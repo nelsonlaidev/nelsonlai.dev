@@ -155,6 +155,7 @@ const CommentEditor = (props: CommentEditorProps) => {
         autoCorrect='off'
         autoCapitalize='off'
         spellCheck='false'
+        data-testid='comment-editor-textarea'
         {...rest}
       />
       <div className='flex flex-row items-center gap-0.5 px-1.5'>
