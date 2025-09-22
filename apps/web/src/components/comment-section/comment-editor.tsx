@@ -113,7 +113,7 @@ const decorateText = (textarea: HTMLTextAreaElement | null, type: 'bold' | 'ital
   const decoration = {
     bold: `**${selectedText}**`,
     strikethrough: `~~${selectedText}~~`,
-    italic: `*${selectedText}*`
+    italic: `_${selectedText}_`
   }
 
   const newSelectionStart = {
