@@ -57,10 +57,11 @@ const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>, command:
   if (event.key === 'Enter') {
     const currentLine = value.slice(0, Math.max(0, selectionStart)).split('\n').pop()
 
-    const unorderedListNoContent = currentLine?.match(/^\s*[*-]\s$/)
+    const unorderedListNoContent = currentLine?.match(/^\s*[-*+]\s$/)
     const orderedListNoContent = currentLine?.match(/^\d+\.\s$/)
+    const taskListNoContent = currentLine?.match(/^\s*[-*+]\s\[\s\]\s$/)
 
-    if (!!unorderedListNoContent || !!orderedListNoContent) {
+    if (!!unorderedListNoContent || !!orderedListNoContent || !!taskListNoContent) {
       event.preventDefault()
 
       const lineStart = value.lastIndexOf('\n', selectionStart - 1) + 1
@@ -78,15 +79,27 @@ const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>, command:
 
       event.preventDefault()
       setRangeText(textarea, insertText, selectionStart, selectionEnd, 'end')
+      return
     }
 
-    const unorderedList = currentLine?.match(/^(\s*)([*-])\s/)
+    const taskList = currentLine?.match(/^(\s*)([-*+])\s\[\s\]\s/)
+
+    if (taskList) {
+      const insertText = `\n${taskList[1]}${taskList[2]} [ ] `
+
+      event.preventDefault()
+      setRangeText(textarea, insertText, selectionStart, selectionEnd, 'end')
+      return
+    }
+
+    const unorderedList = currentLine?.match(/^(\s*)([-*+])\s/)
 
     if (unorderedList) {
       const insertText = `\n${unorderedList[1]}${unorderedList[2]} `
 
       event.preventDefault()
       setRangeText(textarea, insertText, selectionStart, selectionEnd, 'end')
+      return
     }
   }
 }
