@@ -126,7 +126,7 @@ const CommentEditor = (props: CommentEditorProps) => {
   return (
     <div
       className={cn(
-        'rounded-md border border-input bg-transparent pb-1 transition-[color,box-shadow] dark:bg-input/30',
+        'rounded-md border border-input bg-transparent pb-1 font-mono transition-[color,box-shadow] dark:bg-input/30',
         'focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50'
       )}
     >
