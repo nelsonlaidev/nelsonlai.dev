@@ -60,8 +60,9 @@ const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>, command:
     const unorderedListNoContent = currentLine?.match(/^\s*[-*+]\s$/)
     const orderedListNoContent = currentLine?.match(/^\d+\.\s$/)
     const taskListNoContent = currentLine?.match(/^\s*[-*+]\s\[\s\]\s$/)
+    const taskListCheckedNoContent = currentLine?.match(/^\s*[-*+]\s\[x\]\s$/i)
 
-    if (!!unorderedListNoContent || !!orderedListNoContent || !!taskListNoContent) {
+    if (!!unorderedListNoContent || !!orderedListNoContent || !!taskListNoContent || !!taskListCheckedNoContent) {
       event.preventDefault()
 
       const lineStart = value.lastIndexOf('\n', selectionStart - 1) + 1
@@ -83,9 +84,18 @@ const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>, command:
     }
 
     const taskList = currentLine?.match(/^(\s*)([-*+])\s\[\s\]\s/)
+    const taskListChecked = currentLine?.match(/^(\s*)([-*+])\s\[x\]\s/i)
 
     if (taskList) {
       const insertText = `\n${taskList[1]}${taskList[2]} [ ] `
+
+      event.preventDefault()
+      setRangeText(textarea, insertText, selectionStart, selectionEnd, 'end')
+      return
+    }
+
+    if (taskListChecked) {
+      const insertText = `\n${taskListChecked[1]}${taskListChecked[2]} [x] `
 
       event.preventDefault()
       setRangeText(textarea, insertText, selectionStart, selectionEnd, 'end')

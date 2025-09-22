@@ -88,6 +88,12 @@ describe('<CommentEditor />', () => {
     textarea.setSelectionRange(6, 6)
     fireEvent.keyDown(textarea, { key: 'Enter', code: 'Enter' })
     expect(textarea).toHaveValue('')
+
+    // Checked task list
+    fireEvent.change(textarea, { target: { value: '- [x] ' } })
+    textarea.setSelectionRange(6, 6)
+    fireEvent.keyDown(textarea, { key: 'Enter', code: 'Enter' })
+    expect(textarea).toHaveValue('')
   })
 
   it('should create a new unordered list item on Enter', () => {
@@ -127,6 +133,19 @@ describe('<CommentEditor />', () => {
     fireEvent.keyDown(textarea, { key: 'Enter', code: 'Enter' })
     expect(textarea).toHaveValue('- [ ] Task 1\n- [ ] ')
     expect(textarea.selectionStart).toBe(19)
+  })
+
+  it('should create a new checked task list item on Enter', () => {
+    render(<CommentEditor />)
+
+    const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
+
+    fireEvent.change(textarea, { target: { value: '- [x] Completed task' } })
+    textarea.setSelectionRange(20, 20)
+
+    fireEvent.keyDown(textarea, { key: 'Enter', code: 'Enter' })
+    expect(textarea).toHaveValue('- [x] Completed task\n- [x] ')
+    expect(textarea.selectionStart).toBe(27)
   })
 
   it('should bold selected text when bold button is clicked', () => {
@@ -170,8 +189,8 @@ describe('<CommentEditor />', () => {
     const italicButton = screen.getByLabelText('Toggle italic')
     fireEvent.click(italicButton)
 
-    expect(textarea).toHaveValue('*hello* world')
-    expect(textarea.selectionStart).toBe(7) // Cursor is at '*hello*| world'
+    expect(textarea).toHaveValue('_hello_ world')
+    expect(textarea.selectionStart).toBe(7) // Cursor is at '_hello_| world'
   })
 
   it('should insert italic markdown at cursor position when italic button is clicked with no selection', () => {
@@ -185,8 +204,8 @@ describe('<CommentEditor />', () => {
     const italicButton = screen.getByLabelText('Toggle italic')
     fireEvent.click(italicButton)
 
-    expect(textarea).toHaveValue('te**st')
-    expect(textarea.selectionStart).toBe(3) // Cursor is at 'te*|*st'
+    expect(textarea).toHaveValue('te__st')
+    expect(textarea.selectionStart).toBe(3) // Cursor is at 'te_|_st'
   })
 
   it('should strikethrough selected text when strikethrough button is clicked', () => {
