@@ -1,31 +1,30 @@
 import { useCallback, useRef } from 'react'
 
 type UseCommentEditorOptions = {
-  initialValue?: string
   onModEnter?: () => void
   onEscape?: () => void
 }
 
-const setRangeText = (
-  textarea: HTMLTextAreaElement,
-  replacement: string,
-  start: number,
-  end: number,
+type SetRangeTextOptions = {
+  start?: number
+  end?: number
   selectionMode?: SelectionMode
-) => {
+}
+
+const setRangeText = (textarea: HTMLTextAreaElement, replacement: string, options: SetRangeTextOptions = {}) => {
+  const { start = textarea.selectionStart, end = textarea.selectionEnd, selectionMode = 'preserve' } = options
+
   textarea.setRangeText(replacement, start, end, selectionMode)
   // Trigger input event to update the value
   textarea.dispatchEvent(new Event('input', { bubbles: true }))
 }
 
-export const useCommentEditor = (options: UseCommentEditorOptions) => {
-  const { onModEnter, onEscape, initialValue } = options
+export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
+  const { onModEnter, onEscape } = options
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const handleEmptyListItem = useCallback((event: React.KeyboardEvent<HTMLTextAreaElement>, currentLine: string) => {
     if (!textareaRef.current) return
-
-    const { selectionStart, value } = textareaRef.current
 
     const patterns = [
       /^\s*[-*+]\s\[[x\s]\]\s$/i, // Task list item
@@ -35,10 +34,13 @@ export const useCommentEditor = (options: UseCommentEditorOptions) => {
 
     if (patterns.some((pattern) => pattern.test(currentLine))) {
       event.preventDefault()
+      const { selectionStart, value } = textareaRef.current
+
       const lineStart = value.lastIndexOf('\n', selectionStart - 1) + 1
       const lineEnd = selectionStart
 
-      setRangeText(textareaRef.current, '', lineStart, lineEnd, 'start')
+      setRangeText(textareaRef.current, '', { start: lineStart, end: lineEnd, selectionMode: 'start' })
+
       return true
     }
 
@@ -71,14 +73,11 @@ export const useCommentEditor = (options: UseCommentEditorOptions) => {
   }, [])
 
   const handleTab = (event: React.KeyboardEvent<HTMLTextAreaElement>, target: HTMLTextAreaElement) => {
-    const { selectionStart, selectionEnd } = target
-
     if (event.key === 'Tab') {
       event.preventDefault()
       const tabSpace = '  '
 
-      setRangeText(target, tabSpace, selectionStart, selectionEnd, 'end')
-      target.setSelectionRange(selectionStart + tabSpace.length, selectionStart + tabSpace.length)
+      setRangeText(target, tabSpace, { selectionMode: 'end' })
     }
   }
 
@@ -112,7 +111,7 @@ export const useCommentEditor = (options: UseCommentEditorOptions) => {
 
   const handleListContinuation = useCallback(
     (event: React.KeyboardEvent<HTMLTextAreaElement>, target: HTMLTextAreaElement) => {
-      const { selectionStart, selectionEnd, value } = target
+      const { selectionStart, value } = target
 
       if (event.key === 'Enter' && !event.shiftKey && !event.metaKey && !event.ctrlKey) {
         const currentLine = value.slice(0, Math.max(0, selectionStart)).split('\n').pop()
@@ -125,9 +124,9 @@ export const useCommentEditor = (options: UseCommentEditorOptions) => {
 
         if (taskList) {
           event.preventDefault()
-          const insertText = `\n${taskList[1]}${taskList[2]} [ ] `
+          const text = `\n${taskList[1]}${taskList[2]} [ ] `
 
-          setRangeText(target, insertText, selectionStart, selectionEnd, 'end')
+          setRangeText(target, text, { selectionMode: 'end' })
           return
         }
 
@@ -136,9 +135,9 @@ export const useCommentEditor = (options: UseCommentEditorOptions) => {
         if (orderedList?.[1]) {
           event.preventDefault()
           const number = Number.parseInt(orderedList[1], 10) + 1
-          const insertText = `\n${number}. `
+          const text = `\n${number}. `
 
-          setRangeText(target, insertText, selectionStart, selectionEnd, 'end')
+          setRangeText(target, text, { selectionMode: 'end' })
           return
         }
 
@@ -146,9 +145,9 @@ export const useCommentEditor = (options: UseCommentEditorOptions) => {
 
         if (unorderedList) {
           event.preventDefault()
-          const insertText = `\n${unorderedList[1]}${unorderedList[2]} `
+          const text = `\n${unorderedList[1]}${unorderedList[2]} `
 
-          setRangeText(target, insertText, selectionStart, selectionEnd, 'end')
+          setRangeText(target, text, { selectionMode: 'end' })
         }
       }
     },
@@ -189,7 +188,7 @@ export const useCommentEditor = (options: UseCommentEditorOptions) => {
       italic: selectionStart + 1
     }
 
-    setRangeText(textarea, decoration[type], selectionStart, selectionEnd, 'end')
+    setRangeText(textarea, decoration[type], { selectionMode: 'end' })
 
     if (!selectedText) {
       textarea.setSelectionRange(newSelectionStart[type], newSelectionStart[type])
@@ -201,7 +200,6 @@ export const useCommentEditor = (options: UseCommentEditorOptions) => {
   return {
     textareaRef,
     handleKeyDown,
-    initialValue,
     decorateText
   }
 }
