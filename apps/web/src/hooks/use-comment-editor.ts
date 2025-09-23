@@ -16,7 +16,7 @@ const setRangeText = (textarea: HTMLTextAreaElement, replacement: string, option
 
   textarea.setRangeText(replacement, start, end, selectionMode)
   // Trigger input event to update the value
-  textarea.dispatchEvent(new Event('input', { bubbles: true }))
+  textarea.dispatchEvent(new InputEvent('input', { bubbles: true }))
 }
 
 export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
