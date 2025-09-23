@@ -27,7 +27,11 @@ export const useCommentEditor = (options: UseCommentEditorOptions) => {
 
     const { selectionStart, value } = textareaRef.current
 
-    const patterns = [/^\s*[-*+]\s\[\s\]\s$/, /^\s*[-*+]\s\[x\]\s$/i, /^\d+\.\s$/, /^\s*[-*+]\s$/]
+    const patterns = [
+      /^\s*[-*+]\s\[[x\s]\]\s$/i, // Task list item
+      /^\d+\.\s$/, // Ordered list item
+      /^\s*[-*+]\s$/ // Unordered list item
+    ]
 
     if (patterns.some((pattern) => pattern.test(currentLine))) {
       event.preventDefault()
@@ -117,21 +121,11 @@ export const useCommentEditor = (options: UseCommentEditorOptions) => {
 
         if (handleEmptyListItem(event, currentLine)) return
 
-        const taskList = /^(\s*)([-*+])\s\[\s\]\s/.exec(currentLine)
+        const taskList = /^(\s*)([-*+])\s\[[x\s]\]\s/i.exec(currentLine)
 
         if (taskList) {
           event.preventDefault()
           const insertText = `\n${taskList[1]}${taskList[2]} [ ] `
-
-          setRangeText(target, insertText, selectionStart, selectionEnd, 'end')
-          return
-        }
-
-        const taskListChecked = /^(\s*)([-*+])\s\[x\]\s/i.exec(currentLine)
-
-        if (taskListChecked) {
-          event.preventDefault()
-          const insertText = `\n${taskListChecked[1]}${taskListChecked[2]} [x] `
 
           setRangeText(target, insertText, selectionStart, selectionEnd, 'end')
           return

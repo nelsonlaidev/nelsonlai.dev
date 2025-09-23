@@ -144,7 +144,7 @@ describe('<CommentEditor />', () => {
     textarea.setSelectionRange(20, 20)
 
     fireEvent.keyDown(textarea, { key: 'Enter', code: 'Enter' })
-    expect(textarea).toHaveValue('- [x] Completed task\n- [x] ')
+    expect(textarea).toHaveValue('- [x] Completed task\n- [ ] ')
     expect(textarea.selectionStart).toBe(27)
   })
 
