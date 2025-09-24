@@ -55,7 +55,7 @@ export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
   }, [])
 
   const clearRedo = () => {
-    redoStack.current.length = 0
+    redoStack.current = []
   }
 
   const applySnapshot = (ta: HTMLTextAreaElement, snap: Snapshot) => {
