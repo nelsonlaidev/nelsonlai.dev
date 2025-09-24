@@ -4,6 +4,24 @@ import { describe, expect, it, vi } from 'vitest'
 import CommentEditor from '@/components/comment-section/comment-editor'
 import { render } from '@/utils/render'
 
+type SimulateIMEInputOptions = {
+  textarea: HTMLTextAreaElement
+  textValue: string
+  intermediateData: string
+  composedText: string
+  cursorPosition: number
+}
+
+const simulateIMEInput = (options: SimulateIMEInputOptions) => {
+  const { textarea, textValue, intermediateData, composedText, cursorPosition } = options
+
+  fireEvent.compositionStart(textarea, { data: '' })
+  fireEvent.change(textarea, { target: { value: textValue } })
+  textarea.setSelectionRange(cursorPosition, cursorPosition)
+  fireEvent.compositionUpdate(textarea, { data: intermediateData })
+  fireEvent.compositionEnd(textarea, { data: composedText })
+}
+
 describe('<CommentEditor />', () => {
   describe('basic behavior', () => {
     it('should render the Textarea and decoration buttons', () => {
@@ -495,6 +513,104 @@ describe('<CommentEditor />', () => {
       // Redo with Shift+Ctrl+Z should also do nothing
       fireEvent.keyDown(textarea, { key: 'z', code: 'KeyZ', ctrlKey: true, shiftKey: true })
       expect(textarea).toHaveValue('foo-new')
+    })
+  })
+
+  describe('IME composition', () => {
+    it('should group IME input into a single history step and restore caret on undo/redo', () => {
+      render(<CommentEditor />)
+      const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
+      textarea.focus()
+
+      // Initialize non-IME input as default state
+      fireEvent.change(textarea, { target: { value: 'hello' } })
+      textarea.setSelectionRange(5, 5)
+      fireEvent.input(textarea)
+
+      // Compose first character
+      simulateIMEInput({
+        textarea,
+        textValue: '你',
+        intermediateData: '丿丨丿乛丨丿丶',
+        composedText: '你',
+        cursorPosition: 1
+      })
+
+      // Verify composed value and caret
+      expect(textarea).toHaveValue('你')
+      expect(textarea.selectionStart).toBe(1)
+
+      // Compose second character
+      simulateIMEInput({
+        textarea,
+        textValue: '你好',
+        intermediateData: '乛丿一乛丨一',
+        composedText: '好',
+        cursorPosition: 2
+      })
+
+      // Verify composed value and caret
+      expect(textarea).toHaveValue('你好')
+      expect(textarea.selectionStart).toBe(2)
+
+      // Undo should revert to first character and restore caret
+      fireEvent.keyDown(textarea, { key: 'z', code: 'KeyZ', ctrlKey: true })
+      expect(textarea).toHaveValue('你')
+      expect(textarea.selectionStart).toBe(1)
+
+      // Undo should revert to non-IME input and restore caret
+      fireEvent.keyDown(textarea, { key: 'z', code: 'KeyZ', ctrlKey: true })
+      expect(textarea).toHaveValue('hello')
+      expect(textarea.selectionStart).toBe(5)
+
+      // Redo should reapply first character and restore caret
+      fireEvent.keyDown(textarea, { key: 'y', code: 'KeyY', ctrlKey: true })
+      expect(textarea).toHaveValue('你')
+      expect(textarea.selectionStart).toBe(1)
+    })
+
+    it('should clear redo after new input following IME undo', () => {
+      render(<CommentEditor />)
+      const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
+      textarea.focus()
+
+      // Compose three characters
+      simulateIMEInput({
+        textarea,
+        textValue: '你',
+        intermediateData: '丿丨丿乛丨丿丶',
+        composedText: '你',
+        cursorPosition: 1
+      })
+      simulateIMEInput({
+        textarea,
+        textValue: '你好',
+        intermediateData: '乛丿一乛丨一',
+        composedText: '好',
+        cursorPosition: 2
+      })
+      simulateIMEInput({
+        textarea,
+        textValue: '你好嗎',
+        intermediateData: '丨乛一一丨一一丨乛丶丶丶丶',
+        composedText: '嗎',
+        cursorPosition: 3
+      })
+
+      // Undo back to second character
+      fireEvent.keyDown(textarea, { key: 'z', code: 'KeyZ', ctrlKey: true })
+      expect(textarea).toHaveValue('你好')
+      expect(textarea.selectionStart).toBe(2)
+
+      // New non-IME input after undo should clear redo stack
+      fireEvent.change(textarea, { target: { value: '你好!' } })
+      textarea.setSelectionRange(3, 3)
+      fireEvent.input(textarea)
+
+      // Redo should now do nothing
+      fireEvent.keyDown(textarea, { key: 'y', code: 'KeyY', ctrlKey: true })
+      expect(textarea).toHaveValue('你好!')
+      expect(textarea.selectionStart).toBe(3)
     })
   })
 })
