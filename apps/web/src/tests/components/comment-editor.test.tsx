@@ -237,7 +237,9 @@ describe('<CommentEditor />', () => {
       fireEvent.click(boldButton)
 
       expect(textarea).toHaveValue('**hello** world')
-      expect(textarea.selectionStart).toBe(9) // Cursor is at '**hello**| world'
+      // Still selecting 'hello'
+      expect(textarea.selectionStart).toBe(2)
+      expect(textarea.selectionEnd).toBe(7)
     })
 
     it('should insert bold markdown at cursor position when bold button is clicked with no selection', () => {
@@ -245,14 +247,16 @@ describe('<CommentEditor />', () => {
 
       const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
-      fireEvent.change(textarea, { target: { value: 'test' } })
-      textarea.setSelectionRange(2, 2) // Cursor is at 'te|st'
+      fireEvent.change(textarea, { target: { value: 'hello world' } })
+      textarea.setSelectionRange(3, 3) // Cursor is at 'hel|lo world'
 
       const boldButton = screen.getByLabelText('Toggle bold')
       fireEvent.click(boldButton)
 
-      expect(textarea).toHaveValue('te****st')
-      expect(textarea.selectionStart).toBe(4) // Cursor is at 'te**|**st'
+      expect(textarea).toHaveValue('**hello** world')
+      // Should keep the cursor at original position within the bolded text
+      expect(textarea.selectionStart).toBe(5)
+      expect(textarea.selectionEnd).toBe(5)
     })
 
     it('should italicize selected text when italic button is clicked', () => {
@@ -267,7 +271,9 @@ describe('<CommentEditor />', () => {
       fireEvent.click(italicButton)
 
       expect(textarea).toHaveValue('_hello_ world')
-      expect(textarea.selectionStart).toBe(7) // Cursor is at '_hello_| world'
+      // Still selecting 'hello'
+      expect(textarea.selectionStart).toBe(1)
+      expect(textarea.selectionEnd).toBe(6)
     })
 
     it('should insert italic markdown at cursor position when italic button is clicked with no selection', () => {
@@ -275,14 +281,16 @@ describe('<CommentEditor />', () => {
 
       const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
-      fireEvent.change(textarea, { target: { value: 'test' } })
-      textarea.setSelectionRange(2, 2) // Cursor is at 'te|st'
+      fireEvent.change(textarea, { target: { value: 'hello world' } })
+      textarea.setSelectionRange(3, 3) // Cursor is at 'hel|lo world'
 
       const italicButton = screen.getByLabelText('Toggle italic')
       fireEvent.click(italicButton)
 
-      expect(textarea).toHaveValue('te__st')
-      expect(textarea.selectionStart).toBe(3) // Cursor is at 'te_|_st'
+      expect(textarea).toHaveValue('_hello_ world')
+      // Should keep the cursor at original position within the bolded text
+      expect(textarea.selectionStart).toBe(4)
+      expect(textarea.selectionEnd).toBe(4)
     })
 
     it('should strikethrough selected text when strikethrough button is clicked', () => {
@@ -297,7 +305,9 @@ describe('<CommentEditor />', () => {
       fireEvent.click(strikethroughButton)
 
       expect(textarea).toHaveValue('~~hello~~ world')
-      expect(textarea.selectionStart).toBe(9) // Cursor is at '~~hello~~| world'
+      // Still selecting 'hello'
+      expect(textarea.selectionStart).toBe(2)
+      expect(textarea.selectionEnd).toBe(7)
     })
 
     it('should insert strikethrough markdown at cursor position when strikethrough button is clicked with no selection', () => {
@@ -305,14 +315,16 @@ describe('<CommentEditor />', () => {
 
       const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
-      fireEvent.change(textarea, { target: { value: 'test' } })
-      textarea.setSelectionRange(2, 2) // Cursor is at 'te|st'
+      fireEvent.change(textarea, { target: { value: 'hello world' } })
+      textarea.setSelectionRange(3, 3) // Cursor is at 'hel|lo world'
 
       const strikethroughButton = screen.getByLabelText('Toggle strikethrough')
       fireEvent.click(strikethroughButton)
 
-      expect(textarea).toHaveValue('te~~~~st')
-      expect(textarea.selectionStart).toBe(4) // Cursor is at 'te~~|~~st'
+      expect(textarea).toHaveValue('~~hello~~ world')
+      // Should keep the cursor at original position within the bolded text
+      expect(textarea.selectionStart).toBe(5)
+      expect(textarea.selectionEnd).toBe(5)
     })
   })
 
@@ -327,7 +339,9 @@ describe('<CommentEditor />', () => {
 
       fireEvent.keyDown(textarea, { key: 'b', code: 'KeyB', ctrlKey: true })
       expect(textarea).toHaveValue('**hello** world')
-      expect(textarea.selectionStart).toBe(9) // Cursor is at '**hello**| world'
+      // Still selecting 'hello'
+      expect(textarea.selectionStart).toBe(2)
+      expect(textarea.selectionEnd).toBe(7)
     })
 
     it('should bold selected text when Cmd+B is pressed', () => {
@@ -340,7 +354,9 @@ describe('<CommentEditor />', () => {
 
       fireEvent.keyDown(textarea, { key: 'b', code: 'KeyB', metaKey: true })
       expect(textarea).toHaveValue('**hello** world')
-      expect(textarea.selectionStart).toBe(9) // Cursor is at '**hello**| world'
+      // Still selecting 'hello'
+      expect(textarea.selectionStart).toBe(2)
+      expect(textarea.selectionEnd).toBe(7)
     })
 
     it('should insert bold markdown at cursor position when Ctrl+B is pressed with no selection', () => {
@@ -348,12 +364,14 @@ describe('<CommentEditor />', () => {
 
       const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
-      fireEvent.change(textarea, { target: { value: 'test' } })
-      textarea.setSelectionRange(2, 2) // Cursor is at 'te|st'
+      fireEvent.change(textarea, { target: { value: 'hello world' } })
+      textarea.setSelectionRange(3, 3) // Cursor is at 'hel|lo world'
 
       fireEvent.keyDown(textarea, { key: 'b', code: 'KeyB', ctrlKey: true })
-      expect(textarea).toHaveValue('te****st')
-      expect(textarea.selectionStart).toBe(4) // Cursor is at 'te**|**st'
+      expect(textarea).toHaveValue('**hello** world')
+      // Should keep the cursor at original position within the bolded text
+      expect(textarea.selectionStart).toBe(5)
+      expect(textarea.selectionEnd).toBe(5)
     })
 
     it('should italicize selected text when Ctrl+I is pressed', () => {
@@ -366,7 +384,9 @@ describe('<CommentEditor />', () => {
 
       fireEvent.keyDown(textarea, { key: 'i', code: 'KeyI', ctrlKey: true })
       expect(textarea).toHaveValue('_hello_ world')
-      expect(textarea.selectionStart).toBe(7) // Cursor is at '_hello_| world'
+      // Still selecting 'hello'
+      expect(textarea.selectionStart).toBe(1)
+      expect(textarea.selectionEnd).toBe(6)
     })
 
     it('should italicize selected text when Cmd+I is pressed', () => {
@@ -379,7 +399,9 @@ describe('<CommentEditor />', () => {
 
       fireEvent.keyDown(textarea, { key: 'i', code: 'KeyI', metaKey: true })
       expect(textarea).toHaveValue('_hello_ world')
-      expect(textarea.selectionStart).toBe(7) // Cursor is at '_hello_| world'
+      // Still selecting 'hello'
+      expect(textarea.selectionStart).toBe(1)
+      expect(textarea.selectionEnd).toBe(6)
     })
 
     it('should insert italic markdown at cursor position when Ctrl+I is pressed with no selection', () => {
@@ -387,12 +409,14 @@ describe('<CommentEditor />', () => {
 
       const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
-      fireEvent.change(textarea, { target: { value: 'test' } })
-      textarea.setSelectionRange(2, 2) // Cursor is at 'te|st'
+      fireEvent.change(textarea, { target: { value: 'hello world' } })
+      textarea.setSelectionRange(3, 3) // Cursor is at 'hel|lo world'
 
       fireEvent.keyDown(textarea, { key: 'i', code: 'KeyI', ctrlKey: true })
-      expect(textarea).toHaveValue('te__st')
-      expect(textarea.selectionStart).toBe(3) // Cursor is at 'te_|_st'
+      expect(textarea).toHaveValue('_hello_ world')
+      // Should keep the cursor at original position within the bolded text
+      expect(textarea.selectionStart).toBe(4)
+      expect(textarea.selectionEnd).toBe(4)
     })
 
     it('should strikethrough selected text when Ctrl+S is pressed', () => {
@@ -405,7 +429,9 @@ describe('<CommentEditor />', () => {
 
       fireEvent.keyDown(textarea, { key: 's', code: 'KeyS', ctrlKey: true })
       expect(textarea).toHaveValue('~~hello~~ world')
-      expect(textarea.selectionStart).toBe(9) // Cursor is at '~~hello~~| world'
+      // Still selecting 'hello'
+      expect(textarea.selectionStart).toBe(2)
+      expect(textarea.selectionEnd).toBe(7)
     })
 
     it('should strikethrough selected text when Cmd+S is pressed', () => {
@@ -418,7 +444,9 @@ describe('<CommentEditor />', () => {
 
       fireEvent.keyDown(textarea, { key: 's', code: 'KeyS', metaKey: true })
       expect(textarea).toHaveValue('~~hello~~ world')
-      expect(textarea.selectionStart).toBe(9) // Cursor is at '~~hello~~| world'
+      // Still selecting 'hello'
+      expect(textarea.selectionStart).toBe(2)
+      expect(textarea.selectionEnd).toBe(7)
     })
 
     it('should insert strikethrough markdown at cursor position when Ctrl+S is pressed with no selection', () => {
@@ -426,12 +454,14 @@ describe('<CommentEditor />', () => {
 
       const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
-      fireEvent.change(textarea, { target: { value: 'test' } })
-      textarea.setSelectionRange(2, 2) // Cursor is at 'te|st'
+      fireEvent.change(textarea, { target: { value: 'hello world' } })
+      textarea.setSelectionRange(3, 3) // Cursor is at 'hel|lo world'
 
       fireEvent.keyDown(textarea, { key: 's', code: 'KeyS', ctrlKey: true })
-      expect(textarea).toHaveValue('te~~~~st')
-      expect(textarea.selectionStart).toBe(4) // Cursor is at 'te~~|~~st'
+      expect(textarea).toHaveValue('~~hello~~ world')
+      // Should keep the cursor at original position within the bolded text
+      expect(textarea.selectionStart).toBe(5)
+      expect(textarea.selectionEnd).toBe(5)
     })
   })
 

@@ -19,6 +19,115 @@ type Snapshot = {
 
 const MAX_UNDO_STACK_SIZE = 100
 
+const MARKER_MAP = {
+  bold: '**',
+  italic: '_',
+  strikethrough: '~~'
+}
+
+const isSpace = (char: string) => /\s/.test(char)
+
+const getWordBounds = (value: string, pos: number) => {
+  let left = pos
+  let right = pos
+  while (left > 0 && !isSpace(value[left - 1]!)) left--
+  while (right < value.length && !isSpace(value[right]!)) right++
+  return { left, right }
+}
+
+const hasMarkersAround = (value: string, pos: number, marker: string) => {
+  const left = value.slice(pos - marker.length, pos) === marker
+  const right = value.slice(pos, pos + marker.length) === marker
+  return { left, right }
+}
+
+type DecorationPosition = 'inside' | 'outside' | 'none'
+
+const getDecorationPosition = (value: string, start: number, end: number, marker: string): DecorationPosition => {
+  const selected = value.slice(start, end)
+  const inside = selected.length >= 2 * marker.length && selected.startsWith(marker) && selected.endsWith(marker)
+  const outside =
+    value.slice(start - marker.length, start) === marker && value.slice(end, end + marker.length) === marker
+  if (inside) return 'inside'
+  if (outside) return 'outside'
+  return 'none'
+}
+
+const applyPairAtCaret = (
+  ta: HTMLTextAreaElement,
+  pos: number,
+  marker: string,
+  hasLeft: boolean,
+  hasRight: boolean
+) => {
+  if (hasLeft && hasRight) {
+    const rangeStart = pos - marker.length
+    const rangeEnd = pos + marker.length
+    setRangeText(ta, '', { start: rangeStart, end: rangeEnd, selectionMode: 'preserve' })
+    ta.setSelectionRange(rangeStart, rangeStart)
+    ta.focus()
+    return
+  }
+  const insert = marker + marker
+  setRangeText(ta, insert, { start: pos, end: pos, selectionMode: 'end' })
+  const cursorPos = pos + marker.length
+  ta.setSelectionRange(cursorPos, cursorPos)
+  ta.focus()
+}
+
+type ToggleAction = 'add' | 'remove'
+
+const getReplacementAndRange = (value: string, start: number, end: number, marker: string) => {
+  const selected = value.slice(start, end)
+  const pos = getDecorationPosition(value, start, end, marker)
+
+  if (pos === 'inside') {
+    return {
+      rangeStart: start,
+      rangeEnd: end,
+      replacement: selected.slice(marker.length, selected.length - marker.length),
+      action: 'remove' as ToggleAction
+    }
+  }
+
+  if (pos === 'outside') {
+    return {
+      rangeStart: start - marker.length,
+      rangeEnd: end + marker.length,
+      replacement: selected,
+      action: 'remove' as ToggleAction
+    }
+  }
+
+  return {
+    rangeStart: start,
+    rangeEnd: end,
+    replacement: marker + selected + marker,
+    action: 'add' as ToggleAction
+  }
+}
+
+const computeNewSelection = (
+  keepOriginal: boolean,
+  ta: HTMLTextAreaElement,
+  action: ToggleAction,
+  markerLength: number,
+  start: number,
+  end: number
+) => {
+  if (keepOriginal) {
+    const delta = action === 'add' ? markerLength : -markerLength
+    return {
+      selectionStart: ta.selectionStart + delta,
+      selectionEnd: ta.selectionEnd + delta
+    }
+  }
+  return {
+    selectionStart: action === 'add' ? start + markerLength : start - markerLength,
+    selectionEnd: action === 'add' ? end + markerLength : end - markerLength
+  }
+}
+
 const setRangeText = (ta: HTMLTextAreaElement, replacement: string, options: SetRangeTextOptions = {}) => {
   const { start = ta.selectionStart, end = ta.selectionEnd, selectionMode = 'preserve' } = options
 
@@ -87,32 +196,47 @@ export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
     applySnapshot(ta, next)
   }, [pushUndo])
 
-  const decorateText = useCallback((type: 'bold' | 'italic' | 'strikethrough') => {
-    const textarea = textareaRef.current
-    if (!textarea) return
+  const decorateText = useCallback((type: keyof typeof MARKER_MAP) => {
+    const ta = textareaRef.current
+    if (!ta) return
 
-    const { selectionStart, selectionEnd, value } = textarea
-    const selectedText = value.slice(selectionStart, selectionEnd)
+    const marker = MARKER_MAP[type]
+    const value = ta.value
+    let start = ta.selectionStart
+    let end = ta.selectionEnd
+    let keepOriginalCursorPos = false
 
-    const decoration = {
-      bold: `**${selectedText}**`,
-      strikethrough: `~~${selectedText}~~`,
-      italic: `_${selectedText}_`
+    // If no selection, expand to the contiguous non-space "word" under the cursor
+    if (start === end) {
+      const { left, right } = getWordBounds(value, start)
+
+      // No word under caret: toggle markers at caret
+      if (left === right) {
+        const { left: hasLeftMarker, right: hasRightMarker } = hasMarkersAround(value, start, marker)
+        applyPairAtCaret(ta, start, marker, hasLeftMarker, hasRightMarker)
+        return
+      }
+
+      // If there is a word, select it and keep original caret relative position
+      start = left
+      end = right
+      keepOriginalCursorPos = true
     }
 
-    const newSelectionStart = {
-      bold: selectionStart + 2,
-      strikethrough: selectionStart + 2,
-      italic: selectionStart + 1
-    }
+    const { rangeStart, rangeEnd, replacement, action } = getReplacementAndRange(value, start, end, marker)
+    const { selectionStart, selectionEnd } = computeNewSelection(
+      keepOriginalCursorPos,
+      ta,
+      action,
+      marker.length,
+      start,
+      end
+    )
 
-    setRangeText(textarea, decoration[type], { selectionMode: 'end' })
-
-    if (!selectedText) {
-      textarea.setSelectionRange(newSelectionStart[type], newSelectionStart[type])
-    }
-
-    textarea.focus()
+    // Apply change
+    setRangeText(ta, replacement, { start: rangeStart, end: rangeEnd, selectionMode: 'preserve' })
+    ta.setSelectionRange(selectionStart, selectionEnd)
+    ta.focus()
   }, [])
 
   const handleInput = useCallback(
