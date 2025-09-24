@@ -209,14 +209,65 @@ export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
     [decorateText, redo, undo]
   )
 
-  const handleTab = (event: React.KeyboardEvent<HTMLTextAreaElement>, target: HTMLTextAreaElement) => {
-    if (event.key === 'Tab') {
+  const handleTab = useCallback(
+    (event: React.KeyboardEvent<HTMLTextAreaElement>, target: HTMLTextAreaElement) => {
+      if (event.key !== 'Tab') return
+
       event.preventDefault()
       const tabSpace = '  '
+      const { selectionStart, selectionEnd, value } = target
+
+      pushUndo(createSnapshot(target))
+
+      if (!value) {
+        setRangeText(target, tabSpace, { selectionMode: 'end' })
+        clearRedo()
+        return
+      }
+
+      const lineStart = value.lastIndexOf('\n', selectionStart - 1) + 1
+      const endWithinIndex = Math.max(selectionStart, selectionEnd - 1)
+      const lastLineStart = value.lastIndexOf('\n', Math.max(0, endWithinIndex - 1)) + 1
+      const nextNewline = value.indexOf('\n', endWithinIndex)
+      const lineBlockEnd = nextNewline === -1 ? value.length : nextNewline
+
+      const isMultiLineSelection = lastLineStart !== lineStart
+
+      if (isMultiLineSelection) {
+        const block = value.slice(lineStart, lineBlockEnd)
+        const lines = block.split('\n')
+
+        if (event.shiftKey) {
+          const transformed = lines
+            .map((line) => {
+              if (line.startsWith(tabSpace)) return line.slice(tabSpace.length)
+              if (line.startsWith('\t')) return line.slice(1)
+              return line
+            })
+            .join('\n')
+          setRangeText(target, transformed, { start: lineStart, end: lineBlockEnd, selectionMode: 'preserve' })
+        } else {
+          const transformed = lines.map((line) => tabSpace + line).join('\n')
+          setRangeText(target, transformed, { start: lineStart, end: lineBlockEnd, selectionMode: 'preserve' })
+        }
+        clearRedo()
+        return
+      }
+
+      if (event.shiftKey) {
+        if (value.startsWith(tabSpace, lineStart) || value[lineStart] === '\t') {
+          const removeLen = value.startsWith(tabSpace, lineStart) ? tabSpace.length : 1
+          setRangeText(target, '', { start: lineStart, end: lineStart + removeLen, selectionMode: 'preserve' })
+          clearRedo()
+        }
+        return
+      }
 
       setRangeText(target, tabSpace, { selectionMode: 'end' })
-    }
-  }
+      clearRedo()
+    },
+    [pushUndo]
+  )
 
   const handleEscape = useCallback(
     (event: React.KeyboardEvent<HTMLTextAreaElement>) => {

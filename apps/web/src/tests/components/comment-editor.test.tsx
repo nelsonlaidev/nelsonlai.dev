@@ -49,6 +49,30 @@ describe('<CommentEditor />', () => {
       expect(textarea.selectionStart).toBe(2)
     })
 
+    it('should indent all selected lines with Tab when multiple lines are selected', () => {
+      render(<CommentEditor />)
+
+      const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
+
+      fireEvent.change(textarea, { target: { value: 'a\nb\nc' } })
+      textarea.setSelectionRange(0, 3) // Select first two lines
+
+      fireEvent.keyDown(textarea, { key: 'Tab', code: 'Tab' })
+      expect(textarea).toHaveValue('  a\n  b\nc')
+    })
+
+    it('should unindent all selected lines with Shift+Tab when multiple lines are selected', () => {
+      render(<CommentEditor />)
+
+      const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
+
+      fireEvent.change(textarea, { target: { value: '  a\n  b\nc' } })
+      textarea.setSelectionRange(0, 7) // Select first two lines
+
+      fireEvent.keyDown(textarea, { key: 'Tab', code: 'Tab', shiftKey: true })
+      expect(textarea).toHaveValue('a\nb\nc')
+    })
+
     it('should call onEscape when Escape is pressed', () => {
       const onEscape = vi.fn()
 
