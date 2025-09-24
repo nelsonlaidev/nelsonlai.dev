@@ -14,10 +14,11 @@ type CommentEditorProps = {
 const CommentEditor = (props: CommentEditorProps) => {
   const { onModEnter, onEscape, ...rest } = props
   const t = useTranslations()
-  const { textareaRef, handleKeyDown, decorateText } = useCommentEditor({
-    onModEnter,
-    onEscape
-  })
+  const { textareaRef, handleKeyDown, handleInput, handleCompositionStart, handleCompositionEnd, decorateText } =
+    useCommentEditor({
+      onModEnter,
+      onEscape
+    })
 
   return (
     <div
@@ -29,6 +30,9 @@ const CommentEditor = (props: CommentEditorProps) => {
       <Textarea
         rows={1}
         onKeyDown={handleKeyDown}
+        onInput={handleInput}
+        onCompositionStart={handleCompositionStart}
+        onCompositionEnd={handleCompositionEnd}
         ref={textareaRef}
         className='min-h-10 resize-none border-none bg-transparent shadow-none focus-visible:ring-0 dark:bg-transparent'
         autoComplete='off'

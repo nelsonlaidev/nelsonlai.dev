@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 type UseCommentEditorOptions = {
   onModEnter?: () => void
@@ -11,19 +11,139 @@ type SetRangeTextOptions = {
   selectionMode?: SelectionMode
 }
 
-const setRangeText = (textarea: HTMLTextAreaElement, replacement: string, options: SetRangeTextOptions = {}) => {
-  const { start = textarea.selectionStart, end = textarea.selectionEnd, selectionMode = 'preserve' } = options
+type Snapshot = {
+  value: string
+  selectionStart: number
+  selectionEnd: number
+}
 
-  textarea.setRangeText(replacement, start, end, selectionMode)
+const MAX_UNDO_STACK_SIZE = 100
+
+const setRangeText = (ta: HTMLTextAreaElement, replacement: string, options: SetRangeTextOptions = {}) => {
+  const { start = ta.selectionStart, end = ta.selectionEnd, selectionMode = 'preserve' } = options
+
+  ta.setRangeText(replacement, start, end, selectionMode)
   // Trigger input event to update the value
-  textarea.dispatchEvent(new InputEvent('input', { bubbles: true }))
+  ta.dispatchEvent(new InputEvent('input', { bubbles: true }))
 }
 
 export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
   const { onModEnter, onEscape } = options
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  const handleEmptyListItem = useCallback((event: React.KeyboardEvent<HTMLTextAreaElement>, currentLine: string) => {
+  const undoStack = useRef<Snapshot[]>([])
+  const redoStack = useRef<Snapshot[]>([])
+  const isComposing = useRef(false)
+  const isApplyingHistory = useRef(false)
+
+  const createSnapshot = (ta: HTMLTextAreaElement): Snapshot => ({
+    value: ta.value,
+    selectionStart: ta.selectionStart,
+    selectionEnd: ta.selectionEnd
+  })
+
+  const snapshotsEqual = (a?: Snapshot, b?: Snapshot) =>
+    !!a && !!b && a.value === b.value && a.selectionStart === b.selectionStart && a.selectionEnd === b.selectionEnd
+
+  const pushUndo = useCallback((snap: Snapshot) => {
+    const stack = undoStack.current
+    const last = stack.at(-1)
+    if (!snapshotsEqual(last, snap)) {
+      stack.push(snap)
+      if (stack.length > MAX_UNDO_STACK_SIZE) stack.shift()
+    }
+  }, [])
+
+  const clearRedo = () => {
+    redoStack.current.length = 0
+  }
+
+  const applySnapshot = (ta: HTMLTextAreaElement, snap: Snapshot) => {
+    isApplyingHistory.current = true
+    setRangeText(ta, snap.value, { start: 0, end: ta.value.length })
+    ta.setSelectionRange(snap.selectionStart, snap.selectionEnd)
+    ta.dispatchEvent(new InputEvent('input', { bubbles: true }))
+    isApplyingHistory.current = false
+    ta.focus()
+  }
+
+  const undo = useCallback(() => {
+    const ta = textareaRef.current
+    if (!ta) return
+    const stack = undoStack.current
+    if (stack.length <= 1) return
+    const current = stack.pop()!
+    redoStack.current.push(current)
+    const target = stack.at(-1)!
+    applySnapshot(ta, target)
+  }, [])
+
+  const redo = useCallback(() => {
+    const ta = textareaRef.current
+    if (!ta) return
+    if (redoStack.current.length === 0) return
+    const next = redoStack.current.pop()!
+    pushUndo(next)
+    applySnapshot(ta, next)
+  }, [pushUndo])
+
+  const decorateText = useCallback((type: 'bold' | 'italic' | 'strikethrough') => {
+    const textarea = textareaRef.current
+    if (!textarea) return
+
+    const { selectionStart, selectionEnd, value } = textarea
+    const selectedText = value.slice(selectionStart, selectionEnd)
+
+    const decoration = {
+      bold: `**${selectedText}**`,
+      strikethrough: `~~${selectedText}~~`,
+      italic: `_${selectedText}_`
+    }
+
+    const newSelectionStart = {
+      bold: selectionStart + 2,
+      strikethrough: selectionStart + 2,
+      italic: selectionStart + 1
+    }
+
+    setRangeText(textarea, decoration[type], { selectionMode: 'end' })
+
+    if (!selectedText) {
+      textarea.setSelectionRange(newSelectionStart[type], newSelectionStart[type])
+    }
+
+    textarea.focus()
+  }, [])
+
+  const handleInput = useCallback(
+    (event: React.FormEvent<HTMLTextAreaElement>) => {
+      const ta = event.currentTarget
+      if (isApplyingHistory.current) return
+      if (isComposing.current) return
+      pushUndo(createSnapshot(ta))
+      clearRedo()
+    },
+    [pushUndo]
+  )
+
+  const handleCompositionStart = useCallback(
+    (event: React.CompositionEvent<HTMLTextAreaElement>) => {
+      isComposing.current = true
+      pushUndo(createSnapshot(event.currentTarget))
+    },
+    [pushUndo]
+  )
+
+  const handleCompositionEnd = useCallback(
+    (event: React.CompositionEvent<HTMLTextAreaElement>) => {
+      isComposing.current = false
+      pushUndo(createSnapshot(event.currentTarget))
+      clearRedo()
+    },
+    [pushUndo]
+  )
+
+  const handleEmptyListItem = (event: React.KeyboardEvent<HTMLTextAreaElement>, currentLine: string) => {
     if (!textareaRef.current) return
 
     const patterns = [
@@ -45,32 +165,49 @@ export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
     }
 
     return false
-  }, [])
+  }
 
-  const handleShortcut = useCallback((event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.metaKey || event.ctrlKey) {
-      switch (event.key.toLowerCase()) {
-        case 'b': {
-          event.preventDefault()
-          decorateText('bold')
-          break
-        }
-        case 'i': {
-          event.preventDefault()
-          decorateText('italic')
-          break
-        }
-        case 's': {
-          event.preventDefault()
-          decorateText('strikethrough')
-          break
-        }
-        default: {
-          break
+  const handleShortcut = useCallback(
+    (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (event.metaKey || event.ctrlKey) {
+        switch (event.key.toLowerCase()) {
+          case 'z': {
+            event.preventDefault()
+            if (event.shiftKey) {
+              redo()
+            } else {
+              undo()
+            }
+            break
+          }
+          case 'y': {
+            event.preventDefault()
+            redo()
+            break
+          }
+          case 'b': {
+            event.preventDefault()
+            decorateText('bold')
+            break
+          }
+          case 'i': {
+            event.preventDefault()
+            decorateText('italic')
+            break
+          }
+          case 's': {
+            event.preventDefault()
+            decorateText('strikethrough')
+            break
+          }
+          default: {
+            break
+          }
         }
       }
-    }
-  }, [])
+    },
+    [decorateText, redo, undo]
+  )
 
   const handleTab = (event: React.KeyboardEvent<HTMLTextAreaElement>, target: HTMLTextAreaElement) => {
     if (event.key === 'Tab') {
@@ -151,7 +288,7 @@ export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
         }
       }
     },
-    [handleEmptyListItem]
+    []
   )
 
   const handleKeyDown = useCallback(
@@ -166,40 +303,25 @@ export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
 
       handleListContinuation(event, textareaRef.current)
     },
-    [handleShortcut, handleEscape, handleModEnter, handleListContinuation]
+    [handleEscape, handleListContinuation, handleModEnter, handleShortcut]
   )
 
-  const decorateText = (type: 'bold' | 'italic' | 'strikethrough') => {
-    const textarea = textareaRef.current
-    if (!textarea) return
+  useEffect(() => {
+    const ta = textareaRef.current
+    if (!ta) return
 
-    const { selectionStart, selectionEnd, value } = textarea
-    const selectedText = value.slice(selectionStart, selectionEnd)
-
-    const decoration = {
-      bold: `**${selectedText}**`,
-      strikethrough: `~~${selectedText}~~`,
-      italic: `_${selectedText}_`
-    }
-
-    const newSelectionStart = {
-      bold: selectionStart + 2,
-      strikethrough: selectionStart + 2,
-      italic: selectionStart + 1
-    }
-
-    setRangeText(textarea, decoration[type], { selectionMode: 'end' })
-
-    if (!selectedText) {
-      textarea.setSelectionRange(newSelectionStart[type], newSelectionStart[type])
-    }
-
-    textarea.focus()
-  }
+    pushUndo(createSnapshot(ta))
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- We only want to run this once on mount
+  }, [])
 
   return {
     textareaRef,
+    decorateText,
+    undo,
+    redo,
     handleKeyDown,
-    decorateText
+    handleInput,
+    handleCompositionStart,
+    handleCompositionEnd
   }
 }

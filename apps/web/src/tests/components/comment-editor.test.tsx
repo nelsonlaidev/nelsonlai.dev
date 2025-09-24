@@ -392,4 +392,109 @@ describe('<CommentEditor />', () => {
       expect(textarea.selectionStart).toBe(4) // Cursor is at 'te~~|~~st'
     })
   })
+
+  describe('undo/redo', () => {
+    it('should undo last input and restore selection with Ctrl/Cmd+Z', () => {
+      render(<CommentEditor />)
+      const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
+      textarea.focus()
+
+      fireEvent.change(textarea, { target: { value: 'foo' } })
+      textarea.setSelectionRange(3, 3)
+      fireEvent.input(textarea)
+
+      fireEvent.change(textarea, { target: { value: 'bar' } })
+      textarea.setSelectionRange(3, 3)
+      fireEvent.input(textarea)
+
+      // Undo with Ctrl+Z
+      fireEvent.keyDown(textarea, { key: 'z', code: 'KeyZ', ctrlKey: true })
+      expect(textarea).toHaveValue('foo')
+      expect(textarea.selectionStart).toBe(3)
+
+      // Undo with Cmd+Z
+      fireEvent.keyDown(textarea, { key: 'z', code: 'KeyZ', metaKey: true })
+      expect(textarea).toHaveValue('')
+      expect(textarea.selectionStart).toBe(0)
+    })
+
+    it('should redo last undone change with Shift+Ctrl/Cmd+Z', () => {
+      render(<CommentEditor />)
+      const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
+      textarea.focus()
+
+      fireEvent.change(textarea, { target: { value: 'foo' } })
+      textarea.setSelectionRange(3, 3)
+      fireEvent.input(textarea)
+
+      fireEvent.change(textarea, { target: { value: 'bar' } })
+      textarea.setSelectionRange(3, 3)
+      fireEvent.input(textarea)
+
+      // Undo to 'foo'
+      fireEvent.keyDown(textarea, { key: 'z', code: 'KeyZ', ctrlKey: true })
+      expect(textarea).toHaveValue('foo')
+
+      // Redo with Shift+Ctrl+Z
+      fireEvent.keyDown(textarea, { key: 'z', code: 'KeyZ', ctrlKey: true, shiftKey: true })
+      expect(textarea).toHaveValue('bar')
+      expect(textarea.selectionStart).toBe(3)
+
+      // Redo again with Shift+Cmd+Z should be a no-op (no more redo entries)
+      fireEvent.keyDown(textarea, { key: 'z', code: 'KeyZ', metaKey: true, shiftKey: true })
+      expect(textarea).toHaveValue('bar')
+    })
+
+    it('should redo last undone change with Ctrl/Cmd+Y', () => {
+      render(<CommentEditor />)
+      const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
+      textarea.focus()
+
+      fireEvent.change(textarea, { target: { value: 'foo' } })
+      fireEvent.input(textarea)
+
+      fireEvent.change(textarea, { target: { value: 'bar' } })
+      fireEvent.input(textarea)
+
+      // Undo to 'foo'
+      fireEvent.keyDown(textarea, { key: 'z', code: 'KeyZ', ctrlKey: true })
+      expect(textarea).toHaveValue('foo')
+
+      // Redo with Ctrl+Y
+      fireEvent.keyDown(textarea, { key: 'y', code: 'KeyY', ctrlKey: true })
+      expect(textarea).toHaveValue('bar')
+
+      // Redo again with Cmd+Y should be a no-op (no more redo entries)
+      fireEvent.keyDown(textarea, { key: 'y', code: 'KeyY', metaKey: true })
+      expect(textarea).toHaveValue('bar')
+    })
+
+    it('should clear redo history after new input following undo', () => {
+      render(<CommentEditor />)
+      const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
+      textarea.focus()
+
+      fireEvent.change(textarea, { target: { value: 'foo' } })
+      fireEvent.input(textarea)
+
+      fireEvent.change(textarea, { target: { value: 'bar' } })
+      fireEvent.input(textarea)
+
+      // Undo to 'foo'
+      fireEvent.keyDown(textarea, { key: 'z', code: 'KeyZ', ctrlKey: true })
+      expect(textarea).toHaveValue('foo')
+
+      // New input after undo clears redo stack
+      fireEvent.change(textarea, { target: { value: 'foo-new' } })
+      fireEvent.input(textarea)
+
+      // Redo with Ctrl+Y should do nothing now
+      fireEvent.keyDown(textarea, { key: 'y', code: 'KeyY', ctrlKey: true })
+      expect(textarea).toHaveValue('foo-new')
+
+      // Redo with Shift+Ctrl+Z should also do nothing
+      fireEvent.keyDown(textarea, { key: 'z', code: 'KeyZ', ctrlKey: true, shiftKey: true })
+      expect(textarea).toHaveValue('foo-new')
+    })
+  })
 })
