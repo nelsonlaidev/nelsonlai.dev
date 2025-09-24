@@ -36,6 +36,7 @@
     "test:unit": "vitest run",
     "test:unit:coverage": "vitest --coverage --ui",
     "test:unit:ui": "vitest --ui",
+    "test:unit:watch": "vitest watch",
     "type-check": "turbo type-check",
     "with-env": "dotenvx run -f .env.local --"
   },
