@@ -478,7 +478,7 @@ export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
 
       handleListContinuation(event, textareaRef.current)
     },
-    [handleEscape, handleListContinuation, handleModEnter, handleShortcut]
+    [handleEscape, handleListContinuation, handleModEnter, handleShortcut, handleTab]
   )
 
   useEffect(() => {
