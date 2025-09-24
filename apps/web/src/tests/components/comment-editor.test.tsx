@@ -288,7 +288,7 @@ describe('<CommentEditor />', () => {
       fireEvent.click(italicButton)
 
       expect(textarea).toHaveValue('_hello_ world')
-      // Should keep the cursor at original position within the bolded text
+      // Should keep the cursor at original position within the italicized text
       expect(textarea.selectionStart).toBe(4)
       expect(textarea.selectionEnd).toBe(4)
     })
@@ -322,7 +322,7 @@ describe('<CommentEditor />', () => {
       fireEvent.click(strikethroughButton)
 
       expect(textarea).toHaveValue('~~hello~~ world')
-      // Should keep the cursor at original position within the bolded text
+      // Should keep the cursor at original position within the strikethrough text
       expect(textarea.selectionStart).toBe(5)
       expect(textarea.selectionEnd).toBe(5)
     })
@@ -414,7 +414,7 @@ describe('<CommentEditor />', () => {
 
       fireEvent.keyDown(textarea, { key: 'i', code: 'KeyI', ctrlKey: true })
       expect(textarea).toHaveValue('_hello_ world')
-      // Should keep the cursor at original position within the bolded text
+      // Should keep the cursor at original position within the italicized text
       expect(textarea.selectionStart).toBe(4)
       expect(textarea.selectionEnd).toBe(4)
     })
@@ -459,7 +459,7 @@ describe('<CommentEditor />', () => {
 
       fireEvent.keyDown(textarea, { key: 's', code: 'KeyS', ctrlKey: true })
       expect(textarea).toHaveValue('~~hello~~ world')
-      // Should keep the cursor at original position within the bolded text
+      // Should keep the cursor at original position within the strikethrough text
       expect(textarea.selectionStart).toBe(5)
       expect(textarea.selectionEnd).toBe(5)
     })
