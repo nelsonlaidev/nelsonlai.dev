@@ -1,14 +1,12 @@
-/*
- * vocs (MIT License)
- * Copyright (c) weth, LLC
- * Source: https://github.com/wevm/vocs/blob/75e0cfc874e7abe8648be139a8554e1fe87a18d1/src/vite/plugins/rehype/inline-shiki.ts
- *
- * shiki (MIT License)
- * Copyright (c) Pine Wu and Anthony Fu
- * Source: https://github.com/shikijs/shiki/blob/481135b16287d7dabc2e155f427af63d3ff3536d/packages/rehype/src/index.ts
- *
- * Modified by: Nelson Lai
- */
+// vocs (MIT License)
+// Copyright (c) weth, LLC
+// Source: https://github.com/wevm/vocs/blob/75e0cfc874e7abe8648be139a8554e1fe87a18d1/src/vite/plugins/rehype/inline-shiki.ts
+//
+// shiki (MIT License)
+// Copyright (c) Pine Wu and Anthony Fu
+// Source: https://github.com/shikijs/shiki/blob/481135b16287d7dabc2e155f427af63d3ff3536d/packages/rehype/src/index.ts
+//
+// Modified by: Nelson Lai
 import type { RehypeShikiCoreOptions } from '@shikijs/rehype/core'
 import type { Root } from 'hast'
 import type { Plugin } from 'unified'
@@ -78,10 +76,8 @@ export const rehypeInlineCode: Plugin<[RehypeShikiCoreOptions], Root> = () => {
       const inlineCode = preNode.children[0]
       if (inlineCode?.type !== 'element') return
 
-      /*
-       * Set the color by scope if language is not specified
-       * @example `myFunction{:.entity.name.function}`
-       */
+      // Set the color by scope if language is not specified
+      // @example `myFunction{:.entity.name.function}`
       if (!isLang) {
         const colors = getScopeColors(highlighter, lang.slice(1))
         const spanNode = inlineCode.children[0]

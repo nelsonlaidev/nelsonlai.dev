@@ -1,6 +1,4 @@
-/*
- * Inspired by: https://fig.io
- */
+// Inspired by: https://fig.io
 'use client'
 
 import { SiGithub, SiWakatime, SiYoutube } from '@icons-pack/react-simple-icons'

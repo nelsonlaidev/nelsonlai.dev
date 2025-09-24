@@ -1,10 +1,8 @@
-/*
- * fumadocs (MIT License)
- * Copyright (c) fuma-nama
- * Source: https://github.com/fuma-nama/fumadocs/blob/7b18075cc97ca876ab14b22f05349a09dc0e4025/packages/core/src/mdx-plugins/rehype-code.ts
- *
- * Modified by: Nelson Lai
- */
+// fumadocs (MIT License)
+// Copyright (c) fuma-nama
+// Source: https://github.com/fuma-nama/fumadocs/blob/7b18075cc97ca876ab14b22f05349a09dc0e4025/packages/core/src/mdx-plugins/rehype-code.ts
+//
+// Modified by: Nelson Lai
 import type { Root } from 'hast'
 import type { Plugin } from 'unified'
 
@@ -29,10 +27,8 @@ export const DEFAULT_SHIKI_THEMES = {
 export const rehypeCode: Plugin<[RehypeShikiOptions], Root> = () => {
   const transformers: ShikiTransformer[] = [
     {
-      /*
-       * Remove trailing newline
-       * Remove title from meta
-       */
+      // Remove trailing newline
+      // Remove title from meta
       preprocess(code, { meta }) {
         if (meta) {
           meta.__raw = meta.__raw?.replace(titleRegex, '')
