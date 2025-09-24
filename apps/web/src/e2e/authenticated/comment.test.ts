@@ -6,7 +6,7 @@ import { TEST_UNIQUE_ID } from '../fixtures/auth'
 import { getNumberFlow } from '../utils/number-flow'
 
 test.describe('comment page', () => {
-  test('should be able to submit a comment', async ({ page }) => {
+  test('submits a comment', async ({ page }) => {
     const commentText = `comment-${createId()}`
 
     await page.goto('/blog/test-submit')
@@ -22,7 +22,7 @@ test.describe('comment page', () => {
     expect(await getNumberFlow(page.getByTestId('blog-comment-count'))).toBe('1 comment')
   })
 
-  test('should be able to delete a comment', async ({ page }) => {
+  test('deletes a comment', async ({ page }) => {
     const commentId = createId()
 
     await db.insert(comments).values({
@@ -52,7 +52,7 @@ test.describe('comment page', () => {
     expect(await getNumberFlow(page.getByTestId('blog-comment-count'))).toBe('0 comments')
   })
 
-  test('should be able to reply to a comment', async ({ page }) => {
+  test('replies to a comment', async ({ page }) => {
     const parentId = createId()
     const replyText = `reply-${createId()}`
 
@@ -84,7 +84,7 @@ test.describe('comment page', () => {
     expect(await getNumberFlow(page.getByTestId('reply-count'))).toBe('1 reply')
   })
 
-  test('should be able to delete a reply', async ({ page }) => {
+  test('deletes a reply', async ({ page }) => {
     const parentId = createId()
     const replyId = createId()
 

@@ -7,7 +7,7 @@ const getInitialTheme = (theme: string) => (theme === 'light' ? 'dark' : 'light'
 test.describe('theme', () => {
   test.describe('user interaction', () => {
     for (const theme of ['light', 'dark'] as const) {
-      test(`should switch to ${theme} theme via toggle button`, async ({ page }) => {
+      test(`switches to ${theme} theme via toggle button`, async ({ page }) => {
         const initialTheme = getInitialTheme(theme)
 
         await setThemeInLocalStorage(page, initialTheme)
@@ -32,9 +32,7 @@ test.describe('theme', () => {
     ] as const
 
     for (const { preferredColorScheme, expectedTheme } of testCases) {
-      test(`should render ${expectedTheme} theme if preferred-colorscheme is ${preferredColorScheme}`, async ({
-        page
-      }) => {
+      test(`renders ${expectedTheme} theme if preferred-colorscheme is ${preferredColorScheme}`, async ({ page }) => {
         await page.emulateMedia({ colorScheme: preferredColorScheme })
 
         await setThemeInLocalStorage(page, 'system')
@@ -49,7 +47,7 @@ test.describe('theme', () => {
 
   test.describe('storage persistence', () => {
     for (const theme of ['light', 'dark'] as const) {
-      test(`should render ${theme} theme directly from localStorage`, async ({ page }) => {
+      test(`renders ${theme} theme directly from localStorage`, async ({ page }) => {
         await setThemeInLocalStorage(page, theme)
 
         await page.goto('/')

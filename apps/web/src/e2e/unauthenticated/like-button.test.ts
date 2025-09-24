@@ -7,7 +7,7 @@ test.describe('like button', () => {
     await page.goto('/blog/test-like')
   })
 
-  test('should be able to like a post', async ({ page }) => {
+  test('likes a post', async ({ page }) => {
     const likeCount = page.getByTestId('like-count')
     const likeButton = page.getByTestId('like-button')
 
