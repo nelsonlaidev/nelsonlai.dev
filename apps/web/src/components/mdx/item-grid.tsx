@@ -1,6 +1,4 @@
-/*
- * Inspired by: https://jahir.dev/uses
- */
+// Inspired by: https://jahir.dev/uses
 import BlurImage from '@/components/blur-image'
 
 import Link from '../link'

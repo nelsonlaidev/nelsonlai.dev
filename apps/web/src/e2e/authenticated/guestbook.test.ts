@@ -9,7 +9,7 @@ test.describe('guestbook page', () => {
     await page.goto('/guestbook')
   })
 
-  test('should be able to submit a message', async ({ page }) => {
+  test('submits a message', async ({ page }) => {
     const message = createId()
 
     await page.getByTestId('guestbook-textarea').fill(message)
@@ -20,7 +20,7 @@ test.describe('guestbook page', () => {
     await expect(page.getByTestId('guestbook-messages-list').getByText(message)).toBeVisible()
   })
 
-  test('should be able to delete a message', async ({ page }) => {
+  test('deletes a message', async ({ page }) => {
     const id = createId()
 
     await db.insert(guestbook).values({

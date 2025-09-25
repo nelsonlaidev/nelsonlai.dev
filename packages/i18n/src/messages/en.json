@@ -61,7 +61,9 @@
       "this-comment-has-been-deleted": "[This comment has been deleted]",
       "toggle-bold": "Toggle bold",
       "toggle-italic": "Toggle italic",
-      "toggle-strikethrough": "Toggle strikethrough"
+      "toggle-strikethrough": "Toggle strikethrough",
+      "write": "Write",
+      "preview": "Preview"
     },
     "description": "Discover my website and blog, where I share tutorials, notes, and experiences as a full-stack engineer based in Hong Kong. I began web dev as a hobby in Dec 2020. Explore my journey!",
     "footer": {

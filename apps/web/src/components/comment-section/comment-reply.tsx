@@ -52,6 +52,7 @@ const CommentReply = () => {
     <form onSubmit={submitCommentReply}>
       <div className='relative'>
         <CommentEditor
+          value={content}
           onChange={(e) => {
             setContent(e.target.value)
           }}

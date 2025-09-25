@@ -1,10 +1,10 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, test } from 'vitest'
 
 import { i18n } from '../config'
 import { flattenKeys, loadMessages } from '../utils'
 
 describe('i18n messages', () => {
-  it('should have matching keys across all languages', async () => {
+  test('matches keys across all languages', async () => {
     const defaultMessages = await loadMessages(i18n.defaultLocale)
     const defaultKeys = flattenKeys(defaultMessages)
 

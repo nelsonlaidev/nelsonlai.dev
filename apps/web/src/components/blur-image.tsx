@@ -1,10 +1,8 @@
-/*
- * website
- * Copyright (c) Delba de Oliveira
- * Source: https://github.com/delbaoliveira/website/blob/59e6f181ad75751342ceaa8931db4cbcef86b018/ui/BlurImage.tsx
- *
- * Modified by: Nelson Lai
- */
+// website
+// Copyright (c) Delba de Oliveira
+// Source: https://github.com/delbaoliveira/website/blob/59e6f181ad75751342ceaa8931db4cbcef86b018/ui/BlurImage.tsx
+//
+// Modified by: Nelson Lai
 'use client'
 
 import { cn } from '@repo/utils'
