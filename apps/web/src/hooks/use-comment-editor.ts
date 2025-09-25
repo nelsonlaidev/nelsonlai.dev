@@ -35,12 +35,6 @@ const getWordBounds = (value: string, pos: number) => {
   return { left, right }
 }
 
-const hasMarkersAround = (value: string, pos: number, marker: string) => {
-  const left = value.slice(pos - marker.length, pos) === marker
-  const right = value.slice(pos, pos + marker.length) === marker
-  return { left, right }
-}
-
 type DecorationPosition = 'inside' | 'outside' | 'none'
 
 const getDecorationPosition = (value: string, start: number, end: number, marker: string): DecorationPosition => {
@@ -53,21 +47,7 @@ const getDecorationPosition = (value: string, start: number, end: number, marker
   return 'none'
 }
 
-const applyPairAtCaret = (
-  ta: HTMLTextAreaElement,
-  pos: number,
-  marker: string,
-  hasLeft: boolean,
-  hasRight: boolean
-) => {
-  if (hasLeft && hasRight) {
-    const rangeStart = pos - marker.length
-    const rangeEnd = pos + marker.length
-    setRangeText(ta, '', { start: rangeStart, end: rangeEnd, selectionMode: 'preserve' })
-    ta.setSelectionRange(rangeStart, rangeStart)
-    ta.focus()
-    return
-  }
+const applyPairAtCaret = (ta: HTMLTextAreaElement, pos: number, marker: string) => {
   const insert = marker + marker
   setRangeText(ta, insert, { start: pos, end: pos, selectionMode: 'end' })
   const cursorPos = pos + marker.length
@@ -210,10 +190,9 @@ export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
     if (start === end) {
       const { left, right } = getWordBounds(value, start)
 
-      // No word under caret: toggle markers at caret
+      // If there is no word under caret, add markers at caret
       if (left === right) {
-        const { left: hasLeftMarker, right: hasRightMarker } = hasMarkersAround(value, start, marker)
-        applyPairAtCaret(ta, start, marker, hasLeftMarker, hasRightMarker)
+        applyPairAtCaret(ta, start, marker)
         return
       }
 
