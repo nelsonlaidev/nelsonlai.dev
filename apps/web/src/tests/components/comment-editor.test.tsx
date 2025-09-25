@@ -9,15 +9,15 @@ type SimulateIMEInputOptions = {
   textValue: string
   intermediateData: string
   composedText: string
-  cursorPosition: number
+  caretPosition: number
 }
 
 const simulateIMEInput = (options: SimulateIMEInputOptions) => {
-  const { textarea, textValue, intermediateData, composedText, cursorPosition } = options
+  const { textarea, textValue, intermediateData, composedText, caretPosition } = options
 
   fireEvent.compositionStart(textarea, { data: '' })
   fireEvent.change(textarea, { target: { value: textValue } })
-  textarea.setSelectionRange(cursorPosition, cursorPosition)
+  textarea.setSelectionRange(caretPosition, caretPosition)
   fireEvent.compositionUpdate(textarea, { data: intermediateData })
   fireEvent.compositionEnd(textarea, { data: composedText })
 }
@@ -73,7 +73,7 @@ describe('<CommentEditor />', () => {
       textarea.focus()
 
       fireEvent.change(textarea, { target: { value: 'test' } })
-      textarea.setSelectionRange(0, 0) // Move cursor to the start
+      textarea.setSelectionRange(0, 0) // Move caret to the start
 
       fireEvent.keyDown(textarea, { key: 'Tab', code: 'Tab', charCode: 9 })
       expect(textarea).toHaveValue('  test')
@@ -97,14 +97,14 @@ describe('<CommentEditor />', () => {
       const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
       fireEvent.change(textarea, { target: { value: '  test' } })
-      textarea.setSelectionRange(6, 6) // Move cursor to the end
+      textarea.setSelectionRange(6, 6) // Move caret to the end
 
       fireEvent.keyDown(textarea, { key: 'Tab', code: 'Tab', shiftKey: true })
       expect(textarea).toHaveValue('test')
       expect(textarea.selectionStart).toBe(4)
 
       fireEvent.change(textarea, { target: { value: '\ttest' } })
-      textarea.setSelectionRange(5, 5) // Move cursor to the end
+      textarea.setSelectionRange(5, 5) // Move caret to the end
 
       fireEvent.keyDown(textarea, { key: 'Tab', code: 'Tab', shiftKey: true })
       expect(textarea).toHaveValue('test')
@@ -221,17 +221,23 @@ describe('<CommentEditor />', () => {
       const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
       fireEvent.change(textarea, { target: { value: '- 1234' } })
-      textarea.setSelectionRange(4, 4) // Cursor is at '- 12|34'
+      textarea.setSelectionRange(4, 4) // Caret is at '- 12|34'
 
       fireEvent.keyDown(textarea, { key: 'Enter', code: 'Enter' })
       expect(textarea).toHaveValue('- 12\n- 34')
-      expect(textarea.selectionStart).toBe(7) // Cursor is at '- 12\n- |34'
+      expect(textarea.selectionStart).toBe(7) // Caret is at '- 12\n- |34'
     })
   })
 
   describe('text formatting', () => {
+    const SETS = [
+      { action: 'bolds', buttonLabel: 'Toggle bold', marker: '**' },
+      { action: 'italicizes', buttonLabel: 'Toggle italic', marker: '_' },
+      { action: 'strikes through', buttonLabel: 'Toggle strikethrough', marker: '~~' }
+    ]
+
     describe('button actions', () => {
-      test('bolds selected text', () => {
+      test.each(SETS)('$action selected text', ({ buttonLabel, marker }) => {
         render(<CommentEditor />)
 
         const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
@@ -239,98 +245,64 @@ describe('<CommentEditor />', () => {
         fireEvent.change(textarea, { target: { value: 'hello world' } })
         textarea.setSelectionRange(0, 5) // Select 'hello'
 
-        const boldButton = screen.getByLabelText('Toggle bold')
+        const boldButton = screen.getByLabelText(buttonLabel)
         fireEvent.click(boldButton)
 
-        expect(textarea).toHaveValue('**hello** world')
+        expect(textarea).toHaveValue(`${marker}hello${marker} world`)
         // Still selecting 'hello'
-        expect(textarea.selectionStart).toBe(2)
-        expect(textarea.selectionEnd).toBe(7)
+        expect(textarea.selectionStart).toBe(marker.length)
+        expect(textarea.selectionEnd).toBe(5 + marker.length)
       })
 
-      test('bolds current word when no selection', () => {
+      test.each(SETS)('un-$action selected text if already formatted', ({ buttonLabel, marker }) => {
         render(<CommentEditor />)
 
         const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
-        fireEvent.change(textarea, { target: { value: 'hello world' } })
-        textarea.setSelectionRange(3, 3) // Cursor is at 'hel|lo world'
+        fireEvent.change(textarea, { target: { value: `${marker}hello${marker} world` } })
+        textarea.setSelectionRange(marker.length, 5 + marker.length) // Select 'hello'
 
-        const boldButton = screen.getByLabelText('Toggle bold')
+        const boldButton = screen.getByLabelText(buttonLabel)
         fireEvent.click(boldButton)
 
-        expect(textarea).toHaveValue('**hello** world')
-        // Should keep the cursor at original position within the bolded text
-        expect(textarea.selectionStart).toBe(5)
+        expect(textarea).toHaveValue('hello world')
+        // Still selecting 'hello'
+        expect(textarea.selectionStart).toBe(0)
         expect(textarea.selectionEnd).toBe(5)
       })
 
-      test('italicizes selected text', () => {
+      test.each(SETS)('$action current word when no selection', ({ buttonLabel, marker }) => {
         render(<CommentEditor />)
 
         const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
         fireEvent.change(textarea, { target: { value: 'hello world' } })
-        textarea.setSelectionRange(0, 5) // Select 'hello'
+        textarea.setSelectionRange(3, 3) // Caret is at 'hel|lo world'
 
-        const italicButton = screen.getByLabelText('Toggle italic')
-        fireEvent.click(italicButton)
+        const boldButton = screen.getByLabelText(buttonLabel)
+        fireEvent.click(boldButton)
 
-        expect(textarea).toHaveValue('_hello_ world')
-        // Still selecting 'hello'
-        expect(textarea.selectionStart).toBe(1)
-        expect(textarea.selectionEnd).toBe(6)
+        expect(textarea).toHaveValue(`${marker}hello${marker} world`)
+        // Should keep the caret at original position within the word
+        expect(textarea.selectionStart).toBe(3 + marker.length)
+        expect(textarea.selectionEnd).toBe(3 + marker.length)
       })
 
-      test('italicizes current word when no selection', () => {
+      test.each(SETS)('un-$action current word if already formatted when no selection', ({ buttonLabel, marker }) => {
         render(<CommentEditor />)
 
         const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
-        fireEvent.change(textarea, { target: { value: 'hello world' } })
-        textarea.setSelectionRange(3, 3) // Cursor is at 'hel|lo world'
+        fireEvent.change(textarea, { target: { value: `${marker}hello${marker} world` } })
+        textarea.setSelectionRange(3 + marker.length, 3 + marker.length) // Caret is at '${marker}hel|lo${marker}'
 
-        const italicButton = screen.getByLabelText('Toggle italic')
-        fireEvent.click(italicButton)
+        const boldButton = screen.getByLabelText(buttonLabel)
+        fireEvent.click(boldButton)
 
-        expect(textarea).toHaveValue('_hello_ world')
-        // Should keep the cursor at original position within the italicized text
-        expect(textarea.selectionStart).toBe(4)
-        expect(textarea.selectionEnd).toBe(4)
-      })
-
-      test('strikes through selected text', () => {
-        render(<CommentEditor />)
-
-        const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
-
-        fireEvent.change(textarea, { target: { value: 'hello world' } })
-        textarea.setSelectionRange(0, 5) // Select 'hello'
-
-        const strikethroughButton = screen.getByLabelText('Toggle strikethrough')
-        fireEvent.click(strikethroughButton)
-
-        expect(textarea).toHaveValue('~~hello~~ world')
-        // Still selecting 'hello'
-        expect(textarea.selectionStart).toBe(2)
-        expect(textarea.selectionEnd).toBe(7)
-      })
-
-      test('strikes through current word when no selection', () => {
-        render(<CommentEditor />)
-
-        const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
-
-        fireEvent.change(textarea, { target: { value: 'hello world' } })
-        textarea.setSelectionRange(3, 3) // Cursor is at 'hel|lo world'
-
-        const strikethroughButton = screen.getByLabelText('Toggle strikethrough')
-        fireEvent.click(strikethroughButton)
-
-        expect(textarea).toHaveValue('~~hello~~ world')
-        // Should keep the cursor at original position within the strikethrough text
-        expect(textarea.selectionStart).toBe(5)
-        expect(textarea.selectionEnd).toBe(5)
+        expect(textarea).toHaveValue('hello world')
+        // Should keep the caret at original position within the word
+        expect(textarea.selectionStart).toBe(3)
+        expect(textarea.selectionEnd).toBe(3)
       })
     })
 
@@ -367,12 +339,12 @@ describe('<CommentEditor />', () => {
         const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
         fireEvent.change(textarea, { target: { value: 'hello world' } })
-        textarea.setSelectionRange(3, 3) // Cursor is at 'hel|lo world'
+        textarea.setSelectionRange(3, 3) // Caret is at 'hel|lo world'
 
         fireEvent.keyDown(textarea, { key, code, ctrlKey: true })
         expect(textarea).toHaveValue(`${marker}hello${marker} world`)
 
-        // Should keep the cursor at original position
+        // Should keep the caret at original position
         expect(textarea.selectionStart).toBe(marker.length + 3)
         expect(textarea.selectionEnd).toBe(marker.length + 3)
       })
@@ -408,13 +380,28 @@ describe('<CommentEditor />', () => {
         expect(textarea.selectionEnd).toBe(0)
       })
 
+      test('handles markers inside selection', () => {
+        render(<CommentEditor />)
+
+        const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
+
+        fireEvent.change(textarea, { target: { value: 'foo **hello** bar' } })
+        textarea.setSelectionRange(4, 13) // Select '**hello**'
+
+        fireEvent.keyDown(textarea, { key: 'b', code: 'KeyB', ctrlKey: true })
+
+        expect(textarea).toHaveValue('foo hello bar')
+        expect(textarea.selectionStart).toBe(4)
+        expect(textarea.selectionEnd).toBe(9)
+      })
+
       test('handles markers outside selection', () => {
         render(<CommentEditor />)
 
         const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')
 
         fireEvent.change(textarea, { target: { value: 'foo **hello** bar' } })
-        textarea.setSelectionRange(6, 11) // Select 'hello' in 'foo **hello** bar'
+        textarea.setSelectionRange(6, 11) // Select 'hello'
 
         fireEvent.keyDown(textarea, { key: 'b', code: 'KeyB', ctrlKey: true })
 
@@ -567,7 +554,7 @@ describe('<CommentEditor />', () => {
         textValue: '你',
         intermediateData: '丿丨丿乛丨丿丶',
         composedText: '你',
-        cursorPosition: 1
+        caretPosition: 1
       })
 
       // Verify composed value and caret
@@ -580,7 +567,7 @@ describe('<CommentEditor />', () => {
         textValue: '你好',
         intermediateData: '乛丿一乛丨一',
         composedText: '好',
-        cursorPosition: 2
+        caretPosition: 2
       })
 
       // Verify composed value and caret
@@ -614,21 +601,21 @@ describe('<CommentEditor />', () => {
         textValue: '你',
         intermediateData: '丿丨丿乛丨丿丶',
         composedText: '你',
-        cursorPosition: 1
+        caretPosition: 1
       })
       simulateIMEInput({
         textarea,
         textValue: '你好',
         intermediateData: '乛丿一乛丨一',
         composedText: '好',
-        cursorPosition: 2
+        caretPosition: 2
       })
       simulateIMEInput({
         textarea,
         textValue: '你好嗎',
         intermediateData: '丨乛一一丨一一丨乛丶丶丶丶',
         composedText: '嗎',
-        cursorPosition: 3
+        caretPosition: 3
       })
 
       // Undo back to second character
