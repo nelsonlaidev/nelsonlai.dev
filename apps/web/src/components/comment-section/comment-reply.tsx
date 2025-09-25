@@ -11,7 +11,7 @@ import { useCreatePostComment } from '@/hooks/queries/post.query'
 import { useSession } from '@/lib/auth-client'
 
 import CommentEditor from './comment-editor'
-import UnauthorizedOverlay from './unauthorized-overlay'
+import UnauthenticatedOverlay from './unauthenticated-overlay'
 
 const CommentReply = () => {
   const [content, setContent] = useState('')
@@ -66,7 +66,7 @@ const CommentReply = () => {
           autoFocus
           data-testid='comment-textarea-reply'
         />
-        {isAuthenticated ? null : <UnauthorizedOverlay />}
+        {isAuthenticated ? null : <UnauthenticatedOverlay />}
       </div>
       <div className='mt-2 space-x-1'>
         <Button

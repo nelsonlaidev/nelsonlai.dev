@@ -3,7 +3,7 @@ import { Button } from '@repo/ui/components/button'
 
 import { useDialogsStore } from '@/stores/dialogs.store'
 
-const UnauthorizedOverlay = () => {
+const UnauthenticatedOverlay = () => {
   const t = useTranslations()
   const setIsSignInOpen = useDialogsStore((state) => state.setIsSignInOpen)
 
@@ -21,4 +21,4 @@ const UnauthorizedOverlay = () => {
   )
 }
 
-export default UnauthorizedOverlay
+export default UnauthenticatedOverlay

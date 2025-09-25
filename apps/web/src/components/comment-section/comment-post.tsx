@@ -12,7 +12,7 @@ import { useIsMounted } from '@/hooks/use-is-mounted'
 import { useSession } from '@/lib/auth-client'
 
 import CommentEditor from './comment-editor'
-import UnauthorizedOverlay from './unauthorized-overlay'
+import UnauthenticatedOverlay from './unauthenticated-overlay'
 
 const CommentPost = () => {
   const { slug } = useCommentsContext()
@@ -83,7 +83,7 @@ const CommentPost = () => {
         >
           <SendIcon />
         </Button>
-        {isAuthenticated ? null : <UnauthorizedOverlay />}
+        {isAuthenticated ? null : <UnauthenticatedOverlay />}
       </div>
     </form>
   )
