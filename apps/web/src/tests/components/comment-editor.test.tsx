@@ -627,4 +627,23 @@ describe('<CommentEditor />', () => {
       expect(textarea.selectionStart).toBe(3)
     })
   })
+
+  describe('preview mode', () => {
+    test('renders markdown preview when in preview mode', () => {
+      render(<CommentEditor value='**bold** _italic_ ~~strikethrough~~' tabsValue='preview' />)
+
+      expect(screen.getByText('bold')).toBeInTheDocument()
+      expect(screen.getByText('italic')).toBeInTheDocument()
+      expect(screen.getByText('strikethrough')).toBeInTheDocument()
+
+      const boldElement = screen.getByText('bold')
+      expect(boldElement.tagName).toBe('STRONG')
+
+      const italicElement = screen.getByText('italic')
+      expect(italicElement.tagName).toBe('EM')
+
+      const strikeElement = screen.getByText('strikethrough')
+      expect(strikeElement.tagName).toBe('DEL')
+    })
+  })
 })

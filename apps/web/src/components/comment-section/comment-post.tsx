@@ -17,6 +17,7 @@ import UnauthorizedOverlay from './unauthorized-overlay'
 const CommentPost = () => {
   const { slug } = useCommentsContext()
   const [content, setContent] = useState('')
+  const [tabsValue, setTabsValue] = useState<'write' | 'preview'>('write')
   const isMounted = useIsMounted()
   const { data: session, isPending } = useSession()
   const t = useTranslations()
@@ -24,6 +25,7 @@ const CommentPost = () => {
   const { mutate: createComment, isPending: isCreating } = useCreatePostComment({ slug }, () => {
     setContent('')
     toast.success(t('blog.comments.comment-posted'))
+    setTabsValue('write')
   })
 
   const submitComment = (e?: React.FormEvent<HTMLFormElement>) => {
@@ -59,6 +61,10 @@ const CommentPost = () => {
           value={content}
           onChange={(e) => {
             setContent(e.target.value)
+          }}
+          tabsValue={tabsValue}
+          onTabsValueChange={(value) => {
+            setTabsValue(value as 'write' | 'preview')
           }}
           onModEnter={submitComment}
           placeholder={t('blog.comments.placeholder')}

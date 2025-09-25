@@ -61,7 +61,9 @@
       "this-comment-has-been-deleted": "[此评论已被删除]",
       "toggle-bold": "切换粗体",
       "toggle-italic": "切换斜体",
-      "toggle-strikethrough": "切换删除线"
+      "toggle-strikethrough": "切换删除线",
+      "write": "撰写",
+      "preview": "预览"
     },
     "description": "欢迎来到我的网站和博客！作为香港的全端工程师，我从 2020 年 12 月起自学网页开发，分享教学、笔记与生活点滴。探索我的旅程！",
     "footer": {
