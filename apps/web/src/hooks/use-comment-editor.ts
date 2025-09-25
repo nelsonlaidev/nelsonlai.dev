@@ -267,7 +267,7 @@ export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
     if (!textareaRef.current) return
 
     const patterns = [
-      /^\s*[-*+]\s\[[x\s]\]\s$/i, // Task list item
+      /^\s*[-*+]\s\[[x\s]\]\s$/, // Task list item
       /^\d+\.\s$/, // Ordered list item
       /^\s*[-*+]\s$/ // Unordered list item
     ]
@@ -428,7 +428,7 @@ export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
 
         if (handleEmptyListItem(event, currentLine)) return
 
-        const taskList = /^(\s*)([-*+])\s\[[x\s]\]\s/i.exec(currentLine)
+        const taskList = /^(\s*)([-*+])\s\[[x\s]\]\s/.exec(currentLine)
 
         if (taskList) {
           event.preventDefault()

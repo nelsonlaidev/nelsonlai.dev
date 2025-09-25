@@ -183,12 +183,6 @@ describe('<CommentEditor />', () => {
       fireEvent.keyDown(textarea, { key: 'Enter', code: 'Enter' })
       expect(textarea).toHaveValue('- [x]\n')
 
-      // Checked task list (capitalized)
-      fireEvent.change(textarea, { target: { value: '- [X]\n- [X] ' } })
-      textarea.setSelectionRange(12, 12)
-      fireEvent.keyDown(textarea, { key: 'Enter', code: 'Enter' })
-      expect(textarea).toHaveValue('- [X]\n')
-
       // Complex case
       fireEvent.change(textarea, { target: { value: '- 123\n- 123\n- \n\n- 123\n- 123' } })
       textarea.setSelectionRange(14, 14)
@@ -200,8 +194,7 @@ describe('<CommentEditor />', () => {
       { type: 'unordered', initial: '* Item 1', expected: '* Item 1\n* ' },
       { type: 'ordered', initial: '1. First item', expected: '1. First item\n2. ' },
       { type: 'task', initial: '- [ ] Task 1', expected: '- [ ] Task 1\n- [ ] ' },
-      { type: 'checked task', initial: '- [x] Completed task', expected: '- [x] Completed task\n- [ ] ' },
-      { type: 'checked task (capitalized)', initial: '- [X] Completed task', expected: '- [X] Completed task\n- [ ] ' }
+      { type: 'checked task', initial: '- [x] Completed task', expected: '- [x] Completed task\n- [ ] ' }
     ])('creates $type list item on Enter', ({ initial, expected }) => {
       render(<CommentEditor />)
 
