@@ -12,6 +12,7 @@ const middleware = (request: NextRequest) => {
     style-src 'self' 'unsafe-inline' ${IS_PREVIEW ? 'https://vercel.live' : ''};
     img-src 'self' data: https://avatars.githubusercontent.com https://*.googleusercontent.com ${IS_PREVIEW ? 'https://vercel.live https://vercel.com blob:' : ''};
     font-src 'self' ${IS_PREVIEW ? 'https://vercel.live https://assets.vercel.com' : ''};
+    worker-src 'self' blob:;
     object-src 'none';
     base-uri 'none';
     form-action 'none';
