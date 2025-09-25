@@ -645,5 +645,10 @@ describe('<CommentEditor />', () => {
       const strikeElement = screen.getByText('strikethrough')
       expect(strikeElement.tagName).toBe('DEL')
     })
+
+    test('shows placeholder text when previewing empty content', () => {
+      render(<CommentEditor value=' ' tabsValue='preview' />)
+      expect(screen.getByText('Nothing to preview')).toBeInTheDocument()
+    })
   })
 })
