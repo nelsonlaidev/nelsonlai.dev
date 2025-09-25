@@ -69,25 +69,25 @@ const GetInTouch = () => {
             />
             <div
               id='next-js'
-              className='absolute bottom-12 left-14 rounded-3xl border bg-linear-to-b from-zinc-50 to-zinc-100 px-2 py-1.5 text-xs opacity-40 dark:from-zinc-800 dark:to-zinc-900'
+              className='absolute bottom-12 left-14 rounded-3xl border bg-accent px-2 py-1.5 text-xs opacity-40'
             >
               Next.js
             </div>
             <div
               id='react-js'
-              className='absolute top-20 left-2 rounded-3xl border bg-linear-to-b from-zinc-50 to-zinc-100 px-2 py-1.5 text-xs opacity-40 dark:from-zinc-800 dark:to-zinc-900'
+              className='absolute top-20 left-2 rounded-3xl border bg-accent px-2 py-1.5 text-xs opacity-40'
             >
               React.js
             </div>
             <div
               id='typescript'
-              className='absolute right-1 bottom-20 rounded-3xl border bg-linear-to-b from-zinc-50 to-zinc-100 px-2 py-1.5 text-xs opacity-40 dark:from-zinc-800 dark:to-zinc-900'
+              className='absolute right-1 bottom-20 rounded-3xl border bg-accent px-2 py-1.5 text-xs opacity-40'
             >
               TypeScript
             </div>
             <div
               id='javascript'
-              className='absolute top-10 right-8 rounded-3xl border bg-linear-to-b from-zinc-50 to-zinc-100 px-2 py-1.5 text-xs opacity-40 dark:from-zinc-800 dark:to-zinc-900'
+              className='absolute top-10 right-8 rounded-3xl border bg-accent px-2 py-1.5 text-xs opacity-40'
             >
               JavaScript
             </div>
