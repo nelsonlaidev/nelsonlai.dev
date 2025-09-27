@@ -73,6 +73,7 @@ cd prod || {
 
 # Start SRH
 ./bin/prod start &
+sleep 3
 
 if curl -s http://localhost:${SRH_PORT}/ | grep -q "Welcome to Serverless Redis HTTP!"; then
 	echo "Serverless Redis HTTP is running successfully on port ${SRH_PORT}"
