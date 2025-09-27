@@ -23,17 +23,11 @@ for VAR in "${VARS[@]}"; do
   fi
 done
 
-# Update indexes
+# Install packages
 apt-get update -qq
-
-# Install essential packages
-apt-get install -yqq --no-install-recommends curl
-
-# Install PostgreSQL 16
-apt-get install -yqq --no-install-recommends postgresql-16
-
-# Install Redis
-apt-get install -yqq --no-install-recommends redis-server
+apt-get install -yqq --no-install-recommends \
+  postgresql-16 redis-server rebar3 curl ca-certificates gnupg \
+  >/dev/null
 
 # Delete old cluster and create a new one owned by the specified user
 pg_dropcluster --stop 16 main || true
@@ -46,9 +40,9 @@ if [ "$POSTGRES_USER" = "postgres" ]; then
 fi
 
 # Set up PostgreSQL user and database
-su - postgres -c "createuser -s \"${POSTGRES_USER}\""
-su - postgres -c "psql -c \"ALTER USER \\\"${POSTGRES_USER}\\\" WITH PASSWORD '${POSTGRES_PASSWORD}';\""
-su - postgres -c "createdb -O \"${POSTGRES_USER}\" \"${POSTGRES_DB}\""
+sudo -u postgres createuser -s "${POSTGRES_USER}" || true
+sudo -u postgres psql -v ON_ERROR_STOP=1 -c "ALTER USER \"${POSTGRES_USER}\" WITH PASSWORD '${POSTGRES_PASSWORD}';"
+sudo -u postgres createdb -O "${POSTGRES_USER}" "${POSTGRES_DB}" || true
 
 # Start Redis server
 redis-server --daemonize yes
@@ -75,8 +69,7 @@ export SRH_CONNECTION_STRING="redis://127.0.0.1:6379"
 (
   set -euo pipefail
   cd serverless-redis-http-${SRH_VERSION}
-  mix local.hex --force
-  mix local.rebar --force
+  mix archive.install github hexpm/hex branch latest --force
   mix deps.get
   nohup mix phx.server >srh_dev.log 2>&1 &
 )
