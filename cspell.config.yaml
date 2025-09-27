@@ -29,10 +29,14 @@ words:
   - cleanshot
   - cmdk
   - cobe
+  - createcluster
+  - createdb
+  - createuser
   - customizer
   - dbaeumer
   - delba
   - dotenvx
+  - dropcluster
   - eihab
   - fuma
   - fumadocs
@@ -60,6 +64,7 @@ words:
   - nextdotjs
   - nikolovlazar
   - nodedotjs
+  - nohup
   - nosniff
   - noto
   - nums
@@ -70,8 +75,10 @@ words:
   - paralleldrive
   - planetscale
   - plpgsql
+  - psql
   - radixui
   - reactquery
+  - rebar
   - rmiz
   - ryzen
   - sameorigin
