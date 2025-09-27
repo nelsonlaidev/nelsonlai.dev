@@ -26,7 +26,7 @@ done
 # Install packages
 apt-get update -qq
 apt-get install -yqq --no-install-recommends \
-  postgresql-16 redis-server rebar3 curl ca-certificates gnupg \
+  postgresql-16 redis-server curl ca-certificates gnupg \
   >/dev/null
 
 # Delete old cluster and create a new one owned by the specified user
@@ -52,27 +52,12 @@ if ! redis-cli ping | grep -q "PONG"; then
   exit 1
 fi
 
-# Download and extract serverless-redis-http
-SRH_VERSION="0.0.10"
-curl -L -o srh-${SRH_VERSION}.tar.gz https://github.com/hiett/serverless-redis-http/archive/refs/tags/${SRH_VERSION}.tar.gz
-tar -xzf srh-${SRH_VERSION}.tar.gz
-rm -f srh-${SRH_VERSION}.tar.gz
-
 # Set up environment variables for serverless-redis-http
-export SRH_MODE="env"
-export SRH_MAX_CONNECTIONS="10"
-export SRH_PORT="8079"
-export SRH_TOKEN="${UPSTASH_REDIS_REST_TOKEN}"
-export SRH_CONNECTION_STRING="redis://127.0.0.1:6379"
-
-# Install Elixir dependencies and start serverless-redis-http
-(
-  set -euo pipefail
-  cd serverless-redis-http-${SRH_VERSION}
-  mix archive.install github hexpm/hex branch latest --force
-  mix deps.get
-  nohup mix phx.server >srh_dev.log 2>&1 &
-)
+# export SRH_MODE="env"
+# export SRH_MAX_CONNECTIONS="10"
+# export SRH_PORT="8079"
+# export SRH_TOKEN="${UPSTASH_REDIS_REST_TOKEN}"
+# export SRH_CONNECTION_STRING="redis://127.0.0.1:6379"
 
 # Set up project
 pnpm install

@@ -43,7 +43,6 @@ words:
   - ghostty
   - gifs
   - googleusercontent
-  - hexpm
   - hiett
   - iina
   - innerhtml
@@ -65,7 +64,6 @@ words:
   - nextdotjs
   - nikolovlazar
   - nodedotjs
-  - nohup
   - nosniff
   - noto
   - nums
@@ -79,7 +77,6 @@ words:
   - psql
   - radixui
   - reactquery
-  - rebar
   - rmiz
   - ryzen
   - sameorigin
@@ -100,5 +97,5 @@ words:
   - unzoom
   - vocs
   - waka
-  - wakatime
   - zenorocha
+  - wakatime
