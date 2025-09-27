@@ -4,7 +4,7 @@ import path from 'node:path'
 import { consola } from 'consola'
 
 import { db } from './db'
-import { posts } from './schema'
+import { posts } from './schemas'
 
 const main = async () => {
   try {
