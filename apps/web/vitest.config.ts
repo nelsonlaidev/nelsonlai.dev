@@ -8,7 +8,7 @@ const resolve = (path: string) => new URL(path, import.meta.url).pathname
 export default mergeConfig(sharedProjectConfig, {
   plugins: [react()],
   test: {
-    setupFiles: ['./src/tests/setup.ts']
+    setupFiles: ['./src/tests/unit/setup.ts']
   },
   resolve: {
     alias: {

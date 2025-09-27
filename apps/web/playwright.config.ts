@@ -5,7 +5,7 @@ const CI = !!process.env.CI
 const baseURL = 'http://localhost:3000'
 
 export default defineConfig({
-  testDir: './src/e2e',
+  testDir: './src/tests/e2e',
   fullyParallel: !CI,
   forbidOnly: CI,
   retries: CI ? 2 : 1,
@@ -27,7 +27,7 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        storageState: './src/e2e/.auth/user.json',
+        storageState: './src/tests/e2e/.auth/user.json',
         contextOptions: {
           permissions: ['clipboard-read', 'clipboard-write']
         }
