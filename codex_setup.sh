@@ -3,17 +3,17 @@ set -euo pipefail
 
 # Ensure required environment variables are set
 VARS=(
+	"NEXT_PUBLIC_SITE_URL"
+	"DATABASE_URL"
+	"UPSTASH_REDIS_REST_URL"
+	"UPSTASH_REDIS_REST_TOKEN"
+	"IP_ADDRESS_SALT"
+	"BETTER_AUTH_SECRET"
+	"GITHUB_CLIENT_ID"
+	"GITHUB_CLIENT_SECRET"
 	"POSTGRES_USER"
 	"POSTGRES_PASSWORD"
 	"POSTGRES_DB"
-	"DATABASE_URL"
-	"GITHUB_CLIENT_ID"
-	"GITHUB_CLIENT_SECRET"
-	"UPSTASH_REDIS_REST_URL"
-	"UPSTASH_REDIS_REST_TOKEN"
-	"BETTER_AUTH_SECRET"
-	"IP_ADDRESS_SALT"
-	"NEXT_PUBLIC_SITE_URL"
 )
 
 for VAR in "${VARS[@]}"; do
@@ -22,6 +22,16 @@ for VAR in "${VARS[@]}"; do
 		exit 1
 	fi
 done
+
+# Write variables to .env.local
+ENV_FILE=".env.local"
+: > "$ENV_FILE"
+
+for VAR in "${VARS[@]}"; do
+	echo "$VAR=${!VAR}" >> "$ENV_FILE"
+done
+
+echo ".env.local generated successfully."
 
 # Install packages
 apt-get update -qq
