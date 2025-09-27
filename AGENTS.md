@@ -283,7 +283,7 @@ pnpm lint         # Run ESLint
 pnpm lint:fix     # Fix ESLint issues
 pnpm format       # Check Prettier formatting
 pnpm format:fix   # Fix formatting
-pnpm typecheck    # Run TypeScript checks
+pnpm type-check   # Run TypeScript checks
 pnpm check        # Run all checks
 
 # Database
