@@ -111,7 +111,7 @@ const Card = (props: CardProps) => {
   const likesQuery = usePostLikeCount({ slug: post.slug })
 
   return (
-    <Link href={`/blog/${post.slug}`} className='group relative rounded-xl p-2 shadow-feature-card'>
+    <Link href={post.pathname} className='group relative rounded-xl p-2 shadow-feature-card'>
       <div className='flex items-center justify-between p-4'>
         <div className='flex items-center gap-3'>
           <PencilIcon className='size-[18px]' />
@@ -119,13 +119,7 @@ const Card = (props: CardProps) => {
         </div>
         <ArrowUpRightIcon className='size-[18px] opacity-0 transition-opacity group-hover:opacity-100' />
       </div>
-      <BlurImage
-        width={1200}
-        height={630}
-        src={`/images/blog/${post.slug}/cover.png`}
-        alt={post.title}
-        className='rounded-lg'
-      />
+      <BlurImage width={1200} height={630} src={post.coverImagePathname} alt={post.title} className='rounded-lg' />
       <div className='flex items-center justify-between gap-2 px-2 pt-4 text-sm text-zinc-500'>
         {formattedDate}
         <div className='flex gap-2'>

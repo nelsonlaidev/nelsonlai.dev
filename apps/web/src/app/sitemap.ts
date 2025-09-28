@@ -12,9 +12,9 @@ const sitemap = (): MetadataRoute.Sitemap => {
     '/guestbook',
     '/projects',
     '/dashboard',
-    ...new Set(allPages.map((page) => `/${page.slug}`)),
-    ...new Set(allProjects.map((project) => `/projects/${project.slug}`)),
-    ...new Set(allPosts.map((post) => `/blog/${post.slug}`))
+    ...new Set(allPages.map((page) => page.pathname)),
+    ...new Set(allProjects.map((project) => project.pathname)),
+    ...new Set(allPosts.map((post) => post.pathname))
   ]
 
   return supportedLanguages.flatMap((locale) => {

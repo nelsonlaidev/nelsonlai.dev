@@ -55,14 +55,18 @@ const Page = async (props: PageProps<'/[locale]/blog'>) => {
     url,
     mainEntity: {
       '@type': 'ItemList',
-      itemListElement: posts.map((post, index) => ({
-        '@type': 'BlogPosting',
-        headline: post.title,
-        url: `${url}/${post.slug}`,
-        datePublished: post.date,
-        dateModified: post.modifiedTime,
-        position: index + 1
-      }))
+      itemListElement: posts.map((post, index) => {
+        const postUrl = getLocalizedPath({ locale, pathname: post.pathname })
+
+        return {
+          '@type': 'BlogPosting',
+          headline: post.title,
+          url: postUrl,
+          datePublished: post.date,
+          dateModified: post.modifiedTime,
+          position: index + 1
+        }
+      })
     },
     isPartOf: {
       '@type': 'WebSite',

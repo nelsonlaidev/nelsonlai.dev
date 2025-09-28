@@ -37,11 +37,11 @@ export const generateMetadata = async (props: PageProps<'/[locale]/blog/[slug]'>
   if (!post) return {}
 
   return createMetadata({
-    pathname: `/blog/${slug}`,
+    pathname: post.pathname,
     title: post.title,
     description: post.summary,
     locale,
-    ogImagePathname: `/blog/${post.slug}/og-image.png`,
+    ogImagePathname: post.ogImagePathname,
     openGraph: {
       type: 'article',
       publishedTime: post.date,
@@ -56,12 +56,13 @@ const Page = async (props: PageProps<'/[locale]/blog/[slug]'>) => {
   setRequestLocale(locale)
 
   const post = allPosts.find((p) => p.slug === slug && p.locale === locale)
-  const url = getLocalizedPath({ locale, pathname: `/blog/${slug}` })
-  const baseUrl = getBaseUrl()
 
   if (!post) {
     notFound()
   }
+
+  const url = getLocalizedPath({ locale, pathname: post.pathname })
+  const baseUrl = getBaseUrl()
 
   const jsonLd: WithContext<BlogPosting> = {
     '@context': 'https://schema.org',
@@ -72,7 +73,7 @@ const Page = async (props: PageProps<'/[locale]/blog/[slug]'>) => {
       '@type': 'WebPage',
       '@id': url
     },
-    image: `${baseUrl}/blog/${post.slug}/og-image.png`,
+    image: `${baseUrl}${post.ogImagePathname}`,
     datePublished: post.date,
     dateModified: post.modifiedTime,
     author: {

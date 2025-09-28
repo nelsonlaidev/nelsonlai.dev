@@ -80,7 +80,7 @@ const Header = (props: HeaderProps) => {
       </div>
       <ImageZoom>
         <BlurImage
-          src={`/images/blog/${post.slug}/cover.png`}
+          src={post.coverImagePathname}
           className='rounded-lg'
           width={1200}
           height={630}

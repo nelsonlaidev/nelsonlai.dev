@@ -19,13 +19,18 @@ export const generateMetadata = async (props: PageProps<'/[locale]/privacy'>): P
   const t = await getTranslations({ locale, namespace: 'privacy' })
   const title = t('title')
   const description = t('description')
+  const page = allPages.find((p) => p.slug === 'privacy' && p.locale === locale)
+
+  if (!page) {
+    return {}
+  }
 
   return createMetadata({
-    pathname: '/privacy',
+    pathname: page.pathname,
     title,
     description,
     locale,
-    ogImagePathname: '/privacy/og-image.png'
+    ogImagePathname: page.ogImagePathname
   })
 }
 

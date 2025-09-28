@@ -24,7 +24,7 @@ export const GET = async (_request: Request, props: RouteContext<'/[locale]/priv
 
     const ogImageFonts = await getOGImageFonts(title)
 
-    return new ImageResponse(<OGImage title={title} url='/privacy' />, {
+    return new ImageResponse(<OGImage title={title} url={page.pathname} />, {
       width: OG_IMAGE_WIDTH,
       height: OG_IMAGE_HEIGHT,
       fonts: ogImageFonts

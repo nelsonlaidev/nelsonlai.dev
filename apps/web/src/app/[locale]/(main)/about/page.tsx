@@ -28,13 +28,18 @@ export const generateMetadata = async (props: PageProps<'/[locale]/about'>): Pro
   const { params } = props
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'about' })
+  const page = allPages.find((p) => p.slug === 'about' && p.locale === locale)
+
+  if (!page) {
+    return {}
+  }
 
   return createMetadata({
-    pathname: '/about',
+    pathname: page.pathname,
     title: t('title'),
     description: t('description'),
     locale,
-    ogImagePathname: '/about/og-image.png',
+    ogImagePathname: page.ogImagePathname,
     openGraph: {
       type: 'profile'
     }
@@ -48,8 +53,14 @@ const Page = async (props: PageProps<'/[locale]/about'>) => {
   const t = await getTranslations()
   const title = t('about.title')
   const description = t('about.description')
-  const url = getLocalizedPath({ locale, pathname: '/about' })
   const page = allPages.find((p) => p.slug === 'about' && p.locale === locale)
+
+  if (!page) {
+    return notFound()
+  }
+
+  const { code, pathname } = page
+  const url = getLocalizedPath({ locale, pathname })
 
   const jsonLd: WithContext<AboutPage> = {
     '@context': 'https://schema.org',
@@ -66,12 +77,6 @@ const Page = async (props: PageProps<'/[locale]/about'>) => {
     },
     inLanguage: locale
   }
-
-  if (!page) {
-    return notFound()
-  }
-
-  const { code } = page
 
   return (
     <>

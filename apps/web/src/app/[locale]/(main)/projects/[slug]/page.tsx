@@ -32,14 +32,14 @@ export const generateMetadata = async (props: PageProps<'/[locale]/projects/[slu
     return {}
   }
 
-  const { name, description } = project
+  const { name, description, pathname, ogImagePathname } = project
 
   return createMetadata({
-    pathname: `/projects/${slug}`,
+    pathname,
     title: name,
     description,
     locale,
-    ogImagePathname: `/projects/${slug}/og-image.png`
+    ogImagePathname
   })
 }
 
@@ -49,13 +49,13 @@ const Page = async (props: PageProps<'/[locale]/projects/[slug]'>) => {
   setRequestLocale(locale)
 
   const project = allProjects.find((p) => p.slug === slug && p.locale === locale)
-  const url = getLocalizedPath({ locale, pathname: `/projects/${slug}` })
 
   if (!project) {
     notFound()
   }
 
-  const { name, code, description, github, dateCreated } = project
+  const { name, code, description, github, dateCreated, pathname, coverImagePathname } = project
+  const url = getLocalizedPath({ locale, pathname })
   const baseUrl = getBaseUrl()
 
   const jsonLd: WithContext<SoftwareSourceCode> = {
@@ -73,7 +73,7 @@ const Page = async (props: PageProps<'/[locale]/projects/[slug]'>) => {
       name: MY_NAME,
       url: baseUrl
     },
-    thumbnailUrl: `${baseUrl}/images/projects/${slug}/cover.png`,
+    thumbnailUrl: `${baseUrl}${coverImagePathname}`,
     inLanguage: locale
   }
 
@@ -83,7 +83,7 @@ const Page = async (props: PageProps<'/[locale]/projects/[slug]'>) => {
       <div className='mx-auto max-w-3xl'>
         <Header {...project} />
         <BlurImage
-          src={`/images/projects/${slug}/cover.png`}
+          src={coverImagePathname}
           width={1200}
           height={630}
           alt={name}

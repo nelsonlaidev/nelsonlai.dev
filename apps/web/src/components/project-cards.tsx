@@ -24,12 +24,12 @@ const ProjectCards = (props: ProjectCardsProps) => {
 }
 
 const ProjectCard = (props: ProjectCardProps) => {
-  const { name, description, techstack, slug } = props
+  const { name, description, techstack, pathname, coverImagePathname } = props
 
   return (
-    <Link href={`/projects/${slug}`} className='group rounded-xl px-2 py-4 shadow-feature-card'>
+    <Link href={pathname} className='group rounded-xl px-2 py-4 shadow-feature-card'>
       <BlurImage
-        src={`/images/projects/${slug}/cover.png`}
+        src={coverImagePathname}
         width={1200}
         height={630}
         imageClassName='group-hover:scale-105'

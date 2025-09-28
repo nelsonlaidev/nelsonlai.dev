@@ -55,13 +55,17 @@ const Page = async (props: PageProps<'/[locale]/projects'>) => {
     url,
     mainEntity: {
       '@type': 'ItemList',
-      itemListElement: projects.map((project, index) => ({
-        '@type': 'SoftwareSourceCode',
-        name: project.name,
-        description: project.description,
-        url: `${url}/${project.slug}`,
-        position: index + 1
-      }))
+      itemListElement: projects.map((project, index) => {
+        const projectUrl = getLocalizedPath({ locale, pathname: project.pathname })
+
+        return {
+          '@type': 'SoftwareSourceCode',
+          name: project.name,
+          description: project.description,
+          url: projectUrl,
+          position: index + 1
+        }
+      })
     },
     isPartOf: {
       '@type': 'WebSite',

@@ -9,14 +9,15 @@ import { getBaseUrl } from '@/utils/get-base-url'
 
 export const GET = async () => {
   const t = await getTranslations({ locale: i18n.defaultLocale })
+  const baseUrl = getBaseUrl()
 
   const feed = new RSS({
     title: MY_NAME,
     description: t('metadata.site-description'),
-    site_url: getBaseUrl(),
-    feed_url: `${getBaseUrl()}/rss.xml`,
+    site_url: baseUrl,
+    feed_url: `${baseUrl}/rss.xml`,
     language: 'en-US',
-    image_url: `${getBaseUrl()}/og-image.png`
+    image_url: `${baseUrl}/og-image.png`
   })
 
   const posts = allPosts.filter((p) => p.locale === i18n.defaultLocale)
@@ -24,7 +25,7 @@ export const GET = async () => {
   for (const post of posts) {
     feed.item({
       title: post.title,
-      url: `${getBaseUrl()}/blog/${post.slug}`,
+      url: `${baseUrl}${post.pathname}`,
       date: post.date,
       description: post.summary,
       author: MY_NAME

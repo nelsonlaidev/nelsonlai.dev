@@ -29,7 +29,7 @@ const PostCards = (props: PostCardsProps) => {
 }
 
 const PostCard = (props: PostCardProps) => {
-  const { slug, title, summary, date } = props
+  const { slug, title, summary, date, pathname, coverImagePathname } = props
   const formattedDate = useFormattedDate(date)
   const t = useTranslations()
 
@@ -37,9 +37,9 @@ const PostCard = (props: PostCardProps) => {
   const likesQuery = usePostLikeCount({ slug })
 
   return (
-    <Link href={`/blog/${slug}`} className='group rounded-xl px-2 py-4 shadow-feature-card'>
+    <Link href={pathname} className='group rounded-xl px-2 py-4 shadow-feature-card'>
       <BlurImage
-        src={`/images/blog/${slug}/cover.png`}
+        src={coverImagePathname}
         className='rounded-lg'
         width={1200}
         height={630}

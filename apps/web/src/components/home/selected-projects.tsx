@@ -101,11 +101,11 @@ const SelectedProjects = (props: SelectedProjectsProps) => {
 
 const Card = (props: CardProps) => {
   const { project } = props
-  const { slug, name, description } = project
+  const { name, description, pathname, coverImagePathname } = project
   const t = useTranslations()
 
   return (
-    <Link key={slug} href={`/projects/${slug}`} className='group relative rounded-xl p-2 shadow-feature-card'>
+    <Link href={pathname} className='group relative rounded-xl p-2 shadow-feature-card'>
       <div className='flex items-center justify-between p-4'>
         <div className='flex items-center gap-3'>
           <LightbulbIcon className='size-[18px]' />
@@ -116,7 +116,7 @@ const Card = (props: CardProps) => {
       <BlurImage
         width={1200}
         height={630}
-        src={`/images/projects/${slug}/cover.png`}
+        src={coverImagePathname}
         alt={description}
         className='rounded-lg'
         lazy={false}

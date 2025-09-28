@@ -2,7 +2,7 @@
 
 import type { Post } from '@/lib/content'
 
-import { useLocale, useTranslations } from '@repo/i18n/client'
+import { useTranslations } from '@repo/i18n/client'
 import { linkVariants } from '@repo/ui/components/link'
 
 import Link from '@/components/link'
@@ -15,9 +15,8 @@ type FooterProps = {
 const Footer = (props: FooterProps) => {
   const { post } = props
   const t = useTranslations()
-  const locale = useLocale()
 
-  const editURL = `https://github.com/nelsonlaidev/nelsonlai.dev/blob/main/apps/web/src/content/blog/${locale}/${post.slug}.mdx?plain=1`
+  const editURL = `https://github.com/nelsonlaidev/nelsonlai.dev/blob/main/${post.sourceFilePath}?plain=1`
 
   const formattedDate = useFormattedDate(post.modifiedTime)
 

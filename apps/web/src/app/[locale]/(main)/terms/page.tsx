@@ -19,13 +19,18 @@ export const generateMetadata = async (props: PageProps<'/[locale]/terms'>): Pro
   const t = await getTranslations({ locale, namespace: 'terms' })
   const title = t('title')
   const description = t('description')
+  const page = allPages.find((p) => p.slug === 'terms' && p.locale === locale)
+
+  if (!page) {
+    return {}
+  }
 
   return createMetadata({
-    pathname: '/terms',
+    pathname: page.pathname,
     title,
     description,
     locale,
-    ogImagePathname: '/terms/og-image.png'
+    ogImagePathname: page.ogImagePathname
   })
 }
 
