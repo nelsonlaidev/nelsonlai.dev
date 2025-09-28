@@ -103,3 +103,6 @@ fi
 pnpm install
 pnpm db:migrate
 pnpm db:seed
+pnpm build:mdx
+pnpm --filter web typegen
+pnpm playwright install
