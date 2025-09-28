@@ -72,17 +72,24 @@ export SRH_CONNECTION_STRING="redis://127.0.0.1:6379"
 SRH_VERSION="0.0.10"
 SRH_TARBALL="serverless-redis-http-${SRH_VERSION}.tar.gz"
 SRH_URL="https://github.com/nelsonlaidev/srh-build/releases/download/${SRH_VERSION}/${SRH_TARBALL}"
+SRH_TMP_DIR="$(mktemp -d)"
 
-echo "Downloading SRH build version ${SRH_VERSION}..."
-curl -fsSL -o "${SRH_TARBALL}" "${SRH_URL}"
-tar -xzf "${SRH_TARBALL}"
-cd prod || {
-	echo "Error: release directory 'prod' not found"
-	exit 1
-}
+(
+	set -euo pipefail
+	echo "Downloading SRH build version ${SRH_VERSION}..."
+	curl -fsSL -o "${SRH_TMP_DIR}/${SRH_TARBALL}" "${SRH_URL}"
 
-# Start SRH
-./bin/prod start &
+	tar -xzf "${SRH_TMP_DIR}/${SRH_TARBALL}" -C "${SRH_TMP_DIR}"
+
+	cd "${SRH_TMP_DIR}/prod" || {
+		echo "Error: release directory 'prod' not found"
+		exit 1
+	}
+
+	# Start SRH
+	./bin/prod start &
+)
+
 sleep 3
 
 if curl -s http://localhost:${SRH_PORT}/ | grep -q "Welcome to Serverless Redis HTTP!"; then
