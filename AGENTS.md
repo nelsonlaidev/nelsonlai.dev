@@ -117,10 +117,10 @@ export default Component
 - Follow mobile-first responsive design
 
 ```tsx
-// ✅ Good
+// Good
 <div className={cn('flex items-center gap-4', isActive && 'bg-accent')}>
 
-// ❌ Avoid
+// Avoid
 <div style={{ display: 'flex', gap: '1rem' }}>
 ```
 
