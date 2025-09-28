@@ -105,4 +105,4 @@ pnpm db:migrate
 pnpm db:seed
 pnpm build:mdx
 pnpm --filter web typegen
-pnpm playwright install
+pnpm playwright install --with-deps
