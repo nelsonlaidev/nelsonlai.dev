@@ -1,5 +1,7 @@
-import { redirect } from '@repo/i18n/routing'
+import { redirect, routing } from '@repo/i18n/routing'
 import { SidebarProvider } from '@repo/ui/components/sidebar'
+import { notFound } from 'next/navigation'
+import { hasLocale } from 'next-intl'
 
 import AdminHeader from '@/components/admin/admin-header'
 import AdminSidebar from '@/components/admin/admin-sidebar'
@@ -9,6 +11,10 @@ const Layout = async (props: LayoutProps<'/[locale]'>) => {
   const { children, params } = props
   const { locale } = await params
   const session = await getSession()
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
 
   if (!session || session.user.role !== 'admin') {
     redirect({

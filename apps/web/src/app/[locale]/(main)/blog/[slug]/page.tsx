@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import type { BlogPosting, WithContext } from 'schema-dts'
 
+import { routing } from '@repo/i18n/routing'
 import { setRequestLocale } from '@repo/i18n/server'
 import { notFound } from 'next/navigation'
+import { hasLocale } from 'next-intl'
 import { Suspense } from 'react'
 
 import CommentSection from '@/components/comment-section'
@@ -53,8 +55,12 @@ export const generateMetadata = async (props: PageProps<'/[locale]/blog/[slug]'>
 const Page = async (props: PageProps<'/[locale]/blog/[slug]'>) => {
   const { params } = props
   const { slug, locale } = await params
-  setRequestLocale(locale)
 
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
+
+  setRequestLocale(locale)
   const post = allPosts.find((p) => p.slug === slug && p.locale === locale)
   const url = getLocalizedPath({ locale, pathname: `/blog/${slug}` })
   const baseUrl = getBaseUrl()

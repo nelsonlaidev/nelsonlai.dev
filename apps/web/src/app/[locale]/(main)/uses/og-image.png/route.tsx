@@ -1,6 +1,8 @@
+import { routing } from '@repo/i18n/routing'
 import { getErrorMessage } from '@repo/utils'
 import { ImageResponse } from 'next/og'
 import { NextResponse } from 'next/server'
+import { hasLocale } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 
 import OGImage from '@/components/og-image'
@@ -11,6 +13,10 @@ import { getOGImageFonts } from '@/lib/fonts'
 export const GET = async (_request: Request, props: RouteContext<'/[locale]/uses/og-image.png'>) => {
   const { params } = props
   const { locale } = await params
+
+  if (!hasLocale(routing.locales, locale)) {
+    return NextResponse.json({ error: 'Invalid locale' }, { status: 400 })
+  }
 
   const t = await getTranslations({ locale })
   const title = t('uses.title')

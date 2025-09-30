@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import type { WebSite, WithContext } from 'schema-dts'
 
-import { i18n } from '@repo/i18n/config'
+import { routing } from '@repo/i18n/routing'
 import { getTranslations, setRequestLocale } from '@repo/i18n/server'
+import { notFound } from 'next/navigation'
+import { hasLocale } from 'next-intl'
 
 import AboutMe from '@/components/home/about-me'
 import GetInTouch from '@/components/home/get-in-touch'
@@ -24,12 +26,17 @@ import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
 export const generateStaticParams = (): Array<{ locale: string }> => {
-  return i18n.locales.map((locale) => ({ locale }))
+  return routing.locales.map((locale) => ({ locale }))
 }
 
 export const generateMetadata = async (props: PageProps<'/[locale]'>): Promise<Metadata> => {
   const { params } = props
   const { locale } = await params
+
+  if (!hasLocale(routing.locales, locale)) {
+    return {}
+  }
+
   const t = await getTranslations({ locale, namespace: 'metadata' })
   const description = t('site-description')
 
@@ -45,6 +52,11 @@ export const generateMetadata = async (props: PageProps<'/[locale]'>): Promise<M
 const Page = async (props: PageProps<'/[locale]'>) => {
   const { params } = props
   const { locale } = await params
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
+
   setRequestLocale(locale)
   const t = await getTranslations('metadata')
 
