@@ -10,7 +10,7 @@ import PageTitle from '@/components/page-title'
 import { getPageBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 
-export const generateStaticParams = (): Array<Awaited<PageProps<'/[locale]/privacy'>['params']>> => {
+export const generateStaticParams = (): Array<{ locale: string }> => {
   return routing.locales.map((locale) => ({ locale }))
 }
 
