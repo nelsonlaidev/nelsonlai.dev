@@ -19,7 +19,7 @@ export default defineConfig({
   },
   expect: { timeout: 5000 },
   projects: [
-    { name: 'setup', testMatch: '**/*.setup.ts' },
+    { name: 'setup', testMatch: '**/*.setup.ts', teardown: 'teardown' },
     { name: 'teardown', testMatch: '**/*.teardown.ts' },
     {
       name: 'chromium',
