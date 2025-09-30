@@ -11,7 +11,6 @@ import { IS_SERVER } from '@/lib/constants'
 
 import Link from '../link'
 
-import LocaleSwitcher from './locale-switcher'
 import MobileNav from './mobile-nav'
 import Navbar from './navbar'
 import ThemeSwitcher from './theme-switcher'
@@ -71,7 +70,6 @@ const Header = () => {
       <div className='flex items-center gap-2'>
         <Navbar />
         <ThemeSwitcher />
-        <LocaleSwitcher />
         <CommandMenu />
         <MobileNav />
       </div>

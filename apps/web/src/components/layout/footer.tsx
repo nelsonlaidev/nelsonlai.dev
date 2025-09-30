@@ -9,6 +9,7 @@ import { useGitHubStat } from '@/hooks/queries/stat.query'
 
 import Link from '../link'
 
+import LocaleSwitcher from './locale-switcher'
 import NowPlaying from './now-playing'
 
 const Footer = () => {
@@ -33,27 +34,30 @@ const Footer = () => {
           </div>
         ))}
       </div>
-      <div className='mt-20 flex items-center justify-between text-sm'>
-        <div>&copy; {new Date().getFullYear()} Nelson Lai</div>
-        <Link
-          href='https://nelsonlai.link/s/github-portfolio'
-          className='flex items-center justify-center overflow-hidden rounded-md border'
-        >
-          <div className='flex h-8 items-center gap-2 border-r bg-muted px-2'>
-            <StarIcon className='size-4' />
-            <span className='font-medium'>Star</span>
-          </div>
-          <div className='flex h-8 items-center bg-background px-3'>
-            {isSuccess &&
-              Intl.NumberFormat('en', {
-                notation: 'compact',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 1
-              }).format(data.repoStars)}
-            {isLoading && '--'}
-            {isError && t('common.error')}
-          </div>
-        </Link>
+      <div className='mt-20 flex flex-col gap-4'>
+        <LocaleSwitcher />
+        <div className='flex items-center justify-between text-sm'>
+          <div>&copy; {new Date().getFullYear()} Nelson Lai</div>
+          <Link
+            href='https://nelsonlai.link/s/github-portfolio'
+            className='flex items-center justify-center overflow-hidden rounded-md border'
+          >
+            <div className='flex h-8 items-center gap-2 border-r bg-muted px-2'>
+              <StarIcon className='size-4' />
+              <span className='font-medium'>Star</span>
+            </div>
+            <div className='flex h-8 items-center bg-background px-3'>
+              {isSuccess &&
+                Intl.NumberFormat('en', {
+                  notation: 'compact',
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 1
+                }).format(data.repoStars)}
+              {isLoading && '--'}
+              {isError && t('common.error')}
+            </div>
+          </Link>
+        </div>
       </div>
     </footer>
   )
