@@ -4,9 +4,10 @@ import { useTranslations } from '@repo/i18n/client'
 import { Logo } from '@repo/ui/components/logo'
 import { cn } from '@repo/utils'
 import { motion } from 'motion/react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 import CommandMenu from '@/components/command-menu'
+import { IS_SERVER } from '@/lib/constants'
 
 import Link from '../link'
 
@@ -16,40 +17,51 @@ import Navbar from './navbar'
 import ThemeSwitcher from './theme-switcher'
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const headerRef = useRef<HTMLElement>(null)
+  const rafRef = useRef<number | null>(null)
   const t = useTranslations()
 
   useEffect(() => {
-    const changeBackground = () => {
-      if (window.scrollY > 100) {
-        setIsScrolled(true)
-      } else {
-        setIsScrolled(false)
-      }
+    if (IS_SERVER) return
+
+    const headerEl = headerRef.current
+    if (!headerEl) return
+
+    const setScrolled = () => {
+      const scrolled = window.scrollY > 100
+
+      console.log('scrollY', window.scrollY)
+
+      console.log('scrolled', scrolled)
+
+      headerEl.dataset.scrolled = scrolled ? 'true' : 'false'
     }
 
-    document.addEventListener('scroll', changeBackground)
+    const handleScroll = () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      rafRef.current = requestAnimationFrame(setScrolled)
+    }
+
+    setScrolled()
+
+    document.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => {
-      document.removeEventListener('scroll', changeBackground)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      document.removeEventListener('scroll', handleScroll)
     }
   }, [])
 
   return (
     <motion.header
+      ref={headerRef}
       className={cn(
         'fixed inset-x-0 top-4 z-40 mx-auto flex h-[60px] max-w-5xl items-center justify-between rounded-2xl bg-background/30 px-8 shadow-xs saturate-100 backdrop-blur-[10px] transition-colors',
-        isScrolled && 'bg-background/80'
+        'data-[scrolled=true]:bg-background/80'
       )}
-      initial={{
-        y: -100
-      }}
-      animate={{
-        y: 0
-      }}
-      transition={{
-        duration: 0.3
-      }}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.3 }}
     >
       <Link
         href='#skip-nav'
