@@ -10,7 +10,7 @@ import BlurImage from '@/components/blur-image'
 import JsonLd from '@/components/json-ld'
 import Mdx from '@/components/mdx'
 import { MY_NAME } from '@/lib/constants'
-import { allProjects } from '@/lib/content'
+import { allProjects, getProjectBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
@@ -28,7 +28,11 @@ export const generateMetadata = async (props: PageProps<'/[locale]/projects/[slu
   const { params } = props
   const { slug, locale } = await params
 
-  const project = allProjects.find((p) => p.slug === slug && p.locale === locale)
+  if (!hasLocale(routing.locales, locale)) {
+    return {}
+  }
+
+  const project = getProjectBySlug(locale, slug)
 
   if (!project) {
     return {}
@@ -54,7 +58,7 @@ const Page = async (props: PageProps<'/[locale]/projects/[slug]'>) => {
   }
 
   setRequestLocale(locale)
-  const project = allProjects.find((p) => p.slug === slug && p.locale === locale)
+  const project = getProjectBySlug(locale, slug)
   const url = getLocalizedPath({ locale, pathname: `/projects/${slug}` })
 
   if (!project) {

@@ -16,7 +16,7 @@ import {
   SITE_X_URL,
   SITE_YOUTUBE_URL
 } from '@/lib/constants'
-import { allPages } from '@/lib/content'
+import { getPageBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
@@ -60,7 +60,7 @@ const Page = async (props: PageProps<'/[locale]/about'>) => {
   const title = t('about.title')
   const description = t('about.description')
   const url = getLocalizedPath({ locale, pathname: '/about' })
-  const page = allPages.find((p) => p.slug === 'about' && p.locale === locale)
+  const page = getPageBySlug(locale, 'about')
 
   const jsonLd: WithContext<AboutPage> = {
     '@context': 'https://schema.org',

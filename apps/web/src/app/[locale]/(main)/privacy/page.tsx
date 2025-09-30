@@ -7,7 +7,7 @@ import { hasLocale } from 'next-intl'
 
 import Mdx from '@/components/mdx'
 import PageTitle from '@/components/page-title'
-import { allPages } from '@/lib/content'
+import { getPageBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 
 export const generateStaticParams = (): Array<Awaited<PageProps<'/[locale]/privacy'>['params']>> => {
@@ -47,7 +47,7 @@ const Page = async (props: PageProps<'/[locale]/privacy'>) => {
   const t = await getTranslations()
   const title = t('privacy.title')
   const description = t('privacy.description')
-  const page = allPages.find((p) => p.slug === 'privacy' && p.locale === locale)
+  const page = getPageBySlug(locale, 'privacy')
 
   if (!page) {
     return notFound()

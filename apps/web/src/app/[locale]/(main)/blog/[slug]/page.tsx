@@ -11,7 +11,7 @@ import CommentSection from '@/components/comment-section'
 import JsonLd from '@/components/json-ld'
 import Mdx from '@/components/mdx'
 import { MY_NAME } from '@/lib/constants'
-import { allPosts } from '@/lib/content'
+import { allPosts, getPostBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
@@ -34,7 +34,11 @@ export const generateMetadata = async (props: PageProps<'/[locale]/blog/[slug]'>
   const { params } = props
   const { slug, locale } = await params
 
-  const post = allPosts.find((p) => p.slug === slug && p.locale === locale)
+  if (!hasLocale(routing.locales, locale)) {
+    return {}
+  }
+
+  const post = getPostBySlug(locale, slug)
 
   if (!post) return {}
 
@@ -61,7 +65,7 @@ const Page = async (props: PageProps<'/[locale]/blog/[slug]'>) => {
   }
 
   setRequestLocale(locale)
-  const post = allPosts.find((p) => p.slug === slug && p.locale === locale)
+  const post = getPostBySlug(locale, slug)
   const url = getLocalizedPath({ locale, pathname: `/blog/${slug}` })
   const baseUrl = getBaseUrl()
 

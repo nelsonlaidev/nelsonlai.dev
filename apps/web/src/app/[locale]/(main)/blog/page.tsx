@@ -10,7 +10,7 @@ import FilteredPosts from '@/components/filtered-posts'
 import JsonLd from '@/components/json-ld'
 import PageTitle from '@/components/page-title'
 import { MY_NAME } from '@/lib/constants'
-import { allPosts } from '@/lib/content'
+import { getLatestPosts } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
@@ -54,9 +54,7 @@ const Page = async (props: PageProps<'/[locale]/blog'>) => {
   const description = t('description')
   const url = getLocalizedPath({ locale, pathname: '/blog' })
 
-  const posts = allPosts
-    .filter((post) => post.locale === locale)
-    .toSorted((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const posts = getLatestPosts(locale)
 
   const jsonLd: WithContext<CollectionPage> = {
     '@context': 'https://schema.org',
