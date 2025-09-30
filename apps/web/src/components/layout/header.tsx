@@ -30,10 +30,6 @@ const Header = () => {
     const setScrolled = () => {
       const scrolled = window.scrollY > 100
 
-      console.log('scrollY', window.scrollY)
-
-      console.log('scrolled', scrolled)
-
       headerEl.dataset.scrolled = scrolled ? 'true' : 'false'
     }
 
