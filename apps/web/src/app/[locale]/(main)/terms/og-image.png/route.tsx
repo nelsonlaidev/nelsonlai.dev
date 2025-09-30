@@ -7,7 +7,7 @@ import { getTranslations } from 'next-intl/server'
 
 import OGImage from '@/components/og-image'
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '@/lib/constants'
-import { allPages } from '@/lib/content'
+import { getPageBySlug } from '@/lib/content'
 import { getOGImageFonts } from '@/lib/fonts'
 
 export const GET = async (_request: Request, props: RouteContext<'/[locale]/terms/og-image.png'>) => {
@@ -22,7 +22,7 @@ export const GET = async (_request: Request, props: RouteContext<'/[locale]/term
   const title = t('terms.title')
 
   try {
-    const page = allPages.find((p) => p.slug === 'terms' && p.locale === locale)
+    const page = getPageBySlug(locale, 'terms')
 
     if (!page) {
       return NextResponse.json({ error: 'Page not found' }, { status: 404 })

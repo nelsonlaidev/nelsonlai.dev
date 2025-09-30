@@ -3,9 +3,10 @@ import { createId } from '@paralleldrive/cuid2'
 import { and, asc, comments, count, desc, eq, gt, isNotNull, isNull, lt, ne, votes } from '@repo/db'
 import { CommentEmailTemplate, ReplyEmailTemplate } from '@repo/emails'
 import { env } from '@repo/env'
+import { getLocale } from 'next-intl/server'
 
 import { IS_PRODUCTION } from '@/lib/constants'
-import { allPosts } from '@/lib/content'
+import { getPostBySlug } from '@/lib/content'
 import { resend } from '@/lib/resend'
 import { getDefaultImage } from '@/utils/get-default-image'
 
@@ -105,9 +106,10 @@ export const createComment = protectedProcedure
   .handler(async ({ input, context }) => {
     const user = context.session.user
 
+    const locale = await getLocale()
     const commentId = createId()
 
-    const page = allPosts.find((post) => post.slug === input.slug)
+    const page = getPostBySlug(locale, input.slug)
 
     if (!page) throw new ORPCError('NOT_FOUND', { message: 'Blog post not found' })
 

@@ -10,7 +10,7 @@ import JsonLd from '@/components/json-ld'
 import Mdx from '@/components/mdx'
 import PageTitle from '@/components/page-title'
 import { MY_NAME } from '@/lib/constants'
-import { allPages } from '@/lib/content'
+import { getPageBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
@@ -53,7 +53,7 @@ const Page = async (props: PageProps<'/[locale]/uses'>) => {
   const title = t('uses.title')
   const description = t('uses.description')
   const url = getLocalizedPath({ locale, pathname: '/uses' })
-  const page = allPages.find((p) => p.slug === 'uses' && p.locale === locale)
+  const page = getPageBySlug(locale, 'uses')
 
   const jsonLd: WithContext<WebPage> = {
     '@context': 'https://schema.org',
