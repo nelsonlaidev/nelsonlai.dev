@@ -95,7 +95,7 @@ const Message = (props: MessageProps) => {
           <UpdatedDate date={message.updatedAt} />
         </div>
       </div>
-      <div className='pl-[52px] break-words'>{message.body}</div>
+      <div className='pl-13 break-words'>{message.body}</div>
       {isAuthor && <DeleteButton message={message} />}
     </div>
   )

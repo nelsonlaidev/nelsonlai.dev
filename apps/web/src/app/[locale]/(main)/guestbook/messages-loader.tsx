@@ -10,7 +10,7 @@ const Placeholder = () => (
         <Skeleton className='h-4 w-36 rounded-md' />
       </div>
     </div>
-    <Skeleton className='h-6 w-full max-w-xs rounded-md pl-[52px]' />
+    <Skeleton className='h-6 w-full max-w-xs rounded-md pl-13' />
   </div>
 )
 

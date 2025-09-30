@@ -105,10 +105,10 @@ const Page = async (props: PageProps<'/[locale]/blog/[slug]'>) => {
       <Header post={post} />
 
       <div className='mt-8 flex flex-col justify-between lg:flex-row'>
-        <article className='w-full lg:w-[670px]'>
+        <article className='w-full lg:max-w-2xl'>
           <Mdx code={post.code} />
         </article>
-        <aside className='lg:max-w-[270px] lg:min-w-[270px]'>
+        <aside className='w-68'>
           <div className='sticky top-24'>
             {post.toc.length > 0 && <TableOfContents toc={post.toc} />}
             <LikeButton slug={slug} />
