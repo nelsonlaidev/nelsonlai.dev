@@ -15,25 +15,26 @@ export default defineConfig({
     baseURL,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure'
+    video: 'retain-on-failure',
+
+    ...devices['Desktop Chrome'],
+    contextOptions: {
+      permissions: ['clipboard-read', 'clipboard-write']
+    }
   },
   expect: { timeout: 5000 },
   projects: [
     { name: 'setup', testMatch: '**/*.setup.ts', teardown: 'teardown' },
-    { name: 'authenticated', testMatch: 'authenticated/**/*.test.ts', dependencies: ['setup'] },
-    { name: 'unauthenticated', testMatch: 'unauthenticated/**/*.test.ts', dependencies: ['setup'] },
-    { name: 'teardown', testMatch: '**/*.teardown.ts' },
     {
-      name: 'chromium',
+      name: 'authenticated',
+      testMatch: 'authenticated/**/*.test.ts',
       use: {
-        ...devices['Desktop Chrome'],
-        storageState: './src/tests/e2e/.auth/user.json',
-        contextOptions: {
-          permissions: ['clipboard-read', 'clipboard-write']
-        }
+        storageState: './src/tests/e2e/.auth/user.json'
       },
       dependencies: ['setup']
-    }
+    },
+    { name: 'unauthenticated', testMatch: 'unauthenticated/**/*.test.ts', dependencies: ['setup'] },
+    { name: 'teardown', testMatch: '**/*.teardown.ts' }
   ],
   webServer: {
     command: CI ? 'pnpm start' : 'pnpm dev',
