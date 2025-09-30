@@ -13,7 +13,7 @@ import {
   CommandList,
   CommandSeparator
 } from '@repo/ui/components/command'
-import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon } from 'lucide-react'
+import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon, UserCircleIcon } from 'lucide-react'
 import { Fragment, useCallback, useEffect, useState } from 'react'
 
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
@@ -64,6 +64,14 @@ const CommandMenu = () => {
       actions: [
         ...(session
           ? [
+              {
+                title: t('account.title'),
+                icon: <UserCircleIcon />,
+                onSelect: () => {
+                  setIsOpen(false)
+                  router.push('/account')
+                }
+              },
               {
                 title: t('common.sign-out'),
                 icon: <LogOutIcon />,
