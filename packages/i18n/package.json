@@ -6,7 +6,6 @@
   "type": "module",
   "exports": {
     "./client": "./src/client.ts",
-    "./config": "./src/config.ts",
     "./middleware": "./src/middleware.ts",
     "./request": "./src/request.ts",
     "./routing": "./src/routing.ts",

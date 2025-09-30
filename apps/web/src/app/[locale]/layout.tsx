@@ -3,7 +3,6 @@ import type { Viewport } from 'next'
 import '@/styles/globals.css'
 
 import { hasLocale, NextIntlClientProvider } from '@repo/i18n/client'
-import { i18n } from '@repo/i18n/config'
 import { routing } from '@repo/i18n/routing'
 import { setRequestLocale } from '@repo/i18n/server'
 import { cn } from '@repo/utils'
@@ -19,7 +18,7 @@ import SignInDialog from '@/components/sign-in-dialog'
 import Providers from '../providers'
 
 export const generateStaticParams = (): Array<{ locale: string }> => {
-  return i18n.locales.map((locale) => ({ locale }))
+  return routing.locales.map((locale) => ({ locale }))
 }
 
 export const viewport: Viewport = {

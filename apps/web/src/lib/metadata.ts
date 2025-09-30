@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import { deepmerge } from '@fastify/deepmerge'
-import { i18n } from '@repo/i18n/config'
+import { routing } from '@repo/i18n/routing'
 
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
@@ -35,8 +35,8 @@ export const createMetadata = (options: Options): Metadata => {
       alternates: {
         canonical: currentUrl,
         languages: {
-          ...Object.fromEntries(i18n.locales.map((l) => [l, getLocalizedPath({ locale: l, pathname })])),
-          'x-default': getLocalizedPath({ locale: i18n.defaultLocale, pathname })
+          ...Object.fromEntries(routing.locales.map((l) => [l, getLocalizedPath({ locale: l, pathname })])),
+          'x-default': getLocalizedPath({ locale: routing.defaultLocale, pathname })
         }
       },
       robots: {

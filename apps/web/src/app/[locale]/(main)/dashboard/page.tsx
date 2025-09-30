@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import type { WebPage, WithContext } from 'schema-dts'
 
-import { i18n } from '@repo/i18n/config'
+import { routing } from '@repo/i18n/routing'
 import { getTranslations, setRequestLocale } from '@repo/i18n/server'
+import { notFound } from 'next/navigation'
+import { hasLocale } from 'next-intl'
 
 import JsonLd from '@/components/json-ld'
 import PageTitle from '@/components/page-title'
@@ -14,12 +16,17 @@ import { getLocalizedPath } from '@/utils/get-localized-path'
 import Stats from './stats'
 
 export const generateStaticParams = (): Array<{ locale: string }> => {
-  return i18n.locales.map((locale) => ({ locale }))
+  return routing.locales.map((locale) => ({ locale }))
 }
 
 export const generateMetadata = async (props: PageProps<'/[locale]/dashboard'>): Promise<Metadata> => {
   const { params } = props
   const { locale } = await params
+
+  if (!hasLocale(routing.locales, locale)) {
+    return {}
+  }
+
   const t = await getTranslations({ locale, namespace: 'dashboard' })
   const title = t('title')
   const description = t('description')
@@ -36,6 +43,11 @@ export const generateMetadata = async (props: PageProps<'/[locale]/dashboard'>):
 const Page = async (props: PageProps<'/[locale]/dashboard'>) => {
   const { params } = props
   const { locale } = await params
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
+
   setRequestLocale(locale)
   const t = await getTranslations()
   const title = t('dashboard.title')

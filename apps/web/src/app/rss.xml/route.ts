@@ -1,4 +1,4 @@
-import { i18n } from '@repo/i18n/config'
+import { routing } from '@repo/i18n/routing'
 import { getTranslations } from '@repo/i18n/server'
 import { NextResponse } from 'next/server'
 import RSS from 'rss'
@@ -8,7 +8,7 @@ import { allPosts } from '@/lib/content'
 import { getBaseUrl } from '@/utils/get-base-url'
 
 export const GET = async () => {
-  const t = await getTranslations({ locale: i18n.defaultLocale })
+  const t = await getTranslations({ locale: routing.defaultLocale })
 
   const feed = new RSS({
     title: MY_NAME,
@@ -19,7 +19,7 @@ export const GET = async () => {
     image_url: `${getBaseUrl()}/og-image.png`
   })
 
-  const posts = allPosts.filter((p) => p.locale === i18n.defaultLocale)
+  const posts = allPosts.filter((p) => p.locale === routing.defaultLocale)
 
   for (const post of posts) {
     feed.item({

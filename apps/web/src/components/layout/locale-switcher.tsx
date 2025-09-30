@@ -1,6 +1,5 @@
-import { useTranslations } from '@repo/i18n/client'
-import { i18n, supportedLanguages } from '@repo/i18n/config'
-import { usePathname, useRouter } from '@repo/i18n/routing'
+import { type Locale, useTranslations } from '@repo/i18n/client'
+import { localeLabels, routing, usePathname, useRouter } from '@repo/i18n/routing'
 import { Button } from '@repo/ui/components/button'
 import {
   DropdownMenu,
@@ -22,7 +21,7 @@ const LocaleSwitcher = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
-        {i18n.locales.map((locale) => (
+        {routing.locales.map((locale) => (
           <Item key={locale} locale={locale} />
         ))}
       </DropdownMenuContent>
@@ -31,7 +30,7 @@ const LocaleSwitcher = () => {
 }
 
 type ItemProps = {
-  locale: string
+  locale: Locale
 }
 
 const Item = (props: ItemProps) => {
@@ -48,7 +47,7 @@ const Item = (props: ItemProps) => {
 
   return (
     <DropdownMenuItem key={locale} disabled={isPending} onClick={switchLanguage}>
-      {supportedLanguages.find((l) => l.code === locale)?.label}
+      {localeLabels[locale]}
     </DropdownMenuItem>
   )
 }

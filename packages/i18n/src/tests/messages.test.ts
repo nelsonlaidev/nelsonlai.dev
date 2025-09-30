@@ -1,15 +1,15 @@
 import { describe, expect, test } from 'vitest'
 
-import { i18n } from '../config'
+import { routing } from '../routing'
 import { flattenKeys, loadMessages } from '../utils'
 
 describe('i18n messages', () => {
   test('matches keys across all languages', async () => {
-    const defaultMessages = await loadMessages(i18n.defaultLocale)
+    const defaultMessages = await loadMessages(routing.defaultLocale)
     const defaultKeys = flattenKeys(defaultMessages)
 
-    for (const locale of i18n.locales) {
-      if (locale === i18n.defaultLocale) continue
+    for (const locale of routing.locales) {
+      if (locale === routing.defaultLocale) continue
 
       const messages = await loadMessages(locale)
       const messageKeys = flattenKeys(messages)
