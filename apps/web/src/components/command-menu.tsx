@@ -2,7 +2,6 @@
 
 import type { ReactNode } from 'react'
 
-import { SiFacebook, SiGithub, SiInstagram, SiX, SiYoutube } from '@icons-pack/react-simple-icons'
 import { useTranslations } from '@repo/i18n/client'
 import { useRouter } from '@repo/i18n/routing'
 import { Button } from '@repo/ui/components/button'
@@ -18,9 +17,9 @@ import {
 import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon, UserCircleIcon } from 'lucide-react'
 import { Fragment, useCallback, useEffect, useState } from 'react'
 
+import { SOCIAL_LINKS } from '@/config/links'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
 import { signOut, useSession } from '@/lib/auth-client'
-import { SITE_FACEBOOK_URL, SITE_GITHUB_URL, SITE_INSTAGRAM_URL, SITE_X_URL, SITE_YOUTUBE_URL } from '@/lib/constants'
 import { useDialogsStore } from '@/stores/dialogs.store'
 
 type CommandAction = {
@@ -33,14 +32,6 @@ type CommandGroup = {
   name: string
   actions: CommandAction[]
 }
-
-const SOCIAL_LINKS: Array<{ title: string; icon: ReactNode; url: string }> = [
-  { title: 'GitHub', icon: <SiGithub />, url: SITE_GITHUB_URL },
-  { title: 'Facebook', icon: <SiFacebook />, url: SITE_FACEBOOK_URL },
-  { title: 'Instagram', icon: <SiInstagram />, url: SITE_INSTAGRAM_URL },
-  { title: 'X', icon: <SiX />, url: SITE_X_URL },
-  { title: 'YouTube', icon: <SiYoutube />, url: SITE_YOUTUBE_URL }
-]
 
 const CommandMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -147,9 +138,9 @@ const CommandMenu = () => {
 
   const socialActions: CommandAction[] = SOCIAL_LINKS.map((link) => ({
     title: link.title,
-    icon: link.icon,
+    icon: <link.icon />,
     onSelect: () => {
-      openExternalLink(link.url)
+      openExternalLink(link.href)
     }
   }))
 
