@@ -1,7 +1,5 @@
 'use client'
 
-import type { ReactNode } from 'react'
-
 import { useTranslations } from '@repo/i18n/client'
 import { useRouter } from '@repo/i18n/routing'
 import { Button } from '@repo/ui/components/button'
@@ -24,7 +22,7 @@ import { useDialogsStore } from '@/stores/dialogs.store'
 
 type CommandAction = {
   title: string
-  icon: ReactNode
+  icon: React.ReactNode
   onSelect: () => void | Promise<void>
 }
 
@@ -138,7 +136,7 @@ const CommandMenu = () => {
 
   const socialActions: CommandAction[] = SOCIAL_LINKS.map((link) => ({
     title: link.title,
-    icon: <link.icon />,
+    icon: link.icon,
     onSelect: () => {
       openExternalLink(link.href)
     }

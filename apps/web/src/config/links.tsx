@@ -1,4 +1,4 @@
-import { type IconType, SiFacebook, SiGithub, SiInstagram, SiX, SiYoutube } from '@icons-pack/react-simple-icons'
+import { SiFacebook, SiGithub, SiInstagram, SiX, SiYoutube } from '@icons-pack/react-simple-icons'
 import { BarChartIcon, FlameIcon, MessageCircleIcon, MonitorIcon, PencilIcon, UserCircleIcon } from 'lucide-react'
 
 import { SITE_FACEBOOK_URL, SITE_GITHUB_URL, SITE_INSTAGRAM_URL, SITE_X_URL, SITE_YOUTUBE_URL } from '@/lib/constants'
@@ -6,7 +6,7 @@ import { SITE_FACEBOOK_URL, SITE_GITHUB_URL, SITE_INSTAGRAM_URL, SITE_X_URL, SIT
 type SocialLinks = Array<{
   href: string
   title: string
-  icon: IconType
+  icon: React.ReactNode
 }>
 
 export const HEADER_LINKS = [
@@ -83,26 +83,26 @@ export const SOCIAL_LINKS: SocialLinks = [
   {
     href: SITE_GITHUB_URL,
     title: 'GitHub',
-    icon: SiGithub
+    icon: <SiGithub />
   },
   {
     href: SITE_FACEBOOK_URL,
     title: 'Facebook',
-    icon: SiFacebook
+    icon: <SiFacebook />
   },
   {
     href: SITE_INSTAGRAM_URL,
     title: 'Instagram',
-    icon: SiInstagram
+    icon: <SiInstagram />
   },
   {
     href: SITE_X_URL,
     title: 'X',
-    icon: SiX
+    icon: <SiX />
   },
   {
     href: SITE_YOUTUBE_URL,
     title: 'YouTube',
-    icon: SiYoutube
+    icon: <SiYoutube />
   }
 ]
