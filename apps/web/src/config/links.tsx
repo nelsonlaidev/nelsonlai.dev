@@ -1,79 +1,132 @@
+import type { useTranslations } from 'next-intl'
+
 import { SiFacebook, SiGithub, SiInstagram, SiX, SiYoutube } from '@icons-pack/react-simple-icons'
 import { BarChartIcon, FlameIcon, MessageCircleIcon, MonitorIcon, PencilIcon, UserCircleIcon } from 'lucide-react'
 
 import { SITE_FACEBOOK_URL, SITE_GITHUB_URL, SITE_INSTAGRAM_URL, SITE_X_URL, SITE_YOUTUBE_URL } from '@/lib/constants'
 
-export const HEADER_LINKS = [
+// Seems that next-intl doesn't expose the type for translation key,
+// so we extract it here
+type TranslationKey = Parameters<ReturnType<typeof useTranslations<never>>>[0]
+
+type HeaderLinks = Array<{
+  icon: React.ReactNode
+  href: string
+  key: string
+  labelKey: TranslationKey
+}>
+
+export const HEADER_LINKS: HeaderLinks = [
   {
     icon: <PencilIcon className='size-3.5' />,
     href: '/blog',
-    key: 'blog'
+    key: 'blog',
+    // t('common.labels.blog')
+    labelKey: 'common.labels.blog'
   },
   {
     icon: <MessageCircleIcon className='size-3.5' />,
     href: '/guestbook',
-    key: 'guestbook'
+    key: 'guestbook',
+    // t('common.labels.guestbook')
+    labelKey: 'common.labels.guestbook'
   },
   {
     icon: <BarChartIcon className='size-3.5' />,
     href: '/dashboard',
-    key: 'dashboard'
+    key: 'dashboard',
+    // t('common.labels.dashboard')
+    labelKey: 'common.labels.dashboard'
   },
   {
     icon: <FlameIcon className='size-3.5' />,
     href: '/projects',
-    key: 'projects'
+    key: 'projects',
+    // t('common.labels.projects')
+    labelKey: 'common.labels.projects'
   },
   {
     icon: <UserCircleIcon className='size-3.5' />,
     href: '/about',
-    key: 'about'
+    key: 'about',
+    // t('common.labels.about')
+    labelKey: 'common.labels.about'
   },
   {
     icon: <MonitorIcon className='size-3.5' />,
     href: '/uses',
-    key: 'uses'
+    key: 'uses',
+    // t('common.labels.uses')
+    labelKey: 'common.labels.uses'
   }
-] as const
+]
 
-export const FOOTER_LINKS = [
+type FooterLinks = Array<{
+  id: number
+  links: Array<{
+    href: string
+    labelKey: TranslationKey
+  }>
+}>
+
+export const FOOTER_LINKS: FooterLinks = [
   {
     id: 1,
     links: [
-      { href: '/', key: 'home' },
-      { href: '/blog', key: 'blog' },
-      { href: '/about', key: 'about' },
-      { href: '/dashboard', key: 'dashboard' }
+      // t('common.labels.home')
+      { href: '/', labelKey: 'common.labels.home' },
+      // t('common.labels.blog')
+      { href: '/blog', labelKey: 'common.labels.blog' },
+      // t('common.labels.about')
+      { href: '/about', labelKey: 'common.labels.about' },
+      // t('common.labels.dashboard')
+      { href: '/dashboard', labelKey: 'common.labels.dashboard' }
     ]
   },
   {
     id: 2,
     links: [
-      { href: '/guestbook', key: 'guestbook' },
-      { href: '/uses', key: 'uses' },
-      { href: '/projects', key: 'projects' },
-      { href: 'https://nelsonlai.link', key: 'links' }
+      // t('common.labels.guestbook')
+      { href: '/guestbook', labelKey: 'common.labels.guestbook' },
+      // t('common.labels.uses')
+      { href: '/uses', labelKey: 'common.labels.uses' },
+      // t('common.labels.projects')
+      { href: '/projects', labelKey: 'common.labels.projects' },
+      // t('common.labels.links')
+      { href: 'https://nelsonlai.link', labelKey: 'common.labels.links' }
     ]
   },
   {
     id: 3,
     links: [
-      { href: SITE_FACEBOOK_URL, key: 'facebook' },
-      { href: SITE_INSTAGRAM_URL, key: 'instagram' },
-      { href: SITE_GITHUB_URL, key: 'github' },
-      { href: SITE_YOUTUBE_URL, key: 'youtube' }
+      // t('common.labels.facebook')
+      { href: SITE_FACEBOOK_URL, labelKey: 'common.labels.facebook' },
+      // t('common.labels.instagram')
+      { href: SITE_INSTAGRAM_URL, labelKey: 'common.labels.instagram' },
+      // t('common.labels.github')
+      { href: SITE_GITHUB_URL, labelKey: 'common.labels.github' },
+      // t('common.labels.youtube')
+      { href: SITE_YOUTUBE_URL, labelKey: 'common.labels.youtube' }
     ]
   },
   {
     id: 4,
     links: [
-      { href: '/terms', key: 'terms' },
-      { href: '/privacy', key: 'privacy' }
+      // t('common.labels.terms-of-service')
+      { href: '/terms', labelKey: 'common.labels.terms-of-service' },
+      // t('common.labels.privacy-policy')
+      { href: '/privacy', labelKey: 'common.labels.privacy-policy' }
     ]
   }
-] as const
+]
 
-export const SOCIAL_LINKS = [
+type SocialLinks = Array<{
+  href: string
+  title: string
+  icon: React.ReactNode
+}>
+
+export const SOCIAL_LINKS: SocialLinks = [
   {
     href: SITE_GITHUB_URL,
     title: 'GitHub',

@@ -18,15 +18,13 @@ const Connect = () => {
         {SOCIAL_LINKS.map((link) => {
           const { href, title, icon } = link
 
-          const Icon = icon
-
           return (
             <Link
               key={href}
               href={href}
-              className='flex w-fit items-center gap-3 text-muted-foreground transition-colors hover:text-foreground'
+              className='flex w-fit items-center gap-3 text-muted-foreground transition-colors hover:text-foreground [&>svg]:size-4.5'
             >
-              <Icon className='size-4.5' />
+              {icon}
               <h3>{title}</h3>
             </Link>
           )

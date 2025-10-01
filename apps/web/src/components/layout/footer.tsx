@@ -23,11 +23,11 @@ const Footer = () => {
         {FOOTER_LINKS.map((list) => (
           <div key={list.id} className='mb-10 flex flex-col items-start gap-4 pr-4'>
             {list.links.map((link) => {
-              const { href, key } = link
+              const { href, labelKey } = link
 
               return (
                 <Link key={href} href={href} className={linkVariants({ variant: 'muted' })}>
-                  {t(`layout.${key}`)}
+                  {t(labelKey)}
                 </Link>
               )
             })}

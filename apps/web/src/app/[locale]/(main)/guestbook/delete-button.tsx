@@ -48,8 +48,8 @@ const DeleteButton = (props: DeleteButtonProps) => {
         </AlertDialogTrigger>
         <AlertDialogContent data-testid='guestbook-dialog'>
           <AlertDialogHeader>
-            <AlertDialogTitle>{t('guestbook.delete-dialog.title')}</AlertDialogTitle>
-            <AlertDialogDescription>{t('guestbook.delete-dialog.description')}</AlertDialogDescription>
+            <AlertDialogTitle>{t('common.dialogs.delete-comment.title')}</AlertDialogTitle>
+            <AlertDialogDescription>{t('common.dialogs.delete-comment.description')}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>

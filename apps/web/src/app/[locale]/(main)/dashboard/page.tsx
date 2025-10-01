@@ -27,9 +27,9 @@ export const generateMetadata = async (props: PageProps<'/[locale]/dashboard'>):
     return {}
   }
 
-  const t = await getTranslations({ locale, namespace: 'dashboard' })
-  const title = t('title')
-  const description = t('description')
+  const t = await getTranslations({ locale })
+  const title = t('common.labels.dashboard')
+  const description = t('dashboard.description')
 
   return createMetadata({
     pathname: '/dashboard',
@@ -50,7 +50,7 @@ const Page = async (props: PageProps<'/[locale]/dashboard'>) => {
 
   setRequestLocale(locale)
   const t = await getTranslations()
-  const title = t('dashboard.title')
+  const title = t('common.labels.dashboard')
   const description = t('dashboard.description')
   const url = getLocalizedPath({ locale, pathname: '/dashboard' })
 

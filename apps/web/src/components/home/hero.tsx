@@ -9,18 +9,22 @@ import { MY_NAME } from '@/lib/constants'
 
 const TEXTS = [
   {
+    // t('homepage.hero.amazing')
     key: 'amazing',
     className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#ff1835] to-[#ffc900]'
   },
   {
+    // t('homepage.hero.stunning')
     key: 'stunning',
     className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#0077ff] to-[#00e7df]'
   },
   {
+    // t('homepage.hero.fantastic')
     key: 'fantastic',
     className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#7f00de] to-[#ff007f]'
   },
   {
+    // t('homepage.hero.attractive')
     key: 'attractive',
     className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#2ecc70] to-[#1ca085]'
   }

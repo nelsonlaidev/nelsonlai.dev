@@ -22,9 +22,9 @@ export const generateMetadata = async (props: PageProps<'/[locale]/privacy'>): P
     return {}
   }
 
-  const t = await getTranslations({ locale, namespace: 'privacy' })
-  const title = t('title')
-  const description = t('description')
+  const t = await getTranslations({ locale })
+  const title = t('common.labels.privacy-policy')
+  const description = t('privacy.description')
 
   return createMetadata({
     pathname: '/privacy',
@@ -45,7 +45,7 @@ const Page = async (props: PageProps<'/[locale]/privacy'>) => {
 
   setRequestLocale(locale)
   const t = await getTranslations()
-  const title = t('privacy.title')
+  const title = t('common.labels.privacy-policy')
   const description = t('privacy.description')
   const page = getPageBySlug(locale, 'privacy')
 

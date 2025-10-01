@@ -21,7 +21,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/account'>): P
   }
 
   const t = await getTranslations({ locale })
-  const title = t('account.title')
+  const title = t('common.labels.account')
   const description = t('account.description')
 
   return createMetadata({
@@ -43,7 +43,7 @@ const Page = async (props: PageProps<'/[locale]/account'>) => {
 
   setRequestLocale(locale)
   const t = await getTranslations()
-  const title = t('account.title')
+  const title = t('common.labels.account')
   const description = t('account.description')
 
   return (

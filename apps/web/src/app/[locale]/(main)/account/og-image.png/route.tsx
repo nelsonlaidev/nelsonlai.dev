@@ -18,7 +18,7 @@ export const GET = async (_request: Request, props: RouteContext<'/[locale]/acco
   }
 
   const t = await getTranslations({ locale })
-  const title = t('account.title')
+  const title = t('common.labels.account')
 
   try {
     const ogImageFonts = await getOGImageFonts(title)

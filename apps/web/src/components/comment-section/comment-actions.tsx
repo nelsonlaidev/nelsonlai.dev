@@ -55,7 +55,7 @@ const CommentActions = () => {
           className={voteVariants({
             active: comment.liked === true
           })}
-          aria-label={t('blog.comments.like')}
+          aria-label={t('common.like')}
           disabled={isVoting}
         >
           <ThumbsUpIcon />

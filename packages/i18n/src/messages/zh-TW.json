@@ -1,36 +1,14 @@
 {
   "about": {
-    "description": "嗨！我是 Nelson Lai，一位熱愛網頁開發的學生，使用 HTML、CSS 和 JavaScript 創作創新專案。探索我的作品集、技能與開發歷程，一起探索數位世界吧！",
-    "title": "關於"
+    "description": "嗨！我是 Nelson Lai，一位熱愛網頁開發的學生，使用 HTML、CSS 和 JavaScript 創作創新專案。探索我的作品集、技能與開發歷程，一起探索數位世界吧！"
   },
   "admin": {
-    "nav": {
-      "comments": "評論",
-      "dashboard": "儀表板",
-      "general": "一般",
-      "users": "使用者"
-    },
     "page-header": {
       "comments": {
-        "description": "管理使用者的評論",
-        "title": "評論"
+        "description": "管理評論"
       },
       "users": {
-        "description": "管理系統中的使用者",
-        "title": "使用者"
-      }
-    },
-    "table": {
-      "comments": {
-        "body": "內容",
-        "type": "類型",
-        "userId": "使用者 ID"
-      },
-      "createdAt": "建立時間",
-      "users": {
-        "email": "電子郵件",
-        "name": "名稱",
-        "role": "角色"
+        "description": "管理使用者"
       }
     }
   },
@@ -38,21 +16,18 @@
     "comments": {
       "author": "作者",
       "comment-posted": "評論已發佈",
-      "comments": "評論",
-      "confirm-delete-comment": "您確定要刪除此評論嗎？此動作無法復原。",
+      "comments": "{count, plural, =1 {評論} other {評論}}",
       "copy-link": "複製連結",
-      "delete-a-comment": "刪除評論",
       "deleted-a-comment": "已刪除評論",
       "dislike": "倒讚",
       "highlighted-comment": "已標註評論",
-      "like": "讚",
       "link-copied": "連結已複製到剪貼簿",
       "newest": "最新",
       "no-comments": "沒有評論",
       "oldest": "最舊",
       "open-menu": "開啟選單",
       "placeholder": "留下評論",
-      "replies": "回覆",
+      "replies": "{count, plural, =1 {回覆} other {回覆}}",
       "reply": "回覆",
       "reply-posted": "回覆已發佈",
       "reply-to-comment": "回覆評論",
@@ -71,15 +46,12 @@
       "last-updated": "最後更新日期：{date}"
     },
     "header": {
-      "comments": "評論數",
       "published-on": "發佈日期",
       "views": "瀏覽次數",
       "written-by": "撰寫者"
     },
-    "like": "讚",
     "like-this-post": "喜歡這個文章",
-    "on-this-page": "目錄",
-    "title": "部落格"
+    "on-this-page": "目錄"
   },
   "command-menu": {
     "actions": {
@@ -87,8 +59,6 @@
       "source-code": "原始碼"
     },
     "groups": {
-      "account": "帳戶",
-      "general": "一般",
       "social": "社群"
     },
     "no-results": "沒有找到結果。",
@@ -99,10 +69,37 @@
     "cancel": "取消",
     "delete": "刪除",
     "error": "錯誤",
-    "likes": "{count} 按讚",
+    "likes": "{count, plural, =1 {# 點讚} other {# 點讚}}",
     "sign-in": "登入",
     "sign-out": "登出",
-    "views": "{count} 瀏覽次數"
+    "views": "{count, plural, =1 {# 瀏覽次數} other {# 瀏覽次數}}",
+    "like": "讚",
+    "labels": {
+      "home": "首頁",
+      "about": "關於",
+      "account": "帳戶",
+      "blog": "部落格",
+      "dashboard": "儀表板",
+      "guestbook": "留言板",
+      "projects": "專案",
+      "uses": "裝備",
+      "privacy-policy": "隱私權政策",
+      "terms-of-service": "服務條款",
+      "comments": "評論",
+      "users": "使用者",
+      "general": "一般",
+      "links": "連結",
+      "facebook": "Facebook",
+      "github": "GitHub",
+      "instagram": "Instagram",
+      "youtube": "YouTube"
+    },
+    "dialogs": {
+      "delete-comment": {
+        "title": "刪除評論",
+        "description": "您確定要刪除此評論嗎？此動作無法復原。"
+      }
+    }
   },
   "component": {
     "filtered-posts": {
@@ -121,8 +118,7 @@
       "github-stars": "GitHub 星數",
       "youtube-subscribers": "YouTube 訂閱者",
       "youtube-views": "YouTube 瀏覽量"
-    },
-    "title": "儀表板"
+    }
   },
   "dialog": {
     "sign-in": {
@@ -152,10 +148,6 @@
   },
   "guestbook": {
     "create-message-successfully": "成功發佈留言",
-    "delete-dialog": {
-      "description": "您確定要刪除此評論嗎？此操作無法撤銷。",
-      "title": "刪除評論"
-    },
     "delete-message-successfully": "成功刪除留言",
     "description": "在我的留言板上留下您的想法。您可以在這裡告訴我任何事情！",
     "no-messages": "沒有留言，快來成為第一位留言者！",
@@ -167,8 +159,7 @@
     "signin": {
       "description": "以留下評論"
     },
-    "submit": "送出",
-    "title": "留言板"
+    "submit": "送出"
   },
   "homepage": {
     "about-me": {
@@ -213,28 +204,13 @@
     }
   },
   "layout": {
-    "about": "關於",
-    "blog": "部落格",
     "change-language": "更改語言",
-    "dashboard": "儀表板",
-    "facebook": "Facebook",
-    "github": "GitHub",
-    "guestbook": "留言板",
-    "home": "首頁",
-    "instagram": "Instagram",
-    "links": "連結",
     "now-playing": {
       "loading": "載入中 ...",
       "not-listening": "未在收聽 - Spotify"
     },
-    "profile": "個人資料",
-    "projects": "專案",
     "skip-to-main-content": "跳至主要內容",
-    "toggle-menu": "打開選單",
-    "uses": "裝備",
-    "youtube": "YouTube",
-    "terms": "服務條款",
-    "privacy": "隱私權政策"
+    "toggle-menu": "打開選單"
   },
   "mdx": {
     "link-to-section": "連結至章節"
@@ -244,7 +220,6 @@
   },
   "projects": {
     "description": "我的專案集，每個都傾注了心血製作。",
-    "title": "專案",
     "visit-website": "前往網站"
   },
   "theme-toggle": {
@@ -256,19 +231,15 @@
     "toggle-theme": "切換主題"
   },
   "uses": {
-    "description": "這是我目前用來玩遊戲、程式設計、製作影片和日常使用的裝備。",
-    "title": "裝備"
+    "description": "這是我目前用來玩遊戲、程式設計、製作影片和日常使用的裝備。"
   },
   "account": {
-    "description": "管理您的帳戶設定",
-    "title": "帳戶"
+    "description": "管理您的帳戶設定"
   },
   "privacy": {
-    "description": "此頁面說明當您使用我們的網站時，我們如何處理您的資料並保護您的隱私。",
-    "title": "隱私權政策"
+    "description": "此頁面說明當您使用我們的網站時，我們如何處理您的資料並保護您的隱私。"
   },
   "terms": {
-    "description": "這些條款和條件概述了使用我們網站的規則和規定。",
-    "title": "服務條款"
+    "description": "這些條款和條件概述了使用我們網站的規則和規定。"
   }
 }

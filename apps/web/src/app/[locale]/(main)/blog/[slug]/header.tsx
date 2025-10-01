@@ -69,7 +69,7 @@ const Header = (props: HeaderProps) => {
             )}
           </div>
           <div className='space-y-1 md:mx-auto'>
-            <div className='text-muted-foreground'>{t('blog.header.comments')}</div>
+            <div className='text-muted-foreground'>{t('common.labels.comments')}</div>
             {commentCountQuery.status === 'pending' && '--'}
             {commentCountQuery.status === 'error' && t('common.error')}
             {commentCountQuery.status === 'success' && (

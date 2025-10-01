@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from '@repo/i18n/server'
 import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 
+import JsonLd from '@/components/json-ld'
 import Mdx from '@/components/mdx'
 import PageHeader from '@/components/page-header'
 import {
@@ -33,12 +34,12 @@ export const generateMetadata = async (props: PageProps<'/[locale]/about'>): Pro
     return {}
   }
 
-  const t = await getTranslations({ locale, namespace: 'about' })
+  const t = await getTranslations({ locale })
 
   return createMetadata({
     pathname: '/about',
-    title: t('title'),
-    description: t('description'),
+    title: t('common.labels.about'),
+    description: t('about.description'),
     locale,
     ogImagePathname: '/about/og-image.png',
     openGraph: {
@@ -57,7 +58,7 @@ const Page = async (props: PageProps<'/[locale]/about'>) => {
 
   setRequestLocale(locale)
   const t = await getTranslations()
-  const title = t('about.title')
+  const title = t('common.labels.about')
   const description = t('about.description')
   const url = getLocalizedPath({ locale, pathname: '/about' })
   const page = getPageBySlug(locale, 'about')
@@ -86,8 +87,7 @@ const Page = async (props: PageProps<'/[locale]/about'>) => {
 
   return (
     <>
-      {/* eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml -- Safe */}
-      <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd json={jsonLd} />
       <PageHeader title={title} description={description} />
       <Mdx code={code} />
     </>

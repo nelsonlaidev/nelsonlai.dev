@@ -89,8 +89,8 @@ const CommentMenu = () => {
       </DropdownMenu>
       <AlertDialogContent data-testid='comment-dialog'>
         <AlertDialogHeader>
-          <AlertDialogTitle>{t('blog.comments.delete-a-comment')}</AlertDialogTitle>
-          <AlertDialogDescription>{t('blog.comments.confirm-delete-comment')}</AlertDialogDescription>
+          <AlertDialogTitle>{t('common.dialogs.delete-comment.title')}</AlertDialogTitle>
+          <AlertDialogDescription>{t('common.dialogs.delete-comment.description')}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>

@@ -27,7 +27,7 @@ const Navbar = () => {
                 })}
                 href={link.href}
               >
-                {t(`layout.${link.key}`)}
+                {t(link.labelKey)}
               </Link>
               {isActive && (
                 <>

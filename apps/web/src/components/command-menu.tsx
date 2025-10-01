@@ -101,7 +101,7 @@ const CommandMenu = () => {
   const accountActions: CommandAction[] = session
     ? [
         {
-          title: t('account.title'),
+          title: t('common.labels.account'),
           icon: <UserCircleIcon />,
           onSelect: handleAccountNavigate
         },
@@ -143,8 +143,8 @@ const CommandMenu = () => {
   }))
 
   const groups: CommandGroup[] = [
-    { name: t('command-menu.groups.account'), actions: accountActions },
-    { name: t('command-menu.groups.general'), actions: generalActions },
+    { name: t('common.labels.account'), actions: accountActions },
+    { name: t('common.labels.general'), actions: generalActions },
     { name: t('command-menu.groups.social'), actions: socialActions }
   ]
 

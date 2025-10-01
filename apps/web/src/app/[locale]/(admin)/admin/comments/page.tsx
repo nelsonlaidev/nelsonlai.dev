@@ -23,10 +23,7 @@ const Page = async (props: PageProps<'/[locale]/admin/comments'>) => {
 
   return (
     <div className='space-y-6'>
-      <AdminPageHeader
-        title={t('admin.page-header.comments.title')}
-        description={t('admin.page-header.comments.description')}
-      />
+      <AdminPageHeader title={t('common.labels.comments')} description={t('admin.page-header.comments.description')} />
       <AdminComments />
     </div>
   )

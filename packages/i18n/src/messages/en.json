@@ -1,36 +1,14 @@
 {
   "about": {
-    "description": "Hi! I'm Nelson Lai, a passionate web development student creating innovative projects with HTML, CSS, and JavaScript. Explore my portfolio, skills, and journey in building user-friendly apps. Let's connect!",
-    "title": "About"
+    "description": "Hi! I'm Nelson Lai, a passionate web development student creating innovative projects with HTML, CSS, and JavaScript. Explore my portfolio, skills, and journey in building user-friendly apps. Let's connect!"
   },
   "admin": {
-    "nav": {
-      "comments": "Comments",
-      "dashboard": "Dashboard",
-      "general": "General",
-      "users": "Users"
-    },
     "page-header": {
       "comments": {
-        "description": "Manage comments from users",
-        "title": "Comments"
+        "description": "Manage comments"
       },
       "users": {
-        "description": "Manage users of the system",
-        "title": "Users"
-      }
-    },
-    "table": {
-      "comments": {
-        "body": "Body",
-        "type": "Type",
-        "userId": "User ID"
-      },
-      "createdAt": "Created At",
-      "users": {
-        "email": "Email",
-        "name": "Name",
-        "role": "Role"
+        "description": "Manage users"
       }
     }
   },
@@ -39,13 +17,10 @@
       "author": "Author",
       "comment-posted": "Comment posted",
       "comments": "{count, plural, =1 {comment} other {comments}}",
-      "confirm-delete-comment": "Are you sure you want to delete this comment? This action cannot be undone.",
       "copy-link": "Copy Link",
-      "delete-a-comment": "Delete a comment",
       "deleted-a-comment": "Deleted a comment",
       "dislike": "Dislike",
       "highlighted-comment": "Highlighted comment",
-      "like": "Like",
       "link-copied": "Link copied to clipboard",
       "newest": "Newest",
       "no-comments": "No comments",
@@ -71,15 +46,12 @@
       "last-updated": "Last updated: {date}"
     },
     "header": {
-      "comments": "Comments",
       "published-on": "Published on",
       "views": "Views",
       "written-by": "Written by"
     },
-    "like": "Like",
     "like-this-post": "Like this post",
-    "on-this-page": "On this page",
-    "title": "Blog"
+    "on-this-page": "On this page"
   },
   "command-menu": {
     "actions": {
@@ -87,8 +59,6 @@
       "source-code": "Source code"
     },
     "groups": {
-      "account": "Account",
-      "general": "General",
       "social": "Social"
     },
     "no-results": "No results found.",
@@ -102,7 +72,34 @@
     "likes": "{count, plural, =1 {# like} other {# likes}}",
     "sign-in": "Sign in",
     "sign-out": "Sign out",
-    "views": "{count, plural, =1 {# view} other {# views}}"
+    "views": "{count, plural, =1 {# view} other {# views}}",
+    "like": "Like",
+    "labels": {
+      "home": "Home",
+      "about": "About",
+      "account": "Account",
+      "blog": "Blog",
+      "dashboard": "Dashboard",
+      "guestbook": "Guestbook",
+      "projects": "Projects",
+      "uses": "Uses",
+      "privacy-policy": "Privacy Policy",
+      "terms-of-service": "Terms of Service",
+      "comments": "Comments",
+      "users": "Users",
+      "general": "General",
+      "links": "Links",
+      "facebook": "Facebook",
+      "github": "GitHub",
+      "instagram": "Instagram",
+      "youtube": "YouTube"
+    },
+    "dialogs": {
+      "delete-comment": {
+        "title": "Delete a comment",
+        "description": "Are you sure you want to delete this comment? This action cannot be undone."
+      }
+    }
   },
   "component": {
     "filtered-posts": {
@@ -121,8 +118,7 @@
       "github-stars": "GitHub Stars",
       "youtube-subscribers": "YouTube Subscribers",
       "youtube-views": "YouTube Views"
-    },
-    "title": "Dashboard"
+    }
   },
   "dialog": {
     "sign-in": {
@@ -152,23 +148,18 @@
   },
   "guestbook": {
     "create-message-successfully": "Create message successfully",
-    "delete-dialog": {
-      "description": "Are you sure you want to delete this comment? This action cannot be undone.",
-      "title": "Delete a comment"
-    },
     "delete-message-successfully": "Delete message successfully",
     "description": "Sign my guestbook and share your idea. You can tell me anything here!",
     "no-messages": "No messages. Be the first to leave a message!",
     "pinned": {
       "description": "Thanks for visiting my website. If you have a moment, I'd love to hear your thoughts on my work. Please log in with your account to leave a comment. Thanks!",
-      "greeting": "Hey there! 👋"
+      "greeting": "Hey there! \ud83d\udc4b"
     },
     "placeholder": "Leave a message",
     "signin": {
       "description": "to leave a message"
     },
-    "submit": "Submit",
-    "title": "Guestbook"
+    "submit": "Submit"
   },
   "homepage": {
     "about-me": {
@@ -189,7 +180,7 @@
       "amazing": "Amazing",
       "attractive": "Attractive",
       "fantastic": "Fantastic",
-      "location-timezone": "Hong Kong • UTC/GMT +8",
+      "location-timezone": "Hong Kong \u2022 UTC/GMT +8",
       "stunning": "Stunning",
       "title-bottom": "React",
       "title-middle-left": "building",
@@ -213,28 +204,13 @@
     }
   },
   "layout": {
-    "about": "About",
-    "blog": "Blog",
     "change-language": "Change language",
-    "dashboard": "Dashboard",
-    "facebook": "Facebook",
-    "github": "GitHub",
-    "guestbook": "Guestbook",
-    "home": "Home",
-    "instagram": "Instagram",
-    "links": "Links",
     "now-playing": {
       "loading": "Loading ...",
       "not-listening": "Not Listening - Spotify"
     },
-    "profile": "Profile",
-    "projects": "Projects",
     "skip-to-main-content": "Skip to main content",
-    "toggle-menu": "Toggle menu",
-    "uses": "Uses",
-    "youtube": "YouTube",
-    "terms": "Terms of Service",
-    "privacy": "Privacy Policy"
+    "toggle-menu": "Toggle menu"
   },
   "mdx": {
     "link-to-section": "Link to section"
@@ -244,7 +220,6 @@
   },
   "projects": {
     "description": "A collection of my projects, crafted with dedication.",
-    "title": "Projects",
     "visit-website": "Visit Website"
   },
   "theme-toggle": {
@@ -256,19 +231,15 @@
     "toggle-theme": "Toggle theme"
   },
   "uses": {
-    "description": "This is the equipment I currently use for gaming, programming, making videos, and every day.",
-    "title": "Uses"
+    "description": "This is the equipment I currently use for gaming, programming, making videos, and every day."
   },
   "account": {
-    "description": "Manage your account settings",
-    "title": "Account"
+    "description": "Manage your account settings"
   },
   "privacy": {
-    "description": "This page explains how we handle your data and protect your privacy when you use our website.",
-    "title": "Privacy Policy"
+    "description": "This page explains how we handle your data and protect your privacy when you use our website."
   },
   "terms": {
-    "description": "These terms and conditions outline the rules and regulations for the use our website.",
-    "title": "Terms of Service"
+    "description": "These terms and conditions outline the rules and regulations for the use our website."
   }
 }

@@ -23,10 +23,7 @@ const Page = async (props: PageProps<'/[locale]/admin/users'>) => {
 
   return (
     <div className='space-y-6'>
-      <AdminPageHeader
-        title={t('admin.page-header.users.title')}
-        description={t('admin.page-header.users.description')}
-      />
+      <AdminPageHeader title={t('common.labels.users')} description={t('admin.page-header.users.description')} />
       <AdminUsers />
     </div>
   )
