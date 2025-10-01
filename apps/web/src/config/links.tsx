@@ -3,12 +3,6 @@ import { BarChartIcon, FlameIcon, MessageCircleIcon, MonitorIcon, PencilIcon, Us
 
 import { SITE_FACEBOOK_URL, SITE_GITHUB_URL, SITE_INSTAGRAM_URL, SITE_X_URL, SITE_YOUTUBE_URL } from '@/lib/constants'
 
-type SocialLinks = Array<{
-  href: string
-  title: string
-  icon: React.ReactNode
-}>
-
 export const HEADER_LINKS = [
   {
     icon: <PencilIcon className='size-3.5' />,
@@ -79,7 +73,7 @@ export const FOOTER_LINKS = [
   }
 ] as const
 
-export const SOCIAL_LINKS: SocialLinks = [
+export const SOCIAL_LINKS = [
   {
     href: SITE_GITHUB_URL,
     title: 'GitHub',
