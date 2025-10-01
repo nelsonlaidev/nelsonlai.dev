@@ -1,12 +1,10 @@
 'use client'
 
-import { Separator } from '@repo/ui/components/separator'
 import { motion } from 'motion/react'
 
 type PageTitleProps = {
   title: string
   description: string
-  animate?: boolean
 }
 
 const animation = {
@@ -21,32 +19,21 @@ const animation = {
 }
 
 const PageHeader = (props: PageTitleProps) => {
-  const { title, description, animate = true } = props
+  const { title, description } = props
 
   return (
-    <div className='mt-6 mb-16 sm:mt-12 sm:mb-24'>
-      <motion.h1
-        className='my-4 text-4xl font-bold md:text-5xl'
-        {...(animate && {
-          initial: animation.hide,
-          animate: animation.show
-        })}
-      >
+    <div className='flex flex-col gap-2.5 pt-12 pb-16'>
+      <motion.h1 className='text-4xl font-medium' initial={animation.hide} animate={animation.show}>
         {title}
       </motion.h1>
       <motion.h2
-        className='mb-8 text-muted-foreground'
-        {...(animate && {
-          initial: animation.hide,
-          animate: animation.show,
-          transition: {
-            delay: 0.1
-          }
-        })}
+        className='text-muted-foreground'
+        initial={animation.hide}
+        animate={animation.show}
+        transition={{ delay: 0.1 }}
       >
         {description}
       </motion.h2>
-      <Separator className='absolute inset-x-0 translate-y-2 sm:translate-y-6' />
     </div>
   )
 }
