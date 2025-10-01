@@ -1,14 +1,25 @@
-'use client'
+import { routing } from '@repo/i18n/routing'
+import { notFound } from 'next/navigation'
+import { hasLocale } from 'next-intl'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
-import { useTranslations } from 'next-intl'
-
+import AdminComments from '@/components/admin/admin-comments'
 import AdminPageHeader from '@/components/admin/admin-page-header'
-import CommentsTable from '@/components/tables/comments'
-import { useAdminComments } from '@/hooks/queries/admin.query'
 
-const Page = () => {
-  const { isSuccess, isLoading, isError, data } = useAdminComments()
-  const t = useTranslations()
+export const generateStaticParams = (): Array<{ locale: string }> => {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
+const Page = async (props: PageProps<'/[locale]/admin/comments'>) => {
+  const { params } = props
+  const { locale } = await params
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
+
+  setRequestLocale(locale)
+  const t = await getTranslations()
 
   return (
     <div className='space-y-6'>
@@ -16,9 +27,7 @@ const Page = () => {
         title={t('admin.page-header.comments.title')}
         description={t('admin.page-header.comments.description')}
       />
-      {isSuccess && <CommentsTable comments={data.comments} />}
-      {isLoading && 'Loading...'}
-      {isError && <div>{t('error.failed-to-fetch-comments-data')}</div>}
+      <AdminComments />
     </div>
   )
 }
