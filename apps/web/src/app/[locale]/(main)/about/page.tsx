@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 
 import Mdx from '@/components/mdx'
-import PageTitle from '@/components/page-title'
+import PageHeader from '@/components/page-header'
 import {
   MY_NAME,
   SITE_FACEBOOK_URL,
@@ -88,7 +88,7 @@ const Page = async (props: PageProps<'/[locale]/about'>) => {
     <>
       {/* eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml -- Safe */}
       <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <PageTitle title={title} description={description} />
+      <PageHeader title={title} description={description} />
       <Mdx code={code} />
     </>
   )

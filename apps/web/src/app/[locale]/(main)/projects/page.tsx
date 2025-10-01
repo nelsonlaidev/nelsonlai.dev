@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 
 import JsonLd from '@/components/json-ld'
-import PageTitle from '@/components/page-title'
+import PageHeader from '@/components/page-header'
 import ProjectCards from '@/components/project-cards'
 import { MY_NAME } from '@/lib/constants'
 import { getLatestProjects } from '@/lib/content'
@@ -84,7 +84,7 @@ const Page = async (props: PageProps<'/[locale]/projects'>) => {
   return (
     <>
       <JsonLd json={jsonLd} />
-      <PageTitle title={title} description={description} />
+      <PageHeader title={title} description={description} />
       <ProjectCards projects={projects} />
     </>
   )

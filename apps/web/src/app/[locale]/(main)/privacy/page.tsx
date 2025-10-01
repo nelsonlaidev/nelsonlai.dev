@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 
 import Mdx from '@/components/mdx'
-import PageTitle from '@/components/page-title'
+import PageHeader from '@/components/page-header'
 import { getPageBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 
@@ -57,7 +57,7 @@ const Page = async (props: PageProps<'/[locale]/privacy'>) => {
 
   return (
     <>
-      <PageTitle title={title} description={description} />
+      <PageHeader title={title} description={description} />
       <Mdx code={code} />
     </>
   )

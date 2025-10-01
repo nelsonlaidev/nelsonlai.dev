@@ -8,7 +8,7 @@ import { hasLocale } from 'next-intl'
 
 import FilteredPosts from '@/components/filtered-posts'
 import JsonLd from '@/components/json-ld'
-import PageTitle from '@/components/page-title'
+import PageHeader from '@/components/page-header'
 import { MY_NAME } from '@/lib/constants'
 import { getLatestPosts } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
@@ -85,7 +85,7 @@ const Page = async (props: PageProps<'/[locale]/blog'>) => {
   return (
     <>
       <JsonLd json={jsonLd} />
-      <PageTitle title={title} description={description} />
+      <PageHeader title={title} description={description} />
       <FilteredPosts posts={posts} />
     </>
   )

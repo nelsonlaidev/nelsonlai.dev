@@ -5,7 +5,7 @@ import { getTranslations, setRequestLocale } from '@repo/i18n/server'
 import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 
-import PageTitle from '@/components/page-title'
+import PageHeader from '@/components/page-header'
 import { createMetadata } from '@/lib/metadata'
 
 export const generateStaticParams = (): Array<{ locale: string }> => {
@@ -48,7 +48,7 @@ const Page = async (props: PageProps<'/[locale]/account'>) => {
 
   return (
     <>
-      <PageTitle title={title} description={description} />
+      <PageHeader title={title} description={description} />
       <div className='text-muted-foreground'>WIP</div>
     </>
   )

@@ -20,7 +20,7 @@ const animation = {
   }
 }
 
-const PageTitle = (props: PageTitleProps) => {
+const PageHeader = (props: PageTitleProps) => {
   const { title, description, animate = true } = props
 
   return (
@@ -51,4 +51,4 @@ const PageTitle = (props: PageTitleProps) => {
   )
 }
 
-export default PageTitle
+export default PageHeader
