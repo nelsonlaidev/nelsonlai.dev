@@ -16,7 +16,7 @@ import {
   CommandSeparator
 } from '@repo/ui/components/command'
 import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon, UserCircleIcon } from 'lucide-react'
-import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
+import { Fragment, useCallback, useEffect, useState } from 'react'
 
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
 import { signOut, useSession } from '@/lib/auth-client'
@@ -50,43 +50,41 @@ const CommandMenu = () => {
   const setIsSignInOpen = useDialogsStore((state) => state.setIsSignInOpen)
   const router = useRouter()
 
-  const closeMenu = useCallback(() => {
+  const closeMenu = () => {
     setIsOpen(false)
-  }, [])
+  }
 
-  const openMenu = useCallback(() => {
+  const openMenu = () => {
     setIsOpen(true)
-  }, [])
+  }
 
-  const toggleMenu = useCallback(() => {
+  const toggleMenu = () => {
     setIsOpen((value) => !value)
-  }, [])
+  }
 
-  const openExternalLink = useCallback(
-    (url: string) => {
-      closeMenu()
-      window.open(url, '_blank', 'noopener')
-    },
-    [closeMenu]
-  )
+  const openExternalLink = (url: string) => {
+    closeMenu()
+    window.open(url, '_blank', 'noopener')
+  }
 
-  const copyCurrentUrl = useCallback(async () => {
+  const copyCurrentUrl = async () => {
     closeMenu()
     await copy({ text: globalThis.location.href })
-  }, [closeMenu, copy])
+  }
 
-  const handleAccountNavigate = useCallback(() => {
+  const handleAccountNavigate = () => {
     closeMenu()
     router.push('/account')
-  }, [closeMenu, router])
+  }
 
-  const handleSignIn = useCallback(() => {
+  const handleSignIn = () => {
     closeMenu()
     setIsSignInOpen(true)
-  }, [closeMenu, setIsSignInOpen])
+  }
 
-  const handleSignOut = useCallback(async () => {
+  const handleSignOut = async () => {
     closeMenu()
+
     await signOut({
       fetchOptions: {
         onSuccess: () => {
@@ -94,17 +92,14 @@ const CommandMenu = () => {
         }
       }
     })
-  }, [closeMenu, router])
+  }
 
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault()
-        toggleMenu()
-      }
-    },
-    [toggleMenu]
-  )
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
+      event.preventDefault()
+      toggleMenu()
+    }
+  }, [])
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown)
@@ -114,9 +109,8 @@ const CommandMenu = () => {
     }
   }, [handleKeyDown])
 
-  const accountActions = useMemo<CommandAction[]>(() => {
-    if (session) {
-      return [
+  const accountActions: CommandAction[] = session
+    ? [
         {
           title: t('account.title'),
           icon: <UserCircleIcon />,
@@ -128,55 +122,42 @@ const CommandMenu = () => {
           onSelect: handleSignOut
         }
       ]
+    : [
+        {
+          title: t('common.sign-in'),
+          icon: <LogInIcon />,
+          onSelect: handleSignIn
+        }
+      ]
+
+  const generalActions: CommandAction[] = [
+    {
+      title: t('command-menu.actions.copy-link'),
+      icon: <LinkIcon />,
+      onSelect: copyCurrentUrl
+    },
+    {
+      title: t('command-menu.actions.source-code'),
+      icon: <CodeIcon />,
+      onSelect: () => {
+        openExternalLink('https://github.com/nelsonlaidev/nelsonlai.dev')
+      }
     }
+  ]
 
-    return [
-      {
-        title: t('common.sign-in'),
-        icon: <LogInIcon />,
-        onSelect: handleSignIn
-      }
-    ]
-  }, [handleAccountNavigate, handleSignIn, handleSignOut, session, t])
+  const socialActions: CommandAction[] = SOCIAL_LINKS.map((link) => ({
+    title: link.title,
+    icon: link.icon,
+    onSelect: () => {
+      openExternalLink(link.url)
+    }
+  }))
 
-  const generalActions = useMemo<CommandAction[]>(
-    () => [
-      {
-        title: t('command-menu.actions.copy-link'),
-        icon: <LinkIcon />,
-        onSelect: copyCurrentUrl
-      },
-      {
-        title: t('command-menu.actions.source-code'),
-        icon: <CodeIcon />,
-        onSelect: () => {
-          openExternalLink('https://github.com/nelsonlaidev/nelsonlai.dev')
-        }
-      }
-    ],
-    [copyCurrentUrl, openExternalLink, t]
-  )
-
-  const socialActions = useMemo<CommandAction[]>(
-    () =>
-      SOCIAL_LINKS.map((link) => ({
-        title: link.title,
-        icon: link.icon,
-        onSelect: () => {
-          openExternalLink(link.url)
-        }
-      })),
-    [openExternalLink]
-  )
-
-  const groups = useMemo<CommandGroup[]>(
-    () => [
-      { name: t('command-menu.groups.account'), actions: accountActions },
-      { name: t('command-menu.groups.general'), actions: generalActions },
-      { name: t('command-menu.groups.social'), actions: socialActions }
-    ],
-    [accountActions, generalActions, socialActions, t]
-  )
+  const groups: CommandGroup[] = [
+    { name: t('command-menu.groups.account'), actions: accountActions },
+    { name: t('command-menu.groups.general'), actions: generalActions },
+    { name: t('command-menu.groups.social'), actions: socialActions }
+  ]
 
   return (
     <>
