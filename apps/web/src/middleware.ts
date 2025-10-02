@@ -1,9 +1,8 @@
 import { env } from '@repo/env'
 import { i18nMiddleware } from '@repo/i18n/middleware'
-import { headers } from 'next/headers'
 import { type NextRequest, NextResponse } from 'next/server'
 
-import { auth } from './lib/auth'
+import { getSession } from './lib/auth'
 
 const IS_PREVIEW = env.VERCEL_ENV === 'preview'
 
@@ -12,9 +11,7 @@ const PROTECTED_ROUTES = [{ path: /^\/admin/, requireAdmin: true }, { path: /^\/
 const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname
 
-  const session = await auth.api.getSession({
-    headers: await headers()
-  })
+  const session = await getSession(request)
 
   const route = PROTECTED_ROUTES.find((r) => r.path.test(pathname))
 
