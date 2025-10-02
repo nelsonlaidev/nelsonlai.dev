@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from '@repo/i18n/server'
 import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 
+import ActiveSessions from '@/components/account/active-sessions'
 import PageHeader from '@/components/page-header'
 import { createMetadata } from '@/lib/metadata'
 
@@ -49,7 +50,7 @@ const Page = async (props: PageProps<'/[locale]/account'>) => {
   return (
     <>
       <PageHeader title={title} description={description} />
-      <div className='text-muted-foreground'>WIP</div>
+      <ActiveSessions />
     </>
   )
 }

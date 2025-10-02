@@ -74,6 +74,7 @@
     "sign-out": "登出",
     "views": "{count, plural, =1 {# 浏览次数} other {# 浏览次数}}",
     "like": "赞",
+    "unknown": "未知",
     "labels": {
       "home": "首页",
       "about": "关于",
@@ -92,7 +93,8 @@
       "facebook": "Facebook",
       "github": "GitHub",
       "instagram": "Instagram",
-      "youtube": "YouTube"
+      "youtube": "YouTube",
+      "sessions": "会话"
     },
     "dialogs": {
       "delete-comment": {
@@ -234,7 +236,10 @@
     "description": "这是我目前用来玩游戏、程序设计、制作视频和日常使用的装备。"
   },
   "account": {
-    "description": "管理您的账户设置"
+    "description": "管理您的账户设置",
+    "active-sessions": "活跃会话",
+    "no-active-sessions": "没有活动会话",
+    "this-device": "此设备"
   },
   "privacy": {
     "description": "此页面说明当您使用我们的网站时，我们如何处理您的数据并保护您的隐私。"

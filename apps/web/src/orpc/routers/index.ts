@@ -1,6 +1,7 @@
 import type { Inputs, Outputs } from '../client'
 
 import { listAllComments, listAllUsers } from './admin.route'
+import { listSessions } from './auth.route'
 import { likesStats, viewsStats } from './blog.route'
 import { countComments, createComment, deleteComment, listComments } from './comments.route'
 import { githubStats } from './github.route'
@@ -54,6 +55,9 @@ export const router = {
   admin: {
     listAllComments,
     listAllUsers
+  },
+  auth: {
+    listSessions
   }
 }
 
@@ -67,3 +71,5 @@ export type ListAllUsersOutput = Outputs['admin']['listAllUsers']
 
 export type GetViewsOutput = Outputs['posts']['views']['count']
 export type GetLikesOutput = Outputs['posts']['likes']['count']
+
+export type ListSessionsOutput = Outputs['auth']['listSessions']
