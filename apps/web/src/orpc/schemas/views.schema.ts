@@ -1,10 +1,12 @@
 import { z } from 'zod'
 
-export const viewSchema = z.object({
+export const countViewOutputSchema = z.object({
   views: z.number()
 })
 
-export const getViewInputSchema = z.object({
+export { countViewOutputSchema as incrementViewOutputSchema }
+
+export const countViewInputSchema = z.object({
   slug: z.string()
 })
 

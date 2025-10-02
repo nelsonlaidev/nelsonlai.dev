@@ -3,11 +3,16 @@ import { eq, posts, sql } from '@repo/db'
 
 import { cache } from '../cache'
 import { publicProcedure } from '../root'
-import { getViewInputSchema, incrementViewInputSchema, viewSchema } from '../schemas/views.schema'
+import {
+  countViewInputSchema,
+  countViewOutputSchema,
+  incrementViewInputSchema,
+  incrementViewOutputSchema
+} from '../schemas/views.schema'
 
 export const countView = publicProcedure
-  .input(getViewInputSchema)
-  .output(viewSchema)
+  .input(countViewInputSchema)
+  .output(countViewOutputSchema)
   .handler(async ({ input, context }) => {
     const cached = await cache.posts.views.get(input.slug)
 
@@ -32,7 +37,7 @@ export const countView = publicProcedure
 
 export const incrementView = publicProcedure
   .input(incrementViewInputSchema)
-  .output(viewSchema)
+  .output(incrementViewOutputSchema)
   .handler(async ({ input, context }) => {
     const [result] = await context.db
       .insert(posts)

@@ -1,9 +1,9 @@
 import { z } from 'zod'
 
-export const viewsStatsSchema = z.object({
+export const viewsStatsOutputSchema = z.object({
   views: z.number()
 })
 
-export const likesStatsSchema = z.object({
+export const likesStatsOutputSchema = z.object({
   likes: z.number()
 })

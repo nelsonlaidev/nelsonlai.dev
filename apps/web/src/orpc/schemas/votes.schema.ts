@@ -7,4 +7,4 @@ export const createVoteInputSchema = z.object({
   like: z.boolean().nullable()
 })
 
-export const voteSchema = createSelectSchema(votes)
+export const createVoteOutputSchema = createSelectSchema(votes)

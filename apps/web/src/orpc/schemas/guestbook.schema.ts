@@ -2,9 +2,7 @@ import { guestbook, users } from '@repo/db'
 import { createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
 
-import { infiniteQuerySchema } from './common.schema'
-
-export const messageSchema = createSelectSchema(guestbook).pick({
+export const createMessageOutputSchema = createSelectSchema(guestbook).pick({
   id: true,
   createdAt: true,
   updatedAt: true,
@@ -18,12 +16,9 @@ export const createMessageInputSchema = z.object({
   })
 })
 
-// eslint-disable-next-line unicorn/prefer-export-from -- This is a schema
-export const guestbookInputSchema = infiniteQuerySchema
-
-export const guestbookSchema = z.object({
+export const listMessagesOutputSchema = z.object({
   messages: z.array(
-    messageSchema.extend({
+    createMessageOutputSchema.extend({
       user: createSelectSchema(users).pick({
         name: true,
         image: true,
@@ -37,3 +32,5 @@ export const guestbookSchema = z.object({
 export const deleteMessageInputSchema = z.object({
   id: z.string()
 })
+
+export { infiniteQuerySchema as listMessagesInputSchema } from './common.schema'

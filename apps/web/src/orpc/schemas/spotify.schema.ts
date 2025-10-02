@@ -14,4 +14,4 @@ const notPlayingSchema = z.object({
   artist: z.string().nullable()
 })
 
-export const spotifyStatsSchema = z.discriminatedUnion('isPlaying', [playingSchema, notPlayingSchema])
+export const spotifyStatsOutputSchema = z.discriminatedUnion('isPlaying', [playingSchema, notPlayingSchema])

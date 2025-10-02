@@ -4,10 +4,14 @@ export const getLikeInputSchema = z.object({
   slug: z.string()
 })
 
-export const likeSchema = z.object({
+export { getLikeInputSchema as countLikeInputSchema }
+
+export const countLikeOutputSchema = z.object({
   likes: z.number(),
   currentUserLikes: z.number()
 })
+
+export { countLikeOutputSchema as incrementLikeOutputSchema }
 
 export const incrementLikeInputSchema = z.object({
   slug: z.string().min(1),
