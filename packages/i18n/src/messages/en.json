@@ -239,7 +239,9 @@
     "description": "Manage your account settings",
     "active-sessions": "Active sessions",
     "no-active-sessions": "No active sessions",
-    "this-device": "This device"
+    "revoke-session": "Revoke",
+    "this-device": "This device",
+    "session-revoked-successfully": "Session revoked successfully"
   },
   "privacy": {
     "description": "This page explains how we handle your data and protect your privacy when you use our website."

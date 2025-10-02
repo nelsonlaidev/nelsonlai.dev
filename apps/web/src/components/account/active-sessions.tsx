@@ -3,11 +3,13 @@
 import type { ListSessionsOutput } from '@/orpc/routers'
 
 import { Badge } from '@repo/ui/components/badge'
+import { Button } from '@repo/ui/components/button'
+import { toast } from '@repo/ui/components/sonner'
 import Bowser from 'bowser'
 import { MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import { useListSessions } from '@/hooks/queries/auth.query'
+import { useListSessions, useRevokeSession } from '@/hooks/queries/auth.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 
 import ActiveSessionsSkeleton from './active-sessions-skeleton'
@@ -69,32 +71,47 @@ const Session = (props: SessionProps) => {
   const osName = os.name ?? t('common.unknown')
 
   const ipAddress = session.ipAddress ?? t('common.unknown')
-  const lastActive = useFormattedDate(session.updatedAt, {
+  const lastActive = useFormattedDate(session.createdAt, {
     formatOptions: {
       dateStyle: 'medium',
       timeStyle: 'short'
     }
   })
 
+  const { mutate: revokeSession, isPending: isRevoking } = useRevokeSession(() => {
+    toast.success(t('account.session-revoked-successfully'))
+  })
+
+  const handleRevoke = () => {
+    if (isRevoking) return
+
+    revokeSession({ token: session.token })
+  }
+
   return (
     <div className='rounded-xl p-4 shadow-feature-card sm:p-6'>
-      <div className='flex gap-4'>
-        <div className='flex size-12 items-center justify-center rounded-full bg-secondary'>
-          <PlatformIcon aria-hidden className='size-6' />
-        </div>
-        <div className='space-y-1'>
-          <div className='flex h-12 items-center gap-4 font-semibold'>
-            <span className='text-lg'>{osName}</span>{' '}
-            {session.isCurrentSession && <Badge>{t('account.this-device')}</Badge>}
+      <div className='flex flex-col gap-4 sm:flex-row sm:justify-between'>
+        <div className='flex gap-4'>
+          <div className='flex size-12 items-center justify-center rounded-full bg-secondary'>
+            <PlatformIcon aria-hidden className='size-6' />
           </div>
-          <div className='space-y-1 text-sm'>
-            <div>
-              {browserName} {browserVersion && <span className='text-muted-foreground'>{browserVersion}</span>}
+          <div className='space-y-1'>
+            <div className='flex h-12 items-center gap-4 font-semibold'>
+              <span className='text-lg'>{osName}</span>{' '}
+              {session.isCurrentSession && <Badge>{t('account.this-device')}</Badge>}
             </div>
-            <div>{ipAddress}</div>
-            <div>{lastActive}</div>
+            <div className='space-y-1 text-sm'>
+              <div>
+                {browserName} {browserVersion && <span className='text-muted-foreground'>{browserVersion}</span>}
+              </div>
+              <div>{ipAddress}</div>
+              <div>{lastActive}</div>
+            </div>
           </div>
         </div>
+        <Button variant='destructive' size='sm' onClick={handleRevoke} disabled={isRevoking}>
+          {t('account.revoke-session')}
+        </Button>
       </div>
     </div>
   )

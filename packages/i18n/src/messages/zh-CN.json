@@ -239,7 +239,9 @@
     "description": "管理您的账户设置",
     "active-sessions": "活跃会话",
     "no-active-sessions": "没有活动会话",
-    "this-device": "此设备"
+    "revoke-session": "结束",
+    "this-device": "此设备",
+    "session-revoked-successfully": "会话已成功结束"
   },
   "privacy": {
     "description": "此页面说明当您使用我们的网站时，我们如何处理您的数据并保护您的隐私。"

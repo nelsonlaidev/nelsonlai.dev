@@ -239,7 +239,9 @@
     "description": "管理您的帳戶設定",
     "active-sessions": "使用中的工作階段",
     "no-active-sessions": "沒有使用中工作階段",
-    "this-device": "此裝置"
+    "revoke-session": "終止",
+    "this-device": "此裝置",
+    "session-revoked-successfully": "工作階段已成功終止"
   },
   "privacy": {
     "description": "此頁面說明當您使用我們的網站時，我們如何處理您的資料並保護您的隱私。"
