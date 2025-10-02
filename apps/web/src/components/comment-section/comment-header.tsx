@@ -26,9 +26,9 @@ const CommentHeader = () => {
     <div className='flex items-center justify-between px-1'>
       <NumberFlowGroup>
         <div>
-          {commentCountQuery.status === 'pending' && `-- ${t('blog.comments.comments', { count: 0 })}`}
-          {commentCountQuery.status === 'error' && t('common.error')}
-          {commentCountQuery.status === 'success' && (
+          {commentCountQuery.isLoading && `-- ${t('blog.comments.comments', { count: 0 })}`}
+          {commentCountQuery.isError && t('common.error')}
+          {commentCountQuery.isSuccess && (
             <NumberFlow
               value={commentCountQuery.data.count}
               suffix={` ${t('blog.comments.comments', { count: commentCountQuery.data.count })}`}
@@ -36,9 +36,9 @@ const CommentHeader = () => {
             />
           )}
           {' · '}
-          {replyCountQuery.status === 'pending' && `-- ${t('blog.comments.replies', { count: 0 })}`}
-          {replyCountQuery.status === 'error' && t('common.error')}
-          {replyCountQuery.status === 'success' && (
+          {replyCountQuery.isLoading && `-- ${t('blog.comments.replies', { count: 0 })}`}
+          {replyCountQuery.isError && t('common.error')}
+          {replyCountQuery.isSuccess && (
             <NumberFlow
               value={replyCountQuery.data.count}
               suffix={` ${t('blog.comments.replies', { count: replyCountQuery.data.count })}`}

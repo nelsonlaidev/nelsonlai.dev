@@ -62,17 +62,15 @@ const BlogHeader = (props: BlogHeaderProps) => {
           </div>
           <div className='space-y-1 md:mx-auto'>
             <div className='text-muted-foreground'>{t('blog.header.views')}</div>
-            {viewCountQuery.status === 'pending' && '--'}
-            {viewCountQuery.status === 'error' && t('common.error')}
-            {viewCountQuery.status === 'success' && (
-              <NumberFlow value={viewCountQuery.data.views} data-testid='view-count' />
-            )}
+            {viewCountQuery.isLoading && '--'}
+            {viewCountQuery.isError && t('common.error')}
+            {viewCountQuery.isSuccess && <NumberFlow value={viewCountQuery.data.views} data-testid='view-count' />}
           </div>
           <div className='space-y-1 md:mx-auto'>
             <div className='text-muted-foreground'>{t('common.labels.comments')}</div>
-            {commentCountQuery.status === 'pending' && '--'}
-            {commentCountQuery.status === 'error' && t('common.error')}
-            {commentCountQuery.status === 'success' && (
+            {commentCountQuery.isLoading && '--'}
+            {commentCountQuery.isError && t('common.error')}
+            {commentCountQuery.isSuccess && (
               <NumberFlow value={commentCountQuery.data.count} data-testid='comment-count' />
             )}
           </div>
