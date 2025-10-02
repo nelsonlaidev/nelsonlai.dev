@@ -16,8 +16,8 @@ import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
-import Footer from './footer'
-import Header from './header'
+import BlogFooter from './blog-footer'
+import BlogHeader from './blog-header'
 import LikeButton from './like-button'
 import MobileTableOfContents from './mobile-table-of-contents'
 import ProgressBar from './progress-bar'
@@ -102,7 +102,7 @@ const Page = async (props: PageProps<'/[locale]/blog/[slug]'>) => {
     <>
       <JsonLd json={jsonLd} />
 
-      <Header post={post} />
+      <BlogHeader post={post} />
 
       <div className='mt-8 flex flex-col justify-between lg:flex-row'>
         <article className='w-full lg:max-w-2xl'>
@@ -118,7 +118,7 @@ const Page = async (props: PageProps<'/[locale]/blog/[slug]'>) => {
       <ProgressBar />
 
       {post.toc.length > 0 && <MobileTableOfContents toc={post.toc} />}
-      <Footer post={post} />
+      <BlogFooter post={post} />
 
       <Suspense>
         <CommentSection slug={slug} />

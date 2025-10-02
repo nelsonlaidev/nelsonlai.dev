@@ -13,11 +13,11 @@ import { useIncrementPostViewCount, usePostCommentCount, usePostViewCount } from
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { MY_NAME } from '@/lib/constants'
 
-type HeaderProps = {
+type BlogHeaderProps = {
   post: Post
 }
 
-const Header = (props: HeaderProps) => {
+const BlogHeader = (props: BlogHeaderProps) => {
   const { post } = props
   const formattedDate = useFormattedDate(post.date)
   const t = useTranslations()
@@ -93,4 +93,4 @@ const Header = (props: HeaderProps) => {
   )
 }
 
-export default Header
+export default BlogHeader

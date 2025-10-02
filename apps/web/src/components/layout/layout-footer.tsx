@@ -12,7 +12,7 @@ import Link from '../link'
 import LocaleSwitcher from './locale-switcher'
 import NowPlaying from './now-playing'
 
-const Footer = () => {
+const LayoutFooter = () => {
   const { isSuccess, isLoading, isError, data } = useGitHubStat()
   const t = useTranslations()
 
@@ -63,4 +63,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default LayoutFooter

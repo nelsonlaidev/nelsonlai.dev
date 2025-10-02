@@ -8,11 +8,11 @@ import { linkVariants } from '@repo/ui/components/link'
 import Link from '@/components/link'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 
-type FooterProps = {
+type BlogFooterProps = {
   post: Post
 }
 
-const Footer = (props: FooterProps) => {
+const BlogFooter = (props: BlogFooterProps) => {
   const { post } = props
   const t = useTranslations()
   const locale = useLocale()
@@ -31,4 +31,4 @@ const Footer = (props: FooterProps) => {
   )
 }
 
-export default Footer
+export default BlogFooter
