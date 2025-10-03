@@ -44,6 +44,7 @@ const MessageBox = (props: MessageBoxProps) => {
   })
 
   const onSubmit = (values: z.infer<typeof guestbookFormSchema>) => {
+    if (isCreating) return
     createMessage({ message: values.message })
   }
 

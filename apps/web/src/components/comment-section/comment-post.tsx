@@ -31,6 +31,8 @@ const CommentPost = () => {
   const submitComment = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
 
+    if (isCreating) return
+
     if (!content) {
       toast.error(t('error.comment-cannot-be-empty'))
       return

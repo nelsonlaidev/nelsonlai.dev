@@ -28,6 +28,8 @@ const CommentReply = () => {
   const submitCommentReply = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
 
+    if (isCreating) return
+
     if (!content) {
       toast.error(t('error.reply-cannot-be-empty'))
       return

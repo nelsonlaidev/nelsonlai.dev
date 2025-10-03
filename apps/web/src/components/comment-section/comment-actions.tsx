@@ -35,6 +35,8 @@ const CommentActions = () => {
   const isAuthenticated = session !== null
 
   const handleVoteComment = (like: boolean) => {
+    if (isVoting) return
+
     if (!isAuthenticated) {
       toast.error(t('error.need-logged-in-to-vote'))
       return

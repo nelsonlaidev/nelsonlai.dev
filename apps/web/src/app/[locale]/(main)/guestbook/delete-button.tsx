@@ -30,6 +30,7 @@ const DeleteButton = (props: DeleteButtonProps) => {
   })
 
   const handleDeleteMessage = (id: string) => {
+    if (isDeleting) return
     deleteMessage({ id })
   }
 
