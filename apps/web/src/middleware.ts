@@ -6,10 +6,17 @@ import { getSession } from './lib/auth'
 
 const IS_PREVIEW = env.VERCEL_ENV === 'preview'
 
-const PROTECTED_ROUTES = [{ path: /^\/admin/, requireAdmin: true }, { path: /^\/account/ }]
+const LOCALE_PREFIX = '(?:/[a-z]{2}(?:-[A-Z]{2})?)?'
+
+const PROTECTED_ROUTES = [
+  { path: new RegExp(`^${LOCALE_PREFIX}/admin`), requireAdmin: true },
+  { path: new RegExp(`^${LOCALE_PREFIX}/account`) }
+]
 
 const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname
+
+  console.log({ pathname })
 
   const session = await getSession(request)
 
