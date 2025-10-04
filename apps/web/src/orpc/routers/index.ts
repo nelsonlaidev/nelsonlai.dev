@@ -71,7 +71,7 @@ export type ListMessagesOutput = Outputs['guestbook']['list']
 export type ListAllCommentsOutput = Outputs['admin']['listAllComments']
 export type ListAllUsersOutput = Outputs['admin']['listAllUsers']
 
-export type GetViewsOutput = Outputs['posts']['views']['count']
-export type GetLikesOutput = Outputs['posts']['likes']['count']
+export type CountViewOutput = Outputs['posts']['views']['count']
+export type CountLikeOutput = Outputs['posts']['likes']['count']
 
 export type ListSessionsOutput = Outputs['auth']['listSessions']

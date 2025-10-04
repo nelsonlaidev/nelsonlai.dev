@@ -1,10 +1,8 @@
 import { z } from 'zod'
 
-export const getLikeInputSchema = z.object({
+export const countLikeInputSchema = z.object({
   slug: z.string()
 })
-
-export { getLikeInputSchema as countLikeInputSchema }
 
 export const countLikeOutputSchema = z.object({
   likes: z.number(),
