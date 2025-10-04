@@ -2,6 +2,7 @@ import { ORPCError } from '@orpc/client'
 import { APIError } from 'better-auth'
 
 import { auth } from '@/lib/auth'
+import { getLocation } from '@/utils/get-location'
 
 import { protectedProcedure } from '../root'
 import { listSessionsOutputSchema, revokeSessionInputSchema } from '../schemas/auth.schema'
@@ -12,15 +13,18 @@ export const listSessions = protectedProcedure.output(listSessionsOutputSchema).
     headers: context.headers
   })
 
-  const result = sessions.map((session) => ({
-    ...session,
-    // better-auth types say ipAddress and userAgent can be undefined,
-    // but they are always defined in practice.
-    // So we coerce them to be string | null here
-    ipAddress: (session.ipAddress ?? '') || null,
-    userAgent: (session.userAgent ?? '') || null,
-    isCurrentSession: session.id === context.session.session.id
-  }))
+  const result = await Promise.all(
+    sessions.map(async (session) => ({
+      ...session,
+      // better-auth types say ipAddress and userAgent can be undefined,
+      // but they are always defined in practice.
+      // So we coerce them to be string | null here
+      ipAddress: (session.ipAddress ?? '') || null,
+      userAgent: (session.userAgent ?? '') || null,
+      isCurrentSession: session.id === context.session.session.id,
+      location: session.ipAddress ? await getLocation(session.ipAddress) : null
+    }))
+  )
 
   return {
     sessions: result

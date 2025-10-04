@@ -5,7 +5,8 @@ import z from 'zod'
 export const listSessionsOutputSchema = z.object({
   sessions: z.array(
     createSelectSchema(sessions).extend({
-      isCurrentSession: z.boolean()
+      isCurrentSession: z.boolean(),
+      location: z.string().nullable()
     })
   )
 })

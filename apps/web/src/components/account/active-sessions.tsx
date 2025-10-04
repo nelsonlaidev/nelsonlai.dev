@@ -4,9 +4,10 @@ import type { ListSessionsOutput } from '@/orpc/routers'
 
 import { Badge } from '@repo/ui/components/badge'
 import { Button } from '@repo/ui/components/button'
+import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui/components/popover'
 import { toast } from '@repo/ui/components/sonner'
 import Bowser from 'bowser'
-import { MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } from 'lucide-react'
+import { InfoIcon, MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 import { useListSessions, useRevokeSession } from '@/hooks/queries/auth.query'
@@ -104,7 +105,22 @@ const Session = (props: SessionProps) => {
               <div>
                 {browserName} {browserVersion && <span className='text-muted-foreground'>{browserVersion}</span>}
               </div>
-              <div>{ipAddress}</div>
+              <div className='flex items-center gap-1.5'>
+                {ipAddress}{' '}
+                {session.location && (
+                  <>
+                    <span className='text-muted-foreground'>{session.location}</span>
+                    <Popover>
+                      <PopoverTrigger>
+                        <InfoIcon className='size-4 text-muted-foreground' />
+                      </PopoverTrigger>
+                      <PopoverContent className='w-auto p-2 text-sm' side='top'>
+                        Location may not be accurate
+                      </PopoverContent>
+                    </Popover>
+                  </>
+                )}
+              </div>
               <div>{lastActive}</div>
             </div>
           </div>
