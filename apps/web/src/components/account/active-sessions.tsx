@@ -2,6 +2,7 @@
 
 import type { ListSessionsOutput } from '@/orpc/routers'
 
+import { useRouter } from '@repo/i18n/routing'
 import { Badge } from '@repo/ui/components/badge'
 import { Button } from '@repo/ui/components/button'
 import { Card } from '@repo/ui/components/card'
@@ -64,6 +65,7 @@ const PLATFORM_ICONS = {
 const Session = (props: SessionProps) => {
   const { session } = props
   const t = useTranslations()
+  const router = useRouter()
 
   const { browser, os, platform } = Bowser.parse(session.userAgent ?? '')
 
@@ -84,6 +86,9 @@ const Session = (props: SessionProps) => {
 
   const { mutate: revokeSession, isPending: isRevoking } = useRevokeSession(() => {
     toast.success(t('account.session-revoked-successfully'))
+    if (session.isCurrentSession) {
+      router.refresh()
+    }
   })
 
   const handleRevoke = () => {
