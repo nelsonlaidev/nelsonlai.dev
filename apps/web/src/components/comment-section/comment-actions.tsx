@@ -8,8 +8,8 @@ import { ChevronDownIcon, MessageSquareIcon, ThumbsDownIcon, ThumbsUpIcon } from
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
+import { useSession } from '@/hooks/queries/auth.query'
 import { useVotePostComment } from '@/hooks/queries/post.query'
-import { useSession } from '@/lib/auth-client'
 
 const voteVariants = cva({
   base: buttonVariants({

@@ -16,8 +16,9 @@ import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon, UserCircleIcon 
 import { Fragment, useCallback, useEffect, useState } from 'react'
 
 import { SOCIAL_LINKS } from '@/config/links'
+import { useSession } from '@/hooks/queries/auth.query'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
-import { signOut, useSession } from '@/lib/auth-client'
+import { signOut } from '@/lib/auth-client'
 import { useDialogsStore } from '@/stores/dialogs.store'
 
 type CommandAction = {

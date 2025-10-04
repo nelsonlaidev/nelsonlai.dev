@@ -8,9 +8,9 @@ import { getAbbreviation } from '@repo/utils'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
+import { useSession } from '@/hooks/queries/auth.query'
 import { useGuestbookMessages } from '@/hooks/queries/guestbook.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
-import { useSession } from '@/lib/auth-client'
 import { getDefaultImage } from '@/utils/get-default-image'
 
 import DeleteButton from './delete-button'

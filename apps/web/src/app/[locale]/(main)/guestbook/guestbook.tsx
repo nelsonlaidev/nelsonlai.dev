@@ -1,6 +1,6 @@
 'use client'
 
-import { useSession } from '@/lib/auth-client'
+import { useSession } from '@/hooks/queries/auth.query'
 
 import MessageBox from './message-box'
 import Messages from './messages'

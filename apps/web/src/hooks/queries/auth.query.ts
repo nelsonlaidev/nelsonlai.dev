@@ -2,6 +2,10 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { orpc } from '@/orpc/client'
 
+export const useSession = () => {
+  return useQuery(orpc.auth.getSession.queryOptions())
+}
+
 export const useListSessions = () => {
   return useQuery(orpc.auth.listSessions.queryOptions())
 }

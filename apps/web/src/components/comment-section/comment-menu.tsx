@@ -22,9 +22,9 @@ import { MoreVerticalIcon } from 'lucide-react'
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
+import { useSession } from '@/hooks/queries/auth.query'
 import { useDeletePostComment } from '@/hooks/queries/post.query'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
-import { useSession } from '@/lib/auth-client'
 
 const CommentMenu = () => {
   const { comment } = useCommentContext()
