@@ -16,8 +16,6 @@ const PROTECTED_ROUTES = [
 const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname
 
-  console.log({ pathname })
-
   const session = await getSession(request)
 
   const route = PROTECTED_ROUTES.find((r) => r.path.test(pathname))
