@@ -4,6 +4,7 @@ import type { ListSessionsOutput } from '@/orpc/routers'
 
 import { Badge } from '@repo/ui/components/badge'
 import { Button } from '@repo/ui/components/button'
+import { Card } from '@repo/ui/components/card'
 import { toast } from '@repo/ui/components/sonner'
 import Bowser from 'bowser'
 import { InfoIcon, MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } from 'lucide-react'
@@ -35,14 +36,15 @@ const ActiveSessions = () => {
       <h2 className='text-lg font-semibold'>{t('account.active-sessions')}</h2>
       {isLoading && <ActiveSessionsSkeleton />}
       {isError && <div>{t('error.something-went-wrong')}</div>}
-      {sortedSessions ? (
+      {sortedSessions && (
         <div className='space-y-4'>
           {sortedSessions.map((session) => (
             <Session key={session.id} session={session} />
           ))}
         </div>
-      ) : (
-        !isLoading && <div>{t('account.no-active-sessions')}</div>
+      )}
+      {sortedSessions && sortedSessions.length === 0 && (
+        <Card className='py-12 text-center'>{t('account.no-active-sessions')}</Card>
       )}
     </div>
   )
@@ -91,7 +93,7 @@ const Session = (props: SessionProps) => {
   }
 
   return (
-    <div className='rounded-xl p-4 shadow-feature-card sm:p-6'>
+    <Card className='p-4 sm:p-6'>
       <div className='flex flex-col gap-4 sm:flex-row sm:justify-between'>
         <div className='flex gap-4'>
           <div className='flex size-12 items-center justify-center rounded-full bg-secondary'>
@@ -125,7 +127,7 @@ const Session = (props: SessionProps) => {
           {t('account.revoke-session')}
         </Button>
       </div>
-    </div>
+    </Card>
   )
 }
 
