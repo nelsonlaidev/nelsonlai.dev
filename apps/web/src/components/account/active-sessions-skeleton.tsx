@@ -1,5 +1,6 @@
 'use client'
 
+import { Card } from '@repo/ui/components/card'
 import { Skeleton } from '@repo/ui/components/skeleton'
 import { range } from '@repo/utils'
 
@@ -7,7 +8,7 @@ const ActiveSessionsSkeleton = () => {
   return (
     <div className='space-y-4'>
       {range(5).map((sessionNumber) => (
-        <div key={sessionNumber} className='rounded-xl p-4 shadow-feature-card sm:p-6'>
+        <Card key={sessionNumber} className='p-4 sm:p-6'>
           <div className='flex gap-4'>
             <Skeleton className='size-12 rounded-full' />
             <div className='space-y-1'>
@@ -21,7 +22,7 @@ const ActiveSessionsSkeleton = () => {
               </div>
             </div>
           </div>
-        </div>
+        </Card>
       ))}
     </div>
   )
