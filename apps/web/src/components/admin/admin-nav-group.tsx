@@ -13,7 +13,7 @@ const AdminNavGroup = (props: AdminNavGroupProps) => {
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>{t(`admin.nav.${titleKey}`)}</SidebarGroupLabel>
+      <SidebarGroupLabel>{t(titleKey)}</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
           {links.map((link) => (

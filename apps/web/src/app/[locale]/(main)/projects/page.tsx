@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 
 import JsonLd from '@/components/json-ld'
-import PageTitle from '@/components/page-title'
+import PageHeader from '@/components/page-header'
 import ProjectCards from '@/components/project-cards'
 import { MY_NAME } from '@/lib/constants'
 import { getLatestProjects } from '@/lib/content'
@@ -27,9 +27,9 @@ export const generateMetadata = async (props: PageProps<'/[locale]/projects'>): 
     return {}
   }
 
-  const t = await getTranslations({ locale, namespace: 'projects' })
-  const title = t('title')
-  const description = t('description')
+  const t = await getTranslations({ locale })
+  const title = t('common.labels.projects')
+  const description = t('projects.description')
 
   return createMetadata({
     pathname: '/projects',
@@ -50,7 +50,7 @@ const Page = async (props: PageProps<'/[locale]/projects'>) => {
 
   setRequestLocale(locale)
   const t = await getTranslations()
-  const title = t('projects.title')
+  const title = t('common.labels.projects')
   const description = t('projects.description')
   const url = getLocalizedPath({ locale, pathname: '/projects' })
 
@@ -84,7 +84,7 @@ const Page = async (props: PageProps<'/[locale]/projects'>) => {
   return (
     <>
       <JsonLd json={jsonLd} />
-      <PageTitle title={title} description={description} />
+      <PageHeader title={title} description={description} />
       <ProjectCards projects={projects} />
     </>
   )

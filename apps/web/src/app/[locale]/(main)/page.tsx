@@ -37,8 +37,8 @@ export const generateMetadata = async (props: PageProps<'/[locale]'>): Promise<M
     return {}
   }
 
-  const t = await getTranslations({ locale, namespace: 'metadata' })
-  const description = t('site-description')
+  const t = await getTranslations({ locale })
+  const description = t('metadata.site-description')
 
   return createMetadata({
     root: true,
@@ -58,7 +58,7 @@ const Page = async (props: PageProps<'/[locale]'>) => {
   }
 
   setRequestLocale(locale)
-  const t = await getTranslations('metadata')
+  const t = await getTranslations()
 
   const url = getLocalizedPath({ locale })
 
@@ -67,7 +67,7 @@ const Page = async (props: PageProps<'/[locale]'>) => {
     '@type': 'WebSite',
     '@id': url,
     name: MY_NAME,
-    description: t('site-description'),
+    description: t('metadata.site-description'),
     url,
     publisher: {
       '@type': 'Person',

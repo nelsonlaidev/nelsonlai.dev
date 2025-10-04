@@ -10,15 +10,15 @@ import { protectedProcedure, publicProcedure } from '../root'
 import { emptyOutputSchema } from '../schemas/common.schema'
 import {
   createMessageInputSchema,
+  createMessageOutputSchema,
   deleteMessageInputSchema,
-  guestbookInputSchema,
-  guestbookSchema,
-  messageSchema
+  listMessagesInputSchema,
+  listMessagesOutputSchema
 } from '../schemas/guestbook.schema'
 
 export const listMessages = publicProcedure
-  .input(guestbookInputSchema)
-  .output(guestbookSchema)
+  .input(listMessagesInputSchema)
+  .output(listMessagesOutputSchema)
   .handler(async ({ input, context }) => {
     const query = await context.db.query.guestbook.findMany({
       where: and(input.cursor ? lt(guestbook.createdAt, input.cursor) : undefined),
@@ -56,7 +56,7 @@ export const listMessages = publicProcedure
 
 export const createMessage = protectedProcedure
   .input(createMessageInputSchema)
-  .output(messageSchema)
+  .output(createMessageOutputSchema)
   .handler(async ({ input, context }) => {
     const user = context.session.user
 

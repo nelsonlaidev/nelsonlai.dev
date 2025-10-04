@@ -19,32 +19,6 @@
     ".env*": "properties"
   },
 
-  "i18n-ally.enabledFrameworks": ["react", "next-intl", "general"],
-  "i18n-ally.extract.autoDetect": true,
-  "i18n-ally.keysInUse": [
-    "homepage.hero.amazing",
-    "homepage.hero.attractive",
-    "homepage.hero.fantastic",
-    "homepage.hero.stunning",
-    "layout.about",
-    "layout.blog",
-    "layout.dashboard",
-    "layout.facebook",
-    "layout.github",
-    "layout.guestbook",
-    "layout.instagram",
-    "layout.links",
-    "layout.projects",
-    "layout.uses",
-    "layout.youtube",
-    "admin.nav.comments",
-    "admin.nav.dashboard",
-    "admin.nav.general",
-    "admin.nav.users"
-  ],
-  "i18n-ally.keystyle": "nested",
-  "i18n-ally.localesPaths": ["packages/i18n/src/messages"],
-
   "tailwindCSS.classFunctions": ["cva", "cn"],
 
   "typescript.enablePromptUseWorkspaceTsdk": true,

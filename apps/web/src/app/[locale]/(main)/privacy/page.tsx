@@ -6,11 +6,11 @@ import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 
 import Mdx from '@/components/mdx'
-import PageTitle from '@/components/page-title'
+import PageHeader from '@/components/page-header'
 import { getPageBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 
-export const generateStaticParams = (): Array<Awaited<PageProps<'/[locale]/privacy'>['params']>> => {
+export const generateStaticParams = (): Array<{ locale: string }> => {
   return routing.locales.map((locale) => ({ locale }))
 }
 
@@ -22,9 +22,9 @@ export const generateMetadata = async (props: PageProps<'/[locale]/privacy'>): P
     return {}
   }
 
-  const t = await getTranslations({ locale, namespace: 'privacy' })
-  const title = t('title')
-  const description = t('description')
+  const t = await getTranslations({ locale })
+  const title = t('common.labels.privacy-policy')
+  const description = t('privacy.description')
 
   return createMetadata({
     pathname: '/privacy',
@@ -45,7 +45,7 @@ const Page = async (props: PageProps<'/[locale]/privacy'>) => {
 
   setRequestLocale(locale)
   const t = await getTranslations()
-  const title = t('privacy.title')
+  const title = t('common.labels.privacy-policy')
   const description = t('privacy.description')
   const page = getPageBySlug(locale, 'privacy')
 
@@ -57,7 +57,7 @@ const Page = async (props: PageProps<'/[locale]/privacy'>) => {
 
   return (
     <>
-      <PageTitle title={title} description={description} />
+      <PageHeader title={title} description={description} />
       <Mdx code={code} />
     </>
   )

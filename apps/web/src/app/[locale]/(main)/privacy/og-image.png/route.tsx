@@ -19,7 +19,7 @@ export const GET = async (_request: Request, props: RouteContext<'/[locale]/priv
   }
 
   const t = await getTranslations({ locale })
-  const title = t('privacy.title')
+  const title = t('common.labels.privacy-policy')
 
   try {
     const page = getPageBySlug(locale, 'privacy')

@@ -19,7 +19,7 @@ const Navbar = () => {
           const isActive = link.href === pathname
 
           return (
-            <li key={link.key} className='relative flex h-[60px] items-center justify-center'>
+            <li key={link.key} className='relative flex items-center justify-center'>
               <Link
                 className={cn('rounded-sm px-3 py-2 text-sm font-medium transition-colors', {
                   'text-muted-foreground hover:text-foreground': !isActive,
@@ -27,7 +27,7 @@ const Navbar = () => {
                 })}
                 href={link.href}
               >
-                {t(`layout.${link.key}`)}
+                {t(link.labelKey)}
               </Link>
               {isActive && (
                 <>

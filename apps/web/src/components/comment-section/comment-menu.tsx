@@ -22,9 +22,9 @@ import { MoreVerticalIcon } from 'lucide-react'
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
+import { useSession } from '@/hooks/queries/auth.query'
 import { useDeletePostComment } from '@/hooks/queries/post.query'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
-import { useSession } from '@/lib/auth-client'
 
 const CommentMenu = () => {
   const { comment } = useCommentContext()
@@ -47,6 +47,12 @@ const CommentMenu = () => {
   const commentQuery = parentId ? `comment=${parentId}&reply=${id}` : `comment=${id}`
 
   const isAuthor = !isDeleted && session?.user.id === userId
+
+  const handleDeleteComment = () => {
+    if (isDeleting) return
+
+    deleteComment({ id })
+  }
 
   return (
     <AlertDialog>
@@ -89,15 +95,13 @@ const CommentMenu = () => {
       </DropdownMenu>
       <AlertDialogContent data-testid='comment-dialog'>
         <AlertDialogHeader>
-          <AlertDialogTitle>{t('blog.comments.delete-a-comment')}</AlertDialogTitle>
-          <AlertDialogDescription>{t('blog.comments.confirm-delete-comment')}</AlertDialogDescription>
+          <AlertDialogTitle>{t('common.dialogs.delete-comment.title')}</AlertDialogTitle>
+          <AlertDialogDescription>{t('common.dialogs.delete-comment.description')}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
           <AlertDialogAction
-            onClick={() => {
-              deleteComment({ id })
-            }}
+            onClick={handleDeleteComment}
             className={buttonVariants({ variant: 'destructive' })}
             data-testid='comment-dialog-delete-button'
           >

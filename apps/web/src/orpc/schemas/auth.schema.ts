@@ -1,0 +1,23 @@
+import { sessions, users } from '@repo/db'
+import { createSelectSchema } from 'drizzle-zod'
+import z from 'zod'
+
+export const getSessionOutputSchema = z
+  .object({
+    session: createSelectSchema(sessions),
+    user: createSelectSchema(users)
+  })
+  .nullable()
+
+export const listSessionsOutputSchema = z.object({
+  sessions: z.array(
+    createSelectSchema(sessions).extend({
+      isCurrentSession: z.boolean(),
+      location: z.string().nullable()
+    })
+  )
+})
+
+export const revokeSessionInputSchema = z.object({
+  token: z.string()
+})

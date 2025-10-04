@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 
 import JsonLd from '@/components/json-ld'
-import PageTitle from '@/components/page-title'
+import PageHeader from '@/components/page-header'
 import { MY_NAME } from '@/lib/constants'
 import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
@@ -27,9 +27,9 @@ export const generateMetadata = async (props: PageProps<'/[locale]/dashboard'>):
     return {}
   }
 
-  const t = await getTranslations({ locale, namespace: 'dashboard' })
-  const title = t('title')
-  const description = t('description')
+  const t = await getTranslations({ locale })
+  const title = t('common.labels.dashboard')
+  const description = t('dashboard.description')
 
   return createMetadata({
     pathname: '/dashboard',
@@ -50,7 +50,7 @@ const Page = async (props: PageProps<'/[locale]/dashboard'>) => {
 
   setRequestLocale(locale)
   const t = await getTranslations()
-  const title = t('dashboard.title')
+  const title = t('common.labels.dashboard')
   const description = t('dashboard.description')
   const url = getLocalizedPath({ locale, pathname: '/dashboard' })
 
@@ -71,7 +71,7 @@ const Page = async (props: PageProps<'/[locale]/dashboard'>) => {
   return (
     <>
       <JsonLd json={jsonLd} />
-      <PageTitle title={title} description={description} />
+      <PageHeader title={title} description={description} />
       <Stats />
     </>
   )

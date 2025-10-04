@@ -33,7 +33,7 @@ const MobileNav = () => {
           <DropdownMenuItem key={link.key} asChild>
             <Link href={link.href} className='flex items-center gap-4'>
               {link.icon}
-              <div>{t(`layout.${link.key}`)}</div>
+              <div>{t(link.labelKey)}</div>
             </Link>
           </DropdownMenuItem>
         ))}

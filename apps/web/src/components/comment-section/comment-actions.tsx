@@ -8,8 +8,8 @@ import { ChevronDownIcon, MessageSquareIcon, ThumbsDownIcon, ThumbsUpIcon } from
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
+import { useSession } from '@/hooks/queries/auth.query'
 import { useVotePostComment } from '@/hooks/queries/post.query'
-import { useSession } from '@/lib/auth-client'
 
 const voteVariants = cva({
   base: buttonVariants({
@@ -35,6 +35,8 @@ const CommentActions = () => {
   const isAuthenticated = session !== null
 
   const handleVoteComment = (like: boolean) => {
+    if (isVoting) return
+
     if (!isAuthenticated) {
       toast.error(t('error.need-logged-in-to-vote'))
       return
@@ -55,7 +57,7 @@ const CommentActions = () => {
           className={voteVariants({
             active: comment.liked === true
           })}
-          aria-label={t('blog.comments.like')}
+          aria-label={t('common.like')}
           disabled={isVoting}
         >
           <ThumbsUpIcon />

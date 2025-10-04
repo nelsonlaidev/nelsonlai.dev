@@ -1,5 +1,5 @@
 import { z } from 'zod'
 
-export const wakatimeStatsSchema = z.object({
+export const wakatimeStatsOutputSchema = z.object({
   hours: z.number()
 })

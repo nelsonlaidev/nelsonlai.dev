@@ -19,7 +19,7 @@ export const GET = async (_request: Request, props: RouteContext<'/[locale]/term
   }
 
   const t = await getTranslations({ locale })
-  const title = t('terms.title')
+  const title = t('common.labels.terms-of-service')
 
   try {
     const page = getPageBySlug(locale, 'terms')

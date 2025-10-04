@@ -6,11 +6,11 @@ import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 
 import Mdx from '@/components/mdx'
-import PageTitle from '@/components/page-title'
+import PageHeader from '@/components/page-header'
 import { getPageBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 
-export const generateStaticParams = (): Array<Awaited<PageProps<'/[locale]/terms'>['params']>> => {
+export const generateStaticParams = (): Array<{ locale: string }> => {
   return routing.locales.map((locale) => ({ locale }))
 }
 
@@ -22,9 +22,9 @@ export const generateMetadata = async (props: PageProps<'/[locale]/terms'>): Pro
     return {}
   }
 
-  const t = await getTranslations({ locale, namespace: 'terms' })
-  const title = t('title')
-  const description = t('description')
+  const t = await getTranslations({ locale })
+  const title = t('common.labels.terms-of-service')
+  const description = t('terms.description')
 
   return createMetadata({
     pathname: '/terms',
@@ -45,7 +45,7 @@ const Page = async (props: PageProps<'/[locale]/terms'>) => {
 
   setRequestLocale(locale)
   const t = await getTranslations()
-  const title = t('terms.title')
+  const title = t('common.labels.terms-of-service')
   const description = t('terms.description')
   const page = getPageBySlug(locale, 'terms')
 
@@ -57,7 +57,7 @@ const Page = async (props: PageProps<'/[locale]/terms'>) => {
 
   return (
     <>
-      <PageTitle title={title} description={description} />
+      <PageHeader title={title} description={description} />
       <Mdx code={code} />
     </>
   )

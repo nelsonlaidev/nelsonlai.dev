@@ -12,7 +12,7 @@ export const listCommentsInputSchema = infiniteQuerySchema.extend({
   highlightedCommentId: z.string().optional()
 })
 
-export const commentsSchema = z.object({
+export const listCommentsOutputSchema = z.object({
   comments: z.array(
     createSelectSchema(comments).extend({
       liked: z.boolean().nullable(),
@@ -35,7 +35,7 @@ export const createCommentInputSchema = z.object({
   parentId: z.string().optional()
 })
 
-export const commentSchema = createSelectSchema(comments)
+export const createCommentOutputSchema = createSelectSchema(comments)
 
 export const countCommentsInputSchema = z.object({
   slug: z.string().min(1),
@@ -46,6 +46,6 @@ export const deleteCommentInputSchema = z.object({
   id: z.string().min(1)
 })
 
-export const countCommentsSchema = z.object({
+export const countCommentsOutputSchema = z.object({
   count: z.number()
 })

@@ -85,7 +85,7 @@ export const rehypeInlineCode: Plugin<[RehypeShikiCoreOptions], Root> = () => {
         if (spanNode?.type !== 'element') return
         if (spanNode.tagName !== 'span') return
 
-        spanNode.properties.style = themeKeys.map((key, i) => `--shiki-${key}:${colors[i]}`).join(';')
+        spanNode.properties.style = themeKeys.map((key, keyIndex) => `--shiki-${key}:${colors[keyIndex]}`).join(';')
       }
 
       inlineCode.properties.className = ['shiki']

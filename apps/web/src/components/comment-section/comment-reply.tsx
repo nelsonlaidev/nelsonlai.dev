@@ -7,8 +7,8 @@ import { useState } from 'react'
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
+import { useSession } from '@/hooks/queries/auth.query'
 import { useCreatePostComment } from '@/hooks/queries/post.query'
-import { useSession } from '@/lib/auth-client'
 
 import CommentEditor from './comment-editor'
 import UnauthenticatedOverlay from './unauthenticated-overlay'
@@ -27,6 +27,8 @@ const CommentReply = () => {
 
   const submitCommentReply = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
+
+    if (isCreating) return
 
     if (!content) {
       toast.error(t('error.reply-cannot-be-empty'))

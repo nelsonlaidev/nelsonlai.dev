@@ -3,7 +3,7 @@ import { Buffer } from 'node:buffer'
 import { env } from '@repo/env'
 
 import { publicProcedure } from '../root'
-import { spotifyStatsSchema } from '../schemas/spotify.schema'
+import { spotifyStatsOutputSchema } from '../schemas/spotify.schema'
 
 const CLIENT_ID = env.SPOTIFY_CLIENT_ID
 const CLIENT_SECRET = env.SPOTIFY_CLIENT_SECRET
@@ -40,7 +40,7 @@ const getAccessToken = async () => {
   return data.access_token as string
 }
 
-export const spotifyStats = publicProcedure.output(spotifyStatsSchema).handler(async () => {
+export const spotifyStats = publicProcedure.output(spotifyStatsOutputSchema).handler(async () => {
   if (!CLIENT_ID || !CLIENT_SECRET || !REFRESH_TOKEN) {
     return EMPTY_RESPONSE
   }

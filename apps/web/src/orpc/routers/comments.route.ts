@@ -12,19 +12,19 @@ import { getDefaultImage } from '@/utils/get-default-image'
 
 import { protectedProcedure, publicProcedure } from '../root'
 import {
-  commentSchema,
-  commentsSchema,
   countCommentsInputSchema,
-  countCommentsSchema,
+  countCommentsOutputSchema,
   createCommentInputSchema,
+  createCommentOutputSchema,
   deleteCommentInputSchema,
-  listCommentsInputSchema
+  listCommentsInputSchema,
+  listCommentsOutputSchema
 } from '../schemas/comments.schema'
 import { emptyOutputSchema } from '../schemas/common.schema'
 
 export const listComments = publicProcedure
   .input(listCommentsInputSchema)
-  .output(commentsSchema)
+  .output(listCommentsOutputSchema)
   .handler(async ({ input, context }) => {
     const session = context.session
 
@@ -102,7 +102,7 @@ export const listComments = publicProcedure
 
 export const createComment = protectedProcedure
   .input(createCommentInputSchema)
-  .output(commentSchema)
+  .output(createCommentOutputSchema)
   .handler(async ({ input, context }) => {
     const user = context.session.user
 
@@ -249,7 +249,7 @@ export const deleteComment = protectedProcedure
 
 export const countComments = publicProcedure
   .input(countCommentsInputSchema)
-  .output(countCommentsSchema)
+  .output(countCommentsOutputSchema)
   .handler(async ({ input, context }) => {
     const [result] = await context.db
       .select({

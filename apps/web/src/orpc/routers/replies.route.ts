@@ -1,11 +1,11 @@
 import { and, comments, count, eq, isNotNull } from '@repo/db'
 
 import { publicProcedure } from '../root'
-import { countRepliesInputSchema, countRepliesSchema } from '../schemas/replies.schema'
+import { countRepliesInputSchema, countRepliesOutputSchema } from '../schemas/replies.schema'
 
 export const countReplies = publicProcedure
   .input(countRepliesInputSchema)
-  .output(countRepliesSchema)
+  .output(countRepliesOutputSchema)
   .handler(async ({ input, context }) => {
     const [result] = await context.db
       .select({

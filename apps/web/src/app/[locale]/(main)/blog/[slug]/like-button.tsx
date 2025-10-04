@@ -114,7 +114,7 @@ const LikeButton = (props: LikeButtonProps) => {
             />
           </g>
         </svg>
-        {t('blog.like')}
+        {t('common.like')}
         <Separator orientation='vertical' className='bg-zinc-700' />
         {isSuccess && <NumberFlow value={data.likes + cacheCount} data-testid='like-count' />}
         {isLoading && <div>--</div>}
