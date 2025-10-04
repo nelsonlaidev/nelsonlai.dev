@@ -6,7 +6,12 @@ type Options = {
   formatOptions?: DateTimeFormatOptions
 }
 
-export const useFormattedDate = (date: Date | string | number, options: Options = {}) => {
+type UseFormattedDate = {
+  (date: Date | string | number, options?: Options): string
+  (date?: Date | string | number, options?: Options): string | null
+}
+
+export const useFormattedDate = ((date, options = {}) => {
   const {
     relative = false,
     formatOptions = {
@@ -17,6 +22,9 @@ export const useFormattedDate = (date: Date | string | number, options: Options 
   } = options
 
   const format = useFormatter()
+
+  if (!date) return null
+
   const now = new Date()
 
   const convertedDate = dayjs(date).toDate()
@@ -30,4 +38,4 @@ export const useFormattedDate = (date: Date | string | number, options: Options 
   } else {
     return format.dateTime(convertedDate, formatOptions)
   }
-}
+}) as UseFormattedDate
