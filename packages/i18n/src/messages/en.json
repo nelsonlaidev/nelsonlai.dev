@@ -241,7 +241,14 @@
     "no-active-sessions": "No active sessions",
     "revoke-session": "Revoke",
     "this-device": "This device",
-    "session-revoked-successfully": "Session revoked successfully"
+    "session-revoked-successfully": "Session revoked successfully",
+    "profile": "Profile",
+    "avatar": "Avatar",
+    "update-avatar": "Update avatar",
+    "display-name": "Display name",
+    "edit-name": "Edit name",
+    "email": "Email",
+    "account-created": "Account created"
   },
   "privacy": {
     "description": "This page explains how we handle your data and protect your privacy when you use our website."

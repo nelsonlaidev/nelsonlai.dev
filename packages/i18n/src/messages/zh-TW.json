@@ -241,7 +241,14 @@
     "no-active-sessions": "沒有使用中工作階段",
     "revoke-session": "終止",
     "this-device": "此裝置",
-    "session-revoked-successfully": "工作階段已成功終止"
+    "session-revoked-successfully": "工作階段已成功終止",
+    "profile": "個人資料",
+    "avatar": "頭像",
+    "update-avatar": "更新頭像",
+    "display-name": "顯示名稱",
+    "edit-name": "編輯名稱",
+    "email": "電子郵件",
+    "account-created": "帳戶建立時間"
   },
   "privacy": {
     "description": "此頁面說明當您使用我們的網站時，我們如何處理您的資料並保護您的隱私。"

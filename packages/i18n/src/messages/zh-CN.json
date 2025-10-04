@@ -241,7 +241,14 @@
     "no-active-sessions": "没有活动会话",
     "revoke-session": "结束",
     "this-device": "此设备",
-    "session-revoked-successfully": "会话已成功结束"
+    "session-revoked-successfully": "会话已成功结束",
+    "profile": "个人资料",
+    "avatar": "头像",
+    "update-avatar": "更新头像",
+    "display-name": "显示名称",
+    "edit-name": "编辑名称",
+    "email": "邮箱",
+    "account-created": "账户创建时间"
   },
   "privacy": {
     "description": "此页面说明当您使用我们的网站时，我们如何处理您的数据并保护您的隐私。"

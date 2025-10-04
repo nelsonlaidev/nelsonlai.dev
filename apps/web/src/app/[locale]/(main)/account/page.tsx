@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 
 import ActiveSessions from '@/components/account/active-sessions'
+import Profile from '@/components/account/profile'
 import PageHeader from '@/components/page-header'
 import { createMetadata } from '@/lib/metadata'
 
@@ -50,7 +51,10 @@ const Page = async (props: PageProps<'/[locale]/account'>) => {
   return (
     <>
       <PageHeader title={title} description={description} />
-      <ActiveSessions />
+      <div className='space-y-12'>
+        <Profile />
+        <ActiveSessions />
+      </div>
     </>
   )
 }
