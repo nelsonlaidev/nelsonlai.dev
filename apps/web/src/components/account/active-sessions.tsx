@@ -93,7 +93,6 @@ const Session = (props: SessionProps) => {
 
   const handleRevoke = () => {
     if (isRevoking) return
-
     revokeSession({ token: session.token })
   }
 

@@ -50,7 +50,6 @@ const CommentMenu = () => {
 
   const handleDeleteComment = () => {
     if (isDeleting) return
-
     deleteComment({ id })
   }
 

@@ -100,10 +100,7 @@ const EditName = (props: EditNameProps) => {
   const t = useTranslations()
 
   const editNameFormSchema = z.object({
-    name: z
-      .string()
-      .min(1, { message: t('error.name-cannot-be-empty') })
-      .max(50, { message: t('error.name-too-long') })
+    name: z.string().min(1, t('error.name-cannot-be-empty')).max(50, t('error.name-too-long'))
   })
 
   const form = useForm<z.infer<typeof editNameFormSchema>>({
