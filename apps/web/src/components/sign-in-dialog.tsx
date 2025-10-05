@@ -2,12 +2,12 @@
 
 import { SiGithub } from '@icons-pack/react-simple-icons'
 import { useTranslations } from '@repo/i18n/client'
-import { usePathname } from '@repo/i18n/routing'
 import { Badge } from '@repo/ui/components/badge'
 import { Button } from '@repo/ui/components/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@repo/ui/components/dialog'
 import { toast } from '@repo/ui/components/sonner'
 import { LoaderIcon } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
