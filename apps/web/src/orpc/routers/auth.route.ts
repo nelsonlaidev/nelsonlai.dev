@@ -53,10 +53,18 @@ export const updateUser = protectedProcedure
   .input(updateUserInputSchema)
   .output(emptyOutputSchema)
   .handler(async ({ input, context }) => {
+    const body: Record<string, unknown> = {}
+
+    if (input.name !== undefined) {
+      body.name = input.name
+    }
+
+    if (input.image !== undefined) {
+      body.image = input.image
+    }
+
     await auth.api.updateUser({
       headers: context.headers,
-      body: {
-        name: input.name
-      }
+      body
     })
   })

@@ -33,13 +33,13 @@ const middleware = async (request: NextRequest) => {
     default-src 'none';
     script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.nelsonlai.dev https://va.vercel-scripts.com ${IS_PREVIEW ? 'https://vercel.live' : ''};
     style-src 'self' 'unsafe-inline' ${IS_PREVIEW ? 'https://vercel.live' : ''};
-    img-src 'self' data: https://avatars.githubusercontent.com https://*.googleusercontent.com ${IS_PREVIEW ? 'https://vercel.live https://vercel.com blob:' : ''};
+    img-src 'self' data: https://avatars.githubusercontent.com https://*.googleusercontent.com ${env.CLOUDFLARE_R2_PUBLIC_URL} ${IS_PREVIEW ? 'https://vercel.live https://vercel.com blob:' : ''};
     font-src 'self' ${IS_PREVIEW ? 'https://vercel.live https://assets.vercel.com' : ''};
     worker-src 'self' blob:;
     object-src 'none';
     base-uri 'none';
     form-action 'none';
-    connect-src 'self' https://*.nelsonlai.dev ${IS_PREVIEW ? 'https://vercel.live wss://ws-us3.pusher.com' : ''};
+    connect-src 'self' https://*.nelsonlai.dev ${env.CLOUDFLARE_R2_ENDPOINT} ${IS_PREVIEW ? 'https://vercel.live wss://ws-us3.pusher.com' : ''};
     media-src 'self';
     manifest-src 'self';
     frame-ancestors 'none';

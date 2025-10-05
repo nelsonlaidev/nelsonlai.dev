@@ -19,13 +19,15 @@ import { Input } from '@repo/ui/components/input'
 import { toast } from '@repo/ui/components/sonner'
 import { getAbbreviation } from '@repo/utils'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 
 import { useUpdateUser } from '@/hooks/queries/auth.query'
+import { useGetAvatarUploadUrl } from '@/hooks/queries/r2.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { type User, useSession } from '@/lib/auth-client'
+import { AVATAR_MAX_FILE_SIZE, type AvatarMimeType, SUPPORTED_AVATAR_MIME_TYPES } from '@/lib/constants'
 
 import ProfileSkeleton from './profile-skeleton'
 
@@ -63,7 +65,7 @@ const ProfileInfo = (props: ProfileInfoProps) => {
             <AvatarFallback>{getAbbreviation(user.name)}</AvatarFallback>
           </Avatar>
         </div>
-        <Button variant='outline'>{t('account.update-avatar')}</Button>
+        <UpdateAvatar />
       </div>
       <div className='flex items-center justify-between'>
         <div className='flex flex-col gap-2'>
@@ -154,6 +156,87 @@ const EditName = (props: EditNameProps) => {
         </Form>
       </AlertDialogContent>
     </AlertDialog>
+  )
+}
+
+const UpdateAvatar = () => {
+  const t = useTranslations()
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const [isUploading, setIsUploading] = useState(false)
+  const { refetch: refetchSession } = useSession()
+
+  const { mutateAsync: getAvatarUploadUrl } = useGetAvatarUploadUrl()
+  const { mutateAsync: updateUser } = useUpdateUser(() => {
+    toast.success(t('account.update-avatar-successfully'))
+    refetchSession()
+  })
+
+  const handleSelectFile = () => {
+    if (isUploading) return
+    fileInputRef.current?.click()
+  }
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+
+    if (!file) return
+
+    event.target.value = ''
+
+    if (!SUPPORTED_AVATAR_MIME_TYPES.includes(file.type as AvatarMimeType)) {
+      toast.error(t('account.avatar-unsupported-file'))
+      return
+    }
+
+    if (file.size > AVATAR_MAX_FILE_SIZE) {
+      const maxSizeInMb = (AVATAR_MAX_FILE_SIZE / (1024 * 1024)).toFixed(1)
+      toast.error(t('account.avatar-too-large', { size: maxSizeInMb }))
+      return
+    }
+
+    try {
+      setIsUploading(true)
+
+      const { uploadUrl, publicUrl } = await getAvatarUploadUrl({
+        fileName: file.name,
+        fileType: file.type as AvatarMimeType,
+        fileSize: file.size
+      })
+
+      const response = await fetch(uploadUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': file.type
+        },
+        body: file
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to upload avatar')
+      }
+
+      await updateUser({ image: publicUrl })
+    } catch (error) {
+      console.error('Failed to update avatar', error)
+      toast.error(t('account.update-avatar-failed'))
+    } finally {
+      setIsUploading(false)
+    }
+  }
+
+  return (
+    <div>
+      <input
+        ref={fileInputRef}
+        type='file'
+        accept={SUPPORTED_AVATAR_MIME_TYPES.join(',')}
+        className='hidden'
+        onChange={handleFileChange}
+      />
+      <Button variant='outline' onClick={handleSelectFile} disabled={isUploading}>
+        {t('account.update-avatar')}
+      </Button>
+    </div>
   )
 }
 

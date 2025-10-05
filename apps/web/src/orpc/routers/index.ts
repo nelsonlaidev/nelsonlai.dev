@@ -7,6 +7,7 @@ import { countComments, createComment, deleteComment, listComments } from './com
 import { githubStats } from './github.route'
 import { createMessage, deleteMessage, listMessages } from './guestbook.route'
 import { countLike, incrementLike } from './likes.route'
+import { getAvatarUploadUrl } from './r2.route'
 import { countReplies } from './replies.route'
 import { spotifyStats } from './spotify.route'
 import { countView, incrementView } from './views.route'
@@ -60,6 +61,9 @@ export const router = {
     listSessions,
     revokeSession,
     updateUser
+  },
+  r2: {
+    getAvatarUploadUrl
   }
 }
 
