@@ -11,9 +11,7 @@ export const createMessageOutputSchema = createSelectSchema(guestbook).pick({
 })
 
 export const createMessageInputSchema = z.object({
-  message: z.string().min(1, {
-    message: 'Message is required'
-  })
+  message: z.string().min(1)
 })
 
 export const listMessagesOutputSchema = z.object({

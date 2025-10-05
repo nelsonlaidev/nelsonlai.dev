@@ -28,9 +28,7 @@ const MessageBox = (props: MessageBoxProps) => {
   const router = useRouter()
 
   const guestbookFormSchema = z.object({
-    message: z.string().min(1, {
-      message: t('error.message-cannot-be-empty')
-    })
+    message: z.string().min(1, t('error.message-cannot-be-empty'))
   })
 
   const form = useForm<z.infer<typeof guestbookFormSchema>>({
