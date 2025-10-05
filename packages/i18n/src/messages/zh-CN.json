@@ -94,8 +94,7 @@
       "facebook": "Facebook",
       "github": "GitHub",
       "instagram": "Instagram",
-      "youtube": "YouTube",
-      "sessions": "会话"
+      "youtube": "YouTube"
     },
     "dialogs": {
       "delete-comment": {
