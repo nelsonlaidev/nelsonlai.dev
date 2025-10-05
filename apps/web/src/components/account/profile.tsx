@@ -1,7 +1,5 @@
 'use client'
 
-import type { User } from '@repo/db'
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   AlertDialog,
@@ -25,22 +23,22 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 
-import { useSession, useUpdateUser } from '@/hooks/queries/auth.query'
+import { useUpdateUser } from '@/hooks/queries/auth.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
+import { type User, useSession } from '@/lib/auth-client'
 
 import ProfileSkeleton from './profile-skeleton'
 
 const Profile = () => {
-  const { isSuccess, isLoading, isError, data } = useSession()
+  const { data, isPending: isSessionLoading } = useSession()
   const t = useTranslations()
 
   return (
     <div className='space-y-6'>
       <h2 className='text-lg font-semibold'>{t('account.profile')}</h2>
       <Card className='p-4 sm:p-6'>
-        {isLoading && <ProfileSkeleton />}
-        {isError && <div>{t('error.something-went-wrong')}</div>}
-        {isSuccess && data && <ProfileInfo user={data.user} />}
+        {isSessionLoading && <ProfileSkeleton />}
+        {data && <ProfileInfo user={data.user} />}
       </Card>
     </div>
   )
@@ -98,6 +96,7 @@ const EditName = (props: EditNameProps) => {
   const { name } = props
   const [open, setOpen] = useState(false)
   const t = useTranslations()
+  const { refetch: refetchSession } = useSession()
 
   const editNameFormSchema = z.object({
     name: z.string().min(1, t('error.name-cannot-be-empty')).max(50, t('error.name-too-long'))
@@ -114,6 +113,7 @@ const EditName = (props: EditNameProps) => {
     form.reset({ name: form.getValues('name') })
     setOpen(false)
     toast.success(t('account.edit-name-successfully'))
+    refetchSession()
   })
 
   const onSubmit = (values: z.infer<typeof editNameFormSchema>) => {

@@ -13,6 +13,7 @@ import { useTranslations } from 'next-intl'
 
 import { useListSessions, useRevokeSession } from '@/hooks/queries/auth.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
+import { useSession } from '@/lib/auth-client'
 
 import Tip from '../tip'
 
@@ -65,6 +66,7 @@ const PLATFORM_ICONS = {
 const Session = (props: SessionProps) => {
   const { session } = props
   const t = useTranslations()
+  const { refetch: refetchSession } = useSession()
   const router = useRouter()
 
   const { browser, os, platform } = Bowser.parse(session.userAgent ?? '')
@@ -88,6 +90,7 @@ const Session = (props: SessionProps) => {
     toast.success(t('account.session-revoked-successfully'))
     if (session.isCurrentSession) {
       router.refresh()
+      refetchSession()
     }
   })
 

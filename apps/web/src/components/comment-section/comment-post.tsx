@@ -7,9 +7,9 @@ import { SendIcon } from 'lucide-react'
 import { useState } from 'react'
 
 import { useCommentsContext } from '@/contexts/comments.context'
-import { useSession } from '@/hooks/queries/auth.query'
 import { useCreatePostComment } from '@/hooks/queries/post.query'
 import { useIsMounted } from '@/hooks/use-is-mounted'
+import { useSession } from '@/lib/auth-client'
 
 import CommentEditor from './comment-editor'
 import UnauthenticatedOverlay from './unauthenticated-overlay'
@@ -19,7 +19,7 @@ const CommentPost = () => {
   const [content, setContent] = useState('')
   const [tabsValue, setTabsValue] = useState<'write' | 'preview'>('write')
   const isMounted = useIsMounted()
-  const { data: session, isLoading } = useSession()
+  const { data: session, isPending: isSessionLoading } = useSession()
   const t = useTranslations()
 
   const { mutate: createComment, isPending: isCreating } = useCreatePostComment({ slug }, () => {
@@ -53,7 +53,7 @@ const CommentPost = () => {
     return null
   }
 
-  const isAuthenticated = session !== null && !isLoading
+  const isAuthenticated = session !== null && !isSessionLoading
   const disabled = !isAuthenticated || isCreating
 
   return (

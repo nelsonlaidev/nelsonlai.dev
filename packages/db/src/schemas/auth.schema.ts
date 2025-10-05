@@ -86,5 +86,3 @@ export const sessionsRelations = relations(sessions, ({ one }) => ({
     references: [users.id]
   })
 }))
-
-export type User = typeof users.$inferSelect

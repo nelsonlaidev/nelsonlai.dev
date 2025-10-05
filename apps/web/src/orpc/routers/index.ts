@@ -1,7 +1,7 @@
 import type { Inputs, Outputs } from '../client'
 
 import { listAllComments, listAllUsers } from './admin.route'
-import { getSession, listSessions, revokeSession, updateUser } from './auth.route'
+import { listSessions, revokeSession, updateUser } from './auth.route'
 import { likesStats, viewsStats } from './blog.route'
 import { countComments, createComment, deleteComment, listComments } from './comments.route'
 import { githubStats } from './github.route'
@@ -57,7 +57,6 @@ export const router = {
     listAllUsers
   },
   auth: {
-    getSession,
     listSessions,
     revokeSession,
     updateUser

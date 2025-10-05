@@ -1,7 +1,5 @@
 'use client'
 
-import type { User } from '@repo/db'
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from '@repo/i18n/client'
 import { useRouter } from '@repo/i18n/routing'
@@ -15,7 +13,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { useCreateGuestbookMessage } from '@/hooks/queries/guestbook.query'
-import { signOut } from '@/lib/auth-client'
+import { signOut, type User } from '@/lib/auth-client'
 import { getDefaultImage } from '@/utils/get-default-image'
 
 type MessageBoxProps = {

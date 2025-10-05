@@ -1,44 +1,12 @@
-import type { roleEnum } from '@repo/db'
-
 import { ORPCError } from '@orpc/client'
 import { APIError } from 'better-auth'
 
 import { auth } from '@/lib/auth'
 import { getLocation } from '@/utils/get-location'
 
-import { protectedProcedure, publicProcedure } from '../root'
-import {
-  getSessionOutputSchema,
-  listSessionsOutputSchema,
-  revokeSessionInputSchema,
-  updateUserInputSchema
-} from '../schemas/auth.schema'
+import { protectedProcedure } from '../root'
+import { listSessionsOutputSchema, revokeSessionInputSchema, updateUserInputSchema } from '../schemas/auth.schema'
 import { emptyOutputSchema } from '../schemas/common.schema'
-
-export const getSession = publicProcedure.output(getSessionOutputSchema).handler(async ({ context }) => {
-  const session = await auth.api.getSession({
-    headers: context.headers
-  })
-
-  if (!session) return null
-
-  // See https://github.com/better-auth/better-auth/issues/443
-  // type mismatch between better-auth and drizzle
-  const result = {
-    session: {
-      ...session.session,
-      ipAddress: (session.session.ipAddress ?? '') || null,
-      userAgent: (session.session.userAgent ?? '') || null
-    },
-    user: {
-      ...session.user,
-      image: (session.user.image ?? '') || null,
-      role: session.user.role as (typeof roleEnum.enumValues)[number]
-    }
-  }
-
-  return result
-})
 
 export const listSessions = protectedProcedure.output(listSessionsOutputSchema).handler(async ({ context }) => {
   const sessions = await auth.api.listSessions({

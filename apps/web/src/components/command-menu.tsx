@@ -12,15 +12,12 @@ import {
   CommandList,
   CommandSeparator
 } from '@repo/ui/components/command'
-import { useQueryClient } from '@tanstack/react-query'
 import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon, UserCircleIcon } from 'lucide-react'
 import { Fragment, useCallback, useEffect, useState } from 'react'
 
 import { SOCIAL_LINKS } from '@/config/links'
-import { useSession } from '@/hooks/queries/auth.query'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
-import { signOut } from '@/lib/auth-client'
-import { orpc } from '@/orpc/client'
+import { signOut, useSession } from '@/lib/auth-client'
 import { useDialogsStore } from '@/stores/dialogs.store'
 
 type CommandAction = {
@@ -41,7 +38,6 @@ const CommandMenu = () => {
   const t = useTranslations()
   const setIsSignInOpen = useDialogsStore((state) => state.setIsSignInOpen)
   const router = useRouter()
-  const queryClient = useQueryClient()
 
   const closeMenu = () => {
     setIsOpen(false)
@@ -81,7 +77,6 @@ const CommandMenu = () => {
     await signOut({
       fetchOptions: {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: orpc.auth.getSession.key() })
           router.refresh()
         }
       }
