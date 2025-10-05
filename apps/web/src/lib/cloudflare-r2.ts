@@ -9,7 +9,7 @@ type R2Client = {
   publicUrl: string
 }
 
-const createClient = (): R2Client | undefined => {
+const createClient = (): R2Client => {
   const endpoint = env.CLOUDFLARE_R2_ENDPOINT
   const accessKeyId = env.CLOUDFLARE_R2_ACCESS_KEY_ID
   const secretAccessKey = env.CLOUDFLARE_R2_SECRET_ACCESS_KEY
@@ -17,7 +17,7 @@ const createClient = (): R2Client | undefined => {
   const publicUrl = env.CLOUDFLARE_R2_PUBLIC_URL
 
   if (!endpoint || !accessKeyId || !secretAccessKey || !bucketName || !publicUrl) {
-    return
+    throw new Error('Missing Cloudflare R2 environment variables')
   }
 
   const client = new S3Client({

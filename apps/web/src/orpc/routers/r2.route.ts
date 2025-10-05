@@ -4,7 +4,6 @@ import { randomUUID } from 'node:crypto'
 
 import { PutObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import { ORPCError } from '@orpc/client'
 
 import { getCloudflareR2 } from '@/lib/cloudflare-r2'
 import { getR2PublicUrl } from '@/utils/get-r2-public-url'
@@ -17,12 +16,6 @@ export const getAvatarUploadUrl = protectedProcedure
   .output(getAvatarUploadUrlOutputSchema)
   .handler(async ({ input, context }) => {
     const r2 = getCloudflareR2()
-
-    if (!r2) {
-      throw new ORPCError('INTERNAL_SERVER_ERROR', {
-        message: 'R2 storage is not configured'
-      })
-    }
 
     const { client, bucketName, publicUrl } = r2
 
