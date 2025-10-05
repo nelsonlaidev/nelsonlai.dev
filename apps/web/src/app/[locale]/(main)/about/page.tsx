@@ -35,11 +35,13 @@ export const generateMetadata = async (props: PageProps<'/[locale]/about'>): Pro
   }
 
   const t = await getTranslations({ locale })
+  const title = t('common.labels.about')
+  const description = t('about.description')
 
   return createMetadata({
     pathname: '/about',
-    title: t('common.labels.about'),
-    description: t('about.description'),
+    title,
+    description,
     locale,
     ogImagePathname: '/about/og-image.png',
     openGraph: {
