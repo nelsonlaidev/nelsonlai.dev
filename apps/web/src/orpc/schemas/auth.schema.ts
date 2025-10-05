@@ -21,3 +21,7 @@ export const listSessionsOutputSchema = z.object({
 export const revokeSessionInputSchema = z.object({
   token: z.string()
 })
+
+export const updateUserInputSchema = z.object({
+  name: z.string().min(1).max(50)
+})

@@ -75,6 +75,7 @@
     "views": "{count, plural, =1 {# view} other {# views}}",
     "like": "Like",
     "unknown": "Unknown",
+    "save": "Save",
     "labels": {
       "home": "Home",
       "about": "About",
@@ -146,7 +147,9 @@
     "message-cannot-be-empty": "Message cannot be empty",
     "copy-to-clipboard-error": "Unable to copy to clipboard. Please try again!",
     "now-playing-error": "Failed to fetch Spotify data",
-    "not-found": "Page Not Found!"
+    "not-found": "Page Not Found!",
+    "name-cannot-be-empty": "Name cannot be empty",
+    "name-too-long": "Name is too long"
   },
   "guestbook": {
     "create-message-successfully": "Create message successfully",
@@ -247,6 +250,8 @@
     "update-avatar": "Update avatar",
     "display-name": "Display name",
     "edit-name": "Edit name",
+    "edit-name-description": "Change your display name. This name will be shown on your profile and comments.",
+    "edit-name-successfully": "Edit name successfully",
     "email": "Email",
     "account-created": "Account created"
   },

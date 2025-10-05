@@ -75,6 +75,7 @@
     "views": "{count, plural, =1 {# 瀏覽次數} other {# 瀏覽次數}}",
     "like": "讚",
     "unknown": "未知",
+    "save": "儲存",
     "labels": {
       "home": "首頁",
       "about": "關於",
@@ -146,7 +147,9 @@
     "message-cannot-be-empty": "留言不能為空",
     "copy-to-clipboard-error": "無法複製到剪貼簿。請再試一次！",
     "now-playing-error": "無法獲取 Spotify 資料",
-    "not-found": "找不到頁面！"
+    "not-found": "找不到頁面！",
+    "name-cannot-be-empty": "名稱不能為空",
+    "name-too-long": "名稱過長"
   },
   "guestbook": {
     "create-message-successfully": "成功發佈留言",
@@ -247,6 +250,8 @@
     "update-avatar": "更新頭像",
     "display-name": "顯示名稱",
     "edit-name": "編輯名稱",
+    "edit-name-description": "更改您的顯示名稱。此名稱將顯示在您的個人資料和評論中。",
+    "edit-name-successfully": "成功編輯名稱",
     "email": "電子郵件",
     "account-created": "帳戶建立時間"
   },

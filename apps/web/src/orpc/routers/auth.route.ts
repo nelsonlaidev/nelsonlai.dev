@@ -7,7 +7,12 @@ import { auth } from '@/lib/auth'
 import { getLocation } from '@/utils/get-location'
 
 import { protectedProcedure, publicProcedure } from '../root'
-import { getSessionOutputSchema, listSessionsOutputSchema, revokeSessionInputSchema } from '../schemas/auth.schema'
+import {
+  getSessionOutputSchema,
+  listSessionsOutputSchema,
+  revokeSessionInputSchema,
+  updateUserInputSchema
+} from '../schemas/auth.schema'
 import { emptyOutputSchema } from '../schemas/common.schema'
 
 export const getSession = publicProcedure.output(getSessionOutputSchema).handler(async ({ context }) => {
@@ -74,4 +79,16 @@ export const revokeSession = protectedProcedure
 
       throw new ORPCError('INTERNAL_SERVER_ERROR')
     }
+  })
+
+export const updateUser = protectedProcedure
+  .input(updateUserInputSchema)
+  .output(emptyOutputSchema)
+  .handler(async ({ input, context }) => {
+    await auth.api.updateUser({
+      headers: context.headers,
+      body: {
+        name: input.name
+      }
+    })
   })

@@ -22,3 +22,16 @@ export const useRevokeSession = (onSuccess?: () => void) => {
     })
   )
 }
+
+export const useUpdateUser = (onSuccess?: () => void) => {
+  const queryClient = useQueryClient()
+
+  return useMutation(
+    orpc.auth.updateUser.mutationOptions({
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: orpc.auth.getSession.key() })
+        onSuccess?.()
+      }
+    })
+  )
+}
