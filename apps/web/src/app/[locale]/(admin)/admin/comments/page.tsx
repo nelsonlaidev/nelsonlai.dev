@@ -1,17 +1,10 @@
-import { type Locale, useTranslations } from 'next-intl'
-import { setRequestLocale } from 'next-intl/server'
-import { use } from 'react'
+import { getTranslations } from 'next-intl/server'
 
 import AdminComments from '@/components/admin/admin-comments'
 import AdminPageHeader from '@/components/admin/admin-page-header'
 
-const Page = (props: PageProps<'/[locale]/admin/comments'>) => {
-  const { params } = props
-  const { locale } = use(params)
-
-  setRequestLocale(locale as Locale)
-
-  const t = useTranslations()
+const Page = async () => {
+  const t = await getTranslations()
 
   return (
     <div className='space-y-6'>
