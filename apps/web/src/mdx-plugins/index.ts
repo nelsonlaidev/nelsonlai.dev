@@ -9,5 +9,5 @@ import { remarkHeading } from './remark/remark-heading'
 export const remarkPlugins: PluggableList = [remarkGfm, remarkHeading]
 export const rehypePlugins: PluggableList = [rehypeCode, rehypeInlineCode]
 
-export * from './types'
+export type * from './types'
 export * from './utils'

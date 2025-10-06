@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
+import type { Locale } from 'next-intl'
 
 import { getTranslations } from '@repo/i18n/server'
 import { redirect } from 'next/navigation'
-import { type Locale } from 'next-intl'
 
 import ActiveSessions from '@/components/account/active-sessions'
 import Profile from '@/components/account/profile'
