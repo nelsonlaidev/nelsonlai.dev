@@ -107,6 +107,7 @@
     "@types/spotify-api": "^0.0.25",
     "@types/tinycolor2": "^1.4.6",
     "@vitejs/plugin-react": "^5.0.2",
+    "discord-api-types": "^0.38.28",
     "schema-dts": "^1.1.5",
     "tailwindcss": "^4.1.13"
   }
