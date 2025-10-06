@@ -21,10 +21,7 @@ export const countLike = publicProcedure
     const sessionId = getSessionId(input.slug, ip)
 
     const cached = await cache.posts.likes.get(input.slug, sessionId)
-
-    if (cached) {
-      return cached
-    }
+    if (cached) return cached
 
     const [[post], [user]] = await Promise.all([
       context.db.select({ likes: posts.likes }).from(posts).where(eq(posts.slug, input.slug)),

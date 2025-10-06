@@ -15,10 +15,7 @@ export const countView = publicProcedure
   .output(countViewOutputSchema)
   .handler(async ({ input, context }) => {
     const cached = await cache.posts.views.get(input.slug)
-
-    if (cached) {
-      return cached
-    }
+    if (cached) return cached
 
     const [post] = await context.db.select({ views: posts.views }).from(posts).where(eq(posts.slug, input.slug))
 
