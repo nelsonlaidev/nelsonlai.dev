@@ -1,3 +1,5 @@
+'use client'
+
 import { Tooltip, TooltipContent, TooltipTrigger } from '@repo/ui/components/tooltip'
 import { useEffect, useRef, useState } from 'react'
 
