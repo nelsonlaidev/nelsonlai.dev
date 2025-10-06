@@ -1,5 +1,7 @@
 'use client'
 
+import type { Project } from '@/lib/content'
+
 import { useTranslations } from '@repo/i18n/client'
 import { buttonVariants } from '@repo/ui/components/button'
 import { Link } from '@repo/ui/components/link'
@@ -9,7 +11,6 @@ import { motion, useInView } from 'motion/react'
 import { useRef } from 'react'
 
 import BlurImage from '@/components/blur-image'
-import { type Project } from '@/lib/content'
 
 const variants = {
   initial: {
