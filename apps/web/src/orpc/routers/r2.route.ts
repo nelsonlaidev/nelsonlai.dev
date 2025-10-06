@@ -32,7 +32,8 @@ export const getAvatarUploadUrl = protectedProcedure
     const command = new PutObjectCommand({
       Bucket: bucketName,
       Key: path,
-      ContentType: input.fileType
+      ContentType: input.fileType,
+      ContentLength: input.fileSize
     })
 
     const uploadUrl = await getSignedUrl(client, command, {
