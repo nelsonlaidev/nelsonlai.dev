@@ -5,10 +5,6 @@ import { setRequestLocale } from 'next-intl/server'
 
 import MainLayout from '@/components/main-layout'
 
-export const generateStaticParams = (): Array<{ locale: string }> => {
-  return routing.locales.map((locale) => ({ locale }))
-}
-
 const Layout = async (props: LayoutProps<'/[locale]'>) => {
   const { children, params } = props
   const { locale } = await params

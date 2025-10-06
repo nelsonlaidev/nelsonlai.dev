@@ -14,10 +14,6 @@ import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
-export const generateStaticParams = (): Array<{ locale: string }> => {
-  return routing.locales.map((locale) => ({ locale }))
-}
-
 export const generateMetadata = async (props: PageProps<'/[locale]/dashboard'>): Promise<Metadata> => {
   const { params } = props
   const { locale } = await params

@@ -6,10 +6,6 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import AdminPageHeader from '@/components/admin/admin-page-header'
 import AdminUsers from '@/components/admin/admin-users'
 
-export const generateStaticParams = (): Array<{ locale: string }> => {
-  return routing.locales.map((locale) => ({ locale }))
-}
-
 const Page = async (props: PageProps<'/[locale]/admin/users'>) => {
   const { params } = props
   const { locale } = await params

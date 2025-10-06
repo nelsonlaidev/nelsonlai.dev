@@ -10,10 +10,6 @@ import Profile from '@/components/account/profile'
 import PageHeader from '@/components/page-header'
 import { createMetadata } from '@/lib/metadata'
 
-export const generateStaticParams = (): Array<{ locale: string }> => {
-  return routing.locales.map((locale) => ({ locale }))
-}
-
 export const generateMetadata = async (props: PageProps<'/[locale]/account'>): Promise<Metadata> => {
   const { params } = props
   const { locale } = await params

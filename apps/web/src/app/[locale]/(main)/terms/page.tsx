@@ -10,10 +10,6 @@ import PageHeader from '@/components/page-header'
 import { getPageBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 
-export const generateStaticParams = (): Array<{ locale: string }> => {
-  return routing.locales.map((locale) => ({ locale }))
-}
-
 export const generateMetadata = async (props: PageProps<'/[locale]/terms'>): Promise<Metadata> => {
   const { params } = props
   const { locale } = await params
