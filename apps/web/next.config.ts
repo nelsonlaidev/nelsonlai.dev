@@ -1,16 +1,44 @@
 import type { NextConfig } from 'next'
 
-import '@repo/env'
-
 import { withContentCollections } from '@content-collections/next'
 import bundleAnalyzer from '@next/bundle-analyzer'
+import { env } from '@repo/env'
 import createNextIntlPlugin from 'next-intl/plugin'
+
+import { IS_PRODUCTION } from '@/lib/constants'
 
 const withNextIntl = createNextIntlPlugin()
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true'
 })
+
+const remotePatterns: NonNullable<NextConfig['images']>['remotePatterns'] = [
+  {
+    protocol: 'https',
+    hostname: 'avatars.githubusercontent.com'
+  },
+  {
+    protocol: 'https',
+    hostname: '**.googleusercontent.com'
+  }
+]
+
+if (!IS_PRODUCTION) {
+  remotePatterns.push({
+    protocol: 'http',
+    hostname: 'localhost'
+  })
+}
+
+if (env.CLOUDFLARE_R2_PUBLIC_URL) {
+  const { hostname } = new URL(env.CLOUDFLARE_R2_PUBLIC_URL)
+
+  remotePatterns.push({
+    protocol: 'https',
+    hostname
+  })
+}
 
 const config: NextConfig = {
   productionBrowserSourceMaps: true,
@@ -24,20 +52,7 @@ const config: NextConfig = {
 
   images: {
     qualities: [75, 100],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'avatars.githubusercontent.com'
-      },
-      {
-        protocol: 'https',
-        hostname: '**.googleusercontent.com'
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost'
-      }
-    ]
+    remotePatterns
   },
 
   // eslint-disable-next-line @typescript-eslint/require-await -- Must be async
