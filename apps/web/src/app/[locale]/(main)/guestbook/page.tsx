@@ -5,7 +5,7 @@ import { getTranslations, setRequestLocale } from '@repo/i18n/server'
 import { type Locale, useTranslations } from 'next-intl'
 import { use } from 'react'
 
-import Guestbook from '@/components/guestbook/guestbook'
+import MessageBoard from '@/components/guestbook/message-board'
 import JsonLd from '@/components/json-ld'
 import PageHeader from '@/components/page-header'
 import { MY_NAME } from '@/lib/constants'
@@ -59,7 +59,7 @@ const Page = (props: PageProps<'/[locale]/guestbook'>) => {
     <>
       <JsonLd json={jsonLd} />
       <PageHeader title={title} description={description} />
-      <Guestbook />
+      <MessageBoard />
     </>
   )
 }

@@ -7,7 +7,7 @@ import Messages from './messages'
 import Pinned from './pinned'
 import SignIn from './sign-in'
 
-const Guestbook = () => {
+const MessageBoard = () => {
   const { data: session } = useSession()
 
   return (
@@ -19,4 +19,4 @@ const Guestbook = () => {
   )
 }
 
-export default Guestbook
+export default MessageBoard
