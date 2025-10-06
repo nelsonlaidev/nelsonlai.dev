@@ -57,12 +57,12 @@ const LayoutHeader = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <a
+      <Link
         href='#skip-nav'
         className='fixed top-4 left-4 -translate-y-20 rounded-xs border bg-background p-2 font-medium shadow-xs transition-transform focus-visible:translate-y-0 focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-offset-2'
       >
         <span>{t('layout.skip-to-main-content')}</span>
-      </a>
+      </Link>
       <Link href='/' className='flex items-center justify-center gap-1' aria-label={t('common.labels.home')}>
         <Logo width={20} aria-hidden='true' />
       </Link>

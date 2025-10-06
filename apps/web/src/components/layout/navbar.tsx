@@ -3,7 +3,6 @@
 import { useTranslations } from '@repo/i18n/client'
 import { usePathname } from '@repo/i18n/routing'
 import { Link } from '@repo/ui/components/link'
-import { cn } from '@repo/utils'
 
 import { HEADER_LINKS } from '@/config/links'
 
@@ -20,11 +19,9 @@ const Navbar = () => {
           return (
             <li key={link.key} className='relative flex items-center justify-center'>
               <Link
-                className={cn('rounded-sm px-3 py-2 text-sm font-medium transition-colors', {
-                  'text-muted-foreground hover:text-foreground': !isActive,
-                  'text-foreground': isActive
-                })}
+                className='rounded-sm px-3 py-2 text-sm font-medium transition-colors'
                 href={link.href}
+                variant={isActive ? undefined : 'muted'}
               >
                 {t(link.labelKey)}
               </Link>

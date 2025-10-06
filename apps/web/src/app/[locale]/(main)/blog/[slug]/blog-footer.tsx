@@ -3,7 +3,7 @@
 import type { Post } from '@/lib/content'
 
 import { useLocale, useTranslations } from '@repo/i18n/client'
-import { Link, linkVariants } from '@repo/ui/components/link'
+import { Link } from '@repo/ui/components/link'
 
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 
@@ -22,7 +22,7 @@ const BlogFooter = (props: BlogFooterProps) => {
 
   return (
     <div className='my-8 flex w-full items-center justify-between py-4 text-sm'>
-      <Link href={editURL} className={linkVariants({ variant: 'muted' })}>
+      <Link href={editURL} variant='muted'>
         {t('blog.footer.edit-on-github')}
       </Link>
       <div className='text-muted-foreground'>{t('blog.footer.last-updated', { date: formattedDate })}</div>

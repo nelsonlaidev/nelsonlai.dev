@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from '@repo/i18n/client'
-import { Link, linkVariants } from '@repo/ui/components/link'
+import { Link } from '@repo/ui/components/link'
 import { StarIcon } from 'lucide-react'
 
 import { FOOTER_LINKS } from '@/config/links'
@@ -24,7 +24,7 @@ const LayoutFooter = () => {
               const { href, labelKey } = link
 
               return (
-                <Link key={href} href={href} className={linkVariants({ variant: 'muted' })}>
+                <Link key={href} href={href} variant='muted'>
                   {t(labelKey)}
                 </Link>
               )
