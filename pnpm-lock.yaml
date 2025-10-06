@@ -21,8 +21,8 @@ importers:
         specifier: ^1.49.0
         version: 1.49.0
       '@nelsonlaidev/eslint-config':
-        specifier: ^2.0.4
-        version: 2.0.4(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
+        specifier: ^2.1.0
+        version: 2.1.0(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
       '@nelsonlaidev/prettier-config':
         specifier: ^0.1.0
         version: 0.1.0(prettier-plugin-packagejson@2.5.19(prettier@3.6.2))(prettier@3.6.2)
@@ -196,7 +196,7 @@ importers:
         version: 15.5.3(@babel/core@7.28.3)(@playwright/test@1.55.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       next-intl:
         specifier: ^4.3.8
-        version: 4.3.8(next@15.5.3(@babel/core@7.28.3)(@playwright/test@1.55.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(typescript@5.9.2)
+        version: 4.3.8(next@15.5.3(@playwright/test@1.55.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(typescript@5.9.2)
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -274,8 +274,8 @@ importers:
         specifier: ^0.2.7
         version: 0.2.7(@content-collections/core@0.11.1(typescript@5.9.2))(next@15.5.3(@babel/core@7.28.3)(@playwright/test@1.55.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@nelsonlaidev/eslint-config':
-        specifier: ^2.0.4
-        version: 2.0.4(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
+        specifier: ^2.1.0
+        version: 2.1.0(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
       '@nelsonlaidev/typescript-config':
         specifier: ^0.0.3
         version: 0.0.3
@@ -350,8 +350,8 @@ importers:
         version: 3.4.7
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: ^2.0.4
-        version: 2.0.4(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
+        specifier: ^2.1.0
+        version: 2.1.0(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
       '@nelsonlaidev/typescript-config':
         specifier: ^0.0.3
         version: 0.0.3
@@ -378,8 +378,8 @@ importers:
         version: 4.1.8
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: ^2.0.4
-        version: 2.0.4(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
+        specifier: ^2.1.0
+        version: 2.1.0(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
       '@nelsonlaidev/typescript-config':
         specifier: ^0.0.3
         version: 0.0.3
@@ -387,8 +387,8 @@ importers:
   packages/i18n:
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: ^2.0.4
-        version: 2.0.4(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
+        specifier: ^2.1.0
+        version: 2.1.0(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
       '@nelsonlaidev/typescript-config':
         specifier: ^0.0.3
         version: 0.0.3
@@ -400,7 +400,7 @@ importers:
         version: 15.5.3(@babel/core@7.28.3)(@playwright/test@1.55.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       next-intl:
         specifier: ^4.3.8
-        version: 4.3.8(next@15.5.3(@babel/core@7.28.3)(@playwright/test@1.55.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(typescript@5.9.2)
+        version: 4.3.8(next@15.5.3(@playwright/test@1.55.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(typescript@5.9.2)
 
   packages/kv:
     dependencies:
@@ -415,8 +415,8 @@ importers:
         version: 3.4.2
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: ^2.0.4
-        version: 2.0.4(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
+        specifier: ^2.1.0
+        version: 2.1.0(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
       '@nelsonlaidev/typescript-config':
         specifier: ^0.0.3
         version: 0.0.3
@@ -464,8 +464,8 @@ importers:
         version: 2.0.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: ^2.0.4
-        version: 2.0.4(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
+        specifier: ^2.1.0
+        version: 2.1.0(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
       '@nelsonlaidev/typescript-config':
         specifier: ^0.0.3
         version: 0.0.3
@@ -507,8 +507,8 @@ importers:
         version: 3.3.1
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: ^2.0.4
-        version: 2.0.4(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
+        specifier: ^2.1.0
+        version: 2.1.0(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)
       '@nelsonlaidev/typescript-config':
         specifier: ^0.0.3
         version: 0.0.3
@@ -1900,8 +1900,8 @@ packages:
   '@napi-rs/wasm-runtime@1.0.3':
     resolution: {integrity: sha512-rZxtMsLwjdXkMUGC3WwsPwLNVqVqnTJT6MNIB6e+5fhMcSCPP0AOsNWuMQ5mdCq6HNjs/ZeWAEchpqeprqBD2Q==}
 
-  '@nelsonlaidev/eslint-config@2.0.4':
-    resolution: {integrity: sha512-vCBtQ3bKJ0nm9Wk1YuaFZZOzgDMrGtDXRgVPMLfm2APFtJ5cc4FPDmh0ugIueljOePUwI4S4maAF/LmMyvjGww==}
+  '@nelsonlaidev/eslint-config@2.1.0':
+    resolution: {integrity: sha512-rqB11bnzMuPqWnsJwn2GNmBOtau2XNgCwTdv2ZfbJfwRhlpZTvcH/fNkrmfZ9QmRELuOjD0+W6WrWXsCtzEvYg==}
     peerDependencies:
       eslint: '>=9.0.0'
 
@@ -9614,7 +9614,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.0
     optional: true
 
-  '@nelsonlaidev/eslint-config@2.0.4(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)':
+  '@nelsonlaidev/eslint-config@2.1.0(@types/eslint@9.6.1)(eslint@9.35.0(jiti@2.5.1))(prettier@3.6.2)(tailwindcss@4.1.13)(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)(vitest@3.2.4)':
     dependencies:
       '@eslint-community/eslint-plugin-eslint-comments': 4.5.0(eslint@9.35.0(jiti@2.5.1))
       '@eslint-react/eslint-plugin': 1.52.9(eslint@9.35.0(jiti@2.5.1))(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)
@@ -14946,7 +14946,7 @@ snapshots:
 
   negotiator@1.0.0: {}
 
-  next-intl@4.3.8(next@15.5.3(@babel/core@7.28.3)(@playwright/test@1.55.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(typescript@5.9.2):
+  next-intl@4.3.8(next@15.5.3(@playwright/test@1.55.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(typescript@5.9.2):
     dependencies:
       '@formatjs/intl-localematcher': 0.5.10
       negotiator: 1.0.0
