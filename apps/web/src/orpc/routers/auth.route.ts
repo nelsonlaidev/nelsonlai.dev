@@ -4,9 +4,23 @@ import { APIError } from 'better-auth'
 import { auth } from '@/lib/auth'
 import { getLocation } from '@/utils/get-location'
 
+import { cache } from '../cache'
 import { protectedProcedure } from '../root'
 import { listSessionsOutputSchema, revokeSessionInputSchema, updateUserInputSchema } from '../schemas/auth.schema'
 import { emptyOutputSchema } from '../schemas/common.schema'
+
+const resolveLocation = async (ip: string) => {
+  const cached = await cache.auth.location.get(ip)
+  if (cached) return cached
+
+  const location = await getLocation(ip)
+
+  if (location !== null) {
+    await cache.auth.location.set(location, ip)
+  }
+
+  return location
+}
 
 export const listSessions = protectedProcedure.output(listSessionsOutputSchema).handler(async ({ context }) => {
   const sessions = await auth.api.listSessions({
@@ -21,7 +35,7 @@ export const listSessions = protectedProcedure.output(listSessionsOutputSchema).
       ipAddress: (session.ipAddress ?? '') || null,
       userAgent: (session.userAgent ?? '') || null,
       isCurrentSession: session.id === context.session.session.id,
-      location: session.ipAddress ? await getLocation(session.ipAddress) : null
+      location: session.ipAddress ? await resolveLocation(session.ipAddress) : null
     }))
   )
 

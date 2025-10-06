@@ -10,7 +10,7 @@ export const createKey = (parts: KVKey): string => {
   return Array.isArray(parts) ? parts.join(':') : parts
 }
 
-export const createCache = <T, A extends string[]>(keyPrefix: KVKey) => {
+export const createCache = <T, A extends string[]>(keyPrefix: KVKey, ttl = KV_TTL) => {
   const prefixKey = createKey(keyPrefix)
 
   const getKey = (suffixArgs: A) => {
@@ -31,7 +31,7 @@ export const createCache = <T, A extends string[]>(keyPrefix: KVKey) => {
     set: async (value: T, ...args: A): Promise<void> => {
       const key = getKey(args)
       consola.info('[Cache] Set', key)
-      await redis.set(key, value, { ex: KV_TTL })
+      await redis.set(key, value, { ex: ttl })
     }
   }
 }
