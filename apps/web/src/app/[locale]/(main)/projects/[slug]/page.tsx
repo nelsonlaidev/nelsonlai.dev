@@ -15,7 +15,7 @@ import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
-import Header from './header'
+import ProjectHeader from './project-header'
 
 export const generateStaticParams = (): Array<{ slug: string; locale: string }> => {
   return allProjects.map((project) => ({
@@ -91,7 +91,7 @@ const Page = async (props: PageProps<'/[locale]/projects/[slug]'>) => {
     <>
       <JsonLd json={jsonLd} />
       <div className='mx-auto max-w-3xl'>
-        <Header {...project} />
+        <ProjectHeader {...project} />
         <BlurImage
           src={`/images/projects/${slug}/cover.png`}
           width={1200}

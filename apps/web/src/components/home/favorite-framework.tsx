@@ -8,7 +8,7 @@ const FavoriteFramework = () => {
   return (
     <div className='flex flex-col gap-6 rounded-xl p-4 shadow-feature-card lg:p-6'>
       <div className='flex items-center gap-2'>
-        <HeartIcon className='size-[18px]' />
+        <HeartIcon className='size-4.5' />
         <h2 className='text-sm'>{t('homepage.about-me.fav-framework')}</h2>
       </div>
       <div className='flex items-center justify-center'>

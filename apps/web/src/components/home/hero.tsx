@@ -9,18 +9,22 @@ import { MY_NAME } from '@/lib/constants'
 
 const TEXTS = [
   {
+    // t('homepage.hero.amazing')
     key: 'amazing',
     className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#ff1835] to-[#ffc900]'
   },
   {
+    // t('homepage.hero.stunning')
     key: 'stunning',
     className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#0077ff] to-[#00e7df]'
   },
   {
+    // t('homepage.hero.fantastic')
     key: 'fantastic',
     className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#7f00de] to-[#ff007f]'
   },
   {
+    // t('homepage.hero.attractive')
     key: 'attractive',
     className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#2ecc70] to-[#1ca085]'
   }
@@ -74,7 +78,7 @@ const Hero = () => {
               transition={{ ease: 'easeOut' }}
               className='flex gap-2'
             >
-              <motion.div layout key='title-middle-left' className='leading-[30px] sm:leading-[45px]'>
+              <motion.div layout key='title-middle-left'>
                 {t('homepage.hero.title-middle-left')}
               </motion.div>
               <div className='relative overflow-hidden'>
@@ -90,13 +94,13 @@ const Hero = () => {
                       type: 'tween',
                       duration: 0.3
                     }}
-                    className='inline-flex items-center justify-center leading-[30px] sm:leading-[45px]'
+                    className='inline-flex items-center justify-center'
                   >
                     <span className={textItem.className}>{t(`homepage.hero.${textItem.key}`)}</span>
                   </motion.div>
                 </AnimatePresence>
               </div>
-              <motion.div layout key='title-middle-right' className='leading-[30px] sm:leading-[45px]'>
+              <motion.div layout key='title-middle-right'>
                 {t('homepage.hero.title-middle-right')}
               </motion.div>
             </motion.div>

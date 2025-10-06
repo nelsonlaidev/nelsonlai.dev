@@ -25,6 +25,7 @@ words:
   - argb
   - asus
   - bentogrids
+  - bowser
   - bradlc
   - cleanshot
   - cmdk
@@ -74,6 +75,7 @@ words:
   - paralleldrive
   - planetscale
   - plpgsql
+  - presigner
   - psql
   - radixui
   - reactquery
@@ -97,5 +99,5 @@ words:
   - unzoom
   - vocs
   - waka
-  - zenorocha
   - wakatime
+  - zenorocha

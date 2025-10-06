@@ -2,11 +2,11 @@ import { comments, users } from '@repo/db'
 import { createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
 
-export const listAllCommentsSchema = z.object({
+export const listAllCommentsOutputSchema = z.object({
   comments: z.array(createSelectSchema(comments))
 })
 
-export const listAllUsersSchema = z.object({
+export const listAllUsersOutputSchema = z.object({
   users: z.array(
     createSelectSchema(users).pick({
       id: true,

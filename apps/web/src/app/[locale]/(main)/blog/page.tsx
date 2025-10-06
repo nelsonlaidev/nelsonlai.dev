@@ -8,7 +8,7 @@ import { hasLocale } from 'next-intl'
 
 import FilteredPosts from '@/components/filtered-posts'
 import JsonLd from '@/components/json-ld'
-import PageTitle from '@/components/page-title'
+import PageHeader from '@/components/page-header'
 import { MY_NAME } from '@/lib/constants'
 import { getLatestPosts } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
@@ -27,9 +27,9 @@ export const generateMetadata = async (props: PageProps<'/[locale]/blog'>): Prom
     return {}
   }
 
-  const t = await getTranslations({ locale, namespace: 'blog' })
-  const title = t('title')
-  const description = t('description')
+  const t = await getTranslations({ locale })
+  const title = t('common.labels.blog')
+  const description = t('blog.description')
 
   return createMetadata({
     pathname: '/blog',
@@ -49,9 +49,9 @@ const Page = async (props: PageProps<'/[locale]/blog'>) => {
   }
 
   setRequestLocale(locale)
-  const t = await getTranslations('blog')
-  const title = t('title')
-  const description = t('description')
+  const t = await getTranslations()
+  const title = t('common.labels.blog')
+  const description = t('blog.description')
   const url = getLocalizedPath({ locale, pathname: '/blog' })
 
   const posts = getLatestPosts(locale)
@@ -85,7 +85,7 @@ const Page = async (props: PageProps<'/[locale]/blog'>) => {
   return (
     <>
       <JsonLd json={jsonLd} />
-      <PageTitle title={title} description={description} />
+      <PageHeader title={title} description={description} />
       <FilteredPosts posts={posts} />
     </>
   )

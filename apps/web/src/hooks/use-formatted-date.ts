@@ -6,7 +6,12 @@ type Options = {
   formatOptions?: DateTimeFormatOptions
 }
 
-export const useFormattedDate = (date: Date | string, options: Options = {}) => {
+type UseFormattedDate = {
+  (date: Date | string | number, options?: Options): string
+  (date?: Date | string | number, options?: Options): string | null
+}
+
+export const useFormattedDate = ((date, options = {}) => {
   const {
     relative = false,
     formatOptions = {
@@ -17,17 +22,20 @@ export const useFormattedDate = (date: Date | string, options: Options = {}) => 
   } = options
 
   const format = useFormatter()
+
+  if (!date) return null
+
   const now = new Date()
 
-  const convertedDate = typeof date === 'string' ? new Date(date) : date
+  const convertedDate = dayjs(date).toDate()
 
   if (relative) {
-    const weeksDiff = dayjs().diff(convertedDate, 'week')
+    const daysDiff = dayjs(now).diff(convertedDate, 'day')
 
-    return Math.abs(weeksDiff) > 1
+    return Math.abs(daysDiff) > 7
       ? format.dateTime(convertedDate, formatOptions)
       : format.relativeTime(convertedDate, now)
   } else {
     return format.dateTime(convertedDate, formatOptions)
   }
-}
+}) as UseFormattedDate

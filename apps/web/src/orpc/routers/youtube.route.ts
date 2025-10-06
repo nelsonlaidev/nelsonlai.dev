@@ -1,9 +1,9 @@
 import { env } from '@repo/env'
 
 import { publicProcedure } from '../root'
-import { youtubeStatsSchema } from '../schemas/youtube.schema'
+import { youtubeStatsOutputSchema } from '../schemas/youtube.schema'
 
-export const youtubeStats = publicProcedure.output(youtubeStatsSchema).handler(async () => {
+export const youtubeStats = publicProcedure.output(youtubeStatsOutputSchema).handler(async () => {
   if (!env.GOOGLE_API_KEY) {
     return {
       subscribers: 0,

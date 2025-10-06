@@ -10,7 +10,7 @@ const Placeholder = () => (
         <Skeleton className='h-4 w-36 rounded-md' />
       </div>
     </div>
-    <Skeleton className='h-6 w-full max-w-xs rounded-md pl-[52px]' />
+    <Skeleton className='h-6 w-full max-w-xs rounded-md pl-13' />
   </div>
 )
 
@@ -19,8 +19,8 @@ const MessagesLoader = (props: React.ComponentProps<'div'>) => {
 
   return (
     <div className={cn('flex flex-col gap-4', className)} {...rest}>
-      {range(8).map((i) => (
-        <Placeholder key={i} />
+      {range(8).map((number) => (
+        <Placeholder key={number} />
       ))}
     </div>
   )

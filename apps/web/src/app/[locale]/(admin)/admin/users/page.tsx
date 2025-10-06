@@ -1,24 +1,30 @@
-'use client'
-
-import { useTranslations } from 'next-intl'
+import { routing } from '@repo/i18n/routing'
+import { notFound } from 'next/navigation'
+import { hasLocale } from 'next-intl'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 import AdminPageHeader from '@/components/admin/admin-page-header'
-import UsersTable from '@/components/tables/users'
-import { useAdminUsers } from '@/hooks/queries/admin.query'
+import AdminUsers from '@/components/admin/admin-users'
 
-const Page = () => {
-  const { isSuccess, isLoading, isError, data } = useAdminUsers()
-  const t = useTranslations()
+export const generateStaticParams = (): Array<{ locale: string }> => {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
+const Page = async (props: PageProps<'/[locale]/admin/users'>) => {
+  const { params } = props
+  const { locale } = await params
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
+
+  setRequestLocale(locale)
+  const t = await getTranslations()
 
   return (
     <div className='space-y-6'>
-      <AdminPageHeader
-        title={t('admin.page-header.users.title')}
-        description={t('admin.page-header.users.description')}
-      />
-      {isSuccess && <UsersTable users={data.users} />}
-      {isLoading && 'Loading...'}
-      {isError && <div>{t('error.failed-to-fetch-users-data')}</div>}
+      <AdminPageHeader title={t('common.labels.users')} description={t('admin.page-header.users.description')} />
+      <AdminUsers />
     </div>
   )
 }

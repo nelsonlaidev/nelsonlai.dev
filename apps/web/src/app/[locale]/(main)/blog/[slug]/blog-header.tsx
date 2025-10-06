@@ -13,11 +13,11 @@ import { useIncrementPostViewCount, usePostCommentCount, usePostViewCount } from
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { MY_NAME } from '@/lib/constants'
 
-type HeaderProps = {
+type BlogHeaderProps = {
   post: Post
 }
 
-const Header = (props: HeaderProps) => {
+const BlogHeader = (props: BlogHeaderProps) => {
   const { post } = props
   const formattedDate = useFormattedDate(post.date)
   const t = useTranslations()
@@ -39,7 +39,7 @@ const Header = (props: HeaderProps) => {
   return (
     <div className='space-y-16 py-16'>
       <div className='space-y-16 sm:px-8'>
-        <h1 className='bg-linear-to-b from-black via-black/90 to-black/70 to-90% bg-clip-text text-center text-4xl font-bold text-transparent md:text-5xl md:leading-[64px] dark:from-white dark:via-white/90 dark:to-white/70'>
+        <h1 className='bg-linear-to-b from-black via-black/90 to-black/70 to-90% bg-clip-text text-center text-4xl font-bold text-transparent md:text-5xl md:leading-16 dark:from-white dark:via-white/90 dark:to-white/70'>
           {post.title}
         </h1>
         <div className='grid grid-cols-2 text-sm max-md:gap-4 md:grid-cols-4'>
@@ -62,17 +62,15 @@ const Header = (props: HeaderProps) => {
           </div>
           <div className='space-y-1 md:mx-auto'>
             <div className='text-muted-foreground'>{t('blog.header.views')}</div>
-            {viewCountQuery.status === 'pending' && '--'}
-            {viewCountQuery.status === 'error' && t('common.error')}
-            {viewCountQuery.status === 'success' && (
-              <NumberFlow value={viewCountQuery.data.views} data-testid='view-count' />
-            )}
+            {viewCountQuery.isLoading && '--'}
+            {viewCountQuery.isError && t('common.error')}
+            {viewCountQuery.isSuccess && <NumberFlow value={viewCountQuery.data.views} data-testid='view-count' />}
           </div>
           <div className='space-y-1 md:mx-auto'>
-            <div className='text-muted-foreground'>{t('blog.header.comments')}</div>
-            {commentCountQuery.status === 'pending' && '--'}
-            {commentCountQuery.status === 'error' && t('common.error')}
-            {commentCountQuery.status === 'success' && (
+            <div className='text-muted-foreground'>{t('common.labels.comments')}</div>
+            {commentCountQuery.isLoading && '--'}
+            {commentCountQuery.isError && t('common.error')}
+            {commentCountQuery.isSuccess && (
               <NumberFlow value={commentCountQuery.data.count} data-testid='comment-count' />
             )}
           </div>
@@ -93,4 +91,4 @@ const Header = (props: HeaderProps) => {
   )
 }
 
-export default Header
+export default BlogHeader

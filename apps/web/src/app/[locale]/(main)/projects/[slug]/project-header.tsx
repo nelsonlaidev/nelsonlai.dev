@@ -22,9 +22,9 @@ const animation = {
   }
 }
 
-type HeaderProps = Project
+type ProjectHeaderProps = Project
 
-const Header = (props: HeaderProps) => {
+const ProjectHeader = (props: ProjectHeaderProps) => {
   const { name, description, homepage, github } = props
   const t = useTranslations()
 
@@ -58,4 +58,4 @@ const Header = (props: HeaderProps) => {
     </div>
   )
 }
-export default Header
+export default ProjectHeader

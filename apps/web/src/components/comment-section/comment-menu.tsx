@@ -48,6 +48,11 @@ const CommentMenu = () => {
 
   const isAuthor = !isDeleted && session?.user.id === userId
 
+  const handleDeleteComment = () => {
+    if (isDeleting) return
+    deleteComment({ id })
+  }
+
   return (
     <AlertDialog>
       <DropdownMenu>
@@ -89,15 +94,13 @@ const CommentMenu = () => {
       </DropdownMenu>
       <AlertDialogContent data-testid='comment-dialog'>
         <AlertDialogHeader>
-          <AlertDialogTitle>{t('blog.comments.delete-a-comment')}</AlertDialogTitle>
-          <AlertDialogDescription>{t('blog.comments.confirm-delete-comment')}</AlertDialogDescription>
+          <AlertDialogTitle>{t('common.dialogs.delete-comment.title')}</AlertDialogTitle>
+          <AlertDialogDescription>{t('common.dialogs.delete-comment.description')}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
           <AlertDialogAction
-            onClick={() => {
-              deleteComment({ id })
-            }}
+            onClick={handleDeleteComment}
             className={buttonVariants({ variant: 'destructive' })}
             data-testid='comment-dialog-delete-button'
           >

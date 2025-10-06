@@ -34,7 +34,7 @@ const ThemeSwitcher = () => {
           }}
           data-testid='theme-light-button'
         >
-          <SunIcon className='size-[18px]' /> {t('theme-toggle.options.light')}
+          <SunIcon className='size-4.5' /> {t('theme-toggle.options.light')}
         </DropdownMenuItem>
         <DropdownMenuItem
           className='gap-2'
@@ -43,7 +43,7 @@ const ThemeSwitcher = () => {
           }}
           data-testid='theme-dark-button'
         >
-          <MoonIcon className='size-[18px]' /> {t('theme-toggle.options.dark')}
+          <MoonIcon className='size-4.5' /> {t('theme-toggle.options.dark')}
         </DropdownMenuItem>
         <DropdownMenuItem
           className='gap-2'
@@ -52,7 +52,7 @@ const ThemeSwitcher = () => {
           }}
           data-testid='theme-system-button'
         >
-          <MonitorIcon className='size-[18px]' /> {t('theme-toggle.options.system')}
+          <MonitorIcon className='size-4.5' /> {t('theme-toggle.options.system')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

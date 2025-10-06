@@ -1,36 +1,14 @@
 {
   "about": {
-    "description": "嗨！我是 Nelson Lai，一位热爱网页开发的学生，使用 HTML、CSS 和 JavaScript 创作创新项目。探索我的作品集、技能与开发历程，一起探索数字世界吧！",
-    "title": "关于"
+    "description": "嗨！我是 Nelson Lai，一位热爱网页开发的学生，使用 HTML、CSS 和 JavaScript 创作创新项目。探索我的作品集、技能与开发历程，一起探索数字世界吧！"
   },
   "admin": {
-    "nav": {
-      "comments": "评论",
-      "dashboard": "仪表板",
-      "general": "一般",
-      "users": "用户"
-    },
     "page-header": {
       "comments": {
-        "description": "管理用户的评论",
-        "title": "评论"
+        "description": "管理评论"
       },
       "users": {
-        "description": "管理系统中的用户",
-        "title": "用户"
-      }
-    },
-    "table": {
-      "comments": {
-        "body": "内容",
-        "type": "类型",
-        "userId": "用户 ID"
-      },
-      "createdAt": "创建时间",
-      "users": {
-        "email": "电子邮件",
-        "name": "名称",
-        "role": "角色"
+        "description": "管理用户"
       }
     }
   },
@@ -38,21 +16,18 @@
     "comments": {
       "author": "作者",
       "comment-posted": "评论已发布",
-      "comments": "评论",
-      "confirm-delete-comment": "您确定要删除此评论吗？此动作无法复原。",
+      "comments": "{count, plural, =1 {评论} other {评论}}",
       "copy-link": "复制链接",
-      "delete-a-comment": "删除评论",
       "deleted-a-comment": "已删除评论",
       "dislike": "倒赞",
       "highlighted-comment": "已标注评论",
-      "like": "赞",
       "link-copied": "链接已复制到剪贴板",
       "newest": "最新",
       "no-comments": "没有评论",
       "oldest": "最旧",
       "open-menu": "开启选单",
       "placeholder": "留下评论",
-      "replies": "回复",
+      "replies": "{count, plural, =1 {回复} other {回复}}",
       "reply": "回复",
       "reply-posted": "回复已发布",
       "reply-to-comment": "回复评论",
@@ -71,15 +46,12 @@
       "last-updated": "最后更新日期：{date}"
     },
     "header": {
-      "comments": "评论数",
       "published-on": "发布日期",
       "views": "浏览次数",
       "written-by": "撰写者"
     },
-    "like": "赞",
     "like-this-post": "喜欢这个文章",
-    "on-this-page": "目录",
-    "title": "博客"
+    "on-this-page": "目录"
   },
   "command-menu": {
     "actions": {
@@ -87,8 +59,6 @@
       "source-code": "源代码"
     },
     "groups": {
-      "account": "账户",
-      "general": "一般",
       "social": "社群"
     },
     "no-results": "没有找到结果。",
@@ -99,10 +69,39 @@
     "cancel": "取消",
     "delete": "删除",
     "error": "错误",
-    "likes": "{count} 点赞",
+    "likes": "{count, plural, =1 {# 点赞} other {# 点赞}}",
     "sign-in": "登入",
     "sign-out": "登出",
-    "views": "{count} 浏览次数"
+    "views": "{count, plural, =1 {# 浏览次数} other {# 浏览次数}}",
+    "like": "赞",
+    "unknown": "未知",
+    "save": "保存",
+    "labels": {
+      "home": "首页",
+      "about": "关于",
+      "account": "账户",
+      "blog": "博客",
+      "dashboard": "仪表板",
+      "guestbook": "留言板",
+      "projects": "项目",
+      "uses": "装备",
+      "privacy-policy": "隐私权政策",
+      "terms-of-service": "服务条款",
+      "comments": "评论",
+      "users": "用户",
+      "general": "一般",
+      "links": "链接",
+      "facebook": "Facebook",
+      "github": "GitHub",
+      "instagram": "Instagram",
+      "youtube": "YouTube"
+    },
+    "dialogs": {
+      "delete-comment": {
+        "title": "删除评论",
+        "description": "您确定要删除此评论吗？此动作无法复原。"
+      }
+    }
   },
   "component": {
     "filtered-posts": {
@@ -121,8 +120,7 @@
       "github-stars": "GitHub 星数",
       "youtube-subscribers": "YouTube 订阅者",
       "youtube-views": "YouTube 浏览量"
-    },
-    "title": "仪表板"
+    }
   },
   "dialog": {
     "sign-in": {
@@ -148,14 +146,12 @@
     "message-cannot-be-empty": "留言不能为空",
     "copy-to-clipboard-error": "无法复制到剪贴板。请再试一次！",
     "now-playing-error": "无法获取 Spotify 资料",
-    "not-found": "找不到页面！"
+    "not-found": "找不到页面！",
+    "name-cannot-be-empty": "名称不能为空",
+    "name-too-long": "名称过长"
   },
   "guestbook": {
     "create-message-successfully": "成功发布留言",
-    "delete-dialog": {
-      "description": "您确定要删除此评论吗？此操作无法撤销。",
-      "title": "删除评论"
-    },
     "delete-message-successfully": "成功删除留言",
     "description": "在我的留言板上留下您的想法。您可以在这里告诉我任何事情！",
     "no-messages": "没有留言，快来成为第一位留言者！",
@@ -167,8 +163,7 @@
     "signin": {
       "description": "以留下评论"
     },
-    "submit": "送出",
-    "title": "留言板"
+    "submit": "送出"
   },
   "homepage": {
     "about-me": {
@@ -213,28 +208,13 @@
     }
   },
   "layout": {
-    "about": "关于",
-    "blog": "博客",
     "change-language": "更改语言",
-    "dashboard": "仪表板",
-    "facebook": "Facebook",
-    "github": "GitHub",
-    "guestbook": "留言板",
-    "home": "首页",
-    "instagram": "Instagram",
-    "links": "链接",
     "now-playing": {
       "loading": "载入中 ...",
       "not-listening": "未在收听 - Spotify"
     },
-    "profile": "个人资料",
-    "projects": "项目",
     "skip-to-main-content": "跳至主要内容",
-    "toggle-menu": "打开选单",
-    "uses": "装备",
-    "youtube": "YouTube",
-    "terms": "服务条款",
-    "privacy": "隐私权政策"
+    "toggle-menu": "打开选单"
   },
   "mdx": {
     "link-to-section": "连结至章节"
@@ -244,7 +224,6 @@
   },
   "projects": {
     "description": "我的项目集，每个都倾注了心血制作。",
-    "title": "项目",
     "visit-website": "前往网站"
   },
   "theme-toggle": {
@@ -256,15 +235,33 @@
     "toggle-theme": "切换主题"
   },
   "uses": {
-    "description": "这是我目前用来玩游戏、程序设计、制作视频和日常使用的装备。",
-    "title": "装备"
+    "description": "这是我目前用来玩游戏、程序设计、制作视频和日常使用的装备。"
+  },
+  "account": {
+    "description": "管理您的账户设置",
+    "active-sessions": "活跃会话",
+    "no-active-sessions": "没有活动会话",
+    "revoke-session": "结束",
+    "this-device": "此设备",
+    "session-revoked-successfully": "会话已成功结束",
+    "profile": "个人资料",
+    "avatar": "头像",
+    "update-avatar": "更新头像",
+    "update-avatar-successfully": "头像更新成功",
+    "update-avatar-failed": "更新头像失败，请再试一次。",
+    "avatar-too-large": "头像文件过大。请选择小于 {size} MB 的文件。",
+    "avatar-unsupported-file": "请选择支持的图片格式（JPEG、PNG、WEBP、GIF、AVIF）。",
+    "display-name": "显示名称",
+    "edit-name": "编辑名称",
+    "edit-name-description": "更改您的显示名称。此名称将显示在您的个人资料和评论中。",
+    "edit-name-successfully": "成功编辑名称",
+    "email": "邮箱",
+    "account-created": "账户创建时间"
   },
   "privacy": {
-    "description": "此页面说明当您使用我们的网站时，我们如何处理您的数据并保护您的隐私。",
-    "title": "隐私权政策"
+    "description": "此页面说明当您使用我们的网站时，我们如何处理您的数据并保护您的隐私。"
   },
   "terms": {
-    "description": "这些条款和条件概述了使用我们网站的规则和规定。",
-    "title": "服务条款"
+    "description": "这些条款和条件概述了使用我们网站的规则和规定。"
   }
 }

@@ -19,7 +19,7 @@ const CommentPost = () => {
   const [content, setContent] = useState('')
   const [tabsValue, setTabsValue] = useState<'write' | 'preview'>('write')
   const isMounted = useIsMounted()
-  const { data: session, isPending } = useSession()
+  const { data: session, isPending: isSessionLoading } = useSession()
   const t = useTranslations()
 
   const { mutate: createComment, isPending: isCreating } = useCreatePostComment({ slug }, () => {
@@ -30,6 +30,8 @@ const CommentPost = () => {
 
   const submitComment = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
+
+    if (isCreating) return
 
     if (!content) {
       toast.error(t('error.comment-cannot-be-empty'))
@@ -51,7 +53,7 @@ const CommentPost = () => {
     return null
   }
 
-  const isAuthenticated = session !== null && !isPending
+  const isAuthenticated = session !== null && !isSessionLoading
   const disabled = !isAuthenticated || isCreating
 
   return (

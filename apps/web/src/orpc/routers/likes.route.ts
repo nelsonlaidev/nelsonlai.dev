@@ -6,20 +6,22 @@ import { getSessionId } from '@/utils/get-session-id'
 
 import { cache } from '../cache'
 import { publicProcedure } from '../root'
-import { getLikeInputSchema, incrementLikeInputSchema, likeSchema } from '../schemas/likes.schema'
+import {
+  countLikeInputSchema,
+  countLikeOutputSchema,
+  incrementLikeInputSchema,
+  incrementLikeOutputSchema
+} from '../schemas/likes.schema'
 
 export const countLike = publicProcedure
-  .input(getLikeInputSchema)
-  .output(likeSchema)
+  .input(countLikeInputSchema)
+  .output(countLikeOutputSchema)
   .handler(async ({ input, context }) => {
     const ip = getIp(context.headers)
     const sessionId = getSessionId(input.slug, ip)
 
     const cached = await cache.posts.likes.get(input.slug, sessionId)
-
-    if (cached) {
-      return cached
-    }
+    if (cached) return cached
 
     const [[post], [user]] = await Promise.all([
       context.db.select({ likes: posts.likes }).from(posts).where(eq(posts.slug, input.slug)),
@@ -44,7 +46,7 @@ export const countLike = publicProcedure
 
 export const incrementLike = publicProcedure
   .input(incrementLikeInputSchema)
-  .output(likeSchema)
+  .output(incrementLikeOutputSchema)
   .handler(async ({ input, context }) => {
     const ip = getIp(context.headers)
     const sessionId = getSessionId(input.slug, ip)

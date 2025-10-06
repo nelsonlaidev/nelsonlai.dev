@@ -49,13 +49,13 @@ const PostCard = (props: PostCardProps) => {
       <div className='flex items-center justify-between gap-2 px-2 pt-4 text-sm text-zinc-500'>
         {formattedDate}
         <div className='flex gap-2'>
-          {likesQuery.status === 'pending' && '--'}
-          {likesQuery.status === 'error' && t('common.error')}
-          {likesQuery.status === 'success' && <div>{t('common.likes', { count: likesQuery.data.likes })}</div>}
+          {likesQuery.isLoading && '--'}
+          {likesQuery.isError && t('common.error')}
+          {likesQuery.isSuccess && <div>{t('common.likes', { count: likesQuery.data.likes })}</div>}
           <div>&middot;</div>
-          {viewsQuery.status === 'pending' && '--'}
-          {viewsQuery.status === 'error' && t('common.error')}
-          {viewsQuery.status === 'success' && <div>{t('common.views', { count: viewsQuery.data.views })}</div>}
+          {viewsQuery.isLoading && '--'}
+          {viewsQuery.isError && t('common.error')}
+          {viewsQuery.isSuccess && <div>{t('common.views', { count: viewsQuery.data.views })}</div>}
         </div>
       </div>
       <div className='flex flex-col px-2 py-4'>

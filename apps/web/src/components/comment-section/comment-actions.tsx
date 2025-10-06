@@ -35,6 +35,8 @@ const CommentActions = () => {
   const isAuthenticated = session !== null
 
   const handleVoteComment = (like: boolean) => {
+    if (isVoting) return
+
     if (!isAuthenticated) {
       toast.error(t('error.need-logged-in-to-vote'))
       return
@@ -55,7 +57,7 @@ const CommentActions = () => {
           className={voteVariants({
             active: comment.liked === true
           })}
-          aria-label={t('blog.comments.like')}
+          aria-label={t('common.like')}
           disabled={isVoting}
         >
           <ThumbsUpIcon />
