@@ -52,6 +52,14 @@ jobs:
       - name: Generate Next.js route types
         run: bun typegen
 
+      - name: Debug
+        run: |
+          bun --version
+          node --version
+          pwd
+          ls -la apps/web
+          cat apps/web/.next/types/routes.d.ts
+
       - name: Run ESLint
         run: bun lint
 
