@@ -4,7 +4,7 @@ import { toast } from '@repo/ui/components/sonner'
 import { inferAdditionalFields } from 'better-auth/client/plugins'
 import { createAuthClient } from 'better-auth/react'
 
-const authClient = createAuthClient({
+export const authClient = createAuthClient({
   plugins: [inferAdditionalFields<typeof auth>()],
   fetchOptions: {
     onError(e) {
@@ -15,6 +15,6 @@ const authClient = createAuthClient({
   }
 })
 
-export const { signIn, signOut, useSession } = authClient
+export const { useSession } = authClient
 
 export type User = (typeof authClient.$Infer.Session)['user']

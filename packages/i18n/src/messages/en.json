@@ -263,5 +263,9 @@
   },
   "terms": {
     "description": "These terms and conditions outline the rules and regulations for the use our website."
+  },
+  "auth": {
+    "sign-out-successfully": "Sign out successfully",
+    "sign-out-failed": "Sign out failed. Please try again."
   }
 }

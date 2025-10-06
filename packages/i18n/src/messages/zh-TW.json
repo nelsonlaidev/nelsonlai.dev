@@ -263,5 +263,9 @@
   },
   "terms": {
     "description": "這些條款和條件概述了使用我們網站的規則和規定。"
+  },
+  "auth": {
+    "sign-out-successfully": "成功登出",
+    "sign-out-failed": "登出失敗，請再試一次。"
   }
 }

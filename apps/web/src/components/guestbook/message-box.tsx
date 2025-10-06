@@ -1,8 +1,9 @@
 'use client'
 
+import type { User } from '@/lib/auth-client'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from '@repo/i18n/client'
-import { useRouter } from '@repo/i18n/routing'
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar'
 import { Button } from '@repo/ui/components/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@repo/ui/components/form'
@@ -13,7 +14,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { useCreateGuestbookMessage } from '@/hooks/queries/guestbook.query'
-import { signOut, type User } from '@/lib/auth-client'
+import { useSignOut } from '@/hooks/use-sign-out'
 import { getDefaultImage } from '@/utils/get-default-image'
 
 type MessageBoxProps = {
@@ -23,7 +24,7 @@ type MessageBoxProps = {
 const MessageBox = (props: MessageBoxProps) => {
   const { user } = props
   const t = useTranslations()
-  const router = useRouter()
+  const signOut = useSignOut()
 
   const guestbookFormSchema = z.object({
     message: z.string().min(1, t('error.message-cannot-be-empty'))
@@ -69,18 +70,7 @@ const MessageBox = (props: MessageBoxProps) => {
             )}
           />
           <div className='mt-4 flex justify-end gap-2'>
-            <Button
-              variant='outline'
-              onClick={async () => {
-                await signOut({
-                  fetchOptions: {
-                    onSuccess: () => {
-                      router.refresh()
-                    }
-                  }
-                })
-              }}
-            >
+            <Button variant='outline' onClick={signOut}>
               {t('common.sign-out')}
             </Button>
             <Button

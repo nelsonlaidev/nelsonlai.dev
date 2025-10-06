@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
-import { signIn } from '@/lib/auth-client'
+import { authClient } from '@/lib/auth-client'
 import { useDialogsStore } from '@/stores/dialogs.store'
 
 type Provider = 'github' | 'google'
@@ -61,7 +61,7 @@ const SignInDialog = () => {
 
   const handleSignIn = async (provider: Provider) => {
     localStorage.setItem('last-used-provider', provider)
-    await signIn.social({
+    await authClient.signIn.social({
       provider,
       callbackURL: pathname,
       fetchOptions: {
