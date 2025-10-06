@@ -18,7 +18,7 @@
     "test:e2e:ui": "bun with-env playwright test --ui",
     "type-check": "tsc --noEmit",
     "typegen": "bun with-env next typegen",
-    "with-env": "bun --env-file=../../.env.local"
+    "with-env": "dotenvx run -f ../../.env.local --ignore=MISSING_ENV_FILE --"
   },
   "lint-staged": {
     "*.{mjs,ts,tsx}": "eslint --fix"

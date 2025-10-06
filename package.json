@@ -42,7 +42,7 @@
     "test:unit:watch": "vitest watch",
     "type-check": "turbo type-check",
     "typegen": "turbo typegen",
-    "with-env": "bun --env-file=.env.local"
+    "with-env": "dotenvx run -f .env.local --ignore=MISSING_ENV_FILE --"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint --fix",
@@ -55,6 +55,7 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@cspell/dict-redis": "^1.0.7",
+    "@dotenvx/dotenvx": "^1.51.0",
     "@nelsonlaidev/eslint-config": "^2.1.1",
     "@nelsonlaidev/prettier-config": "^0.1.0",
     "@nelsonlaidev/typescript-config": "^0.0.3",

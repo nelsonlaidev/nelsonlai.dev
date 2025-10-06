@@ -192,8 +192,6 @@ jobs:
       - name: Run services
         run: docker compose up -d
 
-      - run: env | grep DATABASE_URL || echo "DATABASE_URL not found"
-
       - name: Migrate database
         run: bun db:migrate
 

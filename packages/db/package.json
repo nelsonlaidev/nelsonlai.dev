@@ -18,7 +18,7 @@
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint --fix .",
     "type-check": "tsc --noEmit",
-    "with-env": "bun --env-file=../../.env.local"
+    "with-env": "dotenvx run -f ../../.env.local --ignore=MISSING_ENV_FILE --"
   },
   "lint-staged": {
     "*.ts": "eslint --fix"
