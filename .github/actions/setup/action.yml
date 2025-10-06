@@ -4,15 +4,15 @@ description: Install Bun and dependencies
 runs:
   using: composite
   steps:
-    - name: Install Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version-file: '.nvmrc'
-
     - name: Install Bun
       uses: oven-sh/setup-bun@v2
       with:
         bun-version: 1.2.23
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: '.nvmrc'
 
     - name: Install dependencies
       shell: bash
