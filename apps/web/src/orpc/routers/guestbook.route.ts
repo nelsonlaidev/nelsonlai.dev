@@ -1,9 +1,7 @@
 import { ORPCError } from '@orpc/client'
 import { createId } from '@paralleldrive/cuid2'
 import { and, desc, eq, guestbook, lt } from '@repo/db'
-import { env } from '@repo/env'
 
-import { IS_PRODUCTION } from '@/lib/constants'
 import { sendGuestbookNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
 
@@ -76,9 +74,7 @@ export const createMessage = protectedProcedure
       })
     }
 
-    if (IS_PRODUCTION && env.DISCORD_WEBHOOK_URL) {
-      await sendGuestbookNotification(input.message, user.name, user.image ?? getDefaultImage(user.id))
-    }
+    await sendGuestbookNotification(input.message, user.name, user.image ?? getDefaultImage(user.id))
 
     return message
   })

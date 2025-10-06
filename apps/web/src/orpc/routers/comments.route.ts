@@ -3,7 +3,6 @@ import { createId } from '@paralleldrive/cuid2'
 import { and, asc, comments, count, desc, eq, gt, isNotNull, isNull, lt, ne, votes } from '@repo/db'
 import { getLocale } from 'next-intl/server'
 
-import { IS_PRODUCTION } from '@/lib/constants'
 import { getPostBySlug } from '@/lib/content'
 import { sendCommentNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
@@ -130,7 +129,7 @@ export const createComment = protectedProcedure
       }
 
       // Notify the author of the blog post via email
-      if (IS_PRODUCTION && !input.parentId && user.role === 'user') {
+      if (!input.parentId && user.role === 'user') {
         await sendCommentNotification(
           post.title,
           post.slug,
