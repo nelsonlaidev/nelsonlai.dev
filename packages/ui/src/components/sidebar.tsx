@@ -1,9 +1,9 @@
 'use client'
 
-import { Slot } from '@radix-ui/react-slot'
 import { cn } from '@repo/utils'
 import { cva, type VariantProps } from 'cva'
 import { PanelLeftIcon } from 'lucide-react'
+import { Slot } from 'radix-ui'
 import { createContext, use, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useIsMobile } from '../hooks/use-is-mobile'
@@ -412,7 +412,7 @@ type SidebarGroupLabelProps = React.ComponentProps<'div'> & {
 
 const SidebarGroupLabel = (props: SidebarGroupLabelProps) => {
   const { className, asChild = false, ...rest } = props
-  const Comp = asChild ? Slot : 'div'
+  const Comp = asChild ? Slot.Root : 'div'
 
   return (
     <Comp
@@ -436,7 +436,7 @@ type SidebarGroupActionProps = React.ComponentProps<'button'> & {
 
 const SidebarGroupAction = (props: SidebarGroupActionProps) => {
   const { className, asChild = false, ...rest } = props
-  const Comp = asChild ? Slot : 'button'
+  const Comp = asChild ? Slot.Root : 'button'
 
   return (
     <Comp
@@ -551,7 +551,7 @@ const SidebarMenuButton = (props: SidebarMenuButtonProps) => {
     className,
     ...rest
   } = props
-  const Comp = asChild ? Slot : 'button'
+  const Comp = asChild ? Slot.Root : 'button'
   const { isMobile, state } = useSidebar()
   let tooltipClone = tooltip
 
@@ -591,7 +591,7 @@ type SidebarMenuActionProps = React.ComponentProps<'button'> & {
 
 const SidebarMenuAction = (props: SidebarMenuActionProps) => {
   const { className, asChild = false, showOnHover = false, ...rest } = props
-  const Comp = asChild ? Slot : 'button'
+  const Comp = asChild ? Slot.Root : 'button'
 
   return (
     <Comp
@@ -715,7 +715,7 @@ type SidebarMenuSubButtonProps = React.ComponentProps<'a'> & {
 
 const SidebarMenuSubButton = (props: SidebarMenuSubButtonProps) => {
   const { asChild = false, size = 'md', isActive = false, className, ...rest } = props
-  const Comp = asChild ? Slot : 'a'
+  const Comp = asChild ? Slot.Root : 'a'
 
   return (
     <Comp

@@ -1,5 +1,5 @@
-import * as TabsPrimitive from '@radix-ui/react-tabs'
 import { cn } from '@repo/utils'
+import { Tabs as TabsPrimitive } from 'radix-ui'
 
 type TabsProps = React.ComponentProps<typeof TabsPrimitive.Root>
 
