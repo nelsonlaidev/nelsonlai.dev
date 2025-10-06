@@ -87,7 +87,8 @@
       "cache": false,
       "persistent": true
     },
-    "type-check": {}
+    "type-check": {},
+    "typegen": {}
   },
   "ui": "tui"
 }

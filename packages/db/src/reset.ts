@@ -52,11 +52,11 @@ const main = async () => {
 
     consola.info('Migrating database...')
 
-    await execa('pnpm', ['db:migrate'], { stdio: 'inherit' })
+    await execa('bun', ['db:migrate'], { stdio: 'inherit' })
 
     consola.info('Seeding database...')
 
-    await execa('pnpm', ['db:seed'], { stdio: 'inherit' })
+    await execa('bun', ['db:seed'], { stdio: 'inherit' })
 
     consola.success('Database reset successfully!')
   } catch (error) {

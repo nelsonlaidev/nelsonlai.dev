@@ -4,12 +4,16 @@
   "license": "MIT",
   "author": "Nelson Lai <me@nelsonlai.dev> (https://github.com/nelsonlaidev/)",
   "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "build": "turbo build",
     "build:apps": "turbo build --filter=./apps/*",
     "build:mdx": "turbo build:mdx",
-    "check": "turbo lint && turbo type-check && pnpm format:check && pnpm check:spelling && pnpm check:knip",
-    "check:knip": "pnpm with-env knip",
+    "check": "turbo lint && turbo type-check && bun format:check && bun check:spelling && bun check:knip",
+    "check:knip": "bun with-env knip",
     "check:spelling": "cspell --no-progress --no-summary --no-must-find-files --unique",
     "clean": "turbo clean && rm -rf .turbo coverage",
     "db:check": "turbo db:check",
@@ -25,7 +29,6 @@
     "dev:web": "turbo dev --filter=@repo/web",
     "format:check": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "format:write": "prettier --cache --write --list-different --ignore-path .gitignore --ignore-path .prettierignore .",
-    "preinstall": "npx --yes only-allow pnpm",
     "lint": "turbo lint && eslint . --max-warnings 0",
     "lint:fix": "turbo lint:fix && eslint --fix .",
     "prepare": "husky",
@@ -38,20 +41,20 @@
     "test:unit:ui": "vitest --ui",
     "test:unit:watch": "vitest watch",
     "type-check": "turbo type-check",
-    "with-env": "dotenvx run -f .env.local --"
+    "typegen": "turbo typegen",
+    "with-env": "bun --env-file=.env.local"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint --fix",
     "*.*": [
       "prettier --write --ignore-unknown",
-      "pnpm check:spelling"
+      "bun check:spelling"
     ]
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@cspell/dict-redis": "^1.0.7",
-    "@dotenvx/dotenvx": "^1.49.0",
     "@nelsonlaidev/eslint-config": "^2.1.0",
     "@nelsonlaidev/prettier-config": "^0.1.0",
     "@nelsonlaidev/typescript-config": "^0.0.3",
@@ -69,12 +72,11 @@
     "lint-staged": "^16.1.6",
     "prettier": "^3.6.2",
     "prettier-plugin-packagejson": "^2.5.19",
-    "tsx": "^4.20.5",
     "turbo": "^2.5.6",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
-  "packageManager": "pnpm@10.16.1",
+  "packageManager": "bun@1.2.23",
   "engines": {
     "node": ">=22"
   }

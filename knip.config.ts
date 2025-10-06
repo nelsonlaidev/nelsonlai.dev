@@ -2,8 +2,6 @@ import type { KnipConfig } from 'knip'
 
 const config: KnipConfig = {
   ignoreDependencies: [
-    // Knip can't detect it since we use `pnpm with-env` in front of it
-    'tsx',
     // PostCSS is already installed under Next.js
     'postcss'
   ],

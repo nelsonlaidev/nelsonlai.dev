@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "command": "pnpm dev",
+      "command": "bun dev",
       "name": "Next.js: debug server-side",
       "request": "launch",
       "type": "node-terminal"
@@ -13,7 +13,7 @@
       "url": "http://localhost:3000"
     },
     {
-      "command": "pnpm dev",
+      "command": "bun dev",
       "name": "Next.js: debug full stack",
       "request": "launch",
       "serverReadyAction": {

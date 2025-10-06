@@ -1,20 +1,16 @@
 name: Setup
-description: Install Node.js, pnpm, and dependencies
+description: Install Bun and dependencies
 
 runs:
   using: composite
   steps:
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-
-    - name: Install Node.js
-      uses: actions/setup-node@v4
+    - name: Install Bun
+      uses: oven-sh/setup-bun@v2
       with:
-        node-version-file: '.nvmrc'
-        cache: 'pnpm'
+        bun-version-file: '.bun-version'
 
     - name: Install dependencies
       shell: bash
-      run: pnpm install
+      run: bun install
       env:
         PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
