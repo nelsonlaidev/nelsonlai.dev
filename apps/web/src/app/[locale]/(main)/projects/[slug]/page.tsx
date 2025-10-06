@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
+import type { Locale } from 'next-intl'
 import type { SoftwareSourceCode, WithContext } from 'schema-dts'
 
-import { routing } from '@repo/i18n/routing'
 import { setRequestLocale } from '@repo/i18n/server'
 import { notFound } from 'next/navigation'
-import { hasLocale } from 'next-intl'
+import { use } from 'react'
 
 import BlurImage from '@/components/blur-image'
 import JsonLd from '@/components/json-ld'
@@ -27,10 +27,6 @@ export const generateMetadata = async (props: PageProps<'/[locale]/projects/[slu
   const { params } = props
   const { slug, locale } = await params
 
-  if (!hasLocale(routing.locales, locale)) {
-    return {}
-  }
-
   const project = getProjectBySlug(locale, slug)
 
   if (!project) {
@@ -48,15 +44,12 @@ export const generateMetadata = async (props: PageProps<'/[locale]/projects/[slu
   })
 }
 
-const Page = async (props: PageProps<'/[locale]/projects/[slug]'>) => {
+const Page = (props: PageProps<'/[locale]/projects/[slug]'>) => {
   const { params } = props
-  const { slug, locale } = await params
+  const { slug, locale } = use(params)
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
+  setRequestLocale(locale as Locale)
 
-  setRequestLocale(locale)
   const project = getProjectBySlug(locale, slug)
   const url = getLocalizedPath({ locale, pathname: `/projects/${slug}` })
 

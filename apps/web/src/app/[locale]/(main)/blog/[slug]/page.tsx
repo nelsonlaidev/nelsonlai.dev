@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
+import type { Locale } from 'next-intl'
 import type { BlogPosting, WithContext } from 'schema-dts'
 
-import { routing } from '@repo/i18n/routing'
 import { setRequestLocale } from '@repo/i18n/server'
 import { notFound } from 'next/navigation'
-import { hasLocale } from 'next-intl'
-import { Suspense } from 'react'
+import { Suspense, use } from 'react'
 
 import BlogFooter from '@/components/blog/blog-footer'
 import BlogHeader from '@/components/blog/blog-header'
@@ -33,10 +32,6 @@ export const generateMetadata = async (props: PageProps<'/[locale]/blog/[slug]'>
   const { params } = props
   const { slug, locale } = await params
 
-  if (!hasLocale(routing.locales, locale)) {
-    return {}
-  }
-
   const post = getPostBySlug(locale, slug)
 
   if (!post) return {}
@@ -55,15 +50,12 @@ export const generateMetadata = async (props: PageProps<'/[locale]/blog/[slug]'>
   })
 }
 
-const Page = async (props: PageProps<'/[locale]/blog/[slug]'>) => {
+const Page = (props: PageProps<'/[locale]/blog/[slug]'>) => {
   const { params } = props
-  const { slug, locale } = await params
+  const { slug, locale } = use(params)
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
+  setRequestLocale(locale as Locale)
 
-  setRequestLocale(locale)
   const post = getPostBySlug(locale, slug)
   const url = getLocalizedPath({ locale, pathname: `/blog/${slug}` })
   const baseUrl = getBaseUrl()

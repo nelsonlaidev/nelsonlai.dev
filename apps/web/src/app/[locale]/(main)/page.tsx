@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
 import type { WebSite, WithContext } from 'schema-dts'
 
-import { routing } from '@repo/i18n/routing'
 import { getTranslations, setRequestLocale } from '@repo/i18n/server'
-import { notFound } from 'next/navigation'
-import { hasLocale } from 'next-intl'
+import { type Locale, useTranslations } from 'next-intl'
+import { use } from 'react'
 
 import AboutMe from '@/components/home/about-me'
 import GetInTouch from '@/components/home/get-in-touch'
@@ -29,11 +28,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]'>): Promise<M
   const { params } = props
   const { locale } = await params
 
-  if (!hasLocale(routing.locales, locale)) {
-    return {}
-  }
-
-  const t = await getTranslations({ locale })
+  const t = await getTranslations({ locale: locale as Locale })
   const description = t('metadata.site-description')
 
   return createMetadata({
@@ -45,17 +40,13 @@ export const generateMetadata = async (props: PageProps<'/[locale]'>): Promise<M
   })
 }
 
-const Page = async (props: PageProps<'/[locale]'>) => {
+const Page = (props: PageProps<'/[locale]'>) => {
   const { params } = props
-  const { locale } = await params
+  const { locale } = use(params)
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
+  setRequestLocale(locale as Locale)
 
-  setRequestLocale(locale)
-  const t = await getTranslations()
-
+  const t = useTranslations()
   const url = getLocalizedPath({ locale })
 
   const jsonLd: WithContext<WebSite> = {

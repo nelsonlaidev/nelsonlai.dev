@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 
-import { routing } from '@repo/i18n/routing'
 import { getTranslations, setRequestLocale } from '@repo/i18n/server'
 import { notFound } from 'next/navigation'
-import { hasLocale } from 'next-intl'
+import { type Locale, useTranslations } from 'next-intl'
+import { use } from 'react'
 
 import Mdx from '@/components/mdx'
 import PageHeader from '@/components/page-header'
@@ -14,11 +14,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/terms'>): Pro
   const { params } = props
   const { locale } = await params
 
-  if (!hasLocale(routing.locales, locale)) {
-    return {}
-  }
-
-  const t = await getTranslations({ locale })
+  const t = await getTranslations({ locale: locale as Locale })
   const title = t('common.labels.terms-of-service')
   const description = t('terms.description')
 
@@ -31,16 +27,13 @@ export const generateMetadata = async (props: PageProps<'/[locale]/terms'>): Pro
   })
 }
 
-const Page = async (props: PageProps<'/[locale]/terms'>) => {
+const Page = (props: PageProps<'/[locale]/terms'>) => {
   const { params } = props
-  const { locale } = await params
+  const { locale } = use(params)
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
+  setRequestLocale(locale as Locale)
 
-  setRequestLocale(locale)
-  const t = await getTranslations()
+  const t = useTranslations()
   const title = t('common.labels.terms-of-service')
   const description = t('terms.description')
   const page = getPageBySlug(locale, 'terms')

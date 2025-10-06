@@ -1,17 +1,13 @@
-import { routing } from '@repo/i18n/routing'
-import { notFound } from 'next/navigation'
-import { hasLocale } from 'next-intl'
+import type { Locale } from 'next-intl'
+
 import { setRequestLocale } from 'next-intl/server'
+import { use } from 'react'
 
-const Page = async (props: PageProps<'/[locale]/admin'>) => {
+const Page = (props: PageProps<'/[locale]/admin'>) => {
   const { params } = props
-  const { locale } = await params
+  const { locale } = use(params)
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
-
-  setRequestLocale(locale)
+  setRequestLocale(locale as Locale)
 
   return <div>admin</div>
 }

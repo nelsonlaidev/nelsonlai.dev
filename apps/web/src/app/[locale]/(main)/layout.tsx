@@ -1,19 +1,15 @@
-import { routing } from '@repo/i18n/routing'
-import { notFound } from 'next/navigation'
-import { hasLocale } from 'next-intl'
+import type { Locale } from 'next-intl'
+
 import { setRequestLocale } from 'next-intl/server'
+import { use } from 'react'
 
 import MainLayout from '@/components/main-layout'
 
-const Layout = async (props: LayoutProps<'/[locale]'>) => {
+const Layout = (props: LayoutProps<'/[locale]'>) => {
   const { children, params } = props
-  const { locale } = await params
+  const { locale } = use(params)
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
-
-  setRequestLocale(locale)
+  setRequestLocale(locale as Locale)
 
   return <MainLayout>{children}</MainLayout>
 }

@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 
-import { routing } from '@repo/i18n/routing'
 import { getTranslations, setRequestLocale } from '@repo/i18n/server'
-import { notFound } from 'next/navigation'
-import { hasLocale } from 'next-intl'
+import { type Locale, useTranslations } from 'next-intl'
+import { use } from 'react'
 
 import ActiveSessions from '@/components/account/active-sessions'
 import Profile from '@/components/account/profile'
@@ -14,11 +13,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/account'>): P
   const { params } = props
   const { locale } = await params
 
-  if (!hasLocale(routing.locales, locale)) {
-    return {}
-  }
-
-  const t = await getTranslations({ locale })
+  const t = await getTranslations({ locale: locale as Locale })
   const title = t('common.labels.account')
   const description = t('account.description')
 
@@ -31,16 +26,13 @@ export const generateMetadata = async (props: PageProps<'/[locale]/account'>): P
   })
 }
 
-const Page = async (props: PageProps<'/[locale]/account'>) => {
+const Page = (props: PageProps<'/[locale]/account'>) => {
   const { params } = props
-  const { locale } = await params
+  const { locale } = use(params)
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
+  setRequestLocale(locale as Locale)
 
-  setRequestLocale(locale)
-  const t = await getTranslations()
+  const t = useTranslations()
   const title = t('common.labels.account')
   const description = t('account.description')
 

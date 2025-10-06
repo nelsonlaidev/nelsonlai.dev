@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
 import type { CollectionPage, WithContext } from 'schema-dts'
 
-import { routing } from '@repo/i18n/routing'
 import { getTranslations, setRequestLocale } from '@repo/i18n/server'
-import { notFound } from 'next/navigation'
-import { hasLocale } from 'next-intl'
+import { type Locale, useTranslations } from 'next-intl'
+import { use } from 'react'
 
 import FilteredPosts from '@/components/filtered-posts'
 import JsonLd from '@/components/json-ld'
@@ -19,11 +18,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/blog'>): Prom
   const { params } = props
   const { locale } = await params
 
-  if (!hasLocale(routing.locales, locale)) {
-    return {}
-  }
-
-  const t = await getTranslations({ locale })
+  const t = await getTranslations({ locale: locale as Locale })
   const title = t('common.labels.blog')
   const description = t('blog.description')
 
@@ -36,16 +31,13 @@ export const generateMetadata = async (props: PageProps<'/[locale]/blog'>): Prom
   })
 }
 
-const Page = async (props: PageProps<'/[locale]/blog'>) => {
+const Page = (props: PageProps<'/[locale]/blog'>) => {
   const { params } = props
-  const { locale } = await params
+  const { locale } = use(params)
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
+  setRequestLocale(locale as Locale)
 
-  setRequestLocale(locale)
-  const t = await getTranslations()
+  const t = useTranslations()
   const title = t('common.labels.blog')
   const description = t('blog.description')
   const url = getLocalizedPath({ locale, pathname: '/blog' })
