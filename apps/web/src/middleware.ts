@@ -55,10 +55,9 @@ export const config = {
   // - favicon.ico (favicon file)
   // - sitemap.xml
   // - robots.txt
-  // - rss.xml
   // - site.webmanifest
   matcher: [
-    '/((?!api|rpc|_next/static|_next/image|_vercel|favicon|android-chrome|apple-touch-icon|fonts|images|videos|favicon.ico|sitemap.xml|robots.txt|rss.xml|site.webmanifest).*)'
+    '/((?!api|rpc|_next/static|_next/image|_vercel|favicon|android-chrome|apple-touch-icon|fonts|images|videos|favicon.ico|sitemap.xml|robots.txt|site.webmanifest).*)'
   ]
 }
 
