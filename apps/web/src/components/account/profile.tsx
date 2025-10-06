@@ -21,7 +21,7 @@ import { getAbbreviation } from '@repo/utils'
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import z from 'zod'
+import { z } from 'zod'
 
 import { useUpdateUser } from '@/hooks/queries/auth.query'
 import { useGetAvatarUploadUrl } from '@/hooks/queries/r2.query'
