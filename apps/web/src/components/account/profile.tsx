@@ -216,8 +216,7 @@ const UpdateAvatar = () => {
       }
 
       await updateUser({ image: publicUrl })
-    } catch (error) {
-      console.error('Failed to update avatar', error)
+    } catch {
       toast.error(t('account.update-avatar-failed'))
     } finally {
       setIsUploading(false)
