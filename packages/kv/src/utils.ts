@@ -10,7 +10,7 @@ export const createKey = (parts: KVKey): string => {
   return Array.isArray(parts) ? parts.join(':') : parts
 }
 
-export const createCache = <T, A extends string[]>(keyPrefix: KVKey, ttl = KV_TTL) => {
+export const createCache = <T, A extends string[]>(keyPrefix: KVKey, ttl: number = KV_TTL) => {
   const prefixKey = createKey(keyPrefix)
 
   const getKey = (suffixArgs: A) => {
