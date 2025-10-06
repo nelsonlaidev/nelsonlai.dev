@@ -7,6 +7,12 @@ import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 import { Suspense } from 'react'
 
+import BlogFooter from '@/components/blog/blog-footer'
+import BlogHeader from '@/components/blog/blog-header'
+import LikeButton from '@/components/blog/like-button'
+import MobileTableOfContents from '@/components/blog/mobile-table-of-contents'
+import ProgressBar from '@/components/blog/progress-bar'
+import TableOfContents from '@/components/blog/table-of-contents'
 import CommentSection from '@/components/comment-section'
 import JsonLd from '@/components/json-ld'
 import Mdx from '@/components/mdx'
@@ -15,13 +21,6 @@ import { allPosts, getPostBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
-
-import BlogFooter from './blog-footer'
-import BlogHeader from './blog-header'
-import LikeButton from './like-button'
-import MobileTableOfContents from './mobile-table-of-contents'
-import ProgressBar from './progress-bar'
-import TableOfContents from './table-of-contents'
 
 export const generateStaticParams = (): Array<{ slug: string; locale: string }> => {
   return allPosts.map((post) => ({

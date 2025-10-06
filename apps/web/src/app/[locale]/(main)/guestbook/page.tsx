@@ -6,14 +6,13 @@ import { getTranslations, setRequestLocale } from '@repo/i18n/server'
 import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 
+import Guestbook from '@/components/guestbook/guestbook'
 import JsonLd from '@/components/json-ld'
 import PageHeader from '@/components/page-header'
 import { MY_NAME } from '@/lib/constants'
 import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
-
-import Guestbook from './guestbook'
 
 export const generateStaticParams = (): Array<{ locale: string }> => {
   return routing.locales.map((locale) => ({ locale }))

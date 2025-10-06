@@ -13,9 +13,8 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 import Analytics from '@/components/analytics'
 import Hello from '@/components/hello'
+import Providers from '@/components/providers'
 import SignInDialog from '@/components/sign-in-dialog'
-
-import Providers from '../providers'
 
 export const generateStaticParams = (): Array<{ locale: string }> => {
   return routing.locales.map((locale) => ({ locale }))
