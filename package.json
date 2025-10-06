@@ -55,7 +55,7 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@cspell/dict-redis": "^1.0.7",
-    "@nelsonlaidev/eslint-config": "^2.1.0",
+    "@nelsonlaidev/eslint-config": "^2.1.1",
     "@nelsonlaidev/prettier-config": "^0.1.0",
     "@nelsonlaidev/typescript-config": "^0.0.3",
     "@playwright/test": "^1.55.0",
