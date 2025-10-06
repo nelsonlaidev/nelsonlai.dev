@@ -8,11 +8,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@repo/ui/components/dropdown-menu'
+import { Link } from '@repo/ui/components/link'
 import { MenuIcon } from 'lucide-react'
 
 import { HEADER_LINKS } from '@/config/links'
-
-import Link from '../link'
 
 const MobileNav = () => {
   const t = useTranslations()

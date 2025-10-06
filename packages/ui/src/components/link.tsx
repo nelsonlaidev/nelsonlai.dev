@@ -1,6 +1,6 @@
+import { Link as LocalizedLink } from '@repo/i18n/routing'
 import { cn } from '@repo/utils'
 import { cva, type VariantProps } from 'cva'
-import NextLink from 'next/link'
 
 const linkVariants = cva({
   variants: {
@@ -10,19 +10,20 @@ const linkVariants = cva({
   }
 })
 
-type LinkProps = Omit<React.ComponentProps<typeof NextLink>, 'href'> &
-  VariantProps<typeof linkVariants> & {
-    href: string
-  }
+type LinkProps = React.ComponentProps<'a'> & VariantProps<typeof linkVariants>
 
 const Link = (props: LinkProps) => {
   const { className, variant, href, children, ...rest } = props
 
+  if (!href) {
+    throw new Error('Link must have an href')
+  }
+
   if (href.startsWith('/')) {
     return (
-      <NextLink className={cn(linkVariants({ variant, className }))} href={href} {...rest}>
+      <LocalizedLink className={cn(linkVariants({ variant, className }))} href={href} {...rest}>
         {children}
-      </NextLink>
+      </LocalizedLink>
     )
   }
 

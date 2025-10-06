@@ -3,9 +3,8 @@
 import type { Post } from '@/lib/content'
 
 import { useLocale, useTranslations } from '@repo/i18n/client'
-import { linkVariants } from '@repo/ui/components/link'
+import { Link, linkVariants } from '@repo/ui/components/link'
 
-import Link from '@/components/link'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 
 type BlogFooterProps = {

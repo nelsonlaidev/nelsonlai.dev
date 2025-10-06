@@ -4,10 +4,9 @@
 //
 // Modified by: Nelson Lai
 import { useTranslations } from '@repo/i18n/client'
+import { Link } from '@repo/ui/components/link'
 import { cn } from '@repo/utils'
 import { LinkIcon } from 'lucide-react'
-
-import Link from '../link'
 
 type Types = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 type HeadingProps<T extends Types> = Omit<React.ComponentProps<T>, 'as'> & {

@@ -1,8 +1,7 @@
+import { Link } from '@repo/ui/components/link'
 import { ExternalLinkIcon } from 'lucide-react'
 
 import BlurImage from '@/components/blur-image'
-
-import Link from '../link'
 
 type LinkCardProps = {
   href: string

@@ -1,13 +1,11 @@
 'use client'
 
 import { useTranslations } from '@repo/i18n/client'
-import { linkVariants } from '@repo/ui/components/link'
+import { Link, linkVariants } from '@repo/ui/components/link'
 import { StarIcon } from 'lucide-react'
 
 import { FOOTER_LINKS } from '@/config/links'
 import { useGitHubStat } from '@/hooks/queries/stat.query'
-
-import Link from '../link'
 
 import LocaleSwitcher from './locale-switcher'
 import NowPlaying from './now-playing'

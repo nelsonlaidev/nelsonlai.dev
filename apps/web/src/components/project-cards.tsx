@@ -2,9 +2,9 @@
 
 import type { Project } from '@/lib/content'
 
-import BlurImage from '@/components/blur-image'
+import { Link } from '@repo/ui/components/link'
 
-import Link from './link'
+import BlurImage from '@/components/blur-image'
 
 type ProjectCardProps = Project
 type ProjectCardsProps = {

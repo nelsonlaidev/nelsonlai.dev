@@ -4,11 +4,11 @@ import type { Post } from '@/lib/content'
 
 import NumberFlow from '@number-flow/react'
 import { useTranslations } from '@repo/i18n/client'
+import { Link } from '@repo/ui/components/link'
 import { useEffect, useRef } from 'react'
 
 import BlurImage from '@/components/blur-image'
 import ImageZoom from '@/components/image-zoom'
-import Link from '@/components/link'
 import { useIncrementPostViewCount, usePostCommentCount, usePostViewCount } from '@/hooks/queries/post.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { MY_NAME } from '@/lib/constants'

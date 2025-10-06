@@ -2,8 +2,7 @@
 
 import { useTranslations } from '@repo/i18n/client'
 import { buttonVariants } from '@repo/ui/components/button'
-
-import Link from './link'
+import { Link } from '@repo/ui/components/link'
 
 const GoToHomepage = () => {
   const t = useTranslations()

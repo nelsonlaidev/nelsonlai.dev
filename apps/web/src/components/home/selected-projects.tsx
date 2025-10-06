@@ -2,6 +2,7 @@
 
 import { useTranslations } from '@repo/i18n/client'
 import { buttonVariants } from '@repo/ui/components/button'
+import { Link } from '@repo/ui/components/link'
 import { cn } from '@repo/utils'
 import { ArrowUpRightIcon, LightbulbIcon } from 'lucide-react'
 import { motion, useInView } from 'motion/react'
@@ -9,8 +10,6 @@ import { useRef } from 'react'
 
 import BlurImage from '@/components/blur-image'
 import { type Project } from '@/lib/content'
-
-import Link from '../link'
 
 const variants = {
   initial: {

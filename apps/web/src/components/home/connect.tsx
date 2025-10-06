@@ -1,9 +1,8 @@
 import { useTranslations } from '@repo/i18n/client'
+import { Link } from '@repo/ui/components/link'
 import { LinkIcon } from 'lucide-react'
 
 import { SOCIAL_LINKS } from '@/config/links'
-
-import Link from '../link'
 
 const Connect = () => {
   const t = useTranslations()

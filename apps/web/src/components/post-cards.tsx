@@ -3,12 +3,11 @@
 import type { Post } from '@/lib/content'
 
 import { useTranslations } from '@repo/i18n/client'
+import { Link } from '@repo/ui/components/link'
 
 import BlurImage from '@/components/blur-image'
 import { usePostLikeCount, usePostViewCount } from '@/hooks/queries/post.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
-
-import Link from './link'
 
 type PostCardsProps = {
   posts: Post[]

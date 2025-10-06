@@ -1,0 +1,3 @@
+/* For Tailwind CSS intellisense and ESLint */
+@import 'tailwindcss';
+@import './preset.css';

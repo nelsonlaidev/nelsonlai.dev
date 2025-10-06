@@ -1,10 +1,9 @@
 'use client'
 
 import { useTranslations } from '@repo/i18n/client'
+import { Link } from '@repo/ui/components/link'
 
 import { useSpotifyStat } from '@/hooks/queries/stat.query'
-
-import Link from '../link'
 
 const NowPlaying = () => {
   const { isSuccess, isLoading, isError, data } = useSpotifyStat()

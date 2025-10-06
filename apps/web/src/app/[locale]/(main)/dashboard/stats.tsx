@@ -3,10 +3,10 @@
 
 import { SiGithub, SiWakatime, SiYoutube } from '@icons-pack/react-simple-icons'
 import { useTranslations } from '@repo/i18n/client'
+import { Link } from '@repo/ui/components/link'
 import { ArrowRightIcon, PencilIcon, StarIcon } from 'lucide-react'
 
 import Counter from '@/components/counter'
-import Link from '@/components/link'
 import {
   useBlogLikeStat,
   useBlogViewStat,

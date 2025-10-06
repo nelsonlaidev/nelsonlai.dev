@@ -4,11 +4,11 @@ import type { Project } from '@/lib/content'
 
 import { useTranslations } from '@repo/i18n/client'
 import { buttonVariants } from '@repo/ui/components/button'
+import { Link } from '@repo/ui/components/link'
 import { cn } from '@repo/utils'
 import { ArrowUpRightIcon } from 'lucide-react'
 import { motion } from 'motion/react'
 
-import Link from '@/components/link'
 import { GITHUB_USERNAME } from '@/lib/constants'
 
 const animation = {

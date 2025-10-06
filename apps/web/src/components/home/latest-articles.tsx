@@ -4,6 +4,7 @@ import type { Post } from '@/lib/content'
 
 import { useTranslations } from '@repo/i18n/client'
 import { buttonVariants } from '@repo/ui/components/button'
+import { Link } from '@repo/ui/components/link'
 import { cn } from '@repo/utils'
 import { ArrowUpRightIcon, PencilIcon } from 'lucide-react'
 import { motion, useInView } from 'motion/react'
@@ -12,8 +13,6 @@ import { useRef } from 'react'
 import BlurImage from '@/components/blur-image'
 import { usePostLikeCount, usePostViewCount } from '@/hooks/queries/post.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
-
-import Link from '../link'
 
 const variants = {
   initial: {

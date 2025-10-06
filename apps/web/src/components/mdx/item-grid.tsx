@@ -1,7 +1,7 @@
 // Inspired by: https://jahir.dev/uses
-import BlurImage from '@/components/blur-image'
+import { Link } from '@repo/ui/components/link'
 
-import Link from '../link'
+import BlurImage from '@/components/blur-image'
 
 type Items = Array<{
   image: string

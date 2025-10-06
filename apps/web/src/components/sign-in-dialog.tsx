@@ -5,6 +5,7 @@ import { useTranslations } from '@repo/i18n/client'
 import { Badge } from '@repo/ui/components/badge'
 import { Button } from '@repo/ui/components/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@repo/ui/components/dialog'
+import { Link } from '@repo/ui/components/link'
 import { toast } from '@repo/ui/components/sonner'
 import { LoaderIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
@@ -13,8 +14,6 @@ import { useShallow } from 'zustand/react/shallow'
 
 import { signIn } from '@/lib/auth-client'
 import { useDialogsStore } from '@/stores/dialogs.store'
-
-import Link from './link'
 
 type Provider = 'github' | 'google'
 

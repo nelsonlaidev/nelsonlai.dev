@@ -1,6 +1,7 @@
 'use client'
 
 import { useTranslations } from '@repo/i18n/client'
+import { Link } from '@repo/ui/components/link'
 import { Logo } from '@repo/ui/components/logo'
 import { cn } from '@repo/utils'
 import { motion } from 'motion/react'
@@ -8,8 +9,6 @@ import { useEffect, useRef } from 'react'
 
 import CommandMenu from '@/components/command-menu'
 import { IS_SERVER } from '@/lib/constants'
-
-import Link from '../link'
 
 import MobileNav from './mobile-nav'
 import Navbar from './navbar'

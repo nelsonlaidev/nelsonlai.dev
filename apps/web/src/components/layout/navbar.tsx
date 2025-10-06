@@ -2,11 +2,10 @@
 
 import { useTranslations } from '@repo/i18n/client'
 import { usePathname } from '@repo/i18n/routing'
+import { Link } from '@repo/ui/components/link'
 import { cn } from '@repo/utils'
 
 import { HEADER_LINKS } from '@/config/links'
-
-import Link from '../link'
 
 const Navbar = () => {
   const pathname = usePathname()

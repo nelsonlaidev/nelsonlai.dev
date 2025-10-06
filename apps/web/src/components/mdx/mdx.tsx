@@ -1,11 +1,11 @@
 import { useMDXComponent } from '@content-collections/mdx/react'
 import { CodeBlock } from '@repo/ui/components/code-block'
 import { Kbd } from '@repo/ui/components/kbd'
+import { Link } from '@repo/ui/components/link'
 
 import BlurImage from '@/components/blur-image'
 
 import ImageZoom from '../image-zoom'
-import Link from '../link'
 
 import Heading from './heading'
 import ItemGrid from './item-grid'
