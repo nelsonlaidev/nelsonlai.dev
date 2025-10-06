@@ -1,32 +1,23 @@
 import { env } from '@repo/env'
 import { i18nMiddleware } from '@repo/i18n/middleware'
+import { getSessionCookie } from 'better-auth/cookies'
 import { type NextRequest, NextResponse } from 'next/server'
-
-import { getSession } from './lib/auth'
 
 const IS_PREVIEW = env.VERCEL_ENV === 'preview'
 
 const LOCALE_PREFIX = '(?:/[a-z]{2}(?:-[A-Z]{2})?)?'
 
-const PROTECTED_ROUTES = [
-  { path: new RegExp(`^${LOCALE_PREFIX}/admin`), requireAdmin: true },
-  { path: new RegExp(`^${LOCALE_PREFIX}/account`) }
-]
+const PROTECTED_ROUTES = [new RegExp(`^${LOCALE_PREFIX}/admin`), new RegExp(`^${LOCALE_PREFIX}/account`)]
 
-const middleware = async (request: NextRequest) => {
+const middleware = (request: NextRequest) => {
   const pathname = request.nextUrl.pathname
 
-  const session = await getSession(request)
+  const sessionCookie = getSessionCookie(request)
 
-  const route = PROTECTED_ROUTES.find((r) => r.path.test(pathname))
+  const route = PROTECTED_ROUTES.find((r) => r.test(pathname))
 
-  if (route) {
-    if (!session) {
-      return NextResponse.redirect(new URL('/', request.url))
-    }
-    if (route.requireAdmin && session.user.role !== 'admin') {
-      return NextResponse.redirect(new URL('/', request.url))
-    }
+  if (route && !sessionCookie) {
+    return NextResponse.redirect(new URL('/', request.url))
   }
 
   const csp = `
@@ -68,8 +59,7 @@ export const config = {
   // - site.webmanifest
   matcher: [
     '/((?!api|rpc|_next/static|_next/image|_vercel|favicon|android-chrome|apple-touch-icon|fonts|images|videos|favicon.ico|sitemap.xml|robots.txt|rss.xml|site.webmanifest).*)'
-  ],
-  runtime: 'nodejs'
+  ]
 }
 
 export default middleware
