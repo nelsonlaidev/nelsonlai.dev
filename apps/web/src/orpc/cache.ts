@@ -6,10 +6,10 @@ const LOCATION_CACHE_TTL = 60 * 60 * 6 // 6 hours
 
 export const cache = {
   posts: {
-    views: createCache<CountViewOutput, [string]>(['posts', 'views']),
-    likes: createCache<CountLikeOutput, [string, string]>(['posts', 'likes'])
+    views: createCache<CountViewOutput, [slug: string]>(['posts', 'views']),
+    likes: createCache<CountLikeOutput, [slug: string, sessionId: string]>(['posts', 'likes'])
   },
   auth: {
-    location: createCache<string, [string]>(['auth', 'location'], LOCATION_CACHE_TTL)
+    location: createCache<string, [ip: string]>(['auth', 'location'], LOCATION_CACHE_TTL)
   }
 }

@@ -14,9 +14,8 @@ export const createCache = <T, A extends string[]>(keyPrefix: KVKey, ttl: number
   const prefixKey = createKey(keyPrefix)
 
   const getKey = (suffixArgs: A) => {
-    if (suffixArgs.length === 0) {
-      return prefixKey
-    }
+    if (suffixArgs.length === 0) return prefixKey
+
     const suffixKey = createKey(suffixArgs)
     return suffixKey ? `${prefixKey}:${suffixKey}` : prefixKey
   }
