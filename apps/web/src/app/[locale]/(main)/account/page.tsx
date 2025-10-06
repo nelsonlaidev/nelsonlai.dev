@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 
-import { getTranslations, setRequestLocale } from '@repo/i18n/server'
-import { type Locale, useTranslations } from 'next-intl'
-import { use } from 'react'
+import { getTranslations } from '@repo/i18n/server'
+import { redirect } from 'next/navigation'
+import { type Locale } from 'next-intl'
 
 import ActiveSessions from '@/components/account/active-sessions'
 import Profile from '@/components/account/profile'
 import PageHeader from '@/components/page-header'
+import { getSession } from '@/lib/auth'
 import { createMetadata } from '@/lib/metadata'
 
 export const generateMetadata = async (props: PageProps<'/[locale]/account'>): Promise<Metadata> => {
@@ -26,13 +27,14 @@ export const generateMetadata = async (props: PageProps<'/[locale]/account'>): P
   })
 }
 
-const Page = (props: PageProps<'/[locale]/account'>) => {
-  const { params } = props
-  const { locale } = use(params)
+const Page = async () => {
+  const session = await getSession()
 
-  setRequestLocale(locale as Locale)
+  if (!session || session.user.role !== 'admin') {
+    redirect('/')
+  }
 
-  const t = useTranslations()
+  const t = await getTranslations()
   const title = t('common.labels.account')
   const description = t('account.description')
 

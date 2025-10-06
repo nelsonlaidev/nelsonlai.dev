@@ -1,25 +1,10 @@
 import { env } from '@repo/env'
 import { i18nMiddleware } from '@repo/i18n/middleware'
-import { getSessionCookie } from 'better-auth/cookies'
-import { type NextRequest, NextResponse } from 'next/server'
+import { type NextRequest } from 'next/server'
 
 const IS_PREVIEW = env.VERCEL_ENV === 'preview'
 
-const LOCALE_PREFIX = '(?:/[a-z]{2}(?:-[A-Z]{2})?)?'
-
-const PROTECTED_ROUTES = [new RegExp(`^${LOCALE_PREFIX}/admin`), new RegExp(`^${LOCALE_PREFIX}/account`)]
-
 const middleware = (request: NextRequest) => {
-  const pathname = request.nextUrl.pathname
-
-  const sessionCookie = getSessionCookie(request)
-
-  const route = PROTECTED_ROUTES.find((r) => r.test(pathname))
-
-  if (route && !sessionCookie) {
-    return NextResponse.redirect(new URL('/', request.url))
-  }
-
   const csp = `
     default-src 'none';
     script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.nelsonlai.dev https://va.vercel-scripts.com ${IS_PREVIEW ? 'https://vercel.live' : ''};
