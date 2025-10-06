@@ -7,8 +7,8 @@
   "exports": {
     "./components/*": "./src/components/*.tsx",
     "./hooks/*": "./src/hooks/*.ts",
-    "./styles/*.css": "./src/styles/*.css",
     "./utils/*": "./src/utils/*.ts",
+    "./globals.css": "./src/styles/globals.css",
     "./postcss-config": "./postcss.config.mjs"
   },
   "scripts": {
