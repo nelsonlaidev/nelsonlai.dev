@@ -1,13 +1,10 @@
 import { ORPCError } from '@orpc/client'
 import { createId } from '@paralleldrive/cuid2'
 import { and, asc, comments, count, desc, eq, gt, isNotNull, isNull, lt, ne, votes } from '@repo/db'
-import { CommentEmailTemplate, ReplyEmailTemplate } from '@repo/emails'
-import { env } from '@repo/env'
 import { getLocale } from 'next-intl/server'
 
-import { IS_PRODUCTION } from '@/lib/constants'
 import { getPostBySlug } from '@/lib/content'
-import { resend } from '@/lib/resend'
+import { sendCommentNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
 
 import { protectedProcedure, publicProcedure } from '../root'
@@ -109,22 +106,9 @@ export const createComment = protectedProcedure
     const locale = await getLocale()
     const commentId = createId()
 
-    const page = getPostBySlug(locale, input.slug)
+    const post = getPostBySlug(locale, input.slug)
 
-    if (!page) throw new ORPCError('NOT_FOUND', { message: 'Blog post not found' })
-
-    const title = page.title
-    const defaultImage = getDefaultImage(user.id)
-
-    const userProfile = {
-      name: user.name,
-      image: user.image ?? defaultImage
-    }
-
-    const post = {
-      title,
-      url: `https://nelsonlai.dev/blog/${input.slug}`
-    }
+    if (!post) throw new ORPCError('NOT_FOUND', { message: 'Blog post not found' })
 
     const comment = await context.db.transaction(async (tx) => {
       const [c] = await tx
@@ -144,48 +128,16 @@ export const createComment = protectedProcedure
         })
       }
 
-      if (IS_PRODUCTION && resend && env.AUTHOR_EMAIL) {
-        // Notify the author of the blog post via email
-        if (!input.parentId && user.role === 'user') {
-          await resend.emails.send({
-            from: 'Nelson Lai <me@nelsonlai.dev>',
-            to: env.AUTHOR_EMAIL,
-            subject: 'New comment on your blog post',
-            react: CommentEmailTemplate({
-              comment: input.content,
-              commenter: userProfile,
-              id: `comment=${commentId}`,
-              date: input.date,
-              post
-            })
-          })
-        }
-
-        // Notify the parent comment owner via email
-        if (input.parentId) {
-          const parentComment = await tx.query.comments.findFirst({
-            where: eq(comments.id, input.parentId),
-            with: {
-              user: true
-            }
-          })
-
-          if (parentComment && parentComment.user.email !== user.email) {
-            await resend.emails.send({
-              from: 'Nelson Lai <me@nelsonlai.dev>',
-              to: parentComment.user.email,
-              subject: 'New reply to your comment',
-              react: ReplyEmailTemplate({
-                reply: input.content,
-                replier: userProfile,
-                comment: parentComment.body,
-                id: `comment=${input.parentId}&reply=${commentId}`,
-                date: input.date,
-                post
-              })
-            })
-          }
-        }
+      // Notify the author of the blog post via email
+      if (!input.parentId && user.role === 'user') {
+        await sendCommentNotification(
+          post.title,
+          post.slug,
+          input.content,
+          commentId,
+          user.name,
+          user.image ?? getDefaultImage(user.id)
+        )
       }
 
       return c

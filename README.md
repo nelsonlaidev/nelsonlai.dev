@@ -71,20 +71,6 @@ Welcome to the monorepo of my personal blog! This repository houses the code for
 - t3-env for environment variables
 - Umami Analytics
 
-### Email Templates
-
-#### Comment Notification
-
-<div align="center">
-  <img alt="Comment notification template" src="apps/web/public/images/comment-email-notification.png">
-</div>
-
-#### Reply Notification
-
-<div align="center">
-  <img alt="Reply notification template" src="apps/web/public/images/reply-email-notification.png">
-</div>
-
 ## Getting Started
 
 ### Prerequisites
@@ -160,7 +146,6 @@ The services will be available at the following URLs:
 | Service          | URL              |
 | ---------------- | ---------------- |
 | App              | `localhost:3000` |
-| React Email      | `localhost:3001` |
 | Docs             | `localhost:3002` |
 | Database         | `localhost:5432` |
 | Redis            | `localhost:6379` |

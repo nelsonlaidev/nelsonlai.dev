@@ -36,7 +36,6 @@
     "@orpc/tanstack-query": "^1.6.0",
     "@paralleldrive/cuid2": "^2.2.2",
     "@repo/db": "workspace:*",
-    "@repo/emails": "workspace:*",
     "@repo/env": "workspace:*",
     "@repo/i18n": "workspace:*",
     "@repo/ui": "workspace:*",
@@ -72,7 +71,6 @@
     "react-medium-image-zoom": "^5.3.0",
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.1",
-    "resend": "^6.0.3",
     "rss": "^1.2.2",
     "server-only": "^0.0.1",
     "shiki": "^3.12.2",
@@ -107,6 +105,7 @@
     "@types/spotify-api": "^0.0.25",
     "@types/tinycolor2": "^1.4.6",
     "@vitejs/plugin-react": "^5.0.2",
+    "discord-api-types": "^0.38.28",
     "schema-dts": "^1.1.5",
     "tailwindcss": "^4.1.13"
   }

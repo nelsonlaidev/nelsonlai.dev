@@ -1,9 +1,8 @@
 import { ORPCError } from '@orpc/client'
 import { createId } from '@paralleldrive/cuid2'
 import { and, desc, eq, guestbook, lt } from '@repo/db'
-import { env } from '@repo/env'
 
-import { IS_PRODUCTION } from '@/lib/constants'
+import { sendGuestbookNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
 
 import { protectedProcedure, publicProcedure } from '../root'
@@ -75,33 +74,7 @@ export const createMessage = protectedProcedure
       })
     }
 
-    if (IS_PRODUCTION && env.DISCORD_WEBHOOK_URL) {
-      await fetch(env.DISCORD_WEBHOOK_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          content: null,
-          embeds: [
-            {
-              title: 'New comment!',
-              description: input.message,
-              url: 'https://nelsonlai.dev/guestbook',
-              color: '6609519',
-              author: {
-                name: user.name,
-                icon_url: user.image
-              },
-              timestamp: new Date().toISOString()
-            }
-          ],
-          username: 'Blog',
-          avatar_url: 'https://cdn.discordapp.com/avatars/1123845082672537751/8af603a10f1d2f86ebc922ede339cd3a.webp',
-          attachments: []
-        })
-      })
-    }
+    await sendGuestbookNotification(input.message, user.name, user.image ?? getDefaultImage(user.id))
 
     return message
   })
