@@ -75,7 +75,7 @@ Welcome to the monorepo of my personal blog! This repository houses the code for
 
 ### Prerequisites
 
-- Node.js with [corepack](https://nodejs.org/api/corepack.html) enabled
+- Node.js
 - Bun
 - Docker
 - [Visual Studio Code](https://code.visualstudio.com/) with [recommended extensions](.vscode/extensions.json)
