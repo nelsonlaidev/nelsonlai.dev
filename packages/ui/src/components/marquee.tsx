@@ -1,4 +1,4 @@
-import { cn, range } from '@repo/utils'
+import { cn } from '../utils/cn'
 
 type MarqueeProps = {
   children: React.ReactNode
@@ -35,7 +35,7 @@ const Marquee = (props: MarqueeProps) => {
         gap
       }}
     >
-      {range(2).map((number) => (
+      {Array.from({ length: 2 }).map((_index, number) => (
         <div
           key={number}
           style={

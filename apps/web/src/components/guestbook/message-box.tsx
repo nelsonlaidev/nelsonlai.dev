@@ -9,12 +9,12 @@ import { Button } from '@repo/ui/components/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@repo/ui/components/form'
 import { toast } from '@repo/ui/components/sonner'
 import { Textarea } from '@repo/ui/components/textarea'
-import { getAbbreviation } from '@repo/utils'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { useCreateGuestbookMessage } from '@/hooks/queries/guestbook.query'
 import { useSignOut } from '@/hooks/use-sign-out'
+import { getAbbreviation } from '@/utils/get-abbreviation'
 import { getDefaultImage } from '@/utils/get-default-image'
 
 type MessageBoxProps = {

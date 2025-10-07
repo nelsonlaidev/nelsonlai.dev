@@ -2,7 +2,7 @@ import NumberFlow from '@number-flow/react'
 import { useTranslations } from '@repo/i18n/client'
 import { Button, buttonVariants } from '@repo/ui/components/button'
 import { toast } from '@repo/ui/components/sonner'
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import { cva } from 'cva'
 import { ChevronDownIcon, MessageSquareIcon, ThumbsDownIcon, ThumbsUpIcon } from 'lucide-react'
 

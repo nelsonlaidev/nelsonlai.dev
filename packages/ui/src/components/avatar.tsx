@@ -1,4 +1,4 @@
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import { Avatar as AvatarPrimitive } from 'radix-ui'
 
 type AvatarProps = React.ComponentProps<typeof AvatarPrimitive.Root>

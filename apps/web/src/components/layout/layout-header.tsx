@@ -3,7 +3,7 @@
 import { useTranslations } from '@repo/i18n/client'
 import { Link } from '@repo/ui/components/link'
 import { Logo } from '@repo/ui/components/logo'
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import { motion } from 'motion/react'
 import { useEffect, useRef } from 'react'
 

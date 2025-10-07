@@ -2,7 +2,8 @@
 
 import { Card } from '@repo/ui/components/card'
 import { Skeleton } from '@repo/ui/components/skeleton'
-import { range } from '@repo/utils'
+
+import { range } from '@/utils/range'
 
 const ActiveSessionsSkeleton = () => {
   return (

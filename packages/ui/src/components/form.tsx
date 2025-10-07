@@ -2,7 +2,7 @@
 
 import type { Label as LabelPrimitive } from 'radix-ui'
 
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import { Slot } from 'radix-ui'
 import { createContext, use, useId, useMemo } from 'react'
 import {

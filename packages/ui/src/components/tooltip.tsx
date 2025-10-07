@@ -1,4 +1,4 @@
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import { Tooltip as TooltipPrimitive } from 'radix-ui'
 
 type TooltipProviderProps = React.ComponentProps<typeof TooltipPrimitive.Provider>

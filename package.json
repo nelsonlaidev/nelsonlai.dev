@@ -46,10 +46,10 @@
     "with-env": "dotenvx run -f .env.local --ignore=MISSING_ENV_FILE --"
   },
   "lint-staged": {
-    "*.{js,ts}": "eslint --fix",
-    "*.*": [
+    "*.{js,mjs,jsx,ts,mts,tsx}": "eslint --fix",
+    "*": [
       "prettier --write --ignore-unknown",
-      "bun check:spelling"
+      "cspell --no-progress --no-summary --no-must-find-files --unique"
     ]
   },
   "devDependencies": {

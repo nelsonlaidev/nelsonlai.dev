@@ -1,4 +1,4 @@
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import { CheckIcon } from 'lucide-react'
 import { Checkbox as CheckboxPrimitive } from 'radix-ui'
 

@@ -19,7 +19,11 @@
     "type-check": "tsc --noEmit"
   },
   "lint-staged": {
-    "*.ts": "eslint --fix"
+    "*.{js,mjs,jsx,ts,mts,tsx}": "eslint --fix",
+    "*": [
+      "prettier --write --ignore-unknown",
+      "cspell --no-progress --no-summary --no-must-find-files --unique"
+    ]
   },
   "devDependencies": {
     "@nelsonlaidev/eslint-config": "2.1.1",
@@ -29,7 +33,7 @@
     "next-intl": "4.3.8"
   },
   "peerDependencies": {
-    "next": "^15",
-    "next-intl": "^4"
+    "next": ">=15.0.0",
+    "next-intl": ">=4.0.0"
   }
 }

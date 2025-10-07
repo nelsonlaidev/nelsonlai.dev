@@ -50,7 +50,6 @@
         "@repo/env": "workspace:*",
         "@repo/i18n": "workspace:*",
         "@repo/ui": "workspace:*",
-        "@repo/utils": "workspace:*",
         "@shikijs/rehype": "3.12.2",
         "@shikijs/transformers": "3.12.2",
         "@tanstack/react-query": "5.87.4",
@@ -128,7 +127,6 @@
       "dependencies": {
         "@repo/env": "workspace:*",
         "drizzle-orm": "0.44.5",
-        "postgres": "3.4.7",
       },
       "devDependencies": {
         "@nelsonlaidev/eslint-config": "2.1.1",
@@ -137,9 +135,10 @@
         "consola": "3.4.2",
         "drizzle-kit": "0.31.4",
         "execa": "9.6.0",
+        "postgres": "3.4.7",
       },
       "peerDependencies": {
-        "postgres": "^3",
+        "postgres": ">=3.0.0",
       },
     },
     "packages/env": {
@@ -165,8 +164,8 @@
         "next-intl": "4.3.8",
       },
       "peerDependencies": {
-        "next": "^15",
-        "next-intl": "^4",
+        "next": ">=15.0.0",
+        "next-intl": ">=4.0.0",
       },
     },
     "packages/kv": {
@@ -190,6 +189,7 @@
         "@ark-ui/react": "5.23.0",
         "@icons-pack/react-simple-icons": "13.7.0",
         "@repo/i18n": "workspace:*",
+        "clsx": "^2.1.1",
         "cmdk": "1.1.1",
         "cva": "1.0.0-beta.4",
         "lucide-react": "0.544.0",
@@ -199,11 +199,11 @@
         "react-hook-form": "7.62.0",
         "react-textarea-autosize": "8.5.9",
         "sonner": "2.0.7",
+        "tailwind-merge": "^3.3.1",
       },
       "devDependencies": {
         "@nelsonlaidev/eslint-config": "2.1.1",
         "@nelsonlaidev/typescript-config": "0.0.3",
-        "@repo/utils": "workspace:*",
         "@tailwindcss/typography": "0.5.19",
         "@types/react": "19.1.13",
         "@types/react-dom": "19.1.9",
@@ -214,23 +214,9 @@
         "tw-animate-css": "1.4.0",
       },
       "peerDependencies": {
-        "@repo/utils": ">=0",
-        "next": "^15",
-        "react": "^19",
-        "react-dom": "^19",
-      },
-    },
-    "packages/utils": {
-      "name": "@repo/utils",
-      "version": "0.0.0",
-      "dependencies": {
-        "clsx": "2.1.1",
-        "tailwind-merge": "3.3.1",
-      },
-      "devDependencies": {
-        "@nelsonlaidev/eslint-config": "2.1.1",
-        "@nelsonlaidev/typescript-config": "0.0.3",
-        "@types/node": "24.3.3",
+        "next": ">=15.0.0",
+        "react": ">=19.0.0",
+        "react-dom": ">=19.0.0",
       },
     },
   },
@@ -1106,8 +1092,6 @@
     "@repo/kv": ["@repo/kv@workspace:packages/kv"],
 
     "@repo/ui": ["@repo/ui@workspace:packages/ui"],
-
-    "@repo/utils": ["@repo/utils@workspace:packages/utils"],
 
     "@repo/web": ["@repo/web@workspace:apps/web"],
 
@@ -2181,7 +2165,7 @@
 
     "get-symbol-description": ["get-symbol-description@1.1.0", "", { "dependencies": { "call-bound": "^1.0.3", "es-errors": "^1.3.0", "get-intrinsic": "^1.2.6" } }, "sha512-w9UMqWwJxHNOvoNzSJ2oPF5wvYcvP7jUvYzhp67yEhTi17ZDBBC1z9pTdGuzjD+EFIqLSYRweZjqfiPzQ06Ebg=="],
 
-    "get-tsconfig": ["get-tsconfig@4.10.1", "", { "dependencies": { "resolve-pkg-maps": "^1.0.0" } }, "sha512-auHyJ4AgMz7vgS8Hp3N6HXSmlMdUyhSUrfBF16w153rxtLIEOE+HGqaBppczZvnHLqQJfiHotCYpNhl0lUROFQ=="],
+    "get-tsconfig": ["get-tsconfig@4.11.0", "", { "dependencies": { "resolve-pkg-maps": "^1.0.0" } }, "sha512-sNsqf7XKQ38IawiVGPOoAlqZo1DMrO7TU+ZcZwi7yLl7/7S0JwmoBMKz/IkUPhSoXM0Ng3vT0yB1iCe5XavDeQ=="],
 
     "git-hooks-list": ["git-hooks-list@4.1.1", "", {}, "sha512-cmP497iLq54AZnv4YRAEMnEyQ1eIn4tGKbmswqwmFV4GBnAqE8NLtWxxdXa++AalfgL5EBH4IxTPyquEuGY/jA=="],
 

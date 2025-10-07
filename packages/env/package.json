@@ -13,7 +13,11 @@
     "type-check": "tsc --noEmit"
   },
   "lint-staged": {
-    "*.ts": "eslint --fix"
+    "*.{js,mjs,jsx,ts,mts,tsx}": "eslint --fix",
+    "*": [
+      "prettier --write --ignore-unknown",
+      "cspell --no-progress --no-summary --no-must-find-files --unique"
+    ]
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "0.13.8",

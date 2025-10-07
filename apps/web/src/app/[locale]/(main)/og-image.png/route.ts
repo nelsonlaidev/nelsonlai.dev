@@ -1,8 +1,9 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-import { getErrorMessage } from '@repo/utils'
 import { NextResponse } from 'next/server'
+
+import { getErrorMessage } from '@/utils/get-error-message'
 
 export const GET = async () => {
   try {

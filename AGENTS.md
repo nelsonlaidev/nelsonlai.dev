@@ -108,7 +108,7 @@ export default Component
 ### Styling Conventions
 
 - Use Tailwind CSS utilities
-- Use `cn()` helper from `@repo/utils` for conditional classes
+- Use `cn()` helper from `@repo/ui/utils/cn` for conditional classes
 - Prefer `space-x-*` and `space-y-*` over `mb-*` and `mt-*`
 - Prefer `gap-*` over `space-x-*` and `space-y-*` in flex containers
 - Avoid inline styles unless dynamic

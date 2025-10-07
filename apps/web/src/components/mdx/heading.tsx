@@ -5,7 +5,7 @@
 // Modified by: Nelson Lai
 import { useTranslations } from '@repo/i18n/client'
 import { Link } from '@repo/ui/components/link'
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import { LinkIcon } from 'lucide-react'
 
 type Types = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'

@@ -1,5 +1,4 @@
 import { routing } from '@repo/i18n/routing'
-import { getErrorMessage } from '@repo/utils'
 import { ImageResponse } from 'next/og'
 import { NextResponse } from 'next/server'
 import { hasLocale } from 'next-intl'
@@ -8,6 +7,7 @@ import OGImage from '@/components/og-image'
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '@/lib/constants'
 import { getPostBySlug } from '@/lib/content'
 import { getOGImageFonts } from '@/lib/fonts'
+import { getErrorMessage } from '@/utils/get-error-message'
 
 export const GET = async (_request: Request, props: RouteContext<'/[locale]/blog/[slug]/og-image.png'>) => {
   const { params } = props

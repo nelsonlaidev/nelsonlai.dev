@@ -2,7 +2,7 @@ import { useTranslations } from '@repo/i18n/client'
 import { Button } from '@repo/ui/components/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/components/tabs'
 import { Textarea } from '@repo/ui/components/textarea'
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import { BoldIcon, ItalicIcon, StrikethroughIcon } from 'lucide-react'
 
 import { useCommentEditor } from '@/hooks/use-comment-editor'

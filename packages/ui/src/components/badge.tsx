@@ -1,4 +1,4 @@
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import { cva, type VariantProps } from 'cva'
 import { Slot } from 'radix-ui'
 

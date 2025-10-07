@@ -5,7 +5,7 @@
 // Modified by: Nelson Lai
 'use client'
 
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import NextImage from 'next/image'
 import { useState } from 'react'
 

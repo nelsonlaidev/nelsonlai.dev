@@ -1,4 +1,4 @@
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 
 type CardProps = React.ComponentProps<'div'>
 

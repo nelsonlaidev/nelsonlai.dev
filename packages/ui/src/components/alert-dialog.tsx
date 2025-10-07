@@ -1,4 +1,4 @@
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import { AlertDialog as AlertDialogPrimitive } from 'radix-ui'
 
 import { buttonVariants } from './button'

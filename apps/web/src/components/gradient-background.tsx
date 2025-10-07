@@ -1,4 +1,4 @@
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import { useId } from 'react'
 
 type GradientBackgroundProps = React.ComponentProps<'svg'>

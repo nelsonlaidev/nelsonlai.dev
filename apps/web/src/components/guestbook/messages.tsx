@@ -4,13 +4,13 @@ import type { ListMessagesOutput } from '@/orpc/routers'
 
 import { useTranslations } from '@repo/i18n/client'
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar'
-import { getAbbreviation } from '@repo/utils'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { useGuestbookMessages } from '@/hooks/queries/guestbook.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useSession } from '@/lib/auth-client'
+import { getAbbreviation } from '@/utils/get-abbreviation'
 import { getDefaultImage } from '@/utils/get-default-image'
 
 import DeleteButton from './delete-button'

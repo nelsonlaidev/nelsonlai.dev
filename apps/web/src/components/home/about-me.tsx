@@ -3,7 +3,7 @@
 import { useTranslations } from '@repo/i18n/client'
 import { buttonVariants } from '@repo/ui/components/button'
 import { Link } from '@repo/ui/components/link'
-import { cn } from '@repo/utils'
+import { cn } from '@repo/ui/utils/cn'
 import { motion, useInView } from 'motion/react'
 import { useRef } from 'react'
 
