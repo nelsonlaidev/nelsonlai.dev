@@ -36,6 +36,10 @@ export const env = createEnv({
 
     DISCORD_WEBHOOK_URL: z.url().optional(),
 
+    RESEND_API_KEY: z.string().min(1).optional(),
+    AUTHOR_EMAIL: z.email().optional(),
+    JWT_SECRET: z.string().min(1).optional(),
+
     CLOUDFLARE_R2_ENDPOINT: z.url().optional(),
     CLOUDFLARE_R2_ACCESS_KEY_ID: z.string().min(1).optional(),
     CLOUDFLARE_R2_SECRET_ACCESS_KEY: z.string().min(1).optional(),

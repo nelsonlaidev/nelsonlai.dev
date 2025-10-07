@@ -146,7 +146,8 @@ The services will be available at the following URLs:
 | Service          | URL              |
 | ---------------- | ---------------- |
 | App              | `localhost:3000` |
-| Docs             | `localhost:3002` |
+| Docs             | `localhost:3001` |
+| React Email      | `localhost:3002` |
 | Database         | `localhost:5432` |
 | Redis            | `localhost:6379` |
 | Redis serverless | `localhost:8079` |

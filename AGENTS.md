@@ -14,6 +14,7 @@ nelsonlai-dev/
 │   └── web/                # Main website (Next.js)
 ├── packages/               # Shared packages
 │   ├── db/                 # Database schema and migrations (Drizzle ORM)
+│   ├── emails/             # Email templates (React Email)
 │   ├── env/                # Environment variable management
 │   ├── i18n/               # Internationalization
 │   ├── kv/                 # Key-value store utilities
@@ -49,6 +50,7 @@ nelsonlai-dev/
 - Cache: Redis for caching and rate limiting
 - Authentication: Better Auth
 - API: oRPC for type-safe APIs
+- Email: React Email for transactional emails
 - Testing: Playwright for E2E, Vitest for unit tests
 - Package Manager: Bun
 - Monorepo: Turborepo
@@ -244,7 +246,7 @@ Follow Conventional Commits:
 Available scopes:
 
 - apps: web
-- packages: db, env, i18n, kv, ui, utils
+- packages: db, emails, env, i18n, kv, ui, utils
 
 ### PR Checklist
 
