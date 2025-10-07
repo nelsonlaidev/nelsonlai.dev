@@ -116,6 +116,19 @@ jobs:
       - name: Run Knip
         run: bun check:knip
 
+  i18n:
+    name: i18n
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Configure environment
+        uses: ./.github/actions/setup
+
+      - name: Run i18n check
+        run: bun check:i18n
+
   e2e:
     name: End-to-end tests
     runs-on: ubuntu-latest
