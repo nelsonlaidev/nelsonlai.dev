@@ -6,8 +6,6 @@ files:
   - .*
   - .*/**
   - '!.git/**'
-ignorePaths:
-  - pnpm-lock.yaml
 dictionaries:
   - npm
   - softwareTerms
@@ -30,14 +28,10 @@ words:
   - cleanshot
   - cmdk
   - cobe
-  - createcluster
-  - createdb
-  - createuser
   - customizer
   - dbaeumer
   - delba
   - dotenvx
-  - dropcluster
   - eihab
   - fuma
   - fumadocs
@@ -52,10 +46,8 @@ words:
   - karabiner
   - keka
   - keychron
-  - keystyle
   - leerob
   - linktree
-  - lokalise
   - macbook
   - maximeheckel
   - motrix
@@ -76,7 +68,6 @@ words:
   - planetscale
   - plpgsql
   - presigner
-  - psql
   - radixui
   - reactquery
   - rmiz

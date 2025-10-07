@@ -76,7 +76,7 @@ Welcome to the monorepo of my personal blog! This repository houses the code for
 ### Prerequisites
 
 - Node.js with [corepack](https://nodejs.org/api/corepack.html) enabled
-- pnpm
+- Bun
 - Docker
 - [Visual Studio Code](https://code.visualstudio.com/) with [recommended extensions](.vscode/extensions.json)
 - Optionally [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
@@ -99,10 +99,10 @@ git clone https://github.com/nelsonlaidev/nelsonlai.dev
 cd nelsonlai.dev
 ```
 
-3. Install dependencies using pnpm:
+3. Install dependencies using Bun:
 
 ```bash
-pnpm install
+bun install
 ```
 
 ### Environment Setup
@@ -122,23 +122,23 @@ docker compose up -d
 3. Run the database migrations:
 
 ```bash
-pnpm db:migrate
+bun db:migrate
 ```
 
 4. Seed the database:
 
 ```bash
-pnpm db:seed
+bun db:seed
 ```
 
 5. Run the app:
 
 ```bash
-pnpm dev # Run all services
+bun dev # Run all services
 # or
-pnpm dev:web # Run only the web app
+bun dev:web # Run only the web app
 # or
-pnpm dev:docs # Run only the documentation app
+bun dev:docs # Run only the documentation app
 ```
 
 The services will be available at the following URLs:

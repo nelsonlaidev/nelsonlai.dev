@@ -34,7 +34,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run unit tests
-        run: pnpm test:unit
+        run: bun test:unit
 
   eslint:
     name: ESLint
@@ -47,13 +47,13 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Build MDX
-        run: pnpm build:mdx
+        run: bun build:mdx
 
       - name: Generate Next.js route types
-        run: pnpm --filter web typegen
+        run: bun typegen
 
       - name: Run ESLint
-        run: pnpm lint
+        run: bun lint
 
   types:
     name: TypeScript
@@ -66,13 +66,13 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Build MDX
-        run: pnpm build:mdx
+        run: bun build:mdx
 
       - name: Generate Next.js route types
-        run: pnpm --filter web typegen
+        run: bun typegen
 
       - name: Run type check
-        run: pnpm type-check
+        run: bun type-check
 
   prettier:
     name: Prettier
@@ -85,7 +85,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run Prettier format check
-        run: pnpm format:check
+        run: bun format:check
 
   spelling:
     name: Spelling
@@ -98,7 +98,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run spelling check
-        run: pnpm check:spelling
+        run: bun check:spelling
 
   knip:
     name: Knip
@@ -111,10 +111,23 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Build MDX
-        run: pnpm build:mdx
+        run: bun build:mdx
 
       - name: Run Knip
-        run: pnpm check:knip
+        run: bun check:knip
+
+  i18n:
+    name: i18n
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Configure environment
+        uses: ./.github/actions/setup
+
+      - name: Run i18n check
+        run: bun check:i18n
 
   e2e:
     name: End-to-end tests
@@ -128,7 +141,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Install Playwright with dependencies
-        run: pnpm playwright install --with-deps chromium --only-shell
+        run: bun playwright install --with-deps chromium --only-shell
 
       - name: Create test posts and copy dummy images
         run: |
@@ -187,19 +200,19 @@ jobs:
           done
 
       - name: Build apps
-        run: pnpm build:apps
+        run: bun build:apps
 
       - name: Run services
         run: docker compose up -d
 
       - name: Migrate database
-        run: pnpm db:migrate
+        run: bun db:migrate
 
       - name: Seed database
-        run: pnpm db:seed
+        run: bun db:seed
 
       - name: Run Playwright tests
-        run: pnpm test:e2e
+        run: bun test:e2e
 
       - name: Upload Playwright report
         if: always()
