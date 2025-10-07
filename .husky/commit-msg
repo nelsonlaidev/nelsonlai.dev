@@ -1,2 +1,0 @@
-bun commitlint --edit $1
-bun check:spelling $1

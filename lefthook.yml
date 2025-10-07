@@ -1,0 +1,20 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: eslint
+      run: bun eslint --fix {staged_files}
+      glob: '*.{js,mjs,jsx,ts,mts,tsx}'
+      stage_fixed: true
+
+    - name: prettier
+      run: bun prettier --write {staged_files} --ignore-unknown
+      stage_fixed: true
+
+commit-msg:
+  parallel: true
+  jobs:
+    - name: commitlint
+      run: bun commitlint --edit {1}
+
+    - name: spelling
+      run: bun check:spelling {1}

@@ -59,7 +59,7 @@ Welcome to the monorepo of my personal blog! This repository houses the code for
 - Playwright for E2E testing
 - ESLint configuration
 - Prettier code formatting
-- Husky & lint-staged
+- Lefthook
 - Conventional commit lint
 - CSpell for spell checking
 
