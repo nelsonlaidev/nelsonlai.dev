@@ -30,7 +30,7 @@
     "@nelsonlaidev/typescript-config": "0.0.3",
     "@types/react": "19.2.2",
     "next": "15.5.4",
-    "next-intl": "4.3.8"
+    "next-intl": "4.3.10"
   },
   "peerDependencies": {
     "next": ">=15.0.0",
