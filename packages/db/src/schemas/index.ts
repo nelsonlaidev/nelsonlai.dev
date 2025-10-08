@@ -1,5 +1,5 @@
 export * from './auth.schema'
 export * from './comments.schema'
 export * from './guestbook.schema'
-export * from './likes-sessions.schema'
+export * from './post-likes.schema'
 export * from './posts.schema'

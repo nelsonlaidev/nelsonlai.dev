@@ -1,6 +1,6 @@
 import { integer, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 
-export const likesSessions = pgTable('likes_session', {
+export const postLikes = pgTable('post_like', {
   id: text('id').primaryKey(),
   createdAt: timestamp('created_at')
     .notNull()

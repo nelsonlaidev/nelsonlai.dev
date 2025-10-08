@@ -1,5 +1,5 @@
 import { ORPCError } from '@orpc/client'
-import { eq, likesSessions, posts, sql } from '@repo/db'
+import { eq, postLikes, posts, sql } from '@repo/db'
 
 import { getIp } from '@/utils/get-ip'
 import { getSessionId } from '@/utils/get-session-id'
@@ -25,7 +25,7 @@ export const countLike = publicProcedure
 
     const [[post], [user]] = await Promise.all([
       context.db.select({ likes: posts.likes }).from(posts).where(eq(posts.slug, input.slug)),
-      context.db.select({ likes: likesSessions.likes }).from(likesSessions).where(eq(likesSessions.id, sessionId))
+      context.db.select({ likes: postLikes.likes }).from(postLikes).where(eq(postLikes.id, sessionId))
     ])
 
     if (!post) {
@@ -52,9 +52,9 @@ export const incrementLike = publicProcedure
     const sessionId = getSessionId(input.slug, ip)
 
     const [session] = await context.db
-      .select({ likes: likesSessions.likes })
-      .from(likesSessions)
-      .where(eq(likesSessions.id, sessionId))
+      .select({ likes: postLikes.likes })
+      .from(postLikes)
+      .where(eq(postLikes.id, sessionId))
 
     if (session && session.likes + input.value > 3) {
       throw new ORPCError('BAD_REQUEST', {
@@ -70,11 +70,11 @@ export const incrementLike = publicProcedure
           .where(eq(posts.slug, input.slug))
           .returning(),
         tx
-          .insert(likesSessions)
+          .insert(postLikes)
           .values({ id: sessionId, likes: input.value })
           .onConflictDoUpdate({
-            target: likesSessions.id,
-            set: { likes: sql`${likesSessions.likes} + ${input.value}` }
+            target: postLikes.id,
+            set: { likes: sql`${postLikes.likes} + ${input.value}` }
           })
           .returning()
       ])
