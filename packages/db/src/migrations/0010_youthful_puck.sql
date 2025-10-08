@@ -1,3 +1,4 @@
+TRUNCATE TABLE "post_like";--> statement-breakpoint
 ALTER TABLE "post_like" DROP COLUMN "id";--> statement-breakpoint
 ALTER TABLE "post_like" ADD COLUMN "post_id" text NOT NULL;--> statement-breakpoint
 ALTER TABLE "post_like" ADD COLUMN "anon_key" text NOT NULL;--> statement-breakpoint
