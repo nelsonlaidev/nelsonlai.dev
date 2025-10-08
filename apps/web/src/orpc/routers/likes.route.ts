@@ -1,8 +1,8 @@
 import { ORPCError } from '@orpc/client'
-import { eq, likesSessions, posts, sql } from '@repo/db'
+import { and, eq, postLikes, posts, sql } from '@repo/db'
 
+import { getAnonKey } from '@/utils/get-anon-key'
 import { getIp } from '@/utils/get-ip'
-import { getSessionId } from '@/utils/get-session-id'
 
 import { cache } from '../cache'
 import { publicProcedure } from '../root'
@@ -18,14 +18,17 @@ export const countLike = publicProcedure
   .output(countLikeOutputSchema)
   .handler(async ({ input, context }) => {
     const ip = getIp(context.headers)
-    const sessionId = getSessionId(input.slug, ip)
+    const anonKey = getAnonKey(ip)
 
-    const cached = await cache.posts.likes.get(input.slug, sessionId)
+    const cached = await cache.posts.likes.get(input.slug, anonKey)
     if (cached) return cached
 
     const [[post], [user]] = await Promise.all([
       context.db.select({ likes: posts.likes }).from(posts).where(eq(posts.slug, input.slug)),
-      context.db.select({ likes: likesSessions.likes }).from(likesSessions).where(eq(likesSessions.id, sessionId))
+      context.db
+        .select({ likes: postLikes.likes })
+        .from(postLikes)
+        .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
     ])
 
     if (!post) {
@@ -39,7 +42,7 @@ export const countLike = publicProcedure
       currentUserLikes: user?.likes ?? 0 // The case that user has not liked the post yet
     }
 
-    await cache.posts.likes.set(likesData, input.slug, sessionId)
+    await cache.posts.likes.set(likesData, input.slug, anonKey)
 
     return likesData
   })
@@ -49,12 +52,12 @@ export const incrementLike = publicProcedure
   .output(incrementLikeOutputSchema)
   .handler(async ({ input, context }) => {
     const ip = getIp(context.headers)
-    const sessionId = getSessionId(input.slug, ip)
+    const anonKey = getAnonKey(ip)
 
     const [session] = await context.db
-      .select({ likes: likesSessions.likes })
-      .from(likesSessions)
-      .where(eq(likesSessions.id, sessionId))
+      .select({ likes: postLikes.likes })
+      .from(postLikes)
+      .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
 
     if (session && session.likes + input.value > 3) {
       throw new ORPCError('BAD_REQUEST', {
@@ -70,11 +73,11 @@ export const incrementLike = publicProcedure
           .where(eq(posts.slug, input.slug))
           .returning(),
         tx
-          .insert(likesSessions)
-          .values({ id: sessionId, likes: input.value })
+          .insert(postLikes)
+          .values({ postId: input.slug, anonKey, likes: input.value })
           .onConflictDoUpdate({
-            target: likesSessions.id,
-            set: { likes: sql`${likesSessions.likes} + ${input.value}` }
+            target: [postLikes.postId, postLikes.anonKey],
+            set: { likes: sql`${postLikes.likes} + ${input.value}` }
           })
           .returning()
       ])
@@ -91,7 +94,7 @@ export const incrementLike = publicProcedure
       currentUserLikes: currentUserLikes.likes
     }
 
-    await cache.posts.likes.set(likesData, input.slug, sessionId)
+    await cache.posts.likes.set(likesData, input.slug, anonKey)
 
     return likesData
   })
