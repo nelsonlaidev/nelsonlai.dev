@@ -38,10 +38,8 @@ const Profile = () => {
   return (
     <div className='space-y-6'>
       <h2 className='text-lg font-semibold'>{t('account.profile')}</h2>
-      <Card className='p-4 sm:p-6'>
-        {isSessionLoading && <ProfileSkeleton />}
-        {data && <ProfileInfo user={data.user} />}
-      </Card>
+      {isSessionLoading && <ProfileSkeleton />}
+      {data && <ProfileInfo user={data.user} />}
     </div>
   )
 }
@@ -56,7 +54,7 @@ const ProfileInfo = (props: ProfileInfoProps) => {
   const t = useTranslations()
 
   return (
-    <>
+    <Card className='p-4 sm:p-6'>
       <div className='flex items-center justify-between'>
         <div className='flex flex-col gap-2'>
           <span className='text-muted-foreground'>{t('account.avatar')}</span>
@@ -86,7 +84,7 @@ const ProfileInfo = (props: ProfileInfoProps) => {
           <span>{createdAt}</span>
         </div>
       </div>
-    </>
+    </Card>
   )
 }
 

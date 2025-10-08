@@ -1,4 +1,5 @@
 import { Button } from '@repo/ui/components/button'
+import { Card } from '@repo/ui/components/card'
 import { Skeleton } from '@repo/ui/components/skeleton'
 import { useTranslations } from 'next-intl'
 
@@ -6,7 +7,7 @@ const ProfileSkeleton = () => {
   const t = useTranslations()
 
   return (
-    <>
+    <Card className='p-4 sm:p-6'>
       <div className='flex items-center justify-between'>
         <div className='flex flex-col gap-2'>
           <span className='text-muted-foreground'>{t('account.avatar')}</span>
@@ -33,7 +34,7 @@ const ProfileSkeleton = () => {
           <Skeleton className='h-6 w-20' />
         </div>
       </div>
-    </>
+    </Card>
   )
 }
 
