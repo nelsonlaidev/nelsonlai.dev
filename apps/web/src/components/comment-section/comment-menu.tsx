@@ -1,4 +1,3 @@
-import { useTranslations } from '@repo/i18n/client'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,6 +18,7 @@ import {
 } from '@repo/ui/components/dropdown-menu'
 import { toast } from '@repo/ui/components/sonner'
 import { MoreVerticalIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'

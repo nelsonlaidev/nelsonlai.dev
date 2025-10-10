@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import type { CollectionPage, WithContext } from 'schema-dts'
 
-import { getTranslations, setRequestLocale } from '@repo/i18n/server'
 import { type Locale, useTranslations } from 'next-intl'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { use } from 'react'
 
 import JsonLd from '@/components/json-ld'

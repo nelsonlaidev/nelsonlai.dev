@@ -1,8 +1,8 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { usePathname } from '@repo/i18n/routing'
 import { Link } from '@repo/ui/components/link'
+import { useTranslations } from 'next-intl'
 
 import { HEADER_LINKS } from '@/config/links'
 

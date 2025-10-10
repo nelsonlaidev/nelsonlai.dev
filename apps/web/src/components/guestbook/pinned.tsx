@@ -1,5 +1,5 @@
-import { useTranslations } from '@repo/i18n/client'
 import { MessageCircleIcon, PinIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 const Pinned = () => {
   const t = useTranslations()

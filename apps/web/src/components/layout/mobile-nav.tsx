@@ -1,6 +1,5 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { Button } from '@repo/ui/components/button'
 import {
   DropdownMenu,
@@ -10,6 +9,7 @@ import {
 } from '@repo/ui/components/dropdown-menu'
 import { Link } from '@repo/ui/components/link'
 import { MenuIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { HEADER_LINKS } from '@/config/links'
 

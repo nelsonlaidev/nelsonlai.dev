@@ -1,16 +1,19 @@
+import type { Locale } from 'next-intl'
+
+import { redirect } from '@repo/i18n/routing'
 import { SidebarProvider } from '@repo/ui/components/sidebar'
-import { redirect } from 'next/navigation'
 
 import AdminHeader from '@/components/admin/admin-header'
 import AdminSidebar from '@/components/admin/admin-sidebar'
 import { getSession } from '@/lib/auth'
 
 const Layout = async (props: LayoutProps<'/[locale]'>) => {
-  const { children } = props
+  const { children, params } = props
+  const { locale } = await params
   const session = await getSession()
 
   if (!session || session.user.role !== 'admin') {
-    redirect('/')
+    redirect({ href: '/', locale: locale as Locale })
   }
 
   return (

@@ -1,5 +1,5 @@
-import { useTranslations } from '@repo/i18n/client'
 import { toast } from '@repo/ui/components/sonner'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 type CopyOptions = {

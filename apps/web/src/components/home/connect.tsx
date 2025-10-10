@@ -1,6 +1,6 @@
-import { useTranslations } from '@repo/i18n/client'
 import { Link } from '@repo/ui/components/link'
 import { LinkIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { SOCIAL_LINKS } from '@/config/links'
 

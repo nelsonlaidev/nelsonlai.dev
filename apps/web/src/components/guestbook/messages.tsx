@@ -2,8 +2,8 @@
 
 import type { ListMessagesOutput } from '@/orpc/routers'
 
-import { useTranslations } from '@repo/i18n/client'
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar'
+import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 

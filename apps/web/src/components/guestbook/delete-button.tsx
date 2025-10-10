@@ -1,6 +1,5 @@
 import type { ListMessagesOutput } from '@/orpc/routers'
 
-import { useTranslations } from '@repo/i18n/client'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,6 +13,7 @@ import {
 } from '@repo/ui/components/alert-dialog'
 import { Button, buttonVariants } from '@repo/ui/components/button'
 import { toast } from '@repo/ui/components/sonner'
+import { useTranslations } from 'next-intl'
 
 import { useDeleteGuestbookMessage } from '@/hooks/queries/guestbook.query'
 

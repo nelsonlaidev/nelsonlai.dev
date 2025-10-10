@@ -2,8 +2,8 @@
 
 import type { Post } from '@/lib/content'
 
-import { useLocale, useTranslations } from '@repo/i18n/client'
 import { Link } from '@repo/ui/components/link'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 

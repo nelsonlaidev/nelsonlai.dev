@@ -1,7 +1,7 @@
-import { type Locale, useLocale, useTranslations } from '@repo/i18n/client'
 import { localeLabels, routing, usePathname, useRouter } from '@repo/i18n/routing'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/components/select'
 import { LanguagesIcon } from 'lucide-react'
+import { type Locale, useLocale, useTranslations } from 'next-intl'
 import { useTransition } from 'react'
 
 const LocaleSwitcher = () => {

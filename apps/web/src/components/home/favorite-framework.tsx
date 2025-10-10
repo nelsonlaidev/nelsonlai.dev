@@ -1,6 +1,6 @@
 import { SiNextdotjs } from '@icons-pack/react-simple-icons'
-import { useTranslations } from '@repo/i18n/client'
 import { HeartIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 const FavoriteFramework = () => {
   const t = useTranslations()

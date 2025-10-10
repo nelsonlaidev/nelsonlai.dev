@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import type { Locale } from 'next-intl'
 import type { WebPage, WithContext } from 'schema-dts'
 
-import { getTranslations, setRequestLocale } from '@repo/i18n/server'
 import { notFound } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { use } from 'react'
 
 import JsonLd from '@/components/json-ld'

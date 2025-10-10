@@ -2,12 +2,12 @@
 
 import type { Project } from '@/lib/content'
 
-import { useTranslations } from '@repo/i18n/client'
 import { buttonVariants } from '@repo/ui/components/button'
 import { Link } from '@repo/ui/components/link'
 import { cn } from '@repo/ui/utils/cn'
 import { ArrowUpRightIcon } from 'lucide-react'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 
 import { GITHUB_USERNAME } from '@/lib/constants'
 

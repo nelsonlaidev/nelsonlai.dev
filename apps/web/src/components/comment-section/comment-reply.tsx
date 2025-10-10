@@ -1,8 +1,8 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { Button } from '@repo/ui/components/button'
 import { toast } from '@repo/ui/components/sonner'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { useCommentContext } from '@/contexts/comment.context'

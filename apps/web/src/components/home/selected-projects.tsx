@@ -2,12 +2,12 @@
 
 import type { Project } from '@/lib/content'
 
-import { useTranslations } from '@repo/i18n/client'
 import { buttonVariants } from '@repo/ui/components/button'
 import { Link } from '@repo/ui/components/link'
 import { cn } from '@repo/ui/utils/cn'
 import { ArrowUpRightIcon, LightbulbIcon } from 'lucide-react'
 import { motion, useInView } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import { useRef } from 'react'
 
 import BlurImage from '@/components/blur-image'
