@@ -238,7 +238,7 @@
     "description": "这是我目前用来玩游戏、程序设计、制作视频和日常使用的装备。"
   },
   "account": {
-    "description": "管理您的账户设置",
+    "description": "管理您的账户。",
     "active-sessions": "活跃会话",
     "no-active-sessions": "没有活动会话",
     "revoke-session": "结束",

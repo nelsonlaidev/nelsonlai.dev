@@ -238,7 +238,7 @@
     "description": "This is the equipment I currently use for gaming, programming, making videos, and every day."
   },
   "account": {
-    "description": "Manage your account settings",
+    "description": "Manage your account.",
     "active-sessions": "Active sessions",
     "no-active-sessions": "No active sessions",
     "revoke-session": "Revoke",

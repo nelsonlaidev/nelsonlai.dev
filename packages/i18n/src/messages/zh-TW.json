@@ -238,7 +238,7 @@
     "description": "這是我目前用來玩遊戲、程式設計、製作影片和日常使用的裝備。"
   },
   "account": {
-    "description": "管理您的帳戶設定",
+    "description": "管理您的帳戶。",
     "active-sessions": "使用中的工作階段",
     "no-active-sessions": "沒有使用中工作階段",
     "revoke-session": "終止",
