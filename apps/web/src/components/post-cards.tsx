@@ -2,8 +2,8 @@
 
 import type { Post } from '@/lib/content'
 
-import { useTranslations } from '@repo/i18n/client'
 import { Link } from '@repo/ui/components/link'
+import { useTranslations } from 'next-intl'
 
 import BlurImage from '@/components/blur-image'
 import { usePostLikeCount, usePostViewCount } from '@/hooks/queries/post.query'

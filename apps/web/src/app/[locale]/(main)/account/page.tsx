@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import type { Locale } from 'next-intl'
 
-import { getTranslations } from '@repo/i18n/server'
-import { redirect } from 'next/navigation'
+import { redirect } from '@repo/i18n/routing'
+import { getTranslations } from 'next-intl/server'
 
 import ActiveSessions from '@/components/account/active-sessions'
 import Profile from '@/components/account/profile'
@@ -27,11 +27,14 @@ export const generateMetadata = async (props: PageProps<'/[locale]/account'>): P
   })
 }
 
-const Page = async () => {
+const Page = async (props: PageProps<'/[locale]/account'>) => {
+  const { params } = props
+  const { locale } = await params
+
   const session = await getSession()
 
   if (!session || session.user.role !== 'admin') {
-    redirect('/')
+    redirect({ href: '/', locale: locale as Locale })
   }
 
   const t = await getTranslations()

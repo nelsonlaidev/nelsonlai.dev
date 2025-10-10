@@ -1,7 +1,7 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { motion, useAnimate, useInView } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
 import BlurImage from '@/components/blur-image'

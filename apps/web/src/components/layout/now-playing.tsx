@@ -1,7 +1,7 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { Link } from '@repo/ui/components/link'
+import { useTranslations } from 'next-intl'
 
 import { useSpotifyStat } from '@/hooks/queries/stat.query'
 

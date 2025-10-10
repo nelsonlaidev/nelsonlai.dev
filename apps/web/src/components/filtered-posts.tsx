@@ -2,10 +2,10 @@
 
 import type { Post } from '@/lib/content'
 
-import { useTranslations } from '@repo/i18n/client'
 import { Input } from '@repo/ui/components/input'
 import { Label } from '@repo/ui/components/label'
 import { SearchIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import PostCards from './post-cards'

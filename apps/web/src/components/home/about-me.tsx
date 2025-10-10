@@ -1,10 +1,10 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { buttonVariants } from '@repo/ui/components/button'
 import { Link } from '@repo/ui/components/link'
 import { cn } from '@repo/ui/utils/cn'
 import { motion, useInView } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import { useRef } from 'react'
 
 import CodingHours from './coding-hours'

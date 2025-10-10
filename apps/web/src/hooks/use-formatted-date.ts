@@ -1,5 +1,5 @@
-import { type DateTimeFormatOptions, useFormatter } from '@repo/i18n/client'
 import dayjs from 'dayjs'
+import { type DateTimeFormatOptions, useFormatter } from 'next-intl'
 
 type Options = {
   relative?: boolean

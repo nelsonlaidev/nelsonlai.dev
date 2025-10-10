@@ -1,7 +1,7 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { Button } from '@repo/ui/components/button'
+import { useTranslations } from 'next-intl'
 
 import { useDialogsStore } from '@/stores/dialogs.store'
 

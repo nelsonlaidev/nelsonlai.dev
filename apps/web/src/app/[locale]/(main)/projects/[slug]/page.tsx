@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import type { Locale } from 'next-intl'
 import type { SoftwareSourceCode, WithContext } from 'schema-dts'
 
-import { setRequestLocale } from '@repo/i18n/server'
 import { notFound } from 'next/navigation'
+import { setRequestLocale } from 'next-intl/server'
 import { use } from 'react'
 
 import BlurImage from '@/components/blur-image'

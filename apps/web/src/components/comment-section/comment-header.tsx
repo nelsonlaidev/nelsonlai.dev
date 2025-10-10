@@ -1,7 +1,6 @@
 import type { ListCommentsInput } from '@/orpc/routers'
 
 import NumberFlow, { NumberFlowGroup } from '@number-flow/react'
-import { useTranslations } from '@repo/i18n/client'
 import { Button } from '@repo/ui/components/button'
 import {
   DropdownMenu,
@@ -11,6 +10,7 @@ import {
   DropdownMenuTrigger
 } from '@repo/ui/components/dropdown-menu'
 import { ListFilterIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { useCommentsContext } from '@/contexts/comments.context'
 import { usePostCommentCount, usePostReplyCount } from '@/hooks/queries/post.query'

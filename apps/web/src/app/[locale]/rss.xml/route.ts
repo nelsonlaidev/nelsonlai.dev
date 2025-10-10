@@ -1,7 +1,7 @@
 import { routing } from '@repo/i18n/routing'
-import { getTranslations } from '@repo/i18n/server'
 import { NextResponse } from 'next/server'
 import { hasLocale } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 import RSS from 'rss'
 
 import { MY_NAME } from '@/lib/constants'

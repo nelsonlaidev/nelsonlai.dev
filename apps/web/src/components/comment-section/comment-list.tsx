@@ -1,6 +1,6 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
+import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { getSingletonHighlighterCore } from 'shiki'

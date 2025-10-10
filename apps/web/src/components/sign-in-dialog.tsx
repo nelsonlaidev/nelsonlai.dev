@@ -1,14 +1,14 @@
 'use client'
 
 import { SiGithub } from '@icons-pack/react-simple-icons'
-import { useTranslations } from '@repo/i18n/client'
+import { usePathname } from '@repo/i18n/routing'
 import { Badge } from '@repo/ui/components/badge'
 import { Button } from '@repo/ui/components/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@repo/ui/components/dialog'
 import { Link } from '@repo/ui/components/link'
 import { toast } from '@repo/ui/components/sonner'
 import { LoaderIcon } from 'lucide-react'
-import { usePathname } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
@@ -52,6 +52,7 @@ const SignInDialog = () => {
   const [lastUsedProvider, setLastUsedProvider] = useState<Provider | null>(null)
   const t = useTranslations()
   const pathname = usePathname()
+  const locale = useLocale()
 
   useEffect(() => {
     const provider = localStorage.getItem('last-used-provider') as Provider | null
@@ -63,7 +64,7 @@ const SignInDialog = () => {
     localStorage.setItem('last-used-provider', provider)
     await authClient.signIn.social({
       provider,
-      callbackURL: pathname,
+      callbackURL: `/${locale}${pathname}`,
       fetchOptions: {
         onSuccess: () => {
           setIsPending(false)

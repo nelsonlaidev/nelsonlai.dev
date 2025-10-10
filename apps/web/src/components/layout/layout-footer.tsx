@@ -1,8 +1,8 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { Link } from '@repo/ui/components/link'
 import { StarIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { FOOTER_LINKS } from '@/config/links'
 import { useGitHubStat } from '@/hooks/queries/stat.query'

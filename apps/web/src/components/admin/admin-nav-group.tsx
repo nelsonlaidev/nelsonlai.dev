@@ -1,7 +1,7 @@
 import type { SidebarGroup as SidebarGroupConfig } from '@/config/admin-sidebar-links'
 
-import { useTranslations } from '@repo/i18n/client'
 import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu } from '@repo/ui/components/sidebar'
+import { useTranslations } from 'next-intl'
 
 import AdminNavLink from './admin-nav-link'
 

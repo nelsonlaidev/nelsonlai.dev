@@ -5,11 +5,9 @@
   "author": "Nelson Lai <me@nelsonlai.dev> (https://github.com/nelsonlaidev/)",
   "type": "module",
   "exports": {
-    "./client": "./src/client.ts",
     "./middleware": "./src/middleware.ts",
     "./request": "./src/request.ts",
     "./routing": "./src/routing.ts",
-    "./server": "./src/server.ts",
     "./messages/*.json": "./src/messages/*.json"
   },
   "scripts": {

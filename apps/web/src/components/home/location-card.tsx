@@ -1,9 +1,9 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import createGlobe from 'cobe'
 import { MapPinIcon } from 'lucide-react'
 import { useMotionValue, useSpring } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
 const LocationCard = () => {

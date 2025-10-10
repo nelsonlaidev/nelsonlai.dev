@@ -1,5 +1,5 @@
+import { useRouter } from '@repo/i18n/routing'
 import { toast } from '@repo/ui/components/sonner'
-import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
 import { authClient } from '@/lib/auth-client'

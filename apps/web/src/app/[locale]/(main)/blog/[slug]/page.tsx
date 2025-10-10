@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import type { Locale } from 'next-intl'
 import type { BlogPosting, WithContext } from 'schema-dts'
 
-import { setRequestLocale } from '@repo/i18n/server'
 import { notFound } from 'next/navigation'
+import { setRequestLocale } from 'next-intl/server'
 import { Suspense, use } from 'react'
 
 import BlogFooter from '@/components/blog/blog-footer'

@@ -3,8 +3,8 @@
 import type { Post } from '@/lib/content'
 
 import NumberFlow from '@number-flow/react'
-import { useTranslations } from '@repo/i18n/client'
 import { Link } from '@repo/ui/components/link'
+import { useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
 import BlurImage from '@/components/blur-image'

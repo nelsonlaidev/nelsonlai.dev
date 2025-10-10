@@ -1,9 +1,9 @@
 import type { SidebarLink } from '@/config/admin-sidebar-links'
 
-import { useTranslations } from '@repo/i18n/client'
 import { usePathname } from '@repo/i18n/routing'
 import { Link } from '@repo/ui/components/link'
 import { SidebarMenuButton, SidebarMenuItem } from '@repo/ui/components/sidebar'
+import { useTranslations } from 'next-intl'
 
 type AdminNavLinkProps = SidebarLink
 

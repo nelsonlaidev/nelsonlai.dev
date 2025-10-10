@@ -2,9 +2,9 @@
 
 import type { TOC } from '@/mdx-plugins'
 
-import { useTranslations } from '@repo/i18n/client'
 import { useRouter } from '@repo/i18n/routing'
 import { SegmentGroup, SegmentGroupItem } from '@repo/ui/components/segment-group'
+import { useTranslations } from 'next-intl'
 
 import { useScrollspy } from '@/hooks/use-scrollspy'
 

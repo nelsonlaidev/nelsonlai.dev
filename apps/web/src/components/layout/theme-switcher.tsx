@@ -1,4 +1,3 @@
-import { useTranslations } from '@repo/i18n/client'
 import { Button } from '@repo/ui/components/button'
 import {
   DropdownMenu,
@@ -7,6 +6,7 @@ import {
   DropdownMenuTrigger
 } from '@repo/ui/components/dropdown-menu'
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 
 const ThemeSwitcher = () => {

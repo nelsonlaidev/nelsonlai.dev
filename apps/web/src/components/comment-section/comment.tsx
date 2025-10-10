@@ -2,11 +2,11 @@
 
 import type { ListCommentsOutput } from '@/orpc/routers'
 
-import { useTranslations } from '@repo/i18n/client'
 import { Badge } from '@repo/ui/components/badge'
 import { Skeleton } from '@repo/ui/components/skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@repo/ui/components/tooltip'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 import { type CommentContextValue, CommentProvider } from '@/contexts/comment.context'

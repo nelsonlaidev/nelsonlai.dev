@@ -2,10 +2,10 @@
 
 // Inspired by: https://framer.university/resources/like-button-component
 import NumberFlow from '@number-flow/react'
-import { useTranslations } from '@repo/i18n/client'
 import { Separator } from '@repo/ui/components/separator'
 import { toast } from '@repo/ui/components/sonner'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 

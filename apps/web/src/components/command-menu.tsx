@@ -1,6 +1,5 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { useRouter } from '@repo/i18n/routing'
 import { Button } from '@repo/ui/components/button'
 import {
@@ -13,6 +12,7 @@ import {
   CommandSeparator
 } from '@repo/ui/components/command'
 import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon, UserCircleIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Fragment, useCallback, useEffect, useState } from 'react'
 
 import { SOCIAL_LINKS } from '@/config/links'

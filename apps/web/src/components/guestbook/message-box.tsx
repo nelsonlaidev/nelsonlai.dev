@@ -3,12 +3,12 @@
 import type { User } from '@/lib/auth-client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useTranslations } from '@repo/i18n/client'
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar'
 import { Button } from '@repo/ui/components/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@repo/ui/components/form'
 import { toast } from '@repo/ui/components/sonner'
 import { Textarea } from '@repo/ui/components/textarea'
+import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 

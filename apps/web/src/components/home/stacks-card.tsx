@@ -24,9 +24,9 @@ import {
   SiVite,
   SiVitest
 } from '@icons-pack/react-simple-icons'
-import { useTranslations } from '@repo/i18n/client'
 import { Marquee } from '@repo/ui/components/marquee'
 import { ZapIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 const StacksCard = () => {
   const t = useTranslations()

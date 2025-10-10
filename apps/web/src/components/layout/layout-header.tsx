@@ -1,10 +1,10 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { Link } from '@repo/ui/components/link'
 import { Logo } from '@repo/ui/components/logo'
 import { cn } from '@repo/ui/utils/cn'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
 import CommandMenu from '@/components/command-menu'

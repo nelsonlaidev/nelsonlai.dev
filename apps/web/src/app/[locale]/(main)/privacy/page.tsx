@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
-import { getTranslations, setRequestLocale } from '@repo/i18n/server'
 import { notFound } from 'next/navigation'
 import { type Locale, useTranslations } from 'next-intl'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { use } from 'react'
 
 import Mdx from '@/components/mdx'

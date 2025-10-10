@@ -1,7 +1,7 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { ClockIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { useWakatimeStat } from '@/hooks/queries/stat.query'
 

@@ -1,9 +1,9 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { Button } from '@repo/ui/components/button'
 import { toast } from '@repo/ui/components/sonner'
 import { SendIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { useCommentsContext } from '@/contexts/comments.context'

@@ -1,8 +1,8 @@
 'use client'
 
-import { useTranslations } from '@repo/i18n/client'
 import { buttonVariants } from '@repo/ui/components/button'
 import { Link } from '@repo/ui/components/link'
+import { useTranslations } from 'next-intl'
 
 const GoToHomepage = () => {
   const t = useTranslations()
