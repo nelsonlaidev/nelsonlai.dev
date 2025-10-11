@@ -1,7 +1,7 @@
 import { relations } from 'drizzle-orm'
 import { index, integer, pgTable, primaryKey, text, timestamp } from 'drizzle-orm/pg-core'
 
-import { posts } from './posts.schema'
+import { posts } from './post.schema'
 
 export const postLikes = pgTable(
   'post_like',

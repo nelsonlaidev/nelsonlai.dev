@@ -1,7 +1,7 @@
 import { relations } from 'drizzle-orm'
 import { boolean, index, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 
-import { comments } from './comments.schema'
+import { comments } from './comment.schema'
 import { guestbook } from './guestbook.schema'
 
 export const roleEnum = pgEnum('role', ['user', 'admin'])
