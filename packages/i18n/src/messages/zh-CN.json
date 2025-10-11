@@ -88,7 +88,10 @@
       "privacy-policy": "隐私权政策",
       "terms-of-service": "服务条款",
       "comments": "评论",
+      "comment": "评论",
+      "unsubscribe": "取消订阅",
       "users": "用户",
+      "settings": "设定",
       "general": "一般",
       "links": "链接",
       "facebook": "Facebook",
@@ -136,6 +139,7 @@
     "comment-cannot-be-empty": "评论不能为空",
     "failed-to-load-comments": "无法载入评论。请刷新页面。",
     "failed-to-load-replies": "无法载入回复。请刷新页面。",
+    "failed-to-load": "无法载入。",
     "need-logged-in-to-vote": "您必须登入才能投票评论",
     "reply-cannot-be-empty": "回复不能为空",
     "like-limit-reached": "您只能对每篇文章点赞 3 次",
@@ -258,6 +262,13 @@
     "email": "邮箱",
     "account-created": "账户创建时间"
   },
+  "settings": {
+    "description": "管理您的设定。",
+    "notification-settings": "通知设定",
+    "reply-notification": "回复通知",
+    "reply-notification-description": "当有人回复您的评论时，接收电子邮件通知。",
+    "save-settings-successfully": "设定保存成功"
+  },
   "privacy": {
     "description": "此页面说明当您使用我们的网站时，我们如何处理您的数据并保护您的隐私。"
   },
@@ -267,5 +278,12 @@
   "auth": {
     "sign-out-successfully": "成功登出",
     "sign-out-failed": "登出失败，请再试一次。"
+  },
+  "unsubscribe": {
+    "unsubscribe-from-this-comment": "取消订阅此评论",
+    "stop-receiving-email-notifications": "停止接收此评论回复的电子邮件通知",
+    "you-are-unsubscribing-as": "您正以 {email} 的身份取消订阅",
+    "you-have-been-unsubscribed": "您已取消订阅",
+    "unsubscribed-description": "您将不再收到此评论的回复通知电子邮件。"
   }
 }

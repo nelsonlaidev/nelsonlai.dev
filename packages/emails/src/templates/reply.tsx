@@ -20,28 +20,26 @@ import Logo from '../components/logo'
 
 type ReplyEmailTemplateProps = {
   reply: string
-  replier: {
-    name: string
-    image: string
-  }
+  replierName: string
+  replierImage: string
   comment: string
   date: string
-  id: string
-  post: {
-    title: string
-    url: string
-  }
+  replierIdentifier: string
+  postTitle: string
+  postUrl: string
+  unsubscribeUrl: string
 }
 
 const ReplyEmailTemplate = (props: ReplyEmailTemplateProps) => {
-  const { reply, replier, comment, date, id, post } = props
+  const { reply, replierName, replierImage, comment, date, replierIdentifier, postTitle, postUrl, unsubscribeUrl } =
+    props
 
   return (
     <Html>
       <Head>
         <GeistFont />
       </Head>
-      <Preview>New reply on the post "{post.title}" on nelsonlai.dev</Preview>
+      <Preview>New reply on the post "{postTitle}" on nelsonlai.dev</Preview>
       <Tailwind>
         <Body className='m-auto bg-white p-1'>
           <Container className='mx-auto w-full max-w-[660px] rounded-lg border border-solid border-[#e5e5e5] bg-white p-8 shadow-sm'>
@@ -49,9 +47,9 @@ const ReplyEmailTemplate = (props: ReplyEmailTemplateProps) => {
             <Section>
               <Text className='m-0 p-0 text-xl font-semibold text-gray-900'>Reply to Your Comment</Text>
               <Text className='mx-0 mt-2 mb-0 p-0 text-base font-normal text-gray-500'>
-                {replier.name} replied to your comment on{' '}
-                <Link href={post.url} className='font-medium text-gray-900'>
-                  {post.title}
+                {replierName} replied to your comment on{' '}
+                <Link href={postUrl} className='font-medium text-gray-900'>
+                  {postTitle}
                 </Link>
               </Text>
             </Section>
@@ -59,15 +57,15 @@ const ReplyEmailTemplate = (props: ReplyEmailTemplateProps) => {
               <Row>
                 <Column className='w-10'>
                   <Img
-                    src={replier.image}
+                    src={replierImage}
                     width={40}
                     height={40}
                     className='rounded-full'
-                    alt={`${replier.name}'s avatar`}
+                    alt={`${replierName}'s avatar`}
                   />
                 </Column>
                 <Column>
-                  <Text className='m-0 py-0 pr-0 pl-3 text-base font-medium text-gray-900'>{replier.name}</Text>
+                  <Text className='m-0 py-0 pr-0 pl-3 text-base font-medium text-gray-900'>{replierName}</Text>
                   <Text className='m-0 py-0 pr-0 pl-3 text-sm font-normal text-gray-500'>{date}</Text>
                 </Column>
               </Row>
@@ -78,10 +76,17 @@ const ReplyEmailTemplate = (props: ReplyEmailTemplateProps) => {
             </Section>
             <Button
               className='mt-6 rounded-full bg-gray-900 px-8 py-2.5 align-middle text-sm font-medium text-white'
-              href={`${post.url}?${id}`}
+              href={`${postUrl}?${replierIdentifier}`}
             >
               View Reply
             </Button>
+            <Text className='text-xs text-gray-500'>
+              You received this email because you enabled notifications for replies to your comments. If you do not want
+              to receive these emails in the future, please check your{' '}
+              <Link href='https://nelsonlai.dev/account/settings'>account settings</Link>. If you do not want to receive
+              {/* eslint-disable-next-line jsx-a11y/anchor-ambiguous-text -- It's ok */} reply notification emails for
+              this comment, please unsubscribe <Link href={unsubscribeUrl}>here</Link>.
+            </Text>
             <Footer />
           </Container>
         </Body>
@@ -93,17 +98,14 @@ const ReplyEmailTemplate = (props: ReplyEmailTemplateProps) => {
 ReplyEmailTemplate.PreviewProps = {
   reply:
     "Thank you for your kind words! I'm glad you found the article helpful. Let me know if you have any questions!",
-  replier: {
-    name: 'John Smith',
-    image: 'https://nelsonlai.dev/api/avatar/john-doe'
-  },
+  replierName: 'John Smith',
+  replierImage: 'https://nelsonlai.dev/api/avatar/john-doe',
   comment: 'This is exactly what I needed! The explanations are clear and concise. Thanks for sharing! 👏',
   date: 'January 2, 2025',
-  id: 'comment=1&reply=1',
-  post: {
-    title: 'Understanding Modern Web Development',
-    url: 'http://localhost:3000/blog/understanding-modern-web-development'
-  }
+  replierIdentifier: 'comment=1&reply=1',
+  postTitle: 'Understanding Modern Web Development',
+  postUrl: 'http://localhost:3000/blog/understanding-modern-web-development',
+  unsubscribeUrl: 'http://localhost:3000/unsubscribe?token=abc123'
 } satisfies ReplyEmailTemplateProps
 
 export default ReplyEmailTemplate

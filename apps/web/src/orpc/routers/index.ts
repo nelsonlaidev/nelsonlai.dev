@@ -10,6 +10,11 @@ import { countLike, incrementLike } from './likes.route'
 import { getAvatarUploadUrl } from './r2.route'
 import { countReplies } from './replies.route'
 import { spotifyStats } from './spotify.route'
+import {
+  getReplyNotificationPrefs,
+  updateGlobalReplyNotificationPrefs,
+  updateReplyNotificationPrefs
+} from './unsubscribes.route'
 import { countView, incrementView } from './views.route'
 import { createVote } from './votes.route'
 import { wakatimeStats } from './wakatime.route'
@@ -64,6 +69,11 @@ export const router = {
   },
   r2: {
     getAvatarUploadUrl
+  },
+  unsubscribes: {
+    getReplyNotificationPrefs,
+    updateGlobalReplyNotificationPrefs,
+    updateReplyNotificationPrefs
   }
 }
 

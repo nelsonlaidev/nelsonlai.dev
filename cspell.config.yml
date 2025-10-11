@@ -67,6 +67,7 @@ words:
   - paralleldrive
   - planetscale
   - plpgsql
+  - prefs
   - presigner
   - radixui
   - reactquery
@@ -87,6 +88,7 @@ words:
   - turborepo
   - umami
   - unifiedjs
+  - unsub
   - unzoom
   - vocs
   - waka

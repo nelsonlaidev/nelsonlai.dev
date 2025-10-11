@@ -88,7 +88,10 @@
       "privacy-policy": "隱私權政策",
       "terms-of-service": "服務條款",
       "comments": "評論",
+      "comment": "評論",
+      "unsubscribe": "取消訂閱",
       "users": "使用者",
+      "settings": "設定",
       "general": "一般",
       "links": "連結",
       "facebook": "Facebook",
@@ -136,6 +139,7 @@
     "comment-cannot-be-empty": "評論不能為空",
     "failed-to-load-comments": "無法載入評論。請重新整理頁面。",
     "failed-to-load-replies": "無法載入回覆。請重新整理頁面。",
+    "failed-to-load": "無法載入。",
     "need-logged-in-to-vote": "您必須登入才能投票評論",
     "reply-cannot-be-empty": "回覆不能為空",
     "like-limit-reached": "您只能對每篇文章按讚 3 次",
@@ -258,6 +262,13 @@
     "email": "電子郵件",
     "account-created": "帳戶建立時間"
   },
+  "settings": {
+    "description": "管理您的設定。",
+    "notification-settings": "通知設定",
+    "reply-notification": "回覆通知",
+    "reply-notification-description": "當有人回覆您的評論時，接收電子郵件通知。",
+    "save-settings-successfully": "設定儲存成功"
+  },
   "privacy": {
     "description": "此頁面說明當您使用我們的網站時，我們如何處理您的資料並保護您的隱私。"
   },
@@ -267,5 +278,12 @@
   "auth": {
     "sign-out-successfully": "成功登出",
     "sign-out-failed": "登出失敗，請再試一次。"
+  },
+  "unsubscribe": {
+    "unsubscribe-from-this-comment": "取消訂閱此評論",
+    "stop-receiving-email-notifications": "停止接收此評論回覆的電子郵件通知",
+    "you-are-unsubscribing-as": "您正以 {email} 的身份取消訂閱",
+    "you-have-been-unsubscribed": "您已取消訂閱",
+    "unsubscribed-description": "您將不再收到此評論的回覆通知電子郵件。"
   }
 }

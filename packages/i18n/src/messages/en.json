@@ -88,7 +88,10 @@
       "privacy-policy": "Privacy Policy",
       "terms-of-service": "Terms of Service",
       "comments": "Comments",
+      "comment": "Comment",
+      "unsubscribe": "Unsubscribe",
       "users": "Users",
+      "settings": "Settings",
       "general": "General",
       "links": "Links",
       "facebook": "Facebook",
@@ -136,6 +139,7 @@
     "comment-cannot-be-empty": "Comment cannot be empty",
     "failed-to-load-comments": "Failed to load comments. Please refresh the page.",
     "failed-to-load-replies": "Failed to load replies. Please refresh the page.",
+    "failed-to-load": "Failed to load.",
     "need-logged-in-to-vote": "You need to be logged in to vote comments",
     "reply-cannot-be-empty": "Reply cannot be empty",
     "like-limit-reached": "You can only like 3 times per post",
@@ -258,6 +262,13 @@
     "email": "Email",
     "account-created": "Account created"
   },
+  "settings": {
+    "description": "Manage your settings.",
+    "notification-settings": "Notification Settings",
+    "reply-notification": "Reply Notification",
+    "reply-notification-description": "Receive email notifications when someone replies to your comment.",
+    "save-settings-successfully": "Settings saved successfully"
+  },
   "privacy": {
     "description": "This page explains how we handle your data and protect your privacy when you use our website."
   },
@@ -267,5 +278,12 @@
   "auth": {
     "sign-out-successfully": "Sign out successfully",
     "sign-out-failed": "Sign out failed. Please try again."
+  },
+  "unsubscribe": {
+    "unsubscribe-from-this-comment": "Unsubscribe from this comment",
+    "stop-receiving-email-notifications": "Stop receiving email notifications for replies to this comment",
+    "you-are-unsubscribing-as": "You're unsubscribing as {email}",
+    "you-have-been-unsubscribed": "You've been unsubscribed",
+    "unsubscribed-description": "You will no longer receive reply notifications emails for this comment."
   }
 }
