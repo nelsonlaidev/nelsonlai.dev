@@ -8,7 +8,7 @@ import {
   countViewOutputSchema,
   incrementViewInputSchema,
   incrementViewOutputSchema
-} from '../schemas/views.schema'
+} from '../schemas/view.schema'
 
 export const countView = publicProcedure
   .input(countViewInputSchema)

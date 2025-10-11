@@ -16,7 +16,7 @@ import {
   deleteCommentInputSchema,
   listCommentsInputSchema,
   listCommentsOutputSchema
-} from '../schemas/comments.schema'
+} from '../schemas/comment.schema'
 import { emptyOutputSchema } from '../schemas/common.schema'
 
 export const listComments = publicProcedure

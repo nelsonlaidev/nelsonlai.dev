@@ -11,7 +11,7 @@ import {
   countLikeOutputSchema,
   incrementLikeInputSchema,
   incrementLikeOutputSchema
-} from '../schemas/likes.schema'
+} from '../schemas/like.schema'
 
 export const countLike = publicProcedure
   .input(countLikeInputSchema)
