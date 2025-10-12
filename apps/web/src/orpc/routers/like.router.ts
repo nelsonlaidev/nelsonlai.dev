@@ -11,7 +11,7 @@ import {
   countLikeOutputSchema,
   incrementLikeInputSchema,
   incrementLikeOutputSchema
-} from '../schemas/likes.schema'
+} from '../schemas/like.schema'
 
 export const countLike = publicProcedure
   .input(countLikeInputSchema)
@@ -26,7 +26,7 @@ export const countLike = publicProcedure
     const [[post], [user]] = await Promise.all([
       context.db.select({ likes: posts.likes }).from(posts).where(eq(posts.slug, input.slug)),
       context.db
-        .select({ likes: postLikes.likes })
+        .select({ likes: postLikes.likeCount })
         .from(postLikes)
         .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
     ])
@@ -55,7 +55,7 @@ export const incrementLike = publicProcedure
     const anonKey = getAnonKey(ip)
 
     const [session] = await context.db
-      .select({ likes: postLikes.likes })
+      .select({ likes: postLikes.likeCount })
       .from(postLikes)
       .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
 
@@ -74,10 +74,10 @@ export const incrementLike = publicProcedure
           .returning(),
         tx
           .insert(postLikes)
-          .values({ postId: input.slug, anonKey, likes: input.value })
+          .values({ postId: input.slug, anonKey, likeCount: input.value })
           .onConflictDoUpdate({
             target: [postLikes.postId, postLikes.anonKey],
-            set: { likes: sql`${postLikes.likes} + ${input.value}` }
+            set: { likeCount: sql`${postLikes.likeCount} + ${input.value}` }
           })
           .returning()
       ])
@@ -91,7 +91,7 @@ export const incrementLike = publicProcedure
 
     const likesData = {
       likes: post.likes,
-      currentUserLikes: currentUserLikes.likes
+      currentUserLikes: currentUserLikes.likeCount
     }
 
     await cache.posts.likes.set(likesData, input.slug, anonKey)

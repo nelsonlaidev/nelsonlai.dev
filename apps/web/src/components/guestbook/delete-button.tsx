@@ -15,7 +15,7 @@ import { Button, buttonVariants } from '@repo/ui/components/button'
 import { toast } from '@repo/ui/components/sonner'
 import { useTranslations } from 'next-intl'
 
-import { useDeleteGuestbookMessage } from '@/hooks/queries/guestbook.query'
+import { useDeleteMessage } from '@/hooks/queries/message.query'
 
 type DeleteButtonProps = {
   message: ListMessagesOutput['messages'][number]
@@ -25,7 +25,7 @@ const DeleteButton = (props: DeleteButtonProps) => {
   const { message } = props
   const t = useTranslations()
 
-  const { mutate: deleteMessage, isPending: isDeleting } = useDeleteGuestbookMessage(() => {
+  const { mutate: deleteMessage, isPending: isDeleting } = useDeleteMessage(() => {
     toast.success(t('guestbook.delete-message-successfully'))
   })
 

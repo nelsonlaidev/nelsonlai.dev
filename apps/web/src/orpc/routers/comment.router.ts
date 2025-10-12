@@ -1,5 +1,4 @@
 import { ORPCError } from '@orpc/client'
-import { createId } from '@paralleldrive/cuid2'
 import { and, asc, comments, count, desc, eq, gt, isNotNull, isNull, lt, ne, unsubscribes, votes } from '@repo/db'
 import { CommentEmailTemplate, ReplyEmailTemplate } from '@repo/emails'
 import { env } from '@repo/env'
@@ -19,7 +18,7 @@ import {
   deleteCommentInputSchema,
   listCommentsInputSchema,
   listCommentsOutputSchema
-} from '../schemas/comments.schema'
+} from '../schemas/comment.schema'
 import { emptyOutputSchema } from '../schemas/common.schema'
 
 export const listComments = publicProcedure
@@ -85,7 +84,7 @@ export const listComments = publicProcedure
 
       return {
         ...comment,
-        liked: selfVote?.like ?? null,
+        liked: selfVote?.isLike ?? null,
         user: {
           ...comment.user,
           image: comment.user.image ?? defaultImage,
@@ -107,7 +106,6 @@ export const createComment = protectedProcedure
     const user = context.session.user
 
     const locale = await getLocale()
-    const commentId = createId()
 
     const post = getPostBySlug(locale, input.slug)
 
@@ -122,7 +120,6 @@ export const createComment = protectedProcedure
       const [c] = await tx
         .insert(comments)
         .values({
-          id: commentId,
           body: input.content,
           userId: user.id,
           postId: input.slug,
@@ -146,7 +143,7 @@ export const createComment = protectedProcedure
               comment: input.content,
               commenterName,
               commenterImage,
-              commentIdentifier: `comment=${commentId}`,
+              commentIdentifier: `comment=${c.id}`,
               date: input.date,
               postTitle,
               postUrl
@@ -193,7 +190,7 @@ export const createComment = protectedProcedure
               replierName: commenterName,
               replierImage: commenterImage,
               comment: parentComment.body,
-              replierIdentifier: `comment=${input.parentId}&reply=${commentId}`,
+              replierIdentifier: `comment=${input.parentId}&reply=${c.id}`,
               date: input.date,
               postTitle,
               postUrl,

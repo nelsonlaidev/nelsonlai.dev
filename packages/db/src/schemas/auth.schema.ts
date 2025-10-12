@@ -1,12 +1,12 @@
 import { relations } from 'drizzle-orm'
 import { boolean, index, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 
-import { comments } from './comments.schema'
-import { guestbook } from './guestbook.schema'
+import { comments } from './comment.schema'
+import { messages } from './message.schema'
 
 export const roleEnum = pgEnum('role', ['user', 'admin'])
 
-export const users = pgTable('user', {
+export const users = pgTable('users', {
   id: text('id').primaryKey(),
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
@@ -19,7 +19,7 @@ export const users = pgTable('user', {
 })
 
 export const accounts = pgTable(
-  'account',
+  'accounts',
   {
     id: text('id').primaryKey(),
     accountId: text('account_id').notNull(),
@@ -37,11 +37,11 @@ export const accounts = pgTable(
     createdAt: timestamp('created_at').notNull(),
     updatedAt: timestamp('updated_at').notNull()
   },
-  (table) => [index('idx_account_user_id').on(table.userId)]
+  (table) => [index('accounts_user_id_idx').on(table.userId)]
 )
 
 export const sessions = pgTable(
-  'session',
+  'sessions',
   {
     id: text('id').primaryKey(),
     expiresAt: timestamp('expires_at').notNull(),
@@ -54,23 +54,23 @@ export const sessions = pgTable(
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' })
   },
-  (table) => [index('idx_session_user_id').on(table.userId)]
+  (table) => [index('sessions_user_id_idx').on(table.userId)]
 )
 
-export const verifications = pgTable('verification', {
+export const verifications = pgTable('verifications', {
   id: text('id').primaryKey(),
   identifier: text('identifier').notNull(),
   value: text('value').notNull(),
   expiresAt: timestamp('expires_at').notNull(),
-  createdAt: timestamp('created_at'),
-  updatedAt: timestamp('updated_at')
+  createdAt: timestamp('created_at').notNull(),
+  updatedAt: timestamp('updated_at').notNull()
 })
 
 export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
   sessions: many(sessions),
   comments: many(comments),
-  guestbook: many(guestbook)
+  messages: many(messages)
 }))
 
 export const accountsRelations = relations(accounts, ({ one }) => ({

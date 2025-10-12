@@ -1,26 +1,31 @@
+import { createId } from '@paralleldrive/cuid2'
 import { relations, sql } from 'drizzle-orm'
-import { boolean, index, integer, pgTable, primaryKey, text, timestamp } from 'drizzle-orm/pg-core'
+import { boolean, foreignKey, index, integer, pgTable, primaryKey, text, timestamp } from 'drizzle-orm/pg-core'
 
 import { users } from './auth.schema'
-import { posts } from './posts.schema'
+import { posts } from './post.schema'
 
 export const comments = pgTable(
-  'comment',
+  'comments',
   {
-    id: text('id').primaryKey(),
+    id: text('id')
+      .primaryKey()
+      .$defaultFn(() => createId()),
     body: text('body').notNull(),
     userId: text('user_id')
       .notNull()
-      .references(() => users.id),
+      .default('ghost')
+      .references(() => users.id, { onDelete: 'set default' }),
     createdAt: timestamp('created_at')
       .notNull()
       .$defaultFn(() => new Date()),
     updatedAt: timestamp('updated_at')
       .notNull()
-      .$defaultFn(() => new Date()),
+      .$defaultFn(() => new Date())
+      .$onUpdateFn(() => new Date()),
     postId: text('post_id')
       .notNull()
-      .references(() => posts.slug),
+      .references(() => posts.slug, { onDelete: 'cascade' }),
     parentId: text('parent_id'),
     isDeleted: boolean('is_deleted').notNull().default(false),
     replyCount: integer('reply_count').notNull().default(0),
@@ -28,34 +33,37 @@ export const comments = pgTable(
     dislikeCount: integer('dislike_count').notNull().default(0)
   },
   (table) => [
-    index('idx_comment_post_id').on(table.postId),
-    index('idx_comment_parent_id').on(table.parentId),
-    index('idx_comment_user_id').on(table.userId),
-    index('idx_comment_post_created')
+    foreignKey({
+      columns: [table.parentId],
+      foreignColumns: [table.id]
+    }).onDelete('restrict'),
+    index('comments_post_id_idx').on(table.postId),
+    index('comments_parent_id_idx').on(table.parentId),
+    index('comments_user_id_idx').on(table.userId),
+    index('comments_post_id_created_at_desc_idx')
       .on(table.postId, table.createdAt.desc())
       .where(sql`${table.parentId} IS NULL`),
-    index('idx_comment_parent_created')
+    index('comments_parent_id_created_at_desc_idx')
       .on(table.parentId, table.createdAt.desc())
       .where(sql`${table.parentId} IS NOT NULL`),
-    index('idx_comment_body_search').using('gin', sql`to_tsvector('english', ${table.body})`)
+    index('comments_body_tsvector_idx').using('gin', sql`to_tsvector('english', ${table.body})`)
   ]
 )
 
 export const votes = pgTable(
-  'vote',
+  'votes',
   {
     userId: text('user_id')
       .notNull()
-      .references(() => users.id),
+      .references(() => users.id, { onDelete: 'cascade' }),
     commentId: text('comment_id')
       .notNull()
       .references(() => comments.id, { onDelete: 'cascade' }),
-    like: boolean('like').notNull()
+    isLike: boolean('is_like').notNull()
   },
   (vote) => [
     primaryKey({ columns: [vote.userId, vote.commentId] }),
-    index('idx_vote_comment_like').on(vote.commentId, vote.like),
-    index('idx_vote_user_comment').on(vote.userId, vote.commentId)
+    index('votes_comment_id_like_idx').on(vote.commentId, vote.isLike)
   ]
 )
 

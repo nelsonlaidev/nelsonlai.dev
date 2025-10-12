@@ -1,7 +1,7 @@
 import { and, comments, count, eq, isNotNull } from '@repo/db'
 
 import { publicProcedure } from '../root'
-import { countRepliesInputSchema, countRepliesOutputSchema } from '../schemas/replies.schema'
+import { countRepliesInputSchema, countRepliesOutputSchema } from '../schemas/reply.schema'
 
 export const countReplies = publicProcedure
   .input(countRepliesInputSchema)

@@ -1,6 +1,6 @@
 import { createId } from '@paralleldrive/cuid2'
 import test, { expect } from '@playwright/test'
-import { db, guestbook } from '@repo/db'
+import { db, messages } from '@repo/db'
 
 import { TEST_UNIQUE_ID } from '../fixtures/auth'
 
@@ -23,7 +23,7 @@ test.describe('guestbook page', () => {
   test('deletes a message', async ({ page }) => {
     const id = createId()
 
-    await db.insert(guestbook).values({
+    await db.insert(messages).values({
       id,
       body: 'Test message',
       userId: TEST_UNIQUE_ID

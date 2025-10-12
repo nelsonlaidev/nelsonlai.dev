@@ -28,6 +28,7 @@
     ]
   },
   "dependencies": {
+    "@paralleldrive/cuid2": "2.2.2",
     "@repo/env": "workspace:*",
     "drizzle-orm": "0.44.5"
   },

@@ -12,7 +12,7 @@ import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { useCreateGuestbookMessage } from '@/hooks/queries/guestbook.query'
+import { useCreateMessage } from '@/hooks/queries/message.query'
 import { useSignOut } from '@/hooks/use-sign-out'
 import { getAbbreviation } from '@/utils/get-abbreviation'
 import { getDefaultImage } from '@/utils/get-default-image'
@@ -37,7 +37,7 @@ const MessageBox = (props: MessageBoxProps) => {
     }
   })
 
-  const { mutate: createMessage, isPending: isCreating } = useCreateGuestbookMessage(() => {
+  const { mutate: createMessage, isPending: isCreating } = useCreateMessage(() => {
     form.reset()
     toast.success(t('guestbook.create-message-successfully'))
   })

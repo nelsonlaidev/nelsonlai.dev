@@ -1,7 +1,7 @@
 import { index, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 
 import { users } from './auth.schema'
-import { comments } from './comments.schema'
+import { comments } from './comment.schema'
 
 export const unsubscribeTypeEnum = pgEnum('unsubscribe_type', ['all', 'comment'])
 

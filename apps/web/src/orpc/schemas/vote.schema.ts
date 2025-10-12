@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 export const createVoteInputSchema = z.object({
   id: z.string(),
-  like: z.boolean().nullable()
+  isLike: z.boolean().nullable()
 })
 
 export const createVoteOutputSchema = createSelectSchema(votes)

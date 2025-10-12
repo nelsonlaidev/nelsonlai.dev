@@ -5,78 +5,22 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1740841128008,
-      "tag": "0000_simple_vengeance",
+      "when": 1760239956217,
+      "tag": "0000_bouncy_steve_rogers",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1740906040796,
-      "tag": "0001_dark_chameleon",
+      "when": 1760240503252,
+      "tag": "0001_wise_arc",
       "breakpoints": true
     },
     {
       "idx": 2,
       "version": "7",
-      "when": 1740907130428,
-      "tag": "0002_numerous_argent",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1750834950312,
-      "tag": "0003_jazzy_veda",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1750872309784,
-      "tag": "0004_shallow_black_panther",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1751420464951,
-      "tag": "0005_blue_cyclops",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1755513464793,
-      "tag": "0006_noisy_talos",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1755566666742,
-      "tag": "0007_milky_sabra",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "7",
-      "when": 1755573391794,
-      "tag": "0008_classy_proteus",
-      "breakpoints": true
-    },
-    {
-      "idx": 9,
-      "version": "7",
-      "when": 1759893801537,
-      "tag": "0009_gray_tiger_shark",
-      "breakpoints": true
-    },
-    {
-      "idx": 10,
-      "version": "7",
-      "when": 1759895827353,
-      "tag": "0010_youthful_puck",
+      "when": 1760240521709,
+      "tag": "0002_amazing_white_tiger",
       "breakpoints": true
     },
     {

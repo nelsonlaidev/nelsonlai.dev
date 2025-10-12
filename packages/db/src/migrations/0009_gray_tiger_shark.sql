@@ -1,1 +1,0 @@
-ALTER TABLE "likes_session" RENAME TO "post_like";
