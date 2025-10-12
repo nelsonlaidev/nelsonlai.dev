@@ -1,7 +1,10 @@
 import { Card, CardDescription, CardHeader, CardTitle } from '@repo/ui/components/card'
 import { BellOffIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 const UnsubscribeError = () => {
+  const t = useTranslations()
+
   return (
     <Card className='w-full max-w-lg'>
       <CardHeader className='space-y-4 text-center'>
@@ -9,9 +12,9 @@ const UnsubscribeError = () => {
           <BellOffIcon className='size-8' />
         </div>
         <div className='space-y-4'>
-          <CardTitle className='text-2xl text-balance'>Invalid unsubscribe link</CardTitle>
+          <CardTitle className='text-2xl text-balance'>{t('unsubscribe.invalid-unsubscribe-link')}</CardTitle>
           <CardDescription className='text-base text-pretty text-muted-foreground'>
-            The unsubscribe link is invalid. Please try again.
+            {t('unsubscribe.invalid-link-description')}
           </CardDescription>
         </div>
       </CardHeader>

@@ -284,6 +284,8 @@
     "stop-receiving-email-notifications": "停止接收此評論回覆的電子郵件通知",
     "you-are-unsubscribing-as": "您正以 {email} 的身份取消訂閱",
     "you-have-been-unsubscribed": "您已取消訂閱",
-    "unsubscribed-description": "您將不再收到此評論的回覆通知電子郵件。"
+    "unsubscribed-description": "您將不再收到此評論的回覆通知電子郵件。",
+    "invalid-unsubscribe-link": "無效的取消訂閱連結",
+    "invalid-link-description": "取消訂閱連結無效。請再試一次。"
   }
 }

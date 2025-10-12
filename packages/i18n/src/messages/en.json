@@ -284,6 +284,8 @@
     "stop-receiving-email-notifications": "Stop receiving email notifications for replies to this comment",
     "you-are-unsubscribing-as": "You're unsubscribing as {email}",
     "you-have-been-unsubscribed": "You've been unsubscribed",
-    "unsubscribed-description": "You will no longer receive reply notifications emails for this comment."
+    "unsubscribed-description": "You will no longer receive reply notifications emails for this comment.",
+    "invalid-unsubscribe-link": "Invalid unsubscribe link",
+    "invalid-link-description": "The unsubscribe link is invalid. Please try again."
   }
 }
