@@ -19,7 +19,7 @@ export const useCopyToClipboard = (): [(options: CopyOptions) => Promise<void>, 
     try {
       await navigator.clipboard.writeText(text)
       setIsCopied(true)
-      toast.success(successMessage ?? t('hook.copy-to-clipboard.copied'))
+      toast.success(successMessage ?? t('hooks.copy-to-clipboard.copied'))
 
       setTimeout(() => {
         setIsCopied(false)

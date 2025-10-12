@@ -30,8 +30,8 @@ const FilteredPosts = (props: FilteredPostsProps) => {
           onChange={(e) => {
             setSearchValue(e.target.value)
           }}
-          placeholder={t('component.filtered-posts.placeholder')}
-          aria-label={t('component.filtered-posts.placeholder')}
+          placeholder={t('components.filtered-posts.placeholder')}
+          aria-label={t('components.filtered-posts.placeholder')}
           className='w-full pl-12'
           id='search'
         />
@@ -40,7 +40,7 @@ const FilteredPosts = (props: FilteredPostsProps) => {
         </Label>
       </div>
       {filteredPosts.length === 0 && (
-        <div className='my-24 text-center text-xl'>{t('component.filtered-posts.no-posts-found')}</div>
+        <div className='my-24 text-center text-xl'>{t('components.filtered-posts.no-posts-found')}</div>
       )}
       <PostCards posts={filteredPosts} />
     </>

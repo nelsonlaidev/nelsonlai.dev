@@ -62,7 +62,7 @@ const SelectedProjects = (props: SelectedProjectsProps) => {
           duration: 0.3
         }}
       >
-        {t('homepage.selectedProjects.title')}
+        {t('homepage.selected-projects.title')}
       </motion.h2>
       <motion.div
         className='mt-12 grid gap-4 md:grid-cols-2'
@@ -92,7 +92,7 @@ const SelectedProjects = (props: SelectedProjectsProps) => {
             'rounded-xl'
           )}
         >
-          {t('homepage.selectedProjects.more')}
+          {t('homepage.selected-projects.more')}
         </Link>
       </div>
     </motion.div>
@@ -109,7 +109,7 @@ const Card = (props: CardProps) => {
       <div className='flex items-center justify-between p-4'>
         <div className='flex items-center gap-3'>
           <LightbulbIcon className='size-4.5' />
-          <h2>{t('homepage.selectedProjects.card')}</h2>
+          <h2>{t('homepage.selected-projects.card')}</h2>
         </div>
         <ArrowUpRightIcon className='size-4.5 opacity-0 transition-opacity group-hover:opacity-100' />
       </div>

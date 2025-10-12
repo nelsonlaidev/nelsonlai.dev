@@ -12,7 +12,7 @@
     "display-name": "Display name",
     "edit-name": "Edit name",
     "edit-name-description": "Change your display name. This name will be shown on your profile and comments.",
-    "edit-name-successfully": "Edit name successfully",
+    "edit-name-successfully": "Display name updated successfully",
     "email": "Email",
     "no-active-sessions": "No active sessions",
     "profile": "Profile",
@@ -35,7 +35,7 @@
   },
   "auth": {
     "sign-out-failed": "Sign out failed. Please try again.",
-    "sign-out-successfully": "Sign out successfully"
+    "sign-out-successfully": "Signed out successfully"
   },
   "blog": {
     "comments": {
@@ -131,7 +131,7 @@
     "unknown": "Unknown",
     "views": "{count, plural, =1 {# view} other {# views}}"
   },
-  "component": {
+  "components": {
     "filtered-posts": {
       "no-posts-found": "No posts found",
       "placeholder": "Search articles"
@@ -160,7 +160,7 @@
   },
   "error": {
     "comment-cannot-be-empty": "Comment cannot be empty",
-    "copy-to-clipboard-error": "Unable to copy to clipboard. Please try again!",
+    "copy-to-clipboard-error": "Unable to copy to clipboard. Please try again.",
     "failed-to-fetch-comments-data": "Failed to fetch comments data. Please refresh the page.",
     "failed-to-fetch-users-data": "Failed to fetch users data. Please refresh the page.",
     "failed-to-load": "Failed to load.",
@@ -172,16 +172,16 @@
     "name-cannot-be-empty": "Name cannot be empty",
     "name-too-long": "Name is too long",
     "need-logged-in-to-vote": "You need to be logged in to vote comments",
-    "not-found": "Page Not Found!",
+    "not-found": "Page not found.",
     "now-playing-error": "Failed to fetch Spotify data",
     "reply-cannot-be-empty": "Reply cannot be empty",
     "sign-in-error": "Failed to sign in. Please try again.",
-    "something-went-wrong": "Something went wrong!",
+    "something-went-wrong": "Something went wrong. Please try again.",
     "try-again": "Try again"
   },
   "guestbook": {
-    "create-message-successfully": "Create message successfully",
-    "delete-message-successfully": "Delete message successfully",
+    "create-message-successfully": "Message created successfully",
+    "delete-message-successfully": "Message deleted successfully",
     "description": "Sign my guestbook and share your idea. You can tell me anything here!",
     "no-messages": "No messages. Be the first to leave a message!",
     "pinned": {
@@ -225,21 +225,21 @@
       "more": "See all articles",
       "title": "Latest Articles"
     },
-    "selectedProjects": {
+    "selected-projects": {
       "card": "Project",
-      "more": "See all project",
+      "more": "See all projects",
       "title": "Selected Projects"
     }
   },
-  "hook": {
+  "hooks": {
     "copy-to-clipboard": {
-      "copied": "Copied to clipboard!"
+      "copied": "Copied to clipboard"
     }
   },
   "layout": {
     "change-language": "Change language",
     "now-playing": {
-      "loading": "Loading ...",
+      "loading": "Loading...",
       "not-listening": "Not Listening - Spotify"
     },
     "skip-to-main-content": "Skip to main content",

@@ -9,7 +9,7 @@ const GoToHomepage = () => {
 
   return (
     <Link href='/' className={buttonVariants()}>
-      {t('component.go-to-homepage')}
+      {t('components.go-to-homepage')}
     </Link>
   )
 }

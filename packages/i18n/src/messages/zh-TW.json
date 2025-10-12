@@ -131,7 +131,7 @@
     "unknown": "未知",
     "views": "{count, plural, =1 {# 瀏覽次數} other {# 瀏覽次數}}"
   },
-  "component": {
+  "components": {
     "filtered-posts": {
       "no-posts-found": "沒有找到文章",
       "placeholder": "搜尋文章"
@@ -160,7 +160,7 @@
   },
   "error": {
     "comment-cannot-be-empty": "評論不能為空",
-    "copy-to-clipboard-error": "無法複製到剪貼簿。請再試一次！",
+    "copy-to-clipboard-error": "無法複製到剪貼簿，請再試一次。",
     "failed-to-fetch-comments-data": "無法獲取評論資料。請重新整理頁面。",
     "failed-to-fetch-users-data": "無法獲取使用者資料。請重新整理頁面。",
     "failed-to-load": "無法載入。",
@@ -172,11 +172,11 @@
     "name-cannot-be-empty": "名稱不能為空",
     "name-too-long": "名稱過長",
     "need-logged-in-to-vote": "您必須登入才能投票評論",
-    "not-found": "找不到頁面！",
+    "not-found": "找不到頁面。",
     "now-playing-error": "無法獲取 Spotify 資料",
     "reply-cannot-be-empty": "回覆不能為空",
     "sign-in-error": "登入失敗。請再試一次。",
-    "something-went-wrong": "出了一些問題！",
+    "something-went-wrong": "發生了一些問題，請再試一次。",
     "try-again": "再試一次"
   },
   "guestbook": {
@@ -225,21 +225,21 @@
       "more": "查看所有文章",
       "title": "最新文章"
     },
-    "selectedProjects": {
+    "selected-projects": {
       "card": "專案",
       "more": "查看所有專案",
       "title": "精選專案"
     }
   },
-  "hook": {
+  "hooks": {
     "copy-to-clipboard": {
-      "copied": "已複製到剪貼簿！"
+      "copied": "已複製到剪貼簿"
     }
   },
   "layout": {
     "change-language": "更改語言",
     "now-playing": {
-      "loading": "載入中 ...",
+      "loading": "載入中...",
       "not-listening": "未在收聽 - Spotify"
     },
     "skip-to-main-content": "跳至主要內容",

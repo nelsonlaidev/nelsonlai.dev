@@ -131,7 +131,7 @@
     "unknown": "未知",
     "views": "{count, plural, =1 {# 浏览次数} other {# 浏览次数}}"
   },
-  "component": {
+  "components": {
     "filtered-posts": {
       "no-posts-found": "没有找到文章",
       "placeholder": "搜寻文章"
@@ -160,7 +160,7 @@
   },
   "error": {
     "comment-cannot-be-empty": "评论不能为空",
-    "copy-to-clipboard-error": "无法复制到剪贴板。请再试一次！",
+    "copy-to-clipboard-error": "无法复制到剪贴板，请再试一次。",
     "failed-to-fetch-comments-data": "无法获取评论数据。请刷新页面。",
     "failed-to-fetch-users-data": "无法获取用户数据。请刷新页面。",
     "failed-to-load": "无法载入。",
@@ -172,11 +172,11 @@
     "name-cannot-be-empty": "名称不能为空",
     "name-too-long": "名称过长",
     "need-logged-in-to-vote": "您必须登入才能投票评论",
-    "not-found": "找不到页面！",
+    "not-found": "找不到页面。",
     "now-playing-error": "无法获取 Spotify 资料",
     "reply-cannot-be-empty": "回复不能为空",
     "sign-in-error": "登入失败。请再试一次。",
-    "something-went-wrong": "出了一些问题！",
+    "something-went-wrong": "发生了一些问题，请再试一次。",
     "try-again": "再试一次"
   },
   "guestbook": {
@@ -225,21 +225,21 @@
       "more": "查看所有文章",
       "title": "最新文章"
     },
-    "selectedProjects": {
+    "selected-projects": {
       "card": "项目",
       "more": "查看所有项目",
       "title": "精选项目"
     }
   },
-  "hook": {
+  "hooks": {
     "copy-to-clipboard": {
-      "copied": "已复制到剪贴板！"
+      "copied": "已复制到剪贴板"
     }
   },
   "layout": {
     "change-language": "更改语言",
     "now-playing": {
-      "loading": "载入中 ...",
+      "loading": "载入中...",
       "not-listening": "未在收听 - Spotify"
     },
     "skip-to-main-content": "跳至主要内容",
