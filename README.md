@@ -71,6 +71,20 @@ Welcome to the monorepo of my personal blog! This repository houses the code for
 - t3-env for environment variables
 - Umami Analytics
 
+### Email Templates
+
+#### Comment Notification
+
+<div align="center">
+  <img alt="Comment notification template" src="apps/web/public/images/comment-notification-email.png">
+</div>
+
+#### Reply Notification
+
+<div align="center">
+  <img alt="Reply notification template" src="apps/web/public/images/reply-notification-email.png">
+</div>
+
 ## Getting Started
 
 ### Prerequisites
