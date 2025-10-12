@@ -3,6 +3,7 @@ import type { Locale } from 'next-intl'
 import { redirect } from '@repo/i18n/routing'
 import { getTranslations } from 'next-intl/server'
 
+import AccountMobileNav from '@/components/account/account-mobile-nav'
 import AccountSidebar from '@/components/account/account-sidebar'
 import MainLayout from '@/components/main-layout'
 import PageHeader from '@/components/page-header'
@@ -24,7 +25,10 @@ const Layout = async (props: LayoutProps<'/[locale]'>) => {
 
   return (
     <MainLayout>
-      <PageHeader title={title} description={description} />
+      <div className='flex items-center justify-between'>
+        <PageHeader title={title} description={description} />
+        <AccountMobileNav />
+      </div>
       <div className='gap-10 md:flex'>
         <AccountSidebar />
         <div className='w-full space-y-12'>{children}</div>
