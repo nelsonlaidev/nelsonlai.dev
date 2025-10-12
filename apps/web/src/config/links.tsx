@@ -153,3 +153,21 @@ export const SOCIAL_LINKS: SocialLinks = [
     icon: <SiYoutube />
   }
 ]
+
+type AccountSidebarLinks = Array<{
+  href: string
+  labelKey: TranslationKey
+}>
+
+export const ACCOUNT_SIDEBAR_LINKS: AccountSidebarLinks = [
+  {
+    href: '/account',
+    // t('common.labels.account')
+    labelKey: 'common.labels.account'
+  },
+  {
+    href: '/account/settings',
+    // t('common.labels.settings')
+    labelKey: 'common.labels.settings'
+  }
+]

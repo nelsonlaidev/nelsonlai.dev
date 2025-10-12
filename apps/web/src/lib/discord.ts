@@ -37,32 +37,3 @@ export const sendGuestbookNotification = async (message: string, userName: strin
 
   await sendWebhook(body)
 }
-
-export const sendCommentNotification = async (
-  title: string,
-  slug: string,
-  comment: string,
-  commentId: string,
-  userName: string,
-  userImage: string
-) => {
-  const body: RESTPostAPIWebhookWithTokenFormDataBody = {
-    username: 'Comments Bot',
-    avatar_url: BOT_AVATAR_URL,
-    embeds: [
-      {
-        title: `New comment on **${title}**!`,
-        description: comment,
-        url: `https://nelsonlai.dev/blog/${slug}?comment=${commentId}`,
-        color: 6_609_519,
-        author: {
-          name: userName,
-          icon_url: userImage
-        },
-        timestamp: new Date().toISOString()
-      }
-    ]
-  }
-
-  await sendWebhook(body)
-}

@@ -10,6 +10,7 @@ import { createMessage, deleteMessage, listMessages } from './message.router'
 import { getAvatarUploadUrl } from './r2.router'
 import { countReplies } from './reply.router'
 import { spotifyStats } from './spotify.router'
+import { getReplyPrefs, updateCommentReplyPrefs, updateReplyPrefs } from './unsubscribe.router'
 import { countView, incrementView } from './view.router'
 import { createVote } from './vote.router'
 import { wakatimeStats } from './wakatime.router'
@@ -64,6 +65,11 @@ export const router = {
   },
   r2: {
     getAvatarUploadUrl
+  },
+  unsubscribes: {
+    getReplyPrefs,
+    updateReplyPrefs,
+    updateCommentReplyPrefs
   }
 }
 
