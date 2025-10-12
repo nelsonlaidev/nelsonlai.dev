@@ -3,6 +3,7 @@ import { boolean, index, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg
 
 import { comments } from './comment.schema'
 import { messages } from './message.schema'
+import { unsubscribes } from './unsubscribe.schema'
 
 export const roleEnum = pgEnum('role', ['user', 'admin'])
 
@@ -70,7 +71,8 @@ export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
   sessions: many(sessions),
   comments: many(comments),
-  messages: many(messages)
+  messages: many(messages),
+  unsubscribes: many(unsubscribes)
 }))
 
 export const accountsRelations = relations(accounts, ({ one }) => ({

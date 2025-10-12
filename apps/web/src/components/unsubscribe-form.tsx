@@ -8,7 +8,7 @@ import { BellOffIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import { useUpdateCommentReplyPrefs } from '@/hooks/queries/notification.query'
+import { useUpdateCommentReplyPrefs } from '@/hooks/queries/unsubscribe.query'
 
 type UnsubscribeFormProps = {
   data: NonNullable<Awaited<ReturnType<typeof getReplyUnsubData>>>

@@ -1,6 +1,6 @@
 import 'server-only'
 
-import { and, comments, db, eq, notifications } from '@repo/db'
+import { and, comments, db, eq, unsubscribes } from '@repo/db'
 import { env } from '@repo/env'
 import { jwtVerify, SignJWT } from 'jose'
 import { z } from 'zod'
@@ -75,11 +75,11 @@ export const getReplyUnsubData = async (token: string | null) => {
 
   if (!data) return null
 
-  const isUnsubscribed = await db.query.notifications.findFirst({
+  const isUnsubscribed = await db.query.unsubscribes.findFirst({
     where: and(
-      eq(notifications.userId, userId),
-      eq(notifications.commentId, commentId),
-      eq(notifications.type, 'comment')
+      eq(unsubscribes.userId, userId),
+      eq(unsubscribes.commentId, commentId),
+      eq(unsubscribes.scope, 'comment_replies_comment')
     )
   })
 

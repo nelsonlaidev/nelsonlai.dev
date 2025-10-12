@@ -1,9 +1,10 @@
 import { ORPCError } from '@orpc/client'
-import { and, asc, comments, count, desc, eq, gt, isNotNull, isNull, lt, ne, notifications, votes } from '@repo/db'
+import { and, asc, comments, count, desc, eq, gt, isNotNull, isNull, lt, ne, unsubscribes, votes } from '@repo/db'
 import { CommentEmailTemplate, ReplyEmailTemplate } from '@repo/emails'
 import { env } from '@repo/env'
 import { getLocale } from 'next-intl/server'
 
+import { IS_PRODUCTION } from '@/lib/constants'
 import { getPostBySlug } from '@/lib/content'
 import { sendEmail } from '@/lib/resend'
 import { generateReplyUnsubToken } from '@/lib/unsubscribe'
@@ -134,7 +135,7 @@ export const createComment = protectedProcedure
       }
 
       // Notify the author of the blog post via email
-      if (!input.parentId && user.role === 'user') {
+      if (IS_PRODUCTION && !input.parentId && user.role === 'user') {
         if (env.AUTHOR_EMAIL) {
           await sendEmail({
             to: env.AUTHOR_EMAIL,
@@ -155,7 +156,7 @@ export const createComment = protectedProcedure
       }
 
       // Notify the parent comment owner via email
-      if (input.parentId) {
+      if (IS_PRODUCTION && input.parentId) {
         const parentComment = await tx.query.comments.findFirst({
           where: eq(comments.id, input.parentId),
           with: {
@@ -164,21 +165,21 @@ export const createComment = protectedProcedure
         })
 
         if (parentComment && parentComment.user.email !== user.email) {
-          const noAllNotification = await tx.query.notifications.findFirst({
-            where: and(eq(notifications.userId, parentComment.userId), eq(notifications.type, 'all'))
+          const unsubscribedFromAllReplies = await tx.query.unsubscribes.findFirst({
+            where: and(eq(unsubscribes.userId, parentComment.userId), eq(unsubscribes.scope, 'comment_replies_user'))
           })
 
-          const noSpecificNotification = await tx.query.notifications.findFirst({
+          const unsubscribedFromThisComment = await tx.query.unsubscribes.findFirst({
             where: and(
-              eq(notifications.commentId, input.parentId),
-              eq(notifications.userId, parentComment.userId),
-              eq(notifications.type, 'comment')
+              eq(unsubscribes.commentId, input.parentId),
+              eq(unsubscribes.userId, parentComment.userId),
+              eq(unsubscribes.scope, 'comment_replies_comment')
             )
           })
 
           // Don't send notification email if the user
-          // has unsubscribed from all notifications or this comment reply notifications
-          if (noAllNotification || noSpecificNotification) return c
+          // has unsubscribed from all replies or this specific comment's replies
+          if (unsubscribedFromAllReplies || unsubscribedFromThisComment) return c
 
           const token = await generateReplyUnsubToken(parentComment.userId, input.parentId)
 

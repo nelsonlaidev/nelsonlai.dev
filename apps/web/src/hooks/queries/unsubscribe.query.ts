@@ -3,16 +3,16 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { orpc } from '@/orpc/client'
 
 export const useReplyPrefs = () => {
-  return useQuery(orpc.notifications.getReplyPrefs.queryOptions())
+  return useQuery(orpc.unsubscribes.getReplyPrefs.queryOptions())
 }
 
 export const useUpdateReplyPrefs = (onSuccess?: () => void) => {
   const queryClient = useQueryClient()
 
   return useMutation(
-    orpc.notifications.updateReplyPrefs.mutationOptions({
+    orpc.unsubscribes.updateReplyPrefs.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: orpc.notifications.getReplyPrefs.key() })
+        queryClient.invalidateQueries({ queryKey: orpc.unsubscribes.getReplyPrefs.key() })
         onSuccess?.()
       }
     })
@@ -21,7 +21,7 @@ export const useUpdateReplyPrefs = (onSuccess?: () => void) => {
 
 export const useUpdateCommentReplyPrefs = (onSuccess?: () => void) => {
   return useMutation(
-    orpc.notifications.updateCommentReplyPrefs.mutationOptions({
+    orpc.unsubscribes.updateCommentReplyPrefs.mutationOptions({
       onSuccess: () => {
         onSuccess?.()
       }

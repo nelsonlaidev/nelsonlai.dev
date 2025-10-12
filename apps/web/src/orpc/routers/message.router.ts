@@ -1,6 +1,7 @@
 import { ORPCError } from '@orpc/client'
 import { and, desc, eq, lt, messages } from '@repo/db'
 
+import { IS_PRODUCTION } from '@/lib/constants'
 import { sendGuestbookNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
 
@@ -72,7 +73,9 @@ export const createMessage = protectedProcedure
       })
     }
 
-    await sendGuestbookNotification(input.message, user.name, user.image ?? getDefaultImage(user.id))
+    if (IS_PRODUCTION) {
+      await sendGuestbookNotification(input.message, user.name, user.image ?? getDefaultImage(user.id))
+    }
 
     return message
   })

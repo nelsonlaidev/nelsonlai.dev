@@ -1,6 +1,6 @@
 import { ORPCError } from '@orpc/client'
 import { createId } from '@paralleldrive/cuid2'
-import { and, eq, notifications } from '@repo/db'
+import { and, eq, unsubscribes } from '@repo/db'
 
 import { verifyReplyUnsubToken } from '@/lib/unsubscribe'
 
@@ -10,13 +10,13 @@ import {
   getCommentReplyPrefsOutputSchema,
   updateCommentReplyPrefsInputSchema,
   updateGlobalReplyPrefsInputSchema
-} from '../schemas/notification.schema'
+} from '../schemas/unsubscribe.schema'
 
 export const getReplyPrefs = protectedProcedure
   .output(getCommentReplyPrefsOutputSchema)
   .handler(async ({ context }) => {
-    const result = await context.db.query.notifications.findFirst({
-      where: and(eq(notifications.userId, context.session.user.id), eq(notifications.type, 'all'))
+    const result = await context.db.query.unsubscribes.findFirst({
+      where: and(eq(unsubscribes.userId, context.session.user.id), eq(unsubscribes.scope, 'comment_replies_user'))
     })
 
     return { isEnabled: result ? false : true }
@@ -28,21 +28,21 @@ export const updateReplyPrefs = protectedProcedure
   .handler(async ({ context, input }) => {
     if (input.isEnabled) {
       await context.db
-        .delete(notifications)
-        .where(and(eq(notifications.userId, context.session.user.id), eq(notifications.type, 'all')))
+        .delete(unsubscribes)
+        .where(and(eq(unsubscribes.userId, context.session.user.id), eq(unsubscribes.scope, 'comment_replies_user')))
 
       return
     }
 
-    const existing = await context.db.query.notifications.findFirst({
-      where: and(eq(notifications.userId, context.session.user.id), eq(notifications.type, 'all'))
+    const existing = await context.db.query.unsubscribes.findFirst({
+      where: and(eq(unsubscribes.userId, context.session.user.id), eq(unsubscribes.scope, 'comment_replies_user'))
     })
 
     if (!existing) {
-      await context.db.insert(notifications).values({
+      await context.db.insert(unsubscribes).values({
         id: createId(),
         userId: context.session.user.id,
-        type: 'all'
+        scope: 'comment_replies_user'
       })
     }
   })
@@ -57,11 +57,11 @@ export const updateCommentReplyPrefs = publicProcedure
       throw new ORPCError('BAD_REQUEST', { message: 'Invalid token' })
     }
 
-    const existing = await context.db.query.notifications.findFirst({
+    const existing = await context.db.query.unsubscribes.findFirst({
       where: and(
-        eq(notifications.userId, input.userId),
-        eq(notifications.commentId, input.commentId),
-        eq(notifications.type, 'comment')
+        eq(unsubscribes.userId, input.userId),
+        eq(unsubscribes.commentId, input.commentId),
+        eq(unsubscribes.scope, 'comment_replies_comment')
       )
     })
 
@@ -71,10 +71,10 @@ export const updateCommentReplyPrefs = publicProcedure
       })
     }
 
-    await context.db.insert(notifications).values({
+    await context.db.insert(unsubscribes).values({
       id: createId(),
       userId: input.userId,
       commentId: input.commentId,
-      type: 'comment'
+      scope: 'comment_replies_comment'
     })
   })

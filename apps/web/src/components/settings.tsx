@@ -7,7 +7,7 @@ import { toast } from '@repo/ui/components/sonner'
 import { Switch } from '@repo/ui/components/switch'
 import { useTranslations } from 'next-intl'
 
-import { useReplyPrefs, useUpdateReplyPrefs } from '@/hooks/queries/notification.query'
+import { useReplyPrefs, useUpdateReplyPrefs } from '@/hooks/queries/unsubscribe.query'
 
 const Settings = () => {
   const t = useTranslations()

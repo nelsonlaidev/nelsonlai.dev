@@ -4,6 +4,7 @@ import { boolean, foreignKey, index, integer, pgTable, primaryKey, text, timesta
 
 import { users } from './auth.schema'
 import { posts } from './post.schema'
+import { unsubscribes } from './unsubscribe.schema'
 
 export const comments = pgTable(
   'comments',
@@ -84,7 +85,8 @@ export const commentsRelations = relations(comments, ({ one, many }) => ({
   replies: many(comments, {
     relationName: 'comment_replies'
   }),
-  votes: many(votes)
+  votes: many(votes),
+  unsubscribes: many(unsubscribes)
 }))
 
 export const votesRelations = relations(votes, ({ one }) => ({
