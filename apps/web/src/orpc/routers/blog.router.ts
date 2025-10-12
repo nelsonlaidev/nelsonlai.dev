@@ -22,7 +22,7 @@ export const likesStats = publicProcedure.output(likesStatsOutputSchema).handler
     .select({
       value: sum(postLikes.likeCount)
     })
-    .from(posts)
+    .from(postLikes)
 
   const likes = result?.value ? Number(result.value) : 0
 
