@@ -75,8 +75,8 @@ export const updateCommentReplyPrefs = publicProcedure
 
     await context.db.insert(unsubscribes).values({
       id: createId(),
-      userId: userId,
-      commentId: commentId,
+      userId,
+      commentId,
       scope: 'comment_replies_comment'
     })
   })
