@@ -2,9 +2,9 @@ import { keepPreviousData, useInfiniteQuery, useMutation, useQueryClient } from 
 
 import { orpc } from '@/orpc/client'
 
-export const useGuestbookMessages = () => {
+export const useMessages = () => {
   return useInfiniteQuery(
-    orpc.guestbook.list.infiniteOptions({
+    orpc.messages.list.infiniteOptions({
       input: (pageParam: Date | undefined) => ({ cursor: pageParam }),
       initialPageParam: undefined,
       getNextPageParam: (lastPage) => lastPage.nextCursor,
@@ -13,26 +13,26 @@ export const useGuestbookMessages = () => {
   )
 }
 
-export const useCreateGuestbookMessage = (onSuccess?: () => void) => {
+export const useCreateMessage = (onSuccess?: () => void) => {
   const queryClient = useQueryClient()
 
   return useMutation(
-    orpc.guestbook.create.mutationOptions({
+    orpc.messages.create.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: orpc.guestbook.list.key() })
+        queryClient.invalidateQueries({ queryKey: orpc.messages.list.key() })
         onSuccess?.()
       }
     })
   )
 }
 
-export const useDeleteGuestbookMessage = (onSuccess?: () => void) => {
+export const useDeleteMessage = (onSuccess?: () => void) => {
   const queryClient = useQueryClient()
 
   return useMutation(
-    orpc.guestbook.delete.mutationOptions({
+    orpc.messages.delete.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: orpc.guestbook.list.key() })
+        queryClient.invalidateQueries({ queryKey: orpc.messages.list.key() })
         onSuccess?.()
       }
     })

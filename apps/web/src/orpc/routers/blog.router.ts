@@ -20,7 +20,7 @@ export const viewsStats = publicProcedure.output(viewsStatsOutputSchema).handler
 export const likesStats = publicProcedure.output(likesStatsOutputSchema).handler(async ({ context }) => {
   const [result] = await context.db
     .select({
-      value: sum(postLikes.likes)
+      value: sum(postLikes.likeCount)
     })
     .from(posts)
 

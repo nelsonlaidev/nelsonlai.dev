@@ -5,8 +5,8 @@ import { listSessions, revokeSession, updateUser } from './auth.router'
 import { likesStats, viewsStats } from './blog.router'
 import { countComments, createComment, deleteComment, listComments } from './comment.router'
 import { githubStats } from './github.router'
-import { createMessage, deleteMessage, listMessages } from './guestbook.router'
 import { countLike, incrementLike } from './like.router'
+import { createMessage, deleteMessage, listMessages } from './message.router'
 import { getAvatarUploadUrl } from './r2.router'
 import { countReplies } from './reply.router'
 import { spotifyStats } from './spotify.router'
@@ -48,7 +48,7 @@ export const router = {
       create: createVote
     }
   },
-  guestbook: {
+  messages: {
     list: listMessages,
     create: createMessage,
     delete: deleteMessage
@@ -70,7 +70,7 @@ export const router = {
 export type ListCommentsInput = Inputs['posts']['comments']['list']
 export type ListCommentsOutput = Outputs['posts']['comments']['list']
 
-export type ListMessagesOutput = Outputs['guestbook']['list']
+export type ListMessagesOutput = Outputs['messages']['list']
 
 export type ListAllCommentsOutput = Outputs['admin']['listAllComments']
 export type ListAllUsersOutput = Outputs['admin']['listAllUsers']

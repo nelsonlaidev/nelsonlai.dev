@@ -1,5 +1,4 @@
 import { ORPCError } from '@orpc/client'
-import { createId } from '@paralleldrive/cuid2'
 import { and, asc, comments, count, desc, eq, gt, isNotNull, isNull, lt, ne, votes } from '@repo/db'
 import { getLocale } from 'next-intl/server'
 
@@ -82,7 +81,7 @@ export const listComments = publicProcedure
 
       return {
         ...comment,
-        liked: selfVote?.like ?? null,
+        liked: selfVote?.isLike ?? null,
         user: {
           ...comment.user,
           image: comment.user.image ?? defaultImage,
@@ -104,7 +103,6 @@ export const createComment = protectedProcedure
     const user = context.session.user
 
     const locale = await getLocale()
-    const commentId = createId()
 
     const post = getPostBySlug(locale, input.slug)
 
@@ -114,7 +112,6 @@ export const createComment = protectedProcedure
       const [c] = await tx
         .insert(comments)
         .values({
-          id: commentId,
           body: input.content,
           userId: user.id,
           postId: input.slug,
@@ -134,7 +131,7 @@ export const createComment = protectedProcedure
           post.title,
           post.slug,
           input.content,
-          commentId,
+          c.id,
           user.name,
           user.image ?? getDefaultImage(user.id)
         )

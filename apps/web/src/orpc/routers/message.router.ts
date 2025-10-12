@@ -1,6 +1,5 @@
 import { ORPCError } from '@orpc/client'
-import { createId } from '@paralleldrive/cuid2'
-import { and, desc, eq, guestbook, lt } from '@repo/db'
+import { and, desc, eq, lt, messages } from '@repo/db'
 
 import { sendGuestbookNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
@@ -13,14 +12,14 @@ import {
   deleteMessageInputSchema,
   listMessagesInputSchema,
   listMessagesOutputSchema
-} from '../schemas/guestbook.schema'
+} from '../schemas/message.schema'
 
 export const listMessages = publicProcedure
   .input(listMessagesInputSchema)
   .output(listMessagesOutputSchema)
   .handler(async ({ input, context }) => {
-    const query = await context.db.query.guestbook.findMany({
-      where: and(input.cursor ? lt(guestbook.createdAt, input.cursor) : undefined),
+    const query = await context.db.query.messages.findMany({
+      where: and(input.cursor ? lt(messages.createdAt, input.cursor) : undefined),
       limit: input.limit,
       with: {
         user: {
@@ -31,7 +30,7 @@ export const listMessages = publicProcedure
           }
         }
       },
-      orderBy: desc(guestbook.updatedAt)
+      orderBy: desc(messages.updatedAt)
     })
 
     const result = query.map((message) => {
@@ -60,9 +59,8 @@ export const createMessage = protectedProcedure
     const user = context.session.user
 
     const [message] = await context.db
-      .insert(guestbook)
+      .insert(messages)
       .values({
-        id: createId(),
         body: input.message,
         userId: user.id
       })
@@ -85,8 +83,8 @@ export const deleteMessage = protectedProcedure
   .handler(async ({ input, context }) => {
     const user = context.session.user
 
-    const message = await context.db.query.guestbook.findFirst({
-      where: and(eq(guestbook.id, input.id), eq(guestbook.userId, user.id))
+    const message = await context.db.query.messages.findFirst({
+      where: and(eq(messages.id, input.id), eq(messages.userId, user.id))
     })
 
     if (!message) {
@@ -95,5 +93,5 @@ export const deleteMessage = protectedProcedure
       })
     }
 
-    await context.db.delete(guestbook).where(eq(guestbook.id, input.id))
+    await context.db.delete(messages).where(eq(messages.id, input.id))
   })

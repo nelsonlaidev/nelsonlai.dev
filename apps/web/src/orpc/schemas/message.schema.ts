@@ -1,8 +1,8 @@
-import { guestbook, users } from '@repo/db'
+import { messages, users } from '@repo/db'
 import { createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
 
-export const createMessageOutputSchema = createSelectSchema(guestbook).pick({
+export const createMessageOutputSchema = createSelectSchema(messages).pick({
   id: true,
   createdAt: true,
   updatedAt: true,

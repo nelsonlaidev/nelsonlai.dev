@@ -10,7 +10,7 @@ export const createVote = protectedProcedure
   .handler(async ({ input, context }) => {
     const user = context.session.user
 
-    if (input.like === null) {
+    if (input.isLike === null) {
       const [vote] = await context.db
         .delete(votes)
         .where(and(eq(votes.commentId, input.id), eq(votes.userId, user.id)))
@@ -30,12 +30,12 @@ export const createVote = protectedProcedure
       .values({
         commentId: input.id,
         userId: user.id,
-        like: input.like
+        isLike: input.isLike
       })
       .onConflictDoUpdate({
         target: [votes.userId, votes.commentId],
         set: {
-          like: input.like
+          isLike: input.isLike
         }
       })
       .returning()

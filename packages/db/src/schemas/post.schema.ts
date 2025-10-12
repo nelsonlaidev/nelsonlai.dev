@@ -4,7 +4,7 @@ import { index, integer, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 import { comments } from './comment.schema'
 
 export const posts = pgTable(
-  'post',
+  'posts',
   {
     createdAt: timestamp('created_at')
       .notNull()
@@ -13,7 +13,7 @@ export const posts = pgTable(
     likes: integer('likes').notNull().default(0),
     views: integer('views').notNull().default(0)
   },
-  (table) => [index('idx_post_created').on(table.createdAt.desc())]
+  (table) => [index('posts_created_at_desc_idx').on(table.createdAt.desc())]
 )
 
 export const postsRelations = relations(posts, ({ many }) => ({

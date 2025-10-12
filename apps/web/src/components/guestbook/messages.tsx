@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-import { useGuestbookMessages } from '@/hooks/queries/guestbook.query'
+import { useMessages } from '@/hooks/queries/message.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useSession } from '@/lib/auth-client'
 import { getAbbreviation } from '@/utils/get-abbreviation'
@@ -17,7 +17,7 @@ import DeleteButton from './delete-button'
 import MessagesLoader from './messages-loader'
 
 const Messages = () => {
-  const { isSuccess, isLoading, isError, data, fetchNextPage, hasNextPage, isFetchingNextPage } = useGuestbookMessages()
+  const { isSuccess, isLoading, isError, data, fetchNextPage, hasNextPage, isFetchingNextPage } = useMessages()
   const t = useTranslations()
 
   const { ref, inView } = useInView()

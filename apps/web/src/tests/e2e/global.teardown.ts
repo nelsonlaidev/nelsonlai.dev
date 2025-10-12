@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 import { test as teardown } from '@playwright/test'
-import { comments, db, eq, guestbook, like, postLikes, posts, sessions, users } from '@repo/db'
+import { comments, db, eq, like, messages, postLikes, posts, sessions, users } from '@repo/db'
 import { redis } from '@repo/kv'
 
 import { TEST_UNIQUE_ID } from './fixtures/auth'
@@ -11,7 +11,7 @@ import { TEST_POSTS } from './fixtures/posts'
 teardown('teardown global', async () => {
   // Delete test user related data
   await db.delete(comments).where(like(comments.postId, 'test%'))
-  await db.delete(guestbook).where(eq(guestbook.userId, TEST_UNIQUE_ID))
+  await db.delete(messages).where(eq(messages.userId, TEST_UNIQUE_ID))
   await db.delete(postLikes).where(like(postLikes.postId, 'test%'))
   await db.delete(posts).where(like(posts.slug, 'test%'))
   await db.delete(sessions).where(like(sessions.userId, TEST_UNIQUE_ID))

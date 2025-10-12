@@ -41,7 +41,7 @@ const CommentActions = () => {
       toast.error(t('error.need-logged-in-to-vote'))
       return
     }
-    voteComment({ id: comment.id, like: like === comment.liked ? null : like })
+    voteComment({ id: comment.id, isLike: like === comment.liked ? null : like })
   }
 
   const hasReplies = !comment.parentId && comment.replyCount > 0
