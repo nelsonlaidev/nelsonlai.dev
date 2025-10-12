@@ -51,16 +51,18 @@ export const updateCommentReplyPrefs = publicProcedure
   .input(updateCommentReplyPrefsInputSchema)
   .output(emptyOutputSchema)
   .handler(async ({ input, context }) => {
-    const { success } = await verifyReplyUnsubToken(input.token)
+    const result = await verifyReplyUnsubToken(input.token)
 
-    if (!success) {
+    if (!result.success) {
       throw new ORPCError('BAD_REQUEST', { message: 'Invalid token' })
     }
 
+    const { userId, commentId } = result.data
+
     const existing = await context.db.query.unsubscribes.findFirst({
       where: and(
-        eq(unsubscribes.userId, input.userId),
-        eq(unsubscribes.commentId, input.commentId),
+        eq(unsubscribes.userId, userId),
+        eq(unsubscribes.commentId, commentId),
         eq(unsubscribes.scope, 'comment_replies_comment')
       )
     })
@@ -73,8 +75,8 @@ export const updateCommentReplyPrefs = publicProcedure
 
     await context.db.insert(unsubscribes).values({
       id: createId(),
-      userId: input.userId,
-      commentId: input.commentId,
+      userId: userId,
+      commentId: commentId,
       scope: 'comment_replies_comment'
     })
   })

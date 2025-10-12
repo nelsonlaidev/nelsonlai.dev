@@ -24,7 +24,7 @@ const UnsubscribeForm = (props: UnsubscribeFormProps) => {
 
   const handleUnsubscribe = () => {
     if (isUpdating) return
-    updatePrefs({ userId: data.userId, commentId: data.commentId, token: data.token })
+    updatePrefs({ token: data.token })
   }
 
   return (

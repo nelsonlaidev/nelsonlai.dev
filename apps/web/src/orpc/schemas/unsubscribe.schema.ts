@@ -9,7 +9,5 @@ export const updateGlobalReplyPrefsInputSchema = z.object({
 })
 
 export const updateCommentReplyPrefsInputSchema = z.object({
-  commentId: z.string().min(1),
-  userId: z.string().min(1),
   token: z.string().min(1)
 })
