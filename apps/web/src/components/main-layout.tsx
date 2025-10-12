@@ -12,7 +12,7 @@ const MainLayout = (props: MainLayoutProps) => {
   return (
     <>
       <LayoutHeader />
-      <main id='skip-nav' className='mx-auto mb-16 w-full max-w-5xl flex-1 px-4 py-24 sm:px-8'>
+      <main id='skip-nav' className='mx-auto mb-16 w-full max-w-5xl flex-1 px-6 py-24 sm:px-8'>
         {children}
       </main>
       <LayoutFooter />
