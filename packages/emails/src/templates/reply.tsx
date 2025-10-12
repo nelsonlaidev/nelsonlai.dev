@@ -81,11 +81,10 @@ const ReplyEmailTemplate = (props: ReplyEmailTemplateProps) => {
               View Reply
             </Button>
             <Text className='text-xs text-gray-500'>
-              You received this email because you enabled notifications for replies to your comments. If you no longer
-              wish to receive these emails, please update your{' '}
+              You received this because you enabled notifications for replies to your comments. If you wish to stop
+              receiving these emails, please update your{' '}
               <Link href='https://nelsonlai.dev/account/settings'>account settings</Link>. To stop receiving reply
-              {/* eslint-disable-next-line jsx-a11y/anchor-ambiguous-text -- It's ok */}
-              notifications for this specific comment, you can unsubscribe <Link href={unsubscribeUrl}>here</Link>.
+              notifications for this specific comment, you can <Link href={unsubscribeUrl}>unsubscribe</Link>.
             </Text>
             <Footer />
           </Container>
