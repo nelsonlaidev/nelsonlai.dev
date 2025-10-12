@@ -1,5 +1,5 @@
 import { ORPCError } from '@orpc/client'
-import { and, asc, comments, count, desc, eq, gt, isNotNull, isNull, lt, ne, unsubscribes, votes } from '@repo/db'
+import { and, asc, comments, count, desc, eq, gt, isNotNull, isNull, lt, ne, notifications, votes } from '@repo/db'
 import { CommentEmailTemplate, ReplyEmailTemplate } from '@repo/emails'
 import { env } from '@repo/env'
 import { getLocale } from 'next-intl/server'
@@ -164,15 +164,15 @@ export const createComment = protectedProcedure
         })
 
         if (parentComment && parentComment.user.email !== user.email) {
-          const noAllNotification = await tx.query.unsubscribes.findFirst({
-            where: and(eq(unsubscribes.userId, parentComment.userId), eq(unsubscribes.type, 'all'))
+          const noAllNotification = await tx.query.notifications.findFirst({
+            where: and(eq(notifications.userId, parentComment.userId), eq(notifications.type, 'all'))
           })
 
-          const noSpecificNotification = await tx.query.unsubscribes.findFirst({
+          const noSpecificNotification = await tx.query.notifications.findFirst({
             where: and(
-              eq(unsubscribes.commentId, input.parentId),
-              eq(unsubscribes.userId, parentComment.userId),
-              eq(unsubscribes.type, 'comment')
+              eq(notifications.commentId, input.parentId),
+              eq(notifications.userId, parentComment.userId),
+              eq(notifications.type, 'comment')
             )
           })
 

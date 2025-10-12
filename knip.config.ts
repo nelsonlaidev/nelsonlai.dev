@@ -20,6 +20,16 @@ const config: KnipConfig = {
     },
     'packages/db': {
       entry: ['src/reset.ts', 'src/seed.ts']
+    },
+    'packages/emails': {
+      ignoreDependencies: [
+        // For tailwindcss intellisense
+        'tailwindcss',
+        // Required by react email
+        '@react-email/preview-server',
+        'react-dom'
+      ],
+      ignore: ['src/styles.css']
     }
   },
   // Credit to https://github.com/webpro-nl/knip/issues/1008#issuecomment-2756559038

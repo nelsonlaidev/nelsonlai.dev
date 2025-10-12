@@ -7,7 +7,7 @@ import { toast } from '@repo/ui/components/sonner'
 import { Switch } from '@repo/ui/components/switch'
 import { useTranslations } from 'next-intl'
 
-import { useReplyNotificationPrefs, useUpdateGlobalReplyNotificationPrefs } from '@/hooks/queries/unsubscribe.query'
+import { useReplyPrefs, useUpdateReplyPrefs } from '@/hooks/queries/notification.query'
 
 const Settings = () => {
   const t = useTranslations()
@@ -23,9 +23,9 @@ const Settings = () => {
 }
 
 const ReplyNotificationSettings = () => {
-  const { isSuccess, isLoading, isError, data } = useReplyNotificationPrefs()
+  const { isSuccess, isLoading, isError, data } = useReplyPrefs()
   const t = useTranslations()
-  const { mutate: updatePrefs, isPending: isUpdating } = useUpdateGlobalReplyNotificationPrefs(() => {
+  const { mutate: updatePrefs, isPending: isUpdating } = useUpdateReplyPrefs(() => {
     toast.success(t('settings.save-settings-successfully'))
   })
 

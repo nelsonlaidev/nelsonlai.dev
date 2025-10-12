@@ -1,6 +1,6 @@
 import 'server-only'
 
-import { and, comments, db, eq, unsubscribes } from '@repo/db'
+import { and, comments, db, eq, notifications } from '@repo/db'
 import { env } from '@repo/env'
 import { jwtVerify, SignJWT } from 'jose'
 import { z } from 'zod'
@@ -9,7 +9,7 @@ import { getMaskedEmail } from '@/utils/get-masked-email'
 
 const tokenSchema = z.jwt({ alg: 'HS256' })
 
-export const replyUnsubPayloadSchema = z.object({
+const replyUnsubPayloadSchema = z.object({
   userId: z.string().min(1),
   commentId: z.string().min(1)
 })
@@ -75,8 +75,12 @@ export const getReplyUnsubData = async (token: string | null) => {
 
   if (!data) return null
 
-  const isUnsubscribed = await db.query.unsubscribes.findFirst({
-    where: and(eq(unsubscribes.userId, userId), eq(unsubscribes.commentId, commentId), eq(unsubscribes.type, 'comment'))
+  const isUnsubscribed = await db.query.notifications.findFirst({
+    where: and(
+      eq(notifications.userId, userId),
+      eq(notifications.commentId, commentId),
+      eq(notifications.type, 'comment')
+    )
   })
 
   const maskedEmail = getMaskedEmail(data.user.email)

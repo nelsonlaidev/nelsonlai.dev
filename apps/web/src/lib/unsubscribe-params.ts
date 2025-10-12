@@ -1,6 +1,6 @@
 import { createLoader, parseAsString } from 'nuqs/server'
 
-export const unsubscribeParams = {
+const unsubscribeParams = {
   token: parseAsString
 }
 

@@ -7,14 +7,10 @@ import { countComments, createComment, deleteComment, listComments } from './com
 import { githubStats } from './github.router'
 import { countLike, incrementLike } from './like.router'
 import { createMessage, deleteMessage, listMessages } from './message.router'
+import { getReplyPrefs, updateCommentReplyPrefs, updateReplyPrefs } from './notification.router'
 import { getAvatarUploadUrl } from './r2.router'
 import { countReplies } from './reply.router'
 import { spotifyStats } from './spotify.router'
-import {
-  getReplyNotificationPrefs,
-  updateGlobalReplyNotificationPrefs,
-  updateReplyNotificationPrefs
-} from './unsubscribe.route'
 import { countView, incrementView } from './view.router'
 import { createVote } from './vote.router'
 import { wakatimeStats } from './wakatime.router'
@@ -70,10 +66,10 @@ export const router = {
   r2: {
     getAvatarUploadUrl
   },
-  unsubscribes: {
-    getReplyNotificationPrefs,
-    updateGlobalReplyNotificationPrefs,
-    updateReplyNotificationPrefs
+  notifications: {
+    getReplyPrefs,
+    updateReplyPrefs,
+    updateCommentReplyPrefs
   }
 }
 

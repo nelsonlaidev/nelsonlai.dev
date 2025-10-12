@@ -8,7 +8,7 @@ import { BellOffIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import { useUpdateReplyNotificationPrefs } from '@/hooks/queries/unsubscribe.query'
+import { useUpdateCommentReplyPrefs } from '@/hooks/queries/notification.query'
 
 type UnsubscribeFormProps = {
   data: NonNullable<Awaited<ReturnType<typeof getReplyUnsubData>>>
@@ -17,7 +17,7 @@ type UnsubscribeFormProps = {
 const UnsubscribeForm = (props: UnsubscribeFormProps) => {
   const { data } = props
   const [isUnsubscribed, setIsUnsubscribed] = useState(data.isUnsubscribed)
-  const { mutate: updatePrefs, isPending: isUpdating } = useUpdateReplyNotificationPrefs(() => {
+  const { mutate: updatePrefs, isPending: isUpdating } = useUpdateCommentReplyPrefs(() => {
     setIsUnsubscribed(true)
   })
   const t = useTranslations()
