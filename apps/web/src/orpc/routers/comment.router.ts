@@ -164,7 +164,8 @@ export const createComment = protectedProcedure
           }
         })
 
-        if (parentComment && parentComment.user.email !== user.email) {
+        // Don't notify if the reply is to own comment or the parent comment user is "ghost"
+        if (parentComment && parentComment.user.email !== user.email && parentComment.user.id !== 'ghost') {
           const unsubscribedFromAllReplies = await tx.query.unsubscribes.findFirst({
             where: and(eq(unsubscribes.userId, parentComment.userId), eq(unsubscribes.scope, 'comment_replies_user'))
           })
