@@ -2,6 +2,27 @@
   "about": {
     "description": "嗨！我是 Nelson Lai，一位热爱网页开发的学生，使用 HTML、CSS 和 JavaScript 创作创新项目。探索我的作品集、技能与开发历程，一起探索数字世界吧！"
   },
+  "account": {
+    "account-created": "账户创建时间",
+    "active-sessions": "活跃会话",
+    "avatar": "头像",
+    "avatar-too-large": "头像文件过大。请选择小于 {size} MB 的文件。",
+    "avatar-unsupported-file": "请选择支持的图片格式（JPEG、PNG、WEBP、GIF、AVIF）。",
+    "description": "管理您的账户。",
+    "display-name": "显示名称",
+    "edit-name": "编辑名称",
+    "edit-name-description": "更改您的显示名称。此名称将显示在您的个人资料和评论中。",
+    "edit-name-successfully": "成功编辑名称",
+    "email": "邮箱",
+    "no-active-sessions": "没有活动会话",
+    "profile": "个人资料",
+    "revoke-session": "结束",
+    "session-revoked-successfully": "会话已成功结束",
+    "this-device": "此设备",
+    "update-avatar": "更新头像",
+    "update-avatar-failed": "更新头像失败，请再试一次。",
+    "update-avatar-successfully": "头像更新成功"
+  },
   "admin": {
     "page-header": {
       "comments": {
@@ -11,6 +32,10 @@
         "description": "管理用户"
       }
     }
+  },
+  "auth": {
+    "sign-out-failed": "登出失败，请再试一次。",
+    "sign-out-successfully": "成功登出"
   },
   "blog": {
     "comments": {
@@ -27,6 +52,7 @@
       "oldest": "最旧",
       "open-menu": "开启选单",
       "placeholder": "留下评论",
+      "preview": "预览",
       "replies": "{count, plural, =1 {回复} other {回复}}",
       "reply": "回复",
       "reply-posted": "回复已发布",
@@ -37,8 +63,7 @@
       "toggle-bold": "切换粗体",
       "toggle-italic": "切换斜体",
       "toggle-strikethrough": "切换删除线",
-      "write": "撰写",
-      "preview": "预览"
+      "write": "撰写"
     },
     "description": "欢迎来到我的网站和博客！作为香港的全端工程师，我从 2020 年 12 月起自学网页开发，分享教学、笔记与生活点滴。探索我的旅程！",
     "footer": {
@@ -68,43 +93,43 @@
   "common": {
     "cancel": "取消",
     "delete": "删除",
+    "dialogs": {
+      "delete-comment": {
+        "description": "您确定要删除此评论吗？此动作无法复原。",
+        "title": "删除评论"
+      }
+    },
     "error": "错误",
-    "likes": "{count, plural, =1 {# 点赞} other {# 点赞}}",
-    "sign-in": "登入",
-    "sign-out": "登出",
-    "views": "{count, plural, =1 {# 浏览次数} other {# 浏览次数}}",
-    "like": "赞",
-    "unknown": "未知",
-    "save": "保存",
     "labels": {
-      "home": "首页",
       "about": "关于",
       "account": "账户",
       "blog": "博客",
-      "dashboard": "仪表板",
-      "guestbook": "留言板",
-      "projects": "项目",
-      "uses": "装备",
-      "privacy-policy": "隐私权政策",
-      "terms-of-service": "服务条款",
-      "comments": "评论",
       "comment": "评论",
+      "comments": "评论",
+      "dashboard": "仪表板",
+      "facebook": "Facebook",
+      "general": "一般",
+      "github": "GitHub",
+      "guestbook": "留言板",
+      "home": "首页",
+      "instagram": "Instagram",
+      "links": "链接",
+      "privacy-policy": "隐私权政策",
+      "projects": "项目",
+      "settings": "设定",
+      "terms-of-service": "服务条款",
       "unsubscribe": "取消订阅",
       "users": "用户",
-      "settings": "设定",
-      "general": "一般",
-      "links": "链接",
-      "facebook": "Facebook",
-      "github": "GitHub",
-      "instagram": "Instagram",
+      "uses": "装备",
       "youtube": "YouTube"
     },
-    "dialogs": {
-      "delete-comment": {
-        "title": "删除评论",
-        "description": "您确定要删除此评论吗？此动作无法复原。"
-      }
-    }
+    "like": "赞",
+    "likes": "{count, plural, =1 {# 点赞} other {# 点赞}}",
+    "save": "保存",
+    "sign-in": "登入",
+    "sign-out": "登出",
+    "unknown": "未知",
+    "views": "{count, plural, =1 {# 浏览次数} other {# 浏览次数}}"
   },
   "component": {
     "filtered-posts": {
@@ -134,25 +159,25 @@
     }
   },
   "error": {
+    "comment-cannot-be-empty": "评论不能为空",
+    "copy-to-clipboard-error": "无法复制到剪贴板。请再试一次！",
     "failed-to-fetch-comments-data": "无法获取评论数据。请刷新页面。",
     "failed-to-fetch-users-data": "无法获取用户数据。请刷新页面。",
-    "comment-cannot-be-empty": "评论不能为空",
-    "failed-to-load-comments": "无法载入评论。请刷新页面。",
-    "failed-to-load-replies": "无法载入回复。请刷新页面。",
     "failed-to-load": "无法载入。",
-    "need-logged-in-to-vote": "您必须登入才能投票评论",
-    "reply-cannot-be-empty": "回复不能为空",
+    "failed-to-load-comments": "无法载入评论。请刷新页面。",
+    "failed-to-load-messages": "无法载入留言。请刷新页面。",
+    "failed-to-load-replies": "无法载入回复。请刷新页面。",
     "like-limit-reached": "您只能对每篇文章点赞 3 次",
+    "message-cannot-be-empty": "留言不能为空",
+    "name-cannot-be-empty": "名称不能为空",
+    "name-too-long": "名称过长",
+    "need-logged-in-to-vote": "您必须登入才能投票评论",
+    "not-found": "找不到页面！",
+    "now-playing-error": "无法获取 Spotify 资料",
+    "reply-cannot-be-empty": "回复不能为空",
     "sign-in-error": "登入失败。请再试一次。",
     "something-went-wrong": "出了一些问题！",
-    "try-again": "再试一次",
-    "failed-to-load-messages": "无法载入留言。请刷新页面。",
-    "message-cannot-be-empty": "留言不能为空",
-    "copy-to-clipboard-error": "无法复制到剪贴板。请再试一次！",
-    "now-playing-error": "无法获取 Spotify 资料",
-    "not-found": "找不到页面！",
-    "name-cannot-be-empty": "名称不能为空",
-    "name-too-long": "名称过长"
+    "try-again": "再试一次"
   },
   "guestbook": {
     "create-message-successfully": "成功发布留言",
@@ -226,9 +251,22 @@
   "metadata": {
     "site-description": "Nelson Lai 是一位居住于香港的全栈工程师。他使用 React、Node.js 和现代技术构建高效且优雅的网站。"
   },
+  "privacy": {
+    "description": "此页面说明当您使用我们的网站时，我们如何处理您的数据并保护您的隐私。"
+  },
   "projects": {
     "description": "我的项目集，每个都倾注了心血制作。",
     "visit-website": "前往网站"
+  },
+  "settings": {
+    "description": "管理您的设定。",
+    "notification-settings": "通知设定",
+    "reply-notification": "回复通知",
+    "reply-notification-description": "当有人回复您的评论时，接收电子邮件通知。",
+    "save-settings-successfully": "设定保存成功"
+  },
+  "terms": {
+    "description": "这些条款和条件概述了使用我们网站的规则和规定。"
   },
   "theme-toggle": {
     "options": {
@@ -238,54 +276,16 @@
     },
     "toggle-theme": "切换主题"
   },
+  "unsubscribe": {
+    "invalid-link-description": "取消订阅链接无效。请再试一次。",
+    "invalid-unsubscribe-link": "无效的取消订阅链接",
+    "stop-receiving-email-notifications": "停止接收此评论回复的电子邮件通知",
+    "unsubscribe-from-this-comment": "取消订阅此评论",
+    "unsubscribed-description": "您将不再收到此评论的回复通知电子邮件。",
+    "you-are-unsubscribing-as": "您正以 {email} 的身份取消订阅",
+    "you-have-been-unsubscribed": "您已取消订阅"
+  },
   "uses": {
     "description": "这是我目前用来玩游戏、程序设计、制作视频和日常使用的装备。"
-  },
-  "account": {
-    "description": "管理您的账户。",
-    "active-sessions": "活跃会话",
-    "no-active-sessions": "没有活动会话",
-    "revoke-session": "结束",
-    "this-device": "此设备",
-    "session-revoked-successfully": "会话已成功结束",
-    "profile": "个人资料",
-    "avatar": "头像",
-    "update-avatar": "更新头像",
-    "update-avatar-successfully": "头像更新成功",
-    "update-avatar-failed": "更新头像失败，请再试一次。",
-    "avatar-too-large": "头像文件过大。请选择小于 {size} MB 的文件。",
-    "avatar-unsupported-file": "请选择支持的图片格式（JPEG、PNG、WEBP、GIF、AVIF）。",
-    "display-name": "显示名称",
-    "edit-name": "编辑名称",
-    "edit-name-description": "更改您的显示名称。此名称将显示在您的个人资料和评论中。",
-    "edit-name-successfully": "成功编辑名称",
-    "email": "邮箱",
-    "account-created": "账户创建时间"
-  },
-  "settings": {
-    "description": "管理您的设定。",
-    "notification-settings": "通知设定",
-    "reply-notification": "回复通知",
-    "reply-notification-description": "当有人回复您的评论时，接收电子邮件通知。",
-    "save-settings-successfully": "设定保存成功"
-  },
-  "privacy": {
-    "description": "此页面说明当您使用我们的网站时，我们如何处理您的数据并保护您的隐私。"
-  },
-  "terms": {
-    "description": "这些条款和条件概述了使用我们网站的规则和规定。"
-  },
-  "auth": {
-    "sign-out-successfully": "成功登出",
-    "sign-out-failed": "登出失败，请再试一次。"
-  },
-  "unsubscribe": {
-    "unsubscribe-from-this-comment": "取消订阅此评论",
-    "stop-receiving-email-notifications": "停止接收此评论回复的电子邮件通知",
-    "you-are-unsubscribing-as": "您正以 {email} 的身份取消订阅",
-    "you-have-been-unsubscribed": "您已取消订阅",
-    "unsubscribed-description": "您将不再收到此评论的回复通知电子邮件。",
-    "invalid-unsubscribe-link": "无效的取消订阅链接",
-    "invalid-link-description": "取消订阅链接无效。请再试一次。"
   }
 }
