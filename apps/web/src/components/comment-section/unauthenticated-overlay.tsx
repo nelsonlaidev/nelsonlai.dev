@@ -8,7 +8,7 @@ const UnauthenticatedOverlay = () => {
   const setIsSignInOpen = useDialogsStore((state) => state.setIsSignInOpen)
 
   return (
-    <div className='absolute inset-0 flex items-center justify-center rounded-lg bg-black/5 backdrop-blur-[0.8px]'>
+    <div className='absolute inset-0 flex items-center justify-center rounded-md bg-black/5 backdrop-blur-[0.8px]'>
       <Button
         size='sm'
         onClick={() => {
