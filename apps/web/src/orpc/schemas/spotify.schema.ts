@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import * as z from 'zod'
 
 const playingSchema = z.object({
   isPlaying: z.literal(true),

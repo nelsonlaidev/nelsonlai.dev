@@ -1,6 +1,6 @@
 import { comments, users } from '@repo/db'
 import { createSelectSchema } from 'drizzle-zod'
-import { z } from 'zod'
+import * as z from 'zod'
 
 export const listAllCommentsOutputSchema = z.object({
   comments: z.array(createSelectSchema(comments))

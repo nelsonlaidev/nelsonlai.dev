@@ -179,7 +179,7 @@ When modifying database schema:
 
 ```ts
 // In apps/web/src/orpc/routers/todo.route.ts
-import { z } from 'zod'
+import * as z from 'zod'
 import { publicProcedure, protectedProcedure } from '../root'
 
 // Router name convention: use verb-noun format

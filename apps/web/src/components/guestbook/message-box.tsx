@@ -10,7 +10,7 @@ import { toast } from '@repo/ui/components/sonner'
 import { Textarea } from '@repo/ui/components/textarea'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import * as z from 'zod'
 
 import { useCreateMessage } from '@/hooks/queries/message.query'
 import { useSignOut } from '@/hooks/use-sign-out'

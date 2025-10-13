@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import * as z from 'zod'
 
 export const infiniteQuerySchema = z.object({
   cursor: z.date().optional(),

@@ -3,7 +3,7 @@ import 'server-only'
 import { and, comments, db, eq, unsubscribes } from '@repo/db'
 import { env } from '@repo/env'
 import { jwtVerify, SignJWT } from 'jose'
-import { z } from 'zod'
+import * as z from 'zod'
 
 import { getMaskedEmail } from '@/utils/get-masked-email'
 

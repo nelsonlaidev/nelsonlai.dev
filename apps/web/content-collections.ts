@@ -1,6 +1,6 @@
 import { type Context, defineCollection, defineConfig, type Meta } from '@content-collections/core'
 import { compileMDX } from '@content-collections/mdx'
-import { z } from 'zod'
+import * as z from 'zod'
 
 import { getTOC, rehypePlugins, remarkPlugins } from '@/mdx-plugins'
 
