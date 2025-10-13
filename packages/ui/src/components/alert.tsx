@@ -23,7 +23,7 @@ type AlertProps = React.ComponentProps<'div'> & VariantProps<typeof alertVariant
 const Alert = (props: AlertProps) => {
   const { className, variant, ...rest } = props
 
-  return <div data-slot='alert' role='alert' className={cn(alertVariants({ variant }), className)} {...rest} />
+  return <div data-slot='alert' role='alert' className={cn(alertVariants({ variant, className }))} {...rest} />
 }
 
 type AlertTitleProps = React.ComponentProps<'div'>

@@ -33,7 +33,7 @@ const Badge = (props: BadgeProps) => {
   const { className, variant, asChild = false, ...rest } = props
   const Comp = asChild ? Slot.Root : 'span'
 
-  return <Comp data-slot='badge' className={cn(badgeVariants({ variant }), className)} {...rest} />
+  return <Comp data-slot='badge' className={cn(badgeVariants({ variant, className }))} {...rest} />
 }
 
 export { Badge, badgeVariants }
