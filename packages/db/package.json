@@ -33,7 +33,7 @@
     "drizzle-orm": "0.44.5"
   },
   "devDependencies": {
-    "@nelsonlaidev/eslint-config": "2.1.1",
+    "@nelsonlaidev/eslint-config": "2.2.0",
     "@nelsonlaidev/typescript-config": "0.0.3",
     "@types/node": "24.3.3",
     "consola": "3.4.2",
