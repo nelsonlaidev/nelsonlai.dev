@@ -6,8 +6,6 @@
     "account-created": "Account created",
     "active-sessions": "Active sessions",
     "avatar": "Avatar",
-    "avatar-too-large": "Avatar file is too large. Please choose a file smaller than {size} MB.",
-    "avatar-unsupported-file": "Please choose a supported image type (JPEG, PNG, WEBP, GIF, AVIF).",
     "description": "Manage your account.",
     "display-name": "Display name",
     "edit-name": "Edit name",
@@ -20,7 +18,6 @@
     "session-revoked-successfully": "Session revoked successfully",
     "this-device": "This device",
     "update-avatar": "Update avatar",
-    "update-avatar-failed": "Failed to update avatar. Please try again.",
     "update-avatar-successfully": "Avatar updated successfully"
   },
   "admin": {
@@ -34,7 +31,6 @@
     }
   },
   "auth": {
-    "sign-out-failed": "Sign out failed. Please try again.",
     "sign-out-successfully": "Signed out successfully"
   },
   "blog": {
@@ -159,6 +155,8 @@
     }
   },
   "error": {
+    "avatar-too-large": "Avatar file is too large. Please choose a file smaller than {size} MB.",
+    "avatar-unsupported-file": "Please choose a supported image type (JPEG, PNG, WEBP, GIF, AVIF).",
     "comment-cannot-be-empty": "Comment cannot be empty",
     "copy-to-clipboard-error": "Unable to copy to clipboard. Please try again.",
     "failed-to-fetch-comments-data": "Failed to fetch comments data. Please refresh the page.",
@@ -176,7 +174,9 @@
     "now-playing-error": "Failed to fetch Spotify data",
     "reply-cannot-be-empty": "Reply cannot be empty",
     "sign-in-error": "Failed to sign in. Please try again.",
+    "sign-out-failed": "Sign out failed. Please try again.",
     "something-went-wrong": "Something went wrong. Please try again.",
+    "update-avatar-failed": "Failed to update avatar. Please try again.",
     "try-again": "Try again"
   },
   "guestbook": {

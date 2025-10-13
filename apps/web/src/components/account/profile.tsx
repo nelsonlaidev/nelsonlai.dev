@@ -182,13 +182,13 @@ const UpdateAvatar = () => {
     event.target.value = ''
 
     if (!SUPPORTED_AVATAR_MIME_TYPES.includes(file.type as AvatarMimeType)) {
-      toast.error(t('account.avatar-unsupported-file'))
+      toast.error(t('error.avatar-unsupported-file'))
       return
     }
 
     if (file.size > AVATAR_MAX_FILE_SIZE) {
       const maxSizeInMb = (AVATAR_MAX_FILE_SIZE / (1024 * 1024)).toFixed(1)
-      toast.error(t('account.avatar-too-large', { size: maxSizeInMb }))
+      toast.error(t('error.avatar-too-large', { size: maxSizeInMb }))
       return
     }
 
@@ -215,7 +215,7 @@ const UpdateAvatar = () => {
 
       await updateUser({ image: publicUrl })
     } catch {
-      toast.error(t('account.update-avatar-failed'))
+      toast.error(t('error.update-avatar-failed'))
     } finally {
       setIsUploading(false)
     }

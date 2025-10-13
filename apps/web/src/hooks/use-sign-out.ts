@@ -26,7 +26,7 @@ export const useSignOut = (options: UseSignOutOptions = {}) => {
           toast.success(t('auth.sign-out-successfully'))
         },
         onError: () => {
-          toast.error(t('auth.sign-out-failed'))
+          toast.error(t('error.sign-out-failed'))
         }
       }
     })

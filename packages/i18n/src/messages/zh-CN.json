@@ -6,8 +6,6 @@
     "account-created": "账户创建时间",
     "active-sessions": "活跃会话",
     "avatar": "头像",
-    "avatar-too-large": "头像文件过大。请选择小于 {size} MB 的文件。",
-    "avatar-unsupported-file": "请选择支持的图片格式（JPEG、PNG、WEBP、GIF、AVIF）。",
     "description": "管理您的账户。",
     "display-name": "显示名称",
     "edit-name": "编辑名称",
@@ -20,7 +18,6 @@
     "session-revoked-successfully": "会话已成功结束",
     "this-device": "此设备",
     "update-avatar": "更新头像",
-    "update-avatar-failed": "更新头像失败，请再试一次。",
     "update-avatar-successfully": "头像更新成功"
   },
   "admin": {
@@ -34,7 +31,6 @@
     }
   },
   "auth": {
-    "sign-out-failed": "登出失败，请再试一次。",
     "sign-out-successfully": "成功登出"
   },
   "blog": {
@@ -159,6 +155,8 @@
     }
   },
   "error": {
+    "avatar-too-large": "头像文件过大。请选择小于 {size} MB 的文件。",
+    "avatar-unsupported-file": "请选择支持的图片格式（JPEG、PNG、WEBP、GIF、AVIF）。",
     "comment-cannot-be-empty": "评论不能为空",
     "copy-to-clipboard-error": "无法复制到剪贴板，请再试一次。",
     "failed-to-fetch-comments-data": "无法获取评论数据。请刷新页面。",
@@ -176,7 +174,9 @@
     "now-playing-error": "无法获取 Spotify 资料",
     "reply-cannot-be-empty": "回复不能为空",
     "sign-in-error": "登入失败。请再试一次。",
+    "sign-out-failed": "登出失败，请再试一次。",
     "something-went-wrong": "发生了一些问题，请再试一次。",
+    "update-avatar-failed": "更新头像失败，请再试一次。",
     "try-again": "再试一次"
   },
   "guestbook": {
