@@ -1,6 +1,7 @@
 import { createId } from '@paralleldrive/cuid2'
 import test, { expect } from '@playwright/test'
 import { db, messages } from '@repo/db'
+import en from '@repo/i18n/messages/en.json' assert { type: 'json' }
 
 import { TEST_UNIQUE_ID } from '../fixtures/auth'
 
@@ -15,7 +16,7 @@ test.describe('guestbook page', () => {
     await page.getByTestId('guestbook-textarea').fill(message)
 
     await page.getByTestId('guestbook-submit-button').click()
-    await expect(page.locator('li[data-sonner-toast]')).toContainText('Create message successfully')
+    await expect(page.locator('li[data-sonner-toast]')).toContainText(en.guestbook['create-message-successfully'])
 
     await expect(page.getByTestId('guestbook-messages-list').getByText(message)).toBeVisible()
   })
@@ -38,6 +39,6 @@ test.describe('guestbook page', () => {
     await deleteDialog.getByTestId('guestbook-dialog-delete-button').click()
 
     await expect(messageBlock).toBeHidden()
-    await expect(page.locator('li[data-sonner-toast]')).toContainText('Delete message successfully')
+    await expect(page.locator('li[data-sonner-toast]')).toContainText(en.guestbook['delete-message-successfully'])
   })
 })
