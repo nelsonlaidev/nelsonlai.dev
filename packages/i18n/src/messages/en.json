@@ -10,15 +10,12 @@
     "display-name": "Display name",
     "edit-name": "Edit name",
     "edit-name-description": "Change your display name. This name will be shown on your profile and comments.",
-    "edit-name-successfully": "Display name updated successfully",
     "email": "Email",
     "no-active-sessions": "No active sessions",
     "profile": "Profile",
     "revoke-session": "Revoke",
-    "session-revoked-successfully": "Session revoked successfully",
     "this-device": "This device",
-    "update-avatar": "Update avatar",
-    "update-avatar-successfully": "Avatar updated successfully"
+    "update-avatar": "Update avatar"
   },
   "admin": {
     "page-header": {
@@ -30,19 +27,13 @@
       }
     }
   },
-  "auth": {
-    "sign-out-successfully": "Signed out successfully"
-  },
   "blog": {
     "comments": {
       "author": "Author",
-      "comment-posted": "Comment posted",
       "comments": "{count, plural, =1 {comment} other {comments}}",
       "copy-link": "Copy Link",
-      "deleted-a-comment": "Deleted a comment",
       "dislike": "Dislike",
       "highlighted-comment": "Highlighted comment",
-      "link-copied": "Link copied to clipboard",
       "newest": "Newest",
       "no-comments": "No comments",
       "oldest": "Oldest",
@@ -51,7 +42,6 @@
       "preview": "Preview",
       "replies": "{count, plural, =1 {reply} other {replies}}",
       "reply": "Reply",
-      "reply-posted": "Reply posted",
       "reply-to-comment": "Reply to comment",
       "send-comment": "Send comment",
       "sort-by": "Sort by",
@@ -180,8 +170,6 @@
     "try-again": "Try again"
   },
   "guestbook": {
-    "create-message-successfully": "Message created successfully",
-    "delete-message-successfully": "Message deleted successfully",
     "description": "Sign my guestbook and share your idea. You can tell me anything here!",
     "no-messages": "No messages. Be the first to leave a message!",
     "pinned": {
@@ -231,11 +219,6 @@
       "title": "Selected Projects"
     }
   },
-  "hooks": {
-    "copy-to-clipboard": {
-      "copied": "Copied to clipboard"
-    }
-  },
   "layout": {
     "change-language": "Change language",
     "now-playing": {
@@ -262,8 +245,21 @@
     "description": "Manage your settings.",
     "notification-settings": "Notification Settings",
     "reply-notification": "Reply Notification",
-    "reply-notification-description": "Receive email notifications when someone replies to your comment.",
-    "save-settings-successfully": "Settings saved successfully"
+    "reply-notification-description": "Receive email notifications when someone replies to your comment."
+  },
+  "success": {
+    "avatar-updated": "Avatar updated successfully",
+    "comment-deleted": "Deleted a comment",
+    "comment-posted": "Comment posted",
+    "copied-to-clipboard": "Copied to clipboard",
+    "link-copied": "Link copied to clipboard",
+    "message-created": "Message created successfully",
+    "message-deleted": "Message deleted successfully",
+    "name-updated": "Display name updated successfully",
+    "reply-posted": "Reply posted",
+    "session-revoked": "Session revoked successfully",
+    "settings-saved": "Settings saved successfully",
+    "signed-out": "Signed out successfully"
   },
   "terms": {
     "description": "These terms and conditions outline the rules and regulations for the use our website."

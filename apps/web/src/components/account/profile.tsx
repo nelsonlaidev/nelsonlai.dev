@@ -112,7 +112,7 @@ const EditName = (props: EditNameProps) => {
   const { mutate: updateUser, isPending: isUpdating } = useUpdateUser(() => {
     form.reset({ name: form.getValues('name') })
     setOpen(false)
-    toast.success(t('account.edit-name-successfully'))
+    toast.success(t('success.name-updated'))
     refetchSession()
   })
 
@@ -165,7 +165,7 @@ const UpdateAvatar = () => {
 
   const { mutateAsync: getAvatarUploadUrl } = useGetAvatarUploadUrl()
   const { mutateAsync: updateUser } = useUpdateUser(() => {
-    toast.success(t('account.update-avatar-successfully'))
+    toast.success(t('success.avatar-updated'))
     refetchSession()
   })
 

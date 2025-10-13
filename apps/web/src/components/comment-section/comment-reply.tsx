@@ -22,7 +22,7 @@ const CommentReply = () => {
 
   const { mutate: createReply, isPending: isCreating } = useCreatePostComment({ slug }, () => {
     setIsReplying(false)
-    toast.success(t('blog.comments.reply-posted'))
+    toast.success(t('success.reply-posted'))
   })
 
   const submitCommentReply = (e?: React.FormEvent<HTMLFormElement>) => {

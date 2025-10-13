@@ -16,7 +16,7 @@ test.describe('guestbook page', () => {
     await page.getByTestId('guestbook-textarea').fill(message)
 
     await page.getByTestId('guestbook-submit-button').click()
-    await expect(page.locator('li[data-sonner-toast]')).toContainText(en.guestbook['create-message-successfully'])
+    await expect(page.locator('li[data-sonner-toast]')).toContainText(en.success['message-created'])
 
     await expect(page.getByTestId('guestbook-messages-list').getByText(message)).toBeVisible()
   })
@@ -39,6 +39,6 @@ test.describe('guestbook page', () => {
     await deleteDialog.getByTestId('guestbook-dialog-delete-button').click()
 
     await expect(messageBlock).toBeHidden()
-    await expect(page.locator('li[data-sonner-toast]')).toContainText(en.guestbook['delete-message-successfully'])
+    await expect(page.locator('li[data-sonner-toast]')).toContainText(en.success['message-deleted'])
   })
 })

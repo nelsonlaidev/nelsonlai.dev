@@ -26,7 +26,7 @@ const ReplyNotificationSettings = () => {
   const { isSuccess, isLoading, isError, data } = useReplyPrefs()
   const t = useTranslations()
   const { mutate: updatePrefs, isPending: isUpdating } = useUpdateReplyPrefs(() => {
-    toast.success(t('settings.save-settings-successfully'))
+    toast.success(t('success.settings-saved'))
   })
 
   const handleUpdatePrefs = (isEnabled: boolean) => {

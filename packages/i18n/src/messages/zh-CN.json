@@ -10,15 +10,12 @@
     "display-name": "显示名称",
     "edit-name": "编辑名称",
     "edit-name-description": "更改您的显示名称。此名称将显示在您的个人资料和评论中。",
-    "edit-name-successfully": "成功编辑名称",
     "email": "邮箱",
     "no-active-sessions": "没有活动会话",
     "profile": "个人资料",
     "revoke-session": "结束",
-    "session-revoked-successfully": "会话已成功结束",
     "this-device": "此设备",
-    "update-avatar": "更新头像",
-    "update-avatar-successfully": "头像更新成功"
+    "update-avatar": "更新头像"
   },
   "admin": {
     "page-header": {
@@ -30,19 +27,13 @@
       }
     }
   },
-  "auth": {
-    "sign-out-successfully": "成功登出"
-  },
   "blog": {
     "comments": {
       "author": "作者",
-      "comment-posted": "评论已发布",
       "comments": "{count, plural, =1 {评论} other {评论}}",
       "copy-link": "复制链接",
-      "deleted-a-comment": "已删除评论",
       "dislike": "倒赞",
       "highlighted-comment": "已标注评论",
-      "link-copied": "链接已复制到剪贴板",
       "newest": "最新",
       "no-comments": "没有评论",
       "oldest": "最旧",
@@ -51,7 +42,6 @@
       "preview": "预览",
       "replies": "{count, plural, =1 {回复} other {回复}}",
       "reply": "回复",
-      "reply-posted": "回复已发布",
       "reply-to-comment": "回复评论",
       "send-comment": "送出评论",
       "sort-by": "排序方式",
@@ -180,8 +170,6 @@
     "try-again": "再试一次"
   },
   "guestbook": {
-    "create-message-successfully": "成功发布留言",
-    "delete-message-successfully": "成功删除留言",
     "description": "在我的留言板上留下您的想法。您可以在这里告诉我任何事情！",
     "no-messages": "没有留言，快来成为第一位留言者！",
     "pinned": {
@@ -231,11 +219,6 @@
       "title": "精选项目"
     }
   },
-  "hooks": {
-    "copy-to-clipboard": {
-      "copied": "已复制到剪贴板"
-    }
-  },
   "layout": {
     "change-language": "更改语言",
     "now-playing": {
@@ -262,8 +245,21 @@
     "description": "管理您的设定。",
     "notification-settings": "通知设定",
     "reply-notification": "回复通知",
-    "reply-notification-description": "当有人回复您的评论时，接收电子邮件通知。",
-    "save-settings-successfully": "设定保存成功"
+    "reply-notification-description": "当有人回复您的评论时，接收电子邮件通知。"
+  },
+  "success": {
+    "avatar-updated": "头像更新成功",
+    "comment-deleted": "已删除评论",
+    "comment-posted": "评论已发布",
+    "copied-to-clipboard": "已复制到剪贴板",
+    "link-copied": "链接已复制到剪贴板",
+    "message-created": "成功发布留言",
+    "message-deleted": "成功删除留言",
+    "name-updated": "成功编辑名称",
+    "reply-posted": "回复已发布",
+    "session-revoked": "会话已成功结束",
+    "settings-saved": "设定保存成功",
+    "signed-out": "成功登出"
   },
   "terms": {
     "description": "这些条款和条件概述了使用我们网站的规则和规定。"

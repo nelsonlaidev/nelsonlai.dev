@@ -39,7 +39,7 @@ const MessageBox = (props: MessageBoxProps) => {
 
   const { mutate: createMessage, isPending: isCreating } = useCreateMessage(() => {
     form.reset()
-    toast.success(t('guestbook.create-message-successfully'))
+    toast.success(t('success.message-created'))
   })
 
   const onSubmit = (values: z.infer<typeof guestbookFormSchema>) => {

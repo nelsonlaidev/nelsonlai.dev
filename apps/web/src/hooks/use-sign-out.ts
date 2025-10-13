@@ -23,7 +23,7 @@ export const useSignOut = (options: UseSignOutOptions = {}) => {
           } else {
             router.refresh()
           }
-          toast.success(t('auth.sign-out-successfully'))
+          toast.success(t('success.signed-out'))
         },
         onError: () => {
           toast.error(t('error.sign-out-failed'))

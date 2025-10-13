@@ -26,7 +26,7 @@ const DeleteButton = (props: DeleteButtonProps) => {
   const t = useTranslations()
 
   const { mutate: deleteMessage, isPending: isDeleting } = useDeleteMessage(() => {
-    toast.success(t('guestbook.delete-message-successfully'))
+    toast.success(t('success.message-deleted'))
   })
 
   const handleDeleteMessage = (id: string) => {

@@ -87,7 +87,7 @@ const Session = (props: SessionProps) => {
   })
 
   const { mutate: revokeSession, isPending: isRevoking } = useRevokeSession(() => {
-    toast.success(t('account.session-revoked-successfully'))
+    toast.success(t('success.session-revoked'))
     if (session.isCurrentSession) {
       router.push('/')
       refetchSession()
