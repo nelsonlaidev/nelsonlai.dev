@@ -20,13 +20,13 @@
     ]
   },
   "dependencies": {
-    "@upstash/ratelimit": "2.0.6",
-    "@upstash/redis": "1.35.3",
-    "consola": "3.4.2"
+    "@upstash/ratelimit": "catalog:prod",
+    "@upstash/redis": "catalog:prod",
+    "consola": "catalog:prod"
   },
   "devDependencies": {
-    "@nelsonlaidev/eslint-config": "2.2.0",
-    "@nelsonlaidev/typescript-config": "0.0.3",
+    "@nelsonlaidev/eslint-config": "catalog:lint",
+    "@nelsonlaidev/typescript-config": "catalog:dev",
     "@repo/env": "workspace:*"
   }
 }

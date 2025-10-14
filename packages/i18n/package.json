@@ -24,11 +24,11 @@
     ]
   },
   "devDependencies": {
-    "@nelsonlaidev/eslint-config": "2.2.0",
-    "@nelsonlaidev/typescript-config": "0.0.3",
-    "@types/react": "19.2.2",
-    "next": "15.5.4",
-    "next-intl": "4.3.10"
+    "@nelsonlaidev/eslint-config": "catalog:lint",
+    "@nelsonlaidev/typescript-config": "catalog:dev",
+    "@types/react": "catalog:types",
+    "next": "catalog:prod",
+    "next-intl": "catalog:prod"
   },
   "peerDependencies": {
     "next": ">=15.0.0",

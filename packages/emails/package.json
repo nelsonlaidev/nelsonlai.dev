@@ -22,17 +22,17 @@
     ]
   },
   "dependencies": {
-    "@react-email/components": "0.5.6",
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "@react-email/components": "catalog:prod",
+    "react": "catalog:prod",
+    "react-dom": "catalog:prod"
   },
   "devDependencies": {
-    "@nelsonlaidev/eslint-config": "2.2.0",
-    "@nelsonlaidev/typescript-config": "0.0.3",
-    "@react-email/preview-server": "4.3.0",
-    "@types/node": "24.7.0",
-    "@types/react": "19.2.2",
-    "react-email": "4.3.0",
-    "tailwindcss": "4.1.14"
+    "@nelsonlaidev/eslint-config": "catalog:lint",
+    "@nelsonlaidev/typescript-config": "catalog:dev",
+    "@react-email/preview-server": "catalog:dev",
+    "@types/node": "catalog:types",
+    "@types/react": "catalog:types",
+    "react-email": "catalog:dev",
+    "tailwindcss": "catalog:dev"
   }
 }
