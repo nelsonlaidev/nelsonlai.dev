@@ -28,18 +28,18 @@
     ]
   },
   "dependencies": {
-    "@paralleldrive/cuid2": "catalog:prod",
+    "@paralleldrive/cuid2": "2.2.2",
     "@repo/env": "workspace:*",
-    "drizzle-orm": "catalog:prod"
+    "drizzle-orm": "0.44.5"
   },
   "devDependencies": {
-    "@nelsonlaidev/eslint-config": "catalog:lint",
-    "@nelsonlaidev/typescript-config": "catalog:dev",
-    "@types/node": "catalog:types",
-    "consola": "catalog:prod",
-    "drizzle-kit": "catalog:dev",
-    "execa": "catalog:dev",
-    "postgres": "catalog:prod"
+    "@nelsonlaidev/eslint-config": "2.2.0",
+    "@nelsonlaidev/typescript-config": "0.0.3",
+    "@types/node": "24.3.3",
+    "consola": "3.4.2",
+    "drizzle-kit": "0.31.4",
+    "execa": "9.6.0",
+    "postgres": "3.4.7"
   },
   "peerDependencies": {
     "postgres": ">=3.0.0"

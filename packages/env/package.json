@@ -20,11 +20,11 @@
     ]
   },
   "dependencies": {
-    "@t3-oss/env-nextjs": "catalog:prod",
-    "zod": "catalog:prod"
+    "@t3-oss/env-nextjs": "0.13.8",
+    "zod": "4.1.8"
   },
   "devDependencies": {
-    "@nelsonlaidev/eslint-config": "catalog:lint",
-    "@nelsonlaidev/typescript-config": "catalog:dev"
+    "@nelsonlaidev/eslint-config": "2.2.0",
+    "@nelsonlaidev/typescript-config": "0.0.3"
   }
 }
