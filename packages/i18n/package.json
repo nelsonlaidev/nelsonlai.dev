@@ -26,8 +26,8 @@
   "devDependencies": {
     "@nelsonlaidev/eslint-config": "catalog:lint",
     "@nelsonlaidev/typescript-config": "catalog:dev",
-    "@types/react": "catalog:types",
-    "next": "catalog:prod",
+    "@types/react": "catalog:react",
+    "next": "catalog:next",
     "next-intl": "catalog:prod"
   },
   "peerDependencies": {

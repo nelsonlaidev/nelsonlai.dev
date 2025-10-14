@@ -23,15 +23,15 @@
   },
   "dependencies": {
     "@react-email/components": "catalog:prod",
-    "react": "catalog:prod",
-    "react-dom": "catalog:prod"
+    "react": "catalog:react",
+    "react-dom": "catalog:react"
   },
   "devDependencies": {
     "@nelsonlaidev/eslint-config": "catalog:lint",
     "@nelsonlaidev/typescript-config": "catalog:dev",
     "@react-email/preview-server": "catalog:dev",
     "@types/node": "catalog:types",
-    "@types/react": "catalog:types",
+    "@types/react": "catalog:react",
     "react-email": "catalog:dev",
     "tailwindcss": "catalog:dev"
   }
