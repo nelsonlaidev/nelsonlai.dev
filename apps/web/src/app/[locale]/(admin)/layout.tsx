@@ -12,7 +12,7 @@ const Layout = async (props: LayoutProps<'/[locale]'>) => {
   const { locale } = await params
   const session = await getSession()
 
-  if (!session || session.user.role !== 'admin') {
+  if (session?.user.role !== 'admin') {
     redirect({ href: '/', locale: locale as Locale })
   }
 
