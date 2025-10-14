@@ -12,7 +12,7 @@
     "build": "turbo build",
     "build:apps": "turbo build --filter=./apps/*",
     "build:mdx": "turbo build:mdx",
-    "check": "turbo lint && turbo type-check && bun format:check && bun check:spelling && bun check:knip",
+    "check": "bun lint && bun type-check && bun format:check && bun check:spelling && bun check:knip && bun check:i18n",
     "check:i18n": "i18n-check -s en -l packages/i18n/src/messages -u apps/web/src -f next-intl",
     "check:knip": "bun with-env knip",
     "check:spelling": "cspell --no-progress --no-summary --no-must-find-files --unique",
@@ -79,7 +79,7 @@
     "typescript": "5.9.2",
     "vitest": "3.2.4"
   },
-  "packageManager": "bun@1.2.23",
+  "packageManager": "bun@1.3.0",
   "engines": {
     "node": ">=22"
   }
