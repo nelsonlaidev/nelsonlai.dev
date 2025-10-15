@@ -4,17 +4,13 @@
   "license": "MIT",
   "author": "Nelson Lai <me@nelsonlai.dev> (https://github.com/nelsonlaidev/)",
   "type": "module",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
     "build": "turbo build",
     "build:apps": "turbo build --filter=./apps/*",
     "build:mdx": "turbo build:mdx",
-    "check": "turbo lint && turbo type-check && bun format:check && bun check:spelling && bun check:knip",
+    "check": "pnpm lint && pnpm type-check && pnpm format:check && pnpm check:spelling && pnpm check:knip && pnpm check:i18n",
     "check:i18n": "i18n-check -s en -l packages/i18n/src/messages -u apps/web/src -f next-intl",
-    "check:knip": "bun with-env knip",
+    "check:knip": "pnpm with-env knip",
     "check:spelling": "cspell --no-progress --no-summary --no-must-find-files --unique",
     "clean": "turbo clean && rm -rf .turbo coverage",
     "db:check": "turbo db:check",
@@ -30,6 +26,7 @@
     "dev:web": "turbo dev --filter=@repo/web",
     "format:check": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "format:write": "prettier --cache --write --list-different --ignore-path .gitignore --ignore-path .prettierignore .",
+    "preinstall": "npx --yes only-allow pnpm",
     "lint": "turbo lint && eslint . --max-warnings 0",
     "lint:fix": "turbo lint:fix && eslint --fix .",
     "prepare": "lefthook install",
@@ -79,7 +76,7 @@
     "typescript": "5.9.2",
     "vitest": "3.2.4"
   },
-  "packageManager": "bun@1.2.23",
+  "packageManager": "pnpm@10.18.3",
   "engines": {
     "node": ">=22"
   }

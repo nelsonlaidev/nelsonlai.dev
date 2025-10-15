@@ -2,13 +2,13 @@ pre-commit:
   parallel: true
   jobs:
     - name: lint-staged
-      run: bun lint-staged
+      run: pnpm lint-staged
 
 commit-msg:
   parallel: true
   jobs:
     - name: commitlint
-      run: bun commitlint --edit {1}
+      run: pnpm commitlint --edit {1}
 
     - name: spelling
-      run: bun check:spelling {1}
+      run: pnpm check:spelling {1}

@@ -34,7 +34,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run unit tests
-        run: bun test:unit
+        run: pnpm test:unit
 
   eslint:
     name: ESLint
@@ -47,13 +47,13 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Build MDX
-        run: bun build:mdx
+        run: pnpm build:mdx
 
       - name: Generate Next.js route types
-        run: bun typegen
+        run: pnpm typegen
 
       - name: Run ESLint
-        run: bun lint
+        run: pnpm lint
 
   types:
     name: TypeScript
@@ -66,13 +66,13 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Build MDX
-        run: bun build:mdx
+        run: pnpm build:mdx
 
       - name: Generate Next.js route types
-        run: bun typegen
+        run: pnpm typegen
 
       - name: Run type check
-        run: bun type-check
+        run: pnpm type-check
 
   prettier:
     name: Prettier
@@ -85,7 +85,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run Prettier format check
-        run: bun format:check
+        run: pnpm format:check
 
   spelling:
     name: Spelling
@@ -98,7 +98,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run spelling check
-        run: bun check:spelling
+        run: pnpm check:spelling
 
   knip:
     name: Knip
@@ -111,10 +111,10 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Build MDX
-        run: bun build:mdx
+        run: pnpm build:mdx
 
       - name: Run Knip
-        run: bun check:knip
+        run: pnpm check:knip
 
   i18n:
     name: i18n
@@ -127,7 +127,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run i18n check
-        run: bun check:i18n
+        run: pnpm check:i18n
 
   e2e:
     name: End-to-end tests
@@ -141,7 +141,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Install Playwright with dependencies
-        run: bun playwright install --with-deps chromium --only-shell
+        run: pnpm playwright install --with-deps chromium --only-shell
 
       - name: Create test posts and copy dummy images
         run: |
@@ -200,19 +200,19 @@ jobs:
           done
 
       - name: Build apps
-        run: bun build:apps
+        run: pnpm build:apps
 
       - name: Run services
         run: docker compose up -d
 
       - name: Migrate database
-        run: bun db:migrate
+        run: pnpm db:migrate
 
       - name: Seed database
-        run: bun db:seed
+        run: pnpm db:seed
 
       - name: Run Playwright tests
-        run: bun test:e2e
+        run: pnpm test:e2e
 
       - name: Upload Playwright report
         if: always()
