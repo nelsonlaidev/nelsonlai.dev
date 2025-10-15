@@ -60,7 +60,7 @@ export const spotifyStats = publicProcedure.output(spotifyStatsOutputSchema).han
   const song: SpotifyApi.CurrentlyPlayingResponse = await response.json()
 
   // If the song is not playing or is not a track, return an empty response
-  if (song.item === null || song.item.type !== 'track') {
+  if (song.item?.type !== 'track') {
     return EMPTY_RESPONSE
   }
 

@@ -52,7 +52,7 @@ nelsonlai-dev/
 - API: oRPC for type-safe APIs
 - Email: React Email for transactional emails
 - Testing: Playwright for E2E, Vitest for unit tests
-- Package Manager: Bun
+- Package Manager: pnpm
 - Monorepo: Turborepo
 
 ### Content Management
@@ -130,10 +130,10 @@ export default Component
 
 ```bash
 # Run E2E tests
-bun test:e2e
+pnpm test:e2e
 
 # Run unit tests
-bun test:unit
+pnpm test:unit
 ```
 
 ### Test File Conventions
@@ -169,8 +169,8 @@ test('page loads correctly', async ({ page }) => {
 When modifying database schema:
 
 1. Edit schema files in `packages/db/src/schemas/`
-2. Generate migration: `bun db:generate`
-3. Apply migration: `bun db:migrate`
+2. Generate migration: `pnpm db:generate`
+3. Apply migration: `pnpm db:migrate`
 4. Update types if needed
 
 ## API Development (oRPC)
@@ -252,8 +252,8 @@ Available scopes:
 
 Before submitting:
 
-1. Run `bun check` (includes lint, type-check, format)
-2. Run `bun test:unit && bun test:e2e` for affected packages
+1. Run `pnpm check` (includes lint, type-check, format)
+2. Run `pnpm test:unit && pnpm test:e2e` for affected packages
 3. Add/update tests for new features
 4. Ensure no console errors
 5. Test on mobile viewport
@@ -265,36 +265,36 @@ Before submitting:
 
 ```bash
 # Install dependencies
-bun install
+pnpm install
 
 # Development
-bun dev              # Run all apps and packages
-bun dev:web          # Run web app only
+pnpm dev              # Run all apps and packages
+pnpm dev:web          # Run web app only
 
 # Building
-bun run build        # Build all apps and packages
-bun build:apps       # Build all apps
-bun build:mdx        # Build MDX content
+pnpm build        # Build all apps and packages
+pnpm build:apps       # Build all apps
+pnpm build:mdx        # Build MDX content
 
 # Quality Checks
-bun lint             # Run ESLint
-bun lint:fix         # Fix ESLint issues
-bun format:check     # Check Prettier formatting
-bun format:fix       # Fix formatting
-bun type-check       # Run TypeScript checks
-bun check:knip       # Check for unused stuff
-bun check:spelling   # Check spelling
-bun check            # Run all checks
+pnpm lint             # Run ESLint
+pnpm lint:fix         # Fix ESLint issues
+pnpm format:check     # Check Prettier formatting
+pnpm format:fix       # Fix formatting
+pnpm type-check       # Run TypeScript checks
+pnpm check:knip       # Check for unused stuff
+pnpm check:spelling   # Check spelling
+pnpm check            # Run all checks
 
 # Database
-bun db:generate      # Generate migrations
-bun db:migrate       # Apply migrations
-bun db:seed          # Seed database
-bun db:studio        # Open Drizzle Studio
+pnpm db:generate      # Generate migrations
+pnpm db:migrate       # Apply migrations
+pnpm db:seed          # Seed database
+pnpm db:studio        # Open Drizzle Studio
 
 # Testing
-bun test:e2e         # Run E2E tests
-bun test:unit        # Run unit tests
+pnpm test:e2e         # Run E2E tests
+pnpm test:unit        # Run unit tests
 ```
 
 ## Common Patterns
