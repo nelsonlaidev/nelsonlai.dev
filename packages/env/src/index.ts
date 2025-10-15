@@ -44,7 +44,10 @@ export const env = createEnv({
     CLOUDFLARE_R2_ACCESS_KEY_ID: z.string().min(1).optional(),
     CLOUDFLARE_R2_SECRET_ACCESS_KEY: z.string().min(1).optional(),
     CLOUDFLARE_R2_BUCKET_NAME: z.string().min(1).optional(),
-    CLOUDFLARE_R2_PUBLIC_URL: z.url().optional()
+    CLOUDFLARE_R2_PUBLIC_URL: z.url().optional(),
+
+    POSTHOG_ENV_ID: z.string().min(1).optional(),
+    POSTHOG_API_KEY: z.string().min(1).optional()
   },
   client: {
     // Required
@@ -54,7 +57,10 @@ export const env = createEnv({
     NEXT_PUBLIC_VERCEL_BRANCH_URL: z.string().optional(),
 
     NEXT_PUBLIC_UMAMI_URL: z.url().optional(),
-    NEXT_PUBLIC_UMAMI_WEBSITE_ID: z.uuid().optional()
+    NEXT_PUBLIC_UMAMI_WEBSITE_ID: z.uuid().optional(),
+
+    NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1).optional(),
+    NEXT_PUBLIC_POSTHOG_HOST: z.url().optional()
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
@@ -64,7 +70,10 @@ export const env = createEnv({
     NEXT_PUBLIC_VERCEL_BRANCH_URL: process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL,
 
     NEXT_PUBLIC_UMAMI_URL: process.env.NEXT_PUBLIC_UMAMI_URL,
-    NEXT_PUBLIC_UMAMI_WEBSITE_ID: process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID
+    NEXT_PUBLIC_UMAMI_WEBSITE_ID: process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID,
+
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST
   },
 
   emptyStringAsUndefined: true

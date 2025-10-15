@@ -2,6 +2,8 @@
 
 import { Button } from '@repo/ui/components/button'
 import { useTranslations } from 'next-intl'
+import posthog from 'posthog-js'
+import { useEffect } from 'react'
 
 import MainLayout from '@/components/main-layout'
 
@@ -13,6 +15,10 @@ type PageProps = {
 const Page = (props: PageProps) => {
   const { error, reset } = props
   const t = useTranslations()
+
+  useEffect(() => {
+    posthog.captureException(error)
+  }, [error])
 
   return (
     <MainLayout>

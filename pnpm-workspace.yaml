@@ -5,6 +5,7 @@ packages:
 onlyBuiltDependencies:
   - '@tailwindcss/oxide'
   - '@vercel/speed-insights'
+  - core-js
   - esbuild
   - lefthook
   - sharp

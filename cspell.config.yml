@@ -69,6 +69,7 @@ words:
   - paralleldrive
   - planetscale
   - plpgsql
+  - posthog
   - prefs
   - presigner
   - radixui
