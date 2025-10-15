@@ -19,7 +19,7 @@ const middleware = (request: NextRequest) => {
     connect-src 'self' https://*.nelsonlai.dev https://*.posthog.com ${env.CLOUDFLARE_R2_ENDPOINT} ${IS_PREVIEW ? 'https://vercel.live wss://ws-us3.pusher.com' : ''};
     media-src 'self' https://*.posthog.com;
     manifest-src 'self';
-    frame-ancestors 'none';
+    frame-ancestors 'self' https://*.posthog.com;
     ${IS_PREVIEW ? 'frame-src https://vercel.live;' : ''}
   `
 
