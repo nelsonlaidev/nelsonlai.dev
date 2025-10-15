@@ -1,6 +1,6 @@
 import { ORPCError } from '@orpc/client'
 import { and, asc, comments, count, desc, eq, gt, isNotNull, isNull, lt, ne, unsubscribes, votes } from '@repo/db'
-import { CommentEmailTemplate, ReplyEmailTemplate } from '@repo/emails'
+import { CommentEmailTemplate, ReplyEmailTemplate } from '@repo/email'
 import { env } from '@repo/env'
 import { getLocale } from 'next-intl/server'
 

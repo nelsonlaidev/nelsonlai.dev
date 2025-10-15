@@ -14,7 +14,7 @@ nelsonlai-dev/
 │   └── web/                # Main website (Next.js)
 ├── packages/               # Shared packages
 │   ├── db/                 # Database schema and migrations (Drizzle ORM)
-│   ├── emails/             # Email templates (React Email)
+│   ├── email/              # Email templates (React Email)
 │   ├── env/                # Environment variable management
 │   ├── i18n/               # Internationalization
 │   ├── kv/                 # Key-value store utilities
@@ -246,7 +246,7 @@ Follow Conventional Commits:
 Available scopes:
 
 - apps: web
-- packages: db, emails, env, i18n, kv, ui, utils
+- packages: db, email, env, i18n, kv, ui, utils
 
 ### PR Checklist
 

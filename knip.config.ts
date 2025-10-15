@@ -23,7 +23,7 @@ const config: KnipConfig = {
     'packages/db': {
       entry: ['src/reset.ts', 'src/seed.ts']
     },
-    'packages/emails': {
+    'packages/email': {
       ignoreDependencies: [
         // For tailwindcss intellisense
         'tailwindcss',
