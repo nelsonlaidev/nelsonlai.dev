@@ -15,6 +15,6 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      run: pnpm install
+      run: pnpm install --frozen-lockfile
       env:
         PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
