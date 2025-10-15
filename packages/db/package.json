@@ -13,7 +13,7 @@
     "db:migrate": "pnpm with-env drizzle-kit migrate",
     "db:push": "pnpm with-env drizzle-kit push",
     "db:reset": "pnpm with-env tsx ./src/reset.ts",
-    "db:seed": "pnpm with-env tsx run ./src/seed.ts",
+    "db:seed": "pnpm with-env tsx ./src/seed.ts",
     "db:studio": "pnpm with-env drizzle-kit studio",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint --fix .",
