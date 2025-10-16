@@ -37,13 +37,14 @@ export const config = {
   // - _next/static (static files)
   // - _next/image (image optimization files)
   // - _vercel (Vercel internal)
+  // - _ph (PostHog)
   // - folders in public (which resolve to /foldername)
   // - favicon.ico (favicon file)
   // - sitemap.xml
   // - robots.txt
   // - site.webmanifest
   matcher: [
-    '/((?!api|rpc|_next/static|_next/image|_vercel|favicon|android-chrome|apple-touch-icon|fonts|images|videos|favicon.ico|sitemap.xml|robots.txt|site.webmanifest).*)'
+    '/((?!api|rpc|_next/static|_next/image|_vercel|_ph|favicon|android-chrome|apple-touch-icon|fonts|images|videos|favicon.ico|sitemap.xml|robots.txt|site.webmanifest).*)'
   ]
 }
 

@@ -56,6 +56,22 @@ const config: NextConfig = {
     remotePatterns
   },
 
+  skipTrailingSlashRedirect: true,
+
+  // eslint-disable-next-line @typescript-eslint/require-await -- Must be async
+  async rewrites() {
+    return [
+      {
+        source: '/_ph/static/:path*',
+        destination: 'https://us-assets.i.posthog.com/static/:path*'
+      },
+      {
+        source: '/_ph/:path*',
+        destination: 'https://us.i.posthog.com/:path*'
+      }
+    ]
+  },
+
   // eslint-disable-next-line @typescript-eslint/require-await -- Must be async
   async redirects() {
     return [

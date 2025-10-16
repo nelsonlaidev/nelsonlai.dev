@@ -60,7 +60,7 @@ export const env = createEnv({
     NEXT_PUBLIC_UMAMI_WEBSITE_ID: z.uuid().optional(),
 
     NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1).optional(),
-    NEXT_PUBLIC_POSTHOG_HOST: z.url().optional()
+    NEXT_PUBLIC_POSTHOG_HOST: z.string().min(1).optional()
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
