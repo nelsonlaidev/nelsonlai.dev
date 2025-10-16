@@ -70,7 +70,7 @@ const LikeButton = (props: LikeButtonProps) => {
   }
 
   return (
-    <div className='mt-12 flex justify-center'>
+    <div className='mt-12 mb-4 flex justify-center'>
       <motion.button
         ref={buttonRef}
         className='flex items-center gap-3 rounded-xl bg-zinc-900 px-4 py-2 text-lg text-white'

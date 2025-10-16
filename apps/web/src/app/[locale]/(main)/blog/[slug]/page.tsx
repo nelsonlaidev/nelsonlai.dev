@@ -99,7 +99,7 @@ const Page = (props: PageProps<'/[locale]/blog/[slug]'>) => {
         <article className='w-full lg:max-w-2xl'>
           <Mdx code={post.code} />
         </article>
-        <aside className='w-68'>
+        <aside className='w-full lg:w-68'>
           <div className='sticky top-24'>
             {post.toc.length > 0 && <TableOfContents toc={post.toc} />}
             <LikeButton slug={slug} />
