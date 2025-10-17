@@ -3,7 +3,6 @@
 import { Link } from '@repo/ui/components/link'
 import { Logo } from '@repo/ui/components/logo'
 import { cn } from '@repo/ui/utils/cn'
-import { motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
@@ -47,15 +46,12 @@ const LayoutHeader = () => {
   }, [])
 
   return (
-    <motion.header
+    <header
       ref={headerRef}
       className={cn(
         'fixed inset-x-0 top-4 z-40 mx-auto flex h-15 max-w-5xl items-center justify-between rounded-2xl bg-background/30 px-8 shadow-xs saturate-100 backdrop-blur-md transition-colors',
         'data-[scrolled=true]:bg-background/80'
       )}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.3 }}
     >
       <Link
         href='#skip-nav'
@@ -72,7 +68,7 @@ const LayoutHeader = () => {
         <CommandMenu />
         <MobileNav />
       </div>
-    </motion.header>
+    </header>
   )
 }
 
