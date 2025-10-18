@@ -3,6 +3,7 @@ packages:
   - packages/*
 
 onlyBuiltDependencies:
+  - '@posthog/cli'
   - '@tailwindcss/oxide'
   - '@vercel/speed-insights'
   - core-js
