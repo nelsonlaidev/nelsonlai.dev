@@ -1,0 +1,44 @@
+{
+  "name": "@repo/docs",
+  "version": "0.0.0",
+  "license": "MIT",
+  "author": "Nelson Lai <me@nelsonlai.dev> (https://github.com/nelsonlaidev/)",
+  "type": "module",
+  "scripts": {
+    "build": "next build --turbo",
+    "build:mdx": "fumadocs-mdx",
+    "clean": "rm -rf .next .turbo .source",
+    "dev": "next dev --turbo -p 3001",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint --fix .",
+    "start": "next start -p 3001",
+    "type-check": "tsc --noEmit",
+    "typegen": "next typegen"
+  },
+  "lint-staged": {
+    "*.{js,mjs,jsx,ts,mts,tsx}": "eslint --fix",
+    "*": [
+      "prettier --write --ignore-unknown",
+      "cspell --no-progress --no-summary --no-must-find-files --unique"
+    ]
+  },
+  "dependencies": {
+    "@repo/ui": "workspace:*",
+    "fumadocs-core": "15.8.5",
+    "fumadocs-mdx": "12.0.3",
+    "fumadocs-ui": "15.8.5",
+    "next": "15.5.4",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@nelsonlaidev/eslint-config": "2.2.0",
+    "@tailwindcss/postcss": "4.1.13",
+    "@types/mdx": "2.0.13",
+    "@types/node": "24.3.3",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.1",
+    "postcss-load-config": "6.0.1",
+    "tailwindcss": "4.1.13"
+  }
+}

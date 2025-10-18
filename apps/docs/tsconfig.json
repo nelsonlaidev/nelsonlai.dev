@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/.source": ["./.source/index.ts"],
+      "~/*": ["./public/*"]
+    }
+  },
+  "exclude": ["node_modules"],
+  "extends": "@nelsonlaidev/typescript-config/nextjs.json",
+  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts", "postcss.config.mjs"]
+}

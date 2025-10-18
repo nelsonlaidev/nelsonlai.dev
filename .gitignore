@@ -20,6 +20,9 @@ node_modules/
 # Content Collections
 .content-collections
 
+# Fumadocs
+.source
+
 # Testing
 playwright-report/
 test-results/
