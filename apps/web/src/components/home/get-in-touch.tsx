@@ -27,7 +27,7 @@ const GetInTouch = () => {
     animate(
       [
         ['#pointer', { left: 200, top: 60 }, { duration: 0 }],
-        ['#javascript', { opacity: 1 }, { duration: 0.3 }],
+        ['#javascript', { opacity: 1 }, { duration: 0 }],
         ['#pointer', { left: 50, top: 102 }, { at: '+0.5', duration: 0.5, ease: 'easeInOut' }],
         ['#javascript', { opacity: 0.4 }, { at: '-0.3', duration: 0.1 }],
         ['#react-js', { opacity: 1 }, { duration: 0.3 }],
@@ -38,11 +38,10 @@ const GetInTouch = () => {
         ['#typescript', { opacity: 0.4 }, { at: '-0.3', duration: 0.1 }],
         ['#next-js', { opacity: 1 }, { duration: 0.3 }],
         ['#pointer', { left: 200, top: 60 }, { at: '+0.5', duration: 0.5, ease: 'easeInOut' }],
-        ['#next-js', { opacity: 0.4 }, { at: '-0.3', duration: 0.1 }]
+        ['#next-js', { opacity: 0.4 }, { at: '-0.3', duration: 0.1 }],
+        ['#javascript', { opacity: 1 }, { duration: 0.3 }]
       ],
-      {
-        repeat: Number.POSITIVE_INFINITY
-      }
+      { repeat: Number.POSITIVE_INFINITY }
     )
   }, [animate])
 
