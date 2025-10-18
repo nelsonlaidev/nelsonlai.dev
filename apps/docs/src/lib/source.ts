@@ -17,3 +17,11 @@ export const getPageImage = (page: InferPageType<typeof source>) => {
     url: `/og/${segments.join('/')}`
   }
 }
+
+export const getLLMText = async (page: InferPageType<typeof source>) => {
+  const processed = await page.data.getText('processed')
+
+  return `# ${page.data.title} (${page.url})
+
+${processed}`
+}
