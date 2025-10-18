@@ -12,7 +12,7 @@ export const GET = async (_request: Request, props: RouteContext<'/og/[...slug]'
   if (!page) notFound()
 
   return new ImageResponse(
-    <DefaultImage title={page.data.title} description={page.data.description} site='docs.nelsonlai.dev' />,
+    <DefaultImage title={page.data.title} description={page.data.description} site='@nelsonlaidev/docs' />,
     {
       width: 1200,
       height: 630

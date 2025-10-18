@@ -29,7 +29,9 @@ const Layout = (props: LayoutProps<'/'>) => {
     >
       <body className='flex min-h-screen flex-col'>
         <RootProvider>
-          <DocsLayout tree={source.pageTree}>{children}</DocsLayout>
+          <DocsLayout tree={source.pageTree} nav={{ title: '@nelsonlaidev/docs' }}>
+            {children}
+          </DocsLayout>
         </RootProvider>
       </body>
     </html>
