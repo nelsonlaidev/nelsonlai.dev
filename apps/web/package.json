@@ -97,7 +97,7 @@
     "@content-collections/mdx": "0.2.2",
     "@content-collections/next": "0.2.7",
     "@nelsonlaidev/eslint-config": "2.2.0",
-    "@nelsonlaidev/typescript-config": "0.0.3",
+    "@nelsonlaidev/typescript-config": "1.0.0",
     "@next/bundle-analyzer": "15.5.4",
     "@repo/kv": "workspace:*",
     "@tailwindcss/postcss": "4.1.13",

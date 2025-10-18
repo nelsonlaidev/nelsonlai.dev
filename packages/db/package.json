@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@nelsonlaidev/eslint-config": "2.2.0",
-    "@nelsonlaidev/typescript-config": "0.0.3",
+    "@nelsonlaidev/typescript-config": "1.0.0",
     "@types/node": "24.3.3",
     "consola": "3.4.2",
     "drizzle-kit": "0.31.4",
