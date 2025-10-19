@@ -1,3 +1,4 @@
+import { consola } from 'consola'
 import { execa } from 'execa'
 import {
   type ArrowFunction,
@@ -48,7 +49,7 @@ const main = async () => {
 
   await project.save()
 
-  console.log('Transformed shadcn-ui components.')
+  consola.log('Transformed shadcn-ui components.')
 
   await execa('pnpm', ['prettier', '--write', 'src/components/ui/**/*.{ts,tsx}'], { stdio: 'inherit' })
   await execa('pnpm', ['eslint', '--fix', 'src/components/ui/**/*.{ts,tsx}'], { stdio: 'inherit' })
