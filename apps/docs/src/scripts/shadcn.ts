@@ -2,8 +2,8 @@ import { consola } from 'consola'
 import { execa } from 'execa'
 import {
   type ArrowFunction,
+  type Expression,
   type FunctionDeclaration,
-  type FunctionExpression,
   Node,
   Project,
   QuoteKind,
@@ -33,18 +33,18 @@ const main = async () => {
   for (const sourceFile of project.getSourceFiles()) {
     rewriteRadixImports(sourceFile)
     rewriteReactImports(sourceFile)
-    rewriteUIImports(sourceFile)
     rewriteCnImports(sourceFile)
     rewriteCvaImports(sourceFile)
     rewriteCvaArgs(sourceFile)
     rewriteDestructuredParams(sourceFile)
     rewriteSlotUses(sourceFile)
-    separateTypeDefs(sourceFile)
     insert2aBeforeFunctions(sourceFile)
+    separateTypeDefs(sourceFile)
     formatCnClasses(sourceFile)
     formatCvaClasses(sourceFile)
     formatClasses(sourceFile)
     newLineAfterUseClient(sourceFile)
+    addDisplayNameToContexts(sourceFile)
   }
 
   await project.save()
@@ -109,34 +109,17 @@ const rewriteReactImports = (sourceFile: SourceFile) => {
     if (imp.getModuleSpecifierValue() !== 'react') continue
 
     if (used.size === 0) {
-      imp.remove()
+      if (imp.getNamespaceImport()) imp.remove()
     } else {
       imp.replaceWithText(`import { ${[...used].join(', ')} } from 'react'`)
     }
   }
 }
 
-// Rewrite `import { Button } from '@/registry/new-york-v4/ui/button'` to `import { Button } from '@/components/ui/button'`
-const rewriteUIImports = (sourceFile: SourceFile) => {
-  for (const imp of sourceFile.getImportDeclarations()) {
-    const mod = imp.getModuleSpecifierValue()
-    const m = /^@\/registry\/new-york-v4\/ui\/([\w-]+)$/i.exec(mod)
-    if (!m) continue
-
-    const componentName = m[1]!
-    imp.setModuleSpecifier(`@/components/ui/${componentName}`)
-  }
-}
-
 // Rewrite `import { cn } from '@/lib/utils'` to `import { cn } from '@repo/ui/utils/cn'`
-// Or `import { cn } from '@/registry/new-york-v4/lib/utils'` to `import { cn } from '@repo/ui/utils/cn'`
 const rewriteCnImports = (sourceFile: SourceFile) => {
   for (const imp of sourceFile.getImportDeclarations()) {
-    if (
-      imp.getModuleSpecifierValue() !== '@/lib/utils' &&
-      imp.getModuleSpecifierValue() !== '@/registry/new-york-v4/lib/utils'
-    )
-      continue
+    if (imp.getModuleSpecifierValue() !== '@/lib/utils') continue
 
     imp.replaceWithText(`import { cn } from '@repo/ui/utils/cn'`)
   }
@@ -193,6 +176,105 @@ const rewriteCvaArgs = (sourceFile: SourceFile) => {
   }
 }
 
+// Turn `({ ... }: Type)` into `(props: Type)` and add `const { ... } = props`.
+const rewriteDestructuredParams = (sourceFile: SourceFile) => {
+  const componentFunctions = getComponentFunctions(sourceFile)
+
+  for (const fn of componentFunctions) {
+    const params = fn.getParameters()
+    if (params.length !== 1) continue
+
+    const p = params[0]
+    if (!p) continue
+
+    const nameNode = p.getNameNode()
+    if (!Node.isObjectBindingPattern(nameNode)) continue // skip non-destructured params
+
+    const body = fn.getBody()
+    if (!body || !Node.isBlock(body)) continue // skip expression bodies
+
+    // Capture destructure text (with braces) before we change the param
+    const destructText = nameNode.getText() // e.g. `{ className, ...props }`
+    const originalParamType = p.getTypeNode()?.getText() ?? ''
+
+    // Replace the original parameter with a simple `props` parameter
+    p.replaceWithText(`props: ${originalParamType}`)
+
+    if (destructText === '{ ...props }') continue
+
+    body.insertVariableStatement(0, {
+      declarationKind: VariableDeclarationKind.Const,
+      declarations: [
+        {
+          name: destructText.replace(/\.{3}props/, '...rest'),
+          initializer: 'props'
+        }
+      ]
+    })
+
+    let modifiedSpreadExpressionCount = 0
+
+    fn.forEachDescendant((descendant) => {
+      if (Node.isJsxSpreadAttribute(descendant)) {
+        const expression = descendant.getExpression()
+        if (Node.isIdentifier(expression) && expression.getText() === 'props') {
+          expression.replaceWithText('rest')
+          modifiedSpreadExpressionCount++
+        }
+      }
+    })
+
+    if (modifiedSpreadExpressionCount > 1) {
+      consola.warn(`Warning: Modified ${modifiedSpreadExpressionCount} spread attributes in ${fn.getText()}`)
+    }
+  }
+}
+
+const getComponentFunctions = (sourceFile: SourceFile) => {
+  const jsxFunctions: Array<FunctionDeclaration | ArrowFunction> = []
+
+  const functionDeclarations: FunctionDeclaration[] = sourceFile.getFunctions()
+
+  for (const funcDecl of functionDeclarations) {
+    if (isReturningJsx(funcDecl)) {
+      jsxFunctions.push(funcDecl)
+    }
+  }
+
+  return jsxFunctions
+}
+
+const unwrapParentheses = (expr: Expression | undefined): Expression | undefined => {
+  while (expr && Node.isParenthesizedExpression(expr)) {
+    expr = expr.getExpression()
+  }
+  return expr
+}
+
+const isReturningJsx = (node: FunctionDeclaration | ArrowFunction): boolean => {
+  const body = node.getBody()
+
+  // If the body is a block, check all return statements
+  if (!Node.isBlock(body)) return true
+
+  const returnStatements = body.getDescendantsOfKind(SyntaxKind.ReturnStatement)
+
+  for (const returnStatement of returnStatements) {
+    const returnExpression = returnStatement.getExpression()
+    const unwrappedExpression = unwrapParentheses(returnExpression)
+
+    if (
+      Node.isJsxElement(unwrappedExpression) ||
+      Node.isJsxSelfClosingElement(unwrappedExpression) ||
+      Node.isJsxFragment(unwrappedExpression)
+    ) {
+      return true
+    }
+  }
+
+  return false
+}
+
 // Rewrite to use Slot.Root
 const rewriteSlotUses = (sourceFile: SourceFile) => {
   const slotIdentifiers = sourceFile.getDescendantsOfKind(SyntaxKind.Identifier).filter((identifier) => {
@@ -202,9 +284,10 @@ const rewriteSlotUses = (sourceFile: SourceFile) => {
   for (const identifier of slotIdentifiers) {
     const parent = identifier.getParent()
 
-    if (parent.isKind(SyntaxKind.ImportSpecifier)) continue
-    if (parent.isKind(SyntaxKind.PropertyAccessExpression) && parent.getExpression() === identifier) continue
-    if (parent.isKind(SyntaxKind.VariableDeclaration) && parent.getNameNode() === identifier) continue
+    if (Node.isImportSpecifier(parent)) continue
+    if (Node.isPropertyAccessExpression(parent) && parent.getExpression() === identifier) continue
+    if (Node.isVariableDeclaration(parent) && parent.getNameNode() === identifier) continue
+    if (parent.getText() === 'Slot.Root') continue
 
     identifier.replaceWithText('Slot.Root')
   }
@@ -214,7 +297,6 @@ const rewriteSlotUses = (sourceFile: SourceFile) => {
 const insert2aBeforeFunctions = (sourceFile: SourceFile) => {
   const fns = sourceFile.getFunctions()
   for (const fn of fns) {
-    // Avoid double-inserting if already present
     const fullText = fn.getFullText()
     const leading = fullText.slice(0, fullText.indexOf(fn.getText()))
     if (/\/\/\/\s*2a\s*$/.test(leading)) continue
@@ -226,72 +308,13 @@ const insert2aBeforeFunctions = (sourceFile: SourceFile) => {
   }
 }
 
-// Turn `({ ... }: Type)` into `(props: Type)` and add `const { ... } = props`.
-const rewriteDestructuredParams = (sourceFile: SourceFile) => {
-  // Function declarations
-  for (const fn of sourceFile.getFunctions()) {
-    fixDestructuring(fn)
-  }
-
-  for (const vs of sourceFile.getVariableStatements()) {
-    for (const decl of vs.getDeclarations()) {
-      const init = decl.getInitializer()
-      if (!init) continue
-
-      if (Node.isArrowFunction(init) || Node.isFunctionExpression(init)) {
-        fixDestructuring(init)
-      }
-    }
-  }
-}
-
-const fixDestructuring = (fn: FunctionDeclaration | FunctionExpression | ArrowFunction) => {
-  const params = fn.getParameters()
-  if (params.length !== 1) return
-
-  const p = params[0]
-  if (!p) return
-
-  const nameNode = p.getNameNode()
-  if (!Node.isObjectBindingPattern(nameNode)) return
-
-  const body = fn.getBody()
-  if (!body || !Node.isBlock(body)) return // skip expression bodies
-
-  // Capture destructure text (with braces) before we change the param
-  const destructText = nameNode.getText() // e.g. `{ className, ...props }`
-  const originalParamType = p.getTypeNode()?.getText() ?? ''
-
-  // Replace the original parameter with a simple `props` parameter
-  p.replaceWithText(`props: ${originalParamType}`)
-
-  if (destructText === '{ ...props }') return
-
-  body.insertVariableStatement(0, {
-    declarationKind: VariableDeclarationKind.Const,
-    declarations: [
-      {
-        name: destructText.replace(/\.{3}props/, '...rest'),
-        initializer: 'props'
-      }
-    ]
-  })
-
-  fn.forEachDescendant((descendant) => {
-    if (Node.isJsxSpreadAttribute(descendant)) {
-      const expression = descendant.getExpression()
-      if (Node.isIdentifier(expression) && expression.getText() === 'props') {
-        expression.replaceWithText('rest')
-      }
-    }
-  })
-}
-
 // const Component = (props: React.ComponentProps<typeof SomeOtherComponent>) => { ... }
 // to
 // type ComponentProps = React.ComponentProps<typeof SomeOtherComponent>
 // const Component = (props: ComponentProps) => { ... }
 const separateTypeDefs = (sourceFile: SourceFile) => {
+  const modifications = []
+
   for (const fn of sourceFile.getFunctions()) {
     const params = fn.getParameters()
     if (params.length !== 1) continue
@@ -304,20 +327,25 @@ const separateTypeDefs = (sourceFile: SourceFile) => {
 
     const paramName = p.getName()
     const paramType = typeNode.getText()
-
-    if (paramName !== 'props' || !paramType.includes('React.')) return
-
     const functionName = fn.getName()
     const typeAliasName = `${functionName}Props`
 
-    const insertionIndex = fn.getChildIndex()
+    if (paramName !== 'props' || paramType === typeAliasName) continue
 
-    sourceFile.insertTypeAlias(insertionIndex, {
-      name: typeAliasName,
-      type: paramType
+    modifications.push({
+      insertPos: fn.getFullStart(),
+      typeText: `\n\ntype ${typeAliasName} = ${paramType}`,
+      replaceStart: typeNode.getStart(),
+      replaceEnd: typeNode.getEnd(),
+      typeAliasName
     })
+  }
 
-    p.setType(typeAliasName)
+  modifications.sort((a, b) => b.insertPos - a.insertPos)
+
+  for (const mod of modifications) {
+    sourceFile.replaceText([mod.replaceStart, mod.replaceEnd], mod.typeAliasName)
+    sourceFile.insertText(mod.insertPos, mod.typeText)
   }
 }
 
@@ -351,9 +379,7 @@ const formatCnClasses = (sourceFile: SourceFile) => {
         .map((c) => `"${c}"`)
         .join(', ')
 
-      const newText = `[${groupedClasses}]`
-
-      arg.replaceWithText(newText)
+      arg.replaceWithText(groupedClasses)
     }
   }
 }
@@ -423,23 +449,8 @@ const formatClasses = (sourceFile: SourceFile) => {
     if (groupedJoined === raw.trim()) continue
 
     const groupedClasses = grouped.map((c) => `"${c}"`).join(', ')
-    const newText = `{cn([${groupedClasses}])}`
+    const newText = `{cn(${groupedClasses})}`
     initializer.replaceWithText(newText)
-  }
-
-  // Ensure `cn` is imported if used
-  const hasCnImport = sourceFile.getImportDeclarations().some((imp) => {
-    return (
-      imp.getModuleSpecifierValue() === '@repo/ui/utils/cn' &&
-      imp.getNamedImports().some((named) => named.getName() === 'cn')
-    )
-  })
-
-  if (!hasCnImport) {
-    sourceFile.addImportDeclaration({
-      moduleSpecifier: '@repo/ui/utils/cn',
-      namedImports: ['cn']
-    })
   }
 }
 
@@ -464,6 +475,46 @@ const newLineAfterUseClient = (sourceFile: SourceFile) => {
   const newFullText = `${leading}${statementText}\n${trailing}`
 
   sourceFile.replaceWithText(newFullText)
+}
+
+// Ensure contexts have displayName set
+const addDisplayNameToContexts = (sourceFile: SourceFile) => {
+  const existingDisplayNames = getExistingDisplayNames(sourceFile)
+  const variableStatements = sourceFile.getDescendantsOfKind(SyntaxKind.VariableStatement)
+
+  for (const statement of variableStatements) {
+    const declarations = statement.getDeclarations()
+
+    for (const decl of declarations) {
+      const initializer = decl.getInitializer()
+      if (!initializer || !Node.isCallExpression(initializer)) continue
+
+      const expr = initializer.getExpression()
+
+      if (Node.isIdentifier(expr) && expr.getText() === 'createContext') {
+        const contextName = decl.getName()
+        const newStatement = `${contextName}.displayName = '${contextName}'`
+
+        if (existingDisplayNames.has(newStatement)) continue
+
+        statement.replaceWithText(`${statement.getText()}\n${newStatement}`)
+      }
+    }
+  }
+}
+
+const getExistingDisplayNames = (sourceFile: SourceFile) => {
+  const existingDisplayNames = new Set<string>()
+
+  const expressionStatements = sourceFile.getDescendantsOfKind(SyntaxKind.ExpressionStatement)
+
+  for (const statement of expressionStatements) {
+    if (statement.getText().includes('.displayName')) {
+      existingDisplayNames.add(statement.getText())
+    }
+  }
+
+  return existingDisplayNames
 }
 
 await main()
