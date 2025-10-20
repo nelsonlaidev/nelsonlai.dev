@@ -28,8 +28,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/uses'>): Prom
     pathname: '/uses',
     title,
     description,
-    locale,
-    ogImagePathname: '/uses/og-image.png'
+    locale
   })
 }
 

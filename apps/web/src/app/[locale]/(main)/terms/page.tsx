@@ -22,8 +22,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/terms'>): Pro
     pathname: '/terms',
     title,
     description,
-    locale,
-    ogImagePathname: '/terms/og-image.png'
+    locale
   })
 }
 

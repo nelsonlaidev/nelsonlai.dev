@@ -41,7 +41,6 @@ export const generateMetadata = async (props: PageProps<'/[locale]/blog/[slug]'>
     title: post.title,
     description: post.summary,
     locale,
-    ogImagePathname: `/blog/${post.slug}/og-image.png`,
     openGraph: {
       type: 'article',
       publishedTime: post.date,
