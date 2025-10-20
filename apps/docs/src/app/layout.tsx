@@ -1,3 +1,5 @@
+import type { Metadata } from 'next'
+
 import '@/styles/globals.css'
 
 import { cn } from '@repo/ui/utils/cn'
@@ -15,6 +17,14 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin']
 })
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | @nelsonlaidev/docs',
+    default: '@nelsonlaidev/docs'
+  },
+  description: "Documentation for Nelson Lai's projects and libraries."
+}
 
 const Layout = (props: LayoutProps<'/'>) => {
   const { children } = props
