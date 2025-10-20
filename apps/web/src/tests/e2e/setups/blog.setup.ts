@@ -1,4 +1,4 @@
-import type { Post } from '.content-collections/generated'
+import type { Post } from '@/lib/content'
 
 import fs from 'node:fs/promises'
 import path from 'node:path'
