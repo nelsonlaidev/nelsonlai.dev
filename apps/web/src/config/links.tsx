@@ -112,10 +112,10 @@ export const FOOTER_LINKS: FooterLinks = [
   {
     id: 4,
     links: [
-      // t('common.labels.terms-of-service')
-      { href: '/terms', labelKey: 'common.labels.terms-of-service' },
-      // t('common.labels.privacy-policy')
-      { href: '/privacy', labelKey: 'common.labels.privacy-policy' }
+      // t('common.labels.terms')
+      { href: '/terms', labelKey: 'common.labels.terms' },
+      // t('common.labels.privacy')
+      { href: '/privacy', labelKey: 'common.labels.privacy' }
     ]
   }
 ]

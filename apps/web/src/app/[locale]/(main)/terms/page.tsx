@@ -15,7 +15,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/terms'>): Pro
   const { locale } = await params
 
   const t = await getTranslations({ locale: locale as Locale })
-  const title = t('common.labels.terms-of-service')
+  const title = t('common.labels.terms')
   const description = t('terms.description')
 
   return createMetadata({
@@ -34,7 +34,7 @@ const Page = (props: PageProps<'/[locale]/terms'>) => {
   setRequestLocale(locale as Locale)
 
   const t = useTranslations()
-  const title = t('common.labels.terms-of-service')
+  const title = t('common.labels.terms')
   const description = t('terms.description')
   const page = getPageBySlug(locale, 'terms')
 
