@@ -67,6 +67,7 @@ words:
   - orbstack
   - orpc
   - paralleldrive
+  - pathnames
   - planetscale
   - plpgsql
   - posthog

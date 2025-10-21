@@ -33,6 +33,9 @@ jobs:
       - name: Configure environment
         uses: ./.github/actions/setup
 
+      - name: Build MDX
+        run: pnpm build:mdx
+
       - name: Run unit tests
         run: pnpm test:unit
 
