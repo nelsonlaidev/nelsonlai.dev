@@ -35,8 +35,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]'>): Promise<M
     root: true,
     title: MY_NAME,
     description,
-    locale,
-    ogImagePathname: '/og-image.png'
+    locale
   })
 }
 

@@ -24,7 +24,7 @@ export const GET = async (_request: Request, props: RouteContext<'/[locale]/rss.
     site_url: getLocalizedPath({ locale }),
     feed_url: getLocalizedPath({ locale, pathname: '/rss.xml' }),
     language: locale,
-    image_url: getLocalizedPath({ locale, pathname: '/og-image.png' }),
+    image_url: getLocalizedPath({ locale, pathname: '/og/image.webp' }),
     copyright: `© ${new Date().getFullYear()} ${MY_NAME}. All rights reserved.`,
     webMaster: 'me@nelsonlai.dev'
   })
