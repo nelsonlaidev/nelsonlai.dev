@@ -23,7 +23,14 @@ export const metadata: Metadata = {
     template: '%s | @nelsonlaidev/docs',
     default: '@nelsonlaidev/docs'
   },
-  description: "Documentation for Nelson Lai's projects and libraries."
+  description: "Documentation for Nelson Lai's projects and libraries.",
+  icons: {
+    icon: {
+      rel: 'icon',
+      type: 'image/x-icon',
+      url: 'https://nelsonlai.dev/favicon.ico'
+    }
+  }
 }
 
 const Layout = (props: LayoutProps<'/'>) => {
