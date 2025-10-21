@@ -43,10 +43,10 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", ".content-collections/**"]
+      "outputs": [".next/**", "!.next/cache/**", ".content-collections/**", ".source/**"]
     },
     "build:mdx": {
-      "outputs": [".content-collections/**"]
+      "outputs": [".content-collections/**", ".source/**"]
     },
     "clean": {
       "cache": false
