@@ -1,5 +1,3 @@
-'use client'
-
 import { cn } from '@repo/ui/utils/cn'
 import { cva, type VariantProps } from 'cva'
 import { useMemo } from 'react'
