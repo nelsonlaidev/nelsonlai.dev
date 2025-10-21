@@ -10,6 +10,7 @@ import { hasLocale, type Locale } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 
 import OGImage from '@/components/og-image'
+import { PROTECTED_ROUTES } from '@/lib/constants'
 import { getPostBySlug } from '@/lib/content'
 import { getOGImageFonts } from '@/lib/fonts'
 import { pathnames } from '@/lib/pathnames'
@@ -101,7 +102,7 @@ const generateOGImage = async (title: string, url: string) => {
 
 export const generateStaticParams = (): Array<{ locale: string; slug: string[] }> => {
   return routing.locales.flatMap((locale) => {
-    return pathnames.map((pathname) => ({
+    return [...pathnames, ...PROTECTED_ROUTES].map((pathname) => ({
       locale,
       slug: [...pathname.split('/'), 'image.webp'].filter(Boolean)
     }))

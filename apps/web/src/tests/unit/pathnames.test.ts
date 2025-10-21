@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url'
 
 import { describe, expect, it } from 'vitest'
 
+import { PROTECTED_ROUTES } from '@/lib/constants'
 import { pathnames } from '@/lib/pathnames'
 
 type PageModule = {
@@ -23,7 +24,6 @@ describe('pathnames', () => {
 
 const getAllPageRoutes = async (): Promise<string[]> => {
   const rootDir = 'apps/web/src/app'
-  const protectedRoutes = new Set(['/account', '/account/settings', '/admin'])
 
   const result: string[] = []
   const queue: string[] = [rootDir]
@@ -49,7 +49,7 @@ const getAllPageRoutes = async (): Promise<string[]> => {
   }
 
   const uniqueRoutes = [...new Set(result)]
-  return uniqueRoutes.filter((route) => !protectedRoutes.has(route))
+  return uniqueRoutes.filter((route) => !PROTECTED_ROUTES.includes(route))
 }
 
 const processPageFile = async (fullPath: string, rootDir: string): Promise<string[]> => {
