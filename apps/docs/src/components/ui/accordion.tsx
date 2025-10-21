@@ -7,7 +7,13 @@ import { Accordion as AccordionPrimitive } from 'radix-ui'
 type AccordionProps = React.ComponentProps<typeof AccordionPrimitive.Root>
 
 const Accordion = (props: AccordionProps) => {
-  return <AccordionPrimitive.Root data-slot='accordion' {...props} />
+  const { className, children, ...rest } = props
+
+  return (
+    <AccordionPrimitive.Root data-slot='accordion' className={cn('rounded-md border', className)} {...rest}>
+      {children}
+    </AccordionPrimitive.Root>
+  )
 }
 
 type AccordionItemProps = React.ComponentProps<typeof AccordionPrimitive.Item>
@@ -34,8 +40,7 @@ const AccordionTrigger = (props: AccordionTriggerProps) => {
       <AccordionPrimitive.Trigger
         data-slot='accordion-trigger'
         className={cn(
-          'flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none',
-          'hover:underline',
+          'flex flex-1 items-start justify-between gap-4 rounded-md px-6 py-4 text-left text-sm font-medium transition-all outline-none',
           'focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50',
           'disabled:pointer-events-none disabled:opacity-50',
           '[&[data-state=open]>svg]:rotate-180',
@@ -59,7 +64,7 @@ const AccordionContent = (props: AccordionContentProps) => {
     <AccordionPrimitive.Content
       data-slot='accordion-content'
       className={cn(
-        'overflow-hidden text-sm',
+        'overflow-hidden px-6 text-sm',
         'data-[state=open]:animate-accordion-down',
         'data-[state=closed]:animate-accordion-up'
       )}
