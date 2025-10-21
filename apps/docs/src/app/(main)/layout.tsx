@@ -17,6 +17,7 @@ const Layout = (props: LayoutProps<'/'>) => {
           </div>
         )
       }}
+      githubUrl='https://github.com/nelsonlaidev/nelsonlai.dev/tree/main/apps/docs'
     >
       {children}
     </DocsLayout>
