@@ -33,9 +33,6 @@ jobs:
       - name: Configure environment
         uses: ./.github/actions/setup
 
-      - name: Build MDX
-        run: pnpm build:mdx
-
       - name: Run unit tests
         run: pnpm test:unit
 
@@ -49,12 +46,6 @@ jobs:
       - name: Configure environment
         uses: ./.github/actions/setup
 
-      - name: Build MDX
-        run: pnpm build:mdx
-
-      - name: Generate Next.js route types
-        run: pnpm typegen
-
       - name: Run ESLint
         run: pnpm lint
 
@@ -67,12 +58,6 @@ jobs:
 
       - name: Configure environment
         uses: ./.github/actions/setup
-
-      - name: Build MDX
-        run: pnpm build:mdx
-
-      - name: Generate Next.js route types
-        run: pnpm typegen
 
       - name: Run type check
         run: pnpm type-check
@@ -112,9 +97,6 @@ jobs:
 
       - name: Configure environment
         uses: ./.github/actions/setup
-
-      - name: Build MDX
-        run: pnpm build:mdx
 
       - name: Run Knip
         run: pnpm check:knip

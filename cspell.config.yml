@@ -24,6 +24,8 @@ words:
   - antec
   - argb
   - asus
+  - beamer
+  - benoit
   - bentogrids
   - bowser
   - bradlc
@@ -34,7 +36,10 @@ words:
   - dbaeumer
   - delba
   - dotenvx
+  - duarte
   - eihab
+  - embla
+  - evilrabbit
   - fuma
   - fumadocs
   - ghostty
@@ -45,6 +50,7 @@ words:
   - innerhtml
   - jahir
   - joshwcomeau
+  - jsxs
   - karabiner
   - keka
   - keychron
@@ -52,6 +58,7 @@ words:
   - linktree
   - macbook
   - maximeheckel
+  - maxleiter
   - motrix
   - nelsonlai
   - nelsonlaidev
@@ -67,6 +74,7 @@ words:
   - orbstack
   - orpc
   - paralleldrive
+  - peduarte
   - pathnames
   - planetscale
   - plpgsql

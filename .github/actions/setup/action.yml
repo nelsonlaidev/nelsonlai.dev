@@ -18,3 +18,11 @@ runs:
       run: pnpm install --frozen-lockfile
       env:
         PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+
+    - name: Build MDX
+      shell: bash
+      run: pnpm build:mdx
+
+    - name: Generate Next.js route types
+      shell: bash
+      run: pnpm typegen
