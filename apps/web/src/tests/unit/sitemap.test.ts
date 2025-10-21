@@ -2,11 +2,12 @@ import { routing } from '@repo/i18n/routing'
 import { describe, expect, it } from 'vitest'
 
 import sitemap from '@/app/sitemap'
-import { pathnames } from '@/lib/pathnames'
 import { getLocalizedPath } from '@/utils/get-localized-path'
+import { getPathnames } from '@/utils/get-pathnames'
 
 describe('sitemap', () => {
   it('generates sitemap entries for all locales and pathnames', () => {
+    const pathnames = getPathnames()
     const result = sitemap()
 
     const expectedEntryCount = routing.locales.length * pathnames.length
@@ -25,6 +26,7 @@ describe('sitemap', () => {
   })
 
   it('generates correct URLs for each locale and pathname combination', () => {
+    const pathnames = getPathnames()
     const result = sitemap()
 
     for (const locale of routing.locales) {
@@ -39,6 +41,7 @@ describe('sitemap', () => {
   })
 
   it('generates URLs with correct locale prefix', () => {
+    const pathnames = getPathnames()
     const result = sitemap()
 
     const entriesByLocale: Record<string, typeof result> = {}
@@ -60,6 +63,7 @@ describe('sitemap', () => {
   })
 
   it('covers all pathnames for each locale', () => {
+    const pathnames = getPathnames()
     const result = sitemap()
 
     for (const locale of routing.locales) {
@@ -90,6 +94,7 @@ describe('sitemap', () => {
   })
 
   it('uses default locale without prefix in URLs', () => {
+    const pathnames = getPathnames()
     const result = sitemap()
     const defaultLocaleEntries: typeof result = []
 

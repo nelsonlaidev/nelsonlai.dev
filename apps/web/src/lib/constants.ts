@@ -20,5 +20,3 @@ export const AVATAR_MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
 export const SUPPORTED_AVATAR_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const
 
 export type AvatarMimeType = (typeof SUPPORTED_AVATAR_MIME_TYPES)[number]
-
-export const PROTECTED_ROUTES = ['/admin', '/account', '/account/settings']

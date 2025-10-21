@@ -4,8 +4,7 @@ import { pathToFileURL } from 'node:url'
 
 import { describe, expect, it } from 'vitest'
 
-import { PROTECTED_ROUTES } from '@/lib/constants'
-import { pathnames } from '@/lib/pathnames'
+import { getPathnames, PROTECTED_ROUTES } from '@/utils/get-pathnames'
 
 type PageModule = {
   generateStaticParams?: () => Promise<Array<Record<string, string>>>
@@ -13,6 +12,7 @@ type PageModule = {
 
 describe('pathnames', () => {
   it('returns all page routes', async () => {
+    const pathnames = getPathnames()
     const allPageRoutes = await getAllPageRoutes()
 
     const sortedPathnames = [...pathnames].toSorted((a, b) => a.localeCompare(b))
