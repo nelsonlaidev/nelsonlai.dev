@@ -63,6 +63,8 @@ const Page = (props: PageProps<'/[locale]/blog/[slug]'>) => {
     notFound()
   }
 
+  const ogImage = getLocalizedPath({ locale, pathname: `/og/blog/${post.slug}/image.webp` })
+
   const jsonLd: WithContext<BlogPosting> = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -72,7 +74,7 @@ const Page = (props: PageProps<'/[locale]/blog/[slug]'>) => {
       '@type': 'WebPage',
       '@id': url
     },
-    image: `${baseUrl}/blog/${post.slug}/og-image.png`,
+    image: ogImage,
     datePublished: post.date,
     dateModified: post.modifiedTime,
     author: {
