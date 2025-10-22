@@ -1,15 +1,12 @@
-'use client'
+import { cn } from '../utils/cn'
 
-import { cn } from '@repo/ui/utils/cn'
-import TextareaAutosize from 'react-textarea-autosize'
-
-type TextareaProps = React.ComponentProps<typeof TextareaAutosize>
+type TextareaProps = React.ComponentProps<'textarea'>
 
 const Textarea = (props: TextareaProps) => {
   const { className, ...rest } = props
 
   return (
-    <TextareaAutosize
+    <textarea
       data-slot='textarea'
       className={cn(
         'flex field-sizing-content min-h-16 w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none',

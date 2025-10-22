@@ -1,18 +1,25 @@
-import { cn } from '@repo/ui/utils/cn'
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
 import { Select as SelectPrimitive } from 'radix-ui'
 
+import { cn } from '../utils/cn'
+
 type SelectProps = React.ComponentProps<typeof SelectPrimitive.Root>
 
-const Select = (props: SelectProps) => <SelectPrimitive.Root data-slot='select' {...props} />
+const Select = (props: SelectProps) => {
+  return <SelectPrimitive.Root data-slot='select' {...props} />
+}
 
 type SelectGroupProps = React.ComponentProps<typeof SelectPrimitive.Group>
 
-const SelectGroup = (props: SelectGroupProps) => <SelectPrimitive.Group data-slot='select-group' {...props} />
+const SelectGroup = (props: SelectGroupProps) => {
+  return <SelectPrimitive.Group data-slot='select-group' {...props} />
+}
 
 type SelectValueProps = React.ComponentProps<typeof SelectPrimitive.Value>
 
-const SelectValue = (props: SelectValueProps) => <SelectPrimitive.Value data-slot='select-value' {...props} />
+const SelectValue = (props: SelectValueProps) => {
+  return <SelectPrimitive.Value data-slot='select-value' {...props} />
+}
 
 type SelectTriggerProps = React.ComponentProps<typeof SelectPrimitive.Trigger> & {
   size?: 'sm' | 'default'
@@ -44,7 +51,7 @@ const SelectTrigger = (props: SelectTriggerProps) => {
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon className='opacity-50' />
+        <ChevronDownIcon className='size-4 opacity-50' />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   )
@@ -53,14 +60,14 @@ const SelectTrigger = (props: SelectTriggerProps) => {
 type SelectContentProps = React.ComponentProps<typeof SelectPrimitive.Content>
 
 const SelectContent = (props: SelectContentProps) => {
-  const { className, children, position = 'popper', ...rest } = props
+  const { className, children, position = 'popper', align = 'center', ...rest } = props
 
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
         data-slot='select-content'
         className={cn(
-          'relative z-50 max-h-(--radix-select-content-available-height) min-w-32 origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border bg-popover text-popover-foreground shadow-md',
+          'relative z-50 max-h-(--radix-select-content-available-height) min-w-[8rem] origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border bg-popover text-popover-foreground shadow-md',
           'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
           'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
           'data-[side=top]:slide-in-from-bottom-2',
@@ -72,6 +79,7 @@ const SelectContent = (props: SelectContentProps) => {
           className
         )}
         position={position}
+        align={align}
         {...rest}
       >
         <SelectScrollUpButton />
@@ -126,7 +134,7 @@ const SelectItem = (props: SelectItemProps) => {
     >
       <span className='absolute right-2 flex size-3.5 items-center justify-center'>
         <SelectPrimitive.ItemIndicator>
-          <CheckIcon />
+          <CheckIcon className='size-4' />
         </SelectPrimitive.ItemIndicator>
       </span>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

@@ -1,5 +1,6 @@
-import { cn } from '@repo/ui/utils/cn'
 import { Label as LabelPrimitive } from 'radix-ui'
+
+import { cn } from '../utils/cn'
 
 type LabelProps = React.ComponentProps<typeof LabelPrimitive.Root>
 

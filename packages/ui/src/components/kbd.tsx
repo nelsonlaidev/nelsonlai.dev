@@ -1,4 +1,4 @@
-import { cn } from '@repo/ui/utils/cn'
+import { cn } from '../utils/cn'
 
 type KbdProps = React.ComponentProps<'kbd'>
 

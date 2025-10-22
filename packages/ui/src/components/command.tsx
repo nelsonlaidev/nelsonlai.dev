@@ -1,8 +1,7 @@
-'use client'
-
-import { cn } from '@repo/ui/utils/cn'
 import { Command as CommandPrimitive } from 'cmdk'
 import { SearchIcon } from 'lucide-react'
+
+import { cn } from '../utils/cn'
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './dialog'
 
@@ -23,10 +22,19 @@ const Command = (props: CommandProps) => {
 type CommandDialogProps = React.ComponentProps<typeof Dialog> & {
   title?: string
   description?: string
+  className?: string
+  showCloseButton?: boolean
 }
 
 const CommandDialog = (props: CommandDialogProps) => {
-  const { title = 'Command Palette', description = 'Search for a command to run...', children, ...rest } = props
+  const {
+    title = 'Command Palette',
+    description = 'Search for a command to run...',
+    children,
+    className,
+    showCloseButton = true,
+    ...rest
+  } = props
 
   return (
     <Dialog {...rest}>
@@ -34,7 +42,7 @@ const CommandDialog = (props: CommandDialogProps) => {
         <DialogTitle>{title}</DialogTitle>
         <DialogDescription>{description}</DialogDescription>
       </DialogHeader>
-      <DialogContent className='overflow-hidden p-0'>
+      <DialogContent className={cn('overflow-hidden p-0', className)} showCloseButton={showCloseButton}>
         <Command
           className={cn(
             '**:data-[slot=command-input-wrapper]:h-12',

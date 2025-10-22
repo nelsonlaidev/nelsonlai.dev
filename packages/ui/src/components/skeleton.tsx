@@ -1,4 +1,4 @@
-import { cn } from '@repo/ui/utils/cn'
+import { cn } from '../utils/cn'
 
 type SkeletonProps = React.ComponentProps<'div'>
 

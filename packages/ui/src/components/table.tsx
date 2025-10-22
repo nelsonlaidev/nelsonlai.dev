@@ -1,4 +1,4 @@
-import { cn } from '@repo/ui/utils/cn'
+import { cn } from '../utils/cn'
 
 type TableProps = React.ComponentProps<'table'>
 
@@ -7,7 +7,6 @@ const Table = (props: TableProps) => {
 
   return (
     <div data-slot='table-container' className='relative w-full overflow-x-auto'>
-      {/* eslint-disable-next-line sonarjs/table-header -- It's a component */}
       <table data-slot='table' className={cn('w-full caption-bottom text-sm', className)} {...rest} />
     </div>
   )
@@ -37,7 +36,7 @@ const TableFooter = (props: TableFooterProps) => {
   return (
     <tfoot
       data-slot='table-footer'
-      className={cn('border-t bg-muted/50 font-medium [&>tr]:last:border-b-0', className)}
+      className={cn('border-t bg-muted/50 font-medium', '[&>tr]:last:border-b-0', className)}
       {...rest}
     />
   )
@@ -51,7 +50,7 @@ const TableRow = (props: TableRowProps) => {
   return (
     <tr
       data-slot='table-row'
-      className={cn('border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted', className)}
+      className={cn('border-b transition-colors', 'hover:bg-muted/50', 'data-[state=selected]:bg-muted', className)}
       {...rest}
     />
   )
@@ -66,7 +65,9 @@ const TableHead = (props: TableHeadProps) => {
     <th
       data-slot='table-head'
       className={cn(
-        'h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+        'h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground',
+        '[&>[role=checkbox]]:translate-y-[2px]',
+        '[&:has([role=checkbox])]:pr-0',
         className
       )}
       {...rest}
@@ -83,7 +84,9 @@ const TableCell = (props: TableCellProps) => {
     <td
       data-slot='table-cell'
       className={cn(
-        'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+        'p-2 align-middle whitespace-nowrap',
+        '[&>[role=checkbox]]:translate-y-[2px]',
+        '[&:has([role=checkbox])]:pr-0',
         className
       )}
       {...rest}

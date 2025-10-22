@@ -1,5 +1,6 @@
-import { cn } from '@repo/ui/utils/cn'
 import { ScrollArea as ScrollAreaPrimitive } from 'radix-ui'
+
+import { cn } from '../utils/cn'
 
 type ScrollAreaProps = React.ComponentProps<typeof ScrollAreaPrimitive.Root>
 
@@ -7,14 +8,13 @@ const ScrollArea = (props: ScrollAreaProps) => {
   const { className, children, ...rest } = props
 
   return (
-    <ScrollAreaPrimitive.Root
-      data-slot='scroll-area'
-      className={cn('relative flex flex-col overflow-hidden', className)}
-      {...rest}
-    >
+    <ScrollAreaPrimitive.Root data-slot='scroll-area' className={cn('relative', className)} {...rest}>
       <ScrollAreaPrimitive.Viewport
         data-slot='scroll-area-viewport'
-        className='size-full rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1'
+        className={cn(
+          'size-full rounded-[inherit] transition-[color,box-shadow] outline-none',
+          'focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1'
+        )}
       >
         {children}
       </ScrollAreaPrimitive.Viewport>

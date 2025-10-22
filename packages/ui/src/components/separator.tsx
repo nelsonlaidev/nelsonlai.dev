@@ -1,5 +1,6 @@
-import { cn } from '@repo/ui/utils/cn'
 import { Separator as SeparatorPrimitive } from 'radix-ui'
+
+import { cn } from '../utils/cn'
 
 type SeparatorProps = React.ComponentProps<typeof SeparatorPrimitive.Root>
 
@@ -8,7 +9,7 @@ const Separator = (props: SeparatorProps) => {
 
   return (
     <SeparatorPrimitive.Root
-      data-slot='separator-root'
+      data-slot='separator'
       decorative={decorative}
       orientation={orientation}
       className={cn(
