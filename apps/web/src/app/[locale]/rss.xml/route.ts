@@ -8,6 +8,8 @@ import { MY_NAME } from '@/lib/constants'
 import { allPosts } from '@/lib/content'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
+export const dynamic = 'force-static'
+
 export const GET = async (_request: Request, props: RouteContext<'/[locale]/rss.xml'>) => {
   const { params } = props
   const { locale } = await params
