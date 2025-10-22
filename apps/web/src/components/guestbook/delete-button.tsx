@@ -12,8 +12,8 @@ import {
   AlertDialogTrigger
 } from '@repo/ui/components/alert-dialog'
 import { Button, buttonVariants } from '@repo/ui/components/button'
-import { toast } from '@repo/ui/components/sonner'
 import { useTranslations } from 'next-intl'
+import { toast } from 'sonner'
 
 import { useDeleteMessage } from '@/hooks/queries/message.query'
 

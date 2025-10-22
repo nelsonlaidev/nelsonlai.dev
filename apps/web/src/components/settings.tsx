@@ -3,9 +3,9 @@
 import { Card } from '@repo/ui/components/card'
 import { Label } from '@repo/ui/components/label'
 import { Skeleton } from '@repo/ui/components/skeleton'
-import { toast } from '@repo/ui/components/sonner'
 import { Switch } from '@repo/ui/components/switch'
 import { useTranslations } from 'next-intl'
+import { toast } from 'sonner'
 
 import { useReplyPrefs, useUpdateReplyPrefs } from '@/hooks/queries/unsubscribe.query'
 

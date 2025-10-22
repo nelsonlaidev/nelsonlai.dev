@@ -1,9 +1,9 @@
 'use client'
 
 import { Button } from '@repo/ui/components/button'
-import { toast } from '@repo/ui/components/sonner'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { toast } from 'sonner'
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'

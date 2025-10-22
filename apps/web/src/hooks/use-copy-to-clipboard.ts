@@ -1,6 +1,6 @@
-import { toast } from '@repo/ui/components/sonner'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { toast } from 'sonner'
 
 type CopyOptions = {
   text: string

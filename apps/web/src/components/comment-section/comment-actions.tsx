@@ -1,10 +1,10 @@
 import NumberFlow from '@number-flow/react'
 import { Button, buttonVariants } from '@repo/ui/components/button'
-import { toast } from '@repo/ui/components/sonner'
 import { cn } from '@repo/ui/utils/cn'
 import { cva } from 'cva'
 import { ChevronDownIcon, MessageSquareIcon, ThumbsDownIcon, ThumbsUpIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { toast } from 'sonner'
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
