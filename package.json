@@ -55,7 +55,7 @@
     "@cspell/dict-redis": "1.0.7",
     "@dotenvx/dotenvx": "1.51.0",
     "@lingual/i18n-check": "0.8.11",
-    "@nelsonlaidev/eslint-config": "2.2.0",
+    "@nelsonlaidev/eslint-config": "2.3.0",
     "@nelsonlaidev/prettier-config": "0.1.0",
     "@nelsonlaidev/typescript-config": "1.0.0",
     "@playwright/test": "1.55.0",

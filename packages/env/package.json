@@ -24,7 +24,7 @@
     "zod": "4.1.8"
   },
   "devDependencies": {
-    "@nelsonlaidev/eslint-config": "2.2.0",
+    "@nelsonlaidev/eslint-config": "2.3.0",
     "@nelsonlaidev/typescript-config": "1.0.0"
   }
 }
