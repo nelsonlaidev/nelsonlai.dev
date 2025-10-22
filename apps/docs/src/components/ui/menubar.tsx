@@ -1,5 +1,3 @@
-'use client'
-
 import { cn } from '@repo/ui/utils/cn'
 import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react'
 import { Menubar as MenubarPrimitive } from 'radix-ui'
@@ -262,7 +260,7 @@ const MenubarSubContent = (props: MenubarSubContentProps) => {
     <MenubarPrimitive.SubContent
       data-slot='menubar-sub-content'
       className={cn(
-        'z-50 min-w-[8rem] origin-(--radix-menubar-content-transform-origin) overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg',
+        'z-50 min-w-32 origin-(--radix-menubar-content-transform-origin) overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg',
         'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
         'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
         'data-[side=top]:slide-in-from-bottom-2',

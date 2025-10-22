@@ -1,5 +1,3 @@
-'use client'
-
 import { cn } from '@repo/ui/utils/cn'
 import { Separator as SeparatorPrimitive } from 'radix-ui'
 

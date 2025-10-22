@@ -1,22 +1,25 @@
-import { cn } from '@repo/ui/utils/cn'
 import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react'
 import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui'
 
+import { cn } from '../utils/cn'
+
 type DropdownMenuProps = React.ComponentProps<typeof DropdownMenuPrimitive.Root>
 
-const DropdownMenu = (props: DropdownMenuProps) => <DropdownMenuPrimitive.Root data-slot='dropdown-menu' {...props} />
+const DropdownMenu = (props: DropdownMenuProps) => {
+  return <DropdownMenuPrimitive.Root data-slot='dropdown-menu' {...props} />
+}
 
 type DropdownMenuPortalProps = React.ComponentProps<typeof DropdownMenuPrimitive.Portal>
 
-const DropdownMenuPortal = (props: DropdownMenuPortalProps) => (
-  <DropdownMenuPrimitive.Portal data-slot='dropdown-menu-portal' {...props} />
-)
+const DropdownMenuPortal = (props: DropdownMenuPortalProps) => {
+  return <DropdownMenuPrimitive.Portal data-slot='dropdown-menu-portal' {...props} />
+}
 
 type DropdownMenuTriggerProps = React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>
 
-const DropdownMenuTrigger = (props: DropdownMenuTriggerProps) => (
-  <DropdownMenuPrimitive.Trigger data-slot='dropdown-menu-trigger' {...props} />
-)
+const DropdownMenuTrigger = (props: DropdownMenuTriggerProps) => {
+  return <DropdownMenuPrimitive.Trigger data-slot='dropdown-menu-trigger' {...props} />
+}
 
 type DropdownMenuContentProps = React.ComponentProps<typeof DropdownMenuPrimitive.Content>
 
@@ -46,9 +49,9 @@ const DropdownMenuContent = (props: DropdownMenuContentProps) => {
 
 type DropdownMenuGroupProps = React.ComponentProps<typeof DropdownMenuPrimitive.Group>
 
-const DropdownMenuGroup = (props: DropdownMenuGroupProps) => (
-  <DropdownMenuPrimitive.Group data-slot='dropdown-menu-group' {...props} />
-)
+const DropdownMenuGroup = (props: DropdownMenuGroupProps) => {
+  return <DropdownMenuPrimitive.Group data-slot='dropdown-menu-group' {...props} />
+}
 
 type DropdownMenuItemProps = React.ComponentProps<typeof DropdownMenuPrimitive.Item> & {
   inset?: boolean
@@ -101,7 +104,7 @@ const DropdownMenuCheckboxItem = (props: DropdownMenuCheckboxItemProps) => {
     >
       <span className='pointer-events-none absolute left-2 flex size-3.5 items-center justify-center'>
         <DropdownMenuPrimitive.ItemIndicator>
-          <CheckIcon />
+          <CheckIcon className='size-4' />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -111,9 +114,9 @@ const DropdownMenuCheckboxItem = (props: DropdownMenuCheckboxItemProps) => {
 
 type DropdownMenuRadioGroupProps = React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>
 
-const DropdownMenuRadioGroup = (props: DropdownMenuRadioGroupProps) => (
-  <DropdownMenuPrimitive.RadioGroup data-slot='dropdown-menu-radio-group' {...props} />
-)
+const DropdownMenuRadioGroup = (props: DropdownMenuRadioGroupProps) => {
+  return <DropdownMenuPrimitive.RadioGroup data-slot='dropdown-menu-radio-group' {...props} />
+}
 
 type DropdownMenuRadioItemProps = React.ComponentProps<typeof DropdownMenuPrimitive.RadioItem>
 
@@ -154,7 +157,7 @@ const DropdownMenuLabel = (props: DropdownMenuLabelProps) => {
     <DropdownMenuPrimitive.Label
       data-slot='dropdown-menu-label'
       data-inset={inset}
-      className={cn('px-2 py-1.5 text-sm font-medium data-[inset]:pl-8', className)}
+      className={cn('px-2 py-1.5 text-sm font-medium', 'data-[inset]:pl-8', className)}
       {...rest}
     />
   )
@@ -190,9 +193,9 @@ const DropdownMenuShortcut = (props: DropdownMenuShortcutProps) => {
 
 type DropdownMenuSubProps = React.ComponentProps<typeof DropdownMenuPrimitive.Sub>
 
-const DropdownMenuSub = (props: DropdownMenuSubProps) => (
-  <DropdownMenuPrimitive.Sub data-slot='dropdown-menu-sub' {...props} />
-)
+const DropdownMenuSub = (props: DropdownMenuSubProps) => {
+  return <DropdownMenuPrimitive.Sub data-slot='dropdown-menu-sub' {...props} />
+}
 
 type DropdownMenuSubTriggerProps = React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> & {
   inset?: boolean
@@ -218,7 +221,7 @@ const DropdownMenuSubTrigger = (props: DropdownMenuSubTriggerProps) => {
       {...rest}
     >
       {children}
-      <ChevronRightIcon className='ml-auto' />
+      <ChevronRightIcon className='ml-auto size-4' />
     </DropdownMenuPrimitive.SubTrigger>
   )
 }

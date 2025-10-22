@@ -1,5 +1,3 @@
-'use client'
-
 import { AspectRatio as AspectRatioPrimitive } from 'radix-ui'
 
 type AspectRatioProps = React.ComponentProps<typeof AspectRatioPrimitive.Root>

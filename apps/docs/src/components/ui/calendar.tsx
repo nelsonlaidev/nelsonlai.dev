@@ -1,5 +1,3 @@
-'use client'
-
 import { cn } from '@repo/ui/utils/cn'
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { useEffect, useRef } from 'react'

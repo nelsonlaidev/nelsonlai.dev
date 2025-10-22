@@ -1,6 +1,7 @@
-import { cn } from '@repo/ui/utils/cn'
 import { CheckIcon } from 'lucide-react'
 import { Checkbox as CheckboxPrimitive } from 'radix-ui'
+
+import { cn } from '../utils/cn'
 
 type CheckboxProps = React.ComponentProps<typeof CheckboxPrimitive.Root>
 
@@ -23,7 +24,7 @@ const Checkbox = (props: CheckboxProps) => {
     >
       <CheckboxPrimitive.Indicator
         data-slot='checkbox-indicator'
-        className='flex items-center justify-center text-current transition-none'
+        className='grid place-content-center text-current transition-none'
       >
         <CheckIcon className='size-3.5' />
       </CheckboxPrimitive.Indicator>

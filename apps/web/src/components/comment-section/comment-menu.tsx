@@ -16,9 +16,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@repo/ui/components/dropdown-menu'
-import { toast } from '@repo/ui/components/sonner'
 import { MoreVerticalIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { toast } from 'sonner'
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'

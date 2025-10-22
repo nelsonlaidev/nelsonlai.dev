@@ -1,22 +1,31 @@
-import { cn } from '@repo/ui/utils/cn'
 import { XIcon } from 'lucide-react'
 import { Dialog as DialogPrimitive } from 'radix-ui'
 
+import { cn } from '../utils/cn'
+
 type DialogProps = React.ComponentProps<typeof DialogPrimitive.Root>
 
-const Dialog = (props: DialogProps) => <DialogPrimitive.Root data-slot='dialog' {...props} />
+const Dialog = (props: DialogProps) => {
+  return <DialogPrimitive.Root data-slot='dialog' {...props} />
+}
 
 type DialogTriggerProps = React.ComponentProps<typeof DialogPrimitive.Trigger>
 
-const DialogTrigger = (props: DialogTriggerProps) => <DialogPrimitive.Trigger data-slot='dialog-trigger' {...props} />
+const DialogTrigger = (props: DialogTriggerProps) => {
+  return <DialogPrimitive.Trigger data-slot='dialog-trigger' {...props} />
+}
 
 type DialogPortalProps = React.ComponentProps<typeof DialogPrimitive.Portal>
 
-const DialogPortal = (props: DialogPortalProps) => <DialogPrimitive.Portal data-slot='dialog-portal' {...props} />
+const DialogPortal = (props: DialogPortalProps) => {
+  return <DialogPrimitive.Portal data-slot='dialog-portal' {...props} />
+}
 
 type DialogCloseProps = React.ComponentProps<typeof DialogPrimitive.Close>
 
-const DialogClose = (props: DialogCloseProps) => <DialogPrimitive.Close data-slot='dialog-close' {...props} />
+const DialogClose = (props: DialogCloseProps) => {
+  return <DialogPrimitive.Close data-slot='dialog-close' {...props} />
+}
 
 type DialogOverlayProps = React.ComponentProps<typeof DialogPrimitive.Overlay>
 
@@ -37,10 +46,12 @@ const DialogOverlay = (props: DialogOverlayProps) => {
   )
 }
 
-type DialogContentProps = React.ComponentProps<typeof DialogPrimitive.Content>
+type DialogContentProps = React.ComponentProps<typeof DialogPrimitive.Content> & {
+  showCloseButton?: boolean
+}
 
 const DialogContent = (props: DialogContentProps) => {
-  const { className, children, ...rest } = props
+  const { className, children, showCloseButton = true, ...rest } = props
 
   return (
     <DialogPortal data-slot='dialog-portal'>
@@ -57,20 +68,23 @@ const DialogContent = (props: DialogContentProps) => {
         {...rest}
       >
         {children}
-        <DialogPrimitive.Close
-          className={cn(
-            'absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity',
-            'hover:opacity-100',
-            'focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-hidden',
-            'disabled:pointer-events-none',
-            'data-[state=open]:bg-accent data-[state=open]:text-muted-foreground',
-            '[&_svg]:pointer-events-none [&_svg]:shrink-0',
-            "[&_svg:not([class*='size-'])]:size-4"
-          )}
-        >
-          <XIcon />
-          <span className='sr-only'>Close</span>
-        </DialogPrimitive.Close>
+        {showCloseButton && (
+          <DialogPrimitive.Close
+            data-slot='dialog-close'
+            className={cn(
+              'absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity',
+              'hover:opacity-100',
+              'focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-hidden',
+              'disabled:pointer-events-none',
+              'data-[state=open]:bg-accent data-[state=open]:text-muted-foreground',
+              '[&_svg]:pointer-events-none [&_svg]:shrink-0',
+              "[&_svg:not([class*='size-'])]:size-4"
+            )}
+          >
+            <XIcon />
+            <span className='sr-only'>Close</span>
+          </DialogPrimitive.Close>
+        )}
       </DialogPrimitive.Content>
     </DialogPortal>
   )
@@ -84,7 +98,7 @@ const DialogHeader = (props: DialogHeaderProps) => {
   return (
     <div
       data-slot='dialog-header'
-      className={cn('flex flex-col gap-2 text-center sm:text-left', className)}
+      className={cn('flex flex-col gap-2 text-center', 'sm:text-left', className)}
       {...rest}
     />
   )
@@ -98,7 +112,7 @@ const DialogFooter = (props: DialogFooterProps) => {
   return (
     <div
       data-slot='dialog-footer'
-      className={cn('flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className)}
+      className={cn('flex flex-col-reverse gap-2', 'sm:flex-row sm:justify-end', className)}
       {...rest}
     />
   )

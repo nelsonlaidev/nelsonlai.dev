@@ -1,5 +1,3 @@
-'use client'
-
 import { cn } from '@repo/ui/utils/cn'
 import { Popover as PopoverPrimitive } from 'radix-ui'
 

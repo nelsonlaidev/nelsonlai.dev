@@ -3,10 +3,10 @@
 // Inspired by: https://framer.university/resources/like-button-component
 import NumberFlow from '@number-flow/react'
 import { Separator } from '@repo/ui/components/separator'
-import { toast } from '@repo/ui/components/sonner'
 import { motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
+import { toast } from 'sonner'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { useLikePost, usePostLikeCount } from '@/hooks/queries/post.query'

@@ -1,22 +1,31 @@
-import { cn } from '@repo/ui/utils/cn'
 import { XIcon } from 'lucide-react'
 import { Dialog as SheetPrimitive } from 'radix-ui'
 
+import { cn } from '../utils/cn'
+
 type SheetProps = React.ComponentProps<typeof SheetPrimitive.Root>
 
-const Sheet = (props: SheetProps) => <SheetPrimitive.Root data-slot='sheet' {...props} />
+const Sheet = (props: SheetProps) => {
+  return <SheetPrimitive.Root data-slot='sheet' {...props} />
+}
 
 type SheetTriggerProps = React.ComponentProps<typeof SheetPrimitive.Trigger>
 
-const SheetTrigger = (props: SheetTriggerProps) => <SheetPrimitive.Trigger data-slot='sheet-trigger' {...props} />
+const SheetTrigger = (props: SheetTriggerProps) => {
+  return <SheetPrimitive.Trigger data-slot='sheet-trigger' {...props} />
+}
 
 type SheetCloseProps = React.ComponentProps<typeof SheetPrimitive.Close>
 
-const SheetClose = (props: SheetCloseProps) => <SheetPrimitive.Close data-slot='sheet-close' {...props} />
+const SheetClose = (props: SheetCloseProps) => {
+  return <SheetPrimitive.Close data-slot='sheet-close' {...props} />
+}
 
 type SheetPortalProps = React.ComponentProps<typeof SheetPrimitive.Portal>
 
-const SheetPortal = (props: SheetPortalProps) => <SheetPrimitive.Portal data-slot='sheet-portal' {...props} />
+const SheetPortal = (props: SheetPortalProps) => {
+  return <SheetPrimitive.Portal data-slot='sheet-portal' {...props} />
+}
 
 type SheetOverlayProps = React.ComponentProps<typeof SheetPrimitive.Overlay>
 

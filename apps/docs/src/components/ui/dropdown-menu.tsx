@@ -1,5 +1,3 @@
-'use client'
-
 import { cn } from '@repo/ui/utils/cn'
 import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react'
 import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui'
@@ -33,7 +31,7 @@ const DropdownMenuContent = (props: DropdownMenuContentProps) => {
         data-slot='dropdown-menu-content'
         sideOffset={sideOffset}
         className={cn(
-          'z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border bg-popover p-1 text-popover-foreground shadow-md',
+          'z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-32 origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border bg-popover p-1 text-popover-foreground shadow-md',
           'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
           'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
           'data-[side=top]:slide-in-from-bottom-2',
@@ -236,7 +234,7 @@ const DropdownMenuSubContent = (props: DropdownMenuSubContentProps) => {
     <DropdownMenuPrimitive.SubContent
       data-slot='dropdown-menu-sub-content'
       className={cn(
-        'z-50 min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg',
+        'z-50 min-w-32 origin-(--radix-dropdown-menu-content-transform-origin) overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg',
         'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
         'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
         'data-[side=top]:slide-in-from-bottom-2',

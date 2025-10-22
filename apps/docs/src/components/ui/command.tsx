@@ -1,5 +1,3 @@
-'use client'
-
 import { cn } from '@repo/ui/utils/cn'
 import { Command as CommandPrimitive } from 'cmdk'
 import { SearchIcon } from 'lucide-react'
@@ -102,7 +100,11 @@ const CommandList = (props: CommandListProps) => {
 type CommandEmptyProps = React.ComponentProps<typeof CommandPrimitive.Empty>
 
 const CommandEmpty = (props: CommandEmptyProps) => {
-  return <CommandPrimitive.Empty data-slot='command-empty' className='py-6 text-center text-sm' {...props} />
+  const { className, ...rest } = props
+
+  return (
+    <CommandPrimitive.Empty data-slot='command-empty' className={cn('py-6 text-center text-sm', className)} {...rest} />
+  )
 }
 
 type CommandGroupProps = React.ComponentProps<typeof CommandPrimitive.Group>
