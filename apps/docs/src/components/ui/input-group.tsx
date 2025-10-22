@@ -44,7 +44,7 @@ const InputGroup = (props: InputGroupProps) => {
 
 const inputGroupAddonVariants = cva({
   base: [
-    'text-muted-foreground flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium select-none',
+    'flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium text-muted-foreground select-none',
     "[&>svg:not([class*='size-'])]:size-4",
     '[&>kbd]:rounded-[calc(var(--radius)-5px)]',
     'group-data-[disabled=true]/input-group:opacity-50'
@@ -86,7 +86,7 @@ const InputGroupAddon = (props: InputGroupAddonProps) => {
 }
 
 const inputGroupButtonVariants = cva({
-  base: ['text-sm shadow-none flex gap-2 items-center'],
+  base: ['flex items-center gap-2 text-sm shadow-none'],
   variants: {
     size: {
       xs: "h-6 gap-1 rounded-[calc(var(--radius)-5px)] px-2 has-[>svg]:px-2 [&>svg:not([class*='size-'])]:size-3.5",

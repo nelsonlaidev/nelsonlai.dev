@@ -34,7 +34,7 @@ const EmptyHeader = (props: EmptyHeaderProps) => {
 }
 
 const emptyMediaVariants = cva({
-  base: ['flex shrink-0 items-center justify-center mb-2', '[&_svg]:pointer-events-none [&_svg]:shrink-0'],
+  base: ['mb-2 flex shrink-0 items-center justify-center', '[&_svg]:pointer-events-none [&_svg]:shrink-0'],
   variants: {
     variant: {
       default: 'bg-transparent',

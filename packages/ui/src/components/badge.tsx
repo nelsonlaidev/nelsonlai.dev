@@ -5,11 +5,11 @@ import { cn } from '../utils/cn'
 
 const badgeVariants = cva({
   base: [
-    'inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 gap-1 transition-[color,box-shadow] overflow-hidden',
+    'inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-md border px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-[color,box-shadow]',
     'dark:aria-invalid:ring-destructive/40',
-    'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
-    'aria-invalid:ring-destructive/20 aria-invalid:border-destructive',
-    '[&>svg]:size-3 [&>svg]:pointer-events-none'
+    'focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50',
+    'aria-invalid:border-destructive aria-invalid:ring-destructive/20',
+    '[&>svg]:pointer-events-none [&>svg]:size-3'
   ],
   variants: {
     variant: {

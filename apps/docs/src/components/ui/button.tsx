@@ -4,10 +4,10 @@ import { Slot } from 'radix-ui'
 
 const buttonVariants = cva({
   base: [
-    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all shrink-0 outline-none',
+    'inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none',
     'dark:aria-invalid:ring-destructive/40',
-    'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
-    'aria-invalid:ring-destructive/20 aria-invalid:border-destructive',
+    'focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50',
+    'aria-invalid:border-destructive aria-invalid:ring-destructive/20',
     'disabled:pointer-events-none disabled:opacity-50',
     '[&_svg]:pointer-events-none [&_svg]:shrink-0',
     "[&_svg:not([class*='size-'])]:size-4"

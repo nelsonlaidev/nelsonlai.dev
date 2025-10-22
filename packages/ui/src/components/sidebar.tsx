@@ -511,7 +511,7 @@ const SidebarMenuItem = (props: SidebarMenuItemProps) => {
 
 const sidebarMenuButtonVariants = cva({
   base: [
-    'peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,height,padding]',
+    'peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm ring-sidebar-ring outline-hidden transition-[width,height,padding]',
     'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
     'active:bg-sidebar-accent active:text-sidebar-accent-foreground',
     'focus-visible:ring-2',
