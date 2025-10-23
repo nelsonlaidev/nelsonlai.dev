@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "0.13.8",
-    "zod": "4.1.8"
+    "zod": "4.1.12"
   },
   "devDependencies": {
     "@nelsonlaidev/eslint-config": "2.3.0",
