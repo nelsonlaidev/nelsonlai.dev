@@ -28,16 +28,16 @@
     ]
   },
   "dependencies": {
-    "@paralleldrive/cuid2": "2.2.2",
+    "@paralleldrive/cuid2": "3.1.0",
     "@repo/env": "workspace:*",
-    "drizzle-orm": "0.44.5"
+    "drizzle-orm": "0.44.6"
   },
   "devDependencies": {
     "@nelsonlaidev/eslint-config": "2.3.0",
     "@nelsonlaidev/typescript-config": "1.0.0",
-    "@types/node": "24.3.3",
+    "@types/node": "24.9.1",
     "consola": "3.4.2",
-    "drizzle-kit": "0.31.4",
+    "drizzle-kit": "0.31.5",
     "execa": "9.6.0",
     "postgres": "3.4.7"
   },
