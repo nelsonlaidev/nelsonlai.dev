@@ -135,5 +135,4 @@ const config: NextConfig = {
   }
 }
 
-// @ts-expect-error -- Ignore for now
-export default withPostHog(withContentCollections(withNextIntl(withBundleAnalyzer(config))))
+export default withContentCollections(withPostHog(withNextIntl(withBundleAnalyzer(config))))
