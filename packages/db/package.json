@@ -30,7 +30,7 @@
   "dependencies": {
     "@paralleldrive/cuid2": "3.1.0",
     "@repo/env": "workspace:*",
-    "drizzle-orm": "0.44.6"
+    "drizzle-orm": "0.44.7"
   },
   "devDependencies": {
     "@nelsonlaidev/eslint-config": "2.3.0",
