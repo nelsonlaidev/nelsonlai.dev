@@ -6,7 +6,6 @@ import { env } from '@repo/env'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 import { IS_PRODUCTION } from '@/lib/constants'
-import { withPostHog } from '@/lib/posthog'
 
 const withNextIntl = createNextIntlPlugin()
 
@@ -135,8 +134,4 @@ const config: NextConfig = {
   }
 }
 
-const next = async () => {
-  return withContentCollections(withPostHog(withNextIntl(withBundleAnalyzer(config))))
-}
-
-export default next
+export default withContentCollections(withNextIntl(withBundleAnalyzer(config)))
