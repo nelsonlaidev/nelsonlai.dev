@@ -10,6 +10,3 @@ onlyBuiltDependencies:
   - esbuild
   - lefthook
   - sharp
-
-patchedDependencies:
-  next@16.0.0: patches/next@16.0.0.patch
