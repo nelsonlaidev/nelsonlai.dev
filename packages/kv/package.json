@@ -25,7 +25,7 @@
     "consola": "3.4.2"
   },
   "devDependencies": {
-    "@nelsonlaidev/eslint-config": "2.3.0",
+    "@nelsonlaidev/eslint-config": "2.3.1",
     "@nelsonlaidev/typescript-config": "1.0.0",
     "@repo/env": "workspace:*"
   }

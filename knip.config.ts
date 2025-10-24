@@ -13,7 +13,10 @@ const config: KnipConfig = {
         'content-collections.ts',
         'src/i18n/request.ts',
         'src/tests/e2e/**/*.setup.ts',
-        'src/tests/e2e/**/*.teardown.ts'
+        'src/tests/e2e/**/*.teardown.ts',
+        // Knip currently is not up to date with Next.js 16
+        // middleware.ts is renamed to proxy.ts
+        'src/proxy.ts'
       ],
       ignoreDependencies: [
         // Used in spotify.route.ts
