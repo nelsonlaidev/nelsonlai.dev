@@ -1,0 +1,13 @@
+diff --git a/dist/server/config.js b/dist/server/config.js
+index 4de0466a5e03ec8cf92d97e84e0295b52a7fc041..fbc9355a51ac59180cd1e4cee72993f928b21f83 100644
+--- a/dist/server/config.js
++++ b/dist/server/config.js
+@@ -1413,6 +1413,8 @@ async function validateConfigSchema(userConfig, configFileName, warn, onValidati
+     // We only validate the config against schema in non minimal mode
+     const { configSchema } = require('./config-schema');
+     const state = configSchema.safeParse(userConfig);
++    console.log(userConfig);
++
+     if (!state.success) {
+         const [warnings, fatalErrors] = normalizeNextConfigZodErrors(state.error);
+         const hasFatalErrors = fatalErrors.length > 0;

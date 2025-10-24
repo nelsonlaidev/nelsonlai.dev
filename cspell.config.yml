@@ -8,6 +8,7 @@ files:
   - '!.git/**'
 ignorePaths:
   - pnpm-lock.yaml
+  - patches/**
 dictionaries:
   - npm
   - softwareTerms
