@@ -1,4 +1,5 @@
 const knownOrderRegex: RegExp[] = [
+  /^base$/,
   /^dark:$/,
   /^sm:$/,
   /^md:$/,

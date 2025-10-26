@@ -42,8 +42,8 @@ export const formatClasses = (sourceFile: SourceFile) => {
     if (tokens.length === 0) continue
 
     const grouped = groupClasses(tokens)
-    const groupedJoined = grouped.join(' ')
-    if (groupedJoined === raw.trim()) continue
+
+    if (grouped.length === 1) continue
 
     const groupedClasses = grouped.map((c) => `"${c}"`).join(', ')
     const newText = `{cn(${groupedClasses})}`
