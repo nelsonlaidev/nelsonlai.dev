@@ -11,10 +11,10 @@ import type { SourceFile } from 'ts-morph'
  *
  * @example
  * // Before:
- * // import { cva, type VariantProps } from 'class-variance-authority'
+ * import { cva, type VariantProps } from 'class-variance-authority'
  *
  * // After:
- * // import { cva, type VariantProps } from 'cva'
+ * import { cva, type VariantProps } from 'cva'
  */
 export const rewriteCvaImports = (sourceFile: SourceFile) => {
   for (const imp of sourceFile.getImportDeclarations()) {

@@ -24,15 +24,15 @@ import {
  *
  * @example
  * // Before:
- * // function Button({ className, children, ...props }: ButtonProps) {
- * //   return <button className={className} {...props}>{children}</button>
- * // }
+ * function Button({ className, children, ...props }: ButtonProps) {
+ *   return <button className={className} {...props}>{children}</button>
+ * }
  *
  * // After:
- * // function Button(props: ButtonProps) {
- * //   const { className, children, ...rest } = props
- * //   return <button className={className} {...rest}>{children}</button>
- * // }
+ * function Button(props: ButtonProps) {
+ *   const { className, children, ...rest } = props
+ *   return <button className={className} {...rest}>{children}</button>
+ * }
  */
 export const rewriteDestructuredParams = (sourceFile: SourceFile) => {
   const componentFunctions = getComponentFunctions(sourceFile)

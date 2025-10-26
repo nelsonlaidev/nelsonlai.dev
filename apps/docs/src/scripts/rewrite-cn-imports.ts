@@ -11,10 +11,10 @@ import type { SourceFile } from 'ts-morph'
  *
  * @example
  * // Before:
- * // import { cn } from '@/lib/utils'
+ * import { cn } from '@/lib/utils'
  *
  * // After:
- * // import { cn } from '@repo/ui/utils/cn'
+ * import { cn } from '@repo/ui/utils/cn'
  */
 export const rewriteCnImports = (sourceFile: SourceFile) => {
   for (const imp of sourceFile.getImportDeclarations()) {

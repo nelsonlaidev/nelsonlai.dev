@@ -11,17 +11,17 @@ import { Node, type SourceFile, SyntaxKind } from 'ts-morph'
  *
  * @example
  * // Before (old API):
- * // const buttonVariants = cva('base classes', {
- * //   variants: { ... },
- * //   defaultVariants: { ... }
- * // })
+ * const buttonVariants = cva('base classes', {
+ *   variants: { ... },
+ *   defaultVariants: { ... }
+ * })
  *
  * // After (beta API):
- * // const buttonVariants = cva({
- * //   base: 'base classes',
- * //   variants: { ... },
- * //   defaultVariants: { ... }
- * // })
+ * const buttonVariants = cva({
+ *   base: 'base classes',
+ *   variants: { ... },
+ *   defaultVariants: { ... }
+ * })
  */
 export const rewriteCvaArgs = (sourceFile: SourceFile) => {
   const cvaCalls = sourceFile.getDescendantsOfKind(SyntaxKind.CallExpression).filter((call) => {

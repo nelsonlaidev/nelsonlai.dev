@@ -11,14 +11,14 @@ import { type SourceFile, SyntaxKind } from 'ts-morph'
  *
  * @example
  * // Before:
- * // import * as React from 'react'
- * // const [state, setState] = React.useState(0)
- * // React.useEffect(() => {}, [])
+ * import * as React from 'react'
+ * const [state, setState] = React.useState(0)
+ * React.useEffect(() => {}, [])
  *
  * // After:
- * // import { useState, useEffect } from 'react'
- * // const [state, setState] = useState(0)
- * // useEffect(() => {}, [])
+ * import { useState, useEffect } from 'react'
+ * const [state, setState] = useState(0)
+ * useEffect(() => {}, [])
  */
 export const rewriteReactImports = (sourceFile: SourceFile) => {
   const used = new Set<string>()
