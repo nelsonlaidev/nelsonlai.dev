@@ -1,6 +1,5 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -14,11 +13,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar'
 import { Button } from '@repo/ui/components/button'
 import { Card } from '@repo/ui/components/card'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@repo/ui/components/form'
+import { Field, FieldError } from '@repo/ui/components/field'
 import { Input } from '@repo/ui/components/input'
+import { useForm } from '@tanstack/react-form'
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import * as z from 'zod'
 
@@ -102,23 +101,28 @@ const EditName = (props: EditNameProps) => {
     name: z.string().min(1, t('error.name-cannot-be-empty')).max(50, t('error.name-too-long'))
   })
 
-  const form = useForm<z.infer<typeof editNameFormSchema>>({
-    resolver: zodResolver(editNameFormSchema),
+  const form = useForm({
     defaultValues: {
       name
+    },
+    validators: {
+      onSubmit: editNameFormSchema
+    },
+    onSubmit: ({ value }) => {
+      if (isUpdating) return
+      updateUser({ name: value.name })
     }
   })
 
   const { mutate: updateUser, isPending: isUpdating } = useUpdateUser(() => {
-    form.reset({ name: form.getValues('name') })
     setOpen(false)
     toast.success(t('success.name-updated'))
     refetchSession()
   })
 
-  const onSubmit = (values: z.infer<typeof editNameFormSchema>) => {
-    if (isUpdating) return
-    updateUser({ name: values.name })
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    form.handleSubmit()
   }
 
   return (
@@ -127,31 +131,38 @@ const EditName = (props: EditNameProps) => {
         <Button variant='outline'>{t('account.edit-name')}</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
-        <Form {...form}>
-          <form className='space-y-6' onSubmit={form.handleSubmit(onSubmit)}>
-            <AlertDialogHeader>
-              <AlertDialogTitle>{t('account.edit-name')}</AlertDialogTitle>
-              <AlertDialogDescription>{t('account.edit-name-description')}</AlertDialogDescription>
-            </AlertDialogHeader>
-            <FormField
-              control={form.control}
-              name='name'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('account.display-name')}</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder={t('account.display-name')} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <AlertDialogFooter>
-              <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
-              <Button type='submit'>{t('common.save')}</Button>
-            </AlertDialogFooter>
-          </form>
-        </Form>
+        <form className='space-y-6' onSubmit={handleSubmit}>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('account.edit-name')}</AlertDialogTitle>
+            <AlertDialogDescription>{t('account.edit-name-description')}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <form.Field name='name'>
+            {(field) => {
+              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+
+              return (
+                <Field data-invalid={isInvalid}>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => {
+                      field.handleChange(e.target.value)
+                    }}
+                    aria-invalid={isInvalid}
+                    placeholder={t('account.display-name')}
+                  />
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                </Field>
+              )
+            }}
+          </form.Field>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
+            <Button type='submit'>{t('common.save')}</Button>
+          </AlertDialogFooter>
+        </form>
       </AlertDialogContent>
     </AlertDialog>
   )

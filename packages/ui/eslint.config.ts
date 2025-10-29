@@ -9,6 +9,10 @@ export default defineConfig({
     },
     sonarjs: {
       'sonarjs/table-header': 'off'
+    },
+    react: {
+      // They are OK in UI components
+      'jsx-a11y/prefer-tag-over-role': 'off'
     }
   }
 })
