@@ -2,11 +2,11 @@ import type { NextConfig } from 'next'
 
 import { withContentCollections } from '@content-collections/next'
 import bundleAnalyzer from '@next/bundle-analyzer'
-import { withPostHogConfig } from '@posthog/nextjs-config'
 import { env } from '@repo/env'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 import { IS_PRODUCTION } from '@/lib/constants'
+import { withPostHog } from '@/lib/posthog'
 
 const withNextIntl = createNextIntlPlugin()
 
@@ -135,14 +135,4 @@ const config: NextConfig = {
   }
 }
 
-export default withContentCollections(
-  withNextIntl(
-    withBundleAnalyzer(
-      withPostHogConfig(config, {
-        personalApiKey: env.POSTHOG_API_KEY!,
-        envId: env.POSTHOG_ENV_ID!,
-        host: env.NEXT_PUBLIC_POSTHOG_HOST
-      })
-    )
-  )
-)
+export default withContentCollections(withNextIntl(withBundleAnalyzer(withPostHog(config))))
