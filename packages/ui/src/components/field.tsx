@@ -2,8 +2,8 @@ import { cn } from '@repo/ui/utils/cn'
 import { cva, type VariantProps } from 'cva'
 import { useMemo } from 'react'
 
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
+import { Label } from './label'
+import { Separator } from './separator'
 
 type FieldSetProps = React.ComponentProps<'fieldset'>
 

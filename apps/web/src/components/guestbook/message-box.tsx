@@ -2,13 +2,12 @@
 
 import type { User } from '@/lib/auth-client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar'
 import { Button } from '@repo/ui/components/button'
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@repo/ui/components/form'
+import { Field, FieldError, FieldGroup } from '@repo/ui/components/field'
 import { Textarea } from '@repo/ui/components/textarea'
+import { useForm } from '@tanstack/react-form'
 import { useTranslations } from 'next-intl'
-import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import * as z from 'zod'
 
@@ -30,10 +29,16 @@ const MessageBox = (props: MessageBoxProps) => {
     message: z.string().min(1, t('error.message-cannot-be-empty'))
   })
 
-  const form = useForm<z.infer<typeof guestbookFormSchema>>({
-    resolver: zodResolver(guestbookFormSchema),
+  const form = useForm({
     defaultValues: {
       message: ''
+    },
+    validators: {
+      onSubmit: guestbookFormSchema
+    },
+    onSubmit: ({ value }) => {
+      if (isCreating) return
+      createMessage({ message: value.message })
     }
   })
 
@@ -42,9 +47,9 @@ const MessageBox = (props: MessageBoxProps) => {
     toast.success(t('success.message-created'))
   })
 
-  const onSubmit = (values: z.infer<typeof guestbookFormSchema>) => {
-    if (isCreating) return
-    createMessage({ message: values.message })
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    form.handleSubmit()
   }
 
   const defaultImage = getDefaultImage(user.id)
@@ -55,35 +60,41 @@ const MessageBox = (props: MessageBoxProps) => {
         <AvatarImage src={user.image ?? defaultImage} alt={user.name} />
         <AvatarFallback>{getAbbreviation(user.name)}</AvatarFallback>
       </Avatar>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='w-full'>
-          <FormField
-            control={form.control}
-            name='message'
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Textarea placeholder={t('guestbook.placeholder')} data-testid='guestbook-textarea' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className='mt-4 flex justify-end gap-2'>
-            <Button variant='outline' onClick={signOut}>
-              {t('common.sign-out')}
-            </Button>
-            <Button
-              type='submit'
-              disabled={isCreating}
-              aria-disabled={isCreating}
-              data-testid='guestbook-submit-button'
-            >
-              {t('guestbook.submit')}
-            </Button>
-          </div>
-        </form>
-      </Form>
+      <form onSubmit={handleSubmit} className='w-full'>
+        <FieldGroup>
+          <form.Field name='message'>
+            {(field) => {
+              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+
+              return (
+                <Field data-invalid={isInvalid}>
+                  <Textarea
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => {
+                      field.handleChange(e.target.value)
+                    }}
+                    aria-invalid={isInvalid}
+                    placeholder={t('guestbook.placeholder')}
+                    data-testid='guestbook-textarea'
+                  />
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                </Field>
+              )
+            }}
+          </form.Field>
+        </FieldGroup>
+        <div className='mt-4 flex justify-end gap-2'>
+          <Button variant='outline' onClick={signOut}>
+            {t('common.sign-out')}
+          </Button>
+          <Button type='submit' disabled={isCreating} aria-disabled={isCreating} data-testid='guestbook-submit-button'>
+            {t('guestbook.submit')}
+          </Button>
+        </div>
+      </form>
     </div>
   )
 }
