@@ -5,7 +5,7 @@ import { i18nMiddleware } from '@repo/i18n/middleware'
 
 const IS_PREVIEW = env.VERCEL_ENV === 'preview'
 
-const middleware = (request: NextRequest) => {
+export const proxy = (request: NextRequest) => {
   const csp = `
     default-src 'none';
     script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.nelsonlai.dev https://*.posthog.com https://va.vercel-scripts.com ${IS_PREVIEW ? 'https://vercel.live' : ''};
@@ -47,5 +47,3 @@ export const config = {
     '/((?!api|rpc|_next/static|_next/image|_vercel|_ph|favicon|android-chrome|apple-touch-icon|fonts|images|videos|favicon.ico|sitemap.xml|robots.txt|site.webmanifest).*)'
   ]
 }
-
-export default middleware

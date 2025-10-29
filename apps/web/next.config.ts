@@ -44,9 +44,6 @@ if (env.CLOUDFLARE_R2_PUBLIC_URL) {
 const config: NextConfig = {
   productionBrowserSourceMaps: true,
 
-  eslint: {
-    ignoreDuringBuilds: !!process.env.CI
-  },
   typescript: {
     ignoreBuildErrors: !!process.env.CI
   },
@@ -138,4 +135,4 @@ const config: NextConfig = {
   }
 }
 
-export default withPostHog(withContentCollections(withNextIntl(withBundleAnalyzer(config))))
+export default withContentCollections(withNextIntl(withBundleAnalyzer(withPostHog(config))))

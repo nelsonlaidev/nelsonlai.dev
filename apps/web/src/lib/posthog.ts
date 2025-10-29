@@ -21,7 +21,7 @@ export const getPostHogServer = () => {
 }
 
 export const withPostHog = (nextConfig: NextConfig): NextConfig => {
-  if (!env.POSTHOG_API_KEY || !env.POSTHOG_ENV_ID || !env.NEXT_PUBLIC_POSTHOG_KEY) {
+  if (!env.POSTHOG_API_KEY || !env.POSTHOG_ENV_ID || !env.NEXT_PUBLIC_POSTHOG_HOST) {
     return nextConfig
   }
 
