@@ -135,9 +135,4 @@ const config: NextConfig = {
   }
 }
 
-console.log(withPostHog(config))
-console.log(withBundleAnalyzer(withPostHog(config)))
-console.log(withNextIntl(withBundleAnalyzer(withPostHog(config))))
-console.log(withContentCollections(withNextIntl(withBundleAnalyzer(withPostHog(config)))))
-
 export default withContentCollections(withNextIntl(withBundleAnalyzer(withPostHog(config))))
