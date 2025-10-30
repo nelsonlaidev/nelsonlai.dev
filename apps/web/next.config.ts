@@ -135,4 +135,4 @@ const config: NextConfig = {
   }
 }
 
-export default withContentCollections(withNextIntl(withBundleAnalyzer(withPostHog(config))))
+export default withContentCollections(withPostHog(withNextIntl(withBundleAnalyzer(config))))
