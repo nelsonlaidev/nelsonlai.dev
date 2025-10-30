@@ -32,6 +32,7 @@ words:
   - cleanshot
   - cmdk
   - cobe
+  - colm
   - customizer
   - dbaeumer
   - delba
@@ -74,8 +75,8 @@ words:
   - orbstack
   - orpc
   - paralleldrive
-  - peduarte
   - pathnames
+  - peduarte
   - planetscale
   - plpgsql
   - posthog
@@ -96,6 +97,7 @@ words:
   - theodorusclarence
   - timebombs
   - tsvector
+  - tuite
   - turbopack
   - turborepo
   - umami

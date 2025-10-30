@@ -171,7 +171,7 @@ const Sidebar = (props: SidebarProps) => {
           data-sidebar='sidebar'
           data-slot='sidebar'
           data-mobile='true'
-          className='w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden'
+          className={cn('w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground', '[&>button]:hidden')}
           style={
             {
               '--sidebar-width': SIDEBAR_WIDTH_MOBILE
@@ -191,7 +191,7 @@ const Sidebar = (props: SidebarProps) => {
 
   return (
     <div
-      className='group peer hidden text-sidebar-foreground md:block'
+      className={cn('group peer hidden text-sidebar-foreground', 'md:block')}
       data-state={state}
       data-collapsible={state === 'collapsed' ? collapsible : ''}
       data-variant={variant}
