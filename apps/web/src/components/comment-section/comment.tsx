@@ -90,7 +90,7 @@ const Comment = (props: CommentProps) => {
           <div className='flex-1 overflow-hidden'>
             <div className='ml-0.5 flex h-8 items-center justify-between'>
               <div className='flex items-center gap-2 text-sm'>
-                <div className='font-semibold'>{name}</div>
+                <div className='max-w-35 truncate font-semibold sm:max-w-none'>{name}</div>
                 <div className='text-muted-foreground'>
                   {formattedDate ? (
                     <Tooltip>
