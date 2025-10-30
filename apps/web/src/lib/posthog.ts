@@ -1,6 +1,3 @@
-import type { NextConfig } from 'next'
-
-import { withPostHogConfig } from '@posthog/nextjs-config'
 import { env } from '@repo/env'
 import { PostHog } from 'posthog-node'
 
@@ -18,16 +15,4 @@ export const getPostHogServer = () => {
   })
 
   return posthogInstance
-}
-
-export const withPostHog = (nextConfig: NextConfig): NextConfig => {
-  if (!env.POSTHOG_API_KEY || !env.POSTHOG_ENV_ID || !env.NEXT_PUBLIC_POSTHOG_HOST) {
-    return nextConfig
-  }
-
-  return withPostHogConfig(nextConfig, {
-    personalApiKey: env.POSTHOG_API_KEY,
-    envId: env.POSTHOG_ENV_ID,
-    host: env.NEXT_PUBLIC_POSTHOG_HOST
-  })
 }
