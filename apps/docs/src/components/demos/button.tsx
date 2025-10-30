@@ -1,6 +1,5 @@
+import { Button } from '@repo/ui/components/button'
 import { ArrowUpIcon } from 'lucide-react'
-
-import { Button } from '../ui/button'
 
 const ButtonDemo = () => {
   return (

@@ -1,6 +1,5 @@
 import { useMDXComponent } from '@content-collections/mdx/react'
 import { CodeBlock } from '@repo/ui/components/code-block'
-import { Kbd } from '@repo/ui/components/kbd'
 import { Link } from '@repo/ui/components/link'
 
 import BlurImage from '@/components/blur-image'
@@ -54,8 +53,7 @@ const components = {
   Video,
   LinkCard,
   Logo,
-  TreeView,
-  Kbd
+  TreeView
 }
 
 const Mdx = (props: MdxProps) => {

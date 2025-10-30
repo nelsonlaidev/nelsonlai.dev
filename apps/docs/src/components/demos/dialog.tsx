@@ -1,4 +1,4 @@
-import { Button } from '../ui/button'
+import { Button } from '@repo/ui/components/button'
 import {
   Dialog,
   DialogClose,
@@ -8,9 +8,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger
-} from '../ui/dialog'
-import { Input } from '../ui/input'
-import { Label } from '../ui/label'
+} from '@repo/ui/components/dialog'
+import { Input } from '@repo/ui/components/input'
+import { Label } from '@repo/ui/components/label'
 
 const DialogDemo = () => {
   return (

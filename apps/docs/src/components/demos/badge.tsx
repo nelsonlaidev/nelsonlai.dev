@@ -1,6 +1,5 @@
+import { Badge } from '@repo/ui/components/badge'
 import { BadgeCheckIcon } from 'lucide-react'
-
-import { Badge } from '../ui/badge'
 
 const BadgeDemo = () => {
   return (

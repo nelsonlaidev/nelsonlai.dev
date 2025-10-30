@@ -1,4 +1,4 @@
-import { Button } from '../ui/button'
+import { Button } from '@repo/ui/components/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +12,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger
-} from '../ui/dropdown-menu'
+} from '@repo/ui/components/dropdown-menu'
 
 const DropdownMenuDemo = () => {
   return (

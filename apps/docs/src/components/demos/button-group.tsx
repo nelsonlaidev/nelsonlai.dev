@@ -1,20 +1,7 @@
 'use client'
 
-import {
-  ArchiveIcon,
-  ArrowLeftIcon,
-  CalendarPlusIcon,
-  ClockIcon,
-  ListFilterPlusIcon,
-  MailCheckIcon,
-  MoreHorizontalIcon,
-  TagIcon,
-  Trash2Icon
-} from 'lucide-react'
-import { useState } from 'react'
-
-import { Button } from '../ui/button'
-import { ButtonGroup } from '../ui/button-group'
+import { Button } from '@repo/ui/components/button'
+import { ButtonGroup } from '@repo/ui/components/button-group'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,7 +14,19 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger
-} from '../ui/dropdown-menu'
+} from '@repo/ui/components/dropdown-menu'
+import {
+  ArchiveIcon,
+  ArrowLeftIcon,
+  CalendarPlusIcon,
+  ClockIcon,
+  ListFilterPlusIcon,
+  MailCheckIcon,
+  MoreHorizontalIcon,
+  TagIcon,
+  Trash2Icon
+} from 'lucide-react'
+import { useState } from 'react'
 
 const ButtonGroupDemo = () => {
   const [label, setLabel] = useState('personal')

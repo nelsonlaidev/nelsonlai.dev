@@ -1,5 +1,5 @@
-import { Item, ItemContent, ItemMedia, ItemTitle } from '../ui/item'
-import { Spinner } from '../ui/spinner'
+import { Item, ItemContent, ItemMedia, ItemTitle } from '@repo/ui/components/item'
+import { Spinner } from '@repo/ui/components/spinner'
 
 const SpinnerDemo = () => {
   return (

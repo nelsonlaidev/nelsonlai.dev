@@ -1,4 +1,4 @@
-import { Skeleton } from '../ui/skeleton'
+import { Skeleton } from '@repo/ui/components/skeleton'
 
 const SkeletonDemo = () => {
   return (

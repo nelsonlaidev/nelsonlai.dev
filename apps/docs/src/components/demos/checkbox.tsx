@@ -1,5 +1,5 @@
-import { Checkbox } from '../ui/checkbox'
-import { Label } from '../ui/label'
+import { Checkbox } from '@repo/ui/components/checkbox'
+import { Label } from '@repo/ui/components/label'
 
 const CheckboxDemo = () => {
   return (

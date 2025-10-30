@@ -1,6 +1,5 @@
+import { Toggle } from '@repo/ui/components/toggle'
 import { BoldIcon } from 'lucide-react'
-
-import { Toggle } from '../ui/toggle'
 
 const ToggleDemo = () => {
   return (

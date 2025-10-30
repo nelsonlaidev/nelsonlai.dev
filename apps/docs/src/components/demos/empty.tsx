@@ -1,7 +1,6 @@
+import { Button } from '@repo/ui/components/button'
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@repo/ui/components/empty'
 import { FolderIcon } from 'lucide-react'
-
-import { Button } from '../ui/button'
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '../ui/empty'
 
 const EmptyDemo = () => {
   return (
