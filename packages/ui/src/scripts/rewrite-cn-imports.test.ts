@@ -6,13 +6,13 @@ import { rewriteCnImports } from './rewrite-cn-imports'
 
 describe('rewriteCnImports', () => {
   describe('cn imports from @/lib/utils', () => {
-    it('rewrites cn import to monorepo package', async () => {
+    it('rewrites cn import to relative path', async () => {
       await expectTransformedEqual(
         `
         import { cn } from '@/lib/utils'
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
         `,
         rewriteCnImports
       )
@@ -24,7 +24,7 @@ describe('rewriteCnImports', () => {
         import { cn, otherUtil } from '@/lib/utils'
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
         `,
         rewriteCnImports
       )
@@ -37,8 +37,8 @@ describe('rewriteCnImports', () => {
         import { cn as cnUtil } from '@/lib/utils'
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
+        import { cn } from '../utils/cn'
         `,
         rewriteCnImports
       )
@@ -79,7 +79,7 @@ describe('rewriteCnImports', () => {
         `,
         `
         import React from 'react'
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
         import { Button } from './button'
         `,
         rewriteCnImports

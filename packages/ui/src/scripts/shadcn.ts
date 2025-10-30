@@ -24,7 +24,7 @@ const main = async () => {
     manipulationSettings: { quoteKind: QuoteKind.Single }
   })
 
-  project.addSourceFilesAtPaths(['src/components/ui/**/*.{ts,tsx}'])
+  project.addSourceFilesAtPaths(['src/components/**/*.{ts,tsx}'])
 
   for (const sourceFile of project.getSourceFiles()) {
     rewriteRadixImports(sourceFile)
@@ -47,8 +47,8 @@ const main = async () => {
 
   consola.log('Transformed shadcn-ui components.')
 
-  await execa('pnpm', ['prettier', '--write', 'src/components/ui/**/*.{ts,tsx}'], { stdio: 'inherit' })
-  await execa('pnpm', ['eslint', '--fix', 'src/components/ui/**/*.{ts,tsx}'], { stdio: 'inherit' })
+  await execa('pnpm', ['prettier', '--write', 'src/components/**/*.{ts,tsx}'], { stdio: 'inherit' })
+  await execa('pnpm', ['eslint', '--fix', 'src/components/**/*.{ts,tsx}'], { stdio: 'inherit' })
 }
 
 await main()
