@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -8,8 +6,14 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator
-} from '../ui/breadcrumb'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu'
+} from '@repo/ui/components/breadcrumb'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from '@repo/ui/components/dropdown-menu'
+import Link from 'next/link'
 
 const BreadcrumbDemo = () => {
   return (

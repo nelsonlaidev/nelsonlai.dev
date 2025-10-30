@@ -1,9 +1,17 @@
-import { Button } from '../ui/button'
-import { Checkbox } from '../ui/checkbox'
-import { Field, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet } from '../ui/field'
-import { Input } from '../ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
-import { Textarea } from '../ui/textarea'
+import { Button } from '@repo/ui/components/button'
+import { Checkbox } from '@repo/ui/components/checkbox'
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet
+} from '@repo/ui/components/field'
+import { Input } from '@repo/ui/components/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/components/select'
+import { Textarea } from '@repo/ui/components/textarea'
 
 const FieldDemo = () => {
   return (

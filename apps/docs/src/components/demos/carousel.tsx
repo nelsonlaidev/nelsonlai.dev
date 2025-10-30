@@ -1,5 +1,5 @@
-import { Card, CardContent } from '../ui/card'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel'
+import { Card, CardContent } from '@repo/ui/components/card'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@repo/ui/components/carousel'
 
 const CarouselDemo = () => {
   return (

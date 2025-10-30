@@ -1,6 +1,9 @@
-import { ArrowUpIcon, CheckIcon, InfoIcon, PlusIcon, SearchIcon } from 'lucide-react'
-
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from '@repo/ui/components/dropdown-menu'
 import {
   InputGroup,
   InputGroupAddon,
@@ -8,9 +11,10 @@ import {
   InputGroupInput,
   InputGroupText,
   InputGroupTextarea
-} from '../ui/input-group'
-import { Separator } from '../ui/separator'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
+} from '@repo/ui/components/input-group'
+import { Separator } from '@repo/ui/components/separator'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@repo/ui/components/tooltip'
+import { ArrowUpIcon, CheckIcon, InfoIcon, PlusIcon, SearchIcon } from 'lucide-react'
 
 const InputGroupDemo = () => {
   return (

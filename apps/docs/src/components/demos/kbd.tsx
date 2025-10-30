@@ -1,4 +1,4 @@
-import { Kbd, KbdGroup } from '../ui/kbd'
+import { Kbd, KbdGroup } from '@repo/ui/components/kbd'
 
 const KbdDemo = () => {
   return (

@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { Button } from '../ui/button'
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
+import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar'
+import { Button } from '@repo/ui/components/button'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@repo/ui/components/hover-card'
 
 const HoverCardDemo = () => {
   return (

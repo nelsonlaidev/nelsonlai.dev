@@ -6,7 +6,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious
-} from '../ui/pagination'
+} from '@repo/ui/components/pagination'
 
 const PaginationDemo = () => {
   return (

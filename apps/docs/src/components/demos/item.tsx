@@ -1,7 +1,6 @@
+import { Button } from '@repo/ui/components/button'
+import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '@repo/ui/components/item'
 import { BadgeCheckIcon, ChevronRightIcon } from 'lucide-react'
-
-import { Button } from '../ui/button'
-import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '../ui/item'
 
 const ItemDemo = () => {
   return (

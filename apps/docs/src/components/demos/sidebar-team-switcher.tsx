@@ -1,8 +1,5 @@
 'use client'
 
-import { AudioWaveformIcon, ChevronsUpDownIcon, CommandIcon, GalleryVerticalEndIcon, PlusIcon } from 'lucide-react'
-import { useState } from 'react'
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +8,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger
-} from '../ui/dropdown-menu'
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '../ui/sidebar'
+} from '@repo/ui/components/dropdown-menu'
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@repo/ui/components/sidebar'
+import { AudioWaveformIcon, ChevronsUpDownIcon, CommandIcon, GalleryVerticalEndIcon, PlusIcon } from 'lucide-react'
+import { useState } from 'react'
 
 type Team = {
   name: string

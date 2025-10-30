@@ -1,11 +1,10 @@
 'use client'
 
+import { Button } from '@repo/ui/components/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/components/tabs'
 import { CodeBlock } from 'fumadocs-ui/components/codeblock'
 import { RotateCcwIcon } from 'lucide-react'
 import { useState } from 'react'
-
-import { Button } from './ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
 
 type ComponentPreviewTabs = {
   preview: React.ReactNode

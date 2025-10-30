@@ -1,4 +1,4 @@
-import { NativeSelect, NativeSelectOption } from '../ui/native-select'
+import { NativeSelect, NativeSelectOption } from '@repo/ui/components/native-select'
 
 const NativeSelectDemo = () => {
   return (

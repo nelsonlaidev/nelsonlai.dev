@@ -1,6 +1,7 @@
-import { cn } from '@repo/ui/utils/cn'
 import { cva, type VariantProps } from 'cva'
 import { useMemo } from 'react'
+
+import { cn } from '../utils/cn'
 
 import { Label } from './label'
 import { Separator } from './separator'

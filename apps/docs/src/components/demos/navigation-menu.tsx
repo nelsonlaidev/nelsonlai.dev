@@ -1,10 +1,5 @@
 'use client'
 
-import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from 'lucide-react'
-import Link from 'next/link'
-
-import { useIsMobile } from '@/hooks/use-is-mobile'
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -13,7 +8,11 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle
-} from '../ui/navigation-menu'
+} from '@repo/ui/components/navigation-menu'
+import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from 'lucide-react'
+import Link from 'next/link'
+
+import { useIsMobile } from '@/hooks/use-is-mobile'
 
 type Component = {
   title: string

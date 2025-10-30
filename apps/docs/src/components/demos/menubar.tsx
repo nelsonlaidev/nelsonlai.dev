@@ -12,7 +12,7 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger
-} from '../ui/menubar'
+} from '@repo/ui/components/menubar'
 
 const MenubarDemo = () => {
   return (

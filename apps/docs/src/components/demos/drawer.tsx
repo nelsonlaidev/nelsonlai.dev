@@ -1,10 +1,6 @@
 'use client'
 
-import { MinusIcon, PlusIcon } from 'lucide-react'
-import { useState } from 'react'
-import { Bar, BarChart, ResponsiveContainer } from 'recharts'
-
-import { Button } from '../ui/button'
+import { Button } from '@repo/ui/components/button'
 import {
   Drawer,
   DrawerClose,
@@ -14,7 +10,10 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger
-} from '../ui/drawer'
+} from '@repo/ui/components/drawer'
+import { MinusIcon, PlusIcon } from 'lucide-react'
+import { useState } from 'react'
+import { Bar, BarChart, ResponsiveContainer } from 'recharts'
 
 const data = [
   { goal: 400 },

@@ -1,6 +1,5 @@
+import { Alert, AlertDescription, AlertTitle } from '@repo/ui/components/alert'
 import { AlertCircleIcon, CheckCircle2Icon, PopcornIcon } from 'lucide-react'
-
-import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
 
 const AlertDemo = () => {
   return (
