@@ -2,11 +2,11 @@ import type { NextConfig } from 'next'
 
 import { withContentCollections } from '@content-collections/next'
 import bundleAnalyzer from '@next/bundle-analyzer'
-import { withPostHogConfig } from '@posthog/nextjs-config'
 import { env } from '@repo/env'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 import { IS_PRODUCTION } from '@/lib/constants'
+import { withPostHog } from '@/lib/posthog'
 
 const withNextIntl = createNextIntlPlugin()
 
@@ -41,7 +41,7 @@ if (env.CLOUDFLARE_R2_PUBLIC_URL) {
   })
 }
 
-let config: NextConfig = {
+const config: NextConfig = {
   productionBrowserSourceMaps: true,
 
   typescript: {
@@ -135,12 +135,4 @@ let config: NextConfig = {
   }
 }
 
-if (env.POSTHOG_API_KEY && env.POSTHOG_ENV_ID && env.NEXT_PUBLIC_POSTHOG_HOST) {
-  config = withPostHogConfig(config, {
-    personalApiKey: env.POSTHOG_API_KEY,
-    envId: env.POSTHOG_ENV_ID,
-    host: env.NEXT_PUBLIC_POSTHOG_HOST
-  })
-}
-
-export default withContentCollections(withNextIntl(withBundleAnalyzer(config)))
+export default withPostHog(withContentCollections(withNextIntl(withBundleAnalyzer(config))))
