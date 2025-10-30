@@ -21,7 +21,7 @@ const config: KnipConfig = {
       ]
     },
     'apps/docs': {
-      entry: ['source.config.ts', 'src/scripts/*.ts', 'src/components/demos/*.tsx']
+      entry: ['source.config.ts', 'src/components/demos/*.tsx']
     },
     'packages/db': {
       entry: ['src/reset.ts', 'src/seed.ts']
@@ -35,6 +35,9 @@ const config: KnipConfig = {
         'react-dom'
       ],
       ignore: ['src/styles.css']
+    },
+    'packages/ui': {
+      entry: ['src/scripts/shadcn.ts']
     }
   },
   // Credit to https://github.com/webpro-nl/knip/issues/1008#issuecomment-2756559038
