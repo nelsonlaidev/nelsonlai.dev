@@ -81,7 +81,7 @@ const CopyButton = (props: CopyButtonProps) => {
         onCopy()
         setIsCopied(true)
       }}
-      className={cn('size-7.5 opacity-0 transition-opacity group-hover:opacity-100', className)}
+      className={cn('size-7.5 opacity-0 transition-opacity', 'group-hover:opacity-100', className)}
       aria-label='Copy code to clipboard'
       {...rest}
     >

@@ -43,10 +43,10 @@ const SegmentGroupItem = (props: SegmentGroupItemProps) => {
       className={cn(
         'cursor-pointer font-medium text-muted-foreground transition-colors',
         'hover:text-accent-foreground',
-        'data-[state=checked]:text-foreground',
+        'data-disabled:cursor-not-allowed data-disabled:text-muted-foreground data-disabled:opacity-50',
         'data-[orientation=horizontal]:px-1 data-[orientation=horizontal]:pb-3',
         'data-[orientation=vertical]:px-3 data-[orientation=vertical]:py-1.5',
-        'data-disabled:cursor-not-allowed data-disabled:text-muted-foreground data-disabled:opacity-50',
+        'data-[state=checked]:text-foreground',
         className
       )}
       {...rest}

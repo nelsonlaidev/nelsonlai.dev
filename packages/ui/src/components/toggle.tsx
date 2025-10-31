@@ -11,8 +11,8 @@ const toggleVariants = cva({
     'dark:aria-invalid:ring-destructive/40',
     'hover:bg-muted hover:text-muted-foreground',
     'focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50',
-    'aria-invalid:border-destructive aria-invalid:ring-destructive/20',
     'disabled:pointer-events-none disabled:opacity-50',
+    'aria-invalid:border-destructive aria-invalid:ring-destructive/20',
     'data-[state=on]:bg-accent data-[state=on]:text-accent-foreground',
     '[&_svg]:pointer-events-none [&_svg]:shrink-0',
     "[&_svg:not([class*='size-'])]:size-4"

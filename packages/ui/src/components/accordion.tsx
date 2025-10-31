@@ -64,8 +64,8 @@ const AccordionContent = (props: AccordionContentProps) => {
       data-slot='accordion-content'
       className={cn(
         'overflow-hidden px-6 text-sm',
-        'data-[state=open]:animate-accordion-down',
-        'data-[state=closed]:animate-accordion-up'
+        'data-[state=closed]:animate-accordion-up',
+        'data-[state=open]:animate-accordion-down'
       )}
       {...rest}
     >

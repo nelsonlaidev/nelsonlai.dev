@@ -34,7 +34,7 @@ const FieldLegend = (props: FieldLegendProps) => {
     <legend
       data-slot='field-legend'
       data-variant={variant}
-      className={cn('mb-3 font-medium', 'data-[variant=legend]:text-base', 'data-[variant=label]:text-sm', className)}
+      className={cn('mb-3 font-medium', 'data-[variant=label]:text-sm', 'data-[variant=legend]:text-base', className)}
       {...rest}
     />
   )
@@ -50,8 +50,8 @@ const FieldGroup = (props: FieldGroupProps) => {
       data-slot='field-group'
       className={cn(
         'group/field-group @container/field-group flex w-full flex-col gap-7',
-        '[&>[data-slot=field-group]]:gap-4',
         'data-[slot=checkbox-group]:gap-3',
+        '[&>[data-slot=field-group]]:gap-4',
         className
       )}
       {...rest}
@@ -121,11 +121,11 @@ const FieldLabel = (props: FieldLabelProps) => {
       data-slot='field-label'
       className={cn(
         'group/field-label peer/field-label flex w-fit gap-2 leading-snug',
+        'dark:has-data-[state=checked]:bg-primary/10',
+        'has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border',
+        'has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/5',
         'group-data-[disabled=true]/field:opacity-50',
         '[&>*]:data-[slot=field]:p-4',
-        'has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border',
-        'dark:has-data-[state=checked]:bg-primary/10',
-        'has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/5',
         className
       )}
       {...rest}
