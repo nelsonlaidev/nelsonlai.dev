@@ -48,7 +48,7 @@ describe('formatCvaClasses', () => {
         `
         import { cva } from 'cva'
 
-        const buttonVariants = cva({ base: ['p-4 bg-white', 'data-[state=open]:bg-accent', 'data-[state=closed]:opacity-0'] })
+        const buttonVariants = cva({ base: ['p-4 bg-white', 'data-[state=closed]:opacity-0', 'data-[state=open]:bg-accent'] })
         `,
         formatCvaClasses
       )
@@ -680,8 +680,8 @@ describe('formatCvaClasses', () => {
         const cardVariants = cva({
           base: [
             'rounded-lg border bg-card text-card-foreground shadow-sm',
-            'data-[state=open]:animate-in',
-            'data-[state=closed]:animate-out'
+            'data-[state=closed]:animate-out',
+            'data-[state=open]:animate-in'
           ]
         })
         `,

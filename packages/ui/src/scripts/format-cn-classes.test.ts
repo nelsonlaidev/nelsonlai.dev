@@ -59,7 +59,7 @@ describe('formatCnClasses', () => {
         import { cn } from '@repo/ui/utils/cn'
 
         const Component = () => {
-          return <div className={cn('p-4 bg-white', 'data-[state=open]:bg-accent', 'data-[state=closed]:opacity-0')} />
+          return <div className={cn('p-4 bg-white', 'data-[state=closed]:opacity-0', 'data-[state=open]:bg-accent')} />
         }
         `,
         formatCnClasses

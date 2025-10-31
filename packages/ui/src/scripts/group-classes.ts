@@ -137,7 +137,19 @@ const getVariantChain = (className: string): string => {
   return match ? match[1]! : 'base'
 }
 
-export const groupClasses = (classes: string[]): string[] => {
+const sortWildcardVariants = (keys: string[]): string[] => {
+  // Separate built-in (no brackets) from arbitrary (with brackets)
+  const builtIn = keys.filter((key) => !key.includes('['))
+  const arbitrary = keys.filter((key) => key.includes('['))
+
+  // Sort each group alphabetically using localeCompare
+  builtIn.sort((a, b) => a.localeCompare(b))
+  arbitrary.sort((a, b) => a.localeCompare(b))
+
+  return [...builtIn, ...arbitrary]
+}
+
+const buildClassGroups = (classes: string[]) => {
   const groups = new Map<string, string[]>()
   const order: string[] = []
 
@@ -150,23 +162,72 @@ export const groupClasses = (classes: string[]): string[] => {
     groups.get(variantChain)!.push(cls)
   }
 
-  const result: string[] = []
-  const matchedKeys = new Set<string>()
+  return { groups, order }
+}
 
-  for (const pattern of knownOrderRegex) {
-    for (const key of order) {
-      if (!matchedKeys.has(key) && pattern.test(key)) {
-        result.push(groups.get(key)!.join(' '))
-        matchedKeys.add(key)
-      }
+const processWildcardPattern = (
+  pattern: RegExp,
+  order: string[],
+  groups: Map<string, string[]>,
+  matchedKeys: Set<string>,
+  result: string[]
+) => {
+  const matchingKeys = order.filter((key) => !matchedKeys.has(key) && pattern.test(key))
+
+  if (matchingKeys.length === 0) return
+
+  const sortedKeys = sortWildcardVariants(matchingKeys)
+
+  for (const key of sortedKeys) {
+    result.push(groups.get(key)!.join(' '))
+    matchedKeys.add(key)
+  }
+}
+
+const processExactPattern = (
+  pattern: RegExp,
+  order: string[],
+  groups: Map<string, string[]>,
+  matchedKeys: Set<string>,
+  result: string[]
+) => {
+  for (const key of order) {
+    if (!matchedKeys.has(key) && pattern.test(key)) {
+      result.push(groups.get(key)!.join(' '))
+      matchedKeys.add(key)
     }
   }
+}
 
+const addUnmatchedKeys = (
+  order: string[],
+  groups: Map<string, string[]>,
+  matchedKeys: Set<string>,
+  result: string[]
+) => {
   for (const key of order) {
     if (!matchedKeys.has(key)) {
       result.push(groups.get(key)!.join(' '))
     }
   }
+}
+
+export const groupClasses = (classes: string[]): string[] => {
+  const { groups, order } = buildClassGroups(classes)
+  const result: string[] = []
+  const matchedKeys = new Set<string>()
+
+  for (const pattern of knownOrderRegex) {
+    const isWildcardPattern = pattern.source.endsWith('-')
+
+    if (isWildcardPattern) {
+      processWildcardPattern(pattern, order, groups, matchedKeys, result)
+    } else {
+      processExactPattern(pattern, order, groups, matchedKeys, result)
+    }
+  }
+
+  addUnmatchedKeys(order, groups, matchedKeys, result)
 
   return result
 }
