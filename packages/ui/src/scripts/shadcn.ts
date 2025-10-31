@@ -18,7 +18,6 @@ import { rewriteSlotUses } from './rewrite-slot-uses'
 import { separateTypeDefs } from './separate-type-defs'
 
 const main = async () => {
-  // Get CLI arguments (paths after the script name)
   const cliPaths = process.argv.slice(2)
   const paths = cliPaths.length > 0 ? cliPaths : ['src/components/**/*.{ts,tsx}']
 
@@ -51,7 +50,6 @@ const main = async () => {
 
   consola.log('Transformed shadcn-ui components.')
 
-  // Use the same paths for prettier and eslint
   await execa('pnpm', ['prettier', '--write', ...paths], { stdio: 'inherit' })
   await execa('pnpm', ['eslint', '--fix', ...paths], { stdio: 'inherit' })
 }
