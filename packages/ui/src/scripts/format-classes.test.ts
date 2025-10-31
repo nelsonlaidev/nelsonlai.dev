@@ -447,7 +447,7 @@ describe('formatClasses', () => {
         `,
         `
         const Component = () => {
-          return <div className={cn('peer-disabled:opacity-50', 'group-hover:opacity-100')} />
+          return <div className={cn('group-hover:opacity-100', 'peer-disabled:opacity-50')} />
         }
         `,
         formatClasses

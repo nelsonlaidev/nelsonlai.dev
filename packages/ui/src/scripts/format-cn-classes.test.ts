@@ -500,9 +500,9 @@ describe('formatCnClasses', () => {
             <div
               className={cn(
                 'opacity-50',
-                'peer-disabled:opacity-25',
+                'group-hover:opacity-100',
                 'group-data-[disabled=true]:cursor-not-allowed',
-                'group-hover:opacity-100'
+                'peer-disabled:opacity-25'
               )}
             />
           )

@@ -534,9 +534,9 @@ describe('formatCvaClasses', () => {
         const buttonVariants = cva({
           base: [
             'opacity-50',
-            'peer-disabled:opacity-25',
+            'group-hover:opacity-100',
             'group-data-[disabled=true]:cursor-not-allowed',
-            'group-hover:opacity-100'
+            'peer-disabled:opacity-25'
           ]
         })
         `,
@@ -596,10 +596,10 @@ describe('formatCvaClasses', () => {
           base: [
             'bg-white',
             'hover:bg-gray-100',
-            'active:bg-gray-200',
             'focus:ring-2',
-            'aria-disabled:cursor-not-allowed',
-            'disabled:opacity-50'
+            'active:bg-gray-200',
+            'disabled:opacity-50',
+            'aria-disabled:cursor-not-allowed'
           ]
         })
         `,
