@@ -418,7 +418,7 @@ describe('formatCvaClasses', () => {
         `
         import { cva } from 'cva'
 
-        const buttonVariants = cva({ base: ['flex', 'items-center'] })
+        const buttonVariants = cva({ base: ['flex items-center'] })
         `,
         formatCvaClasses
       )

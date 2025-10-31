@@ -30,19 +30,51 @@ import { groupClasses } from './group-classes'
  * // After (still converted to array):
  * cva({ base: ["flex items-center gap-4"] })
  */
+
+const extractTokensFromString = (node: Node): string[] => {
+  if (!Node.isStringLiteral(node) && !Node.isNoSubstitutionTemplateLiteral(node)) return []
+  const raw = node.getLiteralText()
+  return raw.trim().split(/\s+/).filter(Boolean)
+}
+
+const extractTokensFromArray = (node: Node): string[] => {
+  if (!Node.isArrayLiteralExpression(node)) return []
+
+  const allTokens: string[] = []
+  const elements = node.getElements()
+
+  for (const element of elements) {
+    const tokens = extractTokensFromString(element)
+    allTokens.push(...tokens)
+  }
+
+  return allTokens
+}
+
+const extractAllTokens = (initializer: Node): string[] => {
+  const stringTokens = extractTokensFromString(initializer)
+  if (stringTokens.length > 0) return stringTokens
+
+  return extractTokensFromArray(initializer)
+}
+
+const isCvaCall = (call: Node) => {
+  if (!Node.isCallExpression(call)) return false
+
+  const expr = call.getExpression()
+  if (!Node.isIdentifier(expr) || expr.getText() !== 'cva') return false
+
+  const symbol = expr.getSymbol()
+  const declaration = symbol?.getDeclarations()[0]
+  if (!declaration || !Node.isImportSpecifier(declaration)) return false
+
+  const importDeclaration = declaration.getFirstAncestorByKind(SyntaxKind.ImportDeclaration)
+  const importFrom = importDeclaration?.getModuleSpecifierValue()
+  return importFrom === 'cva'
+}
+
 export const formatCvaClasses = (sourceFile: SourceFile) => {
-  const cvaCalls = sourceFile.getDescendantsOfKind(SyntaxKind.CallExpression).filter((call) => {
-    const expr = call.getExpression()
-    if (!Node.isIdentifier(expr) || expr.getText() !== 'cva') return false
-
-    const symbol = expr.getSymbol()
-    const declaration = symbol?.getDeclarations()[0]
-    if (!declaration || !Node.isImportSpecifier(declaration)) return false
-
-    const importDeclaration = declaration.getFirstAncestorByKind(SyntaxKind.ImportDeclaration)
-    const importFrom = importDeclaration?.getModuleSpecifierValue()
-    return importFrom === 'cva'
-  })
+  const cvaCalls = sourceFile.getDescendantsOfKind(SyntaxKind.CallExpression).filter((element) => isCvaCall(element))
 
   for (const call of cvaCalls) {
     const args = call.getArguments()
@@ -57,13 +89,10 @@ export const formatCvaClasses = (sourceFile: SourceFile) => {
     const initializer = baseProp.getInitializer()
     if (!initializer) continue
 
-    if (!Node.isStringLiteral(initializer) && !Node.isNoSubstitutionTemplateLiteral(initializer)) continue
+    const allTokens = extractAllTokens(initializer)
+    if (allTokens.length === 0) continue
 
-    const raw = initializer.getLiteralText()
-    const tokens = raw.trim().split(/\s+/).filter(Boolean)
-    if (tokens.length === 0) continue
-
-    const groupedClasses = groupClasses(tokens)
+    const groupedClasses = groupClasses(allTokens)
       .map((c) => `"${c}"`)
       .join(', ')
 

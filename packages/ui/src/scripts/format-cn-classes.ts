@@ -47,18 +47,29 @@ export const formatCnClasses = (sourceFile: SourceFile) => {
   for (const call of cnCalls) {
     const args = call.getArguments()
 
+    const allTokens: string[] = []
+    const nonStringArgs: string[] = []
+
     for (const arg of args) {
-      if (!Node.isStringLiteral(arg) && !Node.isNoSubstitutionTemplateLiteral(arg)) continue
-
-      const raw = arg.getLiteralText()
-      const tokens = raw.trim().split(/\s+/).filter(Boolean)
-      if (tokens.length === 0) continue
-
-      const groupedClasses = groupClasses(tokens)
-        .map((c) => `"${c}"`)
-        .join(', ')
-
-      arg.replaceWithText(groupedClasses)
+      if (Node.isStringLiteral(arg) || Node.isNoSubstitutionTemplateLiteral(arg)) {
+        const raw = arg.getLiteralText()
+        const tokens = raw.trim().split(/\s+/).filter(Boolean)
+        allTokens.push(...tokens)
+      } else {
+        nonStringArgs.push(arg.getText())
+      }
     }
+
+    if (allTokens.length === 0) continue
+
+    const groupedClasses = groupClasses(allTokens).map((c) => `"${c}"`)
+
+    const newArgs = [...groupedClasses, ...nonStringArgs]
+
+    const argsToRemove = call.getArguments()
+    for (let i = argsToRemove.length - 1; i >= 0; i--) {
+      call.removeArgument(i)
+    }
+    call.addArguments(newArgs)
   }
 }
