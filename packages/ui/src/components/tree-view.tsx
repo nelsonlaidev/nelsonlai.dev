@@ -42,7 +42,12 @@ const TreeViewNode = (props: TreeViewNodeProps) => {
     <TreeViewPrimitive.NodeProvider data-slot='tree-view-node' key={node.id} node={node} indexPath={indexPath}>
       {node.children ? (
         <TreeViewPrimitive.Branch>
-          <TreeViewPrimitive.BranchControl className='flex items-center justify-between rounded-sm px-2 py-1.5 pl-[calc(var(--depth)*8px)] text-sm hover:bg-accent hover:text-accent-foreground'>
+          <TreeViewPrimitive.BranchControl
+            className={cn(
+              'flex items-center justify-between rounded-sm px-2 py-1.5 pl-[calc(var(--depth)*8px)] text-sm',
+              'hover:bg-accent hover:text-accent-foreground'
+            )}
+          >
             <TreeViewPrimitive.BranchText className='flex items-center gap-2'>
               <FolderIcon className='size-4' /> {node.name}
             </TreeViewPrimitive.BranchText>
@@ -50,7 +55,13 @@ const TreeViewNode = (props: TreeViewNodeProps) => {
               <ChevronRightIcon className='size-4 transition-transform duration-200' />
             </TreeViewPrimitive.BranchIndicator>
           </TreeViewPrimitive.BranchControl>
-          <TreeViewPrimitive.BranchContent className='overflow-hidden data-[state=closed]:animate-tree-view-content-up data-[state=open]:animate-tree-view-content-down'>
+          <TreeViewPrimitive.BranchContent
+            className={cn(
+              'overflow-hidden',
+              'data-[state=closed]:animate-tree-view-content-up',
+              'data-[state=open]:animate-tree-view-content-down'
+            )}
+          >
             <TreeViewPrimitive.BranchIndentGuide />
             {node.children.map((child, index) => (
               <TreeViewNode key={child.id} node={child} indexPath={[...indexPath, index]} />
@@ -58,7 +69,13 @@ const TreeViewNode = (props: TreeViewNodeProps) => {
           </TreeViewPrimitive.BranchContent>
         </TreeViewPrimitive.Branch>
       ) : (
-        <TreeViewPrimitive.Item className='relative rounded-sm px-2 py-1.5 pl-[calc(var(--depth)*8px)] text-sm hover:bg-accent hover:text-accent-foreground data-selected:bg-accent'>
+        <TreeViewPrimitive.Item
+          className={cn(
+            'relative rounded-sm px-2 py-1.5 pl-[calc(var(--depth)*8px)] text-sm',
+            'hover:bg-accent hover:text-accent-foreground',
+            'data-selected:bg-accent'
+          )}
+        >
           <TreeViewPrimitive.ItemText className='flex items-center gap-2'>
             <FileIcon className='size-4' />
             {node.name}

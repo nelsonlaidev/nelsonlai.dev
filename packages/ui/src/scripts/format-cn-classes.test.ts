@@ -9,14 +9,14 @@ describe('formatCnClasses', () => {
     it('groups mixed variant chains in cn() call', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('border-b hover:border-blue-500 last:border-b-0')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('border-b', 'hover:border-blue-500', 'last:border-b-0')} />
@@ -29,14 +29,14 @@ describe('formatCnClasses', () => {
     it('groups base classes together and separates variants', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center gap-4 hover:bg-red-500 focus:ring-2')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center gap-4', 'hover:bg-red-500', 'focus:ring-2')} />
@@ -49,17 +49,17 @@ describe('formatCnClasses', () => {
     it('groups data attributes separately', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('p-4 bg-white data-[state=open]:bg-accent data-[state=closed]:opacity-0')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
-          return <div className={cn('p-4 bg-white', 'data-[state=open]:bg-accent', 'data-[state=closed]:opacity-0')} />
+          return <div className={cn('p-4 bg-white', 'data-[state=closed]:opacity-0', 'data-[state=open]:bg-accent')} />
         }
         `,
         formatCnClasses
@@ -69,14 +69,14 @@ describe('formatCnClasses', () => {
     it('groups responsive modifiers separately', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('text-sm md:text-base lg:text-lg')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('text-sm', 'md:text-base', 'lg:text-lg')} />
@@ -89,14 +89,14 @@ describe('formatCnClasses', () => {
     it('groups dark mode modifiers separately', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('bg-white text-black dark:bg-black dark:text-white')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('bg-white text-black', 'dark:bg-black dark:text-white')} />
@@ -109,7 +109,7 @@ describe('formatCnClasses', () => {
     it('handles multiple cn() calls in same file', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return (
@@ -121,7 +121,7 @@ describe('formatCnClasses', () => {
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return (
@@ -141,14 +141,14 @@ describe('formatCnClasses', () => {
     it('processes each string argument separately', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center', 'hover:bg-accent focus:ring-2')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center', 'hover:bg-accent', 'focus:ring-2')} />
@@ -161,14 +161,14 @@ describe('formatCnClasses', () => {
     it('processes string arguments while preserving non-string arguments', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center hover:bg-accent', isActive && 'active')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center', 'hover:bg-accent', isActive && 'active')} />
@@ -181,14 +181,14 @@ describe('formatCnClasses', () => {
     it('handles template literals in cn()', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn(\`flex items-center hover:bg-accent\`)} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center', 'hover:bg-accent')} />
@@ -199,7 +199,7 @@ describe('formatCnClasses', () => {
     })
   })
 
-  describe('only processes cn from @repo/ui/utils/cn', () => {
+  describe('only processes cn from ../utils/cn', () => {
     it('ignores cn() from other imports', async () => {
       await expectTransformedEqual(
         `
@@ -239,7 +239,7 @@ describe('formatCnClasses', () => {
     it('processes only cn from correct import when multiple cn imports exist', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
         import { cn as otherCn } from 'other-library'
 
         const Component = () => {
@@ -252,7 +252,7 @@ describe('formatCnClasses', () => {
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
         import { cn as otherCn } from 'other-library'
 
         const Component = () => {
@@ -273,14 +273,14 @@ describe('formatCnClasses', () => {
     it('handles empty string in cn()', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('')} />
@@ -293,14 +293,14 @@ describe('formatCnClasses', () => {
     it('handles whitespace-only string in cn()', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('   ')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('   ')} />
@@ -313,14 +313,14 @@ describe('formatCnClasses', () => {
     it('handles extra whitespace between classes', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('border-b  last:border-b-0')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('border-b', 'last:border-b-0')} />
@@ -343,14 +343,14 @@ describe('formatCnClasses', () => {
     it('handles file without cn() calls', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className='flex items-center' />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className='flex items-center' />
@@ -363,7 +363,7 @@ describe('formatCnClasses', () => {
     it('handles nested cn() calls', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return (
@@ -376,7 +376,7 @@ describe('formatCnClasses', () => {
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return (
@@ -395,14 +395,14 @@ describe('formatCnClasses', () => {
     it('handles cn() with only base classes', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center gap-4')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center gap-4')} />
@@ -415,14 +415,14 @@ describe('formatCnClasses', () => {
     it('handles cn() with single class', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('container')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('container')} />
@@ -437,14 +437,14 @@ describe('formatCnClasses', () => {
     it('handles multiple variant chains with multiple classes each', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('p-4 bg-white hover:bg-accent hover:text-white focus:ring-2 focus:ring-blue-500 data-[state=open]:opacity-100 data-[state=open]:scale-100')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return (
@@ -466,14 +466,14 @@ describe('formatCnClasses', () => {
     it('handles arbitrary values with modifiers', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('w-[200px] h-[100px] hover:w-[250px] hover:h-[150px]')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('w-[200px] h-[100px]', 'hover:w-[250px] hover:h-[150px]')} />
@@ -486,23 +486,23 @@ describe('formatCnClasses', () => {
     it('handles group and peer modifiers', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('opacity-50 group-hover:opacity-100 peer-disabled:opacity-25 group-data-[disabled=true]:cursor-not-allowed')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return (
             <div
               className={cn(
                 'opacity-50',
-                'peer-disabled:opacity-25',
+                'group-hover:opacity-100',
                 'group-data-[disabled=true]:cursor-not-allowed',
-                'group-hover:opacity-100'
+                'peer-disabled:opacity-25'
               )}
             />
           )
@@ -515,14 +515,14 @@ describe('formatCnClasses', () => {
     it('handles complex selector modifiers', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('text-base [&>svg]:size-4 [&>svg]:shrink-0 [&_svg]:pointer-events-none')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('text-base', '[&>svg]:size-4 [&>svg]:shrink-0', '[&_svg]:pointer-events-none')} />
@@ -535,14 +535,14 @@ describe('formatCnClasses', () => {
     it('handles first and last pseudo-classes', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('border-b first:border-t last:border-b-0')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('border-b', 'first:border-t', 'last:border-b-0')} />
@@ -557,14 +557,14 @@ describe('formatCnClasses', () => {
     it('preserves conditional expressions', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center', isActive && 'bg-accent', isDisabled && 'opacity-50')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center', isActive && 'bg-accent', isDisabled && 'opacity-50')} />
@@ -577,14 +577,14 @@ describe('formatCnClasses', () => {
     it('preserves ternary expressions', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center', isActive ? 'bg-accent' : 'bg-muted')} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center', isActive ? 'bg-accent' : 'bg-muted')} />
@@ -597,14 +597,14 @@ describe('formatCnClasses', () => {
     it('preserves variable references', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center', customClasses)} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center', customClasses)} />
@@ -617,14 +617,14 @@ describe('formatCnClasses', () => {
     it('preserves object expressions', async () => {
       await expectTransformedEqual(
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center', { 'bg-accent': isActive })} />
         }
         `,
         `
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
 
         const Component = () => {
           return <div className={cn('flex items-center', { 'bg-accent': isActive })} />

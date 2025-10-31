@@ -5,7 +5,7 @@ import { groupClasses } from './group-classes'
 /**
  * Formats classes inside existing `cn()` calls by grouping them by variant chains.
  *
- * This function finds all `cn()` function calls that are imported from `@repo/ui/utils/cn`,
+ * This function finds all `cn()` function calls that are imported from `@/utils/cn`,
  * and processes any string literal or template literal arguments by:
  * 1. Splitting the class string into individual tokens
  * 2. Grouping classes by their variant chains (e.g., base classes, `hover:`, `last:`, `data-[state]:`)
@@ -41,24 +41,35 @@ export const formatCnClasses = (sourceFile: SourceFile) => {
 
     const importDeclaration = declaration.getFirstAncestorByKind(SyntaxKind.ImportDeclaration)
     const importFrom = importDeclaration?.getModuleSpecifierValue()
-    return importFrom === '@repo/ui/utils/cn'
+    return importFrom?.endsWith('/utils/cn')
   })
 
   for (const call of cnCalls) {
     const args = call.getArguments()
 
+    const allTokens: string[] = []
+    const nonStringArgs: string[] = []
+
     for (const arg of args) {
-      if (!Node.isStringLiteral(arg) && !Node.isNoSubstitutionTemplateLiteral(arg)) continue
-
-      const raw = arg.getLiteralText()
-      const tokens = raw.trim().split(/\s+/).filter(Boolean)
-      if (tokens.length === 0) continue
-
-      const groupedClasses = groupClasses(tokens)
-        .map((c) => `"${c}"`)
-        .join(', ')
-
-      arg.replaceWithText(groupedClasses)
+      if (Node.isStringLiteral(arg) || Node.isNoSubstitutionTemplateLiteral(arg)) {
+        const raw = arg.getLiteralText()
+        const tokens = raw.trim().split(/\s+/).filter(Boolean)
+        allTokens.push(...tokens)
+      } else {
+        nonStringArgs.push(arg.getText())
+      }
     }
+
+    if (allTokens.length === 0) continue
+
+    const groupedClasses = groupClasses(allTokens).map((c) => `"${c}"`)
+
+    const newArgs = [...groupedClasses, ...nonStringArgs]
+
+    const argsToRemove = call.getArguments()
+    for (let i = argsToRemove.length - 1; i >= 0; i--) {
+      call.removeArgument(i)
+    }
+    call.addArguments(newArgs)
   }
 }

@@ -18,13 +18,16 @@ import { rewriteSlotUses } from './rewrite-slot-uses'
 import { separateTypeDefs } from './separate-type-defs'
 
 const main = async () => {
+  const cliPaths = process.argv.slice(2)
+  const paths = cliPaths.length > 0 ? cliPaths : ['src/components/**/*.{ts,tsx}']
+
   const project = new Project({
     tsConfigFilePath: 'tsconfig.json',
     skipAddingFilesFromTsConfig: true,
     manipulationSettings: { quoteKind: QuoteKind.Single }
   })
 
-  project.addSourceFilesAtPaths(['src/components/**/*.{ts,tsx}'])
+  project.addSourceFilesAtPaths(paths)
 
   for (const sourceFile of project.getSourceFiles()) {
     rewriteRadixImports(sourceFile)
@@ -47,8 +50,8 @@ const main = async () => {
 
   consola.log('Transformed shadcn-ui components.')
 
-  await execa('pnpm', ['prettier', '--write', 'src/components/**/*.{ts,tsx}'], { stdio: 'inherit' })
-  await execa('pnpm', ['eslint', '--fix', 'src/components/**/*.{ts,tsx}'], { stdio: 'inherit' })
+  await execa('pnpm', ['prettier', '--write', ...paths], { stdio: 'inherit' })
+  await execa('pnpm', ['eslint', '--fix', ...paths], { stdio: 'inherit' })
 }
 
 await main()

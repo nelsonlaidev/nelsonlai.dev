@@ -411,8 +411,8 @@ describe('formatClasses', () => {
                 'p-4',
                 'hover:bg-accent',
                 'focus:ring-2',
-                'data-[state=open]:opacity-100',
-                'data-[state=closed]:opacity-0'
+                'data-[state=closed]:opacity-0',
+                'data-[state=open]:opacity-100'
               )}
             />
           )
@@ -447,7 +447,7 @@ describe('formatClasses', () => {
         `,
         `
         const Component = () => {
-          return <div className={cn('peer-disabled:opacity-50', 'group-hover:opacity-100')} />
+          return <div className={cn('group-hover:opacity-100', 'peer-disabled:opacity-50')} />
         }
         `,
         formatClasses

@@ -18,7 +18,7 @@ const BreadcrumbList = (props: BreadcrumbListProps) => {
     <ol
       data-slot='breadcrumb-list'
       className={cn(
-        'flex flex-wrap items-center gap-1.5 text-sm break-words text-muted-foreground',
+        'flex flex-wrap items-center gap-1.5 text-sm wrap-break-word text-muted-foreground',
         'sm:gap-2.5',
         className
       )}

@@ -48,7 +48,7 @@ describe('formatCvaClasses', () => {
         `
         import { cva } from 'cva'
 
-        const buttonVariants = cva({ base: ['p-4 bg-white', 'data-[state=open]:bg-accent', 'data-[state=closed]:opacity-0'] })
+        const buttonVariants = cva({ base: ['p-4 bg-white', 'data-[state=closed]:opacity-0', 'data-[state=open]:bg-accent'] })
         `,
         formatCvaClasses
       )
@@ -418,7 +418,7 @@ describe('formatCvaClasses', () => {
         `
         import { cva } from 'cva'
 
-        const buttonVariants = cva({ base: ['flex', 'items-center'] })
+        const buttonVariants = cva({ base: ['flex items-center'] })
         `,
         formatCvaClasses
       )
@@ -534,9 +534,9 @@ describe('formatCvaClasses', () => {
         const buttonVariants = cva({
           base: [
             'opacity-50',
-            'peer-disabled:opacity-25',
+            'group-hover:opacity-100',
             'group-data-[disabled=true]:cursor-not-allowed',
-            'group-hover:opacity-100'
+            'peer-disabled:opacity-25'
           ]
         })
         `,
@@ -596,10 +596,10 @@ describe('formatCvaClasses', () => {
           base: [
             'bg-white',
             'hover:bg-gray-100',
-            'active:bg-gray-200',
             'focus:ring-2',
-            'aria-disabled:cursor-not-allowed',
-            'disabled:opacity-50'
+            'active:bg-gray-200',
+            'disabled:opacity-50',
+            'aria-disabled:cursor-not-allowed'
           ]
         })
         `,
@@ -680,8 +680,8 @@ describe('formatCvaClasses', () => {
         const cardVariants = cva({
           base: [
             'rounded-lg border bg-card text-card-foreground shadow-sm',
-            'data-[state=open]:animate-in',
-            'data-[state=closed]:animate-out'
+            'data-[state=closed]:animate-out',
+            'data-[state=open]:animate-in'
           ]
         })
         `,

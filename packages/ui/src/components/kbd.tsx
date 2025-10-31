@@ -10,9 +10,9 @@ const Kbd = (props: KbdProps) => {
       data-slot='kbd'
       className={cn(
         'pointer-events-none inline-flex h-5 w-fit min-w-5 items-center justify-center gap-1 rounded-sm bg-muted px-1 font-sans text-xs font-medium text-muted-foreground select-none',
+        'dark:in-data-[slot=tooltip-content]:bg-background/10',
+        'in-data-[slot=tooltip-content]:bg-background/20 in-data-[slot=tooltip-content]:text-background',
         "[&_svg:not([class*='size-'])]:size-3",
-        'dark:[[data-slot=tooltip-content]_&]:bg-background/10',
-        '[[data-slot=tooltip-content]_&]:bg-background/20 [[data-slot=tooltip-content]_&]:text-background',
         className
       )}
       {...rest}

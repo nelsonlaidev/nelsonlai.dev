@@ -3,503 +3,484 @@ import { describe, expect, it } from 'vitest'
 import { groupClasses } from './group-classes'
 
 describe('groupClasses', () => {
-  describe('groups base classes together', () => {
-    it('keeps base classes in one group', () => {
-      const result = groupClasses(['flex', 'items-center', 'gap-4'])
-      expect(result).toEqual(['flex items-center gap-4'])
-    })
+  it('orders all regex patterns correctly', () => {
+    const result = groupClasses([
+      'starting:m-0',
+      'open:m-0',
+      'ltr:m-0',
+      'rtl:m-0',
+      'data-[side=top]:m-0',
+      'aria-[sort=ascending]:m-0',
+      'aria-selected:m-0',
+      'aria-required:m-0',
+      'aria-readonly:m-0',
+      'aria-pressed:m-0',
+      'aria-hidden:m-0',
+      'aria-expanded:m-0',
+      'aria-disabled:m-0',
+      'aria-checked:m-0',
+      'aria-busy:m-0',
+      'not-supports-[display:grid]:m-0',
+      'supports-[display:grid]:m-0',
+      'print:m-0',
+      'noscript:m-0',
+      'landscape:m-0',
+      'portrait:m-0',
+      'any-pointer-none:m-0',
+      'any-pointer-coarse:m-0',
+      'any-pointer-fine:m-0',
+      'pointer-none:m-0',
+      'pointer-coarse:m-0',
+      'pointer-fine:m-0',
+      'inverted-colors:m-0',
+      'forced-colors:m-0',
+      'contrast-less:m-0',
+      'contrast-more:m-0',
+      'motion-reduce:m-0',
+      'motion-safe:m-0',
+      '@max-[96rem]:m-0',
+      '@max-7xl:m-0',
+      '@max-6xl:m-0',
+      '@max-5xl:m-0',
+      '@max-4xl:m-0',
+      '@max-3xl:m-0',
+      '@max-2xl:m-0',
+      '@max-xl:m-0',
+      '@max-lg:m-0',
+      '@max-md:m-0',
+      '@max-sm:m-0',
+      '@max-xs:m-0',
+      '@max-2xs:m-0',
+      '@max-3xs:m-0',
+      '@min-[96rem]:m-0',
+      '@7xl:m-0',
+      '@6xl:m-0',
+      '@5xl:m-0',
+      '@4xl:m-0',
+      '@3xl:m-0',
+      '@2xl:m-0',
+      '@xl:m-0',
+      '@lg:m-0',
+      '@md:m-0',
+      '@sm:m-0',
+      '@xs:m-0',
+      '@2xs:m-0',
+      '@3xs:m-0',
+      'max-[120rem]:m-0',
+      'max-2xl:m-0',
+      'max-xl:m-0',
+      'max-lg:m-0',
+      'max-md:m-0',
+      'max-sm:m-0',
+      'min-[120rem]:m-0',
+      '2xl:m-0',
+      'xl:m-0',
+      'lg:m-0',
+      'md:m-0',
+      'sm:m-0',
+      'placeholder:m-0',
+      'backdrop:m-0',
+      'file:m-0',
+      'selection:m-0',
+      'marker:m-0',
+      'first-line:m-0',
+      'first-letter:m-0',
+      'after:m-0',
+      'before:m-0',
+      'read-only:m-0',
+      'autofill:m-0',
+      'details-content:m-0',
+      'placeholder-shown:m-0',
+      'out-of-range:m-0',
+      'in-range:m-0',
+      'user-invalid:m-0',
+      'user-valid:m-0',
+      'invalid:m-0',
+      'valid:m-0',
+      'required:m-0',
+      'optional:m-0',
+      'default:m-0',
+      'indeterminate:m-0',
+      'checked:m-0',
+      'enabled:m-0',
+      'disabled:m-0',
+      'empty:m-0',
+      'nth-last-of-type-2:m-0',
+      'nth-of-type-2:m-0',
+      'nth-last-2:m-0',
+      'nth-2:m-0',
+      'only-of-type:m-0',
+      'last-of-type:m-0',
+      'first-of-type:m-0',
+      'even:m-0',
+      'odd:m-0',
+      'only:m-0',
+      'last:m-0',
+      'first:m-0',
+      'inert:m-0',
+      'not-focus:m-0',
+      'in-focus:m-0',
+      'peer-invalid:m-0',
+      'group-hover:m-0',
+      'has-checked:m-0',
+      '**:m-0',
+      '*:m-0',
+      'target:m-0',
+      'visited:m-0',
+      'active:m-0',
+      'focus-visible:m-0',
+      'focus-within:m-0',
+      'focus:m-0',
+      'hover:m-0',
+      'dark:m-0',
+      'bg-white text-black',
 
-    it('separates base from variants', () => {
-      const result = groupClasses(['flex', 'items-center', 'hover:bg-accent'])
-      expect(result).toEqual(['flex items-center', 'hover:bg-accent'])
-    })
+      // Same as above but unsorted to test grouping
+      'starting:p-0',
+      'open:p-0',
+      'ltr:p-0',
+      'rtl:p-0',
+      'data-[side=top]:p-0',
+      'aria-[sort=ascending]:p-0',
+      'aria-selected:p-0',
+      'aria-required:p-0',
+      'aria-readonly:p-0',
+      'aria-pressed:p-0',
+      'aria-hidden:p-0',
+      'aria-expanded:p-0',
+      'aria-disabled:p-0',
+      'aria-checked:p-0',
+      'aria-busy:p-0',
+      'not-supports-[display:grid]:p-0',
+      'supports-[display:grid]:p-0',
+      'print:p-0',
+      'noscript:p-0',
+      'landscape:p-0',
+      'portrait:p-0',
+      'any-pointer-none:p-0',
+      'any-pointer-coarse:p-0',
+      'any-pointer-fine:p-0',
+      'pointer-none:p-0',
+      'pointer-coarse:p-0',
+      'pointer-fine:p-0',
+      'inverted-colors:p-0',
+      'forced-colors:p-0',
+      'contrast-less:p-0',
+      'contrast-more:p-0',
+      'motion-reduce:p-0',
+      'motion-safe:p-0',
+      '@max-[96rem]:p-0',
+      '@max-7xl:p-0',
+      '@max-6xl:p-0',
+      '@max-5xl:p-0',
+      '@max-4xl:p-0',
+      '@max-3xl:p-0',
+      '@max-2xl:p-0',
+      '@max-xl:p-0',
+      '@max-lg:p-0',
+      '@max-md:p-0',
+      '@max-sm:p-0',
+      '@max-xs:p-0',
+      '@max-2xs:p-0',
+      '@max-3xs:p-0',
+      '@min-[96rem]:p-0',
+      '@7xl:p-0',
+      '@6xl:p-0',
+      '@5xl:p-0',
+      '@4xl:p-0',
+      '@3xl:p-0',
+      '@2xl:p-0',
+      '@xl:p-0',
+      '@lg:p-0',
+      '@md:p-0',
+      '@sm:p-0',
+      '@xs:p-0',
+      '@2xs:p-0',
+      '@3xs:p-0',
+      'max-[120rem]:p-0',
+      'max-2xl:p-0',
+      'max-xl:p-0',
+      'max-lg:p-0',
+      'max-md:p-0',
+      'max-sm:p-0',
+      'min-[120rem]:p-0',
+      '2xl:p-0',
+      'xl:p-0',
+      'lg:p-0',
+      'md:p-0',
+      'sm:p-0',
+      'placeholder:p-0',
+      'backdrop:p-0',
+      'file:p-0',
+      'selection:p-0',
+      'marker:p-0',
+      'first-line:p-0',
+      'first-letter:p-0',
+      'after:p-0',
+      'before:p-0',
+      'read-only:p-0',
+      'autofill:p-0',
+      'details-content:p-0',
+      'placeholder-shown:p-0',
+      'out-of-range:p-0',
+      'in-range:p-0',
+      'user-invalid:p-0',
+      'user-valid:p-0',
+      'invalid:p-0',
+      'valid:p-0',
+      'required:p-0',
+      'optional:p-0',
+      'default:p-0',
+      'indeterminate:p-0',
+      'checked:p-0',
+      'enabled:p-0',
+      'disabled:p-0',
+      'empty:p-0',
+      'nth-last-of-type-2:p-0',
+      'nth-of-type-2:p-0',
+      'nth-last-2:p-0',
+      'nth-2:p-0',
+      'only-of-type:p-0',
+      'last-of-type:p-0',
+      'first-of-type:p-0',
+      'even:p-0',
+      'odd:p-0',
+      'only:p-0',
+      'last:p-0',
+      'first:p-0',
+      'inert:p-0',
+      'not-focus:p-0',
+      'in-focus:p-0',
+      'peer-invalid:p-0',
+      'group-hover:p-0',
+      'has-checked:p-0',
+      '**:p-0',
+      '*:p-0',
+      'target:p-0',
+      'visited:p-0',
+      'active:p-0',
+      'focus-visible:p-0',
+      'focus-within:p-0',
+      'focus:p-0',
+      'hover:p-0',
+      'dark:p-0',
+      'flex block'
+    ])
+
+    expect(result).toEqual([
+      'bg-white text-black flex block',
+      'dark:m-0 dark:p-0',
+      'hover:m-0 hover:p-0',
+      'focus:m-0 focus:p-0',
+      'focus-within:m-0 focus-within:p-0',
+      'focus-visible:m-0 focus-visible:p-0',
+      'active:m-0 active:p-0',
+      'visited:m-0 visited:p-0',
+      'target:m-0 target:p-0',
+      '*:m-0 *:p-0',
+      '**:m-0 **:p-0',
+      'has-checked:m-0 has-checked:p-0',
+      'group-hover:m-0 group-hover:p-0',
+      'peer-invalid:m-0 peer-invalid:p-0',
+      'in-focus:m-0 in-focus:p-0',
+      'in-range:m-0 in-range:p-0',
+      'not-focus:m-0 not-focus:p-0',
+      'not-supports-[display:grid]:m-0 not-supports-[display:grid]:p-0',
+      'inert:m-0 inert:p-0',
+      'first:m-0 first:p-0',
+      'last:m-0 last:p-0',
+      'only:m-0 only:p-0',
+      'odd:m-0 odd:p-0',
+      'even:m-0 even:p-0',
+      'first-of-type:m-0 first-of-type:p-0',
+      'last-of-type:m-0 last-of-type:p-0',
+      'only-of-type:m-0 only-of-type:p-0',
+      'nth-2:m-0 nth-2:p-0',
+      'nth-last-2:m-0 nth-last-2:p-0',
+      'nth-last-of-type-2:m-0 nth-last-of-type-2:p-0',
+      'nth-of-type-2:m-0 nth-of-type-2:p-0',
+      'empty:m-0 empty:p-0',
+      'disabled:m-0 disabled:p-0',
+      'enabled:m-0 enabled:p-0',
+      'checked:m-0 checked:p-0',
+      'indeterminate:m-0 indeterminate:p-0',
+      'default:m-0 default:p-0',
+      'optional:m-0 optional:p-0',
+      'required:m-0 required:p-0',
+      'valid:m-0 valid:p-0',
+      'invalid:m-0 invalid:p-0',
+      'user-valid:m-0 user-valid:p-0',
+      'user-invalid:m-0 user-invalid:p-0',
+      'out-of-range:m-0 out-of-range:p-0',
+      'placeholder-shown:m-0 placeholder-shown:p-0',
+      'details-content:m-0 details-content:p-0',
+      'autofill:m-0 autofill:p-0',
+      'read-only:m-0 read-only:p-0',
+      'before:m-0 before:p-0',
+      'after:m-0 after:p-0',
+      'first-letter:m-0 first-letter:p-0',
+      'first-line:m-0 first-line:p-0',
+      'marker:m-0 marker:p-0',
+      'selection:m-0 selection:p-0',
+      'file:m-0 file:p-0',
+      'backdrop:m-0 backdrop:p-0',
+      'placeholder:m-0 placeholder:p-0',
+      'sm:m-0 sm:p-0',
+      'md:m-0 md:p-0',
+      'lg:m-0 lg:p-0',
+      'xl:m-0 xl:p-0',
+      '2xl:m-0 2xl:p-0',
+      'min-[120rem]:m-0 min-[120rem]:p-0',
+      'max-sm:m-0 max-sm:p-0',
+      'max-md:m-0 max-md:p-0',
+      'max-lg:m-0 max-lg:p-0',
+      'max-xl:m-0 max-xl:p-0',
+      'max-2xl:m-0 max-2xl:p-0',
+      'max-[120rem]:m-0 max-[120rem]:p-0',
+      '@3xs:m-0 @3xs:p-0',
+      '@2xs:m-0 @2xs:p-0',
+      '@xs:m-0 @xs:p-0',
+      '@sm:m-0 @sm:p-0',
+      '@md:m-0 @md:p-0',
+      '@lg:m-0 @lg:p-0',
+      '@xl:m-0 @xl:p-0',
+      '@2xl:m-0 @2xl:p-0',
+      '@3xl:m-0 @3xl:p-0',
+      '@4xl:m-0 @4xl:p-0',
+      '@5xl:m-0 @5xl:p-0',
+      '@6xl:m-0 @6xl:p-0',
+      '@7xl:m-0 @7xl:p-0',
+      '@min-[96rem]:m-0 @min-[96rem]:p-0',
+      '@max-3xs:m-0 @max-3xs:p-0',
+      '@max-2xs:m-0 @max-2xs:p-0',
+      '@max-xs:m-0 @max-xs:p-0',
+      '@max-sm:m-0 @max-sm:p-0',
+      '@max-md:m-0 @max-md:p-0',
+      '@max-lg:m-0 @max-lg:p-0',
+      '@max-xl:m-0 @max-xl:p-0',
+      '@max-2xl:m-0 @max-2xl:p-0',
+      '@max-3xl:m-0 @max-3xl:p-0',
+      '@max-4xl:m-0 @max-4xl:p-0',
+      '@max-5xl:m-0 @max-5xl:p-0',
+      '@max-6xl:m-0 @max-6xl:p-0',
+      '@max-7xl:m-0 @max-7xl:p-0',
+      '@max-[96rem]:m-0 @max-[96rem]:p-0',
+      'motion-safe:m-0 motion-safe:p-0',
+      'motion-reduce:m-0 motion-reduce:p-0',
+      'contrast-more:m-0 contrast-more:p-0',
+      'contrast-less:m-0 contrast-less:p-0',
+      'forced-colors:m-0 forced-colors:p-0',
+      'inverted-colors:m-0 inverted-colors:p-0',
+      'pointer-fine:m-0 pointer-fine:p-0',
+      'pointer-coarse:m-0 pointer-coarse:p-0',
+      'pointer-none:m-0 pointer-none:p-0',
+      'any-pointer-fine:m-0 any-pointer-fine:p-0',
+      'any-pointer-coarse:m-0 any-pointer-coarse:p-0',
+      'any-pointer-none:m-0 any-pointer-none:p-0',
+      'portrait:m-0 portrait:p-0',
+      'landscape:m-0 landscape:p-0',
+      'noscript:m-0 noscript:p-0',
+      'print:m-0 print:p-0',
+      'supports-[display:grid]:m-0 supports-[display:grid]:p-0',
+      'aria-busy:m-0 aria-busy:p-0',
+      'aria-checked:m-0 aria-checked:p-0',
+      'aria-disabled:m-0 aria-disabled:p-0',
+      'aria-expanded:m-0 aria-expanded:p-0',
+      'aria-hidden:m-0 aria-hidden:p-0',
+      'aria-pressed:m-0 aria-pressed:p-0',
+      'aria-readonly:m-0 aria-readonly:p-0',
+      'aria-required:m-0 aria-required:p-0',
+      'aria-selected:m-0 aria-selected:p-0',
+      'aria-[sort=ascending]:m-0 aria-[sort=ascending]:p-0',
+      'data-[side=top]:m-0 data-[side=top]:p-0',
+      'rtl:m-0 rtl:p-0',
+      'ltr:m-0 ltr:p-0',
+      'open:m-0 open:p-0',
+      'starting:m-0 starting:p-0'
+    ])
   })
 
-  describe('responsive modifiers', () => {
-    it('groups dark: modifier', () => {
-      const result = groupClasses(['bg-white', 'dark:bg-black'])
-      expect(result).toEqual(['bg-white', 'dark:bg-black'])
-    })
+  it('handles wildcard variants', () => {
+    const result = groupClasses([
+      'data-[state=inactive]:bg-gray-500',
+      'data-[state=active]:bg-blue-500',
+      'data-selected:bg-green-500',
+      'aria-[sort=descending]:bg-red-500',
+      'aria-[sort=ascending]:bg-yellow-500',
+      'aria-hidden:bg-red-500',
+      'not-supports-[display:grid]:bg-pink-500',
+      'not-supports-[display:flex]:bg-purple-500',
+      'not-supports-backdrop-filter:bg-black',
+      'supports-[display:grid]:bg-gray-100',
+      'supports-[display:flex]:bg-white',
+      'supports-backdrop-filter:bg-gray-200',
+      '@max-[960px]:p-4',
+      '@max-[475px]:p-2',
+      '@min-[960px]:p-6',
+      '@min-[475px]:p-3',
+      'max-[960px]:text-sm',
+      'max-[475px]:text-xs',
+      'min-[960px]:text-lg',
+      'min-[475px]:text-base',
+      'nth-last-of-type-3:bg-red-200',
+      'nth-last-of-type-2:bg-red-300',
+      'nth-of-type-3:bg-green-300',
+      'nth-of-type-2:bg-green-200',
+      'nth-last-3:bg-blue-200',
+      'nth-last-2:bg-blue-300',
+      'nth-3:bg-yellow-200',
+      'nth-2:bg-yellow-300',
+      'not-[svg]:opacity-100',
+      'not-focus:bg-gray-700',
+      'in-[svg]:opacity-50',
+      'in-focus:bg-gray-900',
+      'peer-[.is-dirty]:bg-red-500',
+      'peer-required:bg-green-500',
+      'group-[.is-published]:bg-blue-500',
+      'group-hover:bg-yellow-500',
+      'has-[svg]:bg-purple-500',
+      'has-checked:bg-pink-500'
+    ])
 
-    it('groups sm: modifier', () => {
-      const result = groupClasses(['text-sm', 'sm:text-base'])
-      expect(result).toEqual(['text-sm', 'sm:text-base'])
-    })
-
-    it('groups md: modifier', () => {
-      const result = groupClasses(['text-sm', 'md:text-base'])
-      expect(result).toEqual(['text-sm', 'md:text-base'])
-    })
-
-    it('groups lg: modifier', () => {
-      const result = groupClasses(['text-sm', 'lg:text-lg'])
-      expect(result).toEqual(['text-sm', 'lg:text-lg'])
-    })
-
-    it('groups xl: modifier', () => {
-      const result = groupClasses(['text-sm', 'xl:text-xl'])
-      expect(result).toEqual(['text-sm', 'xl:text-xl'])
-    })
-
-    it('groups 2xl: modifier', () => {
-      const result = groupClasses(['text-sm', '2xl:text-2xl'])
-      expect(result).toEqual(['text-sm', '2xl:text-2xl'])
-    })
-  })
-
-  describe('state modifiers', () => {
-    it('groups hover: modifier', () => {
-      const result = groupClasses(['bg-white', 'hover:bg-accent'])
-      expect(result).toEqual(['bg-white', 'hover:bg-accent'])
-    })
-
-    it('groups first: modifier', () => {
-      const result = groupClasses(['border-b', 'first:border-t'])
-      expect(result).toEqual(['border-b', 'first:border-t'])
-    })
-
-    it('groups last: modifier', () => {
-      const result = groupClasses(['border-b', 'last:border-b-0'])
-      expect(result).toEqual(['border-b', 'last:border-b-0'])
-    })
-
-    it('groups before: modifier', () => {
-      const result = groupClasses(['content-none', 'before:content-[""]'])
-      expect(result).toEqual(['content-none', 'before:content-[""]'])
-    })
-
-    it('groups after: modifier', () => {
-      const result = groupClasses(['content-none', 'after:content-[""]'])
-      expect(result).toEqual(['content-none', 'after:content-[""]'])
-    })
-
-    it('groups active: modifier', () => {
-      const result = groupClasses(['bg-white', 'active:bg-gray-200'])
-      expect(result).toEqual(['bg-white', 'active:bg-gray-200'])
-    })
-
-    it('groups file: modifier', () => {
-      const result = groupClasses(['border', 'file:border-0'])
-      expect(result).toEqual(['border', 'file:border-0'])
-    })
-
-    it('groups placeholder: modifier', () => {
-      const result = groupClasses(['text-black', 'placeholder:text-gray-400'])
-      expect(result).toEqual(['text-black', 'placeholder:text-gray-400'])
-    })
-
-    it('groups selection: modifier', () => {
-      const result = groupClasses(['text-black', 'selection:bg-blue-200'])
-      expect(result).toEqual(['text-black', 'selection:bg-blue-200'])
-    })
-
-    it('groups focus: modifier', () => {
-      const result = groupClasses(['ring-0', 'focus:ring-2'])
-      expect(result).toEqual(['ring-0', 'focus:ring-2'])
-    })
-
-    it('groups focus-visible: modifier', () => {
-      const result = groupClasses(['outline-none', 'focus-visible:ring-2'])
-      expect(result).toEqual(['outline-none', 'focus-visible:ring-2'])
-    })
-
-    it('groups focus-within: modifier', () => {
-      const result = groupClasses(['ring-0', 'focus-within:ring-2'])
-      expect(result).toEqual(['ring-0', 'focus-within:ring-2'])
-    })
-  })
-
-  describe('aria and disabled modifiers', () => {
-    it('groups aria-invalid: modifier', () => {
-      const result = groupClasses(['border', 'aria-invalid:border-red-500'])
-      expect(result).toEqual(['border', 'aria-invalid:border-red-500'])
-    })
-
-    it('groups aria-disabled: modifier', () => {
-      const result = groupClasses(['opacity-100', 'aria-disabled:opacity-50'])
-      expect(result).toEqual(['opacity-100', 'aria-disabled:opacity-50'])
-    })
-
-    it('groups disabled: modifier', () => {
-      const result = groupClasses(['opacity-100', 'disabled:opacity-50'])
-      expect(result).toEqual(['opacity-100', 'disabled:opacity-50'])
-    })
-
-    it('groups peer-disabled: modifier', () => {
-      const result = groupClasses(['opacity-100', 'peer-disabled:opacity-50'])
-      expect(result).toEqual(['opacity-100', 'peer-disabled:opacity-50'])
-    })
-  })
-
-  describe('data attribute modifiers', () => {
-    it('groups data-[disabled]: modifier', () => {
-      const result = groupClasses(['opacity-100', 'data-[disabled]:opacity-50'])
-      expect(result).toEqual(['opacity-100', 'data-[disabled]:opacity-50'])
-    })
-
-    it('groups data-[inset]: modifier', () => {
-      const result = groupClasses(['p-4', 'data-[inset]:p-0'])
-      expect(result).toEqual(['p-4', 'data-[inset]:p-0'])
-    })
-
-    it('groups data-[placeholder]: modifier', () => {
-      const result = groupClasses(['text-black', 'data-[placeholder]:text-gray-400'])
-      expect(result).toEqual(['text-black', 'data-[placeholder]:text-gray-400'])
-    })
-
-    it('groups data-[disabled=true]: modifier', () => {
-      const result = groupClasses(['opacity-100', 'data-[disabled=true]:opacity-50'])
-      expect(result).toEqual(['opacity-100', 'data-[disabled=true]:opacity-50'])
-    })
-
-    it('groups data-[selected=true]: modifier', () => {
-      const result = groupClasses(['bg-white', 'data-[selected=true]:bg-accent'])
-      expect(result).toEqual(['bg-white', 'data-[selected=true]:bg-accent'])
-    })
-
-    it('groups data-[active=true]: modifier', () => {
-      const result = groupClasses(['bg-white', 'data-[active=true]:bg-accent'])
-      expect(result).toEqual(['bg-white', 'data-[active=true]:bg-accent'])
-    })
-
-    it('groups data-[state=open]: modifier', () => {
-      const result = groupClasses(['opacity-0', 'data-[state=open]:opacity-100'])
-      expect(result).toEqual(['opacity-0', 'data-[state=open]:opacity-100'])
-    })
-
-    it('groups data-[state=closed]: modifier', () => {
-      const result = groupClasses(['opacity-100', 'data-[state=closed]:opacity-0'])
-      expect(result).toEqual(['opacity-100', 'data-[state=closed]:opacity-0'])
-    })
-
-    it('groups data-[state=checked]: modifier', () => {
-      const result = groupClasses(['bg-white', 'data-[state=checked]:bg-primary'])
-      expect(result).toEqual(['bg-white', 'data-[state=checked]:bg-primary'])
-    })
-
-    it('groups data-[state=unchecked]: modifier', () => {
-      const result = groupClasses(['bg-primary', 'data-[state=unchecked]:bg-white'])
-      expect(result).toEqual(['bg-primary', 'data-[state=unchecked]:bg-white'])
-    })
-
-    it('groups data-[side=top]: modifier', () => {
-      const result = groupClasses(['bottom-0', 'data-[side=top]:top-0'])
-      expect(result).toEqual(['bottom-0', 'data-[side=top]:top-0'])
-    })
-
-    it('groups data-[orientation=horizontal]: modifier', () => {
-      const result = groupClasses(['flex-col', 'data-[orientation=horizontal]:flex-row'])
-      expect(result).toEqual(['flex-col', 'data-[orientation=horizontal]:flex-row'])
-    })
-  })
-
-  describe('group modifiers', () => {
-    it('groups group-data-[disabled=true]: modifier', () => {
-      const result = groupClasses(['opacity-100', 'group-data-[disabled=true]:opacity-50'])
-      expect(result).toEqual(['opacity-100', 'group-data-[disabled=true]:opacity-50'])
-    })
-
-    it('groups group-data-[side=left]: modifier', () => {
-      const result = groupClasses(['ml-0', 'group-data-[side=left]:ml-4'])
-      expect(result).toEqual(['ml-0', 'group-data-[side=left]:ml-4'])
-    })
-
-    it('groups group-has-data-[...]: modifier', () => {
-      const result = groupClasses(['opacity-100', 'group-has-data-[active]:opacity-50'])
-      expect(result).toEqual(['opacity-100', 'group-has-data-[active]:opacity-50'])
-    })
-  })
-
-  describe('selector modifiers', () => {
-    it('groups *: modifier', () => {
-      const result = groupClasses(['text-base', '*:text-sm'])
-      expect(result).toEqual(['text-base', '*:text-sm'])
-    })
-
-    it('groups **: modifier', () => {
-      const result = groupClasses(['text-base', '**:text-sm'])
-      expect(result).toEqual(['text-base', '**:text-sm'])
-    })
-
-    it('groups has-[>svg]: modifier', () => {
-      const result = groupClasses(['p-4', 'has-[>svg]:p-2'])
-      expect(result).toEqual(['p-4', 'has-[>svg]:p-2'])
-    })
-
-    it('groups [&>svg]: modifier', () => {
-      const result = groupClasses(['text-base', '[&>svg]:size-4'])
-      expect(result).toEqual(['text-base', '[&>svg]:size-4'])
-    })
-
-    it('groups [&_svg]: modifier', () => {
-      const result = groupClasses(['text-base', '[&_svg]:pointer-events-none'])
-      expect(result).toEqual(['text-base', '[&_svg]:pointer-events-none'])
-    })
-
-    it('groups [&>span:last-child]: modifier', () => {
-      const result = groupClasses(['ml-0', '[&>span:last-child]:ml-2'])
-      expect(result).toEqual(['ml-0', '[&>span:last-child]:ml-2'])
-    })
-  })
-
-  describe('maintains order', () => {
-    it('orders base before dark', () => {
-      const result = groupClasses(['dark:bg-black', 'bg-white'])
-      expect(result).toEqual(['bg-white', 'dark:bg-black'])
-    })
-
-    it('orders responsive modifiers correctly', () => {
-      const result = groupClasses(['lg:text-lg', 'md:text-base', 'text-sm'])
-      expect(result).toEqual(['text-sm', 'md:text-base', 'lg:text-lg'])
-    })
-
-    it('orders hover before focus', () => {
-      const result = groupClasses(['focus:ring-2', 'hover:bg-accent', 'bg-white'])
-      expect(result).toEqual(['bg-white', 'hover:bg-accent', 'focus:ring-2'])
-    })
-
-    it('orders first before last', () => {
-      const result = groupClasses(['last:border-b-0', 'first:border-t', 'border-b'])
-      expect(result).toEqual(['border-b', 'first:border-t', 'last:border-b-0'])
-    })
-
-    it('orders disabled before peer-disabled', () => {
-      const result = groupClasses(['peer-disabled:opacity-25', 'disabled:opacity-50', 'opacity-100'])
-      expect(result).toEqual(['opacity-100', 'disabled:opacity-50', 'peer-disabled:opacity-25'])
-    })
-  })
-
-  describe('handles multiple classes per variant', () => {
-    it('keeps multiple base classes together', () => {
-      const result = groupClasses(['flex', 'items-center', 'gap-4', 'p-4'])
-      expect(result).toEqual(['flex items-center gap-4 p-4'])
-    })
-
-    it('keeps multiple hover classes together', () => {
-      const result = groupClasses(['bg-white', 'hover:bg-accent', 'hover:text-white'])
-      expect(result).toEqual(['bg-white', 'hover:bg-accent hover:text-white'])
-    })
-
-    it('keeps multiple data attribute classes together', () => {
-      const result = groupClasses(['opacity-0', 'data-[state=open]:opacity-100', 'data-[state=open]:scale-100'])
-      expect(result).toEqual(['opacity-0', 'data-[state=open]:opacity-100 data-[state=open]:scale-100'])
-    })
-  })
-
-  describe('edge cases', () => {
-    it('handles empty array', () => {
-      const result = groupClasses([])
-      expect(result).toEqual([])
-    })
-
-    it('handles single class', () => {
-      const result = groupClasses(['flex'])
-      expect(result).toEqual(['flex'])
-    })
-
-    it('handles unknown modifiers at the end', () => {
-      const result = groupClasses(['flex', 'custom:bg-red'])
-      expect(result).toEqual(['flex', 'custom:bg-red'])
-    })
-
-    it('handles arbitrary values', () => {
-      const result = groupClasses(['w-[200px]', 'hover:w-[250px]'])
-      expect(result).toEqual(['w-[200px]', 'hover:w-[250px]'])
-    })
-  })
-
-  describe('comprehensive ordering test', () => {
-    it('orders all regex patterns correctly', () => {
-      const input = [
-        // Unknown modifier (should be last)
-        'unknown:text-red',
-        // Selector modifiers
-        '[&_other]:text-xs',
-        '[&>span:last-child]:ml-2',
-        '[&_svg]:pointer-events-none',
-        '[&>svg]:size-4',
-        'has-[>svg]:p-2',
-        '**:text-xs',
-        '*:text-sm',
-        // Group modifiers
-        'group-has-data-[active]/sidebar:opacity-50',
-        'group-has-data-[active]:opacity-50',
-        'group-data-[collapsible=icon]:hidden',
-        'group-data-[collapsible=offcanvas]:flex',
-        'group-data-[side=right]:ml-4',
-        'group-data-[side=left]:ml-4',
-        'group-data-[disabled=true]:opacity-50',
-        'group-data-[viewport=false]/navigation-menu:hidden',
-        // Data attributes - vaul drawer
-        'data-[vaul-drawer-direction=left]:left-0',
-        'data-[vaul-drawer-direction=bottom]:bottom-0',
-        'data-[vaul-drawer-direction=right]:right-0',
-        'data-[vaul-drawer-direction=top]:top-0',
-        // Data attributes - panel group
-        'data-[panel-group-direction=vertical]:flex-col',
-        // Data attributes - slot
-        'data-[slot=navigation-menu-link]:underline',
-        'data-[slot=command-input-wrapper]:px-3',
-        'data-[slot=select-value]:pr-2',
-        // Data attributes - variant
-        'data-[variant=outline]:border',
-        'data-[variant=inset]:pl-8',
-        'data-[variant=destructive]:bg-red-500',
-        // Data attributes - collapsible
-        'data-[collapsible=icon]:w-16',
-        'data-[collapsible=offcanvas]:w-64',
-        // Data attributes - orientation
-        'data-[orientation=vertical]:flex-col',
-        'data-[orientation=horizontal]:flex-row',
-        // Data attributes - motion
-        'data-[motion=to-end]:slide-out-to-right',
-        'data-[motion=to-start]:slide-out-to-left',
-        'data-[motion=from-end]:slide-in-from-right',
-        'data-[motion=from-start]:slide-in-from-left',
-        'data-[motion^=to-]:animate-out',
-        'data-[motion^=from-]:animate-in',
-        // Data attributes - size
-        'data-[size=sm]:h-8',
-        'data-[size=default]:h-10',
-        // Data attributes - side
-        'data-[side=left]:left-0',
-        'data-[side=bottom]:bottom-0',
-        'data-[side=right]:right-0',
-        'data-[side=top]:top-0',
-        // Data attributes - state
-        'data-[state=on]:bg-accent',
-        'data-[state=active]:bg-accent',
-        'data-[state=collapsed]:hidden',
-        'data-[state=hidden]:hidden',
-        'data-[state=visible]:block',
-        'data-[state=unchecked]:bg-transparent',
-        'data-[state=checked]:bg-primary',
-        'data-[state=closed]:opacity-0',
-        'data-[state=open]:opacity-100',
-        // Data attributes - other
-        'data-[active=true]:bg-accent',
-        'data-[selected=true]:bg-accent',
-        'data-[disabled=true]:opacity-50',
-        'data-[placeholder]:text-muted',
-        'data-[inset]:pl-8',
-        'data-[disabled]:opacity-50',
-        // Peer and disabled
-        'peer-disabled:opacity-50',
-        'disabled:opacity-50',
-        'aria-disabled:cursor-not-allowed',
-        'aria-invalid:border-red-500',
-        // Focus states
-        'focus-within:ring-2',
-        'focus-visible:ring-2',
-        'focus:ring-2',
-        // Other states
-        'selection:bg-blue-200',
-        'placeholder:text-gray-400',
-        'file:border-0',
-        'active:bg-gray-200',
-        'after:content-[""]',
-        'before:content-[""]',
-        'last:border-b-0',
-        'first:border-t',
-        'hover:bg-accent',
-        // Responsive
-        '2xl:text-2xl',
-        'xl:text-xl',
-        'lg:text-lg',
-        'md:text-base',
-        'sm:text-sm',
-        'dark:bg-black',
-        // Base classes
-        'flex',
-        'items-center',
-        'gap-4'
-      ]
-
-      const result = groupClasses(input)
-
-      expect(result).toEqual([
-        'flex items-center gap-4',
-        'dark:bg-black',
-        'sm:text-sm',
-        'md:text-base',
-        'lg:text-lg',
-        'xl:text-xl',
-        '2xl:text-2xl',
-        'hover:bg-accent',
-        'first:border-t',
-        'last:border-b-0',
-        'before:content-[""]',
-        'after:content-[""]',
-        'active:bg-gray-200',
-        'file:border-0',
-        'placeholder:text-gray-400',
-        'selection:bg-blue-200',
-        'focus:ring-2',
-        'focus-visible:ring-2',
-        'focus-within:ring-2',
-        'aria-invalid:border-red-500',
-        'aria-disabled:cursor-not-allowed',
-        'disabled:opacity-50',
-        'peer-disabled:opacity-50',
-        'data-[disabled]:opacity-50',
-        'data-[inset]:pl-8',
-        'data-[placeholder]:text-muted',
-        'data-[disabled=true]:opacity-50',
-        'data-[selected=true]:bg-accent',
-        'data-[active=true]:bg-accent',
-        'data-[state=open]:opacity-100',
-        'data-[state=closed]:opacity-0',
-        'data-[state=checked]:bg-primary',
-        'data-[state=unchecked]:bg-transparent',
-        'data-[state=visible]:block',
-        'data-[state=hidden]:hidden',
-        'data-[state=collapsed]:hidden',
-        'data-[state=active]:bg-accent',
-        'data-[state=on]:bg-accent',
-        'data-[side=top]:top-0',
-        'data-[side=right]:right-0',
-        'data-[side=bottom]:bottom-0',
-        'data-[side=left]:left-0',
-        'data-[size=default]:h-10',
-        'data-[size=sm]:h-8',
-        'data-[motion^=from-]:animate-in',
-        'data-[motion^=to-]:animate-out',
-        'data-[motion=from-start]:slide-in-from-left',
-        'data-[motion=from-end]:slide-in-from-right',
-        'data-[motion=to-start]:slide-out-to-left',
-        'data-[motion=to-end]:slide-out-to-right',
-        'data-[orientation=horizontal]:flex-row',
-        'data-[orientation=vertical]:flex-col',
-        'data-[collapsible=offcanvas]:w-64',
-        'data-[collapsible=icon]:w-16',
-        'data-[variant=destructive]:bg-red-500',
-        'data-[variant=inset]:pl-8',
-        'data-[variant=outline]:border',
-        'data-[slot=select-value]:pr-2',
-        'data-[slot=command-input-wrapper]:px-3',
-        'data-[slot=navigation-menu-link]:underline',
-        'data-[panel-group-direction=vertical]:flex-col',
-        'data-[vaul-drawer-direction=top]:top-0',
-        'data-[vaul-drawer-direction=right]:right-0',
-        'data-[vaul-drawer-direction=bottom]:bottom-0',
-        'data-[vaul-drawer-direction=left]:left-0',
-        'group-data-[viewport=false]/navigation-menu:hidden',
-        'group-data-[disabled=true]:opacity-50',
-        'group-data-[side=left]:ml-4',
-        'group-data-[side=right]:ml-4',
-        'group-data-[collapsible=offcanvas]:flex',
-        'group-data-[collapsible=icon]:hidden',
-        'group-has-data-[active]:opacity-50',
-        'group-has-data-[active]/sidebar:opacity-50',
-        '*:text-sm',
-        '**:text-xs',
-        'has-[>svg]:p-2',
-        '[&>svg]:size-4',
-        '[&_svg]:pointer-events-none',
-        '[&>span:last-child]:ml-2',
-        '[&_other]:text-xs',
-        'unknown:text-red'
-      ])
-    })
+    expect(result).toEqual([
+      'has-checked:bg-pink-500',
+      'has-[svg]:bg-purple-500',
+      'group-hover:bg-yellow-500',
+      'group-[.is-published]:bg-blue-500',
+      'peer-required:bg-green-500',
+      'peer-[.is-dirty]:bg-red-500',
+      'in-focus:bg-gray-900',
+      'in-[svg]:opacity-50',
+      'not-focus:bg-gray-700',
+      'not-supports-backdrop-filter:bg-black',
+      'not-[svg]:opacity-100',
+      'not-supports-[display:flex]:bg-purple-500',
+      'not-supports-[display:grid]:bg-pink-500',
+      'nth-2:bg-yellow-300',
+      'nth-3:bg-yellow-200',
+      'nth-last-2:bg-blue-300',
+      'nth-last-3:bg-blue-200',
+      'nth-last-of-type-2:bg-red-300',
+      'nth-last-of-type-3:bg-red-200',
+      'nth-of-type-2:bg-green-200',
+      'nth-of-type-3:bg-green-300',
+      'min-[475px]:text-base',
+      'min-[960px]:text-lg',
+      'max-[475px]:text-xs',
+      'max-[960px]:text-sm',
+      '@min-[475px]:p-3',
+      '@min-[960px]:p-6',
+      '@max-[475px]:p-2',
+      '@max-[960px]:p-4',
+      'supports-backdrop-filter:bg-gray-200',
+      'supports-[display:flex]:bg-white',
+      'supports-[display:grid]:bg-gray-100',
+      'aria-hidden:bg-red-500',
+      'aria-[sort=ascending]:bg-yellow-500',
+      'aria-[sort=descending]:bg-red-500',
+      'data-selected:bg-green-500',
+      'data-[state=active]:bg-blue-500',
+      'data-[state=inactive]:bg-gray-500'
+    ])
   })
 })
