@@ -5,7 +5,7 @@ import { groupClasses } from './group-classes'
 /**
  * Formats classes inside existing `cn()` calls by grouping them by variant chains.
  *
- * This function finds all `cn()` function calls that are imported from `@repo/ui/utils/cn`,
+ * This function finds all `cn()` function calls that are imported from `@/utils/cn`,
  * and processes any string literal or template literal arguments by:
  * 1. Splitting the class string into individual tokens
  * 2. Grouping classes by their variant chains (e.g., base classes, `hover:`, `last:`, `data-[state]:`)
@@ -41,7 +41,7 @@ export const formatCnClasses = (sourceFile: SourceFile) => {
 
     const importDeclaration = declaration.getFirstAncestorByKind(SyntaxKind.ImportDeclaration)
     const importFrom = importDeclaration?.getModuleSpecifierValue()
-    return importFrom === '@repo/ui/utils/cn'
+    return importFrom?.endsWith('/utils/cn')
   })
 
   for (const call of cnCalls) {

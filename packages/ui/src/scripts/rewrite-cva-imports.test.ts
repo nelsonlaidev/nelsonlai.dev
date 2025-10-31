@@ -87,12 +87,12 @@ describe('rewriteCvaImports', () => {
         `
         import React from 'react'
         import { cva } from 'class-variance-authority'
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
         `,
         `
         import React from 'react'
         import { cva } from 'cva'
-        import { cn } from '@repo/ui/utils/cn'
+        import { cn } from '../utils/cn'
         `,
         rewriteCvaImports
       )
