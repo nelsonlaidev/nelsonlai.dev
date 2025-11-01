@@ -6,7 +6,7 @@
       "@/*": ["./src/*"]
     }
   },
-  "exclude": ["node_modules"],
   "extends": "@nelsonlaidev/typescript-config/react-library.json",
-  "include": ["**/*.ts", "**/*.tsx", "postcss.config.mjs"]
+  "exclude": ["node_modules"],
+  "include": ["src", "postcss.config.mjs", "eslint.config.ts", "vitest.config.ts"]
 }

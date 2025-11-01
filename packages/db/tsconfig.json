@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "exclude": ["node_modules"],
   "extends": "@nelsonlaidev/typescript-config/base.json",
-  "include": ["**/*.ts"]
+  "exclude": ["node_modules"],
+  "include": ["src", "eslint.config.ts", "drizzle.config.ts"]
 }
