@@ -2,8 +2,6 @@ import type { KnipConfig } from 'knip'
 
 const config: KnipConfig = {
   ignoreDependencies: [
-    // Knip can't detect it since we use `pnpm with-env` in front of it
-    'tsx',
     // PostCSS is already installed under Next.js
     'postcss'
   ],
@@ -35,9 +33,6 @@ const config: KnipConfig = {
         'react-dom'
       ],
       ignore: ['src/styles.css']
-    },
-    'packages/ui': {
-      entry: ['src/scripts/shadcn.ts']
     }
   },
   // Credit to https://github.com/webpro-nl/knip/issues/1008#issuecomment-2756559038
