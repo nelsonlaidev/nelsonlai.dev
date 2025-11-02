@@ -289,7 +289,7 @@ const SidebarRail = (props: SidebarRailProps) => {
         'group-data-[side=right]:left-0',
         'in-data-[side=left]:cursor-w-resize',
         'in-data-[side=right]:cursor-e-resize',
-        'after:absolute after:inset-y-0 after:left-1/2 after:w-[2px]',
+        'after:absolute after:inset-y-0 after:left-1/2 after:w-0.5',
         'sm:flex',
         '[[data-side=left][data-state=collapsed]_&]:cursor-e-resize',
         '[[data-side=right][data-state=collapsed]_&]:cursor-w-resize',
