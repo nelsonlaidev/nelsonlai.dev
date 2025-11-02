@@ -9,10 +9,9 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle
 } from '@repo/ui/components/navigation-menu'
+import { useIsMobile } from '@repo/ui/hooks/use-is-mobile'
 import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from 'lucide-react'
 import Link from 'next/link'
-
-import { useIsMobile } from '@/hooks/use-is-mobile'
 
 type Component = {
   title: string
