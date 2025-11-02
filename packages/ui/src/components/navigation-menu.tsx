@@ -72,7 +72,7 @@ const NavigationMenuTrigger = (props: NavigationMenuTriggerProps) => {
     >
       {children}{' '}
       <ChevronDownIcon
-        className={cn('relative top-[1px] ml-1 size-3 transition duration-300', 'group-data-[state=open]:rotate-180')}
+        className={cn('relative top-px ml-1 size-3 transition duration-300', 'group-data-[state=open]:rotate-180')}
         aria-hidden='true'
       />
     </NavigationMenuPrimitive.Trigger>
@@ -159,7 +159,7 @@ const NavigationMenuIndicator = (props: NavigationMenuIndicatorProps) => {
     <NavigationMenuPrimitive.Indicator
       data-slot='navigation-menu-indicator'
       className={cn(
-        'top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden',
+        'top-full z-1 flex h-1.5 items-end justify-center overflow-hidden',
         'data-[state=hidden]:animate-out data-[state=hidden]:fade-out',
         'data-[state=visible]:animate-in data-[state=visible]:fade-in',
         className

@@ -50,8 +50,8 @@ const FieldGroup = (props: FieldGroupProps) => {
       data-slot='field-group'
       className={cn(
         'group/field-group @container/field-group flex w-full flex-col gap-7',
-        'data-[slot=checkbox-group]:gap-3',
         '*:data-[slot=field-group]:gap-4',
+        'data-[slot=checkbox-group]:gap-3',
         className
       )}
       {...rest}
@@ -122,10 +122,10 @@ const FieldLabel = (props: FieldLabelProps) => {
       className={cn(
         'group/field-label peer/field-label flex w-fit gap-2 leading-snug',
         'dark:has-data-[state=checked]:bg-primary/10',
+        '*:data-[slot=field]:p-4',
         'has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border',
         'has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/5',
         'group-data-[disabled=true]/field:opacity-50',
-        '*:data-[slot=field]:p-4',
         className
       )}
       {...rest}
