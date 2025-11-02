@@ -482,7 +482,7 @@ export const useCommentEditor = (options: UseCommentEditorOptions = {}) => {
     if (!ta) return
 
     pushUndo(createSnapshot(ta))
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- We only want to run this once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only run once
   }, [])
 
   return {

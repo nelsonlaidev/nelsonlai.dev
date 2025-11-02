@@ -11,7 +11,7 @@ const ComponentPreviewEmbed = (props: ComponentPreviewEmbedProps) => {
         src={`/embed?component=${name}`}
         title={`${name.split('/')[0]} demo`}
         className='size-full'
-        // eslint-disable-next-line @eslint-react/dom/no-unsafe-iframe-sandbox -- Safe to use
+        // eslint-disable-next-line @eslint-react/dom/no-unsafe-iframe-sandbox -- safe to use
         sandbox='allow-scripts allow-same-origin'
         loading='lazy'
         referrerPolicy='no-referrer'

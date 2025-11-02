@@ -18,7 +18,7 @@ export const makeQueryClient = () => {
         }
       },
       hydrate: {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- Safe
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- safe
         deserializeData: (data) => serializer.deserialize(data.json, data.meta)
       }
     },

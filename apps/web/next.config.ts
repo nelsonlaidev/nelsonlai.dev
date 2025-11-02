@@ -55,7 +55,7 @@ const config: NextConfig = {
 
   skipTrailingSlashRedirect: true,
 
-  // eslint-disable-next-line @typescript-eslint/require-await -- Must be async
+  // eslint-disable-next-line @typescript-eslint/require-await -- must be async
   async rewrites() {
     return [
       {
@@ -69,7 +69,7 @@ const config: NextConfig = {
     ]
   },
 
-  // eslint-disable-next-line @typescript-eslint/require-await -- Must be async
+  // eslint-disable-next-line @typescript-eslint/require-await -- must be async
   async redirects() {
     return [
       {
@@ -95,7 +95,7 @@ const config: NextConfig = {
     ]
   },
 
-  // eslint-disable-next-line @typescript-eslint/require-await -- Must be async
+  // eslint-disable-next-line @typescript-eslint/require-await -- must be async
   async headers() {
     return [
       {

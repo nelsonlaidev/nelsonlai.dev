@@ -57,7 +57,7 @@ const SidebarProvider = (props: SidebarProviderProps) => {
 
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.
-  // eslint-disable-next-line @eslint-react/naming-convention/use-state -- Internal state
+  // eslint-disable-next-line @eslint-react/naming-convention/use-state -- internal state
   const [_open, _setOpen] = useState(defaultOpen)
   const open = openProp ?? _open
   const setOpen = useCallback(
@@ -70,7 +70,7 @@ const SidebarProvider = (props: SidebarProviderProps) => {
       }
 
       // This sets the cookie to keep the sidebar state.
-      // eslint-disable-next-line unicorn/no-document-cookie -- Safe
+      // eslint-disable-next-line unicorn/no-document-cookie -- safe
       document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
     },
     [setOpenProp, open]
@@ -655,7 +655,7 @@ const SidebarMenuSkeleton = (props: SidebarMenuSkeletonProps) => {
   const { className, showIcon = false, ...rest } = props
 
   // Random width between 50 to 90%.
-  // eslint-disable-next-line sonarjs/pseudo-random -- Safe
+  // eslint-disable-next-line sonarjs/pseudo-random -- safe
   const width = `${Math.floor(Math.random() * 40) + 50}%`
 
   return (
