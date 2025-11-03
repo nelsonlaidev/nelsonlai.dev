@@ -21,7 +21,7 @@ Welcome to the monorepo of my personal blog! This repository houses the code for
 
 ### Core Technologies
 
-- Next.js 15 with App Router
+- Next.js 16 with App Router
 - TypeScript with strict configuration
 - Tailwind CSS for styling
 - MDX for content
