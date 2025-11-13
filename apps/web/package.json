@@ -116,5 +116,11 @@
     "postcss-load-config": "6.0.1",
     "schema-dts": "1.1.5",
     "tailwindcss": "4.1.16"
+  },
+  "nextBundleAnalysis": {
+    "budget": 358400,
+    "budgetPercentIncreaseRed": 20,
+    "minimumChangeThreshold": 0,
+    "showDetails": true
   }
 }
