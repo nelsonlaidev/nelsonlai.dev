@@ -32,7 +32,6 @@ nelsonlai-dev/
   - `/orpc`: oRPC routers and schemas
   - `/lib`: Core libraries
   - `/hooks`: Custom React hooks
-  - `/stores`: State management (Zustand)
   - `/utils`: Utility functions
 
 - `packages/db/src`: Database layer

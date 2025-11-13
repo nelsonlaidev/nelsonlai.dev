@@ -7,12 +7,11 @@ import { getSingletonHighlighterCore } from 'shiki'
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
 import githubDarkDefault from 'shiki/themes/github-dark-default.mjs'
 import githubLightDefault from 'shiki/themes/github-light-default.mjs'
-import { useShallow } from 'zustand/react/shallow'
 
 import { useCommentsContext } from '@/contexts/comments.context'
 import { usePostComments } from '@/hooks/queries/post.query'
 import { useCommentParams } from '@/hooks/use-comment-params'
-import { useHighlighterStore } from '@/stores/highlighter.store'
+import { useHighlighter } from '@/hooks/use-highlighter'
 
 import Comment from './comment'
 import CommentHeader from './comment-header'
@@ -22,12 +21,7 @@ const CommentList = () => {
   const { slug, sort } = useCommentsContext()
   const [params] = useCommentParams()
   const t = useTranslations()
-  const { highlighter, setHighlighter } = useHighlighterStore(
-    useShallow((state) => ({
-      highlighter: state.highlighter,
-      setHighlighter: state.setHighlighter
-    }))
-  )
+  const [highlighter, setHighlighter] = useHighlighter()
 
   const { isSuccess, isLoading, isError, data, fetchNextPage, hasNextPage, isFetchingNextPage } = usePostComments(
     (pageParam) => ({
