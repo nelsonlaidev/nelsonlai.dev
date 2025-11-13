@@ -20,6 +20,16 @@ permissions:
   actions: read # for fetching base branch bundle stats
   pull-requests: write # for comments
 
+env:
+  NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+  UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+  IP_ADDRESS_SALT: ${{ secrets.IP_ADDRESS_SALT }}
+  BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+  GITHUB_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
+  GITHUB_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
+
 jobs:
   analyze:
     runs-on: ubuntu-latest
