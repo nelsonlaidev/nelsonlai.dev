@@ -10,11 +10,6 @@ on:
       - main # change this if your default branch is named differently
   workflow_dispatch:
 
-defaults:
-  run:
-    # change this if your nextjs app does not live at the root of the repo
-    working-directory: ./apps/web
-
 permissions:
   contents: read # for checkout repository
   actions: read # for fetching base branch bundle stats
@@ -46,20 +41,20 @@ jobs:
         env:
           cache-name: cache-next-build
         with:
-          path: .next/cache
+          path: apps/web/.next/cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
       - name: Build next.js app
-        run: pnpm build
+        run: pnpm --filter web build
 
       - name: Analyze bundle
-        run: pnpm --package=nextjs-bundle-analysis dlx report
+        run: cd apps/web && pnpm --package=nextjs-bundle-analysis dlx report
 
       - name: Upload bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: bundle
-          path: .next/analyze/__bundle_analysis.json
+          path: apps/web/.next/analyze/__bundle_analysis.json
 
       - name: Download base branch bundle stats
         uses: dawidd6/action-download-artifact@v11
@@ -67,16 +62,17 @@ jobs:
         with:
           workflow: web-bundle-analysis.yml
           branch: ${{ github.event.pull_request.base.ref }}
-          path: .next/analyze/base
+          path: apps/web/.next/analyze/base
 
       - name: Compare with base branch bundle
         if: success() && github.event.number
-        run: ls -laR .next/analyze/base && pnpm --package=nextjs-bundle-analysis dlx compare
+        run: cd apps/web && ls -laR .next/analyze/base && pnpm --package=nextjs-bundle-analysis dlx compare
 
       - name: Get Comment Body
         id: get-comment-body
         if: success() && github.event.number
         run: |
+          cd apps/web
           echo "body<<EOF" >> $GITHUB_OUTPUT
           echo "$(cat .next/analyze/__bundle_analysis_comment.txt)" >> $GITHUB_OUTPUT
           echo EOF >> $GITHUB_OUTPUT
