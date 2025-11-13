@@ -17,9 +17,9 @@ import { Fragment, useCallback, useEffect, useState } from 'react'
 
 import { SOCIAL_LINKS } from '@/config/links'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
+import { useSignInDialog } from '@/hooks/use-sign-in-dialog'
 import { useSignOut } from '@/hooks/use-sign-out'
 import { useSession } from '@/lib/auth-client'
-import { useDialogsStore } from '@/stores/dialogs.store'
 
 type CommandAction = {
   title: string
@@ -37,7 +37,7 @@ const CommandMenu = () => {
   const [copy] = useCopyToClipboard()
   const { data: session } = useSession()
   const t = useTranslations()
-  const setIsSignInOpen = useDialogsStore((state) => state.setIsSignInOpen)
+  const { openDialog } = useSignInDialog()
   const router = useRouter()
   const signOut = useSignOut({ redirectTo: '/' })
 
@@ -70,7 +70,7 @@ const CommandMenu = () => {
 
   const handleSignIn = () => {
     closeMenu()
-    setIsSignInOpen(true)
+    openDialog()
   }
 
   const handleSignOut = async () => {

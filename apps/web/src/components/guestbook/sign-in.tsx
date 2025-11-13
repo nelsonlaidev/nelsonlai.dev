@@ -3,19 +3,17 @@
 import { Button } from '@repo/ui/components/button'
 import { useTranslations } from 'next-intl'
 
-import { useDialogsStore } from '@/stores/dialogs.store'
+import { useSignInDialog } from '@/hooks/use-sign-in-dialog'
 
 const SignIn = () => {
   const t = useTranslations()
-  const setIsSignInOpen = useDialogsStore((state) => state.setIsSignInOpen)
+  const { openDialog } = useSignInDialog()
 
   return (
     <>
       <Button
         className='inline-block bg-linear-to-br from-[#fcd34d] via-[#ef4444] to-[#ec4899] font-extrabold dark:text-foreground'
-        onClick={() => {
-          setIsSignInOpen(true)
-        }}
+        onClick={openDialog}
       >
         {t('common.sign-in')}
       </Button>

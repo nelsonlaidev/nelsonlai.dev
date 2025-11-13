@@ -10,10 +10,9 @@ import { LoaderIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
-import { useShallow } from 'zustand/react/shallow'
 
+import { useSignInDialog } from '@/hooks/use-sign-in-dialog'
 import { authClient } from '@/lib/auth-client'
-import { useDialogsStore } from '@/stores/dialogs.store'
 
 type Provider = 'github' | 'google'
 
@@ -42,12 +41,7 @@ const GoogleIcon = () => {
 }
 
 const SignInDialog = () => {
-  const { isSignInDialogOpen, setIsSignInOpen } = useDialogsStore(
-    useShallow((state) => ({
-      isSignInDialogOpen: state.isSignInDialogOpen,
-      setIsSignInOpen: state.setIsSignInOpen
-    }))
-  )
+  const { open, setOpen, closeDialog: closeSignInDialog } = useSignInDialog()
   const [isPending, setIsPending] = useState(false)
   const [lastUsedProvider, setLastUsedProvider] = useState<Provider | null>(null)
   const t = useTranslations()
@@ -82,17 +76,12 @@ const SignInDialog = () => {
 
   const closeDialog = () => {
     if (!isPending) {
-      setIsSignInOpen(false)
+      closeSignInDialog()
     }
   }
 
   return (
-    <Dialog
-      open={isSignInDialogOpen}
-      onOpenChange={(v) => {
-        setIsSignInOpen(v)
-      }}
-    >
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className='sm:max-w-120'>
         <DialogHeader>
           <DialogTitle className='text-left text-2xl'>{t('common.sign-in')}</DialogTitle>

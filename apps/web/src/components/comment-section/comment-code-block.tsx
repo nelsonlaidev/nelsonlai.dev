@@ -2,7 +2,7 @@ import { CodeBlock } from '@repo/ui/components/code-block'
 import { useEffect, useState } from 'react'
 import { type BundledLanguage, bundledLanguages } from 'shiki'
 
-import { useHighlighterStore } from '@/stores/highlighter.store'
+import { useHighlighter } from '@/hooks/use-highlighter'
 
 type CommentCodeBlockProps = {
   children: {
@@ -21,7 +21,7 @@ const CommentCodeBlock = (props: CommentCodeBlockProps) => {
     }
   } = props
   const lang = className?.replace('lang-', '') ?? 'plaintext'
-  const highlighter = useHighlighterStore((state) => state.highlighter)
+  const [highlighter] = useHighlighter()
   const [highlightedHtml, setHighlightedHtml] = useState('')
   const [isHighlighted, setIsHighlighted] = useState(false)
 
