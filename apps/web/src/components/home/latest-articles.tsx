@@ -1,6 +1,6 @@
 'use client'
 
-import type { Post } from '@/lib/content'
+import type { Post } from 'content-collections'
 
 import { buttonVariants } from '@repo/ui/components/button'
 import { Link } from '@repo/ui/components/link'

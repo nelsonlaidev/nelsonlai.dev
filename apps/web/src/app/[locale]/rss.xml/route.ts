@@ -1,11 +1,11 @@
 import { routing } from '@repo/i18n/routing'
+import { allPosts } from 'content-collections'
 import { NextResponse } from 'next/server'
 import { hasLocale } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 import RSS from 'rss'
 
 import { MY_NAME } from '@/lib/constants'
-import { allPosts } from '@/lib/content'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
 export const dynamic = 'force-static'

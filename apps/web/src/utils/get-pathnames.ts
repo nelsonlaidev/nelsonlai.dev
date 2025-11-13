@@ -1,4 +1,4 @@
-import { allPages, allPosts, allProjects } from '@/lib/content'
+import { allPages, allPosts, allProjects } from 'content-collections'
 
 export const PROTECTED_ROUTES = ['/admin', '/account', '/account/settings']
 

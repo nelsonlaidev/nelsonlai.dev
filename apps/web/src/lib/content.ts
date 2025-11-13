@@ -1,7 +1,6 @@
 import 'server-only'
 
-// eslint-disable-next-line no-restricted-imports -- this is @/lib/content
-import { allPages, allPosts, allProjects } from '../../.content-collections/generated'
+import { allPages, allPosts, allProjects } from 'content-collections'
 
 export const getLatestPosts = (locale: string, limit: number = allPosts.length) => {
   return allPosts
@@ -36,6 +35,3 @@ export const getProjectBySlug = (locale: string, slug: string) => {
 export const getPageBySlug = (locale: string, slug: string) => {
   return allPages.find((p) => p.slug === slug && p.locale === locale)
 }
-
-// eslint-disable-next-line no-restricted-imports -- this is @/lib/content
-export * from '../../.content-collections/generated'

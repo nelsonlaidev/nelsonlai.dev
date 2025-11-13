@@ -1,6 +1,6 @@
 'use client'
 
-import type { Post } from '@/lib/content'
+import type { Post } from 'content-collections'
 
 import { Link } from '@repo/ui/components/link'
 import { useTranslations } from 'next-intl'

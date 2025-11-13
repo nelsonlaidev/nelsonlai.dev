@@ -1,6 +1,6 @@
 'use client'
 
-import type { Project } from '@/lib/content'
+import type { Project } from 'content-collections'
 
 import { Link } from '@repo/ui/components/link'
 

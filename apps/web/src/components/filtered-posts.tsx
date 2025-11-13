@@ -1,6 +1,6 @@
 'use client'
 
-import type { Post } from '@/lib/content'
+import type { Post } from 'content-collections'
 
 import { Input } from '@repo/ui/components/input'
 import { Label } from '@repo/ui/components/label'

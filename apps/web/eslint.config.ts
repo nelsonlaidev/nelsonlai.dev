@@ -26,12 +26,6 @@ export default defineConfig({
               importNames: ['default'],
               message: 'Please use `@repo/ui/components/link` instead.'
             }
-          ],
-          patterns: [
-            {
-              regex: String.raw`\.content-collections\/generated`,
-              message: 'Please use `@/lib/content` instead.'
-            }
           ]
         }
       ]
