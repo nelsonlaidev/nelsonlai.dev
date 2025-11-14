@@ -52,7 +52,7 @@
     "consola": "3.4.2",
     "dedent": "1.7.0",
     "execa": "9.6.0",
-    "next": "16.0.1",
+    "next": "16.0.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "tailwindcss": "4.1.16",
