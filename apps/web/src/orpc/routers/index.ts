@@ -82,6 +82,5 @@ export type ListAllCommentsOutput = Outputs['admin']['listAllComments']
 export type ListAllUsersOutput = Outputs['admin']['listAllUsers']
 
 export type CountViewOutput = Outputs['posts']['views']['count']
-export type CountLikeOutput = Outputs['posts']['likes']['count']
 
 export type ListSessionsOutput = Outputs['auth']['listSessions']
