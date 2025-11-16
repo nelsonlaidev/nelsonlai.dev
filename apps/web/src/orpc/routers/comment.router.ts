@@ -165,7 +165,7 @@ export const createComment = protectedProcedure
         })
 
         // Don't notify if the reply is to own comment or the parent comment user is "ghost"
-        if (parentComment && parentComment.user.email !== user.email && parentComment.user.id !== 'ghost') {
+        if (parentComment && parentComment.userId !== user.id && parentComment.user.id !== 'ghost') {
           const unsubscribedFromAllReplies = await tx.query.unsubscribes.findFirst({
             where: and(eq(unsubscribes.userId, parentComment.userId), eq(unsubscribes.scope, 'comment_replies_user'))
           })
@@ -212,7 +212,7 @@ export const deleteComment = protectedProcedure
   .input(deleteCommentInputSchema)
   .output(emptyOutputSchema)
   .handler(async ({ input, context }) => {
-    const email = context.session.user.email
+    const userId = context.session.user.id
 
     const comment = await context.db.query.comments.findFirst({
       where: eq(comments.id, input.id),
@@ -230,7 +230,7 @@ export const deleteComment = protectedProcedure
     }
 
     // Check if the user is the owner of the comment
-    if (comment.user.email !== email) {
+    if (comment.userId !== userId) {
       throw new ORPCError('UNAUTHORIZED')
     }
 
@@ -243,22 +243,29 @@ export const deleteComment = protectedProcedure
     }
 
     // Otherwise, delete the comment
-    await context.db.delete(comments).where(eq(comments.id, input.id))
+    await context.db.transaction(async (tx) => {
+      await tx.delete(comments).where(eq(comments.id, input.id))
 
-    // Case: deleting a reply
-    if (comment.parentId) {
-      const parentComment = await context.db.query.comments.findFirst({
-        where: and(eq(comments.id, comment.parentId), eq(comments.isDeleted, true)),
-        with: {
-          replies: true
+      // Case: deleting a reply
+      if (comment.parentId) {
+        // Lock the parent row to prevent race conditions when multiple replies are deleted concurrently
+        const [parentComment] = await tx
+          .select()
+          .from(comments)
+          .where(and(eq(comments.id, comment.parentId), eq(comments.isDeleted, true)))
+          .for('update')
+
+        if (parentComment) {
+          // Check if parent has any remaining replies
+          const remainingReplies = await tx.select().from(comments).where(eq(comments.parentId, comment.parentId))
+
+          // If the parent comment (which is marked as deleted) has no replies, delete it also.
+          if (remainingReplies.length === 0) {
+            await tx.delete(comments).where(eq(comments.id, comment.parentId))
+          }
         }
-      })
-
-      // If the parent comment (which is marked as deleted) has no replies, delete it also.
-      if (parentComment?.replies.length === 0) {
-        await context.db.delete(comments).where(eq(comments.id, comment.parentId))
       }
-    }
+    })
   })
 
 export const countComments = publicProcedure

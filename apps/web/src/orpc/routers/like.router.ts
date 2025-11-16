@@ -20,31 +20,56 @@ export const countLike = publicProcedure
     const ip = getIp(context.headers)
     const anonKey = getAnonKey(ip)
 
-    const cached = await cache.posts.likes.get(input.slug, anonKey)
-    if (cached) return cached
-
-    const [[post], [user]] = await Promise.all([
-      context.db.select({ likes: posts.likes }).from(posts).where(eq(posts.slug, input.slug)),
-      context.db
-        .select({ likes: postLikes.likeCount })
-        .from(postLikes)
-        .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
+    // Check cache for both global and user-specific like counts
+    const [cachedLikes, cachedUserLikes] = await Promise.all([
+      cache.posts.likes.get(input.slug),
+      cache.posts.userLikes.get(input.slug, anonKey)
     ])
 
-    if (!post) {
+    // If both are cached, return immediately
+    if (cachedLikes !== null && cachedUserLikes !== null) {
+      return {
+        likes: cachedLikes,
+        currentUserLikes: cachedUserLikes
+      }
+    }
+
+    // Fetch missing data from DB
+    const [[post], [user]] = await Promise.all([
+      cachedLikes === null
+        ? context.db.select({ likes: posts.likes }).from(posts).where(eq(posts.slug, input.slug))
+        : Promise.resolve([null]),
+      cachedUserLikes === null
+        ? context.db
+            .select({ likeCount: postLikes.likeCount })
+            .from(postLikes)
+            .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
+        : Promise.resolve([null])
+    ])
+
+    if (cachedLikes === null && !post) {
       throw new ORPCError('NOT_FOUND', {
         message: 'Post not found'
       })
     }
 
-    const likesData = {
-      likes: post.likes,
-      currentUserLikes: user?.likes ?? 0 // The case that user has not liked the post yet
+    const likes = cachedLikes ?? post!.likes
+    const currentUserLikes = cachedUserLikes ?? user?.likeCount ?? 0
+
+    // Cache any missing values
+    const cachePromises = []
+    if (cachedLikes === null) {
+      cachePromises.push(cache.posts.likes.set(likes, input.slug))
     }
+    if (cachedUserLikes === null) {
+      cachePromises.push(cache.posts.userLikes.set(currentUserLikes, input.slug, anonKey))
+    }
+    await Promise.all(cachePromises)
 
-    await cache.posts.likes.set(likesData, input.slug, anonKey)
-
-    return likesData
+    return {
+      likes,
+      currentUserLikes
+    }
   })
 
 export const incrementLike = publicProcedure
@@ -54,25 +79,50 @@ export const incrementLike = publicProcedure
     const ip = getIp(context.headers)
     const anonKey = getAnonKey(ip)
 
-    const [session] = await context.db
-      .select({ likes: postLikes.likeCount })
-      .from(postLikes)
-      .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
+    const [post, currentUserLikes] = await context.db.transaction(async (tx) => {
+      // Validate post existence first
+      const [existingPost] = await tx.select({ slug: posts.slug }).from(posts).where(eq(posts.slug, input.slug))
 
-    if (session && session.likes + input.value > 3) {
-      throw new ORPCError('BAD_REQUEST', {
-        message: 'You can only like a post 3 times'
-      })
-    }
+      if (!existingPost) {
+        throw new ORPCError('NOT_FOUND', {
+          message: 'Post not found'
+        })
+      }
 
-    const [[post], [currentUserLikes]] = await context.db.transaction(async (tx) => {
-      return Promise.all([
-        tx
-          .update(posts)
-          .set({ likes: sql`${posts.likes} + ${input.value}` })
-          .where(eq(posts.slug, input.slug))
-          .returning(),
-        tx
+      // Try to update existing like record with atomic validation
+      const updated = await tx
+        .update(postLikes)
+        .set({ likeCount: sql`${postLikes.likeCount} + ${input.value}` })
+        .where(
+          and(
+            eq(postLikes.postId, input.slug),
+            eq(postLikes.anonKey, anonKey),
+            sql`${postLikes.likeCount} + ${input.value} <= 3`
+          )
+        )
+        .returning()
+
+      let userLikes
+
+      if (updated.length > 0) {
+        // Update succeeded
+        userLikes = updated[0]
+      } else {
+        // Update returned 0 rows - either record doesn't exist or limit would be exceeded
+        const [existing] = await tx
+          .select()
+          .from(postLikes)
+          .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
+
+        if (existing && existing.likeCount + input.value > 3) {
+          // Record exists and limit would be exceeded
+          throw new ORPCError('BAD_REQUEST', {
+            message: 'You can only like a post 3 times'
+          })
+        }
+
+        // Insert with conflict handling to prevent race conditions
+        const [inserted] = await tx
           .insert(postLikes)
           .values({ postId: input.slug, anonKey, likeCount: input.value })
           .onConflictDoUpdate({
@@ -80,7 +130,31 @@ export const incrementLike = publicProcedure
             set: { likeCount: sql`${postLikes.likeCount} + ${input.value}` }
           })
           .returning()
-      ])
+
+        if (!inserted) {
+          throw new ORPCError('INTERNAL_SERVER_ERROR', {
+            message: 'Failed to insert like record'
+          })
+        }
+
+        // Validate limit after insert/update (transaction will rollback if exceeded)
+        if (inserted.likeCount > 3) {
+          throw new ORPCError('BAD_REQUEST', {
+            message: 'You can only like a post 3 times'
+          })
+        }
+
+        userLikes = inserted
+      }
+
+      // Update the post's total like count
+      const [postResult] = await tx
+        .update(posts)
+        .set({ likes: sql`${posts.likes} + ${input.value}` })
+        .where(eq(posts.slug, input.slug))
+        .returning()
+
+      return [postResult, userLikes]
     })
 
     if (!post || !currentUserLikes) {
@@ -89,12 +163,14 @@ export const incrementLike = publicProcedure
       })
     }
 
-    const likesData = {
+    // Update both global and user-specific like caches
+    await Promise.all([
+      cache.posts.likes.set(post.likes, input.slug),
+      cache.posts.userLikes.set(currentUserLikes.likeCount, input.slug, anonKey)
+    ])
+
+    return {
       likes: post.likes,
       currentUserLikes: currentUserLikes.likeCount
     }
-
-    await cache.posts.likes.set(likesData, input.slug, anonKey)
-
-    return likesData
   })
