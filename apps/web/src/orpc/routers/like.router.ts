@@ -96,10 +96,30 @@ export const incrementLike = publicProcedure
           })
         }
 
-        ;[userLikes] = await tx
+        // Insert with conflict handling to prevent race conditions
+        const [inserted] = await tx
           .insert(postLikes)
           .values({ postId: input.slug, anonKey, likeCount: input.value })
+          .onConflictDoUpdate({
+            target: [postLikes.postId, postLikes.anonKey],
+            set: { likeCount: sql`${postLikes.likeCount} + ${input.value}` }
+          })
           .returning()
+
+        if (!inserted) {
+          throw new ORPCError('INTERNAL_SERVER_ERROR', {
+            message: 'Failed to insert like record'
+          })
+        }
+
+        // Validate limit after insert/update (transaction will rollback if exceeded)
+        if (inserted.likeCount > 3) {
+          throw new ORPCError('BAD_REQUEST', {
+            message: 'You can only like a post 3 times'
+          })
+        }
+
+        userLikes = inserted
       }
 
       // Update the post's total like count
