@@ -89,8 +89,8 @@ export const incrementLike = publicProcedure
           .from(postLikes)
           .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
 
-        if (existing) {
-          // Record exists but limit would be exceeded
+        if (existing && existing.likeCount + input.value > 3) {
+          // Record exists and limit would be exceeded
           throw new ORPCError('BAD_REQUEST', {
             message: 'You can only like a post 3 times'
           })
