@@ -54,33 +54,55 @@ export const incrementLike = publicProcedure
     const ip = getIp(context.headers)
     const anonKey = getAnonKey(ip)
 
-    const [session] = await context.db
-      .select({ likes: postLikes.likeCount })
-      .from(postLikes)
-      .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
+    const [post, currentUserLikes] = await context.db.transaction(async (tx) => {
+      // Try to update existing like record with atomic validation
+      const updated = await tx
+        .update(postLikes)
+        .set({ likeCount: sql`${postLikes.likeCount} + ${input.value}` })
+        .where(
+          and(
+            eq(postLikes.postId, input.slug),
+            eq(postLikes.anonKey, anonKey),
+            sql`${postLikes.likeCount} + ${input.value} <= 3`
+          )
+        )
+        .returning()
 
-    if (session && session.likes + input.value > 3) {
-      throw new ORPCError('BAD_REQUEST', {
-        message: 'You can only like a post 3 times'
-      })
-    }
+      let userLikes
 
-    const [[post], [currentUserLikes]] = await context.db.transaction(async (tx) => {
-      return Promise.all([
-        tx
-          .update(posts)
-          .set({ likes: sql`${posts.likes} + ${input.value}` })
-          .where(eq(posts.slug, input.slug))
-          .returning(),
-        tx
+      if (updated.length > 0) {
+        // Update succeeded
+        userLikes = updated[0]
+      } else {
+        // Update returned 0 rows - either record doesn't exist or limit would be exceeded
+        const [existing] = await tx
+          .select()
+          .from(postLikes)
+          .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
+
+        if (existing || input.value > 3) {
+          // Record exists but limit would be exceeded
+          // or
+          // Record doesn't exist but value exceeds limit
+          throw new ORPCError('BAD_REQUEST', {
+            message: 'You can only like a post 3 times'
+          })
+        }
+
+        ;[userLikes] = await tx
           .insert(postLikes)
           .values({ postId: input.slug, anonKey, likeCount: input.value })
-          .onConflictDoUpdate({
-            target: [postLikes.postId, postLikes.anonKey],
-            set: { likeCount: sql`${postLikes.likeCount} + ${input.value}` }
-          })
           .returning()
-      ])
+      }
+
+      // Update the post's total like count
+      const [postResult] = await tx
+        .update(posts)
+        .set({ likes: sql`${posts.likes} + ${input.value}` })
+        .where(eq(posts.slug, input.slug))
+        .returning()
+
+      return [postResult, userLikes]
     })
 
     if (!post || !currentUserLikes) {
