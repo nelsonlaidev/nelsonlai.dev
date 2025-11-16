@@ -55,6 +55,15 @@ export const incrementLike = publicProcedure
     const anonKey = getAnonKey(ip)
 
     const [post, currentUserLikes] = await context.db.transaction(async (tx) => {
+      // Validate post existence first
+      const [existingPost] = await tx.select({ slug: posts.slug }).from(posts).where(eq(posts.slug, input.slug))
+
+      if (!existingPost) {
+        throw new ORPCError('NOT_FOUND', {
+          message: 'Post not found'
+        })
+      }
+
       // Try to update existing like record with atomic validation
       const updated = await tx
         .update(postLikes)
@@ -80,10 +89,8 @@ export const incrementLike = publicProcedure
           .from(postLikes)
           .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
 
-        if (existing || input.value > 3) {
+        if (existing) {
           // Record exists but limit would be exceeded
-          // or
-          // Record doesn't exist but value exceeds limit
           throw new ORPCError('BAD_REQUEST', {
             message: 'You can only like a post 3 times'
           })
