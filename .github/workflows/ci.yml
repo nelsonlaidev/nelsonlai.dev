@@ -115,7 +115,7 @@ jobs:
         run: pnpm check:i18n
 
   e2e:
-    name: End-to-end tests
+    name: End-to-end Tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
