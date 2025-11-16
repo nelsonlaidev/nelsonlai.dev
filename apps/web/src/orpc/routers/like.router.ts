@@ -20,31 +20,56 @@ export const countLike = publicProcedure
     const ip = getIp(context.headers)
     const anonKey = getAnonKey(ip)
 
-    const cached = await cache.posts.likes.get(input.slug, anonKey)
-    if (cached) return cached
-
-    const [[post], [user]] = await Promise.all([
-      context.db.select({ likes: posts.likes }).from(posts).where(eq(posts.slug, input.slug)),
-      context.db
-        .select({ likes: postLikes.likeCount })
-        .from(postLikes)
-        .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
+    // Check cache for both global and user-specific like counts
+    const [cachedLikes, cachedUserLikes] = await Promise.all([
+      cache.posts.likes.get(input.slug),
+      cache.posts.userLikes.get(input.slug, anonKey)
     ])
 
-    if (!post) {
+    // If both are cached, return immediately
+    if (cachedLikes !== null && cachedUserLikes !== null) {
+      return {
+        likes: cachedLikes,
+        currentUserLikes: cachedUserLikes
+      }
+    }
+
+    // Fetch missing data from DB
+    const [[post], [user]] = await Promise.all([
+      cachedLikes === null
+        ? context.db.select({ likes: posts.likes }).from(posts).where(eq(posts.slug, input.slug))
+        : Promise.resolve([null]),
+      cachedUserLikes === null
+        ? context.db
+            .select({ likeCount: postLikes.likeCount })
+            .from(postLikes)
+            .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
+        : Promise.resolve([null])
+    ])
+
+    if (cachedLikes === null && !post) {
       throw new ORPCError('NOT_FOUND', {
         message: 'Post not found'
       })
     }
 
-    const likesData = {
-      likes: post.likes,
-      currentUserLikes: user?.likes ?? 0 // The case that user has not liked the post yet
+    const likes = cachedLikes ?? post!.likes
+    const currentUserLikes = cachedUserLikes ?? user?.likeCount ?? 0
+
+    // Cache any missing values
+    const cachePromises = []
+    if (cachedLikes === null) {
+      cachePromises.push(cache.posts.likes.set(likes, input.slug))
     }
+    if (cachedUserLikes === null) {
+      cachePromises.push(cache.posts.userLikes.set(currentUserLikes, input.slug, anonKey))
+    }
+    await Promise.all(cachePromises)
 
-    await cache.posts.likes.set(likesData, input.slug, anonKey)
-
-    return likesData
+    return {
+      likes,
+      currentUserLikes
+    }
   })
 
 export const incrementLike = publicProcedure
@@ -138,12 +163,14 @@ export const incrementLike = publicProcedure
       })
     }
 
-    const likesData = {
+    // Update both global and user-specific like caches
+    await Promise.all([
+      cache.posts.likes.set(post.likes, input.slug),
+      cache.posts.userLikes.set(currentUserLikes.likeCount, input.slug, anonKey)
+    ])
+
+    return {
       likes: post.likes,
       currentUserLikes: currentUserLikes.likeCount
     }
-
-    await cache.posts.likes.set(likesData, input.slug, anonKey)
-
-    return likesData
   })
