@@ -9,7 +9,7 @@
 // Modified by: Nelson Lai
 import type { RehypeShikiCoreOptions } from '@shikijs/rehype/core'
 import type { Root } from 'hast'
-import type { Plugin } from 'unified'
+import type { Plugin, Transformer } from 'unified'
 
 import { bundledLanguages, getSingletonHighlighter, type Highlighter } from 'shiki'
 import { visit } from 'unist-util-visit'
@@ -42,55 +42,57 @@ const getHighlighter = async () => {
   return cachedHighlighter
 }
 
-export const rehypeInlineCode: Plugin<[RehypeShikiCoreOptions], Root> = () => {
-  return async (tree) => {
-    const highlighter = await getHighlighter()
+const transformer: Transformer<Root> = async (tree) => {
+  const highlighter = await getHighlighter()
 
-    visit(tree, 'element', (node, index, parent) => {
-      if (node.tagName !== 'code') return
+  visit(tree, 'element', (node, index, parent) => {
+    if (node.tagName !== 'code') return
 
-      const childNode = node.children[0]
+    const childNode = node.children[0]
 
-      if (childNode?.type !== 'text') return
+    if (childNode?.type !== 'text') return
 
-      const match = inlineShikiRegex.exec(childNode.value)
-      if (!match) return
+    const match = inlineShikiRegex.exec(childNode.value)
+    if (!match) return
 
-      const [, code, lang] = match
+    const [, code, lang] = match
 
-      if (!code || !lang) return
+    if (!code || !lang) return
 
-      const isLang = !lang.startsWith('.')
+    const isLang = !lang.startsWith('.')
 
-      const hast = highlighter.codeToHast(code, {
-        themes: DEFAULT_SHIKI_THEMES,
-        lang: isLang ? lang : 'plaintext',
-        defaultColor: false
-      })
-
-      const preNode = hast.children[0]
-
-      if (preNode?.type !== 'element') return
-      if (preNode.tagName !== 'pre') return
-
-      const inlineCode = preNode.children[0]
-      if (inlineCode?.type !== 'element') return
-
-      // Set the color by scope if language is not specified
-      // @example `myFunction{:.entity.name.function}`
-      if (!isLang) {
-        const colors = getScopeColors(highlighter, lang.slice(1))
-        const spanNode = inlineCode.children[0]
-
-        if (spanNode?.type !== 'element') return
-        if (spanNode.tagName !== 'span') return
-
-        spanNode.properties.style = themeKeys.map((key, keyIndex) => `--shiki-${key}:${colors[keyIndex]}`).join(';')
-      }
-
-      inlineCode.properties.className = ['shiki']
-
-      parent?.children.splice(index ?? 0, 1, inlineCode)
+    const hast = highlighter.codeToHast(code, {
+      themes: DEFAULT_SHIKI_THEMES,
+      lang: isLang ? lang : 'plaintext',
+      defaultColor: false
     })
-  }
+
+    const preNode = hast.children[0]
+
+    if (preNode?.type !== 'element') return
+    if (preNode.tagName !== 'pre') return
+
+    const inlineCode = preNode.children[0]
+    if (inlineCode?.type !== 'element') return
+
+    // Set the color by scope if language is not specified
+    // @example `myFunction{:.entity.name.function}`
+    if (!isLang) {
+      const colors = getScopeColors(highlighter, lang.slice(1))
+      const spanNode = inlineCode.children[0]
+
+      if (spanNode?.type !== 'element') return
+      if (spanNode.tagName !== 'span') return
+
+      spanNode.properties.style = themeKeys.map((key, keyIndex) => `--shiki-${key}:${colors[keyIndex]}`).join(';')
+    }
+
+    inlineCode.properties.className = ['shiki']
+
+    parent?.children.splice(index ?? 0, 1, inlineCode)
+  })
+}
+
+export const rehypeInlineCode: Plugin<[RehypeShikiCoreOptions], Root> = () => {
+  return transformer
 }

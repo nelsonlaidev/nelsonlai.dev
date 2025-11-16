@@ -60,9 +60,7 @@ const CommentCodeBlock = (props: CommentCodeBlockProps) => {
       {isHighlighted && codeHtml ? (
         <code
           // eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml -- safe
-          dangerouslySetInnerHTML={{
-            __html: codeHtml
-          }}
+          dangerouslySetInnerHTML={{ __html: codeHtml }}
         />
       ) : (
         <code>{code}</code>

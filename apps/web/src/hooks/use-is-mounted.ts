@@ -4,7 +4,6 @@ export const useIsMounted = () => {
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    // eslint-disable-next-line @eslint-react/hooks-extra/no-direct-set-state-in-use-effect -- valid case
     setIsMounted(true)
     return () => {
       setIsMounted(false)
