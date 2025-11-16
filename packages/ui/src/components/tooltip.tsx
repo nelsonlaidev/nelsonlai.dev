@@ -9,7 +9,6 @@ type TooltipProviderProps = React.ComponentProps<typeof TooltipPrimitive.Provide
 const TooltipProvider = (props: TooltipProviderProps) => {
   const { delayDuration = 0, ...rest } = props
 
-  // eslint-disable-next-line @eslint-react/no-context-provider -- Radix UI Context Provider
   return <TooltipPrimitive.Provider data-slot='tooltip-provider' delayDuration={delayDuration} {...rest} />
 }
 

@@ -55,8 +55,7 @@ const config: NextConfig = {
 
   skipTrailingSlashRedirect: true,
 
-  // eslint-disable-next-line @typescript-eslint/require-await -- must be async
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: '/_ph/static/:path*',
@@ -69,8 +68,7 @@ const config: NextConfig = {
     ]
   },
 
-  // eslint-disable-next-line @typescript-eslint/require-await -- must be async
-  async redirects() {
+  redirects() {
     return [
       {
         source: '/pc-specs',
@@ -95,8 +93,7 @@ const config: NextConfig = {
     ]
   },
 
-  // eslint-disable-next-line @typescript-eslint/require-await -- must be async
-  async headers() {
+  headers() {
     return [
       {
         source: '/(.*)',
