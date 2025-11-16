@@ -243,22 +243,24 @@ export const deleteComment = protectedProcedure
     }
 
     // Otherwise, delete the comment
-    await context.db.delete(comments).where(eq(comments.id, input.id))
+    await context.db.transaction(async (tx) => {
+      await tx.delete(comments).where(eq(comments.id, input.id))
 
-    // Case: deleting a reply
-    if (comment.parentId) {
-      const parentComment = await context.db.query.comments.findFirst({
-        where: and(eq(comments.id, comment.parentId), eq(comments.isDeleted, true)),
-        with: {
-          replies: true
+      // Case: deleting a reply
+      if (comment.parentId) {
+        const parentComment = await tx.query.comments.findFirst({
+          where: and(eq(comments.id, comment.parentId), eq(comments.isDeleted, true)),
+          with: {
+            replies: true
+          }
+        })
+
+        // If the parent comment (which is marked as deleted) has no replies, delete it also.
+        if (parentComment?.replies.length === 0) {
+          await tx.delete(comments).where(eq(comments.id, comment.parentId))
         }
-      })
-
-      // If the parent comment (which is marked as deleted) has no replies, delete it also.
-      if (parentComment?.replies.length === 0) {
-        await context.db.delete(comments).where(eq(comments.id, comment.parentId))
       }
-    }
+    })
   })
 
 export const countComments = publicProcedure
