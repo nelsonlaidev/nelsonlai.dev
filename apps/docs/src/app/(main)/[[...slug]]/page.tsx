@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 
+import { Badge } from '@repo/ui/components/badge'
 import { createRelativeLink } from 'fumadocs-ui/mdx'
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page'
+import { ArrowUpRightIcon } from 'lucide-react'
 import { notFound } from 'next/navigation'
 
 import { getPageImage, source } from '@/lib/source'
@@ -39,8 +41,26 @@ const Page = async (props: PageProps<'/[[...slug]]'>) => {
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
       <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
-      <DocsBody>
+      <DocsDescription className='mb-0'>{page.data.description}</DocsDescription>
+      {(page.data.docs !== undefined || page.data.api !== undefined) && (
+        <div className='flex items-center gap-2'>
+          {page.data.docs && (
+            <Badge variant='secondary' className='rounded-full' asChild>
+              <a href={page.data.docs} target='_blank' rel='noopener noreferrer'>
+                Docs <ArrowUpRightIcon />
+              </a>
+            </Badge>
+          )}
+          {page.data.api && (
+            <Badge variant='secondary' className='rounded-full' asChild>
+              <a href={page.data.api} target='_blank' rel='noopener noreferrer'>
+                API Reference <ArrowUpRightIcon />
+              </a>
+            </Badge>
+          )}
+        </div>
+      )}
+      <DocsBody className='mt-4'>
         <MDX
           components={getMDXComponents({
             a: createRelativeLink(source, page)
