@@ -2,10 +2,31 @@ import { type InferPageType, loader } from 'fumadocs-core/source'
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons'
 import { docs } from 'fumadocs-mdx:collections/server'
 
+declare module 'fumadocs-core/page-tree' {
+  interface Item {
+    package?: 'ark-ui'
+  }
+}
+
 export const source = loader({
   baseUrl: '/',
   source: docs.toFumadocsSource(),
-  plugins: [lucideIconsPlugin()]
+  plugins: ({ typedPlugin }) => [
+    lucideIconsPlugin(),
+    typedPlugin({
+      transformPageTree: {
+        file: (node) => {
+          const page = source.getPage(node.url.split('/').filter(Boolean))
+
+          if (page?.data.api?.includes('ark-ui')) {
+            node.package = 'ark-ui'
+          }
+
+          return node
+        }
+      }
+    })
+  ]
 })
 
 export const getPageImage = (page: InferPageType<typeof source>) => {
