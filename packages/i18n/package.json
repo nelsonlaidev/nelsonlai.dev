@@ -26,8 +26,8 @@
   "devDependencies": {
     "@nelsonlaidev/eslint-config": "2.3.3",
     "@nelsonlaidev/typescript-config": "1.0.0",
-    "@types/react": "19.2.2",
-    "next": "16.0.3",
+    "@types/react": "19.2.7",
+    "next": "16.0.7",
     "next-intl": "4.4.0"
   },
   "peerDependencies": {
