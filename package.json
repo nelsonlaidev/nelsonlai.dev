@@ -8,10 +8,8 @@
     "build": "turbo build",
     "build:apps": "turbo build --filter=./apps/*",
     "build:mdx": "turbo build:mdx",
-    "check": "pnpm lint && pnpm type-check && pnpm format:check && pnpm check:spelling && pnpm check:knip && pnpm check:i18n",
+    "check": "pnpm lint && pnpm typecheck && pnpm format:check && pnpm knip && pnpm check:i18n",
     "check:i18n": "i18n-check -s en -l packages/i18n/src/messages -u apps/web/src -f next-intl",
-    "check:knip": "pnpm with-env knip",
-    "check:spelling": "cspell --no-progress --no-summary --no-must-find-files --unique",
     "clean": "turbo clean && rm -rf .turbo coverage",
     "db:check": "turbo db:check",
     "db:generate": "turbo db:generate",
@@ -27,6 +25,7 @@
     "format:check": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "format:write": "prettier --cache --write --list-different --ignore-path .gitignore --ignore-path .prettierignore .",
     "preinstall": "npx --yes only-allow pnpm",
+    "knip": "pnpm with-env knip",
     "lint": "turbo lint && eslint . --max-warnings 0",
     "lint:fix": "turbo lint:fix && eslint --fix .",
     "prepare": "lefthook install",
@@ -38,21 +37,17 @@
     "test:unit:coverage": "pnpm with-env vitest run --coverage",
     "test:unit:ui": "pnpm with-env vitest --ui",
     "test:unit:watch": "pnpm with-env vitest watch",
-    "type-check": "turbo type-check",
+    "typecheck": "turbo type-check",
     "typegen": "turbo typegen",
     "with-env": "dotenvx run -f .env.local --ignore=MISSING_ENV_FILE --"
   },
   "lint-staged": {
-    "*.{js,mjs,jsx,ts,mts,tsx}": "eslint --fix",
+    "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}": "eslint --fix",
     "*": [
-      "prettier --write --ignore-unknown",
-      "cspell --no-progress --no-summary --no-must-find-files --unique"
+      "prettier --write --ignore-unknown"
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "20.1.0",
-    "@commitlint/config-conventional": "20.0.0",
-    "@cspell/dict-redis": "1.0.7",
     "@dotenvx/dotenvx": "1.51.0",
     "@lingual/i18n-check": "0.8.12",
     "@nelsonlaidev/eslint-config": "2.3.3",
@@ -63,11 +58,9 @@
     "@vitest/coverage-v8": "4.0.4",
     "@vitest/ui": "4.0.4",
     "cross-env": "10.1.0",
-    "cspell": "9.2.2",
-    "czg": "1.12.0",
     "eslint": "9.39.1",
     "jsdom": "27.0.1",
-    "knip": "5.66.4",
+    "knip": "5.73.4",
     "lefthook": "2.0.2",
     "lint-staged": "16.2.6",
     "prettier": "3.6.2",

@@ -2,7 +2,7 @@
 @import '@repo/ui/styles/preset.css';
 @import '@repo/ui/styles/shiki.css';
 @import '@repo/ui/styles/typography.css';
-@source '../../../../packages/ui/src/**/*.{ts,tsx}';
+@source '../../../../packages/ui/src/components';
 
 @theme {
   --font-sans: var(--font-geist-sans), var(--font-noto-sans-tc), var(--font-noto-sans-sc);

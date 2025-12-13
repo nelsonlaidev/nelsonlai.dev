@@ -10,15 +10,5 @@
   },
   "extends": "@nelsonlaidev/typescript-config/nextjs.json",
   "exclude": ["node_modules"],
-  "include": [
-    "src",
-    ".next/types/**/*.ts",
-    "next-env.d.ts",
-    "postcss.config.mjs",
-    "eslint.config.ts",
-    "next.config.ts",
-    "playwright.config.ts",
-    "vitest.config.ts",
-    "global.d.ts"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts", ".next/dev/types/**/*.ts"]
 }

@@ -21,10 +21,9 @@
     "with-env": "dotenvx run -f ../../.env.local --ignore=MISSING_ENV_FILE --"
   },
   "lint-staged": {
-    "*.{js,mjs,jsx,ts,mts,tsx}": "eslint --fix",
+    "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}": "eslint --fix",
     "*": [
-      "prettier --write --ignore-unknown",
-      "cspell --no-progress --no-summary --no-must-find-files --unique"
+      "prettier --write --ignore-unknown"
     ]
   },
   "dependencies": {
@@ -65,15 +64,15 @@
     "lucide-react": "0.548.0",
     "markdown-to-jsx": "8.0.0",
     "motion": "12.23.24",
-    "next": "16.0.3",
+    "next": "16.0.10",
     "next-intl": "4.4.0",
     "next-themes": "0.4.6",
     "nuqs": "2.7.2",
     "postgres": "3.4.7",
     "posthog-js": "1.281.0",
     "posthog-node": "5.10.4",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
     "react-intersection-observer": "10.0.0",
     "react-medium-image-zoom": "5.4.0",
     "remark": "15.0.1",
@@ -97,7 +96,7 @@
     "@content-collections/next": "0.2.9",
     "@nelsonlaidev/eslint-config": "2.3.3",
     "@nelsonlaidev/typescript-config": "1.0.0",
-    "@next/bundle-analyzer": "16.0.3",
+    "@next/bundle-analyzer": "16.0.10",
     "@repo/kv": "workspace:*",
     "@tailwindcss/postcss": "4.1.16",
     "@testing-library/jest-dom": "6.9.1",
@@ -106,8 +105,8 @@
     "@types/hast": "3.0.4",
     "@types/mdast": "4.0.4",
     "@types/node": "24.9.2",
-    "@types/react": "19.2.2",
-    "@types/react-dom": "19.2.2",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
     "@types/rss": "0.0.32",
     "@types/spotify-api": "0.0.25",
     "@types/tinycolor2": "1.4.6",

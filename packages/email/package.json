@@ -15,23 +15,22 @@
     "type-check": "tsc --noEmit"
   },
   "lint-staged": {
-    "*.{js,mjs,jsx,ts,mts,tsx}": "eslint --fix",
+    "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}": "eslint --fix",
     "*": [
-      "prettier --write --ignore-unknown",
-      "cspell --no-progress --no-summary --no-must-find-files --unique"
+      "prettier --write --ignore-unknown"
     ]
   },
   "dependencies": {
     "@react-email/components": "0.5.7",
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react": "19.2.1",
+    "react-dom": "19.2.1"
   },
   "devDependencies": {
     "@nelsonlaidev/eslint-config": "2.3.3",
     "@nelsonlaidev/typescript-config": "1.0.0",
-    "@react-email/preview-server": "4.3.2",
+    "@react-email/preview-server": "5.0.8",
     "@types/node": "24.9.2",
-    "@types/react": "19.2.2",
+    "@types/react": "19.2.7",
     "react-email": "4.3.2",
     "tailwindcss": "4.1.16"
   }
