@@ -3,12 +3,3 @@ pre-commit:
   jobs:
     - name: lint-staged
       run: pnpm lint-staged
-
-commit-msg:
-  parallel: true
-  jobs:
-    - name: commitlint
-      run: pnpm commitlint --edit {1}
-
-    - name: spelling
-      run: pnpm check:spelling {1}

@@ -8,5 +8,5 @@
   },
   "extends": "@nelsonlaidev/typescript-config/react-library.json",
   "exclude": ["node_modules"],
-  "include": ["src", "postcss.config.mjs", "eslint.config.ts", "vitest.config.ts"]
+  "include": ["**/*.ts", "**/*.tsx"]
 }

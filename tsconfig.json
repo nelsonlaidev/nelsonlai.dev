@@ -1,5 +1,5 @@
 {
   "extends": "@nelsonlaidev/typescript-config/base.json",
   "exclude": ["node_modules", "apps/**", "packages/**"],
-  "include": ["prettier.config.js", "commitlint.config.ts", "eslint.config.ts", "knip.config.ts", "vitest.config.ts"]
+  "include": ["**/*.ts", "**/*.tsx"]
 }

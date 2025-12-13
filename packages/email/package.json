@@ -15,10 +15,9 @@
     "type-check": "tsc --noEmit"
   },
   "lint-staged": {
-    "*.{js,mjs,jsx,ts,mts,tsx}": "eslint --fix",
+    "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}": "eslint --fix",
     "*": [
-      "prettier --write --ignore-unknown",
-      "cspell --no-progress --no-summary --no-must-find-files --unique"
+      "prettier --write --ignore-unknown"
     ]
   },
   "dependencies": {

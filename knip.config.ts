@@ -34,10 +34,6 @@ const config: KnipConfig = {
       ],
       ignore: ['src/styles.css']
     }
-  },
-  // Credit to https://github.com/webpro-nl/knip/issues/1008#issuecomment-2756559038
-  compilers: {
-    css: (text: string) => [...text.matchAll(/(?<=@)(?:import|plugin)[^;]+/g)].join('\n').replace('plugin', 'import')
   }
 }
 
