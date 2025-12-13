@@ -4,8 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/.source": ["./.source/index.ts"],
-      "~/*": ["./public/*"]
+      "~/*": ["./public/*"],
+      "fumadocs-mdx:collections/*": [".source/*"]
     }
   },
   "extends": "@nelsonlaidev/typescript-config/nextjs.json",
