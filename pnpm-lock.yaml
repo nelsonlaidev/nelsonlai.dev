@@ -15,14 +15,14 @@ importers:
         specifier: 0.8.12
         version: 0.8.12
       '@nelsonlaidev/eslint-config':
-        specifier: 2.3.3
-        version: 2.3.3(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
+        specifier: 2.4.5
+        version: 2.4.5(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
       '@nelsonlaidev/prettier-config':
-        specifier: 0.1.0
-        version: 0.1.0(prettier-plugin-packagejson@2.5.19(prettier@3.6.2))(prettier@3.6.2)
+        specifier: 0.1.1
+        version: 0.1.1(prettier-plugin-packagejson@2.5.19(prettier@3.6.2))(prettier@3.6.2)
       '@nelsonlaidev/typescript-config':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.1.1
+        version: 1.1.1
       '@playwright/test':
         specifier: 1.56.1
         version: 1.56.1
@@ -79,13 +79,13 @@ importers:
         version: link:../../packages/ui
       fumadocs-core:
         specifier: 16.1.0
-        version: 16.1.0(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+        version: 16.1.0(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       fumadocs-mdx:
         specifier: 14.0.3
-        version: 14.0.3(fumadocs-core@16.1.0(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(vite@7.1.10(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1))
+        version: 14.0.3(fumadocs-core@16.1.0(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(vite@7.1.10(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1))
       fumadocs-ui:
         specifier: 16.1.0
-        version: 16.1.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(tailwindcss@4.1.16)
+        version: 16.1.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(tailwindcss@4.1.16)
       hast-util-to-jsx-runtime:
         specifier: 2.3.6
         version: 2.3.6
@@ -115,8 +115,8 @@ importers:
         version: 4.1.12
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: 2.3.3
-        version: 2.3.3(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
+        specifier: 2.4.5
+        version: 2.4.5(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
       '@tailwindcss/postcss':
         specifier: 4.1.16
         version: 4.1.16
@@ -257,7 +257,7 @@ importers:
         version: 16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       next-intl:
         specifier: 4.4.0
-        version: 4.4.0(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(typescript@5.9.3)
+        version: 4.4.0(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(typescript@5.9.3)
       next-themes:
         specifier: 0.4.6
         version: 0.4.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
@@ -338,11 +338,11 @@ importers:
         specifier: 0.2.9
         version: 0.2.9(@content-collections/core@0.11.1(typescript@5.9.3))(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))
       '@nelsonlaidev/eslint-config':
-        specifier: 2.3.3
-        version: 2.3.3(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
+        specifier: 2.4.5
+        version: 2.4.5(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
       '@nelsonlaidev/typescript-config':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.1.1
+        version: 1.1.1
       '@next/bundle-analyzer':
         specifier: 16.0.10
         version: 16.0.10
@@ -414,11 +414,11 @@ importers:
         version: 0.44.7(@upstash/redis@1.35.6)(kysely@0.28.8)(postgres@3.4.7)
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: 2.3.3
-        version: 2.3.3(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
+        specifier: 2.4.5
+        version: 2.4.5(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
       '@nelsonlaidev/typescript-config':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.1.1
+        version: 1.1.1
       '@types/node':
         specifier: 24.9.2
         version: 24.9.2
@@ -448,14 +448,14 @@ importers:
         version: 19.2.1(react@19.2.1)
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: 2.3.3
-        version: 2.3.3(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
+        specifier: 2.4.5
+        version: 2.4.5(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
       '@nelsonlaidev/typescript-config':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.1.1
+        version: 1.1.1
       '@react-email/preview-server':
         specifier: 5.0.8
-        version: 5.0.8(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+        version: 5.0.8(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       '@types/node':
         specifier: 24.9.2
         version: 24.9.2
@@ -479,20 +479,20 @@ importers:
         version: 4.1.12
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: 2.3.3
-        version: 2.3.3(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
+        specifier: 2.4.5
+        version: 2.4.5(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
       '@nelsonlaidev/typescript-config':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.1.1
+        version: 1.1.1
 
   packages/i18n:
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: 2.3.3
-        version: 2.3.3(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
+        specifier: 2.4.5
+        version: 2.4.5(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
       '@nelsonlaidev/typescript-config':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.1.1
+        version: 1.1.1
       '@types/react':
         specifier: 19.2.7
         version: 19.2.7
@@ -501,7 +501,7 @@ importers:
         version: 16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       next-intl:
         specifier: 4.4.0
-        version: 4.4.0(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(typescript@5.9.3)
+        version: 4.4.0(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(typescript@5.9.3)
 
   packages/kv:
     dependencies:
@@ -516,11 +516,11 @@ importers:
         version: 3.4.2
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: 2.3.3
-        version: 2.3.3(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
+        specifier: 2.4.5
+        version: 2.4.5(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
       '@nelsonlaidev/typescript-config':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.1.1
+        version: 1.1.1
       '@repo/env':
         specifier: workspace:*
         version: link:../env
@@ -580,11 +580,11 @@ importers:
         version: 1.1.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
     devDependencies:
       '@nelsonlaidev/eslint-config':
-        specifier: 2.3.3
-        version: 2.3.3(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
+        specifier: 2.4.5
+        version: 2.4.5(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)
       '@nelsonlaidev/typescript-config':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.1.1
+        version: 1.1.1
       '@tailwindcss/typography':
         specifier: 0.5.19
         version: 0.5.19(tailwindcss@4.1.16)
@@ -1893,19 +1893,19 @@ packages:
   '@napi-rs/wasm-runtime@1.1.0':
     resolution: {integrity: sha512-Fq6DJW+Bb5jaWE69/qOE0D1TUN9+6uWhCeZpdnSBk14pjLcCWR7Q8n49PTSPHazM37JqrsdpEthXy2xn6jWWiA==}
 
-  '@nelsonlaidev/eslint-config@2.3.3':
-    resolution: {integrity: sha512-l5Zx8Mkp6gWAIieyxi6w371CkNdtYVOSlRNlHncf2Gv7yycqXW/qPopjflxOKUr7fRw7+fNbr78mIUNYwTTK8w==}
+  '@nelsonlaidev/eslint-config@2.4.5':
+    resolution: {integrity: sha512-Rh3cW3KP9RW77ZumjygyG+zkT5YrzwFqPWEje7S8PP7rVdCdAKAeBTFpHc6/TexoXdGgT6wMBTPI6PqqxX5eiA==}
     peerDependencies:
       eslint: '>=9.0.0'
 
-  '@nelsonlaidev/prettier-config@0.1.0':
-    resolution: {integrity: sha512-f3fgzg6sY4MnddWIh6bVcpN4utgU7LFCQbCqqggzJcRg9x25mhMo8gf0uFDrx0bY7OEI0fOi4kXRIhH2jL/bTg==}
+  '@nelsonlaidev/prettier-config@0.1.1':
+    resolution: {integrity: sha512-1j7CJ0LllNwKljS/xKovgXJR5fb2aZIJ6/1FGW+cBjCnBcIc0UM3h4Jl7vDaucpk+Q4BeRgPapnq7wr0zMAX6g==}
     peerDependencies:
       prettier: '>=3.6.0'
       prettier-plugin-packagejson: '>=2.5.0'
 
-  '@nelsonlaidev/typescript-config@1.0.0':
-    resolution: {integrity: sha512-quji2a9Vv0pKgE+Fq8P5uKAy4BbR3kVpSOb3WEck8jQFev6I37BVH/4gu7LQ8ClPYH636wEGLz22ntoT9yijKQ==}
+  '@nelsonlaidev/typescript-config@1.1.1':
+    resolution: {integrity: sha512-VNae2m0v7Mzt2B+l8ws2CnwYwy4BdLXpvrsJWHS6g9VfxfkTIc4gUgNGl2+5OhbDIFXKUwUIEMv89VucLF6wYA==}
 
   '@next/bundle-analyzer@16.0.10':
     resolution: {integrity: sha512-AHA6ZomhQuRsJtkoRvsq+hIuwA6F26mQzQT8ICcc2dL3BvHRcWOA+EiFr+BgWFY++EE957xVDqMIJjLApyxnwA==}
@@ -10300,7 +10300,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@nelsonlaidev/eslint-config@2.3.3(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)':
+  '@nelsonlaidev/eslint-config@2.4.5(@types/eslint@9.6.1)(@typescript-eslint/utils@8.46.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(prettier@3.6.2)(tailwindcss@4.1.16)(typescript@5.9.3)(vitest@4.0.4)':
     dependencies:
       '@eslint-community/eslint-plugin-eslint-comments': 4.5.0(eslint@9.39.1(jiti@2.6.1))
       '@eslint-react/eslint-plugin': 2.3.5(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
@@ -10339,12 +10339,12 @@ snapshots:
       - typescript
       - vitest
 
-  '@nelsonlaidev/prettier-config@0.1.0(prettier-plugin-packagejson@2.5.19(prettier@3.6.2))(prettier@3.6.2)':
+  '@nelsonlaidev/prettier-config@0.1.1(prettier-plugin-packagejson@2.5.19(prettier@3.6.2))(prettier@3.6.2)':
     dependencies:
       prettier: 3.6.2
       prettier-plugin-packagejson: 2.5.19(prettier@3.6.2)
 
-  '@nelsonlaidev/typescript-config@1.0.0': {}
+  '@nelsonlaidev/typescript-config@1.1.1': {}
 
   '@next/bundle-analyzer@16.0.10':
     dependencies:
@@ -11536,9 +11536,9 @@ snapshots:
       marked: 15.0.12
       react: 19.2.1
 
-  '@react-email/preview-server@5.0.8(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)':
+  '@react-email/preview-server@5.0.8(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)':
     dependencies:
-      next: 16.0.9(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      next: 16.0.9(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
     transitivePeerDependencies:
       - '@babel/core'
       - '@opentelemetry/api'
@@ -14730,7 +14730,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  fumadocs-core@16.1.0(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
+  fumadocs-core@16.1.0(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
     dependencies:
       '@formatjs/intl-localematcher': 0.6.2
       '@orama/orama': 3.1.16
@@ -14759,14 +14759,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  fumadocs-mdx@14.0.3(fumadocs-core@16.1.0(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(vite@7.1.10(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1)):
+  fumadocs-mdx@14.0.3(fumadocs-core@16.1.0(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(vite@7.1.10(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1)):
     dependencies:
       '@mdx-js/mdx': 3.1.1
       '@standard-schema/spec': 1.0.0
       chokidar: 4.0.3
       esbuild: 0.27.1
       estree-util-value-to-estree: 3.5.0
-      fumadocs-core: 16.1.0(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      fumadocs-core: 16.1.0(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       js-yaml: 4.1.1
       lru-cache: 11.2.2
       mdast-util-to-markdown: 2.1.2
@@ -14787,7 +14787,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  fumadocs-ui@16.1.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(tailwindcss@4.1.16):
+  fumadocs-ui@16.1.0(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(tailwindcss@4.1.16):
     dependencies:
       '@radix-ui/react-accordion': 1.2.12(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       '@radix-ui/react-collapsible': 1.1.12(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
@@ -14800,7 +14800,7 @@ snapshots:
       '@radix-ui/react-slot': 1.2.4(@types/react@19.2.7)(react@19.2.1)
       '@radix-ui/react-tabs': 1.1.13(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       class-variance-authority: 0.7.1
-      fumadocs-core: 16.1.0(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      fumadocs-core: 16.1.0(@types/react@19.2.7)(lucide-react@0.548.0(react@19.2.1))(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       lodash.merge: 4.6.2
       next-themes: 0.4.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       postcss-selector-parser: 7.1.0
@@ -16299,7 +16299,7 @@ snapshots:
 
   negotiator@1.0.0: {}
 
-  next-intl@4.4.0(next@16.0.10(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(typescript@5.9.3):
+  next-intl@4.4.0(next@16.0.10(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)(typescript@5.9.3):
     dependencies:
       '@formatjs/intl-localematcher': 0.5.10
       negotiator: 1.0.0
@@ -16338,7 +16338,7 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@16.0.9(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
+  next@16.0.9(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
     dependencies:
       '@next/env': 16.0.9
       '@swc/helpers': 0.5.15

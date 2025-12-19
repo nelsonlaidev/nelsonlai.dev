@@ -23,8 +23,8 @@
     ]
   },
   "devDependencies": {
-    "@nelsonlaidev/eslint-config": "2.3.3",
-    "@nelsonlaidev/typescript-config": "1.0.0",
+    "@nelsonlaidev/eslint-config": "2.4.5",
+    "@nelsonlaidev/typescript-config": "1.1.1",
     "@types/react": "19.2.7",
     "next": "16.0.10",
     "next-intl": "4.4.0"
