@@ -2,7 +2,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme {
+@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
@@ -52,8 +52,8 @@
 
   --animate-tree-view-content-down: tree-view-content-down 0.2s ease-out;
   --animate-tree-view-content-up: tree-view-content-up 0.2s ease-out;
-  --animate-marquee-left: marquee-left var(--duration, 30s) linear infinite;
-  --animate-marquee-up: marquee-up var(--duration, 30s) linear infinite;
+  --animate-marquee-x: marquee-x var(--marquee-duration) linear infinite;
+  --animate-marquee-y: marquee-y var(--marquee-duration) linear infinite;
 
   @keyframes tree-view-content-down {
     from {
@@ -73,21 +73,21 @@
     }
   }
 
-  @keyframes marquee-left {
+  @keyframes marquee-x {
     from {
       transform: translateX(0);
     }
     to {
-      transform: translateX(calc(-100% - var(--gap)));
+      transform: translateX(calc(-100% - var(--marquee-gap)));
     }
   }
 
-  @keyframes marquee-up {
+  @keyframes marquee-y {
     from {
       transform: translateY(0);
     }
     to {
-      transform: translateY(calc(-100% - var(--gap)));
+      transform: translateY(calc(-100% - var(--marquee-gap)));
     }
   }
 }
