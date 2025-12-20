@@ -11,6 +11,7 @@ nelsonlai.dev is a Next.js monorepo containing a personal website, and shared pa
 ```
 nelsonlai-dev/
 ├── apps/                   # Application workspaces
+│   ├── docs/               # Documentation site (Next.js)
 │   └── web/                # Main website (Next.js)
 ├── packages/               # Shared packages
 │   ├── db/                 # Database schema and migrations (Drizzle ORM)
@@ -18,8 +19,7 @@ nelsonlai-dev/
 │   ├── env/                # Environment variable management
 │   ├── i18n/               # Internationalization
 │   ├── kv/                 # Key-value store utilities
-│   ├── ui/                 # Shared UI components library
-│   ├── utils/              # Common utility functions
+│   └── ui/                 # Shared UI components library
 ```
 
 ### Key Directories AI Should Understand
@@ -245,14 +245,14 @@ Follow Conventional Commits:
 
 Available scopes:
 
-- apps: web
-- packages: db, email, env, i18n, kv, ui, utils
+- apps: docs, web
+- packages: db, email, env, i18n, kv, ui
 
 ### PR Checklist
 
 Before submitting:
 
-1. Run `pnpm check` (includes lint, type-check, format)
+1. Run `pnpm check` (includes lint, typecheck, format)
 2. Run `pnpm test:unit && pnpm test:e2e` for affected packages
 3. Add/update tests for new features
 4. Ensure no console errors
@@ -270,31 +270,46 @@ pnpm install
 # Development
 pnpm dev              # Run all apps and packages
 pnpm dev:web          # Run web app only
+pnpm dev:docs         # Run docs app only
+pnpm dev:packages     # Run packages only
 
 # Building
-pnpm build        # Build all apps and packages
+pnpm build            # Build all apps and packages
 pnpm build:apps       # Build all apps
 pnpm build:mdx        # Build MDX content
 
 # Quality Checks
 pnpm lint             # Run ESLint
 pnpm lint:fix         # Fix ESLint issues
+pnpm format           # Format code with Prettier
 pnpm format:check     # Check Prettier formatting
-pnpm format:fix       # Fix formatting
-pnpm type-check       # Run TypeScript checks
-pnpm check:knip       # Check for unused stuff
-pnpm check:spelling   # Check spelling
+pnpm typecheck        # Run TypeScript checks
+pnpm knip             # Check for unused stuff
+pnpm check:i18n       # Check i18n translations
 pnpm check            # Run all checks
+pnpm clean            # Clean build artifacts
 
 # Database
+pnpm db:check         # Check database
 pnpm db:generate      # Generate migrations
 pnpm db:migrate       # Apply migrations
+pnpm db:push          # Push database changes
+pnpm db:reset         # Reset database
 pnpm db:seed          # Seed database
 pnpm db:studio        # Open Drizzle Studio
 
 # Testing
 pnpm test:e2e         # Run E2E tests
+pnpm test:e2e:ui      # Run E2E tests with UI
+pnpm test:e2e:inspector # Run E2E tests with inspector
+pnpm test:e2e:install # Install Playwright browsers
 pnpm test:unit        # Run unit tests
+pnpm test:unit:watch  # Run unit tests in watch mode
+pnpm test:unit:ui     # Run unit tests with UI
+pnpm test:unit:coverage # Run unit tests with coverage
+
+# Code Generation
+pnpm typegen          # Generate types
 ```
 
 ## Common Patterns

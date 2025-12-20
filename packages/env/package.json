@@ -10,7 +10,7 @@
     "clean": "rm -rf .turbo",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint --fix .",
-    "type-check": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "lint-staged": {
     "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}": "eslint --fix",

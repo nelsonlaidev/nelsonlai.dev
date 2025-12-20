@@ -16,7 +16,7 @@
     "test:e2e": "pnpm with-env playwright test",
     "test:e2e:inspector": "pnpm with-env playwright test $1 --debug",
     "test:e2e:ui": "pnpm with-env playwright test --ui",
-    "type-check": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "typegen": "pnpm with-env next typegen",
     "with-env": "dotenvx run -f ../../.env.local --ignore=MISSING_ENV_FILE --"
   },

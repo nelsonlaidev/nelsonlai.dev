@@ -12,7 +12,7 @@
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint --fix .",
     "start": "next start -p 3001",
-    "type-check": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "typegen": "next typegen"
   },
   "lint-staged": {

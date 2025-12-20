@@ -81,8 +81,13 @@
       "cache": false,
       "persistent": true
     },
-    "lint": {},
-    "lint:fix": {},
+    "lint": {
+      "dependsOn": ["typegen", "build:mdx"],
+      "outputs": []
+    },
+    "lint:fix": {
+      "cache": false
+    },
     "test:e2e": {
       "outputs": ["playwright-report/**", "test-results/**"]
     },
@@ -94,7 +99,10 @@
       "cache": false,
       "persistent": true
     },
-    "type-check": {},
+    "typecheck": {
+      "dependsOn": ["typegen", "build:mdx"],
+      "outputs": []
+    },
     "typegen": {
       "outputs": [".next/types/**"]
     }
