@@ -36,7 +36,7 @@ const toggleVariants = cva({
 
 type ToggleProps = React.ComponentProps<typeof TogglePrimitive.Root> & VariantProps<typeof toggleVariants>
 
-const Toggle = (props: ToggleProps) => {
+function Toggle(props: ToggleProps) {
   const { className, variant, size, ...rest } = props
 
   return (

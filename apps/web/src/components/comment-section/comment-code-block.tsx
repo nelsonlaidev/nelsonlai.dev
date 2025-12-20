@@ -14,7 +14,7 @@ type CommentCodeBlockProps = {
   }
 }
 
-const CommentCodeBlock = (props: CommentCodeBlockProps) => {
+function CommentCodeBlock(props: CommentCodeBlockProps) {
   const {
     children: {
       props: { children: code, className, title }
@@ -28,16 +28,18 @@ const CommentCodeBlock = (props: CommentCodeBlockProps) => {
   useEffect(() => {
     if (!highlighter) return
 
-    const generateHighlightedHtml = async () => {
-      const loadedLanguages = highlighter.getLoadedLanguages()
+    const currHighlighter = highlighter
+
+    async function generateHighlightedHtml() {
+      const loadedLanguages = currHighlighter.getLoadedLanguages()
       const hasLoadedLanguage = loadedLanguages.includes(lang)
       const bundledLang = bundledLanguages[lang as BundledLanguage]
 
       if (!hasLoadedLanguage) {
-        await highlighter.loadLanguage(bundledLang)
+        await currHighlighter.loadLanguage(bundledLang)
       }
 
-      return highlighter.codeToHtml(code, {
+      return currHighlighter.codeToHtml(code, {
         lang: lang in bundledLanguages ? lang : 'plaintext',
         themes: {
           light: 'github-light-default',

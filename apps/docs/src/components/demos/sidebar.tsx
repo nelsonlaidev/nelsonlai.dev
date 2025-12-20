@@ -44,7 +44,7 @@ const items = [
   }
 ]
 
-const SidebarDemo = () => {
+function SidebarDemo() {
   return (
     <SidebarProvider>
       <Sidebar collapsible='icon'>

@@ -5,7 +5,9 @@ import path from 'node:path'
 
 import { cache } from 'react'
 
-const getFontPath = (fontName: string) => path.join(process.cwd(), 'public', 'fonts', fontName)
+function getFontPath(fontName: string) {
+  return path.join(process.cwd(), 'public', 'fonts', fontName)
+}
 
 const getRegularFont = cache(async () => {
   const response = await fs.readFile(getFontPath('Geist-Regular.otf'))
@@ -53,7 +55,7 @@ const fetchGoogleFont = cache(async (font: string, text: string): Promise<ArrayB
   return fontData
 })
 
-export const getOGImageFonts = async (title: string): Promise<SatoriOptions['fonts']> => {
+export async function getOGImageFonts(title: string): Promise<SatoriOptions['fonts']> {
   const [regularFontData, mediumFontData, semiBoldFontData, notoSansTCData, notoSansSCData] = await Promise.all([
     getRegularFont(),
     getMediumFont(),

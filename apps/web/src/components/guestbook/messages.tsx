@@ -16,7 +16,7 @@ import { getDefaultImage } from '@/utils/get-default-image'
 import DeleteButton from './delete-button'
 import MessagesLoader from './messages-loader'
 
-const Messages = () => {
+function Messages() {
   const { isSuccess, isLoading, isError, data, fetchNextPage, hasNextPage, isFetchingNextPage } = useMessages()
   const t = useTranslations()
 
@@ -52,7 +52,7 @@ type MessageProps = {
   message: ListMessagesOutput['messages'][number]
 }
 
-const Message = (props: MessageProps) => {
+function Message(props: MessageProps) {
   const { message } = props
   const { data: session } = useSession()
 

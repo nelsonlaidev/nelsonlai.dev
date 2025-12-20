@@ -1,6 +1,6 @@
 import { Logo } from '@repo/ui/components/logo'
 
-const getFontSize = (title: string) => {
+function getFontSize(title: string) {
   const baseSize = 80
   const minSize = 50
   const maxChars = 80
@@ -18,7 +18,7 @@ type OGImageProps = {
   url?: string
 }
 
-const OGImage = (props: OGImageProps) => {
+function OGImage(props: OGImageProps) {
   const { title, url } = props
   const fontSize = getFontSize(title)
 

@@ -10,7 +10,7 @@ import {
 } from '@repo/ui/components/command'
 import { CalculatorIcon, CalendarIcon, CreditCardIcon, SettingsIcon, SmileIcon, UserIcon } from 'lucide-react'
 
-const CommandDemo = () => {
+function CommandDemo() {
   return (
     <Command className='max-w-[450px] rounded-lg border shadow-md'>
       <CommandInput placeholder='Type a command or search...' />

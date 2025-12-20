@@ -1,6 +1,6 @@
 import { Img, Section } from '@react-email/components'
 
-const Logo = () => {
+function Logo() {
   return (
     <Section className='mb-6'>
       <Img

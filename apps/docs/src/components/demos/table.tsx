@@ -54,7 +54,7 @@ const invoices = [
   }
 ]
 
-const TableDemo = () => {
+function TableDemo() {
   return (
     <Table>
       <TableCaption>A list of your recent invoices.</TableCaption>

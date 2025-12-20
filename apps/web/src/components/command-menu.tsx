@@ -32,7 +32,7 @@ type CommandGroup = {
   actions: CommandAction[]
 }
 
-const CommandMenu = () => {
+function CommandMenu() {
   const [isOpen, setIsOpen] = useState(false)
   const [copy] = useCopyToClipboard()
   const { data: session } = useSession()
@@ -41,39 +41,39 @@ const CommandMenu = () => {
   const router = useRouter()
   const signOut = useSignOut({ redirectTo: '/' })
 
-  const closeMenu = () => {
+  function closeMenu() {
     setIsOpen(false)
   }
 
-  const openMenu = () => {
+  function openMenu() {
     setIsOpen(true)
   }
 
-  const toggleMenu = () => {
+  function toggleMenu() {
     setIsOpen((value) => !value)
   }
 
-  const openExternalLink = (url: string) => {
+  function openExternalLink(url: string) {
     closeMenu()
     window.open(url, '_blank', 'noopener')
   }
 
-  const copyCurrentUrl = async () => {
+  async function copyCurrentUrl() {
     closeMenu()
     await copy({ text: globalThis.location.href })
   }
 
-  const handleAccountNavigate = () => {
+  function handleAccountNavigate() {
     closeMenu()
     router.push('/account')
   }
 
-  const handleSignIn = () => {
+  function handleSignIn() {
     closeMenu()
     openDialog()
   }
 
-  const handleSignOut = async () => {
+  async function handleSignOut() {
     closeMenu()
 
     await signOut()

@@ -4,7 +4,7 @@ import { DocsLayout } from 'fumadocs-ui/layouts/notebook'
 import SidebarItem from '@/components/sidebar-item'
 import { source } from '@/lib/source'
 
-const Layout = (props: LayoutProps<'/'>) => {
+function Layout(props: LayoutProps<'/'>) {
   const { children } = props
 
   return (

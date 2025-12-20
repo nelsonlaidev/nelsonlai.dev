@@ -2,7 +2,7 @@
 
 import { SidebarTrigger } from '@repo/ui/components/sidebar'
 
-const AdminHeader = () => {
+function AdminHeader() {
   return (
     <header className='flex items-center justify-between py-4'>
       <SidebarTrigger variant='outline' />

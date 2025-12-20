@@ -30,7 +30,7 @@ type ReplyEmailTemplateProps = {
   unsubscribeUrl: string
 }
 
-const ReplyEmailTemplate = (props: ReplyEmailTemplateProps) => {
+function ReplyEmailTemplate(props: ReplyEmailTemplateProps) {
   const { reply, replierName, replierImage, comment, date, replierIdentifier, postTitle, postUrl, unsubscribeUrl } =
     props
 

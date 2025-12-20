@@ -22,7 +22,7 @@ describe('pathnames', () => {
   })
 })
 
-const getAllPageRoutes = async (): Promise<string[]> => {
+async function getAllPageRoutes(): Promise<string[]> {
   const rootDir = 'apps/web/src/app'
 
   const result: string[] = []
@@ -52,7 +52,7 @@ const getAllPageRoutes = async (): Promise<string[]> => {
   return uniqueRoutes.filter((route) => !PROTECTED_ROUTES.includes(route))
 }
 
-const processPageFile = async (fullPath: string, rootDir: string): Promise<string[]> => {
+async function processPageFile(fullPath: string, rootDir: string): Promise<string[]> {
   const pathParts = getPathParts(fullPath, rootDir)
   const hasDynamic = pathParts.some((part) => part.startsWith('[') && part.endsWith(']'))
 
@@ -63,7 +63,7 @@ const processPageFile = async (fullPath: string, rootDir: string): Promise<strin
   return await processDynamicPage(fullPath, pathParts)
 }
 
-const getPathParts = (fullPath: string, rootDir: string): string[] => {
+function getPathParts(fullPath: string, rootDir: string): string[] {
   const relativePath = path.relative(rootDir, fullPath)
   return relativePath.split('/').filter((part) => {
     if (part === '[locale]') return false
@@ -73,7 +73,7 @@ const getPathParts = (fullPath: string, rootDir: string): string[] => {
   })
 }
 
-const processDynamicPage = async (fullPath: string, pathParts: string[]): Promise<string[]> => {
+async function processDynamicPage(fullPath: string, pathParts: string[]): Promise<string[]> {
   const modPath = pathToFileURL(fullPath).href
   const pageModule = (await import(modPath)) as PageModule
 
@@ -101,8 +101,8 @@ const processDynamicPage = async (fullPath: string, pathParts: string[]): Promis
   })
 }
 
-const isRSCPage = async (filePath: string): Promise<boolean> => {
+async function isRSCPage(filePath: string): Promise<boolean> {
   const content = await fs.readFile(filePath, 'utf8')
 
-  return content.includes('const Page = async')
+  return content.includes('async function Page')
 }

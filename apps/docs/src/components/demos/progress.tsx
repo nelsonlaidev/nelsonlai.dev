@@ -3,7 +3,7 @@
 import { Progress } from '@repo/ui/components/progress'
 import { useEffect, useState } from 'react'
 
-const ProgressDemo = () => {
+function ProgressDemo() {
   const [progress, setProgress] = useState(13)
 
   useEffect(() => {

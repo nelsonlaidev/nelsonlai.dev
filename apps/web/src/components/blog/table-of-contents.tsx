@@ -12,7 +12,7 @@ type TableOfContentsProps = {
   toc: TOC[]
 }
 
-const TableOfContents = (props: TableOfContentsProps) => {
+function TableOfContents(props: TableOfContentsProps) {
   const { toc } = props
   const activeId = useScrollspy(
     toc.map((item) => item.url),

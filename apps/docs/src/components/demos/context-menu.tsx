@@ -14,7 +14,7 @@ import {
   ContextMenuTrigger
 } from '@repo/ui/components/context-menu'
 
-const ContextMenuDemo = () => {
+function ContextMenuDemo() {
   return (
     <ContextMenu>
       <ContextMenuTrigger className='flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm'>

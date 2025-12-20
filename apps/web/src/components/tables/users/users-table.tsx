@@ -7,7 +7,7 @@ type UsersTableProps = {
   users: User[]
 }
 
-const UsersTable = (props: UsersTableProps) => {
+function UsersTable(props: UsersTableProps) {
   const { users } = props
 
   // See https://github.com/TanStack/table/issues/5567

@@ -42,7 +42,7 @@ const collection = createTreeCollection<Node>({
   }
 })
 
-const TreeViewDemo = () => {
+function TreeViewDemo() {
   return <TreeView className='w-full max-w-md' collection={collection} />
 }
 

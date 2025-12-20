@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 
 type AdminNavLinkProps = SidebarLink
 
-const AdminNavLink = (props: AdminNavLinkProps) => {
+function AdminNavLink(props: AdminNavLinkProps) {
   const { titleKey, url, icon: Icon } = props
   const t = useTranslations()
   const pathname = usePathname()

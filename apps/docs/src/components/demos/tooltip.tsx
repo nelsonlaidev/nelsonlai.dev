@@ -1,7 +1,7 @@
 import { Button } from '@repo/ui/components/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@repo/ui/components/tooltip'
 
-const TooltipDemo = () => {
+function TooltipDemo() {
   return (
     <Tooltip>
       <TooltipTrigger asChild>

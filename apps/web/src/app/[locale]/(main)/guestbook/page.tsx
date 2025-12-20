@@ -13,7 +13,7 @@ import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
-export const generateMetadata = async (props: PageProps<'/[locale]/guestbook'>): Promise<Metadata> => {
+export async function generateMetadata(props: PageProps<'/[locale]/guestbook'>): Promise<Metadata> {
   const { params } = props
   const { locale } = await params
 
@@ -29,7 +29,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/guestbook'>):
   })
 }
 
-const Page = (props: PageProps<'/[locale]/guestbook'>) => {
+function Page(props: PageProps<'/[locale]/guestbook'>) {
   const { params } = props
   const { locale } = use(params)
 

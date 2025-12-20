@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 
 import { ACCOUNT_SIDEBAR_LINKS } from '@/config/links'
 
-const AccountSidebar = () => {
+function AccountSidebar() {
   const t = useTranslations()
   const pathname = usePathname()
 

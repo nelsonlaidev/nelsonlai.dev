@@ -6,12 +6,11 @@ type Options = {
   formatOptions?: DateTimeFormatOptions
 }
 
-type UseFormattedDate = {
-  (date: Date | string | number, options?: Options): string
-  (date?: Date | string | number, options?: Options): string | null
-}
+type DateInput = Date | string | number
 
-export const useFormattedDate = ((date, options = {}) => {
+export function useFormattedDate(date: DateInput, options?: Options): string
+export function useFormattedDate(date?: DateInput, options?: Options): string | null
+export function useFormattedDate(date?: DateInput, options: Options = {}): string | null {
   const {
     relative = false,
     formatOptions = {
@@ -38,4 +37,4 @@ export const useFormattedDate = ((date, options = {}) => {
   } else {
     return format.dateTime(convertedDate, formatOptions)
   }
-}) as UseFormattedDate
+}

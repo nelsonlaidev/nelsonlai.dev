@@ -5,7 +5,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@repo/ui/co
 import { ChevronsUpDownIcon } from 'lucide-react'
 import { useState } from 'react'
 
-const CollapsibleDemo = () => {
+function CollapsibleDemo() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (

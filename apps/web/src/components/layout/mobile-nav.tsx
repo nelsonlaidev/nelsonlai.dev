@@ -13,7 +13,7 @@ import { useTranslations } from 'next-intl'
 
 import { HEADER_LINKS } from '@/config/links'
 
-const MobileNav = () => {
+function MobileNav() {
   const t = useTranslations()
 
   return (

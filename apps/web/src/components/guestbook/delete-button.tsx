@@ -21,7 +21,7 @@ type DeleteButtonProps = {
   message: ListMessagesOutput['messages'][number]
 }
 
-const DeleteButton = (props: DeleteButtonProps) => {
+function DeleteButton(props: DeleteButtonProps) {
   const { message } = props
   const t = useTranslations()
 
@@ -29,7 +29,7 @@ const DeleteButton = (props: DeleteButtonProps) => {
     toast.success(t('success.message-deleted'))
   })
 
-  const handleDeleteMessage = (id: string) => {
+  function handleDeleteMessage(id: string) {
     if (isDeleting) return
     deleteMessage({ id })
   }

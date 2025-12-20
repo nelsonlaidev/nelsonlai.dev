@@ -6,7 +6,7 @@ import { getTranslations } from 'next-intl/server'
 import Settings from '@/components/settings'
 import { createMetadata } from '@/lib/metadata'
 
-export const generateMetadata = async (props: PageProps<'/[locale]/account/settings'>): Promise<Metadata> => {
+export async function generateMetadata(props: PageProps<'/[locale]/account/settings'>): Promise<Metadata> {
   const { params } = props
   const { locale } = await params
 
@@ -22,7 +22,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/account/setti
   })
 }
 
-const Page = () => {
+function Page() {
   return <Settings />
 }
 

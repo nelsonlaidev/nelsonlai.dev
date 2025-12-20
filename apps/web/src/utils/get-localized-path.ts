@@ -7,7 +7,7 @@ type LocalizedDocument = {
   pathname?: string
 }
 
-export const getLocalizedPath = (doc: LocalizedDocument) => {
+export function getLocalizedPath(doc: LocalizedDocument) {
   const { locale, pathname = '' } = doc
   const baseUrl = getBaseUrl()
 

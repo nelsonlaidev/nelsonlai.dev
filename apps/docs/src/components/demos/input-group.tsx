@@ -16,7 +16,7 @@ import { Separator } from '@repo/ui/components/separator'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@repo/ui/components/tooltip'
 import { ArrowUpIcon, CheckIcon, InfoIcon, PlusIcon, SearchIcon } from 'lucide-react'
 
-const InputGroupDemo = () => {
+function InputGroupDemo() {
   return (
     <div className='grid w-full max-w-sm gap-6'>
       <InputGroup>

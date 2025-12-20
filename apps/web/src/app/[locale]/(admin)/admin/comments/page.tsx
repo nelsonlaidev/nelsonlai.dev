@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import AdminComments from '@/components/admin/admin-comments'
 import AdminPageHeader from '@/components/admin/admin-page-header'
 
-const Page = async () => {
+async function Page() {
   const t = await getTranslations()
 
   return (

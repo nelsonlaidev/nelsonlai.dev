@@ -9,7 +9,7 @@ import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 
-const ThemeSwitcher = () => {
+function ThemeSwitcher() {
   const { setTheme } = useTheme()
   const t = useTranslations()
 

@@ -28,7 +28,7 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 
-const ButtonGroupDemo = () => {
+function ButtonGroupDemo() {
   const [label, setLabel] = useState('personal')
 
   return (

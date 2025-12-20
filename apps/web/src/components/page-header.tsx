@@ -18,7 +18,7 @@ const animation = {
   }
 }
 
-const PageHeader = (props: PageTitleProps) => {
+function PageHeader(props: PageTitleProps) {
   const { title, description } = props
 
   return (

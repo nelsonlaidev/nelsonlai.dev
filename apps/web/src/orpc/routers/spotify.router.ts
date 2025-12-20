@@ -20,7 +20,7 @@ const EMPTY_RESPONSE = {
   artist: null
 } as const
 
-const getAccessToken = async () => {
+async function getAccessToken() {
   if (!REFRESH_TOKEN) return null
 
   const response = await fetch(TOKEN_ENDPOINT, {

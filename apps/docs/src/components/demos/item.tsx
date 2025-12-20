@@ -2,7 +2,7 @@ import { Button } from '@repo/ui/components/button'
 import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '@repo/ui/components/item'
 import { BadgeCheckIcon, ChevronRightIcon } from 'lucide-react'
 
-const ItemDemo = () => {
+function ItemDemo() {
   return (
     <div className='flex w-full max-w-md flex-col gap-6'>
       <Item variant='outline'>

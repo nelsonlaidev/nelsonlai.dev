@@ -2,26 +2,26 @@ import { useQuery } from '@tanstack/react-query'
 
 import { orpc } from '@/orpc/client'
 
-export const useYouTubeStat = () => {
+export function useYouTubeStat() {
   return useQuery(orpc.stats.youtube.queryOptions())
 }
 
-export const useGitHubStat = () => {
+export function useGitHubStat() {
   return useQuery(orpc.stats.github.queryOptions())
 }
 
-export const useBlogLikeStat = () => {
+export function useBlogLikeStat() {
   return useQuery(orpc.stats.blog.likes.queryOptions())
 }
 
-export const useBlogViewStat = () => {
+export function useBlogViewStat() {
   return useQuery(orpc.stats.blog.views.queryOptions())
 }
 
-export const useWakatimeStat = () => {
+export function useWakatimeStat() {
   return useQuery(orpc.stats.wakatime.queryOptions())
 }
 
-export const useSpotifyStat = () => {
+export function useSpotifyStat() {
   return useQuery(orpc.stats.spotify.queryOptions())
 }

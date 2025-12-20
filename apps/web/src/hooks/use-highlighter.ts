@@ -4,6 +4,6 @@ import { atom, useAtom } from 'jotai'
 
 const highlighterAtom = atom<HighlighterCore | null>(null)
 
-export const useHighlighter = () => {
+export function useHighlighter() {
   return useAtom(highlighterAtom)
 }

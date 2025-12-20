@@ -4,7 +4,7 @@ import { cn } from '../utils/cn'
 
 type SegmentGroupProps = React.ComponentProps<typeof SegmentGroupPrimitive.Root>
 
-const SegmentGroup = (props: SegmentGroupProps) => {
+function SegmentGroup(props: SegmentGroupProps) {
   const { className, children, orientation, ...rest } = props
 
   return (
@@ -34,7 +34,7 @@ const SegmentGroup = (props: SegmentGroupProps) => {
 
 type SegmentGroupItemProps = React.ComponentProps<typeof SegmentGroupPrimitive.Item>
 
-const SegmentGroupItem = (props: SegmentGroupItemProps) => {
+function SegmentGroupItem(props: SegmentGroupItemProps) {
   const { className, children, ...rest } = props
 
   return (

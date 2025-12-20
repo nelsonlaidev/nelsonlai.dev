@@ -2,7 +2,7 @@ import { atom, useAtom } from 'jotai'
 
 const signInDialogAtom = atom(false)
 
-export const useSignInDialog = () => {
+export function useSignInDialog() {
   const [open, setOpen] = useAtom(signInDialogAtom)
 
   return {

@@ -7,7 +7,7 @@ import { makeQueryClient } from './query-client'
 
 let browserQueryClient: QueryClient | undefined
 
-const getQueryClient = () => {
+function getQueryClient() {
   if (IS_SERVER) {
     // Server: always make a new query client
     return makeQueryClient()
@@ -25,7 +25,7 @@ type ORPCQueryProviderProps = {
   children: React.ReactNode
 }
 
-export const ORPCQueryProvider = (props: ORPCQueryProviderProps) => {
+export function ORPCQueryProvider(props: ORPCQueryProviderProps) {
   const { children } = props
   const queryClient = getQueryClient()
 

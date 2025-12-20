@@ -26,8 +26,8 @@
     "react-dom": "19.2.1"
   },
   "devDependencies": {
-    "@nelsonlaidev/eslint-config": "2.3.3",
-    "@nelsonlaidev/typescript-config": "1.0.0",
+    "@nelsonlaidev/eslint-config": "2.4.5",
+    "@nelsonlaidev/typescript-config": "1.1.1",
     "@react-email/preview-server": "5.0.8",
     "@types/node": "24.9.2",
     "@types/react": "19.2.7",

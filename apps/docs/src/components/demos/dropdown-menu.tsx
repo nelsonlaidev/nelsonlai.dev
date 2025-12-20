@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger
 } from '@repo/ui/components/dropdown-menu'
 
-const DropdownMenuDemo = () => {
+function DropdownMenuDemo() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

@@ -1,4 +1,4 @@
-const Page = async (props: PageProps<'/embed'>) => {
+async function Page(props: PageProps<'/embed'>) {
   const { searchParams } = props
   const { component } = await searchParams
 

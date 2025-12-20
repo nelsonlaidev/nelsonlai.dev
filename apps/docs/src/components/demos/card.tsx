@@ -11,7 +11,7 @@ import {
 import { Input } from '@repo/ui/components/input'
 import { Label } from '@repo/ui/components/label'
 
-const CardDemo = () => {
+function CardDemo() {
   return (
     <Card className='w-full max-w-sm'>
       <CardHeader>

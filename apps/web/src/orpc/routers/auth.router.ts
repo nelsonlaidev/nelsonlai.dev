@@ -9,7 +9,7 @@ import { protectedProcedure } from '../root'
 import { listSessionsOutputSchema, revokeSessionInputSchema, updateUserInputSchema } from '../schemas/auth.schema'
 import { emptyOutputSchema } from '../schemas/common.schema'
 
-const resolveLocation = async (ip: string) => {
+async function resolveLocation(ip: string) {
   const cached = await cache.auth.location.get(ip)
   if (cached) return cached
 

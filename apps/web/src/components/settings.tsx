@@ -9,7 +9,7 @@ import { toast } from 'sonner'
 
 import { useReplyPrefs, useUpdateReplyPrefs } from '@/hooks/queries/unsubscribe.query'
 
-const Settings = () => {
+function Settings() {
   const t = useTranslations()
 
   return (
@@ -22,14 +22,14 @@ const Settings = () => {
   )
 }
 
-const ReplyNotificationSettings = () => {
+function ReplyNotificationSettings() {
   const { isSuccess, isLoading, isError, data } = useReplyPrefs()
   const t = useTranslations()
   const { mutate: updatePrefs, isPending: isUpdating } = useUpdateReplyPrefs(() => {
     toast.success(t('success.settings-saved'))
   })
 
-  const handleUpdatePrefs = (isEnabled: boolean) => {
+  function handleUpdatePrefs(isEnabled: boolean) {
     if (isUpdating) return
     updatePrefs({ isEnabled })
   }

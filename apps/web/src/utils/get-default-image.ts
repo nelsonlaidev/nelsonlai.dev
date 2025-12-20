@@ -1,3 +1,5 @@
 import { getBaseUrl } from './get-base-url'
 
-export const getDefaultImage = (id: string) => `${getBaseUrl()}/api/avatar/${id}`
+export function getDefaultImage(id: string) {
+  return `${getBaseUrl()}/api/avatar/${id}`
+}

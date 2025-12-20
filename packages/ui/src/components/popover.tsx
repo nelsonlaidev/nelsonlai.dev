@@ -4,19 +4,19 @@ import { cn } from '../utils/cn'
 
 type PopoverProps = React.ComponentProps<typeof PopoverPrimitive.Root>
 
-const Popover = (props: PopoverProps) => {
+function Popover(props: PopoverProps) {
   return <PopoverPrimitive.Root data-slot='popover' {...props} />
 }
 
 type PopoverTriggerProps = React.ComponentProps<typeof PopoverPrimitive.Trigger>
 
-const PopoverTrigger = (props: PopoverTriggerProps) => {
+function PopoverTrigger(props: PopoverTriggerProps) {
   return <PopoverPrimitive.Trigger data-slot='popover-trigger' {...props} />
 }
 
 type PopoverContentProps = React.ComponentProps<typeof PopoverPrimitive.Content>
 
-const PopoverContent = (props: PopoverContentProps) => {
+function PopoverContent(props: PopoverContentProps) {
   const { className, align = 'center', sideOffset = 4, ...rest } = props
 
   return (
@@ -43,7 +43,7 @@ const PopoverContent = (props: PopoverContentProps) => {
 
 type PopoverAnchorProps = React.ComponentProps<typeof PopoverPrimitive.Anchor>
 
-const PopoverAnchor = (props: PopoverAnchorProps) => {
+function PopoverAnchor(props: PopoverAnchorProps) {
   return <PopoverPrimitive.Anchor data-slot='popover-anchor' {...props} />
 }
 

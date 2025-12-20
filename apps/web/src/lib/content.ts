@@ -2,7 +2,7 @@ import 'server-only'
 
 import { allPages, allPosts, allProjects } from 'content-collections'
 
-export const getLatestPosts = (locale: string, limit: number = allPosts.length) => {
+export function getLatestPosts(locale: string, limit: number = allPosts.length) {
   return allPosts
     .filter((post) => post.locale === locale)
     .toSorted((a, b) => {
@@ -11,7 +11,7 @@ export const getLatestPosts = (locale: string, limit: number = allPosts.length) 
     .slice(0, limit)
 }
 
-export const getLatestProjects = (locale: string, limit: number = allProjects.length) => {
+export function getLatestProjects(locale: string, limit: number = allProjects.length) {
   return allProjects
     .filter((project) => project.locale === locale)
     .toSorted((a, b) => {
@@ -20,18 +20,18 @@ export const getLatestProjects = (locale: string, limit: number = allProjects.le
     .slice(0, limit)
 }
 
-export const getSelectedProjects = (locale: string) => {
+export function getSelectedProjects(locale: string) {
   return allProjects.filter((project) => project.selected && project.locale === locale)
 }
 
-export const getPostBySlug = (locale: string, slug: string) => {
+export function getPostBySlug(locale: string, slug: string) {
   return allPosts.find((p) => p.slug === slug && p.locale === locale)
 }
 
-export const getProjectBySlug = (locale: string, slug: string) => {
+export function getProjectBySlug(locale: string, slug: string) {
   return allProjects.find((p) => p.slug === slug && p.locale === locale)
 }
 
-export const getPageBySlug = (locale: string, slug: string) => {
+export function getPageBySlug(locale: string, slug: string) {
   return allPages.find((p) => p.slug === slug && p.locale === locale)
 }

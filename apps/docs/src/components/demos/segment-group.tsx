@@ -2,7 +2,7 @@ import { SegmentGroup, SegmentGroupItem } from '@repo/ui/components/segment-grou
 
 const frameworks = ['React', 'Solid', 'Svelte', 'Vue']
 
-const SegmentGroupDemo = () => {
+function SegmentGroupDemo() {
   return (
     <SegmentGroup>
       {frameworks.map((framework) => (

@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar'
 import { Button } from '@repo/ui/components/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@repo/ui/components/hover-card'
 
-const HoverCardDemo = () => {
+function HoverCardDemo() {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>

@@ -26,7 +26,7 @@ type CommentProps = {
   comment: ListCommentsOutput['comments'][number]
 }
 
-const Comment = (props: CommentProps) => {
+function Comment(props: CommentProps) {
   const { comment } = props
 
   const [isEditing, setIsEditing] = useState(false)

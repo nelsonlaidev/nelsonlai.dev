@@ -8,7 +8,7 @@ import {
   PaginationPrevious
 } from '@repo/ui/components/pagination'
 
-const PaginationDemo = () => {
+function PaginationDemo() {
   return (
     <Pagination>
       <PaginationContent>

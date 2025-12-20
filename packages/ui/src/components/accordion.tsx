@@ -5,7 +5,7 @@ import { cn } from '../utils/cn'
 
 type AccordionProps = React.ComponentProps<typeof AccordionPrimitive.Root>
 
-const Accordion = (props: AccordionProps) => {
+function Accordion(props: AccordionProps) {
   const { className, children, ...rest } = props
 
   return (
@@ -17,7 +17,7 @@ const Accordion = (props: AccordionProps) => {
 
 type AccordionItemProps = React.ComponentProps<typeof AccordionPrimitive.Item>
 
-const AccordionItem = (props: AccordionItemProps) => {
+function AccordionItem(props: AccordionItemProps) {
   const { className, ...rest } = props
 
   return (
@@ -31,7 +31,7 @@ const AccordionItem = (props: AccordionItemProps) => {
 
 type AccordionTriggerProps = React.ComponentProps<typeof AccordionPrimitive.Trigger>
 
-const AccordionTrigger = (props: AccordionTriggerProps) => {
+function AccordionTrigger(props: AccordionTriggerProps) {
   const { className, children, ...rest } = props
 
   return (
@@ -56,7 +56,7 @@ const AccordionTrigger = (props: AccordionTriggerProps) => {
 
 type AccordionContentProps = React.ComponentProps<typeof AccordionPrimitive.Content>
 
-const AccordionContent = (props: AccordionContentProps) => {
+function AccordionContent(props: AccordionContentProps) {
   const { className, children, ...rest } = props
 
   return (

@@ -16,7 +16,7 @@ type CommentEditorProps = {
   onEscape?: () => void
 } & React.ComponentProps<typeof Textarea>
 
-const CommentEditor = (props: CommentEditorProps) => {
+function CommentEditor(props: CommentEditorProps) {
   const { value, tabsValue, onTabsValueChange, onModEnter, onEscape, ...rest } = props
   const t = useTranslations()
   const { textareaRef, handleKeyDown, handleInput, handleCompositionStart, handleCompositionEnd, decorateText } =

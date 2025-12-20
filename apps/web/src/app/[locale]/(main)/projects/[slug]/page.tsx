@@ -17,14 +17,14 @@ import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
-export const generateStaticParams = (): Array<{ slug: string; locale: string }> => {
+export function generateStaticParams(): Array<{ slug: string; locale: string }> {
   return allProjects.map((project) => ({
     slug: project.slug,
     locale: project.locale
   }))
 }
 
-export const generateMetadata = async (props: PageProps<'/[locale]/projects/[slug]'>): Promise<Metadata> => {
+export async function generateMetadata(props: PageProps<'/[locale]/projects/[slug]'>): Promise<Metadata> {
   const { params } = props
   const { slug, locale } = await params
 
@@ -44,7 +44,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/projects/[slu
   })
 }
 
-const Page = (props: PageProps<'/[locale]/projects/[slug]'>) => {
+function Page(props: PageProps<'/[locale]/projects/[slug]'>) {
   const { params } = props
   const { slug, locale } = use(params)
 

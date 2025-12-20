@@ -1,6 +1,6 @@
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@repo/ui/components/resizable'
 
-const ResizableDemo = () => {
+function ResizableDemo() {
   return (
     <ResizablePanelGroup direction='horizontal' className='max-w-md rounded-lg border md:min-w-[450px]'>
       <ResizablePanel defaultSize={50}>

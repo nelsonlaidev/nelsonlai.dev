@@ -2,7 +2,7 @@ type ComponentPreviewEmbedProps = {
   name: string
 }
 
-const ComponentPreviewEmbed = (props: ComponentPreviewEmbedProps) => {
+function ComponentPreviewEmbed(props: ComponentPreviewEmbedProps) {
   const { name } = props
 
   return (

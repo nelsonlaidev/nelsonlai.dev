@@ -13,7 +13,7 @@ type TreeViewProps = {
   label?: string
 } & React.ComponentProps<typeof TreeViewPrimitive.Root<Node>>
 
-const TreeView = (props: TreeViewProps) => {
+function TreeView(props: TreeViewProps) {
   const { collection, className, label = 'Tree View', ...rest } = props
 
   return (
@@ -35,7 +35,7 @@ const TreeView = (props: TreeViewProps) => {
 
 type TreeViewNodeProps = TreeViewPrimitive.NodeProviderProps<Node>
 
-const TreeViewNode = (props: TreeViewNodeProps) => {
+function TreeViewNode(props: TreeViewNodeProps) {
   const { node, indexPath } = props
 
   return (

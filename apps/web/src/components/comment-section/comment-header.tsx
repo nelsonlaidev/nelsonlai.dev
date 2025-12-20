@@ -15,7 +15,7 @@ import { useTranslations } from 'next-intl'
 import { useCommentsContext } from '@/contexts/comments.context'
 import { usePostCommentCount, usePostReplyCount } from '@/hooks/queries/post.query'
 
-const CommentHeader = () => {
+function CommentHeader() {
   const { slug, sort, setSort } = useCommentsContext()
   const t = useTranslations()
 

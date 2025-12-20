@@ -11,7 +11,7 @@ type MarqueeProps = {
   className?: string
 }
 
-const Marquee = (props: MarqueeProps) => {
+function Marquee(props: MarqueeProps) {
   const {
     children,
     gap = '1rem',

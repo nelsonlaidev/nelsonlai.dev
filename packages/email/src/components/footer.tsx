@@ -1,6 +1,6 @@
 import { Column, Hr, Img, Link, Row, Section, Text } from '@react-email/components'
 
-const Footer = () => {
+function Footer() {
   return (
     <>
       <Hr className='mt-6 mb-3' />

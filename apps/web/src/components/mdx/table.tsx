@@ -5,7 +5,7 @@ type TableProps = {
   rows: string[][]
 }
 
-const Table = (props: TableProps) => {
+function Table(props: TableProps) {
   const { headers, rows } = props
 
   return (

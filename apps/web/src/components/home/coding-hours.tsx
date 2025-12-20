@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 
 import { useWakatimeStat } from '@/hooks/queries/stat.query'
 
-const CodingHours = () => {
+function CodingHours() {
   const { isSuccess, isLoading, isError, data } = useWakatimeStat()
   const t = useTranslations()
 

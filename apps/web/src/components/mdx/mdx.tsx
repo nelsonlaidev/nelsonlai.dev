@@ -56,7 +56,7 @@ const components = {
   TreeView
 }
 
-const Mdx = (props: MdxProps) => {
+function Mdx(props: MdxProps) {
   const { code } = props
   const MDXContent = useMDXComponent(code)
 

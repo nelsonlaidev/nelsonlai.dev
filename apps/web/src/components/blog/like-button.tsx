@@ -15,7 +15,7 @@ type LikeButtonProps = {
   slug: string
 }
 
-const LikeButton = (props: LikeButtonProps) => {
+function LikeButton(props: LikeButtonProps) {
   const { slug } = props
   const [cacheCount, setCacheCount] = useState(0)
   const buttonRef = useRef<HTMLButtonElement>(null)
@@ -24,7 +24,7 @@ const LikeButton = (props: LikeButtonProps) => {
   const { isSuccess, isLoading, isError, data } = usePostLikeCount({ slug })
   const { mutate: likePost } = useLikePost({ slug })
 
-  const showConfettiAnimation = async () => {
+  async function showConfettiAnimation() {
     const { clientWidth, clientHeight } = document.documentElement
     const boundingBox = buttonRef.current?.getBoundingClientRect()
 
@@ -52,7 +52,7 @@ const LikeButton = (props: LikeButtonProps) => {
     setCacheCount(0)
   }, 1000)
 
-  const handleLikeButtonClick = () => {
+  function handleLikeButtonClick() {
     if (isLoading || !data) return
     if (data.currentUserLikes + cacheCount >= 3) {
       toast.error(t('error.like-limit-reached'))

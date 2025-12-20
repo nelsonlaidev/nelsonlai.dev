@@ -3,7 +3,7 @@
 import { Calendar } from '@repo/ui/components/calendar'
 import { useState } from 'react'
 
-const CalendarDemo = () => {
+function CalendarDemo() {
   const [date, setDate] = useState<Date | undefined>(() => new Date())
 
   return (

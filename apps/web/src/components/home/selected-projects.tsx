@@ -31,7 +31,7 @@ type SelectedProjectsProps = {
   projects: Project[]
 }
 
-const SelectedProjects = (props: SelectedProjectsProps) => {
+function SelectedProjects(props: SelectedProjectsProps) {
   const { projects } = props
   const projectsRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(projectsRef, { once: true, margin: '-100px' })
@@ -99,7 +99,7 @@ const SelectedProjects = (props: SelectedProjectsProps) => {
   )
 }
 
-const Card = (props: CardProps) => {
+function Card(props: CardProps) {
   const { project } = props
   const { slug, name, description } = project
   const t = useTranslations()

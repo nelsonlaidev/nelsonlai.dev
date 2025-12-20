@@ -7,7 +7,7 @@ type VideoProps = {
   height: number
 } & React.ComponentProps<'video'>
 
-const Video = (props: VideoProps) => {
+function Video(props: VideoProps) {
   const { src, width, height, controls = true, className, ...rest } = props
 
   return (

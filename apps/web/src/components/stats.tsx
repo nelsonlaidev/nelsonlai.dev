@@ -28,7 +28,7 @@ type Card = {
   suffix?: string
 }
 
-const Stats = () => {
+function Stats() {
   const youtubeQuery = useYouTubeStat()
   const githubQuery = useGitHubStat()
   const likesQuery = useBlogLikeStat()

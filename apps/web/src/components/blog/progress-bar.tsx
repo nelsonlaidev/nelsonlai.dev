@@ -2,7 +2,7 @@
 
 import { motion, useScroll } from 'motion/react'
 
-const ProgressBar = () => {
+function ProgressBar() {
   const { scrollYProgress } = useScroll()
 
   return (

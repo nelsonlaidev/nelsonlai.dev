@@ -11,7 +11,7 @@ type ProjectCardsProps = {
   projects: Project[]
 }
 
-const ProjectCards = (props: ProjectCardsProps) => {
+function ProjectCards(props: ProjectCardsProps) {
   const { projects } = props
 
   return (
@@ -23,7 +23,7 @@ const ProjectCards = (props: ProjectCardsProps) => {
   )
 }
 
-const ProjectCard = (props: ProjectCardProps) => {
+function ProjectCard(props: ProjectCardProps) {
   const { name, description, techstack, slug } = props
 
   return (

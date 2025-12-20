@@ -24,7 +24,7 @@ const animation = {
 
 type ProjectHeaderProps = Project
 
-const ProjectHeader = (props: ProjectHeaderProps) => {
+function ProjectHeader(props: ProjectHeaderProps) {
   const { name, description, homepage, github } = props
   const t = useTranslations()
 

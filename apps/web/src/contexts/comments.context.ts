@@ -11,7 +11,7 @@ type CommentsContextValue = {
 const CommentsContext = createContext<CommentsContextValue | null>(null)
 CommentsContext.displayName = 'CommentsContext'
 
-export const useCommentsContext = (): CommentsContextValue => {
+export function useCommentsContext(): CommentsContextValue {
   const context = use(CommentsContext)
 
   if (!context) {

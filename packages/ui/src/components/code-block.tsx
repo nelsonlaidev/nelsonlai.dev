@@ -16,13 +16,13 @@ type CodeBlockProps = {
   scrollAreaClassName?: string
 } & React.ComponentProps<'pre'>
 
-const CodeBlock = (props: CodeBlockProps) => {
+function CodeBlock(props: CodeBlockProps) {
   const { children, className, title, 'data-lang': lang, figureClassName, scrollAreaClassName, ref, ...rest } = props
 
   const textInput = useRef<HTMLPreElement>(null)
   const Icon = getIconByLanguage(lang ?? '')
 
-  const onCopy = () => {
+  function onCopy() {
     void navigator.clipboard.writeText(textInput.current?.textContent ?? '')
   }
 
@@ -59,7 +59,7 @@ type CopyButtonProps = {
   onCopy: () => void
 } & React.ComponentProps<typeof Button>
 
-const CopyButton = (props: CopyButtonProps) => {
+function CopyButton(props: CopyButtonProps) {
   const { onCopy, className, ...rest } = props
   const [isCopied, setIsCopied] = useState(false)
 

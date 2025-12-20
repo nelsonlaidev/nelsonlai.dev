@@ -1,7 +1,7 @@
 import { Badge } from '@repo/ui/components/badge'
 import { BadgeCheckIcon } from 'lucide-react'
 
-const BadgeDemo = () => {
+function BadgeDemo() {
   return (
     <div className='flex flex-col items-center gap-2'>
       <div className='flex w-full flex-wrap gap-2'>

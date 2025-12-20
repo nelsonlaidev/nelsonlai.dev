@@ -6,7 +6,7 @@ import { useAdminComments } from '@/hooks/queries/admin.query'
 
 import CommentsTable from '../tables/comments'
 
-const AdminComments = () => {
+function AdminComments() {
   const { isSuccess, isLoading, isError, data } = useAdminComments()
   const t = useTranslations()
 

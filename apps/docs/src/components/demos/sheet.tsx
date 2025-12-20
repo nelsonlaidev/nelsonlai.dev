@@ -12,7 +12,7 @@ import {
   SheetTrigger
 } from '@repo/ui/components/sheet'
 
-const SheetDemo = () => {
+function SheetDemo() {
   return (
     <Sheet>
       <SheetTrigger asChild>

@@ -11,7 +11,7 @@ type ComponentPreviewTabs = {
   source: React.ReactNode
 }
 
-const ComponentPreviewTabs = (props: ComponentPreviewTabs) => {
+function ComponentPreviewTabs(props: ComponentPreviewTabs) {
   const { preview, source } = props
   const [key, setKey] = useState(0)
 

@@ -2,7 +2,7 @@ import { Button } from '@repo/ui/components/button'
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@repo/ui/components/empty'
 import { FolderIcon } from 'lucide-react'
 
-const EmptyDemo = () => {
+function EmptyDemo() {
   return (
     <Empty>
       <EmptyHeader>

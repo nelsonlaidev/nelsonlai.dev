@@ -1,6 +1,6 @@
 import { parseAsString, useQueryStates } from 'nuqs'
 
-export const useCommentParams = () => {
+export function useCommentParams() {
   return useQueryStates({
     comment: parseAsString,
     reply: parseAsString

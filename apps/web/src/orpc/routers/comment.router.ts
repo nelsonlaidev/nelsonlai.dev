@@ -28,7 +28,7 @@ export const listComments = publicProcedure
   .handler(async ({ input, context }) => {
     const session = context.session
 
-    const getCursorFilter = () => {
+    function getCursorFilter() {
       if (!input.cursor) return
       return input.sort === 'newest' ? lt(comments.createdAt, input.cursor) : gt(comments.createdAt, input.cursor)
     }

@@ -2,7 +2,9 @@ import { test } from '@playwright/test'
 
 import { checkAppliedTheme, checkStoredTheme, setThemeInLocalStorage } from '../utils/theme'
 
-const getInitialTheme = (theme: string) => (theme === 'light' ? 'dark' : 'light')
+function getInitialTheme(theme: string) {
+  return theme === 'light' ? 'dark' : 'light'
+}
 
 test.describe('theme', () => {
   test.describe('user interaction', () => {

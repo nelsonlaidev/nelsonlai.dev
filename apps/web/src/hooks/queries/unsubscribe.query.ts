@@ -2,11 +2,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { orpc } from '@/orpc/client'
 
-export const useReplyPrefs = () => {
+export function useReplyPrefs() {
   return useQuery(orpc.unsubscribes.getReplyPrefs.queryOptions())
 }
 
-export const useUpdateReplyPrefs = (onSuccess?: () => void) => {
+export function useUpdateReplyPrefs(onSuccess?: () => void) {
   const queryClient = useQueryClient()
 
   return useMutation(
@@ -19,7 +19,7 @@ export const useUpdateReplyPrefs = (onSuccess?: () => void) => {
   )
 }
 
-export const useUpdateCommentReplyPrefs = (onSuccess?: () => void) => {
+export function useUpdateCommentReplyPrefs(onSuccess?: () => void) {
   return useMutation(
     orpc.unsubscribes.updateCommentReplyPrefs.mutationOptions({
       onSuccess: () => {

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   }
 }
 
-const Layout = (props: LayoutProps<'/'>) => {
+function Layout(props: LayoutProps<'/'>) {
   const { children } = props
 
   return (

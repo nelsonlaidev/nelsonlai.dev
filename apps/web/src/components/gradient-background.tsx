@@ -3,15 +3,17 @@ import { useId } from 'react'
 
 type GradientBackgroundProps = React.ComponentProps<'svg'>
 
-const Filter = (props: React.ComponentProps<'filter'>) => (
-  <filter colorInterpolationFilters='sRGB' filterUnits='userSpaceOnUse' {...props}>
-    <feFlood floodOpacity='0' result='BackgroundImageFix' />
-    <feBlend in='SourceGraphic' in2='BackgroundImageFix' result='shape' />
-    <feGaussianBlur result='gradient-background-blur' stdDeviation='118.081' />
-  </filter>
-)
+function Filter(props: React.ComponentProps<'filter'>) {
+  return (
+    <filter colorInterpolationFilters='sRGB' filterUnits='userSpaceOnUse' {...props}>
+      <feFlood floodOpacity='0' result='BackgroundImageFix' />
+      <feBlend in='SourceGraphic' in2='BackgroundImageFix' result='shape' />
+      <feGaussianBlur result='gradient-background-blur' stdDeviation='118.081' />
+    </filter>
+  )
+}
 
-const GradientBackground = (props: GradientBackgroundProps) => {
+function GradientBackground(props: GradientBackgroundProps) {
   const { className, ...rest } = props
 
   const id = useId()

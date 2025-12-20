@@ -37,7 +37,7 @@
     "zod": "4.1.12"
   },
   "devDependencies": {
-    "@nelsonlaidev/eslint-config": "2.3.3",
+    "@nelsonlaidev/eslint-config": "2.4.5",
     "@tailwindcss/postcss": "4.1.16",
     "@types/mdx": "2.0.13",
     "@types/node": "24.9.2",

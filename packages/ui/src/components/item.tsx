@@ -7,7 +7,7 @@ import { Separator } from './separator'
 
 type ItemGroupProps = React.ComponentProps<'div'>
 
-const ItemGroup = (props: ItemGroupProps) => {
+function ItemGroup(props: ItemGroupProps) {
   const { className, ...rest } = props
 
   return (
@@ -17,7 +17,7 @@ const ItemGroup = (props: ItemGroupProps) => {
 
 type ItemSeparatorProps = React.ComponentProps<typeof Separator>
 
-const ItemSeparator = (props: ItemSeparatorProps) => {
+function ItemSeparator(props: ItemSeparatorProps) {
   const { className, ...rest } = props
 
   return <Separator data-slot='item-separator' orientation='horizontal' className={cn('my-0', className)} {...rest} />
@@ -48,7 +48,7 @@ const itemVariants = cva({
 
 type ItemProps = React.ComponentProps<'div'> & VariantProps<typeof itemVariants> & { asChild?: boolean }
 
-const Item = (props: ItemProps) => {
+function Item(props: ItemProps) {
   const { className, variant = 'default', size = 'default', asChild = false, ...rest } = props
   const Comp = asChild ? Slot.Root : 'div'
   return (
@@ -82,7 +82,7 @@ const itemMediaVariants = cva({
 
 type ItemMediaProps = React.ComponentProps<'div'> & VariantProps<typeof itemMediaVariants>
 
-const ItemMedia = (props: ItemMediaProps) => {
+function ItemMedia(props: ItemMediaProps) {
   const { className, variant = 'default', ...rest } = props
 
   return (
@@ -97,7 +97,7 @@ const ItemMedia = (props: ItemMediaProps) => {
 
 type ItemContentProps = React.ComponentProps<'div'>
 
-const ItemContent = (props: ItemContentProps) => {
+function ItemContent(props: ItemContentProps) {
   const { className, ...rest } = props
 
   return (
@@ -111,7 +111,7 @@ const ItemContent = (props: ItemContentProps) => {
 
 type ItemTitleProps = React.ComponentProps<'div'>
 
-const ItemTitle = (props: ItemTitleProps) => {
+function ItemTitle(props: ItemTitleProps) {
   const { className, ...rest } = props
 
   return (
@@ -125,7 +125,7 @@ const ItemTitle = (props: ItemTitleProps) => {
 
 type ItemDescriptionProps = React.ComponentProps<'p'>
 
-const ItemDescription = (props: ItemDescriptionProps) => {
+function ItemDescription(props: ItemDescriptionProps) {
   const { className, ...rest } = props
 
   return (
@@ -144,7 +144,7 @@ const ItemDescription = (props: ItemDescriptionProps) => {
 
 type ItemActionsProps = React.ComponentProps<'div'>
 
-const ItemActions = (props: ItemActionsProps) => {
+function ItemActions(props: ItemActionsProps) {
   const { className, ...rest } = props
 
   return <div data-slot='item-actions' className={cn('flex items-center gap-2', className)} {...rest} />
@@ -152,7 +152,7 @@ const ItemActions = (props: ItemActionsProps) => {
 
 type ItemHeaderProps = React.ComponentProps<'div'>
 
-const ItemHeader = (props: ItemHeaderProps) => {
+function ItemHeader(props: ItemHeaderProps) {
   const { className, ...rest } = props
 
   return (
@@ -166,7 +166,7 @@ const ItemHeader = (props: ItemHeaderProps) => {
 
 type ItemFooterProps = React.ComponentProps<'div'>
 
-const ItemFooter = (props: ItemFooterProps) => {
+function ItemFooter(props: ItemFooterProps) {
   const { className, ...rest } = props
 
   return (

@@ -10,7 +10,7 @@ import { useGitHubStat } from '@/hooks/queries/stat.query'
 import LocaleSwitcher from './locale-switcher'
 import NowPlaying from './now-playing'
 
-const LayoutFooter = () => {
+function LayoutFooter() {
   const { isSuccess, isLoading, isError, data } = useGitHubStat()
   const t = useTranslations()
 

@@ -11,7 +11,7 @@ type ComponentPreviewProps = {
   name: string
 }
 
-const ComponentPreview = async (props: ComponentPreviewProps) => {
+async function ComponentPreview(props: ComponentPreviewProps) {
   const { name } = props
 
   const COMPONENT_PATH = `src/components/demos/${name}`

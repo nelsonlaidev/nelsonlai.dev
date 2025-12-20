@@ -4,19 +4,19 @@ import { cn } from '../utils/cn'
 
 type HoverCardProps = React.ComponentProps<typeof HoverCardPrimitive.Root>
 
-const HoverCard = (props: HoverCardProps) => {
+function HoverCard(props: HoverCardProps) {
   return <HoverCardPrimitive.Root data-slot='hover-card' {...props} />
 }
 
 type HoverCardTriggerProps = React.ComponentProps<typeof HoverCardPrimitive.Trigger>
 
-const HoverCardTrigger = (props: HoverCardTriggerProps) => {
+function HoverCardTrigger(props: HoverCardTriggerProps) {
   return <HoverCardPrimitive.Trigger data-slot='hover-card-trigger' {...props} />
 }
 
 type HoverCardContentProps = React.ComponentProps<typeof HoverCardPrimitive.Content>
 
-const HoverCardContent = (props: HoverCardContentProps) => {
+function HoverCardContent(props: HoverCardContentProps) {
   const { className, align = 'center', sideOffset = 4, ...rest } = props
 
   return (

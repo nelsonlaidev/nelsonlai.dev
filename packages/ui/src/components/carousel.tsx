@@ -32,7 +32,7 @@ type CarouselContextProps = {
 const CarouselContext = createContext<CarouselContextProps | null>(null)
 CarouselContext.displayName = 'CarouselContext'
 
-const useCarousel = () => {
+function useCarousel() {
   const context = use(CarouselContext)
 
   if (!context) {
@@ -44,7 +44,7 @@ const useCarousel = () => {
 
 type CarouselProps = React.ComponentProps<'div'> & CarouselBaseProps
 
-const Carousel = (props: CarouselProps) => {
+function Carousel(props: CarouselProps) {
   const { orientation = 'horizontal', opts, setApi, plugins, className, children, ...rest } = props
   const [carouselRef, api] = useEmblaCarousel(
     {
@@ -131,7 +131,7 @@ const Carousel = (props: CarouselProps) => {
 
 type CarouselContentProps = React.ComponentProps<'div'>
 
-const CarouselContent = (props: CarouselContentProps) => {
+function CarouselContent(props: CarouselContentProps) {
   const { className, ...rest } = props
   const { carouselRef, orientation } = useCarousel()
 
@@ -144,7 +144,7 @@ const CarouselContent = (props: CarouselContentProps) => {
 
 type CarouselItemProps = React.ComponentProps<'div'>
 
-const CarouselItem = (props: CarouselItemProps) => {
+function CarouselItem(props: CarouselItemProps) {
   const { className, ...rest } = props
   const { orientation } = useCarousel()
 
@@ -161,7 +161,7 @@ const CarouselItem = (props: CarouselItemProps) => {
 
 type CarouselPreviousProps = React.ComponentProps<typeof Button>
 
-const CarouselPrevious = (props: CarouselPreviousProps) => {
+function CarouselPrevious(props: CarouselPreviousProps) {
   const { className, variant = 'outline', size = 'icon', ...rest } = props
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
@@ -189,7 +189,7 @@ const CarouselPrevious = (props: CarouselPreviousProps) => {
 
 type CarouselNextProps = React.ComponentProps<typeof Button>
 
-const CarouselNext = (props: CarouselNextProps) => {
+function CarouselNext(props: CarouselNextProps) {
   const { className, variant = 'outline', size = 'icon', ...rest } = props
   const { orientation, scrollNext, canScrollNext } = useCarousel()
 

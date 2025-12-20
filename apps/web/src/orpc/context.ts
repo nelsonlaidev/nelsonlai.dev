@@ -5,7 +5,7 @@ import { headers } from 'next/headers'
 
 import { getSession } from '@/lib/auth'
 
-export const createORPCContext = async (request?: NextRequest) => {
+export async function createORPCContext(request?: NextRequest) {
   const session = await getSession(request)
 
   return {

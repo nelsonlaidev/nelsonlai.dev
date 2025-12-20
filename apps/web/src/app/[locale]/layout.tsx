@@ -16,7 +16,7 @@ import Hello from '@/components/hello'
 import Providers from '@/components/providers'
 import SignInDialog from '@/components/sign-in-dialog'
 
-export const generateStaticParams = (): Array<{ locale: string }> => {
+export function generateStaticParams(): Array<{ locale: string }> {
   return routing.locales.map((locale) => ({ locale }))
 }
 
@@ -49,7 +49,7 @@ const notoSansSC = Noto_Sans_SC({
   display: 'swap'
 })
 
-const Layout = async (props: LayoutProps<'/[locale]'>) => {
+async function Layout(props: LayoutProps<'/[locale]'>) {
   const { children, params } = props
   const { locale } = await params
 

@@ -9,7 +9,7 @@ type R2Client = {
   publicUrl: string
 }
 
-const createClient = (): R2Client => {
+function createClient(): R2Client {
   const endpoint = env.CLOUDFLARE_R2_ENDPOINT
   const accessKeyId = env.CLOUDFLARE_R2_ACCESS_KEY_ID
   const secretAccessKey = env.CLOUDFLARE_R2_SECRET_ACCESS_KEY
@@ -39,7 +39,7 @@ const createClient = (): R2Client => {
 
 let r2Client: R2Client | undefined
 
-export const getCloudflareR2 = () => {
+export function getCloudflareR2() {
   r2Client ??= createClient()
   return r2Client
 }

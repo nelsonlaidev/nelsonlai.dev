@@ -1,7 +1,7 @@
 import { Button } from '@repo/ui/components/button'
 import { ArrowUpIcon } from 'lucide-react'
 
-const ButtonDemo = () => {
+function ButtonDemo() {
   return (
     <div className='flex flex-wrap items-center gap-2 md:flex-row'>
       <Button variant='outline'>Button</Button>

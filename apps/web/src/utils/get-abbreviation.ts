@@ -1,4 +1,4 @@
-export const getAbbreviation = (name: string) => {
+export function getAbbreviation(name: string) {
   const abbreviation = name
     .split(' ')
     .map((n) => n[0])

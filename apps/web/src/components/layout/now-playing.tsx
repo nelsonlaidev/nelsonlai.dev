@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 
 import { useSpotifyStat } from '@/hooks/queries/stat.query'
 
-const NowPlaying = () => {
+function NowPlaying() {
   const { isSuccess, isLoading, isError, data } = useSpotifyStat()
   const t = useTranslations()
 

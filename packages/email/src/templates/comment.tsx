@@ -28,7 +28,7 @@ type CommentEmailTemplateProps = {
   postUrl: string
 }
 
-const CommentEmailTemplate = (props: CommentEmailTemplateProps) => {
+function CommentEmailTemplate(props: CommentEmailTemplateProps) {
   const { comment, commenterName, commenterImage, date, commentIdentifier, postTitle, postUrl } = props
 
   return (

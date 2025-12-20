@@ -14,7 +14,7 @@ import {
   MenubarTrigger
 } from '@repo/ui/components/menubar'
 
-const MenubarDemo = () => {
+function MenubarDemo() {
   return (
     <Menubar>
       <MenubarMenu>

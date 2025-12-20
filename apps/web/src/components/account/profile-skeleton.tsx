@@ -3,7 +3,7 @@ import { Card } from '@repo/ui/components/card'
 import { Skeleton } from '@repo/ui/components/skeleton'
 import { useTranslations } from 'next-intl'
 
-const ProfileSkeleton = () => {
+function ProfileSkeleton() {
   const t = useTranslations()
 
   return (

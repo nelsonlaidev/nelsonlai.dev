@@ -1,7 +1,7 @@
 import { Item, ItemContent, ItemMedia, ItemTitle } from '@repo/ui/components/item'
 import { Spinner } from '@repo/ui/components/spinner'
 
-const SpinnerDemo = () => {
+function SpinnerDemo() {
   return (
     <div className='flex w-full max-w-xs flex-col gap-4 [--radius:1rem]'>
       <Item variant='muted'>

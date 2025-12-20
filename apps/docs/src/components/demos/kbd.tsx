@@ -1,6 +1,6 @@
 import { Kbd, KbdGroup } from '@repo/ui/components/kbd'
 
-const KbdDemo = () => {
+function KbdDemo() {
   return (
     <div className='flex flex-col items-center gap-4'>
       <KbdGroup>

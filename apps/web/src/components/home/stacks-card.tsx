@@ -28,7 +28,7 @@ import { Marquee } from '@repo/ui/components/marquee'
 import { ZapIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-const StacksCard = () => {
+function StacksCard() {
   const t = useTranslations()
 
   return (

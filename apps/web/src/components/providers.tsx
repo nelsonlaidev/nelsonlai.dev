@@ -10,7 +10,7 @@ type ProvidesProps = {
   children: React.ReactNode
 }
 
-const Providers = (props: ProvidesProps) => {
+function Providers(props: ProvidesProps) {
   const { children } = props
 
   return (
