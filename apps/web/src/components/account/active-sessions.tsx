@@ -19,7 +19,7 @@ import Tip from '../tip'
 
 import ActiveSessionsSkeleton from './active-sessions-skeleton'
 
-const ActiveSessions = () => {
+function ActiveSessions() {
   const t = useTranslations()
   const { isSuccess, isLoading, isError, data } = useListSessions()
 
@@ -63,7 +63,7 @@ const PLATFORM_ICONS = {
   tv: TvIcon
 }
 
-const Session = (props: SessionProps) => {
+function Session(props: SessionProps) {
   const { session } = props
   const t = useTranslations()
   const { refetch: refetchSession } = useSession()
@@ -94,7 +94,7 @@ const Session = (props: SessionProps) => {
     }
   })
 
-  const handleRevoke = () => {
+  function handleRevoke() {
     if (isRevoking) return
     revokeSession({ token: session.token })
   }

@@ -4,7 +4,7 @@ import { Input } from '@repo/ui/components/input'
 import { Label } from '@repo/ui/components/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/components/tabs'
 
-const TabsDemo = () => {
+function TabsDemo() {
   return (
     <div className='flex w-full max-w-sm flex-col gap-6'>
       <Tabs defaultValue='account'>

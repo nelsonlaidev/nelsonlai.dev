@@ -1,6 +1,6 @@
 import { Separator } from '@repo/ui/components/separator'
 
-const SeparatorDemo = () => {
+function SeparatorDemo() {
   return (
     <div>
       <div className='space-y-1'>

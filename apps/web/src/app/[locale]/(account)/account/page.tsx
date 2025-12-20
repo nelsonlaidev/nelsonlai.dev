@@ -7,7 +7,7 @@ import ActiveSessions from '@/components/account/active-sessions'
 import Profile from '@/components/account/profile'
 import { createMetadata } from '@/lib/metadata'
 
-export const generateMetadata = async (props: PageProps<'/[locale]/account'>): Promise<Metadata> => {
+export async function generateMetadata(props: PageProps<'/[locale]/account'>): Promise<Metadata> {
   const { params } = props
   const { locale } = await params
 
@@ -23,7 +23,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/account'>): P
   })
 }
 
-const Page = () => {
+function Page() {
   return (
     <>
       <Profile />

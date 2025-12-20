@@ -20,7 +20,7 @@ type MessageBoxProps = {
   user: User
 }
 
-const MessageBox = (props: MessageBoxProps) => {
+function MessageBox(props: MessageBoxProps) {
   const { user } = props
   const t = useTranslations()
   const signOut = useSignOut()
@@ -47,7 +47,7 @@ const MessageBox = (props: MessageBoxProps) => {
     toast.success(t('success.message-created'))
   })
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     form.handleSubmit()
   }

@@ -2,7 +2,7 @@ import { keepPreviousData, useInfiniteQuery, useMutation, useQueryClient } from 
 
 import { orpc } from '@/orpc/client'
 
-export const useMessages = () => {
+export function useMessages() {
   return useInfiniteQuery(
     orpc.messages.list.infiniteOptions({
       input: (pageParam: Date | undefined) => ({ cursor: pageParam }),
@@ -13,7 +13,7 @@ export const useMessages = () => {
   )
 }
 
-export const useCreateMessage = (onSuccess?: () => void) => {
+export function useCreateMessage(onSuccess?: () => void) {
   const queryClient = useQueryClient()
 
   return useMutation(
@@ -26,7 +26,7 @@ export const useCreateMessage = (onSuccess?: () => void) => {
   )
 }
 
-export const useDeleteMessage = (onSuccess?: () => void) => {
+export function useDeleteMessage(onSuccess?: () => void) {
   const queryClient = useQueryClient()
 
   return useMutation(

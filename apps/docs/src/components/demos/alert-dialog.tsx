@@ -11,7 +11,7 @@ import {
 } from '@repo/ui/components/alert-dialog'
 import { Button } from '@repo/ui/components/button'
 
-const AlertDialogDemo = () => {
+function AlertDialogDemo() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>

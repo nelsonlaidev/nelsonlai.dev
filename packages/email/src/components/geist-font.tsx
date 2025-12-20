@@ -1,6 +1,6 @@
 import { Font } from '@react-email/components'
 
-const GeistFont = () => {
+function GeistFont() {
   return (
     <Font
       fontFamily='Geist'

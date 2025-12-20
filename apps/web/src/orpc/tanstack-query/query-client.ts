@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 
 const serializer = new StandardRPCJsonSerializer()
 
-export const makeQueryClient = () => {
+export function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {

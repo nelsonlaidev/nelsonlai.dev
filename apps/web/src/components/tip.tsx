@@ -8,14 +8,15 @@ type TipProps = {
   content: React.ReactNode
 }
 
-const Tip = ({ children, content }: TipProps) => {
+function Tip(props: TipProps) {
+  const { children, content } = props
   const [open, setOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   const canHover = globalThis.matchMedia('(hover: hover)').matches
 
   useEffect(() => {
-    const handleClickOutside = (event: TouchEvent) => {
+    function handleClickOutside(event: TouchEvent) {
       if (!buttonRef.current?.contains(event.target as Node)) {
         setOpen(false)
       }

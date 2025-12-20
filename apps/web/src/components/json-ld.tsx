@@ -4,7 +4,7 @@ type JsonLdProps = {
   json: WithContext<Thing>
 }
 
-const JsonLd = (props: JsonLdProps) => {
+function JsonLd(props: JsonLdProps) {
   const { json } = props
 
   // eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml -- safe

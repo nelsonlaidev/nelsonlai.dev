@@ -24,7 +24,7 @@ const variants = {
   }
 }
 
-const AboutMe = () => {
+function AboutMe() {
   const cardsRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(cardsRef, { once: true, margin: '-100px' })
   const t = useTranslations()

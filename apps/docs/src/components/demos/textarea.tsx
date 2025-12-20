@@ -1,6 +1,6 @@
 import { Textarea } from '@repo/ui/components/textarea'
 
-const TextareaDemo = () => {
+function TextareaDemo() {
   return <Textarea placeholder='Type your message here.' className='max-w-md' />
 }
 

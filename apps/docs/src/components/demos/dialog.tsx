@@ -12,7 +12,7 @@ import {
 import { Input } from '@repo/ui/components/input'
 import { Label } from '@repo/ui/components/label'
 
-const DialogDemo = () => {
+function DialogDemo() {
   return (
     <Dialog>
       <form>

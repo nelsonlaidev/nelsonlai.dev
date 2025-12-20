@@ -1,6 +1,6 @@
 import { NativeSelect, NativeSelectOption } from '@repo/ui/components/native-select'
 
-const NativeSelectDemo = () => {
+function NativeSelectDemo() {
   return (
     <NativeSelect>
       <NativeSelectOption value=''>Select status</NativeSelectOption>

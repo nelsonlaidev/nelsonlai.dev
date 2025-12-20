@@ -29,7 +29,7 @@ type LatestArticlesProps = {
   posts: Post[]
 }
 
-const LatestArticles = (props: LatestArticlesProps) => {
+function LatestArticles(props: LatestArticlesProps) {
   const { posts } = props
   const projectsRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(projectsRef, { once: true, margin: '-100px' })
@@ -101,7 +101,7 @@ type CardProps = {
   post: Post
 }
 
-const Card = (props: CardProps) => {
+function Card(props: CardProps) {
   const { post } = props
   const formattedDate = useFormattedDate(post.date)
   const t = useTranslations()

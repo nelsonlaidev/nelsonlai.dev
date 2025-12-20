@@ -1,7 +1,7 @@
 import { cn } from '@repo/ui/utils/cn'
 import { LoaderIcon } from 'lucide-react'
 
-const CommentLoader = (props: React.ComponentProps<'div'>) => {
+function CommentLoader(props: React.ComponentProps<'div'>) {
   const { className, ...rest } = props
 
   return (

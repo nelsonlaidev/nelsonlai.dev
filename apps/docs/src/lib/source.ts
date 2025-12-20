@@ -29,7 +29,7 @@ export const source = loader({
   ]
 })
 
-export const getPageImage = (page: InferPageType<typeof source>) => {
+export function getPageImage(page: InferPageType<typeof source>) {
   const segments = [...page.slugs, 'image.png']
 
   return {
@@ -38,7 +38,7 @@ export const getPageImage = (page: InferPageType<typeof source>) => {
   }
 }
 
-export const getLLMText = async (page: InferPageType<typeof source>) => {
+export async function getLLMText(page: InferPageType<typeof source>) {
   const processed = await page.data.getText('processed')
 
   return `# ${page.data.title} (${page.url})

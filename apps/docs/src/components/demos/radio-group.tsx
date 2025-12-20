@@ -1,7 +1,7 @@
 import { Label } from '@repo/ui/components/label'
 import { RadioGroup, RadioGroupItem } from '@repo/ui/components/radio-group'
 
-const RadioGroupDemo = () => {
+function RadioGroupDemo() {
   return (
     <RadioGroup defaultValue='comfortable'>
       <div className='flex items-center gap-3'>

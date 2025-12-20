@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar'
 
-const AvatarDemo = () => {
+function AvatarDemo() {
   return (
     <div className='flex flex-row flex-wrap items-center gap-12'>
       <Avatar>

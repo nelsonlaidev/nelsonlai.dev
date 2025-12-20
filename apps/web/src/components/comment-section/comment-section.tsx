@@ -13,7 +13,7 @@ type CommentSectionProps = {
   slug: string
 }
 
-const CommentSection = (props: CommentSectionProps) => {
+function CommentSection(props: CommentSectionProps) {
   const { slug } = props
   const [sort, setSort] = useState<ListCommentsInput['sort']>('newest')
 

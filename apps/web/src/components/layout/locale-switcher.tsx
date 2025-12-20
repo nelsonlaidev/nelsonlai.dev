@@ -4,14 +4,14 @@ import { LanguagesIcon } from 'lucide-react'
 import { type Locale, useLocale, useTranslations } from 'next-intl'
 import { useTransition } from 'react'
 
-const LocaleSwitcher = () => {
+function LocaleSwitcher() {
   const t = useTranslations()
   const currentLocale = useLocale()
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
   const pathname = usePathname()
 
-  const switchLanguage = (locale: Locale) => {
+  function switchLanguage(locale: Locale) {
     startTransition(() => {
       router.replace(pathname, { locale })
     })

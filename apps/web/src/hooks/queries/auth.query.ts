@@ -2,11 +2,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { orpc } from '@/orpc/client'
 
-export const useListSessions = () => {
+export function useListSessions() {
   return useQuery(orpc.auth.listSessions.queryOptions())
 }
 
-export const useRevokeSession = (onSuccess?: () => void) => {
+export function useRevokeSession(onSuccess?: () => void) {
   const queryClient = useQueryClient()
 
   return useMutation(
@@ -19,7 +19,7 @@ export const useRevokeSession = (onSuccess?: () => void) => {
   )
 }
 
-export const useUpdateUser = (onSuccess?: () => void) => {
+export function useUpdateUser(onSuccess?: () => void) {
   return useMutation(
     orpc.auth.updateUser.mutationOptions({
       onSuccess: () => {

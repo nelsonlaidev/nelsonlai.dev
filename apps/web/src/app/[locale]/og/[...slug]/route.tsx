@@ -14,7 +14,7 @@ import { getPostBySlug } from '@/lib/content'
 import { getOGImageFonts } from '@/lib/fonts'
 import { getPathnames } from '@/utils/get-pathnames'
 
-export const GET = async (_request: Request, props: RouteContext<'/[locale]/og/[...slug]'>) => {
+export async function GET(_request: Request, props: RouteContext<'/[locale]/og/[...slug]'>) {
   const { params } = props
   const { slug, locale } = await params
   const normalizedSlug = slug.slice(0, -1)
@@ -39,7 +39,7 @@ export const GET = async (_request: Request, props: RouteContext<'/[locale]/og/[
   return generatePageOGImage(locale, normalizedSlug, pathname)
 }
 
-const generateIndexOGImage = async () => {
+async function generateIndexOGImage() {
   const imageBuffer = await fs.readFile(path.join(process.cwd(), 'public', 'images', 'banner.png'))
 
   return new NextResponse(new Uint8Array(imageBuffer), {
@@ -51,7 +51,7 @@ const generateIndexOGImage = async () => {
   })
 }
 
-const generateBlogOGImage = async (locale: Locale, slugs: string[]) => {
+async function generateBlogOGImage(locale: Locale, slugs: string[]) {
   const postSlug = slugs.at(-1)
   if (!postSlug) notFound()
 
@@ -61,7 +61,7 @@ const generateBlogOGImage = async (locale: Locale, slugs: string[]) => {
   return generateOGImage(post.title, '/blog')
 }
 
-const generatePageOGImage = async (locale: Locale, slugs: string[], pathname: string) => {
+async function generatePageOGImage(locale: Locale, slugs: string[], pathname: string) {
   const pageSlug = slugs.at(-1)
   if (!pageSlug) notFound()
 
@@ -72,7 +72,7 @@ const generatePageOGImage = async (locale: Locale, slugs: string[], pathname: st
   return generateOGImage(t(`common.labels.${pageSlug as keyof typeof en.common.labels}`), pathname)
 }
 
-const generateProjectOGImage = async (slugs: string[]) => {
+async function generateProjectOGImage(slugs: string[]) {
   const projectSlug = slugs.at(-1)
   if (!projectSlug) notFound()
 
@@ -89,7 +89,7 @@ const generateProjectOGImage = async (slugs: string[]) => {
   })
 }
 
-const generateOGImage = async (title: string, url: string) => {
+async function generateOGImage(title: string, url: string) {
   const fonts = await getOGImageFonts(title)
 
   return new ImageResponse(<OGImage title={title} url={url} />, {

@@ -17,7 +17,7 @@ ToggleGroupContext.displayName = 'ToggleGroupContext'
 
 type ToggleGroupProps = React.ComponentProps<typeof ToggleGroupPrimitive.Root> & VariantProps<typeof toggleVariants>
 
-const ToggleGroup = (props: ToggleGroupProps) => {
+function ToggleGroup(props: ToggleGroupProps) {
   const { className, variant, size, children, ...rest } = props
 
   const value = useMemo(
@@ -47,7 +47,7 @@ const ToggleGroup = (props: ToggleGroupProps) => {
 
 type ToggleGroupItemProps = React.ComponentProps<typeof ToggleGroupPrimitive.Item> & VariantProps<typeof toggleVariants>
 
-const ToggleGroupItem = (props: ToggleGroupItemProps) => {
+function ToggleGroupItem(props: ToggleGroupItemProps) {
   const { className, children, variant, size, ...rest } = props
   const context = use(ToggleGroupContext)
 

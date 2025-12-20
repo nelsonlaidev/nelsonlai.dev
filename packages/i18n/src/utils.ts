@@ -2,7 +2,7 @@ type DeepObject = {
   [key: string]: string | DeepObject
 }
 
-export const loadMessages = async (locale: string) => {
+export async function loadMessages(locale: string) {
   const { default: messages } = (await import(`./messages/${locale}.json`)) as {
     default: DeepObject
   }
@@ -10,7 +10,7 @@ export const loadMessages = async (locale: string) => {
   return messages
 }
 
-export const flattenKeys = (object: DeepObject, prefix = ''): string[] => {
+export function flattenKeys(object: DeepObject, prefix = ''): string[] {
   const keys: string[] = []
 
   for (const [key, value] of Object.entries(object)) {

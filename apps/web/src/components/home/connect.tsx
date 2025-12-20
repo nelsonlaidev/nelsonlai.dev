@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import { SOCIAL_LINKS } from '@/config/links'
 
-const Connect = () => {
+function Connect() {
   const t = useTranslations()
 
   return (

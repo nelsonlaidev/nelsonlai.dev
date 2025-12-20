@@ -14,7 +14,7 @@ import { useSession } from '@/lib/auth-client'
 import CommentEditor from './comment-editor'
 import UnauthenticatedOverlay from './unauthenticated-overlay'
 
-const CommentPost = () => {
+function CommentPost() {
   const { slug } = useCommentsContext()
   const [content, setContent] = useState('')
   const [tabsValue, setTabsValue] = useState<'write' | 'preview'>('write')
@@ -28,7 +28,7 @@ const CommentPost = () => {
     setTabsValue('write')
   })
 
-  const submitComment = (e?: React.FormEvent<HTMLFormElement>) => {
+  function submitComment(e?: React.FormEvent<HTMLFormElement>) {
     e?.preventDefault()
 
     if (isCreating) return

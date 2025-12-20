@@ -5,13 +5,13 @@ import { cn } from '../utils/cn'
 
 type BreadcrumbProps = React.ComponentProps<'nav'>
 
-const Breadcrumb = (props: BreadcrumbProps) => {
+function Breadcrumb(props: BreadcrumbProps) {
   return <nav aria-label='breadcrumb' data-slot='breadcrumb' {...props} />
 }
 
 type BreadcrumbListProps = React.ComponentProps<'ol'>
 
-const BreadcrumbList = (props: BreadcrumbListProps) => {
+function BreadcrumbList(props: BreadcrumbListProps) {
   const { className, ...rest } = props
 
   return (
@@ -29,7 +29,7 @@ const BreadcrumbList = (props: BreadcrumbListProps) => {
 
 type BreadcrumbItemProps = React.ComponentProps<'li'>
 
-const BreadcrumbItem = (props: BreadcrumbItemProps) => {
+function BreadcrumbItem(props: BreadcrumbItemProps) {
   const { className, ...rest } = props
 
   return <li data-slot='breadcrumb-item' className={cn('inline-flex items-center gap-1.5', className)} {...rest} />
@@ -39,7 +39,7 @@ type BreadcrumbLinkProps = React.ComponentProps<'a'> & {
   asChild?: boolean
 }
 
-const BreadcrumbLink = (props: BreadcrumbLinkProps) => {
+function BreadcrumbLink(props: BreadcrumbLinkProps) {
   const { asChild, className, ...rest } = props
   const Comp = asChild ? Slot.Root : 'a'
 
@@ -54,7 +54,7 @@ const BreadcrumbLink = (props: BreadcrumbLinkProps) => {
 
 type BreadcrumbPageProps = React.ComponentProps<'span'>
 
-const BreadcrumbPage = (props: BreadcrumbPageProps) => {
+function BreadcrumbPage(props: BreadcrumbPageProps) {
   const { className, ...rest } = props
 
   return (
@@ -71,7 +71,7 @@ const BreadcrumbPage = (props: BreadcrumbPageProps) => {
 
 type BreadcrumbSeparatorProps = React.ComponentProps<'li'>
 
-const BreadcrumbSeparator = (props: BreadcrumbSeparatorProps) => {
+function BreadcrumbSeparator(props: BreadcrumbSeparatorProps) {
   const { children, className, ...rest } = props
 
   return (
@@ -89,7 +89,7 @@ const BreadcrumbSeparator = (props: BreadcrumbSeparatorProps) => {
 
 type BreadcrumbEllipsisProps = React.ComponentProps<'span'>
 
-const BreadcrumbEllipsis = (props: BreadcrumbEllipsisProps) => {
+function BreadcrumbEllipsis(props: BreadcrumbEllipsisProps) {
   const { className, ...rest } = props
 
   return (

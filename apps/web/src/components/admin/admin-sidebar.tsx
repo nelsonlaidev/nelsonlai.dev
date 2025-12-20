@@ -6,7 +6,7 @@ import { ADMIN_SIDEBAR_LINKS } from '@/config/admin-sidebar-links'
 
 import AdminNavGroup from './admin-nav-group'
 
-const AdminSidebar = () => {
+function AdminSidebar() {
   return (
     <Sidebar collapsible='icon' variant='floating'>
       <SidebarContent>

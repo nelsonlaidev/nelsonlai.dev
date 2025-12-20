@@ -29,7 +29,7 @@ export const generateStaticParams = (): Array<{ slug: string; locale: string }> 
   }))
 }
 
-export const generateMetadata = async (props: PageProps<'/[locale]/blog/[slug]'>): Promise<Metadata> => {
+export async function generateMetadata(props: PageProps<'/[locale]/blog/[slug]'>): Promise<Metadata> {
   const { params } = props
   const { slug, locale } = await params
 
@@ -50,7 +50,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/blog/[slug]'>
   })
 }
 
-const Page = (props: PageProps<'/[locale]/blog/[slug]'>) => {
+function Page(props: PageProps<'/[locale]/blog/[slug]'>) {
   const { params } = props
   const { slug, locale } = use(params)
 

@@ -6,7 +6,7 @@ type MainLayoutProps = {
   children: React.ReactNode
 }
 
-const MainLayout = (props: MainLayoutProps) => {
+function MainLayout(props: MainLayoutProps) {
   const { children } = props
 
   return (

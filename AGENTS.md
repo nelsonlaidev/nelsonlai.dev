@@ -63,7 +63,8 @@ nelsonlai-dev/
 
 ### TypeScript Guidelines
 
-- Always use arrow functions
+- Use function keywords for component functions and named functions
+- Use arrow functions for anonymous callbacks and expressions
 - Always use const unless reassignment is needed
 - Avoid destructuring props directly in the parameter signature
 - Avoid using interface for type definitions
@@ -83,14 +84,14 @@ type ComponentProps = {
 }
 
 // 2. Component definition
-const Component = (props: ComponentProps) => {
+function Component(props: ComponentProps) {
   const { className, ...rest } = props
 
   // 3. Hooks
   const [state, setState] = useState()
 
   // 4. Event handlers
-  const handleClick = () => {
+  function handleClick() {
     // ...
   }
 
@@ -215,7 +216,7 @@ export const router = {
 import { useQuery } from '@tanstack/react-query'
 import { orpc } from '@/orpc/client'
 
-export const useTodos = () => {
+export function useTodos() {
   return useQuery(orpc.todo.listTodos.queryOptions())
 }
 ```
@@ -302,13 +303,13 @@ pnpm test:unit        # Run unit tests
 
 ```tsx
 // Client Component with oRPC (preferred)
-const ClientComponent = () => {
+function ClientComponent() {
   const { data } = useTodos()
   return <div>{/* Render data */}</div>
 }
 
 // Server Component
-const ServerComponent = async () => {
+async function ServerComponent() {
   const data = await db.select().from(table)
   return <div>{/* Render data */}</div>
 }

@@ -3,7 +3,7 @@ type AdminPageHeaderProps = {
   description: string
 }
 
-const AdminPageHeader = (props: AdminPageHeaderProps) => {
+function AdminPageHeader(props: AdminPageHeaderProps) {
   const { title, description } = props
 
   return (

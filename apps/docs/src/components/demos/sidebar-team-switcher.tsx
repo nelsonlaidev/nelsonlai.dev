@@ -43,7 +43,7 @@ const teams: Team[] = [
   }
 ]
 
-const SidebarTeamSwitcher = () => {
+function SidebarTeamSwitcher() {
   const { isMobile } = useSidebar()
   const [activeTeam, setActiveTeam] = useState<Team>(defaultTeam)
 

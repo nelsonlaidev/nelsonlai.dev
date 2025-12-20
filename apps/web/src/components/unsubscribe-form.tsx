@@ -14,7 +14,7 @@ type UnsubscribeFormProps = {
   data: NonNullable<Awaited<ReturnType<typeof getReplyUnsubData>>>
 }
 
-const UnsubscribeForm = (props: UnsubscribeFormProps) => {
+function UnsubscribeForm(props: UnsubscribeFormProps) {
   const { data } = props
   const [isUnsubscribed, setIsUnsubscribed] = useState(data.isUnsubscribed)
   const { mutate: updatePrefs, isPending: isUpdating } = useUpdateCommentReplyPrefs(() => {
@@ -22,7 +22,7 @@ const UnsubscribeForm = (props: UnsubscribeFormProps) => {
   })
   const t = useTranslations()
 
-  const handleUnsubscribe = () => {
+  function handleUnsubscribe() {
     if (isUpdating) return
     updatePrefs({ token: data.token })
   }

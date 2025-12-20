@@ -13,7 +13,7 @@ import { useSession } from '@/lib/auth-client'
 import CommentEditor from './comment-editor'
 import UnauthenticatedOverlay from './unauthenticated-overlay'
 
-const CommentReply = () => {
+function CommentReply() {
   const [content, setContent] = useState('')
   const { data: session } = useSession()
   const { comment, setIsReplying } = useCommentContext()
@@ -25,7 +25,7 @@ const CommentReply = () => {
     toast.success(t('success.reply-posted'))
   })
 
-  const submitCommentReply = (e?: React.FormEvent<HTMLFormElement>) => {
+  function submitCommentReply(e?: React.FormEvent<HTMLFormElement>) {
     e?.preventDefault()
 
     if (isCreating) return

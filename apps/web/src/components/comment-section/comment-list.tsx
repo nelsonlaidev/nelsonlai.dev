@@ -17,7 +17,7 @@ import Comment from './comment'
 import CommentHeader from './comment-header'
 import CommentLoader from './comment-loader'
 
-const CommentList = () => {
+function CommentList() {
   const { slug, sort } = useCommentsContext()
   const [params] = useCommentParams()
   const t = useTranslations()

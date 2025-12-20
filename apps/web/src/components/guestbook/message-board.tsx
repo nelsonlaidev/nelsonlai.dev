@@ -7,7 +7,7 @@ import Messages from './messages'
 import Pinned from './pinned'
 import SignIn from './sign-in'
 
-const MessageBoard = () => {
+function MessageBoard() {
   const { data: session } = useSession()
 
   return (

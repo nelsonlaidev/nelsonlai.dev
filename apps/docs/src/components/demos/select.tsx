@@ -8,7 +8,7 @@ import {
   SelectValue
 } from '@repo/ui/components/select'
 
-const SelectDemo = () => {
+function SelectDemo() {
   return (
     <Select>
       <SelectTrigger className='w-[180px]'>

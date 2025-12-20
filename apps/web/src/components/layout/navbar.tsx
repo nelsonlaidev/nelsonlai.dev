@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 
 import { HEADER_LINKS } from '@/config/links'
 
-const Navbar = () => {
+function Navbar() {
   const pathname = usePathname()
   const t = useTranslations()
 

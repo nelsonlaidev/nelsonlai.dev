@@ -8,7 +8,7 @@ type UseSignOutOptions = {
   redirectTo?: string
 }
 
-export const useSignOut = (options: UseSignOutOptions = {}) => {
+export function useSignOut(options: UseSignOutOptions = {}) {
   const { redirectTo } = options
 
   const router = useRouter()

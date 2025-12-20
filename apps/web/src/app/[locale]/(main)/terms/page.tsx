@@ -10,7 +10,7 @@ import PageHeader from '@/components/page-header'
 import { getPageBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 
-export const generateMetadata = async (props: PageProps<'/[locale]/terms'>): Promise<Metadata> => {
+export async function generateMetadata(props: PageProps<'/[locale]/terms'>): Promise<Metadata> {
   const { params } = props
   const { locale } = await params
 
@@ -26,7 +26,7 @@ export const generateMetadata = async (props: PageProps<'/[locale]/terms'>): Pro
   })
 }
 
-const Page = (props: PageProps<'/[locale]/terms'>) => {
+function Page(props: PageProps<'/[locale]/terms'>) {
   const { params } = props
   const { locale } = use(params)
 

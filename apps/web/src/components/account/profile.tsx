@@ -30,7 +30,7 @@ import { getAbbreviation } from '@/utils/get-abbreviation'
 
 import ProfileSkeleton from './profile-skeleton'
 
-const Profile = () => {
+function Profile() {
   const { data, isPending: isSessionLoading } = useSession()
   const t = useTranslations()
 
@@ -47,7 +47,7 @@ type ProfileInfoProps = {
   user: User
 }
 
-const ProfileInfo = (props: ProfileInfoProps) => {
+function ProfileInfo(props: ProfileInfoProps) {
   const { user } = props
   const createdAt = useFormattedDate(user.createdAt)
   const t = useTranslations()
@@ -91,7 +91,7 @@ type EditNameProps = {
   name: string
 }
 
-const EditName = (props: EditNameProps) => {
+function EditName(props: EditNameProps) {
   const { name } = props
   const [open, setOpen] = useState(false)
   const t = useTranslations()
@@ -120,7 +120,7 @@ const EditName = (props: EditNameProps) => {
     refetchSession()
   })
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     form.handleSubmit()
   }
@@ -168,7 +168,7 @@ const EditName = (props: EditNameProps) => {
   )
 }
 
-const UpdateAvatar = () => {
+function UpdateAvatar() {
   const t = useTranslations()
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [isUploading, setIsUploading] = useState(false)
@@ -180,12 +180,12 @@ const UpdateAvatar = () => {
     refetchSession()
   })
 
-  const handleSelectFile = () => {
+  function handleSelectFile() {
     if (isUploading) return
     fileInputRef.current?.click()
   }
 
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
 
     if (!file) return

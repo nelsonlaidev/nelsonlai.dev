@@ -5,7 +5,7 @@ import { i18nMiddleware } from '@repo/i18n/middleware'
 
 const IS_PREVIEW = env.VERCEL_ENV === 'preview'
 
-export const proxy = (request: NextRequest) => {
+export function proxy(request: NextRequest) {
   const csp = `
     default-src 'none';
     script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.nelsonlai.dev https://*.posthog.com https://va.vercel-scripts.com ${IS_PREVIEW ? 'https://vercel.live' : ''};

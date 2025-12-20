@@ -12,7 +12,7 @@ type SimulateIMEInputOptions = {
   caretPosition: number
 }
 
-const simulateIMEInput = (options: SimulateIMEInputOptions) => {
+function simulateIMEInput(options: SimulateIMEInputOptions) {
   const { textarea, textValue, intermediateData, composedText, caretPosition } = options
 
   fireEvent.compositionStart(textarea, { data: '' })

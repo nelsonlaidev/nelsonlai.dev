@@ -1,4 +1,4 @@
-const Page = () => {
+function Page() {
   return <div>admin</div>
 }
 

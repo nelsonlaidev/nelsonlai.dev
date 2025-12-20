@@ -6,7 +6,7 @@ import { useMotionValue, useSpring } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
-const LocationCard = () => {
+function LocationCard() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pointerInteracting = useRef<number | null>(null)
   const pointerInteractionMovement = useRef(0)
@@ -23,7 +23,7 @@ const LocationCard = () => {
   useEffect(() => {
     let width = 0
 
-    const onResize = () => {
+    function onResize() {
       if (canvasRef.current && (width = canvasRef.current.offsetWidth)) {
         window.addEventListener('resize', onResize)
       }

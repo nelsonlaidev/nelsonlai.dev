@@ -1,7 +1,7 @@
 import { Checkbox } from '@repo/ui/components/checkbox'
 import { Label } from '@repo/ui/components/label'
 
-const CheckboxDemo = () => {
+function CheckboxDemo() {
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex items-center gap-3'>

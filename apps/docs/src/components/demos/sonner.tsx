@@ -3,7 +3,7 @@
 import { Button } from '@repo/ui/components/button'
 import { toast } from 'sonner'
 
-const SonnerDemo = () => {
+function SonnerDemo() {
   return (
     <Button
       variant='outline'

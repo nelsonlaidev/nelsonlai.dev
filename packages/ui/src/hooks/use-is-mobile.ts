@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 
 const MOBILE_BREAKPOINT = 768
 
-export const useIsMobile = () => {
+export function useIsMobile() {
   const [isMobile, setIsMobile] = useState<boolean | undefined>()
 
   useEffect(() => {
     const mql = globalThis.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
-    const onChange = () => {
+    function onChange() {
       setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
     }
     mql.addEventListener('change', onChange)

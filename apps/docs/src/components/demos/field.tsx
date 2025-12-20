@@ -13,7 +13,7 @@ import { Input } from '@repo/ui/components/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/components/select'
 import { Textarea } from '@repo/ui/components/textarea'
 
-const FieldDemo = () => {
+function FieldDemo() {
   return (
     <div className='w-full max-w-md'>
       <form>

@@ -14,7 +14,7 @@ type MobileTableOfContentsProps = {
   toc: TOC[]
 }
 
-const MobileTableOfContents = (props: MobileTableOfContentsProps) => {
+function MobileTableOfContents(props: MobileTableOfContentsProps) {
   const { toc } = props
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()

@@ -16,7 +16,7 @@ type Options = {
   locale: string
 } & Partial<Metadata>
 
-export const createMetadata = (options: Options): Metadata => {
+export function createMetadata(options: Options): Metadata {
   const { root = false, pathname, title, description, locale, ...rest } = options
   const baseUrl = getBaseUrl()
 

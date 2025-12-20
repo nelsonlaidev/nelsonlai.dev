@@ -7,7 +7,7 @@ import AdminNavLink from './admin-nav-link'
 
 type AdminNavGroupProps = SidebarGroupConfig
 
-const AdminNavGroup = (props: AdminNavGroupProps) => {
+function AdminNavGroup(props: AdminNavGroupProps) {
   const { titleKey, links } = props
   const t = useTranslations()
 

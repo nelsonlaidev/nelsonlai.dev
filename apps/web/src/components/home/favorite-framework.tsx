@@ -2,7 +2,7 @@ import { SiNextdotjs } from '@icons-pack/react-simple-icons'
 import { HeartIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-const FavoriteFramework = () => {
+function FavoriteFramework() {
   const t = useTranslations()
 
   return (

@@ -1,6 +1,6 @@
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@repo/ui/components/input-otp'
 
-const InputOTPDemo = () => {
+function InputOTPDemo() {
   return (
     <InputOTP maxLength={6}>
       <InputOTPGroup>

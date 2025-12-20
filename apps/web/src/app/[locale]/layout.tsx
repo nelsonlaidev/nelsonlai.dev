@@ -49,7 +49,7 @@ const notoSansSC = Noto_Sans_SC({
   display: 'swap'
 })
 
-const Layout = async (props: LayoutProps<'/[locale]'>) => {
+async function Layout(props: LayoutProps<'/[locale]'>) {
   const { children, params } = props
   const { locale } = await params
 

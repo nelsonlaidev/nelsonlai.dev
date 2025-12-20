@@ -1,4 +1,4 @@
-export const getIp = (headers: Headers) => {
+export function getIp(headers: Headers) {
   const forwardedFor = headers.get('x-forwarded-for')
 
   if (forwardedFor) {

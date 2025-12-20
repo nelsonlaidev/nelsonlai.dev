@@ -12,7 +12,7 @@ import { useCommentParams } from '@/hooks/use-comment-params'
 import Comment from './comment'
 import CommentLoader from './comment-loader'
 
-const CommentReplies = () => {
+function CommentReplies() {
   const { comment, isOpenReplies, setIsOpenReplies } = useCommentContext()
   const { slug } = useCommentsContext()
   const [params] = useCommentParams()

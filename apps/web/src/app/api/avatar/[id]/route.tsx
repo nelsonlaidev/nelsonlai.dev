@@ -11,7 +11,7 @@ import { getErrorMessage } from '@/utils/get-error-message'
 
 export const runtime = 'edge'
 
-const djb2 = (str: string) => {
+function djb2(str: string) {
   let hash = 5381
   for (let i = 0; i < str.length; i++) {
     hash = (hash << 5) + hash + str.codePointAt(i)!
@@ -19,7 +19,7 @@ const djb2 = (str: string) => {
   return hash
 }
 
-const generateGradient = (id: string) => {
+function generateGradient(id: string) {
   const c1 = color({ h: djb2(id) % 360, s: 0.95, l: 0.5 })
   const second = c1.triad()[1].toHexString()
 
@@ -29,7 +29,7 @@ const generateGradient = (id: string) => {
   }
 }
 
-export const GET = async (request: Request, context: RouteContext<'/api/avatar/[id]'>) => {
+export async function GET(request: Request, context: RouteContext<'/api/avatar/[id]'>) {
   const { params } = context
   const { id } = await params
 

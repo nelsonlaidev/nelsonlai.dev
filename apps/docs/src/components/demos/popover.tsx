@@ -3,7 +3,7 @@ import { Input } from '@repo/ui/components/input'
 import { Label } from '@repo/ui/components/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui/components/popover'
 
-const PopoverDemo = () => {
+function PopoverDemo() {
   return (
     <Popover>
       <PopoverTrigger asChild>

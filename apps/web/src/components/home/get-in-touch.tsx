@@ -17,7 +17,7 @@ const variants = {
   }
 }
 
-const GetInTouch = () => {
+function GetInTouch() {
   const [scope, animate] = useAnimate()
   const cardsRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(cardsRef, { once: true, margin: '-100px' })

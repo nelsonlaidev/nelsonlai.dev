@@ -5,7 +5,7 @@ import { Skeleton } from '@repo/ui/components/skeleton'
 
 import { range } from '@/utils/range'
 
-const ActiveSessionsSkeleton = () => {
+function ActiveSessionsSkeleton() {
   return (
     <div className='space-y-4'>
       {range(5).map((sessionNumber) => (

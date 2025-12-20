@@ -54,7 +54,7 @@ const components: Component[] = [
   }
 ]
 
-const NavigationMenuDemo = () => {
+function NavigationMenuDemo() {
   const isMobile = useIsMobile()
 
   return (
@@ -187,7 +187,7 @@ type ListItemProps = React.ComponentPropsWithoutRef<'li'> & {
   href: string
 }
 
-const ListItem = (props: ListItemProps) => {
+function ListItem(props: ListItemProps) {
   const { title, children, href, ...rest } = props
 
   return (

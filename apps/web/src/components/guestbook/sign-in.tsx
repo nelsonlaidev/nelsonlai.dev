@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 
 import { useSignInDialog } from '@/hooks/use-sign-in-dialog'
 
-const SignIn = () => {
+function SignIn() {
   const t = useTranslations()
   const { openDialog } = useSignInDialog()
 

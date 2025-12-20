@@ -8,7 +8,7 @@ import { Separator } from './separator'
 
 type FieldSetProps = React.ComponentProps<'fieldset'>
 
-const FieldSet = (props: FieldSetProps) => {
+function FieldSet(props: FieldSetProps) {
   const { className, ...rest } = props
 
   return (
@@ -27,7 +27,7 @@ const FieldSet = (props: FieldSetProps) => {
 
 type FieldLegendProps = React.ComponentProps<'legend'> & { variant?: 'legend' | 'label' }
 
-const FieldLegend = (props: FieldLegendProps) => {
+function FieldLegend(props: FieldLegendProps) {
   const { className, variant = 'legend', ...rest } = props
 
   return (
@@ -42,7 +42,7 @@ const FieldLegend = (props: FieldLegendProps) => {
 
 type FieldGroupProps = React.ComponentProps<'div'>
 
-const FieldGroup = (props: FieldGroupProps) => {
+function FieldGroup(props: FieldGroupProps) {
   const { className, ...rest } = props
 
   return (
@@ -83,7 +83,7 @@ const fieldVariants = cva({
 
 type FieldProps = React.ComponentProps<'div'> & VariantProps<typeof fieldVariants>
 
-const Field = (props: FieldProps) => {
+function Field(props: FieldProps) {
   const { className, orientation = 'vertical', ...rest } = props
 
   return (
@@ -99,7 +99,7 @@ const Field = (props: FieldProps) => {
 
 type FieldContentProps = React.ComponentProps<'div'>
 
-const FieldContent = (props: FieldContentProps) => {
+function FieldContent(props: FieldContentProps) {
   const { className, ...rest } = props
 
   return (
@@ -113,7 +113,7 @@ const FieldContent = (props: FieldContentProps) => {
 
 type FieldLabelProps = React.ComponentProps<typeof Label>
 
-const FieldLabel = (props: FieldLabelProps) => {
+function FieldLabel(props: FieldLabelProps) {
   const { className, ...rest } = props
 
   return (
@@ -135,7 +135,7 @@ const FieldLabel = (props: FieldLabelProps) => {
 
 type FieldTitleProps = React.ComponentProps<'div'>
 
-const FieldTitle = (props: FieldTitleProps) => {
+function FieldTitle(props: FieldTitleProps) {
   const { className, ...rest } = props
 
   return (
@@ -153,7 +153,7 @@ const FieldTitle = (props: FieldTitleProps) => {
 
 type FieldDescriptionProps = React.ComponentProps<'p'>
 
-const FieldDescription = (props: FieldDescriptionProps) => {
+function FieldDescription(props: FieldDescriptionProps) {
   const { className, ...rest } = props
 
   return (
@@ -178,7 +178,7 @@ type FieldSeparatorProps = React.ComponentProps<'div'> & {
   children?: React.ReactNode
 }
 
-const FieldSeparator = (props: FieldSeparatorProps) => {
+function FieldSeparator(props: FieldSeparatorProps) {
   const { children, className, ...rest } = props
 
   return (
@@ -205,7 +205,7 @@ type FieldErrorProps = React.ComponentProps<'div'> & {
   errors?: Array<{ message?: string } | undefined>
 }
 
-const FieldError = (props: FieldErrorProps) => {
+function FieldError(props: FieldErrorProps) {
   const { className, children, errors, ...rest } = props
   const content = useMemo(() => {
     if (children) {

@@ -1,7 +1,7 @@
 import { ToggleGroup, ToggleGroupItem } from '@repo/ui/components/toggle-group'
 import { BoldIcon, ItalicIcon, UnderlineIcon } from 'lucide-react'
 
-const ToggleGroupDemo = () => {
+function ToggleGroupDemo() {
   return (
     <ToggleGroup variant='outline' type='multiple'>
       <ToggleGroupItem value='bold' aria-label='Toggle bold'>

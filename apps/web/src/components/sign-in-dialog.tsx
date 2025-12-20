@@ -16,7 +16,7 @@ import { authClient } from '@/lib/auth-client'
 
 type Provider = 'github' | 'google'
 
-const GoogleIcon = () => {
+function GoogleIcon() {
   return (
     <svg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'>
       <path
@@ -40,7 +40,7 @@ const GoogleIcon = () => {
   )
 }
 
-const SignInDialog = () => {
+function SignInDialog() {
   const { open, setOpen, closeDialog: closeSignInDialog } = useSignInDialog()
   const [isPending, setIsPending] = useState(false)
   const [lastUsedProvider, setLastUsedProvider] = useState<Provider | null>(null)
@@ -53,7 +53,7 @@ const SignInDialog = () => {
     setLastUsedProvider(provider)
   }, [])
 
-  const handleSignIn = async (provider: Provider) => {
+  async function handleSignIn(provider: Provider) {
     localStorage.setItem('last-used-provider', provider)
     await authClient.signIn.social({
       provider,
@@ -73,7 +73,7 @@ const SignInDialog = () => {
     })
   }
 
-  const closeDialog = () => {
+  function closeDialog() {
     if (!isPending) {
       closeSignInDialog()
     }
@@ -127,7 +127,7 @@ const SignInDialog = () => {
   )
 }
 
-const LastUsed = () => {
+function LastUsed() {
   const t = useTranslations()
 
   return (

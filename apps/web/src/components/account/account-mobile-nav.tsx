@@ -16,11 +16,11 @@ import { useState } from 'react'
 
 import { ACCOUNT_SIDEBAR_LINKS } from '@/config/links'
 
-const AccountMobileNav = () => {
+function AccountMobileNav() {
   const t = useTranslations()
   const [open, setOpen] = useState(false)
 
-  const handleCloseDrawer = () => {
+  function handleCloseDrawer() {
     setOpen(false)
   }
 

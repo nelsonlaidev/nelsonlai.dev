@@ -7,7 +7,7 @@ type SendEmailOptions = {
   react: React.ReactNode
 }
 
-export const sendEmail = (options: SendEmailOptions) => {
+export function sendEmail(options: SendEmailOptions) {
   if (!env.RESEND_API_KEY) {
     console.warn('RESEND_API_KEY is not set. Skipping email sending.')
     return

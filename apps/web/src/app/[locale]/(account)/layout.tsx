@@ -9,7 +9,7 @@ import MainLayout from '@/components/main-layout'
 import PageHeader from '@/components/page-header'
 import { getSession } from '@/lib/auth'
 
-const Layout = async (props: LayoutProps<'/[locale]'>) => {
+async function Layout(props: LayoutProps<'/[locale]'>) {
   const { children, params } = props
   const { locale } = await params
 

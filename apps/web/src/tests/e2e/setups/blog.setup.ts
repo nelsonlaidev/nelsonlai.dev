@@ -9,7 +9,8 @@ import { db, posts } from '@repo/db'
 import { TEST_POSTS } from '../fixtures/posts'
 import { makeDummyImage } from '../utils/make-dummy-image'
 
-const createTestPost = (title: string) => `\
+function createTestPost(title: string) {
+  return `\
 ---
 title: ${title}
 date: '1970-01-01T00:00:00Z'
@@ -21,8 +22,9 @@ summary: This is a test post.
 
 This is a test post.
 `
+}
 
-const extractJsonFromArrayFile = (fileContent: string): Post[] => {
+function extractJsonFromArrayFile(fileContent: string): Post[] {
   const startIndex = fileContent.indexOf('[')
   const endIndex = fileContent.lastIndexOf(']')
   if (startIndex === -1 || endIndex === -1) {
@@ -33,7 +35,7 @@ const extractJsonFromArrayFile = (fileContent: string): Post[] => {
   return JSON.parse(jsonString) as Post[]
 }
 
-const waitForContentBuild = async () => {
+async function waitForContentBuild() {
   await expect(async () => {
     const fileContent = await fs.readFile(
       path.join(process.cwd(), '.content-collections/generated/allPosts.js'),

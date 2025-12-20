@@ -4,7 +4,7 @@ import { ImageResponse } from 'next/og'
 
 import { getPageImage, source } from '@/lib/source'
 
-export const GET = async (_request: Request, props: RouteContext<'/og/[...slug]'>) => {
+export async function GET(_request: Request, props: RouteContext<'/og/[...slug]'>) {
   const { params } = props
   const { slug } = await params
 
@@ -20,7 +20,7 @@ export const GET = async (_request: Request, props: RouteContext<'/og/[...slug]'
   )
 }
 
-export const generateStaticParams = () => {
+export function generateStaticParams() {
   return source.getPages().map((page) => ({
     lang: page.locale,
     slug: getPageImage(page).segments

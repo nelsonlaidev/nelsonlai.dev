@@ -1,9 +1,15 @@
 'use client'
 
-import { Badge } from '@repo/ui/components/badge'
-import { type SidebarComponents, SidebarItem as FDSidebarItem } from 'fumadocs-ui/components/layout/sidebar'
+import type * as PageTree from 'fumadocs-core/page-tree'
 
-const SidebarItem: SidebarComponents['Item'] = (props) => {
+import { Badge } from '@repo/ui/components/badge'
+import { SidebarItem as FDSidebarItem } from 'fumadocs-ui/components/layout/sidebar'
+
+type SidebarItemProps = {
+  item: PageTree.Item
+}
+
+function SidebarItem(props: SidebarItemProps) {
   const { item } = props
 
   return (

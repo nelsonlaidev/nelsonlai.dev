@@ -5,31 +5,31 @@ import { cn } from '../utils/cn'
 
 type SheetProps = React.ComponentProps<typeof SheetPrimitive.Root>
 
-const Sheet = (props: SheetProps) => {
+function Sheet(props: SheetProps) {
   return <SheetPrimitive.Root data-slot='sheet' {...props} />
 }
 
 type SheetTriggerProps = React.ComponentProps<typeof SheetPrimitive.Trigger>
 
-const SheetTrigger = (props: SheetTriggerProps) => {
+function SheetTrigger(props: SheetTriggerProps) {
   return <SheetPrimitive.Trigger data-slot='sheet-trigger' {...props} />
 }
 
 type SheetCloseProps = React.ComponentProps<typeof SheetPrimitive.Close>
 
-const SheetClose = (props: SheetCloseProps) => {
+function SheetClose(props: SheetCloseProps) {
   return <SheetPrimitive.Close data-slot='sheet-close' {...props} />
 }
 
 type SheetPortalProps = React.ComponentProps<typeof SheetPrimitive.Portal>
 
-const SheetPortal = (props: SheetPortalProps) => {
+function SheetPortal(props: SheetPortalProps) {
   return <SheetPrimitive.Portal data-slot='sheet-portal' {...props} />
 }
 
 type SheetOverlayProps = React.ComponentProps<typeof SheetPrimitive.Overlay>
 
-const SheetOverlay = (props: SheetOverlayProps) => {
+function SheetOverlay(props: SheetOverlayProps) {
   const { className, ...rest } = props
 
   return (
@@ -50,7 +50,7 @@ type SheetContentProps = React.ComponentProps<typeof SheetPrimitive.Content> & {
   side?: 'top' | 'right' | 'bottom' | 'left'
 }
 
-const SheetContent = (props: SheetContentProps) => {
+function SheetContent(props: SheetContentProps) {
   const { className, children, side = 'right', ...rest } = props
 
   return (
@@ -94,7 +94,7 @@ const SheetContent = (props: SheetContentProps) => {
 
 type SheetHeaderProps = React.ComponentProps<'div'>
 
-const SheetHeader = (props: SheetHeaderProps) => {
+function SheetHeader(props: SheetHeaderProps) {
   const { className, ...rest } = props
 
   return <div data-slot='sheet-header' className={cn('flex flex-col gap-1.5 p-4', className)} {...rest} />
@@ -102,7 +102,7 @@ const SheetHeader = (props: SheetHeaderProps) => {
 
 type SheetFooterProps = React.ComponentProps<'div'>
 
-const SheetFooter = (props: SheetFooterProps) => {
+function SheetFooter(props: SheetFooterProps) {
   const { className, ...rest } = props
 
   return <div data-slot='sheet-footer' className={cn('mt-auto flex flex-col gap-2 p-4', className)} {...rest} />
@@ -110,7 +110,7 @@ const SheetFooter = (props: SheetFooterProps) => {
 
 type SheetTitleProps = React.ComponentProps<typeof SheetPrimitive.Title>
 
-const SheetTitle = (props: SheetTitleProps) => {
+function SheetTitle(props: SheetTitleProps) {
   const { className, ...rest } = props
 
   return (
@@ -124,7 +124,7 @@ const SheetTitle = (props: SheetTitleProps) => {
 
 type SheetDescriptionProps = React.ComponentProps<typeof SheetPrimitive.Description>
 
-const SheetDescription = (props: SheetDescriptionProps) => {
+function SheetDescription(props: SheetDescriptionProps) {
   const { className, ...rest } = props
 
   return (

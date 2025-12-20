@@ -2,7 +2,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from '@repo/ui/component
 import { BellOffIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-const UnsubscribeError = () => {
+function UnsubscribeError() {
   const t = useTranslations()
 
   return (

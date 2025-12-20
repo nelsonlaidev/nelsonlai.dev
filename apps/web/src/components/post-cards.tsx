@@ -15,7 +15,7 @@ type PostCardsProps = {
 
 type PostCardProps = Post
 
-const PostCards = (props: PostCardsProps) => {
+function PostCards(props: PostCardsProps) {
   const { posts } = props
 
   return (
@@ -27,7 +27,7 @@ const PostCards = (props: PostCardsProps) => {
   )
 }
 
-const PostCard = (props: PostCardProps) => {
+function PostCard(props: PostCardProps) {
   const { slug, title, summary, date } = props
   const formattedDate = useFormattedDate(date)
   const t = useTranslations()

@@ -11,7 +11,7 @@ type LocationResponse = {
   isp: string
 }
 
-export const getLocation = async (ip: string): Promise<string | null> => {
+export async function getLocation(ip: string): Promise<string | null> {
   try {
     const response = await fetch(`https://api.nelsonlai.dev/ip/geo?ip=${ip}`)
     if (!response.ok) throw new Error('Failed to fetch location')

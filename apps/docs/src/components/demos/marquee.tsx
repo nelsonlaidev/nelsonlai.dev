@@ -2,7 +2,7 @@ import { Marquee } from '@repo/ui/components/marquee'
 
 const items = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig', 'grape', 'honeydew']
 
-const MarqueeDemo = () => {
+function MarqueeDemo() {
   return (
     <Marquee>
       {items.map((item) => (

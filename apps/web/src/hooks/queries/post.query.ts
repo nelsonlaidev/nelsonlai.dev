@@ -2,10 +2,10 @@ import { keepPreviousData, useInfiniteQuery, useMutation, useQuery, useQueryClie
 
 import { type Inputs, orpc, type Outputs } from '@/orpc/client'
 
-export const usePostComments = (
+export function usePostComments(
   input: (pageParam: Date | undefined) => Inputs['posts']['comments']['list'],
   enabled = true
-) => {
+) {
   return useInfiniteQuery(
     orpc.posts.comments.list.infiniteOptions({
       input,
@@ -17,23 +17,23 @@ export const usePostComments = (
   )
 }
 
-export const usePostViewCount = (input: Inputs['posts']['views']['count']) => {
+export function usePostViewCount(input: Inputs['posts']['views']['count']) {
   return useQuery(orpc.posts.views.count.queryOptions({ input }))
 }
 
-export const usePostCommentCount = (input: Inputs['posts']['comments']['count']) => {
+export function usePostCommentCount(input: Inputs['posts']['comments']['count']) {
   return useQuery(orpc.posts.comments.count.queryOptions({ input }))
 }
 
-export const usePostReplyCount = (input: Inputs['posts']['replies']['count']) => {
+export function usePostReplyCount(input: Inputs['posts']['replies']['count']) {
   return useQuery(orpc.posts.replies.count.queryOptions({ input }))
 }
 
-export const usePostLikeCount = (input: Inputs['posts']['likes']['count']) => {
+export function usePostLikeCount(input: Inputs['posts']['likes']['count']) {
   return useQuery(orpc.posts.likes.count.queryOptions({ input }))
 }
 
-export const useIncrementPostViewCount = (input: Inputs['posts']['views']['count']) => {
+export function useIncrementPostViewCount(input: Inputs['posts']['views']['count']) {
   const queryClient = useQueryClient()
 
   return useMutation(
@@ -49,7 +49,7 @@ export const useIncrementPostViewCount = (input: Inputs['posts']['views']['count
 
 type PostLikeCountOutput = Outputs['posts']['likes']['count']
 
-export const useLikePost = (input: Inputs['posts']['likes']['count']) => {
+export function useLikePost(input: Inputs['posts']['likes']['count']) {
   const queryClient = useQueryClient()
   const queryKey = orpc.posts.likes.count.queryKey({ input: { slug: input.slug } })
 
@@ -82,7 +82,7 @@ export const useLikePost = (input: Inputs['posts']['likes']['count']) => {
   )
 }
 
-export const useVotePostComment = (input: Inputs['posts']['comments']['list']) => {
+export function useVotePostComment(input: Inputs['posts']['comments']['list']) {
   const queryClient = useQueryClient()
 
   return useMutation(
@@ -94,7 +94,7 @@ export const useVotePostComment = (input: Inputs['posts']['comments']['list']) =
   )
 }
 
-export const useCreatePostComment = (input: Inputs['posts']['comments']['list'], onSuccess?: () => void) => {
+export function useCreatePostComment(input: Inputs['posts']['comments']['list'], onSuccess?: () => void) {
   const queryClient = useQueryClient()
 
   return useMutation(
@@ -109,7 +109,7 @@ export const useCreatePostComment = (input: Inputs['posts']['comments']['list'],
   )
 }
 
-export const useDeletePostComment = (input: Inputs['posts']['comments']['list'], onSuccess?: () => void) => {
+export function useDeletePostComment(input: Inputs['posts']['comments']['list'], onSuccess?: () => void) {
   const queryClient = useQueryClient()
 
   return useMutation(

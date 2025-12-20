@@ -5,31 +5,31 @@ import { cn } from '../utils/cn'
 
 type DialogProps = React.ComponentProps<typeof DialogPrimitive.Root>
 
-const Dialog = (props: DialogProps) => {
+function Dialog(props: DialogProps) {
   return <DialogPrimitive.Root data-slot='dialog' {...props} />
 }
 
 type DialogTriggerProps = React.ComponentProps<typeof DialogPrimitive.Trigger>
 
-const DialogTrigger = (props: DialogTriggerProps) => {
+function DialogTrigger(props: DialogTriggerProps) {
   return <DialogPrimitive.Trigger data-slot='dialog-trigger' {...props} />
 }
 
 type DialogPortalProps = React.ComponentProps<typeof DialogPrimitive.Portal>
 
-const DialogPortal = (props: DialogPortalProps) => {
+function DialogPortal(props: DialogPortalProps) {
   return <DialogPrimitive.Portal data-slot='dialog-portal' {...props} />
 }
 
 type DialogCloseProps = React.ComponentProps<typeof DialogPrimitive.Close>
 
-const DialogClose = (props: DialogCloseProps) => {
+function DialogClose(props: DialogCloseProps) {
   return <DialogPrimitive.Close data-slot='dialog-close' {...props} />
 }
 
 type DialogOverlayProps = React.ComponentProps<typeof DialogPrimitive.Overlay>
 
-const DialogOverlay = (props: DialogOverlayProps) => {
+function DialogOverlay(props: DialogOverlayProps) {
   const { className, ...rest } = props
 
   return (
@@ -50,7 +50,7 @@ type DialogContentProps = React.ComponentProps<typeof DialogPrimitive.Content> &
   showCloseButton?: boolean
 }
 
-const DialogContent = (props: DialogContentProps) => {
+function DialogContent(props: DialogContentProps) {
   const { className, children, showCloseButton = true, ...rest } = props
 
   return (
@@ -92,7 +92,7 @@ const DialogContent = (props: DialogContentProps) => {
 
 type DialogHeaderProps = React.ComponentProps<'div'>
 
-const DialogHeader = (props: DialogHeaderProps) => {
+function DialogHeader(props: DialogHeaderProps) {
   const { className, ...rest } = props
 
   return (
@@ -106,7 +106,7 @@ const DialogHeader = (props: DialogHeaderProps) => {
 
 type DialogFooterProps = React.ComponentProps<'div'>
 
-const DialogFooter = (props: DialogFooterProps) => {
+function DialogFooter(props: DialogFooterProps) {
   const { className, ...rest } = props
 
   return (
@@ -120,7 +120,7 @@ const DialogFooter = (props: DialogFooterProps) => {
 
 type DialogTitleProps = React.ComponentProps<typeof DialogPrimitive.Title>
 
-const DialogTitle = (props: DialogTitleProps) => {
+function DialogTitle(props: DialogTitleProps) {
   const { className, ...rest } = props
 
   return (
@@ -134,7 +134,7 @@ const DialogTitle = (props: DialogTitleProps) => {
 
 type DialogDescriptionProps = React.ComponentProps<typeof DialogPrimitive.Description>
 
-const DialogDescription = (props: DialogDescriptionProps) => {
+function DialogDescription(props: DialogDescriptionProps) {
   const { className, ...rest } = props
 
   return (

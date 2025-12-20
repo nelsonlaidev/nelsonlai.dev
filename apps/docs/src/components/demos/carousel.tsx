@@ -1,7 +1,7 @@
 import { Card, CardContent } from '@repo/ui/components/card'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@repo/ui/components/carousel'
 
-const CarouselDemo = () => {
+function CarouselDemo() {
   return (
     <Carousel className='w-full max-w-xs'>
       <CarouselContent>

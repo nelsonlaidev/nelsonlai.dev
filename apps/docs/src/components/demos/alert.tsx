@@ -1,7 +1,7 @@
 import { Alert, AlertDescription, AlertTitle } from '@repo/ui/components/alert'
 import { AlertCircleIcon, CheckCircle2Icon, PopcornIcon } from 'lucide-react'
 
-const AlertDemo = () => {
+function AlertDemo() {
   return (
     <div className='grid w-full max-w-xl items-start gap-4'>
       <Alert>

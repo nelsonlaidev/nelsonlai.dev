@@ -1,6 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/components/accordion'
 
-const AccordionDemo = () => {
+function AccordionDemo() {
   return (
     <Accordion type='single' collapsible className='w-full' defaultValue='item-1'>
       <AccordionItem value='item-1'>

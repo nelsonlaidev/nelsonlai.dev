@@ -1,6 +1,6 @@
 import type { TOC } from '../types'
-import type { Heading } from 'mdast'
-import type { Plugin, Transformer } from 'unified'
+import type { Heading, Node } from 'mdast'
+import type { VFile } from 'vfile'
 
 import Slugger from 'github-slugger'
 import { visit } from 'unist-util-visit'
@@ -15,7 +15,7 @@ declare module 'mdast' {
 
 const slugger = new Slugger()
 
-const transformer: Transformer = (tree, file) => {
+function transformer(tree: Node, file: VFile) {
   const toc: TOC[] = []
   slugger.reset()
 
@@ -44,6 +44,6 @@ const transformer: Transformer = (tree, file) => {
   file.data.toc = toc
 }
 
-export const remarkHeading: Plugin = () => {
+export function remarkHeading() {
   return transformer
 }

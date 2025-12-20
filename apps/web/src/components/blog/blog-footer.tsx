@@ -11,7 +11,7 @@ type BlogFooterProps = {
   post: Post
 }
 
-const BlogFooter = (props: BlogFooterProps) => {
+function BlogFooter(props: BlogFooterProps) {
   const { post } = props
   const t = useTranslations()
   const locale = useLocale()

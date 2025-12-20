@@ -17,7 +17,7 @@ type BlogHeaderProps = {
   post: Post
 }
 
-const BlogHeader = (props: BlogHeaderProps) => {
+function BlogHeader(props: BlogHeaderProps) {
   const { post } = props
   const formattedDate = useFormattedDate(post.date)
   const t = useTranslations()

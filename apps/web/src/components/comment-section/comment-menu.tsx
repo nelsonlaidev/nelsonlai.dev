@@ -26,7 +26,7 @@ import { useDeletePostComment } from '@/hooks/queries/post.query'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
 import { useSession } from '@/lib/auth-client'
 
-const CommentMenu = () => {
+function CommentMenu() {
   const { comment } = useCommentContext()
   const { slug } = useCommentsContext()
   const { data: session } = useSession()
@@ -48,7 +48,7 @@ const CommentMenu = () => {
 
   const isAuthor = !isDeleted && session?.user.id === userId
 
-  const handleDeleteComment = () => {
+  function handleDeleteComment() {
     if (isDeleting) return
     deleteComment({ id })
   }

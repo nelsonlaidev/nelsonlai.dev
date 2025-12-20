@@ -15,7 +15,7 @@ import {
 } from '@repo/ui/components/dropdown-menu'
 import Link from 'next/link'
 
-const BreadcrumbDemo = () => {
+function BreadcrumbDemo() {
   return (
     <Breadcrumb>
       <BreadcrumbList>

@@ -5,7 +5,7 @@ import { use } from 'react'
 
 import MainLayout from '@/components/main-layout'
 
-const Layout = (props: LayoutProps<'/[locale]'>) => {
+function Layout(props: LayoutProps<'/[locale]'>) {
   const { children, params } = props
   const { locale } = use(params)
 

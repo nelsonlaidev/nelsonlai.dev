@@ -13,7 +13,7 @@ import MobileNav from './mobile-nav'
 import Navbar from './navbar'
 import ThemeSwitcher from './theme-switcher'
 
-const LayoutHeader = () => {
+function LayoutHeader() {
   const headerRef = useRef<HTMLElement>(null)
   const rafRef = useRef<number | null>(null)
   const t = useTranslations()
@@ -24,13 +24,15 @@ const LayoutHeader = () => {
     const headerEl = headerRef.current
     if (!headerEl) return
 
-    const setScrolled = () => {
+    const currHeaderEl = headerEl
+
+    function setScrolled() {
       const scrolled = window.scrollY > 100
 
-      headerEl.dataset.scrolled = scrolled ? 'true' : 'false'
+      currHeaderEl.dataset.scrolled = scrolled ? 'true' : 'false'
     }
 
-    const handleScroll = () => {
+    function handleScroll() {
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
       rafRef.current = requestAnimationFrame(setScrolled)
     }

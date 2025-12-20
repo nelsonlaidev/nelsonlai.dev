@@ -9,11 +9,11 @@ import { notFound } from 'next/navigation'
 import { getPageImage, source } from '@/lib/source'
 import { getMDXComponents } from '@/mdx-components'
 
-export const generateStaticParams = () => {
+export function generateStaticParams() {
   return source.generateParams()
 }
 
-export const generateMetadata = async (props: PageProps<'/[[...slug]]'>): Promise<Metadata> => {
+export async function generateMetadata(props: PageProps<'/[[...slug]]'>): Promise<Metadata> {
   const { params } = props
   const { slug } = await params
 
@@ -29,7 +29,7 @@ export const generateMetadata = async (props: PageProps<'/[[...slug]]'>): Promis
   }
 }
 
-const Page = async (props: PageProps<'/[[...slug]]'>) => {
+async function Page(props: PageProps<'/[[...slug]]'>) {
   const { params } = props
   const { slug } = await params
 

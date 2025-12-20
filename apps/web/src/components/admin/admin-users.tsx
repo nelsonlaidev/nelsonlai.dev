@@ -6,7 +6,7 @@ import { useAdminUsers } from '@/hooks/queries/admin.query'
 
 import UsersTable from '../tables/users'
 
-const AdminUsers = () => {
+function AdminUsers() {
   const { isSuccess, isLoading, isError, data } = useAdminUsers()
   const t = useTranslations()
 

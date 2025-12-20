@@ -1,12 +1,12 @@
 import { type Browser, expect, type Page } from '@playwright/test'
 
-export const checkAppliedTheme = async (page: Page, theme: string) => {
+export async function checkAppliedTheme(page: Page, theme: string) {
   const htmlElement = page.locator('html')
   await expect(htmlElement).toHaveClass(new RegExp(String.raw`${theme}`))
   await expect(htmlElement).not.toHaveClass(new RegExp(String.raw`${theme === 'light' ? 'dark' : 'light'}`))
 }
 
-export const checkStoredTheme = async (page: Page, theme: 'light' | 'dark' | 'system') => {
+export async function checkStoredTheme(page: Page, theme: 'light' | 'dark' | 'system') {
   await expect(async () => {
     const storedTheme = await page.evaluate(() => localStorage.getItem('theme'))
     expect(storedTheme).toBe(theme)
@@ -19,7 +19,7 @@ type CreateBrowserContextOptions = {
   localStorage?: Array<{ name: string; value: string }>
 }
 
-export const createBrowserContext = async (browser: Browser, options: CreateBrowserContextOptions = {}) => {
+export async function createBrowserContext(browser: Browser, options: CreateBrowserContextOptions = {}) {
   return browser.newContext({
     colorScheme: options.colorScheme ?? 'no-preference',
     storageState: {
@@ -34,7 +34,7 @@ export const createBrowserContext = async (browser: Browser, options: CreateBrow
   })
 }
 
-export const setThemeInLocalStorage = async (page: Page, theme: string) => {
+export async function setThemeInLocalStorage(page: Page, theme: string) {
   await page.addInitScript((t: string) => {
     globalThis.localStorage.setItem('theme', t)
   }, theme)

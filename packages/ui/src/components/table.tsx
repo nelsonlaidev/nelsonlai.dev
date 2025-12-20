@@ -2,7 +2,7 @@ import { cn } from '../utils/cn'
 
 type TableProps = React.ComponentProps<'table'>
 
-const Table = (props: TableProps) => {
+function Table(props: TableProps) {
   const { className, ...rest } = props
 
   return (
@@ -14,7 +14,7 @@ const Table = (props: TableProps) => {
 
 type TableHeaderProps = React.ComponentProps<'thead'>
 
-const TableHeader = (props: TableHeaderProps) => {
+function TableHeader(props: TableHeaderProps) {
   const { className, ...rest } = props
 
   return <thead data-slot='table-header' className={cn('[&_tr]:border-b', className)} {...rest} />
@@ -22,7 +22,7 @@ const TableHeader = (props: TableHeaderProps) => {
 
 type TableBodyProps = React.ComponentProps<'tbody'>
 
-const TableBody = (props: TableBodyProps) => {
+function TableBody(props: TableBodyProps) {
   const { className, ...rest } = props
 
   return <tbody data-slot='table-body' className={cn('[&_tr:last-child]:border-0', className)} {...rest} />
@@ -30,7 +30,7 @@ const TableBody = (props: TableBodyProps) => {
 
 type TableFooterProps = React.ComponentProps<'tfoot'>
 
-const TableFooter = (props: TableFooterProps) => {
+function TableFooter(props: TableFooterProps) {
   const { className, ...rest } = props
 
   return (
@@ -44,7 +44,7 @@ const TableFooter = (props: TableFooterProps) => {
 
 type TableRowProps = React.ComponentProps<'tr'>
 
-const TableRow = (props: TableRowProps) => {
+function TableRow(props: TableRowProps) {
   const { className, ...rest } = props
 
   return (
@@ -58,7 +58,7 @@ const TableRow = (props: TableRowProps) => {
 
 type TableHeadProps = React.ComponentProps<'th'>
 
-const TableHead = (props: TableHeadProps) => {
+function TableHead(props: TableHeadProps) {
   const { className, ...rest } = props
 
   return (
@@ -77,7 +77,7 @@ const TableHead = (props: TableHeadProps) => {
 
 type TableCellProps = React.ComponentProps<'td'>
 
-const TableCell = (props: TableCellProps) => {
+function TableCell(props: TableCellProps) {
   const { className, ...rest } = props
 
   return (
@@ -96,7 +96,7 @@ const TableCell = (props: TableCellProps) => {
 
 type TableCaptionProps = React.ComponentProps<'caption'>
 
-const TableCaption = (props: TableCaptionProps) => {
+function TableCaption(props: TableCaptionProps) {
   const { className, ...rest } = props
 
   return <caption data-slot='table-caption' className={cn('mt-4 text-sm text-muted-foreground', className)} {...rest} />

@@ -6,7 +6,7 @@ import { PostHog } from 'posthog-node'
 
 let posthogInstance: PostHog | null = null
 
-export const getPostHogServer = () => {
+export function getPostHogServer() {
   if (!env.NEXT_PUBLIC_POSTHOG_KEY) {
     throw new Error('POSTHOG_KEY is not set')
   }
@@ -20,7 +20,7 @@ export const getPostHogServer = () => {
   return posthogInstance
 }
 
-export const withPostHog = (nextConfig: Promise<NextConfig>): Promise<NextConfig> | NextConfig => {
+export function withPostHog(nextConfig: Promise<NextConfig>): Promise<NextConfig> | NextConfig {
   if (!env.POSTHOG_API_KEY || !env.POSTHOG_ENV_ID || !env.NEXT_PUBLIC_POSTHOG_HOST) {
     return nextConfig
   }

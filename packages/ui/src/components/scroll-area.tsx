@@ -4,7 +4,7 @@ import { cn } from '../utils/cn'
 
 type ScrollAreaProps = React.ComponentProps<typeof ScrollAreaPrimitive.Root>
 
-const ScrollArea = (props: ScrollAreaProps) => {
+function ScrollArea(props: ScrollAreaProps) {
   const { className, children, ...rest } = props
 
   return (
@@ -26,7 +26,7 @@ const ScrollArea = (props: ScrollAreaProps) => {
 
 type ScrollBarProps = React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>
 
-const ScrollBar = (props: ScrollBarProps) => {
+function ScrollBar(props: ScrollBarProps) {
   const { className, orientation = 'vertical', ...rest } = props
 
   return (

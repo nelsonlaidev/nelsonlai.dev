@@ -4,7 +4,7 @@ import { env } from '@repo/env'
 
 const BOT_AVATAR_URL = 'https://cdn.discordapp.com/avatars/1123845082672537751/8af603a10f1d2f86ebc922ede339cd3a.webp'
 
-const sendWebhook = async (body: RESTPostAPIWebhookWithTokenFormDataBody) => {
+async function sendWebhook(body: RESTPostAPIWebhookWithTokenFormDataBody) {
   if (!env.DISCORD_WEBHOOK_URL) return
 
   await fetch(env.DISCORD_WEBHOOK_URL, {
@@ -16,7 +16,7 @@ const sendWebhook = async (body: RESTPostAPIWebhookWithTokenFormDataBody) => {
   })
 }
 
-export const sendGuestbookNotification = async (message: string, userName: string, userImage: string) => {
+export async function sendGuestbookNotification(message: string, userName: string, userImage: string) {
   const body: RESTPostAPIWebhookWithTokenFormDataBody = {
     username: 'Guestbook Bot',
     avatar_url: BOT_AVATAR_URL,

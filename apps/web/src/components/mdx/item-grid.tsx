@@ -14,7 +14,7 @@ type ItemGridProps = {
   items: Items
 }
 
-const ItemGrid = (props: ItemGridProps) => {
+function ItemGrid(props: ItemGridProps) {
   const { items } = props
 
   return (

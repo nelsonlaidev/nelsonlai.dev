@@ -14,7 +14,7 @@ type FilteredPostsProps = {
   posts: Post[]
 }
 
-const FilteredPosts = (props: FilteredPostsProps) => {
+function FilteredPosts(props: FilteredPostsProps) {
   const { posts } = props
   const [searchValue, setSearchValue] = useState('')
   const t = useTranslations()

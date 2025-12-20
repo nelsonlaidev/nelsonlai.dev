@@ -12,7 +12,7 @@ type PageProps = {
   reset: () => void
 }
 
-const Page = (props: PageProps) => {
+function Page(props: PageProps) {
   const { error, reset } = props
   const t = useTranslations()
 

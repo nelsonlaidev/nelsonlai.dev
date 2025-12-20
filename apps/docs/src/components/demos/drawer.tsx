@@ -31,10 +31,10 @@ const data = [
   { goal: 349 }
 ]
 
-const DrawerDemo = () => {
+function DrawerDemo() {
   const [goal, setGoal] = useState(350)
 
-  const handleClick = (adjustment: number) => {
+  function handleClick(adjustment: number) {
     setGoal(Math.max(200, Math.min(400, goal + adjustment)))
   }
 

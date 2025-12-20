@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-const Hello = () => {
+function Hello() {
   useEffect(() => {
     console.log(
       `\

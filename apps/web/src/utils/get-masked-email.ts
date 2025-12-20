@@ -1,4 +1,4 @@
-export const getMaskedEmail = (email: string) => {
+export function getMaskedEmail(email: string) {
   const [username, domain] = email.split('@')
 
   if (!username || !domain) return email

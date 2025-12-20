@@ -1,7 +1,7 @@
 import { AspectRatio } from '@repo/ui/components/aspect-ratio'
 import Image from 'next/image'
 
-const AspectRatioDemo = () => {
+function AspectRatioDemo() {
   return (
     <AspectRatio ratio={16 / 9} className='rounded-lg bg-muted'>
       <Image

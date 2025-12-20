@@ -7,7 +7,7 @@ type CommentsTableProps = {
   comments: Comment[]
 }
 
-const CommentsTable = (props: CommentsTableProps) => {
+function CommentsTable(props: CommentsTableProps) {
   const { comments } = props
 
   // See https://github.com/TanStack/table/issues/5567

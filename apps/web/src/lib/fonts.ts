@@ -53,7 +53,7 @@ const fetchGoogleFont = cache(async (font: string, text: string): Promise<ArrayB
   return fontData
 })
 
-export const getOGImageFonts = async (title: string): Promise<SatoriOptions['fonts']> => {
+export async function getOGImageFonts(title: string): Promise<SatoriOptions['fonts']> {
   const [regularFontData, mediumFontData, semiBoldFontData, notoSansTCData, notoSansSCData] = await Promise.all([
     getRegularFont(),
     getMediumFont(),

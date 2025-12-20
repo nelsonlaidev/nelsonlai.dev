@@ -24,7 +24,7 @@ const voteVariants = cva({
   }
 })
 
-const CommentActions = () => {
+function CommentActions() {
   const { slug } = useCommentsContext()
   const { comment, setIsReplying, isOpenReplies, setIsOpenReplies } = useCommentContext()
   const { data: session } = useSession()
@@ -34,7 +34,7 @@ const CommentActions = () => {
 
   const isAuthenticated = session !== null
 
-  const handleVoteComment = (like: boolean) => {
+  function handleVoteComment(like: boolean) {
     if (isVoting) return
 
     if (!isAuthenticated) {

@@ -4,7 +4,7 @@ type FormattedDateCellProps = {
   date: Date
 }
 
-const FormattedDateCell = (props: FormattedDateCellProps) => {
+function FormattedDateCell(props: FormattedDateCellProps) {
   const { date } = props
 
   const formattedDate = useFormattedDate(date, {

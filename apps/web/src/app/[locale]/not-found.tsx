@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: '404'
 }
 
-const NotFound = () => {
+function NotFound() {
   const t = useTranslations()
 
   return (

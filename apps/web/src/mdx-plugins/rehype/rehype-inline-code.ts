@@ -7,9 +7,7 @@
 // Source: https://github.com/shikijs/shiki/blob/481135b16287d7dabc2e155f427af63d3ff3536d/packages/rehype/src/index.ts
 //
 // Modified by: Nelson Lai
-import type { RehypeShikiCoreOptions } from '@shikijs/rehype/core'
 import type { Root } from 'hast'
-import type { Plugin, Transformer } from 'unified'
 
 import { bundledLanguages, getSingletonHighlighter, type Highlighter } from 'shiki'
 import { visit } from 'unist-util-visit'
@@ -23,7 +21,7 @@ const themeKeys = Object.keys(DEFAULT_SHIKI_THEMES)
 
 let cachedHighlighter: Highlighter | null = null
 
-const getScopeColors = (highlighter: Highlighter, scope: string): string[] => {
+function getScopeColors(highlighter: Highlighter, scope: string): string[] {
   return themeNames.map(
     (name) =>
       highlighter.getTheme(name).settings.find(({ scope: themeScope }) => themeScope?.includes(scope))?.settings
@@ -31,7 +29,7 @@ const getScopeColors = (highlighter: Highlighter, scope: string): string[] => {
   )
 }
 
-const getHighlighter = async () => {
+async function getHighlighter() {
   if (cachedHighlighter) return cachedHighlighter
 
   cachedHighlighter = await getSingletonHighlighter({
@@ -42,7 +40,7 @@ const getHighlighter = async () => {
   return cachedHighlighter
 }
 
-const transformer: Transformer<Root> = async (tree) => {
+async function transformer(tree: Root) {
   const highlighter = await getHighlighter()
 
   visit(tree, 'element', (node, index, parent) => {
@@ -93,6 +91,6 @@ const transformer: Transformer<Root> = async (tree) => {
   })
 }
 
-export const rehypeInlineCode: Plugin<[RehypeShikiCoreOptions], Root> = () => {
+export function rehypeInlineCode() {
   return transformer
 }

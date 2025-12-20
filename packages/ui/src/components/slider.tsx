@@ -5,7 +5,7 @@ import { cn } from '../utils/cn'
 
 type SliderProps = React.ComponentProps<typeof SliderPrimitive.Root>
 
-const Slider = (props: SliderProps) => {
+function Slider(props: SliderProps) {
   const { className, defaultValue, value, min = 0, max = 100, ...rest } = props
   const _values = useMemo(() => {
     let result: number[] // or appropriate type depending on your data

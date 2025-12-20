@@ -6,7 +6,7 @@ import ComponentPreview from '@/components/component-preview'
 
 import ComponentPreviewEmbed from './components/component-preview-embed'
 
-export const getMDXComponents = (components?: MDXComponents): MDXComponents => {
+export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
     ...components,

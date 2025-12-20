@@ -47,7 +47,7 @@ const variants = {
   }
 }
 
-const Hero = () => {
+function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const t = useTranslations()
 

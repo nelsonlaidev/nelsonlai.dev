@@ -8,7 +8,7 @@ import { Button, buttonVariants } from './button'
 
 type CalendarDayButtonProps = React.ComponentProps<typeof DayButton>
 
-const CalendarDayButton = (props: CalendarDayButtonProps) => {
+function CalendarDayButton(props: CalendarDayButtonProps) {
   const { className, day, modifiers, ...rest } = props
   const defaultClassNames = getDefaultClassNames()
 
@@ -80,7 +80,7 @@ type CalendarProps = React.ComponentProps<typeof DayPicker> & {
   buttonVariant?: React.ComponentProps<typeof Button>['variant']
 }
 
-const Calendar = (props: CalendarProps) => {
+function Calendar(props: CalendarProps) {
   const {
     className,
     classNames,

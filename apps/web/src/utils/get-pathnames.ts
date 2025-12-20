@@ -6,7 +6,7 @@ type GetPathnamesOptions = {
   includeProtectedRoutes?: boolean
 }
 
-export const getPathnames = (options: GetPathnamesOptions = {}) => {
+export function getPathnames(options: GetPathnamesOptions = {}) {
   const { includeProtectedRoutes = false } = options
 
   const publicRoutes = [

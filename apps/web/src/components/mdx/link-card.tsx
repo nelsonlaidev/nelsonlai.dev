@@ -9,7 +9,7 @@ type LinkCardProps = {
   title: string
 }
 
-const LinkCard = (props: LinkCardProps) => {
+function LinkCard(props: LinkCardProps) {
   const { href, hostname, title } = props
 
   return (

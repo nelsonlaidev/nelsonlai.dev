@@ -4,7 +4,7 @@ import { buttonVariants } from '@repo/ui/components/button'
 import { Link } from '@repo/ui/components/link'
 import { useTranslations } from 'next-intl'
 
-const GoToHomepage = () => {
+function GoToHomepage() {
   const t = useTranslations()
 
   return (
