@@ -57,7 +57,6 @@
     "@types/node": "22.19.3",
     "@vitest/coverage-v8": "4.0.16",
     "@vitest/ui": "4.0.16",
-    "cross-env": "10.1.0",
     "eslint": "9.39.2",
     "jsdom": "27.3.0",
     "knip": "5.76.0",
