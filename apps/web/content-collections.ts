@@ -37,7 +37,8 @@ const posts = defineCollection({
     title: z.string(),
     date: z.string(),
     modifiedTime: z.string(),
-    summary: z.string()
+    summary: z.string(),
+    content: z.string()
   }),
   transform
 })
@@ -53,7 +54,8 @@ const projects = defineCollection({
     github: z.string(),
     techstack: z.array(z.string()),
     selected: z.boolean().optional().default(false),
-    dateCreated: z.string()
+    dateCreated: z.string(),
+    content: z.string()
   }),
   transform
 })
@@ -62,7 +64,9 @@ const pages = defineCollection({
   name: 'Page',
   directory: 'src/content/pages',
   include: '**/*.mdx',
-  schema: z.object({}),
+  schema: z.object({
+    content: z.string()
+  }),
   transform
 })
 
