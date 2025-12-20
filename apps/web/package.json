@@ -87,7 +87,7 @@
     "unist-util-visit": "5.0.0",
     "use-debounce": "10.0.6",
     "vfile": "6.0.3",
-    "zod": "4.1.12"
+    "zod": "4.2.1"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.11.0",
