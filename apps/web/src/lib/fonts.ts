@@ -5,7 +5,9 @@ import path from 'node:path'
 
 import { cache } from 'react'
 
-const getFontPath = (fontName: string) => path.join(process.cwd(), 'public', 'fonts', fontName)
+function getFontPath(fontName: string) {
+  return path.join(process.cwd(), 'public', 'fonts', fontName)
+}
 
 const getRegularFont = cache(async () => {
   const response = await fs.readFile(getFontPath('Geist-Regular.otf'))

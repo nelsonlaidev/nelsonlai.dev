@@ -17,7 +17,7 @@ import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
-export const generateStaticParams = (): Array<{ slug: string; locale: string }> => {
+export function generateStaticParams(): Array<{ slug: string; locale: string }> {
   return allProjects.map((project) => ({
     slug: project.slug,
     locale: project.locale

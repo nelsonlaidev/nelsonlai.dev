@@ -16,7 +16,7 @@ import Hello from '@/components/hello'
 import Providers from '@/components/providers'
 import SignInDialog from '@/components/sign-in-dialog'
 
-export const generateStaticParams = (): Array<{ locale: string }> => {
+export function generateStaticParams(): Array<{ locale: string }> {
   return routing.locales.map((locale) => ({ locale }))
 }
 

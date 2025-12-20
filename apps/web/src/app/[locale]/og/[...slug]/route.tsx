@@ -99,7 +99,7 @@ async function generateOGImage(title: string, url: string) {
   })
 }
 
-export const generateStaticParams = (): Array<{ locale: string; slug: string[] }> => {
+export function generateStaticParams(): Array<{ locale: string; slug: string[] }> {
   const pathnames = getPathnames({ includeProtectedRoutes: true })
 
   return routing.locales.flatMap((locale) => {
