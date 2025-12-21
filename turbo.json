@@ -4,7 +4,6 @@
   "globalEnv": [
     "NODE_ENV",
     "CI",
-    "ANALYZE",
     "NEXT_RUNTIME",
     "DATABASE_URL",
     "UPSTASH_REDIS_REST_URL",

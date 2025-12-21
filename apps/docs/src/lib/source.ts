@@ -11,22 +11,7 @@ declare module 'fumadocs-core/page-tree' {
 export const source = loader({
   baseUrl: '/',
   source: docs.toFumadocsSource(),
-  plugins: ({ typedPlugin }) => [
-    lucideIconsPlugin(),
-    typedPlugin({
-      transformPageTree: {
-        file: (node) => {
-          const page = source.getPage(node.url.split('/').filter(Boolean))
-
-          if (page?.data.api?.includes('ark-ui')) {
-            node.package = 'ark-ui'
-          }
-
-          return node
-        }
-      }
-    })
-  ]
+  plugins: [lucideIconsPlugin()]
 })
 
 export function getPageImage(page: InferPageType<typeof source>) {

@@ -1,7 +1,6 @@
 import type { NextConfig } from 'next'
 
 import { withContentCollections } from '@content-collections/next'
-import bundleAnalyzer from '@next/bundle-analyzer'
 import { env } from '@repo/env'
 import createNextIntlPlugin from 'next-intl/plugin'
 
@@ -9,10 +8,6 @@ import { IS_PRODUCTION } from '@/lib/constants'
 import { withPostHog } from '@/lib/posthog'
 
 const withNextIntl = createNextIntlPlugin()
-
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true'
-})
 
 const remotePatterns: NonNullable<NextConfig['images']>['remotePatterns'] = [
   {
@@ -132,4 +127,4 @@ const config: NextConfig = {
   }
 }
 
-export default withPostHog(withContentCollections(withNextIntl(withBundleAnalyzer(config))))
+export default withPostHog(withContentCollections(withNextIntl(config)))

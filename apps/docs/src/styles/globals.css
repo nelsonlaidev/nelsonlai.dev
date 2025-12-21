@@ -9,10 +9,6 @@
   --font-mono: var(--font-geist-mono);
 }
 
-:root {
-  --fd-page-width: 1000px;
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;

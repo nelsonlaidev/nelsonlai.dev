@@ -29,15 +29,15 @@
   "dependencies": {
     "@paralleldrive/cuid2": "3.0.4",
     "@repo/env": "workspace:*",
-    "drizzle-orm": "0.44.7"
+    "drizzle-orm": "0.45.1"
   },
   "devDependencies": {
     "@nelsonlaidev/eslint-config": "2.4.5",
     "@nelsonlaidev/typescript-config": "1.1.1",
-    "@types/node": "24.9.2",
+    "@types/node": "22.19.3",
     "consola": "3.4.2",
-    "drizzle-kit": "0.31.6",
-    "execa": "9.6.0",
+    "drizzle-kit": "0.31.8",
+    "execa": "9.6.1",
     "postgres": "3.4.7"
   },
   "peerDependencies": {
