@@ -1,5 +1,5 @@
 import { Logo } from '@repo/ui/components/logo'
-import { DocsLayout } from 'fumadocs-ui/layouts/notebook'
+import { DocsLayout } from 'fumadocs-ui/layouts/docs'
 
 import { source } from '@/lib/source'
 

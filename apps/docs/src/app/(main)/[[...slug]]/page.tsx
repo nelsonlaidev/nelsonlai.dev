@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import { Badge } from '@repo/ui/components/badge'
-import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/layouts/notebook/page'
+import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/layouts/docs/page'
 import { createRelativeLink } from 'fumadocs-ui/mdx'
 import { ArrowUpRightIcon } from 'lucide-react'
 import { notFound } from 'next/navigation'
