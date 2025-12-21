@@ -56,12 +56,6 @@ function Carousel(props: CarouselProps) {
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
 
-  const onSelect = useCallback((a: CarouselApi) => {
-    if (!a) return
-    setCanScrollPrev(a.canScrollPrev())
-    setCanScrollNext(a.canScrollNext())
-  }, [])
-
   const scrollPrev = useCallback(() => {
     api?.scrollPrev()
   }, [api])
@@ -90,6 +84,13 @@ function Carousel(props: CarouselProps) {
 
   useEffect(() => {
     if (!api) return
+
+    function onSelect(a: CarouselApi) {
+      if (!a) return
+      setCanScrollPrev(a.canScrollPrev())
+      setCanScrollNext(a.canScrollNext())
+    }
+
     onSelect(api)
     api.on('reInit', onSelect)
     api.on('select', onSelect)
@@ -97,7 +98,7 @@ function Carousel(props: CarouselProps) {
     return () => {
       api.off('select', onSelect)
     }
-  }, [api, onSelect])
+  }, [api])
 
   const value = useMemo(
     () => ({
