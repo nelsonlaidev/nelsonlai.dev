@@ -96,23 +96,24 @@ describe('sitemap', () => {
   it('uses default locale without prefix in URLs', () => {
     const pathnames = getPathnames()
     const result = sitemap()
-    const defaultLocaleEntries: typeof result = []
 
-    for (const pathname of pathnames) {
+    const defaultLocaleEntries = pathnames.map((pathname) => {
       const expectedUrl = getLocalizedPath({ locale: routing.defaultLocale, pathname })
-      const matchingEntry = result.find((entry) => entry.url === expectedUrl)
-      if (matchingEntry) {
-        defaultLocaleEntries.push(matchingEntry)
-      }
-    }
+      return result.find((entry) => entry.url === expectedUrl)
+    })
 
+    expect(defaultLocaleEntries.every((entry) => entry !== undefined)).toBe(true)
     expect(defaultLocaleEntries).toHaveLength(pathnames.length)
 
-    for (const entry of defaultLocaleEntries) {
-      for (const locale of routing.locales) {
-        if (locale !== routing.defaultLocale) {
-          expect(entry.url).not.toContain('/' + locale + '/')
-        }
+    const allDefaultEntries = defaultLocaleEntries.filter(
+      (entry): entry is NonNullable<typeof entry> => entry !== undefined
+    )
+
+    const nonDefaultLocales = routing.locales.filter((locale) => locale !== routing.defaultLocale)
+
+    for (const entry of allDefaultEntries) {
+      for (const locale of nonDefaultLocales) {
+        expect(entry.url).not.toContain('/' + locale + '/')
       }
     }
   })

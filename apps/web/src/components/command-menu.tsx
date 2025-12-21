@@ -13,7 +13,7 @@ import {
 } from '@repo/ui/components/command'
 import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon, UserCircleIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { Fragment, useCallback, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 import { SOCIAL_LINKS } from '@/config/links'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
@@ -79,20 +79,20 @@ function CommandMenu() {
     await signOut()
   }
 
-  const handleKeyDown = useCallback((event: KeyboardEvent) => {
-    if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
-      event.preventDefault()
-      toggleMenu()
-    }
-  }, [])
-
   useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault()
+        toggleMenu()
+      }
+    }
+
     document.addEventListener('keydown', handleKeyDown)
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [handleKeyDown])
+  }, [])
 
   const accountActions: CommandAction[] = session
     ? [
