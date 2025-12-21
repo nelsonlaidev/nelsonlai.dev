@@ -1,7 +1,6 @@
 import { Logo } from '@repo/ui/components/logo'
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook'
 
-import SidebarItem from '@/components/sidebar-item'
 import { source } from '@/lib/source'
 
 function Layout(props: LayoutProps<'/'>) {
@@ -17,11 +16,6 @@ function Layout(props: LayoutProps<'/'>) {
             @nelsonlaidev/docs
           </div>
         )
-      }}
-      sidebar={{
-        components: {
-          Item: SidebarItem
-        }
       }}
       githubUrl='https://github.com/nelsonlaidev/nelsonlai.dev/tree/main/apps/docs'
     >
