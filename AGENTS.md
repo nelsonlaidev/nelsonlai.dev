@@ -178,7 +178,7 @@ When modifying database schema:
 ### Creating New Routes
 
 ```ts
-// In apps/web/src/orpc/routers/todo.route.ts
+// In apps/web/src/orpc/routers/todo.router.ts
 import * as z from 'zod'
 import { publicProcedure, protectedProcedure } from '../root'
 
