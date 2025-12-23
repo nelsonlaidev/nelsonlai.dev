@@ -42,7 +42,7 @@ nelsonlai-dev/
 
 ### Core Technologies
 
-- Framework: Next.js 15+ with App Router
+- Framework: Next.js 16+ with App Router
 - Language: TypeScript (strict mode)
 - Styling: Tailwind CSS with custom utility classes
 - Database: PostgreSQL with Drizzle ORM
@@ -111,8 +111,8 @@ export default Component
 
 - Use Tailwind CSS utilities
 - Use `cn()` helper from `@repo/ui/utils/cn` for conditional classes
-- Prefer `space-x-*` and `space-y-*` over `mb-*` and `mt-*`
-- Prefer `gap-*` over `space-x-*` and `space-y-*` in flex containers
+- Use `gap-*` for flex/grid containers for consistent spacing
+- Use margin utilities (`mt-*`, `mb-*`, etc.) for component-level spacing as needed
 - Avoid inline styles unless dynamic
 - Follow mobile-first responsive design
 
@@ -182,8 +182,8 @@ When modifying database schema:
 import { publicProcedure, protectedProcedure } from '../root'
 import { todoOutputSchema, createTodoInputSchema } from '../schemas/todo.schema'
 
-// Router name convention: use verb-noun format
-// e.g., get-user, create-post, update-profile
+// Router files use noun-based naming: <noun>.router.ts (e.g., todo.router.ts, auth.router.ts)
+// Individual procedures within routers use verb-noun format (e.g., listTodos, createTodo)
 export const listTodos = publicProcedure.output(todoOutputSchema).handler(async ({ context }) => {
   // Implementation
 })
@@ -200,7 +200,7 @@ export const createTodo = protectedProcedure
 
 ```ts
 // In apps/web/src/orpc/routers/index.ts
-import { todoRouter } from './todo.router'
+import { listTodos, createTodo } from './todo.router'
 
 export const router = {
   todo: {
