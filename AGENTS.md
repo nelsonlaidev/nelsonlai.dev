@@ -179,18 +179,18 @@ When modifying database schema:
 
 ```ts
 // In apps/web/src/orpc/routers/todo.router.ts
-import * as z from 'zod'
 import { publicProcedure, protectedProcedure } from '../root'
+import { todoOutputSchema, createTodoInputSchema } from '../schemas/todo.schema'
 
 // Router name convention: use verb-noun format
 // e.g., get-user, create-post, update-profile
-export const listTodos = publicProcedure.output(todoSchema).handler(async ({ context }) => {
+export const listTodos = publicProcedure.output(todoOutputSchema).handler(async ({ context }) => {
   // Implementation
 })
 
 export const createTodo = protectedProcedure
   .input(createTodoInputSchema)
-  .output(todoSchema)
+  .output(todoOutputSchema)
   .handler(async ({ input, context }) => {
     // Implementation
   })
@@ -200,6 +200,7 @@ export const createTodo = protectedProcedure
 
 ```ts
 // In apps/web/src/orpc/routers/index.ts
+import { todoRouter } from './todo.router'
 
 export const router = {
   todo: {
