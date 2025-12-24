@@ -48,7 +48,6 @@
     "@nelsonlaidev/prettier-config": "0.1.1",
     "@nelsonlaidev/typescript-config": "1.1.1",
     "@playwright/test": "1.57.0",
-    "@types/node": "22.19.3",
     "@vitest/coverage-v8": "4.0.16",
     "@vitest/ui": "4.0.16",
     "eslint": "9.39.2",
