@@ -41,12 +41,6 @@
     "typegen": "turbo typegen",
     "with-env": "dotenvx run -f .env.local --ignore=MISSING_ENV_FILE --"
   },
-  "lint-staged": {
-    "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}": "eslint --fix",
-    "*": [
-      "prettier --write --ignore-unknown"
-    ]
-  },
   "devDependencies": {
     "@dotenvx/dotenvx": "1.51.2",
     "@lingual/i18n-check": "0.8.16",
@@ -61,7 +55,6 @@
     "jsdom": "27.3.0",
     "knip": "5.76.0",
     "lefthook": "2.0.12",
-    "lint-staged": "16.2.7",
     "prettier": "3.7.4",
     "prettier-plugin-packagejson": "2.5.20",
     "tsx": "4.21.0",

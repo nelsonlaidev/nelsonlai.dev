@@ -20,12 +20,6 @@
     "typecheck": "tsc --noEmit",
     "with-env": "dotenvx run -f ../../.env.local --ignore=MISSING_ENV_FILE --"
   },
-  "lint-staged": {
-    "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}": "eslint --fix",
-    "*": [
-      "prettier --write --ignore-unknown"
-    ]
-  },
   "dependencies": {
     "@paralleldrive/cuid2": "3.0.4",
     "@repo/env": "workspace:*",

@@ -16,12 +16,6 @@
     "typecheck": "tsc --noEmit",
     "typegen": "next typegen"
   },
-  "lint-staged": {
-    "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}": "eslint --fix",
-    "*": [
-      "prettier --write --ignore-unknown"
-    ]
-  },
   "dependencies": {
     "@repo/ui": "workspace:*",
     "fumadocs-core": "16.3.1",

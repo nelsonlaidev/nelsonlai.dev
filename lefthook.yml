@@ -1,5 +1,9 @@
 pre-commit:
-  parallel: true
   jobs:
-    - name: lint-staged
-      run: pnpm lint-staged
+    - name: prettier
+      run: pnpm prettier --write --ignore-unknown "{staged_files}"
+      stage_fixed: true
+
+extends:
+  - apps/*/lefthook.yml
+  - packages/*/lefthook.yml

@@ -20,12 +20,6 @@
     "typegen": "pnpm with-env next typegen",
     "with-env": "dotenvx run -f ../../.env.local --ignore=MISSING_ENV_FILE --"
   },
-  "lint-staged": {
-    "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}": "eslint --fix",
-    "*": [
-      "prettier --write --ignore-unknown"
-    ]
-  },
   "dependencies": {
     "@aws-sdk/client-s3": "3.956.0",
     "@aws-sdk/s3-request-presigner": "3.956.0",

@@ -17,12 +17,6 @@
     "shadcn": "tsx ./src/scripts/shadcn.ts",
     "typecheck": "tsc --noEmit"
   },
-  "lint-staged": {
-    "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}": "eslint --fix",
-    "*": [
-      "prettier --write --ignore-unknown"
-    ]
-  },
   "dependencies": {
     "@ark-ui/react": "5.30.0",
     "@icons-pack/react-simple-icons": "13.8.0",

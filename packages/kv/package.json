@@ -12,12 +12,6 @@
     "lint:fix": "eslint --fix . --max-warnings 0",
     "typecheck": "tsc --noEmit"
   },
-  "lint-staged": {
-    "*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}": "eslint --fix",
-    "*": [
-      "prettier --write --ignore-unknown"
-    ]
-  },
   "dependencies": {
     "@upstash/ratelimit": "2.0.7",
     "@upstash/redis": "1.35.8",
