@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": [".env.*local"],
+  "globalDependencies": [".env*"],
   "globalEnv": [
     "NODE_ENV",
     "CI",
@@ -39,6 +39,7 @@
     "NEXT_PUBLIC_POSTHOG_HOST",
     "NEXT_PUBLIC_POSTHOG_KEY"
   ],
+  "ui": "tui",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
@@ -105,6 +106,5 @@
     "typegen": {
       "outputs": [".next/types/**"]
     }
-  },
-  "ui": "tui"
+  }
 }
