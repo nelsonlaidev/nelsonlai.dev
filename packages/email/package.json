@@ -10,8 +10,8 @@
     "clean": "rm -rf .turbo",
     "dev": "email dev --port 3002 --dir src/templates",
     "export": "email export",
-    "lint": "eslint . --max-warnings 0",
-    "lint:fix": "eslint --fix . --max-warnings 0",
+    "lint": "eslint --max-warnings 0 .",
+    "lint:fix": "eslint --fix --max-warnings 0 .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
