@@ -13,7 +13,7 @@
   "scripts": {
     "clean": "rm -rf .turbo",
     "lint": "eslint . --max-warnings 0",
-    "lint:fix": "eslint --fix .",
+    "lint:fix": "eslint --fix . --max-warnings 0",
     "shadcn": "tsx ./src/scripts/shadcn.ts",
     "typecheck": "tsc --noEmit"
   },

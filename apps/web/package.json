@@ -11,7 +11,7 @@
     "clean": "rm -rf .next .turbo .content-collections test-results playwright-report",
     "dev": "pnpm with-env next dev -p 3000",
     "lint": "eslint . --max-warnings 0",
-    "lint:fix": "eslint --fix .",
+    "lint:fix": "eslint --fix . --max-warnings 0",
     "start": "pnpm with-env next start -p 3000",
     "test:e2e": "pnpm with-env playwright test",
     "test:e2e:inspector": "pnpm with-env playwright test $1 --debug",

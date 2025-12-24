@@ -13,7 +13,7 @@
   "scripts": {
     "clean": "rm -rf .turbo",
     "lint": "eslint . --max-warnings 0",
-    "lint:fix": "eslint --fix .",
+    "lint:fix": "eslint --fix . --max-warnings 0",
     "typecheck": "tsc --noEmit"
   },
   "lint-staged": {
