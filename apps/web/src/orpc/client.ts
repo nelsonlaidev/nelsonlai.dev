@@ -3,19 +3,13 @@ import type { InferRouterInputs, InferRouterOutputs, RouterClient } from '@orpc/
 
 import { createORPCClient } from '@orpc/client'
 import { RPCLink } from '@orpc/client/fetch'
-import { BatchLinkPlugin } from '@orpc/client/plugins'
 import { createTanstackQueryUtils } from '@orpc/tanstack-query'
 
 import { IS_SERVER } from '@/lib/constants'
 import { getBaseUrl } from '@/utils/get-base-url'
 
 const link = new RPCLink({
-  url: `${IS_SERVER ? getBaseUrl() : globalThis.location.origin}/rpc`,
-  plugins: [
-    new BatchLinkPlugin({
-      groups: [{ condition: () => true, context: {} }]
-    })
-  ]
+  url: `${IS_SERVER ? getBaseUrl() : globalThis.location.origin}/rpc`
 })
 
 const client: RouterClient<typeof router> = createORPCClient(link)
