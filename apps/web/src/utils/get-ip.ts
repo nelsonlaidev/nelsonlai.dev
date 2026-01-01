@@ -1,22 +1,8 @@
+import { ipAddress } from '@vercel/functions'
+
 export function getIp(headers: Headers) {
-  const forwardedFor = headers.get('x-forwarded-for')
-
-  if (forwardedFor) {
-    const ip = forwardedFor
-      .split(',')
-      .map((entry) => entry.trim())
-      .find(Boolean)
-
-    if (ip) {
-      return ip
-    }
-  }
-
-  const realIp = headers.get('x-real-ip')
-
-  if (realIp) {
-    return realIp
-  }
+  const ip = ipAddress(headers)
+  if (ip) return ip
 
   return '0.0.0.0'
 }

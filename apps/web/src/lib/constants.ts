@@ -1,6 +1,6 @@
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
-// eslint-disable-next-line unicorn/no-typeof-undefined -- window is not defined on server
+// eslint-disable-next-line unicorn/no-typeof-undefined -- window is not always defined
 export const IS_SERVER = typeof globalThis.window === 'undefined'
 
 export const GITHUB_USERNAME = 'nelsonlaidev'

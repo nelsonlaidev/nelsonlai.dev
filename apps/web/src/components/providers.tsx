@@ -4,7 +4,7 @@ import { Toaster } from '@repo/ui/components/sonner'
 import { TooltipProvider } from '@repo/ui/components/tooltip'
 import { ThemeProvider } from 'next-themes'
 
-import { ORPCQueryProvider } from '@/orpc/tanstack-query/client'
+import QueryProvider from './query-provider'
 
 type ProvidesProps = {
   children: React.ReactNode
@@ -14,7 +14,7 @@ function Providers(props: ProvidesProps) {
   const { children } = props
 
   return (
-    <ORPCQueryProvider>
+    <QueryProvider>
       <ThemeProvider attribute='class' defaultTheme='system' enableSystem enableColorScheme disableTransitionOnChange>
         <TooltipProvider>
           {children}
@@ -27,7 +27,7 @@ function Providers(props: ProvidesProps) {
           />
         </TooltipProvider>
       </ThemeProvider>
-    </ORPCQueryProvider>
+    </QueryProvider>
   )
 }
 
