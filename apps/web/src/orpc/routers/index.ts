@@ -81,6 +81,4 @@ export type ListMessagesOutput = Outputs['messages']['list']
 export type ListAllCommentsOutput = Outputs['admin']['listAllComments']
 export type ListAllUsersOutput = Outputs['admin']['listAllUsers']
 
-export type CountViewOutput = Outputs['posts']['views']['count']
-
 export type ListSessionsOutput = Outputs['auth']['listSessions']
