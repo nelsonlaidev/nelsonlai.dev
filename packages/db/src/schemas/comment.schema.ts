@@ -64,7 +64,7 @@ export const votes = pgTable(
   },
   (vote) => [
     primaryKey({ columns: [vote.userId, vote.commentId] }),
-    index('votes_comment_id_like_idx').on(vote.commentId, vote.isLike)
+    index('votes_comment_id_is_like_idx').on(vote.commentId, vote.isLike)
   ]
 )
 

@@ -29,6 +29,13 @@
       "when": 1760254604754,
       "tag": "0003_absurd_the_fallen",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1767276591387,
+      "tag": "0004_melted_cobalt_man",
+      "breakpoints": true
     }
   ]
 }
