@@ -15,7 +15,11 @@ export const countView = publicProcedure
   .output(countViewOutputSchema)
   .handler(async ({ input, context }) => {
     const cached = await cache.posts.views.get(input.slug)
-    if (cached) return cached
+    if (cached) {
+      return {
+        views: cached
+      }
+    }
 
     const [post] = await context.db.select({ views: posts.views }).from(posts).where(eq(posts.slug, input.slug))
 
@@ -25,11 +29,13 @@ export const countView = publicProcedure
       })
     }
 
-    const viewsData = { views: post.views }
+    const views = post.views
 
-    await cache.posts.views.set(viewsData, input.slug)
+    await cache.posts.views.set(input.slug, views)
 
-    return viewsData
+    return {
+      views
+    }
   })
 
 export const incrementView = publicProcedure
@@ -56,8 +62,11 @@ export const incrementView = publicProcedure
       })
     }
 
-    const viewsData = { views: result.views }
-    await cache.posts.views.set(viewsData, input.slug)
+    const views = result.views
 
-    return viewsData
+    await cache.posts.views.set(input.slug, views)
+
+    return {
+      views
+    }
   })

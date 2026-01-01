@@ -23,7 +23,7 @@ export const countLike = publicProcedure
     // Check cache for both global and user-specific like counts
     const [cachedLikes, cachedUserLikes] = await Promise.all([
       cache.posts.likes.get(input.slug),
-      cache.posts.userLikes.get(input.slug, anonKey)
+      cache.posts.userLikes.get(`${input.slug}:${anonKey}`)
     ])
 
     // If both are cached, return immediately
@@ -59,10 +59,10 @@ export const countLike = publicProcedure
     // Cache any missing values
     const cachePromises = []
     if (cachedLikes === null) {
-      cachePromises.push(cache.posts.likes.set(likes, input.slug))
+      cachePromises.push(cache.posts.likes.set(input.slug, likes))
     }
     if (cachedUserLikes === null) {
-      cachePromises.push(cache.posts.userLikes.set(currentUserLikes, input.slug, anonKey))
+      cachePromises.push(cache.posts.userLikes.set(`${input.slug}:${anonKey}`, currentUserLikes))
     }
     await Promise.all(cachePromises)
 
@@ -165,8 +165,8 @@ export const incrementLike = publicProcedure
 
     // Update both global and user-specific like caches
     await Promise.all([
-      cache.posts.likes.set(post.likes, input.slug),
-      cache.posts.userLikes.set(currentUserLikes.likeCount, input.slug, anonKey)
+      cache.posts.likes.set(input.slug, post.likes),
+      cache.posts.userLikes.set(`${input.slug}:${anonKey}`, currentUserLikes.likeCount)
     ])
 
     return {

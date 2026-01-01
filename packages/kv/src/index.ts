@@ -13,4 +13,4 @@ export const ratelimit = new Ratelimit({
   analytics: true
 })
 
-export { createCache, createKey } from './utils'
+export { createCache } from './utils'

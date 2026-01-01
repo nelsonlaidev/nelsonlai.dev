@@ -16,7 +16,7 @@ async function resolveLocation(ip: string) {
   const location = await getLocation(ip)
 
   if (location !== null) {
-    await cache.auth.location.set(location, ip)
+    await cache.auth.location.set(ip, location)
   }
 
   return location
