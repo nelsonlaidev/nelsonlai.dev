@@ -2,7 +2,6 @@ import type { NextRequest } from 'next/server'
 
 import { onError } from '@orpc/client'
 import { RPCHandler } from '@orpc/server/fetch'
-import { BatchHandlerPlugin } from '@orpc/server/plugins'
 
 import { createORPCContext } from '@/orpc/context'
 import { router } from '@/orpc/routers'
@@ -12,8 +11,7 @@ const handler = new RPCHandler(router, {
     onError((error) => {
       console.error(error)
     })
-  ],
-  plugins: [new BatchHandlerPlugin()]
+  ]
 })
 
 async function handleRequest(request: NextRequest) {
