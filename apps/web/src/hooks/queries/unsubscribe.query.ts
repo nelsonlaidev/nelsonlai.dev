@@ -20,11 +20,5 @@ export function useUpdateReplyPrefs(onSuccess?: () => void) {
 }
 
 export function useUpdateCommentReplyPrefs(onSuccess?: () => void) {
-  return useMutation(
-    orpc.unsubscribes.updateCommentReplyPrefs.mutationOptions({
-      onSuccess: () => {
-        onSuccess?.()
-      }
-    })
-  )
+  return useMutation(orpc.unsubscribes.updateCommentReplyPrefs.mutationOptions({ onSuccess }))
 }

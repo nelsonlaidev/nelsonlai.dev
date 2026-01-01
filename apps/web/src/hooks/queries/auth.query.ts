@@ -20,11 +20,5 @@ export function useRevokeSession(onSuccess?: () => void) {
 }
 
 export function useUpdateUser(onSuccess?: () => void) {
-  return useMutation(
-    orpc.auth.updateUser.mutationOptions({
-      onSuccess: () => {
-        onSuccess?.()
-      }
-    })
-  )
+  return useMutation(orpc.auth.updateUser.mutationOptions({ onSuccess }))
 }
