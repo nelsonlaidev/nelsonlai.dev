@@ -12,6 +12,8 @@
     ".env*": "properties"
   },
 
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+
   "tailwindCSS.classFunctions": ["cva", "cn"],
   "tailwindCSS.experimental.configFile": {
     "apps/docs/src/styles/globals.css": "apps/docs/src/**",
