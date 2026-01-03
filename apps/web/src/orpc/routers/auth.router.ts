@@ -6,8 +6,8 @@ import { getLocation } from '@/utils/get-location'
 
 import { cache } from '../cache'
 import { protectedProcedure } from '../root'
-import { listSessionsOutputSchema, revokeSessionInputSchema, updateUserInputSchema } from '../schemas/auth.schema'
-import { emptyOutputSchema } from '../schemas/common.schema'
+import { ListSessionsOutputSchema, RevokeSessionInputSchema, UpdateUserInputSchema } from '../schemas/auth.schema'
+import { EmptyOutputSchema } from '../schemas/common.schema'
 
 async function resolveLocation(ip: string) {
   const cached = await cache.auth.location.get(ip)
@@ -22,7 +22,7 @@ async function resolveLocation(ip: string) {
   return location
 }
 
-export const listSessions = protectedProcedure.output(listSessionsOutputSchema).handler(async ({ context }) => {
+export const listSessions = protectedProcedure.output(ListSessionsOutputSchema).handler(async ({ context }) => {
   const sessions = await auth.api.listSessions({
     headers: context.headers
   })
@@ -45,8 +45,8 @@ export const listSessions = protectedProcedure.output(listSessionsOutputSchema).
 })
 
 export const revokeSession = protectedProcedure
-  .input(revokeSessionInputSchema)
-  .output(emptyOutputSchema)
+  .input(RevokeSessionInputSchema)
+  .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
     try {
       await auth.api.revokeSession({
@@ -64,8 +64,8 @@ export const revokeSession = protectedProcedure
   })
 
 export const updateUser = protectedProcedure
-  .input(updateUserInputSchema)
-  .output(emptyOutputSchema)
+  .input(UpdateUserInputSchema)
+  .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
     const body: Record<string, unknown> = {}
 

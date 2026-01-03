@@ -1,13 +1,13 @@
 import * as z from 'zod'
 
-export const getCommentReplyPrefsOutputSchema = z.object({
+export const GetCommentReplyPrefsOutputSchema = z.object({
   isEnabled: z.boolean()
 })
 
-export const updateGlobalReplyPrefsInputSchema = z.object({
+export const UpdateGlobalReplyPrefsInputSchema = z.object({
   isEnabled: z.boolean()
 })
 
-export const updateCommentReplyPrefsInputSchema = z.object({
+export const UpdateCommentReplyPrefsInputSchema = z.object({
   token: z.string().min(1)
 })

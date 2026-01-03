@@ -1,15 +1,15 @@
 import * as z from 'zod'
 
-export const countViewOutputSchema = z.object({
+export const CountViewOutputSchema = z.object({
   views: z.number()
 })
 
-export { countViewOutputSchema as incrementViewOutputSchema }
+export { CountViewOutputSchema as IncrementViewOutputSchema }
 
-export const countViewInputSchema = z.object({
+export const CountViewInputSchema = z.object({
   slug: z.string()
 })
 
-export const incrementViewInputSchema = z.object({
+export const IncrementViewInputSchema = z.object({
   slug: z.string()
 })

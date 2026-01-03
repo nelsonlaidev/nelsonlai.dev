@@ -5,15 +5,15 @@ import { and, eq, unsubscribes } from '@repo/db'
 import { verifyReplyUnsubToken } from '@/lib/unsubscribe'
 
 import { protectedProcedure, publicProcedure } from '../root'
-import { emptyOutputSchema } from '../schemas/common.schema'
+import { EmptyOutputSchema } from '../schemas/common.schema'
 import {
-  getCommentReplyPrefsOutputSchema,
-  updateCommentReplyPrefsInputSchema,
-  updateGlobalReplyPrefsInputSchema
+  GetCommentReplyPrefsOutputSchema,
+  UpdateCommentReplyPrefsInputSchema,
+  UpdateGlobalReplyPrefsInputSchema
 } from '../schemas/unsubscribe.schema'
 
 export const getReplyPrefs = protectedProcedure
-  .output(getCommentReplyPrefsOutputSchema)
+  .output(GetCommentReplyPrefsOutputSchema)
   .handler(async ({ context }) => {
     const result = await context.db.query.unsubscribes.findFirst({
       where: and(eq(unsubscribes.userId, context.session.user.id), eq(unsubscribes.scope, 'comment_replies_user'))
@@ -23,8 +23,8 @@ export const getReplyPrefs = protectedProcedure
   })
 
 export const updateReplyPrefs = protectedProcedure
-  .input(updateGlobalReplyPrefsInputSchema)
-  .output(emptyOutputSchema)
+  .input(UpdateGlobalReplyPrefsInputSchema)
+  .output(EmptyOutputSchema)
   .handler(async ({ context, input }) => {
     if (input.isEnabled) {
       await context.db
@@ -48,8 +48,8 @@ export const updateReplyPrefs = protectedProcedure
   })
 
 export const updateCommentReplyPrefs = publicProcedure
-  .input(updateCommentReplyPrefsInputSchema)
-  .output(emptyOutputSchema)
+  .input(UpdateCommentReplyPrefsInputSchema)
+  .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
     const result = await verifyReplyUnsubToken(input.token)
 

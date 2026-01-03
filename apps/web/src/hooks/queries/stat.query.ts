@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { orpc } from '@/orpc/client'
 
-export function useYouTubeStat() {
+export function useYoutubeStat() {
   return useQuery(orpc.stats.youtube.queryOptions())
 }
 

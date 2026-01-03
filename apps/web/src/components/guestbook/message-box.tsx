@@ -25,7 +25,7 @@ function MessageBox(props: MessageBoxProps) {
   const t = useTranslations()
   const signOut = useSignOut()
 
-  const guestbookFormSchema = z.object({
+  const GuestbookFormSchema = z.object({
     message: z.string().min(1, t('error.message-cannot-be-empty'))
   })
 
@@ -34,7 +34,7 @@ function MessageBox(props: MessageBoxProps) {
       message: ''
     },
     validators: {
-      onSubmit: guestbookFormSchema
+      onSubmit: GuestbookFormSchema
     },
     onSubmit: ({ value }) => {
       if (isCreating) return

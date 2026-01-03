@@ -31,4 +31,4 @@ export const deleteMessageInputSchema = z.object({
   id: z.string()
 })
 
-export { infiniteQuerySchema as listMessagesInputSchema } from './common.schema'
+export { InfiniteQuerySchema as listMessagesInputSchema } from './common.schema'
