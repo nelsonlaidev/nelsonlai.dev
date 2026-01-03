@@ -248,12 +248,9 @@ export const deleteComment = protectedProcedure
 
       // Case: deleting a reply
       if (comment.parentId) {
-        // Lock the parent row to prevent race conditions when multiple replies are deleted concurrently
-        const [parentComment] = await tx
-          .select()
-          .from(comments)
-          .where(and(eq(comments.id, comment.parentId), eq(comments.isDeleted, true)))
-          .for('update')
+        const parentComment = await tx.query.comments.findFirst({
+          where: and(eq(comments.id, comment.parentId), eq(comments.isDeleted, true))
+        })
 
         if (parentComment) {
           // Check if parent has any remaining replies
