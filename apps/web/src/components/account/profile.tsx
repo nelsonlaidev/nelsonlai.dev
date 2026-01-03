@@ -97,7 +97,7 @@ function EditName(props: EditNameProps) {
   const t = useTranslations()
   const { refetch: refetchSession } = useSession()
 
-  const editNameFormSchema = z.object({
+  const EditNameFormSchema = z.object({
     name: z.string().min(1, t('error.name-cannot-be-empty')).max(50, t('error.name-too-long'))
   })
 
@@ -106,7 +106,7 @@ function EditName(props: EditNameProps) {
       name
     },
     validators: {
-      onSubmit: editNameFormSchema
+      onSubmit: EditNameFormSchema
     },
     onSubmit: ({ value }) => {
       if (isUpdating) return

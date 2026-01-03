@@ -7,15 +7,15 @@ import { getIp } from '@/utils/get-ip'
 import { cache } from '../cache'
 import { publicProcedure } from '../root'
 import {
-  countLikeInputSchema,
-  countLikeOutputSchema,
-  incrementLikeInputSchema,
-  incrementLikeOutputSchema
+  CountLikeInputSchema,
+  CountLikeOutputSchema,
+  IncrementLikeInputSchema,
+  IncrementLikeOutputSchema
 } from '../schemas/like.schema'
 
 export const countLike = publicProcedure
-  .input(countLikeInputSchema)
-  .output(countLikeOutputSchema)
+  .input(CountLikeInputSchema)
+  .output(CountLikeOutputSchema)
   .handler(async ({ input, context }) => {
     const ip = getIp(context.headers)
     const anonKey = getAnonKey(ip)
@@ -73,8 +73,8 @@ export const countLike = publicProcedure
   })
 
 export const incrementLike = publicProcedure
-  .input(incrementLikeInputSchema)
-  .output(incrementLikeOutputSchema)
+  .input(IncrementLikeInputSchema)
+  .output(IncrementLikeOutputSchema)
   .handler(async ({ input, context }) => {
     const ip = getIp(context.headers)
     const anonKey = getAnonKey(ip)

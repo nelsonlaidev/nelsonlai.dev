@@ -9,13 +9,13 @@ import { getMaskedEmail } from '@/utils/get-masked-email'
 
 const tokenSchema = z.jwt({ alg: 'HS256' })
 
-const replyUnsubPayloadSchema = z.object({
+const ReplyUnsubPayloadSchema = z.object({
   userId: z.string().min(1),
   commentId: z.string().min(1)
 })
 
 type UnsubTokenResult<T> = { success: true; data: T } | { success: false }
-type ReplyUnsubPayload = z.infer<typeof replyUnsubPayloadSchema>
+type ReplyUnsubPayload = z.infer<typeof ReplyUnsubPayloadSchema>
 
 export async function generateReplyUnsubToken(userId: string, commentId: string): Promise<string> {
   if (!env.JWT_SECRET) {
@@ -42,7 +42,7 @@ export async function verifyReplyUnsubToken(token: string): Promise<UnsubTokenRe
   try {
     const decoded = await jwtVerify(token, new TextEncoder().encode(env.JWT_SECRET), { algorithms: ['HS256'] })
 
-    const parsedPayload = replyUnsubPayloadSchema.safeParse(decoded.payload)
+    const parsedPayload = ReplyUnsubPayloadSchema.safeParse(decoded.payload)
 
     if (!parsedPayload.success) {
       return { success: false }

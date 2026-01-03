@@ -1,9 +1,9 @@
 import { posts, sum } from '@repo/db'
 
 import { publicProcedure } from '../root'
-import { likesStatsOutputSchema, viewsStatsOutputSchema } from '../schemas/blog.schema'
+import { LikesStatsOutputSchema, ViewsStatsOutputSchema } from '../schemas/blog.schema'
 
-export const viewsStats = publicProcedure.output(viewsStatsOutputSchema).handler(async ({ context }) => {
+export const viewsStats = publicProcedure.output(ViewsStatsOutputSchema).handler(async ({ context }) => {
   const [result] = await context.db
     .select({
       value: sum(posts.views)
@@ -17,7 +17,7 @@ export const viewsStats = publicProcedure.output(viewsStatsOutputSchema).handler
   }
 })
 
-export const likesStats = publicProcedure.output(likesStatsOutputSchema).handler(async ({ context }) => {
+export const likesStats = publicProcedure.output(LikesStatsOutputSchema).handler(async ({ context }) => {
   const [result] = await context.db
     .select({
       value: sum(posts.likes)

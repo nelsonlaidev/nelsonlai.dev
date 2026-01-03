@@ -1,9 +1,9 @@
 import * as z from 'zod'
 
-export const countRepliesInputSchema = z.object({
+export const CountRepliesInputSchema = z.object({
   slug: z.string().min(1)
 })
 
-export const countRepliesOutputSchema = z.object({
+export const CountRepliesOutputSchema = z.object({
   count: z.number()
 })

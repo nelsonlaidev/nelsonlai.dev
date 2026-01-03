@@ -12,7 +12,7 @@ import {
   useBlogViewStat,
   useGitHubStat,
   useWakatimeStat,
-  useYouTubeStat
+  useYoutubeStat
 } from '@/hooks/queries/stat.query'
 
 type Card = {
@@ -29,7 +29,7 @@ type Card = {
 }
 
 function Stats() {
-  const youtubeQuery = useYouTubeStat()
+  const youtubeQuery = useYoutubeStat()
   const githubQuery = useGitHubStat()
   const likesQuery = useBlogLikeStat()
   const viewsQuery = useBlogViewStat()

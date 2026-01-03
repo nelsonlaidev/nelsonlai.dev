@@ -9,11 +9,11 @@ import { getCloudflareR2 } from '@/lib/cloudflare-r2'
 import { getR2PublicUrl } from '@/utils/get-r2-public-url'
 
 import { protectedProcedure } from '../root'
-import { getAvatarUploadUrlInputSchema, getAvatarUploadUrlOutputSchema } from '../schemas/r2.schema'
+import { GetAvatarUploadUrlInputSchema, GetAvatarUploadUrlOutputSchema } from '../schemas/r2.schema'
 
 export const getAvatarUploadUrl = protectedProcedure
-  .input(getAvatarUploadUrlInputSchema)
-  .output(getAvatarUploadUrlOutputSchema)
+  .input(GetAvatarUploadUrlInputSchema)
+  .output(GetAvatarUploadUrlOutputSchema)
   .handler(async ({ input, context }) => {
     const r2 = getCloudflareR2()
 

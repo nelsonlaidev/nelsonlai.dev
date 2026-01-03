@@ -1,6 +1,6 @@
 import * as z from 'zod'
 
-export const youtubeStatsOutputSchema = z.object({
+export const YoutubeStatsOutputSchema = z.object({
   subscribers: z.number(),
   views: z.number()
 })

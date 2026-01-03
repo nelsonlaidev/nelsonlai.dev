@@ -13,18 +13,18 @@ import { getDefaultImage } from '@/utils/get-default-image'
 import { protectedProcedure, publicProcedure } from '../root'
 import {
   countCommentsInputSchema,
-  countCommentsOutputSchema,
-  createCommentInputSchema,
-  createCommentOutputSchema,
-  deleteCommentInputSchema,
-  listCommentsInputSchema,
-  listCommentsOutputSchema
+  CountCommentsOutputSchema,
+  CreateCommentInputSchema,
+  CreateCommentOutputSchema,
+  DeleteCommentInputSchema,
+  ListCommentsInputSchema,
+  ListCommentsOutputSchema
 } from '../schemas/comment.schema'
-import { emptyOutputSchema } from '../schemas/common.schema'
+import { EmptyOutputSchema } from '../schemas/common.schema'
 
 export const listComments = publicProcedure
-  .input(listCommentsInputSchema)
-  .output(listCommentsOutputSchema)
+  .input(ListCommentsInputSchema)
+  .output(ListCommentsOutputSchema)
   .handler(async ({ input, context }) => {
     const session = context.session
 
@@ -101,8 +101,8 @@ export const listComments = publicProcedure
   })
 
 export const createComment = protectedProcedure
-  .input(createCommentInputSchema)
-  .output(createCommentOutputSchema)
+  .input(CreateCommentInputSchema)
+  .output(CreateCommentOutputSchema)
   .handler(async ({ input, context }) => {
     const user = context.session.user
 
@@ -209,8 +209,8 @@ export const createComment = protectedProcedure
   })
 
 export const deleteComment = protectedProcedure
-  .input(deleteCommentInputSchema)
-  .output(emptyOutputSchema)
+  .input(DeleteCommentInputSchema)
+  .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
     const userId = context.session.user.id
 
@@ -267,7 +267,7 @@ export const deleteComment = protectedProcedure
 
 export const countComments = publicProcedure
   .input(countCommentsInputSchema)
-  .output(countCommentsOutputSchema)
+  .output(CountCommentsOutputSchema)
   .handler(async ({ input, context }) => {
     const [result] = await context.db
       .select({

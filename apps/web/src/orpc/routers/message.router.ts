@@ -6,7 +6,7 @@ import { sendGuestbookNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
 
 import { protectedProcedure, publicProcedure } from '../root'
-import { emptyOutputSchema } from '../schemas/common.schema'
+import { EmptyOutputSchema } from '../schemas/common.schema'
 import {
   createMessageInputSchema,
   createMessageOutputSchema,
@@ -82,7 +82,7 @@ export const createMessage = protectedProcedure
 
 export const deleteMessage = protectedProcedure
   .input(deleteMessageInputSchema)
-  .output(emptyOutputSchema)
+  .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
     const user = context.session.user
 

@@ -2,11 +2,11 @@ import { ORPCError } from '@orpc/client'
 import { and, eq, votes } from '@repo/db'
 
 import { protectedProcedure } from '../root'
-import { createVoteInputSchema, createVoteOutputSchema } from '../schemas/vote.schema'
+import { CreateVoteInputSchema, CreateVoteOutputSchema } from '../schemas/vote.schema'
 
 export const createVote = protectedProcedure
-  .input(createVoteInputSchema)
-  .output(createVoteOutputSchema)
+  .input(CreateVoteInputSchema)
+  .output(CreateVoteOutputSchema)
   .handler(async ({ input, context }) => {
     const user = context.session.user
 

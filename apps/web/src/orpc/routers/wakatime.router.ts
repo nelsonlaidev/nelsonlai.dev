@@ -3,9 +3,9 @@ import { Buffer } from 'node:buffer'
 import { env } from '@repo/env'
 
 import { publicProcedure } from '../root'
-import { wakatimeStatsOutputSchema } from '../schemas/wakatime.schema'
+import { WakatimeStatsOutputSchema } from '../schemas/wakatime.schema'
 
-export const wakatimeStats = publicProcedure.output(wakatimeStatsOutputSchema).handler(async () => {
+export const wakatimeStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(async () => {
   if (!env.WAKATIME_API_KEY) {
     return {
       hours: 0
