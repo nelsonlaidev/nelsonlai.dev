@@ -13,9 +13,10 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar'
 import { Button } from '@repo/ui/components/button'
 import { Card } from '@repo/ui/components/card'
-import { Field, FieldError } from '@repo/ui/components/field'
+import { Field, FieldError, FieldGroup } from '@repo/ui/components/field'
 import { Input } from '@repo/ui/components/input'
 import { useForm } from '@tanstack/react-form'
+import { Loader2Icon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
 import { toast } from 'sonner'
@@ -131,38 +132,44 @@ function EditName(props: EditNameProps) {
         <Button variant='outline'>{t('account.edit-name')}</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
-        <form className='space-y-6' onSubmit={handleSubmit}>
-          <AlertDialogHeader>
-            <AlertDialogTitle>{t('account.edit-name')}</AlertDialogTitle>
-            <AlertDialogDescription>{t('account.edit-name-description')}</AlertDialogDescription>
-          </AlertDialogHeader>
-          <form.Field name='name'>
-            {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+        <AlertDialogHeader>
+          <AlertDialogTitle>{t('account.edit-name')}</AlertDialogTitle>
+          <AlertDialogDescription>{t('account.edit-name-description')}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <form className='space-y-6' id='edit-name-form' onSubmit={handleSubmit}>
+          <FieldGroup>
+            <form.Field name='name'>
+              {(field) => {
+                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
 
-              return (
-                <Field data-invalid={isInvalid}>
-                  <Input
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => {
-                      field.handleChange(e.target.value)
-                    }}
-                    aria-invalid={isInvalid}
-                    placeholder={t('account.display-name')}
-                  />
-                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                </Field>
-              )
-            }}
-          </form.Field>
-          <AlertDialogFooter>
-            <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
-            <Button type='submit'>{t('common.save')}</Button>
-          </AlertDialogFooter>
+                return (
+                  <Field data-invalid={isInvalid}>
+                    <Input
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => {
+                        field.handleChange(e.target.value)
+                      }}
+                      aria-invalid={isInvalid}
+                      disabled={isUpdating}
+                      placeholder={t('account.display-name')}
+                    />
+                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                  </Field>
+                )
+              }}
+            </form.Field>
+          </FieldGroup>
         </form>
+        <AlertDialogFooter>
+          <AlertDialogCancel disabled={isUpdating}>{t('common.cancel')}</AlertDialogCancel>
+          <Button type='submit' form='edit-name-form' disabled={isUpdating}>
+            {isUpdating && <Loader2Icon className='animate-spin' />}
+            {t('common.save')}
+          </Button>
+        </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   )

@@ -78,6 +78,7 @@ function MessageBox(props: MessageBoxProps) {
                     }}
                     aria-invalid={isInvalid}
                     placeholder={t('guestbook.placeholder')}
+                    disabled={isCreating}
                     data-testid='guestbook-textarea'
                   />
                   {isInvalid && <FieldError errors={field.state.meta.errors} />}
@@ -87,10 +88,10 @@ function MessageBox(props: MessageBoxProps) {
           </form.Field>
         </FieldGroup>
         <div className='mt-4 flex justify-end gap-2'>
-          <Button variant='outline' onClick={signOut}>
+          <Button variant='outline' onClick={signOut} disabled={isCreating}>
             {t('common.sign-out')}
           </Button>
-          <Button type='submit' disabled={isCreating} aria-disabled={isCreating} data-testid='guestbook-submit-button'>
+          <Button type='submit' disabled={isCreating} data-testid='guestbook-submit-button'>
             {t('guestbook.submit')}
           </Button>
         </div>

@@ -63,12 +63,12 @@ function SettingsForm(props: SettingsFormProps) {
                   return (
                     <Field orientation='horizontal' data-invalid={isInvalid}>
                       <FieldContent>
-                        <FieldLabel htmlFor='reply-notifications-switch'>{t('settings.reply-notification')}</FieldLabel>
+                        <FieldLabel htmlFor={field.name}>{t('settings.reply-notification')}</FieldLabel>
                         <FieldDescription>{t('settings.reply-notification-description')}</FieldDescription>
                         {isInvalid && <FieldError errors={field.state.meta.errors} />}
                       </FieldContent>
                       <Switch
-                        id='reply-notifications-switch'
+                        id={field.name}
                         name={field.name}
                         checked={field.state.value}
                         onCheckedChange={field.handleChange}
