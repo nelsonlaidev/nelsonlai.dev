@@ -4,9 +4,18 @@ import { ORPCError } from '@orpc/client'
 import { os } from '@orpc/server'
 import { ratelimit } from '@repo/kv'
 
+import { IS_PRODUCTION } from '@/lib/constants'
 import { getIp } from '@/utils/get-ip'
 
 const base = os.$context<Context>()
+
+const delayMiddleware = base.middleware(async ({ context, next }) => {
+  if (!IS_PRODUCTION) {
+    await new Promise((resolve) => setTimeout(resolve, 500))
+  }
+
+  return next({ context })
+})
 
 const rateLimitMiddleware = base.middleware(async ({ path, context, next }) => {
   const ip = getIp(context.headers)
@@ -31,9 +40,9 @@ const authMiddleware = base.middleware(async ({ context, next }) => {
   })
 })
 
-export const publicProcedure = base.use(rateLimitMiddleware)
+export const publicProcedure = base.use(rateLimitMiddleware).use(delayMiddleware)
 export const protectedProcedure = publicProcedure.use(authMiddleware)
-export const adminProcedure = protectedProcedure.use(authMiddleware).use(async ({ context, next }) => {
+export const adminProcedure = protectedProcedure.use(async ({ context, next }) => {
   if (context.session.user.role !== 'admin') {
     throw new ORPCError('FORBIDDEN')
   }
