@@ -43,6 +43,13 @@
       "when": 1767608963401,
       "tag": "0005_steady_carlie_cooper",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1767678630544,
+      "tag": "0006_brown_gorgon",
+      "breakpoints": true
     }
   ]
 }

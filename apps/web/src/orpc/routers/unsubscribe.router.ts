@@ -2,19 +2,19 @@ import { ORPCError } from '@orpc/client'
 import { createId } from '@paralleldrive/cuid2'
 import { and, eq, unsubscribes } from '@repo/db'
 
-import { verifyReplyUnsubToken } from '@/lib/unsubscribe'
-
 import { publicProcedure } from '../orpc'
 import { EmptyOutputSchema } from '../schemas/common.schema'
-import { CreateCommentUnsubscribeInputSchema } from '../schemas/unsubscribe.schema'
+import { UnsubscribeTokenInputSchema } from '../schemas/unsubscribe.schema'
 
-const createCommentUnsubscribe = publicProcedure
-  .input(CreateCommentUnsubscribeInputSchema)
+const createCommentReplyUnsubscribe = publicProcedure
+  .input(UnsubscribeTokenInputSchema)
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
-    const result = await verifyReplyUnsubToken(input.token)
+    const { verifyUnsubToken } = await import('@/lib/unsubscribe')
+    const result = await verifyUnsubToken(input.token)
 
-    if (!result.success) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- future types may be added
+    if (!result.success || result.data.type !== 'comment_reply') {
       throw new ORPCError('BAD_REQUEST', { message: 'Invalid token' })
     }
 
@@ -24,7 +24,7 @@ const createCommentUnsubscribe = publicProcedure
       where: and(
         eq(unsubscribes.userId, userId),
         eq(unsubscribes.commentId, commentId),
-        eq(unsubscribes.scope, 'comment')
+        eq(unsubscribes.type, 'comment_reply')
       )
     })
 
@@ -38,10 +38,10 @@ const createCommentUnsubscribe = publicProcedure
       id: createId(),
       userId,
       commentId,
-      scope: 'comment'
+      type: 'comment_reply'
     })
   })
 
 export const unsubscribeRouter = {
-  createComment: createCommentUnsubscribe
+  createCommentReply: createCommentReplyUnsubscribe
 }

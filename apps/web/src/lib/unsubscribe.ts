@@ -9,26 +9,30 @@ import { getMaskedEmail } from '@/utils/get-masked-email'
 
 const TokenSchema = z.jwt({ alg: 'HS256' })
 
-const ReplyUnsubPayloadSchema = z.object({
+const CommentReplyUnsubPayloadSchema = z.object({
+  type: z.literal('comment_reply'),
   userId: z.string().min(1),
   commentId: z.string().min(1)
 })
 
-type UnsubTokenResult<T> = { success: true; data: T } | { success: false }
-type ReplyUnsubPayload = z.infer<typeof ReplyUnsubPayloadSchema>
+const UnsubPayloadSchema = z.discriminatedUnion('type', [CommentReplyUnsubPayloadSchema])
 
-export async function generateReplyUnsubToken(userId: string, commentId: string): Promise<string> {
+type UnsubTokenResult<T> = { success: true; data: T } | { success: false }
+type UnsubPayload = z.infer<typeof UnsubPayloadSchema>
+type CommentReplyUnsubPayload = z.infer<typeof CommentReplyUnsubPayloadSchema>
+
+async function generateUnsubToken(payload: UnsubPayload): Promise<string> {
   if (!env.JWT_SECRET) {
     throw new Error('JWT_SECRET is not set')
   }
 
-  return new SignJWT({ userId, commentId })
+  return new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setExpirationTime('30d')
     .sign(new TextEncoder().encode(env.JWT_SECRET))
 }
 
-export async function verifyReplyUnsubToken(token: string): Promise<UnsubTokenResult<ReplyUnsubPayload>> {
+export async function verifyUnsubToken(token: string): Promise<UnsubTokenResult<UnsubPayload>> {
   if (!env.JWT_SECRET) {
     throw new Error('JWT_SECRET is not set')
   }
@@ -42,7 +46,7 @@ export async function verifyReplyUnsubToken(token: string): Promise<UnsubTokenRe
   try {
     const decoded = await jwtVerify(token, new TextEncoder().encode(env.JWT_SECRET), { algorithms: ['HS256'] })
 
-    const parsedPayload = ReplyUnsubPayloadSchema.safeParse(decoded.payload)
+    const parsedPayload = UnsubPayloadSchema.safeParse(decoded.payload)
 
     if (!parsedPayload.success) {
       return { success: false }
@@ -54,14 +58,16 @@ export async function verifyReplyUnsubToken(token: string): Promise<UnsubTokenRe
   }
 }
 
-export async function getReplyUnsubData(token: string | null) {
-  if (!token) return null
+export async function generateCommentReplyUnsubToken(userId: string, commentId: string): Promise<string> {
+  return generateUnsubToken({
+    type: 'comment_reply',
+    userId,
+    commentId
+  })
+}
 
-  const result = await verifyReplyUnsubToken(token)
-
-  if (!result.success) return null
-
-  const { userId, commentId } = result.data
+async function getCommentReplyUnsubData(payload: CommentReplyUnsubPayload, token: string) {
+  const { userId, commentId } = payload
 
   const data = await db.query.comments.findFirst({
     where: and(eq(comments.userId, userId), eq(comments.id, commentId)),
@@ -79,17 +85,40 @@ export async function getReplyUnsubData(token: string | null) {
     where: and(
       eq(unsubscribes.userId, userId),
       eq(unsubscribes.commentId, commentId),
-      eq(unsubscribes.scope, 'comment')
+      eq(unsubscribes.type, 'comment_reply')
     )
   })
 
   const maskedEmail = getMaskedEmail(data.user.email)
 
   return {
+    type: 'comment_reply' as const,
     comment: data.body,
     userEmail: maskedEmail,
     token,
     isUnsubscribed: !!isUnsubscribed,
-    ...result.data
+    userId,
+    commentId
+  }
+}
+
+export async function getUnsubData(token: string | null) {
+  if (!token) return null
+
+  const result = await verifyUnsubToken(token)
+
+  if (!result.success) return null
+
+  const { data } = result
+
+  // eslint-disable-next-line sonarjs/no-small-switch -- allow for future types
+  switch (data.type) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- allow for future types
+    case 'comment_reply': {
+      return getCommentReplyUnsubData(data, token)
+    }
+    default: {
+      return null
+    }
   }
 }

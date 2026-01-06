@@ -22,7 +22,7 @@ import { getLocale } from 'next-intl/server'
 import { IS_PRODUCTION } from '@/lib/constants'
 import { getPostBySlug } from '@/lib/content'
 import { sendEmail } from '@/lib/resend'
-import { generateReplyUnsubToken } from '@/lib/unsubscribe'
+import { generateCommentReplyUnsubToken } from '@/lib/unsubscribe'
 import { getDefaultImage } from '@/utils/get-default-image'
 
 import { protectedProcedure, publicProcedure } from '../orpc'
@@ -190,7 +190,7 @@ const createComment = protectedProcedure
             where: and(
               eq(unsubscribes.commentId, input.parentId),
               eq(unsubscribes.userId, parentComment.userId),
-              eq(unsubscribes.scope, 'comment')
+              eq(unsubscribes.type, 'comment_reply')
             )
           })
 
@@ -198,7 +198,7 @@ const createComment = protectedProcedure
           // has disabled reply notifications or unsubscribed from this specific comment's replies
           if (userSettings?.replyNotificationsEnabled === false || unsubscribedFromThisComment) return c
 
-          const token = await generateReplyUnsubToken(parentComment.userId, input.parentId)
+          const token = await generateCommentReplyUnsubToken(parentComment.userId, input.parentId)
 
           await sendEmail({
             to: parentComment.user.email,
