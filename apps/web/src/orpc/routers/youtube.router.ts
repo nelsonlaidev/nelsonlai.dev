@@ -1,6 +1,6 @@
 import { env } from '@repo/env'
 
-import { publicProcedure } from '../root'
+import { publicProcedure } from '../orpc'
 import { YoutubeStatsOutputSchema } from '../schemas/youtube.schema'
 
 export const youtubeStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(async () => {
@@ -24,3 +24,7 @@ export const youtubeStats = publicProcedure.output(YoutubeStatsOutputSchema).han
     views: Number(statistics.viewCount)
   }
 })
+
+export const youtubeRouter = {
+  stats: youtubeStats
+}

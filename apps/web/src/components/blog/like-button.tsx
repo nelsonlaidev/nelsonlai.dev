@@ -9,7 +9,7 @@ import { useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { useLikePost, usePostLikeCount } from '@/hooks/queries/post.query'
+import { useLikePost, usePostLikeCount } from '@/hooks/queries/like.query'
 
 type LikeButtonProps = {
   slug: string
@@ -21,7 +21,7 @@ function LikeButton(props: LikeButtonProps) {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const t = useTranslations()
 
-  const { isSuccess, isLoading, isError, data } = usePostLikeCount({ slug })
+  const { data, isSuccess, isLoading, isError } = usePostLikeCount({ slug })
   const { mutate: likePost } = useLikePost({ slug })
 
   async function showConfettiAnimation() {

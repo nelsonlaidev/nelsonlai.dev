@@ -1,6 +1,6 @@
 'use client'
 
-import type { ListCommentsInput } from '@/orpc/routers'
+import type { CommentListInput } from '@/orpc/client'
 
 import { useState } from 'react'
 
@@ -15,7 +15,7 @@ type CommentSectionProps = {
 
 function CommentSection(props: CommentSectionProps) {
   const { slug } = props
-  const [sort, setSort] = useState<ListCommentsInput['sort']>('newest')
+  const [sort, setSort] = useState<CommentListInput['sort']>('newest')
 
   return (
     <CommentsProvider value={{ slug, sort, setSort }}>

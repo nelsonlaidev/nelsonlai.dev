@@ -2,7 +2,7 @@ import { Buffer } from 'node:buffer'
 
 import { env } from '@repo/env'
 
-import { publicProcedure } from '../root'
+import { publicProcedure } from '../orpc'
 import { spotifyStatsOutputSchema } from '../schemas/spotify.schema'
 
 const CLIENT_ID = env.SPOTIFY_CLIENT_ID
@@ -73,3 +73,7 @@ export const spotifyStats = publicProcedure.output(spotifyStatsOutputSchema).han
     artist: artists
   }
 })
+
+export const spotifyRouter = {
+  stats: spotifyStats
+}

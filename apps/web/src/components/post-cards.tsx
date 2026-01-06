@@ -6,7 +6,8 @@ import { Link } from '@repo/ui/components/link'
 import { useTranslations } from 'next-intl'
 
 import BlurImage from '@/components/blur-image'
-import { usePostLikeCount, usePostViewCount } from '@/hooks/queries/post.query'
+import { usePostLikeCount } from '@/hooks/queries/like.query'
+import { usePostViewCount } from '@/hooks/queries/view.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 
 type PostCardsProps = {

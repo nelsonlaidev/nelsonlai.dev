@@ -9,7 +9,7 @@ import githubDarkDefault from 'shiki/themes/github-dark-default.mjs'
 import githubLightDefault from 'shiki/themes/github-light-default.mjs'
 
 import { useCommentsContext } from '@/contexts/comments.context'
-import { usePostComments } from '@/hooks/queries/post.query'
+import { usePostComments } from '@/hooks/queries/comment.query'
 import { useCommentParams } from '@/hooks/use-comment-params'
 import { useHighlighter } from '@/hooks/use-highlighter'
 
@@ -23,7 +23,7 @@ function CommentList() {
   const t = useTranslations()
   const [highlighter, setHighlighter] = useHighlighter()
 
-  const { isSuccess, isLoading, isError, data, fetchNextPage, hasNextPage, isFetchingNextPage } = usePostComments(
+  const { data, isSuccess, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = usePostComments(
     (pageParam) => ({
       slug,
       sort,

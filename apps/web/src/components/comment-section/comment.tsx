@@ -1,6 +1,6 @@
 'use client'
 
-import type { ListCommentsOutput } from '@/orpc/routers'
+import type { CommentListOutput } from '@/orpc/client'
 
 import { Badge } from '@repo/ui/components/badge'
 import { Skeleton } from '@repo/ui/components/skeleton'
@@ -23,7 +23,7 @@ import CommentReplies from './comment-replies'
 import CommentReply from './comment-reply'
 
 type CommentProps = {
-  comment: ListCommentsOutput['comments'][number]
+  comment: CommentListOutput['comments'][number]
 }
 
 function Comment(props: CommentProps) {

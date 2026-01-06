@@ -5,13 +5,13 @@ import { StarIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 import { FOOTER_LINKS } from '@/config/links'
-import { useGitHubStat } from '@/hooks/queries/stat.query'
+import { useGitHubStats } from '@/hooks/queries/stats.query'
 
 import LocaleSwitcher from './locale-switcher'
 import NowPlaying from './now-playing'
 
 function LayoutFooter() {
-  const { isSuccess, isLoading, isError, data } = useGitHubStat()
+  const { data, isSuccess, isLoading, isError } = useGitHubStats()
   const t = useTranslations()
 
   return (

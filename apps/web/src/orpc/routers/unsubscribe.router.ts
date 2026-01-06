@@ -4,51 +4,12 @@ import { and, eq, unsubscribes } from '@repo/db'
 
 import { verifyReplyUnsubToken } from '@/lib/unsubscribe'
 
-import { protectedProcedure, publicProcedure } from '../root'
+import { publicProcedure } from '../orpc'
 import { EmptyOutputSchema } from '../schemas/common.schema'
-import {
-  GetCommentReplyPrefsOutputSchema,
-  UpdateCommentReplyPrefsInputSchema,
-  UpdateGlobalReplyPrefsInputSchema
-} from '../schemas/unsubscribe.schema'
+import { CreateCommentUnsubscribeInputSchema } from '../schemas/unsubscribe.schema'
 
-export const getReplyPrefs = protectedProcedure
-  .output(GetCommentReplyPrefsOutputSchema)
-  .handler(async ({ context }) => {
-    const result = await context.db.query.unsubscribes.findFirst({
-      where: and(eq(unsubscribes.userId, context.session.user.id), eq(unsubscribes.scope, 'comment_replies_user'))
-    })
-
-    return { isEnabled: result ? false : true }
-  })
-
-export const updateReplyPrefs = protectedProcedure
-  .input(UpdateGlobalReplyPrefsInputSchema)
-  .output(EmptyOutputSchema)
-  .handler(async ({ context, input }) => {
-    if (input.isEnabled) {
-      await context.db
-        .delete(unsubscribes)
-        .where(and(eq(unsubscribes.userId, context.session.user.id), eq(unsubscribes.scope, 'comment_replies_user')))
-
-      return
-    }
-
-    const existing = await context.db.query.unsubscribes.findFirst({
-      where: and(eq(unsubscribes.userId, context.session.user.id), eq(unsubscribes.scope, 'comment_replies_user'))
-    })
-
-    if (!existing) {
-      await context.db.insert(unsubscribes).values({
-        id: createId(),
-        userId: context.session.user.id,
-        scope: 'comment_replies_user'
-      })
-    }
-  })
-
-export const updateCommentReplyPrefs = publicProcedure
-  .input(UpdateCommentReplyPrefsInputSchema)
+export const createCommentUnsubscribe = publicProcedure
+  .input(CreateCommentUnsubscribeInputSchema)
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
     const result = await verifyReplyUnsubToken(input.token)
@@ -80,3 +41,7 @@ export const updateCommentReplyPrefs = publicProcedure
       scope: 'comment_replies_comment'
     })
   })
+
+export const unsubscribeRouter = {
+  createComment: createCommentUnsubscribe
+}

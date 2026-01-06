@@ -11,7 +11,8 @@ import { useTranslations } from 'next-intl'
 import { useRef } from 'react'
 
 import BlurImage from '@/components/blur-image'
-import { usePostLikeCount, usePostViewCount } from '@/hooks/queries/post.query'
+import { usePostLikeCount } from '@/hooks/queries/like.query'
+import { usePostViewCount } from '@/hooks/queries/view.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 
 const variants = {

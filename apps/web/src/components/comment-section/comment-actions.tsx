@@ -8,7 +8,7 @@ import { toast } from 'sonner'
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
-import { useVotePostComment } from '@/hooks/queries/post.query'
+import { useVotePostComment } from '@/hooks/queries/vote.query'
 import { useSession } from '@/lib/auth-client'
 
 const voteVariants = cva({

@@ -5,7 +5,7 @@ import { IS_PRODUCTION } from '@/lib/constants'
 import { sendGuestbookNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
 
-import { protectedProcedure, publicProcedure } from '../root'
+import { protectedProcedure, publicProcedure } from '../orpc'
 import { EmptyOutputSchema } from '../schemas/common.schema'
 import {
   createMessageInputSchema,
@@ -98,3 +98,9 @@ export const deleteMessage = protectedProcedure
 
     await context.db.delete(messages).where(eq(messages.id, input.id))
   })
+
+export const messageRouter = {
+  list: listMessages,
+  create: createMessage,
+  delete: deleteMessage
+}

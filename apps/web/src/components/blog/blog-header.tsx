@@ -9,7 +9,8 @@ import { useEffect, useRef } from 'react'
 
 import BlurImage from '@/components/blur-image'
 import ImageZoom from '@/components/image-zoom'
-import { useIncrementPostViewCount, usePostCommentCount, usePostViewCount } from '@/hooks/queries/post.query'
+import { usePostCommentCount } from '@/hooks/queries/comment.query'
+import { useIncrementPostViewCount, usePostViewCount } from '@/hooks/queries/view.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { MY_NAME } from '@/lib/constants'
 

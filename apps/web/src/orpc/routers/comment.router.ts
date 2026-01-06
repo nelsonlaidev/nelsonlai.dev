@@ -10,10 +10,10 @@ import { sendEmail } from '@/lib/resend'
 import { generateReplyUnsubToken } from '@/lib/unsubscribe'
 import { getDefaultImage } from '@/utils/get-default-image'
 
-import { protectedProcedure, publicProcedure } from '../root'
+import { protectedProcedure, publicProcedure } from '../orpc'
 import {
-  countCommentsInputSchema,
-  CountCommentsOutputSchema,
+  CountCommentInputSchema,
+  CountCommentOutputSchema,
   CreateCommentInputSchema,
   CreateCommentOutputSchema,
   DeleteCommentInputSchema,
@@ -265,9 +265,9 @@ export const deleteComment = protectedProcedure
     })
   })
 
-export const countComments = publicProcedure
-  .input(countCommentsInputSchema)
-  .output(CountCommentsOutputSchema)
+export const countComment = publicProcedure
+  .input(CountCommentInputSchema)
+  .output(CountCommentOutputSchema)
   .handler(async ({ input, context }) => {
     const [result] = await context.db
       .select({
@@ -280,3 +280,10 @@ export const countComments = publicProcedure
       count: result?.value ?? 0
     }
   })
+
+export const commentRouter = {
+  list: listComments,
+  create: createComment,
+  delete: deleteComment,
+  count: countComment
+}

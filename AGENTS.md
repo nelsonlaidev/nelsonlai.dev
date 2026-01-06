@@ -179,7 +179,7 @@ When modifying database schema:
 
 ```ts
 // In apps/web/src/orpc/routers/todo.router.ts
-import { publicProcedure, protectedProcedure } from '../root'
+import { publicProcedure, protectedProcedure } from '../orpc'
 import { todoOutputSchema, createTodoInputSchema } from '../schemas/todo.schema'
 
 // Router files use noun-based naming: <noun>.router.ts (e.g., todo.router.ts, auth.router.ts)

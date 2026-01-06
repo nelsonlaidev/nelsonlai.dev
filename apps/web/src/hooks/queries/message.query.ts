@@ -2,9 +2,9 @@ import { keepPreviousData, useInfiniteQuery, useMutation, useQueryClient } from 
 
 import { orpc } from '@/orpc/client'
 
-export function useMessages() {
+export function useListMessages() {
   return useInfiniteQuery(
-    orpc.messages.list.infiniteOptions({
+    orpc.message.list.infiniteOptions({
       input: (pageParam: Date | undefined) => ({ cursor: pageParam }),
       initialPageParam: undefined,
       getNextPageParam: (lastPage) => lastPage.nextCursor,
@@ -17,9 +17,9 @@ export function useCreateMessage(onSuccess?: () => void) {
   const queryClient = useQueryClient()
 
   return useMutation(
-    orpc.messages.create.mutationOptions({
+    orpc.message.create.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: orpc.messages.list.key() })
+        queryClient.invalidateQueries({ queryKey: orpc.message.list.key() })
         onSuccess?.()
       }
     })
@@ -30,9 +30,9 @@ export function useDeleteMessage(onSuccess?: () => void) {
   const queryClient = useQueryClient()
 
   return useMutation(
-    orpc.messages.delete.mutationOptions({
+    orpc.message.delete.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: orpc.messages.list.key() })
+        queryClient.invalidateQueries({ queryKey: orpc.message.list.key() })
         onSuccess?.()
       }
     })

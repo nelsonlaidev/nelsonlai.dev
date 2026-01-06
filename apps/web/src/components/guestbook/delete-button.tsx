@@ -1,4 +1,4 @@
-import type { ListMessagesOutput } from '@/orpc/routers'
+import type { MessageListOutput } from '@/orpc/client'
 
 import {
   AlertDialog,
@@ -18,7 +18,7 @@ import { toast } from 'sonner'
 import { useDeleteMessage } from '@/hooks/queries/message.query'
 
 type DeleteButtonProps = {
-  message: ListMessagesOutput['messages'][number]
+  message: MessageListOutput['messages'][number]
 }
 
 function DeleteButton(props: DeleteButtonProps) {

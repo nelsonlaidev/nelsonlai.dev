@@ -5,7 +5,7 @@ import { auth } from '@/lib/auth'
 import { getLocation } from '@/utils/get-location'
 
 import { cache } from '../cache'
-import { protectedProcedure } from '../root'
+import { protectedProcedure } from '../orpc'
 import { ListSessionsOutputSchema, RevokeSessionInputSchema, UpdateUserInputSchema } from '../schemas/auth.schema'
 import { EmptyOutputSchema } from '../schemas/common.schema'
 
@@ -82,3 +82,13 @@ export const updateUser = protectedProcedure
       body
     })
   })
+
+export const authRouter = {
+  session: {
+    list: listSessions,
+    revoke: revokeSession
+  },
+  user: {
+    update: updateUser
+  }
+}

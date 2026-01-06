@@ -1,6 +1,6 @@
 'use client'
 
-import type { ListSessionsOutput } from '@/orpc/routers'
+import type { SessionListOutput } from '@/orpc/client'
 
 import { useRouter } from '@repo/i18n/routing'
 import { Badge } from '@repo/ui/components/badge'
@@ -21,7 +21,7 @@ import ActiveSessionsSkeleton from './active-sessions-skeleton'
 
 function ActiveSessions() {
   const t = useTranslations()
-  const { isSuccess, isLoading, isError, data } = useListSessions()
+  const { data, isSuccess, isLoading, isError } = useListSessions()
 
   const sortedSessions =
     isSuccess &&
@@ -53,7 +53,7 @@ function ActiveSessions() {
 }
 
 type SessionProps = {
-  session: ListSessionsOutput['sessions'][number]
+  session: SessionListOutput['sessions'][number]
 }
 
 const PLATFORM_ICONS = {

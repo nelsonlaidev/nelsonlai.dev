@@ -2,7 +2,7 @@ import { Buffer } from 'node:buffer'
 
 import { env } from '@repo/env'
 
-import { publicProcedure } from '../root'
+import { publicProcedure } from '../orpc'
 import { WakatimeStatsOutputSchema } from '../schemas/wakatime.schema'
 
 export const wakatimeStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(async () => {
@@ -26,3 +26,7 @@ export const wakatimeStats = publicProcedure.output(WakatimeStatsOutputSchema).h
     hours: Math.round(total_seconds / 60 / 60)
   }
 })
+
+export const wakatimeRouter = {
+  stats: wakatimeStats
+}

@@ -1,13 +1,13 @@
 'use client'
 
-import type { ListMessagesOutput } from '@/orpc/routers'
+import type { MessageListOutput } from '@/orpc/client'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/avatar'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-import { useMessages } from '@/hooks/queries/message.query'
+import { useListMessages } from '@/hooks/queries/message.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useSession } from '@/lib/auth-client'
 import { getAbbreviation } from '@/utils/get-abbreviation'
@@ -17,7 +17,7 @@ import DeleteButton from './delete-button'
 import MessagesLoader from './messages-loader'
 
 function Messages() {
-  const { isSuccess, isLoading, isError, data, fetchNextPage, hasNextPage, isFetchingNextPage } = useMessages()
+  const { data, isSuccess, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = useListMessages()
   const t = useTranslations()
 
   const { ref, inView } = useInView()
@@ -49,7 +49,7 @@ function Messages() {
 }
 
 type MessageProps = {
-  message: ListMessagesOutput['messages'][number]
+  message: MessageListOutput['messages'][number]
 }
 
 function Message(props: MessageProps) {
