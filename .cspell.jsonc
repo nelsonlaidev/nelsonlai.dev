@@ -1,0 +1,53 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "useGitignore": true,
+  "enableGlobDot": true,
+  "enabledFileTypes": { "*": true },
+  "ignoreRandomStrings": true,
+  "allowCompoundWords": true,
+  "dictionaryDefinitions": [
+    {
+      "name": "custom-words",
+      "path": "./.cspell/custom-words.txt",
+      "addWords": true
+    },
+    {
+      "name": "names",
+      "path": "./.cspell/names.txt",
+      "addWords": true
+    },
+    {
+      "name": "company-names",
+      "path": "./.cspell/company-names.txt",
+      "addWords": true
+    },
+    {
+      "name": "software-names",
+      "path": "./.cspell/software-names.txt",
+      "addWords": true
+    },
+    {
+      "name": "packages",
+      "path": "./.cspell/packages.txt",
+      "addWords": true
+    },
+    {
+      "name": "tech-terms",
+      "path": "./.cspell/tech-terms.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": [
+    "custom-words",
+    "names",
+    "company-names",
+    "software-names",
+    "packages",
+    "tech-terms",
+    "npm",
+    "fullstack",
+    "html",
+    "sql"
+  ],
+  "ignorePaths": ["pnpm-lock.yaml", ".git"]
+}

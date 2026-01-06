@@ -49,6 +49,19 @@ jobs:
       - name: Run ESLint
         run: pnpm lint
 
+  spellcheck:
+    name: Spell Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Configure environment
+        uses: ./.github/actions/setup
+
+      - name: Run cspell
+        run: pnpm lint:spell
+
   types:
     name: TypeScript
     runs-on: ubuntu-latest
