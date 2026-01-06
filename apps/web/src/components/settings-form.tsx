@@ -32,6 +32,7 @@ function SettingsForm(props: SettingsFormProps) {
       onChange: SettingsFormSchema
     },
     onSubmit: ({ value }) => {
+      if (isUpdating) return
       updateSettings(value)
     }
   })
