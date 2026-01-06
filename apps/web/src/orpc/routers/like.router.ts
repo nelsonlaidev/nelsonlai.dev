@@ -14,7 +14,7 @@ import {
   IncrementLikeOutputSchema
 } from '../schemas/like.schema'
 
-export const countLike = publicProcedure
+const countLike = publicProcedure
   .input(CountLikeInputSchema)
   .output(CountLikeOutputSchema)
   .handler(async ({ input, context }) => {
@@ -73,7 +73,7 @@ export const countLike = publicProcedure
     }
   })
 
-export const incrementLike = publicProcedure
+const incrementLike = publicProcedure
   .input(IncrementLikeInputSchema)
   .output(IncrementLikeOutputSchema)
   .handler(async ({ input, context }) => {
@@ -176,7 +176,7 @@ export const incrementLike = publicProcedure
     }
   })
 
-export const likesStats = publicProcedure.output(LikesStatsOutputSchema).handler(async ({ context }) => {
+const likesStats = publicProcedure.output(LikesStatsOutputSchema).handler(async ({ context }) => {
   const [result] = await context.db
     .select({
       value: sum(posts.likes)

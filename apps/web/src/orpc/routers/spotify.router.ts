@@ -40,7 +40,7 @@ async function getAccessToken() {
   return data.access_token as string
 }
 
-export const spotifyStats = publicProcedure.output(spotifyStatsOutputSchema).handler(async () => {
+const spotifyStats = publicProcedure.output(spotifyStatsOutputSchema).handler(async () => {
   if (!CLIENT_ID || !CLIENT_SECRET || !REFRESH_TOKEN) {
     return EMPTY_RESPONSE
   }

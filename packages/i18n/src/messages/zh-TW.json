@@ -112,6 +112,7 @@
     "like": "讚",
     "likes": "{count, plural, =1 {# 點讚} other {# 點讚}}",
     "save": "儲存",
+    "reset": "重設",
     "sign-in": "登入",
     "sign-out": "登出",
     "unknown": "未知",
@@ -151,10 +152,10 @@
     "copy-to-clipboard-error": "無法複製到剪貼簿，請再試一次。",
     "failed-to-fetch-comments-data": "無法獲取評論資料。請重新整理頁面。",
     "failed-to-fetch-users-data": "無法獲取使用者資料。請重新整理頁面。",
-    "failed-to-load": "無法載入。",
     "failed-to-load-comments": "無法載入評論。請重新整理頁面。",
     "failed-to-load-messages": "無法載入留言。請重新整理頁面。",
     "failed-to-load-replies": "無法載入回覆。請重新整理頁面。",
+    "failed-to-load-settings": "無法載入設定。請重新整理頁面。",
     "like-limit-reached": "您只能對每篇文章按讚 3 次",
     "message-cannot-be-empty": "留言不能為空",
     "name-cannot-be-empty": "名稱不能為空",
@@ -258,7 +259,7 @@
     "name-updated": "成功編輯名稱",
     "reply-posted": "回覆已發佈",
     "session-revoked": "工作階段已成功終止",
-    "settings-saved": "設定儲存成功",
+    "settings-updated": "設定更新成功",
     "signed-out": "成功登出"
   },
   "terms": {

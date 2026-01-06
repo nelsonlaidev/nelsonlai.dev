@@ -22,7 +22,7 @@ async function resolveLocation(ip: string) {
   return location
 }
 
-export const listSessions = protectedProcedure.output(ListSessionsOutputSchema).handler(async ({ context }) => {
+const listSessions = protectedProcedure.output(ListSessionsOutputSchema).handler(async ({ context }) => {
   const sessions = await auth.api.listSessions({
     headers: context.headers
   })
@@ -44,7 +44,7 @@ export const listSessions = protectedProcedure.output(ListSessionsOutputSchema).
   }
 })
 
-export const revokeSession = protectedProcedure
+const revokeSession = protectedProcedure
   .input(RevokeSessionInputSchema)
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
@@ -63,7 +63,7 @@ export const revokeSession = protectedProcedure
     }
   })
 
-export const updateUser = protectedProcedure
+const updateUser = protectedProcedure
   .input(UpdateUserInputSchema)
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {

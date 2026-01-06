@@ -4,7 +4,7 @@ import { adminProcedure } from '@/orpc/orpc'
 
 import { ListCommentsOutputSchema, ListUsersOutputSchema } from '../schemas/admin.schema'
 
-export const listComments = adminProcedure.output(ListCommentsOutputSchema).handler(async ({ context }) => {
+const listComments = adminProcedure.output(ListCommentsOutputSchema).handler(async ({ context }) => {
   const result = await context.db.select().from(comments)
 
   return {
@@ -12,7 +12,7 @@ export const listComments = adminProcedure.output(ListCommentsOutputSchema).hand
   }
 })
 
-export const listUsers = adminProcedure.output(ListUsersOutputSchema).handler(async ({ context }) => {
+const listUsers = adminProcedure.output(ListUsersOutputSchema).handler(async ({ context }) => {
   const result = await context.db
     .select({
       id: users.id,

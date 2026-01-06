@@ -4,7 +4,7 @@ import { and, eq, votes } from '@repo/db'
 import { protectedProcedure } from '../orpc'
 import { CreateVoteInputSchema, CreateVoteOutputSchema } from '../schemas/vote.schema'
 
-export const createVote = protectedProcedure
+const createVote = protectedProcedure
   .input(CreateVoteInputSchema)
   .output(CreateVoteOutputSchema)
   .handler(async ({ input, context }) => {

@@ -11,7 +11,7 @@ import { getR2PublicUrl } from '@/utils/get-r2-public-url'
 import { protectedProcedure } from '../orpc'
 import { GetAvatarUploadUrlInputSchema, GetAvatarUploadUrlOutputSchema } from '../schemas/r2.schema'
 
-export const getAvatarUploadUrl = protectedProcedure
+const getAvatarUploadUrl = protectedProcedure
   .input(GetAvatarUploadUrlInputSchema)
   .output(GetAvatarUploadUrlOutputSchema)
   .handler(async ({ input, context }) => {

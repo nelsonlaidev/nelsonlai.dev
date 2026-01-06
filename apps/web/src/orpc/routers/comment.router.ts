@@ -1,5 +1,20 @@
 import { ORPCError } from '@orpc/client'
-import { and, asc, comments, count, desc, eq, gt, isNotNull, isNull, lt, ne, unsubscribes, votes } from '@repo/db'
+import {
+  and,
+  asc,
+  comments,
+  count,
+  desc,
+  eq,
+  gt,
+  isNotNull,
+  isNull,
+  lt,
+  ne,
+  settings,
+  unsubscribes,
+  votes
+} from '@repo/db'
 import { CommentEmailTemplate, ReplyEmailTemplate } from '@repo/email'
 import { env } from '@repo/env'
 import { getLocale } from 'next-intl/server'
@@ -22,7 +37,7 @@ import {
 } from '../schemas/comment.schema'
 import { EmptyOutputSchema } from '../schemas/common.schema'
 
-export const listComments = publicProcedure
+const listComments = publicProcedure
   .input(ListCommentsInputSchema)
   .output(ListCommentsOutputSchema)
   .handler(async ({ input, context }) => {
@@ -100,7 +115,7 @@ export const listComments = publicProcedure
     }
   })
 
-export const createComment = protectedProcedure
+const createComment = protectedProcedure
   .input(CreateCommentInputSchema)
   .output(CreateCommentOutputSchema)
   .handler(async ({ input, context }) => {
@@ -166,21 +181,22 @@ export const createComment = protectedProcedure
 
         // Don't notify if the reply is to own comment or the parent comment user is "ghost"
         if (parentComment && parentComment.userId !== user.id && parentComment.user.id !== 'ghost') {
-          const unsubscribedFromAllReplies = await tx.query.unsubscribes.findFirst({
-            where: and(eq(unsubscribes.userId, parentComment.userId), eq(unsubscribes.scope, 'comment_replies_user'))
-          })
+          const [userSettings] = await tx
+            .select({ replyNotificationsEnabled: settings.replyNotificationsEnabled })
+            .from(settings)
+            .where(eq(settings.userId, parentComment.userId))
 
           const unsubscribedFromThisComment = await tx.query.unsubscribes.findFirst({
             where: and(
               eq(unsubscribes.commentId, input.parentId),
               eq(unsubscribes.userId, parentComment.userId),
-              eq(unsubscribes.scope, 'comment_replies_comment')
+              eq(unsubscribes.scope, 'comment')
             )
           })
 
           // Don't send notification email if the user
-          // has unsubscribed from all replies or this specific comment's replies
-          if (unsubscribedFromAllReplies || unsubscribedFromThisComment) return c
+          // has disabled reply notifications or unsubscribed from this specific comment's replies
+          if (userSettings?.replyNotificationsEnabled === false || unsubscribedFromThisComment) return c
 
           const token = await generateReplyUnsubToken(parentComment.userId, input.parentId)
 
@@ -208,7 +224,7 @@ export const createComment = protectedProcedure
     return comment
   })
 
-export const deleteComment = protectedProcedure
+const deleteComment = protectedProcedure
   .input(DeleteCommentInputSchema)
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
@@ -265,7 +281,7 @@ export const deleteComment = protectedProcedure
     })
   })
 
-export const countComment = publicProcedure
+const countComment = publicProcedure
   .input(CountCommentInputSchema)
   .output(CountCommentOutputSchema)
   .handler(async ({ input, context }) => {

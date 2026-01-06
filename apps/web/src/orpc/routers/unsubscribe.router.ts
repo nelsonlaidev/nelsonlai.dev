@@ -8,7 +8,7 @@ import { publicProcedure } from '../orpc'
 import { EmptyOutputSchema } from '../schemas/common.schema'
 import { CreateCommentUnsubscribeInputSchema } from '../schemas/unsubscribe.schema'
 
-export const createCommentUnsubscribe = publicProcedure
+const createCommentUnsubscribe = publicProcedure
   .input(CreateCommentUnsubscribeInputSchema)
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
@@ -24,7 +24,7 @@ export const createCommentUnsubscribe = publicProcedure
       where: and(
         eq(unsubscribes.userId, userId),
         eq(unsubscribes.commentId, commentId),
-        eq(unsubscribes.scope, 'comment_replies_comment')
+        eq(unsubscribes.scope, 'comment')
       )
     })
 
@@ -38,7 +38,7 @@ export const createCommentUnsubscribe = publicProcedure
       id: createId(),
       userId,
       commentId,
-      scope: 'comment_replies_comment'
+      scope: 'comment'
     })
   })
 

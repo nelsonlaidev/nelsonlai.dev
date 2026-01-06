@@ -11,7 +11,7 @@ import {
   IncrementViewOutputSchema
 } from '../schemas/view.schema'
 
-export const countView = publicProcedure
+const countView = publicProcedure
   .input(CountViewInputSchema)
   .output(CountViewOutputSchema)
   .handler(async ({ input, context }) => {
@@ -39,7 +39,7 @@ export const countView = publicProcedure
     }
   })
 
-export const incrementView = publicProcedure
+const incrementView = publicProcedure
   .input(IncrementViewInputSchema)
   .output(IncrementViewOutputSchema)
   .handler(async ({ input, context }) => {
@@ -72,7 +72,7 @@ export const incrementView = publicProcedure
     }
   })
 
-export const viewsStats = publicProcedure.output(ViewsStatsOutputSchema).handler(async ({ context }) => {
+const viewsStats = publicProcedure.output(ViewsStatsOutputSchema).handler(async ({ context }) => {
   const [result] = await context.db
     .select({
       value: sum(posts.views)

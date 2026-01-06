@@ -4,7 +4,7 @@ import { octokit } from '@/lib/octokit'
 import { publicProcedure } from '../orpc'
 import { GithubStatsOutputSchema } from '../schemas/github.schema'
 
-export const githubStats = publicProcedure.output(GithubStatsOutputSchema).handler(async () => {
+const githubStats = publicProcedure.output(GithubStatsOutputSchema).handler(async () => {
   if (!octokit) {
     return {
       stars: 0,

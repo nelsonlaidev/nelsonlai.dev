@@ -4,7 +4,7 @@ import { check, index, pgEnum, pgTable, text, timestamp, unique } from 'drizzle-
 import { users } from './auth.schema'
 import { comments } from './comment.schema'
 
-export const unsubscribeScopeEnum = pgEnum('unsubscribe_scope', ['comment_replies_user', 'comment_replies_comment'])
+export const unsubscribeScopeEnum = pgEnum('unsubscribe_scope', ['comment'])
 
 export const unsubscribes = pgTable(
   'unsubscribes',
@@ -27,14 +27,7 @@ export const unsubscribes = pgTable(
     index('unsubscribes_user_id_idx').on(table.userId),
     index('unsubscribes_comment_id_idx').on(table.commentId),
     unique('unsubscribes_user_id_scope_comment_id_uq').on(table.userId, table.scope, table.commentId),
-    check(
-      'unsubscribes_scope_comment_id_check',
-      sql`(
-        (${table.scope} = 'comment_replies_user' AND ${table.commentId} IS NULL)
-        OR
-        (${table.scope} = 'comment_replies_comment' AND ${table.commentId} IS NOT NULL)
-      )`
-    )
+    check('unsubscribes_scope_comment_id_check', sql`(${table.scope} = 'comment' AND ${table.commentId} IS NOT NULL)`)
   ]
 )
 

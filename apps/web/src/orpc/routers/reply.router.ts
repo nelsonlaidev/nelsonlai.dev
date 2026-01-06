@@ -3,7 +3,7 @@ import { and, comments, count, eq, isNotNull } from '@repo/db'
 import { publicProcedure } from '../orpc'
 import { CountReplyInputSchema, CountReplyOutputSchema } from '../schemas/reply.schema'
 
-export const countReply = publicProcedure
+const countReply = publicProcedure
   .input(CountReplyInputSchema)
   .output(CountReplyOutputSchema)
   .handler(async ({ input, context }) => {

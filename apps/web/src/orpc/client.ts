@@ -16,8 +16,8 @@ const client: RouterClient<typeof router> = createORPCClient(link)
 
 export const orpc = createTanstackQueryUtils(client)
 
-export type Inputs = InferRouterInputs<typeof router>
-export type Outputs = InferRouterOutputs<typeof router>
+type Inputs = InferRouterInputs<typeof router>
+type Outputs = InferRouterOutputs<typeof router>
 
 export type CommentCountInput = Inputs['comment']['count']
 export type CommentListInput = Inputs['comment']['list']

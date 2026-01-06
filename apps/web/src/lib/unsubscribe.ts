@@ -79,7 +79,7 @@ export async function getReplyUnsubData(token: string | null) {
     where: and(
       eq(unsubscribes.userId, userId),
       eq(unsubscribes.commentId, commentId),
-      eq(unsubscribes.scope, 'comment_replies_comment')
+      eq(unsubscribes.scope, 'comment')
     )
   })
 

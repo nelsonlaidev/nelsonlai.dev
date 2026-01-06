@@ -15,7 +15,7 @@ import {
   listMessagesOutputSchema
 } from '../schemas/message.schema'
 
-export const listMessages = publicProcedure
+const listMessages = publicProcedure
   .input(listMessagesInputSchema)
   .output(listMessagesOutputSchema)
   .handler(async ({ input, context }) => {
@@ -53,7 +53,7 @@ export const listMessages = publicProcedure
     }
   })
 
-export const createMessage = protectedProcedure
+const createMessage = protectedProcedure
   .input(createMessageInputSchema)
   .output(createMessageOutputSchema)
   .handler(async ({ input, context }) => {
@@ -80,7 +80,7 @@ export const createMessage = protectedProcedure
     return message
   })
 
-export const deleteMessage = protectedProcedure
+const deleteMessage = protectedProcedure
   .input(deleteMessageInputSchema)
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
