@@ -8,7 +8,7 @@
     "build": "turbo build",
     "build:apps": "turbo build --filter=./apps/*",
     "build:mdx": "turbo build:mdx",
-    "check": "pnpm lint && pnpm typecheck && pnpm format:check && pnpm knip && pnpm check:i18n",
+    "check": "pnpm lint && pnpm typecheck && pnpm format:check && pnpm knip && pnpm check:i18n && pnpm lint:spell",
     "check:i18n": "i18n-check -s en -l packages/i18n/src/messages -u apps/web/src -f next-intl",
     "clean": "turbo clean && rm -rf .turbo coverage",
     "db:check": "turbo db:check",
