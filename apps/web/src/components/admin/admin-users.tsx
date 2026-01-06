@@ -2,12 +2,12 @@
 
 import { useTranslations } from 'next-intl'
 
-import { useListAdminUsers } from '@/hooks/queries/admin.query'
+import { useListUsersAdmin } from '@/hooks/queries/admin.query'
 
 import UsersTable from '../tables/users'
 
 function AdminUsers() {
-  const { data, isSuccess, isLoading, isError } = useListAdminUsers()
+  const { data, isSuccess, isLoading, isError } = useListUsersAdmin()
   const t = useTranslations()
 
   return (

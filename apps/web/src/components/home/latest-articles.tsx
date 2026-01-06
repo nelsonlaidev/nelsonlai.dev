@@ -11,8 +11,8 @@ import { useTranslations } from 'next-intl'
 import { useRef } from 'react'
 
 import BlurImage from '@/components/blur-image'
-import { usePostLikeCount } from '@/hooks/queries/like.query'
-import { usePostViewCount } from '@/hooks/queries/view.query'
+import { useCountLike } from '@/hooks/queries/like.query'
+import { useCountView } from '@/hooks/queries/view.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 
 const variants = {
@@ -107,8 +107,8 @@ function Card(props: CardProps) {
   const formattedDate = useFormattedDate(post.date)
   const t = useTranslations()
 
-  const viewsQuery = usePostViewCount({ slug: post.slug })
-  const likesQuery = usePostLikeCount({ slug: post.slug })
+  const viewsQuery = useCountView({ slug: post.slug })
+  const likesQuery = useCountLike({ slug: post.slug })
 
   return (
     <Link href={`/blog/${post.slug}`} className='group relative rounded-xl p-2 shadow-feature-card'>

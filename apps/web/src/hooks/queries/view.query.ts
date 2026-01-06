@@ -2,11 +2,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { orpc, type ViewCountInput } from '@/orpc/client'
 
-export function usePostViewCount(input: ViewCountInput) {
+export function useCountView(input: ViewCountInput) {
   return useQuery(orpc.view.count.queryOptions({ input }))
 }
 
-export function useIncrementPostViewCount(input: ViewCountInput) {
+export function useIncrementView(input: ViewCountInput) {
   const queryClient = useQueryClient()
 
   return useMutation(

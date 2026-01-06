@@ -2,11 +2,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { type LikeCountInput, type LikeCountOutput, orpc } from '@/orpc/client'
 
-export function usePostLikeCount(input: LikeCountInput) {
+export function useCountLike(input: LikeCountInput) {
   return useQuery(orpc.like.count.queryOptions({ input }))
 }
 
-export function useLikePost(input: LikeCountInput) {
+export function useIncrementLike(input: LikeCountInput) {
   const queryClient = useQueryClient()
   const queryKey = orpc.like.count.queryKey({ input: { slug: input.slug } })
 

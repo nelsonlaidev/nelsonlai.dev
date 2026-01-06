@@ -2,7 +2,7 @@ import { keepPreviousData, useInfiniteQuery, useMutation, useQuery, useQueryClie
 
 import { type CommentCountInput, type CommentListInput, orpc } from '@/orpc/client'
 
-export function usePostComments(input: (pageParam: Date | undefined) => CommentListInput, enabled = true) {
+export function useListComments(input: (pageParam: Date | undefined) => CommentListInput, enabled = true) {
   return useInfiniteQuery(
     orpc.comment.list.infiniteOptions({
       input,
@@ -14,7 +14,7 @@ export function usePostComments(input: (pageParam: Date | undefined) => CommentL
   )
 }
 
-export function usePostCommentCount(input: CommentCountInput) {
+export function useCountComment(input: CommentCountInput) {
   return useQuery(orpc.comment.count.queryOptions({ input }))
 }
 

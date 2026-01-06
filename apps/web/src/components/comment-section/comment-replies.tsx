@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer'
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
-import { usePostComments } from '@/hooks/queries/comment.query'
+import { useListComments } from '@/hooks/queries/comment.query'
 import { useCommentParams } from '@/hooks/use-comment-params'
 
 import Comment from './comment'
@@ -18,7 +18,7 @@ function CommentReplies() {
   const [params] = useCommentParams()
   const t = useTranslations()
 
-  const { data, isSuccess, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = usePostComments(
+  const { data, isSuccess, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = useListComments(
     (pageParam) => ({
       slug,
       sort: 'oldest',

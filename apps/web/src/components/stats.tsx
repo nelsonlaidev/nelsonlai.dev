@@ -8,9 +8,9 @@ import { useTranslations } from 'next-intl'
 
 import Counter from '@/components/counter'
 import {
-  useBlogLikeStats,
-  useBlogViewStats,
   useGitHubStats,
+  useLikeStats,
+  useViewStats,
   useWakatimeStats,
   useYoutubeStats
 } from '@/hooks/queries/stats.query'
@@ -31,8 +31,8 @@ type Card = {
 function Stats() {
   const youtubeQuery = useYoutubeStats()
   const githubQuery = useGitHubStats()
-  const likesQuery = useBlogLikeStats()
-  const viewsQuery = useBlogViewStats()
+  const likesQuery = useLikeStats()
+  const viewsQuery = useViewStats()
   const wakatimeQuery = useWakatimeStats()
 
   const t = useTranslations()

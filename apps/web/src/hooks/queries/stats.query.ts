@@ -10,11 +10,11 @@ export function useGitHubStats() {
   return useQuery(orpc.github.stats.queryOptions())
 }
 
-export function useBlogLikeStats() {
+export function useLikeStats() {
   return useQuery(orpc.like.stats.queryOptions())
 }
 
-export function useBlogViewStats() {
+export function useViewStats() {
   return useQuery(orpc.view.stats.queryOptions())
 }
 

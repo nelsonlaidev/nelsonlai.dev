@@ -13,15 +13,15 @@ import { ListFilterIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 import { useCommentsContext } from '@/contexts/comments.context'
-import { usePostCommentCount } from '@/hooks/queries/comment.query'
-import { usePostReplyCount } from '@/hooks/queries/reply.query'
+import { useCountComment } from '@/hooks/queries/comment.query'
+import { useCountReply } from '@/hooks/queries/reply.query'
 
 function CommentHeader() {
   const { slug, sort, setSort } = useCommentsContext()
   const t = useTranslations()
 
-  const commentCountQuery = usePostCommentCount({ slug })
-  const replyCountQuery = usePostReplyCount({ slug })
+  const commentCountQuery = useCountComment({ slug })
+  const replyCountQuery = useCountReply({ slug })
 
   return (
     <div className='flex items-center justify-between px-1'>
