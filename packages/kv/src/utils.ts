@@ -5,7 +5,9 @@ import { redis } from './index'
 const DEFAULT_TTL = 60 * 60 * 24 // 1 day
 
 export function createCache<T>(prefix: string, ttl: number = DEFAULT_TTL) {
-  const getKey = (...parts: Array<string | number>) => [prefix, ...parts].filter(Boolean).join(':')
+  function getKey(...parts: Array<string | number>) {
+    return [prefix, ...parts].filter(Boolean).join(':')
+  }
 
   return {
     async get(key: string): Promise<T | null> {
