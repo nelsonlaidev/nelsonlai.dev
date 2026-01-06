@@ -1,9 +1,9 @@
-import type { ListAllUsersOutput } from '@/orpc/routers'
+import type { AdminUserListOutput } from '@/orpc/client'
 import type { ColumnDef } from '@tanstack/react-table'
 
 import FormattedDateCell from '../formatted-date-cell'
 
-export type User = ListAllUsersOutput['users'][number]
+export type User = AdminUserListOutput['users'][number]
 
 export const columns: Array<ColumnDef<User>> = [
   {

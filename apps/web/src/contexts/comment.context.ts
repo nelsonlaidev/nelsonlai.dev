@@ -1,4 +1,4 @@
-import type { ListCommentsOutput } from '@/orpc/routers'
+import type { CommentListOutput } from '@/orpc/client'
 
 import { createContext, use } from 'react'
 
@@ -10,7 +10,7 @@ export type CommentContextValue = {
   setIsReplying: (value: boolean) => void
   setIsOpenReplies: (value: boolean) => void
   slug: string
-  comment: ListCommentsOutput['comments'][number]
+  comment: CommentListOutput['comments'][number]
 }
 
 const CommentContext = createContext<CommentContextValue | null>(null)

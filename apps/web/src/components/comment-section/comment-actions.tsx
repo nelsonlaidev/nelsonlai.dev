@@ -8,7 +8,7 @@ import { toast } from 'sonner'
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
-import { useVotePostComment } from '@/hooks/queries/post.query'
+import { useCreateVote } from '@/hooks/queries/vote.query'
 import { useSession } from '@/lib/auth-client'
 
 const voteVariants = cva({
@@ -30,7 +30,7 @@ function CommentActions() {
   const { data: session } = useSession()
   const t = useTranslations()
 
-  const { mutate: voteComment, isPending: isVoting } = useVotePostComment({ slug })
+  const { mutate: voteComment, isPending: isVoting } = useCreateVote({ slug })
 
   const isAuthenticated = session !== null
 

@@ -112,6 +112,7 @@
     "like": "Like",
     "likes": "{count, plural, =1 {# like} other {# likes}}",
     "save": "Save",
+    "reset": "Reset",
     "sign-in": "Sign in",
     "sign-out": "Sign out",
     "unknown": "Unknown",
@@ -151,10 +152,10 @@
     "copy-to-clipboard-error": "Unable to copy to clipboard. Please try again.",
     "failed-to-fetch-comments-data": "Failed to fetch comments data. Please refresh the page.",
     "failed-to-fetch-users-data": "Failed to fetch users data. Please refresh the page.",
-    "failed-to-load": "Failed to load.",
     "failed-to-load-comments": "Failed to load comments. Please refresh the page.",
     "failed-to-load-messages": "Failed to load messages. Please refresh the page.",
     "failed-to-load-replies": "Failed to load replies. Please refresh the page.",
+    "failed-to-load-settings": "Failed to load settings. Please refresh the page.",
     "like-limit-reached": "You can only like 3 times per post",
     "message-cannot-be-empty": "Message cannot be empty",
     "name-cannot-be-empty": "Name cannot be empty",
@@ -258,7 +259,7 @@
     "name-updated": "Display name updated successfully",
     "reply-posted": "Reply posted",
     "session-revoked": "Session revoked successfully",
-    "settings-saved": "Settings saved successfully",
+    "settings-updated": "Settings updated successfully",
     "signed-out": "Signed out successfully"
   },
   "terms": {

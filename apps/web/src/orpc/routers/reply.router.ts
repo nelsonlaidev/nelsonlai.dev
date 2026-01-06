@@ -1,11 +1,11 @@
 import { and, comments, count, eq, isNotNull } from '@repo/db'
 
-import { publicProcedure } from '../root'
-import { CountRepliesInputSchema, CountRepliesOutputSchema } from '../schemas/reply.schema'
+import { publicProcedure } from '../orpc'
+import { CountReplyInputSchema, CountReplyOutputSchema } from '../schemas/reply.schema'
 
-export const countReplies = publicProcedure
-  .input(CountRepliesInputSchema)
-  .output(CountRepliesOutputSchema)
+const countReply = publicProcedure
+  .input(CountReplyInputSchema)
+  .output(CountReplyOutputSchema)
   .handler(async ({ input, context }) => {
     const [result] = await context.db
       .select({
@@ -18,3 +18,7 @@ export const countReplies = publicProcedure
       count: result?.value ?? 0
     }
   })
+
+export const replyRouter = {
+  count: countReply
+}

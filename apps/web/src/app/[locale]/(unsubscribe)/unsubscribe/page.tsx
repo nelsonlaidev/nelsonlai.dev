@@ -1,14 +1,23 @@
+import UnsubscribeCommentReplyForm from '@/components/unsubscribe-comment-reply-form'
 import UnsubscribeError from '@/components/unsubscribe-error'
-import UnsubscribeForm from '@/components/unsubscribe-form'
-import { getReplyUnsubData } from '@/lib/unsubscribe'
+import { getUnsubData } from '@/lib/unsubscribe'
 import { loadUnsubscribeParams } from '@/lib/unsubscribe-params'
 
 async function Page(props: PageProps<'/[locale]/unsubscribe'>) {
   const { searchParams } = props
   const { token } = await loadUnsubscribeParams(searchParams)
-  const data = await getReplyUnsubData(token)
+  const data = await getUnsubData(token)
 
-  return data ? <UnsubscribeForm data={data} /> : <UnsubscribeError />
+  if (!data) {
+    return <UnsubscribeError />
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- allow for future types
+  if (data.type === 'comment_reply') {
+    return <UnsubscribeCommentReplyForm data={data} />
+  }
+
+  return <UnsubscribeError />
 }
 
 export default Page

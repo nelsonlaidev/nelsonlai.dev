@@ -1,9 +1,9 @@
 import { env } from '@repo/env'
 
-import { publicProcedure } from '../root'
+import { publicProcedure } from '../orpc'
 import { YoutubeStatsOutputSchema } from '../schemas/youtube.schema'
 
-export const youtubeStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(async () => {
+const youtubeStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(async () => {
   if (!env.GOOGLE_API_KEY) {
     return {
       subscribers: 0,
@@ -24,3 +24,7 @@ export const youtubeStats = publicProcedure.output(YoutubeStatsOutputSchema).han
     views: Number(statistics.viewCount)
   }
 })
+
+export const youtubeRouter = {
+  stats: youtubeStats
+}

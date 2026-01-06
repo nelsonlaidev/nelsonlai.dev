@@ -1,11 +1,11 @@
-import type { ListCommentsInput } from '@/orpc/routers'
+import type { CommentListInput } from '@/orpc/client'
 
 import { createContext, use } from 'react'
 
 type CommentsContextValue = {
   slug: string
-  sort: ListCommentsInput['sort']
-  setSort: (sort: ListCommentsInput['sort']) => void
+  sort: CommentListInput['sort']
+  setSort: (sort: CommentListInput['sort']) => void
 }
 
 const CommentsContext = createContext<CommentsContextValue | null>(null)

@@ -2,8 +2,8 @@ import { Buffer } from 'node:buffer'
 
 import { env } from '@repo/env'
 
-import { publicProcedure } from '../root'
-import { spotifyStatsOutputSchema } from '../schemas/spotify.schema'
+import { publicProcedure } from '../orpc'
+import { SpotifyStatsOutputSchema } from '../schemas/spotify.schema'
 
 const CLIENT_ID = env.SPOTIFY_CLIENT_ID
 const CLIENT_SECRET = env.SPOTIFY_CLIENT_SECRET
@@ -40,7 +40,7 @@ async function getAccessToken() {
   return data.access_token as string
 }
 
-export const spotifyStats = publicProcedure.output(spotifyStatsOutputSchema).handler(async () => {
+const spotifyStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(async () => {
   if (!CLIENT_ID || !CLIENT_SECRET || !REFRESH_TOKEN) {
     return EMPTY_RESPONSE
   }
@@ -73,3 +73,7 @@ export const spotifyStats = publicProcedure.output(spotifyStatsOutputSchema).han
     artist: artists
   }
 })
+
+export const spotifyRouter = {
+  stats: spotifyStats
+}

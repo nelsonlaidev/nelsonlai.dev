@@ -37,7 +37,7 @@ export const CreateCommentInputSchema = z.object({
 
 export const CreateCommentOutputSchema = createSelectSchema(comments)
 
-export const countCommentsInputSchema = z.object({
+export const CountCommentInputSchema = z.object({
   slug: z.string().min(1),
   withReplies: z.boolean().optional().default(false)
 })
@@ -46,6 +46,6 @@ export const DeleteCommentInputSchema = z.object({
   id: z.string().min(1)
 })
 
-export const CountCommentsOutputSchema = z.object({
+export const CountCommentOutputSchema = z.object({
   count: z.number()
 })

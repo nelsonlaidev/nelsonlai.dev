@@ -7,7 +7,7 @@ import { toast } from 'sonner'
 
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
-import { useCreatePostComment } from '@/hooks/queries/post.query'
+import { useCreatePostComment } from '@/hooks/queries/comment.query'
 import { useSession } from '@/lib/auth-client'
 
 import CommentEditor from './comment-editor'

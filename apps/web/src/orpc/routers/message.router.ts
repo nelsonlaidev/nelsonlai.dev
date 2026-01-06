@@ -5,19 +5,19 @@ import { IS_PRODUCTION } from '@/lib/constants'
 import { sendGuestbookNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
 
-import { protectedProcedure, publicProcedure } from '../root'
+import { protectedProcedure, publicProcedure } from '../orpc'
 import { EmptyOutputSchema } from '../schemas/common.schema'
 import {
-  createMessageInputSchema,
-  createMessageOutputSchema,
-  deleteMessageInputSchema,
-  listMessagesInputSchema,
-  listMessagesOutputSchema
+  CreateMessageInputSchema,
+  CreateMessageOutputSchema,
+  DeleteMessageInputSchema,
+  ListMessagesInputSchema,
+  ListMessagesOutputSchema
 } from '../schemas/message.schema'
 
-export const listMessages = publicProcedure
-  .input(listMessagesInputSchema)
-  .output(listMessagesOutputSchema)
+const listMessages = publicProcedure
+  .input(ListMessagesInputSchema)
+  .output(ListMessagesOutputSchema)
   .handler(async ({ input, context }) => {
     const query = await context.db.query.messages.findMany({
       where: and(input.cursor ? lt(messages.createdAt, input.cursor) : undefined),
@@ -53,9 +53,9 @@ export const listMessages = publicProcedure
     }
   })
 
-export const createMessage = protectedProcedure
-  .input(createMessageInputSchema)
-  .output(createMessageOutputSchema)
+const createMessage = protectedProcedure
+  .input(CreateMessageInputSchema)
+  .output(CreateMessageOutputSchema)
   .handler(async ({ input, context }) => {
     const user = context.session.user
 
@@ -80,8 +80,8 @@ export const createMessage = protectedProcedure
     return message
   })
 
-export const deleteMessage = protectedProcedure
-  .input(deleteMessageInputSchema)
+const deleteMessage = protectedProcedure
+  .input(DeleteMessageInputSchema)
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
     const user = context.session.user
@@ -98,3 +98,9 @@ export const deleteMessage = protectedProcedure
 
     await context.db.delete(messages).where(eq(messages.id, input.id))
   })
+
+export const messageRouter = {
+  list: listMessages,
+  create: createMessage,
+  delete: deleteMessage
+}

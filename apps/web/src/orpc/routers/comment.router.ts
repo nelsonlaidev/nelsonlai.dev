@@ -1,5 +1,20 @@
 import { ORPCError } from '@orpc/client'
-import { and, asc, comments, count, desc, eq, gt, isNotNull, isNull, lt, ne, unsubscribes, votes } from '@repo/db'
+import {
+  and,
+  asc,
+  comments,
+  count,
+  desc,
+  eq,
+  gt,
+  isNotNull,
+  isNull,
+  lt,
+  ne,
+  settings,
+  unsubscribes,
+  votes
+} from '@repo/db'
 import { CommentEmailTemplate, ReplyEmailTemplate } from '@repo/email'
 import { env } from '@repo/env'
 import { getLocale } from 'next-intl/server'
@@ -7,13 +22,13 @@ import { getLocale } from 'next-intl/server'
 import { IS_PRODUCTION } from '@/lib/constants'
 import { getPostBySlug } from '@/lib/content'
 import { sendEmail } from '@/lib/resend'
-import { generateReplyUnsubToken } from '@/lib/unsubscribe'
+import { generateCommentReplyUnsubToken } from '@/lib/unsubscribe'
 import { getDefaultImage } from '@/utils/get-default-image'
 
-import { protectedProcedure, publicProcedure } from '../root'
+import { protectedProcedure, publicProcedure } from '../orpc'
 import {
-  countCommentsInputSchema,
-  CountCommentsOutputSchema,
+  CountCommentInputSchema,
+  CountCommentOutputSchema,
   CreateCommentInputSchema,
   CreateCommentOutputSchema,
   DeleteCommentInputSchema,
@@ -22,7 +37,7 @@ import {
 } from '../schemas/comment.schema'
 import { EmptyOutputSchema } from '../schemas/common.schema'
 
-export const listComments = publicProcedure
+const listComments = publicProcedure
   .input(ListCommentsInputSchema)
   .output(ListCommentsOutputSchema)
   .handler(async ({ input, context }) => {
@@ -100,7 +115,7 @@ export const listComments = publicProcedure
     }
   })
 
-export const createComment = protectedProcedure
+const createComment = protectedProcedure
   .input(CreateCommentInputSchema)
   .output(CreateCommentOutputSchema)
   .handler(async ({ input, context }) => {
@@ -166,23 +181,24 @@ export const createComment = protectedProcedure
 
         // Don't notify if the reply is to own comment or the parent comment user is "ghost"
         if (parentComment && parentComment.userId !== user.id && parentComment.user.id !== 'ghost') {
-          const unsubscribedFromAllReplies = await tx.query.unsubscribes.findFirst({
-            where: and(eq(unsubscribes.userId, parentComment.userId), eq(unsubscribes.scope, 'comment_replies_user'))
-          })
+          const [userSettings] = await tx
+            .select({ replyNotificationsEnabled: settings.replyNotificationsEnabled })
+            .from(settings)
+            .where(eq(settings.userId, parentComment.userId))
 
           const unsubscribedFromThisComment = await tx.query.unsubscribes.findFirst({
             where: and(
               eq(unsubscribes.commentId, input.parentId),
               eq(unsubscribes.userId, parentComment.userId),
-              eq(unsubscribes.scope, 'comment_replies_comment')
+              eq(unsubscribes.type, 'comment_reply')
             )
           })
 
           // Don't send notification email if the user
-          // has unsubscribed from all replies or this specific comment's replies
-          if (unsubscribedFromAllReplies || unsubscribedFromThisComment) return c
+          // has disabled reply notifications or unsubscribed from this specific comment's replies
+          if (userSettings?.replyNotificationsEnabled === false || unsubscribedFromThisComment) return c
 
-          const token = await generateReplyUnsubToken(parentComment.userId, input.parentId)
+          const token = await generateCommentReplyUnsubToken(parentComment.userId, input.parentId)
 
           await sendEmail({
             to: parentComment.user.email,
@@ -208,7 +224,7 @@ export const createComment = protectedProcedure
     return comment
   })
 
-export const deleteComment = protectedProcedure
+const deleteComment = protectedProcedure
   .input(DeleteCommentInputSchema)
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
@@ -265,9 +281,9 @@ export const deleteComment = protectedProcedure
     })
   })
 
-export const countComments = publicProcedure
-  .input(countCommentsInputSchema)
-  .output(CountCommentsOutputSchema)
+const countComment = publicProcedure
+  .input(CountCommentInputSchema)
+  .output(CountCommentOutputSchema)
   .handler(async ({ input, context }) => {
     const [result] = await context.db
       .select({
@@ -280,3 +296,10 @@ export const countComments = publicProcedure
       count: result?.value ?? 0
     }
   })
+
+export const commentRouter = {
+  list: listComments,
+  create: createComment,
+  delete: deleteComment,
+  count: countComment
+}

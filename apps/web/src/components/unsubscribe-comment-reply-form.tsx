@@ -1,6 +1,6 @@
 'use client'
 
-import type { getReplyUnsubData } from '@/lib/unsubscribe'
+import type { getUnsubData } from '@/lib/unsubscribe'
 
 import { Button } from '@repo/ui/components/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/components/card'
@@ -8,23 +8,23 @@ import { BellOffIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import { useUpdateCommentReplyPrefs } from '@/hooks/queries/unsubscribe.query'
+import { useCreateCommentReplyUnsubscribe } from '@/hooks/queries/unsubscribe.query'
 
-type UnsubscribeFormProps = {
-  data: NonNullable<Awaited<ReturnType<typeof getReplyUnsubData>>>
+type UnsubscribeCommentReplyFormProps = {
+  data: NonNullable<Awaited<ReturnType<typeof getUnsubData>>> & { type: 'comment_reply' }
 }
 
-function UnsubscribeForm(props: UnsubscribeFormProps) {
+function UnsubscribeCommentReplyForm(props: UnsubscribeCommentReplyFormProps) {
   const { data } = props
   const [isUnsubscribed, setIsUnsubscribed] = useState(data.isUnsubscribed)
-  const { mutate: updatePrefs, isPending: isUpdating } = useUpdateCommentReplyPrefs(() => {
+  const { mutate: createCommentReplyUnsubscribe, isPending: isUpdating } = useCreateCommentReplyUnsubscribe(() => {
     setIsUnsubscribed(true)
   })
   const t = useTranslations()
 
   function handleUnsubscribe() {
     if (isUpdating) return
-    updatePrefs({ token: data.token })
+    createCommentReplyUnsubscribe({ token: data.token })
   }
 
   return (
@@ -70,4 +70,4 @@ function UnsubscribeForm(props: UnsubscribeFormProps) {
   )
 }
 
-export default UnsubscribeForm
+export default UnsubscribeCommentReplyForm

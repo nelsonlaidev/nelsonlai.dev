@@ -1,10 +1,10 @@
 import { comments, users } from '@repo/db'
 
-import { adminProcedure } from '@/orpc/root'
+import { adminProcedure } from '@/orpc/orpc'
 
-import { ListAllCommentsOutputSchema, ListAllUsersOutputSchema } from '../schemas/admin.schema'
+import { ListCommentsOutputSchema, ListUsersOutputSchema } from '../schemas/admin.schema'
 
-export const listAllComments = adminProcedure.output(ListAllCommentsOutputSchema).handler(async ({ context }) => {
+const listComments = adminProcedure.output(ListCommentsOutputSchema).handler(async ({ context }) => {
   const result = await context.db.select().from(comments)
 
   return {
@@ -12,7 +12,7 @@ export const listAllComments = adminProcedure.output(ListAllCommentsOutputSchema
   }
 })
 
-export const listAllUsers = adminProcedure.output(ListAllUsersOutputSchema).handler(async ({ context }) => {
+const listUsers = adminProcedure.output(ListUsersOutputSchema).handler(async ({ context }) => {
   const result = await context.db
     .select({
       id: users.id,
@@ -27,3 +27,12 @@ export const listAllUsers = adminProcedure.output(ListAllUsersOutputSchema).hand
     users: result
   }
 })
+
+export const adminRouter = {
+  comment: {
+    list: listComments
+  },
+  user: {
+    list: listUsers
+  }
+}

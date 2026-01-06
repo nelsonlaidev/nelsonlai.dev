@@ -3,10 +3,10 @@
 import { ClockIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import { useWakatimeStat } from '@/hooks/queries/stat.query'
+import { useWakatimeStats } from '@/hooks/queries/stats.query'
 
 function CodingHours() {
-  const { isSuccess, isLoading, isError, data } = useWakatimeStat()
+  const { data, isSuccess, isLoading, isError } = useWakatimeStats()
   const t = useTranslations()
 
   return (

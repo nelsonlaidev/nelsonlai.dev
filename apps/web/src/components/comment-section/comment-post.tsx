@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 
 import { useCommentsContext } from '@/contexts/comments.context'
-import { useCreatePostComment } from '@/hooks/queries/post.query'
+import { useCreatePostComment } from '@/hooks/queries/comment.query'
 import { useIsMounted } from '@/hooks/use-is-mounted'
 import { useSession } from '@/lib/auth-client'
 

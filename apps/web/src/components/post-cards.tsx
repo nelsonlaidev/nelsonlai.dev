@@ -6,7 +6,8 @@ import { Link } from '@repo/ui/components/link'
 import { useTranslations } from 'next-intl'
 
 import BlurImage from '@/components/blur-image'
-import { usePostLikeCount, usePostViewCount } from '@/hooks/queries/post.query'
+import { useCountLike } from '@/hooks/queries/like.query'
+import { useCountView } from '@/hooks/queries/view.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 
 type PostCardsProps = {
@@ -32,8 +33,8 @@ function PostCard(props: PostCardProps) {
   const formattedDate = useFormattedDate(date)
   const t = useTranslations()
 
-  const viewsQuery = usePostViewCount({ slug })
-  const likesQuery = usePostLikeCount({ slug })
+  const viewsQuery = useCountView({ slug })
+  const likesQuery = useCountLike({ slug })
 
   return (
     <Link href={`/blog/${slug}`} className='group rounded-xl px-2 py-4 shadow-feature-card'>

@@ -1,4 +1,4 @@
-import type { ListCommentsInput } from '@/orpc/routers'
+import type { CommentListInput } from '@/orpc/client'
 
 import NumberFlow, { NumberFlowGroup } from '@number-flow/react'
 import { Button } from '@repo/ui/components/button'
@@ -13,14 +13,15 @@ import { ListFilterIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 import { useCommentsContext } from '@/contexts/comments.context'
-import { usePostCommentCount, usePostReplyCount } from '@/hooks/queries/post.query'
+import { useCountComment } from '@/hooks/queries/comment.query'
+import { useCountReply } from '@/hooks/queries/reply.query'
 
 function CommentHeader() {
   const { slug, sort, setSort } = useCommentsContext()
   const t = useTranslations()
 
-  const commentCountQuery = usePostCommentCount({ slug })
-  const replyCountQuery = usePostReplyCount({ slug })
+  const commentCountQuery = useCountComment({ slug })
+  const replyCountQuery = useCountReply({ slug })
 
   return (
     <div className='flex items-center justify-between px-1'>
@@ -58,7 +59,7 @@ function CommentHeader() {
           <DropdownMenuRadioGroup
             value={sort}
             onValueChange={(value) => {
-              setSort(value as ListCommentsInput['sort'])
+              setSort(value as CommentListInput['sort'])
             }}
           >
             <DropdownMenuRadioItem value='newest'>{t('blog.comments.newest')}</DropdownMenuRadioItem>

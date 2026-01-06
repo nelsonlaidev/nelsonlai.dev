@@ -1,11 +1,12 @@
 import { ORPCError } from '@orpc/client'
-import { and, eq, postLikes, posts, sql } from '@repo/db'
+import { and, eq, postLikes, posts, sql, sum } from '@repo/db'
 
 import { getAnonKey } from '@/utils/get-anon-key'
 import { getIp } from '@/utils/get-ip'
 
 import { cache } from '../cache'
-import { publicProcedure } from '../root'
+import { publicProcedure } from '../orpc'
+import { LikesStatsOutputSchema } from '../schemas/blog.schema'
 import {
   CountLikeInputSchema,
   CountLikeOutputSchema,
@@ -13,7 +14,7 @@ import {
   IncrementLikeOutputSchema
 } from '../schemas/like.schema'
 
-export const countLike = publicProcedure
+const countLike = publicProcedure
   .input(CountLikeInputSchema)
   .output(CountLikeOutputSchema)
   .handler(async ({ input, context }) => {
@@ -72,7 +73,7 @@ export const countLike = publicProcedure
     }
   })
 
-export const incrementLike = publicProcedure
+const incrementLike = publicProcedure
   .input(IncrementLikeInputSchema)
   .output(IncrementLikeOutputSchema)
   .handler(async ({ input, context }) => {
@@ -174,3 +175,23 @@ export const incrementLike = publicProcedure
       currentUserLikes: currentUserLikes.likeCount
     }
   })
+
+const likesStats = publicProcedure.output(LikesStatsOutputSchema).handler(async ({ context }) => {
+  const [result] = await context.db
+    .select({
+      value: sum(posts.likes)
+    })
+    .from(posts)
+
+  const likes = result?.value ? Number(result.value) : 0
+
+  return {
+    likes
+  }
+})
+
+export const likeRouter = {
+  count: countLike,
+  increment: incrementLike,
+  stats: likesStats
+}

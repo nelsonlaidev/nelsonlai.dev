@@ -3,10 +3,10 @@
 import { Link } from '@repo/ui/components/link'
 import { useTranslations } from 'next-intl'
 
-import { useSpotifyStat } from '@/hooks/queries/stat.query'
+import { useSpotifyStats } from '@/hooks/queries/stats.query'
 
 function NowPlaying() {
-  const { isSuccess, isLoading, isError, data } = useSpotifyStat()
+  const { data, isSuccess, isLoading, isError } = useSpotifyStats()
   const t = useTranslations()
 
   const isPlaying = isSuccess && data.isPlaying && data.songUrl

@@ -2,58 +2,19 @@ import { ORPCError } from '@orpc/client'
 import { createId } from '@paralleldrive/cuid2'
 import { and, eq, unsubscribes } from '@repo/db'
 
-import { verifyReplyUnsubToken } from '@/lib/unsubscribe'
-
-import { protectedProcedure, publicProcedure } from '../root'
+import { publicProcedure } from '../orpc'
 import { EmptyOutputSchema } from '../schemas/common.schema'
-import {
-  GetCommentReplyPrefsOutputSchema,
-  UpdateCommentReplyPrefsInputSchema,
-  UpdateGlobalReplyPrefsInputSchema
-} from '../schemas/unsubscribe.schema'
+import { UnsubscribeTokenInputSchema } from '../schemas/unsubscribe.schema'
 
-export const getReplyPrefs = protectedProcedure
-  .output(GetCommentReplyPrefsOutputSchema)
-  .handler(async ({ context }) => {
-    const result = await context.db.query.unsubscribes.findFirst({
-      where: and(eq(unsubscribes.userId, context.session.user.id), eq(unsubscribes.scope, 'comment_replies_user'))
-    })
-
-    return { isEnabled: result ? false : true }
-  })
-
-export const updateReplyPrefs = protectedProcedure
-  .input(UpdateGlobalReplyPrefsInputSchema)
-  .output(EmptyOutputSchema)
-  .handler(async ({ context, input }) => {
-    if (input.isEnabled) {
-      await context.db
-        .delete(unsubscribes)
-        .where(and(eq(unsubscribes.userId, context.session.user.id), eq(unsubscribes.scope, 'comment_replies_user')))
-
-      return
-    }
-
-    const existing = await context.db.query.unsubscribes.findFirst({
-      where: and(eq(unsubscribes.userId, context.session.user.id), eq(unsubscribes.scope, 'comment_replies_user'))
-    })
-
-    if (!existing) {
-      await context.db.insert(unsubscribes).values({
-        id: createId(),
-        userId: context.session.user.id,
-        scope: 'comment_replies_user'
-      })
-    }
-  })
-
-export const updateCommentReplyPrefs = publicProcedure
-  .input(UpdateCommentReplyPrefsInputSchema)
+const createCommentReplyUnsubscribe = publicProcedure
+  .input(UnsubscribeTokenInputSchema)
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
-    const result = await verifyReplyUnsubToken(input.token)
+    const { verifyUnsubToken } = await import('@/lib/unsubscribe')
+    const result = await verifyUnsubToken(input.token)
 
-    if (!result.success) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- future types may be added
+    if (!result.success || result.data.type !== 'comment_reply') {
       throw new ORPCError('BAD_REQUEST', { message: 'Invalid token' })
     }
 
@@ -63,7 +24,7 @@ export const updateCommentReplyPrefs = publicProcedure
       where: and(
         eq(unsubscribes.userId, userId),
         eq(unsubscribes.commentId, commentId),
-        eq(unsubscribes.scope, 'comment_replies_comment')
+        eq(unsubscribes.type, 'comment_reply')
       )
     })
 
@@ -77,6 +38,10 @@ export const updateCommentReplyPrefs = publicProcedure
       id: createId(),
       userId,
       commentId,
-      scope: 'comment_replies_comment'
+      type: 'comment_reply'
     })
   })
+
+export const unsubscribeRouter = {
+  createCommentReply: createCommentReplyUnsubscribe
+}

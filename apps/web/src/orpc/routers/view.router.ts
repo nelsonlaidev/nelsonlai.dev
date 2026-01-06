@@ -1,8 +1,9 @@
 import { ORPCError } from '@orpc/client'
-import { eq, posts, sql } from '@repo/db'
+import { eq, posts, sql, sum } from '@repo/db'
 
 import { cache } from '../cache'
-import { publicProcedure } from '../root'
+import { publicProcedure } from '../orpc'
+import { ViewsStatsOutputSchema } from '../schemas/blog.schema'
 import {
   CountViewInputSchema,
   CountViewOutputSchema,
@@ -10,7 +11,7 @@ import {
   IncrementViewOutputSchema
 } from '../schemas/view.schema'
 
-export const countView = publicProcedure
+const countView = publicProcedure
   .input(CountViewInputSchema)
   .output(CountViewOutputSchema)
   .handler(async ({ input, context }) => {
@@ -38,7 +39,7 @@ export const countView = publicProcedure
     }
   })
 
-export const incrementView = publicProcedure
+const incrementView = publicProcedure
   .input(IncrementViewInputSchema)
   .output(IncrementViewOutputSchema)
   .handler(async ({ input, context }) => {
@@ -70,3 +71,23 @@ export const incrementView = publicProcedure
       views
     }
   })
+
+const viewsStats = publicProcedure.output(ViewsStatsOutputSchema).handler(async ({ context }) => {
+  const [result] = await context.db
+    .select({
+      value: sum(posts.views)
+    })
+    .from(posts)
+
+  const views = result?.value ? Number(result.value) : 0
+
+  return {
+    views
+  }
+})
+
+export const viewRouter = {
+  count: countView,
+  increment: incrementView,
+  stats: viewsStats
+}

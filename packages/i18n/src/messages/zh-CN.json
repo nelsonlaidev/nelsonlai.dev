@@ -112,6 +112,7 @@
     "like": "赞",
     "likes": "{count, plural, =1 {# 点赞} other {# 点赞}}",
     "save": "保存",
+    "reset": "重设",
     "sign-in": "登入",
     "sign-out": "登出",
     "unknown": "未知",
@@ -151,10 +152,10 @@
     "copy-to-clipboard-error": "无法复制到剪贴板，请再试一次。",
     "failed-to-fetch-comments-data": "无法获取评论数据。请刷新页面。",
     "failed-to-fetch-users-data": "无法获取用户数据。请刷新页面。",
-    "failed-to-load": "无法载入。",
     "failed-to-load-comments": "无法载入评论。请刷新页面。",
     "failed-to-load-messages": "无法载入留言。请刷新页面。",
     "failed-to-load-replies": "无法载入回复。请刷新页面。",
+    "failed-to-load-settings": "无法载入设定。请刷新页面。",
     "like-limit-reached": "您只能对每篇文章点赞 3 次",
     "message-cannot-be-empty": "留言不能为空",
     "name-cannot-be-empty": "名称不能为空",
@@ -258,7 +259,7 @@
     "name-updated": "成功编辑名称",
     "reply-posted": "回复已发布",
     "session-revoked": "会话已成功结束",
-    "settings-saved": "设定保存成功",
+    "settings-updated": "设定更新成功",
     "signed-out": "成功登出"
   },
   "terms": {

@@ -1,84 +1,33 @@
-import type { Inputs, Outputs } from '../client'
-
-import { listAllComments, listAllUsers } from './admin.router'
-import { listSessions, revokeSession, updateUser } from './auth.router'
-import { likesStats, viewsStats } from './blog.router'
-import { countComments, createComment, deleteComment, listComments } from './comment.router'
-import { githubStats } from './github.router'
-import { countLike, incrementLike } from './like.router'
-import { createMessage, deleteMessage, listMessages } from './message.router'
-import { getAvatarUploadUrl } from './r2.router'
-import { countReplies } from './reply.router'
-import { spotifyStats } from './spotify.router'
-import { getReplyPrefs, updateCommentReplyPrefs, updateReplyPrefs } from './unsubscribe.router'
-import { countView, incrementView } from './view.router'
-import { createVote } from './vote.router'
-import { wakatimeStats } from './wakatime.router'
-import { youtubeStats } from './youtube.router'
+import { adminRouter } from './admin.router'
+import { authRouter } from './auth.router'
+import { commentRouter } from './comment.router'
+import { githubRouter } from './github.router'
+import { likeRouter } from './like.router'
+import { messageRouter } from './message.router'
+import { r2Router } from './r2.router'
+import { replyRouter } from './reply.router'
+import { settingsRouter } from './settings.router'
+import { spotifyRouter } from './spotify.router'
+import { unsubscribeRouter } from './unsubscribe.router'
+import { viewRouter } from './view.router'
+import { voteRouter } from './vote.router'
+import { wakatimeRouter } from './wakatime.router'
+import { youtubeRouter } from './youtube.router'
 
 export const router = {
-  stats: {
-    github: githubStats,
-    youtube: youtubeStats,
-    wakatime: wakatimeStats,
-    spotify: spotifyStats,
-    blog: {
-      views: viewsStats,
-      likes: likesStats
-    }
-  },
-  posts: {
-    views: {
-      count: countView,
-      increment: incrementView
-    },
-    likes: {
-      count: countLike,
-      increment: incrementLike
-    },
-    comments: {
-      list: listComments,
-      create: createComment,
-      delete: deleteComment,
-      count: countComments
-    },
-    replies: {
-      count: countReplies
-    },
-    votes: {
-      create: createVote
-    }
-  },
-  messages: {
-    list: listMessages,
-    create: createMessage,
-    delete: deleteMessage
-  },
-  admin: {
-    listAllComments,
-    listAllUsers
-  },
-  auth: {
-    listSessions,
-    revokeSession,
-    updateUser
-  },
-  r2: {
-    getAvatarUploadUrl
-  },
-  unsubscribes: {
-    getReplyPrefs,
-    updateReplyPrefs,
-    updateCommentReplyPrefs
-  }
+  github: githubRouter,
+  youtube: youtubeRouter,
+  wakatime: wakatimeRouter,
+  spotify: spotifyRouter,
+  view: viewRouter,
+  like: likeRouter,
+  comment: commentRouter,
+  reply: replyRouter,
+  vote: voteRouter,
+  message: messageRouter,
+  admin: adminRouter,
+  auth: authRouter,
+  settings: settingsRouter,
+  r2: r2Router,
+  unsubscribe: unsubscribeRouter
 }
-
-export type ListCommentsInput = Inputs['posts']['comments']['list']
-export type ListCommentsOutput = Outputs['posts']['comments']['list']
-
-export type ListMessagesOutput = Outputs['messages']['list']
-
-export type ListAllCommentsOutput = Outputs['admin']['listAllComments']
-export type ListAllUsersOutput = Outputs['admin']['listAllUsers']
-
-export type ListSessionsOutput = Outputs['auth']['listSessions']

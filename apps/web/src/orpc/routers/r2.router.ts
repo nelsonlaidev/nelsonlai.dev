@@ -8,10 +8,10 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { getCloudflareR2 } from '@/lib/cloudflare-r2'
 import { getR2PublicUrl } from '@/utils/get-r2-public-url'
 
-import { protectedProcedure } from '../root'
+import { protectedProcedure } from '../orpc'
 import { GetAvatarUploadUrlInputSchema, GetAvatarUploadUrlOutputSchema } from '../schemas/r2.schema'
 
-export const getAvatarUploadUrl = protectedProcedure
+const getAvatarUploadUrl = protectedProcedure
   .input(GetAvatarUploadUrlInputSchema)
   .output(GetAvatarUploadUrlOutputSchema)
   .handler(async ({ input, context }) => {
@@ -46,3 +46,7 @@ export const getAvatarUploadUrl = protectedProcedure
       key: path
     }
   })
+
+export const r2Router = {
+  getAvatarUploadUrl
+}

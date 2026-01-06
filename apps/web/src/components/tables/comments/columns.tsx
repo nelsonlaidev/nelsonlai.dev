@@ -1,9 +1,9 @@
-import type { ListAllCommentsOutput } from '@/orpc/routers'
+import type { AdminCommentListOutput } from '@/orpc/client'
 import type { ColumnDef } from '@tanstack/react-table'
 
 import FormattedDateCell from '../formatted-date-cell'
 
-export type Comment = ListAllCommentsOutput['comments'][number]
+export type Comment = AdminCommentListOutput['comments'][number]
 
 export const columns: Array<ColumnDef<Comment>> = [
   {
