@@ -2,7 +2,7 @@ import { messages, users } from '@repo/db'
 import { createSelectSchema } from 'drizzle-zod'
 import * as z from 'zod'
 
-export const createMessageOutputSchema = createSelectSchema(messages).pick({
+export const CreateMessageOutputSchema = createSelectSchema(messages).pick({
   id: true,
   createdAt: true,
   updatedAt: true,
@@ -10,13 +10,13 @@ export const createMessageOutputSchema = createSelectSchema(messages).pick({
   body: true
 })
 
-export const createMessageInputSchema = z.object({
+export const CreateMessageInputSchema = z.object({
   message: z.string().min(1)
 })
 
-export const listMessagesOutputSchema = z.object({
+export const ListMessagesOutputSchema = z.object({
   messages: z.array(
-    createMessageOutputSchema.extend({
+    CreateMessageOutputSchema.extend({
       user: createSelectSchema(users).pick({
         name: true,
         image: true,
@@ -27,8 +27,8 @@ export const listMessagesOutputSchema = z.object({
   nextCursor: z.date().optional()
 })
 
-export const deleteMessageInputSchema = z.object({
+export const DeleteMessageInputSchema = z.object({
   id: z.string()
 })
 
-export { InfiniteQuerySchema as listMessagesInputSchema } from './common.schema'
+export { InfiniteQuerySchema as ListMessagesInputSchema } from './common.schema'

@@ -7,7 +7,7 @@ import * as z from 'zod'
 
 import { getMaskedEmail } from '@/utils/get-masked-email'
 
-const tokenSchema = z.jwt({ alg: 'HS256' })
+const TokenSchema = z.jwt({ alg: 'HS256' })
 
 const ReplyUnsubPayloadSchema = z.object({
   userId: z.string().min(1),
@@ -33,7 +33,7 @@ export async function verifyReplyUnsubToken(token: string): Promise<UnsubTokenRe
     throw new Error('JWT_SECRET is not set')
   }
 
-  const parsedToken = tokenSchema.safeParse(token)
+  const parsedToken = TokenSchema.safeParse(token)
 
   if (!parsedToken.success) {
     return { success: false }

@@ -8,16 +8,16 @@ import { getDefaultImage } from '@/utils/get-default-image'
 import { protectedProcedure, publicProcedure } from '../orpc'
 import { EmptyOutputSchema } from '../schemas/common.schema'
 import {
-  createMessageInputSchema,
-  createMessageOutputSchema,
-  deleteMessageInputSchema,
-  listMessagesInputSchema,
-  listMessagesOutputSchema
+  CreateMessageInputSchema,
+  CreateMessageOutputSchema,
+  DeleteMessageInputSchema,
+  ListMessagesInputSchema,
+  ListMessagesOutputSchema
 } from '../schemas/message.schema'
 
 const listMessages = publicProcedure
-  .input(listMessagesInputSchema)
-  .output(listMessagesOutputSchema)
+  .input(ListMessagesInputSchema)
+  .output(ListMessagesOutputSchema)
   .handler(async ({ input, context }) => {
     const query = await context.db.query.messages.findMany({
       where: and(input.cursor ? lt(messages.createdAt, input.cursor) : undefined),
@@ -54,8 +54,8 @@ const listMessages = publicProcedure
   })
 
 const createMessage = protectedProcedure
-  .input(createMessageInputSchema)
-  .output(createMessageOutputSchema)
+  .input(CreateMessageInputSchema)
+  .output(CreateMessageOutputSchema)
   .handler(async ({ input, context }) => {
     const user = context.session.user
 
@@ -81,7 +81,7 @@ const createMessage = protectedProcedure
   })
 
 const deleteMessage = protectedProcedure
-  .input(deleteMessageInputSchema)
+  .input(DeleteMessageInputSchema)
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
     const user = context.session.user
