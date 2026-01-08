@@ -60,16 +60,7 @@ function Message(props: MessageProps) {
 
   const defaultImage = getDefaultImage(message.userId)
 
-  const formattedDate = useFormattedDate(message.createdAt, {
-    formatOptions: {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    }
-  })
+  const formattedDate = useFormattedDate(message.createdAt, { formatName: 'long' })
 
   return (
     <div className='rounded-lg border p-4 shadow-xs dark:bg-zinc-900/30' data-testid={`message-${message.id}`}>

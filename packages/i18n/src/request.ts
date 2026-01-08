@@ -11,6 +11,19 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   return {
     locale,
-    messages
+    messages,
+    formats: {
+      dateTime: {
+        short: {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        },
+        long: {
+          dateStyle: 'medium',
+          timeStyle: 'short'
+        }
+      }
+    }
   }
 })

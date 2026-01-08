@@ -1,41 +1,41 @@
-import dayjs from 'dayjs'
-import { type DateTimeFormatOptions, useFormatter } from 'next-intl'
+import { type DateTimeFormatOptions, useFormatter, useNow } from 'next-intl'
 import { useEffect, useState } from 'react'
 
 type Options = {
   relative?: boolean
+  threshold?: number
+  formatName?: string
   formatOptions?: DateTimeFormatOptions
 }
 
 type DateInput = Date | string | number
 
 export function useFormattedDate(date: DateInput, options: Options = {}): string | null {
-  const {
-    relative = false,
-    formatOptions = {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    }
-  } = options
+  const { relative = false, threshold = 7, formatName = 'short', formatOptions } = options
 
   const format = useFormatter()
+  const now = useNow()
+
   const [formattedDate, setFormattedDate] = useState<string | null>(null)
 
   useEffect(() => {
-    const now = new Date()
-    const convertedDate = dayjs(date).toDate()
+    const dateTime = new Date(date)
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
-    if (relative) {
-      const daysDiff = dayjs(now).diff(convertedDate, 'day')
-
-      setFormattedDate(
-        Math.abs(daysDiff) > 7 ? format.dateTime(convertedDate, formatOptions) : format.relativeTime(convertedDate, now)
-      )
-    } else {
-      setFormattedDate(format.dateTime(convertedDate, formatOptions))
+    const formatOptionsWithTimeZone = {
+      ...formatOptions,
+      timeZone
     }
-  }, [date, relative, formatOptions, format])
+
+    // Check if we should use relative time
+    const useRelative = relative && Math.abs(now.getTime() - dateTime.getTime()) / (1000 * 60 * 60 * 24) <= threshold
+
+    const result = useRelative
+      ? format.relativeTime(dateTime, now)
+      : format.dateTime(dateTime, formatName, formatOptionsWithTimeZone)
+
+    setFormattedDate(result)
+  }, [date, relative, threshold, formatOptions, format, now, formatName])
 
   return formattedDate
 }

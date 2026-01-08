@@ -51,9 +51,7 @@ function Comment(props: CommentProps) {
     replyCount
   } = comment
 
-  const formattedDate = useFormattedDate(comment.createdAt, {
-    relative: true
-  })
+  const formattedDate = useFormattedDate(comment.createdAt, { relative: true })
 
   useEffect(() => {
     if (isHighlighted && commentRef.current) {

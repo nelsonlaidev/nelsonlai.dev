@@ -79,12 +79,7 @@ function Session(props: SessionProps) {
   const osName = os.name ?? t('common.unknown')
 
   const ipAddress = session.ipAddress ?? t('common.unknown')
-  const lastActive = useFormattedDate(session.createdAt, {
-    formatOptions: {
-      dateStyle: 'medium',
-      timeStyle: 'short'
-    }
-  })
+  const lastActive = useFormattedDate(session.createdAt, { formatName: 'long' })
 
   const { mutate: revokeSession, isPending: isRevoking } = useRevokeSession(() => {
     toast.success(t('success.session-revoked'))
