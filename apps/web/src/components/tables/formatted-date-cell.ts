@@ -20,7 +20,7 @@ function FormattedDateCell(props: FormattedDateCellProps) {
     }
   })
 
-  return formattedDate
+  return formattedDate ?? '--'
 }
 
 export default FormattedDateCell

@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import { type DateTimeFormatOptions, useFormatter } from 'next-intl'
+import { useEffect, useState } from 'react'
 
 type Options = {
   relative?: boolean
@@ -8,9 +9,7 @@ type Options = {
 
 type DateInput = Date | string | number
 
-export function useFormattedDate(date: DateInput, options?: Options): string
-export function useFormattedDate(date?: DateInput, options?: Options): string | null
-export function useFormattedDate(date?: DateInput, options: Options = {}): string | null {
+export function useFormattedDate(date: DateInput, options: Options = {}): string | null {
   const {
     relative = false,
     formatOptions = {
@@ -21,20 +20,22 @@ export function useFormattedDate(date?: DateInput, options: Options = {}): strin
   } = options
 
   const format = useFormatter()
+  const [formattedDate, setFormattedDate] = useState<string | null>(null)
 
-  if (!date) return null
+  useEffect(() => {
+    const now = new Date()
+    const convertedDate = dayjs(date).toDate()
 
-  const now = new Date()
+    if (relative) {
+      const daysDiff = dayjs(now).diff(convertedDate, 'day')
 
-  const convertedDate = dayjs(date).toDate()
+      setFormattedDate(
+        Math.abs(daysDiff) > 7 ? format.dateTime(convertedDate, formatOptions) : format.relativeTime(convertedDate, now)
+      )
+    } else {
+      setFormattedDate(format.dateTime(convertedDate, formatOptions))
+    }
+  }, [date, relative, formatOptions, format])
 
-  if (relative) {
-    const daysDiff = dayjs(now).diff(convertedDate, 'day')
-
-    return Math.abs(daysDiff) > 7
-      ? format.dateTime(convertedDate, formatOptions)
-      : format.relativeTime(convertedDate, now)
-  } else {
-    return format.dateTime(convertedDate, formatOptions)
-  }
+  return formattedDate
 }

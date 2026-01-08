@@ -25,7 +25,7 @@ function BlogFooter(props: BlogFooterProps) {
       <Link href={editURL} variant='muted'>
         {t('blog.footer.edit-on-github')}
       </Link>
-      <div className='text-muted-foreground'>{t('blog.footer.last-updated', { date: formattedDate })}</div>
+      <div className='text-muted-foreground'>{t('blog.footer.last-updated', { date: formattedDate ?? '--' })}</div>
     </div>
   )
 }

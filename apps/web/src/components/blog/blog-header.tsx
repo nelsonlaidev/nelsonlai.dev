@@ -59,7 +59,7 @@ function BlogHeader(props: BlogHeaderProps) {
           </div>
           <div className='space-y-1 md:mx-auto'>
             <div className='text-muted-foreground'>{t('blog.header.published-on')}</div>
-            <div>{formattedDate}</div>
+            <div>{formattedDate ?? '--'}</div>
           </div>
           <div className='space-y-1 md:mx-auto'>
             <div className='text-muted-foreground'>{t('blog.header.views')}</div>

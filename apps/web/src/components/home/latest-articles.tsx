@@ -127,7 +127,7 @@ function Card(props: CardProps) {
         className='rounded-lg'
       />
       <div className='flex items-center justify-between gap-2 px-2 pt-4 text-sm text-zinc-500'>
-        {formattedDate}
+        {formattedDate ?? '--'}
         <div className='flex gap-2'>
           {likesQuery.isLoading && '--'}
           {likesQuery.isError && t('common.error')}

@@ -81,7 +81,7 @@ function ProfileInfo(props: ProfileInfoProps) {
       <div>
         <div className='flex flex-col gap-2'>
           <span className='text-muted-foreground'>{t('account.account-created')}</span>
-          <span>{createdAt}</span>
+          <span>{createdAt ?? '--'}</span>
         </div>
       </div>
     </Card>

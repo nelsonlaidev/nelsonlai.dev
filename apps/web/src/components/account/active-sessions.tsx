@@ -126,7 +126,7 @@ function Session(props: SessionProps) {
                   </>
                 )}
               </div>
-              <div>{lastActive}</div>
+              <div>{lastActive ?? '--'}</div>
             </div>
           </div>
         </div>

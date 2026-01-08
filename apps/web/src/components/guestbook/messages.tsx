@@ -80,7 +80,7 @@ function Message(props: MessageProps) {
         </Avatar>
         <div className='flex flex-col justify-center gap-px text-sm'>
           <div>{message.user.name}</div>
-          <div className='text-xs text-muted-foreground'>{formattedDate}</div>
+          <div className='text-xs text-muted-foreground'>{formattedDate ?? '--'}</div>
         </div>
       </div>
       <div className='pl-13 wrap-break-word'>{message.body}</div>
