@@ -1,6 +1,6 @@
 import { env } from '@repo/env'
 
-import { publicProcedure } from '../orpc'
+import { publicProcedure } from '../procedures'
 import { YoutubeStatsOutputSchema } from '../schemas/youtube.schema'
 
 const youtubeStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(async () => {

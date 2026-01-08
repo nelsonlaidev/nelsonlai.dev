@@ -8,7 +8,7 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { getCloudflareR2 } from '@/lib/cloudflare-r2'
 import { getR2PublicUrl } from '@/utils/get-r2-public-url'
 
-import { protectedProcedure } from '../orpc'
+import { protectedProcedure } from '../procedures'
 import { GetAvatarUploadUrlInputSchema, GetAvatarUploadUrlOutputSchema } from '../schemas/r2.schema'
 
 const getAvatarUploadUrl = protectedProcedure

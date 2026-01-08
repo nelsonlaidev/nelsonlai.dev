@@ -1,7 +1,7 @@
 import { ORPCError } from '@orpc/client'
 import { and, eq, votes } from '@repo/db'
 
-import { protectedProcedure } from '../orpc'
+import { protectedProcedure } from '../procedures'
 import { CreateVoteInputSchema, CreateVoteOutputSchema } from '../schemas/vote.schema'
 
 const createVote = protectedProcedure

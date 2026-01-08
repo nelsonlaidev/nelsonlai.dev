@@ -5,7 +5,7 @@ import { IS_PRODUCTION } from '@/lib/constants'
 import { sendGuestbookNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
 
-import { protectedProcedure, publicProcedure } from '../orpc'
+import { protectedProcedure, publicProcedure } from '../procedures'
 import { EmptyOutputSchema } from '../schemas/common.schema'
 import {
   CreateMessageInputSchema,

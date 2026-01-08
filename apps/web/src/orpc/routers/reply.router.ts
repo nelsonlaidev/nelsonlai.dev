@@ -1,6 +1,6 @@
 import { and, comments, count, eq, isNotNull } from '@repo/db'
 
-import { publicProcedure } from '../orpc'
+import { publicProcedure } from '../procedures'
 import { CountReplyInputSchema, CountReplyOutputSchema } from '../schemas/reply.schema'
 
 const countReply = publicProcedure

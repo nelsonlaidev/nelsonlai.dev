@@ -2,7 +2,7 @@ import { ORPCError } from '@orpc/client'
 import { eq, posts, sql, sum } from '@repo/db'
 
 import { cache } from '../cache'
-import { publicProcedure } from '../orpc'
+import { publicProcedure } from '../procedures'
 import { ViewsStatsOutputSchema } from '../schemas/blog.schema'
 import {
   CountViewInputSchema,

@@ -1,7 +1,6 @@
 import { comments, users } from '@repo/db'
 
-import { adminProcedure } from '@/orpc/orpc'
-
+import { adminProcedure } from '../procedures'
 import { ListCommentsOutputSchema, ListUsersOutputSchema } from '../schemas/admin.schema'
 
 const listComments = adminProcedure.output(ListCommentsOutputSchema).handler(async ({ context }) => {

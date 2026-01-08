@@ -2,7 +2,7 @@ import { Buffer } from 'node:buffer'
 
 import { env } from '@repo/env'
 
-import { publicProcedure } from '../orpc'
+import { publicProcedure } from '../procedures'
 import { SpotifyStatsOutputSchema } from '../schemas/spotify.schema'
 
 const CLIENT_ID = env.SPOTIFY_CLIENT_ID

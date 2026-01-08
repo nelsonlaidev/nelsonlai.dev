@@ -5,7 +5,7 @@ import { getAnonKey } from '@/utils/get-anon-key'
 import { getIp } from '@/utils/get-ip'
 
 import { cache } from '../cache'
-import { publicProcedure } from '../orpc'
+import { publicProcedure } from '../procedures'
 import { LikesStatsOutputSchema } from '../schemas/blog.schema'
 import {
   CountLikeInputSchema,

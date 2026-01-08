@@ -1,7 +1,7 @@
 import { GITHUB_USERNAME } from '@/lib/constants'
 import { octokit } from '@/lib/octokit'
 
-import { publicProcedure } from '../orpc'
+import { publicProcedure } from '../procedures'
 import { GithubStatsOutputSchema } from '../schemas/github.schema'
 
 const githubStats = publicProcedure.output(GithubStatsOutputSchema).handler(async () => {

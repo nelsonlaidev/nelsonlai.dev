@@ -5,7 +5,7 @@ import { auth } from '@/lib/auth'
 import { getLocation } from '@/utils/get-location'
 
 import { cache } from '../cache'
-import { protectedProcedure } from '../orpc'
+import { protectedProcedure } from '../procedures'
 import { ListSessionsOutputSchema, RevokeSessionInputSchema, UpdateUserInputSchema } from '../schemas/auth.schema'
 import { EmptyOutputSchema } from '../schemas/common.schema'
 

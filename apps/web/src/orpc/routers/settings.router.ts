@@ -1,7 +1,7 @@
 import { ORPCError } from '@orpc/client'
 import { DEFAULT_SETTINGS, eq, settings } from '@repo/db'
 
-import { protectedProcedure } from '../orpc'
+import { protectedProcedure } from '../procedures'
 import {
   GetSettingsOutputSchema,
   UpdateSettingsInputSchema,

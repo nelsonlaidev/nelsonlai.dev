@@ -25,7 +25,7 @@ import { sendEmail } from '@/lib/resend'
 import { generateCommentReplyUnsubToken } from '@/lib/unsubscribe'
 import { getDefaultImage } from '@/utils/get-default-image'
 
-import { protectedProcedure, publicProcedure } from '../orpc'
+import { protectedProcedure, publicProcedure } from '../procedures'
 import {
   CountCommentInputSchema,
   CountCommentOutputSchema,

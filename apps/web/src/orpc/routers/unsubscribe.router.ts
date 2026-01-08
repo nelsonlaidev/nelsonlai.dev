@@ -2,7 +2,7 @@ import { ORPCError } from '@orpc/client'
 import { createId } from '@paralleldrive/cuid2'
 import { and, eq, unsubscribes } from '@repo/db'
 
-import { publicProcedure } from '../orpc'
+import { publicProcedure } from '../procedures'
 import { EmptyOutputSchema } from '../schemas/common.schema'
 import { UnsubscribeTokenInputSchema } from '../schemas/unsubscribe.schema'
 
