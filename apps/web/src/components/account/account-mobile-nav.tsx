@@ -27,7 +27,12 @@ function AccountMobileNav() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant='outline' size='icon' className='size-10 md:hidden'>
+        <Button
+          variant='outline'
+          size='icon'
+          className='size-10 md:hidden'
+          aria-label={t('account.open-navigation-menu')}
+        >
           <MenuIcon className='size-4' />
         </Button>
       </DrawerTrigger>

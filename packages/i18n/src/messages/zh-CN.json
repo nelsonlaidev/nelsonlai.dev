@@ -12,6 +12,7 @@
     "edit-name-description": "更改您的显示名称。此名称将显示在您的个人资料和评论中。",
     "email": "邮箱",
     "no-active-sessions": "没有活动会话",
+    "open-navigation-menu": "打开导航菜单",
     "profile": "个人资料",
     "revoke-session": "结束",
     "this-device": "此设备",
@@ -25,7 +26,8 @@
       "users": {
         "description": "管理用户"
       }
-    }
+    },
+    "toggle-sidebar": "切换侧边栏"
   },
   "blog": {
     "comments": {
@@ -77,15 +79,17 @@
     "placeholder": "输入指令或搜寻"
   },
   "common": {
+    "avatar-alt": "{name} 的头像",
     "cancel": "取消",
     "delete": "删除",
     "dialogs": {
       "delete-comment": {
-        "description": "您确定要删除此评论吗？此动作无法复原。",
+        "description": "您确定要删除此评论吗？此操作无法撤销。",
         "title": "删除评论"
       }
     },
     "error": "错误",
+    "loading": "加载中...",
     "labels": {
       "about": "关于",
       "account": "账户",

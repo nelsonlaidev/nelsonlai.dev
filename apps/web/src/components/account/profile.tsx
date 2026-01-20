@@ -59,7 +59,11 @@ function ProfileInfo(props: ProfileInfoProps) {
         <div className='flex flex-col gap-2'>
           <span className='text-muted-foreground'>{t('account.avatar')}</span>
           <Avatar className='size-24'>
-            <AvatarImage src={user.image ?? undefined} className='size-full' />
+            <AvatarImage
+              src={user.image ?? undefined}
+              alt={t('common.avatar-alt', { name: user.name })}
+              className='size-full'
+            />
             <AvatarFallback>{getAbbreviation(user.name)}</AvatarFallback>
           </Avatar>
         </div>

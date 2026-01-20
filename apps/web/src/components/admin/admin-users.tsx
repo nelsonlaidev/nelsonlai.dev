@@ -13,7 +13,7 @@ function AdminUsers() {
   return (
     <>
       {isSuccess && <UsersTable users={data.users} />}
-      {isLoading && 'Loading...'}
+      {isLoading && <div>{t('common.loading')}</div>}
       {isError && <div>{t('error.failed-to-fetch-users-data')}</div>}
     </>
   )

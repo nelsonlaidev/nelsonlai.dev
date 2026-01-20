@@ -12,6 +12,7 @@
     "edit-name-description": "更改您的顯示名稱。此名稱將顯示在您的個人資料和評論中。",
     "email": "電子郵件",
     "no-active-sessions": "沒有使用中工作階段",
+    "open-navigation-menu": "開啟導覽選單",
     "profile": "個人資料",
     "revoke-session": "終止",
     "this-device": "此裝置",
@@ -25,7 +26,8 @@
       "users": {
         "description": "管理使用者"
       }
-    }
+    },
+    "toggle-sidebar": "切換側邊欄"
   },
   "blog": {
     "comments": {
@@ -77,6 +79,7 @@
     "placeholder": "輸入指令或搜尋"
   },
   "common": {
+    "avatar-alt": "{name} 的頭像",
     "cancel": "取消",
     "delete": "刪除",
     "dialogs": {
@@ -86,6 +89,7 @@
       }
     },
     "error": "錯誤",
+    "loading": "載入中...",
     "labels": {
       "about": "關於",
       "account": "帳戶",

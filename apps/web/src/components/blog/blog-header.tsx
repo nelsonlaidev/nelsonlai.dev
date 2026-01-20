@@ -52,7 +52,7 @@ function BlogHeader(props: BlogHeaderProps) {
                 className='size-6 rounded-full'
                 width={1024}
                 height={1024}
-                alt={`${MY_NAME}'s Logo`}
+                alt={t('common.avatar-alt', { name: MY_NAME })}
               />
               {MY_NAME}
             </Link>

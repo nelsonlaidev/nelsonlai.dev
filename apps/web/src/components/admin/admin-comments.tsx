@@ -13,7 +13,7 @@ function AdminComments() {
   return (
     <>
       {isSuccess && <CommentsTable comments={data.comments} />}
-      {isLoading && 'Loading...'}
+      {isLoading && <div>{t('common.loading')}</div>}
       {isError && <div>{t('error.failed-to-fetch-comments-data')}</div>}
     </>
   )

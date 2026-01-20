@@ -12,6 +12,7 @@
     "edit-name-description": "Change your display name. This name will be shown on your profile and comments.",
     "email": "Email",
     "no-active-sessions": "No active sessions",
+    "open-navigation-menu": "Open navigation menu",
     "profile": "Profile",
     "revoke-session": "Revoke",
     "this-device": "This device",
@@ -25,7 +26,8 @@
       "users": {
         "description": "Manage users"
       }
-    }
+    },
+    "toggle-sidebar": "Toggle sidebar"
   },
   "blog": {
     "comments": {
@@ -77,6 +79,7 @@
     "placeholder": "Type a command or search"
   },
   "common": {
+    "avatar-alt": "Avatar of {name}",
     "cancel": "Cancel",
     "delete": "Delete",
     "dialogs": {
@@ -86,6 +89,7 @@
       }
     },
     "error": "Error",
+    "loading": "Loading...",
     "labels": {
       "about": "About",
       "account": "Account",
