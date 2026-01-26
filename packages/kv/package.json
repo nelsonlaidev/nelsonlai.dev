@@ -13,13 +13,13 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@upstash/ratelimit": "2.0.7",
-    "@upstash/redis": "1.35.8",
+    "@upstash/ratelimit": "2.0.8",
+    "@upstash/redis": "1.36.1",
     "consola": "3.4.2"
   },
   "devDependencies": {
     "@nelsonlaidev/eslint-config": "2.4.5",
-    "@nelsonlaidev/typescript-config": "1.1.1",
+    "@nelsonlaidev/typescript-config": "1.2.0",
     "@repo/env": "workspace:*",
     "@types/node": "22.19.3"
   }

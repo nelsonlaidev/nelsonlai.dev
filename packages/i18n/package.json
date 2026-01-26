@@ -18,10 +18,10 @@
   },
   "devDependencies": {
     "@nelsonlaidev/eslint-config": "2.4.5",
-    "@nelsonlaidev/typescript-config": "1.1.1",
-    "@types/react": "19.2.7",
-    "next": "16.1.0",
-    "next-intl": "4.6.1"
+    "@nelsonlaidev/typescript-config": "1.2.0",
+    "@types/react": "19.2.9",
+    "next": "16.1.4",
+    "next-intl": "4.7.0"
   },
   "peerDependencies": {
     "next": ">=16.0.0",
