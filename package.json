@@ -43,27 +43,27 @@
     "with-env": "dotenvx run -f .env.local --ignore=MISSING_ENV_FILE --"
   },
   "devDependencies": {
-    "@dotenvx/dotenvx": "1.51.2",
-    "@lingual/i18n-check": "0.8.16",
+    "@dotenvx/dotenvx": "1.52.0",
+    "@lingual/i18n-check": "0.8.19",
     "@nelsonlaidev/eslint-config": "2.4.5",
     "@nelsonlaidev/prettier-config": "0.1.1",
-    "@nelsonlaidev/typescript-config": "1.1.1",
-    "@playwright/test": "1.57.0",
-    "@vitest/coverage-v8": "4.0.16",
-    "@vitest/ui": "4.0.16",
-    "cspell": "9.4.0",
+    "@nelsonlaidev/typescript-config": "1.2.0",
+    "@playwright/test": "1.58.0",
+    "@vitest/coverage-v8": "4.0.18",
+    "@vitest/ui": "4.0.18",
+    "cspell": "9.6.1",
     "eslint": "9.39.2",
-    "jsdom": "27.3.0",
-    "knip": "5.76.0",
-    "lefthook": "2.0.12",
-    "prettier": "3.7.4",
-    "prettier-plugin-packagejson": "2.5.20",
+    "jsdom": "27.4.0",
+    "knip": "5.82.1",
+    "lefthook": "2.0.15",
+    "prettier": "3.8.1",
+    "prettier-plugin-packagejson": "3.0.0",
     "tsx": "4.21.0",
-    "turbo": "2.7.0",
+    "turbo": "2.7.6",
     "typescript": "5.9.3",
-    "vitest": "4.0.16"
+    "vitest": "4.0.18"
   },
-  "packageManager": "pnpm@10.26.1",
+  "packageManager": "pnpm@10.28.1",
   "engines": {
     "node": ">=22"
   }
