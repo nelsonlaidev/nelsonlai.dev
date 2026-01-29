@@ -1,10 +1,12 @@
 import 'server-only'
 
-import { and, comments, db, eq, unsubscribes } from '@repo/db'
 import { env } from '@repo/env'
+import { and, eq } from 'drizzle-orm'
 import { jwtVerify, SignJWT } from 'jose'
 import * as z from 'zod'
 
+import { db } from '@/db'
+import { comments, unsubscribes } from '@/db/schemas'
 import { getMaskedEmail } from '@/utils/get-masked-email'
 
 const TokenSchema = z.jwt({ alg: 'HS256' })

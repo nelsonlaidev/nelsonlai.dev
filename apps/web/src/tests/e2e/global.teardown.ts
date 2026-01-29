@@ -2,8 +2,11 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 import { test as teardown } from '@playwright/test'
-import { comments, db, eq, like, messages, postLikes, posts, sessions, users } from '@repo/db'
 import { redis } from '@repo/kv'
+import { eq, like } from 'drizzle-orm'
+
+import { db } from '@/db'
+import { comments, messages, postLikes, posts, sessions, users } from '@/db/schemas'
 
 import { TEST_UNIQUE_ID } from './fixtures/auth'
 import { TEST_POSTS } from './fixtures/posts'

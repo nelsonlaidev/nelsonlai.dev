@@ -3,7 +3,7 @@ import path from 'node:path'
 
 import { consola } from 'consola'
 
-import { db } from './db'
+import { db } from './index'
 import { posts } from './schemas'
 
 async function main() {

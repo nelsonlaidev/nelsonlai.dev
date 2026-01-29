@@ -1,6 +1,8 @@
 import { ORPCError } from '@orpc/client'
 import { createId } from '@paralleldrive/cuid2'
-import { and, eq, unsubscribes } from '@repo/db'
+import { and, eq } from 'drizzle-orm'
+
+import { unsubscribes } from '@/db/schemas'
 
 import { publicProcedure } from '../procedures'
 import { EmptyOutputSchema } from '../schemas/common.schema'

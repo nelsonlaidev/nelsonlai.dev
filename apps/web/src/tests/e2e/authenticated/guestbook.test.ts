@@ -1,7 +1,9 @@
 import { createId } from '@paralleldrive/cuid2'
 import test, { expect } from '@playwright/test'
-import { db, messages } from '@repo/db'
 import en from '@repo/i18n/messages/en.json' assert { type: 'json' }
+
+import { db } from '@/db'
+import { messages } from '@/db/schemas'
 
 import { TEST_UNIQUE_ID } from '../fixtures/auth'
 

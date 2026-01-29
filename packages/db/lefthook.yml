@@ -1,7 +1,0 @@
-pre-commit:
-  jobs:
-    - name: lint (db)
-      root: packages/db
-      glob: '*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}'
-      run: pnpm eslint --fix --max-warnings 0 "{staged_files}"
-      stage_fixed: true

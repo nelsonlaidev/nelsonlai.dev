@@ -1,24 +1,10 @@
 import { ORPCError } from '@orpc/client'
-import {
-  and,
-  asc,
-  comments,
-  count,
-  desc,
-  eq,
-  gt,
-  isNotNull,
-  isNull,
-  lt,
-  ne,
-  settings,
-  unsubscribes,
-  votes
-} from '@repo/db'
 import { CommentEmailTemplate, ReplyEmailTemplate } from '@repo/email'
 import { env } from '@repo/env'
+import { and, asc, count, desc, eq, gt, isNotNull, isNull, lt, ne } from 'drizzle-orm'
 import { getLocale } from 'next-intl/server'
 
+import { comments, settings, unsubscribes, votes } from '@/db/schemas'
 import { IS_PRODUCTION } from '@/lib/constants'
 import { getPostBySlug } from '@/lib/content'
 import { sendEmail } from '@/lib/resend'

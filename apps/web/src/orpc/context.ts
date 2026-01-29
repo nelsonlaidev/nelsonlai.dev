@@ -1,7 +1,6 @@
 import type { NextRequest } from 'next/server'
 
-import { db } from '@repo/db'
-
+import { db } from '@/db'
 import { getSession } from '@/lib/auth'
 
 export async function createORPCContext(request: NextRequest) {

@@ -3,7 +3,7 @@ import { consola } from 'consola'
 import { sql } from 'drizzle-orm'
 import { execa } from 'execa'
 
-import { db } from './db'
+import { db } from './index'
 
 async function main() {
   const confirmed = await consola.prompt('Are you sure you want to reset the database?', {

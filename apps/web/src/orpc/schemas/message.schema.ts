@@ -1,6 +1,7 @@
-import { messages, users } from '@repo/db'
 import { createSelectSchema } from 'drizzle-zod'
 import * as z from 'zod'
+
+import { messages, users } from '@/db/schemas'
 
 export const CreateMessageOutputSchema = createSelectSchema(messages).pick({
   id: true,

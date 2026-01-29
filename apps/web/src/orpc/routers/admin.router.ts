@@ -1,4 +1,4 @@
-import { comments, users } from '@repo/db'
+import { comments, users } from '@/db/schemas'
 
 import { adminProcedure } from '../procedures'
 import { ListCommentsOutputSchema, ListUsersOutputSchema } from '../schemas/admin.schema'

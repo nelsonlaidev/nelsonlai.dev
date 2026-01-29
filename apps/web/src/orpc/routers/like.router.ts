@@ -1,6 +1,7 @@
 import { ORPCError } from '@orpc/client'
-import { and, eq, postLikes, posts, sql, sum } from '@repo/db'
+import { and, eq, sql, sum } from 'drizzle-orm'
 
+import { postLikes, posts } from '@/db/schemas'
 import { getAnonKey } from '@/utils/get-anon-key'
 import { getIp } from '@/utils/get-ip'
 

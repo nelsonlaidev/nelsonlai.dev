@@ -1,5 +1,7 @@
 import { ORPCError } from '@orpc/client'
-import { eq, posts, sql, sum } from '@repo/db'
+import { eq, sql, sum } from 'drizzle-orm'
+
+import { posts } from '@/db/schemas'
 
 import { cache } from '../cache'
 import { publicProcedure } from '../procedures'

@@ -1,4 +1,6 @@
-import { and, comments, count, eq, isNotNull } from '@repo/db'
+import { and, count, eq, isNotNull } from 'drizzle-orm'
+
+import { comments } from '@/db/schemas'
 
 import { publicProcedure } from '../procedures'
 import { CountReplyInputSchema, CountReplyOutputSchema } from '../schemas/reply.schema'

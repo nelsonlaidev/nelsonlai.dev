@@ -1,6 +1,7 @@
-import { comments, users, votes } from '@repo/db'
 import { createSelectSchema } from 'drizzle-zod'
 import * as z from 'zod'
+
+import { comments, users, votes } from '@/db/schemas'
 
 import { InfiniteQuerySchema } from './common.schema'
 

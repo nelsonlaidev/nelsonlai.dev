@@ -1,5 +1,8 @@
 import { ORPCError } from '@orpc/client'
-import { DEFAULT_SETTINGS, eq, settings } from '@repo/db'
+import { eq } from 'drizzle-orm'
+
+import { DEFAULT_SETTINGS } from '@/db/constants'
+import { settings } from '@/db/schemas'
 
 import { protectedProcedure } from '../procedures'
 import {

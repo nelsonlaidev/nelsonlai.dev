@@ -4,7 +4,9 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 import { expect, test as setup } from '@playwright/test'
-import { db, posts } from '@repo/db'
+
+import { db } from '@/db'
+import { posts } from '@/db/schemas'
 
 import { TEST_POSTS } from '../fixtures/posts'
 import { makeDummyImage } from '../utils/make-dummy-image'

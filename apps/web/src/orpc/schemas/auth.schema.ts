@@ -1,6 +1,7 @@
-import { sessions } from '@repo/db'
 import { createSelectSchema } from 'drizzle-zod'
 import * as z from 'zod'
+
+import { sessions } from '@/db/schemas'
 
 export const ListSessionsOutputSchema = z.object({
   sessions: z.array(
