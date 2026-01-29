@@ -18,9 +18,6 @@ const config: KnipConfig = {
         '@types/spotify-api'
       ]
     },
-    'apps/docs': {
-      entry: ['source.config.ts', 'src/components/demos/*.tsx']
-    },
     'packages/db': {
       entry: ['src/reset.ts', 'src/seed.ts']
     },

@@ -150,8 +150,6 @@ pnpm db:seed
 pnpm dev # Run all services
 # or
 pnpm dev:web # Run only the web app
-# or
-pnpm dev:docs # Run only the documentation app
 ```
 
 The services will be available at the following URLs:
@@ -159,8 +157,7 @@ The services will be available at the following URLs:
 | Service          | URL              |
 | ---------------- | ---------------- |
 | App              | `localhost:3000` |
-| Docs             | `localhost:3001` |
-| React Email      | `localhost:3002` |
+| React Email      | `localhost:3001` |
 | Database         | `localhost:5432` |
 | Redis            | `localhost:6379` |
 | Redis serverless | `localhost:8079` |

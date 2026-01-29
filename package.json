@@ -19,7 +19,6 @@
     "db:seed": "turbo db:seed",
     "db:studio": "turbo db:studio",
     "dev": "turbo dev",
-    "dev:docs": "turbo dev --filter=./apps/docs",
     "dev:packages": "turbo dev --filter=./packages/*",
     "dev:web": "turbo dev --filter=@repo/web",
     "format": "prettier --write .",

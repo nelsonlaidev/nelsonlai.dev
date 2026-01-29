@@ -16,7 +16,6 @@
 
   "tailwindCSS.classFunctions": ["cva", "cn"],
   "tailwindCSS.experimental.configFile": {
-    "apps/docs/src/styles/globals.css": "apps/docs/src/**",
     "apps/web/src/styles/globals.css": "apps/web/src/**",
     "packages/email/src/styles.css": "packages/email/src/**",
     "packages/ui/src/styles/main.css": "packages/ui/src/**"
