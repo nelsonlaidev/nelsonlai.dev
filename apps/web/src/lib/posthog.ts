@@ -1,8 +1,9 @@
 import type { NextConfig } from 'next'
 
 import { withPostHogConfig } from '@posthog/nextjs-config'
-import { env } from '@repo/env'
 import { PostHog } from 'posthog-node'
+
+import { env } from '@/lib/env'
 
 let posthogInstance: PostHog | null = null
 

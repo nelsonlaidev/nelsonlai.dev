@@ -2,9 +2,9 @@ import type { Context } from './context'
 
 import { ORPCError } from '@orpc/client'
 import { os } from '@orpc/server'
-import { ratelimit } from '@repo/kv'
 
 import { IS_PRODUCTION } from '@/lib/constants'
+import { ratelimit } from '@/lib/kv'
 import { getIp } from '@/utils/get-ip'
 
 const base = os.$context<Context>()

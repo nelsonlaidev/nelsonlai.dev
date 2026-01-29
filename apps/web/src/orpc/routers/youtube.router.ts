@@ -1,4 +1,4 @@
-import { env } from '@repo/env'
+import { env } from '@/lib/env'
 
 import { publicProcedure } from '../procedures'
 import { YoutubeStatsOutputSchema } from '../schemas/youtube.schema'

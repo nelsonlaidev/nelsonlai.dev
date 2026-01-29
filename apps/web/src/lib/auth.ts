@@ -1,11 +1,11 @@
 import type { NextRequest } from 'next/server'
 
-import { env } from '@repo/env'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { headers } from 'next/headers'
 
 import { db } from '@/db'
+import { env } from '@/lib/env'
 import { getBaseUrl } from '@/utils/get-base-url'
 
 export const auth = betterAuth({

@@ -104,9 +104,6 @@ importers:
       '@react-email/components':
         specifier: 1.0.6
         version: 1.0.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@repo/env':
-        specifier: workspace:*
-        version: link:../../packages/env
       '@repo/i18n':
         specifier: workspace:*
         version: link:../../packages/i18n
@@ -119,6 +116,9 @@ importers:
       '@shikijs/transformers':
         specifier: 3.21.0
         version: 3.21.0
+      '@t3-oss/env-nextjs':
+        specifier: 0.13.10
+        version: 0.13.10(typescript@5.9.3)(zod@4.3.6)
       '@tanstack/react-form':
         specifier: 1.28.0
         version: 1.28.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -131,6 +131,12 @@ importers:
       '@tanstack/react-table':
         specifier: 8.21.3
         version: 8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@upstash/ratelimit':
+        specifier: 2.0.8
+        version: 2.0.8(@upstash/redis@1.36.1)
+      '@upstash/redis':
+        specifier: 1.36.1
+        version: 1.36.1
       '@vercel/functions':
         specifier: 3.3.6
         version: 3.3.6(@aws-sdk/credential-provider-web-identity@3.972.1)
@@ -279,9 +285,6 @@ importers:
       '@react-email/preview-server':
         specifier: 5.2.5
         version: 5.2.5(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(@playwright/test@1.58.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@repo/kv':
-        specifier: workspace:*
-        version: link:../../packages/kv
       '@tailwindcss/postcss':
         specifier: 4.1.18
         version: 4.1.18
@@ -346,25 +349,6 @@ importers:
         specifier: 4.1.18
         version: 4.1.18
 
-  packages/env:
-    dependencies:
-      '@t3-oss/env-nextjs':
-        specifier: 0.13.10
-        version: 0.13.10(typescript@5.9.3)(zod@4.3.6)
-      zod:
-        specifier: 4.3.6
-        version: 4.3.6
-    devDependencies:
-      '@nelsonlaidev/eslint-config':
-        specifier: 2.4.5
-        version: 2.4.5(@types/eslint@9.6.1)(@typescript-eslint/utils@8.50.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(prettier@3.8.1)(tailwindcss@4.1.18)(typescript@5.9.3)(vitest@4.0.18)
-      '@nelsonlaidev/typescript-config':
-        specifier: 1.2.0
-        version: 1.2.0
-      '@types/node':
-        specifier: 22.19.3
-        version: 22.19.3
-
   packages/i18n:
     devDependencies:
       '@nelsonlaidev/eslint-config':
@@ -382,31 +366,6 @@ importers:
       next-intl:
         specifier: 4.7.0
         version: 4.7.0(@swc/helpers@0.5.17)(next@16.1.4(@opentelemetry/api@1.9.0)(@playwright/test@1.58.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(typescript@5.9.3)
-
-  packages/kv:
-    dependencies:
-      '@upstash/ratelimit':
-        specifier: 2.0.8
-        version: 2.0.8(@upstash/redis@1.36.1)
-      '@upstash/redis':
-        specifier: 1.36.1
-        version: 1.36.1
-      consola:
-        specifier: 3.4.2
-        version: 3.4.2
-    devDependencies:
-      '@nelsonlaidev/eslint-config':
-        specifier: 2.4.5
-        version: 2.4.5(@types/eslint@9.6.1)(@typescript-eslint/utils@8.50.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(prettier@3.8.1)(tailwindcss@4.1.18)(typescript@5.9.3)(vitest@4.0.18)
-      '@nelsonlaidev/typescript-config':
-        specifier: 1.2.0
-        version: 1.2.0
-      '@repo/env':
-        specifier: workspace:*
-        version: link:../env
-      '@types/node':
-        specifier: 22.19.3
-        version: 22.19.3
 
   packages/ui:
     dependencies:

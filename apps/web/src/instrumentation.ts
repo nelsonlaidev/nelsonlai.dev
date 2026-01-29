@@ -1,6 +1,6 @@
 import type { Instrumentation } from 'next'
 
-import { env } from '@repo/env'
+import { env } from '@/lib/env'
 
 export function register() {
   // Do nothing

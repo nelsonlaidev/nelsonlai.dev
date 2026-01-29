@@ -1,6 +1,6 @@
 import { Buffer } from 'node:buffer'
 
-import { env } from '@repo/env'
+import { env } from '@/lib/env'
 
 import { publicProcedure } from '../procedures'
 import { WakatimeStatsOutputSchema } from '../schemas/wakatime.schema'

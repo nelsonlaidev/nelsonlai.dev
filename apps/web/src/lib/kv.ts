@@ -1,6 +1,19 @@
+import { Ratelimit } from '@upstash/ratelimit'
+import { Redis } from '@upstash/redis'
 import { consola } from 'consola'
 
-import { redis } from './index'
+import { env } from '@/lib/env'
+
+export const redis = new Redis({
+  url: env.UPSTASH_REDIS_REST_URL,
+  token: env.UPSTASH_REDIS_REST_TOKEN
+})
+
+export const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(50, '10 s'),
+  analytics: true
+})
 
 const DEFAULT_TTL = 60 * 60 * 24 // 1 day
 

@@ -3,11 +3,11 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 import { test as setup } from '@playwright/test'
-import { env } from '@repo/env'
 import dayjs from 'dayjs'
 
 import { db } from '@/db'
 import { accounts, sessions, users } from '@/db/schemas'
+import { env } from '@/lib/env'
 
 import { TEST_UNIQUE_ID, TEST_USER } from '../fixtures/auth'
 

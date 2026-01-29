@@ -1,5 +1,4 @@
 import { ORPCError } from '@orpc/client'
-import { env } from '@repo/env'
 import { and, asc, count, desc, eq, gt, isNotNull, isNull, lt, ne } from 'drizzle-orm'
 import { getLocale } from 'next-intl/server'
 
@@ -7,6 +6,7 @@ import { comments, settings, unsubscribes, votes } from '@/db/schemas'
 import { CommentEmailTemplate, ReplyEmailTemplate } from '@/email'
 import { IS_PRODUCTION } from '@/lib/constants'
 import { getPostBySlug } from '@/lib/content'
+import { env } from '@/lib/env'
 import { sendEmail } from '@/lib/resend'
 import { generateCommentReplyUnsubToken } from '@/lib/unsubscribe'
 import { getDefaultImage } from '@/utils/get-default-image'

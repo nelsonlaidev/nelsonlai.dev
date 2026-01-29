@@ -1,4 +1,4 @@
-import { createCache } from '@repo/kv'
+import { createCache } from '@/lib/kv'
 
 const LOCATION_CACHE_TTL = 60 * 60 * 6 // 6 hours
 

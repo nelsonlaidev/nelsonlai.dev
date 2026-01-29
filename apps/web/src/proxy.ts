@@ -1,7 +1,8 @@
 import type { NextRequest } from 'next/server'
 
-import { env } from '@repo/env'
 import { i18nMiddleware } from '@repo/i18n/middleware'
+
+import { env } from '@/lib/env'
 
 const IS_PREVIEW = env.VERCEL_ENV === 'preview'
 
