@@ -4,34 +4,7 @@ const config: KnipConfig = {
   ignoreDependencies: [
     // PostCSS is already installed under Next.js
     'postcss'
-  ],
-  workspaces: {
-    'apps/web': {
-      entry: [
-        'content-collections.ts',
-        'src/i18n/request.ts',
-        'src/tests/e2e/**/*.setup.ts',
-        'src/tests/e2e/**/*.teardown.ts'
-      ],
-      ignoreDependencies: [
-        // Used in spotify.route.ts
-        '@types/spotify-api'
-      ]
-    },
-    'packages/db': {
-      entry: ['src/reset.ts', 'src/seed.ts']
-    },
-    'packages/email': {
-      ignoreDependencies: [
-        // For tailwindcss intellisense
-        'tailwindcss',
-        // Required by react email
-        '@react-email/preview-server',
-        'react-dom'
-      ],
-      ignore: ['src/styles.css']
-    }
-  }
+  ]
 }
 
 export default config

@@ -39,7 +39,7 @@
     "@orpc/tanstack-query": "1.13.4",
     "@paralleldrive/cuid2": "3.3.0",
     "@posthog/nextjs-config": "1.8.4",
-    "@repo/email": "workspace:*",
+    "@react-email/components": "1.0.6",
     "@repo/env": "workspace:*",
     "@repo/i18n": "workspace:*",
     "@repo/ui": "workspace:*",
@@ -99,6 +99,7 @@
     "@content-collections/next": "0.2.10",
     "@nelsonlaidev/eslint-config": "2.4.5",
     "@nelsonlaidev/typescript-config": "1.2.0",
+    "@react-email/preview-server": "5.2.5",
     "@repo/kv": "workspace:*",
     "@tailwindcss/postcss": "4.1.18",
     "@testing-library/jest-dom": "6.9.1",
@@ -119,6 +120,7 @@
     "execa": "9.6.1",
     "postcss-load-config": "6.0.1",
     "postgres": "3.4.8",
+    "react-email": "5.2.5",
     "schema-dts": "1.1.5",
     "tailwindcss": "4.1.18"
   }
