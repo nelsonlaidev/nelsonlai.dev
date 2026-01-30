@@ -29,6 +29,7 @@
     "lint:fix": "eslint --fix --max-warnings 0 .",
     "lint:spell": "cspell .",
     "prepare": "lefthook install",
+    "start": "pnpm with-env next start -p 3000",
     "test:e2e": "pnpm with-env playwright test",
     "test:e2e:inspector": "pnpm with-env playwright test $1 --debug",
     "test:e2e:install": "playwright install",
