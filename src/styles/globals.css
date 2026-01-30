@@ -3,7 +3,7 @@
 @import './shiki.css';
 @import './typography.css';
 
-@custom-variant dark (&: is(.dark *));
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
