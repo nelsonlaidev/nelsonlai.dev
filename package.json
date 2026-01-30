@@ -10,7 +10,7 @@
     "build:mdx": "content-collections build",
     "check": "pnpm lint && pnpm typecheck && pnpm format:check && pnpm knip && pnpm check:i18n && pnpm lint:spell",
     "check:i18n": "i18n-check -s en -l src/i18n/messages -u src -f next-intl",
-    "clean": "rm -rf coverage .content-collections test-results playwright-report",
+    "clean": "rm -rf coverage .content-collections test-results playwright-report tsconfig.tsbuildinfo .next next-env.d.ts node_modules",
     "db:check": "pnpm with-env drizzle-kit check",
     "db:generate": "pnpm with-env drizzle-kit generate",
     "db:migrate": "pnpm with-env drizzle-kit migrate",
