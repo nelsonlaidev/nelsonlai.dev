@@ -23,7 +23,7 @@ describe('pathnames', () => {
 })
 
 async function getAllPageRoutes(): Promise<string[]> {
-  const rootDir = 'apps/web/src/app'
+  const rootDir = 'src/app'
 
   const result: string[] = []
   const queue: string[] = [rootDir]

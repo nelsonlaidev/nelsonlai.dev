@@ -128,8 +128,8 @@ jobs:
 
       - name: Create test posts and copy dummy images
         run: |
-          mkdir -p apps/web/src/content/blog/en/
-          mkdir -p apps/web/public/images/blog/
+          mkdir -p src/content/blog/en/
+          mkdir -p public/images/blog/
 
           frontmatter() {
             local title="$1"
@@ -148,7 +148,7 @@ jobs:
           EOF
           }
 
-          dummy_image_path="apps/web/public/images/dummy.png"
+          dummy_image_path="public/images/dummy.png"
           if [ ! -f "$dummy_image_path" ]; then
             echo "Error: Dummy image not found at $dummy_image_path"
             exit 1
@@ -160,8 +160,8 @@ jobs:
           for i in "${!titles[@]}"; do
             title="${titles[$i]}"
             slug="${slugs[$i]}"
-            post_path="apps/web/src/content/blog/en/$slug.mdx"
-            cover_dir="apps/web/public/images/blog/$slug"
+            post_path="src/content/blog/en/$slug.mdx"
+            cover_dir="public/images/blog/$slug"
             cover_path="$cover_dir/cover.png"
 
             frontmatter "$title" "$slug" > "$post_path"
@@ -202,5 +202,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
-          path: apps/web/playwright-report/
+          path: playwright-report/
           retention-days: 30

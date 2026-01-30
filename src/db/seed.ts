@@ -8,7 +8,7 @@ import { posts } from './schemas'
 
 async function main() {
   try {
-    const files = await fs.readdir(path.join(process.cwd(), '../../apps/web/src/content/blog/en'))
+    const files = await fs.readdir(path.join(process.cwd(), '../../src/content/blog/en'))
 
     for (const file of files) {
       const slug = file.replace('.mdx', '')
