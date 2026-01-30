@@ -56,7 +56,7 @@ function Message(props: MessageProps) {
   const { message } = props
   const { data: session } = useSession()
 
-  const isAuthor = session?.user && message.userId === session.user.id
+  const isAuthor = message.userId === session?.user.id
 
   const defaultImage = getDefaultImage(message.userId)
 
