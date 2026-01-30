@@ -42,7 +42,7 @@ function SettingsForm(props: SettingsFormProps) {
     toast.success(t('success.settings-updated'))
   })
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
     form.handleSubmit()
   }

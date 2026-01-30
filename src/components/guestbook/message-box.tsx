@@ -47,7 +47,7 @@ function MessageBox(props: MessageBoxProps) {
     toast.success(t('success.message-created'))
   })
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
     form.handleSubmit()
   }

@@ -243,7 +243,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
   }, [])
 
   const handleInput = useCallback(
-    (event: React.FormEvent<HTMLTextAreaElement>) => {
+    (event: React.InputEvent<HTMLTextAreaElement>) => {
       const ta = event.currentTarget
       if (isApplyingHistory.current) return
       if (isComposing.current) return

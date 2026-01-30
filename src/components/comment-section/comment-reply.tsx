@@ -25,7 +25,7 @@ function CommentReply() {
     toast.success(t('success.reply-posted'))
   })
 
-  function submitCommentReply(e?: React.FormEvent<HTMLFormElement>) {
+  function submitCommentReply(e?: React.SubmitEvent<HTMLFormElement>) {
     e?.preventDefault()
 
     if (isCreating) return

@@ -28,7 +28,7 @@ function CommentPost() {
     setTabsValue('write')
   })
 
-  function submitComment(e?: React.FormEvent<HTMLFormElement>) {
+  function submitComment(e?: React.SubmitEvent<HTMLFormElement>) {
     e?.preventDefault()
 
     if (isCreating) return
