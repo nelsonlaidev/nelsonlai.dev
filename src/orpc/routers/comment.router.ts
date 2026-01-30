@@ -3,7 +3,7 @@ import { and, asc, count, desc, eq, gt, isNotNull, isNull, lt, ne } from 'drizzl
 import { getLocale } from 'next-intl/server'
 
 import { comments, settings, unsubscribes, votes } from '@/db/schemas'
-import { CommentEmailTemplate, ReplyEmailTemplate } from '@/email'
+import { CommentEmailTemplate, ReplyEmailTemplate } from '@/emails'
 import { IS_PRODUCTION } from '@/lib/constants'
 import { getPostBySlug } from '@/lib/content'
 import { env } from '@/lib/env'

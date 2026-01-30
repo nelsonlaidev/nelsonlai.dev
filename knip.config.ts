@@ -5,7 +5,9 @@ const config: KnipConfig = {
     // PostCSS is already installed under Next.js
     'postcss',
     // Used in Spotify router
-    '@types/spotify-api'
+    '@types/spotify-api',
+    // Required by react-email
+    '@react-email/preview-server'
   ],
   ignore: ['src/components/ui/*.tsx'],
   entry: ['content-collections.ts', 'src/db/reset.ts', 'src/db/seed.ts']
