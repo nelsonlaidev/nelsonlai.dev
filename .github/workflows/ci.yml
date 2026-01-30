@@ -11,8 +11,6 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
   NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
   DATABASE_URL: ${{ secrets.DATABASE_URL }}
   UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
@@ -185,7 +183,7 @@ jobs:
           done
 
       - name: Build apps
-        run: pnpm build:apps
+        run: pnpm build
 
       - name: Run services
         run: docker compose up -d

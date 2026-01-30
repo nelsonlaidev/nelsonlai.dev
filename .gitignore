@@ -5,9 +5,6 @@ node_modules/
 .env*.local
 .env
 
-# Turbo
-.turbo/
-
 # Vercel
 .vercel/
 
@@ -24,7 +21,7 @@ node_modules/
 playwright-report/
 test-results/
 coverage/
-apps/web/src/tests/e2e/.auth/
+src/tests/e2e/.auth/
 
 # TypeScript
 *.tsbuildinfo

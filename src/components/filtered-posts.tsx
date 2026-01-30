@@ -1,0 +1,51 @@
+'use client'
+
+import type { Post } from 'content-collections'
+
+import { SearchIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { useState } from 'react'
+
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+
+import PostCards from './post-cards'
+
+type FilteredPostsProps = {
+  posts: Post[]
+}
+
+function FilteredPosts(props: FilteredPostsProps) {
+  const { posts } = props
+  const [searchValue, setSearchValue] = useState('')
+  const t = useTranslations()
+
+  const filteredPosts = posts.filter((post) => post.title.toLowerCase().includes(searchValue.toLowerCase()))
+
+  return (
+    <>
+      <div className='relative mb-8'>
+        <Input
+          type='text'
+          value={searchValue}
+          onChange={(e) => {
+            setSearchValue(e.target.value)
+          }}
+          placeholder={t('components.filtered-posts.placeholder')}
+          aria-label={t('components.filtered-posts.placeholder')}
+          className='w-full pl-12'
+          id='search'
+        />
+        <Label htmlFor='search'>
+          <SearchIcon className='absolute top-1/2 left-4 size-4 -translate-y-1/2' />
+        </Label>
+      </div>
+      {filteredPosts.length === 0 && (
+        <div className='my-24 text-center text-xl'>{t('components.filtered-posts.no-posts-found')}</div>
+      )}
+      <PostCards posts={filteredPosts} />
+    </>
+  )
+}
+
+export default FilteredPosts

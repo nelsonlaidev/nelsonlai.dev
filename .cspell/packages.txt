@@ -3,7 +3,6 @@ cmdk
 cobe
 dbaeumer
 dotenvx
-embla
 fumadocs
 nuqs
 orpc
@@ -12,6 +11,5 @@ rmiz
 shiki
 shikijs
 sonarjs
-turborepo
 unifiedjs
 vaul

@@ -1,5 +1,14 @@
 {
-  "extends": "@nelsonlaidev/typescript-config/base.json",
-  "exclude": ["node_modules", "apps/**", "packages/**"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "~/*": ["./public/*"],
+      "content-collections": ["./.content-collections/generated"]
+    }
+  },
+  "extends": "@nelsonlaidev/typescript-config/nextjs.json",
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts", ".next/dev/types/**/*.ts"]
 }
