@@ -36,7 +36,7 @@ function MobileTableOfContents(props: MobileTableOfContentsProps) {
             <Link
               key={url}
               href={`#${url}`}
-              className='block py-2.5 pr-2.5 text-sm leading-tight text-muted-foreground transition-colors hover:text-foreground'
+              className='block py-2.5 pr-2.5 text-sm/tight text-muted-foreground transition-colors hover:text-foreground'
               style={{
                 paddingLeft: (depth - 1) * 16
               }}

@@ -281,7 +281,7 @@ function SidebarRail(props: SidebarRailProps) {
       type='button'
       className={cn(
         'absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear',
-        'hover:after:bg-sidebar-border hover:group-data-[collapsible=offcanvas]:bg-sidebar',
+        'hover:group-data-[collapsible=offcanvas]:bg-sidebar hover:after:bg-sidebar-border',
         'group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full',
         'group-data-[side=left]:-right-4',
         'group-data-[side=right]:left-0',
