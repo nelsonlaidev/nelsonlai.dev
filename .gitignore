@@ -5,9 +5,6 @@ node_modules/
 .env*.local
 .env
 
-# Turbo
-.turbo/
-
 # Vercel
 .vercel/
 
@@ -20,14 +17,11 @@ node_modules/
 # Content Collections
 .content-collections
 
-# Fumadocs
-.source
-
 # Testing
 playwright-report/
 test-results/
 coverage/
-apps/web/src/tests/e2e/.auth/
+src/tests/e2e/.auth/
 
 # TypeScript
 *.tsbuildinfo

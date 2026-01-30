@@ -1,8 +1,8 @@
 <div align="center">
   <a href="https://nelsonlai.dev">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="apps/web/public/images/dark-header.png">
-      <img alt="Project Cover" src="apps/web/public/images/light-header.png">
+      <source media="(prefers-color-scheme: dark)" srcset="public/images/dark-header.png">
+      <img alt="Project Cover" src="public/images/light-header.png">
     </picture>
   </a>
 
@@ -75,13 +75,13 @@ Welcome to the monorepo of my personal blog! This repository houses the code for
 #### Comment Notification
 
 <div align="center">
-  <img alt="Comment notification template" src="apps/web/public/images/comment-notification-email.png">
+  <img alt="Comment notification template" src="public/images/comment-notification-email.png">
 </div>
 
 #### Reply Notification
 
 <div align="center">
-  <img alt="Reply notification template" src="apps/web/public/images/reply-notification-email.png">
+  <img alt="Reply notification template" src="public/images/reply-notification-email.png">
 </div>
 
 ## Getting Started
@@ -150,8 +150,6 @@ pnpm db:seed
 pnpm dev # Run all services
 # or
 pnpm dev:web # Run only the web app
-# or
-pnpm dev:docs # Run only the documentation app
 ```
 
 The services will be available at the following URLs:
@@ -159,8 +157,7 @@ The services will be available at the following URLs:
 | Service          | URL              |
 | ---------------- | ---------------- |
 | App              | `localhost:3000` |
-| Docs             | `localhost:3001` |
-| React Email      | `localhost:3002` |
+| React Email      | `localhost:3001` |
 | Database         | `localhost:5432` |
 | Redis            | `localhost:6379` |
 | Redis serverless | `localhost:8079` |
