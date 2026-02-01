@@ -1,12 +1,15 @@
-import { cva, type VariantProps } from 'cva'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 import { Link as LocalizedLink } from '@/i18n/routing'
 import { cn } from '@/utils/cn'
 
-const linkVariants = cva({
+const linkVariants = cva('', {
   variants: {
     variant: {
-      muted: 'text-muted-foreground transition-colors hover:text-foreground'
+      muted: `
+        text-muted-foreground transition-colors
+        hover:text-foreground
+      `
     }
   }
 })

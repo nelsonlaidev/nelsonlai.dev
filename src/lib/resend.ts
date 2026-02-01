@@ -18,7 +18,7 @@ export function sendEmail(options: SendEmailOptions) {
   const resend = new Resend(env.RESEND_API_KEY)
 
   return resend.emails.send({
-    from: `Nelson Lai <me@nelsonlai.dev>`,
+    from: 'Nelson Lai <me@nelsonlai.dev>',
     to,
     subject,
     react

@@ -1,9 +1,22 @@
-import { AspectRatio as AspectRatioPrimitive } from 'radix-ui'
+import { cn } from '@/utils/cn'
 
-type AspectRatioProps = React.ComponentProps<typeof AspectRatioPrimitive.Root>
+type AspectRatioProps = React.ComponentProps<'div'> & { ratio: number }
 
 function AspectRatio(props: AspectRatioProps) {
-  return <AspectRatioPrimitive.Root data-slot='aspect-ratio' {...props} />
+  const { ratio, className, ...rest } = props
+
+  return (
+    <div
+      data-slot='aspect-ratio'
+      style={
+        {
+          '--ratio': ratio
+        } as React.CSSProperties
+      }
+      className={cn('relative aspect-(--ratio)', className)}
+      {...rest}
+    />
+  )
 }
 
 export { AspectRatio }

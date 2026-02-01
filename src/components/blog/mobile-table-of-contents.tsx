@@ -23,11 +23,14 @@ function MobileTableOfContents(props: MobileTableOfContentsProps) {
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
-      <PopoverTrigger className='gap-2' asChild>
-        <Button variant='secondary' className='fixed right-2 bottom-2 z-50 lg:hidden'>
-          <AlignLeftIcon /> {t('blog.on-this-page')}
-        </Button>
-      </PopoverTrigger>
+      <PopoverTrigger
+        className='gap-2'
+        render={
+          <Button variant='secondary' className='fixed right-2 bottom-2 z-50 lg:hidden'>
+            <AlignLeftIcon /> {t('blog.on-this-page')}
+          </Button>
+        }
+      />
       <PopoverContent align='end' side='top' className='px-0 py-2'>
         {toc.map((item) => {
           const { title, url, depth } = item

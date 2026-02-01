@@ -5,6 +5,11 @@ import { useTransition } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { localeLabels, routing, usePathname, useRouter } from '@/i18n/routing'
 
+const items = routing.locales.map((locale) => ({
+  label: localeLabels[locale],
+  value: locale
+}))
+
 function LocaleSwitcher() {
   const t = useTranslations()
   const currentLocale = useLocale()
@@ -19,7 +24,14 @@ function LocaleSwitcher() {
   }
 
   return (
-    <Select value={currentLocale} onValueChange={switchLanguage} disabled={isPending}>
+    <Select
+      items={items}
+      value={currentLocale}
+      onValueChange={(value) => {
+        if (value) switchLanguage(value)
+      }}
+      disabled={isPending}
+    >
       <SelectTrigger className='w-36' aria-label={t('layout.change-language')}>
         <div className='flex items-center gap-2'>
           <LanguagesIcon />
@@ -27,9 +39,9 @@ function LocaleSwitcher() {
         </div>
       </SelectTrigger>
       <SelectContent side='top'>
-        {routing.locales.map((locale) => (
-          <SelectItem key={locale} value={locale}>
-            {localeLabels[locale]}
+        {items.map((item) => (
+          <SelectItem key={item.value} value={item.value}>
+            {item.label}
           </SelectItem>
         ))}
       </SelectContent>

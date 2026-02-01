@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/utils/cn'
 
 type TableProps = React.ComponentProps<'table'>
@@ -7,7 +9,7 @@ function Table(props: TableProps) {
 
   return (
     <div data-slot='table-container' className='relative w-full overflow-x-auto'>
-      {/* eslint-disable-next-line sonarjs/table-header -- this is a table component */}
+      {/* eslint-disable-next-line sonarjs/table-header -- Table is a reusable wrapper component. Header rows and columns are provided at the usage site via TableHeader and TableHead components. */}
       <table data-slot='table' className={cn('w-full caption-bottom text-sm', className)} {...rest} />
     </div>
   )
@@ -37,7 +39,13 @@ function TableFooter(props: TableFooterProps) {
   return (
     <tfoot
       data-slot='table-footer'
-      className={cn('border-t bg-muted/50 font-medium', '[&>tr]:last:border-b-0', className)}
+      className={cn(
+        `
+          border-t bg-muted/50 font-medium
+          [&>tr]:last:border-b-0
+        `,
+        className
+      )}
       {...rest}
     />
   )
@@ -51,7 +59,14 @@ function TableRow(props: TableRowProps) {
   return (
     <tr
       data-slot='table-row'
-      className={cn('border-b transition-colors', 'hover:bg-muted/50', 'data-[state=selected]:bg-muted', className)}
+      className={cn(
+        `
+          border-b transition-colors
+          hover:bg-muted/50
+          data-[state=selected]:bg-muted
+        `,
+        className
+      )}
       {...rest}
     />
   )
@@ -66,9 +81,10 @@ function TableHead(props: TableHeadProps) {
     <th
       data-slot='table-head'
       className={cn(
-        'h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground',
-        '*:[[role=checkbox]]:translate-y-0.5',
-        '[&:has([role=checkbox])]:pr-0',
+        `
+          h-12 px-3 text-left align-middle font-medium whitespace-nowrap text-foreground
+          [&:has([role=checkbox])]:pr-0
+        `,
         className
       )}
       {...rest}
@@ -85,9 +101,10 @@ function TableCell(props: TableCellProps) {
     <td
       data-slot='table-cell'
       className={cn(
-        'p-2 align-middle whitespace-nowrap',
-        '*:[[role=checkbox]]:translate-y-0.5',
-        '[&:has([role=checkbox])]:pr-0',
+        `
+          p-3 align-middle whitespace-nowrap
+          [&:has([role=checkbox])]:pr-0
+        `,
         className
       )}
       {...rest}

@@ -11,17 +11,19 @@ function ThemeSwitcher() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant='ghost'
-          className='size-9 p-0'
-          aria-label={t('theme-toggle.toggle-theme')}
-          data-testid='theme-toggle'
-        >
-          <SunIcon className='dark:hidden' />
-          <MoonIcon className='hidden dark:block' />
-        </Button>
-      </DropdownMenuTrigger>
+      <DropdownMenuTrigger
+        render={
+          <Button
+            variant='ghost'
+            className='size-9 p-0'
+            aria-label={t('theme-toggle.toggle-theme')}
+            data-testid='theme-toggle'
+          >
+            <SunIcon className='dark:hidden' />
+            <MoonIcon className='hidden dark:block' />
+          </Button>
+        }
+      />
       <DropdownMenuContent align='end'>
         <DropdownMenuItem
           className='gap-2'

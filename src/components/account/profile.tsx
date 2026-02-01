@@ -132,9 +132,7 @@ function EditName(props: EditNameProps) {
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger asChild>
-        <Button variant='outline'>{t('account.edit-name')}</Button>
-      </AlertDialogTrigger>
+      <AlertDialogTrigger render={<Button variant='outline'>{t('account.edit-name')}</Button>} />
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{t('account.edit-name')}</AlertDialogTitle>

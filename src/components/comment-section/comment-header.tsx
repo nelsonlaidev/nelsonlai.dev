@@ -49,12 +49,14 @@ function CommentHeader() {
         </div>
       </NumberFlowGroup>
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant='outline' size='sm' className='h-7 gap-1 text-sm'>
-            <ListFilterIcon className='size-3.5' />
-            <span>{t('blog.comments.sort-by')}</span>
-          </Button>
-        </DropdownMenuTrigger>
+        <DropdownMenuTrigger
+          render={
+            <Button variant='outline' size='sm' className='h-7 gap-1 text-sm'>
+              <ListFilterIcon className='size-3.5' />
+              <span>{t('blog.comments.sort-by')}</span>
+            </Button>
+          }
+        />
         <DropdownMenuContent align='end'>
           <DropdownMenuRadioGroup
             value={sort}

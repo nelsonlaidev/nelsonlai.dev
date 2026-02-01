@@ -37,16 +37,18 @@ function DeleteButton(props: DeleteButtonProps) {
   return (
     <div className='mt-4 flex justify-end'>
       <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button
-            variant='destructive'
-            disabled={isDeleting}
-            aria-disabled={isDeleting}
-            data-testid='guestbook-delete-button'
-          >
-            {t('common.delete')}
-          </Button>
-        </AlertDialogTrigger>
+        <AlertDialogTrigger
+          render={
+            <Button
+              variant='destructive'
+              disabled={isDeleting}
+              aria-disabled={isDeleting}
+              data-testid='guestbook-delete-button'
+            >
+              {t('common.delete')}
+            </Button>
+          }
+        />
         <AlertDialogContent data-testid='guestbook-dialog'>
           <AlertDialogHeader>
             <AlertDialogTitle>{t('common.dialogs.delete-comment.title')}</AlertDialogTitle>

@@ -5,7 +5,7 @@ type SkeletonProps = React.ComponentProps<'div'>
 function Skeleton(props: SkeletonProps) {
   const { className, ...rest } = props
 
-  return <div data-slot='skeleton' className={cn('animate-pulse rounded-md bg-accent', className)} {...rest} />
+  return <div data-slot='skeleton' className={cn('animate-pulse rounded-xl bg-muted', className)} {...rest} />
 }
 
 export { Skeleton }

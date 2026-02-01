@@ -97,6 +97,7 @@
       "comment": "Comment",
       "comments": "Comments",
       "dashboard": "Dashboard",
+      "design": "Design",
       "facebook": "Facebook",
       "general": "General",
       "github": "GitHub",
@@ -139,6 +140,18 @@
       "github-stars": "GitHub Stars",
       "youtube-subscribers": "YouTube Subscribers",
       "youtube-views": "YouTube Views"
+    }
+  },
+  "design": {
+    "description": "Explore the design system and UI components used throughout this website. View component variants, styles, and implementation examples.",
+    "sections": {
+      "alert-dialog": "Alert Dialog",
+      "aspect-ratio": "Aspect Ratio",
+      "avatar": "Avatar",
+      "badge": "Badge",
+      "buttons": "Buttons",
+      "card": "Card",
+      "command": "Command"
     }
   },
   "dialog": {

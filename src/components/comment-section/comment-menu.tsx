@@ -51,17 +51,19 @@ function CommentMenu() {
   return (
     <AlertDialog>
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant='ghost'
-            size='icon'
-            className='size-8'
-            aria-label={t('blog.comments.open-menu')}
-            data-testid='comment-menu-button'
-          >
-            <MoreVerticalIcon className='size-5' />
-          </Button>
-        </DropdownMenuTrigger>
+        <DropdownMenuTrigger
+          render={
+            <Button
+              variant='ghost'
+              size='icon'
+              className='size-8'
+              aria-label={t('blog.comments.open-menu')}
+              data-testid='comment-menu-button'
+            >
+              <MoreVerticalIcon className='size-5' />
+            </Button>
+          }
+        />
         <DropdownMenuContent align='end'>
           <DropdownMenuItem
             onClick={() =>
@@ -73,18 +75,20 @@ function CommentMenu() {
           >
             {t('blog.comments.copy-link')}
           </DropdownMenuItem>
-          <AlertDialogTrigger asChild>
-            {isAuthor && (
-              <DropdownMenuItem
-                disabled={isDeleting}
-                aria-disabled={isDeleting}
-                data-testid='comment-delete-button'
-                variant='destructive'
-              >
-                {t('common.delete')}
-              </DropdownMenuItem>
-            )}
-          </AlertDialogTrigger>
+          {isAuthor && (
+            <AlertDialogTrigger
+              render={
+                <DropdownMenuItem
+                  disabled={isDeleting}
+                  aria-disabled={isDeleting}
+                  data-testid='comment-delete-button'
+                  variant='destructive'
+                >
+                  {t('common.delete')}
+                </DropdownMenuItem>
+              }
+            />
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
       <AlertDialogContent data-testid='comment-dialog'>

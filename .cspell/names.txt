@@ -10,11 +10,13 @@ fuma
 hiett
 jahir
 joshwcomeau
+laptev
 maximeheckel
 nelsonlai
 nelsonlaidev
 nikolovlazar
 noto
+oleg
 peduarte
 theodorusclarence
 tuite

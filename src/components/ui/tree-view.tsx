@@ -43,10 +43,10 @@ function TreeViewNode(props: TreeViewNodeProps) {
       {node.children ? (
         <TreeViewPrimitive.Branch>
           <TreeViewPrimitive.BranchControl
-            className={cn(
-              'flex items-center justify-between rounded-sm px-2 py-1.5 pl-[calc(var(--depth)*8px)] text-sm',
-              'hover:bg-accent hover:text-accent-foreground'
-            )}
+            className='
+              flex items-center justify-between rounded-sm px-2 py-1.5 pl-[calc(var(--depth)*8px)] text-sm
+              hover:bg-accent hover:text-accent-foreground
+            '
           >
             <TreeViewPrimitive.BranchText className='flex items-center gap-2'>
               <FolderIcon className='size-4' /> {node.name}
@@ -56,11 +56,11 @@ function TreeViewNode(props: TreeViewNodeProps) {
             </TreeViewPrimitive.BranchIndicator>
           </TreeViewPrimitive.BranchControl>
           <TreeViewPrimitive.BranchContent
-            className={cn(
-              'overflow-hidden',
-              'data-[state=closed]:animate-tree-view-content-up',
-              'data-[state=open]:animate-tree-view-content-down'
-            )}
+            className='
+              overflow-hidden
+              data-[state=closed]:animate-tree-view-content-up
+              data-[state=open]:animate-tree-view-content-down
+            '
           >
             <TreeViewPrimitive.BranchIndentGuide />
             {node.children.map((child, index) => (
@@ -70,11 +70,11 @@ function TreeViewNode(props: TreeViewNodeProps) {
         </TreeViewPrimitive.Branch>
       ) : (
         <TreeViewPrimitive.Item
-          className={cn(
-            'relative rounded-sm px-2 py-1.5 pl-[calc(var(--depth)*8px)] text-sm',
-            'hover:bg-accent hover:text-accent-foreground',
-            'data-selected:bg-accent'
-          )}
+          className='
+            relative rounded-sm px-2 py-1.5 pl-[calc(var(--depth)*8px)] text-sm
+            hover:bg-accent hover:text-accent-foreground
+            data-selected:bg-accent
+          '
         >
           <TreeViewPrimitive.ItemText className='flex items-center gap-2'>
             <FileIcon className='size-4' />

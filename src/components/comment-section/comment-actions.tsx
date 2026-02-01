@@ -1,5 +1,5 @@
 import NumberFlow from '@number-flow/react'
-import { cva } from 'cva'
+import { cva } from 'class-variance-authority'
 import { ChevronDownIcon, MessageSquareIcon, ThumbsDownIcon, ThumbsUpIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
@@ -11,18 +11,20 @@ import { useCreateVote } from '@/hooks/queries/vote.query'
 import { useSession } from '@/lib/auth-client'
 import { cn } from '@/utils/cn'
 
-const voteVariants = cva({
-  base: buttonVariants({
+const voteVariants = cva(
+  buttonVariants({
     variant: 'secondary',
     className: 'h-8 gap-1.5 px-2 font-mono text-xs font-medium'
   }),
-  variants: {
-    active: {
-      true: 'bg-accent text-accent-foreground',
-      false: 'text-muted-foreground'
+  {
+    variants: {
+      active: {
+        true: 'bg-accent text-accent-foreground',
+        false: 'text-muted-foreground'
+      }
     }
   }
-})
+)
 
 function CommentActions() {
   const { slug } = useCommentsContext()
