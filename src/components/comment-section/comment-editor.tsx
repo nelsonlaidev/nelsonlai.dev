@@ -58,8 +58,7 @@ function CommentEditor(props: CommentEditorProps) {
             <Button
               aria-label={t('blog.comments.toggle-bold')}
               variant='ghost'
-              size='icon'
-              className='size-7'
+              size='icon-sm'
               onClick={() => {
                 decorateText('bold')
               }}
@@ -69,8 +68,7 @@ function CommentEditor(props: CommentEditorProps) {
             <Button
               aria-label={t('blog.comments.toggle-strikethrough')}
               variant='ghost'
-              size='icon'
-              className='size-7'
+              size='icon-sm'
               onClick={() => {
                 decorateText('strikethrough')
               }}
@@ -80,8 +78,7 @@ function CommentEditor(props: CommentEditorProps) {
             <Button
               aria-label={t('blog.comments.toggle-italic')}
               variant='ghost'
-              size='icon'
-              className='size-7'
+              size='icon-sm'
               onClick={() => {
                 decorateText('italic')
               }}

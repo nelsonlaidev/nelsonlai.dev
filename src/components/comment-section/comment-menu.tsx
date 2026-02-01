@@ -1,5 +1,6 @@
 import { MoreVerticalIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 import { toast } from 'sonner'
 
 import {
@@ -10,8 +11,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger
+  AlertDialogTitle
 } from '@/components/ui/alert-dialog'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -26,6 +26,7 @@ function CommentMenu() {
   const { slug } = useCommentsContext()
   const { data: session } = useSession()
   const [copy] = useCopyToClipboard()
+  const [open, setOpen] = useState(false)
   const t = useTranslations()
 
   const { mutate: deleteComment, isPending: isDeleting } = useDeletePostComment({ slug }, () => {
@@ -49,18 +50,17 @@ function CommentMenu() {
   }
 
   return (
-    <AlertDialog>
+    <>
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
             <Button
               variant='ghost'
-              size='icon'
-              className='size-8'
+              size='icon-sm'
               aria-label={t('blog.comments.open-menu')}
               data-testid='comment-menu-button'
             >
-              <MoreVerticalIcon className='size-5' />
+              <MoreVerticalIcon />
             </Button>
           }
         />
@@ -76,38 +76,39 @@ function CommentMenu() {
             {t('blog.comments.copy-link')}
           </DropdownMenuItem>
           {isAuthor && (
-            <AlertDialogTrigger
-              render={
-                <DropdownMenuItem
-                  disabled={isDeleting}
-                  aria-disabled={isDeleting}
-                  data-testid='comment-delete-button'
-                  variant='destructive'
-                >
-                  {t('common.delete')}
-                </DropdownMenuItem>
-              }
-            />
+            <DropdownMenuItem
+              disabled={isDeleting}
+              aria-disabled={isDeleting}
+              data-testid='comment-delete-button'
+              variant='destructive'
+              onClick={() => {
+                setOpen(true)
+              }}
+            >
+              {t('common.delete')}
+            </DropdownMenuItem>
           )}
         </DropdownMenuContent>
       </DropdownMenu>
-      <AlertDialogContent data-testid='comment-dialog'>
-        <AlertDialogHeader>
-          <AlertDialogTitle>{t('common.dialogs.delete-comment.title')}</AlertDialogTitle>
-          <AlertDialogDescription>{t('common.dialogs.delete-comment.description')}</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={handleDeleteComment}
-            className={buttonVariants({ variant: 'destructive' })}
-            data-testid='comment-dialog-delete-button'
-          >
-            {t('common.delete')}
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent data-testid='comment-dialog'>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('common.dialogs.delete-comment.title')}</AlertDialogTitle>
+            <AlertDialogDescription>{t('common.dialogs.delete-comment.description')}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteComment}
+              className={buttonVariants({ variant: 'destructive' })}
+              data-testid='comment-dialog-delete-button'
+            >
+              {t('common.delete')}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   )
 }
 

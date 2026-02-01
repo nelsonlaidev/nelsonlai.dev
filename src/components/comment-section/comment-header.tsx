@@ -51,8 +51,8 @@ function CommentHeader() {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button variant='outline' size='sm' className='h-7 gap-1 text-sm'>
-              <ListFilterIcon className='size-3.5' />
+            <Button variant='outline' size='sm'>
+              <ListFilterIcon data-icon='inline-start' />
               <span>{t('blog.comments.sort-by')}</span>
             </Button>
           }

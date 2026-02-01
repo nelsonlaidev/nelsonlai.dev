@@ -1,7 +1,6 @@
 'use client'
 
 import { SiGithub } from '@icons-pack/react-simple-icons'
-import { LoaderIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
@@ -13,6 +12,8 @@ import { Link } from '@/components/ui/link'
 import { useSignInDialog } from '@/hooks/use-sign-in-dialog'
 import { usePathname } from '@/i18n/routing'
 import { authClient } from '@/lib/auth-client'
+
+import { Spinner } from './ui/spinner'
 
 type Provider = 'github' | 'google'
 
@@ -93,7 +94,7 @@ function SignInDialog() {
             disabled={isPending}
             data-testid='github-sign-in-button'
           >
-            {isPending ? <LoaderIcon className='animate-spin' /> : <SiGithub />}
+            {isPending ? <Spinner /> : <SiGithub />}
             {t('dialog.sign-in.continue-with', { provider: 'GitHub' })}
             {lastUsedProvider === 'github' && <LastUsed />}
           </Button>
@@ -103,7 +104,7 @@ function SignInDialog() {
             onClick={() => handleSignIn('google')}
             disabled={isPending}
           >
-            {isPending ? <LoaderIcon className='animate-spin' /> : <GoogleIcon />}
+            {isPending ? <Spinner /> : <GoogleIcon />}
             {t('dialog.sign-in.continue-with', { provider: 'Google' })}
             {lastUsedProvider === 'google' && <LastUsed />}
           </Button>

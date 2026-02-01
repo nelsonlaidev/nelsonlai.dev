@@ -1,7 +1,6 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
-import { Loader2Icon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
 import { toast } from 'sonner'
@@ -28,6 +27,8 @@ import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { type User, useSession } from '@/lib/auth-client'
 import { AVATAR_MAX_FILE_SIZE, type AvatarMimeType, SUPPORTED_AVATAR_MIME_TYPES } from '@/lib/constants'
 import { getAbbreviation } from '@/utils/get-abbreviation'
+
+import { Spinner } from '../ui/spinner'
 
 import ProfileSkeleton from './profile-skeleton'
 
@@ -168,7 +169,7 @@ function EditName(props: EditNameProps) {
         <AlertDialogFooter>
           <AlertDialogCancel disabled={isUpdating}>{t('common.cancel')}</AlertDialogCancel>
           <Button type='submit' form='edit-name-form' disabled={isUpdating}>
-            {isUpdating && <Loader2Icon className='animate-spin' />}
+            {isUpdating && <Spinner data-icon='inline-start' />}
             {t('common.save')}
           </Button>
         </AlertDialogFooter>

@@ -149,7 +149,7 @@ function CommandMenu() {
     <>
       <Button
         variant='ghost'
-        className='size-9 p-0'
+        size='icon'
         onClick={openMenu}
         aria-label={t('command-menu.open-menu')}
         data-testid='command-menu-button'

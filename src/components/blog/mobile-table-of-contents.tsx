@@ -27,7 +27,7 @@ function MobileTableOfContents(props: MobileTableOfContentsProps) {
         className='gap-2'
         render={
           <Button variant='secondary' className='fixed right-2 bottom-2 z-50 lg:hidden'>
-            <AlignLeftIcon /> {t('blog.on-this-page')}
+            <AlignLeftIcon data-icon='inline-start' /> {t('blog.on-this-page')}
           </Button>
         }
       />

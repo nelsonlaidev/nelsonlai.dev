@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useCreateCommentReplyUnsubscribe } from '@/hooks/queries/unsubscribe.query'
 
+import { Spinner } from './ui/spinner'
+
 type UnsubscribeCommentReplyFormProps = {
   data: NonNullable<Awaited<ReturnType<typeof getUnsubData>>> & { type: 'comment_reply' }
 }
@@ -57,6 +59,7 @@ function UnsubscribeCommentReplyForm(props: UnsubscribeCommentReplyFormProps) {
 
           <div className='space-y-3'>
             <Button onClick={handleUnsubscribe} disabled={isUpdating} className='w-full'>
+              {isUpdating && <Spinner data-icon='inline-start' />}
               {t('common.labels.unsubscribe')}
             </Button>
 
