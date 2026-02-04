@@ -34,6 +34,7 @@ import TableDemo from '@/components/design/table.demo'
 import TabsDemo from '@/components/design/tabs.demo'
 import TextareaDemo from '@/components/design/textarea.demo'
 import TooltipDemo from '@/components/design/tooltip.demo'
+import TreeViewDemo from '@/components/design/tree-view.demo'
 import JsonLd from '@/components/json-ld'
 import PageHeader from '@/components/page-header'
 import { MY_NAME } from '@/lib/constants'
@@ -117,6 +118,7 @@ function Page(props: PageProps<'/[locale]/design'>) {
         <TabsDemo />
         <TextareaDemo />
         <TooltipDemo />
+        <TreeViewDemo />
       </div>
     </>
   )

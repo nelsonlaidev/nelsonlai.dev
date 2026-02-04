@@ -20,7 +20,7 @@ function TreeView(props: TreeViewProps) {
     <TreeViewPrimitive.Root
       data-slot='tree-view'
       collection={collection}
-      className={cn('rounded-md border bg-card p-2', className)}
+      className={cn('rounded-xl border bg-card p-4', className)}
       {...rest}
     >
       <TreeViewPrimitive.Label className='sr-only'>{label}</TreeViewPrimitive.Label>
@@ -46,11 +46,11 @@ function TreeViewNode(props: TreeViewNodeProps) {
             <TreeViewPrimitive.BranchText className='flex items-center gap-2'>
               <FolderIcon className='size-4' /> {node.name}
             </TreeViewPrimitive.BranchText>
-            <TreeViewPrimitive.BranchIndicator className='[&[data-state=open]>svg]:rotate-90'>
+            <TreeViewPrimitive.BranchIndicator className='data-open:[&>svg]:rotate-90'>
               <ChevronRightIcon className='size-4 transition-transform duration-200' />
             </TreeViewPrimitive.BranchIndicator>
           </TreeViewPrimitive.BranchControl>
-          <TreeViewPrimitive.BranchContent className='overflow-hidden data-[state=closed]:animate-tree-view-content-up data-[state=open]:animate-tree-view-content-down'>
+          <TreeViewPrimitive.BranchContent className='overflow-hidden data-open:animate-tree-view-content-down data-closed:animate-tree-view-content-up'>
             <TreeViewPrimitive.BranchIndentGuide />
             {node.children.map((child, index) => (
               <TreeViewNode key={child.id} node={child} indexPath={[...indexPath, index]} />
