@@ -22,6 +22,7 @@ import KbdDemo from '@/components/design/kbd.demo'
 import LabelDemo from '@/components/design/label.demo'
 import PopoverDemo from '@/components/design/popover.demo'
 import ScrollAreaDemo from '@/components/design/scroll-area.demo'
+import SegmentGroupDemo from '@/components/design/segment-group.demo'
 import SelectDemo from '@/components/design/select.demo'
 import SeparatorDemo from '@/components/design/separator.demo'
 import SheetDemo from '@/components/design/sheet.demo'
@@ -104,6 +105,7 @@ function Page(props: PageProps<'/[locale]/design'>) {
         <LabelDemo />
         <PopoverDemo />
         <ScrollAreaDemo />
+        <SegmentGroupDemo />
         <SelectDemo />
         <SeparatorDemo />
         <SheetDemo />

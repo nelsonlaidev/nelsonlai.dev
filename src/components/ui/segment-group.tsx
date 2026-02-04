@@ -5,15 +5,15 @@ import { cn } from '@/utils/cn'
 type SegmentGroupProps = React.ComponentProps<typeof SegmentGroupPrimitive.Root>
 
 function SegmentGroup(props: SegmentGroupProps) {
-  const { className, children, orientation, ...rest } = props
+  const { className, children, orientation = 'horizontal', ...rest } = props
 
   return (
     <SegmentGroupPrimitive.Root
       data-slot='segment-group'
+      data-orientation={orientation}
       orientation={orientation}
       className={cn(
-        'flex items-start',
-        orientation === 'horizontal' ? 'gap-4 border-b' : 'flex-col gap-1 border-l',
+        'flex items-start data-horizontal:gap-4 data-horizontal:border-b data-vertical:flex-col data-vertical:gap-1 data-vertical:border-l',
         className
       )}
       {...rest}
@@ -21,7 +21,7 @@ function SegmentGroup(props: SegmentGroupProps) {
       <SegmentGroupPrimitive.Indicator
         data-slot='segment-group-indicator'
         className={cn(
-          'border-foreground data-[orientation=horizontal]:bottom-0 data-[orientation=horizontal]:w-(--width) data-[orientation=horizontal]:translate-y-px data-[orientation=horizontal]:border-b-2 data-[orientation=vertical]:h-(--height) data-[orientation=vertical]:-translate-x-px data-[orientation=vertical]:border-l-2',
+          'border-foreground data-horizontal:bottom-0 data-horizontal:w-(--width) data-horizontal:translate-y-px data-horizontal:border-b-2 data-vertical:h-(--height) data-vertical:-translate-x-px data-vertical:border-l-2',
           className
         )}
       />
@@ -39,7 +39,7 @@ function SegmentGroupItem(props: SegmentGroupItemProps) {
     <SegmentGroupPrimitive.Item
       data-slot='segment-group-item'
       className={cn(
-        'cursor-pointer font-medium text-muted-foreground transition-colors hover:text-accent-foreground data-[orientation=horizontal]:px-1 data-[orientation=horizontal]:pb-3 data-[orientation=vertical]:px-3 data-[orientation=vertical]:py-1.5 data-[state=checked]:text-foreground data-disabled:cursor-not-allowed data-disabled:text-muted-foreground data-disabled:opacity-50',
+        'cursor-pointer font-medium text-muted-foreground transition-colors hover:text-accent-foreground data-checked:text-foreground data-disabled:cursor-not-allowed data-disabled:text-muted-foreground data-disabled:opacity-50 data-horizontal:px-1 data-horizontal:pb-3 data-vertical:px-3 data-vertical:py-1.5',
         className
       )}
       {...rest}
