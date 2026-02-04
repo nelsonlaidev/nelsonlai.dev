@@ -2,44 +2,42 @@ import { defineConfig, GLOB_SRC_EXT } from '@nelsonlaidev/eslint-config'
 
 export default defineConfig(
   {
-    tailwindEntryPoint: './src/styles/globals.css',
-    playwrightGlob: `./src/tests/e2e/**/*.test.${GLOB_SRC_EXT}`,
-    vitestGlob: `./src/tests/unit/**/*.test.${GLOB_SRC_EXT}`,
-    overrides: {
-      tailwindcss: {
-        'better-tailwindcss/no-unknown-classes': ['error', { ignore: ['not-prose', 'shiki', 'toaster'] }]
-      },
-      playwright: {
-        'playwright/expect-expect': [
-          'error',
-          { assertFunctionNames: ['a11y', 'checkAppliedTheme', 'checkStoredTheme'] }
-        ]
-      },
-      javascript: {
-        'no-restricted-imports': [
-          'error',
-          {
-            paths: [
-              {
-                name: 'next/navigation',
-                importNames: ['usePathname', 'useRouter', 'redirect', 'permanentRedirect'],
-                message: 'Please use `@/i18n/routing` instead.'
-              },
-              {
-                name: 'next/link',
-                importNames: ['default'],
-                message: 'Please use `@/components/ui/link` instead.'
-              }
-            ]
-          }
-        ]
+    tailwindcss: {
+      entryPoint: './src/styles/globals.css',
+      rootFontSize: 16,
+      noUnknownClasses: {
+        ignore: ['not-prose', 'shiki', 'toaster']
       }
+    },
+    playwright: {
+      files: [`./src/tests/e2e/**/*.test.${GLOB_SRC_EXT}`],
+      expectExpect: {
+        assertFunctionNames: ['a11y', 'checkAppliedTheme', 'checkStoredTheme']
+      }
+    },
+    vitest: {
+      files: [`./src/tests/unit/**/*.test.${GLOB_SRC_EXT}`]
     }
   },
   {
-    files: ['./src/components/ui/*.tsx'],
     rules: {
-      'better-tailwindcss/enforce-consistent-line-wrapping': ['error', { printWidth: 120 }]
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'next/navigation',
+              importNames: ['usePathname', 'useRouter', 'redirect', 'permanentRedirect'],
+              message: 'Please use `@/i18n/routing` instead.'
+            },
+            {
+              name: 'next/link',
+              importNames: ['default'],
+              message: 'Please use `@/components/ui/link` instead.'
+            }
+          ]
+        }
+      ]
     }
   }
 )
