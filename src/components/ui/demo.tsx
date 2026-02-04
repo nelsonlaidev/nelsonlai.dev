@@ -11,16 +11,7 @@ function Demo(props: DemoProps) {
   return (
     <section data-slot='demo' className='flex flex-col gap-4'>
       <h2 className='text-2xl font-medium'>{title}</h2>
-      <div
-        className={cn(
-          `
-            grid gap-6
-            md:grid-cols-2
-          `,
-          className
-        )}
-        {...rest}
-      >
+      <div className={cn('grid gap-6 md:grid-cols-2', className)} {...rest}>
         {children}
       </div>
     </section>
@@ -42,12 +33,7 @@ function DemoItem(props: DemoItem) {
         data-slot='demo-item-content'
         data-orientation={orientation}
         className={cn(
-          `
-            flex flex-wrap rounded-4xl border border-dashed p-4
-            sm:p-6
-            data-horizontal:gap-2
-            data-vertical:flex-col data-vertical:gap-6
-          `,
+          'flex flex-wrap rounded-4xl border border-dashed p-4 sm:p-6 data-horizontal:gap-2 data-vertical:flex-col data-vertical:gap-6',
           className
         )}
       >

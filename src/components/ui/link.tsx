@@ -6,10 +6,7 @@ import { cn } from '@/utils/cn'
 const linkVariants = cva('', {
   variants: {
     variant: {
-      muted: `
-        text-muted-foreground transition-colors
-        hover:text-foreground
-      `
+      muted: 'text-muted-foreground transition-colors hover:text-foreground'
     }
   }
 })

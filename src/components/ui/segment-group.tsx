@@ -21,13 +21,7 @@ function SegmentGroup(props: SegmentGroupProps) {
       <SegmentGroupPrimitive.Indicator
         data-slot='segment-group-indicator'
         className={cn(
-          `
-            border-foreground
-            data-[orientation=horizontal]:bottom-0 data-[orientation=horizontal]:w-(--width)
-            data-[orientation=horizontal]:translate-y-px data-[orientation=horizontal]:border-b-2
-            data-[orientation=vertical]:h-(--height) data-[orientation=vertical]:-translate-x-px
-            data-[orientation=vertical]:border-l-2
-          `,
+          'border-foreground data-[orientation=horizontal]:bottom-0 data-[orientation=horizontal]:w-(--width) data-[orientation=horizontal]:translate-y-px data-[orientation=horizontal]:border-b-2 data-[orientation=vertical]:h-(--height) data-[orientation=vertical]:-translate-x-px data-[orientation=vertical]:border-l-2',
           className
         )}
       />
@@ -45,14 +39,7 @@ function SegmentGroupItem(props: SegmentGroupItemProps) {
     <SegmentGroupPrimitive.Item
       data-slot='segment-group-item'
       className={cn(
-        `
-          cursor-pointer font-medium text-muted-foreground transition-colors
-          hover:text-accent-foreground
-          data-[orientation=horizontal]:px-1 data-[orientation=horizontal]:pb-3
-          data-[orientation=vertical]:px-3 data-[orientation=vertical]:py-1.5
-          data-[state=checked]:text-foreground
-          data-disabled:cursor-not-allowed data-disabled:text-muted-foreground data-disabled:opacity-50
-        `,
+        'cursor-pointer font-medium text-muted-foreground transition-colors hover:text-accent-foreground data-[orientation=horizontal]:px-1 data-[orientation=horizontal]:pb-3 data-[orientation=vertical]:px-3 data-[orientation=vertical]:py-1.5 data-[state=checked]:text-foreground data-disabled:cursor-not-allowed data-disabled:text-muted-foreground data-disabled:opacity-50',
         className
       )}
       {...rest}
