@@ -39,7 +39,7 @@ function CommentEmailTemplate(props: CommentEmailTemplateProps) {
       <Preview>New comment on the post "{postTitle}" on nelsonlai.dev</Preview>
       <Tailwind>
         <Body className='m-auto bg-white p-1'>
-          <Container className='mx-auto w-full max-w-[660px] rounded-lg border border-solid border-[#e5e5e5] bg-white p-8 shadow-sm'>
+          <Container className='mx-auto w-full max-w-165 rounded-lg border border-solid border-[#e5e5e5] bg-white p-8 shadow-sm'>
             <Logo />
             <Section>
               <Text className='m-0 p-0 text-xl font-semibold text-gray-900'>New Comment on Your Blog Post</Text>

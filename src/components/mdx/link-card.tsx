@@ -26,7 +26,7 @@ function LinkCard(props: LinkCardProps) {
           <div>{title}</div>
           <div className='text-sm text-muted-foreground'>{href}</div>
         </div>
-        <ExternalLinkIcon className='size-[22px]' />
+        <ExternalLinkIcon className='size-5.5' />
       </Link>
     </div>
   )
