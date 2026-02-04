@@ -11,6 +11,7 @@ import AvatarDemo from '@/components/design/avatar.demo'
 import BadgeDemo from '@/components/design/badge.demo'
 import ButtonDemo from '@/components/design/button.demo'
 import CardDemo from '@/components/design/card.demo'
+import CodeBlockDemo from '@/components/design/code-block.demo'
 import CommandDemo from '@/components/design/command.demo'
 import DialogDemo from '@/components/design/dialog.demo'
 import DrawerDemo from '@/components/design/drawer.demo'
@@ -96,6 +97,7 @@ function Page(props: PageProps<'/[locale]/design'>) {
         <BadgeDemo />
         <ButtonDemo />
         <CardDemo />
+        <CodeBlockDemo />
         <CommandDemo />
         <DialogDemo />
         <DrawerDemo />
