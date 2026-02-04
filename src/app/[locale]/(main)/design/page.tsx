@@ -20,6 +20,7 @@ import InputDemo from '@/components/design/input.demo'
 import InputGroupDemo from '@/components/design/input-group.demo'
 import KbdDemo from '@/components/design/kbd.demo'
 import LabelDemo from '@/components/design/label.demo'
+import MarqueeDemo from '@/components/design/marquee.demo'
 import PopoverDemo from '@/components/design/popover.demo'
 import ScrollAreaDemo from '@/components/design/scroll-area.demo'
 import SegmentGroupDemo from '@/components/design/segment-group.demo'
@@ -104,6 +105,7 @@ function Page(props: PageProps<'/[locale]/design'>) {
         <InputDemo />
         <KbdDemo />
         <LabelDemo />
+        <MarqueeDemo />
         <PopoverDemo />
         <ScrollAreaDemo />
         <SegmentGroupDemo />
