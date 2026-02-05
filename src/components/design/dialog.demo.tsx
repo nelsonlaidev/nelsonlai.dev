@@ -31,7 +31,7 @@ function DialogBasic() {
             <DialogHeader>
               <DialogTitle>Edit profile</DialogTitle>
               <DialogDescription>
-                Make changes to your profile here. Click save when you&apos;re done. Your profile will be updated
+                Make changes to your profile here. Click save when you're done. Your profile will be updated
                 immediately.
               </DialogDescription>
             </DialogHeader>

@@ -59,7 +59,7 @@ function AlertDialogSizes() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Don&apos;t allow</AlertDialogCancel>
+            <AlertDialogCancel>Don't allow</AlertDialogCancel>
             <AlertDialogAction>Allow</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -103,7 +103,7 @@ function AlertDialogWithMedia() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Don&apos;t allow</AlertDialogCancel>
+            <AlertDialogCancel>Don't allow</AlertDialogCancel>
             <AlertDialogAction>Allow</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

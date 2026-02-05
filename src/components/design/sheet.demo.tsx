@@ -31,7 +31,7 @@ function SheetWithForm() {
         <SheetContent>
           <SheetHeader>
             <SheetTitle>Edit profile</SheetTitle>
-            <SheetDescription>Make changes to your profile here. Click save when you&apos;re done.</SheetDescription>
+            <SheetDescription>Make changes to your profile here. Click save when you're done.</SheetDescription>
           </SheetHeader>
           <div className='px-6'>
             <FieldGroup>
@@ -64,8 +64,8 @@ function SheetNoCloseButton() {
           <SheetHeader>
             <SheetTitle>No Close Button</SheetTitle>
             <SheetDescription>
-              This sheet doesn&apos;t have a close button in the top-right corner. You can only close it using the
-              button below.
+              This sheet doesn't have a close button in the top-right corner. You can only close it using the button
+              below.
             </SheetDescription>
           </SheetHeader>
         </SheetContent>
@@ -91,16 +91,16 @@ function SheetWithSides() {
           <SheetContent side={side} className='data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]'>
             <SheetHeader>
               <SheetTitle>Edit profile</SheetTitle>
-              <SheetDescription>Make changes to your profile here. Click save when you&apos;re done.</SheetDescription>
+              <SheetDescription>Make changes to your profile here. Click save when you're done.</SheetDescription>
             </SheetHeader>
             <div className='no-scrollbar overflow-y-auto px-6'>
               {Array.from({ length: 10 }).map((_, index) => (
                 <p key={index} className='mb-4 leading-normal'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                  officia deserunt mollit anim id est laborum.
+                  But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born
+                  and I will give you a complete account of the system, and expound the actual teachings of the great
+                  explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids
+                  pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure
+                  rationally encounter consequences that are extremely painful.
                 </p>
               ))}
             </div>
