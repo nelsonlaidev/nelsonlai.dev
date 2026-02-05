@@ -1,20 +1,9 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-
 import { Link as LocalizedLink } from '@/i18n/routing'
-import { cn } from '@/utils/cn'
 
-const linkVariants = cva('', {
-  variants: {
-    variant: {
-      muted: 'text-muted-foreground transition-colors hover:text-foreground'
-    }
-  }
-})
-
-type LinkProps = React.ComponentProps<'a'> & VariantProps<typeof linkVariants>
+type LinkProps = React.ComponentProps<'a'>
 
 function Link(props: LinkProps) {
-  const { className, variant, href, children, ...rest } = props
+  const { href, children, ...rest } = props
 
   if (!href) {
     throw new Error('Link must have an href')
@@ -22,7 +11,7 @@ function Link(props: LinkProps) {
 
   if (href.startsWith('/')) {
     return (
-      <LocalizedLink className={cn(linkVariants({ variant, className }))} href={href} {...rest}>
+      <LocalizedLink href={href} {...rest}>
         {children}
       </LocalizedLink>
     )
@@ -30,23 +19,17 @@ function Link(props: LinkProps) {
 
   if (href.startsWith('#')) {
     return (
-      <a className={cn(linkVariants({ variant, className }))} href={href} {...rest}>
+      <a href={href} {...rest}>
         {children}
       </a>
     )
   }
 
   return (
-    <a
-      className={cn(linkVariants({ variant, className }))}
-      target='_blank'
-      rel='noopener noreferrer'
-      href={href}
-      {...rest}
-    >
+    <a target='_blank' rel='noopener noreferrer' href={href} {...rest}>
       {children}
     </a>
   )
 }
 
-export { Link, linkVariants }
+export { Link }

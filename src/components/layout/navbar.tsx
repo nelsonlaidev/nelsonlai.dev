@@ -13,21 +13,17 @@ function Navbar() {
   return (
     <nav className='hidden md:block'>
       <ul className='flex gap-2'>
-        {HEADER_LINKS.map((link) => {
-          const isActive = link.href === pathname
-
-          return (
-            <li key={link.key} className='relative flex items-center justify-center'>
-              <Link
-                className='rounded-sm px-3 py-2 text-sm font-medium transition-colors'
-                href={link.href}
-                variant={isActive ? undefined : 'muted'}
-              >
-                {t(link.labelKey)}
-              </Link>
-            </li>
-          )
-        })}
+        {HEADER_LINKS.map((link) => (
+          <li key={link.key} className='relative flex items-center justify-center'>
+            <Link
+              className='rounded-sm px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-active:text-foreground'
+              data-active={link.href === pathname}
+              href={link.href}
+            >
+              {t(link.labelKey)}
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   )

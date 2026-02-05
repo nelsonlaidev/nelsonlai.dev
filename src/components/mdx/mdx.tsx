@@ -28,7 +28,7 @@ const components = {
     const { children, ...rest } = props
 
     return (
-      <Link className='text-anchor no-underline transition-colors hover:text-foreground' {...rest}>
+      <Link className='underline underline-offset-4' {...rest}>
         {children}
       </Link>
     )

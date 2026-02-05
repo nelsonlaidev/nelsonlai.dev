@@ -24,7 +24,7 @@ function LayoutFooter() {
               const { href, labelKey } = link
 
               return (
-                <Link key={href} href={href} variant='muted'>
+                <Link key={href} href={href} className='text-muted-foreground transition-colors hover:text-foreground'>
                   {t(labelKey)}
                 </Link>
               )

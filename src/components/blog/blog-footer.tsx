@@ -22,7 +22,7 @@ function BlogFooter(props: BlogFooterProps) {
 
   return (
     <div className='my-8 flex w-full items-center justify-between py-4 text-sm'>
-      <Link href={editURL} variant='muted'>
+      <Link href={editURL} className='text-muted-foreground transition-colors hover:text-foreground'>
         {t('blog.footer.edit-on-github')}
       </Link>
       <div className='text-muted-foreground'>{t('blog.footer.last-updated', { date: formattedDate ?? '--' })}</div>
