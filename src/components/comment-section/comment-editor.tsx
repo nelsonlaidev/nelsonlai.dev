@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
 import { useCommentEditor } from '@/hooks/use-comment-editor'
-import { cn } from '@/utils/cn'
 
 import Markdown from '../mdx/markdown'
 
@@ -32,12 +31,7 @@ function CommentEditor(props: CommentEditorProps) {
         <TabsTrigger value='preview'>{t('blog.comments.preview')}</TabsTrigger>
       </TabsList>
       <TabsContent value='write'>
-        <div
-          className={cn(
-            'rounded-md border border-input bg-transparent pb-1 font-mono transition-[color,box-shadow] dark:bg-input/30',
-            'focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50'
-          )}
-        >
+        <div className='rounded-md border border-input bg-transparent pb-1 font-mono transition-[color,box-shadow] focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50 dark:bg-input/30'>
           <Textarea
             rows={1}
             value={value}

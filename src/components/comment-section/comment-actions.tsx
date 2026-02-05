@@ -8,7 +8,6 @@ import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
 import { useCreateVote } from '@/hooks/queries/vote.query'
 import { useSession } from '@/lib/auth-client'
-import { cn } from '@/utils/cn'
 
 function CommentActions() {
   const { slug } = useCommentsContext()
@@ -82,18 +81,14 @@ function CommentActions() {
         <Button
           variant='ghost'
           size='sm'
-          className='mt-4 text-xs'
+          className='mt-4 text-xs data-open:[&>svg]:rotate-180'
           onClick={() => {
             setIsOpenReplies(!isOpenReplies)
           }}
+          data-state={isOpenReplies ? 'open' : 'closed'}
           data-testid='comment-replies-expand-button'
         >
-          <ChevronDownIcon
-            data-icon='inline-start'
-            className={cn('size-4 transition-transform duration-200', {
-              'rotate-180': isOpenReplies
-            })}
-          />
+          <ChevronDownIcon data-icon='inline-start' className='size-4 transition-transform duration-200' />
           <NumberFlow value={comment.replyCount} data-testid='comment-reply-count' />
           {t('blog.comments.replies', { count: comment.replyCount })}
         </Button>

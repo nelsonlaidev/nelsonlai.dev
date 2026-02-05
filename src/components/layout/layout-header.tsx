@@ -7,7 +7,6 @@ import CommandMenu from '@/components/command-menu'
 import { Link } from '@/components/ui/link'
 import { Logo } from '@/components/ui/logo'
 import { IS_SERVER } from '@/lib/constants'
-import { cn } from '@/utils/cn'
 
 import MobileNav from './mobile-nav'
 import Navbar from './navbar'
@@ -50,10 +49,7 @@ function LayoutHeader() {
   return (
     <header
       ref={headerRef}
-      className={cn(
-        'fixed inset-x-0 top-4 z-40 mx-auto flex h-15 max-w-5xl items-center justify-between rounded-2xl bg-background/30 px-8 shadow-xs saturate-100 backdrop-blur-md transition-colors',
-        'data-[scrolled=true]:bg-background/80'
-      )}
+      className='fixed inset-x-0 top-4 z-40 mx-auto flex h-15 max-w-5xl items-center justify-between rounded-2xl bg-background/30 px-8 shadow-xs saturate-100 backdrop-blur-md transition-colors data-[scrolled=true]:bg-background/80'
     >
       <Link
         href='#skip-nav'

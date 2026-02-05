@@ -82,15 +82,7 @@ function LatestArticles(props: LatestArticlesProps) {
         ))}
       </motion.div>
       <div className='my-8 flex items-center justify-center'>
-        <Link
-          href='/blog'
-          className={cn(
-            buttonVariants({
-              variant: 'outline'
-            }),
-            'rounded-xl'
-          )}
-        >
+        <Link href='/blog' className={cn(buttonVariants({ variant: 'outline' }), 'rounded-xl')}>
           {t('homepage.latest-articles.more')}
         </Link>
       </div>

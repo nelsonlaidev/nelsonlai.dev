@@ -83,15 +83,7 @@ function SelectedProjects(props: SelectedProjectsProps) {
         ))}
       </motion.div>
       <div className='my-8 flex items-center justify-center'>
-        <Link
-          href='/projects'
-          className={cn(
-            buttonVariants({
-              variant: 'outline'
-            }),
-            'rounded-xl'
-          )}
-        >
+        <Link href='/projects' className={cn(buttonVariants({ variant: 'outline' }), 'rounded-xl')}>
           {t('homepage.selected-projects.more')}
         </Link>
       </div>

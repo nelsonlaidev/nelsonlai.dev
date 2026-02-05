@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl'
 
 import { ACCOUNT_SIDEBAR_LINKS } from '@/config/links'
 import { Link, usePathname } from '@/i18n/routing'
-import { cn } from '@/utils/cn'
 
 function AccountSidebar() {
   const t = useTranslations()
@@ -17,10 +16,8 @@ function AccountSidebar() {
           <li key={link.href}>
             <Link
               href={link.href}
-              className={cn(
-                'block rounded-md px-3 py-2 transition-colors hover:bg-accent',
-                pathname === link.href ? 'text-foreground' : 'text-muted-foreground'
-              )}
+              data-active={pathname === link.href}
+              className='block rounded-xl px-3 py-2 text-muted-foreground transition-colors hover:bg-accent data-active:text-foreground'
             >
               {t(link.labelKey)}
             </Link>
