@@ -101,7 +101,7 @@ function KbdWithIconsAndText() {
 
 function KbdInInputGroup() {
   return (
-    <DemoItem title='InputGroup'>
+    <DemoItem title='Input Group'>
       <InputGroup>
         <InputGroupInput />
         <InputGroupAddon>
