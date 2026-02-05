@@ -12,7 +12,7 @@ function FavoriteFramework() {
         <h2 className='text-sm'>{t('homepage.about-me.fav-framework')}</h2>
       </div>
       <div className='flex items-center justify-center'>
-        <SiNextdotjs size={80} className='text-zinc-800 dark:text-zinc-200' />
+        <SiNextdotjs size={80} />
       </div>
     </div>
   )

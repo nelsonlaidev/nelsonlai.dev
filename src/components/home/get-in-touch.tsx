@@ -113,10 +113,8 @@ function GetInTouch() {
       </div>
 
       <div className='flex flex-col justify-center px-4'>
-        <p className='mb-2 bg-linear-to-r from-black to-black/70 bg-clip-text text-3xl font-semibold text-transparent dark:from-zinc-100 dark:to-zinc-400'>
-          {t('homepage.get-in-touch.title')}
-        </p>
-        <p className='text-zinc-800 dark:text-zinc-300'>{t('homepage.get-in-touch.description')}</p>
+        <p className='mb-2 text-3xl font-semibold'>{t('homepage.get-in-touch.title')}</p>
+        <p className='text-muted-foreground'>{t('homepage.get-in-touch.description')}</p>
         <div className='my-8'>
           <a href='mailto:me@nelsonlai.dev' className={cn(buttonVariants(), 'bg-email-button text-white')}>
             me@nelsonlai.dev

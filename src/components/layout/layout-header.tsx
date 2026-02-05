@@ -53,7 +53,7 @@ function LayoutHeader() {
     >
       <Link
         href='#skip-nav'
-        className='fixed top-4 left-4 -translate-y-20 rounded-xs border bg-background p-2 font-medium shadow-xs transition-transform focus-visible:translate-y-0 focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-offset-2'
+        className='fixed top-4 left-4 -translate-y-20 rounded-4xl border bg-background px-3 py-2 font-medium shadow-xs transition-transform focus-visible:translate-y-0 focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-offset-2'
       >
         <span>{t('layout.skip-to-main-content')}</span>
       </Link>

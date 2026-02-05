@@ -4,15 +4,15 @@ import { range } from '@/utils/range'
 
 function Placeholder() {
   return (
-    <div className='rounded-lg border p-4 shadow-xs dark:bg-zinc-900/30'>
+    <div className='rounded-xl border p-4'>
       <div className='mb-3 flex gap-3'>
         <Skeleton className='size-10 rounded-full' />
         <div className='flex flex-col justify-center gap-1'>
-          <Skeleton className='h-4 w-40 rounded-md' />
-          <Skeleton className='h-4 w-36 rounded-md' />
+          <Skeleton className='h-4 w-40' />
+          <Skeleton className='h-4 w-36' />
         </div>
       </div>
-      <Skeleton className='h-6 w-full max-w-xs rounded-md pl-13' />
+      <Skeleton className='h-6 w-full max-w-xs pl-13' />
     </div>
   )
 }
