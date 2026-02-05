@@ -2,17 +2,14 @@
 
 import { PlusIcon } from 'lucide-react'
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
 
 import { Button } from '../ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card'
 import { Demo, DemoItem } from '../ui/demo'
 
 function CardDemo() {
-  const t = useTranslations()
-
   return (
-    <Demo title={t('design.sections.card')}>
+    <Demo title='Card'>
       <CardSizes />
       <CardWithBorder />
       <CardWithImage />

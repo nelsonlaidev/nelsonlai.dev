@@ -1,7 +1,6 @@
 'use client'
 
 import { BluetoothIcon, Trash2Icon } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 
 import {
   AlertDialog,
@@ -19,10 +18,8 @@ import { Button } from '../ui/button'
 import { Demo, DemoItem } from '../ui/demo'
 
 function AlertDialogDemo() {
-  const t = useTranslations()
-
   return (
-    <Demo title={t('design.sections.alert-dialog')}>
+    <Demo title='Alert Dialog'>
       <AlertDialogSizes />
       <AlertDialogWithMedia />
       <AlertDialogDestructive />

@@ -143,16 +143,7 @@
     }
   },
   "design": {
-    "description": "探索本網站使用的設計系統和 UI 元件。查看元件變體、樣式和實作範例。",
-    "sections": {
-      "alert-dialog": "警示對話框",
-      "aspect-ratio": "寬高比",
-      "avatar": "頭像",
-      "badge": "徽章",
-      "buttons": "按鈕",
-      "card": "卡片",
-      "command": "命令"
-    }
+    "description": "探索本網站使用的設計系統和 UI 元件。查看元件變體、樣式和實作範例。"
   },
   "dialog": {
     "sign-in": {

@@ -1,16 +1,13 @@
 'use client'
 
 import { CheckIcon, PlusIcon } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 
 import { Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from '../ui/avatar'
 import { Demo, DemoItem } from '../ui/demo'
 
 function AvatarDemo() {
-  const t = useTranslations()
-
   return (
-    <Demo title={t('design.sections.avatar')}>
+    <Demo title='Avatar'>
       <AvatarSizes />
       <AvatarWithBadge />
       <AvatarGroups />

@@ -1,17 +1,14 @@
 'use client'
 
 import { ArrowRightIcon, ArrowUpRightIcon, BadgeCheckIcon } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 
 import { Badge } from '../ui/badge'
 import { Demo, DemoItem } from '../ui/demo'
 import { Spinner } from '../ui/spinner'
 
 function BadgeDemo() {
-  const t = useTranslations()
-
   return (
-    <Demo title={t('design.sections.badge')}>
+    <Demo title='Badge'>
       <BadgeVariants />
       <BadgeWithIcons />
       <BadgeAsLink />

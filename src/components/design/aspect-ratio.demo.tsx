@@ -1,16 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
 
 import { AspectRatio } from '../ui/aspect-ratio'
 import { Demo, DemoItem } from '../ui/demo'
 
 function AspectRatioDemo() {
-  const t = useTranslations()
-
   return (
-    <Demo title={t('design.sections.aspect-ratio')} className='md:grid-cols-1'>
+    <Demo title='Aspect Ratio' className='md:grid-cols-1'>
       <AspectRatioRatios />
     </Demo>
   )

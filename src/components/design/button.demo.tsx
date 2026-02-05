@@ -1,14 +1,11 @@
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 
 import { Button } from '../ui/button'
 import { Demo, DemoItem } from '../ui/demo'
 
 function ButtonDemo() {
-  const t = useTranslations()
-
   return (
-    <Demo title={t('design.sections.buttons')}>
+    <Demo title='Buttons'>
       <ButtonVariantsAndSizes />
       <ButtonIconRight />
       <ButtonIconLeft />

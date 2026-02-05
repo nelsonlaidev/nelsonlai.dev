@@ -143,16 +143,7 @@
     }
   },
   "design": {
-    "description": "探索本网站使用的设计系统和 UI 组件。查看组件变体、样式和实现示例。",
-    "sections": {
-      "alert-dialog": "警示对话框",
-      "aspect-ratio": "宽高比",
-      "avatar": "头像",
-      "badge": "徽章",
-      "buttons": "按钮",
-      "card": "卡片",
-      "command": "命令"
-    }
+    "description": "探索本网站使用的设计系统和 UI 组件。查看组件变体、样式和实现示例。"
   },
   "dialog": {
     "sign-in": {

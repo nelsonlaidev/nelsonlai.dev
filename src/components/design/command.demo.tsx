@@ -25,7 +25,6 @@ import {
   ZoomInIcon,
   ZoomOutIcon
 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { Button } from '../ui/button'
@@ -43,10 +42,8 @@ import {
 import { Demo, DemoItem } from '../ui/demo'
 
 function CommandDemo() {
-  const t = useTranslations()
-
   return (
-    <Demo title={t('design.sections.command')}>
+    <Demo title='Command'>
       <CommandGroupsAndItems />
     </Demo>
   )

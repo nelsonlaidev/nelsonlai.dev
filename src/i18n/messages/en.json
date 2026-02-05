@@ -143,16 +143,7 @@
     }
   },
   "design": {
-    "description": "Explore the design system and UI components used throughout this website. View component variants, styles, and implementation examples.",
-    "sections": {
-      "alert-dialog": "Alert Dialog",
-      "aspect-ratio": "Aspect Ratio",
-      "avatar": "Avatar",
-      "badge": "Badge",
-      "buttons": "Buttons",
-      "card": "Card",
-      "command": "Command"
-    }
+    "description": "Explore the design system and UI components used throughout this website. View component variants, styles, and implementation examples."
   },
   "dialog": {
     "sign-in": {
