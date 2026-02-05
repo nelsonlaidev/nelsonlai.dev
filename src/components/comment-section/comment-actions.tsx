@@ -53,7 +53,7 @@ function CommentActions() {
           onClick={() => {
             handleVoteComment(false)
           }}
-          data-active={comment.liked === true}
+          data-active={comment.liked === false}
           size='sm'
           className='font-mono text-xs text-muted-foreground data-active:bg-accent data-active:text-accent-foreground'
           aria-label={t('blog.comments.dislike')}
