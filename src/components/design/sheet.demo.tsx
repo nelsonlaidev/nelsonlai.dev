@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '../ui/button'
 import { Demo, DemoItem } from '../ui/demo'
 import { Field, FieldGroup, FieldLabel } from '../ui/field'
