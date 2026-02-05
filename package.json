@@ -123,7 +123,7 @@
     "@content-collections/next": "0.2.10",
     "@dotenvx/dotenvx": "1.52.0",
     "@lingual/i18n-check": "0.9.0-beta.1",
-    "@nelsonlaidev/eslint-config": "https://pkg.pr.new/@nelsonlaidev/eslint-config@8d593f7",
+    "@nelsonlaidev/eslint-config": "3.0.0",
     "@nelsonlaidev/prettier-config": "0.1.1",
     "@nelsonlaidev/typescript-config": "1.2.0",
     "@playwright/test": "1.58.0",
