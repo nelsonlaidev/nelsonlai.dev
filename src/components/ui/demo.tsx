@@ -27,7 +27,7 @@ function DemoItem(props: DemoItem) {
   const { title, orientation = 'horizontal', className, children } = props
 
   return (
-    <div data-slot='demo-item'>
+    <div data-slot='demo-item' className='min-w-0'>
       {title && <div className='px-1.5 py-2 text-xs font-medium text-muted-foreground'>{title}</div>}
       <div
         data-slot='demo-item-content'

@@ -35,7 +35,7 @@ function CodeBlockDemo() {
 
 function CodeBlockBasic() {
   return (
-    <DemoItem title='Basic'>
+    <DemoItem title='Basic' className='justify-center'>
       <CodeBlock data-lang='bash' figureClassName='w-full max-w-lg'>
         <code>{bashSnippet}</code>
       </CodeBlock>
@@ -45,7 +45,7 @@ function CodeBlockBasic() {
 
 function CodeBlockWithTitle() {
   return (
-    <DemoItem title='With Title'>
+    <DemoItem title='With Title' className='justify-center'>
       <CodeBlock data-lang='tsx' title='components/primary-button.tsx'>
         <code>{tsxSnippet}</code>
       </CodeBlock>
