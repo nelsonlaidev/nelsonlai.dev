@@ -68,7 +68,7 @@ function Hero() {
     <div className='my-16 space-y-6'>
       <div className='flex justify-between gap-8'>
         <div className='flex flex-col gap-4'>
-          <h1 className='flex flex-col flex-wrap gap-2 text-xl font-bold sm:text-3xl'>
+          <h1 className='flex flex-col flex-wrap gap-2 text-xl font-semibold sm:text-3xl'>
             <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ ease: 'easeOut' }}>
               {t('homepage.hero.title-top')}
             </motion.div>
