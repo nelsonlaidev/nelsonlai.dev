@@ -38,13 +38,13 @@ function LayoutFooter() {
           <div>&copy; {new Date().getFullYear()} Nelson Lai</div>
           <Link
             href='https://nelsonlai.link/s/github-portfolio'
-            className='flex items-center justify-center overflow-hidden rounded-md border'
+            className='flex items-center justify-center overflow-hidden rounded-4xl border'
           >
-            <div className='flex h-8 items-center gap-2 border-r bg-muted px-2'>
+            <div className='flex h-8 items-center gap-2 border-r bg-muted pr-2 pl-3'>
               <StarIcon className='size-4' />
               <span className='font-medium'>Star</span>
             </div>
-            <div className='flex h-8 items-center bg-background px-3'>
+            <div className='flex h-8 items-center bg-background pr-3 pl-2'>
               {isSuccess &&
                 Intl.NumberFormat('en', {
                   notation: 'compact',

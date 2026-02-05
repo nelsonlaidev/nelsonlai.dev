@@ -84,7 +84,7 @@ function AboutMe() {
         </div>
       </motion.div>
       <div className='my-8 flex items-center justify-center'>
-        <Link href='/about' className={cn(buttonVariants({ variant: 'outline' }), 'rounded-xl')}>
+        <Link href='/about' className={cn(buttonVariants({ variant: 'outline' }))}>
           {t('homepage.about-me.more')}
         </Link>
       </div>

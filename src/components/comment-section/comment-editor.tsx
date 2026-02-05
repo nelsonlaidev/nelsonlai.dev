@@ -1,12 +1,13 @@
+import type { Textarea } from '@/components/ui/textarea'
+
 import { BoldIcon, ItalicIcon, StrikethroughIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Textarea } from '@/components/ui/textarea'
 import { useCommentEditor } from '@/hooks/use-comment-editor'
 
 import Markdown from '../mdx/markdown'
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupTextarea } from '../ui/input-group'
 
 type CommentEditorProps = {
   tabsValue?: string
@@ -31,8 +32,8 @@ function CommentEditor(props: CommentEditorProps) {
         <TabsTrigger value='preview'>{t('blog.comments.preview')}</TabsTrigger>
       </TabsList>
       <TabsContent value='write'>
-        <div className='rounded-md border border-input bg-transparent pb-1 font-mono transition-[color,box-shadow] focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50 dark:bg-input/30'>
-          <Textarea
+        <InputGroup>
+          <InputGroupTextarea
             rows={1}
             value={value}
             onKeyDown={handleKeyDown}
@@ -40,7 +41,7 @@ function CommentEditor(props: CommentEditorProps) {
             onCompositionStart={handleCompositionStart}
             onCompositionEnd={handleCompositionEnd}
             ref={textareaRef}
-            className='min-h-10 resize-none border-none bg-transparent shadow-none focus-visible:ring-0 dark:bg-transparent'
+            className='min-h-10 resize-none font-mono'
             autoComplete='off'
             autoCorrect='off'
             autoCapitalize='off'
@@ -48,39 +49,39 @@ function CommentEditor(props: CommentEditorProps) {
             data-testid='comment-editor-textarea'
             {...rest}
           />
-          <div className='flex flex-row items-center gap-0.5 px-1.5'>
-            <Button
+          <InputGroupAddon align='block-end'>
+            <InputGroupButton
               aria-label={t('blog.comments.toggle-bold')}
               variant='ghost'
-              size='icon-sm'
+              size='icon-xs'
               onClick={() => {
                 decorateText('bold')
               }}
             >
               <BoldIcon />
-            </Button>
-            <Button
+            </InputGroupButton>
+            <InputGroupButton
               aria-label={t('blog.comments.toggle-strikethrough')}
               variant='ghost'
-              size='icon-sm'
+              size='icon-xs'
               onClick={() => {
                 decorateText('strikethrough')
               }}
             >
               <StrikethroughIcon />
-            </Button>
-            <Button
+            </InputGroupButton>
+            <InputGroupButton
               aria-label={t('blog.comments.toggle-italic')}
               variant='ghost'
-              size='icon-sm'
+              size='icon-xs'
               onClick={() => {
                 decorateText('italic')
               }}
             >
               <ItalicIcon />
-            </Button>
-          </div>
-        </div>
+            </InputGroupButton>
+          </InputGroupAddon>
+        </InputGroup>
       </TabsContent>
       <TabsContent value='preview' className='rounded-md border border-input px-2.5 dark:bg-input/30'>
         <Markdown>{typeof value === 'string' && value.trim() !== '' ? value : 'Nothing to preview'}</Markdown>

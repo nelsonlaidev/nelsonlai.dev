@@ -37,7 +37,7 @@ function PostCard(props: PostCardProps) {
   const likesQuery = useCountLike({ slug })
 
   return (
-    <Link href={`/blog/${slug}`} className='group rounded-xl px-2 py-4 shadow-feature-card'>
+    <Link href={`/blog/${slug}`} className='group rounded-2xl p-2 shadow-feature-card'>
       <BlurImage
         src={`/images/blog/${slug}/cover.png`}
         className='rounded-lg'
@@ -46,7 +46,7 @@ function PostCard(props: PostCardProps) {
         imageClassName='transition-transform group-hover:scale-105'
         alt={title}
       />
-      <div className='flex items-center justify-between gap-2 px-2 pt-4 text-sm text-zinc-500'>
+      <div className='flex items-center justify-between gap-2 px-2 pt-4 text-sm text-muted-foreground'>
         {formattedDate ?? '--'}
         <div className='flex gap-2'>
           {likesQuery.isLoading && '--'}

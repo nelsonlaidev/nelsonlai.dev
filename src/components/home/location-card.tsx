@@ -61,7 +61,7 @@ function LocationCard() {
   }, [springRotation])
 
   return (
-    <div className='relative flex h-60 flex-col gap-6 overflow-hidden rounded-xl p-4 shadow-feature-card lg:p-6'>
+    <div className='relative flex h-60 flex-col gap-6 overflow-hidden rounded-2xl p-4 shadow-feature-card lg:p-6'>
       <div className='flex items-center gap-2'>
         <MapPinIcon className='size-4.5' />
         <h2 className='text-sm'>{t('homepage.about-me.location')}</h2>

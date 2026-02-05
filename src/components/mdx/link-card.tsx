@@ -14,7 +14,10 @@ function LinkCard(props: LinkCardProps) {
 
   return (
     <div className='not-prose flex justify-center'>
-      <Link href={href} className='my-8 flex items-center justify-center gap-4 rounded-lg border p-4'>
+      <Link
+        href={href}
+        className='my-8 flex items-center justify-center gap-4 rounded-xl border p-4 transition-colors hover:bg-accent'
+      >
         <BlurImage
           src={`/images/website-icons/${hostname}.png`}
           className='rounded-lg'
@@ -23,7 +26,7 @@ function LinkCard(props: LinkCardProps) {
           alt={hostname}
         />
         <div>
-          <div>{title}</div>
+          <div className='font-semibold'>{title}</div>
           <div className='text-sm text-muted-foreground'>{href}</div>
         </div>
         <ExternalLinkIcon className='size-5.5' />

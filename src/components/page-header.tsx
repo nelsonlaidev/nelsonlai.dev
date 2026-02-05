@@ -23,7 +23,7 @@ function PageHeader(props: PageTitleProps) {
 
   return (
     <div className='flex flex-col gap-2.5 pt-12 pb-16'>
-      <motion.h1 className='text-4xl font-medium' initial={animation.hide} animate={animation.show}>
+      <motion.h1 className='text-4xl font-semibold' initial={animation.hide} animate={animation.show}>
         {title}
       </motion.h1>
       <motion.h2

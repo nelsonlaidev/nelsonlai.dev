@@ -52,7 +52,7 @@ function UnsubscribeCommentReplyForm(props: UnsubscribeCommentReplyFormProps) {
         <CardContent className='space-y-8'>
           <div className='space-y-2'>
             <p>{t('common.labels.comment')}</p>
-            <div className='rounded-lg border p-3 dark:bg-input/30'>
+            <div className='rounded-xl border p-3 dark:bg-input/30'>
               <p className='text-sm text-pretty text-muted-foreground'>{data.comment}</p>
             </div>
           </div>
