@@ -15,7 +15,7 @@
   <img src="https://img.shields.io/github/license/nelsonlaidev/nelsonlai.dev?style=for-the-badge&labelColor=000" alt="License" />
 </div>
 
-Welcome to the monorepo of my personal blog! This repository houses the code for my blog, where I share my thoughts, projects, and insights. Feel free to explore and get inspired.
+Welcome to my personal blog and portfolio website! This repository contains a modern Next.js application where I share my thoughts, projects, and insights.
 
 ## Features
 
@@ -88,11 +88,33 @@ Welcome to the monorepo of my personal blog! This repository houses the code for
 
 ### Prerequisites
 
-- Node.js
-- pnpm
+- Node.js >= 24
+- pnpm >= 10
 - Docker
 - [Visual Studio Code](https://code.visualstudio.com/) with [recommended extensions](.vscode/extensions.json)
 - Optionally [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+
+## Project Structure
+
+```
+nelsonlai.dev/
+├── public/           # Static assets (images, fonts, videos)
+├── src/
+│   ├── app/          # Next.js app router pages
+│   ├── components/   # React components
+│   ├── config/       # Configuration files
+│   ├── content/      # MDX blog posts and content
+│   ├── db/           # Database schema and migrations
+│   ├── emails/       # Email templates
+│   ├── hooks/        # Custom React hooks
+│   ├── i18n/         # Internationalization
+│   ├── lib/          # Utility libraries
+│   ├── orpc/         # oRPC API routes
+│   ├── styles/       # Global styles
+│   └── utils/        # Utility functions
+├── docker-compose.yml
+└── package.json
+```
 
 ## Development
 
@@ -147,9 +169,9 @@ pnpm db:seed
 5. Run the app:
 
 ```bash
-pnpm dev # Run all services
+pnpm dev          # Run the development server
 # or
-pnpm dev:web # Run only the web app
+pnpm email:dev    # Run the email preview server separately
 ```
 
 The services will be available at the following URLs:
@@ -161,6 +183,22 @@ The services will be available at the following URLs:
 | Database         | `localhost:5432` |
 | Redis            | `localhost:6379` |
 | Redis serverless | `localhost:8079` |
+
+### Available Scripts
+
+```bash
+pnpm dev              # Start development server
+pnpm build            # Build for production
+pnpm start            # Start production server
+pnpm lint             # Run ESLint
+pnpm typecheck        # Run TypeScript type checking
+pnpm format           # Format code with Prettier
+pnpm test:unit        # Run unit tests
+pnpm test:e2e         # Run E2E tests
+pnpm db:migrate       # Run database migrations
+pnpm db:seed          # Seed the database
+pnpm db:studio        # Open Drizzle Studio
+```
 
 ## Credits
 
@@ -174,7 +212,6 @@ This project also uses/adapts the following open-source projects:
 - Comment System - from [fuma-comment](https://github.com/fuma-nama/fuma-comment)
 - Rehype Plugins - from [fumadocs](https://github.com/fuma-nama/fumadocs)
 - UI components - from [shadcn/ui](https://github.com/shadcn-ui/ui)
-- ESLint config - from [@antfu/eslint-config](https://github.com/antfu/eslint-config)
 - Admin UI - from [shadcn-admin](https://github.com/satnaing/shadcn-admin)
 
 The following projects were referenced for inspiration:
