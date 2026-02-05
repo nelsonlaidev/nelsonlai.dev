@@ -16,12 +16,15 @@ function AdminNavLink(props: AdminNavLinkProps) {
 
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton isActive={isActive} asChild>
-        <Link href={url}>
-          <Icon />
-          <span>{t(titleKey)}</span>
-        </Link>
-      </SidebarMenuButton>
+      <SidebarMenuButton
+        isActive={isActive}
+        render={
+          <Link href={url}>
+            <Icon />
+            <span>{t(titleKey)}</span>
+          </Link>
+        }
+      />
     </SidebarMenuItem>
   )
 }

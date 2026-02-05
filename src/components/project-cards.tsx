@@ -5,6 +5,8 @@ import type { Project } from 'content-collections'
 import BlurImage from '@/components/blur-image'
 import { Link } from '@/components/ui/link'
 
+import { Badge } from './ui/badge'
+
 type ProjectCardProps = Project
 type ProjectCardsProps = {
   projects: Project[]
@@ -26,7 +28,7 @@ function ProjectCard(props: ProjectCardProps) {
   const { name, description, techstack, slug } = props
 
   return (
-    <Link href={`/projects/${slug}`} className='group rounded-xl px-2 py-4 shadow-feature-card'>
+    <Link href={`/projects/${slug}`} className='group rounded-2xl px-2 py-4 shadow-feature-card'>
       <BlurImage
         src={`/images/projects/${slug}/cover.png`}
         width={1200}
@@ -43,9 +45,9 @@ function ProjectCard(props: ProjectCardProps) {
         <div className='mt-4 flex flex-wrap gap-2'>
           {techstack.map((label) => {
             return (
-              <div key={label} className='rounded-full border bg-zinc-50 px-3 py-2 text-xs leading-4 dark:bg-zinc-900'>
+              <Badge key={label} variant='outline'>
                 {label}
-              </div>
+              </Badge>
             )
           })}
         </div>

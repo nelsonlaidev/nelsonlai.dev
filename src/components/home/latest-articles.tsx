@@ -82,15 +82,7 @@ function LatestArticles(props: LatestArticlesProps) {
         ))}
       </motion.div>
       <div className='my-8 flex items-center justify-center'>
-        <Link
-          href='/blog'
-          className={cn(
-            buttonVariants({
-              variant: 'outline'
-            }),
-            'rounded-xl'
-          )}
-        >
+        <Link href='/blog' className={cn(buttonVariants({ variant: 'outline' }))}>
           {t('homepage.latest-articles.more')}
         </Link>
       </div>
@@ -111,7 +103,7 @@ function Card(props: CardProps) {
   const likesQuery = useCountLike({ slug: post.slug })
 
   return (
-    <Link href={`/blog/${post.slug}`} className='group relative rounded-xl p-2 shadow-feature-card'>
+    <Link href={`/blog/${post.slug}`} className='group relative rounded-2xl p-2 shadow-feature-card'>
       <div className='flex items-center justify-between p-4'>
         <div className='flex items-center gap-3'>
           <PencilIcon className='size-4.5' />
@@ -126,7 +118,7 @@ function Card(props: CardProps) {
         alt={post.title}
         className='rounded-lg'
       />
-      <div className='flex items-center justify-between gap-2 px-2 pt-4 text-sm text-zinc-500'>
+      <div className='flex items-center justify-between gap-2 px-2 pt-4 text-sm text-muted-foreground'>
         {formattedDate ?? '--'}
         <div className='flex gap-2'>
           {likesQuery.isLoading && '--'}

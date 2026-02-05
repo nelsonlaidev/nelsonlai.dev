@@ -73,7 +73,7 @@ function CommentReply() {
       <div className='mt-2 space-x-1'>
         <Button
           variant='secondary'
-          className='h-8 px-2 text-xs font-medium'
+          size='sm'
           type='submit'
           disabled={disabled || !content}
           aria-disabled={disabled || !content}
@@ -83,7 +83,7 @@ function CommentReply() {
         </Button>
         <Button
           variant='secondary'
-          className='h-8 px-2 text-xs font-medium'
+          size='sm'
           onClick={() => {
             setIsReplying(false)
           }}

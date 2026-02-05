@@ -5,6 +5,9 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
 import BlurImage from '@/components/blur-image'
+import { cn } from '@/utils/cn'
+
+import { buttonVariants } from '../ui/button'
 
 const variants = {
   initial: {
@@ -47,7 +50,7 @@ function GetInTouch() {
 
   return (
     <motion.div
-      className='relative flex flex-col justify-center gap-12 rounded-xl p-5 shadow-feature-card md:flex-row'
+      className='relative flex flex-col justify-center gap-12 rounded-2xl p-5 shadow-feature-card md:flex-row'
       initial='initial'
       animate={isInView ? 'animate' : 'initial'}
       variants={variants}
@@ -66,25 +69,25 @@ function GetInTouch() {
         />
         <div
           id='next-js'
-          className='absolute bottom-12 left-14 rounded-3xl border bg-accent px-2 py-1.5 text-xs opacity-40'
+          className='absolute bottom-12 left-14 rounded-4xl border bg-accent px-2 py-1.5 text-xs opacity-40'
         >
           Next.js
         </div>
         <div
           id='react-js'
-          className='absolute top-20 left-2 rounded-3xl border bg-accent px-2 py-1.5 text-xs opacity-40'
+          className='absolute top-20 left-2 rounded-4xl border bg-accent px-2 py-1.5 text-xs opacity-40'
         >
           React.js
         </div>
         <div
           id='typescript'
-          className='absolute right-1 bottom-20 rounded-3xl border bg-accent px-2 py-1.5 text-xs opacity-40'
+          className='absolute right-1 bottom-20 rounded-4xl border bg-accent px-2 py-1.5 text-xs opacity-40'
         >
           TypeScript
         </div>
         <div
           id='javascript'
-          className='absolute top-10 right-8 rounded-3xl border bg-accent px-2 py-1.5 text-xs opacity-40'
+          className='absolute top-10 right-8 rounded-4xl border bg-accent px-2 py-1.5 text-xs opacity-40'
         >
           JavaScript
         </div>
@@ -105,17 +108,15 @@ function GetInTouch() {
               d='M12 5.50676L0 0L2.83818 13L6.30623 7.86537L12 5.50676V5.50676Z'
             />
           </svg>
-          <span className='relative left-4 rounded-3xl bg-red-500 px-2 py-0.5 text-xs text-white'>Nelson</span>
+          <span className='relative left-4 rounded-4xl bg-red-500 px-2 py-0.5 text-xs text-white'>Nelson</span>
         </div>
       </div>
 
       <div className='flex flex-col justify-center px-4'>
-        <p className='mb-2 bg-linear-to-r from-black to-black/70 bg-clip-text text-3xl font-semibold text-transparent dark:from-zinc-100 dark:to-zinc-400'>
-          {t('homepage.get-in-touch.title')}
-        </p>
-        <p className='text-zinc-800 dark:text-zinc-300'>{t('homepage.get-in-touch.description')}</p>
+        <p className='mb-2 text-3xl font-semibold'>{t('homepage.get-in-touch.title')}</p>
+        <p className='text-muted-foreground'>{t('homepage.get-in-touch.description')}</p>
         <div className='my-8'>
-          <a href='mailto:me@nelsonlai.dev' className='rounded-full bg-email-button px-4 py-2 text-sm text-white'>
+          <a href='mailto:me@nelsonlai.dev' className={cn(buttonVariants(), 'bg-email-button text-white')}>
             me@nelsonlai.dev
           </a>
         </div>

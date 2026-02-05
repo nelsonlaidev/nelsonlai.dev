@@ -17,12 +17,12 @@ function ItemGrid(props: ItemGridProps) {
   const { items } = props
 
   return (
-    <div className='mb-9 grid grid-cols-1 gap-4 sm:grid-cols-4'>
+    <div className='not-prose mb-9 grid grid-cols-1 gap-4 sm:grid-cols-4'>
       {items.map((item) => (
         <Link
           key={item.name}
           href={item.url}
-          className='flex gap-6 rounded-lg border p-4 no-underline shadow-xs transition-colors hover:bg-zinc-100 sm:flex-col sm:gap-3 dark:bg-zinc-900 dark:hover:bg-zinc-800'
+          className='flex gap-6 rounded-xl border p-4 transition-colors hover:bg-accent sm:flex-col sm:gap-3'
         >
           <BlurImage
             src={item.image}
@@ -33,7 +33,7 @@ function ItemGrid(props: ItemGridProps) {
             imageClassName='m-0 size-24 sm:size-full'
           />
           <div className='flex flex-col justify-center gap-2'>
-            <div className='text-lg font-extrabold'>{item.name}</div>
+            <div className='text-lg font-semibold'>{item.name}</div>
             <div className='text-sm text-muted-foreground'>{item.description}</div>
           </div>
         </Link>

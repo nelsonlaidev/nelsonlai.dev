@@ -97,6 +97,7 @@
       "comment": "评论",
       "comments": "评论",
       "dashboard": "仪表板",
+      "design": "设计",
       "facebook": "Facebook",
       "general": "一般",
       "github": "GitHub",
@@ -140,6 +141,9 @@
       "youtube-subscribers": "YouTube 订阅者",
       "youtube-views": "YouTube 浏览量"
     }
+  },
+  "design": {
+    "description": "探索本网站使用的设计系统和 UI 组件。查看组件变体、样式和实现示例。"
   },
   "dialog": {
     "sign-in": {

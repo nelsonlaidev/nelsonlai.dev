@@ -10,7 +10,7 @@ export function proxy(request: NextRequest) {
     default-src 'none';
     script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.nelsonlai.dev https://*.posthog.com https://va.vercel-scripts.com ${IS_PREVIEW ? 'https://vercel.live' : ''};
     style-src 'self' 'unsafe-inline' https://*.posthog.com ${IS_PREVIEW ? 'https://vercel.live' : ''};
-    img-src 'self' data: https://avatars.githubusercontent.com https://*.googleusercontent.com https://*.posthog.com ${env.CLOUDFLARE_R2_PUBLIC_URL} ${IS_PREVIEW ? 'https://vercel.live https://vercel.com blob:' : ''};
+    img-src 'self' data: https://avatars.githubusercontent.com https://*.googleusercontent.com https://*.posthog.com https://github.com https://images.unsplash.com ${env.CLOUDFLARE_R2_PUBLIC_URL} ${IS_PREVIEW ? 'https://vercel.live https://vercel.com blob:' : ''};
     font-src 'self' https://*.posthog.com ${IS_PREVIEW ? 'https://vercel.live https://assets.vercel.com' : ''};
     worker-src 'self' blob:;
     object-src 'none';

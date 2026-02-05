@@ -1,28 +1,13 @@
 import NumberFlow from '@number-flow/react'
-import { cva } from 'cva'
 import { ChevronDownIcon, MessageSquareIcon, ThumbsDownIcon, ThumbsUpIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
 import { useCreateVote } from '@/hooks/queries/vote.query'
 import { useSession } from '@/lib/auth-client'
-import { cn } from '@/utils/cn'
-
-const voteVariants = cva({
-  base: buttonVariants({
-    variant: 'secondary',
-    className: 'h-8 gap-1.5 px-2 font-mono text-xs font-medium'
-  }),
-  variants: {
-    active: {
-      true: 'bg-accent text-accent-foreground',
-      false: 'text-muted-foreground'
-    }
-  }
-})
 
 function CommentActions() {
   const { slug } = useCommentsContext()
@@ -54,9 +39,9 @@ function CommentActions() {
           onClick={() => {
             handleVoteComment(true)
           }}
-          className={voteVariants({
-            active: comment.liked === true
-          })}
+          data-active={comment.liked === true}
+          size='sm'
+          className='font-mono text-xs text-muted-foreground data-active:bg-accent data-active:text-accent-foreground'
           aria-label={t('common.like')}
           disabled={isVoting}
         >
@@ -68,9 +53,9 @@ function CommentActions() {
           onClick={() => {
             handleVoteComment(false)
           }}
-          className={voteVariants({
-            active: comment.liked === false
-          })}
+          data-active={comment.liked === false}
+          size='sm'
+          className='font-mono text-xs text-muted-foreground data-active:bg-accent data-active:text-accent-foreground'
           aria-label={t('blog.comments.dislike')}
           disabled={isVoting}
         >
@@ -80,7 +65,8 @@ function CommentActions() {
         {comment.parentId ? null : (
           <Button
             variant='secondary'
-            className='h-8 gap-1.5 px-2 text-xs font-medium text-muted-foreground'
+            size='sm'
+            className='text-xs text-muted-foreground'
             onClick={() => {
               setIsReplying(true)
             }}
@@ -95,17 +81,14 @@ function CommentActions() {
         <Button
           variant='ghost'
           size='sm'
-          className='mt-4 h-8 gap-1.5 px-2 text-xs font-medium'
+          className='mt-4 text-xs data-open:[&>svg]:rotate-180'
           onClick={() => {
             setIsOpenReplies(!isOpenReplies)
           }}
+          data-state={isOpenReplies ? 'open' : 'closed'}
           data-testid='comment-replies-expand-button'
         >
-          <ChevronDownIcon
-            className={cn('size-4 transition-transform duration-200', {
-              'rotate-180': isOpenReplies
-            })}
-          />
+          <ChevronDownIcon data-icon='inline-start' className='size-4 transition-transform duration-200' />
           <NumberFlow value={comment.replyCount} data-testid='comment-reply-count' />
           {t('blog.comments.replies', { count: comment.replyCount })}
         </Button>

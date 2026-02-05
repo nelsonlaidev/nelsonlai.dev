@@ -1,7 +1,6 @@
 import type { SettingsGetOutput } from '@/orpc/client'
 
 import { useForm, useStore } from '@tanstack/react-form'
-import { Loader2Icon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 import * as z from 'zod'
@@ -11,6 +10,8 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Switch } from '@/components/ui/switch'
 import { useUpdateSettings } from '@/hooks/queries/settings.query'
+
+import { Spinner } from './ui/spinner'
 
 type SettingsFormProps = {
   settings: SettingsGetOutput
@@ -97,7 +98,7 @@ function SettingsForm(props: SettingsFormProps) {
           </Button>
         )}
         <Button type='submit' form='edit-settings-form' disabled={!isDirty || isUpdating}>
-          {isUpdating && <Loader2Icon className='animate-spin' />}
+          {isUpdating && <Spinner />}
           {t('common.save')}
         </Button>
       </CardFooter>

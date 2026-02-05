@@ -1,17 +1,26 @@
 import { defineConfig, GLOB_SRC_EXT } from '@nelsonlaidev/eslint-config'
 
-export default defineConfig({
-  tailwindEntryPoint: './src/styles/globals.css',
-  playwrightGlob: `./src/tests/e2e/**/*.test.${GLOB_SRC_EXT}`,
-  vitestGlob: `./src/tests/unit/**/*.test.${GLOB_SRC_EXT}`,
-  overrides: {
+export default defineConfig(
+  {
     tailwindcss: {
-      'better-tailwindcss/no-unregistered-classes': ['error', { ignore: ['not-prose', 'shiki', 'toaster'] }]
+      entryPoint: './src/styles/globals.css',
+      rootFontSize: 16,
+      noUnknownClasses: {
+        ignore: ['not-prose', 'shiki', 'toaster']
+      }
     },
     playwright: {
-      'playwright/expect-expect': ['error', { assertFunctionNames: ['a11y', 'checkAppliedTheme', 'checkStoredTheme'] }]
+      files: [`./src/tests/e2e/**/*.test.${GLOB_SRC_EXT}`],
+      expectExpect: {
+        assertFunctionNames: ['a11y', 'checkAppliedTheme', 'checkStoredTheme']
+      }
     },
-    javascript: {
+    vitest: {
+      files: [`./src/tests/unit/**/*.test.${GLOB_SRC_EXT}`]
+    }
+  },
+  {
+    rules: {
       'no-restricted-imports': [
         'error',
         {
@@ -31,4 +40,4 @@ export default defineConfig({
       ]
     }
   }
-})
+)

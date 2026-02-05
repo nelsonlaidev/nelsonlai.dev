@@ -1,32 +1,44 @@
-import { Avatar as AvatarPrimitive } from 'radix-ui'
+'use client'
+
+import { Avatar as AvatarPrimitive } from '@base-ui/react/avatar'
 
 import { cn } from '@/utils/cn'
 
-type AvatarProps = React.ComponentProps<typeof AvatarPrimitive.Root>
+type AvatarProps = AvatarPrimitive.Root.Props & {
+  size?: 'default' | 'sm' | 'lg'
+}
 
 function Avatar(props: AvatarProps) {
-  const { className, ...rest } = props
+  const { className, size = 'default', ...rest } = props
 
   return (
     <AvatarPrimitive.Root
       data-slot='avatar'
-      className={cn('relative flex size-8 shrink-0 overflow-hidden rounded-full', className)}
+      data-size={size}
+      className={cn(
+        'group/avatar relative flex size-8 shrink-0 rounded-full select-none after:absolute after:inset-0 after:rounded-full after:border after:border-border after:mix-blend-darken data-[size=lg]:size-10 data-[size=sm]:size-6 dark:after:mix-blend-lighten',
+        className
+      )}
       {...rest}
     />
   )
 }
 
-type AvatarImageProps = React.ComponentProps<typeof AvatarPrimitive.Image>
+type AvatarImageProps = AvatarPrimitive.Image.Props
 
 function AvatarImage(props: AvatarImageProps) {
   const { className, ...rest } = props
 
   return (
-    <AvatarPrimitive.Image data-slot='avatar-image' className={cn('aspect-square size-full', className)} {...rest} />
+    <AvatarPrimitive.Image
+      data-slot='avatar-image'
+      className={cn('aspect-square size-full rounded-full object-cover', className)}
+      {...rest}
+    />
   )
 }
 
-type AvatarFallbackProps = React.ComponentProps<typeof AvatarPrimitive.Fallback>
+type AvatarFallbackProps = AvatarPrimitive.Fallback.Props
 
 function AvatarFallback(props: AvatarFallbackProps) {
   const { className, ...rest } = props
@@ -34,10 +46,64 @@ function AvatarFallback(props: AvatarFallbackProps) {
   return (
     <AvatarPrimitive.Fallback
       data-slot='avatar-fallback'
-      className={cn('flex size-full items-center justify-center rounded-full bg-muted', className)}
+      className={cn(
+        'flex size-full items-center justify-center rounded-full bg-muted text-sm text-muted-foreground group-data-[size=sm]/avatar:text-xs',
+        className
+      )}
       {...rest}
     />
   )
 }
 
-export { Avatar, AvatarFallback, AvatarImage }
+type AvatarBadgeProps = React.ComponentProps<'span'>
+
+function AvatarBadge(props: AvatarBadgeProps) {
+  const { className, ...rest } = props
+
+  return (
+    <span
+      data-slot='avatar-badge'
+      className={cn(
+        'absolute right-0 bottom-0 z-10 inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground bg-blend-color ring-2 ring-background select-none group-data-[size=default]/avatar:size-2.5 group-data-[size=lg]/avatar:size-3 group-data-[size=sm]/avatar:size-2 group-data-[size=default]/avatar:[&>svg]:size-2 group-data-[size=lg]/avatar:[&>svg]:size-2 group-data-[size=sm]/avatar:[&>svg]:hidden',
+        className
+      )}
+      {...rest}
+    />
+  )
+}
+
+type AvatarGroupProps = React.ComponentProps<'div'>
+
+function AvatarGroup(props: AvatarGroupProps) {
+  const { className, ...rest } = props
+
+  return (
+    <div
+      data-slot='avatar-group'
+      className={cn(
+        'group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background',
+        className
+      )}
+      {...rest}
+    />
+  )
+}
+
+type AvatarGroupCountProps = React.ComponentProps<'div'>
+
+function AvatarGroupCount(props: AvatarGroupCountProps) {
+  const { className, ...rest } = props
+
+  return (
+    <div
+      data-slot='avatar-group-count'
+      className={cn(
+        'relative flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-sm text-muted-foreground ring-2 ring-background group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6 [&>svg]:size-4 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3',
+        className
+      )}
+      {...rest}
+    />
+  )
+}
+
+export { Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage }

@@ -42,7 +42,7 @@ function ReplyEmailTemplate(props: ReplyEmailTemplateProps) {
       <Preview>New reply on the post "{postTitle}" on nelsonlai.dev</Preview>
       <Tailwind>
         <Body className='m-auto bg-white p-1'>
-          <Container className='mx-auto w-full max-w-165 rounded-lg border border-solid border-[#e5e5e5] bg-white p-8 shadow-sm'>
+          <Container className='mx-auto w-full max-w-165 rounded-2xl border border-solid border-[#e5e5e5] bg-white p-8'>
             <Logo />
             <Section>
               <Text className='m-0 p-0 text-xl font-semibold text-gray-900'>Reply to Your Comment</Text>
@@ -53,7 +53,7 @@ function ReplyEmailTemplate(props: ReplyEmailTemplateProps) {
                 </Link>
               </Text>
             </Section>
-            <Section className='mt-6 rounded-lg border border-solid border-[#e5e5e5] bg-gray-50 p-6'>
+            <Section className='mt-6 rounded-xl border border-solid border-[#e5e5e5] bg-gray-50 p-6'>
               <Row>
                 <Column className='w-10'>
                   <Img
@@ -75,7 +75,7 @@ function ReplyEmailTemplate(props: ReplyEmailTemplateProps) {
               <Text className='mx-0 mt-4 mb-0 p-0 text-base font-normal text-gray-700'>{reply}</Text>
             </Section>
             <Button
-              className='mt-6 rounded-full bg-gray-900 px-8 py-2.5 align-middle text-sm font-medium text-white'
+              className='mt-6 rounded-4xl bg-gray-900 px-8 py-2.5 align-middle text-sm font-medium text-white'
               href={`${postUrl}?${replierIdentifier}`}
             >
               View Reply

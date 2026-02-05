@@ -63,7 +63,7 @@ function Message(props: MessageProps) {
   const formattedDate = useFormattedDate(message.createdAt, { formatName: 'long' })
 
   return (
-    <div className='rounded-lg border p-4 shadow-xs dark:bg-zinc-900/30' data-testid={`message-${message.id}`}>
+    <div className='rounded-xl border p-4' data-testid={`message-${message.id}`}>
       <div className='mb-3 flex gap-3'>
         <Avatar className='size-10'>
           <AvatarImage src={message.user.image ?? defaultImage} alt={message.user.name} />

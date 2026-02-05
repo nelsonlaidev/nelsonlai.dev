@@ -97,6 +97,7 @@
       "comment": "評論",
       "comments": "評論",
       "dashboard": "儀表板",
+      "design": "設計",
       "facebook": "Facebook",
       "general": "一般",
       "github": "GitHub",
@@ -140,6 +141,9 @@
       "youtube-subscribers": "YouTube 訂閱者",
       "youtube-views": "YouTube 瀏覽量"
     }
+  },
+  "design": {
+    "description": "探索本網站使用的設計系統和 UI 元件。查看元件變體、樣式和實作範例。"
   },
   "dialog": {
     "sign-in": {

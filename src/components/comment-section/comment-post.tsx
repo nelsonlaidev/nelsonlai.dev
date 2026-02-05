@@ -75,8 +75,8 @@ function CommentPost() {
         />
         <Button
           variant='ghost'
-          size='icon'
-          className='absolute right-2 bottom-1.5 size-7'
+          size='icon-sm'
+          className='absolute right-2 bottom-1.5'
           type='submit'
           disabled={disabled || !content}
           aria-label={t('blog.comments.send-comment')}

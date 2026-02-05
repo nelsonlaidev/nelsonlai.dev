@@ -29,12 +29,12 @@ function CodeBlock(props: CodeBlockProps) {
   return (
     <figure
       className={cn(
-        'not-prose group relative my-6 overflow-hidden rounded-lg border bg-secondary/50 text-sm',
+        'not-prose group relative my-6 overflow-hidden rounded-2xl border bg-input/30 text-sm',
         figureClassName
       )}
     >
       {title ? (
-        <div className='flex flex-row items-center gap-2 border-b bg-muted/50 px-4 py-1.5'>
+        <div className='flex flex-row items-center gap-2 border-b bg-muted px-4 py-1.5'>
           <div className='text-muted-foreground'>
             <Icon className='size-3.5' />
           </div>
@@ -81,7 +81,7 @@ function CopyButton(props: CopyButtonProps) {
         onCopy()
         setIsCopied(true)
       }}
-      className={cn('size-7.5 opacity-0 transition-opacity', 'group-hover:opacity-100', className)}
+      className={cn('size-7.5 opacity-0 transition-opacity group-hover:opacity-100', className)}
       aria-label='Copy code to clipboard'
       {...rest}
     >

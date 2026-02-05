@@ -16,6 +16,14 @@ const remotePatterns: NonNullable<NextConfig['images']>['remotePatterns'] = [
   },
   {
     protocol: 'https',
+    hostname: 'github.com'
+  },
+  {
+    protocol: 'https',
+    hostname: 'images.unsplash.com'
+  },
+  {
+    protocol: 'https',
     hostname: '**.googleusercontent.com'
   }
 ]

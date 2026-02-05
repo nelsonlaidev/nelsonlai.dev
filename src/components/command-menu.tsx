@@ -6,6 +6,7 @@ import { Fragment, useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import {
+  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -148,7 +149,7 @@ function CommandMenu() {
     <>
       <Button
         variant='ghost'
-        className='size-9 p-0'
+        size='icon'
         onClick={openMenu}
         aria-label={t('command-menu.open-menu')}
         data-testid='command-menu-button'
@@ -156,23 +157,25 @@ function CommandMenu() {
         <CommandIcon />
       </Button>
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
-        <CommandInput placeholder={t('command-menu.placeholder')} />
-        <CommandList>
-          <CommandEmpty>{t('command-menu.no-results')}</CommandEmpty>
-          {groups.map((group, index) => (
-            <Fragment key={group.name}>
-              <CommandGroup heading={group.name}>
-                {group.actions.map((action) => (
-                  <CommandItem key={action.title} onSelect={action.onSelect}>
-                    {action.icon}
-                    {action.title}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-              {index === groups.length - 1 ? null : <CommandSeparator />}
-            </Fragment>
-          ))}
-        </CommandList>
+        <Command>
+          <CommandInput placeholder={t('command-menu.placeholder')} />
+          <CommandList>
+            <CommandEmpty>{t('command-menu.no-results')}</CommandEmpty>
+            {groups.map((group, index) => (
+              <Fragment key={group.name}>
+                <CommandGroup heading={group.name}>
+                  {group.actions.map((action) => (
+                    <CommandItem key={action.title} onSelect={action.onSelect}>
+                      {action.icon}
+                      {action.title}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+                {index === groups.length - 1 ? null : <CommandSeparator />}
+              </Fragment>
+            ))}
+          </CommandList>
+        </Command>
       </CommandDialog>
     </>
   )

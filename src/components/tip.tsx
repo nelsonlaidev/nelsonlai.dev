@@ -31,24 +31,26 @@ function Tip(props: TipProps) {
 
   return (
     <Tooltip open={open} onOpenChange={setOpen}>
-      <TooltipTrigger asChild>
-        <button
-          type='button'
-          className='cursor-pointer'
-          ref={buttonRef}
-          onClick={() => {
-            if (!canHover) setOpen((v) => !v)
-          }}
-          onMouseEnter={() => {
-            if (canHover) setOpen(true)
-          }}
-          onMouseLeave={() => {
-            if (canHover) setOpen(false)
-          }}
-        >
-          {children}
-        </button>
-      </TooltipTrigger>
+      <TooltipTrigger
+        render={
+          <button
+            type='button'
+            className='cursor-pointer'
+            ref={buttonRef}
+            onClick={() => {
+              if (!canHover) setOpen((v) => !v)
+            }}
+            onMouseEnter={() => {
+              if (canHover) setOpen(true)
+            }}
+            onMouseLeave={() => {
+              if (canHover) setOpen(false)
+            }}
+          >
+            {children}
+          </button>
+        }
+      />
       <TooltipContent>{content}</TooltipContent>
     </Tooltip>
   )

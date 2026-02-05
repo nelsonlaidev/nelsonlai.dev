@@ -83,15 +83,7 @@ function SelectedProjects(props: SelectedProjectsProps) {
         ))}
       </motion.div>
       <div className='my-8 flex items-center justify-center'>
-        <Link
-          href='/projects'
-          className={cn(
-            buttonVariants({
-              variant: 'outline'
-            }),
-            'rounded-xl'
-          )}
-        >
+        <Link href='/projects' className={cn(buttonVariants({ variant: 'outline' }))}>
           {t('homepage.selected-projects.more')}
         </Link>
       </div>
@@ -105,7 +97,7 @@ function Card(props: CardProps) {
   const t = useTranslations()
 
   return (
-    <Link key={slug} href={`/projects/${slug}`} className='group relative rounded-xl p-2 shadow-feature-card'>
+    <Link key={slug} href={`/projects/${slug}`} className='group relative rounded-2xl p-2 shadow-feature-card'>
       <div className='flex items-center justify-between p-4'>
         <div className='flex items-center gap-3'>
           <LightbulbIcon className='size-4.5' />
@@ -124,7 +116,7 @@ function Card(props: CardProps) {
       />
       <div className='absolute bottom-6 left-7 flex flex-col transition-[left] ease-out group-hover:left-8'>
         <h3 className='text-2xl font-semibold text-white'>{name}</h3>
-        <p className='mt-2 text-zinc-100 dark:text-muted-foreground'>{description}</p>
+        <p className='mt-2 text-neutral-200 dark:text-muted-foreground'>{description}</p>
       </div>
     </Link>
   )

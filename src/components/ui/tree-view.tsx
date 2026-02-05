@@ -20,7 +20,7 @@ function TreeView(props: TreeViewProps) {
     <TreeViewPrimitive.Root
       data-slot='tree-view'
       collection={collection}
-      className={cn('rounded-md border bg-card p-2', className)}
+      className={cn('rounded-2xl border bg-card p-4', className)}
       {...rest}
     >
       <TreeViewPrimitive.Label className='sr-only'>{label}</TreeViewPrimitive.Label>
@@ -42,26 +42,15 @@ function TreeViewNode(props: TreeViewNodeProps) {
     <TreeViewPrimitive.NodeProvider data-slot='tree-view-node' key={node.id} node={node} indexPath={indexPath}>
       {node.children ? (
         <TreeViewPrimitive.Branch>
-          <TreeViewPrimitive.BranchControl
-            className={cn(
-              'flex items-center justify-between rounded-sm px-2 py-1.5 pl-[calc(var(--depth)*8px)] text-sm',
-              'hover:bg-accent hover:text-accent-foreground'
-            )}
-          >
+          <TreeViewPrimitive.BranchControl className='ml-[calc((var(--depth)-1)*8px)] flex items-center justify-between rounded-xl px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground'>
             <TreeViewPrimitive.BranchText className='flex items-center gap-2'>
               <FolderIcon className='size-4' /> {node.name}
             </TreeViewPrimitive.BranchText>
-            <TreeViewPrimitive.BranchIndicator className='[&[data-state=open]>svg]:rotate-90'>
+            <TreeViewPrimitive.BranchIndicator className='data-open:[&>svg]:rotate-90'>
               <ChevronRightIcon className='size-4 transition-transform duration-200' />
             </TreeViewPrimitive.BranchIndicator>
           </TreeViewPrimitive.BranchControl>
-          <TreeViewPrimitive.BranchContent
-            className={cn(
-              'overflow-hidden',
-              'data-[state=closed]:animate-tree-view-content-up',
-              'data-[state=open]:animate-tree-view-content-down'
-            )}
-          >
+          <TreeViewPrimitive.BranchContent className='overflow-hidden data-open:animate-tree-view-content-down data-closed:animate-tree-view-content-up'>
             <TreeViewPrimitive.BranchIndentGuide />
             {node.children.map((child, index) => (
               <TreeViewNode key={child.id} node={child} indexPath={[...indexPath, index]} />
@@ -69,13 +58,7 @@ function TreeViewNode(props: TreeViewNodeProps) {
           </TreeViewPrimitive.BranchContent>
         </TreeViewPrimitive.Branch>
       ) : (
-        <TreeViewPrimitive.Item
-          className={cn(
-            'relative rounded-sm px-2 py-1.5 pl-[calc(var(--depth)*8px)] text-sm',
-            'hover:bg-accent hover:text-accent-foreground',
-            'data-selected:bg-accent'
-          )}
-        >
+        <TreeViewPrimitive.Item className='relative ml-[calc((var(--depth)-1)*8px)] rounded-xl px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground data-selected:bg-accent'>
           <TreeViewPrimitive.ItemText className='flex items-center gap-2'>
             <FileIcon className='size-4' />
             {node.name}

@@ -137,7 +137,7 @@ function Stats() {
           <Link
             key={stat.title}
             href={link}
-            className='group relative overflow-hidden rounded-lg border p-4 shadow-xs transition-colors hover:bg-zinc-100 dark:bg-zinc-900/50 dark:hover:bg-zinc-900'
+            className='group relative overflow-hidden rounded-xl border p-4 transition-colors hover:bg-accent'
           >
             <div className='flex flex-col items-center justify-center gap-2 transition-transform group-hover:-translate-y-24 group-focus:-translate-y-24'>
               <div className='flex items-center gap-2 text-3xl font-semibold'>
@@ -159,7 +159,7 @@ function Stats() {
                   '--'
                 )}
               </div>
-              <div className='text-xl font-medium'>{title}</div>
+              <div className='text-xl font-semibold'>{title}</div>
             </div>
             <span className='absolute top-1/2 left-1/2 flex -translate-x-1/2 translate-y-24 items-center gap-1 text-2xl font-semibold opacity-0 transition group-hover:-translate-y-1/2 group-hover:opacity-100 group-focus:-translate-y-1/2 group-focus:opacity-100'>
               {linkText}
