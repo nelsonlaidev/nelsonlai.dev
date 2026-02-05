@@ -28,6 +28,7 @@ import SegmentGroupDemo from '@/components/design/segment-group.demo'
 import SelectDemo from '@/components/design/select.demo'
 import SeparatorDemo from '@/components/design/separator.demo'
 import SheetDemo from '@/components/design/sheet.demo'
+import SidebarDemo from '@/components/design/sidebar.demo'
 import SkeletonDemo from '@/components/design/skeleton.demo'
 import SonnerDemo from '@/components/design/sonner.demo'
 import SpinnerDemo from '@/components/design/spinner.demo'
@@ -114,6 +115,7 @@ function Page(props: PageProps<'/[locale]/design'>) {
         <SelectDemo />
         <SeparatorDemo />
         <SheetDemo />
+        <SidebarDemo />
         <SkeletonDemo />
         <SonnerDemo />
         <SpinnerDemo />
