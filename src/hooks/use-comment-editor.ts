@@ -129,6 +129,18 @@ function setRangeText(ta: HTMLTextAreaElement, replacement: string, options: Set
   ta.dispatchEvent(new InputEvent('input', { bubbles: true }))
 }
 
+function createSnapshot(ta: HTMLTextAreaElement): Snapshot {
+  return {
+    value: ta.value,
+    selectionStart: ta.selectionStart,
+    selectionEnd: ta.selectionEnd,
+  }
+}
+
+function snapshotsEqual(a?: Snapshot, b?: Snapshot) {
+  return !!a && !!b && a.value === b.value && a.selectionStart === b.selectionStart && a.selectionEnd === b.selectionEnd
+}
+
 export function useCommentEditor(options: UseCommentEditorOptions = {}) {
   const { onModEnter, onEscape } = options
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -137,20 +149,6 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
   const redoStack = useRef<Snapshot[]>([])
   const isComposing = useRef(false)
   const isApplyingHistory = useRef(false)
-
-  function createSnapshot(ta: HTMLTextAreaElement): Snapshot {
-    return {
-      value: ta.value,
-      selectionStart: ta.selectionStart,
-      selectionEnd: ta.selectionEnd,
-    }
-  }
-
-  function snapshotsEqual(a?: Snapshot, b?: Snapshot) {
-    return (
-      !!a && !!b && a.value === b.value && a.selectionStart === b.selectionStart && a.selectionEnd === b.selectionEnd
-    )
-  }
 
   const pushUndo = useCallback((snap: Snapshot) => {
     const stack = undoStack.current
@@ -489,8 +487,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
     if (!ta) return
 
     pushUndo(createSnapshot(ta))
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- only run once
-  }, [])
+  }, [pushUndo])
 
   return {
     textareaRef,
