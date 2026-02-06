@@ -2,7 +2,7 @@
   "recommendations": [
     "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
+    "oxc.oxc-vscode",
     "bradlc.vscode-tailwindcss",
     "unifiedjs.vscode-mdx",
     "streetsidesoftware.code-spell-checker"

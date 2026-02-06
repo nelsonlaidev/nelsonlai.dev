@@ -6,6 +6,8 @@ dotenvx
 fumadocs
 nuqs
 orpc
+oxfmt
+oxfmtrc
 radixui
 rmiz
 shiki

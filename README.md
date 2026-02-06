@@ -58,7 +58,7 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 - Vitest for unit/integration testing
 - Playwright for E2E testing
 - ESLint configuration
-- Prettier code formatting
+- Oxfmt code formatting
 - Lefthook
 - Conventional commit lint
 
@@ -192,7 +192,7 @@ pnpm build            # Build for production
 pnpm start            # Start production server
 pnpm lint             # Run ESLint
 pnpm typecheck        # Run TypeScript type checking
-pnpm format           # Format code with Prettier
+pnpm fmt              # Format code with Oxfmt
 pnpm test:unit        # Run unit tests
 pnpm test:e2e         # Run E2E tests
 pnpm db:migrate       # Run database migrations

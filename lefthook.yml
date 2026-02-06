@@ -1,8 +1,8 @@
 pre-commit:
   parallel: true
   jobs:
-    - name: prettier
-      run: pnpm prettier --write --ignore-unknown "{staged_files}"
+    - name: format
+      run: pnpm oxfmt --no-error-on-unmatched-pattern "{staged_files}"
       stage_fixed: true
 
     - name: lint
