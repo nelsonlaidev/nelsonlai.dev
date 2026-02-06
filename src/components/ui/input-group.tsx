@@ -49,7 +49,7 @@ function InputGroupAddon(props: InputGroupAddonProps) {
   const { className, align = 'inline-start', ...rest } = props
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- addon container has click handler to focus associated input (similar to label behavior). Interactive children (buttons) handle their own interactions.
+    // oxlint-disable-next-line jsx_a11y/click-events-have-key-events
     <div
       role='group'
       data-slot='input-group-addon'

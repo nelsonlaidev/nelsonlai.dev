@@ -15,7 +15,6 @@ const createCommentReplyUnsubscribe = publicProcedure
     const { verifyUnsubToken } = await import('@/lib/unsubscribe')
     const result = await verifyUnsubToken(input.token)
 
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- future types may be added
     if (!result.success || result.data.type !== 'comment_reply') {
       throw new ORPCError('BAD_REQUEST', { message: 'Invalid token' })
     }

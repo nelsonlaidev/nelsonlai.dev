@@ -27,6 +27,19 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
 
+    "import/no-unassigned-import": [
+      "error",
+      {
+        "allow": [
+          "server-only",
+          "client-only",
+          "@testing-library/jest-dom/vitest",
+          "@/styles/*.css",
+          "react-medium-image-zoom/dist/styles.css"
+        ]
+      }
+    ],
+
     "no-restricted-imports": [
       "error",
       {
@@ -55,7 +68,9 @@
         "Image": "img",
         "Input": "input",
         "Textarea": "textarea",
-        "Link": "a"
+        "Link": "a",
+        "Label": "label",
+        "FieldLabel": "label"
       }
     }
   }

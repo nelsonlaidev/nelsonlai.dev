@@ -5,6 +5,7 @@ import { ArrowRightIcon, ArrowUpRightIcon, BadgeCheckIcon } from 'lucide-react'
 import { Badge } from '../ui/badge'
 import { Demo, DemoItem } from '../ui/demo'
 import { Spinner } from '../ui/spinner'
+import { Link } from '@/components/ui/link'
 
 function BadgeDemo() {
   return (
@@ -120,33 +121,33 @@ function BadgeAsLink() {
     <DemoItem title='As Link'>
       <Badge
         render={
-          <a href='/design#'>
+          <Link href='/design#'>
             Link <ArrowUpRightIcon data-icon='inline-end' />
-          </a>
+          </Link>
         }
       />
       <Badge
         variant='secondary'
         render={
-          <a href='/design#'>
+          <Link href='/design#'>
             Link <ArrowUpRightIcon data-icon='inline-end' />
-          </a>
+          </Link>
         }
       />
       <Badge
         variant='destructive'
         render={
-          <a href='/design#'>
+          <Link href='/design#'>
             Link <ArrowUpRightIcon data-icon='inline-end' />
-          </a>
+          </Link>
         }
       />
       <Badge
         variant='ghost'
         render={
-          <a href='/design#'>
+          <Link href='/design#'>
             Link <ArrowUpRightIcon data-icon='inline-end' />
-          </a>
+          </Link>
         }
       />
     </DemoItem>

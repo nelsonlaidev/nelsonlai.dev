@@ -8,7 +8,9 @@ function Label(props: LabelProps) {
   const { className, ...rest } = props
 
   return (
-    // eslint-disable-next-line jsx-a11y/label-has-associated-control -- label is a reusable wrapper component. Association with form controls is handled at the usage site via htmlFor prop or child elements.
+    // Label is a reusable wrapper component.
+    // The below rule will be enabled on <Label /> usage sites instead of here.
+    // oxlint-disable-next-line jsx_a11y/label-has-associated-control
     <label
       data-slot='label'
       className={cn(

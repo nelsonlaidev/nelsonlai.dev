@@ -107,6 +107,7 @@ function FieldLabel(props: FieldLabelProps) {
   const { className, ...rest } = props
 
   return (
+    // oxlint-disable-next-line jsx_a11y/label-has-associated-control
     <Label
       data-slot='field-label'
       className={cn(

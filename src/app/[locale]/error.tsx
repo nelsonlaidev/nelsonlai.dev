@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import posthog from 'posthog-js'
+import { posthog } from 'posthog-js'
 import { useEffect } from 'react'
 
 import MainLayout from '@/components/main-layout'

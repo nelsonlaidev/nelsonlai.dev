@@ -113,9 +113,7 @@ export async function getUnsubData(token: string | null) {
 
   const { data } = result
 
-  // eslint-disable-next-line sonarjs/no-small-switch -- allow for future types
   switch (data.type) {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- allow for future types
     case 'comment_reply': {
       return getCommentReplyUnsubData(data, token)
     }
