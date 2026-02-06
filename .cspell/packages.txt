@@ -8,6 +8,7 @@ nuqs
 orpc
 oxfmt
 oxfmtrc
+oxlint
 radixui
 rmiz
 shiki

@@ -1,0 +1,60 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "eslint",
+    "typescript",
+    "unicorn",
+    "react",
+    "react-perf",
+    "nextjs",
+    "oxc",
+    "import",
+    "jsdoc",
+    "jsx-a11y",
+    "node",
+    "promise",
+    "vitest"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error"
+    // Consider enabling these categories for stricter linting in the future
+    // "pedantic": "error",
+    // "perf": "error",
+    // "restriction": "error",
+    // "nursery": "error"
+  },
+  "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "next/navigation",
+            "importNames": ["usePathname", "useRouter", "redirect", "permanentRedirect"],
+            "message": "Please use `@/i18n/routing` instead."
+          },
+          {
+            "name": "next/link",
+            "importNames": ["default"],
+            "message": "Please use `@/components/ui/link` instead."
+          }
+        ]
+      }
+    ]
+  },
+  "env": {
+    "builtin": true
+  },
+  "settings": {
+    "jsx-a11y": {
+      "components": {
+        "Button": "button",
+        "Image": "img",
+        "Input": "input",
+        "Textarea": "textarea",
+        "Link": "a"
+      }
+    }
+  }
+}

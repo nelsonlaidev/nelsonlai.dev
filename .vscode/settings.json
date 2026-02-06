@@ -1,10 +1,11 @@
 {
   "oxc.fmt.configPath": ".oxfmtrc.json",
+  "oxc.typeAware": true,
+
   "editor.defaultFormatter": "oxc.oxc-vscode",
 
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "never"
+    "source.fixAll.oxc": "always"
   },
 
   "editor.formatOnPaste": true,
@@ -14,8 +15,6 @@
     "*.css": "tailwindcss",
     ".env*": "properties"
   },
-
-  "eslint.workingDirectories": [{ "mode": "auto" }],
 
   "tailwindCSS.classFunctions": ["cva", "cn"],
 

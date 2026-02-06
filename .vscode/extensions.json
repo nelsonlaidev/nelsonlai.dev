@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "editorconfig.editorconfig",
-    "dbaeumer.vscode-eslint",
     "oxc.oxc-vscode",
     "bradlc.vscode-tailwindcss",
     "unifiedjs.vscode-mdx",

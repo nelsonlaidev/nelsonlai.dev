@@ -57,7 +57,7 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 
 - Vitest for unit/integration testing
 - Playwright for E2E testing
-- ESLint configuration
+- Oxlint configuration
 - Oxfmt code formatting
 - Lefthook
 - Conventional commit lint
@@ -190,7 +190,7 @@ The services will be available at the following URLs:
 pnpm dev              # Start development server
 pnpm build            # Build for production
 pnpm start            # Start production server
-pnpm lint             # Run ESLint
+pnpm lint             # Run Oxlint
 pnpm typecheck        # Run TypeScript type checking
 pnpm fmt              # Format code with Oxfmt
 pnpm test:unit        # Run unit tests
