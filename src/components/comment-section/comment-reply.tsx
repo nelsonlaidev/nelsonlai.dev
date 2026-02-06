@@ -12,6 +12,7 @@ import { useSession } from '@/lib/auth-client'
 
 import CommentEditor from './comment-editor'
 import UnauthenticatedOverlay from './unauthenticated-overlay'
+import { useFocus } from '@/hooks/use-focus'
 
 function CommentReply() {
   const [content, setContent] = useState('')
@@ -19,6 +20,7 @@ function CommentReply() {
   const { comment, setIsReplying } = useCommentContext()
   const { slug } = useCommentsContext()
   const t = useTranslations()
+  const textareaRef = useFocus<HTMLTextAreaElement>()
 
   const { mutate: createReply, isPending: isCreating } = useCreatePostComment({ slug }, () => {
     setIsReplying(false)
@@ -55,6 +57,7 @@ function CommentReply() {
       <div className='relative'>
         <CommentEditor
           value={content}
+          ref={textareaRef}
           onChange={(e) => {
             setContent(e.target.value)
           }}
@@ -64,8 +67,6 @@ function CommentReply() {
           }}
           placeholder={t('blog.comments.reply-to-comment')}
           disabled={disabled}
-          // eslint-disable-next-line jsx-a11y/no-autofocus -- autofocus is necessary because user is replying to a comment
-          autoFocus
           data-testid='comment-textarea-reply'
         />
         {isAuthenticated ? null : <UnauthenticatedOverlay />}
