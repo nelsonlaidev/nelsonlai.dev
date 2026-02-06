@@ -28,7 +28,7 @@ export async function generateMetadata(props: PageProps<'/[locale]/uses'>): Prom
     pathname: '/uses',
     title,
     description,
-    locale
+    locale,
   })
 }
 
@@ -53,8 +53,8 @@ function Page(props: PageProps<'/[locale]/uses'>) {
     isPartOf: {
       '@type': 'WebSite',
       name: MY_NAME,
-      url: getBaseUrl()
-    }
+      url: getBaseUrl(),
+    },
   }
 
   if (!page) {

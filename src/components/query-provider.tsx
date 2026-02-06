@@ -10,13 +10,13 @@ function createQueryClient() {
     queryCache: new QueryCache({
       onError: (error) => {
         toast.error(error.message)
-      }
+      },
     }),
     mutationCache: new MutationCache({
       onError: (error) => {
         toast.error(error.message)
-      }
-    })
+      },
+    }),
   })
 }
 

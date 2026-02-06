@@ -21,7 +21,7 @@ export function useIncrementLike(input: LikeCountInput) {
           queryClient.setQueryData<LikeCountOutput>(queryKey, {
             ...previousData,
             likes: previousData.likes + newData.value,
-            currentUserLikes: previousData.currentUserLikes + newData.value
+            currentUserLikes: previousData.currentUserLikes + newData.value,
           })
         }
 
@@ -34,7 +34,7 @@ export function useIncrementLike(input: LikeCountInput) {
       },
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: orpc.like.count.key({ input }) })
-      }
-    })
+      },
+    }),
   )
 }

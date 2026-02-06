@@ -23,7 +23,7 @@ export function createMetadata(options: Options): Metadata {
   const resolvedTitle = root ? title : `${title} | ${MY_NAME}`
   const resolvedOGImageUrl = getLocalizedPath({
     locale,
-    pathname: pathname ? `/og${pathname}/image.webp` : '/og/image.webp'
+    pathname: pathname ? `/og${pathname}/image.webp` : '/og/image.webp',
   })
 
   const currentUrl = getLocalizedPath({ locale, pathname })
@@ -38,8 +38,8 @@ export function createMetadata(options: Options): Metadata {
         canonical: currentUrl,
         languages: {
           ...Object.fromEntries(routing.locales.map((l) => [l, getLocalizedPath({ locale: l, pathname })])),
-          'x-default': getLocalizedPath({ locale: routing.defaultLocale, pathname })
-        }
+          'x-default': getLocalizedPath({ locale: routing.defaultLocale, pathname }),
+        },
       },
       robots: {
         index: true,
@@ -49,12 +49,12 @@ export function createMetadata(options: Options): Metadata {
           follow: true,
           'max-video-preview': -1,
           'max-image-preview': 'large',
-          'max-snippet': -1
-        }
+          'max-snippet': -1,
+        },
       },
       authors: {
         name: MY_NAME,
-        url: baseUrl
+        url: baseUrl,
       },
       openGraph: {
         title: resolvedTitle,
@@ -68,51 +68,51 @@ export function createMetadata(options: Options): Metadata {
             url: resolvedOGImageUrl,
             width: OG_IMAGE_WIDTH,
             height: OG_IMAGE_HEIGHT,
-            type: OG_IMAGE_TYPE
-          }
-        ]
+            type: OG_IMAGE_TYPE,
+          },
+        ],
       },
       twitter: {
         card: 'summary_large_image',
         siteId: '1152256803746377730',
         creator: '@nelsonlaidev',
-        creatorId: '1152256803746377730'
+        creatorId: '1152256803746377730',
       },
       icons: {
         icon: {
           rel: 'icon',
           type: 'image/x-icon',
-          url: `${baseUrl}/favicon.ico`
+          url: `${baseUrl}/favicon.ico`,
         },
         apple: [
           {
             type: 'image/png',
             url: `${baseUrl}/apple-touch-icon.png`,
-            sizes: '180x180'
-          }
+            sizes: '180x180',
+          },
         ],
         other: [
           {
             rel: 'icon',
             type: 'image/svg+xml',
             url: `${baseUrl}/favicon.svg`,
-            sizes: 'any'
+            sizes: 'any',
           },
           {
             rel: 'icon',
             type: 'image/png',
             url: `${baseUrl}/favicon-16x16.png`,
-            sizes: '16x16'
+            sizes: '16x16',
           },
           {
             rel: 'icon',
             type: 'image/png',
             url: `${baseUrl}/favicon-32x32.png`,
-            sizes: '32x32'
-          }
-        ]
-      }
+            sizes: '32x32',
+          },
+        ],
+      },
     },
-    rest
+    rest,
   )
 }

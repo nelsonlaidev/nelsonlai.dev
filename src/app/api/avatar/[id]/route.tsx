@@ -25,7 +25,7 @@ function generateGradient(id: string) {
 
   return {
     fromColor: c1.toHexString(),
-    toColor: second
+    toColor: second,
   }
 }
 
@@ -53,17 +53,17 @@ export async function GET(request: Request, context: RouteContext<'/api/avatar/[
       </svg>,
       {
         width: Number(size),
-        height: Number(size)
-      }
+        height: Number(size),
+      },
     )
   } catch (error) {
     return NextResponse.json(
       {
-        error: 'Failed to generate avatar: ' + getErrorMessage(error)
+        error: 'Failed to generate avatar: ' + getErrorMessage(error),
       },
       {
-        status: 500
-      }
+        status: 500,
+      },
     )
   }
 }

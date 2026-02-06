@@ -20,7 +20,7 @@ function Marquee(props: MarqueeProps) {
     pauseOnHover = true,
     fade = true,
     reverse = false,
-    className
+    className,
   } = props
 
   const maskDirection = direction === 'left' ? 'to right' : 'to bottom'
@@ -35,7 +35,7 @@ function Marquee(props: MarqueeProps) {
       style={{
         maskImage: mask,
         WebkitMaskImage: mask,
-        gap
+        gap,
       }}
     >
       {Array.from({ length: 2 }).map((_index, number) => (
@@ -44,14 +44,14 @@ function Marquee(props: MarqueeProps) {
           style={
             {
               '--marquee-gap': gap,
-              '--marquee-duration': `${duration}s`
+              '--marquee-duration': `${duration}s`,
             } as React.CSSProperties
           }
           className={cn(
             'flex shrink-0 justify-around gap-(--marquee-gap)',
             direction === 'left' ? 'animate-marquee-x flex-row' : 'animate-marquee-y flex-col',
             pauseOnHover && 'group-hover:paused',
-            reverse && 'direction-reverse'
+            reverse && 'direction-reverse',
           )}
         >
           {children}

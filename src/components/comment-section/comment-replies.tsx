@@ -25,9 +25,9 @@ function CommentReplies() {
       parentId: comment.id,
       type: 'replies',
       highlightedCommentId: params.reply ?? undefined,
-      cursor: pageParam
+      cursor: pageParam,
     }),
-    isOpenReplies
+    isOpenReplies,
   )
 
   const { ref, inView } = useInView()

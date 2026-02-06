@@ -16,7 +16,7 @@ function UsersTable(props: UsersTableProps) {
   const table = useReactTable({
     data: users,
     columns,
-    getCoreRowModel: getCoreRowModel()
+    getCoreRowModel: getCoreRowModel(),
   })
 
   return (

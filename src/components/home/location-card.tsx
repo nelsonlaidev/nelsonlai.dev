@@ -17,7 +17,7 @@ function LocationCard() {
   const springRotation = useSpring(rotation, {
     stiffness: 280,
     damping: 40,
-    mass: 1
+    mass: 1,
   })
 
   useEffect(() => {
@@ -51,7 +51,7 @@ function LocationCard() {
         state.phi = 2.75 + springRotation.get()
         state.width = width * 2
         state.height = width * 2
-      }
+      },
     })
 
     return () => {
@@ -74,7 +74,7 @@ function LocationCard() {
             display: 'flex',
             placeItems: 'center',
             placeContent: 'center',
-            overflow: 'visible'
+            overflow: 'visible',
           }}
         >
           <div
@@ -83,7 +83,7 @@ function LocationCard() {
               aspectRatio: '1/1',
               maxWidth: 800,
               WebkitMaskImage: fadeMask,
-              maskImage: fadeMask
+              maskImage: fadeMask,
             }}
           >
             <canvas
@@ -119,7 +119,7 @@ function LocationCard() {
                 height: '100%',
                 contain: 'layout paint size',
                 cursor: 'auto',
-                userSelect: 'none'
+                userSelect: 'none',
               }}
             />
           </div>

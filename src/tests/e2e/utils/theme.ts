@@ -27,10 +27,10 @@ export async function createBrowserContext(browser: Browser, options: CreateBrow
       origins: [
         {
           origin: options.baseURL ?? 'http://localhost:3000',
-          localStorage: options.localStorage ?? []
-        }
-      ]
-    }
+          localStorage: options.localStorage ?? [],
+        },
+      ],
+    },
   })
 }
 

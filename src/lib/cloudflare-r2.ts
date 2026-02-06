@@ -27,14 +27,14 @@ function createClient(): R2Client {
     forcePathStyle: true,
     credentials: {
       accessKeyId,
-      secretAccessKey
-    }
+      secretAccessKey,
+    },
   })
 
   return {
     client,
     bucketName,
-    publicUrl
+    publicUrl,
   }
 }
 

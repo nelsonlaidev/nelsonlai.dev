@@ -10,6 +10,6 @@ export function render(ui: React.ReactNode, options?: RenderOptions): RenderResu
         {children}
       </NextIntlClientProvider>
     ),
-    ...options
+    ...options,
   })
 }

@@ -18,12 +18,12 @@ export const settings = pgTable('settings', {
   updatedAt: timestamp('updated_at')
     .notNull()
     .$defaultFn(() => new Date())
-    .$onUpdateFn(() => new Date())
+    .$onUpdateFn(() => new Date()),
 })
 
 export const settingsRelations = relations(settings, ({ one }) => ({
   user: one(users, {
     fields: [settings.userId],
-    references: [users.id]
-  })
+    references: [users.id],
+  }),
 }))

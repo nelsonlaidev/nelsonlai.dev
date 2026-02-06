@@ -22,7 +22,7 @@ function CommentEditor(props: CommentEditorProps) {
   const { textareaRef, handleKeyDown, handleInput, handleCompositionStart, handleCompositionEnd, decorateText } =
     useCommentEditor({
       onModEnter,
-      onEscape
+      onEscape,
     })
 
   return (

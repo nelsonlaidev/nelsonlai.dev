@@ -15,7 +15,7 @@ import {
   SITE_GITHUB_URL,
   SITE_INSTAGRAM_URL,
   SITE_X_URL,
-  SITE_YOUTUBE_URL
+  SITE_YOUTUBE_URL,
 } from '@/lib/constants'
 import { getPageBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
@@ -36,8 +36,8 @@ export async function generateMetadata(props: PageProps<'/[locale]/about'>): Pro
     description,
     locale,
     openGraph: {
-      type: 'profile'
-    }
+      type: 'profile',
+    },
   })
 }
 
@@ -64,9 +64,9 @@ function Page(props: PageProps<'/[locale]/about'>) {
       name: MY_NAME,
       description: t('metadata.site-description'),
       url: getBaseUrl(),
-      sameAs: [SITE_FACEBOOK_URL, SITE_INSTAGRAM_URL, SITE_X_URL, SITE_GITHUB_URL, SITE_YOUTUBE_URL]
+      sameAs: [SITE_FACEBOOK_URL, SITE_INSTAGRAM_URL, SITE_X_URL, SITE_GITHUB_URL, SITE_YOUTUBE_URL],
     },
-    inLanguage: locale
+    inLanguage: locale,
   }
 
   if (!page) {

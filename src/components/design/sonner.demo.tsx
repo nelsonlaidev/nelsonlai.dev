@@ -29,7 +29,7 @@ function promiseTask() {
   return new Promise<{ name: string }>((resolve) =>
     setTimeout(() => {
       resolve({ name: 'Event' })
-    }, 2000)
+    }, 2000),
   )
 }
 
@@ -54,7 +54,7 @@ function SonnerTypes() {
           toast.promise<{ name: string }>(promiseTask, {
             loading: 'Loading...',
             success: (data) => `${data.name} has been created`,
-            error: 'Error'
+            error: 'Error',
           })
         }}
       >
@@ -70,7 +70,7 @@ function SonnerWithDescription() {
       <Button
         onClick={() =>
           toast('Event has been created', {
-            description: 'Monday, January 3rd at 6:00pm'
+            description: 'Monday, January 3rd at 6:00pm',
           })
         }
         variant='outline'

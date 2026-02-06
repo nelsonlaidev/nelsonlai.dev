@@ -28,7 +28,7 @@ export async function GET(_request: Request, props: RouteContext<'/[locale]/rss.
     language: locale,
     image_url: getLocalizedPath({ locale, pathname: '/og/image.webp' }),
     copyright: `© ${new Date().getFullYear()} ${MY_NAME}. All rights reserved.`,
-    webMaster: 'me@nelsonlai.dev'
+    webMaster: 'me@nelsonlai.dev',
   })
 
   const posts = allPosts.filter((p) => p.locale === locale)
@@ -39,13 +39,13 @@ export async function GET(_request: Request, props: RouteContext<'/[locale]/rss.
       url: getLocalizedPath({ locale, pathname: `/blog/${post.slug}` }),
       date: post.date,
       description: post.summary,
-      author: MY_NAME
+      author: MY_NAME,
     })
   }
 
   return new NextResponse(feed.xml({ indent: true }), {
     headers: {
-      'Content-Type': 'application/xml'
-    }
+      'Content-Type': 'application/xml',
+    },
   })
 }

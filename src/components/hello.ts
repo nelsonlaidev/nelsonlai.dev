@@ -14,7 +14,7 @@ https://github.com/nelsonlaidev/nelsonlai.dev
 
 and give it a star ⭐
 `,
-      'font-size: 16px'
+      'font-size: 16px',
     )
   }, [])
 

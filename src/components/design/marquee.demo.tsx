@@ -9,7 +9,7 @@ const updates = [
   { title: 'Release checklist', time: 'Tomorrow · 9:00 AM' },
   { title: 'Content pass', time: 'Thu · 1:30 PM' },
   { title: 'QA sweep', time: 'Fri · 11:00 AM' },
-  { title: 'Launch prep', time: 'Fri · 4:00 PM' }
+  { title: 'Launch prep', time: 'Fri · 4:00 PM' },
 ]
 
 function MarqueeDemo() {

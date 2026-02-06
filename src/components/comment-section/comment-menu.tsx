@@ -11,7 +11,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle
+  AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -37,7 +37,7 @@ function CommentMenu() {
     isDeleted,
     id,
     user: { id: userId },
-    parentId
+    parentId,
   } = comment
 
   const commentQuery = parentId ? `comment=${parentId}&reply=${id}` : `comment=${id}`
@@ -69,7 +69,7 @@ function CommentMenu() {
             onClick={() =>
               void copy({
                 text: `${globalThis.location.origin}/blog/${slug}?${commentQuery}`,
-                successMessage: t('success.link-copied')
+                successMessage: t('success.link-copied'),
               })
             }
           >

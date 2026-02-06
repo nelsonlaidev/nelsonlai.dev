@@ -10,36 +10,36 @@ type Icon = {
 const icons: Icon[] = [
   {
     language: ['javascript', 'js', 'mjs', 'cjs'],
-    icon: SiJavascript
+    icon: SiJavascript,
   },
   {
     language: ['typescript', 'ts', 'mts', 'cts'],
-    icon: SiTypescript
+    icon: SiTypescript,
   },
   {
     language: ['html'],
-    icon: SiHtml5
+    icon: SiHtml5,
   },
   {
     language: ['css'],
-    icon: SiCss
+    icon: SiCss,
   },
   {
     language: ['jsx', 'tsx'],
-    icon: SiReact
+    icon: SiReact,
   },
   {
     language: ['sh', 'bash', 'zsh'],
-    icon: TerminalIcon
+    icon: TerminalIcon,
   },
   {
     language: ['markdown', 'md'],
-    icon: SiMarkdown
+    icon: SiMarkdown,
   },
   {
     language: ['mdx'],
-    icon: SiMdx
-  }
+    icon: SiMdx,
+  },
 ]
 
 const languageToIcon = new Map<string, React.FC<React.SVGProps<SVGSVGElement>>>()

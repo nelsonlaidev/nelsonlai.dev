@@ -60,7 +60,7 @@ const PLATFORM_ICONS = {
   desktop: MonitorIcon,
   mobile: SmartphoneIcon,
   tablet: TabletIcon,
-  tv: TvIcon
+  tv: TvIcon,
 }
 
 function Session(props: SessionProps) {

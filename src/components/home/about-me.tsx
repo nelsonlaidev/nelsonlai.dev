@@ -17,12 +17,12 @@ import StacksCard from './stacks-card'
 const variants = {
   initial: {
     y: 40,
-    opacity: 0
+    opacity: 0,
   },
   animate: {
     y: 0,
-    opacity: 1
-  }
+    opacity: 1,
+  },
 }
 
 function AboutMe() {
@@ -37,7 +37,7 @@ function AboutMe() {
       variants={variants}
       ref={cardsRef}
       transition={{
-        duration: 0.5
+        duration: 0.5,
       }}
       className='relative my-24'
     >
@@ -45,14 +45,14 @@ function AboutMe() {
         className='text-center text-3xl font-semibold'
         initial={{
           y: 30,
-          opacity: 0
+          opacity: 0,
         }}
         animate={{
           y: 0,
-          opacity: 1
+          opacity: 1,
         }}
         transition={{
-          duration: 0.3
+          duration: 0.3,
         }}
       >
         {t('homepage.about-me.title')}
@@ -61,14 +61,14 @@ function AboutMe() {
         className='mt-12 grid gap-4 md:grid-cols-2'
         initial={{
           y: 40,
-          opacity: 0
+          opacity: 0,
         }}
         animate={{
           y: 0,
-          opacity: 1
+          opacity: 1,
         }}
         transition={{
-          duration: 0.3
+          duration: 0.3,
         }}
       >
         <div className='grid gap-4'>

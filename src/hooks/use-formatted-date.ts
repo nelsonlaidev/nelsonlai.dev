@@ -24,7 +24,7 @@ export function useFormattedDate(date: DateInput, options: Options = {}): string
 
     const formatOptionsWithTimeZone = {
       ...formatOptions,
-      timeZone
+      timeZone,
     }
 
     // Check if we should use relative time

@@ -48,7 +48,7 @@ function Comment(props: CommentProps) {
     isDeleted,
     parentId,
     user: { id: userId, image, name, role },
-    replyCount
+    replyCount,
   } = comment
 
   const formattedDate = useFormattedDate(comment.createdAt, { relative: true })
@@ -74,9 +74,9 @@ function Comment(props: CommentProps) {
       setIsReplying,
       setIsOpenReplies,
       slug,
-      comment
+      comment,
     }),
-    [comment, isEditing, isOpenReplies, isReplying, slug]
+    [comment, isEditing, isOpenReplies, isReplying, slug],
   )
 
   return (

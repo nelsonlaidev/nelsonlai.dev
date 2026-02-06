@@ -41,7 +41,7 @@ function MobileTableOfContents(props: MobileTableOfContentsProps) {
               href={`#${url}`}
               className='block py-2.5 pr-2.5 text-sm/tight text-muted-foreground transition-colors hover:text-foreground'
               style={{
-                paddingLeft: (depth - 1) * 16
+                paddingLeft: (depth - 1) * 16,
               }}
               onClick={() => {
                 router.push(`#${url}`)

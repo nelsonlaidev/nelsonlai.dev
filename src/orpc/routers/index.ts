@@ -29,5 +29,5 @@ export const router = {
   auth: authRouter,
   settings: settingsRouter,
   r2: r2Router,
-  unsubscribe: unsubscribeRouter
+  unsubscribe: unsubscribeRouter,
 }

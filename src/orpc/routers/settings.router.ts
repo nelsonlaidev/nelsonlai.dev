@@ -8,7 +8,7 @@ import { protectedProcedure } from '../procedures'
 import {
   GetSettingsOutputSchema,
   UpdateSettingsInputSchema,
-  UpdateSettingsOutputSchema
+  UpdateSettingsOutputSchema,
 } from '../schemas/settings.schema'
 
 const getSettings = protectedProcedure.output(GetSettingsOutputSchema).handler(async ({ context }) => {
@@ -27,11 +27,11 @@ const updateSettings = protectedProcedure
       .insert(settings)
       .values({
         userId: context.session.user.id,
-        ...input
+        ...input,
       })
       .onConflictDoUpdate({
         target: settings.userId,
-        set: input
+        set: input,
       })
       .returning()
 
@@ -46,5 +46,5 @@ const updateSettings = protectedProcedure
 
 export const settingsRouter = {
   get: getSettings,
-  update: updateSettings
+  update: updateSettings,
 }

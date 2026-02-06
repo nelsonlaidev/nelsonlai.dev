@@ -3,7 +3,7 @@ import { createSelectSchema } from 'drizzle-zod'
 import { settings } from '@/db/schemas'
 
 export const GetSettingsOutputSchema = createSelectSchema(settings).pick({
-  replyNotificationsEnabled: true
+  replyNotificationsEnabled: true,
 })
 
 export { GetSettingsOutputSchema as UpdateSettingsInputSchema }

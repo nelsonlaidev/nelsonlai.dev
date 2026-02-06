@@ -26,13 +26,13 @@ const createCommentReplyUnsubscribe = publicProcedure
       where: and(
         eq(unsubscribes.userId, userId),
         eq(unsubscribes.commentId, commentId),
-        eq(unsubscribes.type, 'comment_reply')
-      )
+        eq(unsubscribes.type, 'comment_reply'),
+      ),
     })
 
     if (existing) {
       throw new ORPCError('CONFLICT', {
-        message: 'You have already unsubscribed from notifications for this comment'
+        message: 'You have already unsubscribed from notifications for this comment',
       })
     }
 
@@ -40,10 +40,10 @@ const createCommentReplyUnsubscribe = publicProcedure
       id: createId(),
       userId,
       commentId,
-      type: 'comment_reply'
+      type: 'comment_reply',
     })
   })
 
 export const unsubscribeRouter = {
-  createCommentReply: createCommentReplyUnsubscribe
+  createCommentReply: createCommentReplyUnsubscribe,
 }

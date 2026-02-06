@@ -13,6 +13,6 @@ export function useSignInDialog() {
     },
     closeDialog: () => {
       setOpen(false)
-    }
+    },
   }
 }

@@ -17,17 +17,17 @@ export const postLikes = pgTable(
     updatedAt: timestamp('updated_at')
       .notNull()
       .$defaultFn(() => new Date())
-      .$onUpdateFn(() => new Date())
+      .$onUpdateFn(() => new Date()),
   },
   (postLike) => [
     primaryKey({ columns: [postLike.postId, postLike.anonKey] }),
-    check('post_likes_like_count_check', sql`${postLike.likeCount} BETWEEN 0 AND 3`)
-  ]
+    check('post_likes_like_count_check', sql`${postLike.likeCount} BETWEEN 0 AND 3`),
+  ],
 )
 
 export const postLikesRelations = relations(postLikes, ({ one }) => ({
   post: one(posts, {
     fields: [postLikes.postId],
-    references: [posts.slug]
-  })
+    references: [posts.slug],
+  }),
 }))

@@ -57,7 +57,7 @@ export async function generateMetadata(props: PageProps<'/[locale]/design'>): Pr
     pathname: '/design',
     title,
     description,
-    locale
+    locale,
   })
 }
 
@@ -81,9 +81,9 @@ function Page(props: PageProps<'/[locale]/design'>) {
     isPartOf: {
       '@type': 'WebSite',
       name: MY_NAME,
-      url: getBaseUrl()
+      url: getBaseUrl(),
     },
-    inLanguage: locale
+    inLanguage: locale,
   }
 
   return (

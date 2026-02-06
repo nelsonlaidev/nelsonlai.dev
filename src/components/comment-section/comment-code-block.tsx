@@ -17,8 +17,8 @@ type CommentCodeBlockProps = {
 function CommentCodeBlock(props: CommentCodeBlockProps) {
   const {
     children: {
-      props: { children: code, className, title }
-    }
+      props: { children: code, className, title },
+    },
   } = props
   const lang = className?.replace('lang-', '') ?? 'plaintext'
   const [highlighter] = useHighlighter()
@@ -43,9 +43,9 @@ function CommentCodeBlock(props: CommentCodeBlockProps) {
         lang: lang in bundledLanguages ? lang : 'plaintext',
         themes: {
           light: 'github-light-default',
-          dark: 'github-dark-default'
+          dark: 'github-dark-default',
         },
-        defaultColor: false
+        defaultColor: false,
       })
     }
 

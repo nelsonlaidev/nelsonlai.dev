@@ -8,11 +8,11 @@ export const CreateMessageOutputSchema = createSelectSchema(messages).pick({
   createdAt: true,
   updatedAt: true,
   userId: true,
-  body: true
+  body: true,
 })
 
 export const CreateMessageInputSchema = z.object({
-  message: z.string().min(1)
+  message: z.string().min(1),
 })
 
 export const ListMessagesOutputSchema = z.object({
@@ -21,15 +21,15 @@ export const ListMessagesOutputSchema = z.object({
       user: createSelectSchema(users).pick({
         name: true,
         image: true,
-        id: true
-      })
-    })
+        id: true,
+      }),
+    }),
   ),
-  nextCursor: z.date().optional()
+  nextCursor: z.date().optional(),
 })
 
 export const DeleteMessageInputSchema = z.object({
-  id: z.string()
+  id: z.string(),
 })
 
 export { InfiniteQuerySchema as ListMessagesInputSchema } from './common.schema'

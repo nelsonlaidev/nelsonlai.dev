@@ -12,12 +12,12 @@ import { buttonVariants } from '../ui/button'
 const variants = {
   initial: {
     y: 40,
-    opacity: 0
+    opacity: 0,
   },
   animate: {
     y: 0,
-    opacity: 1
-  }
+    opacity: 1,
+  },
 }
 
 function GetInTouch() {
@@ -42,9 +42,9 @@ function GetInTouch() {
         ['#next-js', { opacity: 1 }, { duration: 0.3 }],
         ['#pointer', { left: 200, top: 60 }, { at: '+0.5', duration: 0.5, ease: 'easeInOut' }],
         ['#next-js', { opacity: 0.4 }, { at: '-0.3', duration: 0.1 }],
-        ['#javascript', { opacity: 1 }, { duration: 0.3 }]
+        ['#javascript', { opacity: 1 }, { duration: 0.3 }],
       ],
-      { repeat: Number.POSITIVE_INFINITY }
+      { repeat: Number.POSITIVE_INFINITY },
     )
   }, [animate])
 
@@ -56,7 +56,7 @@ function GetInTouch() {
       variants={variants}
       ref={cardsRef}
       transition={{
-        duration: 0.5
+        duration: 0.5,
       }}
     >
       <div className='relative size-64 max-md:mx-auto' ref={scope}>

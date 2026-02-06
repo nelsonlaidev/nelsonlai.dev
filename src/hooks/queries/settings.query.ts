@@ -14,7 +14,7 @@ export function useUpdateSettings(onSuccess?: () => void) {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: orpc.settings.get.key() })
         onSuccess?.()
-      }
-    })
+      },
+    }),
   )
 }

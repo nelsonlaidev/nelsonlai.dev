@@ -7,7 +7,7 @@ import { localeLabels, routing, usePathname, useRouter } from '@/i18n/routing'
 
 const items = routing.locales.map((locale) => ({
   label: localeLabels[locale],
-  value: locale
+  value: locale,
 }))
 
 function LocaleSwitcher() {

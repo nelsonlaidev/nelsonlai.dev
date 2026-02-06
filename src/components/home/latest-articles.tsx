@@ -18,12 +18,12 @@ import { cn } from '@/utils/cn'
 const variants = {
   initial: {
     y: 40,
-    opacity: 0
+    opacity: 0,
   },
   animate: {
     y: 0,
-    opacity: 1
-  }
+    opacity: 1,
+  },
 }
 
 type LatestArticlesProps = {
@@ -43,7 +43,7 @@ function LatestArticles(props: LatestArticlesProps) {
       variants={variants}
       ref={projectsRef}
       transition={{
-        duration: 0.5
+        duration: 0.5,
       }}
       className='my-24'
     >
@@ -51,14 +51,14 @@ function LatestArticles(props: LatestArticlesProps) {
         className='text-center text-3xl font-semibold'
         initial={{
           y: 30,
-          opacity: 0
+          opacity: 0,
         }}
         animate={{
           y: 0,
-          opacity: 1
+          opacity: 1,
         }}
         transition={{
-          duration: 0.3
+          duration: 0.3,
         }}
       >
         {t('homepage.latest-articles.title')}
@@ -67,14 +67,14 @@ function LatestArticles(props: LatestArticlesProps) {
         className='mt-12 grid gap-4 md:grid-cols-2'
         initial={{
           y: 40,
-          opacity: 0
+          opacity: 0,
         }}
         animate={{
           y: 0,
-          opacity: 1
+          opacity: 1,
         }}
         transition={{
-          duration: 0.3
+          duration: 0.3,
         }}
       >
         {posts.map((post) => (

@@ -31,7 +31,7 @@ test.describe('comment page', () => {
       id: commentId,
       body: 'Test Comment',
       postId: 'test-delete',
-      userId: TEST_UNIQUE_ID
+      userId: TEST_UNIQUE_ID,
     })
 
     await page.goto('/blog/test-delete')
@@ -62,7 +62,7 @@ test.describe('comment page', () => {
       id: parentId,
       body: 'Parent Comment',
       postId: 'test-reply',
-      userId: TEST_UNIQUE_ID
+      userId: TEST_UNIQUE_ID,
     })
 
     await page.goto('/blog/test-reply')
@@ -94,7 +94,7 @@ test.describe('comment page', () => {
       id: parentId,
       body: 'Parent Comment',
       postId: 'test-delete-reply',
-      userId: TEST_UNIQUE_ID
+      userId: TEST_UNIQUE_ID,
     })
 
     await db.insert(comments).values({
@@ -102,7 +102,7 @@ test.describe('comment page', () => {
       body: 'Reply comment',
       postId: 'test-delete-reply',
       userId: TEST_UNIQUE_ID,
-      parentId
+      parentId,
     })
 
     await page.goto('/blog/test-delete-reply')

@@ -12,7 +12,7 @@ function Counter(props: CounterProps) {
   const motionValue = useMotionValue(direction === 'down' ? value : 0)
   const springValue = useSpring(motionValue, {
     damping: 100,
-    stiffness: 300
+    stiffness: 300,
   })
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 

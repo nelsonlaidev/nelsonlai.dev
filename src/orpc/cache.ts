@@ -6,9 +6,9 @@ export const cache = {
   posts: {
     views: createCache<number>('posts:views'),
     likes: createCache<number>('posts:likes'),
-    userLikes: createCache<number>('posts:user-likes')
+    userLikes: createCache<number>('posts:user-likes'),
   },
   auth: {
-    location: createCache<string>('auth:location', LOCATION_CACHE_TTL)
-  }
+    location: createCache<string>('auth:location', LOCATION_CACHE_TTL),
+  },
 }

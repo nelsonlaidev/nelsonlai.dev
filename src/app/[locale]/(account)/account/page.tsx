@@ -19,7 +19,7 @@ export async function generateMetadata(props: PageProps<'/[locale]/account'>): P
     pathname: '/account',
     title,
     description,
-    locale
+    locale,
   })
 }
 

@@ -21,6 +21,6 @@ export function sendEmail(options: SendEmailOptions) {
     from: 'Nelson Lai <me@nelsonlai.dev>',
     to,
     subject,
-    react
+    react,
   })
 }

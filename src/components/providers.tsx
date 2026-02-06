@@ -23,7 +23,7 @@ function Providers(props: ProvidesProps) {
             {children}
             <Toaster
               toastOptions={{
-                duration: 2500
+                duration: 2500,
               }}
               visibleToasts={5}
               expand

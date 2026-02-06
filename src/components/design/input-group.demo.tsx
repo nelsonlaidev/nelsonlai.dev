@@ -16,7 +16,7 @@ import {
   SearchIcon,
   SparklesIcon,
   StarIcon,
-  TrashIcon
+  TrashIcon,
 } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -32,7 +32,7 @@ import {
   InputGroupButton,
   InputGroupInput,
   InputGroupText,
-  InputGroupTextarea
+  InputGroupTextarea,
 } from '../ui/input-group'
 import { Kbd, KbdGroup } from '../ui/kbd'
 import { Popover, PopoverContent, PopoverDescription, PopoverHeader, PopoverTitle, PopoverTrigger } from '../ui/popover'

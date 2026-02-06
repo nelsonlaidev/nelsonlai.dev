@@ -49,7 +49,7 @@ function LayoutFooter() {
                 Intl.NumberFormat('en', {
                   notation: 'compact',
                   minimumFractionDigits: 0,
-                  maximumFractionDigits: 1
+                  maximumFractionDigits: 1,
                 }).format(data.repoStars)}
               {isLoading && '--'}
               {isError && t('common.error')}

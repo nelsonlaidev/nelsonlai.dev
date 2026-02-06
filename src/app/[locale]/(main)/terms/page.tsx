@@ -22,7 +22,7 @@ export async function generateMetadata(props: PageProps<'/[locale]/terms'>): Pro
     pathname: '/terms',
     title,
     description,
-    locale
+    locale,
   })
 }
 

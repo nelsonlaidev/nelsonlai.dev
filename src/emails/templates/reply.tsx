@@ -11,7 +11,7 @@ import {
   Row,
   Section,
   Tailwind,
-  Text
+  Text,
 } from '@react-email/components'
 
 import Footer from '../components/footer'
@@ -104,7 +104,7 @@ ReplyEmailTemplate.PreviewProps = {
   replierIdentifier: 'comment=1&reply=1',
   postTitle: 'Understanding Modern Web Development',
   postUrl: 'http://localhost:3000/blog/understanding-modern-web-development',
-  unsubscribeUrl: 'http://localhost:3000/unsubscribe?token=abc123'
+  unsubscribeUrl: 'http://localhost:3000/unsubscribe?token=abc123',
 } satisfies ReplyEmailTemplateProps
 
 export default ReplyEmailTemplate

@@ -94,7 +94,7 @@ function InputWithSelect() {
   const items = [
     { label: 'USD', value: 'usd' },
     { label: 'EUR', value: 'eur' },
-    { label: 'GBP', value: 'gbp' }
+    { label: 'GBP', value: 'gbp' },
   ]
 
   return (
@@ -129,7 +129,7 @@ function InputForm() {
   const items = [
     { label: 'United States', value: 'us' },
     { label: 'United Kingdom', value: 'uk' },
-    { label: 'Canada', value: 'ca' }
+    { label: 'Canada', value: 'ca' },
   ]
 
   return (

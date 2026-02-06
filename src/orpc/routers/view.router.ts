@@ -10,7 +10,7 @@ import {
   CountViewInputSchema,
   CountViewOutputSchema,
   IncrementViewInputSchema,
-  IncrementViewOutputSchema
+  IncrementViewOutputSchema,
 } from '../schemas/view.schema'
 
 const countView = publicProcedure
@@ -20,7 +20,7 @@ const countView = publicProcedure
     const cached = await cache.posts.views.get(input.slug)
     if (cached) {
       return {
-        views: cached
+        views: cached,
       }
     }
 
@@ -28,7 +28,7 @@ const countView = publicProcedure
 
     if (!post) {
       throw new ORPCError('NOT_FOUND', {
-        message: 'Post not found'
+        message: 'Post not found',
       })
     }
 
@@ -37,7 +37,7 @@ const countView = publicProcedure
     await cache.posts.views.set(input.slug, views)
 
     return {
-      views
+      views,
     }
   })
 
@@ -49,19 +49,19 @@ const incrementView = publicProcedure
       .insert(posts)
       .values({
         slug: input.slug,
-        views: 1
+        views: 1,
       })
       .onConflictDoUpdate({
         target: posts.slug,
         set: {
-          views: sql`${posts.views} + 1`
-        }
+          views: sql`${posts.views} + 1`,
+        },
       })
       .returning()
 
     if (!result) {
       throw new ORPCError('INTERNAL_SERVER_ERROR', {
-        message: 'Failed to increment view'
+        message: 'Failed to increment view',
       })
     }
 
@@ -70,26 +70,26 @@ const incrementView = publicProcedure
     await cache.posts.views.set(input.slug, views)
 
     return {
-      views
+      views,
     }
   })
 
 const viewsStats = publicProcedure.output(ViewsStatsOutputSchema).handler(async ({ context }) => {
   const [result] = await context.db
     .select({
-      value: sum(posts.views)
+      value: sum(posts.views),
     })
     .from(posts)
 
   const views = result?.value ? Number(result.value) : 0
 
   return {
-    views
+    views,
   }
 })
 
 export const viewRouter = {
   count: countView,
   increment: incrementView,
-  stats: viewsStats
+  stats: viewsStats,
 }

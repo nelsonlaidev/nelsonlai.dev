@@ -20,18 +20,18 @@ const works = [
   {
     artist: 'Ornella Binni',
     description: 'Grayscale photo of bike on wall',
-    art: 'https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80'
+    art: 'https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80',
   },
   {
     artist: 'Tom Byrom',
     description: 'Grayscale photography of concrete stairs',
-    art: 'https://images.unsplash.com/photo-1548516173-3cabfa4607e9?auto=format&fit=crop&w=300&q=80'
+    art: 'https://images.unsplash.com/photo-1548516173-3cabfa4607e9?auto=format&fit=crop&w=300&q=80',
   },
   {
     artist: 'Alex Padurariu',
     description: 'Grayscale photo of concrete structure',
-    art: 'https://images.unsplash.com/photo-1494337480532-3725c85fd2ab?auto=format&fit=crop&w=300&q=80'
-  }
+    art: 'https://images.unsplash.com/photo-1494337480532-3725c85fd2ab?auto=format&fit=crop&w=300&q=80',
+  },
 ] as const
 
 function ScrollAreaVertical() {

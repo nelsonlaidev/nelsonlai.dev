@@ -35,7 +35,7 @@ function transformer(tree: Node, file: VFile) {
     toc.push({
       title: text,
       url: id,
-      depth: node.depth
+      depth: node.depth,
     })
 
     return 'skip'

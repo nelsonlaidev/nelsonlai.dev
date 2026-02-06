@@ -34,7 +34,7 @@ function DemoItem(props: DemoItem) {
         data-orientation={orientation}
         className={cn(
           'flex flex-wrap rounded-4xl border border-dashed p-4 sm:p-6 data-horizontal:gap-2 data-vertical:flex-col data-vertical:gap-6',
-          className
+          className,
         )}
       >
         {children}

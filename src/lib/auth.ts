@@ -12,7 +12,7 @@ export const auth = betterAuth({
   baseURL: getBaseUrl(),
   database: drizzleAdapter(db, {
     provider: 'pg',
-    usePlural: true
+    usePlural: true,
   }),
   trustedOrigins: [getBaseUrl()],
   socialProviders: {
@@ -20,26 +20,26 @@ export const auth = betterAuth({
       !!env.GOOGLE_CLIENT_SECRET && {
         google: {
           clientId: env.GOOGLE_CLIENT_ID,
-          clientSecret: env.GOOGLE_CLIENT_SECRET
-        }
+          clientSecret: env.GOOGLE_CLIENT_SECRET,
+        },
       }),
     ...(!!env.GITHUB_CLIENT_ID &&
       !!env.GITHUB_CLIENT_SECRET && {
         github: {
           clientId: env.GITHUB_CLIENT_ID,
-          clientSecret: env.GITHUB_CLIENT_SECRET
-        }
-      })
+          clientSecret: env.GITHUB_CLIENT_SECRET,
+        },
+      }),
   },
   user: {
     additionalFields: {
-      role: { type: 'string', required: true, input: false, defaultValue: 'user' }
-    }
-  }
+      role: { type: 'string', required: true, input: false, defaultValue: 'user' },
+    },
+  },
 })
 
 export async function getSession(request?: NextRequest) {
   return auth.api.getSession({
-    headers: request ? request.headers : await headers()
+    headers: request ? request.headers : await headers(),
   })
 }

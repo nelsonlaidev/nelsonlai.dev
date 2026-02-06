@@ -8,8 +8,8 @@ export function useListMessages() {
       input: (pageParam: Date | undefined) => ({ cursor: pageParam }),
       initialPageParam: undefined,
       getNextPageParam: (lastPage) => lastPage.nextCursor,
-      placeholderData: keepPreviousData
-    })
+      placeholderData: keepPreviousData,
+    }),
   )
 }
 
@@ -21,8 +21,8 @@ export function useCreateMessage(onSuccess?: () => void) {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: orpc.message.list.key() })
         onSuccess?.()
-      }
-    })
+      },
+    }),
   )
 }
 
@@ -34,7 +34,7 @@ export function useDeleteMessage(onSuccess?: () => void) {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: orpc.message.list.key() })
         onSuccess?.()
-      }
-    })
+      },
+    }),
   )
 }

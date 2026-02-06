@@ -9,8 +9,8 @@ export function useListComments(input: (pageParam: Date | undefined) => CommentL
       initialPageParam: undefined,
       getNextPageParam: (lastPage) => lastPage.nextCursor,
       placeholderData: keepPreviousData,
-      enabled
-    })
+      enabled,
+    }),
   )
 }
 
@@ -28,8 +28,8 @@ export function useCreatePostComment(input: CommentListInput, onSuccess?: () => 
         queryClient.invalidateQueries({ queryKey: orpc.comment.count.key({ input }) })
         queryClient.invalidateQueries({ queryKey: orpc.reply.count.key({ input }) })
         onSuccess?.()
-      }
-    })
+      },
+    }),
   )
 }
 
@@ -43,7 +43,7 @@ export function useDeletePostComment(input: CommentListInput, onSuccess?: () => 
         queryClient.invalidateQueries({ queryKey: orpc.comment.count.key({ input }) })
         queryClient.invalidateQueries({ queryKey: orpc.reply.count.key({ input }) })
         onSuccess?.()
-      }
-    })
+      },
+    }),
   )
 }

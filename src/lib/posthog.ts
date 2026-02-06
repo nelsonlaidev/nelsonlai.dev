@@ -15,7 +15,7 @@ export function getPostHogServer() {
   posthogInstance ??= new PostHog(env.NEXT_PUBLIC_POSTHOG_KEY, {
     host: env.NEXT_PUBLIC_POSTHOG_HOST,
     flushAt: 1,
-    flushInterval: 0
+    flushInterval: 0,
   })
 
   return posthogInstance
@@ -29,6 +29,6 @@ export function withPostHog(nextConfig: Promise<NextConfig>): Promise<NextConfig
   return withPostHogConfig(() => nextConfig, {
     personalApiKey: env.POSTHOG_API_KEY,
     envId: env.POSTHOG_ENV_ID,
-    host: env.NEXT_PUBLIC_POSTHOG_HOST
+    host: env.NEXT_PUBLIC_POSTHOG_HOST,
   })
 }

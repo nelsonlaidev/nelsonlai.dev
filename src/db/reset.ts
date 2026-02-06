@@ -8,7 +8,7 @@ import { db } from './index'
 
 async function main() {
   const confirmed = await consola.prompt('Are you sure you want to reset the database?', {
-    type: 'confirm'
+    type: 'confirm',
   })
 
   if (!confirmed) {
@@ -19,7 +19,7 @@ async function main() {
 
   if (!env.DATABASE_URL.includes('localhost')) {
     const nonLocalConfirmed = await consola.prompt('Non-local database detected. Are you sure you want to continue?', {
-      type: 'confirm'
+      type: 'confirm',
     })
 
     if (!nonLocalConfirmed) {

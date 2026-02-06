@@ -47,7 +47,7 @@ Next, create the following file:
       {
         id: 'components',
         name: 'components',
-        children: [{ id: 'components/layout.jsx', name: 'layout.jsx' }]
+        children: [{ id: 'components/layout.jsx', name: 'layout.jsx' }],
       },
       {
         id: 'data',
@@ -59,18 +59,18 @@ Next, create the following file:
             children: [
               { id: 'data/blog/markdown.mdx', name: 'markdown.mdx' },
               { id: 'data/blog/nextjs.mdx', name: 'nextjs.mdx' },
-              { id: 'data/blog/react.mdx', name: 'react.mdx' }
-            ]
-          }
-        ]
+              { id: 'data/blog/react.mdx', name: 'react.mdx' },
+            ],
+          },
+        ],
       },
       {
         id: 'lib',
         name: 'lib',
         children: [
           { id: 'lib/format-date.js', name: 'format-date.js' },
-          { id: 'lib/mdx.js', name: 'mdx.js' }
-        ]
+          { id: 'lib/mdx.js', name: 'mdx.js' },
+        ],
       },
       {
         id: 'pages',
@@ -79,11 +79,11 @@ Next, create the following file:
           {
             id: 'pages/blog',
             name: 'blog',
-            children: [{ id: 'pages/blog/[slug].jsx', name: '[slug].jsx' }]
-          }
-        ]
-      }
-    ]
+            children: [{ id: 'pages/blog/[slug].jsx', name: '[slug].jsx' }],
+          },
+        ],
+      },
+    ],
   }}
 />
 
@@ -156,13 +156,13 @@ export const getPostBySlug = async (slug) => {
 
   const frontMatter = {
     ...data,
-    slug
+    slug,
   }
   // Put the slug in the front matter as well, which will be used later
 
   return {
     source: mdxSource,
-    frontMatter
+    frontMatter,
   }
 }
 ```
@@ -181,7 +181,7 @@ export const getAllPosts = () => {
     frontMatter.push({
       ...data,
       slug: formatSlug(slug),
-      date: new Date(data.date).toISOString()
+      date: new Date(data.date).toISOString(),
     })
   })
 
@@ -204,7 +204,7 @@ export const formatDate = (date) =>
   new Date(date).toLocaleDateString('en', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   })
 /*
  * formatDate('2022-08-21T00:00:00Z')
@@ -250,8 +250,8 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      posts
-    }
+      posts,
+    },
   }
 }
 ```
@@ -286,16 +286,16 @@ export const getStaticProps = async ({ params }) => {
 
   return {
     props: {
-      post
-    }
+      post,
+    },
   }
 }
 
 export const getStaticPaths = async () => {
   const paths = allSlugs.map((slug) => ({
     params: {
-      slug: formatSlug(slug)
-    }
+      slug: formatSlug(slug),
+    },
   }))
   /*
    * paths Output:
@@ -308,7 +308,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false
+    fallback: false,
   }
 }
 ```

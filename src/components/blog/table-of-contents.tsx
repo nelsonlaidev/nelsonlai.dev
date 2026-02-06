@@ -16,7 +16,7 @@ function TableOfContents(props: TableOfContentsProps) {
   const { toc } = props
   const activeId = useScrollspy(
     toc.map((item) => item.url),
-    { rootMargin: '0% 0% -80% 0%' }
+    { rootMargin: '0% 0% -80% 0%' },
   )
   const t = useTranslations()
   const router = useRouter()
@@ -37,7 +37,7 @@ function TableOfContents(props: TableOfContentsProps) {
             key={item.url}
             value={item.url}
             style={{
-              paddingLeft: (item.depth - 1) * 12
+              paddingLeft: (item.depth - 1) * 12,
             }}
           >
             {item.title}

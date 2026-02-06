@@ -13,7 +13,7 @@ import {
   CreateMessageOutputSchema,
   DeleteMessageInputSchema,
   ListMessagesInputSchema,
-  ListMessagesOutputSchema
+  ListMessagesOutputSchema,
 } from '../schemas/message.schema'
 
 const listMessages = publicProcedure
@@ -28,11 +28,11 @@ const listMessages = publicProcedure
           columns: {
             name: true,
             image: true,
-            id: true
-          }
-        }
+            id: true,
+          },
+        },
       },
-      orderBy: desc(messages.updatedAt)
+      orderBy: desc(messages.updatedAt),
     })
 
     const result = query.map((message) => {
@@ -43,14 +43,14 @@ const listMessages = publicProcedure
         user: {
           ...message.user,
           name: message.user.name,
-          image: message.user.image ?? defaultImage
-        }
+          image: message.user.image ?? defaultImage,
+        },
       }
     })
 
     return {
       messages: result,
-      nextCursor: result.at(-1)?.updatedAt
+      nextCursor: result.at(-1)?.updatedAt,
     }
   })
 
@@ -64,13 +64,13 @@ const createMessage = protectedProcedure
       .insert(messages)
       .values({
         body: input.message,
-        userId: user.id
+        userId: user.id,
       })
       .returning()
 
     if (!message) {
       throw new ORPCError('INTERNAL_SERVER_ERROR', {
-        message: 'Failed to create message'
+        message: 'Failed to create message',
       })
     }
 
@@ -88,12 +88,12 @@ const deleteMessage = protectedProcedure
     const user = context.session.user
 
     const message = await context.db.query.messages.findFirst({
-      where: and(eq(messages.id, input.id), eq(messages.userId, user.id))
+      where: and(eq(messages.id, input.id), eq(messages.userId, user.id)),
     })
 
     if (!message) {
       throw new ORPCError('NOT_FOUND', {
-        message: 'Message not found'
+        message: 'Message not found',
       })
     }
 
@@ -103,5 +103,5 @@ const deleteMessage = protectedProcedure
 export const messageRouter = {
   list: listMessages,
   create: createMessage,
-  delete: deleteMessage
+  delete: deleteMessage,
 }

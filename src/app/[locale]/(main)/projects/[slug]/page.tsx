@@ -20,7 +20,7 @@ import { getLocalizedPath } from '@/utils/get-localized-path'
 export function generateStaticParams(): Array<{ slug: string; locale: string }> {
   return allProjects.map((project) => ({
     slug: project.slug,
-    locale: project.locale
+    locale: project.locale,
   }))
 }
 
@@ -40,7 +40,7 @@ export async function generateMetadata(props: PageProps<'/[locale]/projects/[slu
     pathname: `/projects/${slug}`,
     title: name,
     description,
-    locale
+    locale,
   })
 }
 
@@ -73,10 +73,10 @@ function Page(props: PageProps<'/[locale]/projects/[slug]'>) {
     author: {
       '@type': 'Person',
       name: MY_NAME,
-      url: baseUrl
+      url: baseUrl,
     },
     thumbnailUrl: `${baseUrl}/images/projects/${slug}/cover.png`,
-    inLanguage: locale
+    inLanguage: locale,
   }
 
   return (

@@ -11,7 +11,7 @@ import {
   Row,
   Section,
   Tailwind,
-  Text
+  Text,
 } from '@react-email/components'
 
 import Footer from '../components/footer'
@@ -89,7 +89,7 @@ CommentEmailTemplate.PreviewProps = {
   date: 'January 1, 2025',
   commentIdentifier: 'comment=1',
   postTitle: 'Understanding Modern Web Development',
-  postUrl: 'http://localhost:3000/blog/understanding-modern-web-development'
+  postUrl: 'http://localhost:3000/blog/understanding-modern-web-development',
 } satisfies CommentEmailTemplateProps
 
 export default CommentEmailTemplate

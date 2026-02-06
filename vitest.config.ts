@@ -16,20 +16,20 @@ export default defineConfig({
     server: {
       deps: {
         // https://github.com/vercel/next.js/issues/77200
-        inline: ['next-intl']
-      }
+        inline: ['next-intl'],
+      },
     },
     coverage: {
       reporter: ['lcov', 'html'],
       provider: 'v8',
       include: ['**/src/**/*.{ts,tsx}'],
-      exclude: ['**/tests/**', '**/e2e/**', '**/fixtures/**']
-    }
+      exclude: ['**/tests/**', '**/e2e/**', '**/fixtures/**'],
+    },
   },
   resolve: {
     alias: {
       '@': resolve('./src'),
-      'content-collections': resolve('.content-collections/generated')
-    }
-  }
+      'content-collections': resolve('.content-collections/generated'),
+    },
+  },
 })

@@ -32,7 +32,7 @@ function OGImage(props: OGImageProps) {
         justifyContent: 'center',
         backgroundColor: '#000',
         padding: 50,
-        color: '#fff'
+        color: '#fff',
       }}
     >
       <Logo width={50} style={{ position: 'absolute', left: 50, top: 50 }} />

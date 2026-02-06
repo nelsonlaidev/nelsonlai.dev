@@ -10,14 +10,14 @@ const handler = new RPCHandler(router, {
   interceptors: [
     onError((error) => {
       console.error(error)
-    })
-  ]
+    }),
+  ],
 })
 
 async function handleRequest(request: NextRequest) {
   const { response } = await handler.handle(request, {
     prefix: '/rpc',
-    context: await createORPCContext(request)
+    context: await createORPCContext(request),
   })
 
   return response ?? new Response('Not found', { status: 404 })

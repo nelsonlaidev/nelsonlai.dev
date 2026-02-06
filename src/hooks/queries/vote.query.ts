@@ -9,7 +9,7 @@ export function useCreateVote(input: CommentListInput) {
     orpc.vote.create.mutationOptions({
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: orpc.comment.list.key({ input }) })
-      }
-    })
+      },
+    }),
   )
 }

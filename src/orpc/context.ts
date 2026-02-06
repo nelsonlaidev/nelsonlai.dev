@@ -9,7 +9,7 @@ export async function createORPCContext(request: NextRequest) {
   return {
     session,
     db,
-    headers: request.headers
+    headers: request.headers,
   }
 }
 

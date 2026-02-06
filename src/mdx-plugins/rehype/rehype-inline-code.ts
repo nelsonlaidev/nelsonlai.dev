@@ -25,7 +25,7 @@ function getScopeColors(highlighter: Highlighter, scope: string): string[] {
   return themeNames.map(
     (name) =>
       highlighter.getTheme(name).settings.find(({ scope: themeScope }) => themeScope?.includes(scope))?.settings
-        .foreground ?? 'inherit'
+        .foreground ?? 'inherit',
   )
 }
 
@@ -34,7 +34,7 @@ async function getHighlighter() {
 
   cachedHighlighter = await getSingletonHighlighter({
     themes: themeNames,
-    langs: Object.keys(bundledLanguages)
+    langs: Object.keys(bundledLanguages),
   })
 
   return cachedHighlighter
@@ -62,7 +62,7 @@ async function transformer(tree: Root) {
     const hast = highlighter.codeToHast(code, {
       themes: DEFAULT_SHIKI_THEMES,
       lang: isLang ? lang : 'plaintext',
-      defaultColor: false
+      defaultColor: false,
     })
 
     const preNode = hast.children[0]

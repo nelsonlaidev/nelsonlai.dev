@@ -10,9 +10,9 @@ async function sendWebhook(body: RESTPostAPIWebhookWithTokenFormDataBody) {
   await fetch(env.DISCORD_WEBHOOK_URL, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
   })
 }
 
@@ -28,11 +28,11 @@ export async function sendGuestbookNotification(message: string, userName: strin
         color: 6_609_519,
         author: {
           name: userName,
-          icon_url: userImage
+          icon_url: userImage,
         },
-        timestamp: new Date().toISOString()
-      }
-    ]
+        timestamp: new Date().toISOString(),
+      },
+    ],
   }
 
   await sendWebhook(body)

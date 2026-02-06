@@ -11,23 +11,23 @@ const TEXTS = [
   {
     // i18n-check t('homepage.hero.amazing')
     key: 'amazing',
-    className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#ff1835] to-[#ffc900]'
+    className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#ff1835] to-[#ffc900]',
   },
   {
     // i18n-check t('homepage.hero.stunning')
     key: 'stunning',
-    className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#0077ff] to-[#00e7df]'
+    className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#0077ff] to-[#00e7df]',
   },
   {
     // i18n-check t('homepage.hero.fantastic')
     key: 'fantastic',
-    className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#7f00de] to-[#ff007f]'
+    className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#7f00de] to-[#ff007f]',
   },
   {
     // i18n-check t('homepage.hero.attractive')
     key: 'attractive',
-    className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#2ecc70] to-[#1ca085]'
-  }
+    className: 'bg-clip-text text-center text-transparent bg-linear-to-r from-[#2ecc70] to-[#1ca085]',
+  },
 ] as const
 
 const SPEED = 2
@@ -35,16 +35,16 @@ const SPEED = 2
 const variants = {
   enter: {
     y: 100,
-    opacity: 0
+    opacity: 0,
   },
   center: {
     y: 0,
-    opacity: 1
+    opacity: 1,
   },
   exit: {
     y: -100,
-    opacity: 0
-  }
+    opacity: 0,
+  },
 }
 
 function Hero() {
@@ -92,7 +92,7 @@ function Hero() {
                     layout
                     transition={{
                       type: 'tween',
-                      duration: 0.3
+                      duration: 0.3,
                     }}
                     className='inline-flex items-center justify-center'
                   >
@@ -120,13 +120,13 @@ function Hero() {
         <motion.div
           className='relative hidden size-28 md:block'
           initial={{
-            scale: 0
+            scale: 0,
           }}
           animate={{
-            scale: 1
+            scale: 1,
           }}
           transition={{
-            duration: 0.3
+            duration: 0.3,
           }}
         >
           <BlurImage

@@ -8,21 +8,21 @@ export type Comment = AdminCommentListOutput['comments'][number]
 export const columns: Array<ColumnDef<Comment>> = [
   {
     accessorKey: 'userId',
-    header: 'User ID'
+    header: 'User ID',
   },
   {
     accessorKey: 'body',
-    header: 'Body'
+    header: 'Body',
   },
   {
     accessorKey: 'parentId',
-    header: 'Parent ID'
+    header: 'Parent ID',
   },
   {
     accessorKey: 'createdAt',
     header: 'Created At',
     cell: ({ row }) => {
       return <FormattedDateCell date={row.original.createdAt} />
-    }
-  }
+    },
+  },
 ]

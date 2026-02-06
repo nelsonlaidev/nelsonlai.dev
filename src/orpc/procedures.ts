@@ -35,8 +35,8 @@ const authMiddleware = base.middleware(async ({ context, next }) => {
 
   return next({
     context: {
-      session: context.session
-    }
+      session: context.session,
+    },
   })
 })
 

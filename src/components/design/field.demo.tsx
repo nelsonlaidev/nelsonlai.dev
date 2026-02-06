@@ -67,19 +67,19 @@ function SelectFields() {
     { label: 'Select your country', value: null },
     { label: 'United States', value: 'us' },
     { label: 'United Kingdom', value: 'uk' },
-    { label: 'Canada', value: 'ca' }
+    { label: 'Canada', value: 'ca' },
   ]
   const invalidItems = [
     { label: 'This field has an error', value: null },
     { label: 'Option 1', value: 'option1' },
     { label: 'Option 2', value: 'option2' },
-    { label: 'Option 3', value: 'option3' }
+    { label: 'Option 3', value: 'option3' },
   ]
   const disabledItems = [
     { label: 'Cannot select', value: null },
     { label: 'Option 1', value: 'option1' },
     { label: 'Option 2', value: 'option2' },
-    { label: 'Option 3', value: 'option3' }
+    { label: 'Option 3', value: 'option3' },
   ]
 
   return (

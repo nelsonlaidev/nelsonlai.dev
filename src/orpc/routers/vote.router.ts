@@ -20,7 +20,7 @@ const createVote = protectedProcedure
 
       if (!vote) {
         throw new ORPCError('INTERNAL_SERVER_ERROR', {
-          message: 'Failed to delete vote'
+          message: 'Failed to delete vote',
         })
       }
 
@@ -32,19 +32,19 @@ const createVote = protectedProcedure
       .values({
         commentId: input.id,
         userId: user.id,
-        isLike: input.isLike
+        isLike: input.isLike,
       })
       .onConflictDoUpdate({
         target: [votes.userId, votes.commentId],
         set: {
-          isLike: input.isLike
-        }
+          isLike: input.isLike,
+        },
       })
       .returning()
 
     if (!vote) {
       throw new ORPCError('INTERNAL_SERVER_ERROR', {
-        message: 'Failed to create vote'
+        message: 'Failed to create vote',
       })
     }
 
@@ -52,5 +52,5 @@ const createVote = protectedProcedure
   })
 
 export const voteRouter = {
-  create: createVote
+  create: createVote,
 }

@@ -12,7 +12,7 @@ function TreeView(props: TreeViewProps) {
       collection={createTreeCollection({
         nodeToValue: (node) => node.id,
         nodeToString: (node) => node.name,
-        rootNode: collection
+        rootNode: collection,
       })}
       {...rest}
     />

@@ -7,10 +7,10 @@ const config: KnipConfig = {
     // Used in Spotify router
     '@types/spotify-api',
     // Required by react-email
-    '@react-email/preview-server'
+    '@react-email/preview-server',
   ],
   ignore: ['src/components/ui/*.tsx'],
-  entry: ['content-collections.ts', 'src/db/reset.ts', 'src/db/seed.ts']
+  entry: ['content-collections.ts', 'src/db/reset.ts', 'src/db/seed.ts'],
 }
 
 export default config

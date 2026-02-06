@@ -7,7 +7,7 @@ function GeistFont() {
       fallbackFontFamily='Arial'
       webFont={{
         url: 'https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap',
-        format: 'woff2'
+        format: 'woff2',
       }}
       fontWeight={400}
       fontStyle='normal'

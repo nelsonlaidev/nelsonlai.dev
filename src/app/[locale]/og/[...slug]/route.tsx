@@ -46,8 +46,8 @@ async function generateIndexOGImage() {
     status: 200,
     headers: {
       'Content-Type': 'image/png',
-      'Cache-Control': 'no-cache, no-store'
-    }
+      'Cache-Control': 'no-cache, no-store',
+    },
   })
 }
 
@@ -77,15 +77,15 @@ async function generateProjectOGImage(slugs: string[]) {
   if (!projectSlug) notFound()
 
   const imageBuffer = await fs.readFile(
-    path.join(process.cwd(), 'public', 'images', 'projects', projectSlug, 'cover.png')
+    path.join(process.cwd(), 'public', 'images', 'projects', projectSlug, 'cover.png'),
   )
 
   return new NextResponse(new Uint8Array(imageBuffer), {
     status: 200,
     headers: {
       'Content-Type': 'image/png',
-      'Cache-Control': 'no-cache, no-store'
-    }
+      'Cache-Control': 'no-cache, no-store',
+    },
   })
 }
 
@@ -95,7 +95,7 @@ async function generateOGImage(title: string, url: string) {
   return new ImageResponse(<OGImage title={title} url={url} />, {
     width: 1200,
     height: 630,
-    fonts
+    fonts,
   })
 }
 
@@ -105,7 +105,7 @@ export function generateStaticParams(): Array<{ locale: string; slug: string[] }
   return routing.locales.flatMap((locale) => {
     return pathnames.map((pathname) => ({
       locale,
-      slug: [...pathname.split('/'), 'image.webp'].filter(Boolean)
+      slug: [...pathname.split('/'), 'image.webp'].filter(Boolean),
     }))
   })
 }

@@ -17,7 +17,7 @@ const EMPTY_RESPONSE = {
   isPlaying: false,
   songUrl: null,
   name: null,
-  artist: null
+  artist: null,
 } as const
 
 async function getAccessToken() {
@@ -27,12 +27,12 @@ async function getAccessToken() {
     method: 'POST',
     headers: {
       Authorization: `Basic ${BASIC}`,
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: new URLSearchParams({
       grant_type: 'refresh_token',
-      refresh_token: REFRESH_TOKEN
-    })
+      refresh_token: REFRESH_TOKEN,
+    }),
   })
 
   const data = await response.json()
@@ -49,8 +49,8 @@ const spotifyStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(as
 
   const response = await fetch(NOW_PLAYING_ENDPOINT, {
     headers: {
-      Authorization: `Bearer ${accessToken}`
-    }
+      Authorization: `Bearer ${accessToken}`,
+    },
   })
 
   if (response.status === 204) {
@@ -70,10 +70,10 @@ const spotifyStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(as
     isPlaying: song.is_playing,
     songUrl: song.item.external_urls.spotify,
     name: song.item.name,
-    artist: artists
+    artist: artists,
   }
 })
 
 export const spotifyRouter = {
-  stats: spotifyStats
+  stats: spotifyStats,
 }

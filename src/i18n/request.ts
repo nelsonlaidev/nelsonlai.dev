@@ -17,13 +17,13 @@ export default getRequestConfig(async ({ requestLocale }) => {
         short: {
           year: 'numeric',
           month: 'short',
-          day: 'numeric'
+          day: 'numeric',
         },
         long: {
           dateStyle: 'medium',
-          timeStyle: 'short'
-        }
-      }
-    }
+          timeStyle: 'short',
+        },
+      },
+    },
   }
 })

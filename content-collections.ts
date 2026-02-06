@@ -12,7 +12,7 @@ type BaseDoc = {
 const transform = async <D extends BaseDoc>(document: D, context: Context) => {
   const code = await compileMDX(context, document, {
     remarkPlugins,
-    rehypePlugins
+    rehypePlugins,
   })
   const [locale, path] = document._meta.path.split(/[/\\]/)
 
@@ -25,7 +25,7 @@ const transform = async <D extends BaseDoc>(document: D, context: Context) => {
     code,
     locale,
     slug: path,
-    toc: await getTOC(document.content)
+    toc: await getTOC(document.content),
   }
 }
 
@@ -38,9 +38,9 @@ const posts = defineCollection({
     date: z.string(),
     modifiedTime: z.string(),
     summary: z.string(),
-    content: z.string()
+    content: z.string(),
   }),
-  transform
+  transform,
 })
 
 const projects = defineCollection({
@@ -55,9 +55,9 @@ const projects = defineCollection({
     techstack: z.array(z.string()),
     selected: z.boolean().optional().default(false),
     dateCreated: z.string(),
-    content: z.string()
+    content: z.string(),
   }),
-  transform
+  transform,
 })
 
 const pages = defineCollection({
@@ -65,11 +65,11 @@ const pages = defineCollection({
   directory: 'src/content/pages',
   include: '**/*.mdx',
   schema: z.object({
-    content: z.string()
+    content: z.string(),
   }),
-  transform
+  transform,
 })
 
 export default defineConfig({
-  collections: [posts, projects, pages]
+  collections: [posts, projects, pages],
 })

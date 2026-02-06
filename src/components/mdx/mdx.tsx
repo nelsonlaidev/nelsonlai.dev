@@ -53,7 +53,7 @@ const components = {
   Video,
   LinkCard,
   Logo,
-  TreeView
+  TreeView,
 }
 
 function Mdx(props: MdxProps) {

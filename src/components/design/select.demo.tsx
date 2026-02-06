@@ -9,7 +9,7 @@ import {
   SelectLabel,
   SelectSeparator,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '../ui/select'
 
 function SelectDemo() {
@@ -31,7 +31,7 @@ function SelectBasic() {
     { label: 'Banana', value: 'banana' },
     { label: 'Blueberry', value: 'blueberry' },
     { label: 'Grapes', value: 'grapes' },
-    { label: 'Pineapple', value: 'pineapple' }
+    { label: 'Pineapple', value: 'pineapple' },
   ]
   return (
     <DemoItem title='Basic'>
@@ -86,7 +86,7 @@ function SelectSizes() {
     { label: 'Select a fruit', value: null },
     { label: 'Apple', value: 'apple' },
     { label: 'Banana', value: 'banana' },
-    { label: 'Blueberry', value: 'blueberry' }
+    { label: 'Blueberry', value: 'blueberry' },
   ]
 
   return (
@@ -132,7 +132,7 @@ function SelectWithIcons() {
           Chart Type
         </div>
       ),
-      value: null
+      value: null,
     },
     {
       label: (
@@ -141,7 +141,7 @@ function SelectWithIcons() {
           Line
         </div>
       ),
-      value: 'line'
+      value: 'line',
     },
     {
       label: (
@@ -150,7 +150,7 @@ function SelectWithIcons() {
           Bar
         </div>
       ),
-      value: 'bar'
+      value: 'bar',
     },
     {
       label: (
@@ -159,8 +159,8 @@ function SelectWithIcons() {
           Pie
         </div>
       ),
-      value: 'pie'
-    }
+      value: 'pie',
+    },
   ]
   return (
     <DemoItem title='With Icons'>
@@ -186,12 +186,12 @@ function SelectWithGroups() {
   const fruits = [
     { label: 'Apple', value: 'apple' },
     { label: 'Banana', value: 'banana' },
-    { label: 'Blueberry', value: 'blueberry' }
+    { label: 'Blueberry', value: 'blueberry' },
   ]
   const vegetables = [
     { label: 'Carrot', value: 'carrot' },
     { label: 'Broccoli', value: 'broccoli' },
-    { label: 'Spinach', value: 'spinach' }
+    { label: 'Spinach', value: 'spinach' },
   ]
   const allItems = [{ label: 'Select a fruit', value: null }, ...fruits, ...vegetables]
 
@@ -232,7 +232,7 @@ function SelectItemAligned() {
     { label: 'Banana', value: 'banana' },
     { label: 'Blueberry', value: 'blueberry' },
     { label: 'Grapes', value: 'grapes', disabled: true },
-    { label: 'Pineapple', value: 'pineapple' }
+    { label: 'Pineapple', value: 'pineapple' },
   ]
 
   return (

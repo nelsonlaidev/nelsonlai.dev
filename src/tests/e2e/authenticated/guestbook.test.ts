@@ -29,7 +29,7 @@ test.describe('guestbook page', () => {
     await db.insert(messages).values({
       id,
       body: 'Test message',
-      userId: TEST_UNIQUE_ID
+      userId: TEST_UNIQUE_ID,
     })
 
     const messageBlock = page.getByTestId(`message-${id}`)

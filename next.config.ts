@@ -12,26 +12,26 @@ const withNextIntl = createNextIntlPlugin()
 const remotePatterns: NonNullable<NextConfig['images']>['remotePatterns'] = [
   {
     protocol: 'https',
-    hostname: 'avatars.githubusercontent.com'
+    hostname: 'avatars.githubusercontent.com',
   },
   {
     protocol: 'https',
-    hostname: 'github.com'
+    hostname: 'github.com',
   },
   {
     protocol: 'https',
-    hostname: 'images.unsplash.com'
+    hostname: 'images.unsplash.com',
   },
   {
     protocol: 'https',
-    hostname: '**.googleusercontent.com'
-  }
+    hostname: '**.googleusercontent.com',
+  },
 ]
 
 if (!IS_PRODUCTION) {
   remotePatterns.push({
     protocol: 'http',
-    hostname: 'localhost'
+    hostname: 'localhost',
   })
 }
 
@@ -40,7 +40,7 @@ if (env.CLOUDFLARE_R2_PUBLIC_URL) {
 
   remotePatterns.push({
     protocol: 'https',
-    hostname
+    hostname,
   })
 }
 
@@ -48,12 +48,12 @@ const config: NextConfig = {
   productionBrowserSourceMaps: true,
 
   typescript: {
-    ignoreBuildErrors: !!process.env.CI
+    ignoreBuildErrors: !!process.env.CI,
   },
 
   images: {
     qualities: [75, 100],
-    remotePatterns
+    remotePatterns,
   },
 
   skipTrailingSlashRedirect: true,
@@ -62,12 +62,12 @@ const config: NextConfig = {
     return [
       {
         source: '/_ph/static/:path*',
-        destination: 'https://us-assets.i.posthog.com/static/:path*'
+        destination: 'https://us-assets.i.posthog.com/static/:path*',
       },
       {
         source: '/_ph/:path*',
-        destination: 'https://us.i.posthog.com/:path*'
-      }
+        destination: 'https://us.i.posthog.com/:path*',
+      },
     ]
   },
 
@@ -76,23 +76,23 @@ const config: NextConfig = {
       {
         source: '/pc-specs',
         destination: '/uses',
-        permanent: true
+        permanent: true,
       },
       {
         source: '/atom',
         destination: '/rss.xml',
-        permanent: true
+        permanent: true,
       },
       {
         source: '/feed',
         destination: '/rss.xml',
-        permanent: true
+        permanent: true,
       },
       {
         source: '/rss',
         destination: '/rss.xml',
-        permanent: true
-      }
+        permanent: true,
+      },
     ]
   },
 
@@ -103,36 +103,36 @@ const config: NextConfig = {
         headers: [
           {
             key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin'
+            value: 'strict-origin-when-cross-origin',
           },
           {
             key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()'
+            value: 'camera=(), microphone=(), geolocation=()',
           },
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains; preload'
+            value: 'max-age=31536000; includeSubDomains; preload',
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
+            value: 'SAMEORIGIN',
           },
           {
             key: 'X-Content-Type-Options',
-            value: 'nosniff'
+            value: 'nosniff',
           },
           {
             key: 'X-DNS-Prefetch-Control',
-            value: 'on'
+            value: 'on',
           },
           {
             key: 'X-XSS-Protection',
-            value: '1; mode=block'
-          }
-        ]
-      }
+            value: '1; mode=block',
+          },
+        ],
+      },
     ]
-  }
+  },
 }
 
 export default withPostHog(withContentCollections(withNextIntl(config)))

@@ -25,10 +25,10 @@ const Markdown = memo((props: MarkdownProps) => {
             thead: TableHeader,
             tr: TableRow,
             th: TableHead,
-            td: TableCell
+            td: TableCell,
           },
           disableParsingRawHTML: true,
-          wrapper: Fragment
+          wrapper: Fragment,
         }}
       >
         {children}

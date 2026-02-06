@@ -11,16 +11,16 @@ const countReply = publicProcedure
   .handler(async ({ input, context }) => {
     const [result] = await context.db
       .select({
-        value: count()
+        value: count(),
       })
       .from(comments)
       .where(and(eq(comments.postId, input.slug), isNotNull(comments.parentId)))
 
     return {
-      count: result?.value ?? 0
+      count: result?.value ?? 0,
     }
   })
 
 export const replyRouter = {
-  count: countReply
+  count: countReply,
 }

@@ -18,7 +18,7 @@ type SettingsFormProps = {
 }
 
 const SettingsFormSchema = z.object({
-  replyNotificationsEnabled: z.boolean()
+  replyNotificationsEnabled: z.boolean(),
 })
 
 function SettingsForm(props: SettingsFormProps) {
@@ -27,15 +27,15 @@ function SettingsForm(props: SettingsFormProps) {
 
   const form = useForm({
     defaultValues: {
-      replyNotificationsEnabled: settings.replyNotificationsEnabled
+      replyNotificationsEnabled: settings.replyNotificationsEnabled,
     },
     validators: {
-      onChange: SettingsFormSchema
+      onChange: SettingsFormSchema,
     },
     onSubmit: ({ value }) => {
       if (isUpdating) return
       updateSettings(value)
-    }
+    },
   })
 
   const { mutate: updateSettings, isPending: isUpdating } = useUpdateSettings(() => {

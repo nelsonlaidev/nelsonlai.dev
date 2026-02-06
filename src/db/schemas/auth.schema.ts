@@ -17,7 +17,7 @@ export const users = pgTable('users', {
   createdAt: timestamp('created_at').notNull(),
   updatedAt: timestamp('updated_at').notNull(),
   // Extra columns
-  role: roleEnum('role').default('user').notNull()
+  role: roleEnum('role').default('user').notNull(),
 })
 
 export const accounts = pgTable(
@@ -37,9 +37,9 @@ export const accounts = pgTable(
     scope: text('scope'),
     password: text('password'),
     createdAt: timestamp('created_at').notNull(),
-    updatedAt: timestamp('updated_at').notNull()
+    updatedAt: timestamp('updated_at').notNull(),
   },
-  (table) => [index('accounts_user_id_idx').on(table.userId)]
+  (table) => [index('accounts_user_id_idx').on(table.userId)],
 )
 
 export const sessions = pgTable(
@@ -54,9 +54,9 @@ export const sessions = pgTable(
     userAgent: text('user_agent'),
     userId: text('user_id')
       .notNull()
-      .references(() => users.id, { onDelete: 'cascade' })
+      .references(() => users.id, { onDelete: 'cascade' }),
   },
-  (table) => [index('sessions_user_id_idx').on(table.userId)]
+  (table) => [index('sessions_user_id_idx').on(table.userId)],
 )
 
 export const verifications = pgTable('verifications', {
@@ -65,7 +65,7 @@ export const verifications = pgTable('verifications', {
   value: text('value').notNull(),
   expiresAt: timestamp('expires_at').notNull(),
   createdAt: timestamp('created_at').notNull(),
-  updatedAt: timestamp('updated_at').notNull()
+  updatedAt: timestamp('updated_at').notNull(),
 })
 
 export const usersRelations = relations(users, ({ many, one }) => ({
@@ -74,19 +74,19 @@ export const usersRelations = relations(users, ({ many, one }) => ({
   comments: many(comments),
   messages: many(messages),
   unsubscribes: many(unsubscribes),
-  settings: one(settings)
+  settings: one(settings),
 }))
 
 export const accountsRelations = relations(accounts, ({ one }) => ({
   user: one(users, {
     fields: [accounts.userId],
-    references: [users.id]
-  })
+    references: [users.id],
+  }),
 }))
 
 export const sessionsRelations = relations(sessions, ({ one }) => ({
   user: one(users, {
     fields: [sessions.userId],
-    references: [users.id]
-  })
+    references: [users.id],
+  }),
 }))

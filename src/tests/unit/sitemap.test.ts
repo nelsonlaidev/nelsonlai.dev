@@ -106,7 +106,7 @@ describe('sitemap', () => {
     expect(defaultLocaleEntries).toHaveLength(pathnames.length)
 
     const allDefaultEntries = defaultLocaleEntries.filter(
-      (entry): entry is NonNullable<typeof entry> => entry !== undefined
+      (entry): entry is NonNullable<typeof entry> => entry !== undefined,
     )
 
     const nonDefaultLocales = routing.locales.filter((locale) => locale !== routing.defaultLocale)

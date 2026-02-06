@@ -9,7 +9,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
 import { Input } from '../ui/input'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
@@ -62,44 +62,44 @@ const invoices = [
     invoice: 'INV001',
     paymentStatus: 'Paid',
     totalAmount: '$250.00',
-    paymentMethod: 'Credit Card'
+    paymentMethod: 'Credit Card',
   },
   {
     invoice: 'INV002',
     paymentStatus: 'Pending',
     totalAmount: '$150.00',
-    paymentMethod: 'PayPal'
+    paymentMethod: 'PayPal',
   },
   {
     invoice: 'INV003',
     paymentStatus: 'Unpaid',
     totalAmount: '$350.00',
-    paymentMethod: 'Bank Transfer'
+    paymentMethod: 'Bank Transfer',
   },
   {
     invoice: 'INV004',
     paymentStatus: 'Paid',
     totalAmount: '$450.00',
-    paymentMethod: 'Credit Card'
+    paymentMethod: 'Credit Card',
   },
   {
     invoice: 'INV005',
     paymentStatus: 'Paid',
     totalAmount: '$550.00',
-    paymentMethod: 'PayPal'
+    paymentMethod: 'PayPal',
   },
   {
     invoice: 'INV006',
     paymentStatus: 'Pending',
     totalAmount: '$200.00',
-    paymentMethod: 'Bank Transfer'
+    paymentMethod: 'Bank Transfer',
   },
   {
     invoice: 'INV007',
     paymentStatus: 'Unpaid',
     totalAmount: '$300.00',
-    paymentMethod: 'Credit Card'
-  }
+    paymentMethod: 'Credit Card',
+  },
 ]
 
 function TableWithFooter() {
@@ -314,25 +314,25 @@ const people = [
   { value: 'sarah', label: 'Sarah Chen' },
   { value: 'marcus', label: 'Marc Rodriguez' },
   { value: 'emily', label: 'Emily Watson' },
-  { value: 'david', label: 'David Kim' }
+  { value: 'david', label: 'David Kim' },
 ]
 
 const tasks = [
   {
     task: 'Design homepage',
     assignee: 'sarah',
-    status: 'In Progress'
+    status: 'In Progress',
   },
   {
     task: 'Implement API',
     assignee: 'marcus',
-    status: 'Pending'
+    status: 'Pending',
   },
   {
     task: 'Write tests',
     assignee: 'emily',
-    status: 'Not Started'
-  }
+    status: 'Not Started',
+  },
 ]
 
 function TableWithSelect() {

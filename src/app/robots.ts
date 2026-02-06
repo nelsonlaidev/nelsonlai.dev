@@ -8,10 +8,10 @@ function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: ['/', '/api/avatar/*'],
-        disallow: ['/api/']
-      }
+        disallow: ['/api/'],
+      },
     ],
-    sitemap: `${getBaseUrl()}/sitemap.xml`
+    sitemap: `${getBaseUrl()}/sitemap.xml`,
   }
 }
 

@@ -14,7 +14,7 @@ const TokenSchema = z.jwt({ alg: 'HS256' })
 const CommentReplyUnsubPayloadSchema = z.object({
   type: z.literal('comment_reply'),
   userId: z.string().min(1),
-  commentId: z.string().min(1)
+  commentId: z.string().min(1),
 })
 
 const UnsubPayloadSchema = z.discriminatedUnion('type', [CommentReplyUnsubPayloadSchema])
@@ -64,7 +64,7 @@ export async function generateCommentReplyUnsubToken(userId: string, commentId: 
   return generateUnsubToken({
     type: 'comment_reply',
     userId,
-    commentId
+    commentId,
   })
 }
 
@@ -75,10 +75,10 @@ async function getCommentReplyUnsubData(payload: CommentReplyUnsubPayload, token
     where: and(eq(comments.userId, userId), eq(comments.id, commentId)),
     with: {
       user: {
-        columns: { email: true }
-      }
+        columns: { email: true },
+      },
     },
-    columns: { body: true }
+    columns: { body: true },
   })
 
   if (!data) return null
@@ -87,8 +87,8 @@ async function getCommentReplyUnsubData(payload: CommentReplyUnsubPayload, token
     where: and(
       eq(unsubscribes.userId, userId),
       eq(unsubscribes.commentId, commentId),
-      eq(unsubscribes.type, 'comment_reply')
-    )
+      eq(unsubscribes.type, 'comment_reply'),
+    ),
   })
 
   const maskedEmail = getMaskedEmail(data.user.email)
@@ -100,7 +100,7 @@ async function getCommentReplyUnsubData(payload: CommentReplyUnsubPayload, token
     token,
     isUnsubscribed: !!isUnsubscribed,
     userId,
-    commentId
+    commentId,
   }
 }
 

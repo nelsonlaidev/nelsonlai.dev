@@ -22,7 +22,7 @@ const getAvatarUploadUrl = protectedProcedure
     const extensionMap: Record<AvatarMimeType, string> = {
       'image/jpeg': 'jpg',
       'image/png': 'png',
-      'image/webp': 'webp'
+      'image/webp': 'webp',
     }
 
     const extension = extensionMap[input.fileType]
@@ -33,20 +33,20 @@ const getAvatarUploadUrl = protectedProcedure
       Bucket: bucketName,
       Key: path,
       ContentType: input.fileType,
-      ContentLength: input.fileSize
+      ContentLength: input.fileSize,
     })
 
     const uploadUrl = await getSignedUrl(client, command, {
-      expiresIn: 60 * 5
+      expiresIn: 60 * 5,
     })
 
     return {
       uploadUrl,
       publicUrl: getR2PublicUrl(publicUrl, path),
-      key: path
+      key: path,
     }
   })
 
 export const r2Router = {
-  getAvatarUploadUrl
+  getAvatarUploadUrl,
 }

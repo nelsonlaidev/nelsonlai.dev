@@ -13,7 +13,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator
+  CommandSeparator,
 } from '@/components/ui/command'
 import { SOCIAL_LINKS } from '@/config/links'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
@@ -100,35 +100,35 @@ function CommandMenu() {
         {
           title: t('common.labels.account'),
           icon: <UserCircleIcon />,
-          onSelect: handleAccountNavigate
+          onSelect: handleAccountNavigate,
         },
         {
           title: t('common.sign-out'),
           icon: <LogOutIcon />,
-          onSelect: handleSignOut
-        }
+          onSelect: handleSignOut,
+        },
       ]
     : [
         {
           title: t('common.sign-in'),
           icon: <LogInIcon />,
-          onSelect: handleSignIn
-        }
+          onSelect: handleSignIn,
+        },
       ]
 
   const generalActions: CommandAction[] = [
     {
       title: t('command-menu.actions.copy-link'),
       icon: <LinkIcon />,
-      onSelect: copyCurrentUrl
+      onSelect: copyCurrentUrl,
     },
     {
       title: t('command-menu.actions.source-code'),
       icon: <CodeIcon />,
       onSelect: () => {
         openExternalLink('https://github.com/nelsonlaidev/nelsonlai.dev')
-      }
-    }
+      },
+    },
   ]
 
   const socialActions: CommandAction[] = SOCIAL_LINKS.map((link) => ({
@@ -136,13 +136,13 @@ function CommandMenu() {
     icon: link.icon,
     onSelect: () => {
       openExternalLink(link.href)
-    }
+    },
   }))
 
   const groups: CommandGroup[] = [
     { name: t('common.labels.account'), actions: accountActions },
     { name: t('common.labels.general'), actions: generalActions },
-    { name: t('command-menu.groups.social'), actions: socialActions }
+    { name: t('command-menu.groups.social'), actions: socialActions },
   ]
 
   return (

@@ -24,7 +24,7 @@ async function resolveLocation(ip: string) {
 
 const listSessions = protectedProcedure.output(ListSessionsOutputSchema).handler(async ({ context }) => {
   const sessions = await auth.api.listSessions({
-    headers: context.headers
+    headers: context.headers,
   })
 
   const result = await Promise.all(
@@ -35,12 +35,12 @@ const listSessions = protectedProcedure.output(ListSessionsOutputSchema).handler
       ipAddress: (session.ipAddress ?? '') || null,
       userAgent: (session.userAgent ?? '') || null,
       isCurrentSession: session.id === context.session.session.id,
-      location: session.ipAddress ? await resolveLocation(session.ipAddress) : null
-    }))
+      location: session.ipAddress ? await resolveLocation(session.ipAddress) : null,
+    })),
   )
 
   return {
-    sessions: result
+    sessions: result,
   }
 })
 
@@ -51,7 +51,7 @@ const revokeSession = protectedProcedure
     try {
       await auth.api.revokeSession({
         headers: context.headers,
-        body: { token: input.token }
+        body: { token: input.token },
       })
     } catch (error) {
       if (error instanceof APIError) {
@@ -79,16 +79,16 @@ const updateUser = protectedProcedure
 
     await auth.api.updateUser({
       headers: context.headers,
-      body
+      body,
     })
   })
 
 export const authRouter = {
   session: {
     list: listSessions,
-    revoke: revokeSession
+    revoke: revokeSession,
   },
   user: {
-    update: updateUser
-  }
+    update: updateUser,
+  },
 }

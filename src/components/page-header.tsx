@@ -10,12 +10,12 @@ type PageTitleProps = {
 const animation = {
   hide: {
     x: -30,
-    opacity: 0
+    opacity: 0,
   },
   show: {
     x: 0,
-    opacity: 1
-  }
+    opacity: 1,
+  },
 }
 
 function PageHeader(props: PageTitleProps) {

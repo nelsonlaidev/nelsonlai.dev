@@ -24,7 +24,7 @@ function BlurImage(props: ImageProps) {
       <NextImage
         className={cn(isLoading && 'scale-[1.02] blur-xl grayscale', imageClassName)}
         style={{
-          transition: 'filter 700ms ease, scale 150ms ease'
+          transition: 'filter 700ms ease, scale 150ms ease',
         }}
         src={src}
         alt={alt}

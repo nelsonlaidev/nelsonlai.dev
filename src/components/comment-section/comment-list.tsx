@@ -29,8 +29,8 @@ function CommentList() {
       sort,
       type: 'comments',
       highlightedCommentId: params.comment ?? undefined,
-      cursor: pageParam
-    })
+      cursor: pageParam,
+    }),
   )
 
   const { ref, inView } = useInView()
@@ -44,7 +44,7 @@ function CommentList() {
 
     getSingletonHighlighterCore({
       themes: [githubLightDefault, githubDarkDefault],
-      engine: createJavaScriptRegexEngine()
+      engine: createJavaScriptRegexEngine(),
     }).then((instance) => {
       setHighlighter(instance)
     })

@@ -7,7 +7,7 @@ const listComments = adminProcedure.output(ListCommentsOutputSchema).handler(asy
   const result = await context.db.select().from(comments)
 
   return {
-    comments: result
+    comments: result,
   }
 })
 
@@ -18,20 +18,20 @@ const listUsers = adminProcedure.output(ListUsersOutputSchema).handler(async ({ 
       name: users.name,
       email: users.email,
       role: users.role,
-      createdAt: users.createdAt
+      createdAt: users.createdAt,
     })
     .from(users)
 
   return {
-    users: result
+    users: result,
   }
 })
 
 export const adminRouter = {
   comment: {
-    list: listComments
+    list: listComments,
   },
   user: {
-    list: listUsers
-  }
+    list: listUsers,
+  },
 }

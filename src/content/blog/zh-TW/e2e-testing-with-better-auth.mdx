@@ -30,7 +30,7 @@ export const TEST_USER = {
   name: '測試用戶',
   email: 'test@example.com',
   sessionToken: '00000000000000000000000000000000',
-  accountId: '000'
+  accountId: '000',
 }
 
 const signature = crypto
@@ -58,7 +58,7 @@ const transaction = db.transaction(() => {
       INSERT OR IGNORE INTO user (
         id, name, email, emailVerified, createdAt, updatedAt
       ) VALUES (?, ?, ?, ?, ?, ?)
-    `
+    `,
   ).run(TEST_UNIQUE_ID, TEST_USER.name, TEST_USER.email, 0, now, now)
 
   db.prepare(
@@ -66,7 +66,7 @@ const transaction = db.transaction(() => {
       INSERT OR IGNORE INTO account (
         id, accountId, providerId, userId, password, createdAt, updatedAt
       ) VALUES (?, ?, ?, ?, ?, ?, ?)
-    `
+    `,
   ).run(TEST_UNIQUE_ID, TEST_USER.accountId, 'credential', TEST_UNIQUE_ID, 'password_hash', now, now)
 
   db.prepare(
@@ -77,7 +77,7 @@ const transaction = db.transaction(() => {
       ON CONFLICT(token) DO UPDATE SET
       expiresAt = excluded.expiresAt,
       updatedAt = excluded.updatedAt
-    `
+    `,
   ).run(TEST_UNIQUE_ID, TEST_USER.sessionToken, TEST_UNIQUE_ID, expiresAt, now, now)
 })
 
@@ -99,7 +99,7 @@ const cookieObject = {
   httpOnly: true,
   secure: false,
   sameSite: 'Lax',
-  expires: Math.round(expiresAt / 1000)
+  expires: Math.round(expiresAt / 1000),
 }
 
 await fs.writeFile('.auth/auth.json', JSON.stringify({ cookies: [cookieObject], origins: [] }, null, 2))
@@ -121,11 +121,11 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        storageState: '.auth/auth.json' // [!code highlight]
+        storageState: '.auth/auth.json', // [!code highlight]
       },
-      dependencies: ['setup'] // [!code highlight]
-    }
-  ]
+      dependencies: ['setup'], // [!code highlight]
+    },
+  ],
 })
 ```
 

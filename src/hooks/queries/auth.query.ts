@@ -14,8 +14,8 @@ export function useRevokeSession(onSuccess?: () => void) {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: orpc.auth.session.list.key() })
         onSuccess?.()
-      }
-    })
+      },
+    }),
   )
 }
 

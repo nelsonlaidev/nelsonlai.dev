@@ -26,20 +26,20 @@ function MessageBox(props: MessageBoxProps) {
   const signOut = useSignOut()
 
   const GuestbookFormSchema = z.object({
-    message: z.string().min(1, t('error.message-cannot-be-empty'))
+    message: z.string().min(1, t('error.message-cannot-be-empty')),
   })
 
   const form = useForm({
     defaultValues: {
-      message: ''
+      message: '',
     },
     validators: {
-      onSubmit: GuestbookFormSchema
+      onSubmit: GuestbookFormSchema,
     },
     onSubmit: ({ value }) => {
       if (isCreating) return
       createMessage({ message: value.message })
-    }
+    },
   })
 
   const { mutate: createMessage, isPending: isCreating } = useCreateMessage(() => {

@@ -17,7 +17,7 @@ function FieldSet(props: FieldSetProps) {
       data-slot='field-set'
       className={cn(
         'flex flex-col gap-6 has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3',
-        className
+        className,
       )}
       {...rest}
     />
@@ -49,7 +49,7 @@ function FieldGroup(props: FieldGroupProps) {
       data-slot='field-group'
       className={cn(
         'group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-3 *:data-[slot=field-group]:gap-4',
-        className
+        className,
       )}
       {...rest}
     />
@@ -63,12 +63,12 @@ const fieldVariants = cva('group/field flex w-full gap-3 data-[invalid=true]:tex
       horizontal:
         'flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',
       responsive:
-        'flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px'
-    }
+        'flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',
+    },
   },
   defaultVariants: {
-    orientation: 'vertical'
-  }
+    orientation: 'vertical',
+  },
 })
 
 type FieldProps = React.ComponentProps<'div'> & VariantProps<typeof fieldVariants>
@@ -111,7 +111,7 @@ function FieldLabel(props: FieldLabelProps) {
       data-slot='field-label'
       className={cn(
         'group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:border-primary/50 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-4 dark:has-data-checked:bg-primary/10',
-        className
+        className,
       )}
       {...rest}
     />
@@ -128,7 +128,7 @@ function FieldTitle(props: FieldTitleProps) {
       data-slot='field-label'
       className={cn(
         'flex w-fit items-center gap-2 text-sm/snug font-medium group-data-[disabled=true]/field:opacity-50',
-        className
+        className,
       )}
       {...rest}
     />
@@ -145,7 +145,7 @@ function FieldDescription(props: FieldDescriptionProps) {
       data-slot='field-description'
       className={cn(
         'text-left text-sm/normal font-normal text-muted-foreground group-has-data-[orientation=horizontal]/field:text-balance last:mt-0 nth-last-2:-mt-1 [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary [[data-variant=legend]+&]:-mt-1.5',
-        className
+        className,
       )}
       {...rest}
     />
@@ -234,5 +234,5 @@ export {
   FieldLegend,
   FieldSeparator,
   FieldSet,
-  FieldTitle
+  FieldTitle,
 }

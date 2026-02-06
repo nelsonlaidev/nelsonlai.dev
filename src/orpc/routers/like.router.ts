@@ -12,7 +12,7 @@ import {
   CountLikeInputSchema,
   CountLikeOutputSchema,
   IncrementLikeInputSchema,
-  IncrementLikeOutputSchema
+  IncrementLikeOutputSchema,
 } from '../schemas/like.schema'
 
 const countLike = publicProcedure
@@ -25,14 +25,14 @@ const countLike = publicProcedure
     // Check cache for both global and user-specific like counts
     const [cachedLikes, cachedUserLikes] = await Promise.all([
       cache.posts.likes.get(input.slug),
-      cache.posts.userLikes.get(`${input.slug}:${anonKey}`)
+      cache.posts.userLikes.get(`${input.slug}:${anonKey}`),
     ])
 
     // If both are cached, return immediately
     if (cachedLikes !== null && cachedUserLikes !== null) {
       return {
         likes: cachedLikes,
-        currentUserLikes: cachedUserLikes
+        currentUserLikes: cachedUserLikes,
       }
     }
 
@@ -46,12 +46,12 @@ const countLike = publicProcedure
             .select({ likeCount: postLikes.likeCount })
             .from(postLikes)
             .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
-        : Promise.resolve([null])
+        : Promise.resolve([null]),
     ])
 
     if (cachedLikes === null && !post) {
       throw new ORPCError('NOT_FOUND', {
-        message: 'Post not found'
+        message: 'Post not found',
       })
     }
 
@@ -70,7 +70,7 @@ const countLike = publicProcedure
 
     return {
       likes,
-      currentUserLikes
+      currentUserLikes,
     }
   })
 
@@ -87,7 +87,7 @@ const incrementLike = publicProcedure
 
       if (!existingPost) {
         throw new ORPCError('NOT_FOUND', {
-          message: 'Post not found'
+          message: 'Post not found',
         })
       }
 
@@ -99,8 +99,8 @@ const incrementLike = publicProcedure
           and(
             eq(postLikes.postId, input.slug),
             eq(postLikes.anonKey, anonKey),
-            sql`${postLikes.likeCount} + ${input.value} <= 3`
-          )
+            sql`${postLikes.likeCount} + ${input.value} <= 3`,
+          ),
         )
         .returning()
 
@@ -119,7 +119,7 @@ const incrementLike = publicProcedure
         if (existing && existing.likeCount + input.value > 3) {
           // Record exists and limit would be exceeded
           throw new ORPCError('BAD_REQUEST', {
-            message: 'You can only like a post 3 times'
+            message: 'You can only like a post 3 times',
           })
         }
 
@@ -129,20 +129,20 @@ const incrementLike = publicProcedure
           .values({ postId: input.slug, anonKey, likeCount: input.value })
           .onConflictDoUpdate({
             target: [postLikes.postId, postLikes.anonKey],
-            set: { likeCount: sql`${postLikes.likeCount} + ${input.value}` }
+            set: { likeCount: sql`${postLikes.likeCount} + ${input.value}` },
           })
           .returning()
 
         if (!inserted) {
           throw new ORPCError('INTERNAL_SERVER_ERROR', {
-            message: 'Failed to insert like record'
+            message: 'Failed to insert like record',
           })
         }
 
         // Validate limit after insert/update (transaction will rollback if exceeded)
         if (inserted.likeCount > 3) {
           throw new ORPCError('BAD_REQUEST', {
-            message: 'You can only like a post 3 times'
+            message: 'You can only like a post 3 times',
           })
         }
 
@@ -161,38 +161,38 @@ const incrementLike = publicProcedure
 
     if (!post || !currentUserLikes) {
       throw new ORPCError('INTERNAL_SERVER_ERROR', {
-        message: 'Failed to increment like'
+        message: 'Failed to increment like',
       })
     }
 
     // Update both global and user-specific like caches
     await Promise.all([
       cache.posts.likes.set(input.slug, post.likes),
-      cache.posts.userLikes.set(`${input.slug}:${anonKey}`, currentUserLikes.likeCount)
+      cache.posts.userLikes.set(`${input.slug}:${anonKey}`, currentUserLikes.likeCount),
     ])
 
     return {
       likes: post.likes,
-      currentUserLikes: currentUserLikes.likeCount
+      currentUserLikes: currentUserLikes.likeCount,
     }
   })
 
 const likesStats = publicProcedure.output(LikesStatsOutputSchema).handler(async ({ context }) => {
   const [result] = await context.db
     .select({
-      value: sum(posts.likes)
+      value: sum(posts.likes),
     })
     .from(posts)
 
   const likes = result?.value ? Number(result.value) : 0
 
   return {
-    likes
+    likes,
   }
 })
 
 export const likeRouter = {
   count: countLike,
   increment: incrementLike,
-  stats: likesStats
+  stats: likesStats,
 }

@@ -25,7 +25,7 @@ import { getLocalizedPath } from '@/utils/get-localized-path'
 export function generateStaticParams(): Array<{ slug: string; locale: string }> {
   return allPosts.map((post) => ({
     slug: post.slug,
-    locale: post.locale
+    locale: post.locale,
   }))
 }
 
@@ -45,8 +45,8 @@ export async function generateMetadata(props: PageProps<'/[locale]/blog/[slug]'>
     openGraph: {
       type: 'article',
       publishedTime: post.date,
-      modifiedTime: post.modifiedTime
-    }
+      modifiedTime: post.modifiedTime,
+    },
   })
 }
 
@@ -73,7 +73,7 @@ function Page(props: PageProps<'/[locale]/blog/[slug]'>) {
     description: post.summary,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': url
+      '@id': url,
     },
     image: ogImage,
     datePublished: post.date,
@@ -81,14 +81,14 @@ function Page(props: PageProps<'/[locale]/blog/[slug]'>) {
     author: {
       '@type': 'Person',
       name: MY_NAME,
-      url: baseUrl
+      url: baseUrl,
     },
     publisher: {
       '@type': 'Person',
       name: MY_NAME,
-      url: baseUrl
+      url: baseUrl,
     },
-    inLanguage: locale
+    inLanguage: locale,
   }
 
   return (

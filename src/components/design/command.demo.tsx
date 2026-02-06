@@ -23,7 +23,7 @@ import {
   TrashIcon,
   UserIcon,
   ZoomInIcon,
-  ZoomOutIcon
+  ZoomOutIcon,
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -37,7 +37,7 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut
+  CommandShortcut,
 } from '../ui/command'
 import { Demo, DemoItem } from '../ui/demo'
 

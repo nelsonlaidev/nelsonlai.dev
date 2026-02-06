@@ -26,7 +26,7 @@ export async function generateMetadata(props: PageProps<'/[locale]/blog'>): Prom
     pathname: '/blog',
     title,
     description,
-    locale
+    locale,
   })
 }
 
@@ -58,15 +58,15 @@ function Page(props: PageProps<'/[locale]/blog'>) {
         url: `${url}/${post.slug}`,
         datePublished: post.date,
         dateModified: post.modifiedTime,
-        position: index + 1
-      }))
+        position: index + 1,
+      })),
     },
     isPartOf: {
       '@type': 'WebSite',
       name: MY_NAME,
-      url: getBaseUrl()
+      url: getBaseUrl(),
     },
-    inLanguage: locale
+    inLanguage: locale,
   }
 
   return (

@@ -22,7 +22,7 @@ const MAX_UNDO_STACK_SIZE = 100
 const MARKER_MAP = {
   bold: '**',
   italic: '_',
-  strikethrough: '~~'
+  strikethrough: '~~',
 }
 
 function isSpace(char: string) {
@@ -69,7 +69,7 @@ function getReplacementAndRange(value: string, start: number, end: number, marke
       rangeEnd: end,
       replacement: selected.slice(marker.length, selected.length - marker.length),
       action: 'remove' as ToggleAction,
-      position: 'inside' as DecorationPosition
+      position: 'inside' as DecorationPosition,
     }
   }
 
@@ -79,7 +79,7 @@ function getReplacementAndRange(value: string, start: number, end: number, marke
       rangeEnd: end + marker.length,
       replacement: selected,
       action: 'remove' as ToggleAction,
-      position: 'outside' as DecorationPosition
+      position: 'outside' as DecorationPosition,
     }
   }
 
@@ -88,7 +88,7 @@ function getReplacementAndRange(value: string, start: number, end: number, marke
     rangeEnd: end,
     replacement: marker + selected + marker,
     action: 'add' as ToggleAction,
-    position: 'none' as DecorationPosition
+    position: 'none' as DecorationPosition,
   }
 }
 
@@ -97,7 +97,7 @@ function computeNewSelection(
   action: ToggleAction,
   markerLength: number,
   position: DecorationPosition,
-  keepCaretPos: boolean
+  keepCaretPos: boolean,
 ) {
   let { selectionStart, selectionEnd } = textarea
 
@@ -142,7 +142,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
     return {
       value: ta.value,
       selectionStart: ta.selectionStart,
-      selectionEnd: ta.selectionEnd
+      selectionEnd: ta.selectionEnd,
     }
   }
 
@@ -229,14 +229,14 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
       action,
       marker.length,
       position,
-      keepCaretPos
+      keepCaretPos,
     )
 
     // Apply replacement and update caret
     setRangeText(textarea, replacement, {
       start: rangeStart,
       end: rangeEnd,
-      selectionMode: 'preserve'
+      selectionMode: 'preserve',
     })
     textarea.setSelectionRange(selectionStart, selectionEnd)
     textarea.focus()
@@ -250,7 +250,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
       pushUndo(createSnapshot(ta))
       clearRedo()
     },
-    [pushUndo]
+    [pushUndo],
   )
 
   const handleCompositionStart = useCallback(
@@ -258,7 +258,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
       isComposing.current = true
       pushUndo(createSnapshot(event.currentTarget))
     },
-    [pushUndo]
+    [pushUndo],
   )
 
   const handleCompositionEnd = useCallback(
@@ -267,7 +267,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
       pushUndo(createSnapshot(event.currentTarget))
       clearRedo()
     },
-    [pushUndo]
+    [pushUndo],
   )
 
   function handleEmptyListItem(event: React.KeyboardEvent<HTMLTextAreaElement>, currentLine: string) {
@@ -276,7 +276,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
     const patterns = [
       /^\s*[-*+]\s\[[x\s]\]\s$/, // Task list item
       /^\d+\.\s$/, // Ordered list item
-      /^\s*[-*+]\s$/ // Unordered list item
+      /^\s*[-*+]\s$/, // Unordered list item
     ]
 
     if (patterns.some((pattern) => pattern.test(currentLine))) {
@@ -333,7 +333,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
         }
       }
     },
-    [decorateText, redo, undo]
+    [decorateText, redo, undo],
   )
 
   const handleTab = useCallback(
@@ -393,7 +393,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
       setRangeText(target, tabSpace, { selectionMode: 'end' })
       clearRedo()
     },
-    [pushUndo]
+    [pushUndo],
   )
 
   const handleEscape = useCallback(
@@ -407,7 +407,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
 
       return false
     },
-    [onEscape]
+    [onEscape],
   )
 
   const handleModEnter = useCallback(
@@ -421,7 +421,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
 
       return false
     },
-    [onModEnter]
+    [onModEnter],
   )
 
   const handleListContinuation = useCallback(
@@ -466,7 +466,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
         }
       }
     },
-    []
+    [],
   )
 
   const handleKeyDown = useCallback(
@@ -481,7 +481,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
 
       handleListContinuation(event, textareaRef.current)
     },
-    [handleEscape, handleListContinuation, handleModEnter, handleShortcut, handleTab]
+    [handleEscape, handleListContinuation, handleModEnter, handleShortcut, handleTab],
   )
 
   useEffect(() => {
@@ -500,6 +500,6 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
     handleKeyDown,
     handleInput,
     handleCompositionStart,
-    handleCompositionEnd
+    handleCompositionEnd,
   }
 }

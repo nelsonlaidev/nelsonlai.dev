@@ -27,8 +27,8 @@ export function useSignOut(options: UseSignOutOptions = {}) {
         },
         onError: () => {
           toast.error(t('error.sign-out-failed'))
-        }
-      }
+        },
+      },
     })
   }
 }

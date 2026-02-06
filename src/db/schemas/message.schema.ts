@@ -20,17 +20,17 @@ export const messages = pgTable(
     updatedAt: timestamp('updated_at')
       .notNull()
       .$defaultFn(() => new Date())
-      .$onUpdateFn(() => new Date())
+      .$onUpdateFn(() => new Date()),
   },
   (table) => [
     index('messages_created_at_desc_idx').on(table.createdAt.desc()),
-    index('messages_user_id_idx').on(table.userId)
-  ]
+    index('messages_user_id_idx').on(table.userId),
+  ],
 )
 
 export const messageRelations = relations(messages, ({ one }) => ({
   user: one(users, {
     fields: [messages.userId],
-    references: [users.id]
-  })
+    references: [users.id],
+  }),
 }))

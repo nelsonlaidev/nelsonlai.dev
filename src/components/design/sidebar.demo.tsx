@@ -6,7 +6,7 @@ import {
   LifeBuoyIcon,
   LogOutIcon,
   SettingsIcon,
-  UsersIcon
+  UsersIcon,
 } from 'lucide-react'
 
 import { Button } from '../ui/button'
@@ -24,7 +24,7 @@ import {
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarProvider
+  SidebarProvider,
 } from '../ui/sidebar'
 
 const MAIN_LINKS = [
@@ -32,12 +32,12 @@ const MAIN_LINKS = [
   { label: 'Projects', icon: FolderIcon },
   { label: 'Calendar', icon: CalendarIcon },
   { label: 'Inbox', icon: InboxIcon, badge: '3' },
-  { label: 'Team', icon: UsersIcon }
+  { label: 'Team', icon: UsersIcon },
 ]
 
 const FOOTER_LINKS = [
   { label: 'Settings', icon: SettingsIcon },
-  { label: 'Support', icon: LifeBuoyIcon }
+  { label: 'Support', icon: LifeBuoyIcon },
 ]
 
 function SidebarDemo() {

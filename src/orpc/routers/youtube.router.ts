@@ -7,12 +7,12 @@ const youtubeStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(as
   if (!env.GOOGLE_API_KEY) {
     return {
       subscribers: 0,
-      views: 0
+      views: 0,
     }
   }
 
   const response = await fetch(
-    `https://www.googleapis.com/youtube/v3/channels?id=UC2hMWOaOlk9vrkvFVaGmn0Q&part=statistics&key=${env.GOOGLE_API_KEY}`
+    `https://www.googleapis.com/youtube/v3/channels?id=UC2hMWOaOlk9vrkvFVaGmn0Q&part=statistics&key=${env.GOOGLE_API_KEY}`,
   )
   const data = await response.json()
 
@@ -21,10 +21,10 @@ const youtubeStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(as
 
   return {
     subscribers: Number(statistics.subscriberCount),
-    views: Number(statistics.viewCount)
+    views: Number(statistics.viewCount),
   }
 })
 
 export const youtubeRouter = {
-  stats: youtubeStats
+  stats: youtubeStats,
 }

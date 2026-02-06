@@ -194,7 +194,7 @@ describe('<CommentEditor />', () => {
       { type: 'unordered', initial: '* Item 1', expected: '* Item 1\n* ' },
       { type: 'ordered', initial: '1. First item', expected: '1. First item\n2. ' },
       { type: 'task', initial: '- [ ] Task 1', expected: '- [ ] Task 1\n- [ ] ' },
-      { type: 'checked task', initial: '- [x] Completed task', expected: '- [x] Completed task\n- [ ] ' }
+      { type: 'checked task', initial: '- [x] Completed task', expected: '- [x] Completed task\n- [ ] ' },
     ])('creates $type list item on Enter', ({ initial, expected }) => {
       render(<CommentEditor />)
 
@@ -226,7 +226,7 @@ describe('<CommentEditor />', () => {
     const SETS = [
       { action: 'bolds', buttonLabel: 'Toggle bold', marker: '**' },
       { action: 'italicizes', buttonLabel: 'Toggle italic', marker: '_' },
-      { action: 'strikes through', buttonLabel: 'Toggle strikethrough', marker: '~~' }
+      { action: 'strikes through', buttonLabel: 'Toggle strikethrough', marker: '~~' },
     ]
 
     describe('button actions', () => {
@@ -306,7 +306,7 @@ describe('<CommentEditor />', () => {
         { action: 'italicizes', modifier: 'Ctrl+I', key: 'i', code: 'KeyI', ctrlKey: true, marker: '_' },
         { action: 'italicizes', modifier: 'Cmd+I', key: 'i', code: 'KeyI', metaKey: true, marker: '_' },
         { action: 'strikes through', modifier: 'Ctrl+S', key: 's', code: 'KeyS', ctrlKey: true, marker: '~~' },
-        { action: 'strikes through', modifier: 'Cmd+S', key: 's', code: 'KeyS', metaKey: true, marker: '~~' }
+        { action: 'strikes through', modifier: 'Cmd+S', key: 's', code: 'KeyS', metaKey: true, marker: '~~' },
       ])('$action selected text with $modifier', ({ key, code, ctrlKey, metaKey, marker }) => {
         render(<CommentEditor />)
 
@@ -325,7 +325,7 @@ describe('<CommentEditor />', () => {
       test.each([
         { action: 'bolds', key: 'b', code: 'KeyB', marker: '**' },
         { action: 'italicizes', key: 'i', code: 'KeyI', marker: '_' },
-        { action: 'strikes through', key: 's', code: 'KeyS', marker: '~~' }
+        { action: 'strikes through', key: 's', code: 'KeyS', marker: '~~' },
       ])('$action current word when no selection', ({ key, code, marker }) => {
         render(<CommentEditor />)
 
@@ -547,7 +547,7 @@ describe('<CommentEditor />', () => {
         textValue: '你',
         intermediateData: '丿丨丿乛丨丿丶',
         composedText: '你',
-        caretPosition: 1
+        caretPosition: 1,
       })
 
       // Verify composed value and caret
@@ -560,7 +560,7 @@ describe('<CommentEditor />', () => {
         textValue: '你好',
         intermediateData: '乛丿一乛丨一',
         composedText: '好',
-        caretPosition: 2
+        caretPosition: 2,
       })
 
       // Verify composed value and caret
@@ -594,21 +594,21 @@ describe('<CommentEditor />', () => {
         textValue: '你',
         intermediateData: '丿丨丿乛丨丿丶',
         composedText: '你',
-        caretPosition: 1
+        caretPosition: 1,
       })
       simulateIMEInput({
         textarea,
         textValue: '你好',
         intermediateData: '乛丿一乛丨一',
         composedText: '好',
-        caretPosition: 2
+        caretPosition: 2,
       })
       simulateIMEInput({
         textarea,
         textValue: '你好嗎',
         intermediateData: '丨乛一一丨一一丨乛丶丶丶丶',
         composedText: '嗎',
-        caretPosition: 3
+        caretPosition: 3,
       })
 
       // Undo back to second character

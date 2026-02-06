@@ -22,7 +22,7 @@ import {
   SiTailwindcss,
   SiTypescript,
   SiVite,
-  SiVitest
+  SiVitest,
 } from '@icons-pack/react-simple-icons'
 import { ZapIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'

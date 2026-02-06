@@ -21,8 +21,8 @@ const treeData: Node = {
               children: [
                 { id: 'tree-view', name: 'tree-view.tsx' },
                 { id: 'button', name: 'button.tsx' },
-                { id: 'card', name: 'card.tsx' }
-              ]
+                { id: 'card', name: 'card.tsx' },
+              ],
             },
             {
               id: 'routes',
@@ -31,38 +31,38 @@ const treeData: Node = {
                 {
                   id: 'design',
                   name: 'design',
-                  children: [{ id: 'page', name: 'page.tsx' }]
-                }
-              ]
-            }
-          ]
+                  children: [{ id: 'page', name: 'page.tsx' }],
+                },
+              ],
+            },
+          ],
         },
         {
           id: 'public',
           name: 'public',
           children: [
             { id: 'logo', name: 'logo.svg' },
-            { id: 'og', name: 'og-image.png' }
-          ]
+            { id: 'og', name: 'og-image.png' },
+          ],
         },
-        { id: 'readme', name: 'README.md' }
-      ]
+        { id: 'readme', name: 'README.md' },
+      ],
     },
     {
       id: 'notes',
       name: 'notes',
       children: [
         { id: 'roadmap', name: 'roadmap.md' },
-        { id: 'ideas', name: 'ideas.md' }
-      ]
-    }
-  ]
+        { id: 'ideas', name: 'ideas.md' },
+      ],
+    },
+  ],
 }
 
 const treeCollection = createTreeCollection({
   nodeToValue: (node) => node.id,
   nodeToString: (node) => node.name,
-  rootNode: treeData
+  rootNode: treeData,
 })
 
 function TreeViewDemo() {

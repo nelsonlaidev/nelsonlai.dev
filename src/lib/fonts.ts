@@ -36,8 +36,8 @@ const fetchGoogleFont = cache(async (font: string, text: string): Promise<ArrayB
   const cssResponse = await fetch(cssURL, {
     headers: {
       'User-Agent':
-        'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1'
-    }
+        'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1',
+    },
   })
 
   const css = await cssResponse.text()
@@ -61,7 +61,7 @@ export async function getOGImageFonts(title: string): Promise<SatoriOptions['fon
     getMediumFont(),
     getSemiBoldFont(),
     fetchGoogleFont('Noto Sans TC', title),
-    fetchGoogleFont('Noto Sans SC', title)
+    fetchGoogleFont('Noto Sans SC', title),
   ])
 
   return [
@@ -69,31 +69,31 @@ export async function getOGImageFonts(title: string): Promise<SatoriOptions['fon
       name: 'Geist Sans',
       data: regularFontData,
       style: 'normal',
-      weight: 400
+      weight: 400,
     },
     {
       name: 'Geist Sans',
       data: mediumFontData,
       style: 'normal',
-      weight: 500
+      weight: 500,
     },
     {
       name: 'Geist Sans',
       data: semiBoldFontData,
       style: 'normal',
-      weight: 600
+      weight: 600,
     },
     {
       name: 'Noto Sans TC',
       data: notoSansTCData,
       style: 'normal',
-      weight: 400
+      weight: 400,
     },
     {
       name: 'Noto Sans SC',
       data: notoSansSCData,
       style: 'normal',
-      weight: 400
-    }
+      weight: 400,
+    },
   ]
 }

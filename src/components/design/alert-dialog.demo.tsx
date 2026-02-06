@@ -12,7 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogMedia,
   AlertDialogTitle,
-  AlertDialogTrigger
+  AlertDialogTrigger,
 } from '../ui/alert-dialog'
 import { Button } from '../ui/button'
 import { Demo, DemoItem } from '../ui/demo'

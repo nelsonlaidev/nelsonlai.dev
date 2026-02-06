@@ -4,7 +4,7 @@ import * as z from 'zod'
 import { comments, users } from '@/db/schemas'
 
 export const ListCommentsOutputSchema = z.object({
-  comments: z.array(createSelectSchema(comments))
+  comments: z.array(createSelectSchema(comments)),
 })
 
 export const ListUsersOutputSchema = z.object({
@@ -14,7 +14,7 @@ export const ListUsersOutputSchema = z.object({
       name: true,
       email: true,
       role: true,
-      createdAt: true
-    })
-  )
+      createdAt: true,
+    }),
+  ),
 })

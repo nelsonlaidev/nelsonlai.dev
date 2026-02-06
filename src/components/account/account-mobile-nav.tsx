@@ -11,7 +11,7 @@ import {
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger
+  DrawerTrigger,
 } from '@/components/ui/drawer'
 import { Link } from '@/components/ui/link'
 import { ACCOUNT_SIDEBAR_LINKS } from '@/config/links'

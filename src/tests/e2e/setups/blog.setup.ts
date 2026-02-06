@@ -41,7 +41,7 @@ async function waitForContentBuild() {
   await expect(async () => {
     const fileContent = await fs.readFile(
       path.join(process.cwd(), '.content-collections/generated/allPosts.js'),
-      'utf8'
+      'utf8',
     )
     const allPosts = extractJsonFromArrayFile(fileContent)
 
@@ -58,7 +58,7 @@ setup('setup blog', async () => {
       .values({
         slug: post.slug,
         views: 0,
-        likes: 0
+        likes: 0,
       })
       .onConflictDoNothing({ target: posts.slug })
 

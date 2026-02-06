@@ -30,7 +30,7 @@ test.describe('theme', () => {
   test.describe('system preference', () => {
     const testCases = [
       { preferredColorScheme: 'light', expectedTheme: 'light' },
-      { preferredColorScheme: 'dark', expectedTheme: 'dark' }
+      { preferredColorScheme: 'dark', expectedTheme: 'dark' },
     ] as const
 
     for (const { preferredColorScheme, expectedTheme } of testCases) {

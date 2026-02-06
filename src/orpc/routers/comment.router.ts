@@ -19,7 +19,7 @@ import {
   CreateCommentOutputSchema,
   DeleteCommentInputSchema,
   ListCommentsInputSchema,
-  ListCommentsOutputSchema
+  ListCommentsOutputSchema,
 } from '../schemas/comment.schema'
 import { EmptyOutputSchema } from '../schemas/common.schema'
 
@@ -40,7 +40,7 @@ const listComments = publicProcedure
         input.parentId ? eq(comments.parentId, input.parentId) : isNull(comments.parentId),
         input.type === 'comments' ? isNull(comments.parentId) : isNotNull(comments.parentId),
         getCursorFilter(),
-        input.highlightedCommentId ? ne(comments.id, input.highlightedCommentId) : undefined
+        input.highlightedCommentId ? ne(comments.id, input.highlightedCommentId) : undefined,
       ),
       limit: input.limit,
       with: {
@@ -49,14 +49,14 @@ const listComments = publicProcedure
             name: true,
             image: true,
             role: true,
-            id: true
-          }
+            id: true,
+          },
         },
         votes: {
-          where: eq(votes.userId, session?.user.id ?? '')
-        }
+          where: eq(votes.userId, session?.user.id ?? ''),
+        },
       },
-      orderBy: input.sort === 'newest' ? desc(comments.createdAt) : asc(comments.createdAt)
+      orderBy: input.sort === 'newest' ? desc(comments.createdAt) : asc(comments.createdAt),
     })
 
     if (input.highlightedCommentId && !input.cursor) {
@@ -68,13 +68,13 @@ const listComments = publicProcedure
               name: true,
               image: true,
               role: true,
-              id: true
-            }
+              id: true,
+            },
           },
           votes: {
-            where: eq(votes.userId, session?.user.id ?? '')
-          }
-        }
+            where: eq(votes.userId, session?.user.id ?? ''),
+          },
+        },
       })
 
       if (highlightedComment) query.unshift(highlightedComment)
@@ -90,14 +90,14 @@ const listComments = publicProcedure
         user: {
           ...comment.user,
           image: comment.user.image ?? defaultImage,
-          name: comment.user.name
-        }
+          name: comment.user.name,
+        },
       }
     })
 
     return {
       comments: result,
-      nextCursor: result.at(-1)?.createdAt
+      nextCursor: result.at(-1)?.createdAt,
     }
   })
 
@@ -125,13 +125,13 @@ const createComment = protectedProcedure
           body: input.content,
           userId: user.id,
           postId: input.slug,
-          parentId: input.parentId
+          parentId: input.parentId,
         })
         .returning()
 
       if (!c) {
         throw new ORPCError('INTERNAL_SERVER_ERROR', {
-          message: 'Failed to create comment'
+          message: 'Failed to create comment',
         })
       }
 
@@ -148,8 +148,8 @@ const createComment = protectedProcedure
               commentIdentifier: `comment=${c.id}`,
               date: input.date,
               postTitle,
-              postUrl
-            })
+              postUrl,
+            }),
           })
         } else {
           console.warn('AUTHOR_EMAIL is not set. Skipping email sending.')
@@ -161,8 +161,8 @@ const createComment = protectedProcedure
         const parentComment = await tx.query.comments.findFirst({
           where: eq(comments.id, input.parentId),
           with: {
-            user: true
-          }
+            user: true,
+          },
         })
 
         // Don't notify if the reply is to own comment or the parent comment user is "ghost"
@@ -176,8 +176,8 @@ const createComment = protectedProcedure
             where: and(
               eq(unsubscribes.commentId, input.parentId),
               eq(unsubscribes.userId, parentComment.userId),
-              eq(unsubscribes.type, 'comment_reply')
-            )
+              eq(unsubscribes.type, 'comment_reply'),
+            ),
           })
 
           // Don't send notification email if the user
@@ -198,8 +198,8 @@ const createComment = protectedProcedure
               date: input.date,
               postTitle,
               postUrl,
-              unsubscribeUrl: `https://nelsonlai.dev/unsubscribe?token=${token}`
-            })
+              unsubscribeUrl: `https://nelsonlai.dev/unsubscribe?token=${token}`,
+            }),
           })
         }
       }
@@ -221,13 +221,13 @@ const deleteComment = protectedProcedure
       with: {
         user: true,
         replies: true,
-        parent: true
-      }
+        parent: true,
+      },
     })
 
     if (!comment) {
       throw new ORPCError('NOT_FOUND', {
-        message: 'Comment not found'
+        message: 'Comment not found',
       })
     }
 
@@ -251,7 +251,7 @@ const deleteComment = protectedProcedure
       // Case: deleting a reply
       if (comment.parentId) {
         const parentComment = await tx.query.comments.findFirst({
-          where: and(eq(comments.id, comment.parentId), eq(comments.isDeleted, true))
+          where: and(eq(comments.id, comment.parentId), eq(comments.isDeleted, true)),
         })
 
         if (parentComment) {
@@ -273,13 +273,13 @@ const countComment = publicProcedure
   .handler(async ({ input, context }) => {
     const [result] = await context.db
       .select({
-        value: count()
+        value: count(),
       })
       .from(comments)
       .where(and(eq(comments.postId, input.slug), input.withReplies ? undefined : isNull(comments.parentId)))
 
     return {
-      count: result?.value ?? 0
+      count: result?.value ?? 0,
     }
   })
 
@@ -287,5 +287,5 @@ export const commentRouter = {
   list: listComments,
   create: createComment,
   delete: deleteComment,
-  count: countComment
+  count: countComment,
 }

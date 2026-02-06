@@ -19,8 +19,8 @@ export default defineConfig({
 
     ...devices['Desktop Chrome'],
     contextOptions: {
-      permissions: ['clipboard-read', 'clipboard-write']
-    }
+      permissions: ['clipboard-read', 'clipboard-write'],
+    },
   },
   expect: { timeout: 5000 },
   projects: [
@@ -29,16 +29,16 @@ export default defineConfig({
       name: 'authenticated',
       testMatch: 'authenticated/**/*.test.ts',
       use: {
-        storageState: './src/tests/e2e/.auth/user.json'
+        storageState: './src/tests/e2e/.auth/user.json',
       },
-      dependencies: ['setup']
+      dependencies: ['setup'],
     },
     { name: 'unauthenticated', testMatch: 'unauthenticated/**/*.test.ts', dependencies: ['setup'] },
-    { name: 'teardown', testMatch: '**/*.teardown.ts' }
+    { name: 'teardown', testMatch: '**/*.teardown.ts' },
   ],
   webServer: {
     command: CI ? 'pnpm start' : 'pnpm dev',
     url: baseURL,
-    reuseExistingServer: !CI
-  }
+    reuseExistingServer: !CI,
+  },
 })

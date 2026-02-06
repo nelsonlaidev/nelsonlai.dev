@@ -8,7 +8,7 @@ import GoToHomepage from '@/components/go-to-homepage'
 import MainLayout from '@/components/main-layout'
 
 export const metadata: Metadata = {
-  title: '404'
+  title: '404',
 }
 
 function NotFound() {

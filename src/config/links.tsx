@@ -22,43 +22,43 @@ export const HEADER_LINKS: HeaderLinks = [
     href: '/blog',
     key: 'blog',
     // i18n-check t('common.labels.blog')
-    labelKey: 'common.labels.blog'
+    labelKey: 'common.labels.blog',
   },
   {
     icon: <MessageCircleIcon className='size-3.5' />,
     href: '/guestbook',
     key: 'guestbook',
     // i18n-check t('common.labels.guestbook')
-    labelKey: 'common.labels.guestbook'
+    labelKey: 'common.labels.guestbook',
   },
   {
     icon: <BarChartIcon className='size-3.5' />,
     href: '/dashboard',
     key: 'dashboard',
     // i18n-check t('common.labels.dashboard')
-    labelKey: 'common.labels.dashboard'
+    labelKey: 'common.labels.dashboard',
   },
   {
     icon: <FlameIcon className='size-3.5' />,
     href: '/projects',
     key: 'projects',
     // i18n-check t('common.labels.projects')
-    labelKey: 'common.labels.projects'
+    labelKey: 'common.labels.projects',
   },
   {
     icon: <UserCircleIcon className='size-3.5' />,
     href: '/about',
     key: 'about',
     // i18n-check t('common.labels.about')
-    labelKey: 'common.labels.about'
+    labelKey: 'common.labels.about',
   },
   {
     icon: <MonitorIcon className='size-3.5' />,
     href: '/uses',
     key: 'uses',
     // i18n-check t('common.labels.uses')
-    labelKey: 'common.labels.uses'
-  }
+    labelKey: 'common.labels.uses',
+  },
 ]
 
 type FooterLinks = Array<{
@@ -82,8 +82,8 @@ export const FOOTER_LINKS: FooterLinks = [
       // i18n-check t('common.labels.dashboard')
       { href: '/dashboard', labelKey: 'common.labels.dashboard' },
       // i18n-check t('common.labels.design')
-      { href: '/design', labelKey: 'common.labels.design' }
-    ]
+      { href: '/design', labelKey: 'common.labels.design' },
+    ],
   },
   {
     id: 2,
@@ -95,8 +95,8 @@ export const FOOTER_LINKS: FooterLinks = [
       // i18n-check t('common.labels.projects')
       { href: '/projects', labelKey: 'common.labels.projects' },
       // i18n-check t('common.labels.links')
-      { href: 'https://nelsonlai.link', labelKey: 'common.labels.links' }
-    ]
+      { href: 'https://nelsonlai.link', labelKey: 'common.labels.links' },
+    ],
   },
   {
     id: 3,
@@ -108,8 +108,8 @@ export const FOOTER_LINKS: FooterLinks = [
       // i18n-check t('common.labels.github')
       { href: SITE_GITHUB_URL, labelKey: 'common.labels.github' },
       // i18n-check t('common.labels.youtube')
-      { href: SITE_YOUTUBE_URL, labelKey: 'common.labels.youtube' }
-    ]
+      { href: SITE_YOUTUBE_URL, labelKey: 'common.labels.youtube' },
+    ],
   },
   {
     id: 4,
@@ -117,9 +117,9 @@ export const FOOTER_LINKS: FooterLinks = [
       // i18n-check t('common.labels.terms')
       { href: '/terms', labelKey: 'common.labels.terms' },
       // i18n-check t('common.labels.privacy')
-      { href: '/privacy', labelKey: 'common.labels.privacy' }
-    ]
-  }
+      { href: '/privacy', labelKey: 'common.labels.privacy' },
+    ],
+  },
 ]
 
 type SocialLinks = Array<{
@@ -132,28 +132,28 @@ export const SOCIAL_LINKS: SocialLinks = [
   {
     href: SITE_GITHUB_URL,
     title: 'GitHub',
-    icon: <SiGithub />
+    icon: <SiGithub />,
   },
   {
     href: SITE_FACEBOOK_URL,
     title: 'Facebook',
-    icon: <SiFacebook />
+    icon: <SiFacebook />,
   },
   {
     href: SITE_INSTAGRAM_URL,
     title: 'Instagram',
-    icon: <SiInstagram />
+    icon: <SiInstagram />,
   },
   {
     href: SITE_X_URL,
     title: 'X',
-    icon: <SiX />
+    icon: <SiX />,
   },
   {
     href: SITE_YOUTUBE_URL,
     title: 'YouTube',
-    icon: <SiYoutube />
-  }
+    icon: <SiYoutube />,
+  },
 ]
 
 type AccountSidebarLinks = Array<{
@@ -165,11 +165,11 @@ export const ACCOUNT_SIDEBAR_LINKS: AccountSidebarLinks = [
   {
     href: '/account',
     // i18n-check t('common.labels.account')
-    labelKey: 'common.labels.account'
+    labelKey: 'common.labels.account',
   },
   {
     href: '/account/settings',
     // i18n-check t('common.labels.settings')
-    labelKey: 'common.labels.settings'
-  }
+    labelKey: 'common.labels.settings',
+  },
 ]

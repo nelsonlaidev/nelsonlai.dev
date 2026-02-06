@@ -15,12 +15,12 @@ import { cn } from '@/utils/cn'
 const variants = {
   initial: {
     y: 40,
-    opacity: 0
+    opacity: 0,
   },
   animate: {
     y: 0,
-    opacity: 1
-  }
+    opacity: 1,
+  },
 }
 
 type CardProps = {
@@ -44,7 +44,7 @@ function SelectedProjects(props: SelectedProjectsProps) {
       variants={variants}
       ref={projectsRef}
       transition={{
-        duration: 0.5
+        duration: 0.5,
       }}
       className='relative my-24'
     >
@@ -52,14 +52,14 @@ function SelectedProjects(props: SelectedProjectsProps) {
         className='text-center text-3xl font-semibold'
         initial={{
           y: 30,
-          opacity: 0
+          opacity: 0,
         }}
         animate={{
           y: 0,
-          opacity: 1
+          opacity: 1,
         }}
         transition={{
-          duration: 0.3
+          duration: 0.3,
         }}
       >
         {t('homepage.selected-projects.title')}
@@ -68,14 +68,14 @@ function SelectedProjects(props: SelectedProjectsProps) {
         className='mt-12 grid gap-4 md:grid-cols-2'
         initial={{
           y: 40,
-          opacity: 0
+          opacity: 0,
         }}
         animate={{
           y: 0,
-          opacity: 1
+          opacity: 1,
         }}
         transition={{
-          duration: 0.3
+          duration: 0.3,
         }}
       >
         {projects.map((project) => (

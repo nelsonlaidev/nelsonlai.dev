@@ -69,8 +69,8 @@ function SignInDialog() {
         },
         onRequest: () => {
           setIsPending(true)
-        }
-      }
+        },
+      },
     })
   }
 
@@ -120,7 +120,7 @@ function SignInDialog() {
               <Link href='/privacy' className='text-foreground underline' onClick={closeDialog}>
                 {chunks}
               </Link>
-            )
+            ),
           })}
         </div>
       </DialogContent>

@@ -18,7 +18,7 @@ export async function generateMetadata(props: PageProps<'/[locale]/account/setti
     pathname: '/account/settings',
     title,
     description,
-    locale
+    locale,
   })
 }
 

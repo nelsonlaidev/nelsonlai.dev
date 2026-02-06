@@ -25,7 +25,7 @@ import {
   SettingsIcon,
   ShieldIcon,
   SunIcon,
-  UserIcon
+  UserIcon,
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -46,7 +46,7 @@ import {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
 
 function DropdownMenuDemo() {
@@ -61,7 +61,7 @@ function DropdownMenuComplex() {
   const [notifications, setNotifications] = useState({
     email: true,
     sms: false,
-    push: true
+    push: true,
   })
   const [theme, setTheme] = useState('light')
 
@@ -232,7 +232,7 @@ function DropdownMenuComplex() {
                               onCheckedChange={(checked) => {
                                 setNotifications({
                                   ...notifications,
-                                  push: checked
+                                  push: checked,
                                 })
                               }}
                             >
@@ -244,7 +244,7 @@ function DropdownMenuComplex() {
                               onCheckedChange={(checked) => {
                                 setNotifications({
                                   ...notifications,
-                                  email: checked
+                                  email: checked,
                                 })
                               }}
                             >

@@ -11,7 +11,7 @@ import {
   transformerNotationDiff,
   transformerNotationFocus,
   transformerNotationHighlight,
-  transformerNotationWordHighlight
+  transformerNotationWordHighlight,
 } from '@shikijs/transformers'
 import { bundledLanguages, getSingletonHighlighter, type ShikiTransformer } from 'shiki'
 import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
@@ -20,7 +20,7 @@ const titleRegex = /title=["']([^"']*)["']/
 
 export const DEFAULT_SHIKI_THEMES = {
   light: 'github-light-default',
-  dark: 'github-dark-default'
+  dark: 'github-dark-default',
 }
 
 export function rehypeCode(): Transformer<Root, Root> {
@@ -40,30 +40,30 @@ export function rehypeCode(): Transformer<Root, Root> {
             ...pre,
             properties: {
               ...pre.properties,
-              'data-lang': this.options.lang
-            }
-          }
+              'data-lang': this.options.lang,
+            },
+          },
         ]
-      }
+      },
     },
     transformerNotationHighlight({
-      matchAlgorithm: 'v3'
+      matchAlgorithm: 'v3',
     }),
     transformerNotationWordHighlight({
-      matchAlgorithm: 'v3'
+      matchAlgorithm: 'v3',
     }),
     transformerNotationDiff({
-      matchAlgorithm: 'v3'
+      matchAlgorithm: 'v3',
     }),
     transformerNotationFocus({
-      matchAlgorithm: 'v3'
-    })
+      matchAlgorithm: 'v3',
+    }),
   ]
 
   const highlighter = getSingletonHighlighter({
     engine: createOnigurumaEngine(import('shiki/wasm')),
     themes: Object.values(DEFAULT_SHIKI_THEMES),
-    langs: Object.keys(bundledLanguages)
+    langs: Object.keys(bundledLanguages),
   })
 
   const transformer = highlighter.then((instance) =>
@@ -77,8 +77,8 @@ export function rehypeCode(): Transformer<Root, Root> {
         const title = titleMatch?.[1] ?? null
 
         return { title }
-      }
-    })
+      },
+    }),
   )
 
   return async (tree, file) => {

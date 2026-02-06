@@ -10,7 +10,7 @@ function sitemap(): MetadataRoute.Sitemap {
   return routing.locales.flatMap((locale) => {
     return pathnames.map((pathname) => ({
       url: getLocalizedPath({ locale, pathname }),
-      lastModified: new Date()
+      lastModified: new Date(),
     }))
   })
 }

@@ -9,7 +9,7 @@ import { IS_SERVER } from '@/lib/constants'
 import { getBaseUrl } from '@/utils/get-base-url'
 
 const link = new RPCLink({
-  url: `${IS_SERVER ? getBaseUrl() : globalThis.location.origin}/rpc`
+  url: `${IS_SERVER ? getBaseUrl() : globalThis.location.origin}/rpc`,
 })
 
 const client: RouterClient<typeof router> = createORPCClient(link)

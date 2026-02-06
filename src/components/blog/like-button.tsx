@@ -41,9 +41,9 @@ function LikeButton(props: LikeButtonProps) {
       spread: 100,
       origin: {
         y: targetY / clientHeight,
-        x: targetCenterX / clientWidth
+        x: targetCenterX / clientWidth,
       },
-      shapes: [confetti.shapeFromText({ text: '❤️', scalar: 2 })]
+      shapes: [confetti.shapeFromText({ text: '❤️', scalar: 2 })],
     })
   }
 
@@ -106,10 +106,10 @@ function LikeButton(props: LikeButtonProps) {
               height='24'
               fill='#ef4444'
               initial={{
-                y: '100%'
+                y: '100%',
               }}
               animate={{
-                y: data ? `${100 - (data.currentUserLikes + cacheCount) * 33}%` : '100%'
+                y: data ? `${100 - (data.currentUserLikes + cacheCount) * 33}%` : '100%',
               }}
             />
           </g>

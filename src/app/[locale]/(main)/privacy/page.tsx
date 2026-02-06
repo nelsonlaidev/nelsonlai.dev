@@ -22,7 +22,7 @@ export async function generateMetadata(props: PageProps<'/[locale]/privacy'>): P
     pathname: '/privacy',
     title,
     description,
-    locale
+    locale,
   })
 }
 

@@ -6,13 +6,13 @@ import { env } from '@/lib/env'
 
 export const redis = new Redis({
   url: env.UPSTASH_REDIS_REST_URL,
-  token: env.UPSTASH_REDIS_REST_TOKEN
+  token: env.UPSTASH_REDIS_REST_TOKEN,
 })
 
 export const ratelimit = new Ratelimit({
   redis,
   limiter: Ratelimit.slidingWindow(50, '10 s'),
-  analytics: true
+  analytics: true,
 })
 
 const DEFAULT_TTL = 60 * 60 * 24 // 1 day
@@ -71,6 +71,6 @@ export function createCache<T>(prefix: string, ttl: number = DEFAULT_TTL) {
       await this.set(key, value, customTtl)
 
       return value
-    }
+    },
   }
 }

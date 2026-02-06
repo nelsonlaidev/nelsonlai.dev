@@ -8,25 +8,25 @@ export type User = AdminUserListOutput['users'][number]
 export const columns: Array<ColumnDef<User>> = [
   {
     accessorKey: 'id',
-    header: 'ID'
+    header: 'ID',
   },
   {
     accessorKey: 'name',
-    header: 'Name'
+    header: 'Name',
   },
   {
     accessorKey: 'email',
-    header: 'Email'
+    header: 'Email',
   },
   {
     accessorKey: 'role',
-    header: 'Role'
+    header: 'Role',
   },
   {
     accessorKey: 'createdAt',
     header: 'Created At',
     cell: ({ row }) => {
       return <FormattedDateCell date={row.original.createdAt} />
-    }
-  }
+    },
+  },
 ]

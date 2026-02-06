@@ -42,8 +42,8 @@ function CommentReply() {
       date: new Date().toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
-      })
+        day: 'numeric',
+      }),
     })
   }
 

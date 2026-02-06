@@ -25,7 +25,7 @@ export async function generateMetadata(props: PageProps<'/[locale]/dashboard'>):
     pathname: '/dashboard',
     title,
     description,
-    locale
+    locale,
   })
 }
 
@@ -49,9 +49,9 @@ function Page(props: PageProps<'/[locale]/dashboard'>) {
     isPartOf: {
       '@type': 'WebSite',
       name: MY_NAME,
-      url: getBaseUrl()
+      url: getBaseUrl(),
     },
-    inLanguage: locale
+    inLanguage: locale,
   }
 
   return (

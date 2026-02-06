@@ -16,7 +16,7 @@ function CommentsTable(props: CommentsTableProps) {
   const table = useReactTable({
     data: comments,
     columns,
-    getCoreRowModel: getCoreRowModel()
+    getCoreRowModel: getCoreRowModel(),
   })
 
   return (

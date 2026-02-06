@@ -14,7 +14,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger
+  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -104,20 +104,20 @@ function EditName(props: EditNameProps) {
   const { refetch: refetchSession } = useSession()
 
   const EditNameFormSchema = z.object({
-    name: z.string().min(1, t('error.name-cannot-be-empty')).max(50, t('error.name-too-long'))
+    name: z.string().min(1, t('error.name-cannot-be-empty')).max(50, t('error.name-too-long')),
   })
 
   const form = useForm({
     defaultValues: {
-      name
+      name,
     },
     validators: {
-      onSubmit: EditNameFormSchema
+      onSubmit: EditNameFormSchema,
     },
     onSubmit: ({ value }) => {
       if (isUpdating) return
       updateUser({ name: value.name })
-    }
+    },
   })
 
   const { mutate: updateUser, isPending: isUpdating } = useUpdateUser(() => {
@@ -219,15 +219,15 @@ function UpdateAvatar() {
       const { uploadUrl, publicUrl } = await getAvatarUploadUrl({
         fileName: file.name,
         fileType: file.type as AvatarMimeType,
-        fileSize: file.size
+        fileSize: file.size,
       })
 
       const response = await fetch(uploadUrl, {
         method: 'PUT',
         headers: {
-          'Content-Type': file.type
+          'Content-Type': file.type,
         },
-        body: file
+        body: file,
       })
 
       if (!response.ok) {

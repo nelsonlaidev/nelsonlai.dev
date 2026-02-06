@@ -27,7 +27,7 @@ setup('setup auth', async () => {
         emailVerified: false,
         image: TEST_USER.image,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       })
       .onConflictDoNothing({ target: users.id })
 
@@ -41,7 +41,7 @@ setup('setup auth', async () => {
         accessToken: 'gho_000',
         scope: 'read:user,user:email',
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       })
       .onConflictDoNothing({ target: accounts.id })
 
@@ -53,11 +53,11 @@ setup('setup auth', async () => {
         userId: TEST_UNIQUE_ID,
         expiresAt,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
       })
       .onConflictDoUpdate({
         target: sessions.token,
-        set: { expiresAt }
+        set: { expiresAt },
       })
   })
 
@@ -73,7 +73,7 @@ setup('setup auth', async () => {
     httpOnly: true,
     secure: false,
     sameSite: 'Lax',
-    expires: Math.floor(expiresAt.getTime() / 1000)
+    expires: Math.floor(expiresAt.getTime() / 1000),
   }
 
   const authDir = path.dirname(authStoragePath)

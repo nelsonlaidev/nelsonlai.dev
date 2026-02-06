@@ -12,7 +12,7 @@ import {
   useLikeStats,
   useViewStats,
   useWakatimeStats,
-  useYoutubeStats
+  useYoutubeStats,
 } from '@/hooks/queries/stats.query'
 
 type Card = {
@@ -46,9 +46,9 @@ function Stats() {
       linkText: 'WakaTime',
       gradient: {
         startColor: '#0061ff',
-        endColor: '#6f7bf7'
+        endColor: '#6f7bf7',
       },
-      suffix: 'hrs'
+      suffix: 'hrs',
     },
     {
       title: t('dashboard.stat.youtube-subscribers'),
@@ -58,8 +58,8 @@ function Stats() {
       linkText: 'YouTube',
       gradient: {
         startColor: '#ff0000',
-        endColor: '#ca1a1a'
-      }
+        endColor: '#ca1a1a',
+      },
     },
     {
       title: t('dashboard.stat.youtube-views'),
@@ -69,8 +69,8 @@ function Stats() {
       linkText: 'YouTube',
       gradient: {
         startColor: '#ff0000',
-        endColor: '#ca1a1a'
-      }
+        endColor: '#ca1a1a',
+      },
     },
     {
       title: t('dashboard.stat.github-followers'),
@@ -80,8 +80,8 @@ function Stats() {
       linkText: 'GitHub',
       gradient: {
         startColor: '#fee000',
-        endColor: '#ffce63'
-      }
+        endColor: '#ffce63',
+      },
     },
     {
       title: t('dashboard.stat.github-stars'),
@@ -91,8 +91,8 @@ function Stats() {
       linkText: 'GitHub',
       gradient: {
         startColor: '#fee000',
-        endColor: '#ffce63'
-      }
+        endColor: '#ffce63',
+      },
     },
     {
       title: t('dashboard.stat.blog-total-views'),
@@ -102,8 +102,8 @@ function Stats() {
       linkText: 'Blog',
       gradient: {
         startColor: '#ff0f7b',
-        endColor: '#f945ff'
-      }
+        endColor: '#f945ff',
+      },
     },
     {
       title: t('dashboard.stat.blog-total-likes'),
@@ -113,9 +113,9 @@ function Stats() {
       linkText: 'Blog',
       gradient: {
         startColor: '#ff0f7b',
-        endColor: '#f945ff'
-      }
-    }
+        endColor: '#f945ff',
+      },
+    },
   ]
 
   return (
@@ -128,7 +128,7 @@ function Stats() {
           value,
           linkText,
           gradient: { startColor, endColor },
-          suffix
+          suffix,
         } = stat
 
         const hasValue = value === 0 || value !== undefined
@@ -148,7 +148,7 @@ function Stats() {
                       style={{
                         background: `linear-gradient(122.25deg, ${startColor} 12.16%, ${endColor} 70.98%)`,
                         WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent'
+                        WebkitTextFillColor: 'transparent',
                       }}
                     >
                       <Counter value={value} />

@@ -30,7 +30,7 @@ function CodeBlock(props: CodeBlockProps) {
     <figure
       className={cn(
         'not-prose group relative my-6 overflow-hidden rounded-2xl border bg-input/30 text-sm',
-        figureClassName
+        figureClassName,
       )}
     >
       {title ? (
