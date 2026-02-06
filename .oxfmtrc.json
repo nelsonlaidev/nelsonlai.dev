@@ -3,5 +3,8 @@
   "singleQuote": true,
   "jsxSingleQuote": true,
   "semi": false,
-  "printWidth": 120
+  "printWidth": 120,
+  "experimentalSortPackageJson": {
+    "sortScripts": true
+  }
 }
