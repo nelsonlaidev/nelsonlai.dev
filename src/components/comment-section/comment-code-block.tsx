@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { type BundledLanguage, bundledLanguages } from 'shiki'
 
 import { CodeBlock } from '@/components/ui/code-block'
@@ -20,10 +20,22 @@ function CommentCodeBlock(props: CommentCodeBlockProps) {
       props: { children: code, className, title },
     },
   } = props
-  const lang = className?.replace('lang-', '') ?? 'plaintext'
-  const [highlighter] = useHighlighter()
+  const lang =
+    className
+      ?.split(' ')
+      .find((c) => c.startsWith('lang-') || c.startsWith('language-'))
+      ?.replace(/^(lang-|language-)/, '') ?? 'plaintext'
+  const { highlighter, initHighlighter } = useHighlighter()
   const [highlightedHtml, setHighlightedHtml] = useState('')
   const [isHighlighted, setIsHighlighted] = useState(false)
+  const initCalled = useRef(false)
+
+  useEffect(() => {
+    if (!initCalled.current) {
+      initCalled.current = true
+      initHighlighter()
+    }
+  }, [initHighlighter])
 
   useEffect(() => {
     if (!highlighter) return
@@ -39,7 +51,7 @@ function CommentCodeBlock(props: CommentCodeBlockProps) {
         await currHighlighter.loadLanguage(bundledLang)
       }
 
-      return currHighlighter.codeToHtml(code, {
+      const newHtml = currHighlighter.codeToHtml(code, {
         lang: lang in bundledLanguages ? lang : 'plaintext',
         themes: {
           light: 'github-light-default',
@@ -47,26 +59,19 @@ function CommentCodeBlock(props: CommentCodeBlockProps) {
         },
         defaultColor: false,
       })
-    }
 
-    generateHighlightedHtml().then((newHtml) => {
       setHighlightedHtml(newHtml)
       setIsHighlighted(true)
-    })
+    }
+
+    generateHighlightedHtml()
   }, [code, highlighter, lang])
 
   const codeHtml = /<code\b[^>]*>([\s\S]*?)<\/code>/.exec(highlightedHtml)?.[1]
 
   return (
     <CodeBlock data-lang={lang} title={title} className='shiki' figureClassName='my-2' scrollAreaClassName='max-h-120'>
-      {isHighlighted && codeHtml ? (
-        <code
-          // eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml -- safe
-          dangerouslySetInnerHTML={{ __html: codeHtml }}
-        />
-      ) : (
-        <code>{code}</code>
-      )}
+      {isHighlighted && codeHtml ? <code dangerouslySetInnerHTML={{ __html: codeHtml }} /> : <code>{code}</code>}
     </CodeBlock>
   )
 }
