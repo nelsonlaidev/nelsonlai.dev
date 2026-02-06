@@ -33,7 +33,7 @@ function CommentCodeBlock(props: CommentCodeBlockProps) {
   useEffect(() => {
     if (!initCalled.current) {
       initCalled.current = true
-      initHighlighter()
+      void initHighlighter()
     }
   }, [initHighlighter])
 
@@ -43,28 +43,33 @@ function CommentCodeBlock(props: CommentCodeBlockProps) {
     const currHighlighter = highlighter
 
     async function generateHighlightedHtml() {
-      const loadedLanguages = currHighlighter.getLoadedLanguages()
-      const hasLoadedLanguage = loadedLanguages.includes(lang)
-      const bundledLang = bundledLanguages[lang as BundledLanguage]
+      try {
+        const loadedLanguages = currHighlighter.getLoadedLanguages()
+        const hasLoadedLanguage = loadedLanguages.includes(lang)
+        const bundledLang = bundledLanguages[lang as BundledLanguage]
 
-      if (!hasLoadedLanguage) {
-        await currHighlighter.loadLanguage(bundledLang)
+        if (!hasLoadedLanguage && bundledLang) {
+          await currHighlighter.loadLanguage(bundledLang)
+        }
+
+        const newHtml = currHighlighter.codeToHtml(code, {
+          lang: lang in bundledLanguages ? lang : 'plaintext',
+          themes: {
+            light: 'github-light-default',
+            dark: 'github-dark-default',
+          },
+          defaultColor: false,
+        })
+
+        setHighlightedHtml(newHtml)
+        setIsHighlighted(true)
+      } catch (error) {
+        console.error('Failed to highlight code:', error)
+        setIsHighlighted(false)
       }
-
-      const newHtml = currHighlighter.codeToHtml(code, {
-        lang: lang in bundledLanguages ? lang : 'plaintext',
-        themes: {
-          light: 'github-light-default',
-          dark: 'github-dark-default',
-        },
-        defaultColor: false,
-      })
-
-      setHighlightedHtml(newHtml)
-      setIsHighlighted(true)
     }
 
-    generateHighlightedHtml()
+    void generateHighlightedHtml()
   }, [code, highlighter, lang])
 
   const codeHtml = /<code\b[^>]*>([\s\S]*?)<\/code>/.exec(highlightedHtml)?.[1]

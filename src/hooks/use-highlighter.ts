@@ -4,21 +4,36 @@ import { atom, useAtom } from 'jotai'
 
 const instanceAtom = atom<HighlighterCore | null>(null)
 
+let initPromise: Promise<void> | null = null
+
 const highlighterAtom = atom(
   (get) => get(instanceAtom),
   async (get, set) => {
     if (get(instanceAtom)) return
 
-    const { createHighlighter } = await import('shiki')
-    const { createJavaScriptRegexEngine } = await import('shiki/engine/javascript')
+    if (initPromise) {
+      await initPromise
+      return
+    }
 
-    const instance = await createHighlighter({
-      langs: [],
-      themes: ['github-light-default', 'github-dark-default'],
-      engine: createJavaScriptRegexEngine(),
-    })
+    initPromise = (async () => {
+      const { createHighlighter } = await import('shiki')
+      const { createJavaScriptRegexEngine } = await import('shiki/engine/javascript')
 
-    set(instanceAtom, instance)
+      const instance = await createHighlighter({
+        langs: [],
+        themes: ['github-light-default', 'github-dark-default'],
+        engine: createJavaScriptRegexEngine(),
+      })
+
+      set(instanceAtom, instance)
+    })()
+
+    try {
+      await initPromise
+    } finally {
+      initPromise = null
+    }
   },
 )
 
