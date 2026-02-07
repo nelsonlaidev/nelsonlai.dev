@@ -18,11 +18,6 @@
   "categories": {
     "correctness": "error",
     "suspicious": "error"
-    // Consider enabling these categories for stricter linting in the future
-    // "pedantic": "error",
-    // "perf": "error",
-    // "restriction": "error",
-    // "nursery": "error"
   },
   "rules": {
     "react/react-in-jsx-scope": "off",
