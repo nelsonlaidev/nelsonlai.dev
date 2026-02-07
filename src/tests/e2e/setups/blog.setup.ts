@@ -34,7 +34,7 @@ function extractJsonFromArrayFile(fileContent: string): Post[] {
   }
   const jsonString = fileContent.slice(startIndex, endIndex + 1)
 
-  return JSON.parse(jsonString) as Post[]
+  return JSON.parse(jsonString)
 }
 
 async function waitForContentBuild() {

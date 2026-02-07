@@ -1,7 +1,10 @@
 import type { Locator } from '@playwright/test'
 
 export async function getNumberFlow(locator: Locator) {
-  // Internal properties are not typed.
-  // @ts-expect-error
-  return locator.evaluate((flow) => flow._internals.ariaLabel) as Promise<string | undefined>
+  return locator.evaluate((flow) => {
+    // Internal properties are not typed.
+    // @ts-expect-error - accessing internal property
+    const ariaLabel = flow._internals.ariaLabel
+    return typeof ariaLabel === 'string' ? ariaLabel : undefined
+  })
 }

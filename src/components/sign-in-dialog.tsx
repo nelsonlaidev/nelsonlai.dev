@@ -50,8 +50,10 @@ function SignInDialog() {
   const locale = useLocale()
 
   useEffect(() => {
-    const provider = localStorage.getItem('last-used-provider') as Provider | null
-    setLastUsedProvider(provider)
+    const storedProvider = localStorage.getItem('last-used-provider')
+    if (storedProvider === 'github' || storedProvider === 'google') {
+      setLastUsedProvider(storedProvider)
+    }
   }, [])
 
   async function handleSignIn(provider: Provider) {

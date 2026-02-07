@@ -20,6 +20,13 @@ const EMPTY_RESPONSE = {
   artist: null,
 } as const
 
+type TokenResponse = {
+  access_token: string
+  token_type: string
+  expires_in: number
+  scope: string
+}
+
 async function getAccessToken() {
   if (!REFRESH_TOKEN) return null
 
@@ -35,9 +42,9 @@ async function getAccessToken() {
     }),
   })
 
-  const data = await response.json()
+  const data: TokenResponse = await response.json()
 
-  return data.access_token as string
+  return data.access_token
 }
 
 const spotifyStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(async () => {

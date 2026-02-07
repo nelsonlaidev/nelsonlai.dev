@@ -75,7 +75,7 @@ function getPathParts(fullPath: string, rootDir: string): string[] {
 
 async function processDynamicPage(fullPath: string, pathParts: string[]): Promise<string[]> {
   const modPath = pathToFileURL(fullPath).href
-  const pageModule = (await import(modPath)) as PageModule
+  const pageModule: PageModule = await import(modPath)
 
   if (typeof pageModule.generateStaticParams !== 'function') {
     return []

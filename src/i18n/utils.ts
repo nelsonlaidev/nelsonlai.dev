@@ -2,12 +2,18 @@ type DeepObject = {
   [key: string]: string | DeepObject
 }
 
-export async function loadMessages(locale: string) {
-  const { default: messages } = (await import(`./messages/${locale}.json`)) as {
-    default: DeepObject
+function isDeepObject(value: unknown): value is DeepObject {
+  return typeof value === 'object' && value !== null
+}
+
+export async function loadMessages(locale: string): Promise<DeepObject> {
+  const mod = await import(`./messages/${locale}.json`)
+
+  if (typeof mod === 'object' && mod !== null && 'default' in mod && isDeepObject(mod.default)) {
+    return mod.default
   }
 
-  return messages
+  throw new Error(`Invalid messages format for locale: ${locale}`)
 }
 
 export function flattenKeys(object: DeepObject, prefix = ''): string[] {

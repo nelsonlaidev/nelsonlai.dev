@@ -16,7 +16,7 @@ export async function getLocation(ip: string): Promise<string | null> {
     const response = await fetch(`https://api.nelsonlai.dev/ip/geo?ip=${ip}`)
     if (!response.ok) throw new Error('Failed to fetch location')
 
-    const data = (await response.json()) as LocationResponse
+    const data: LocationResponse = await response.json()
 
     const country = data.country
     const region = data.region ? `, ${data.region}` : ''

@@ -27,6 +27,9 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
 
+    "typescript/no-floating-promises": "off",
+    "typescript/no-unsafe-type-assertion": "off",
+
     "import/no-unassigned-import": [
       "error",
       {
