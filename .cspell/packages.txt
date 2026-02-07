@@ -14,5 +14,6 @@ rmiz
 shiki
 shikijs
 sonarjs
+tsgolint
 unifiedjs
 vaul

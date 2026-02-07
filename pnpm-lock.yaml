@@ -327,6 +327,9 @@ importers:
       oxlint:
         specifier: 1.43.0
         version: 1.43.0(oxlint-tsgolint@0.11.4)
+      oxlint-tsgolint:
+        specifier: 0.11.4
+        version: 0.11.4
       postcss-load-config:
         specifier: 6.0.1
         version: 6.0.1(jiti@2.6.1)(postcss@8.5.6)(tsx@4.21.0)(yaml@2.8.2)
@@ -13652,7 +13655,6 @@ snapshots:
       '@oxlint-tsgolint/linux-x64': 0.11.4
       '@oxlint-tsgolint/win32-arm64': 0.11.4
       '@oxlint-tsgolint/win32-x64': 0.11.4
-    optional: true
 
   oxlint@1.43.0(oxlint-tsgolint@0.11.4):
     optionalDependencies:
