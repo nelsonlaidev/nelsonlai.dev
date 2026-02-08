@@ -2,9 +2,9 @@
 
 import { ArrowRightIcon, ArrowUpRightIcon, BadgeCheckIcon } from 'lucide-react'
 
-import { Badge } from '../ui/badge'
-import { Demo, DemoItem } from '../ui/demo'
-import { Spinner } from '../ui/spinner'
+import { Badge } from '@/components/ui/badge'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Spinner } from '@/components/ui/spinner'
 import { Link } from '@/components/ui/link'
 
 function BadgeDemo() {

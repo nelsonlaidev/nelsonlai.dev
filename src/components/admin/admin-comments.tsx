@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import { useListCommentsAdmin } from '@/hooks/queries/admin.query'
 
-import CommentsTable from '../tables/comments'
+import CommentsTable from '@/components/tables/comments'
 
 function AdminComments() {
   const { data, isSuccess, isLoading, isError } = useListCommentsAdmin()

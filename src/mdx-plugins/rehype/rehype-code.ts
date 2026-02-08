@@ -13,7 +13,8 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from '@shikijs/transformers'
-import { bundledLanguages, getSingletonHighlighter, type ShikiTransformer } from 'shiki'
+import { bundledLanguages, getSingletonHighlighter } from 'shiki'
+import type { ShikiTransformer } from 'shiki'
 import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
 const titleRegex = /title=["']([^"']*)["']/
@@ -66,8 +67,9 @@ export function rehypeCode(): Transformer<Root, Root> {
     langs: Object.keys(bundledLanguages),
   })
 
-  const transformer = highlighter.then((instance) =>
-    rehypeShikiFromHighlighter(instance, {
+  return async (tree, file) => {
+    const instance = await highlighter
+    const transformer = rehypeShikiFromHighlighter(instance, {
       themes: DEFAULT_SHIKI_THEMES,
       defaultColor: false,
       defaultLanguage: 'plaintext',
@@ -78,13 +80,9 @@ export function rehypeCode(): Transformer<Root, Root> {
 
         return { title }
       },
-    }),
-  )
+    })
 
-  return async (tree, file) => {
-    await (
-      await transformer
-    )(tree, file, () => {
+    await transformer(tree, file, () => {
       // Do nothing
     })
   }

@@ -1,7 +1,7 @@
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 
-import { Button } from '../ui/button'
-import { Demo, DemoItem } from '../ui/demo'
+import { Button } from '@/components/ui/button'
+import { Demo, DemoItem } from '@/components/ui/demo'
 
 function ButtonDemo() {
   return (

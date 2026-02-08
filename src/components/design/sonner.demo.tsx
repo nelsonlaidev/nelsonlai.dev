@@ -2,8 +2,9 @@
 
 import { toast } from 'sonner'
 
-import { Button } from '../ui/button'
-import { Demo, DemoItem } from '../ui/demo'
+import { Button } from '@/components/ui/button'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { sleep } from '@/utils/sleep'
 
 function SonnerDemo() {
   return (
@@ -25,12 +26,9 @@ function SonnerBasic() {
   )
 }
 
-function promiseTask() {
-  return new Promise<{ name: string }>((resolve) =>
-    setTimeout(() => {
-      resolve({ name: 'Event' })
-    }, 2000),
-  )
+async function promiseTask() {
+  await sleep(2000)
+  return { name: 'Event' }
 }
 
 function SonnerTypes() {

@@ -2,8 +2,8 @@
 
 import Image from 'next/image'
 
-import { AspectRatio } from '../ui/aspect-ratio'
-import { Demo, DemoItem } from '../ui/demo'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { Demo, DemoItem } from '@/components/ui/demo'
 
 function AspectRatioDemo() {
   return (

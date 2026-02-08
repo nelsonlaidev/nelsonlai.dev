@@ -2,8 +2,8 @@ import { Buffer } from 'node:buffer'
 
 import { env } from '@/lib/env'
 
-import { publicProcedure } from '../procedures'
-import { WakatimeStatsOutputSchema } from '../schemas/wakatime.schema'
+import { publicProcedure } from '@/orpc/procedures'
+import { WakatimeStatsOutputSchema } from '@/orpc/schemas/wakatime.schema'
 
 const wakatimeStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(async () => {
   if (!env.WAKATIME_API_KEY) {

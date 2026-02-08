@@ -1,7 +1,8 @@
 import { AxeBuilder } from '@axe-core/playwright'
-import { expect, type Page } from '@playwright/test'
+import { expect } from '@playwright/test'
+import type { Page } from '@playwright/test'
 
-import { A11Y_TAGS } from '../constants'
+import { A11Y_TAGS } from '@/tests/e2e/constants'
 
 type Options = {
   page: Page

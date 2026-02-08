@@ -1,5 +1,5 @@
-import { Demo, DemoItem } from '../ui/demo'
-import { SegmentGroup, SegmentGroupItem } from '../ui/segment-group'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { SegmentGroup, SegmentGroupItem } from '@/components/ui/segment-group'
 
 function SegmentGroupDemo() {
   return (

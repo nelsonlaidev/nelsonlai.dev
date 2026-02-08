@@ -1,7 +1,7 @@
 import { comments, users } from '@/db/schemas'
 
-import { adminProcedure } from '../procedures'
-import { ListCommentsOutputSchema, ListUsersOutputSchema } from '../schemas/admin.schema'
+import { adminProcedure } from '@/orpc/procedures'
+import { ListCommentsOutputSchema, ListUsersOutputSchema } from '@/orpc/schemas/admin.schema'
 
 const listComments = adminProcedure.output(ListCommentsOutputSchema).handler(async ({ context }) => {
   const result = await context.db.select().from(comments)

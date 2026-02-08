@@ -1,4 +1,5 @@
-import { type DateTimeFormatOptions, useFormatter, useNow } from 'next-intl'
+import { useFormatter, useNow } from 'next-intl'
+import type { DateTimeFormatOptions } from 'next-intl'
 import { useEffect, useState } from 'react'
 
 type Options = {

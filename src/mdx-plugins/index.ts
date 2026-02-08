@@ -10,4 +10,4 @@ export const remarkPlugins: PluggableList = [remarkGfm, remarkHeading]
 export const rehypePlugins: PluggableList = [rehypeCode, rehypeInlineCode]
 
 export type * from './types'
-export * from './utils'
+export { getTOC } from './utils'

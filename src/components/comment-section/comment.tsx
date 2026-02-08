@@ -9,20 +9,21 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { type CommentContextValue, CommentProvider } from '@/contexts/comment.context'
+import { CommentProvider } from '@/contexts/comment.context'
+import type { CommentContextValue } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
 import { useCommentParams } from '@/hooks/use-comment-params'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { getDefaultImage } from '@/utils/get-default-image'
 
-import Markdown from '../mdx/markdown'
+import Markdown from '@/components/mdx/markdown'
 
 import CommentActions from './comment-actions'
 import CommentMenu from './comment-menu'
 import CommentReplies from './comment-replies'
 import CommentReply from './comment-reply'
 
-type CommentProps = {
+export type CommentProps = {
   comment: CommentListOutput['comments'][number]
 }
 
@@ -122,7 +123,7 @@ function Comment(props: CommentProps) {
           </div>
         </div>
       </div>
-      {hasReplies && <CommentReplies />}
+      {hasReplies && <CommentReplies commentComponent={Comment} />}
     </CommentProvider>
   )
 }

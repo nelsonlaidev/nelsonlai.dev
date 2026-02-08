@@ -1,8 +1,8 @@
 import { GITHUB_USERNAME } from '@/lib/constants'
 import { octokit } from '@/lib/octokit'
 
-import { publicProcedure } from '../procedures'
-import { GithubStatsOutputSchema } from '../schemas/github.schema'
+import { publicProcedure } from '@/orpc/procedures'
+import { GithubStatsOutputSchema } from '@/orpc/schemas/github.schema'
 
 const githubStats = publicProcedure.output(GithubStatsOutputSchema).handler(async () => {
   if (!octokit) {

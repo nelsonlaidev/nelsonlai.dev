@@ -6,12 +6,13 @@ import { os } from '@orpc/server'
 import { IS_PRODUCTION } from '@/lib/constants'
 import { ratelimit } from '@/lib/kv'
 import { getIp } from '@/utils/get-ip'
+import { sleep } from '@/utils/sleep'
 
 const base = os.$context<Context>()
 
 const delayMiddleware = base.middleware(async ({ context, next }) => {
   if (!IS_PRODUCTION) {
-    await new Promise((resolve) => setTimeout(resolve, 500))
+    await sleep(500)
   }
 
   return next({ context })

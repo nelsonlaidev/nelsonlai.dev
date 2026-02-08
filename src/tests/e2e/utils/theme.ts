@@ -1,4 +1,5 @@
-import { type Browser, expect, type Page } from '@playwright/test'
+import { expect } from '@playwright/test'
+import type { Browser, Page } from '@playwright/test'
 
 export async function checkAppliedTheme(page: Page, theme: string) {
   const htmlElement = page.locator('html')

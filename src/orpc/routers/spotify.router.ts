@@ -2,8 +2,8 @@ import { Buffer } from 'node:buffer'
 
 import { env } from '@/lib/env'
 
-import { publicProcedure } from '../procedures'
-import { SpotifyStatsOutputSchema } from '../schemas/spotify.schema'
+import { publicProcedure } from '@/orpc/procedures'
+import { SpotifyStatsOutputSchema } from '@/orpc/schemas/spotify.schema'
 
 const CLIENT_ID = env.SPOTIFY_CLIENT_ID
 const CLIENT_SECRET = env.SPOTIFY_CLIENT_SECRET

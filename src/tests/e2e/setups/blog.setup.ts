@@ -7,9 +7,11 @@ import { expect, test as setup } from '@playwright/test'
 
 import { db } from '@/db'
 import { posts } from '@/db/schemas'
+import { sleep } from '@/utils/sleep'
 
-import { TEST_POSTS } from '../fixtures/posts'
-import { makeDummyImage } from '../utils/make-dummy-image'
+import { TEST_POSTS } from '@/tests/e2e/fixtures/posts'
+import { makeDummyImage } from '@/tests/e2e/utils/make-dummy-image'
+import { env } from '@/lib/env'
 
 function createTestPost(title: string) {
   return `\
@@ -66,14 +68,14 @@ setup('setup blog', async () => {
     const testPostCoverPath = path.join(process.cwd(), `public/images/blog/${post.slug}/cover.png`)
 
     // For CI, we need to build the app, so we'll create the test files in CI workflow.
-    if (!process.env.CI) {
+    if (!env.CI) {
       await fs.writeFile(testPostPath, createTestPost(post.title))
 
       const coverDir = path.dirname(testPostCoverPath)
       await fs.mkdir(coverDir, { recursive: true })
       await makeDummyImage(testPostCoverPath)
 
-      await new Promise((resolve) => setTimeout(resolve, 200)) // Don't generate too fast
+      await sleep(200) // Don't generate too fast
     }
   }
 

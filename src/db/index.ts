@@ -4,6 +4,7 @@ import postgres from 'postgres'
 import { env } from '@/lib/env'
 
 import * as schema from './schemas'
+import { IS_PRODUCTION } from '@/lib/constants'
 
 declare global {
   var pgClient: ReturnType<typeof postgres> | undefined
@@ -11,7 +12,7 @@ declare global {
 
 let client: ReturnType<typeof postgres>
 
-if (process.env.NODE_ENV === 'production') {
+if (IS_PRODUCTION) {
   client = postgres(env.DATABASE_URL)
 } else {
   globalThis.pgClient ??= postgres(env.DATABASE_URL)

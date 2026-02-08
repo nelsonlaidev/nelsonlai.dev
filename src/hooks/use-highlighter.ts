@@ -1,4 +1,4 @@
-import { type HighlighterCore } from 'shiki'
+import type { HighlighterCore } from 'shiki'
 
 import { atom, useAtom } from 'jotai'
 

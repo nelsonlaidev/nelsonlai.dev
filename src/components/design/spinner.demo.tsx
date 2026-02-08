@@ -1,9 +1,9 @@
-import { Badge } from '../ui/badge'
-import { Button } from '../ui/button'
-import { Demo, DemoItem } from '../ui/demo'
-import { Field, FieldLabel } from '../ui/field'
-import { InputGroup, InputGroupAddon, InputGroupInput } from '../ui/input-group'
-import { Spinner } from '../ui/spinner'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Field, FieldLabel } from '@/components/ui/field'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
+import { Spinner } from '@/components/ui/spinner'
 
 function SpinnerDemo() {
   return (

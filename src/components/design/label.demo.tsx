@@ -1,8 +1,8 @@
-import { Demo, DemoItem } from '../ui/demo'
-import { Field } from '../ui/field'
-import { Input } from '../ui/input'
-import { Label } from '../ui/label'
-import { Textarea } from '../ui/textarea'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Field } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 
 function LabelDemo() {
   return (

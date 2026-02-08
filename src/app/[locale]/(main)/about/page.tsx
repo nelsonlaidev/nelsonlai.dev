@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import type { AboutPage, WithContext } from 'schema-dts'
 
 import { notFound } from 'next/navigation'
-import { type Locale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
+import type { Locale } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { use } from 'react'
 

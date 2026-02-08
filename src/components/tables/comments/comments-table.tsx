@@ -2,7 +2,8 @@ import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-tabl
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
-import { columns, type Comment } from './columns'
+import { columns } from './columns'
+import type { Comment } from './columns'
 
 type CommentsTableProps = {
   comments: Comment[]

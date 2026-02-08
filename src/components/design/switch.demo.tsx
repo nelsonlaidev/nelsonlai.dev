@@ -1,6 +1,6 @@
-import { Demo, DemoItem } from '../ui/demo'
-import { Field, FieldLabel } from '../ui/field'
-import { Switch } from '../ui/switch'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Field, FieldLabel } from '@/components/ui/field'
+import { Switch } from '@/components/ui/switch'
 
 function SwitchDemo() {
   return (

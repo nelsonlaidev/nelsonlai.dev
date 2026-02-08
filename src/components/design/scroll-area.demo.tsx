@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import { Fragment } from 'react'
 
-import { Demo, DemoItem } from '../ui/demo'
-import { ScrollArea, ScrollBar } from '../ui/scroll-area'
-import { Separator } from '../ui/separator'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { Separator } from '@/components/ui/separator'
 
 function ScrollAreaDemo() {
   return (

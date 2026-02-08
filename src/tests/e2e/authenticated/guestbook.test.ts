@@ -5,7 +5,7 @@ import { db } from '@/db'
 import { messages } from '@/db/schemas'
 import en from '@/i18n/messages/en.json' assert { type: 'json' }
 
-import { TEST_UNIQUE_ID } from '../fixtures/auth'
+import { TEST_UNIQUE_ID } from '@/tests/e2e/fixtures/auth'
 
 test.describe('guestbook page', () => {
   test.beforeEach(async ({ page }) => {

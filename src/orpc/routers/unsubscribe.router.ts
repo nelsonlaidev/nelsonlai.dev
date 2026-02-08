@@ -4,9 +4,9 @@ import { and, eq } from 'drizzle-orm'
 
 import { unsubscribes } from '@/db/schemas'
 
-import { publicProcedure } from '../procedures'
-import { EmptyOutputSchema } from '../schemas/common.schema'
-import { UnsubscribeTokenInputSchema } from '../schemas/unsubscribe.schema'
+import { publicProcedure } from '@/orpc/procedures'
+import { EmptyOutputSchema } from '@/orpc/schemas/common.schema'
+import { UnsubscribeTokenInputSchema } from '@/orpc/schemas/unsubscribe.schema'
 
 const createCommentReplyUnsubscribe = publicProcedure
   .input(UnsubscribeTokenInputSchema)

@@ -2,10 +2,10 @@
 
 import { InfoIcon, SaveIcon } from 'lucide-react'
 
-import { Button } from '../ui/button'
-import { Demo, DemoItem } from '../ui/demo'
-import { Kbd } from '../ui/kbd'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
+import { Button } from '@/components/ui/button'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Kbd } from '@/components/ui/kbd'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { Link } from '@/components/ui/link'
 
 function TooltipDemo() {

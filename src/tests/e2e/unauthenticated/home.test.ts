@@ -1,7 +1,7 @@
 import { test } from '@playwright/test'
 
-import { a11y } from '../utils/a11y'
-import { createBrowserContext } from '../utils/theme'
+import { a11y } from '@/tests/e2e/utils/a11y'
+import { createBrowserContext } from '@/tests/e2e/utils/theme'
 
 test.describe('homepage', () => {
   test('audits a11y issues in light mode', async ({ page }) => {

@@ -4,8 +4,8 @@ import test, { expect } from '@playwright/test'
 import { db } from '@/db'
 import { comments } from '@/db/schemas'
 
-import { TEST_UNIQUE_ID } from '../fixtures/auth'
-import { getNumberFlow } from '../utils/number-flow'
+import { TEST_UNIQUE_ID } from '@/tests/e2e/fixtures/auth'
+import { getNumberFlow } from '@/tests/e2e/utils/number-flow'
 
 test.describe('comment page', () => {
   test('submits a comment', async ({ page }) => {

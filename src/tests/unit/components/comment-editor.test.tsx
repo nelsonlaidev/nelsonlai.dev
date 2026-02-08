@@ -530,7 +530,7 @@ describe('<CommentEditor />', () => {
     })
   })
 
-  describe('IME composition', () => {
+  describe('input method editor (IME) composition', () => {
     test('groups IME input into a single history step and restores caret on undo/redo', () => {
       render(<CommentEditor />)
       const textarea = screen.getByTestId<HTMLTextAreaElement>('comment-editor-textarea')

@@ -9,8 +9,8 @@ import {
   UsersIcon,
 } from 'lucide-react'
 
-import { Button } from '../ui/button'
-import { Demo, DemoItem } from '../ui/demo'
+import { Button } from '@/components/ui/button'
+import { Demo, DemoItem } from '@/components/ui/demo'
 import {
   Sidebar,
   SidebarContent,
@@ -25,7 +25,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
-} from '../ui/sidebar'
+} from '@/components/ui/sidebar'
 
 const MAIN_LINKS = [
   { label: 'Dashboard', icon: LayoutGridIcon, active: true },

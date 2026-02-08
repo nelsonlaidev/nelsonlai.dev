@@ -1,4 +1,4 @@
-import { relations, sql } from 'drizzle-orm'
+import { sql } from 'drizzle-orm'
 import { check, index, pgEnum, pgTable, text, timestamp, unique } from 'drizzle-orm/pg-core'
 
 import { users } from './auth.schema'
@@ -33,14 +33,3 @@ export const unsubscribes = pgTable(
     ),
   ],
 )
-
-export const unsubscribesRelations = relations(unsubscribes, ({ one }) => ({
-  user: one(users, {
-    fields: [unsubscribes.userId],
-    references: [users.id],
-  }),
-  comment: one(comments, {
-    fields: [unsubscribes.commentId],
-    references: [comments.id],
-  }),
-}))

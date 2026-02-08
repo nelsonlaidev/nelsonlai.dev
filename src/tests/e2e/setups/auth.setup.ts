@@ -9,7 +9,7 @@ import { db } from '@/db'
 import { accounts, sessions, users } from '@/db/schemas'
 import { env } from '@/lib/env'
 
-import { TEST_UNIQUE_ID, TEST_USER } from '../fixtures/auth'
+import { TEST_UNIQUE_ID, TEST_USER } from '@/tests/e2e/fixtures/auth'
 
 const authStoragePath = path.join(import.meta.dirname, '../.auth/user.json')
 

@@ -1,4 +1,4 @@
-import { relations, sql } from 'drizzle-orm'
+import { sql } from 'drizzle-orm'
 import { check, integer, pgTable, primaryKey, text, timestamp } from 'drizzle-orm/pg-core'
 
 import { posts } from './post.schema'
@@ -24,10 +24,3 @@ export const postLikes = pgTable(
     check('post_likes_like_count_check', sql`${postLike.likeCount} BETWEEN 0 AND 3`),
   ],
 )
-
-export const postLikesRelations = relations(postLikes, ({ one }) => ({
-  post: one(posts, {
-    fields: [postLikes.postId],
-    references: [posts.slug],
-  }),
-}))

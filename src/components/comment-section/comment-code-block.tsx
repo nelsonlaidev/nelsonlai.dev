@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { type BundledLanguage, bundledLanguages } from 'shiki'
+import { bundledLanguages } from 'shiki'
+import type { BundledLanguage } from 'shiki'
 
 import { CodeBlock } from '@/components/ui/code-block'
 import { useHighlighter } from '@/hooks/use-highlighter'
@@ -76,6 +77,8 @@ function CommentCodeBlock(props: CommentCodeBlockProps) {
 
   return (
     <CodeBlock data-lang={lang} title={title} className='shiki' figureClassName='my-2' scrollAreaClassName='max-h-120'>
+      {/* HTML of highlighted code is safely generated. */}
+      {/* oxlint-disable-next-line react/no-danger */}
       {isHighlighted && codeHtml ? <code dangerouslySetInnerHTML={{ __html: codeHtml }} /> : <code>{code}</code>}
     </CodeBlock>
   )

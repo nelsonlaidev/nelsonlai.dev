@@ -1,12 +1,12 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, test } from 'vitest'
 
 import sitemap from '@/app/sitemap'
 import { routing } from '@/i18n/routing'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 import { getPathnames } from '@/utils/get-pathnames'
 
-describe('sitemap', () => {
-  it('generates sitemap entries for all locales and pathnames', () => {
+describe(sitemap, () => {
+  test('generates sitemap entries for all locales and pathnames', () => {
     const pathnames = getPathnames()
     const result = sitemap()
 
@@ -14,78 +14,72 @@ describe('sitemap', () => {
     expect(result).toHaveLength(expectedEntryCount)
   })
 
-  it('includes all required properties for each entry', () => {
+  test('includes all required properties for each entry', () => {
     const result = sitemap()
 
-    for (const entry of result) {
-      expect(entry).toHaveProperty('url')
-      expect(entry).toHaveProperty('lastModified')
-      expect(entry.url).toBeTypeOf('string')
-      expect(entry.lastModified).toBeInstanceOf(Date)
-    }
+    const allHaveUrl = result.every((entry) => 'url' in entry)
+    const allHaveLastModified = result.every((entry) => 'lastModified' in entry)
+    const allUrlsAreStrings = result.every((entry) => typeof entry.url === 'string')
+    const allLastModifiedAreDates = result.every((entry) => entry.lastModified instanceof Date)
+
+    expect(allHaveUrl).toBeTruthy()
+    expect(allHaveLastModified).toBeTruthy()
+    expect(allUrlsAreStrings).toBeTruthy()
+    expect(allLastModifiedAreDates).toBeTruthy()
   })
 
-  it('generates correct URLs for each locale and pathname combination', () => {
+  describe('generates correct URLs for each locale and pathname combination', () => {
     const pathnames = getPathnames()
-    const result = sitemap()
+    const localePathnamesCombinations = routing.locales.flatMap((locale) =>
+      pathnames.map((pathname) => ({ locale, pathname })),
+    )
 
-    for (const locale of routing.locales) {
-      for (const pathname of pathnames) {
-        const expectedUrl = getLocalizedPath({ locale, pathname })
-        const matchingEntry = result.find((entry) => entry.url === expectedUrl)
+    test.each(localePathnamesCombinations)('$locale - $pathname', ({ locale, pathname }) => {
+      const result = sitemap()
+      const expectedUrl = getLocalizedPath({ locale, pathname })
+      const matchingEntry = result.find((entry) => entry.url === expectedUrl)
 
-        expect(matchingEntry).toBeDefined()
-        expect(matchingEntry?.url).toBe(expectedUrl)
-      }
-    }
+      expect(matchingEntry).toBeDefined()
+      expect(matchingEntry?.url).toBe(expectedUrl)
+    })
   })
 
-  it('generates URLs with correct locale prefix', () => {
-    const pathnames = getPathnames()
-    const result = sitemap()
+  describe('generates URLs with correct locale prefix', () => {
+    test.each(routing.locales)('%s has entries for all pathnames', (locale) => {
+      const pathnames = getPathnames()
+      const result = sitemap()
 
-    const entriesByLocale: Record<string, typeof result> = {}
+      const localeEntries = pathnames
+        .map((pathname) => {
+          const expectedUrl = getLocalizedPath({ locale, pathname })
+          return result.find((entry) => entry.url === expectedUrl)
+        })
+        .filter((entry): entry is NonNullable<typeof entry> => entry !== undefined)
 
-    for (const locale of routing.locales) {
-      entriesByLocale[locale] = []
-      for (const pathname of pathnames) {
-        const expectedUrl = getLocalizedPath({ locale, pathname })
-        const matchingEntry = result.find((entry) => entry.url === expectedUrl)
-        if (matchingEntry) {
-          entriesByLocale[locale].push(matchingEntry)
-        }
-      }
-    }
-
-    for (const locale of routing.locales) {
-      expect(entriesByLocale[locale]).toHaveLength(pathnames.length)
-    }
+      expect(localeEntries).toHaveLength(pathnames.length)
+    })
   })
 
-  it('covers all pathnames for each locale', () => {
-    const pathnames = getPathnames()
-    const result = sitemap()
+  describe('covers all pathnames for each locale', () => {
+    test.each(routing.locales)('%s covers all pathnames', (locale) => {
+      const pathnames = getPathnames()
+      const result = sitemap()
 
-    for (const locale of routing.locales) {
-      const coveredPathnames = new Set<string>()
+      const expectedUrls = pathnames.map((pathname) => getLocalizedPath({ locale, pathname }))
+      const actualUrls = result.map((entry) => entry.url)
 
-      for (const pathname of pathnames) {
+      expect(actualUrls).toStrictEqual(expect.arrayContaining(expectedUrls))
+
+      const coveredPathnamesCount = pathnames.filter((pathname) => {
         const expectedUrl = getLocalizedPath({ locale, pathname })
-        const hasEntry = result.some((entry) => entry.url === expectedUrl)
-        if (hasEntry) {
-          coveredPathnames.add(pathname)
-        }
-      }
+        return result.some((entry) => entry.url === expectedUrl)
+      }).length
 
-      expect(coveredPathnames.size).toBe(pathnames.length)
-
-      for (const pathname of pathnames) {
-        expect(coveredPathnames.has(pathname)).toBe(true)
-      }
-    }
+      expect(coveredPathnamesCount).toBe(pathnames.length)
+    })
   })
 
-  it('generates unique URLs', () => {
+  test('generates unique URLs', () => {
     const result = sitemap()
     const urls = result.map((entry) => entry.url)
     const uniqueUrls = new Set(urls)
@@ -93,28 +87,26 @@ describe('sitemap', () => {
     expect(uniqueUrls.size).toBe(urls.length)
   })
 
-  it('uses default locale without prefix in URLs', () => {
+  test('uses default locale without prefix in URLs', () => {
     const pathnames = getPathnames()
     const result = sitemap()
 
-    const defaultLocaleEntries = pathnames.map((pathname) => {
-      const expectedUrl = getLocalizedPath({ locale: routing.defaultLocale, pathname })
-      return result.find((entry) => entry.url === expectedUrl)
-    })
+    const defaultLocaleEntries = pathnames
+      .map((pathname) => {
+        const expectedUrl = getLocalizedPath({ locale: routing.defaultLocale, pathname })
+        return result.find((entry) => entry.url === expectedUrl)
+      })
+      .filter((entry): entry is NonNullable<typeof entry> => entry !== undefined)
 
-    expect(defaultLocaleEntries.every((entry) => entry !== undefined)).toBe(true)
     expect(defaultLocaleEntries).toHaveLength(pathnames.length)
 
-    const allDefaultEntries = defaultLocaleEntries.filter(
-      (entry): entry is NonNullable<typeof entry> => entry !== undefined,
+    const nonDefaultLocales = routing.locales.filter((locale) => locale !== routing.defaultLocale)
+    const nonDefaultLocalePatterns = nonDefaultLocales.map((locale) => `/${locale}/`)
+
+    const allDefaultEntriesDoNotContainNonDefaultLocales = defaultLocaleEntries.every((entry) =>
+      nonDefaultLocalePatterns.every((pattern) => !entry.url.includes(pattern)),
     )
 
-    const nonDefaultLocales = routing.locales.filter((locale) => locale !== routing.defaultLocale)
-
-    for (const entry of allDefaultEntries) {
-      for (const locale of nonDefaultLocales) {
-        expect(entry.url).not.toContain('/' + locale + '/')
-      }
-    }
+    expect(allDefaultEntriesDoNotContainNonDefaultLocales).toBeTruthy()
   })
 })

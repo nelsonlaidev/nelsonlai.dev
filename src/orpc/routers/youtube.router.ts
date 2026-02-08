@@ -1,7 +1,7 @@
 import { env } from '@/lib/env'
 
-import { publicProcedure } from '../procedures'
-import { YoutubeStatsOutputSchema } from '../schemas/youtube.schema'
+import { publicProcedure } from '@/orpc/procedures'
+import { YoutubeStatsOutputSchema } from '@/orpc/schemas/youtube.schema'
 
 const youtubeStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(async () => {
   if (!env.GOOGLE_API_KEY) {

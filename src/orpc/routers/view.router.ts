@@ -3,15 +3,15 @@ import { eq, sql, sum } from 'drizzle-orm'
 
 import { posts } from '@/db/schemas'
 
-import { cache } from '../cache'
-import { publicProcedure } from '../procedures'
-import { ViewsStatsOutputSchema } from '../schemas/blog.schema'
+import { cache } from '@/orpc/cache'
+import { publicProcedure } from '@/orpc/procedures'
+import { ViewsStatsOutputSchema } from '@/orpc/schemas/blog.schema'
 import {
   CountViewInputSchema,
   CountViewOutputSchema,
   IncrementViewInputSchema,
   IncrementViewOutputSchema,
-} from '../schemas/view.schema'
+} from '@/orpc/schemas/view.schema'
 
 const countView = publicProcedure
   .input(CountViewInputSchema)

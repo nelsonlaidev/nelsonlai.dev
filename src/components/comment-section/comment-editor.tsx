@@ -6,8 +6,8 @@ import { useTranslations } from 'next-intl'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useCommentEditor } from '@/hooks/use-comment-editor'
 
-import Markdown from '../mdx/markdown'
-import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupTextarea } from '../ui/input-group'
+import Markdown from '@/components/mdx/markdown'
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupTextarea } from '@/components/ui/input-group'
 
 type CommentEditorProps = {
   tabsValue?: string

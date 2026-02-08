@@ -1,30 +1,80 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "pedantic": "error",
+    "perf": "error",
+    "style": "error",
+    "restriction": "error",
+    "nursery": "error"
+  },
   "plugins": [
     "eslint",
-    "typescript",
-    "unicorn",
-    "react",
-    "react-perf",
-    "nextjs",
-    "oxc",
     "import",
     "jsdoc",
     "jsx-a11y",
+    "nextjs",
     "node",
+    "oxc",
     "promise",
+    "react",
+    "react-perf",
+    "typescript",
+    "unicorn",
     "vitest"
   ],
-  "categories": {
-    "correctness": "error",
-    "suspicious": "error"
+  "env": {
+    "builtin": true
+  },
+  "settings": {
+    "jsx-a11y": {
+      "components": {
+        "Button": "button",
+        "Image": "img",
+        "Input": "input",
+        "Textarea": "textarea",
+        "Link": "a",
+        "Label": "label",
+        "FieldLabel": "label"
+      }
+    }
   },
   "rules": {
+    // Allow long files
+    "max-lines": "off",
+
+    // Prefer vitest/prefer-called-times
+    "vitest/prefer-called-once": "off",
+
+    // Since we are using React 17+, we don't need React to be in scope
     "react/react-in-jsx-scope": "off",
+    // Arbitrary
+    "react/jsx-max-depth": "off",
+    "react/only-export-components": "off",
+    // Allow spreading props
+    "react/jsx-props-no-spreading": "off",
+    // Unnecessary since we are using TypeScript
+    "react/jsx-filename-extension": "off",
+    // Allow multiple components per file
+    "react/no-multi-comp": "off",
+    // Allow using array as index key
+    "react/no-array-index-key": "off",
 
-    "typescript/no-floating-promises": "off",
-    "typescript/no-unsafe-type-assertion": "off",
+    // Since we are using TypeScript, we don't need JSDoc comments for type annotations
+    "jsdoc/require-param-type": "off",
+    "jsdoc/require-returns-type": "off",
 
+    // Allow default exports
+    "import/no-default-export": "off",
+    // Allow named exports
+    "import/no-named-export": "off",
+    // Allow multiple export declarations
+    "import/group-exports": "off",
+    // Allow exporting anywhere
+    "import/exports-last": "off",
+    // Allow importing any number of dependencies
+    "import/max-dependencies": "off",
     "import/no-unassigned-import": [
       "error",
       {
@@ -37,6 +87,84 @@
         ]
       }
     ],
+
+    "jest/consistent-test-it": ["error", { "fn": "test" }],
+    "jest/max-expects": ["error", { "max": 10 }],
+
+    // Doesn't seem to work with vitest
+    "jest/no-untyped-mock-factory": "off",
+    "jest/valid-title": "off",
+
+    // Unnecessary in modern Javascript
+    "oxc/no-optional-chaining": "off",
+    "oxc/no-async-await": "off",
+    "oxc/no-rest-spread-properties": "off",
+
+    // TODO: Re-enable these rules and fix the issues
+    "sort-keys": "off",
+    "no-ternary": "off",
+    "sort-imports": "off",
+    "prefer-destructuring": "off",
+    "no-magic-numbers": "off",
+    "no-implicit-coercion": "off",
+    "func-style": "off",
+    "prefer-default-export": "off",
+    "no-nodejs-modules": "off",
+    "id-length": "off",
+    "curly": "off",
+    "max-statements": "off",
+    "init-declarations": "off",
+    "no-namespace": "off",
+    "new-cap": "off",
+    "capitalized-comments": "off",
+    "arrow-body-style": "off",
+    "max-params": "off",
+    "prefer-template": "off",
+    "no-continue": "off",
+    "no-duplicate-imports": "off",
+    "no-inline-comments": "off",
+    "no-plusplus": "off",
+    "max-lines-per-function": "off",
+    "no-undefined": "off",
+    "no-undef": "off",
+    "no-map-spread": "off",
+    "no-console": "off",
+    "no-promise-executor-return": "off",
+    "no-await-in-loop": "off",
+    "no-bitwise": "off",
+    "no-void": "off",
+    "require-await": "off",
+
+    "jsx-a11y/anchor-ambiguous-text": "off",
+
+    "jest/require-hook": "off",
+
+    "react-perf/jsx-no-new-object-as-prop": "off",
+    "react-perf/jsx-no-new-function-as-prop": "off",
+    "react-perf/jsx-no-jsx-as-prop": "off",
+    "react-perf/jsx-no-new-array-as-prop": "off",
+
+    "typescript/array-type": "off",
+    "typescript/consistent-type-definitions": "off",
+    "typescript/consistent-indexed-object-style": "off",
+    "typescript/strict-boolean-expressions": "off",
+    "typescript/promise-function-async": "off",
+    "typescript/no-unsafe-return": "off",
+    "typescript/no-unsafe-assignment": "off",
+    "typescript/no-unsafe-member-access": "off",
+    "typescript/no-misused-promises": "off",
+    "typescript/no-non-null-assertion": "off",
+    "typescript/return-await": "off",
+    "typescript/prefer-optional-chain": "off",
+    "typescript/explicit-function-return-type": "off",
+    "typescript/explicit-module-boundary-types": "off",
+    "typescript/no-import-type-side-effects": "off",
+    "typescript/no-floating-promises": "off",
+    "typescript/no-unsafe-type-assertion": "off",
+
+    "unicorn/no-null": "off",
+    "unicorn/no-document-cookie": "off",
+    "unicorn/no-typeof-undefined": "off",
 
     "no-restricted-imports": [
       "error",
@@ -55,21 +183,5 @@
         ]
       }
     ]
-  },
-  "env": {
-    "builtin": true
-  },
-  "settings": {
-    "jsx-a11y": {
-      "components": {
-        "Button": "button",
-        "Image": "img",
-        "Input": "input",
-        "Textarea": "textarea",
-        "Link": "a",
-        "Label": "label",
-        "FieldLabel": "label"
-      }
-    }
   }
 }

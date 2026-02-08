@@ -1,5 +1,5 @@
-import { Demo, DemoItem } from '../ui/demo'
-import { Separator } from '../ui/separator'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Separator } from '@/components/ui/separator'
 
 function SeparatorDemo() {
   return (

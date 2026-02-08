@@ -3,8 +3,8 @@ import { and, eq } from 'drizzle-orm'
 
 import { votes } from '@/db/schemas'
 
-import { protectedProcedure } from '../procedures'
-import { CreateVoteInputSchema, CreateVoteOutputSchema } from '../schemas/vote.schema'
+import { protectedProcedure } from '@/orpc/procedures'
+import { CreateVoteInputSchema, CreateVoteOutputSchema } from '@/orpc/schemas/vote.schema'
 
 const createVote = protectedProcedure
   .input(CreateVoteInputSchema)

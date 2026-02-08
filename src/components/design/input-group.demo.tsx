@@ -21,11 +21,11 @@ import {
 import { useState } from 'react'
 import { toast } from 'sonner'
 
-import { Button } from '../ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card'
-import { Demo, DemoItem } from '../ui/demo'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu'
-import { Field, FieldDescription, FieldGroup, FieldLabel } from '../ui/field'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
@@ -33,11 +33,18 @@ import {
   InputGroupInput,
   InputGroupText,
   InputGroupTextarea,
-} from '../ui/input-group'
-import { Kbd, KbdGroup } from '../ui/kbd'
-import { Popover, PopoverContent, PopoverDescription, PopoverHeader, PopoverTitle, PopoverTrigger } from '../ui/popover'
-import { Spinner } from '../ui/spinner'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
+} from '@/components/ui/input-group'
+import { Kbd, KbdGroup } from '@/components/ui/kbd'
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { Spinner } from '@/components/ui/spinner'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 function InputGroupDemo() {
   return (

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import type { WebSite, WithContext } from 'schema-dts'
 
-import { type Locale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
+import type { Locale } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { use } from 'react'
 

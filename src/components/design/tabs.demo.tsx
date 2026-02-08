@@ -1,7 +1,7 @@
 import { BellIcon, LockIcon, UserIcon } from 'lucide-react'
 
-import { Demo, DemoItem } from '../ui/demo'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 function TabsDemo() {
   return (

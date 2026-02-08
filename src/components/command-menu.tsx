@@ -25,7 +25,7 @@ import { useSession } from '@/lib/auth-client'
 type CommandAction = {
   title: string
   icon: React.ReactNode
-  onSelect: () => void | Promise<void>
+  handleSelect: () => void | Promise<void>
 }
 
 type CommandGroup = {
@@ -100,19 +100,19 @@ function CommandMenu() {
         {
           title: t('common.labels.account'),
           icon: <UserCircleIcon />,
-          onSelect: handleAccountNavigate,
+          handleSelect: handleAccountNavigate,
         },
         {
           title: t('common.sign-out'),
           icon: <LogOutIcon />,
-          onSelect: handleSignOut,
+          handleSelect: handleSignOut,
         },
       ]
     : [
         {
           title: t('common.sign-in'),
           icon: <LogInIcon />,
-          onSelect: handleSignIn,
+          handleSelect: handleSignIn,
         },
       ]
 
@@ -120,12 +120,12 @@ function CommandMenu() {
     {
       title: t('command-menu.actions.copy-link'),
       icon: <LinkIcon />,
-      onSelect: copyCurrentUrl,
+      handleSelect: copyCurrentUrl,
     },
     {
       title: t('command-menu.actions.source-code'),
       icon: <CodeIcon />,
-      onSelect: () => {
+      handleSelect: () => {
         openExternalLink('https://github.com/nelsonlaidev/nelsonlai.dev')
       },
     },
@@ -134,7 +134,7 @@ function CommandMenu() {
   const socialActions: CommandAction[] = SOCIAL_LINKS.map((link) => ({
     title: link.title,
     icon: link.icon,
-    onSelect: () => {
+    handleSelect: () => {
       openExternalLink(link.href)
     },
   }))
@@ -165,7 +165,7 @@ function CommandMenu() {
               <Fragment key={group.name}>
                 <CommandGroup heading={group.name}>
                   {group.actions.map((action) => (
-                    <CommandItem key={action.title} onSelect={action.onSelect}>
+                    <CommandItem key={action.title} onSelect={action.handleSelect}>
                       {action.icon}
                       {action.title}
                     </CommandItem>

@@ -1,5 +1,6 @@
 import { LanguagesIcon } from 'lucide-react'
-import { type Locale, useLocale, useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
+import type { Locale } from 'next-intl'
 import { useTransition } from 'react'
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'

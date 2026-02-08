@@ -15,7 +15,7 @@ import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useRouter } from '@/i18n/routing'
 import { useSession } from '@/lib/auth-client'
 
-import Tip from '../tip'
+import Tip from '@/components/tip'
 
 import ActiveSessionsSkeleton from './active-sessions-skeleton'
 

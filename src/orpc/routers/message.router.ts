@@ -6,15 +6,15 @@ import { IS_PRODUCTION } from '@/lib/constants'
 import { sendGuestbookNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
 
-import { protectedProcedure, publicProcedure } from '../procedures'
-import { EmptyOutputSchema } from '../schemas/common.schema'
+import { protectedProcedure, publicProcedure } from '@/orpc/procedures'
+import { EmptyOutputSchema } from '@/orpc/schemas/common.schema'
 import {
   CreateMessageInputSchema,
   CreateMessageOutputSchema,
   DeleteMessageInputSchema,
   ListMessagesInputSchema,
   ListMessagesOutputSchema,
-} from '../schemas/message.schema'
+} from '@/orpc/schemas/message.schema'
 
 const listMessages = publicProcedure
   .input(ListMessagesInputSchema)

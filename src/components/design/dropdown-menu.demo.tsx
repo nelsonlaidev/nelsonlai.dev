@@ -29,8 +29,8 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 
-import { Button } from '../ui/button'
-import { Demo, DemoItem } from '../ui/demo'
+import { Button } from '@/components/ui/button'
+import { Demo, DemoItem } from '@/components/ui/demo'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -47,7 +47,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
+} from '@/components/ui/dropdown-menu'
 
 function DropdownMenuDemo() {
   return (

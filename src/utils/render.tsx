@@ -1,4 +1,5 @@
-import { render as baseRender, type RenderOptions, type RenderResult } from '@testing-library/react'
+import { render as baseRender } from '@testing-library/react'
+import type { RenderOptions, RenderResult } from '@testing-library/react'
 import { NextIntlClientProvider } from 'next-intl'
 
 import messages from '@/i18n/messages/en.json'

@@ -1,7 +1,7 @@
 'use client'
 
-import { CodeBlock } from '../ui/code-block'
-import { Demo, DemoItem } from '../ui/demo'
+import { CodeBlock } from '@/components/ui/code-block'
+import { Demo, DemoItem } from '@/components/ui/demo'
 
 const tsxSnippet = `\
 type ButtonProps = {

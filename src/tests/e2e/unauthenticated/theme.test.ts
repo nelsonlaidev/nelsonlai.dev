@@ -1,6 +1,6 @@
 import { test } from '@playwright/test'
 
-import { checkAppliedTheme, checkStoredTheme, setThemeInLocalStorage } from '../utils/theme'
+import { checkAppliedTheme, checkStoredTheme, setThemeInLocalStorage } from '@/tests/e2e/utils/theme'
 
 function getInitialTheme(theme: string) {
   return theme === 'light' ? 'dark' : 'light'

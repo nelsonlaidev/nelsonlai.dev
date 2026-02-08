@@ -362,19 +362,19 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
         const block = value.slice(lineStart, lineBlockEnd)
         const lines = block.split('\n')
 
+        let transformed: string
         if (event.shiftKey) {
-          const transformed = lines
+          transformed = lines
             .map((line) => {
               if (line.startsWith(tabSpace)) return line.slice(tabSpace.length)
               if (line.startsWith('\t')) return line.slice(1)
               return line
             })
             .join('\n')
-          setRangeText(target, transformed, { start: lineStart, end: lineBlockEnd, selectionMode: 'preserve' })
         } else {
-          const transformed = lines.map((line) => tabSpace + line).join('\n')
-          setRangeText(target, transformed, { start: lineStart, end: lineBlockEnd, selectionMode: 'preserve' })
+          transformed = lines.map((line) => tabSpace + line).join('\n')
         }
+        setRangeText(target, transformed, { start: lineStart, end: lineBlockEnd, selectionMode: 'preserve' })
         clearRedo()
         return
       }

@@ -2,8 +2,8 @@
 
 import { CheckIcon, PlusIcon } from 'lucide-react'
 
-import { Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from '../ui/avatar'
-import { Demo, DemoItem } from '../ui/demo'
+import { Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from '@/components/ui/avatar'
+import { Demo, DemoItem } from '@/components/ui/demo'
 
 function AvatarDemo() {
   return (

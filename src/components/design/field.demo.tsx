@@ -1,9 +1,9 @@
-import { Demo, DemoItem } from '../ui/demo'
-import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel } from '../ui/field'
-import { Input } from '../ui/input'
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
-import { Switch } from '../ui/switch'
-import { Textarea } from '../ui/textarea'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Switch } from '@/components/ui/switch'
+import { Textarea } from '@/components/ui/textarea'
 
 function FieldDemo() {
   return (

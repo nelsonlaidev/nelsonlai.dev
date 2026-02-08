@@ -1,6 +1,6 @@
-import { Demo, DemoItem } from '../ui/demo'
-import { Field, FieldDescription, FieldLabel } from '../ui/field'
-import { Textarea } from '../ui/textarea'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Field, FieldDescription, FieldLabel } from '@/components/ui/field'
+import { Textarea } from '@/components/ui/textarea'
 
 function TextareaDemo() {
   return (

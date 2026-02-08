@@ -1,10 +1,10 @@
 import { ArrowLeftIcon, ArrowRightIcon, CircleDashedIcon, SaveIcon } from 'lucide-react'
 
-import { Button } from '../ui/button'
-import { Demo, DemoItem } from '../ui/demo'
-import { InputGroup, InputGroupAddon, InputGroupInput } from '../ui/input-group'
-import { Kbd, KbdGroup } from '../ui/kbd'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
+import { Button } from '@/components/ui/button'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
+import { Kbd, KbdGroup } from '@/components/ui/kbd'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 function KbdDemo() {
   return (

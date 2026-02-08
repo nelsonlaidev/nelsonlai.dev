@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-import { describe, expect, it } from 'vitest'
+import { describe, expect, test } from 'vitest'
 
 import { getPathnames, PROTECTED_ROUTES } from '@/utils/get-pathnames'
 
@@ -11,14 +11,14 @@ type PageModule = {
 }
 
 describe('pathnames', () => {
-  it('returns all page routes', async () => {
+  test('returns all page routes', async () => {
     const pathnames = getPathnames()
     const allPageRoutes = await getAllPageRoutes()
 
     const sortedPathnames = [...pathnames].toSorted((a, b) => a.localeCompare(b))
     const sortedAllPageRoutes = [...allPageRoutes].toSorted((a, b) => a.localeCompare(b))
 
-    expect(sortedPathnames).toEqual(sortedAllPageRoutes)
+    expect(sortedPathnames).toStrictEqual(sortedAllPageRoutes)
   })
 })
 

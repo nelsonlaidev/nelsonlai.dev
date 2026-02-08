@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { type LikeCountInput, type LikeCountOutput, orpc } from '@/orpc/client'
+import { orpc } from '@/orpc/client'
+import type { LikeCountInput, LikeCountOutput } from '@/orpc/client'
 
 export function useCountLike(input: LikeCountInput) {
   return useQuery(orpc.like.count.queryOptions({ input }))

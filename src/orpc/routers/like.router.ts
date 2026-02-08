@@ -5,15 +5,15 @@ import { postLikes, posts } from '@/db/schemas'
 import { getAnonKey } from '@/utils/get-anon-key'
 import { getIp } from '@/utils/get-ip'
 
-import { cache } from '../cache'
-import { publicProcedure } from '../procedures'
-import { LikesStatsOutputSchema } from '../schemas/blog.schema'
+import { cache } from '@/orpc/cache'
+import { publicProcedure } from '@/orpc/procedures'
+import { LikesStatsOutputSchema } from '@/orpc/schemas/blog.schema'
 import {
   CountLikeInputSchema,
   CountLikeOutputSchema,
   IncrementLikeInputSchema,
   IncrementLikeOutputSchema,
-} from '../schemas/like.schema'
+} from '@/orpc/schemas/like.schema'
 
 const countLike = publicProcedure
   .input(CountLikeInputSchema)

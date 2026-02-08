@@ -1,6 +1,6 @@
-import { Badge } from '../ui/badge'
-import { Demo, DemoItem } from '../ui/demo'
-import { Marquee } from '../ui/marquee'
+import { Badge } from '@/components/ui/badge'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Marquee } from '@/components/ui/marquee'
 
 const tags = ['Next.js', 'TypeScript', 'Tailwind', 'Design Systems', 'Motion', 'Accessibility', 'Performance', 'SEO']
 

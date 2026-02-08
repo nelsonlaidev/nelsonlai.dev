@@ -1,10 +1,4 @@
-import { relations } from 'drizzle-orm'
 import { boolean, index, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
-
-import { comments } from './comment.schema'
-import { messages } from './message.schema'
-import { settings } from './settings.schema'
-import { unsubscribes } from './unsubscribe.schema'
 
 export const roleEnum = pgEnum('role', ['user', 'admin'])
 
@@ -67,26 +61,3 @@ export const verifications = pgTable('verifications', {
   createdAt: timestamp('created_at').notNull(),
   updatedAt: timestamp('updated_at').notNull(),
 })
-
-export const usersRelations = relations(users, ({ many, one }) => ({
-  accounts: many(accounts),
-  sessions: many(sessions),
-  comments: many(comments),
-  messages: many(messages),
-  unsubscribes: many(unsubscribes),
-  settings: one(settings),
-}))
-
-export const accountsRelations = relations(accounts, ({ one }) => ({
-  user: one(users, {
-    fields: [accounts.userId],
-    references: [users.id],
-  }),
-}))
-
-export const sessionsRelations = relations(sessions, ({ one }) => ({
-  user: one(users, {
-    fields: [sessions.userId],
-    references: [users.id],
-  }),
-}))

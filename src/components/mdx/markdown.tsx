@@ -4,8 +4,8 @@ import { Fragment, memo } from 'react'
 import { Link } from '@/components/ui/link'
 import { TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
-import CommentCodeBlock from '../comment-section/comment-code-block'
-import CommentTable from '../comment-section/comment-table'
+import CommentCodeBlock from '@/components/comment-section/comment-code-block'
+import CommentTable from '@/components/comment-section/comment-table'
 
 type MarkdownProps = {
   children: string

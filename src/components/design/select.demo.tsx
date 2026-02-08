@@ -1,6 +1,6 @@
 import { ChartBarIcon, ChartLineIcon, ChartPieIcon } from 'lucide-react'
 
-import { Demo, DemoItem } from '../ui/demo'
+import { Demo, DemoItem } from '@/components/ui/demo'
 import {
   Select,
   SelectContent,
@@ -10,7 +10,7 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from '../ui/select'
+} from '@/components/ui/select'
 
 function SelectDemo() {
   return (

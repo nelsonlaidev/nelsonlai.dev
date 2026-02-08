@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader } from '../ui/card'
-import { Demo, DemoItem } from '../ui/demo'
-import { Skeleton } from '../ui/skeleton'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Skeleton } from '@/components/ui/skeleton'
 
 function SkeletonDemo() {
   return (

@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn'
 
-import { Spinner } from '../ui/spinner'
+import { Spinner } from '@/components/ui/spinner'
 
 function CommentLoader(props: React.ComponentProps<'div'>) {
   const { className, ...rest } = props

@@ -2,8 +2,8 @@ import { and, count, eq, isNotNull } from 'drizzle-orm'
 
 import { comments } from '@/db/schemas'
 
-import { publicProcedure } from '../procedures'
-import { CountReplyInputSchema, CountReplyOutputSchema } from '../schemas/reply.schema'
+import { publicProcedure } from '@/orpc/procedures'
+import { CountReplyInputSchema, CountReplyOutputSchema } from '@/orpc/schemas/reply.schema'
 
 const countReply = publicProcedure
   .input(CountReplyInputSchema)

@@ -1,4 +1,4 @@
-import type { TOC } from '../types'
+import type { TOC } from '@/mdx-plugins/types'
 import type { Heading, Node } from 'mdast'
 import type { VFile } from 'vfile'
 

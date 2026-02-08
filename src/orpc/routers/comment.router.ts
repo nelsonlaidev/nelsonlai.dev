@@ -11,7 +11,7 @@ import { sendEmail } from '@/lib/resend'
 import { generateCommentReplyUnsubToken } from '@/lib/unsubscribe'
 import { getDefaultImage } from '@/utils/get-default-image'
 
-import { protectedProcedure, publicProcedure } from '../procedures'
+import { protectedProcedure, publicProcedure } from '@/orpc/procedures'
 import {
   CountCommentInputSchema,
   CountCommentOutputSchema,
@@ -20,8 +20,8 @@ import {
   DeleteCommentInputSchema,
   ListCommentsInputSchema,
   ListCommentsOutputSchema,
-} from '../schemas/comment.schema'
-import { EmptyOutputSchema } from '../schemas/common.schema'
+} from '@/orpc/schemas/comment.schema'
+import { EmptyOutputSchema } from '@/orpc/schemas/common.schema'
 
 const listComments = publicProcedure
   .input(ListCommentsInputSchema)

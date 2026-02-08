@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { getNumberFlow } from '../utils/number-flow'
+import { getNumberFlow } from '@/tests/e2e/utils/number-flow'
 
 test.describe('like button', () => {
   test.beforeEach(async ({ page }) => {

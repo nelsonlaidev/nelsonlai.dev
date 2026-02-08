@@ -1,9 +1,9 @@
 'use client'
 
-import { Button } from '../ui/button'
-import { Demo, DemoItem } from '../ui/demo'
-import { Field, FieldGroup, FieldLabel } from '../ui/field'
-import { Input } from '../ui/input'
+import { Button } from '@/components/ui/button'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
 import {
   Sheet,
   SheetClose,
@@ -13,7 +13,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '../ui/sheet'
+} from '@/components/ui/sheet'
 
 function SheetDemo() {
   return (
@@ -33,7 +33,7 @@ function SheetWithForm() {
         <SheetContent>
           <SheetHeader>
             <SheetTitle>Edit profile</SheetTitle>
-            <SheetDescription>Make changes to your profile here. Click save when you're done.</SheetDescription>
+            <SheetDescription>Make changes to your profile here. Click save when you&apos;re done.</SheetDescription>
           </SheetHeader>
           <div className='px-6'>
             <FieldGroup>
@@ -66,7 +66,7 @@ function SheetNoCloseButton() {
           <SheetHeader>
             <SheetTitle>No Close Button</SheetTitle>
             <SheetDescription>
-              This sheet doesn't have a close button in the top-right corner. You can only close it using the button
+              This sheet does not have a close button in the top-right corner. You can only close it using the button
               below.
             </SheetDescription>
           </SheetHeader>
@@ -93,7 +93,7 @@ function SheetWithSides() {
           <SheetContent side={side} className='data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]'>
             <SheetHeader>
               <SheetTitle>Edit profile</SheetTitle>
-              <SheetDescription>Make changes to your profile here. Click save when you're done.</SheetDescription>
+              <SheetDescription>Make changes to your profile here. Click save when you&apos;re done.</SheetDescription>
             </SheetHeader>
             <div className='no-scrollbar overflow-y-auto px-6'>
               {Array.from({ length: 10 }).map((_, index) => (

@@ -13,9 +13,9 @@ import {
   AlertDialogMedia,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '../ui/alert-dialog'
-import { Button } from '../ui/button'
-import { Demo, DemoItem } from '../ui/demo'
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
+import { Demo, DemoItem } from '@/components/ui/demo'
 import { Link } from '@/components/ui/link'
 
 function AlertDialogDemo() {
@@ -57,7 +57,7 @@ function AlertDialogSizes() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Don't allow</AlertDialogCancel>
+            <AlertDialogCancel>Don&apos;t allow</AlertDialogCancel>
             <AlertDialogAction>Allow</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -101,7 +101,7 @@ function AlertDialogWithMedia() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Don't allow</AlertDialogCancel>
+            <AlertDialogCancel>Don&apos;t allow</AlertDialogCancel>
             <AlertDialogAction>Allow</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

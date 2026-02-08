@@ -27,7 +27,7 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/button'
 import {
   Command,
   CommandDialog,
@@ -38,8 +38,8 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from '../ui/command'
-import { Demo, DemoItem } from '../ui/demo'
+} from '@/components/ui/command'
+import { Demo, DemoItem } from '@/components/ui/demo'
 
 function CommandDemo() {
   return (

@@ -1,8 +1,8 @@
-import { Button } from '../ui/button'
-import { Demo, DemoItem } from '../ui/demo'
-import { Field, FieldDescription, FieldGroup, FieldLabel } from '../ui/field'
-import { Input } from '../ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+import { Button } from '@/components/ui/button'
+import { Demo, DemoItem } from '@/components/ui/demo'
+import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 function InputDemo() {
   return (
@@ -143,7 +143,7 @@ function InputForm() {
           <Field>
             <FieldLabel htmlFor='form-email'>Email</FieldLabel>
             <Input id='form-email' type='email' placeholder='john@example.com' />
-            <FieldDescription>We'll never share your email with anyone.</FieldDescription>
+            <FieldDescription>We&apos;ll never share your email with anyone.</FieldDescription>
           </Field>
           <div className='grid grid-cols-2 gap-4'>
             <Field>

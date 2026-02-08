@@ -4,12 +4,12 @@ import { eq } from 'drizzle-orm'
 import { DEFAULT_SETTINGS } from '@/db/constants'
 import { settings } from '@/db/schemas'
 
-import { protectedProcedure } from '../procedures'
+import { protectedProcedure } from '@/orpc/procedures'
 import {
   GetSettingsOutputSchema,
   UpdateSettingsInputSchema,
   UpdateSettingsOutputSchema,
-} from '../schemas/settings.schema'
+} from '@/orpc/schemas/settings.schema'
 
 const getSettings = protectedProcedure.output(GetSettingsOutputSchema).handler(async ({ context }) => {
   const [result] = await context.db.select().from(settings).where(eq(settings.userId, context.session.user.id))
@@ -34,8 +34,6 @@ const updateSettings = protectedProcedure
         set: input,
       })
       .returning()
-
-    await new Promise((resolve) => setTimeout(resolve, 1000))
 
     if (!result) {
       throw new ORPCError('INTERNAL_SERVER_ERROR', { message: 'Failed to update settings' })

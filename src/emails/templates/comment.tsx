@@ -14,9 +14,9 @@ import {
   Text,
 } from '@react-email/components'
 
-import Footer from '../components/footer'
-import GeistFont from '../components/geist-font'
-import Logo from '../components/logo'
+import Footer from '@/emails/components/footer'
+import GeistFont from '@/emails/components/geist-font'
+import Logo from '@/emails/components/logo'
 
 type CommentEmailTemplateProps = {
   comment: string
@@ -36,7 +36,7 @@ function CommentEmailTemplate(props: CommentEmailTemplateProps) {
       <Head>
         <GeistFont />
       </Head>
-      <Preview>New comment on the post "{postTitle}" on nelsonlai.dev</Preview>
+      <Preview>New comment on the post &quot;{postTitle}&quot; on nelsonlai.dev</Preview>
       <Tailwind>
         <Body className='m-auto bg-white p-1'>
           <Container className='mx-auto w-full max-w-165 rounded-2xl border border-solid border-[#e5e5e5] bg-white p-8'>

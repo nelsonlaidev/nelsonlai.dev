@@ -24,11 +24,13 @@ import { Input } from '@/components/ui/input'
 import { useUpdateUser } from '@/hooks/queries/auth.query'
 import { useGetAvatarUploadUrl } from '@/hooks/queries/r2.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
-import { type User, useSession } from '@/lib/auth-client'
-import { AVATAR_MAX_FILE_SIZE, type AvatarMimeType, SUPPORTED_AVATAR_MIME_TYPES } from '@/lib/constants'
+import { useSession } from '@/lib/auth-client'
+import type { User } from '@/lib/auth-client'
+import { AVATAR_MAX_FILE_SIZE, SUPPORTED_AVATAR_MIME_TYPES } from '@/lib/constants'
+import type { AvatarMimeType } from '@/lib/constants'
 import { getAbbreviation } from '@/utils/get-abbreviation'
 
-import { Spinner } from '../ui/spinner'
+import { Spinner } from '@/components/ui/spinner'
 
 import ProfileSkeleton from './profile-skeleton'
 

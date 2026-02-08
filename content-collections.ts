@@ -1,4 +1,5 @@
-import { type Context, defineCollection, defineConfig, type Meta } from '@content-collections/core'
+import { defineCollection, defineConfig } from '@content-collections/core'
+import type { Context, Meta } from '@content-collections/core'
 import { compileMDX } from '@content-collections/mdx'
 import * as z from 'zod'
 

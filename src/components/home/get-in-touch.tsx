@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react'
 import BlurImage from '@/components/blur-image'
 import { cn } from '@/utils/cn'
 
-import { buttonVariants } from '../ui/button'
+import { buttonVariants } from '@/components/ui/button'
 
 const variants = {
   initial: {

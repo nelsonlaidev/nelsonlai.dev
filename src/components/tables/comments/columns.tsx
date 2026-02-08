@@ -1,7 +1,7 @@
 import type { AdminCommentListOutput } from '@/orpc/client'
 import type { ColumnDef } from '@tanstack/react-table'
 
-import FormattedDateCell from '../formatted-date-cell'
+import FormattedDateCell from '@/components/tables/formatted-date-cell'
 
 export type Comment = AdminCommentListOutput['comments'][number]
 
