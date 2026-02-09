@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test'
 
-import { env } from '@/lib/env'
+import { env } from './src/lib/env'
 
 const baseURL = 'http://localhost:3000'
 
