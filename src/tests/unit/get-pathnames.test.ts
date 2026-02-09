@@ -57,7 +57,7 @@ async function processPageFile(fullPath: string, rootDir: string): Promise<strin
   const hasDynamic = pathParts.some((part) => part.startsWith('[') && part.endsWith(']'))
 
   if (!hasDynamic) {
-    return ['/' + pathParts.join('/')]
+    return [`/${pathParts.join('/')}`]
   }
 
   return await processDynamicPage(fullPath, pathParts)
@@ -97,7 +97,7 @@ async function processDynamicPage(fullPath: string, pathParts: string[]): Promis
       })
       .join('/')
 
-    return '/' + resolved
+    return `/${resolved}`
   })
 }
 

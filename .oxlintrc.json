@@ -128,7 +128,7 @@
     "curly": "off",
     "init-declarations": "off",
     "max-params": "off",
-    "prefer-template": "off",
+    // "prefer-template": "off",
     "no-duplicate-imports": "off",
     "no-inline-comments": "off",
     "no-undefined": "off",

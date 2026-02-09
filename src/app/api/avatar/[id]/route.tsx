@@ -57,13 +57,6 @@ export async function GET(request: Request, context: RouteContext<'/api/avatar/[
       },
     )
   } catch (error) {
-    return NextResponse.json(
-      {
-        error: 'Failed to generate avatar: ' + getErrorMessage(error),
-      },
-      {
-        status: 500,
-      },
-    )
+    return NextResponse.json({ error: `Failed to generate avatar: ${getErrorMessage(error)}` }, { status: 500 })
   }
 }
