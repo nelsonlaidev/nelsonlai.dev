@@ -45,6 +45,14 @@
     "max-lines": "off",
     // Allow both default and named exports
     "prefer-default-export": "off",
+    // Allow using Node.js modules in server components
+    "no-nodejs-modules": "off",
+    // Allow many lines in functions
+    "max-lines-per-function": "off",
+    // Allow many statements in functions
+    "max-statements": "off",
+    // Allow ternary expressions
+    "no-ternary": "off",
     "func-style": ["error", "declaration"],
     "new-cap": ["error", { "capIsNew": false }],
     "capitalized-comments": [
@@ -116,15 +124,12 @@
 
     // TODO: Re-enable these rules and fix the issues
     "sort-keys": "off",
-    "no-ternary": "off",
     "sort-imports": "off",
     "prefer-destructuring": "off",
     "no-magic-numbers": "off",
     "no-implicit-coercion": "off",
-    "no-nodejs-modules": "off",
     "id-length": "off",
     "curly": "off",
-    "max-statements": "off",
     "init-declarations": "off",
     "no-namespace": "off",
     "arrow-body-style": "off",
@@ -133,7 +138,6 @@
     "no-continue": "off",
     "no-duplicate-imports": "off",
     "no-inline-comments": "off",
-    "max-lines-per-function": "off",
     "no-undefined": "off",
     "no-undef": "off",
     "no-map-spread": "off",
