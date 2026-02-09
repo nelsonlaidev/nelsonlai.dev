@@ -3,7 +3,6 @@ import { FileIcon, TerminalIcon } from 'lucide-react'
 
 type Icon = {
   language: string[]
-
   icon: React.FC<React.SVGProps<SVGSVGElement>>
 }
 
