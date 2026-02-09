@@ -27,7 +27,6 @@
     "lint": "eslint --max-warnings 0 .",
     "lint:fix": "eslint --fix --max-warnings 0 .",
     "lint:spell": "cspell .",
-    "preinstall": "npx --yes only-allow pnpm",
     "prepare": "lefthook install",
     "start": "pnpm with-env next start -p 3000",
     "test:e2e": "pnpm with-env playwright test",
