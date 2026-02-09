@@ -1,4 +1,4 @@
-// fumadocs (MIT License)
+// Based on fuma-nama/fumadocs (MIT License)
 // Copyright (c) fuma-nama
 // Source: https://github.com/fuma-nama/fumadocs/blob/82c273917280f63da95687852135f89a08593e71/packages/ui/src/components/heading.tsx
 //
@@ -14,7 +14,7 @@ type HeadingProps<T extends Types> = Omit<React.ComponentProps<T>, 'as'> & {
   as?: T
 }
 
-const Heading = <T extends Types = 'h1'>(props: HeadingProps<T>) => {
+function Heading<T extends Types = 'h1'>(props: HeadingProps<T>) {
   const { as, className, children, id, ...rest } = props
   const Component = as ?? 'h1'
   const t = useTranslations()

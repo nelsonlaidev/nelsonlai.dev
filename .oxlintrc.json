@@ -43,6 +43,18 @@
   "rules": {
     // Allow long files
     "max-lines": "off",
+    // Allow both default and named exports
+    "prefer-default-export": "off",
+    "func-style": ["error", "declaration"],
+    "new-cap": ["error", { "capIsNew": false }],
+    "capitalized-comments": [
+      "error",
+      "always",
+      {
+        "ignorePattern": "i18n-check",
+        "ignoreConsecutiveComments": true
+      }
+    ],
 
     // Prefer vitest/prefer-called-times
     "vitest/prefer-called-once": "off",
@@ -107,16 +119,12 @@
     "prefer-destructuring": "off",
     "no-magic-numbers": "off",
     "no-implicit-coercion": "off",
-    "func-style": "off",
-    "prefer-default-export": "off",
     "no-nodejs-modules": "off",
     "id-length": "off",
     "curly": "off",
     "max-statements": "off",
     "init-declarations": "off",
     "no-namespace": "off",
-    "new-cap": "off",
-    "capitalized-comments": "off",
     "arrow-body-style": "off",
     "max-params": "off",
     "prefer-template": "off",
