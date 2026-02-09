@@ -4,6 +4,9 @@ import { useEffect } from 'react'
 
 function Hello() {
   useEffect(() => {
+    // This is a fun little message for anyone who might be inspecting the code.
+    // So we disable the rule for this line.
+    // oxlint-disable-next-line no-console
     console.log(
       `\
 %cHey there, awesome developer!

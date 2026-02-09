@@ -55,6 +55,8 @@
         "ignoreConsecutiveComments": true
       }
     ],
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
 
     // Prefer vitest/prefer-called-times
     "vitest/prefer-called-once": "off",
@@ -131,12 +133,10 @@
     "no-continue": "off",
     "no-duplicate-imports": "off",
     "no-inline-comments": "off",
-    "no-plusplus": "off",
     "max-lines-per-function": "off",
     "no-undefined": "off",
     "no-undef": "off",
     "no-map-spread": "off",
-    "no-console": "off",
     "no-promise-executor-return": "off",
     "no-await-in-loop": "off",
     "no-bitwise": "off",

@@ -32,8 +32,8 @@ function isSpace(char: string) {
 function getWordBounds(value: string, pos: number) {
   let left = pos
   let right = pos
-  while (left > 0 && !isSpace(value[left - 1]!)) left--
-  while (right < value.length && !isSpace(value[right]!)) right++
+  while (left > 0 && !isSpace(value[left - 1]!)) left -= 1
+  while (right < value.length && !isSpace(value[right]!)) right += 1
   return { left, right }
 }
 
