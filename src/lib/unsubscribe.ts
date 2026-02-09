@@ -98,7 +98,7 @@ async function getCommentReplyUnsubData(payload: CommentReplyUnsubPayload, token
     comment: data.body,
     userEmail: maskedEmail,
     token,
-    isUnsubscribed: !!isUnsubscribed,
+    isUnsubscribed: Boolean(isUnsubscribed),
     userId,
     commentId,
   }

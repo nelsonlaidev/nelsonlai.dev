@@ -138,7 +138,9 @@ function createSnapshot(ta: HTMLTextAreaElement): Snapshot {
 }
 
 function snapshotsEqual(a?: Snapshot, b?: Snapshot) {
-  return !!a && !!b && a.value === b.value && a.selectionStart === b.selectionStart && a.selectionEnd === b.selectionEnd
+  if (!a || !b) return false
+
+  return a.value === b.value && a.selectionStart === b.selectionStart && a.selectionEnd === b.selectionEnd
 }
 
 export function useCommentEditor(options: UseCommentEditorOptions = {}) {

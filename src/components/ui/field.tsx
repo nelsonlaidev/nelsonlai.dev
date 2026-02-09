@@ -164,7 +164,7 @@ function FieldSeparator(props: FieldSeparatorProps) {
   return (
     <div
       data-slot='field-separator'
-      data-content={!!children}
+      data-content={Boolean(children)}
       className={cn('relative -my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2', className)}
       {...rest}
     >

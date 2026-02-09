@@ -53,6 +53,8 @@
     "max-statements": "off",
     // Allow ternary expressions
     "no-ternary": "off",
+    // Allow continue statements
+    "no-continue": "off",
     "func-style": ["error", "declaration"],
     "new-cap": ["error", { "capIsNew": false }],
     "capitalized-comments": [
@@ -65,6 +67,7 @@
     ],
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-namespace": ["error", { "ignore": ["zod", "schemas"] }],
 
     // Prefer vitest/prefer-called-times
     "vitest/prefer-called-once": "off",
@@ -100,13 +103,7 @@
     "import/no-unassigned-import": [
       "error",
       {
-        "allow": [
-          "server-only",
-          "client-only",
-          "@testing-library/jest-dom/vitest",
-          "@/styles/*.css",
-          "react-medium-image-zoom/dist/styles.css"
-        ]
+        "allow": ["server-only", "client-only", "@testing-library/jest-dom/vitest", "**/*.css"]
       }
     ],
 
@@ -127,15 +124,11 @@
     "sort-imports": "off",
     "prefer-destructuring": "off",
     "no-magic-numbers": "off",
-    "no-implicit-coercion": "off",
     "id-length": "off",
     "curly": "off",
     "init-declarations": "off",
-    "no-namespace": "off",
-    // "arrow-body-style": "off",
     "max-params": "off",
     "prefer-template": "off",
-    "no-continue": "off",
     "no-duplicate-imports": "off",
     "no-inline-comments": "off",
     "no-undefined": "off",

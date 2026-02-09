@@ -1,12 +1,33 @@
 import type { NextRequest } from 'next/server'
 
 import { betterAuth } from 'better-auth'
+import type { SocialProviders } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { headers } from 'next/headers'
 
 import { db } from '@/db'
 import { env } from '@/lib/env'
 import { getBaseUrl } from '@/utils/get-base-url'
+
+function getSocialProviders(): SocialProviders {
+  const providers: SocialProviders = {}
+
+  if (env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET) {
+    providers.google = {
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    }
+  }
+
+  if (env.GITHUB_CLIENT_ID && env.GITHUB_CLIENT_SECRET) {
+    providers.github = {
+      clientId: env.GITHUB_CLIENT_ID,
+      clientSecret: env.GITHUB_CLIENT_SECRET,
+    }
+  }
+
+  return providers
+}
 
 export const auth = betterAuth({
   baseURL: getBaseUrl(),
@@ -15,22 +36,7 @@ export const auth = betterAuth({
     usePlural: true,
   }),
   trustedOrigins: [getBaseUrl()],
-  socialProviders: {
-    ...(!!env.GOOGLE_CLIENT_ID &&
-      !!env.GOOGLE_CLIENT_SECRET && {
-        google: {
-          clientId: env.GOOGLE_CLIENT_ID,
-          clientSecret: env.GOOGLE_CLIENT_SECRET,
-        },
-      }),
-    ...(!!env.GITHUB_CLIENT_ID &&
-      !!env.GITHUB_CLIENT_SECRET && {
-        github: {
-          clientId: env.GITHUB_CLIENT_ID,
-          clientSecret: env.GITHUB_CLIENT_SECRET,
-        },
-      }),
-  },
+  socialProviders: getSocialProviders(),
   user: {
     additionalFields: {
       role: { type: 'string', required: true, input: false, defaultValue: 'user' },
