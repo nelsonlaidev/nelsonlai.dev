@@ -58,7 +58,7 @@ const createMessage = protectedProcedure
   .input(CreateMessageInputSchema)
   .output(CreateMessageOutputSchema)
   .handler(async ({ input, context }) => {
-    const user = context.session.user
+    const { user } = context.session
 
     const [message] = await context.db
       .insert(messages)
@@ -85,7 +85,7 @@ const deleteMessage = protectedProcedure
   .input(DeleteMessageInputSchema)
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
-    const user = context.session.user
+    const { user } = context.session
 
     const message = await context.db.query.messages.findFirst({
       where: and(eq(messages.id, input.id), eq(messages.userId, user.id)),

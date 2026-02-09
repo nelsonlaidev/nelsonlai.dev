@@ -38,7 +38,7 @@ const githubStats = publicProcedure.output(GithubStatsOutputSchema).handler(asyn
     username: GITHUB_USERNAME,
   })
 
-  const followers = user.followers
+  const { followers } = user
 
   const { data: repo } = await octokit.request('GET /repos/{owner}/{repo}', {
     owner: GITHUB_USERNAME,

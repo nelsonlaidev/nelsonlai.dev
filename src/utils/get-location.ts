@@ -18,7 +18,7 @@ export async function getLocation(ip: string): Promise<string | null> {
 
     const data: LocationResponse = await response.json()
 
-    const country = data.country
+    const { country } = data
     const region = data.region ? `, ${data.region}` : ''
 
     return `${country}${region}`

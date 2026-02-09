@@ -32,7 +32,7 @@ const countView = publicProcedure
       })
     }
 
-    const views = post.views
+    const { views } = post
 
     await cache.posts.views.set(input.slug, views)
 
@@ -65,7 +65,7 @@ const incrementView = publicProcedure
       })
     }
 
-    const views = result.views
+    const { views } = result
 
     await cache.posts.views.set(input.slug, views)
 

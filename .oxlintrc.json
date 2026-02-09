@@ -43,10 +43,6 @@
   "rules": {
     // Allow long files
     "max-lines": "off",
-    // Allow both default and named exports
-    "prefer-default-export": "off",
-    // Allow using Node.js modules in server components
-    "no-nodejs-modules": "off",
     // Allow many lines in functions
     "max-lines-per-function": "off",
     // Allow many statements in functions
@@ -55,6 +51,8 @@
     "no-ternary": "off",
     // Allow continue statements
     "no-continue": "off",
+    // Allow variables without initialization
+    "init-declarations": "off",
     "func-style": ["error", "declaration"],
     "new-cap": ["error", { "capIsNew": false }],
     "capitalized-comments": [
@@ -67,7 +65,19 @@
     ],
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-    "no-namespace": ["error", { "ignore": ["zod", "schemas"] }],
+    "prefer-destructuring": [
+      "error",
+      {
+        "VariableDeclarator": {
+          "array": false,
+          "object": true
+        },
+        "AssignmentExpression": {
+          "array": false,
+          "object": false
+        }
+      }
+    ],
 
     // Prefer vitest/prefer-called-times
     "vitest/prefer-called-once": "off",
@@ -100,12 +110,17 @@
     "import/exports-last": "off",
     // Allow importing any number of dependencies
     "import/max-dependencies": "off",
+    // Allow using Node.js modules in server components
+    "import/no-nodejs-modules": "off",
+    // Allow both default and named exports
+    "import/prefer-default-export": "off",
     "import/no-unassigned-import": [
       "error",
       {
         "allow": ["server-only", "client-only", "@testing-library/jest-dom/vitest", "**/*.css"]
       }
     ],
+    "import/no-namespace": ["error", { "ignore": ["zod", "schemas"] }],
 
     "jest/consistent-test-it": ["error", { "fn": "test" }],
     "jest/max-expects": ["error", { "max": 10 }],
@@ -118,22 +133,20 @@
     "oxc/no-optional-chaining": "off",
     "oxc/no-async-await": "off",
     "oxc/no-rest-spread-properties": "off",
+    // Allow spreading in maps
+    "oxc/no-map-spread": "off",
 
     // TODO: Re-enable these rules and fix the issues
     "sort-keys": "off",
     "sort-imports": "off",
-    "prefer-destructuring": "off",
     "no-magic-numbers": "off",
     "id-length": "off",
     "curly": "off",
-    "init-declarations": "off",
     "max-params": "off",
-    // "prefer-template": "off",
     "no-duplicate-imports": "off",
     "no-inline-comments": "off",
     "no-undefined": "off",
     "no-undef": "off",
-    "no-map-spread": "off",
     "no-promise-executor-return": "off",
     "no-await-in-loop": "off",
     "no-bitwise": "off",

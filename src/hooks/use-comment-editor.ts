@@ -198,8 +198,8 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
     const textarea = textareaRef.current
     if (!textarea) return
 
+    const { value } = textarea
     const marker = MARKER_MAP[type]
-    const value = textarea.value
     let { selectionStart: start, selectionEnd: end } = textarea
     let keepCaretPos = false
 

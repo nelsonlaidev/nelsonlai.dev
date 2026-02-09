@@ -4,11 +4,13 @@ export function useFocus<T extends HTMLTextAreaElement | HTMLInputElement>() {
   const ref = useRef<T>(null)
 
   useEffect(() => {
-    if (ref.current) {
-      ref.current.focus()
+    const el = ref.current
 
-      const length = ref.current.value.length
-      ref.current.setSelectionRange(length, length)
+    if (el) {
+      el.focus()
+      const { length } = el.value
+
+      el.setSelectionRange(length, length)
     }
   }, [])
 
