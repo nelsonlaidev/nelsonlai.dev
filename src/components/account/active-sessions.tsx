@@ -3,7 +3,7 @@
 import type { SessionListOutput } from '@/orpc/client'
 
 import Bowser from 'bowser'
-import { InfoIcon, MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } from 'lucide-react'
+import { BotIcon, InfoIcon, MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
@@ -57,6 +57,7 @@ type SessionProps = {
 }
 
 const PLATFORM_ICONS = {
+  bot: BotIcon,
   desktop: MonitorIcon,
   mobile: SmartphoneIcon,
   tablet: TabletIcon,
