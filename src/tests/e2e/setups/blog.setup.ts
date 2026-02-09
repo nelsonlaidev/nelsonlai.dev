@@ -7,6 +7,7 @@ import { expect, test as setup } from '@playwright/test'
 
 import { db } from '@/db'
 import { posts } from '@/db/schemas'
+import { env } from '@/lib/env'
 
 import { TEST_POSTS } from '../fixtures/posts'
 import { makeDummyImage } from '../utils/make-dummy-image'
@@ -66,7 +67,7 @@ setup('setup blog', async () => {
     const testPostCoverPath = path.join(process.cwd(), `public/images/blog/${post.slug}/cover.png`)
 
     // For CI, we need to build the app, so we'll create the test files in CI workflow.
-    if (!process.env.CI) {
+    if (!env.CI) {
       await fs.writeFile(testPostPath, createTestPost(post.title))
 
       const coverDir = path.dirname(testPostCoverPath)

@@ -1,15 +1,15 @@
 import { defineConfig, devices } from '@playwright/test'
 
-const CI = !!process.env.CI
+import { env } from '@/lib/env'
 
 const baseURL = 'http://localhost:3000'
 
 export default defineConfig({
   testDir: './src/tests/e2e',
-  fullyParallel: !CI,
-  forbidOnly: CI,
-  retries: CI ? 2 : 1,
-  workers: CI ? 1 : '50%',
+  fullyParallel: !env.CI,
+  forbidOnly: env.CI,
+  retries: env.CI ? 2 : 1,
+  workers: env.CI ? 1 : '50%',
   reporter: 'html',
   use: {
     baseURL,
@@ -37,8 +37,8 @@ export default defineConfig({
     { name: 'teardown', testMatch: '**/*.teardown.ts' },
   ],
   webServer: {
-    command: CI ? 'pnpm start' : 'pnpm dev',
+    command: env.CI ? 'pnpm start' : 'pnpm dev',
     url: baseURL,
-    reuseExistingServer: !CI,
+    reuseExistingServer: !env.CI,
   },
 })

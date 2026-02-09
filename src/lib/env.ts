@@ -5,7 +5,17 @@ import * as z from 'zod'
 export const env = createEnv({
   extends: [vercel()],
 
+  shared: {
+    NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
+    CI: z
+      .enum(['true', 'false', '1', '0'])
+      .default('false')
+      .transform((v) => v === 'true' || v === '1'),
+  },
+
   server: {
+    NEXT_RUNTIME: z.enum(['nodejs', 'edge']).default('nodejs'),
+
     // Required
     DATABASE_URL: z.url(),
 
@@ -61,6 +71,9 @@ export const env = createEnv({
   },
 
   experimental__runtimeEnv: {
+    NODE_ENV: process.env.NODE_ENV,
+    CI: process.env.CI,
+
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_VERCEL_ENV: process.env.NEXT_PUBLIC_VERCEL_ENV,
     NEXT_PUBLIC_VERCEL_BRANCH_URL: process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL,

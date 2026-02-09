@@ -1,6 +1,7 @@
 import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
 
+import { IS_PRODUCTION } from '@/lib/constants'
 import { env } from '@/lib/env'
 
 import * as schema from './schemas'
@@ -11,7 +12,7 @@ declare global {
 
 let client: ReturnType<typeof postgres>
 
-if (process.env.NODE_ENV === 'production') {
+if (IS_PRODUCTION) {
   client = postgres(env.DATABASE_URL)
 } else {
   globalThis.pgClient ??= postgres(env.DATABASE_URL)
