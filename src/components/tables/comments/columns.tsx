@@ -21,8 +21,6 @@ export const columns: Array<ColumnDef<Comment>> = [
   {
     accessorKey: 'createdAt',
     header: 'Created At',
-    cell: ({ row }) => {
-      return <FormattedDateCell date={row.original.createdAt} />
-    },
+    cell: ({ row }) => <FormattedDateCell date={row.original.createdAt} />,
   },
 ]

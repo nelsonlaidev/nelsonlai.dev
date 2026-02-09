@@ -363,9 +363,7 @@ function TableWithSelect() {
                 <Select
                   items={people}
                   defaultValue={people.find((person) => person.value === item.assignee)}
-                  itemToStringValue={(i) => {
-                    return i.value
-                  }}
+                  itemToStringValue={(i) => i.value}
                 >
                   <SelectTrigger className='w-40' size='sm'>
                     <SelectValue />

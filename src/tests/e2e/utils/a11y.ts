@@ -16,8 +16,8 @@ export async function a11y(options: Options) {
   if (violations.length > 0) {
     console.warn(
       violations
-        .map((violation) => {
-          return `
+        .map(
+          (violation) => `
 ==================================================
 Description: ${violation.description}
 Impact: ${violation.impact}
@@ -26,8 +26,8 @@ Help URL: ${violation.helpUrl}
 Failure Summary: ${violation.nodes[0]?.failureSummary}
 HTML: ${violation.nodes[0]?.html}
 ==================================================
-      `
-        })
+      `,
+        )
         .join('\n'),
     )
   }

@@ -103,10 +103,10 @@ async function generateOGImage(title: string, url: string) {
 export function generateStaticParams(): Array<{ locale: string; slug: string[] }> {
   const pathnames = getPathnames({ includeProtectedRoutes: true })
 
-  return routing.locales.flatMap((locale) => {
-    return pathnames.map((pathname) => ({
+  return routing.locales.flatMap((locale) =>
+    pathnames.map((pathname) => ({
       locale,
       slug: [...pathname.split('/'), 'image.webp'].filter(Boolean),
-    }))
-  })
+    })),
+  )
 }

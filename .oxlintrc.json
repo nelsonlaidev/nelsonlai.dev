@@ -132,7 +132,7 @@
     "curly": "off",
     "init-declarations": "off",
     "no-namespace": "off",
-    "arrow-body-style": "off",
+    // "arrow-body-style": "off",
     "max-params": "off",
     "prefer-template": "off",
     "no-continue": "off",

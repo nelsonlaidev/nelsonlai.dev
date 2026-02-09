@@ -43,13 +43,11 @@ function ProjectCard(props: ProjectCardProps) {
           <div className='text-muted-foreground'>{description}</div>
         </div>
         <div className='mt-4 flex flex-wrap gap-2'>
-          {techstack.map((label) => {
-            return (
-              <Badge key={label} variant='outline'>
-                {label}
-              </Badge>
-            )
-          })}
+          {techstack.map((label) => (
+            <Badge key={label} variant='outline'>
+              {label}
+            </Badge>
+          ))}
         </div>
       </div>
     </Link>
