@@ -41,12 +41,10 @@ function Marquee(props: MarqueeProps) {
       {Array.from({ length: 2 }).map((_index, number) => (
         <div
           key={number}
-          style={
-            {
-              '--marquee-gap': gap,
-              '--marquee-duration': `${duration}s`,
-            } as React.CSSProperties
-          }
+          style={{
+            '--marquee-gap': gap,
+            '--marquee-duration': `${duration}s`,
+          }}
           className={cn(
             'flex shrink-0 justify-around gap-(--marquee-gap)',
             direction === 'left' ? 'animate-marquee-x flex-row' : 'animate-marquee-y flex-col',
