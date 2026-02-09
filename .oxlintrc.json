@@ -53,6 +53,9 @@
     "no-continue": "off",
     // Allow variables without initialization
     "init-declarations": "off",
+    // Unnecessary in TypeScript
+    "no-undef": "off",
+    "no-undefined": "off",
     "func-style": ["error", "declaration"],
     "new-cap": ["error", { "capIsNew": false }],
     "capitalized-comments": [
@@ -145,8 +148,6 @@
     "max-params": "off",
     "no-duplicate-imports": "off",
     "no-inline-comments": "off",
-    "no-undefined": "off",
-    "no-undef": "off",
     "no-promise-executor-return": "off",
     "no-await-in-loop": "off",
     "no-bitwise": "off",
