@@ -64,6 +64,11 @@
     "no-inline-comments": "off",
     // Allow functions with many parameters
     "max-params": "off",
+    // Allow magic numbers
+    "no-magic-numbers": "off",
+    // Handled by other plugins
+    "sort-keys": "off",
+    "sort-imports": "off",
     "func-style": ["error", "declaration"],
     "new-cap": ["error", { "capIsNew": false }],
     "capitalized-comments": [
@@ -90,6 +95,7 @@
       }
     ],
     "no-duplicate-imports": ["error", { "allowSeparateTypeImports": true }],
+    "no-void": ["error", { "allowAsStatement": true }],
 
     // Prefer vitest/prefer-called-times
     "vitest/prefer-called-once": "off",
@@ -148,13 +154,8 @@
     // Allow spreading in maps
     "oxc/no-map-spread": "off",
 
-    // TODO: Re-enable these rules and fix the issues
-    "sort-keys": "off",
-    "sort-imports": "off",
-    "no-magic-numbers": "off",
+    // TODO: Re-enable these rules and fix the issues,
     "no-await-in-loop": "off",
-    "no-bitwise": "off",
-    "no-void": "off",
     "require-await": "off",
 
     "jsx-a11y/anchor-ambiguous-text": "off",

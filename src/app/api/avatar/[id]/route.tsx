@@ -14,6 +14,8 @@ export const runtime = 'edge'
 function djb2(str: string) {
   let hash = 5381
   for (let i = 0; i < str.length; i++) {
+    // Bitwise is allowed here for the hash function.
+    // oxlint-disable-next-line no-bitwise
     hash = (hash << 5) + hash + str.codePointAt(i)!
   }
   return hash
