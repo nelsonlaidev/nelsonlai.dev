@@ -24,11 +24,13 @@ function LocationCard() {
     let width = 0
 
     function onResize() {
-      if (canvasRef.current && (width = canvasRef.current.offsetWidth)) {
-        window.addEventListener('resize', onResize)
+      if (canvasRef.current) {
+        width = canvasRef.current.offsetWidth
       }
     }
+
     onResize()
+    window.addEventListener('resize', onResize)
 
     if (!canvasRef.current) return
 

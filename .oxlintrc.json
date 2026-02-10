@@ -184,7 +184,6 @@
     "typescript/no-unsafe-member-access": "off",
     "typescript/no-misused-promises": "off",
     "typescript/no-non-null-assertion": "off",
-    "typescript/prefer-optional-chain": "off",
     "typescript/explicit-function-return-type": "off",
     "typescript/explicit-module-boundary-types": "off",
     "typescript/no-import-type-side-effects": "off",
