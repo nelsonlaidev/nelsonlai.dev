@@ -156,7 +156,6 @@
 
     // TODO: Re-enable these rules and fix the issues,
     "no-await-in-loop": "off",
-    "require-await": "off",
 
     "jsx-a11y/anchor-ambiguous-text": "off",
 

@@ -29,7 +29,7 @@ const rateLimitMiddleware = base.middleware(async ({ path, context, next }) => {
   return next({ context })
 })
 
-const authMiddleware = base.middleware(async ({ context, next }) => {
+const authMiddleware = base.middleware(({ context, next }) => {
   if (!context.session?.user) {
     throw new ORPCError('UNAUTHORIZED')
   }
@@ -43,7 +43,7 @@ const authMiddleware = base.middleware(async ({ context, next }) => {
 
 export const publicProcedure = base.use(rateLimitMiddleware).use(delayMiddleware)
 export const protectedProcedure = publicProcedure.use(authMiddleware)
-export const adminProcedure = protectedProcedure.use(async ({ context, next }) => {
+export const adminProcedure = protectedProcedure.use(({ context, next }) => {
   if (context.session.user.role !== 'admin') {
     throw new ORPCError('FORBIDDEN')
   }
