@@ -53,7 +53,7 @@ async function processPageFile(fullPath: string, rootDir: string): Promise<strin
     return [`/${pathParts.join('/')}`]
   }
 
-  return await processDynamicPage(fullPath, pathParts)
+  return processDynamicPage(fullPath, pathParts)
 }
 
 function getPathParts(fullPath: string, rootDir: string): string[] {

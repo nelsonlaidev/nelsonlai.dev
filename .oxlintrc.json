@@ -179,13 +179,11 @@
     "react-perf/jsx-no-jsx-as-prop": "off",
     "react-perf/jsx-no-new-array-as-prop": "off",
 
-    // "typescript/promise-function-async": "off",
     "typescript/no-unsafe-return": "off",
     "typescript/no-unsafe-assignment": "off",
     "typescript/no-unsafe-member-access": "off",
     "typescript/no-misused-promises": "off",
     "typescript/no-non-null-assertion": "off",
-    "typescript/return-await": "off",
     "typescript/prefer-optional-chain": "off",
     "typescript/explicit-function-return-type": "off",
     "typescript/explicit-module-boundary-types": "off",
