@@ -25,29 +25,22 @@ describe('pathnames', () => {
 async function getAllPageRoutes(): Promise<string[]> {
   const rootDir = 'src/app'
 
-  const result: string[] = []
-  const queue: string[] = [rootDir]
+  const entries = await fs.readdir(rootDir, { recursive: true })
+  const pageFiles = entries
+    .filter((entry) => entry.endsWith('/page.tsx') || entry === 'page.tsx')
+    .map((entry) => path.join(rootDir, entry))
 
-  while (queue.length > 0) {
-    const currentDir = queue.pop()!
-    const entries = await fs.readdir(currentDir, { withFileTypes: true })
+  const rscResults = await Promise.all(
+    pageFiles.map(async (filePath) => ({
+      filePath,
+      isRsc: await isRSCPage(filePath),
+    })),
+  )
+  const nonRscPages = rscResults.filter((r) => !r.isRsc).map((r) => r.filePath)
 
-    for (const entry of entries) {
-      const fullPath = path.join(currentDir, entry.name)
+  const routeArrays = await Promise.all(nonRscPages.map((fullPath) => processPageFile(fullPath, rootDir)))
 
-      if (entry.isDirectory()) {
-        queue.push(fullPath)
-        continue
-      }
-
-      if (!entry.isFile() || entry.name !== 'page.tsx') continue
-      if (await isRSCPage(fullPath)) continue
-
-      const route = await processPageFile(fullPath, rootDir)
-      result.push(...route)
-    }
-  }
-
+  const result = routeArrays.flat()
   const uniqueRoutes = [...new Set(result)]
   return uniqueRoutes.filter((route) => !PROTECTED_ROUTES.includes(route))
 }

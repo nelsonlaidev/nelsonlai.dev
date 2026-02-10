@@ -13,26 +13,12 @@ const githubStats = publicProcedure.output(GithubStatsOutputSchema).handler(asyn
     }
   }
 
-  let stars = 0
-  let page = 1
-  const per_page = 100
+  const repos = await octokit.paginate('GET /users/{username}/repos', {
+    username: GITHUB_USERNAME,
+    per_page: 100,
+  })
 
-  for (;;) {
-    const response = await octokit.request('GET /users/{username}/repos', {
-      username: GITHUB_USERNAME,
-      per_page,
-      page,
-    })
-
-    const repos = response.data
-    if (repos.length === 0) break
-
-    for (const repo of repos) {
-      stars += repo.stargazers_count ?? 0
-    }
-
-    page += 1
-  }
+  const stars = repos.reduce((sum, repo) => sum + (repo.stargazers_count ?? 0), 0)
 
   const { data: user } = await octokit.request('GET /users/{username}', {
     username: GITHUB_USERNAME,

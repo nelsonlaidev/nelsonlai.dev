@@ -7,7 +7,6 @@ import { expect, test as setup } from '@playwright/test'
 
 import { db } from '@/db'
 import { posts } from '@/db/schemas'
-import { sleep } from '@/utils/sleep'
 
 import { TEST_POSTS } from '@/tests/e2e/fixtures/posts'
 import { makeDummyImage } from '@/tests/e2e/utils/make-dummy-image'
@@ -54,30 +53,29 @@ async function waitForContentBuild() {
 }
 
 setup('setup blog', async () => {
-  for (const post of TEST_POSTS) {
-    await db
-      .insert(posts)
-      .values({
-        slug: post.slug,
-        views: 0,
-        likes: 0,
-      })
-      .onConflictDoNothing({ target: posts.slug })
+  await Promise.all(
+    TEST_POSTS.map(async (post) => {
+      await db
+        .insert(posts)
+        .values({
+          slug: post.slug,
+          views: 0,
+          likes: 0,
+        })
+        .onConflictDoNothing({ target: posts.slug })
 
-    const testPostPath = path.join(process.cwd(), `src/content/blog/en/${post.slug}.mdx`)
-    const testPostCoverPath = path.join(process.cwd(), `public/images/blog/${post.slug}/cover.png`)
+      const testPostPath = path.join(process.cwd(), `src/content/blog/en/${post.slug}.mdx`)
+      const testPostCoverPath = path.join(process.cwd(), `public/images/blog/${post.slug}/cover.png`)
 
-    // For CI, we need to build the app, so we'll create the test files in CI workflow.
-    if (!env.CI) {
-      await fs.writeFile(testPostPath, createTestPost(post.title))
+      if (!env.CI) {
+        await fs.writeFile(testPostPath, createTestPost(post.title))
 
-      const coverDir = path.dirname(testPostCoverPath)
-      await fs.mkdir(coverDir, { recursive: true })
-      await makeDummyImage(testPostCoverPath)
-
-      await sleep(200) // Don't generate too fast
-    }
-  }
+        const coverDir = path.dirname(testPostCoverPath)
+        await fs.mkdir(coverDir, { recursive: true })
+        await makeDummyImage(testPostCoverPath)
+      }
+    }),
+  )
 
   await waitForContentBuild()
 })

@@ -155,7 +155,7 @@
     "oxc/no-map-spread": "off",
 
     // TODO: Re-enable these rules and fix the issues,
-    "no-await-in-loop": "off",
+    // "no-await-in-loop": "off",
 
     "jsx-a11y/anchor-ambiguous-text": "off",
 
