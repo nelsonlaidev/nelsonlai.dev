@@ -56,6 +56,14 @@
     // Unnecessary in TypeScript
     "no-undef": "off",
     "no-undefined": "off",
+    // Allow control statements without curly braces
+    "curly": "off",
+    // Allow short variable names
+    "id-length": "off",
+    // Allow inline comments
+    "no-inline-comments": "off",
+    // Allow functions with many parameters
+    "max-params": "off",
     "func-style": ["error", "declaration"],
     "new-cap": ["error", { "capIsNew": false }],
     "capitalized-comments": [
@@ -81,6 +89,7 @@
         }
       }
     ],
+    "no-duplicate-imports": ["error", { "allowSeparateTypeImports": true }],
 
     // Prefer vitest/prefer-called-times
     "vitest/prefer-called-once": "off",
@@ -143,12 +152,6 @@
     "sort-keys": "off",
     "sort-imports": "off",
     "no-magic-numbers": "off",
-    "id-length": "off",
-    "curly": "off",
-    "max-params": "off",
-    "no-duplicate-imports": "off",
-    "no-inline-comments": "off",
-    "no-promise-executor-return": "off",
     "no-await-in-loop": "off",
     "no-bitwise": "off",
     "no-void": "off",
