@@ -1,3 +1,6 @@
+// We sometimes need to use interface to extend existing types,
+// so we disable the rule for consistent type definitions in this file
+// oxlint-disable typescript/consistent-type-definitions
 import type messages from '@/i18n/messages/en.json'
 import type { routing } from '@/i18n/routing'
 

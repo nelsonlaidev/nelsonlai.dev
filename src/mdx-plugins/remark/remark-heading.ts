@@ -6,6 +6,8 @@ import Slugger from 'github-slugger'
 import { visit } from 'unist-util-visit'
 
 declare module 'mdast' {
+  // We need to use interface here to extend the existing Data interface from mdast
+  // oxlint-disable-next-line typescript/consistent-type-definitions
   interface Data {
     hProperties?: {
       id?: string

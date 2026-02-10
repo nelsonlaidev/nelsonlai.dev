@@ -154,11 +154,19 @@
     // Allow spreading in maps
     "oxc/no-map-spread": "off",
 
-    // TODO: Re-enable these rules and fix the issues,
-    // "no-await-in-loop": "off",
-
+    // Too restrictive
     "jsx-a11y/anchor-ambiguous-text": "off",
 
+    "typescript/array-type": [
+      "error",
+      {
+        "default": "array-simple",
+        "readonly": "array-simple"
+      }
+    ],
+    "typescript/consistent-type-definitions": ["error", "type"],
+
+    // TODO: Re-enable these rules and fix the issues,
     "jest/require-hook": "off",
 
     "react-perf/jsx-no-new-object-as-prop": "off",
@@ -166,8 +174,6 @@
     "react-perf/jsx-no-jsx-as-prop": "off",
     "react-perf/jsx-no-new-array-as-prop": "off",
 
-    "typescript/array-type": "off",
-    "typescript/consistent-type-definitions": "off",
     "typescript/consistent-indexed-object-style": "off",
     "typescript/strict-boolean-expressions": "off",
     "typescript/promise-function-async": "off",
