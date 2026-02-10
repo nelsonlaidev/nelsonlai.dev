@@ -52,7 +52,7 @@ async function generateIndexOGImage() {
   })
 }
 
-function generateBlogOGImage(locale: Locale, slugs: string[]) {
+async function generateBlogOGImage(locale: Locale, slugs: string[]) {
   const postSlug = slugs.at(-1)
   if (!postSlug) notFound()
 

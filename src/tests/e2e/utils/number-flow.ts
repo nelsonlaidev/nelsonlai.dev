@@ -1,6 +1,6 @@
 import type { Locator } from '@playwright/test'
 
-export function getNumberFlow(locator: Locator) {
+export async function getNumberFlow(locator: Locator) {
   return locator.evaluate((flow) => {
     // Internal properties are not typed.
     // @ts-expect-error - accessing internal property

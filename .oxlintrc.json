@@ -69,6 +69,8 @@
     // Handled by other plugins
     "sort-keys": "off",
     "sort-imports": "off",
+    // Handled by TSESLint
+    "require-await": "off",
     "func-style": ["error", "declaration"],
     "new-cap": ["error", { "capIsNew": false }],
     "capitalized-comments": [
@@ -165,6 +167,9 @@
       }
     ],
     "typescript/consistent-type-definitions": ["error", "type"],
+    // ======================================================================
+    "typescript/strict-boolean-expressions": "off", // To be enabled in the final
+    // ======================================================================
 
     // TODO: Re-enable these rules and fix the issues,
     "jest/require-hook": "off",
@@ -174,9 +179,7 @@
     "react-perf/jsx-no-jsx-as-prop": "off",
     "react-perf/jsx-no-new-array-as-prop": "off",
 
-    "typescript/consistent-indexed-object-style": "off",
-    "typescript/strict-boolean-expressions": "off",
-    "typescript/promise-function-async": "off",
+    // "typescript/promise-function-async": "off",
     "typescript/no-unsafe-return": "off",
     "typescript/no-unsafe-assignment": "off",
     "typescript/no-unsafe-member-access": "off",

@@ -20,7 +20,7 @@ type CreateBrowserContextOptions = {
   localStorage?: Array<{ name: string; value: string }>
 }
 
-export function createBrowserContext(browser: Browser, options: CreateBrowserContextOptions = {}) {
+export async function createBrowserContext(browser: Browser, options: CreateBrowserContextOptions = {}) {
   return browser.newContext({
     colorScheme: options.colorScheme ?? 'no-preference',
     storageState: {

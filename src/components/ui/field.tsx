@@ -188,6 +188,9 @@ type FieldErrorProps = React.ComponentProps<'div'> & {
 function FieldError(props: FieldErrorProps) {
   const { className, children, errors, ...rest } = props
 
+  // ReactNode includes Promise<AwaitedReactNode>,
+  // which triggers this rule incorrectly in Client Components.
+  // oxlint-disable-next-line typescript/promise-function-async
   const content = useMemo(() => {
     if (children) {
       return children

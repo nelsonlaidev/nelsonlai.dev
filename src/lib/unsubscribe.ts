@@ -23,7 +23,7 @@ type UnsubTokenResult<T> = { success: true; data: T } | { success: false }
 type UnsubPayload = z.infer<typeof UnsubPayloadSchema>
 type CommentReplyUnsubPayload = z.infer<typeof CommentReplyUnsubPayloadSchema>
 
-function generateUnsubToken(payload: UnsubPayload): Promise<string> {
+async function generateUnsubToken(payload: UnsubPayload): Promise<string> {
   if (!env.JWT_SECRET) {
     throw new Error('JWT_SECRET is not set')
   }
@@ -60,7 +60,7 @@ export async function verifyUnsubToken(token: string): Promise<UnsubTokenResult<
   }
 }
 
-export function generateCommentReplyUnsubToken(userId: string, commentId: string): Promise<string> {
+export async function generateCommentReplyUnsubToken(userId: string, commentId: string): Promise<string> {
   return generateUnsubToken({
     type: 'comment_reply',
     userId,

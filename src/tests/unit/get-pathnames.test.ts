@@ -38,7 +38,7 @@ async function getAllPageRoutes(): Promise<string[]> {
   )
   const nonRscPages = rscResults.filter((r) => !r.isRsc).map((r) => r.filePath)
 
-  const routeArrays = await Promise.all(nonRscPages.map((fullPath) => processPageFile(fullPath, rootDir)))
+  const routeArrays = await Promise.all(nonRscPages.map(async (fullPath) => processPageFile(fullPath, rootDir)))
 
   const result = routeArrays.flat()
   const uniqueRoutes = [...new Set(result)]
