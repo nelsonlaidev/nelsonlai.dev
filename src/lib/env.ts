@@ -59,7 +59,6 @@ export const env = createEnv({
   client: {
     // Required
     NEXT_PUBLIC_SITE_URL: z.url(),
-
     // Optional
     NEXT_PUBLIC_VERCEL_ENV: z.string().optional(),
     NEXT_PUBLIC_VERCEL_BRANCH_URL: z.string().optional(),
@@ -71,48 +70,9 @@ export const env = createEnv({
     NEXT_PUBLIC_POSTHOG_HOST: z.string().min(1).optional(),
   },
 
-  runtimeEnv: {
+  experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     CI: process.env.CI,
-
-    NEXT_RUNTIME: process.env.NEXT_RUNTIME,
-
-    DATABASE_URL: process.env.DATABASE_URL,
-
-    UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
-    UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
-
-    IP_ADDRESS_SALT: process.env.IP_ADDRESS_SALT,
-
-    BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
-
-    SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
-    SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
-    SPOTIFY_REFRESH_TOKEN: process.env.SPOTIFY_REFRESH_TOKEN,
-
-    GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
-    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
-    WAKATIME_API_KEY: process.env.WAKATIME_API_KEY,
-
-    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
-    GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
-
-    DISCORD_WEBHOOK_URL: process.env.DISCORD_WEBHOOK_URL,
-
-    RESEND_API_KEY: process.env.RESEND_API_KEY,
-    AUTHOR_EMAIL: process.env.AUTHOR_EMAIL,
-    JWT_SECRET: process.env.JWT_SECRET,
-
-    CLOUDFLARE_R2_ENDPOINT: process.env.CLOUDFLARE_R2_ENDPOINT,
-    CLOUDFLARE_R2_ACCESS_KEY_ID: process.env.CLOUDFLARE_R2_ACCESS_KEY_ID,
-    CLOUDFLARE_R2_SECRET_ACCESS_KEY: process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY,
-    CLOUDFLARE_R2_BUCKET_NAME: process.env.CLOUDFLARE_R2_BUCKET_NAME,
-    CLOUDFLARE_R2_PUBLIC_URL: process.env.CLOUDFLARE_R2_PUBLIC_URL,
-
-    POSTHOG_ENV_ID: process.env.POSTHOG_ENV_ID,
-    POSTHOG_API_KEY: process.env.POSTHOG_API_KEY,
 
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_VERCEL_ENV: process.env.NEXT_PUBLIC_VERCEL_ENV,
