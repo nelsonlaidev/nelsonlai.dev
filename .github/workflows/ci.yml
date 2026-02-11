@@ -34,7 +34,7 @@ jobs:
       - name: Run unit tests
         run: pnpm test:unit
 
-  eslint:
+  lint:
     name: ESLint
     runs-on: ubuntu-latest
     steps:
@@ -83,8 +83,8 @@ jobs:
       - name: Configure environment
         uses: ./.github/actions/setup
 
-      - name: Run Oxfmt format check
-        run: pnpm fmt:check
+      - name: Run Prettier format check
+        run: pnpm format:check
 
   knip:
     name: Knip

@@ -8,7 +8,7 @@
     "analyze": "next experimental-analyze",
     "build": "pnpm with-env next build",
     "build:mdx": "content-collections build",
-    "check": "pnpm lint && pnpm typecheck && pnpm fmt:check && pnpm knip && pnpm check:i18n && pnpm lint:spell",
+    "check": "pnpm lint && pnpm typecheck && pnpm format:check && pnpm knip && pnpm check:i18n && pnpm lint:spell",
     "check:i18n": "i18n-check -s en -l ./src/i18n/messages -u ./src -f next-intl",
     "clean": "rm -rf coverage .content-collections test-results playwright-report tsconfig.tsbuildinfo .next next-env.d.ts node_modules",
     "db:check": "pnpm with-env drizzle-kit check",
@@ -21,8 +21,8 @@
     "dev": "pnpm with-env next dev -p 3000",
     "email:dev": "email dev --port 3001 --dir ./src/emails/templates",
     "email:export": "email export --dir ./src/emails/templates",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "knip": "pnpm with-env knip",
     "lint": "eslint --max-warnings 0 .",
     "lint:fix": "eslint --fix --max-warnings 0 .",
@@ -123,6 +123,7 @@
     "@dotenvx/dotenvx": "1.52.0",
     "@lingual/i18n-check": "0.9.0-beta.1",
     "@nelsonlaidev/eslint-config": "3.0.1",
+    "@nelsonlaidev/prettier-config": "0.2.0",
     "@nelsonlaidev/typescript-config": "1.2.0",
     "@playwright/test": "1.58.0",
     "@react-email/preview-server": "5.2.5",
@@ -151,17 +152,18 @@
     "knip": "5.82.1",
     "lefthook": "2.0.16",
     "next-intl": "4.8.0",
-    "oxfmt": "0.28.0",
     "postcss-load-config": "6.0.1",
     "postgres": "3.4.8",
+    "prettier": "3.8.1",
+    "prettier-plugin-packagejson": "3.0.0",
     "schema-dts": "1.1.5",
     "tailwindcss": "4.1.18",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
     "vitest": "4.0.18"
   },
+  "packageManager": "pnpm@10.28.2",
   "engines": {
     "node": ">=24"
-  },
-  "packageManager": "pnpm@10.28.2"
+  }
 }

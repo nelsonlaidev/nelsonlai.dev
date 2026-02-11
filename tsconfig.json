@@ -15,6 +15,7 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "postcss.config.mjs"
+    "postcss.config.mjs",
+    "prettier.config.js"
   ]
 }
