@@ -1,7 +1,5 @@
 import type { Instrumentation } from 'next'
 
-import { env } from '@/lib/env'
-
 export function register() {
   // Do nothing
 }
@@ -9,7 +7,7 @@ export function register() {
 export async function onRequestError(...args: Parameters<Instrumentation.onRequestError>) {
   const [error, request] = args
 
-  if (env.NEXT_RUNTIME === 'nodejs' && env.NEXT_PUBLIC_POSTHOG_KEY) {
+  if (process.env.NEXT_RUNTIME === 'nodejs' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
     const { getPostHogServer } = await import('./lib/posthog')
     const posthog = getPostHogServer()
 
