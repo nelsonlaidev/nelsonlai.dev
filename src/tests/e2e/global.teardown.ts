@@ -21,10 +21,12 @@ teardown('teardown global', async () => {
   await db.delete(users).where(eq(users.id, TEST_UNIQUE_ID))
 
   // Delete test blog posts
-  for (const post of TEST_POSTS) {
-    await fs.rm(path.join(process.cwd(), 'src/content/blog/en', `${post.slug}.mdx`))
-    await fs.rm(path.join(process.cwd(), 'public/images/blog', post.slug), { recursive: true })
-  }
+  await Promise.all(
+    TEST_POSTS.map(async (post) => {
+      await fs.rm(path.join(process.cwd(), 'src/content/blog/en', `${post.slug}.mdx`))
+      await fs.rm(path.join(process.cwd(), 'public/images/blog', post.slug), { recursive: true })
+    }),
+  )
 
   // Clean cache
   await redis.flushall()

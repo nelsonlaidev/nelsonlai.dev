@@ -32,8 +32,8 @@ function isSpace(char: string) {
 function getWordBounds(value: string, pos: number) {
   let left = pos
   let right = pos
-  while (left > 0 && !isSpace(value[left - 1]!)) left--
-  while (right < value.length && !isSpace(value[right]!)) right++
+  while (left > 0 && !isSpace(value[left - 1]!)) left -= 1
+  while (right < value.length && !isSpace(value[right]!)) right += 1
   return { left, right }
 }
 
@@ -147,9 +147,9 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
   }
 
   function snapshotsEqual(a?: Snapshot, b?: Snapshot) {
-    return (
-      !!a && !!b && a.value === b.value && a.selectionStart === b.selectionStart && a.selectionEnd === b.selectionEnd
-    )
+    if (!a || !b) return false
+
+    return a.value === b.value && a.selectionStart === b.selectionStart && a.selectionEnd === b.selectionEnd
   }
 
   const pushUndo = useCallback((snap: Snapshot) => {
@@ -199,7 +199,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
     if (!textarea) return
 
     const marker = MARKER_MAP[type]
-    const value = textarea.value
+    const { value } = textarea
     let { selectionStart: start, selectionEnd: end } = textarea
     let keepCaretPos = false
 

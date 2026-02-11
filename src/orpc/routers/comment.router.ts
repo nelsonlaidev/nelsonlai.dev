@@ -27,7 +27,7 @@ const listComments = publicProcedure
   .input(ListCommentsInputSchema)
   .output(ListCommentsOutputSchema)
   .handler(async ({ input, context }) => {
-    const session = context.session
+    const { session } = context
 
     function getCursorFilter() {
       if (!input.cursor) return
@@ -105,7 +105,7 @@ const createComment = protectedProcedure
   .input(CreateCommentInputSchema)
   .output(CreateCommentOutputSchema)
   .handler(async ({ input, context }) => {
-    const user = context.session.user
+    const { user } = context.session
 
     const locale = await getLocale()
 

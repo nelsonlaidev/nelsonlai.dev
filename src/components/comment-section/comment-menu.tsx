@@ -66,12 +66,12 @@ function CommentMenu() {
         />
         <DropdownMenuContent align='end'>
           <DropdownMenuItem
-            onClick={() =>
+            onClick={() => {
               void copy({
                 text: `${globalThis.location.origin}/blog/${slug}?${commentQuery}`,
                 successMessage: t('success.link-copied'),
               })
-            }
+            }}
           >
             {t('blog.comments.copy-link')}
           </DropdownMenuItem>

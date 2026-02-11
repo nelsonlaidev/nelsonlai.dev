@@ -162,7 +162,7 @@ function FieldSeparator(props: FieldSeparatorProps) {
   return (
     <div
       data-slot='field-separator'
-      data-content={!!children}
+      data-content={Boolean(children)}
       className={cn('relative -my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2', className)}
       {...rest}
     >
@@ -197,7 +197,7 @@ function FieldError(props: FieldErrorProps) {
 
     const uniqueErrors = [...new Map(errors.map((error) => [error?.message, error])).values()]
 
-    if (uniqueErrors.length == 1) {
+    if (uniqueErrors.length === 1) {
       return uniqueErrors[0]?.message
     }
 

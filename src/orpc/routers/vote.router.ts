@@ -10,7 +10,7 @@ const createVote = protectedProcedure
   .input(CreateVoteInputSchema)
   .output(CreateVoteOutputSchema)
   .handler(async ({ input, context }) => {
-    const user = context.session.user
+    const { user } = context.session
 
     if (input.isLike === null) {
       const [vote] = await context.db

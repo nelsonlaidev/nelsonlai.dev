@@ -5,14 +5,6 @@ import type { VFile } from 'vfile'
 import Slugger from 'github-slugger'
 import { visit } from 'unist-util-visit'
 
-declare module 'mdast' {
-  interface Data {
-    hProperties?: {
-      id?: string
-    }
-  }
-}
-
 const slugger = new Slugger()
 
 function transformer(tree: Node, file: VFile) {

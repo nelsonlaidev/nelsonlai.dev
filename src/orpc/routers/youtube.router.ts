@@ -17,7 +17,7 @@ const youtubeStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(as
   const data = await response.json()
 
   const channel = data.items[0]
-  const statistics = channel.statistics
+  const { statistics } = channel
 
   return {
     subscribers: Number(statistics.subscriberCount),

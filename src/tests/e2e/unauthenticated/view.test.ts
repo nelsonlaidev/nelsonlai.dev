@@ -15,6 +15,8 @@ test.describe('views', () => {
     // Ensure the view count is incremented
     await page.reload()
 
-    expect(Number.parseInt(String(await getNumberFlow(viewCount)))).toBeGreaterThan(0)
+    const viewCountValue = String(await getNumberFlow(viewCount))
+
+    expect(Number.parseInt(viewCountValue, 10)).toBeGreaterThan(0)
   })
 })

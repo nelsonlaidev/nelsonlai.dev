@@ -20,7 +20,7 @@ export function useFormattedDate(date: DateInput, options: Options = {}): string
 
   useEffect(() => {
     const dateTime = new Date(date)
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    const { timeZone } = Intl.DateTimeFormat().resolvedOptions()
 
     const formatOptionsWithTimeZone = {
       ...formatOptions,
