@@ -243,8 +243,8 @@ importers:
         specifier: 0.9.0-beta.1
         version: 0.9.0-beta.1
       '@nelsonlaidev/eslint-config':
-        specifier: https://pkg.pr.new/@nelsonlaidev/eslint-config@8d1821e
-        version: https://pkg.pr.new/@nelsonlaidev/eslint-config@8d1821e(@types/eslint@9.6.1)(@typescript-eslint/utils@8.54.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(prettier@3.8.1)(tailwindcss@4.1.18)(typescript@5.9.3)(vitest@4.0.18)
+        specifier: https://pkg.pr.new/@nelsonlaidev/eslint-config@95b9662
+        version: https://pkg.pr.new/@nelsonlaidev/eslint-config@95b9662(@types/eslint@9.6.1)(@typescript-eslint/utils@8.54.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(prettier@3.8.1)(tailwindcss@4.1.18)(typescript@5.9.3)(vitest@4.0.18)
       '@nelsonlaidev/prettier-config':
         specifier: 0.2.0
         version: 0.2.0(prettier-plugin-packagejson@3.0.0(prettier@3.8.1))(prettier@3.8.1)
@@ -2290,11 +2290,11 @@ packages:
     resolution:
       { integrity: sha512-p64ah1M1ld8xjWv3qbvFwHiFVWrq1yFvV4f7w+mzaqiR4IlSgkqhcRdHwsGgomwzBH51sRY4NEowLxnaBjcW/A== }
 
-  '@nelsonlaidev/eslint-config@https://pkg.pr.new/@nelsonlaidev/eslint-config@8d1821e':
+  '@nelsonlaidev/eslint-config@https://pkg.pr.new/@nelsonlaidev/eslint-config@95b9662':
     resolution:
       {
-        integrity: sha512-Vb4RbBa0gY2aoUV9pcPboN720ZTPwl/izvwWqkOLmjt2HJb0hfYgKw87OdAlMn8FMur2OJIyH6wY3DP+LHJnrQ==,
-        tarball: https://pkg.pr.new/@nelsonlaidev/eslint-config@8d1821e,
+        integrity: sha512-Z3k1hSRs2vZzyG/2Byu6DurxfOP5xmdTiifgMdlBUzHWwj9w6MHUEpF4e8yPeOfwcSpqJIRu4ONDIkUdkYHRlA==,
+        tarball: https://pkg.pr.new/@nelsonlaidev/eslint-config@95b9662,
       }
     version: 3.0.1
     peerDependencies:
@@ -11787,7 +11787,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@nelsonlaidev/eslint-config@https://pkg.pr.new/@nelsonlaidev/eslint-config@8d1821e(@types/eslint@9.6.1)(@typescript-eslint/utils@8.54.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(prettier@3.8.1)(tailwindcss@4.1.18)(typescript@5.9.3)(vitest@4.0.18)':
+  '@nelsonlaidev/eslint-config@https://pkg.pr.new/@nelsonlaidev/eslint-config@95b9662(@types/eslint@9.6.1)(@typescript-eslint/utils@8.54.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(prettier@3.8.1)(tailwindcss@4.1.18)(typescript@5.9.3)(vitest@4.0.18)':
     dependencies:
       '@eslint-community/eslint-plugin-eslint-comments': 4.6.0(eslint@9.39.2(jiti@2.6.1))
       '@eslint-react/eslint-plugin': 2.8.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)

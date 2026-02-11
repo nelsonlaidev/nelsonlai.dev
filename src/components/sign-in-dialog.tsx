@@ -90,7 +90,7 @@ function SignInDialog() {
         <div className='my-6 flex flex-col gap-4'>
           <Button
             className='relative h-10 gap-3 rounded-xl font-semibold'
-            onClick={() => handleSignIn('github')}
+            onClick={async () => handleSignIn('github')}
             disabled={isPending}
             data-testid='github-sign-in-button'
           >
@@ -101,7 +101,7 @@ function SignInDialog() {
           <Button
             className='relative h-10 gap-3 rounded-xl border font-semibold'
             variant='ghost'
-            onClick={() => handleSignIn('google')}
+            onClick={async () => handleSignIn('google')}
             disabled={isPending}
           >
             {isPending ? <Spinner /> : <GoogleIcon />}
