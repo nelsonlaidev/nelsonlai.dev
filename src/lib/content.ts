@@ -5,18 +5,14 @@ import { allPages, allPosts, allProjects } from 'content-collections'
 export function getLatestPosts(locale: string, limit: number = allPosts.length) {
   return allPosts
     .filter((post) => post.locale === locale)
-    .toSorted((a, b) => {
-      return new Date(b.date).getTime() - new Date(a.date).getTime()
-    })
+    .toSorted((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, limit)
 }
 
 export function getLatestProjects(locale: string, limit: number = allProjects.length) {
   return allProjects
     .filter((project) => project.locale === locale)
-    .toSorted((a, b) => {
-      return new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime()
-    })
+    .toSorted((a, b) => new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime())
     .slice(0, limit)
 }
 
