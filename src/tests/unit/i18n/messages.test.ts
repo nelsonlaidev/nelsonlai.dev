@@ -7,6 +7,8 @@ describe('i18n messages', () => {
   const nonDefaultLocales = routing.locales.filter((locale) => locale !== routing.defaultLocale)
 
   test.each(nonDefaultLocales)('%s matches keys with default locale', async (locale) => {
+    expect.assertions(2)
+
     const defaultMessages = await loadMessages(routing.defaultLocale)
     const defaultKeys = flattenKeys(defaultMessages)
 

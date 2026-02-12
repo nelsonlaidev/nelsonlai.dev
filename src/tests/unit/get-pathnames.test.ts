@@ -12,6 +12,8 @@ type PageModule = {
 
 describe('pathnames', () => {
   test('returns all page routes', async () => {
+    expect.assertions(1)
+
     const pathnames = getPathnames()
     const allPageRoutes = await getAllPageRoutes()
 
