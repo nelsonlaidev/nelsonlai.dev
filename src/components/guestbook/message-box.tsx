@@ -44,7 +44,7 @@ function MessageBox(props: MessageBoxProps) {
 
   const { mutate: createMessage, isPending: isCreating } = useCreateMessage(() => {
     form.reset()
-    toast.success(t('success.message-created'))
+    toast.success(t('success.message-created'), { testId: 'guestbook-message-created-toast' })
   })
 
   function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {

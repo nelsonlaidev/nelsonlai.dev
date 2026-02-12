@@ -30,7 +30,7 @@ function CommentMenu() {
   const t = useTranslations()
 
   const { mutate: deleteComment, isPending: isDeleting } = useDeletePostComment({ slug }, () => {
-    toast.success(t('success.comment-deleted'))
+    toast.success(t('success.comment-deleted'), { testId: 'comment-deleted-toast' })
   })
 
   const {

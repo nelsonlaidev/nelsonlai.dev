@@ -3,6 +3,7 @@ import test, { expect } from '@playwright/test'
 
 import { db } from '@/db'
 import { comments } from '@/db/schemas'
+import en from '@/i18n/messages/en.json' assert { type: 'json' }
 
 import { TEST_UNIQUE_ID } from '../fixtures/auth'
 import { getNumberFlow } from '../utils/number-flow'
@@ -17,7 +18,7 @@ test.describe('comment page', () => {
     await page.getByTestId('comment-submit-button').click()
 
     await expect(page.getByTestId('comments-list').getByText(commentText)).toBeVisible()
-    await expect(page.locator('li[data-sonner-toast]')).toContainText('Comment posted')
+    await expect(page.getByTestId('comment-posted-toast')).toContainText(en.success['comment-posted'])
 
     // Comment count should be updated in the blog header and comment header
     expect(await getNumberFlow(page.getByTestId('comment-count'))).toBe('1')
@@ -47,7 +48,7 @@ test.describe('comment page', () => {
     await deleteDialog.getByTestId('comment-dialog-delete-button').click()
 
     await expect(commentBlock).toBeHidden()
-    await expect(page.locator('li[data-sonner-toast]')).toContainText('Deleted a comment')
+    await expect(page.getByTestId('comment-deleted-toast')).toContainText(en.success['comment-deleted'])
 
     // Comment count should be updated in the blog header and comment header
     expect(await getNumberFlow(page.getByTestId('comment-count'))).toBe('0')
@@ -73,7 +74,7 @@ test.describe('comment page', () => {
 
     await page.getByTestId('comment-textarea-reply').fill(replyText)
     await page.getByTestId('comment-submit-reply-button').click()
-    await expect(page.locator('li[data-sonner-toast]')).toContainText('Reply posted')
+    await expect(page.getByTestId('comment-reply-posted-toast')).toContainText(en.success['reply-posted'])
 
     const expandButton = parentCommentBlock.getByTestId('comment-replies-expand-button')
     await expect(expandButton.getByTestId('comment-reply-count')).toContainText('1')
@@ -124,7 +125,7 @@ test.describe('comment page', () => {
     await deleteDialog.getByTestId('comment-dialog-delete-button').click()
 
     await expect(replyCommentBlock).toBeHidden()
-    await expect(page.locator('li[data-sonner-toast]')).toContainText('Deleted a comment')
+    await expect(page.getByTestId('comment-deleted-toast')).toContainText(en.success['comment-deleted'])
 
     // Reply count should be updated in the comment header
     expect(await getNumberFlow(page.getByTestId('comment-count'))).toBe('1')
