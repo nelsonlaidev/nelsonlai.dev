@@ -113,7 +113,7 @@ describe('sitemap', () => {
 
     for (const entry of allDefaultEntries) {
       for (const locale of nonDefaultLocales) {
-        expect(entry.url).not.toContain('/' + locale + '/')
+        expect(entry.url).not.toContain(`/${locale}/`)
       }
     }
   })

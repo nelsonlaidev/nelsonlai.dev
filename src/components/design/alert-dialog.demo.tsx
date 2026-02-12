@@ -16,6 +16,7 @@ import {
 } from '../ui/alert-dialog'
 import { Button } from '../ui/button'
 import { Demo, DemoItem } from '../ui/demo'
+import { Link } from '../ui/link'
 
 function AlertDialogDemo() {
   return (
@@ -121,8 +122,8 @@ function AlertDialogDestructive() {
             </AlertDialogMedia>
             <AlertDialogTitle>Delete chat?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete this chat conversation. View <a href='/settings'>Settings</a> delete any
-              memories saved during this chat.
+              This will permanently delete this chat conversation. View <Link href='/settings'>Settings</Link> delete
+              any memories saved during this chat.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
