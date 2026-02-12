@@ -74,7 +74,7 @@ async function transformer(tree: Root) {
     if (inlineCode?.type !== 'element') return
 
     // Set the color by scope if language is not specified
-    // @example `myFunction{:.entity.name.function}`
+    // For example: `myFunction{:.entity.name.function}`
     if (!isLang) {
       const colors = getScopeColors(highlighter, lang.slice(1))
       const spanNode = inlineCode.children[0]

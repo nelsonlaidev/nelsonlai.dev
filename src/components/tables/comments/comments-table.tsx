@@ -11,8 +11,9 @@ type CommentsTableProps = {
 function CommentsTable(props: CommentsTableProps) {
   const { comments } = props
 
+  // @tanstack/react-table is incompatible with React Compiler
   // See https://github.com/TanStack/table/issues/5567
-  // eslint-disable-next-line react-hooks/incompatible-library -- @tanstack/react-table is compatible with React Compiler
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data: comments,
     columns,
