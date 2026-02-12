@@ -8,7 +8,6 @@ function resolve(path: string) {
 export default defineConfig({
   plugins: [react()],
   test: {
-    globals: true,
     environment: 'jsdom',
     include: ['src/tests/unit/**/*.test.{ts,tsx}'],
     exclude: ['**/node_modules/**'],
