@@ -18,6 +18,11 @@ export default defineConfig(
     vitest: {
       files: [`src/tests/unit/**/*.test.${GLOB_SRC_EXT}`],
     },
+    importX: {
+      noNamespace: {
+        ignore: ['./schemas'],
+      },
+    },
   },
   {
     rules: {

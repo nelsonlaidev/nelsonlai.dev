@@ -2,7 +2,7 @@
 
 import type { SessionListOutput } from '@/orpc/client'
 
-import Bowser from 'bowser'
+import { parse } from 'bowser'
 import { BotIcon, InfoIcon, MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
@@ -70,7 +70,7 @@ function Session(props: SessionProps) {
   const { refetch: refetchSession } = useSession()
   const router = useRouter()
 
-  const { browser, os, platform } = Bowser.parse(session.userAgent ?? '')
+  const { browser, os, platform } = parse(session.userAgent ?? '')
 
   const platformType = (platform.type ?? 'desktop') as keyof typeof PLATFORM_ICONS
   const PlatformIcon = PLATFORM_ICONS[platformType]
