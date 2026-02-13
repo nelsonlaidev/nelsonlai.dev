@@ -32,8 +32,8 @@ function isSpace(char: string) {
 function getWordBounds(value: string, pos: number) {
   let left = pos
   let right = pos
-  while (left > 0 && !isSpace(value[left - 1]!)) left -= 1
-  while (right < value.length && !isSpace(value[right]!)) right += 1
+  while (left > 0 && !isSpace(value[left - 1] ?? ' ')) left -= 1
+  while (right < value.length && !isSpace(value[right] ?? ' ')) right += 1
   return { left, right }
 }
 
@@ -176,20 +176,29 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
 
   const undo = useCallback(() => {
     const ta = textareaRef.current
-    if (!ta) return
     const stack = undoStack.current
-    if (stack.length <= 1) return
-    const current = stack.pop()!
+
+    if (!ta || stack.length <= 1) return
+
+    const current = stack.pop()
+    if (!current) return
+
     redoStack.current.push(current)
-    const target = stack.at(-1)!
-    applySnapshot(ta, target)
+
+    const target = stack.at(-1)
+
+    if (target) {
+      applySnapshot(ta, target)
+    }
   }, [])
 
   const redo = useCallback(() => {
     const ta = textareaRef.current
-    if (!ta) return
-    if (redoStack.current.length === 0) return
-    const next = redoStack.current.pop()!
+
+    const next = redoStack.current.pop()
+
+    if (!ta || !next) return
+
     pushUndo(next)
     applySnapshot(ta, next)
   }, [pushUndo])

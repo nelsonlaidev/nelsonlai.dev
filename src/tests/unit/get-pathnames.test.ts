@@ -84,9 +84,16 @@ async function processDynamicPage(fullPath: string, pathParts: string[]): Promis
 
     const resolved = pathParts
       .map((part) => {
+        // Check for dynamic segment like [id]
         if (part.startsWith('[') && part.endsWith(']')) {
           const key = part.slice(1, -1)
-          return params[key]!
+          const value = params[key]
+
+          if (value === undefined) {
+            throw new Error(`generateStaticParams in ${fullPath} is missing the required parameter: "${key}"`)
+          }
+
+          return value
         }
         return part
       })

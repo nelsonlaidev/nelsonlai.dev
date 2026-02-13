@@ -15,7 +15,8 @@ function djb2(str: string) {
   let hash = 5381
   for (let i = 0; i < str.length; i++) {
     // Bitwise is allowed here for the hash function.
-    // eslint-disable-next-line no-bitwise
+    // `i` is always in range due to the loop condition, so `codePointAt` will never return `undefined`.
+    // eslint-disable-next-line no-bitwise, @typescript-eslint/no-non-null-assertion
     hash = (hash << 5) + hash + str.codePointAt(i)!
   }
   return hash
