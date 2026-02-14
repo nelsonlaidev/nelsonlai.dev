@@ -35,8 +35,6 @@ const updateSettings = protectedProcedure
       })
       .returning()
 
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-
     if (!result) {
       throw new ORPCError('INTERNAL_SERVER_ERROR', { message: 'Failed to update settings' })
     }

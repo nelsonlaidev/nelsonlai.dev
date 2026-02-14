@@ -600,9 +600,7 @@ function SidebarMenuSkeleton(props: SidebarMenuSkeletonProps) {
   const { className, showIcon = false, ...rest } = props
 
   // Random width between 50 to 90%.
-  const [width] = useState(() => {
-    return `${Math.floor(Math.random() * 40) + 50}%`
-  })
+  const [width] = useState(() => `${Math.floor(Math.random() * 40) + 50}%`)
 
   return (
     <div

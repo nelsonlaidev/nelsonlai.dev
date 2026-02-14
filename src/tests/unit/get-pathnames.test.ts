@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-import { describe, expect, it } from 'vitest'
+import { describe, expect, test } from 'vitest'
 
 import { getPathnames, PROTECTED_ROUTES } from '@/utils/get-pathnames'
 
@@ -11,43 +11,38 @@ type PageModule = {
 }
 
 describe('pathnames', () => {
-  it('returns all page routes', async () => {
+  test('returns all page routes', async () => {
+    expect.assertions(1)
+
     const pathnames = getPathnames()
     const allPageRoutes = await getAllPageRoutes()
 
     const sortedPathnames = [...pathnames].toSorted((a, b) => a.localeCompare(b))
     const sortedAllPageRoutes = [...allPageRoutes].toSorted((a, b) => a.localeCompare(b))
 
-    expect(sortedPathnames).toEqual(sortedAllPageRoutes)
+    expect(sortedPathnames).toStrictEqual(sortedAllPageRoutes)
   })
 })
 
 async function getAllPageRoutes(): Promise<string[]> {
   const rootDir = 'src/app'
 
-  const result: string[] = []
-  const queue: string[] = [rootDir]
+  const entries = await fs.readdir(rootDir, { recursive: true })
+  const pageFiles = entries
+    .filter((entry) => entry.endsWith('/page.tsx') || entry === 'page.tsx')
+    .map((entry) => path.join(rootDir, entry))
 
-  while (queue.length > 0) {
-    const currentDir = queue.pop()!
-    const entries = await fs.readdir(currentDir, { withFileTypes: true })
+  const rscResults = await Promise.all(
+    pageFiles.map(async (filePath) => ({
+      filePath,
+      isRsc: await isRSCPage(filePath),
+    })),
+  )
+  const nonRscPages = rscResults.filter((r) => !r.isRsc).map((r) => r.filePath)
 
-    for (const entry of entries) {
-      const fullPath = path.join(currentDir, entry.name)
+  const routeArrays = await Promise.all(nonRscPages.map(async (fullPath) => processPageFile(fullPath, rootDir)))
 
-      if (entry.isDirectory()) {
-        queue.push(fullPath)
-        continue
-      }
-
-      if (!entry.isFile() || entry.name !== 'page.tsx') continue
-      if (await isRSCPage(fullPath)) continue
-
-      const route = await processPageFile(fullPath, rootDir)
-      result.push(...route)
-    }
-  }
-
+  const result = routeArrays.flat()
   const uniqueRoutes = [...new Set(result)]
   return uniqueRoutes.filter((route) => !PROTECTED_ROUTES.includes(route))
 }
@@ -57,10 +52,10 @@ async function processPageFile(fullPath: string, rootDir: string): Promise<strin
   const hasDynamic = pathParts.some((part) => part.startsWith('[') && part.endsWith(']'))
 
   if (!hasDynamic) {
-    return ['/' + pathParts.join('/')]
+    return [`/${pathParts.join('/')}`]
   }
 
-  return await processDynamicPage(fullPath, pathParts)
+  return processDynamicPage(fullPath, pathParts)
 }
 
 function getPathParts(fullPath: string, rootDir: string): string[] {
@@ -89,15 +84,22 @@ async function processDynamicPage(fullPath: string, pathParts: string[]): Promis
 
     const resolved = pathParts
       .map((part) => {
+        // Check for dynamic segment like [id]
         if (part.startsWith('[') && part.endsWith(']')) {
           const key = part.slice(1, -1)
-          return params[key]!
+          const value = params[key]
+
+          if (value === undefined) {
+            throw new Error(`generateStaticParams in ${fullPath} is missing the required parameter: "${key}"`)
+          }
+
+          return value
         }
         return part
       })
       .join('/')
 
-    return '/' + resolved
+    return `/${resolved}`
   })
 }
 

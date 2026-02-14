@@ -10,13 +10,18 @@ export default defineConfig(
       },
     },
     playwright: {
-      files: [`./src/tests/e2e/**/*.test.${GLOB_SRC_EXT}`],
+      files: [`src/tests/e2e/**/*.test.${GLOB_SRC_EXT}`],
       expectExpect: {
         assertFunctionNames: ['a11y', 'checkAppliedTheme', 'checkStoredTheme'],
       },
     },
     vitest: {
-      files: [`./src/tests/unit/**/*.test.${GLOB_SRC_EXT}`],
+      files: [`src/tests/unit/**/*.test.${GLOB_SRC_EXT}`],
+    },
+    importX: {
+      noNamespace: {
+        ignore: ['./schemas'],
+      },
     },
   },
   {

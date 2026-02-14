@@ -12,7 +12,7 @@ export function useUpdateSettings(onSuccess?: () => void) {
   return useMutation(
     orpc.settings.update.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: orpc.settings.get.key() })
+        void queryClient.invalidateQueries({ queryKey: orpc.settings.get.key() })
         onSuccess?.()
       },
     }),

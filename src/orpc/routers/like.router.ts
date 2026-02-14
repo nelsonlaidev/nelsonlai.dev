@@ -22,13 +22,11 @@ const countLike = publicProcedure
     const ip = getIp(context.headers)
     const anonKey = getAnonKey(ip)
 
-    // Check cache for both global and user-specific like counts
     const [cachedLikes, cachedUserLikes] = await Promise.all([
       cache.posts.likes.get(input.slug),
       cache.posts.userLikes.get(`${input.slug}:${anonKey}`),
     ])
 
-    // If both are cached, return immediately
     if (cachedLikes !== null && cachedUserLikes !== null) {
       return {
         likes: cachedLikes,
@@ -36,29 +34,32 @@ const countLike = publicProcedure
       }
     }
 
-    // Fetch missing data from DB
-    const [[post], [user]] = await Promise.all([
+    const [dbLikes, dbUserLikes] = await Promise.all([
       cachedLikes === null
-        ? context.db.select({ likes: posts.likes }).from(posts).where(eq(posts.slug, input.slug))
-        : Promise.resolve([null]),
+        ? context.db
+            .select({ likes: posts.likes })
+            .from(posts)
+            .where(eq(posts.slug, input.slug))
+            .then((rows) => {
+              const row = rows[0]
+              if (!row) {
+                throw new ORPCError('NOT_FOUND', { message: 'Post not found' })
+              }
+              return row.likes
+            })
+        : Promise.resolve(cachedLikes),
       cachedUserLikes === null
         ? context.db
             .select({ likeCount: postLikes.likeCount })
             .from(postLikes)
             .where(and(eq(postLikes.postId, input.slug), eq(postLikes.anonKey, anonKey)))
-        : Promise.resolve([null]),
+            .then((rows) => rows[0]?.likeCount ?? 0)
+        : Promise.resolve(cachedUserLikes),
     ])
 
-    if (cachedLikes === null && !post) {
-      throw new ORPCError('NOT_FOUND', {
-        message: 'Post not found',
-      })
-    }
+    const likes = cachedLikes ?? dbLikes
+    const currentUserLikes = cachedUserLikes ?? dbUserLikes
 
-    const likes = cachedLikes ?? post!.likes
-    const currentUserLikes = cachedUserLikes ?? user?.likeCount ?? 0
-
-    // Cache any missing values
     const cachePromises = []
     if (cachedLikes === null) {
       cachePromises.push(cache.posts.likes.set(input.slug, likes))

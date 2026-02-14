@@ -5,6 +5,7 @@ import { InfoIcon, SaveIcon } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Demo, DemoItem } from '../ui/demo'
 import { Kbd } from '../ui/kbd'
+import { Link } from '../ui/link'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 
 function TooltipDemo() {
@@ -149,7 +150,7 @@ function TooltipOnLink() {
       <Tooltip>
         <TooltipTrigger
           render={
-            <a
+            <Link
               href='/design#'
               className='w-fit text-sm text-primary underline-offset-4 hover:underline'
               onClick={(e) => {
@@ -157,7 +158,7 @@ function TooltipOnLink() {
               }}
             >
               Learn more
-            </a>
+            </Link>
           }
         />
         <TooltipContent>

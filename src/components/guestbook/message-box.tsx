@@ -44,12 +44,12 @@ function MessageBox(props: MessageBoxProps) {
 
   const { mutate: createMessage, isPending: isCreating } = useCreateMessage(() => {
     form.reset()
-    toast.success(t('success.message-created'))
+    toast.success(t('success.message-created'), { testId: 'guestbook-message-created-toast' })
   })
 
   function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
-    form.handleSubmit()
+    void form.handleSubmit()
   }
 
   const defaultImage = getDefaultImage(user.id)

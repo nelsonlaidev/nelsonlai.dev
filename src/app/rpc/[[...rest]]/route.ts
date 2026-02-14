@@ -8,8 +8,8 @@ import { router } from '@/orpc/routers'
 
 const handler = new RPCHandler(router, {
   interceptors: [
-    onError((error) => {
-      console.error(error)
+    onError((e) => {
+      console.error(e)
     }),
   ],
 })

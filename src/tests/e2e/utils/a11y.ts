@@ -13,10 +13,10 @@ export async function a11y(options: Options) {
   const { violations } = await new AxeBuilder({ page }).disableRules(['color-contrast']).withTags(A11Y_TAGS).analyze()
 
   if (violations.length > 0) {
-    console.log(
+    console.warn(
       violations
-        .map((violation) => {
-          return `
+        .map(
+          (violation) => `
 ==================================================
 Description: ${violation.description}
 Impact: ${violation.impact}
@@ -25,8 +25,8 @@ Help URL: ${violation.helpUrl}
 Failure Summary: ${violation.nodes[0]?.failureSummary}
 HTML: ${violation.nodes[0]?.html}
 ==================================================
-      `
-        })
+      `,
+        )
         .join('\n'),
     )
   }

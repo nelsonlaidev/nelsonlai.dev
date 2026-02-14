@@ -1,20 +1,25 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, test } from 'vitest'
 
 import sitemap from '@/app/sitemap'
 import { routing } from '@/i18n/routing'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 import { getPathnames } from '@/utils/get-pathnames'
 
-describe('sitemap', () => {
-  it('generates sitemap entries for all locales and pathnames', () => {
+describe(sitemap, () => {
+  test('generates sitemap entries for all locales and pathnames', () => {
+    expect.assertions(1)
+
     const pathnames = getPathnames()
     const result = sitemap()
 
     const expectedEntryCount = routing.locales.length * pathnames.length
+
     expect(result).toHaveLength(expectedEntryCount)
   })
 
-  it('includes all required properties for each entry', () => {
+  test('includes all required properties for each entry', () => {
+    expect.hasAssertions()
+
     const result = sitemap()
 
     for (const entry of result) {
@@ -25,7 +30,9 @@ describe('sitemap', () => {
     }
   })
 
-  it('generates correct URLs for each locale and pathname combination', () => {
+  test('generates correct URLs for each locale and pathname combination', () => {
+    expect.hasAssertions()
+
     const pathnames = getPathnames()
     const result = sitemap()
 
@@ -40,7 +47,9 @@ describe('sitemap', () => {
     }
   })
 
-  it('generates URLs with correct locale prefix', () => {
+  test('generates URLs with correct locale prefix', () => {
+    expect.hasAssertions()
+
     const pathnames = getPathnames()
     const result = sitemap()
 
@@ -62,7 +71,9 @@ describe('sitemap', () => {
     }
   })
 
-  it('covers all pathnames for each locale', () => {
+  test('covers all pathnames for each locale', () => {
+    expect.hasAssertions()
+
     const pathnames = getPathnames()
     const result = sitemap()
 
@@ -85,7 +96,9 @@ describe('sitemap', () => {
     }
   })
 
-  it('generates unique URLs', () => {
+  test('generates unique URLs', () => {
+    expect.assertions(1)
+
     const result = sitemap()
     const urls = result.map((entry) => entry.url)
     const uniqueUrls = new Set(urls)
@@ -93,7 +106,9 @@ describe('sitemap', () => {
     expect(uniqueUrls.size).toBe(urls.length)
   })
 
-  it('uses default locale without prefix in URLs', () => {
+  test('uses default locale without prefix in URLs', () => {
+    expect.hasAssertions()
+
     const pathnames = getPathnames()
     const result = sitemap()
 
@@ -113,7 +128,7 @@ describe('sitemap', () => {
 
     for (const entry of allDefaultEntries) {
       for (const locale of nonDefaultLocales) {
-        expect(entry.url).not.toContain('/' + locale + '/')
+        expect(entry.url).not.toContain(`/${locale}/`)
       }
     }
   })

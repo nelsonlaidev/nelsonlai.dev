@@ -30,7 +30,7 @@ function CommentMenu() {
   const t = useTranslations()
 
   const { mutate: deleteComment, isPending: isDeleting } = useDeletePostComment({ slug }, () => {
-    toast.success(t('success.comment-deleted'))
+    toast.success(t('success.comment-deleted'), { testId: 'comment-deleted-toast' })
   })
 
   const {
@@ -66,12 +66,12 @@ function CommentMenu() {
         />
         <DropdownMenuContent align='end'>
           <DropdownMenuItem
-            onClick={() =>
+            onClick={() => {
               void copy({
                 text: `${globalThis.location.origin}/blog/${slug}?${commentQuery}`,
                 successMessage: t('success.link-copied'),
               })
-            }
+            }}
           >
             {t('blog.comments.copy-link')}
           </DropdownMenuItem>

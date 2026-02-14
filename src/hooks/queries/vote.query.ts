@@ -8,7 +8,7 @@ export function useCreateVote(input: CommentListInput) {
   return useMutation(
     orpc.vote.create.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: orpc.comment.list.key({ input }) })
+        void queryClient.invalidateQueries({ queryKey: orpc.comment.list.key({ input }) })
       },
     }),
   )

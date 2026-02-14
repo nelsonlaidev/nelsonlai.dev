@@ -26,7 +26,7 @@ export function withPostHog(nextConfig: Promise<NextConfig>): Promise<NextConfig
     return nextConfig
   }
 
-  return withPostHogConfig(() => nextConfig, {
+  return withPostHogConfig(async () => nextConfig, {
     personalApiKey: env.POSTHOG_API_KEY,
     envId: env.POSTHOG_ENV_ID,
     host: env.NEXT_PUBLIC_POSTHOG_HOST,

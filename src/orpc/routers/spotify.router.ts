@@ -1,9 +1,34 @@
 import { Buffer } from 'node:buffer'
 
+import * as z from 'zod'
+
 import { env } from '@/lib/env'
+import { TraceableError } from '@/lib/errors'
 
 import { publicProcedure } from '../procedures'
 import { SpotifyStatsOutputSchema } from '../schemas/spotify.schema'
+
+const AccessTokenResponseSchema = z.object({
+  access_token: z.string(),
+})
+
+const NowPlayingResponseSchema = z.object({
+  is_playing: z.boolean(),
+  item: z
+    .object({
+      type: z.string(),
+      name: z.string(),
+      external_urls: z.object({
+        spotify: z.string(),
+      }),
+      artists: z.array(
+        z.object({
+          name: z.string(),
+        }),
+      ),
+    })
+    .nullable(),
+})
 
 const CLIENT_ID = env.SPOTIFY_CLIENT_ID
 const CLIENT_SECRET = env.SPOTIFY_CLIENT_SECRET
@@ -35,9 +60,19 @@ async function getAccessToken() {
     }),
   })
 
-  const data = await response.json()
+  if (!response.ok) {
+    const body = await response.text()
+    throw new TraceableError('Spotify token API error', {
+      status: response.status,
+      statusText: response.statusText,
+      body,
+    })
+  }
 
-  return data.access_token as string
+  const rawData = await response.json()
+  const data = AccessTokenResponseSchema.parse(rawData)
+
+  return data.access_token
 }
 
 const spotifyStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(async () => {
@@ -57,7 +92,17 @@ const spotifyStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(as
     return EMPTY_RESPONSE
   }
 
-  const song: SpotifyApi.CurrentlyPlayingResponse = await response.json()
+  if (!response.ok) {
+    const body = await response.text()
+    throw new TraceableError('Spotify now playing API error', {
+      status: response.status,
+      statusText: response.statusText,
+      body,
+    })
+  }
+
+  const rawData = await response.json()
+  const song = NowPlayingResponseSchema.parse(rawData)
 
   // If the song is not playing or is not a track, return an empty response
   if (song.item?.type !== 'track') {

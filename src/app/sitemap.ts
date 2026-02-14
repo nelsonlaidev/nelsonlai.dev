@@ -7,12 +7,12 @@ import { getPathnames } from '@/utils/get-pathnames'
 function sitemap(): MetadataRoute.Sitemap {
   const pathnames = getPathnames()
 
-  return routing.locales.flatMap((locale) => {
-    return pathnames.map((pathname) => ({
+  return routing.locales.flatMap((locale) =>
+    pathnames.map((pathname) => ({
       url: getLocalizedPath({ locale, pathname }),
       lastModified: new Date(),
-    }))
-  })
+    })),
+  )
 }
 
 export default sitemap

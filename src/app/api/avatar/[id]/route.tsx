@@ -1,4 +1,4 @@
-// avatar (MIT License)
+// Based on vercel/avatar (MIT License)
 // Copyright (c) Vercel
 // Source: https://github.com/vercel/avatar/blob/410bc1e438ef26a7456b037bbdd44d5aec49031a/pages/api/avatar/%5Bname%5D.tsx
 //
@@ -14,6 +14,9 @@ export const runtime = 'edge'
 function djb2(str: string) {
   let hash = 5381
   for (let i = 0; i < str.length; i++) {
+    // Bitwise is allowed here for the hash function.
+    // `i` is always in range due to the loop condition, so `codePointAt` will never return `undefined`.
+    // eslint-disable-next-line no-bitwise, @typescript-eslint/no-non-null-assertion
     hash = (hash << 5) + hash + str.codePointAt(i)!
   }
   return hash
@@ -57,13 +60,6 @@ export async function GET(request: Request, context: RouteContext<'/api/avatar/[
       },
     )
   } catch (error) {
-    return NextResponse.json(
-      {
-        error: 'Failed to generate avatar: ' + getErrorMessage(error),
-      },
-      {
-        status: 500,
-      },
-    )
+    return NextResponse.json({ error: `Failed to generate avatar: ${getErrorMessage(error)}` }, { status: 500 })
   }
 }

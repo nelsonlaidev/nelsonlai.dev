@@ -1,5 +1,11 @@
 import type { Instrumentation } from 'next'
 
+import * as z from 'zod'
+
+const PostHogCookieDataSchema = z.object({
+  distinct_id: z.string(),
+})
+
 export function register() {
   // Do nothing
 }
@@ -22,7 +28,8 @@ export async function onRequestError(...args: Parameters<Instrumentation.onReque
       if (postHogCookieMatch?.[1]) {
         try {
           const decodedCookie = decodeURIComponent(postHogCookieMatch[1])
-          const postHogData = JSON.parse(decodedCookie)
+          const rawData = JSON.parse(decodedCookie)
+          const postHogData = PostHogCookieDataSchema.parse(rawData)
           distinctId = postHogData.distinct_id
         } catch (parseError) {
           console.error('Error parsing PostHog cookie:', parseError)

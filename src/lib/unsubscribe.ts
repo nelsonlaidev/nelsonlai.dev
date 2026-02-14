@@ -98,7 +98,7 @@ async function getCommentReplyUnsubData(payload: CommentReplyUnsubPayload, token
     comment: data.body,
     userEmail: maskedEmail,
     token,
-    isUnsubscribed: !!isUnsubscribed,
+    isUnsubscribed: Boolean(isUnsubscribed),
     userId,
     commentId,
   }
@@ -113,9 +113,10 @@ export async function getUnsubData(token: string | null) {
 
   const { data } = result
 
-  // eslint-disable-next-line sonarjs/no-small-switch -- allow for future types
+  // Allow for future types
+  // eslint-disable-next-line sonarjs/no-small-switch
   switch (data.type) {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- allow for future types
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     case 'comment_reply': {
       return getCommentReplyUnsubData(data, token)
     }

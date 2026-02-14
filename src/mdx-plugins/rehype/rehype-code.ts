@@ -1,4 +1,4 @@
-// fumadocs (MIT License)
+// Based on fuma-nama/fumadocs (MIT License)
 // Copyright (c) fuma-nama
 // Source: https://github.com/fuma-nama/fumadocs/blob/7b18075cc97ca876ab14b22f05349a09dc0e4025/packages/core/src/mdx-plugins/rehype-code.ts
 //
@@ -66,8 +66,9 @@ export function rehypeCode(): Transformer<Root, Root> {
     langs: Object.keys(bundledLanguages),
   })
 
-  const transformer = highlighter.then((instance) =>
-    rehypeShikiFromHighlighter(instance, {
+  return async (tree, file) => {
+    const instance = await highlighter
+    const transformer = rehypeShikiFromHighlighter(instance, {
       themes: DEFAULT_SHIKI_THEMES,
       defaultColor: false,
       defaultLanguage: 'plaintext',
@@ -78,13 +79,9 @@ export function rehypeCode(): Transformer<Root, Root> {
 
         return { title }
       },
-    }),
-  )
+    })
 
-  return async (tree, file) => {
-    await (
-      await transformer
-    )(tree, file, () => {
+    await transformer(tree, file, () => {
       // Do nothing
     })
   }

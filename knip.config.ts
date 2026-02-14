@@ -4,8 +4,6 @@ const config: KnipConfig = {
   ignoreDependencies: [
     // PostCSS is already installed under Next.js
     'postcss',
-    // Used in Spotify router
-    '@types/spotify-api',
     // Required by react-email
     '@react-email/preview-server',
   ],
