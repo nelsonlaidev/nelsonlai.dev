@@ -1,9 +1,18 @@
 import { Buffer } from 'node:buffer'
 
+import * as z from 'zod'
+
 import { env } from '@/lib/env'
+import { TraceableError } from '@/lib/errors'
 
 import { publicProcedure } from '../procedures'
 import { WakatimeStatsOutputSchema } from '../schemas/wakatime.schema'
+
+const WakatimeResponseSchema = z.object({
+  data: z.object({
+    total_seconds: z.number(),
+  }),
+})
 
 const wakatimeStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(async () => {
   if (!env.WAKATIME_API_KEY) {
@@ -18,12 +27,20 @@ const wakatimeStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(
     },
   })
 
-  const {
-    data: { total_seconds },
-  } = await response.json()
+  if (!response.ok) {
+    const body = await response.text()
+    throw new TraceableError('WakaTime API error', {
+      status: response.status,
+      statusText: response.statusText,
+      body,
+    })
+  }
+
+  const rawData = await response.json()
+  const { data } = WakatimeResponseSchema.parse(rawData)
 
   return {
-    hours: Math.round(total_seconds / 60 / 60),
+    hours: Math.round(data.total_seconds / 60 / 60),
   }
 })
 
