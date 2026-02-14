@@ -2,7 +2,7 @@
 
 import type { SessionListOutput } from '@/orpc/client'
 
-import { parse } from 'bowser'
+import Bowser from 'bowser'
 import { BotIcon, InfoIcon, MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
@@ -70,7 +70,10 @@ function Session(props: SessionProps) {
   const { refetch: refetchSession } = useSession()
   const router = useRouter()
 
-  const { browser, os, platform } = parse(session.userAgent ?? '')
+  // Bowser v2 exports a class as default; 'parse' is a static method, not a named export.
+  // This triggers a false positive in import-x which expects 'parse' to be a named export.
+  // eslint-disable-next-line import-x/no-named-as-default-member
+  const { browser, os, platform } = Bowser.parse(session.userAgent ?? '')
 
   const platformType = (platform.type ?? 'desktop') as keyof typeof PLATFORM_ICONS
   const PlatformIcon = PLATFORM_ICONS[platformType]
