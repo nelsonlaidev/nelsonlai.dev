@@ -19,7 +19,7 @@ export function useCreateMessage(onSuccess?: () => void) {
   return useMutation(
     orpc.message.create.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: orpc.message.list.key() })
+        void queryClient.invalidateQueries({ queryKey: orpc.message.list.key() })
         onSuccess?.()
       },
     }),
@@ -32,7 +32,7 @@ export function useDeleteMessage(onSuccess?: () => void) {
   return useMutation(
     orpc.message.delete.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: orpc.message.list.key() })
+        void queryClient.invalidateQueries({ queryKey: orpc.message.list.key() })
         onSuccess?.()
       },
     }),

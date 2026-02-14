@@ -12,7 +12,7 @@ export function useIncrementView(input: ViewCountInput) {
   return useMutation(
     orpc.view.increment.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries({
+        void queryClient.invalidateQueries({
           queryKey: orpc.view.count.key({ input }),
         })
       },

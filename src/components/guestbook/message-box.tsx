@@ -49,7 +49,7 @@ function MessageBox(props: MessageBoxProps) {
 
   function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
-    form.handleSubmit()
+    void form.handleSubmit()
   }
 
   const defaultImage = getDefaultImage(user.id)

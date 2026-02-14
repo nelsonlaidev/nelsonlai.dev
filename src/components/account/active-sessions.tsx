@@ -86,7 +86,7 @@ function Session(props: SessionProps) {
     toast.success(t('success.session-revoked'))
     if (session.isCurrentSession) {
       router.push('/')
-      refetchSession()
+      void refetchSession()
     }
   })
 

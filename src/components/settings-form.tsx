@@ -45,7 +45,7 @@ function SettingsForm(props: SettingsFormProps) {
 
   function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
-    form.handleSubmit()
+    void form.handleSubmit()
   }
 
   const isDirty = useStore(form.store, (state) => state.isDirty)
