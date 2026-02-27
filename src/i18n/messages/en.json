@@ -212,10 +212,11 @@
       "fantastic": "Fantastic",
       "location-timezone": "Hong Kong • UTC/GMT +8",
       "stunning": "Stunning",
-      "title-bottom": "React",
-      "title-middle-left": "building",
-      "title-middle-right": "websites using",
-      "title-top": "I'm Nelson, a Full Stack Engineer"
+      "line-1": "I'm Nelson, a Full Stack Engineer",
+      "line-2-left": "building",
+      "line-2-right": "websites using",
+      "line-3": "React",
+      "image-alt": "Nelson Lai's Logo"
     },
     "latest-articles": {
       "card": "Article",

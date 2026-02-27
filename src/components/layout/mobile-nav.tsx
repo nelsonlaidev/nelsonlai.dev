@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Link } from '@/components/ui/link'
-import { HEADER_LINKS } from '@/config/links'
+import { HEADER_LINKS } from '@/constants/navigation'
 
 function MobileNav() {
   const t = useTranslations()
@@ -15,23 +15,19 @@ function MobileNav() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button
-            className='flex size-9 items-center justify-center p-0 md:hidden'
-            aria-label={t('layout.toggle-menu')}
-            variant='ghost'
-          >
+          <Button variant='ghost' size='icon' aria-label={t('layout.toggle-menu')} className='md:hidden'>
             <MenuIcon />
           </Button>
         }
       />
-      <DropdownMenuContent align='end' sideOffset={20} className='min-w-40'>
+      <DropdownMenuContent align='end'>
         {HEADER_LINKS.map((link) => (
           <DropdownMenuItem
-            key={link.key}
+            key={link.href}
             render={
-              <Link href={link.href} className='flex items-center gap-4'>
+              <Link href={link.href}>
                 {link.icon}
-                <div>{t(link.labelKey)}</div>
+                {t(link.labelKey)}
               </Link>
             }
           />

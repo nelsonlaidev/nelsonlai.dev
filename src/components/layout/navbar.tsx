@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl'
 
 import { Link } from '@/components/ui/link'
-import { HEADER_LINKS } from '@/config/links'
+import { HEADER_LINKS } from '@/constants/navigation'
 import { usePathname } from '@/i18n/routing'
 
 function Navbar() {
@@ -12,13 +12,13 @@ function Navbar() {
 
   return (
     <nav className='hidden md:block'>
-      <ul className='flex gap-2'>
+      <ul className='flex items-center gap-2'>
         {HEADER_LINKS.map((link) => (
-          <li key={link.key} className='relative flex items-center justify-center'>
+          <li key={link.href}>
             <Link
-              className='rounded-sm px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-active:text-foreground'
-              data-active={link.href === pathname}
               href={link.href}
+              data-active={pathname === link.href}
+              className='px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-active:text-foreground'
             >
               {t(link.labelKey)}
             </Link>

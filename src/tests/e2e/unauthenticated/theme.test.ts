@@ -19,7 +19,7 @@ test.describe('theme', () => {
         await checkAppliedTheme(page, initialTheme)
 
         await page.getByTestId('theme-toggle').click()
-        await page.getByTestId(`theme-${theme}-button`).click()
+        await page.getByTestId(`theme-option-${theme}`).click()
 
         await checkAppliedTheme(page, theme)
         await checkStoredTheme(page, theme)

@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl'
 import Counter from '@/components/counter'
 import { Link } from '@/components/ui/link'
 import {
-  useGitHubStats,
+  useGithubStats,
   useLikeStats,
   useViewStats,
   useWakatimeStats,
@@ -30,7 +30,7 @@ type Card = {
 
 function Stats() {
   const youtubeQuery = useYoutubeStats()
-  const githubQuery = useGitHubStats()
+  const githubQuery = useGithubStats()
   const likesQuery = useLikeStats()
   const viewsQuery = useViewStats()
   const wakatimeQuery = useWakatimeStats()
