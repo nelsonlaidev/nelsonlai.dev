@@ -212,10 +212,11 @@
       "fantastic": "极致出色",
       "location-timezone": "香港 • UTC/GMT +8",
       "stunning": "惊艳非凡",
-      "title-bottom": "并使用 React 开发",
-      "title-middle-left": "制作",
-      "title-middle-right": "的网站",
-      "title-top": "我是 Nelson，一位全栈工程师"
+      "line-1": "我是 Nelson，一位全栈工程师",
+      "line-2-left": "制作",
+      "line-2-right": "的网站",
+      "line-3": "并使用 React 开发",
+      "image-alt": "Nelson Lai 的标志"
     },
     "latest-articles": {
       "card": "文章",
