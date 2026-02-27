@@ -13,10 +13,16 @@ export const routing = defineRouting({
   },
 })
 
-export const localeLabels: Record<(typeof routing.locales)[number], string> = {
-  en: 'English',
-  'zh-TW': '繁體中文',
-  'zh-CN': '简体中文',
+type Locale = (typeof routing.locales)[number]
+type LocaleItem = {
+  label: string
+  value: Locale
 }
+
+export const LOCALE_ITEMS: LocaleItem[] = [
+  { label: 'English', value: 'en' },
+  { label: '繁體中文', value: 'zh-TW' },
+  { label: '简体中文', value: 'zh-CN' },
+]
 
 export const { Link, usePathname, useRouter, redirect } = createNavigation(routing)

@@ -6,7 +6,7 @@ export function useYoutubeStats() {
   return useQuery(orpc.youtube.stats.queryOptions())
 }
 
-export function useGitHubStats() {
+export function useGithubStats() {
   return useQuery(orpc.github.stats.queryOptions())
 }
 

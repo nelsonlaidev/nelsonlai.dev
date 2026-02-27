@@ -14,7 +14,7 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { Link } from '@/components/ui/link'
-import { ACCOUNT_SIDEBAR_LINKS } from '@/config/links'
+import { ACCOUNT_SIDEBAR_LINKS } from '@/constants/navigation'
 
 function AccountMobileNav() {
   const t = useTranslations()

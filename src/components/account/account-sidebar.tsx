@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 
-import { ACCOUNT_SIDEBAR_LINKS } from '@/config/links'
+import { ACCOUNT_SIDEBAR_LINKS } from '@/constants/navigation'
 import { Link, usePathname } from '@/i18n/routing'
 
 function AccountSidebar() {

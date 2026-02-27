@@ -15,7 +15,7 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
-import { SOCIAL_LINKS } from '@/config/links'
+import { SOCIAL_LINKS } from '@/constants/navigation'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
 import { useSignInDialog } from '@/hooks/use-sign-in-dialog'
 import { useSignOut } from '@/hooks/use-sign-out'

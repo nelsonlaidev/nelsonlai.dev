@@ -271,7 +271,7 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased relative min-h-svh flex flex-col;
   }
 }
 
