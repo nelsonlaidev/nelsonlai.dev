@@ -26,7 +26,9 @@ export function createCache<T>(prefix: string, ttl: number = DEFAULT_TTL) {
     async get(key: string): Promise<T | null> {
       const fullKey = getKey(key)
       try {
-        return await redis.get<T>(fullKey)
+        const value = await redis.get<T>(fullKey)
+        if (value !== null) consola.info('[Cache] Hit:', fullKey)
+        return value
       } catch (error) {
         consola.error('[Cache] Get failed:', fullKey, error)
         return null
