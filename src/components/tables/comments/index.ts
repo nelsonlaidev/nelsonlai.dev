@@ -1,1 +1,1 @@
-export { default } from './comments-table'
+export { CommentsTable } from './comments-table'

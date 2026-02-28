@@ -13,10 +13,10 @@ import { useSession } from '@/lib/auth-client'
 import { getAbbreviation } from '@/utils/get-abbreviation'
 import { getDefaultImage } from '@/utils/get-default-image'
 
-import DeleteButton from './delete-button'
-import MessagesLoader from './messages-loader'
+import { DeleteButton } from './delete-button'
+import { MessagesLoader } from './messages-loader'
 
-function Messages() {
+export function Messages() {
   const { data, isSuccess, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = useListMessages()
   const t = useTranslations()
 
@@ -79,5 +79,3 @@ function Message(props: MessageProps) {
     </div>
   )
 }
-
-export default Messages

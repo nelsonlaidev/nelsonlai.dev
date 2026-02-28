@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader } from '../ui/card'
 import { Demo, DemoItem } from '../ui/demo'
 import { Skeleton } from '../ui/skeleton'
 
-function SkeletonDemo() {
+export function SkeletonDemo() {
   return (
     <Demo title='Skeleton'>
       <SkeletonAvatar />
@@ -91,5 +91,3 @@ function SkeletonTable() {
     </DemoItem>
   )
 }
-
-export default SkeletonDemo

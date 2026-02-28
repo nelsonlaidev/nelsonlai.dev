@@ -29,7 +29,7 @@ import { useTranslations } from 'next-intl'
 
 import { Marquee } from '@/components/ui/marquee'
 
-function StacksCard() {
+export function StacksCard() {
   const t = useTranslations()
 
   return (
@@ -67,5 +67,3 @@ function StacksCard() {
     </div>
   )
 }
-
-export default StacksCard

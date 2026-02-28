@@ -24,7 +24,7 @@ pnpm lint
 pnpm test
 `
 
-function CodeBlockDemo() {
+export function CodeBlockDemo() {
   return (
     <Demo title='Code Block'>
       <CodeBlockBasic />
@@ -52,5 +52,3 @@ function CodeBlockWithTitle() {
     </DemoItem>
   )
 }
-
-export default CodeBlockDemo

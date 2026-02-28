@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { AspectRatio } from '../ui/aspect-ratio'
 import { Demo, DemoItem } from '../ui/demo'
 
-function AspectRatioDemo() {
+export function AspectRatioDemo() {
   return (
     <Demo title='Aspect Ratio' className='md:grid-cols-1'>
       <AspectRatioRatios />
@@ -55,5 +55,3 @@ function AspectRatioRatios() {
     </DemoItem>
   )
 }
-
-export default AspectRatioDemo

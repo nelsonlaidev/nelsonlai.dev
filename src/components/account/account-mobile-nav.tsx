@@ -16,7 +16,7 @@ import {
 import { Link } from '@/components/ui/link'
 import { ACCOUNT_SIDEBAR_LINKS } from '@/constants/navigation'
 
-function AccountMobileNav() {
+export function AccountMobileNav() {
   const t = useTranslations()
   const [open, setOpen] = useState(false)
 
@@ -54,5 +54,3 @@ function AccountMobileNav() {
     </Drawer>
   )
 }
-
-export default AccountMobileNav

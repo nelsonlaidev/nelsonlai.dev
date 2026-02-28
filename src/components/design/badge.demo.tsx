@@ -7,7 +7,7 @@ import { Demo, DemoItem } from '../ui/demo'
 import { Link } from '../ui/link'
 import { Spinner } from '../ui/spinner'
 
-function BadgeDemo() {
+export function BadgeDemo() {
   return (
     <Demo title='Badge'>
       <BadgeVariants />
@@ -169,5 +169,3 @@ function BadgeCustomColors() {
     </DemoItem>
   )
 }
-
-export default BadgeDemo

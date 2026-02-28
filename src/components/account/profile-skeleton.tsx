@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 
-function ProfileSkeleton() {
+export function ProfileSkeleton() {
   const t = useTranslations()
 
   return (
@@ -38,5 +38,3 @@ function ProfileSkeleton() {
     </Card>
   )
 }
-
-export default ProfileSkeleton

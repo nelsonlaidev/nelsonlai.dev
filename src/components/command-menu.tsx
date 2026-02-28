@@ -33,7 +33,7 @@ type CommandGroup = {
   actions: CommandAction[]
 }
 
-function CommandMenu() {
+export function CommandMenu() {
   const [isOpen, setIsOpen] = useState(false)
   const [copy] = useCopyToClipboard()
   const { data: session } = useSession()
@@ -180,5 +180,3 @@ function CommandMenu() {
     </>
   )
 }
-
-export default CommandMenu

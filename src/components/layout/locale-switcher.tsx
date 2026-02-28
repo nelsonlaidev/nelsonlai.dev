@@ -5,7 +5,7 @@ import { useTransition } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { LOCALE_ITEMS, usePathname, useRouter } from '@/i18n/routing'
 
-function LocaleSwitcher() {
+export function LocaleSwitcher() {
   const t = useTranslations()
   const locale = useLocale()
   const [isPending, startTransition] = useTransition()
@@ -36,5 +36,3 @@ function LocaleSwitcher() {
     </Select>
   )
 }
-
-export default LocaleSwitcher

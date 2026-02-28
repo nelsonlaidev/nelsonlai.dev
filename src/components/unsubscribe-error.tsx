@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
-function UnsubscribeError() {
+export function UnsubscribeError() {
   const t = useTranslations()
 
   return (
@@ -22,5 +22,3 @@ function UnsubscribeError() {
     </Card>
   )
 }
-
-export default UnsubscribeError

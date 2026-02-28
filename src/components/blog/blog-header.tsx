@@ -6,8 +6,8 @@ import NumberFlow from '@number-flow/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
-import BlurImage from '@/components/blur-image'
-import ImageZoom from '@/components/image-zoom'
+import { BlurImage } from '@/components/blur-image'
+import { ImageZoom } from '@/components/image-zoom'
 import { Link } from '@/components/ui/link'
 import { useCountComment } from '@/hooks/queries/comment.query'
 import { useCountView, useIncrementView } from '@/hooks/queries/view.query'
@@ -18,7 +18,7 @@ type BlogHeaderProps = {
   post: Post
 }
 
-function BlogHeader(props: BlogHeaderProps) {
+export function BlogHeader(props: BlogHeaderProps) {
   const { post } = props
   const formattedDate = useFormattedDate(post.date)
   const t = useTranslations()
@@ -91,5 +91,3 @@ function BlogHeader(props: BlogHeaderProps) {
     </div>
   )
 }
-
-export default BlogHeader

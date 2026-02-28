@@ -5,7 +5,7 @@ type TableProps = {
   rows: string[][]
 }
 
-function Table(props: TableProps) {
+export function Table(props: TableProps) {
   const { headers, rows } = props
 
   return (
@@ -29,5 +29,3 @@ function Table(props: TableProps) {
     </UITable>
   )
 }
-
-export default Table

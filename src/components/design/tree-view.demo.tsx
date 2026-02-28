@@ -65,7 +65,7 @@ const treeCollection = createTreeCollection({
   rootNode: treeData,
 })
 
-function TreeViewDemo() {
+export function TreeViewDemo() {
   return (
     <Demo title='Tree View'>
       <TreeViewBasic />
@@ -80,5 +80,3 @@ function TreeViewBasic() {
     </DemoItem>
   )
 }
-
-export default TreeViewDemo

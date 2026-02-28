@@ -1,7 +1,7 @@
 import type { Locale } from 'next-intl'
 
-import AdminHeader from '@/components/admin/admin-header'
-import AdminSidebar from '@/components/admin/admin-sidebar'
+import { AdminHeader } from '@/components/admin/admin-header'
+import { AdminSidebar } from '@/components/admin/admin-sidebar'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { redirect } from '@/i18n/routing'
 import { getSession } from '@/lib/auth'

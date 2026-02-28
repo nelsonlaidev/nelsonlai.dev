@@ -15,7 +15,7 @@ type ImageProps = {
   lazy?: boolean
 } & React.ComponentProps<typeof NextImage>
 
-function BlurImage(props: ImageProps) {
+export function BlurImage(props: ImageProps) {
   const { alt, src, className, imageClassName, lazy = true, ...rest } = props
   const [isLoading, setIsLoading] = useState(true)
 
@@ -39,5 +39,3 @@ function BlurImage(props: ImageProps) {
     </div>
   )
 }
-
-export default BlurImage

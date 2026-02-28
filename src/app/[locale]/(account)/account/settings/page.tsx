@@ -3,7 +3,7 @@ import type { Locale } from 'next-intl'
 
 import { getTranslations } from 'next-intl/server'
 
-import Settings from '@/components/settings'
+import { Settings } from '@/components/settings'
 import { createMetadata } from '@/lib/metadata'
 
 export async function generateMetadata(props: PageProps<'/[locale]/account/settings'>): Promise<Metadata> {

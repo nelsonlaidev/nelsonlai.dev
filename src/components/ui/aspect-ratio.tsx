@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 type AspectRatioProps = React.ComponentProps<'div'> & { ratio: number }
 
-function AspectRatio(props: AspectRatioProps) {
+export function AspectRatio(props: AspectRatioProps) {
   const { ratio, className, ...rest } = props
 
   return (
@@ -16,5 +16,3 @@ function AspectRatio(props: AspectRatioProps) {
     />
   )
 }
-
-export { AspectRatio }

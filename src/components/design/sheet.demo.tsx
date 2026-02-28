@@ -15,7 +15,7 @@ import {
   SheetTrigger,
 } from '../ui/sheet'
 
-function SheetDemo() {
+export function SheetDemo() {
   return (
     <Demo title='Sheet'>
       <SheetWithForm />
@@ -116,5 +116,3 @@ function SheetWithSides() {
     </DemoItem>
   )
 }
-
-export default SheetDemo

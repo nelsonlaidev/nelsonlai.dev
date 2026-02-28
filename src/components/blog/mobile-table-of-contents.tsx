@@ -15,7 +15,7 @@ type MobileTableOfContentsProps = {
   toc: TOC[]
 }
 
-function MobileTableOfContents(props: MobileTableOfContentsProps) {
+export function MobileTableOfContents(props: MobileTableOfContentsProps) {
   const { toc } = props
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
@@ -56,5 +56,3 @@ function MobileTableOfContents(props: MobileTableOfContentsProps) {
     </Popover>
   )
 }
-
-export default MobileTableOfContents

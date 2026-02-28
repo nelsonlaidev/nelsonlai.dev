@@ -4,7 +4,7 @@ import type { Post } from 'content-collections'
 
 import { useTranslations } from 'next-intl'
 
-import BlurImage from '@/components/blur-image'
+import { BlurImage } from '@/components/blur-image'
 import { Link } from '@/components/ui/link'
 import { useCountLike } from '@/hooks/queries/like.query'
 import { useCountView } from '@/hooks/queries/view.query'
@@ -16,7 +16,7 @@ type PostCardsProps = {
 
 type PostCardProps = Post
 
-function PostCards(props: PostCardsProps) {
+export function PostCards(props: PostCardsProps) {
   const { posts } = props
 
   return (
@@ -65,5 +65,3 @@ function PostCard(props: PostCardProps) {
     </Link>
   )
 }
-
-export default PostCards

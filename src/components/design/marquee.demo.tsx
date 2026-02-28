@@ -12,7 +12,7 @@ const updates = [
   { title: 'Launch prep', time: 'Fri · 4:00 PM' },
 ]
 
-function MarqueeDemo() {
+export function MarqueeDemo() {
   return (
     <Demo title='Marquee'>
       <MarqueeHorizontal />
@@ -53,5 +53,3 @@ function MarqueeVertical() {
     </DemoItem>
   )
 }
-
-export default MarqueeDemo

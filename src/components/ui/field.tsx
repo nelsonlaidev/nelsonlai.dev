@@ -9,7 +9,7 @@ import { cn } from '@/utils/cn'
 
 type FieldSetProps = React.ComponentProps<'fieldset'>
 
-function FieldSet(props: FieldSetProps) {
+export function FieldSet(props: FieldSetProps) {
   const { className, ...rest } = props
 
   return (
@@ -26,7 +26,7 @@ function FieldSet(props: FieldSetProps) {
 
 type FieldLegendProps = React.ComponentProps<'legend'> & { variant?: 'legend' | 'label' }
 
-function FieldLegend(props: FieldLegendProps) {
+export function FieldLegend(props: FieldLegendProps) {
   const { className, variant = 'legend', ...rest } = props
 
   return (
@@ -41,7 +41,7 @@ function FieldLegend(props: FieldLegendProps) {
 
 type FieldGroupProps = React.ComponentProps<'div'>
 
-function FieldGroup(props: FieldGroupProps) {
+export function FieldGroup(props: FieldGroupProps) {
   const { className, ...rest } = props
 
   return (
@@ -73,7 +73,7 @@ const fieldVariants = cva('group/field flex w-full gap-3 data-[invalid=true]:tex
 
 type FieldProps = React.ComponentProps<'div'> & VariantProps<typeof fieldVariants>
 
-function Field(props: FieldProps) {
+export function Field(props: FieldProps) {
   const { className, orientation = 'vertical', ...rest } = props
 
   return (
@@ -89,7 +89,7 @@ function Field(props: FieldProps) {
 
 type FieldContentProps = React.ComponentProps<'div'>
 
-function FieldContent(props: FieldContentProps) {
+export function FieldContent(props: FieldContentProps) {
   const { className, ...rest } = props
 
   return (
@@ -103,7 +103,7 @@ function FieldContent(props: FieldContentProps) {
 
 type FieldLabelProps = React.ComponentProps<typeof Label>
 
-function FieldLabel(props: FieldLabelProps) {
+export function FieldLabel(props: FieldLabelProps) {
   const { className, ...rest } = props
 
   return (
@@ -120,7 +120,7 @@ function FieldLabel(props: FieldLabelProps) {
 
 type FieldTitleProps = React.ComponentProps<'div'>
 
-function FieldTitle(props: FieldTitleProps) {
+export function FieldTitle(props: FieldTitleProps) {
   const { className, ...rest } = props
 
   return (
@@ -137,7 +137,7 @@ function FieldTitle(props: FieldTitleProps) {
 
 type FieldDescriptionProps = React.ComponentProps<'p'>
 
-function FieldDescription(props: FieldDescriptionProps) {
+export function FieldDescription(props: FieldDescriptionProps) {
   const { className, ...rest } = props
 
   return (
@@ -156,7 +156,7 @@ type FieldSeparatorProps = React.ComponentProps<'div'> & {
   children?: React.ReactNode
 }
 
-function FieldSeparator(props: FieldSeparatorProps) {
+export function FieldSeparator(props: FieldSeparatorProps) {
   const { children, className, ...rest } = props
 
   return (
@@ -183,7 +183,7 @@ type FieldErrorProps = React.ComponentProps<'div'> & {
   errors?: Array<{ message?: string } | undefined>
 }
 
-function FieldError(props: FieldErrorProps) {
+export function FieldError(props: FieldErrorProps) {
   const { className, children, errors, ...rest } = props
 
   // ReactNode includes Promise<AwaitedReactNode>,
@@ -225,17 +225,4 @@ function FieldError(props: FieldErrorProps) {
       {content}
     </div>
   )
-}
-
-export {
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-  FieldLegend,
-  FieldSeparator,
-  FieldSet,
-  FieldTitle,
 }

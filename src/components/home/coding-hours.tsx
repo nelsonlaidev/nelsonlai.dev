@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 
 import { useWakatimeStats } from '@/hooks/queries/stats.query'
 
-function CodingHours() {
+export function CodingHours() {
   const { data, isSuccess, isLoading, isError } = useWakatimeStats()
   const t = useTranslations()
 
@@ -23,5 +23,3 @@ function CodingHours() {
     </div>
   )
 }
-
-export default CodingHours

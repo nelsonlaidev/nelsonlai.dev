@@ -5,11 +5,11 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
 
 import { cn } from '@/utils/cn'
 
-const Select = SelectPrimitive.Root
+export const Select = SelectPrimitive.Root
 
 type SelectGroupProps = SelectPrimitive.Group.Props
 
-function SelectGroup(props: SelectGroupProps) {
+export function SelectGroup(props: SelectGroupProps) {
   const { className, ...rest } = props
 
   return <SelectPrimitive.Group data-slot='select-group' className={cn('scroll-my-1 p-1', className)} {...rest} />
@@ -17,7 +17,7 @@ function SelectGroup(props: SelectGroupProps) {
 
 type SelectValueProps = SelectPrimitive.Value.Props
 
-function SelectValue(props: SelectValueProps) {
+export function SelectValue(props: SelectValueProps) {
   const { className, ...rest } = props
 
   return <SelectPrimitive.Value data-slot='select-value' className={cn('flex flex-1 text-left', className)} {...rest} />
@@ -27,7 +27,7 @@ type SelectTriggerProps = SelectPrimitive.Trigger.Props & {
   size?: 'sm' | 'default'
 }
 
-function SelectTrigger(props: SelectTriggerProps) {
+export function SelectTrigger(props: SelectTriggerProps) {
   const { className, size = 'default', children, ...rest } = props
 
   return (
@@ -49,7 +49,7 @@ function SelectTrigger(props: SelectTriggerProps) {
 type SelectContentProps = SelectPrimitive.Popup.Props &
   Pick<SelectPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset' | 'alignItemWithTrigger'>
 
-function SelectContent(props: SelectContentProps) {
+export function SelectContent(props: SelectContentProps) {
   const {
     className,
     children,
@@ -91,7 +91,7 @@ function SelectContent(props: SelectContentProps) {
 
 type SelectLabelProps = SelectPrimitive.GroupLabel.Props
 
-function SelectLabel(props: SelectLabelProps) {
+export function SelectLabel(props: SelectLabelProps) {
   const { className, ...rest } = props
 
   return (
@@ -105,7 +105,7 @@ function SelectLabel(props: SelectLabelProps) {
 
 type SelectItemProps = SelectPrimitive.Item.Props
 
-function SelectItem(props: SelectItemProps) {
+export function SelectItem(props: SelectItemProps) {
   const { className, children, ...rest } = props
 
   return (
@@ -133,7 +133,7 @@ function SelectItem(props: SelectItemProps) {
 
 type SelectSeparatorProps = SelectPrimitive.Separator.Props
 
-function SelectSeparator(props: SelectSeparatorProps) {
+export function SelectSeparator(props: SelectSeparatorProps) {
   const { className, ...rest } = props
 
   return (
@@ -147,7 +147,7 @@ function SelectSeparator(props: SelectSeparatorProps) {
 
 type SelectScrollUpButtonProps = React.ComponentProps<typeof SelectPrimitive.ScrollUpArrow>
 
-function SelectScrollUpButton(props: SelectScrollUpButtonProps) {
+export function SelectScrollUpButton(props: SelectScrollUpButtonProps) {
   const { className, ...rest } = props
 
   return (
@@ -166,7 +166,7 @@ function SelectScrollUpButton(props: SelectScrollUpButtonProps) {
 
 type SelectScrollDownButtonProps = React.ComponentProps<typeof SelectPrimitive.ScrollDownArrow>
 
-function SelectScrollDownButton(props: SelectScrollDownButtonProps) {
+export function SelectScrollDownButton(props: SelectScrollDownButtonProps) {
   const { className, ...rest } = props
 
   return (
@@ -181,17 +181,4 @@ function SelectScrollDownButton(props: SelectScrollDownButtonProps) {
       <ChevronDownIcon />
     </SelectPrimitive.ScrollDownArrow>
   )
-}
-
-export {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectScrollDownButton,
-  SelectScrollUpButton,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
 }

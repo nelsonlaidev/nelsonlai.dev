@@ -4,8 +4,8 @@ import type { Metadata } from 'next'
 
 import { useTranslations } from 'next-intl'
 
-import GoToHomepage from '@/components/go-to-homepage'
-import MainLayout from '@/components/main-layout'
+import { GoToHomepage } from '@/components/go-to-homepage'
+import { MainLayout } from '@/components/main-layout'
 
 export const metadata: Metadata = {
   title: '404',

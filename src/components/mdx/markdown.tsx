@@ -4,14 +4,14 @@ import { Fragment, memo } from 'react'
 import { Link } from '@/components/ui/link'
 import { TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
-import CommentCodeBlock from '../comment-section/comment-code-block'
-import CommentTable from '../comment-section/comment-table'
+import { CommentCodeBlock } from '../comment-section/comment-code-block'
+import { CommentTable } from '../comment-section/comment-table'
 
 type MarkdownProps = {
   children: string
 }
 
-const Markdown = memo((props: MarkdownProps) => {
+export const Markdown = memo((props: MarkdownProps) => {
   const { children } = props
 
   return (
@@ -38,5 +38,3 @@ const Markdown = memo((props: MarkdownProps) => {
 })
 
 Markdown.displayName = 'Markdown'
-
-export default Markdown

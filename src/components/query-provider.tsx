@@ -35,7 +35,7 @@ type QueryProviderProps = {
   children: React.ReactNode
 }
 
-function QueryProvider(props: QueryProviderProps) {
+export function QueryProvider(props: QueryProviderProps) {
   const { children } = props
   const [queryClient] = useState(() => createQueryClient())
 
@@ -46,5 +46,3 @@ function QueryProvider(props: QueryProviderProps) {
     </QueryClientProvider>
   )
 }
-
-export default QueryProvider

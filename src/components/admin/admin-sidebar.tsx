@@ -17,7 +17,7 @@ import { usePathname } from '@/i18n/routing'
 
 import { Link } from '../ui/link'
 
-function AdminSidebar() {
+export function AdminSidebar() {
   const t = useTranslations()
   const pathname = usePathname()
 
@@ -50,5 +50,3 @@ function AdminSidebar() {
     </Sidebar>
   )
 }
-
-export default AdminSidebar

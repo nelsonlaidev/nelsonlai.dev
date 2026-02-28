@@ -5,7 +5,7 @@ import { Field, FieldGroup, FieldLabel } from '../ui/field'
 import { Input } from '../ui/input'
 import { Popover, PopoverContent, PopoverDescription, PopoverHeader, PopoverTitle, PopoverTrigger } from '../ui/popover'
 
-function PopoverDemo() {
+export function PopoverDemo() {
   return (
     <Demo title='Popover'>
       <PopoverBasic />
@@ -153,5 +153,3 @@ function PopoverInDialog() {
     </DemoItem>
   )
 }
-
-export default PopoverDemo

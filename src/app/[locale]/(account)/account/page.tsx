@@ -3,8 +3,8 @@ import type { Locale } from 'next-intl'
 
 import { getTranslations } from 'next-intl/server'
 
-import ActiveSessions from '@/components/account/active-sessions'
-import Profile from '@/components/account/profile'
+import { ActiveSessions } from '@/components/account/active-sessions'
+import { Profile } from '@/components/account/profile'
 import { createMetadata } from '@/lib/metadata'
 
 export async function generateMetadata(props: PageProps<'/[locale]/account'>): Promise<Metadata> {

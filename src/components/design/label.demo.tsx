@@ -4,7 +4,7 @@ import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { Textarea } from '../ui/textarea'
 
-function LabelDemo() {
+export function LabelDemo() {
   return (
     <Demo title='Label'>
       <LabelWithInput />
@@ -46,5 +46,3 @@ function LabelWithTextarea() {
     </DemoItem>
   )
 }
-
-export default LabelDemo

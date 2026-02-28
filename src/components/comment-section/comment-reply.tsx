@@ -10,10 +10,10 @@ import { useCommentsContext } from '@/contexts/comments.context'
 import { useCreatePostComment } from '@/hooks/queries/comment.query'
 import { useSession } from '@/lib/auth-client'
 
-import CommentEditor from './comment-editor'
-import UnauthenticatedOverlay from './unauthenticated-overlay'
+import { CommentEditor } from './comment-editor'
+import { UnauthenticatedOverlay } from './unauthenticated-overlay'
 
-function CommentReply() {
+export function CommentReply() {
   const [content, setContent] = useState('')
   const { data: session } = useSession()
   const { comment, setIsReplying } = useCommentContext()
@@ -94,5 +94,3 @@ function CommentReply() {
     </form>
   )
 }
-
-export default CommentReply

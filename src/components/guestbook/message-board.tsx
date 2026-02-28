@@ -2,12 +2,12 @@
 
 import { useSession } from '@/lib/auth-client'
 
-import MessageBox from './message-box'
-import Messages from './messages'
-import Pinned from './pinned'
-import SignIn from './sign-in'
+import { MessageBox } from './message-box'
+import { Messages } from './messages'
+import { Pinned } from './pinned'
+import { SignIn } from './sign-in'
 
-function MessageBoard() {
+export function MessageBoard() {
   const { data: session } = useSession()
 
   return (
@@ -18,5 +18,3 @@ function MessageBoard() {
     </div>
   )
 }
-
-export default MessageBoard

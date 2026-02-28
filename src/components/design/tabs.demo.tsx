@@ -3,7 +3,7 @@ import { BellIcon, LockIcon, UserIcon } from 'lucide-react'
 import { Demo, DemoItem } from '../ui/demo'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 
-function TabsDemo() {
+export function TabsDemo() {
   return (
     <Demo title='Tabs'>
       <TabsBasic />
@@ -71,4 +71,3 @@ function TabsLine() {
     </DemoItem>
   )
 }
-export default TabsDemo

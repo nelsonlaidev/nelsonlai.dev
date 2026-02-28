@@ -21,7 +21,7 @@ type DeleteButtonProps = {
   message: MessageListOutput['messages'][number]
 }
 
-function DeleteButton(props: DeleteButtonProps) {
+export function DeleteButton(props: DeleteButtonProps) {
   const { message } = props
   const t = useTranslations()
 
@@ -71,5 +71,3 @@ function DeleteButton(props: DeleteButtonProps) {
     </div>
   )
 }
-
-export default DeleteButton

@@ -6,7 +6,7 @@ import { cn } from '@/utils/cn'
 
 type SeparatorProps = SeparatorPrimitive.Props
 
-function Separator(props: SeparatorProps) {
+export function Separator(props: SeparatorProps) {
   const { className, orientation = 'horizontal', ...rest } = props
 
   return (
@@ -21,5 +21,3 @@ function Separator(props: SeparatorProps) {
     />
   )
 }
-
-export { Separator }

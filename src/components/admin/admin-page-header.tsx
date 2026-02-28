@@ -3,7 +3,7 @@ type AdminPageHeaderProps = {
   description: string
 }
 
-function AdminPageHeader(props: AdminPageHeaderProps) {
+export function AdminPageHeader(props: AdminPageHeaderProps) {
   const { title, description } = props
 
   return (
@@ -15,5 +15,3 @@ function AdminPageHeader(props: AdminPageHeaderProps) {
     </div>
   )
 }
-
-export default AdminPageHeader

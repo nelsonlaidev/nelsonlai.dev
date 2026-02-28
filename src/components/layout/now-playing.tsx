@@ -8,7 +8,7 @@ import { cn } from '@/utils/cn'
 
 type NowPlayingProps = React.ComponentProps<'div'>
 
-function NowPlaying(props: NowPlayingProps) {
+export function NowPlaying(props: NowPlayingProps) {
   const { className, ...rest } = props
   const { data, isSuccess, isLoading, isError } = useSpotifyStats()
   const t = useTranslations()
@@ -36,5 +36,3 @@ function NowPlaying(props: NowPlayingProps) {
     </div>
   )
 }
-
-export default NowPlaying

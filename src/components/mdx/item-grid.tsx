@@ -1,5 +1,5 @@
 // Inspired by: https://jahir.dev/uses
-import BlurImage from '@/components/blur-image'
+import { BlurImage } from '@/components/blur-image'
 import { Link } from '@/components/ui/link'
 
 type Items = Array<{
@@ -13,7 +13,7 @@ type ItemGridProps = {
   items: Items
 }
 
-function ItemGrid(props: ItemGridProps) {
+export function ItemGrid(props: ItemGridProps) {
   const { items } = props
 
   return (
@@ -41,5 +41,3 @@ function ItemGrid(props: ItemGridProps) {
     </div>
   )
 }
-
-export default ItemGrid

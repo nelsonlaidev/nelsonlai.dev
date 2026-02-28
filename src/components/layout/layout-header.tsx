@@ -3,18 +3,18 @@
 import { useTranslations } from 'next-intl'
 import { useLayoutEffect, useRef } from 'react'
 
-import CommandMenu from '@/components/command-menu'
+import { CommandMenu } from '@/components/command-menu'
 import { Link } from '@/components/ui/link'
 import { Logo } from '@/components/ui/logo'
 
-import MobileNav from './mobile-nav'
-import Navbar from './navbar'
+import { MobileNav } from './mobile-nav'
+import { Navbar } from './navbar'
 import { SkipNav } from './skip-nav'
-import ThemeSwitcher from './theme-switcher'
+import { ThemeSwitcher } from './theme-switcher'
 
 const SCROLL_THRESHOLD = 100
 
-function LayoutHeader() {
+export function LayoutHeader() {
   const headerRef = useRef<HTMLElement>(null)
   const rafRef = useRef<number | null>(null)
   const t = useTranslations()
@@ -69,5 +69,3 @@ function LayoutHeader() {
     </header>
   )
 }
-
-export default LayoutHeader

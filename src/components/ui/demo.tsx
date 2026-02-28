@@ -5,7 +5,7 @@ type DemoProps = {
   children: React.ReactNode
 } & React.ComponentProps<'div'>
 
-function Demo(props: DemoProps) {
+export function Demo(props: DemoProps) {
   const { title, children, className, ...rest } = props
 
   return (
@@ -23,7 +23,7 @@ type DemoItem = {
   orientation?: 'horizontal' | 'vertical'
 } & React.ComponentProps<'div'>
 
-function DemoItem(props: DemoItem) {
+export function DemoItem(props: DemoItem) {
   const { title, orientation = 'horizontal', className, children } = props
 
   return (
@@ -42,5 +42,3 @@ function DemoItem(props: DemoItem) {
     </div>
   )
 }
-
-export { Demo, DemoItem }

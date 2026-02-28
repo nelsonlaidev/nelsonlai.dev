@@ -2,7 +2,7 @@
 
 import type { Project } from 'content-collections'
 
-import BlurImage from '@/components/blur-image'
+import { BlurImage } from '@/components/blur-image'
 import { Link } from '@/components/ui/link'
 
 import { Badge } from './ui/badge'
@@ -12,7 +12,7 @@ type ProjectCardsProps = {
   projects: Project[]
 }
 
-function ProjectCards(props: ProjectCardsProps) {
+export function ProjectCards(props: ProjectCardsProps) {
   const { projects } = props
 
   return (
@@ -53,5 +53,3 @@ function ProjectCard(props: ProjectCardProps) {
     </Link>
   )
 }
-
-export default ProjectCards

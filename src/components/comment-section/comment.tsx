@@ -15,18 +15,18 @@ import { useCommentParams } from '@/hooks/use-comment-params'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { getDefaultImage } from '@/utils/get-default-image'
 
-import Markdown from '../mdx/markdown'
+import { Markdown } from '../mdx/markdown'
 
-import CommentActions from './comment-actions'
-import CommentMenu from './comment-menu'
-import CommentReplies from './comment-replies'
-import CommentReply from './comment-reply'
+import { CommentActions } from './comment-actions'
+import { CommentMenu } from './comment-menu'
+import { CommentReplies } from './comment-replies'
+import { CommentReply } from './comment-reply'
 
 type CommentProps = {
   comment: CommentListOutput['comments'][number]
 }
 
-function Comment(props: CommentProps) {
+export function Comment(props: CommentProps) {
   const { comment } = props
 
   const [isEditing, setIsEditing] = useState(false)
@@ -126,5 +126,3 @@ function Comment(props: CommentProps) {
     </CommentProvider>
   )
 }
-
-export default Comment

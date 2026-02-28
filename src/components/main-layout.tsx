@@ -1,12 +1,12 @@
 import { GradientBackground } from './gradient-background'
-import LayoutFooter from './layout/layout-footer'
-import LayoutHeader from './layout/layout-header'
+import { LayoutFooter } from './layout/layout-footer'
+import { LayoutHeader } from './layout/layout-header'
 
 type MainLayoutProps = {
   children: React.ReactNode
 }
 
-function MainLayout(props: MainLayoutProps) {
+export function MainLayout(props: MainLayoutProps) {
   const { children } = props
 
   return (
@@ -25,5 +25,3 @@ function MainLayout(props: MainLayoutProps) {
     </>
   )
 }
-
-export default MainLayout

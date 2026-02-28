@@ -13,7 +13,7 @@ type TreeViewProps = {
   label?: string
 } & React.ComponentProps<typeof TreeViewPrimitive.Root<Node>>
 
-function TreeView(props: TreeViewProps) {
+export function TreeView(props: TreeViewProps) {
   const { collection, className, label = 'Tree View', ...rest } = props
 
   return (
@@ -35,7 +35,7 @@ function TreeView(props: TreeViewProps) {
 
 type TreeViewNodeProps = TreeViewPrimitive.NodeProviderProps<Node>
 
-function TreeViewNode(props: TreeViewNodeProps) {
+export function TreeViewNode(props: TreeViewNodeProps) {
   const { node, indexPath } = props
 
   return (
@@ -69,5 +69,5 @@ function TreeViewNode(props: TreeViewNodeProps) {
   )
 }
 
-export { type Node, TreeView, TreeViewNode }
+export type { Node }
 export { createTreeCollection } from '@ark-ui/react/tree-view'

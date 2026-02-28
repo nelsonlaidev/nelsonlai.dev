@@ -7,7 +7,7 @@ import { cn } from '@/utils/cn'
 
 type TabsProps = TabsPrimitive.Root.Props
 
-function Tabs(props: TabsProps) {
+export function Tabs(props: TabsProps) {
   const { className, orientation = 'horizontal', ...rest } = props
 
   return (
@@ -20,7 +20,7 @@ function Tabs(props: TabsProps) {
   )
 }
 
-const tabsListVariants = cva(
+export const tabsListVariants = cva(
   'group/tabs-list inline-flex w-fit items-center justify-center rounded-4xl p-0.75 text-muted-foreground group-data-[orientation=vertical]/tabs:h-fit group-data-[orientation=vertical]/tabs:flex-col group-data-horizontal/tabs:h-9 group-data-vertical/tabs:rounded-2xl data-[variant=line]:rounded-none',
   {
     variants: {
@@ -37,7 +37,7 @@ const tabsListVariants = cva(
 
 type TabsListProps = TabsPrimitive.List.Props & VariantProps<typeof tabsListVariants>
 
-function TabsList(props: TabsListProps) {
+export function TabsList(props: TabsListProps) {
   const { className, variant = 'default', ...rest } = props
 
   return (
@@ -52,7 +52,7 @@ function TabsList(props: TabsListProps) {
 
 type TabsTriggerProps = TabsPrimitive.Tab.Props
 
-function TabsTrigger(props: TabsTriggerProps) {
+export function TabsTrigger(props: TabsTriggerProps) {
   const { className, ...rest } = props
 
   return (
@@ -69,12 +69,10 @@ function TabsTrigger(props: TabsTriggerProps) {
 
 type TabsContentProps = TabsPrimitive.Panel.Props
 
-function TabsContent(props: TabsContentProps) {
+export function TabsContent(props: TabsContentProps) {
   const { className, ...rest } = props
 
   return (
     <TabsPrimitive.Panel data-slot='tabs-content' className={cn('flex-1 text-sm outline-none', className)} {...rest} />
   )
 }
-
-export { Tabs, TabsContent, TabsList, tabsListVariants, TabsTrigger }

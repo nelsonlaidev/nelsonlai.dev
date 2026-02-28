@@ -6,20 +6,20 @@ import { cn } from '@/utils/cn'
 
 type PopoverProps = PopoverPrimitive.Root.Props
 
-function Popover(props: PopoverProps) {
+export function Popover(props: PopoverProps) {
   return <PopoverPrimitive.Root data-slot='popover' {...props} />
 }
 
 type PopoverTriggerProps = PopoverPrimitive.Trigger.Props
 
-function PopoverTrigger(props: PopoverTriggerProps) {
+export function PopoverTrigger(props: PopoverTriggerProps) {
   return <PopoverPrimitive.Trigger data-slot='popover-trigger' {...props} />
 }
 
 type PopoverContentProps = PopoverPrimitive.Popup.Props &
   Pick<PopoverPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset'>
 
-function PopoverContent(props: PopoverContentProps) {
+export function PopoverContent(props: PopoverContentProps) {
   const { className, align = 'center', alignOffset = 0, side = 'bottom', sideOffset = 4, ...rest } = props
 
   return (
@@ -46,7 +46,7 @@ function PopoverContent(props: PopoverContentProps) {
 
 type PopoverHeaderProps = React.ComponentProps<'div'>
 
-function PopoverHeader(props: PopoverHeaderProps) {
+export function PopoverHeader(props: PopoverHeaderProps) {
   const { className, ...rest } = props
 
   return <div data-slot='popover-header' className={cn('flex flex-col gap-1 text-sm', className)} {...rest} />
@@ -54,7 +54,7 @@ function PopoverHeader(props: PopoverHeaderProps) {
 
 type PopoverTitleProps = PopoverPrimitive.Title.Props
 
-function PopoverTitle(props: PopoverTitleProps) {
+export function PopoverTitle(props: PopoverTitleProps) {
   const { className, ...rest } = props
 
   return (
@@ -64,7 +64,7 @@ function PopoverTitle(props: PopoverTitleProps) {
 
 type PopoverDescriptionProps = PopoverPrimitive.Description.Props
 
-function PopoverDescription(props: PopoverDescriptionProps) {
+export function PopoverDescription(props: PopoverDescriptionProps) {
   const { className, ...rest } = props
 
   return (
@@ -75,5 +75,3 @@ function PopoverDescription(props: PopoverDescriptionProps) {
     />
   )
 }
-
-export { Popover, PopoverContent, PopoverDescription, PopoverHeader, PopoverTitle, PopoverTrigger }

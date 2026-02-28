@@ -8,7 +8,7 @@ type UsersTableProps = {
   users: User[]
 }
 
-function UsersTable(props: UsersTableProps) {
+export function UsersTable(props: UsersTableProps) {
   const { users } = props
 
   // @tanstack/react-table is incompatible with React Compiler
@@ -55,5 +55,3 @@ function UsersTable(props: UsersTableProps) {
     </div>
   )
 }
-
-export default UsersTable

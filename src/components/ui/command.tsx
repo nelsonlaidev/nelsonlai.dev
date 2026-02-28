@@ -9,7 +9,7 @@ import { cn } from '@/utils/cn'
 
 type CommandProps = React.ComponentProps<typeof CommandPrimitive>
 
-function Command(props: CommandProps) {
+export function Command(props: CommandProps) {
   const { className, ...rest } = props
 
   return (
@@ -32,7 +32,7 @@ type CommandDialogProps = Omit<React.ComponentProps<typeof Dialog>, 'children'> 
   children: React.ReactNode
 }
 
-function CommandDialog(props: CommandDialogProps) {
+export function CommandDialog(props: CommandDialogProps) {
   const {
     title = 'Command Palette',
     description = 'Search for a command to run...',
@@ -60,7 +60,7 @@ function CommandDialog(props: CommandDialogProps) {
 
 type CommandInputProps = React.ComponentProps<typeof CommandPrimitive.Input>
 
-function CommandInput(props: CommandInputProps) {
+export function CommandInput(props: CommandInputProps) {
   const { className, ...rest } = props
 
   return (
@@ -81,7 +81,7 @@ function CommandInput(props: CommandInputProps) {
 
 type CommandListProps = React.ComponentProps<typeof CommandPrimitive.List>
 
-function CommandList(props: CommandListProps) {
+export function CommandList(props: CommandListProps) {
   const { className, ...rest } = props
 
   return (
@@ -95,7 +95,7 @@ function CommandList(props: CommandListProps) {
 
 type CommandEmptyProps = React.ComponentProps<typeof CommandPrimitive.Empty>
 
-function CommandEmpty(props: CommandEmptyProps) {
+export function CommandEmpty(props: CommandEmptyProps) {
   const { className, ...rest } = props
 
   return (
@@ -105,7 +105,7 @@ function CommandEmpty(props: CommandEmptyProps) {
 
 type CommandGroupProps = React.ComponentProps<typeof CommandPrimitive.Group>
 
-function CommandGroup(props: CommandGroupProps) {
+export function CommandGroup(props: CommandGroupProps) {
   const { className, ...rest } = props
 
   return (
@@ -122,7 +122,7 @@ function CommandGroup(props: CommandGroupProps) {
 
 type CommandSeparatorProps = React.ComponentProps<typeof CommandPrimitive.Separator>
 
-function CommandSeparator(props: CommandSeparatorProps) {
+export function CommandSeparator(props: CommandSeparatorProps) {
   const { className, ...rest } = props
 
   return (
@@ -136,7 +136,7 @@ function CommandSeparator(props: CommandSeparatorProps) {
 
 type CommandItemProps = React.ComponentProps<typeof CommandPrimitive.Item>
 
-function CommandItem(props: CommandItemProps) {
+export function CommandItem(props: CommandItemProps) {
   const { className, children, ...rest } = props
 
   return (
@@ -156,7 +156,7 @@ function CommandItem(props: CommandItemProps) {
 
 type CommandShortcutProps = React.ComponentProps<'span'>
 
-function CommandShortcut(props: CommandShortcutProps) {
+export function CommandShortcut(props: CommandShortcutProps) {
   const { className, ...rest } = props
 
   return (
@@ -169,16 +169,4 @@ function CommandShortcut(props: CommandShortcutProps) {
       {...rest}
     />
   )
-}
-
-export {
-  Command,
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
 }

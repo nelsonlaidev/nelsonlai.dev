@@ -4,7 +4,7 @@ type JsonLdProps = {
   json: WithContext<Thing>
 }
 
-function JsonLd(props: JsonLdProps) {
+export function JsonLd(props: JsonLdProps) {
   const { json } = props
 
   // We need to use `dangerouslySetInnerHTML` to insert the JSON-LD script tag,
@@ -13,5 +13,3 @@ function JsonLd(props: JsonLdProps) {
   // eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml
   return <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }} />
 }
-
-export default JsonLd

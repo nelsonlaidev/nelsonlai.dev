@@ -9,7 +9,7 @@ import { useCommentsContext } from '@/contexts/comments.context'
 import { useCreateVote } from '@/hooks/queries/vote.query'
 import { useSession } from '@/lib/auth-client'
 
-function CommentActions() {
+export function CommentActions() {
   const { slug } = useCommentsContext()
   const { comment, setIsReplying, isOpenReplies, setIsOpenReplies } = useCommentContext()
   const { data: session } = useSession()
@@ -96,5 +96,3 @@ function CommentActions() {
     </>
   )
 }
-
-export default CommentActions

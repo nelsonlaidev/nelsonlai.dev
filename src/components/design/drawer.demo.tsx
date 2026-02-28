@@ -11,7 +11,7 @@ import {
   DrawerTrigger,
 } from '../ui/drawer'
 
-function DrawerDemo() {
+export function DrawerDemo() {
   return (
     <Demo title='Drawer'>
       <DrawerWithSides />
@@ -59,5 +59,3 @@ function DrawerWithSides() {
     </DemoItem>
   )
 }
-
-export default DrawerDemo

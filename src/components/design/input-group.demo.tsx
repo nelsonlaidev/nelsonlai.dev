@@ -39,7 +39,7 @@ import { Popover, PopoverContent, PopoverDescription, PopoverHeader, PopoverTitl
 import { Spinner } from '../ui/spinner'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 
-function InputGroupDemo() {
+export function InputGroupDemo() {
   return (
     <Demo title='Input Group'>
       <InputGroupBasic />
@@ -588,5 +588,3 @@ function InputGroupTextareaExamples() {
     </DemoItem>
   )
 }
-
-export default InputGroupDemo

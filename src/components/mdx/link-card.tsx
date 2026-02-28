@@ -1,6 +1,6 @@
 import { ExternalLinkIcon } from 'lucide-react'
 
-import BlurImage from '@/components/blur-image'
+import { BlurImage } from '@/components/blur-image'
 import { Link } from '@/components/ui/link'
 
 type LinkCardProps = {
@@ -9,7 +9,7 @@ type LinkCardProps = {
   title: string
 }
 
-function LinkCard(props: LinkCardProps) {
+export function LinkCard(props: LinkCardProps) {
   const { href, hostname, title } = props
 
   return (
@@ -34,5 +34,3 @@ function LinkCard(props: LinkCardProps) {
     </div>
   )
 }
-
-export default LinkCard

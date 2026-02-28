@@ -18,7 +18,7 @@ import { Button } from '../ui/button'
 import { Demo, DemoItem } from '../ui/demo'
 import { Link } from '../ui/link'
 
-function AlertDialogDemo() {
+export function AlertDialogDemo() {
   return (
     <Demo title='Alert Dialog'>
       <AlertDialogSizes />
@@ -135,5 +135,3 @@ function AlertDialogDestructive() {
     </DemoItem>
   )
 }
-
-export default AlertDialogDemo

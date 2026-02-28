@@ -2,7 +2,7 @@ import { Demo, DemoItem } from '../ui/demo'
 import { Field, FieldDescription, FieldLabel } from '../ui/field'
 import { Textarea } from '../ui/textarea'
 
-function TextareaDemo() {
+export function TextareaDemo() {
   return (
     <Demo title='Textarea'>
       <TextareaBasic />
@@ -44,5 +44,3 @@ function TextareaWithDescription() {
     </DemoItem>
   )
 }
-
-export default TextareaDemo

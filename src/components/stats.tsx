@@ -5,7 +5,7 @@ import { SiGithub, SiWakatime, SiYoutube } from '@icons-pack/react-simple-icons'
 import { ArrowRightIcon, PencilIcon, StarIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import Counter from '@/components/counter'
+import { Counter } from '@/components/counter'
 import { Link } from '@/components/ui/link'
 import {
   useGithubStats,
@@ -28,7 +28,7 @@ type Card = {
   suffix?: string
 }
 
-function Stats() {
+export function Stats() {
   const youtubeQuery = useYoutubeStats()
   const githubQuery = useGithubStats()
   const likesQuery = useLikeStats()
@@ -171,5 +171,3 @@ function Stats() {
     </div>
   )
 }
-
-export default Stats

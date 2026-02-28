@@ -6,10 +6,10 @@ import { Link } from '@/components/ui/link'
 import { FOOTER_GROUPS } from '@/constants/navigation'
 
 import { GithubStarButton } from './github-star-button'
-import LocaleSwitcher from './locale-switcher'
-import NowPlaying from './now-playing'
+import { LocaleSwitcher } from './locale-switcher'
+import { NowPlaying } from './now-playing'
 
-function LayoutFooter() {
+export function LayoutFooter() {
   const t = useTranslations()
 
   return (
@@ -40,5 +40,3 @@ function LayoutFooter() {
     </footer>
   )
 }
-
-export default LayoutFooter

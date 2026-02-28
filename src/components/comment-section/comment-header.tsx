@@ -16,7 +16,7 @@ import { useCommentsContext } from '@/contexts/comments.context'
 import { useCountComment } from '@/hooks/queries/comment.query'
 import { useCountReply } from '@/hooks/queries/reply.query'
 
-function CommentHeader() {
+export function CommentHeader() {
   const { slug, sort, setSort } = useCommentsContext()
   const t = useTranslations()
 
@@ -72,5 +72,3 @@ function CommentHeader() {
     </div>
   )
 }
-
-export default CommentHeader

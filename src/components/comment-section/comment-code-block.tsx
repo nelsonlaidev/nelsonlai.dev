@@ -18,7 +18,7 @@ function isBundledLanguage(lang: string): lang is BundledLanguage {
   return lang in bundledLanguages
 }
 
-function CommentCodeBlock(props: CommentCodeBlockProps) {
+export function CommentCodeBlock(props: CommentCodeBlockProps) {
   const {
     children: {
       props: { children: code, className, title },
@@ -86,5 +86,3 @@ function CommentCodeBlock(props: CommentCodeBlockProps) {
     </CodeBlock>
   )
 }
-
-export default CommentCodeBlock

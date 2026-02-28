@@ -4,7 +4,7 @@ import { cn } from '@/utils/cn'
 
 type LabelProps = React.ComponentProps<'label'>
 
-function Label(props: LabelProps) {
+export function Label(props: LabelProps) {
   const { className, ...rest } = props
 
   return (
@@ -21,5 +21,3 @@ function Label(props: LabelProps) {
     />
   )
 }
-
-export { Label }

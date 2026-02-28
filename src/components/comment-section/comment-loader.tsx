@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 
 import { Spinner } from '../ui/spinner'
 
-function CommentLoader(props: React.ComponentProps<'div'>) {
+export function CommentLoader(props: React.ComponentProps<'div'>) {
   const { className, ...rest } = props
 
   return (
@@ -11,5 +11,3 @@ function CommentLoader(props: React.ComponentProps<'div'>) {
     </div>
   )
 }
-
-export default CommentLoader

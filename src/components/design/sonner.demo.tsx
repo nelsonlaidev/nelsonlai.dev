@@ -7,7 +7,7 @@ import { sleep } from '@/utils/sleep'
 import { Button } from '../ui/button'
 import { Demo, DemoItem } from '../ui/demo'
 
-function SonnerDemo() {
+export function SonnerDemo() {
   return (
     <Demo title='Sonner'>
       <SonnerBasic />
@@ -79,5 +79,3 @@ function SonnerWithDescription() {
     </DemoItem>
   )
 }
-
-export default SonnerDemo

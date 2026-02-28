@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { useSignInDialog } from '@/hooks/use-sign-in-dialog'
 
-function UnauthenticatedOverlay() {
+export function UnauthenticatedOverlay() {
   const t = useTranslations()
   const { openDialog } = useSignInDialog()
 
@@ -15,5 +15,3 @@ function UnauthenticatedOverlay() {
     </div>
   )
 }
-
-export default UnauthenticatedOverlay

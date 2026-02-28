@@ -41,7 +41,7 @@ import {
 } from '../ui/command'
 import { Demo, DemoItem } from '../ui/demo'
 
-function CommandDemo() {
+export function CommandDemo() {
   return (
     <Demo title='Command'>
       <CommandGroupsAndItems />
@@ -194,5 +194,3 @@ function CommandGroupsAndItems() {
     </DemoItem>
   )
 }
-
-export default CommandDemo

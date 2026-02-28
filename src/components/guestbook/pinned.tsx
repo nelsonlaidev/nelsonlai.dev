@@ -1,7 +1,7 @@
 import { MessageCircleIcon, PinIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-function Pinned() {
+export function Pinned() {
   const t = useTranslations()
 
   return (
@@ -28,5 +28,3 @@ function Pinned() {
     </div>
   )
 }
-
-export default Pinned

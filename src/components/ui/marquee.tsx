@@ -11,7 +11,7 @@ type MarqueeProps = {
   className?: string
 }
 
-function Marquee(props: MarqueeProps) {
+export function Marquee(props: MarqueeProps) {
   const {
     children,
     gap = '1rem',
@@ -58,5 +58,3 @@ function Marquee(props: MarqueeProps) {
     </div>
   )
 }
-
-export { Marquee }

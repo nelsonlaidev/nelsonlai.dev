@@ -17,7 +17,7 @@ function Placeholder() {
   )
 }
 
-function MessagesLoader(props: React.ComponentProps<'div'>) {
+export function MessagesLoader(props: React.ComponentProps<'div'>) {
   const { className, ...rest } = props
 
   return (
@@ -28,5 +28,3 @@ function MessagesLoader(props: React.ComponentProps<'div'>) {
     </div>
   )
 }
-
-export default MessagesLoader

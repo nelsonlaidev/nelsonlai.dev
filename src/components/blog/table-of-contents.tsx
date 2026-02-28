@@ -12,7 +12,7 @@ type TableOfContentsProps = {
   toc: TOC[]
 }
 
-function TableOfContents(props: TableOfContentsProps) {
+export function TableOfContents(props: TableOfContentsProps) {
   const { toc } = props
   const activeId = useScrollspy(
     toc.map((item) => item.url),
@@ -47,5 +47,3 @@ function TableOfContents(props: TableOfContentsProps) {
     </div>
   )
 }
-
-export default TableOfContents

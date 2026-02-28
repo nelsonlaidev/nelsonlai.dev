@@ -4,7 +4,7 @@ import { createTreeCollection, type Node, TreeView as UITreeView } from '@/compo
 
 type TreeViewProps = { collection: Node } & Omit<React.ComponentProps<typeof UITreeView>, 'collection'>
 
-function TreeView(props: TreeViewProps) {
+export function TreeView(props: TreeViewProps) {
   const { collection, ...rest } = props
 
   return (
@@ -18,5 +18,3 @@ function TreeView(props: TreeViewProps) {
     />
   )
 }
-
-export default TreeView

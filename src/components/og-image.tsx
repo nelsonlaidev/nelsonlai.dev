@@ -18,7 +18,7 @@ type OGImageProps = {
   url?: string
 }
 
-function OGImage(props: OGImageProps) {
+export function OGImage(props: OGImageProps) {
   const { title, url } = props
   const fontSize = getFontSize(title)
 
@@ -43,5 +43,3 @@ function OGImage(props: OGImageProps) {
     </div>
   )
 }
-
-export default OGImage

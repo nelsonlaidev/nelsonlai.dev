@@ -6,7 +6,7 @@ import { useMotionValue, useSpring } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
-function LocationCard() {
+export function LocationCard() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pointerInteracting = useRef<number | null>(null)
   const pointerInteractionMovement = useRef(0)
@@ -130,5 +130,3 @@ function LocationCard() {
     </div>
   )
 }
-
-export default LocationCard

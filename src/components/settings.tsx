@@ -5,9 +5,9 @@ import { useTranslations } from 'next-intl'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useGetSettings } from '@/hooks/queries/settings.query'
 
-import SettingsForm from './settings-form'
+import { SettingsForm } from './settings-form'
 
-function Settings() {
+export function Settings() {
   const t = useTranslations()
   const { data, isSuccess, isError, isLoading } = useGetSettings()
 
@@ -19,5 +19,3 @@ function Settings() {
     </>
   )
 }
-
-export default Settings

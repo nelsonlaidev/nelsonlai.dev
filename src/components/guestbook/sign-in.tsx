@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { useSignInDialog } from '@/hooks/use-sign-in-dialog'
 
-function SignIn() {
+export function SignIn() {
   const t = useTranslations()
   const { openDialog } = useSignInDialog()
 
@@ -21,5 +21,3 @@ function SignIn() {
     </>
   )
 }
-
-export default SignIn

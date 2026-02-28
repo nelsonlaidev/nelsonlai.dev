@@ -8,7 +8,7 @@ type SwitchProps = SwitchPrimitive.Root.Props & {
   size?: 'sm' | 'default'
 }
 
-function Switch(props: SwitchProps) {
+export function Switch(props: SwitchProps) {
   const { className, size = 'default', ...rest } = props
 
   return (
@@ -28,5 +28,3 @@ function Switch(props: SwitchProps) {
     </SwitchPrimitive.Root>
   )
 }
-
-export { Switch }

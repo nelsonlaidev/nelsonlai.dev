@@ -1,7 +1,7 @@
 import { Demo, DemoItem } from '../ui/demo'
 import { Separator } from '../ui/separator'
 
-function SeparatorDemo() {
+export function SeparatorDemo() {
   return (
     <Demo title='Separator'>
       <SeparatorHorizontal />
@@ -84,5 +84,3 @@ function SeparatorInList() {
     </DemoItem>
   )
 }
-
-export default SeparatorDemo

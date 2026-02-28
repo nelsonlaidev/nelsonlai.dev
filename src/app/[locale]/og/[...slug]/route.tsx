@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server'
 import { hasLocale, type Locale } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 
-import OGImage from '@/components/og-image'
+import { OGImage } from '@/components/og-image'
 import en from '@/i18n/messages/en.json'
 import { routing } from '@/i18n/routing'
 import { getPostBySlug } from '@/lib/content'

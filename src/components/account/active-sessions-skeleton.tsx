@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { range } from '@/utils/range'
 
-function ActiveSessionsSkeleton() {
+export function ActiveSessionsSkeleton() {
   return (
     <div className='space-y-4'>
       {range(5).map((sessionNumber) => (
@@ -27,5 +27,3 @@ function ActiveSessionsSkeleton() {
     </div>
   )
 }
-
-export default ActiveSessionsSkeleton

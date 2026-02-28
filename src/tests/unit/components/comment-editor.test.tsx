@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 
-import CommentEditor from '@/components/comment-section/comment-editor'
+import { CommentEditor } from '@/components/comment-section/comment-editor'
 import { render } from '@/utils/render'
 
 type SimulateIMEInputOptions = {

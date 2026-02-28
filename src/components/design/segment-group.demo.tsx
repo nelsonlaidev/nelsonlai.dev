@@ -1,7 +1,7 @@
 import { Demo, DemoItem } from '../ui/demo'
 import { SegmentGroup, SegmentGroupItem } from '../ui/segment-group'
 
-function SegmentGroupDemo() {
+export function SegmentGroupDemo() {
   return (
     <Demo title='Segment Group'>
       <SegmentGroupBasic />
@@ -39,5 +39,3 @@ function SegmentGroupVertical() {
     </DemoItem>
   )
 }
-
-export default SegmentGroupDemo

@@ -8,7 +8,7 @@ type AvatarProps = AvatarPrimitive.Root.Props & {
   size?: 'default' | 'sm' | 'lg'
 }
 
-function Avatar(props: AvatarProps) {
+export function Avatar(props: AvatarProps) {
   const { className, size = 'default', ...rest } = props
 
   return (
@@ -26,7 +26,7 @@ function Avatar(props: AvatarProps) {
 
 type AvatarImageProps = AvatarPrimitive.Image.Props
 
-function AvatarImage(props: AvatarImageProps) {
+export function AvatarImage(props: AvatarImageProps) {
   const { className, ...rest } = props
 
   return (
@@ -40,7 +40,7 @@ function AvatarImage(props: AvatarImageProps) {
 
 type AvatarFallbackProps = AvatarPrimitive.Fallback.Props
 
-function AvatarFallback(props: AvatarFallbackProps) {
+export function AvatarFallback(props: AvatarFallbackProps) {
   const { className, ...rest } = props
 
   return (
@@ -57,7 +57,7 @@ function AvatarFallback(props: AvatarFallbackProps) {
 
 type AvatarBadgeProps = React.ComponentProps<'span'>
 
-function AvatarBadge(props: AvatarBadgeProps) {
+export function AvatarBadge(props: AvatarBadgeProps) {
   const { className, ...rest } = props
 
   return (
@@ -74,7 +74,7 @@ function AvatarBadge(props: AvatarBadgeProps) {
 
 type AvatarGroupProps = React.ComponentProps<'div'>
 
-function AvatarGroup(props: AvatarGroupProps) {
+export function AvatarGroup(props: AvatarGroupProps) {
   const { className, ...rest } = props
 
   return (
@@ -91,7 +91,7 @@ function AvatarGroup(props: AvatarGroupProps) {
 
 type AvatarGroupCountProps = React.ComponentProps<'div'>
 
-function AvatarGroupCount(props: AvatarGroupCountProps) {
+export function AvatarGroupCount(props: AvatarGroupCountProps) {
   const { className, ...rest } = props
 
   return (
@@ -105,5 +105,3 @@ function AvatarGroupCount(props: AvatarGroupCountProps) {
     />
   )
 }
-
-export { Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage }

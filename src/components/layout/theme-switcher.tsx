@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { THEMES } from '@/constants/themes'
 
-function ThemeSwitcher() {
+export function ThemeSwitcher() {
   const { setTheme } = useTheme()
   const t = useTranslations()
 
@@ -37,5 +37,3 @@ function ThemeSwitcher() {
     </DropdownMenu>
   )
 }
-
-export default ThemeSwitcher

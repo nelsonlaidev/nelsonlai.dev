@@ -18,7 +18,7 @@ const animation = {
   },
 }
 
-function PageHeader(props: PageTitleProps) {
+export function PageHeader(props: PageTitleProps) {
   const { title, description } = props
 
   return (
@@ -37,5 +37,3 @@ function PageHeader(props: PageTitleProps) {
     </div>
   )
 }
-
-export default PageHeader

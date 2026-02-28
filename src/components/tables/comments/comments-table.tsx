@@ -8,7 +8,7 @@ type CommentsTableProps = {
   comments: Comment[]
 }
 
-function CommentsTable(props: CommentsTableProps) {
+export function CommentsTable(props: CommentsTableProps) {
   const { comments } = props
 
   // @tanstack/react-table is incompatible with React Compiler
@@ -55,5 +55,3 @@ function CommentsTable(props: CommentsTableProps) {
     </div>
   )
 }
-
-export default CommentsTable

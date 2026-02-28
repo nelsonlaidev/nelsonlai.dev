@@ -20,7 +20,7 @@ type MessageBoxProps = {
   user: User
 }
 
-function MessageBox(props: MessageBoxProps) {
+export function MessageBox(props: MessageBoxProps) {
   const { user } = props
   const t = useTranslations()
   const signOut = useSignOut()
@@ -99,5 +99,3 @@ function MessageBox(props: MessageBoxProps) {
     </div>
   )
 }
-
-export default MessageBox

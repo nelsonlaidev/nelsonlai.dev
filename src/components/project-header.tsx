@@ -24,7 +24,7 @@ const animation = {
 
 type ProjectHeaderProps = Project
 
-function ProjectHeader(props: ProjectHeaderProps) {
+export function ProjectHeader(props: ProjectHeaderProps) {
   const { name, description, homepage, github } = props
   const t = useTranslations()
 
@@ -58,4 +58,3 @@ function ProjectHeader(props: ProjectHeaderProps) {
     </div>
   )
 }
-export default ProjectHeader

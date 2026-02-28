@@ -2,7 +2,7 @@ import { Link as LocalizedLink } from '@/i18n/routing'
 
 type LinkProps = React.ComponentProps<'a'>
 
-function Link(props: LinkProps) {
+export function Link(props: LinkProps) {
   const { href, children, ...rest } = props
 
   if (!href) {
@@ -31,5 +31,3 @@ function Link(props: LinkProps) {
     </a>
   )
 }
-
-export { Link }

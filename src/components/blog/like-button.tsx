@@ -15,7 +15,7 @@ type LikeButtonProps = {
   slug: string
 }
 
-function LikeButton(props: LikeButtonProps) {
+export function LikeButton(props: LikeButtonProps) {
   const { slug } = props
   const [cacheCount, setCacheCount] = useState(0)
   const buttonRef = useRef<HTMLButtonElement>(null)
@@ -123,5 +123,3 @@ function LikeButton(props: LikeButtonProps) {
     </div>
   )
 }
-
-export default LikeButton

@@ -5,7 +5,7 @@ import { Field, FieldLabel } from '../ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '../ui/input-group'
 import { Spinner } from '../ui/spinner'
 
-function SpinnerDemo() {
+export function SpinnerDemo() {
   return (
     <Demo title='Spinner'>
       <SpinnerBasic />
@@ -83,5 +83,3 @@ function SpinnerInInputGroup() {
     </DemoItem>
   )
 }
-
-export default SpinnerDemo

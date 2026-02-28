@@ -21,7 +21,7 @@ const SettingsFormSchema = z.object({
   replyNotificationsEnabled: z.boolean(),
 })
 
-function SettingsForm(props: SettingsFormProps) {
+export function SettingsForm(props: SettingsFormProps) {
   const { settings } = props
   const t = useTranslations()
 
@@ -105,5 +105,3 @@ function SettingsForm(props: SettingsFormProps) {
     </Card>
   )
 }
-
-export default SettingsForm

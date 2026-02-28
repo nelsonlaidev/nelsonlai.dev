@@ -8,7 +8,7 @@ import { Kbd } from '../ui/kbd'
 import { Link } from '../ui/link'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 
-function TooltipDemo() {
+export function TooltipDemo() {
   return (
     <Demo title='Tooltip'>
       <TooltipBasic />
@@ -190,5 +190,3 @@ function TooltipFormatted() {
     </DemoItem>
   )
 }
-
-export default TooltipDemo

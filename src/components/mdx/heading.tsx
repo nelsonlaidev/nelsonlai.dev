@@ -14,7 +14,7 @@ type HeadingProps<T extends Types> = Omit<React.ComponentProps<T>, 'as'> & {
   as?: T
 }
 
-function Heading<T extends Types = 'h1'>(props: HeadingProps<T>) {
+export function Heading<T extends Types = 'h1'>(props: HeadingProps<T>) {
   const { as, className, children, id, ...rest } = props
   const Component = as ?? 'h1'
   const t = useTranslations()
@@ -31,5 +31,3 @@ function Heading<T extends Types = 'h1'>(props: HeadingProps<T>) {
     </Component>
   )
 }
-
-export default Heading

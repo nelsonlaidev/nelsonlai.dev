@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import posthog from 'posthog-js'
 import { useEffect } from 'react'
 
-import MainLayout from '@/components/main-layout'
+import { MainLayout } from '@/components/main-layout'
 import { Button } from '@/components/ui/button'
 
 type PageProps = {

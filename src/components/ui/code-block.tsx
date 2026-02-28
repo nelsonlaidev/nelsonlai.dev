@@ -16,7 +16,7 @@ type CodeBlockProps = {
   scrollAreaClassName?: string
 } & React.ComponentProps<'pre'>
 
-function CodeBlock(props: CodeBlockProps) {
+export function CodeBlock(props: CodeBlockProps) {
   const { children, className, title, 'data-lang': lang, figureClassName, scrollAreaClassName, ref, ...rest } = props
 
   const textInput = useRef<HTMLPreElement>(null)
@@ -89,5 +89,3 @@ function CopyButton(props: CopyButtonProps) {
     </Button>
   )
 }
-
-export { CodeBlock }

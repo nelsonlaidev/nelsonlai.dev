@@ -16,7 +16,7 @@ type UnsubscribeCommentReplyFormProps = {
   data: NonNullable<Awaited<ReturnType<typeof getUnsubData>>> & { type: 'comment_reply' }
 }
 
-function UnsubscribeCommentReplyForm(props: UnsubscribeCommentReplyFormProps) {
+export function UnsubscribeCommentReplyForm(props: UnsubscribeCommentReplyFormProps) {
   const { data } = props
   const [isUnsubscribed, setIsUnsubscribed] = useState(data.isUnsubscribed)
   const { mutate: createCommentReplyUnsubscribe, isPending: isUpdating } = useCreateCommentReplyUnsubscribe(() => {
@@ -72,5 +72,3 @@ function UnsubscribeCommentReplyForm(props: UnsubscribeCommentReplyFormProps) {
     </Card>
   )
 }
-
-export default UnsubscribeCommentReplyForm

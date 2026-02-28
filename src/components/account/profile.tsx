@@ -30,9 +30,9 @@ import { getAbbreviation } from '@/utils/get-abbreviation'
 
 import { Spinner } from '../ui/spinner'
 
-import ProfileSkeleton from './profile-skeleton'
+import { ProfileSkeleton } from './profile-skeleton'
 
-function Profile() {
+export function Profile() {
   const { data, isPending: isSessionLoading } = useSession()
   const t = useTranslations()
 
@@ -257,5 +257,3 @@ function UpdateAvatar() {
     </div>
   )
 }
-
-export default Profile

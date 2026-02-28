@@ -5,7 +5,7 @@ import { Demo, DemoItem } from '../ui/demo'
 import { ScrollArea, ScrollBar } from '../ui/scroll-area'
 import { Separator } from '../ui/separator'
 
-function ScrollAreaDemo() {
+export function ScrollAreaDemo() {
   return (
     <Demo title='Scroll Area'>
       <ScrollAreaVertical />
@@ -79,5 +79,3 @@ function ScrollAreaHorizontal() {
     </DemoItem>
   )
 }
-
-export default ScrollAreaDemo

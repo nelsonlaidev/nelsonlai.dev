@@ -1,18 +1,18 @@
 import { useMDXComponent } from '@content-collections/mdx/react'
 
-import BlurImage from '@/components/blur-image'
+import { BlurImage } from '@/components/blur-image'
 import { CodeBlock } from '@/components/ui/code-block'
 import { Link } from '@/components/ui/link'
 
-import ImageZoom from '../image-zoom'
+import { ImageZoom } from '../image-zoom'
 
-import Heading from './heading'
-import ItemGrid from './item-grid'
-import LinkCard from './link-card'
-import Logo from './logo'
-import Table from './table'
-import TreeView from './tree-view'
-import Video from './video'
+import { Heading } from './heading'
+import { ItemGrid } from './item-grid'
+import { LinkCard } from './link-card'
+import { Logo } from './logo'
+import { Table } from './table'
+import { TreeView } from './tree-view'
+import { Video } from './video'
 
 type MdxProps = {
   code: string
@@ -56,7 +56,7 @@ const components = {
   TreeView,
 }
 
-function Mdx(props: MdxProps) {
+export function Mdx(props: MdxProps) {
   const { code } = props
   const MDXContent = useMDXComponent(code)
 
@@ -66,5 +66,3 @@ function Mdx(props: MdxProps) {
     </div>
   )
 }
-
-export default Mdx

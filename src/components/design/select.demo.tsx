@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from '../ui/select'
 
-function SelectDemo() {
+export function SelectDemo() {
   return (
     <Demo title='Select'>
       <SelectBasic />
@@ -254,5 +254,3 @@ function SelectItemAligned() {
     </DemoItem>
   )
 }
-
-export default SelectDemo

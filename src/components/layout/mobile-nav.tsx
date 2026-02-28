@@ -8,7 +8,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Link } from '@/components/ui/link'
 import { HEADER_LINKS } from '@/constants/navigation'
 
-function MobileNav() {
+export function MobileNav() {
   const t = useTranslations()
 
   return (
@@ -36,5 +36,3 @@ function MobileNav() {
     </DropdownMenu>
   )
 }
-
-export default MobileNav

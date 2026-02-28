@@ -8,31 +8,31 @@ import { cn } from '@/utils/cn'
 
 type SheetProps = SheetPrimitive.Root.Props
 
-function Sheet(props: SheetProps) {
+export function Sheet(props: SheetProps) {
   return <SheetPrimitive.Root data-slot='sheet' {...props} />
 }
 
 type SheetTriggerProps = SheetPrimitive.Trigger.Props
 
-function SheetTrigger(props: SheetTriggerProps) {
+export function SheetTrigger(props: SheetTriggerProps) {
   return <SheetPrimitive.Trigger data-slot='sheet-trigger' {...props} />
 }
 
 type SheetCloseProps = SheetPrimitive.Close.Props
 
-function SheetClose(props: SheetCloseProps) {
+export function SheetClose(props: SheetCloseProps) {
   return <SheetPrimitive.Close data-slot='sheet-close' {...props} />
 }
 
 type SheetPortalProps = SheetPrimitive.Portal.Props
 
-function SheetPortal(props: SheetPortalProps) {
+export function SheetPortal(props: SheetPortalProps) {
   return <SheetPrimitive.Portal data-slot='sheet-portal' {...props} />
 }
 
 type SheetOverlayProps = SheetPrimitive.Backdrop.Props
 
-function SheetOverlay(props: SheetOverlayProps) {
+export function SheetOverlay(props: SheetOverlayProps) {
   const { className, ...rest } = props
 
   return (
@@ -52,7 +52,7 @@ type SheetContentProps = SheetPrimitive.Popup.Props & {
   showCloseButton?: boolean
 }
 
-function SheetContent(props: SheetContentProps) {
+export function SheetContent(props: SheetContentProps) {
   const { className, children, side = 'right', showCloseButton = true, ...rest } = props
 
   return (
@@ -86,7 +86,7 @@ function SheetContent(props: SheetContentProps) {
 
 type SheetHeaderProps = React.ComponentProps<'div'>
 
-function SheetHeader(props: SheetHeaderProps) {
+export function SheetHeader(props: SheetHeaderProps) {
   const { className, ...rest } = props
 
   return <div data-slot='sheet-header' className={cn('flex flex-col gap-1.5 p-6', className)} {...rest} />
@@ -94,7 +94,7 @@ function SheetHeader(props: SheetHeaderProps) {
 
 type SheetFooterProps = React.ComponentProps<'div'>
 
-function SheetFooter(props: SheetFooterProps) {
+export function SheetFooter(props: SheetFooterProps) {
   const { className, ...rest } = props
 
   return <div data-slot='sheet-footer' className={cn('mt-auto flex flex-col gap-2 p-6', className)} {...rest} />
@@ -102,7 +102,7 @@ function SheetFooter(props: SheetFooterProps) {
 
 type SheetTitleProps = SheetPrimitive.Title.Props
 
-function SheetTitle(props: SheetTitleProps) {
+export function SheetTitle(props: SheetTitleProps) {
   const { className, ...rest } = props
 
   return (
@@ -116,7 +116,7 @@ function SheetTitle(props: SheetTitleProps) {
 
 type SheetDescriptionProps = SheetPrimitive.Description.Props
 
-function SheetDescription(props: SheetDescriptionProps) {
+export function SheetDescription(props: SheetDescriptionProps) {
   const { className, ...rest } = props
 
   return (
@@ -127,5 +127,3 @@ function SheetDescription(props: SheetDescriptionProps) {
     />
   )
 }
-
-export { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger }

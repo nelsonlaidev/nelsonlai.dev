@@ -6,7 +6,7 @@ type CounterProps = {
   direction?: 'up' | 'down'
 } & React.ComponentProps<'span'>
 
-function Counter(props: CounterProps) {
+export function Counter(props: CounterProps) {
   const { value, direction = 'up', ...rest } = props
   const ref = useRef<HTMLSpanElement>(null)
   const motionValue = useMotionValue(direction === 'down' ? value : 0)
@@ -40,5 +40,3 @@ function Counter(props: CounterProps) {
     </span>
   )
 }
-
-export default Counter

@@ -2,7 +2,7 @@ import { Demo, DemoItem } from '../ui/demo'
 import { Field, FieldLabel } from '../ui/field'
 import { Switch } from '../ui/switch'
 
-function SwitchDemo() {
+export function SwitchDemo() {
   return (
     <Demo title='Switch'>
       <SwitchBasic />
@@ -44,5 +44,3 @@ function SwitchSizes() {
     </DemoItem>
   )
 }
-
-export default SwitchDemo

@@ -1,5 +1,5 @@
-import UnsubscribeCommentReplyForm from '@/components/unsubscribe-comment-reply-form'
-import UnsubscribeError from '@/components/unsubscribe-error'
+import { UnsubscribeCommentReplyForm } from '@/components/unsubscribe-comment-reply-form'
+import { UnsubscribeError } from '@/components/unsubscribe-error'
 import { getUnsubData } from '@/lib/unsubscribe'
 import { loadUnsubscribeParams } from '@/lib/unsubscribe-params'
 

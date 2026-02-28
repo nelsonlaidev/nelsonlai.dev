@@ -9,7 +9,7 @@ type TipProps = {
   content: React.ReactNode
 }
 
-function Tip(props: TipProps) {
+export function Tip(props: TipProps) {
   const { children, content } = props
   const [open, setOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
@@ -55,5 +55,3 @@ function Tip(props: TipProps) {
     </Tooltip>
   )
 }
-
-export default Tip

@@ -4,7 +4,7 @@ import { motion, useAnimate, useInView } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
-import BlurImage from '@/components/blur-image'
+import { BlurImage } from '@/components/blur-image'
 import { cn } from '@/utils/cn'
 
 import { buttonVariants } from '../ui/button'
@@ -20,7 +20,7 @@ const variants = {
   },
 }
 
-function GetInTouch() {
+export function GetInTouch() {
   const [scope, animate] = useAnimate()
   const cardsRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(cardsRef, { once: true, margin: '-100px' })
@@ -124,5 +124,3 @@ function GetInTouch() {
     </motion.div>
   )
 }
-
-export default GetInTouch

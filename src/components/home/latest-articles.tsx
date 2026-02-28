@@ -7,7 +7,7 @@ import { motion, useInView } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useRef } from 'react'
 
-import BlurImage from '@/components/blur-image'
+import { BlurImage } from '@/components/blur-image'
 import { buttonVariants } from '@/components/ui/button'
 import { Link } from '@/components/ui/link'
 import { useCountLike } from '@/hooks/queries/like.query'
@@ -30,7 +30,7 @@ type LatestArticlesProps = {
   posts: Post[]
 }
 
-function LatestArticles(props: LatestArticlesProps) {
+export function LatestArticles(props: LatestArticlesProps) {
   const { posts } = props
   const projectsRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(projectsRef, { once: true, margin: '-100px' })
@@ -137,5 +137,3 @@ function Card(props: CardProps) {
     </Link>
   )
 }
-
-export default LatestArticles

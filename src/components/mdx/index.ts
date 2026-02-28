@@ -1,1 +1,1 @@
-export { default } from './mdx'
+export { Mdx } from './mdx'

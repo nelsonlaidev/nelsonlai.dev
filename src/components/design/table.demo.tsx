@@ -15,7 +15,7 @@ import { Input } from '../ui/input'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '../ui/table'
 
-function TableDemo() {
+export function TableDemo() {
   return (
     <Demo title='Table'>
       <TableBasic />
@@ -417,5 +417,3 @@ function TableWithInput() {
     </DemoItem>
   )
 }
-
-export default TableDemo

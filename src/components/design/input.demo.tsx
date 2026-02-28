@@ -4,7 +4,7 @@ import { Field, FieldDescription, FieldGroup, FieldLabel } from '../ui/field'
 import { Input } from '../ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 
-function InputDemo() {
+export function InputDemo() {
   return (
     <Demo title='Input'>
       <InputBasic />
@@ -181,5 +181,3 @@ function InputForm() {
     </DemoItem>
   )
 }
-
-export default InputDemo

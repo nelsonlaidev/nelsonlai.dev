@@ -7,7 +7,7 @@ type VideoProps = {
   height: number
 } & React.ComponentProps<'video'>
 
-function Video(props: VideoProps) {
+export function Video(props: VideoProps) {
   const { src, width, height, controls = true, className, ...rest } = props
 
   return (
@@ -25,5 +25,3 @@ function Video(props: VideoProps) {
     </AspectRatio>
   )
 }
-
-export default Video

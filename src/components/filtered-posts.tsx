@@ -6,14 +6,14 @@ import { SearchIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import PostCards from './post-cards'
+import { PostCards } from './post-cards'
 import { InputGroup, InputGroupAddon, InputGroupInput } from './ui/input-group'
 
 type FilteredPostsProps = {
   posts: Post[]
 }
 
-function FilteredPosts(props: FilteredPostsProps) {
+export function FilteredPosts(props: FilteredPostsProps) {
   const { posts } = props
   const [searchValue, setSearchValue] = useState('')
   const t = useTranslations()
@@ -45,5 +45,3 @@ function FilteredPosts(props: FilteredPostsProps) {
     </>
   )
 }
-
-export default FilteredPosts

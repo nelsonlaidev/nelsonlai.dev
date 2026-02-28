@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import { SidebarTrigger } from '@/components/ui/sidebar'
 
-function AdminHeader() {
+export function AdminHeader() {
   const t = useTranslations()
 
   return (
@@ -13,5 +13,3 @@ function AdminHeader() {
     </header>
   )
 }
-
-export default AdminHeader

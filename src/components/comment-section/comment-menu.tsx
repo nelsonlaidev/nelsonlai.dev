@@ -21,7 +21,7 @@ import { useDeletePostComment } from '@/hooks/queries/comment.query'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
 import { useSession } from '@/lib/auth-client'
 
-function CommentMenu() {
+export function CommentMenu() {
   const { comment } = useCommentContext()
   const { slug } = useCommentsContext()
   const { data: session } = useSession()
@@ -111,5 +111,3 @@ function CommentMenu() {
     </>
   )
 }
-
-export default CommentMenu

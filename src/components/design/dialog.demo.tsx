@@ -13,7 +13,7 @@ import {
 import { Field, FieldGroup, FieldLabel } from '../ui/field'
 import { Input } from '../ui/input'
 
-function DialogDemo() {
+export function DialogDemo() {
   return (
     <Demo title='Dialog'>
       <DialogBasic />
@@ -55,5 +55,3 @@ function DialogBasic() {
     </DemoItem>
   )
 }
-
-export default DialogDemo

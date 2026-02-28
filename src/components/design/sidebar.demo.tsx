@@ -40,7 +40,7 @@ const FOOTER_LINKS = [
   { label: 'Support', icon: LifeBuoyIcon },
 ]
 
-function SidebarDemo() {
+export function SidebarDemo() {
   return (
     <Demo title='Sidebar' className='md:grid-cols-1'>
       <SidebarBasic />
@@ -139,5 +139,3 @@ function SidebarBasic() {
     </DemoItem>
   )
 }
-
-export default SidebarDemo

@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useCommentEditor } from '@/hooks/use-comment-editor'
 
-import Markdown from '../mdx/markdown'
+import { Markdown } from '../mdx/markdown'
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupTextarea } from '../ui/input-group'
 
 type CommentEditorProps = {
@@ -16,7 +16,7 @@ type CommentEditorProps = {
   onEscape?: () => void
 } & React.ComponentProps<typeof Textarea>
 
-function CommentEditor(props: CommentEditorProps) {
+export function CommentEditor(props: CommentEditorProps) {
   const { value, tabsValue, onTabsValueChange, onModEnter, onEscape, ...rest } = props
   const t = useTranslations()
   const { textareaRef, handleKeyDown, handleInput, handleCompositionStart, handleCompositionEnd, decorateText } =
@@ -89,5 +89,3 @@ function CommentEditor(props: CommentEditorProps) {
     </Tabs>
   )
 }
-
-export default CommentEditor

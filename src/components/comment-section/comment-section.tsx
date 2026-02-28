@@ -6,14 +6,14 @@ import { useState } from 'react'
 
 import { CommentsProvider } from '@/contexts/comments.context'
 
-import CommentList from './comment-list'
-import CommentPost from './comment-post'
+import { CommentList } from './comment-list'
+import { CommentPost } from './comment-post'
 
 type CommentSectionProps = {
   slug: string
 }
 
-function CommentSection(props: CommentSectionProps) {
+export function CommentSection(props: CommentSectionProps) {
   const { slug } = props
   const [sort, setSort] = useState<CommentListInput['sort']>('newest')
 
@@ -26,5 +26,3 @@ function CommentSection(props: CommentSectionProps) {
     </CommentsProvider>
   )
 }
-
-export default CommentSection

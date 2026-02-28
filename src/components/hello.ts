@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-function Hello() {
+export function Hello() {
   useEffect(() => {
     // This is a fun little message for anyone who might be inspecting the code.
     // So we disable the rule for this line.
@@ -23,5 +23,3 @@ and give it a star ⭐
 
   return null
 }
-
-export default Hello

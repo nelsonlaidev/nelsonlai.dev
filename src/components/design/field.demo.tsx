@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Switch } from '../ui/switch'
 import { Textarea } from '../ui/textarea'
 
-function FieldDemo() {
+export function FieldDemo() {
   return (
     <Demo title='Field'>
       <InputFields />
@@ -169,5 +169,3 @@ function SwitchFields() {
     </DemoItem>
   )
 }
-
-export default FieldDemo

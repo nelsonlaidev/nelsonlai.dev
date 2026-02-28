@@ -8,11 +8,11 @@ import { useCommentsContext } from '@/contexts/comments.context'
 import { useListComments } from '@/hooks/queries/comment.query'
 import { useCommentParams } from '@/hooks/use-comment-params'
 
-import Comment from './comment'
-import CommentHeader from './comment-header'
-import CommentLoader from './comment-loader'
+import { Comment } from './comment'
+import { CommentHeader } from './comment-header'
+import { CommentLoader } from './comment-loader'
 
-function CommentList() {
+export function CommentList() {
   const { slug, sort } = useCommentsContext()
   const [params] = useCommentParams()
   const t = useTranslations()
@@ -57,5 +57,3 @@ function CommentList() {
     </>
   )
 }
-
-export default CommentList

@@ -49,7 +49,7 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
 
-function DropdownMenuDemo() {
+export function DropdownMenuDemo() {
   return (
     <Demo title='Dropdown Menu'>
       <DropdownMenuComplex />
@@ -291,5 +291,3 @@ function DropdownMenuComplex() {
     </DemoItem>
   )
 }
-
-export default DropdownMenuDemo

@@ -8,11 +8,11 @@ import { buttonVariants } from '@/components/ui/button'
 import { Link } from '@/components/ui/link'
 import { cn } from '@/utils/cn'
 
-import CodingHours from './coding-hours'
-import Connect from './connect'
-import FavoriteFramework from './favorite-framework'
-import LocationCard from './location-card'
-import StacksCard from './stacks-card'
+import { CodingHours } from './coding-hours'
+import { Connect } from './connect'
+import { FavoriteFramework } from './favorite-framework'
+import { LocationCard } from './location-card'
+import { StacksCard } from './stacks-card'
 
 const variants = {
   initial: {
@@ -25,7 +25,7 @@ const variants = {
   },
 }
 
-function AboutMe() {
+export function AboutMe() {
   const cardsRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(cardsRef, { once: true, margin: '-100px' })
   const t = useTranslations()
@@ -91,5 +91,3 @@ function AboutMe() {
     </motion.div>
   )
 }
-
-export default AboutMe

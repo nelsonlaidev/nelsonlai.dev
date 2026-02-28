@@ -4,7 +4,7 @@ import { cn } from '@/utils/cn'
 
 type SegmentGroupProps = React.ComponentProps<typeof SegmentGroupPrimitive.Root>
 
-function SegmentGroup(props: SegmentGroupProps) {
+export function SegmentGroup(props: SegmentGroupProps) {
   const { className, children, orientation = 'horizontal', ...rest } = props
 
   return (
@@ -32,7 +32,7 @@ function SegmentGroup(props: SegmentGroupProps) {
 
 type SegmentGroupItemProps = React.ComponentProps<typeof SegmentGroupPrimitive.Item>
 
-function SegmentGroupItem(props: SegmentGroupItemProps) {
+export function SegmentGroupItem(props: SegmentGroupItemProps) {
   const { className, children, ...rest } = props
 
   return (
@@ -50,5 +50,3 @@ function SegmentGroupItem(props: SegmentGroupItemProps) {
     </SegmentGroupPrimitive.Item>
   )
 }
-
-export { SegmentGroup, SegmentGroupItem }

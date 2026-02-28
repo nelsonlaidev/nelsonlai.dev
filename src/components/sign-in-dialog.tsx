@@ -41,7 +41,7 @@ function GoogleIcon() {
   )
 }
 
-function SignInDialog() {
+export function SignInDialog() {
   const { open, setOpen, closeDialog: closeSignInDialog } = useSignInDialog()
   const [isPending, setIsPending] = useState(false)
   const [lastUsedProvider, setLastUsedProvider] = useState<Provider | null>(null)
@@ -137,5 +137,3 @@ function LastUsed() {
     </Badge>
   )
 }
-
-export default SignInDialog

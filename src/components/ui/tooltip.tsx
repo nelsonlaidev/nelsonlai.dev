@@ -6,7 +6,7 @@ import { cn } from '@/utils/cn'
 
 type TooltipProviderProps = TooltipPrimitive.Provider.Props
 
-function TooltipProvider(props: TooltipProviderProps) {
+export function TooltipProvider(props: TooltipProviderProps) {
   const { delay = 0, ...rest } = props
 
   return <TooltipPrimitive.Provider data-slot='tooltip-provider' delay={delay} {...rest} />
@@ -14,7 +14,7 @@ function TooltipProvider(props: TooltipProviderProps) {
 
 type TooltipProps = TooltipPrimitive.Root.Props
 
-function Tooltip(props: TooltipProps) {
+export function Tooltip(props: TooltipProps) {
   return (
     <TooltipProvider>
       <TooltipPrimitive.Root data-slot='tooltip' {...props} />
@@ -24,14 +24,14 @@ function Tooltip(props: TooltipProps) {
 
 type TooltipTriggerProps = TooltipPrimitive.Trigger.Props
 
-function TooltipTrigger(props: TooltipTriggerProps) {
+export function TooltipTrigger(props: TooltipTriggerProps) {
   return <TooltipPrimitive.Trigger data-slot='tooltip-trigger' {...props} />
 }
 
 type TooltipContentProps = TooltipPrimitive.Popup.Props &
   Pick<TooltipPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset'>
 
-function TooltipContent(props: TooltipContentProps) {
+export function TooltipContent(props: TooltipContentProps) {
   const { className, side = 'top', sideOffset = 4, align = 'center', alignOffset = 0, children, ...rest } = props
 
   return (
@@ -58,5 +58,3 @@ function TooltipContent(props: TooltipContentProps) {
     </TooltipPrimitive.Portal>
   )
 }
-
-export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger }

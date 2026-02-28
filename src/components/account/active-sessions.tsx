@@ -15,11 +15,11 @@ import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useRouter } from '@/i18n/routing'
 import { useSession } from '@/lib/auth-client'
 
-import Tip from '../tip'
+import { Tip } from '../tip'
 
-import ActiveSessionsSkeleton from './active-sessions-skeleton'
+import { ActiveSessionsSkeleton } from './active-sessions-skeleton'
 
-function ActiveSessions() {
+export function ActiveSessions() {
   const t = useTranslations()
   const { data, isSuccess, isLoading, isError } = useListSessions()
 
@@ -136,5 +136,3 @@ function Session(props: SessionProps) {
     </Card>
   )
 }
-
-export default ActiveSessions

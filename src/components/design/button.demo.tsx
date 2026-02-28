@@ -3,7 +3,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Demo, DemoItem } from '../ui/demo'
 
-function ButtonDemo() {
+export function ButtonDemo() {
   return (
     <Demo title='Buttons'>
       <ButtonVariantsAndSizes />
@@ -397,5 +397,3 @@ function ButtonIconOnly() {
     </DemoItem>
   )
 }
-
-export default ButtonDemo

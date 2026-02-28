@@ -7,7 +7,7 @@ import { Button } from '../ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card'
 import { Demo, DemoItem } from '../ui/demo'
 
-function CardDemo() {
+export function CardDemo() {
   return (
     <Demo title='Card'>
       <CardSizes />
@@ -160,5 +160,3 @@ function CardWithImage() {
     </DemoItem>
   )
 }
-
-export default CardDemo

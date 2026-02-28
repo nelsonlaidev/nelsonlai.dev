@@ -11,10 +11,10 @@ import { useCreatePostComment } from '@/hooks/queries/comment.query'
 import { useIsMounted } from '@/hooks/use-is-mounted'
 import { useSession } from '@/lib/auth-client'
 
-import CommentEditor from './comment-editor'
-import UnauthenticatedOverlay from './unauthenticated-overlay'
+import { CommentEditor } from './comment-editor'
+import { UnauthenticatedOverlay } from './unauthenticated-overlay'
 
-function CommentPost() {
+export function CommentPost() {
   const { slug } = useCommentsContext()
   const [content, setContent] = useState('')
   const [tabsValue, setTabsValue] = useState<'write' | 'preview'>('write')
@@ -90,5 +90,3 @@ function CommentPost() {
     </form>
   )
 }
-
-export default CommentPost

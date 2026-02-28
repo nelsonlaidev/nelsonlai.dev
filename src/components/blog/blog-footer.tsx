@@ -11,7 +11,7 @@ type BlogFooterProps = {
   post: Post
 }
 
-function BlogFooter(props: BlogFooterProps) {
+export function BlogFooter(props: BlogFooterProps) {
   const { post } = props
   const t = useTranslations()
   const locale = useLocale()
@@ -29,5 +29,3 @@ function BlogFooter(props: BlogFooterProps) {
     </div>
   )
 }
-
-export default BlogFooter

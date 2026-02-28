@@ -7,25 +7,25 @@ import { cn } from '@/utils/cn'
 
 type AlertDialogProps = AlertDialogPrimitive.Root.Props
 
-function AlertDialog(props: AlertDialogProps) {
+export function AlertDialog(props: AlertDialogProps) {
   return <AlertDialogPrimitive.Root data-slot='alert-dialog' {...props} />
 }
 
 type AlertDialogTriggerProps = AlertDialogPrimitive.Trigger.Props
 
-function AlertDialogTrigger(props: AlertDialogTriggerProps) {
+export function AlertDialogTrigger(props: AlertDialogTriggerProps) {
   return <AlertDialogPrimitive.Trigger data-slot='alert-dialog-trigger' {...props} />
 }
 
 type AlertDialogPortalProps = AlertDialogPrimitive.Portal.Props
 
-function AlertDialogPortal(props: AlertDialogPortalProps) {
+export function AlertDialogPortal(props: AlertDialogPortalProps) {
   return <AlertDialogPrimitive.Portal data-slot='alert-dialog-portal' {...props} />
 }
 
 type AlertDialogOverlayProps = AlertDialogPrimitive.Backdrop.Props
 
-function AlertDialogOverlay(props: AlertDialogOverlayProps) {
+export function AlertDialogOverlay(props: AlertDialogOverlayProps) {
   const { className, ...rest } = props
 
   return (
@@ -44,7 +44,7 @@ type AlertDialogContentProps = AlertDialogPrimitive.Popup.Props & {
   size?: 'default' | 'sm'
 }
 
-function AlertDialogContent(props: AlertDialogContentProps) {
+export function AlertDialogContent(props: AlertDialogContentProps) {
   const { className, size = 'default', ...rest } = props
 
   return (
@@ -65,7 +65,7 @@ function AlertDialogContent(props: AlertDialogContentProps) {
 
 type AlertDialogHeaderProps = React.ComponentProps<'div'>
 
-function AlertDialogHeader(props: AlertDialogHeaderProps) {
+export function AlertDialogHeader(props: AlertDialogHeaderProps) {
   const { className, ...rest } = props
 
   return (
@@ -82,7 +82,7 @@ function AlertDialogHeader(props: AlertDialogHeaderProps) {
 
 type AlertDialogFooterProps = React.ComponentProps<'div'>
 
-function AlertDialogFooter(props: AlertDialogFooterProps) {
+export function AlertDialogFooter(props: AlertDialogFooterProps) {
   const { className, ...rest } = props
 
   return (
@@ -99,7 +99,7 @@ function AlertDialogFooter(props: AlertDialogFooterProps) {
 
 type AlertDialogMediaProps = React.ComponentProps<'div'>
 
-function AlertDialogMedia(props: AlertDialogMediaProps) {
+export function AlertDialogMedia(props: AlertDialogMediaProps) {
   const { className, ...rest } = props
 
   return (
@@ -116,7 +116,7 @@ function AlertDialogMedia(props: AlertDialogMediaProps) {
 
 type AlertDialogTitleProps = React.ComponentProps<typeof AlertDialogPrimitive.Title>
 
-function AlertDialogTitle(props: AlertDialogTitleProps) {
+export function AlertDialogTitle(props: AlertDialogTitleProps) {
   const { className, ...rest } = props
 
   return (
@@ -133,7 +133,7 @@ function AlertDialogTitle(props: AlertDialogTitleProps) {
 
 type AlertDialogDescriptionProps = React.ComponentProps<typeof AlertDialogPrimitive.Description>
 
-function AlertDialogDescription(props: AlertDialogDescriptionProps) {
+export function AlertDialogDescription(props: AlertDialogDescriptionProps) {
   const { className, ...rest } = props
 
   return (
@@ -150,7 +150,7 @@ function AlertDialogDescription(props: AlertDialogDescriptionProps) {
 
 type AlertDialogActionProps = React.ComponentProps<typeof Button>
 
-function AlertDialogAction(props: AlertDialogActionProps) {
+export function AlertDialogAction(props: AlertDialogActionProps) {
   const { className, ...rest } = props
 
   return <Button data-slot='alert-dialog-action' className={cn(className)} {...rest} />
@@ -159,7 +159,7 @@ function AlertDialogAction(props: AlertDialogActionProps) {
 type AlertDialogCancelProps = AlertDialogPrimitive.Close.Props &
   Pick<React.ComponentProps<typeof Button>, 'variant' | 'size'>
 
-function AlertDialogCancel(props: AlertDialogCancelProps) {
+export function AlertDialogCancel(props: AlertDialogCancelProps) {
   const { className, variant = 'outline', size = 'default', ...rest } = props
 
   return (
@@ -170,19 +170,4 @@ function AlertDialogCancel(props: AlertDialogCancelProps) {
       {...rest}
     />
   )
-}
-
-export {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogMedia,
-  AlertDialogOverlay,
-  AlertDialogPortal,
-  AlertDialogTitle,
-  AlertDialogTrigger,
 }

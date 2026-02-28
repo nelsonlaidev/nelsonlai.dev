@@ -6,7 +6,7 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from '../ui/input-group'
 import { Kbd, KbdGroup } from '../ui/kbd'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 
-function KbdDemo() {
+export function KbdDemo() {
   return (
     <Demo title='Kbd'>
       <KbdBasic />
@@ -142,5 +142,3 @@ function KbdWithSamp() {
     </DemoItem>
   )
 }
-
-export default KbdDemo

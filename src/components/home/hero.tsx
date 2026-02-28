@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 
-import BlurImage from '@/components/blur-image'
+import { BlurImage } from '@/components/blur-image'
 import { cn } from '@/utils/cn'
 
 const WORDS = [
@@ -30,7 +30,7 @@ const WORDS = [
   },
 ] as const
 
-function Hero() {
+export function Hero() {
   return (
     <div className='my-16 flex justify-between'>
       <Introduction />
@@ -120,5 +120,3 @@ function Avatar() {
     </motion.div>
   )
 }
-
-export default Hero

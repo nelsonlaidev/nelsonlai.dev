@@ -5,7 +5,7 @@ import { CheckIcon, PlusIcon } from 'lucide-react'
 import { Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from '../ui/avatar'
 import { Demo, DemoItem } from '../ui/demo'
 
-function AvatarDemo() {
+export function AvatarDemo() {
   return (
     <Demo title='Avatar'>
       <AvatarSizes />
@@ -278,5 +278,3 @@ function AvatarGroups() {
     </DemoItem>
   )
 }
-
-export default AvatarDemo
