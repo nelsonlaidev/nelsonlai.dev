@@ -1,33 +1,41 @@
 import { GITHUB_USERNAME } from '@/lib/constants'
 import { octokit } from '@/lib/octokit'
 
+import { cache } from '../cache'
 import { publicProcedure } from '../procedures'
 import { GithubStatsOutputSchema } from '../schemas/github.schema'
 
+const CACHE_KEY = 'stats'
+
 const getStats = publicProcedure.output(GithubStatsOutputSchema).handler(async () => {
-  const repos = await octokit.paginate('GET /users/{username}/repos', {
-    username: GITHUB_USERNAME,
-    per_page: 100,
-  })
+  const cached = await cache.github.get(CACHE_KEY)
+  if (cached) return cached
 
-  const stars = repos.reduce((sum, repo) => sum + (repo.stargazers_count ?? 0), 0)
+  const [repos, { data: user }, { data: repo }] = await Promise.all([
+    octokit.paginate('GET /users/{username}/repos', {
+      username: GITHUB_USERNAME,
+      per_page: 100,
+    }),
+    octokit.request('GET /users/{username}', {
+      username: GITHUB_USERNAME,
+    }),
+    octokit.request('GET /repos/{owner}/{repo}', {
+      owner: GITHUB_USERNAME,
+      repo: 'nelsonlai.dev',
+    }),
+  ])
 
-  const { data: user } = await octokit.request('GET /users/{username}', {
-    username: GITHUB_USERNAME,
-  })
+  const stars = repos.reduce((sum, r) => sum + (r.stargazers_count ?? 0), 0)
 
-  const { followers } = user
-
-  const { data: repo } = await octokit.request('GET /repos/{owner}/{repo}', {
-    owner: GITHUB_USERNAME,
-    repo: 'nelsonlai.dev',
-  })
-
-  return {
+  const result = {
     stars,
-    followers,
+    followers: user.followers,
     repoStars: repo.stargazers_count,
   }
+
+  await cache.github.set(CACHE_KEY, result)
+
+  return result
 })
 
 export const githubRouter = {
