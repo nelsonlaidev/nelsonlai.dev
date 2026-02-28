@@ -2,7 +2,7 @@ import { Buffer } from 'node:buffer'
 
 import * as z from 'zod'
 
-import { env } from '@/lib/env'
+import { env } from '@/env'
 import { TraceableError } from '@/lib/errors'
 
 import { publicProcedure } from '../procedures'

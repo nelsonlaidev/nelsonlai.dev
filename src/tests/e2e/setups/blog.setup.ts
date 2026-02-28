@@ -7,7 +7,7 @@ import { expect, test as setup } from '@playwright/test'
 
 import { db } from '@/db'
 import { posts } from '@/db/schemas'
-import { env } from '@/lib/env'
+import { env } from '@/env'
 
 import { TEST_POSTS } from '../fixtures/posts'
 import { makeDummyImage } from '../utils/make-dummy-image'

@@ -5,7 +5,7 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { headers } from 'next/headers'
 
 import { db } from '@/db'
-import { env } from '@/lib/env'
+import { env } from '@/env'
 import { getBaseUrl } from '@/utils/get-base-url'
 
 function getSocialProviders(): SocialProviders {

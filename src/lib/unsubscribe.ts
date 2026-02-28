@@ -6,7 +6,7 @@ import * as z from 'zod'
 
 import { db } from '@/db'
 import { comments, unsubscribes } from '@/db/schemas'
-import { env } from '@/lib/env'
+import { env } from '@/env'
 import { getMaskedEmail } from '@/utils/get-masked-email'
 
 const TokenSchema = z.jwt({ alg: 'HS256' })

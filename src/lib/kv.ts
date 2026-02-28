@@ -2,7 +2,7 @@ import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
 import { consola } from 'consola'
 
-import { env } from '@/lib/env'
+import { env } from '@/env'
 
 export const redis = new Redis({
   url: env.UPSTASH_REDIS_REST_URL,

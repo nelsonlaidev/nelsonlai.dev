@@ -1,6 +1,6 @@
 import posthog from 'posthog-js'
 
-import { env } from '@/lib/env'
+import { env } from '@/env'
 
 if (env.NEXT_PUBLIC_POSTHOG_KEY) {
   posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {

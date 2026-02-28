@@ -1,6 +1,6 @@
 import { Octokit } from '@octokit/rest'
 
-import { env } from '@/lib/env'
+import { env } from '@/env'
 
 export const octokit: InstanceType<typeof Octokit> | null = env.GITHUB_TOKEN
   ? new Octokit({

@@ -7,7 +7,7 @@ import dayjs from 'dayjs'
 
 import { db } from '@/db'
 import { accounts, sessions, users } from '@/db/schemas'
-import { env } from '@/lib/env'
+import { env } from '@/env'
 
 import { TEST_UNIQUE_ID, TEST_USER } from '../fixtures/auth'
 

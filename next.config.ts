@@ -3,8 +3,8 @@ import type { NextConfig } from 'next'
 import { withContentCollections } from '@content-collections/next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
+import { env } from '@/env'
 import { IS_PRODUCTION } from '@/lib/constants'
-import { env } from '@/lib/env'
 import { withPostHog } from '@/lib/posthog'
 
 const withNextIntl = createNextIntlPlugin()

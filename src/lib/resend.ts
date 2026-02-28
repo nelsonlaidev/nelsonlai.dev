@@ -1,6 +1,6 @@
 import { Resend } from 'resend'
 
-import { env } from '@/lib/env'
+import { env } from '@/env'
 
 type SendEmailOptions = {
   subject: string

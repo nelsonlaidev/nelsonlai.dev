@@ -3,7 +3,7 @@ import type { NextConfig } from 'next'
 import { withPostHogConfig } from '@posthog/nextjs-config'
 import { PostHog } from 'posthog-node'
 
-import { env } from './env'
+import { env } from '@/env'
 
 let posthogInstance: PostHog | null = null
 
