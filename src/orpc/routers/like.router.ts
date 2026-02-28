@@ -178,7 +178,7 @@ const incrementLike = publicProcedure
     }
   })
 
-const likesStats = publicProcedure.output(LikesStatsOutputSchema).handler(async ({ context }) => {
+const getStats = publicProcedure.output(LikesStatsOutputSchema).handler(async ({ context }) => {
   const [result] = await context.db
     .select({
       value: sum(posts.likes),
@@ -195,5 +195,5 @@ const likesStats = publicProcedure.output(LikesStatsOutputSchema).handler(async 
 export const likeRouter = {
   count: countLike,
   increment: incrementLike,
-  stats: likesStats,
+  getStats,
 }

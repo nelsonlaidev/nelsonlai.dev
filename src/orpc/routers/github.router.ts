@@ -4,15 +4,7 @@ import { octokit } from '@/lib/octokit'
 import { publicProcedure } from '../procedures'
 import { GithubStatsOutputSchema } from '../schemas/github.schema'
 
-const githubStats = publicProcedure.output(GithubStatsOutputSchema).handler(async () => {
-  if (!octokit) {
-    return {
-      stars: 0,
-      followers: 0,
-      repoStars: 0,
-    }
-  }
-
+const getStats = publicProcedure.output(GithubStatsOutputSchema).handler(async () => {
   const repos = await octokit.paginate('GET /users/{username}/repos', {
     username: GITHUB_USERNAME,
     per_page: 100,
@@ -39,5 +31,5 @@ const githubStats = publicProcedure.output(GithubStatsOutputSchema).handler(asyn
 })
 
 export const githubRouter = {
-  stats: githubStats,
+  getStats,
 }

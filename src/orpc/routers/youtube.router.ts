@@ -22,7 +22,7 @@ const EMPTY_RESPONSE = {
   views: 0,
 }
 
-const youtubeStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(async () => {
+const getStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(async () => {
   if (!env.GOOGLE_API_KEY) return EMPTY_RESPONSE
 
   const response = await fetch(
@@ -57,5 +57,5 @@ const youtubeStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(as
 })
 
 export const youtubeRouter = {
-  stats: youtubeStats,
+  getStats,
 }

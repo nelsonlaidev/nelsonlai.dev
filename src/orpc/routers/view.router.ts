@@ -74,7 +74,7 @@ const incrementView = publicProcedure
     }
   })
 
-const viewsStats = publicProcedure.output(ViewsStatsOutputSchema).handler(async ({ context }) => {
+const getStats = publicProcedure.output(ViewsStatsOutputSchema).handler(async ({ context }) => {
   const [result] = await context.db
     .select({
       value: sum(posts.views),
@@ -91,5 +91,5 @@ const viewsStats = publicProcedure.output(ViewsStatsOutputSchema).handler(async 
 export const viewRouter = {
   count: countView,
   increment: incrementView,
-  stats: viewsStats,
+  getStats,
 }

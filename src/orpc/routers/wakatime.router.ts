@@ -14,7 +14,7 @@ const WakatimeResponseSchema = z.object({
   }),
 })
 
-const wakatimeStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(async () => {
+const getStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(async () => {
   if (!env.WAKATIME_API_KEY) {
     return {
       hours: 0,
@@ -45,5 +45,5 @@ const wakatimeStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(
 })
 
 export const wakatimeRouter = {
-  stats: wakatimeStats,
+  getStats,
 }

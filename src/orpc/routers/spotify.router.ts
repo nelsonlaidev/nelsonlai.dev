@@ -75,7 +75,7 @@ async function getAccessToken() {
   return data.access_token
 }
 
-const spotifyStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(async () => {
+const getStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(async () => {
   if (!CLIENT_ID || !CLIENT_SECRET || !REFRESH_TOKEN) {
     return EMPTY_RESPONSE
   }
@@ -120,5 +120,5 @@ const spotifyStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(as
 })
 
 export const spotifyRouter = {
-  stats: spotifyStats,
+  getStats,
 }
