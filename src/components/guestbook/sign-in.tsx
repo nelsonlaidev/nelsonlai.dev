@@ -12,7 +12,7 @@ export function SignIn() {
   return (
     <>
       <Button
-        className='inline-block bg-linear-to-br from-[#fcd34d] via-[#ef4444] to-[#ec4899] font-extrabold dark:text-foreground'
+        className='inline-block bg-linear-to-br from-[#fcd34d] via-[#ef4444] to-[#ec4899] font-semibold dark:text-foreground'
         onClick={openDialog}
       >
         {t('common.sign-in')}

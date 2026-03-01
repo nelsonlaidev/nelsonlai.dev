@@ -60,7 +60,7 @@ export function MessageBox(props: MessageBoxProps) {
         <AvatarImage src={user.image ?? defaultImage} alt={user.name} />
         <AvatarFallback>{getAbbreviation(user.name)}</AvatarFallback>
       </Avatar>
-      <form onSubmit={handleSubmit} className='w-full'>
+      <form onSubmit={handleSubmit} className='w-full space-y-4'>
         <FieldGroup>
           <form.Field name='message'>
             {(field) => {
@@ -87,7 +87,7 @@ export function MessageBox(props: MessageBoxProps) {
             }}
           </form.Field>
         </FieldGroup>
-        <div className='mt-4 flex justify-end gap-2'>
+        <div className='flex items-center justify-end gap-2'>
           <Button variant='outline' onClick={signOut} disabled={isCreating}>
             {t('common.sign-out')}
           </Button>

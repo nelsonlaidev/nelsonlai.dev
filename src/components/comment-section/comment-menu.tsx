@@ -1,4 +1,4 @@
-import { MoreVerticalIcon } from 'lucide-react'
+import { CopyIcon, MoreVerticalIcon, Trash2Icon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -13,7 +13,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
@@ -64,7 +64,7 @@ export function CommentMenu() {
             </Button>
           }
         />
-        <DropdownMenuContent align='end'>
+        <DropdownMenuContent align='end' className='min-w-36'>
           <DropdownMenuItem
             onClick={() => {
               void copy({
@@ -73,7 +73,7 @@ export function CommentMenu() {
               })
             }}
           >
-            {t('blog.comments.copy-link')}
+            <CopyIcon /> {t('blog.comments.copy-link')}
           </DropdownMenuItem>
           {isAuthor && (
             <DropdownMenuItem
@@ -85,6 +85,7 @@ export function CommentMenu() {
                 setOpen(true)
               }}
             >
+              <Trash2Icon />
               {t('common.delete')}
             </DropdownMenuItem>
           )}
@@ -100,7 +101,7 @@ export function CommentMenu() {
             <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDeleteComment}
-              className={buttonVariants({ variant: 'destructive' })}
+              variant='destructive'
               data-testid='comment-dialog-delete-button'
             >
               {t('common.delete')}

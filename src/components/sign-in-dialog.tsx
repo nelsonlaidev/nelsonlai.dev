@@ -89,7 +89,8 @@ export function SignInDialog() {
         </DialogHeader>
         <div className='my-6 flex flex-col gap-4'>
           <Button
-            className='relative h-10 gap-3 rounded-xl font-semibold'
+            className='relative'
+            size='lg'
             onClick={async () => handleSignIn('github')}
             disabled={isPending}
             data-testid='github-sign-in-button'
@@ -99,7 +100,8 @@ export function SignInDialog() {
             {lastUsedProvider === 'github' && <LastUsed />}
           </Button>
           <Button
-            className='relative h-10 gap-3 rounded-xl border font-semibold'
+            className='relative border-border'
+            size='lg'
             variant='ghost'
             onClick={async () => handleSignIn('google')}
             disabled={isPending}

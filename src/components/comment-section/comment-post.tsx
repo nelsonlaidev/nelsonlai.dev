@@ -75,15 +75,15 @@ export function CommentPost() {
         />
         <Button
           variant='ghost'
-          size='icon-sm'
-          className='absolute right-2 bottom-1.5'
+          size='icon-xs'
+          className='absolute right-3 bottom-3'
           type='submit'
           disabled={disabled || !content}
           aria-label={t('blog.comments.send-comment')}
           aria-disabled={disabled || !content}
           data-testid='comment-submit-button'
         >
-          <SendIcon />
+          <SendIcon className='size-4' />
         </Button>
         {isAuthenticated ? null : <UnauthenticatedOverlay />}
       </div>

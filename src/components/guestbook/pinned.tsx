@@ -14,7 +14,7 @@ export function Pinned() {
         <PinIcon className='size-5 rotate-45 text-muted-foreground' />
       </div>
 
-      <div className='relative p-6'>
+      <div className='relative p-4'>
         <div className='flex items-start gap-4'>
           <div className='hidden size-10 shrink-0 items-center justify-center rounded-full bg-muted sm:flex'>
             <MessageCircleIcon className='size-5 text-primary' />
