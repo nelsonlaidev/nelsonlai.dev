@@ -1,5 +1,6 @@
 'use client'
 
+import type { CommentContextValue } from '@/contexts/comment.context'
 import type { CommentListOutput } from '@/orpc/client'
 
 import Image from 'next/image'
@@ -9,7 +10,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { type CommentContextValue, CommentProvider } from '@/contexts/comment.context'
+import { CommentProvider } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
 import { useCommentParams } from '@/hooks/use-comment-params'
 import { useFormattedDate } from '@/hooks/use-formatted-date'

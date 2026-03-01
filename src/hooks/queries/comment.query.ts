@@ -1,6 +1,8 @@
+import type { CommentCountInput, CommentListInput } from '@/orpc/client'
+
 import { keepPreviousData, useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { type CommentCountInput, type CommentListInput, orpc } from '@/orpc/client'
+import { orpc } from '@/orpc/client'
 
 export function useListComments(input: (pageParam: Date | undefined) => CommentListInput, enabled = true) {
   return useInfiniteQuery(

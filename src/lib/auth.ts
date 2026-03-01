@@ -1,6 +1,7 @@
+import type { SocialProviders } from 'better-auth'
 import type { NextRequest } from 'next/server'
 
-import { betterAuth, type SocialProviders } from 'better-auth'
+import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { headers } from 'next/headers'
 

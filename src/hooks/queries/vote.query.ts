@@ -1,6 +1,8 @@
+import type { CommentListInput } from '@/orpc/client'
+
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { type CommentListInput, orpc } from '@/orpc/client'
+import { orpc } from '@/orpc/client'
 
 export function useCreateVote(input: CommentListInput) {
   const queryClient = useQueryClient()
