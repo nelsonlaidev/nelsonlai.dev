@@ -7,7 +7,9 @@ import { cn } from '@/utils/cn'
 type DrawerProps = React.ComponentProps<typeof DrawerPrimitive.Root>
 
 export function Drawer(props: DrawerProps) {
-  return <DrawerPrimitive.Root data-slot='drawer' {...props} />
+  // See: https://github.com/emilkowalski/vaul/issues/517#issuecomment-2571619213
+  // eslint-disable-next-line jsx-a11y/no-autofocus
+  return <DrawerPrimitive.Root data-slot='drawer' autoFocus {...props} />
 }
 
 type DrawerTriggerProps = React.ComponentProps<typeof DrawerPrimitive.Trigger>
