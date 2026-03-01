@@ -1,5 +1,7 @@
+import type { BundledLanguage } from 'shiki'
+
 import { useEffect, useRef, useState } from 'react'
-import { type BundledLanguage, bundledLanguages } from 'shiki'
+import { bundledLanguages } from 'shiki'
 
 import { CodeBlock } from '@/components/ui/code-block'
 import { useHighlighter } from '@/hooks/use-highlighter'

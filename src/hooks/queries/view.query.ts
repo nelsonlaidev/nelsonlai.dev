@@ -1,6 +1,8 @@
+import type { ViewCountInput } from '@/orpc/client'
+
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { orpc, type ViewCountInput } from '@/orpc/client'
+import { orpc } from '@/orpc/client'
 
 export function useCountView(input: ViewCountInput) {
   return useQuery(orpc.view.count.queryOptions({ input }))

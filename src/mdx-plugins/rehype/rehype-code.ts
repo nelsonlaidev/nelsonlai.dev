@@ -4,6 +4,7 @@
 //
 // Modified by: Nelson Lai
 import type { Root } from 'hast'
+import type { ShikiTransformer } from 'shiki'
 import type { Transformer } from 'unified'
 
 import rehypeShikiFromHighlighter from '@shikijs/rehype/core'
@@ -13,7 +14,7 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from '@shikijs/transformers'
-import { bundledLanguages, getSingletonHighlighter, type ShikiTransformer } from 'shiki'
+import { bundledLanguages, getSingletonHighlighter } from 'shiki'
 import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
 const titleRegex = /title=["']([^"']*)["']/

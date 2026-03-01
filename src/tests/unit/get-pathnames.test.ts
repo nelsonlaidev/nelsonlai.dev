@@ -104,7 +104,7 @@ async function processDynamicPage(fullPath: string, pathParts: string[]): Promis
 }
 
 async function isRSCPage(filePath: string): Promise<boolean> {
-  const content = await fs.readFile(filePath, 'utf8')
+  const content = await fs.readFile(filePath, 'utf-8')
 
   return content.includes('async function Page')
 }

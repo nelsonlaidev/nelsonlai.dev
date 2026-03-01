@@ -42,7 +42,7 @@ async function waitForContentBuild() {
   await expect(async () => {
     const fileContent = await fs.readFile(
       path.join(process.cwd(), '.content-collections/generated/allPosts.js'),
-      'utf8',
+      'utf-8',
     )
     const allPosts = extractJsonFromArrayFile(fileContent)
 

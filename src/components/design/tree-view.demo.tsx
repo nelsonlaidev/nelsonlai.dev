@@ -1,7 +1,9 @@
 'use client'
 
+import type { Node } from '../ui/tree-view'
+
 import { Demo, DemoItem } from '../ui/demo'
-import { createTreeCollection, type Node, TreeView } from '../ui/tree-view'
+import { createTreeCollection, TreeView } from '../ui/tree-view'
 
 const treeData: Node = {
   id: 'root',

@@ -1,10 +1,12 @@
+import type { Locale } from 'next-intl'
+
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
 import { notFound } from 'next/navigation'
 import { ImageResponse } from 'next/og'
 import { NextResponse } from 'next/server'
-import { hasLocale, type Locale } from 'next-intl'
+import { hasLocale } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 
 import { OGImage } from '@/components/og-image'
