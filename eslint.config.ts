@@ -41,6 +41,13 @@ export default defineConfig(
               message: 'Please use `@/components/ui/link` instead.',
             },
           ],
+          patterns: [
+            {
+              group: ['**/routing', '@/i18n/routing'],
+              importNames: ['Link'],
+              message: 'Please use `@/components/ui/link` instead.',
+            },
+          ],
         },
       ],
     },

@@ -3,7 +3,9 @@
 import { useTranslations } from 'next-intl'
 
 import { ACCOUNT_SIDEBAR_LINKS } from '@/constants/navigation'
-import { Link, usePathname } from '@/i18n/routing'
+import { usePathname } from '@/i18n/routing'
+
+import { Link } from '../ui/link'
 
 export function AccountSidebar() {
   const t = useTranslations()
