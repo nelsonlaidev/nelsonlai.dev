@@ -18,7 +18,7 @@ export function Providers(props: ProvidesProps) {
   return (
     <JotaiProvider>
       <QueryProvider>
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem enableColorScheme disableTransitionOnChange>
+        <ThemeProvider attribute='class' disableTransitionOnChange>
           <TooltipProvider>
             {children}
             <Toaster
