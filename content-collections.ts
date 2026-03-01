@@ -73,5 +73,5 @@ const pages = defineCollection({
 })
 
 export default defineConfig({
-  collections: [posts, projects, pages],
+  content: [posts, projects, pages],
 })
