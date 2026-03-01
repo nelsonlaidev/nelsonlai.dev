@@ -2,16 +2,16 @@ import { useEffect, useRef, useState } from 'react'
 
 export function useScrollspy(ids: string[], options: IntersectionObserverInit): string | undefined {
   const [activeId, setActiveId] = useState<string>()
-  const observer = useRef<IntersectionObserver | null>(null)
+  const observerRef = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {
     const elements = ids.map((id) => document.querySelector(`#${id}`))
 
-    if (observer.current) {
-      observer.current.disconnect()
+    if (observerRef.current) {
+      observerRef.current.disconnect()
     }
 
-    observer.current = new IntersectionObserver((entries) => {
+    observerRef.current = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
           setActiveId(entry.target.id)
@@ -20,10 +20,10 @@ export function useScrollspy(ids: string[], options: IntersectionObserverInit): 
     }, options)
 
     for (const el of elements) {
-      if (el) observer.current.observe(el)
+      if (el) observerRef.current.observe(el)
     }
 
-    return () => observer.current?.disconnect()
+    return () => observerRef.current?.disconnect()
   }, [ids, options])
 
   return activeId

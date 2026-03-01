@@ -34,11 +34,11 @@ export function CommentCodeBlock(props: CommentCodeBlockProps) {
   const { highlighter, initHighlighter } = useHighlighter()
   const [highlightedHtml, setHighlightedHtml] = useState('')
   const [isHighlighted, setIsHighlighted] = useState(false)
-  const initCalled = useRef(false)
+  const hasInitializedRef = useRef(false)
 
   useEffect(() => {
-    if (!initCalled.current) {
-      initCalled.current = true
+    if (!hasInitializedRef.current) {
+      hasInitializedRef.current = true
       void initHighlighter()
     }
   }, [initHighlighter])

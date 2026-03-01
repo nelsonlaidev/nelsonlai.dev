@@ -8,8 +8,8 @@ import { useEffect, useRef } from 'react'
 
 export function LocationCard() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const pointerInteracting = useRef<number | null>(null)
-  const pointerInteractionMovement = useRef(0)
+  const dragOriginXRef = useRef<number | null>(null)
+  const dragDeltaRef = useRef(0)
   const fadeMask = 'radial-gradient(circle at 50% 50%, rgb(0, 0, 0) 60%, rgb(0, 0, 0, 0) 70%)'
   const t = useTranslations()
 
@@ -91,28 +91,28 @@ export function LocationCard() {
             <canvas
               ref={canvasRef}
               onPointerDown={(e) => {
-                pointerInteracting.current = e.clientX - pointerInteractionMovement.current
+                dragOriginXRef.current = e.clientX - dragDeltaRef.current
                 if (canvasRef.current) canvasRef.current.style.cursor = 'grabbing'
               }}
               onPointerUp={() => {
-                pointerInteracting.current = null
+                dragOriginXRef.current = null
                 if (canvasRef.current) canvasRef.current.style.cursor = 'grab'
               }}
               onPointerOut={() => {
-                pointerInteracting.current = null
+                dragOriginXRef.current = null
                 if (canvasRef.current) canvasRef.current.style.cursor = 'grab'
               }}
               onMouseMove={(e) => {
-                if (pointerInteracting.current !== null) {
-                  const delta = e.clientX - pointerInteracting.current
-                  pointerInteractionMovement.current = delta
+                if (dragOriginXRef.current !== null) {
+                  const delta = e.clientX - dragOriginXRef.current
+                  dragDeltaRef.current = delta
                   rotation.set(delta / 200)
                 }
               }}
               onTouchMove={(e) => {
-                if (pointerInteracting.current !== null && e.touches[0]) {
-                  const delta = e.touches[0].clientX - pointerInteracting.current
-                  pointerInteractionMovement.current = delta
+                if (dragOriginXRef.current !== null && e.touches[0]) {
+                  const delta = e.touches[0].clientX - dragOriginXRef.current
+                  dragDeltaRef.current = delta
                   rotation.set(delta / 100)
                 }
               }}

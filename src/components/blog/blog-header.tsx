@@ -28,12 +28,12 @@ export function BlogHeader(props: BlogHeaderProps) {
 
   const { mutate: incrementPostView } = useIncrementView({ slug: post.slug })
 
-  const incremented = useRef(false)
+  const hasIncrementedRef = useRef(false)
 
   useEffect(() => {
-    if (!incremented.current) {
+    if (!hasIncrementedRef.current) {
       incrementPostView({ slug: post.slug })
-      incremented.current = true
+      hasIncrementedRef.current = true
     }
   }, [incrementPostView, post.slug])
 

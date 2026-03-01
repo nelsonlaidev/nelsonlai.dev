@@ -133,10 +133,10 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
   const { onModEnter, onEscape } = options
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  const undoStack = useRef<Snapshot[]>([])
-  const redoStack = useRef<Snapshot[]>([])
-  const isComposing = useRef(false)
-  const isApplyingHistory = useRef(false)
+  const undoStackRef = useRef<Snapshot[]>([])
+  const redoStackRef = useRef<Snapshot[]>([])
+  const isComposingRef = useRef(false)
+  const isApplyingHistoryRef = useRef(false)
 
   function createSnapshot(ta: HTMLTextAreaElement): Snapshot {
     return {
@@ -153,7 +153,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
   }
 
   const pushUndo = useCallback((snap: Snapshot) => {
-    const stack = undoStack.current
+    const stack = undoStackRef.current
     const last = stack.at(-1)
     if (!snapshotsEqual(last, snap)) {
       stack.push(snap)
@@ -162,28 +162,28 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
   }, [])
 
   function clearRedo() {
-    redoStack.current = []
+    redoStackRef.current = []
   }
 
   function applySnapshot(ta: HTMLTextAreaElement, snap: Snapshot) {
-    isApplyingHistory.current = true
+    isApplyingHistoryRef.current = true
     setRangeText(ta, snap.value, { start: 0, end: ta.value.length })
     ta.setSelectionRange(snap.selectionStart, snap.selectionEnd)
     ta.dispatchEvent(new InputEvent('input', { bubbles: true }))
-    isApplyingHistory.current = false
+    isApplyingHistoryRef.current = false
     ta.focus()
   }
 
   const undo = useCallback(() => {
     const ta = textareaRef.current
-    const stack = undoStack.current
+    const stack = undoStackRef.current
 
     if (!ta || stack.length <= 1) return
 
     const current = stack.pop()
     if (!current) return
 
-    redoStack.current.push(current)
+    redoStackRef.current.push(current)
 
     const target = stack.at(-1)
 
@@ -195,7 +195,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
   const redo = useCallback(() => {
     const ta = textareaRef.current
 
-    const next = redoStack.current.pop()
+    const next = redoStackRef.current.pop()
 
     if (!ta || !next) return
 
@@ -254,8 +254,8 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
   const handleInput = useCallback(
     (event: React.InputEvent<HTMLTextAreaElement>) => {
       const ta = event.currentTarget
-      if (isApplyingHistory.current) return
-      if (isComposing.current) return
+      if (isApplyingHistoryRef.current) return
+      if (isComposingRef.current) return
       pushUndo(createSnapshot(ta))
       clearRedo()
     },
@@ -264,7 +264,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
 
   const handleCompositionStart = useCallback(
     (event: React.CompositionEvent<HTMLTextAreaElement>) => {
-      isComposing.current = true
+      isComposingRef.current = true
       pushUndo(createSnapshot(event.currentTarget))
     },
     [pushUndo],
@@ -272,7 +272,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
 
   const handleCompositionEnd = useCallback(
     (event: React.CompositionEvent<HTMLTextAreaElement>) => {
-      isComposing.current = false
+      isComposingRef.current = false
       pushUndo(createSnapshot(event.currentTarget))
       clearRedo()
     },
