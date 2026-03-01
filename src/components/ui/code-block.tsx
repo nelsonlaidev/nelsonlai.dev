@@ -8,7 +8,7 @@ import { cn } from '@/utils/cn'
 import { getIconByLanguage } from '@/utils/get-icon-by-language'
 
 import { Button } from './button'
-import { ScrollArea, ScrollBar } from './scroll-area'
+import { ScrollArea } from './scroll-area'
 
 type CodeBlockProps = {
   'data-lang'?: string
@@ -49,7 +49,6 @@ export function CodeBlock(props: CodeBlockProps) {
         <pre ref={mergeRefs(textInput, ref)} className={cn('p-4 text-[13px]', className)} {...rest}>
           {children}
         </pre>
-        <ScrollBar orientation='horizontal' />
       </ScrollArea>
     </figure>
   )

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Fragment } from 'react'
 
 import { Demo, DemoItem } from '../ui/demo'
-import { ScrollArea, ScrollBar } from '../ui/scroll-area'
+import { ScrollArea } from '../ui/scroll-area'
 import { Separator } from '../ui/separator'
 
 export function ScrollAreaDemo() {
@@ -74,7 +74,6 @@ function ScrollAreaHorizontal() {
             </figure>
           ))}
         </div>
-        <ScrollBar orientation='horizontal' />
       </ScrollArea>
     </DemoItem>
   )

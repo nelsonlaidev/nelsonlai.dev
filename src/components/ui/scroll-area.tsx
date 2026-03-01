@@ -10,14 +10,12 @@ export function ScrollArea(props: ScrollAreaProps) {
   const { className, children, ...rest } = props
 
   return (
-    <ScrollAreaPrimitive.Root data-slot='scroll-area' className={cn('relative', className)} {...rest}>
-      <ScrollAreaPrimitive.Viewport
-        data-slot='scroll-area-viewport'
-        className='size-full rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1'
-      >
+    <ScrollAreaPrimitive.Root data-slot='scroll-area' className={cn('relative flex flex-col', className)} {...rest}>
+      <ScrollAreaPrimitive.Viewport data-slot='scroll-area-viewport' className='grow'>
         {children}
       </ScrollAreaPrimitive.Viewport>
       <ScrollBar />
+      <ScrollBar orientation='horizontal' />
       <ScrollAreaPrimitive.Corner />
     </ScrollAreaPrimitive.Root>
   )
@@ -34,12 +32,12 @@ export function ScrollBar(props: ScrollBarProps) {
       data-orientation={orientation}
       orientation={orientation}
       className={cn(
-        'flex touch-none p-px transition-colors select-none data-horizontal:h-2.5 data-horizontal:flex-col data-horizontal:border-t data-horizontal:border-t-transparent data-vertical:h-full data-vertical:w-2.5 data-vertical:border-l data-vertical:border-l-transparent',
+        'pointer-events-none m-2 flex rounded-full bg-neutral-200 opacity-0 transition-opacity data-hovering:pointer-events-auto data-hovering:opacity-100 data-scrolling:pointer-events-auto data-scrolling:opacity-100 data-horizontal:h-1.5 data-vertical:w-1.5',
         className,
       )}
       {...rest}
     >
-      <ScrollAreaPrimitive.Thumb data-slot='scroll-area-thumb' className='relative flex-1 rounded-full bg-border' />
+      <ScrollAreaPrimitive.Thumb data-slot='scroll-area-thumb' className='w-full rounded-full bg-neutral-400' />
     </ScrollAreaPrimitive.Scrollbar>
   )
 }
