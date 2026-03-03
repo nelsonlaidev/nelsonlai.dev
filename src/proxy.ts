@@ -3,6 +3,8 @@ import type { NextRequest } from 'next/server'
 import { env } from '@/env'
 import { i18nMiddleware } from '@/i18n/middleware'
 
+import { IS_PRODUCTION } from './lib/constants'
+
 const IS_PREVIEW = env.VERCEL_ENV === 'preview'
 
 export function proxy(request: NextRequest) {
@@ -19,7 +21,7 @@ export function proxy(request: NextRequest) {
     connect-src 'self' https://*.nelsonlai.dev https://*.posthog.com ${env.CLOUDFLARE_R2_ENDPOINT} ${IS_PREVIEW ? 'https://vercel.live wss://ws-us3.pusher.com' : ''};
     media-src 'self' https://*.posthog.com;
     manifest-src 'self';
-    frame-ancestors 'self' https://*.posthog.com;
+    frame-ancestors 'self' https://*.posthog.com ${IS_PRODUCTION ? '' : 'http://localhost:3002'};
     ${IS_PREVIEW ? 'frame-src https://vercel.live;' : ''}
   `
 
@@ -33,6 +35,7 @@ export function proxy(request: NextRequest) {
 export const config = {
   // Match all request paths except for the ones starting with:
   // - api (API routes)
+  // - cosmos (React Cosmos routes)
   // - rpc (oRPC routes)
   // - _next/static (static files)
   // - _next/image (image optimization files)
@@ -44,6 +47,6 @@ export const config = {
   // - robots.txt
   // - site.webmanifest
   matcher: [
-    '/((?!api|rpc|_next/static|_next/image|_vercel|_ph|favicon|android-chrome|apple-touch-icon|fonts|images|videos|favicon.ico|sitemap.xml|robots.txt|site.webmanifest).*)',
+    '/((?!api|cosmos|rpc|_next/static|_next/image|_vercel|_ph|favicon|android-chrome|apple-touch-icon|fonts|images|videos|favicon.ico|sitemap.xml|robots.txt|site.webmanifest).*)',
   ],
 }

@@ -20,7 +20,7 @@ export default defineConfig(
     },
     importX: {
       noNamespace: {
-        ignore: ['./schemas'],
+        ignore: ['./schemas', '../../../../cosmos.imports'],
       },
     },
   },
@@ -50,6 +50,12 @@ export default defineConfig(
           ],
         },
       ],
+    },
+  },
+  {
+    files: ['src/components/ui/*.fixture.tsx'],
+    rules: {
+      '@next/next/no-html-link-for-pages': 'off',
     },
   },
 )

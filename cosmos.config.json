@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/react-cosmos/config.schema.json",
+  "rendererUrl": {
+    "dev": "http://localhost:3000/cosmos/<fixture>",
+    "export": "/cosmos/<fixture>.html"
+  },
+  "port": 3002
+}
