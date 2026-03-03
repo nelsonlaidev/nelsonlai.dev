@@ -1,5 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "import": ["@cspell/dict-es-es/cspell-ext.json"],
+  "language": "en,es",
   "useGitignore": true,
   "enableGlobDot": true,
   "enabledFileTypes": { "*": true },
@@ -9,6 +11,11 @@
     {
       "name": "custom-words",
       "path": "./.cspell/custom-words.txt",
+      "addWords": true,
+    },
+    {
+      "name": "es-custom-words",
+      "path": "./.cspell/es-custom-words.txt",
       "addWords": true,
     },
     {
@@ -39,6 +46,7 @@
   ],
   "dictionaries": [
     "custom-words",
+    "es-custom-words",
     "names",
     "company-names",
     "software-names",
@@ -48,6 +56,13 @@
     "fullstack",
     "html",
     "sql",
+  ],
+  "languageSettings": [
+    {
+      "languageId": "*",
+      "locale": "es, es_ES",
+      "caseSensitive": false,
+    },
   ],
   "ignorePaths": ["pnpm-lock.yaml", ".git"],
 }

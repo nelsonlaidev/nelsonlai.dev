@@ -237,6 +237,9 @@ importers:
       '@content-collections/next':
         specifier: 0.2.11
         version: 0.2.11(@content-collections/core@0.14.1(typescript@5.9.3))(next@16.1.6(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
+      '@cspell/dict-es-es':
+        specifier: 3.0.8
+        version: 3.0.8
       '@dotenvx/dotenvx':
         specifier: 1.52.0
         version: 1.52.0
@@ -911,6 +914,9 @@ packages:
 
   '@cspell/dict-en_us@4.4.29':
     resolution: {integrity: sha512-G3B27++9ziRdgbrY/G/QZdFAnMzzx17u8nCb2Xyd4q6luLpzViRM/CW3jA+Mb/cGT5zR/9N+Yz9SrGu1s0bq7g==}
+
+  '@cspell/dict-es-es@3.0.8':
+    resolution: {integrity: sha512-tj4zYKYWtAFc+JWtJo0DxLAve7I0UJM5+6we3hvLyzQlhGCBF41cTihPa/cbLHUkTD6PkrVGf1hgOKuSR9hkMQ==}
 
   '@cspell/dict-filetypes@3.0.15':
     resolution: {integrity: sha512-uDMeqYlLlK476w/muEFQGBy9BdQWS0mQ7BJiy/iQv5XUWZxE2O54ZQd9nW8GyQMzAgoyg5SG4hf9l039Qt66oA==}
@@ -10095,6 +10101,8 @@ snapshots:
   '@cspell/dict-en-gb-mit@3.1.18': {}
 
   '@cspell/dict-en_us@4.4.29': {}
+
+  '@cspell/dict-es-es@3.0.8': {}
 
   '@cspell/dict-filetypes@3.0.15': {}
 
