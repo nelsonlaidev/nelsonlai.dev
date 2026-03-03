@@ -16,7 +16,7 @@ import {
   SearchIcon,
   SparklesIcon,
   StarIcon,
-  TrashIcon,
+  Trash2Icon,
 } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -221,7 +221,7 @@ function InputGroupWithButtons() {
             <InputGroupInput />
             <InputGroupAddon align='inline-end'>
               <InputGroupButton variant='secondary' size='icon-xs'>
-                <TrashIcon />
+                <Trash2Icon />
               </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>

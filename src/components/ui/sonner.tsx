@@ -2,6 +2,7 @@
 
 import type { ToasterProps } from 'sonner'
 
+// eslint-disable-next-line no-restricted-syntax
 import { CircleCheckIcon, InfoIcon, LoaderIcon, OctagonXIcon, TriangleAlertIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Toaster as Sonner } from 'sonner'

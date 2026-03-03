@@ -20,7 +20,7 @@ import {
   PlusIcon,
   ScissorsIcon,
   SettingsIcon,
-  TrashIcon,
+  Trash2Icon,
   UserIcon,
   ZoomInIcon,
   ZoomOutIcon,
@@ -117,7 +117,7 @@ function CommandGroupsAndItems() {
                 <CommandShortcut>⌘V</CommandShortcut>
               </CommandItem>
               <CommandItem>
-                <TrashIcon />
+                <Trash2Icon />
                 <span>Delete</span>
                 <CommandShortcut>⌫</CommandShortcut>
               </CommandItem>

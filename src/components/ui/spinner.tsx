@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-syntax
 import { LoaderIcon } from 'lucide-react'
 
 import { cn } from '@/utils/cn'

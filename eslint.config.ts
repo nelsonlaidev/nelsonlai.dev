@@ -50,6 +50,28 @@ export default defineConfig(
           ],
         },
       ],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: "ImportDeclaration[source.value='lucide-react'] > ImportSpecifier[imported.name!=/Icon$/]",
+          message: "Always use the 'Icon' suffixed version (e.g., 'HomeIcon' instead of 'Home').",
+        },
+        {
+          selector: "ImportDeclaration[source.value='lucide-react'] > ImportSpecifier[imported.name=/^Loader2?Icon$/]",
+          message:
+            "Do not use LoaderIcon or Loader2Icon from lucide-react. Use the <Spinner /> component from '@/components/ui/spinner' instead.",
+        },
+        {
+          selector: "ImportDeclaration[source.value='lucide-react'] > ImportSpecifier[imported.name='TrashIcon']",
+          message: "Use 'Trash2Icon' instead of 'TrashIcon' for better visual consistency.",
+        },
+        {
+          selector:
+            "CallExpression[callee.name='buttonVariants']:not(CallExpression[callee.name='cn'] CallExpression[callee.name='buttonVariants'])",
+          message:
+            "Always wrap 'buttonVariants()' calls inside the 'cn()' utility to ensure Tailwind classes merge correctly.",
+        },
+      ],
     },
   },
   {
