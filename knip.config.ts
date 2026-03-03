@@ -6,8 +6,6 @@ const config: KnipConfig = {
     'postcss',
     // Required by react-email
     '@react-email/preview-server',
-    // Required by react-cosmos
-    'react-cosmos-core',
   ],
   ignore: ['src/components/ui/*.tsx'],
   entry: ['content-collections.ts', 'src/db/reset.ts', 'src/db/seed.ts'],

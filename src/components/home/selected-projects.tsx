@@ -2,15 +2,15 @@
 
 import type { Project } from 'content-collections'
 
-import { ArrowUpRightIcon, LightbulbIcon } from 'lucide-react'
 import { motion, useInView } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useRef } from 'react'
 
-import { BlurImage } from '@/components/blur-image'
 import { buttonVariants } from '@/components/ui/button'
 import { Link } from '@/components/ui/link'
 import { cn } from '@/utils/cn'
+
+import { ProjectCard } from '../project-card'
 
 const variants = {
   initial: {
@@ -21,10 +21,6 @@ const variants = {
     y: 0,
     opacity: 1,
   },
-}
-
-type CardProps = {
-  project: Project
 }
 
 type SelectedProjectsProps = {
@@ -79,7 +75,7 @@ export function SelectedProjects(props: SelectedProjectsProps) {
         }}
       >
         {projects.map((project) => (
-          <Card key={project.slug} project={project} />
+          <ProjectCard key={project.slug} project={project} featured />
         ))}
       </motion.div>
       <div className='my-8 flex items-center justify-center'>
@@ -88,36 +84,5 @@ export function SelectedProjects(props: SelectedProjectsProps) {
         </Link>
       </div>
     </motion.div>
-  )
-}
-
-function Card(props: CardProps) {
-  const { project } = props
-  const { slug, name, description } = project
-  const t = useTranslations()
-
-  return (
-    <Link key={slug} href={`/projects/${slug}`} className='group relative rounded-2xl p-2 shadow-feature-card'>
-      <div className='flex items-center justify-between p-4'>
-        <div className='flex items-center gap-3'>
-          <LightbulbIcon className='size-4.5' />
-          <h2>{t('homepage.selected-projects.card')}</h2>
-        </div>
-        <ArrowUpRightIcon className='size-4.5 opacity-0 transition-opacity group-hover:opacity-100' />
-      </div>
-      <BlurImage
-        width={1200}
-        height={630}
-        src={`/images/projects/${slug}/cover.png`}
-        alt={description}
-        className='rounded-lg'
-        lazy={false}
-        fetchPriority='high'
-      />
-      <div className='absolute bottom-6 left-7 flex flex-col transition-[left] ease-out group-hover:left-8'>
-        <h3 className='text-2xl font-semibold text-white'>{name}</h3>
-        <p className='mt-2 text-neutral-200 dark:text-muted-foreground'>{description}</p>
-      </div>
-    </Link>
   )
 }

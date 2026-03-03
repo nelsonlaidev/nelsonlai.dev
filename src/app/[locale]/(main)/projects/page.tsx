@@ -8,7 +8,7 @@ import { use } from 'react'
 
 import { JsonLd } from '@/components/json-ld'
 import { PageHeader } from '@/components/page-header'
-import { ProjectCards } from '@/components/project-cards'
+import { ProjectCard } from '@/components/project-card'
 import { MY_NAME } from '@/lib/constants'
 import { getLatestProjects } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
@@ -73,7 +73,11 @@ function Page(props: PageProps<'/[locale]/projects'>) {
     <>
       <JsonLd json={jsonLd} />
       <PageHeader title={title} description={description} />
-      <ProjectCards projects={projects} />
+      <div className='grid gap-4 md:grid-cols-2'>
+        {projects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
+        ))}
+      </div>
     </>
   )
 }
