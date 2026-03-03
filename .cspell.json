@@ -11,38 +11,38 @@
     {
       "name": "custom-words",
       "path": "./.cspell/custom-words.txt",
-      "addWords": true,
+      "addWords": true
     },
     {
       "name": "es-custom-words",
       "path": "./.cspell/es-custom-words.txt",
-      "addWords": true,
+      "addWords": true
     },
     {
       "name": "names",
       "path": "./.cspell/names.txt",
-      "addWords": true,
+      "addWords": true
     },
     {
       "name": "company-names",
       "path": "./.cspell/company-names.txt",
-      "addWords": true,
+      "addWords": true
     },
     {
       "name": "software-names",
       "path": "./.cspell/software-names.txt",
-      "addWords": true,
+      "addWords": true
     },
     {
       "name": "packages",
       "path": "./.cspell/packages.txt",
-      "addWords": true,
+      "addWords": true
     },
     {
       "name": "tech-terms",
       "path": "./.cspell/tech-terms.txt",
-      "addWords": true,
-    },
+      "addWords": true
+    }
   ],
   "dictionaries": [
     "custom-words",
@@ -55,14 +55,14 @@
     "npm",
     "fullstack",
     "html",
-    "sql",
+    "sql"
   ],
   "languageSettings": [
     {
       "languageId": "*",
       "locale": "es, es_ES",
-      "caseSensitive": false,
-    },
+      "caseSensitive": false
+    }
   ],
-  "ignorePaths": ["pnpm-lock.yaml", ".git"],
+  "ignorePaths": ["pnpm-lock.yaml", ".git"]
 }
