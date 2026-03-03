@@ -1,6 +1,6 @@
 'use client'
 
-import { Card } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { range } from '@/utils/range'
 
@@ -8,8 +8,8 @@ export function ActiveSessionsSkeleton() {
   return (
     <div className='space-y-4'>
       {range(5).map((sessionNumber) => (
-        <Card key={sessionNumber} className='p-4 sm:p-6'>
-          <div className='flex gap-4'>
+        <Card key={sessionNumber}>
+          <CardContent className='flex gap-4'>
             <Skeleton className='size-12 rounded-full' />
             <div className='space-y-1'>
               <div className='flex h-12 items-center gap-4 font-semibold'>
@@ -21,7 +21,7 @@ export function ActiveSessionsSkeleton() {
                 ))}
               </div>
             </div>
-          </div>
+          </CardContent>
         </Card>
       ))}
     </div>

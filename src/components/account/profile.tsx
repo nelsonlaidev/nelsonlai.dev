@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Field, FieldError, FieldGroup } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { useUpdateUser } from '@/hooks/queries/auth.query'
@@ -58,40 +58,42 @@ function ProfileInfo(props: ProfileInfoProps) {
   const t = useTranslations()
 
   return (
-    <Card className='p-4 sm:p-6'>
-      <div className='flex items-center justify-between'>
-        <div className='flex flex-col gap-2'>
-          <span className='text-muted-foreground'>{t('account.avatar')}</span>
-          <Avatar className='size-24'>
-            <AvatarImage
-              src={user.image ?? undefined}
-              alt={t('common.avatar-alt', { name: user.name })}
-              className='size-full'
-            />
-            <AvatarFallback>{getAbbreviation(user.name)}</AvatarFallback>
-          </Avatar>
+    <Card>
+      <CardContent>
+        <div className='flex items-center justify-between'>
+          <div className='flex flex-col gap-2'>
+            <span className='text-muted-foreground'>{t('account.avatar')}</span>
+            <Avatar className='size-24'>
+              <AvatarImage
+                src={user.image ?? undefined}
+                alt={t('common.avatar-alt', { name: user.name })}
+                className='size-full'
+              />
+              <AvatarFallback>{getAbbreviation(user.name)}</AvatarFallback>
+            </Avatar>
+          </div>
+          <UpdateAvatar />
         </div>
-        <UpdateAvatar />
-      </div>
-      <div className='flex items-center justify-between'>
-        <div className='flex flex-col gap-2'>
-          <span className='text-muted-foreground'>{t('account.display-name')}</span>
-          <span>{user.name}</span>
+        <div className='flex items-center justify-between'>
+          <div className='flex flex-col gap-2'>
+            <span className='text-muted-foreground'>{t('account.display-name')}</span>
+            <span>{user.name}</span>
+          </div>
+          <EditName name={user.name} />
         </div>
-        <EditName name={user.name} />
-      </div>
-      <div>
-        <div className='flex flex-col gap-2'>
-          <span className='text-muted-foreground'>{t('account.email')}</span>
-          <span>{user.email}</span>
+        <div>
+          <div className='flex flex-col gap-2'>
+            <span className='text-muted-foreground'>{t('account.email')}</span>
+            <span>{user.email}</span>
+          </div>
         </div>
-      </div>
-      <div>
-        <div className='flex flex-col gap-2'>
-          <span className='text-muted-foreground'>{t('account.account-created')}</span>
-          <span>{createdAt ?? '--'}</span>
+        <div>
+          <div className='flex flex-col gap-2'>
+            <span className='text-muted-foreground'>{t('account.account-created')}</span>
+            <span>{createdAt ?? '--'}</span>
+          </div>
         </div>
-      </div>
+      </CardContent>
     </Card>
   )
 }
