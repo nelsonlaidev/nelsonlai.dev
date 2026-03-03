@@ -1,0 +1,312 @@
+{
+  "about": {
+    "description": "¡Hola! Soy Nelson Lai, un apasionado estudiante de desarrollo web que crea proyectos innovadores con HTML, CSS y JavaScript. Explora mi portafolio, habilidades y mi camino en la creación de aplicaciones amigables. ¡Conectemos!"
+  },
+  "account": {
+    "account-created": "Cuenta creada",
+    "active-sessions": "Sesiones activas",
+    "avatar": "Avatar",
+    "description": "Administra tu cuenta.",
+    "display-name": "Nombre visible",
+    "edit-name": "Editar nombre",
+    "edit-name-description": "Cambia tu nombre visible. Este nombre se mostrará en tu perfil y comentarios.",
+    "email": "Correo electrónico",
+    "location-not-accurate": "La ubicación puede no ser precisa",
+    "mobile-nav": {
+      "description": "Muestra la navegación móvil en un cajón.",
+      "title": "Cajón"
+    },
+    "no-active-sessions": "No hay sesiones activas",
+    "open-navigation-menu": "Abrir menú de navegación",
+    "profile": "Perfil",
+    "revoke-session": "Revocar",
+    "this-device": "Este dispositivo",
+    "update-avatar": "Actualizar avatar"
+  },
+  "admin": {
+    "page-header": {
+      "comments": {
+        "description": "Administrar comentarios"
+      },
+      "users": {
+        "description": "Administrar usuarios"
+      }
+    },
+    "toggle-sidebar": "Alternar barra lateral"
+  },
+  "blog": {
+    "comments": {
+      "author": "Autor",
+      "comments": "{count, plural, =1 {comentario} other {comentarios}}",
+      "copy-link": "Copiar enlace",
+      "dislike": "No me gusta",
+      "highlighted-comment": "Comentario destacado",
+      "newest": "Más recientes",
+      "no-comments": "Sin comentarios",
+      "nothing-to-preview": "Nada que previsualizar",
+      "oldest": "Más antiguos",
+      "open-menu": "Abrir menú",
+      "placeholder": "Deja un comentario",
+      "preview": "Previsualizar",
+      "replies": "{count, plural, =1 {respuesta} other {respuestas}}",
+      "reply": "Responder",
+      "reply-to-comment": "Responder al comentario",
+      "send-comment": "Enviar comentario",
+      "sort-by": "Ordenar por",
+      "this-comment-has-been-deleted": "[Este comentario ha sido eliminado]",
+      "toggle-bold": "Alternar negrita",
+      "toggle-italic": "Alternar cursiva",
+      "toggle-strikethrough": "Alternar tachado",
+      "write": "Escribir"
+    },
+    "description": "Descubre mi sitio web y blog, donde comparto tutoriales, notas y experiencias como ingeniero full-stack con base en Hong Kong. Empecé el desarrollo web como hobby en dic. de 2020. ¡Explora mi camino!",
+    "footer": {
+      "edit-on-github": "Editar en GitHub",
+      "last-updated": "Última actualización: {date}"
+    },
+    "header": {
+      "published-on": "Publicado el",
+      "views": "Vistas",
+      "written-by": "Escrito por"
+    },
+    "like-this-post": "Me gusta esta entrada",
+    "on-this-page": "En esta página"
+  },
+  "command-menu": {
+    "actions": {
+      "copy-link": "Copiar enlace",
+      "source-code": "Código fuente"
+    },
+    "description": "Busca un comando para ejecutar...",
+    "groups": {
+      "social": "Social"
+    },
+    "no-results": "No se encontraron resultados.",
+    "open-menu": "Abrir menú de comandos",
+    "placeholder": "Escribe un comando o busca",
+    "title": "Paleta de comandos"
+  },
+  "common": {
+    "aria-labels": {
+      "copy-code": "Copiar código al portapapeles",
+      "loading": "Cargando",
+      "toggle-sidebar": "Alternar barra lateral",
+      "tree-view": "Vista de árbol"
+    },
+    "avatar-alt": "Avatar de {name}",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "dialogs": {
+      "delete-comment": {
+        "description": "¿Estás seguro de que deseas eliminar este comentario? Esta acción no se puede deshacer.",
+        "title": "Eliminar un comentario"
+      }
+    },
+    "error": "Error",
+    "loading": "Cargando...",
+    "labels": {
+      "about": "Acerca de",
+      "account": "Cuenta",
+      "blog": "Blog",
+      "close": "Cerrar",
+      "comment": "Comentario",
+      "comments": "Comentarios",
+      "dashboard": "Panel",
+      "facebook": "Facebook",
+      "general": "General",
+      "github": "GitHub",
+      "guestbook": "Libro de visitas",
+      "home": "Inicio",
+      "instagram": "Instagram",
+      "links": "Enlaces",
+      "privacy": "Política de privacidad",
+      "projects": "Proyectos",
+      "settings": "Configuración",
+      "terms": "Términos de servicio",
+      "unsubscribe": "Cancelar suscripción",
+      "users": "Usuarios",
+      "uses": "Usos",
+      "youtube": "YouTube"
+    },
+    "like": "Me gusta",
+    "likes": "{count, plural, =1 {# me gusta} other {# me gusta}}",
+    "save": "Guardar",
+    "reset": "Restablecer",
+    "sign-in": "Iniciar sesión",
+    "sign-out": "Cerrar sesión",
+    "unknown": "Desconocido",
+    "views": "{count, plural, =1 {# vista} other {# vistas}}"
+  },
+  "components": {
+    "filtered-posts": {
+      "no-posts-found": "No se encontraron entradas",
+      "placeholder": "Buscar artículos"
+    },
+    "go-to-homepage": "Ir a la página de inicio"
+  },
+  "dashboard": {
+    "description": "Este es mi panel personal, construido con rutas API de Next.js desplegadas como funciones sin servidor. Uso este panel para rastrear varias estadísticas en plataformas como YouTube, GitHub y más.",
+    "stat": {
+      "blog-total-likes": "Total de me gusta del blog",
+      "blog-total-views": "Total de vistas del blog",
+      "coding-hours": "Horas de programación",
+      "github-followers": "Seguidores en GitHub",
+      "github-stars": "Estrellas en GitHub",
+      "youtube-subscribers": "Suscriptores de YouTube",
+      "youtube-views": "Vistas de YouTube"
+    }
+  },
+  "dialog": {
+    "sign-in": {
+      "continue-with": "Continuar con {provider}",
+      "description": "para continuar a nelsonlai.dev",
+      "last-used": "Último usado",
+      "notice": "Al continuar, aceptas nuestros <terms>Términos de servicio</terms> y <privacy>Política de privacidad</privacy>"
+    }
+  },
+  "error": {
+    "avatar-too-large": "El archivo del avatar es demasiado grande. Por favor elige un archivo menor a {size} MB.",
+    "avatar-unsupported-file": "Por favor elige un tipo de imagen compatible (JPEG, PNG, WEBP, GIF, AVIF).",
+    "comment-cannot-be-empty": "El comentario no puede estar vacío",
+    "copy-to-clipboard-error": "No se pudo copiar al portapapeles. Por favor intenta de nuevo.",
+    "failed-to-fetch-comments-data": "Error al obtener datos de comentarios. Por favor recarga la página.",
+    "failed-to-fetch-users-data": "Error al obtener datos de usuarios. Por favor recarga la página.",
+    "failed-to-load-comments": "Error al cargar comentarios. Por favor recarga la página.",
+    "failed-to-load-messages": "Error al cargar mensajes. Por favor recarga la página.",
+    "failed-to-load-replies": "Error al cargar respuestas. Por favor recarga la página.",
+    "failed-to-load-settings": "Error al cargar configuración. Por favor recarga la página.",
+    "like-limit-reached": "Solo puedes dar me gusta 3 veces por entrada",
+    "message-cannot-be-empty": "El mensaje no puede estar vacío",
+    "name-cannot-be-empty": "El nombre no puede estar vacío",
+    "name-too-long": "El nombre es demasiado largo",
+    "need-logged-in-to-vote": "Debes iniciar sesión para votar comentarios",
+    "not-found": "Página no encontrada.",
+    "now-playing-error": "Error al obtener datos de Spotify",
+    "reply-cannot-be-empty": "La respuesta no puede estar vacía",
+    "sign-in-error": "Error al iniciar sesión. Por favor intenta de nuevo.",
+    "sign-out-failed": "Error al cerrar sesión. Por favor intenta de nuevo.",
+    "something-went-wrong": "Algo salió mal. Por favor intenta de nuevo.",
+    "update-avatar-failed": "Error al actualizar el avatar. Por favor intenta de nuevo.",
+    "try-again": "Intentar de nuevo"
+  },
+  "guestbook": {
+    "description": "Firma mi libro de visitas y comparte tu idea. ¡Puedes decirme cualquier cosa aquí!",
+    "no-messages": "Sin mensajes. ¡Sé el primero en dejar un mensaje!",
+    "pinned": {
+      "description": "Gracias por visitar mi sitio web. Si tienes un momento, me encantaría escuchar tus opiniones sobre mi trabajo. Por favor inicia sesión con tu cuenta para dejar un comentario. ¡Gracias!",
+      "greeting": "¡Hola! 👋"
+    },
+    "placeholder": "Deja un mensaje",
+    "signin": {
+      "description": "para dejar un mensaje"
+    },
+    "submit": "Enviar"
+  },
+  "homepage": {
+    "about-me": {
+      "coding-hours": "Horas de programación",
+      "connect": "Conectar",
+      "fav-framework": "Framework favorito",
+      "location": "Hong Kong",
+      "more": "Conoce más sobre mí",
+      "stacks": "Tecnologías",
+      "title": "Sobre mí"
+    },
+    "get-in-touch": {
+      "description": "¡No dudes en contactarme!",
+      "image-alt": "Logo de Nelson Lai",
+      "title": "¿Preguntas sobre Next.js?"
+    },
+    "hero": {
+      "amazing": "Increíble",
+      "attractive": "Atractivo",
+      "fantastic": "Fantástico",
+      "location-timezone": "Hong Kong • UTC/GMT +8",
+      "stunning": "Impresionante",
+      "line-1": "Soy Nelson, un Ingeniero Full Stack",
+      "line-2-left": "construyendo",
+      "line-2-right": "sitios web",
+      "line-3": "con React",
+      "image-alt": "Logo de Nelson Lai"
+    },
+    "latest-articles": {
+      "card": "Artículo",
+      "more": "Ver todos los artículos",
+      "title": "Últimos artículos"
+    },
+    "selected-projects": {
+      "card": "Proyecto",
+      "more": "Ver todos los proyectos",
+      "title": "Proyectos destacados"
+    }
+  },
+  "layout": {
+    "change-language": "Cambiar idioma",
+    "now-playing": {
+      "loading": "Cargando...",
+      "not-listening": "Sin reproducción - Spotify"
+    },
+    "sidebar": {
+      "description": "Muestra la barra lateral móvil.",
+      "title": "Barra lateral"
+    },
+    "skip-to-main-content": "Saltar al contenido principal",
+    "toggle-menu": "Alternar menú"
+  },
+  "mdx": {
+    "link-to-section": "Enlace a la sección"
+  },
+  "metadata": {
+    "site-description": "Nelson Lai es un ingeniero full-stack con base en Hong Kong. Construye sitios web elegantes y eficientes usando React, Node.js y tecnologías modernas."
+  },
+  "privacy": {
+    "description": "Esta página explica cómo gestionamos tus datos y protegemos tu privacidad cuando usas nuestro sitio web."
+  },
+  "projects": {
+    "description": "Una colección de mis proyectos, creados con dedicación.",
+    "visit-website": "Visitar sitio web"
+  },
+  "settings": {
+    "description": "Administra tu configuración.",
+    "notification-settings": "Configuración de notificaciones",
+    "reply-notification": "Notificación de respuestas",
+    "reply-notification-description": "Recibe notificaciones por correo electrónico cuando alguien responda a tu comentario."
+  },
+  "success": {
+    "avatar-updated": "Avatar actualizado correctamente",
+    "comment-deleted": "Comentario eliminado",
+    "comment-posted": "Comentario publicado",
+    "copied-to-clipboard": "Copiado al portapapeles",
+    "link-copied": "Enlace copiado al portapapeles",
+    "message-created": "Mensaje creado correctamente",
+    "message-deleted": "Mensaje eliminado correctamente",
+    "name-updated": "Nombre visible actualizado correctamente",
+    "reply-posted": "Respuesta publicada",
+    "session-revoked": "Sesión revocada correctamente",
+    "settings-updated": "Configuración actualizada correctamente",
+    "signed-out": "Sesión cerrada correctamente"
+  },
+  "terms": {
+    "description": "Estos términos y condiciones describen las reglas y regulaciones para el uso de nuestro sitio web."
+  },
+  "theme-toggle": {
+    "options": {
+      "dark": "Oscuro",
+      "light": "Claro",
+      "system": "Sistema"
+    },
+    "toggle-theme": "Alternar tema"
+  },
+  "unsubscribe": {
+    "invalid-link-description": "El enlace para cancelar la suscripción no es válido. Por favor intenta de nuevo.",
+    "invalid-unsubscribe-link": "Enlace de cancelación inválido",
+    "stop-receiving-email-notifications": "Dejar de recibir notificaciones por correo de respuestas a este comentario",
+    "unsubscribe-from-this-comment": "Cancelar suscripción de este comentario",
+    "unsubscribed-description": "Ya no recibirás correos de notificación de respuestas para este comentario.",
+    "you-are-unsubscribing-as": "Estás cancelando la suscripción como {email}",
+    "you-have-been-unsubscribed": "Has cancelado la suscripción"
+  },
+  "uses": {
+    "description": "Este es el equipo que uso actualmente para jugar, programar, hacer videos y el día a día."
+  }
+}
