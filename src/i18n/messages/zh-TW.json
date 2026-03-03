@@ -11,6 +11,11 @@
     "edit-name": "編輯名稱",
     "edit-name-description": "更改您的顯示名稱。此名稱將顯示在您的個人資料和評論中。",
     "email": "電子郵件",
+    "location-not-accurate": "位置可能不準確",
+    "mobile-nav": {
+      "description": "在抽屜中顯示行動版導覽。",
+      "title": "抽屜"
+    },
     "no-active-sessions": "沒有使用中工作階段",
     "open-navigation-menu": "開啟導覽選單",
     "profile": "個人資料",
@@ -38,6 +43,7 @@
       "highlighted-comment": "已標註評論",
       "newest": "最新",
       "no-comments": "沒有評論",
+      "nothing-to-preview": "沒有預覽內容",
       "oldest": "最舊",
       "open-menu": "開啟選單",
       "placeholder": "留下評論",
@@ -71,14 +77,23 @@
       "copy-link": "複製連結",
       "source-code": "原始碼"
     },
+    "description": "搜尋要執行的指令...",
     "groups": {
       "social": "社群"
     },
     "no-results": "沒有找到結果。",
     "open-menu": "開啟指令選單",
-    "placeholder": "輸入指令或搜尋"
+    "placeholder": "輸入指令或搜尋",
+    "title": "指令選單"
   },
   "common": {
+    "aria-labels": {
+      "close": "關閉",
+      "copy-code": "複製代碼到剪貼簿",
+      "loading": "載入中",
+      "toggle-sidebar": "切換側邊欄",
+      "tree-view": "樹狀視圖"
+    },
     "avatar-alt": "{name} 的頭像",
     "cancel": "取消",
     "delete": "刪除",
@@ -94,6 +109,7 @@
       "about": "關於",
       "account": "帳戶",
       "blog": "部落格",
+      "close": "關閉",
       "comment": "評論",
       "comments": "評論",
       "dashboard": "儀表板",
@@ -230,6 +246,10 @@
     "now-playing": {
       "loading": "載入中...",
       "not-listening": "未在收聽 - Spotify"
+    },
+    "sidebar": {
+      "description": "顯示行動版側邊欄。",
+      "title": "側邊欄"
     },
     "skip-to-main-content": "跳至主要內容",
     "toggle-menu": "打開選單"

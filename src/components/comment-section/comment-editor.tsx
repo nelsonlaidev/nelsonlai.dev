@@ -84,7 +84,9 @@ export function CommentEditor(props: CommentEditorProps) {
         </InputGroup>
       </TabsContent>
       <TabsContent value='preview' className='rounded-md border border-input px-2.5 dark:bg-input/30'>
-        <Markdown>{typeof value === 'string' && value.trim() !== '' ? value : 'Nothing to preview'}</Markdown>
+        <Markdown>
+          {typeof value === 'string' && value.trim() !== '' ? value : t('blog.comments.nothing-to-preview')}
+        </Markdown>
       </TabsContent>
     </Tabs>
   )

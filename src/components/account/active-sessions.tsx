@@ -119,7 +119,7 @@ function Session(props: SessionProps) {
                 {session.location && (
                   <div className='flex items-center gap-2'>
                     <span className='text-muted-foreground'>{session.location}</span>
-                    <Tip content='Location may not be accurate'>
+                    <Tip content={t('account.location-not-accurate')}>
                       <InfoIcon className='size-4 text-muted-foreground' />
                     </Tip>
                   </div>

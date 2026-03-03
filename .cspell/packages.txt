@@ -4,6 +4,7 @@ cobe
 dbaeumer
 dotenvx
 fumadocs
+lokalise
 nuqs
 orpc
 radixui

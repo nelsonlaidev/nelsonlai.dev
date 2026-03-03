@@ -38,8 +38,8 @@ export function AccountMobileNav() {
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className='sr-only'>
-          <DrawerTitle>Drawer</DrawerTitle>
-          <DrawerDescription>Displays the mobile navigation in drawer.</DrawerDescription>
+          <DrawerTitle>{t('account.mobile-nav.title')}</DrawerTitle>
+          <DrawerDescription>{t('account.mobile-nav.description')}</DrawerDescription>
         </DrawerHeader>
         <ul className='p-8'>
           {ACCOUNT_SIDEBAR_LINKS.map((link) => (

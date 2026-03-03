@@ -2,6 +2,7 @@
 
 import { Command as CommandPrimitive } from 'cmdk'
 import { CheckIcon, SearchIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { InputGroup, InputGroupAddon } from '@/components/ui/input-group'
@@ -33,14 +34,18 @@ type CommandDialogProps = Omit<React.ComponentProps<typeof Dialog>, 'children'> 
 }
 
 export function CommandDialog(props: CommandDialogProps) {
+  const t = useTranslations()
   const {
-    title = 'Command Palette',
-    description = 'Search for a command to run...',
+    title: titleProp,
+    description: descriptionProp,
     children,
     className,
     showCloseButton = false,
     ...rest
   } = props
+
+  const title = titleProp ?? t('command-menu.title')
+  const description = descriptionProp ?? t('command-menu.description')
 
   return (
     <Dialog {...rest}>

@@ -11,6 +11,11 @@
     "edit-name": "Edit name",
     "edit-name-description": "Change your display name. This name will be shown on your profile and comments.",
     "email": "Email",
+    "location-not-accurate": "Location may not be accurate",
+    "mobile-nav": {
+      "description": "Displays the mobile navigation in drawer.",
+      "title": "Drawer"
+    },
     "no-active-sessions": "No active sessions",
     "open-navigation-menu": "Open navigation menu",
     "profile": "Profile",
@@ -38,6 +43,7 @@
       "highlighted-comment": "Highlighted comment",
       "newest": "Newest",
       "no-comments": "No comments",
+      "nothing-to-preview": "Nothing to preview",
       "oldest": "Oldest",
       "open-menu": "Open menu",
       "placeholder": "Leave a comment",
@@ -71,14 +77,23 @@
       "copy-link": "Copy link",
       "source-code": "Source code"
     },
+    "description": "Search for a command to run...",
     "groups": {
       "social": "Social"
     },
     "no-results": "No results found.",
     "open-menu": "Open command menu",
-    "placeholder": "Type a command or search"
+    "placeholder": "Type a command or search",
+    "title": "Command Palette"
   },
   "common": {
+    "aria-labels": {
+      "close": "Close",
+      "copy-code": "Copy code to clipboard",
+      "loading": "Loading",
+      "toggle-sidebar": "Toggle Sidebar",
+      "tree-view": "Tree View"
+    },
     "avatar-alt": "Avatar of {name}",
     "cancel": "Cancel",
     "delete": "Delete",
@@ -94,6 +109,7 @@
       "about": "About",
       "account": "Account",
       "blog": "Blog",
+      "close": "Close",
       "comment": "Comment",
       "comments": "Comments",
       "dashboard": "Dashboard",
@@ -230,6 +246,10 @@
     "now-playing": {
       "loading": "Loading...",
       "not-listening": "Not Listening - Spotify"
+    },
+    "sidebar": {
+      "description": "Displays the mobile sidebar.",
+      "title": "Sidebar"
     },
     "skip-to-main-content": "Skip to main content",
     "toggle-menu": "Toggle menu"

@@ -2,6 +2,7 @@
 
 import { CheckIcon, CopyIcon } from 'lucide-react'
 import mergeRefs from 'merge-refs'
+import { useTranslations } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/utils/cn'
@@ -61,6 +62,7 @@ type CopyButtonProps = {
 function CopyButton(props: CopyButtonProps) {
   const { onCopy, className, ...rest } = props
   const [isCopied, setIsCopied] = useState(false)
+  const t = useTranslations()
 
   useEffect(() => {
     const copyResetTimeoutId = setTimeout(() => {
@@ -81,7 +83,7 @@ function CopyButton(props: CopyButtonProps) {
         setIsCopied(true)
       }}
       className={cn('size-7.5 opacity-0 transition-opacity group-hover:opacity-100', className)}
-      aria-label='Copy code to clipboard'
+      aria-label={t('common.aria-labels.copy-code')}
       {...rest}
     >
       {isCopied ? <CheckIcon className='size-3.5' /> : <CopyIcon className='size-3.5' />}
