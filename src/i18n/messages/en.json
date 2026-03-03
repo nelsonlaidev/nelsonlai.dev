@@ -88,7 +88,6 @@
   },
   "common": {
     "aria-labels": {
-      "close": "Close",
       "copy-code": "Copy code to clipboard",
       "loading": "Loading",
       "toggle-sidebar": "Toggle Sidebar",

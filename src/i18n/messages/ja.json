@@ -88,7 +88,6 @@
   },
   "common": {
     "aria-labels": {
-      "close": "閉じる",
       "copy-code": "コードをクリップボードにコピー",
       "loading": "読み込み中",
       "toggle-sidebar": "サイドバーを切り替え",

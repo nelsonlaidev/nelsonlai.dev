@@ -88,7 +88,6 @@
   },
   "common": {
     "aria-labels": {
-      "close": "關閉",
       "copy-code": "複製代碼到剪貼簿",
       "loading": "載入中",
       "toggle-sidebar": "切換側邊欄",
