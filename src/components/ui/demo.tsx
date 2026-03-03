@@ -9,12 +9,12 @@ export function Demo(props: DemoProps) {
   const { title, children, className, ...rest } = props
 
   return (
-    <section data-slot='demo' className='flex flex-col gap-4'>
+    <div data-slot='demo' className='flex flex-col gap-4'>
       <h2 className='text-2xl font-medium'>{title}</h2>
-      <div className={cn('grid gap-6 md:grid-cols-2', className)} {...rest}>
+      <div className={cn('space-y-6', className)} {...rest}>
         {children}
       </div>
-    </section>
+    </div>
   )
 }
 
@@ -28,7 +28,7 @@ export function DemoItem(props: DemoItem) {
 
   return (
     <div data-slot='demo-item' className='min-w-0'>
-      {title && <div className='px-1.5 py-2 text-xs font-medium text-muted-foreground'>{title}</div>}
+      {title && <h3 className='px-1.5 py-2 text-xs font-medium text-muted-foreground'>{title}</h3>}
       <div
         data-slot='demo-item-content'
         data-orientation={orientation}

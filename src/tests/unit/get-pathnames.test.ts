@@ -24,6 +24,8 @@ describe('pathnames', () => {
   })
 })
 
+const IGNORED_ROUTES = ['/cosmos']
+
 async function getAllPageRoutes(): Promise<string[]> {
   const rootDir = 'src/app'
 
@@ -44,7 +46,10 @@ async function getAllPageRoutes(): Promise<string[]> {
 
   const result = routeArrays.flat()
   const uniqueRoutes = [...new Set(result)]
-  return uniqueRoutes.filter((route) => !PROTECTED_ROUTES.includes(route))
+
+  return uniqueRoutes
+    .filter((route) => !PROTECTED_ROUTES.includes(route))
+    .filter((route) => !IGNORED_ROUTES.some((ignored) => route === ignored || route.startsWith(`${ignored}/`)))
 }
 
 async function processPageFile(fullPath: string, rootDir: string): Promise<string[]> {

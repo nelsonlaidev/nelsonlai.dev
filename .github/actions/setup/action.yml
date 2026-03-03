@@ -23,6 +23,10 @@ runs:
       shell: bash
       run: pnpm build:mdx
 
+    - name: Build Cosmos
+      shell: bash
+      run: pnpm cosmos:export
+
     - name: Generate Next.js route types
       shell: bash
       run: pnpm typegen

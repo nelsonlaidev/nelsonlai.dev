@@ -63,8 +63,6 @@ export const FOOTER_GROUPS = [
       { href: '/about', labelKey: 'common.labels.about' },
       // i18n-check t('common.labels.dashboard')
       { href: '/dashboard', labelKey: 'common.labels.dashboard' },
-      // i18n-check t('common.labels.design')
-      { href: '/design', labelKey: 'common.labels.design' },
     ],
   },
   {
