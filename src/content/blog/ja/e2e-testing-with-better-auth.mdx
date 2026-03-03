@@ -1,0 +1,137 @@
+---
+title: Better Auth を使った E2E テスト
+date: '2025-09-17T07:01:11.746Z'
+modifiedTime: '2025-09-17T07:01:11.746Z'
+summary: Better Auth を使ったエンドツーエンドテストのセットアップ方法を学びましょう。
+---
+
+## TL;DR
+
+有効なセッショントークンを生成してクッキーとして保存する必要があります。これにより、E2E テストが手動ログインなしに認証済みルートにアクセスできます。この方法は、クレデンシャルベースと OAuth 認証の両方に対応しています。
+
+> GitHub リポジトリ：[nelsonlaidev/e2e-testing-with-better-auth](https://github.com/nelsonlaidev/e2e-testing-with-better-auth)
+
+## はじめに
+
+このガイドでは、E2E テストフレームワークとして [Playwright](https://playwright.dev/) を使用しますが、概念は [Cypress](https://www.cypress.io/) などの他のフレームワークにも応用できます。
+
+シンプルにするため、クレデンシャルベースの認証例を使用します。ただし、同じ原則が OAuth プロバイダーにも適用されます。
+
+また、デモ目的で SQLite データベースを使用します。セットアップに合わせてデータベースのやり取り **（例：テーブル名、カラム型）** を調整してください。
+
+## セッショントークンの生成
+
+認証済みセッションをシミュレートするために、`BETTER_AUTH_SECRET` を使って署名済みセッショントークンを生成します。このトークンはセッションクッキーで使用されます。
+
+```ts
+import crypto from 'node:crypto'
+
+export const TEST_USER = {
+  name: 'Test User',
+  email: 'test@example.com',
+  sessionToken: '00000000000000000000000000000000',
+  accountId: '000',
+}
+
+const signature = crypto
+  .createHmac('sha256', process.env.BETTER_AUTH_SECRET!)
+  .update(TEST_USER.sessionToken)
+  .digest('base64')
+const signedValue = `${TEST_USER.sessionToken}.${signature}`
+```
+
+## テストデータの挿入
+
+テスト中に複数のユーザーが作成されないよう、テストユーザーを静的に保ちます。まだ存在しない場合は、テストユーザー、アカウント、セッションをデータベースに挿入します。シンプルにするため、すべての主キーに `0` を使用します。
+
+```ts
+import { db } from '@/lib/db'
+
+const TEST_UNIQUE_ID = '0'
+
+const now = new Date().getTime()
+const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).getTime() // 7日間
+
+const transaction = db.transaction(() => {
+  db.prepare(
+    `
+      INSERT OR IGNORE INTO user (
+        id, name, email, emailVerified, createdAt, updatedAt
+      ) VALUES (?, ?, ?, ?, ?, ?)
+    `,
+  ).run(TEST_UNIQUE_ID, TEST_USER.name, TEST_USER.email, 0, now, now)
+
+  db.prepare(
+    `
+      INSERT OR IGNORE INTO account (
+        id, accountId, providerId, userId, password, createdAt, updatedAt
+      ) VALUES (?, ?, ?, ?, ?, ?, ?)
+    `,
+  ).run(TEST_UNIQUE_ID, TEST_USER.accountId, 'credential', TEST_UNIQUE_ID, 'password_hash', now, now)
+
+  db.prepare(
+    `
+      INSERT INTO session (
+        id, token, userId, expiresAt, createdAt, updatedAt
+      ) VALUES (?, ?, ?, ?, ?, ?)
+      ON CONFLICT(token) DO UPDATE SET
+      expiresAt = excluded.expiresAt,
+      updatedAt = excluded.updatedAt
+    `,
+  ).run(TEST_UNIQUE_ID, TEST_USER.sessionToken, TEST_UNIQUE_ID, expiresAt, now, now)
+})
+
+transaction()
+```
+
+## セッションの保存
+
+テストフレームワークで使用するために、署名済みトークンを JSON ファイルにクッキーとして保存します。クッキー値は必ず `encodeURIComponent{:.entity.name.function}` してください。
+
+```ts
+import fs from 'node:fs/promises'
+
+const cookieObject = {
+  name: 'better-auth.session_token',
+  value: encodeURIComponent(signedValue), // [!code highlight]
+  domain: 'localhost',
+  path: '/',
+  httpOnly: true,
+  secure: false,
+  sameSite: 'Lax',
+  expires: Math.round(expiresAt / 1000),
+}
+
+await fs.writeFile('.auth/auth.json', JSON.stringify({ cookies: [cookieObject], origins: [] }, null, 2))
+```
+
+## テストでのセッションの使用
+
+保存したセッションを E2E テストで読み込み、ログインなしで保護されたルートにアクセスします。以下の例は Playwright を使用していますが、クッキーのインジェクションをサポートする任意のテストライブラリ（Cypress など）に適用できます。
+
+```ts title='playwright.config.ts'
+export default defineConfig({
+  // ...
+  projects: [
+    { name: 'setup', testMatch: /global\.setup\.ts/, teardown: 'teardown' }, // [!code highlight]
+
+    { name: 'teardown', testMatch: /global\.teardown\.ts/ }, // [!code highlight]
+
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: '.auth/auth.json', // [!code highlight]
+      },
+      dependencies: ['setup'], // [!code highlight]
+    },
+  ],
+})
+```
+
+## 参考リンク
+
+- [Playwright セットアップとティアダウン](https://playwright.dev/docs/test-global-setup-teardown)
+- [Playwright ストレージステート](https://playwright.dev/docs/auth#reuse-authentication-in-other-scenarios)
+- [Cypress フック](https://docs.cypress.io/app/core-concepts/writing-and-organizing-tests#Hooks)
+- [Cypress クッキー設定](https://docs.cypress.io/api/commands/setcookie)

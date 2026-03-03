@@ -1,0 +1,323 @@
+---
+title: Next.js と MDX でブログを構築する方法
+date: '2022-08-22T00:00:00Z'
+modifiedTime: '2025-09-16T15:11:03Z'
+summary: Next.js でブログを作るのはとても簡単です！
+---
+
+## はじめに
+
+使用するパッケージ：
+
+- [next](https://github.com/vercel/next.js) Next.js フレームワーク
+- [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) MDX コンテンツの処理と読み込み
+- [gray-matter](https://github.com/jonschlinkert/gray-matter) マークダウンのフロントマターの解析
+
+このチュートリアルのリポジトリ：
+
+https://github.com/nelsonlaidev/nextjs-mdx-blog
+
+## デモ
+
+[オンラインデモ](https://nelsonlai-nextjs-mdx-blog.vercel.app)
+
+<Video src='/videos/blog/how-to-build-a-blog-with-nextjs-and-mdx/demo.mp4' width={1920} height={1080} />
+
+## ブログの作り方
+
+まず、以下のコマンドで Next.js プロジェクトを作成します：
+
+```bash title='ターミナル'
+yarn create next-app nextjs-mdx-blog
+```
+
+次に、以下のファイルを作成します：
+
+- `components/layout.jsx` - すべてのコンポーネントをコンテナにラップする（任意、スタイルのみ）
+- `date/blog/*.mdx` - ブログ記事
+- `lib/format-date.js` - 日付を `MM DD, YYYY` 形式にフォーマット
+- `pages/blog/[slug].jsx` - 記事ページ、[動的ルーティング](https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes)を使用
+
+<TreeView
+  defaultExpandedValue={['components', 'data', 'data/blog', 'lib', 'pages', 'pages/blog']}
+  collection={{
+    id: 'ROOT',
+    name: '',
+    children: [
+      {
+        id: 'components',
+        name: 'components',
+        children: [{ id: 'components/layout.jsx', name: 'layout.jsx' }],
+      },
+      {
+        id: 'data',
+        name: 'data',
+        children: [
+          {
+            id: 'data/blog',
+            name: 'blog',
+            children: [
+              { id: 'data/blog/markdown.mdx', name: 'markdown.mdx' },
+              { id: 'data/blog/nextjs.mdx', name: 'nextjs.mdx' },
+              { id: 'data/blog/react.mdx', name: 'react.mdx' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'lib',
+        name: 'lib',
+        children: [
+          { id: 'lib/format-date.js', name: 'format-date.js' },
+          { id: 'lib/mdx.js', name: 'mdx.js' },
+        ],
+      },
+      {
+        id: 'pages',
+        name: 'pages',
+        children: [
+          {
+            id: 'pages/blog',
+            name: 'blog',
+            children: [{ id: 'pages/blog/[slug].jsx', name: '[slug].jsx' }],
+          },
+        ],
+      },
+    ],
+  }}
+/>
+
+### Markdown ファイルの処理方法
+
+まず `const root{:js}` はルートディレクトリで、`process.cwd(){:js}` メソッドは Node.js プロセスの現在の作業ディレクトリを返します。
+
+```js title='lib/mdx.js'
+const root = process.cwd()
+```
+
+記事ファイルが保存されるパスのための変数 `POSTS_PATH{:.entity.name.constant}` も定義します。
+
+```js title='lib/mdx.js'
+import path from 'path'
+
+const POSTS_PATH = path.join(root, 'data', 'blog') // [!code highlight]
+// 出力例：A:/nextjs-mdx-blog/data/blog
+```
+
+次に fs を使ってそのディレクトリの内容、つまり `data/blog` 下のすべてのファイル名を読み込みます。
+
+```js title='lib/mdx.js'
+import fs from 'fs'
+
+export const allSlugs = fs.readdirSync(POSTS_PATH)
+// 出力例：['markdown.mdx', 'nextjs.mdx', 'react.mdx']
+```
+
+後で使用するためにファイル拡張子を取り除く関数を書きます。
+
+```js title='lib/mdx.js'
+export const formatSlug = (slug) => slug.replace(/\.mdx$/, '')
+/*
+ * 例：formatSlug('markdown.mdx')
+ * 出力：'markdown'
+ */
+```
+
+次はスラッグで記事のコンテンツを取得します。
+
+```js title='lib/mdx.js'
+export const getPostBySlug = async (slug) => {
+  const postFilePath = path.join(POSTS_PATH, `${slug}.mdx`)
+  // 出力例：A:/nextjs-mdx-blog/data/blog/slug.mdx
+  const source = fs.readFileSync(postFilePath)
+  // ファイルの内容を返す
+
+  const { content, data } = matter(source)
+  /*
+   * 例：
+   *  ---
+   *  title: Hello
+   *  slug: home
+   *  ---
+   *  <h1>Hello world!</h1>
+   *
+   * 戻り値：
+   *  {
+   *    content: '<h1>Hello world!</h1>',
+   *    data: {
+   *      title: 'Hello',
+   *      slug: 'home'
+   *    }
+   *  }
+   */
+
+  const mdxSource = await serialize(content)
+  // コンテンツを serialize (next-mdx-remote) で処理する
+
+  const frontMatter = {
+    ...data,
+    slug,
+  }
+  // 後で使用するためにスラッグをフロントマターにも追加する
+
+  return {
+    source: mdxSource,
+    frontMatter,
+  }
+}
+```
+
+次に、ホームページに表示するすべての記事を取得できます。
+
+```js title='lib/mdx.js'
+export const getAllPosts = () => {
+  const frontMatter = []
+
+  allSlugs.forEach((slug) => {
+    const source = fs.readFileSync(path.join(POSTS_PATH, slug), 'utf-8')
+
+    const { data } = matter(source)
+
+    frontMatter.push({
+      ...data,
+      slug: formatSlug(slug),
+      date: new Date(data.date).toISOString(),
+    })
+  })
+
+  return frontMatter.sort((a, b) => dateSortDesc(a.date, b.date))
+}
+
+// 日付の降順でソート
+const dateSortDesc = (a, b) => {
+  if (a > b) return -1
+  if (a < b) return 1
+
+  return 0
+}
+```
+
+### 日付のフォーマット
+
+```js title='lib/format-date.js'
+export const formatDate = (date) =>
+  new Date(date).toLocaleDateString('en', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+/*
+ * formatDate('2022-08-21T00:00:00Z')
+ * 出力：'August 21, 2022'
+ */
+```
+
+### ホームページ
+
+```jsx title='pages/index.jsx'
+import { formatDate } from '../lib/format-date'
+import { getAllPosts } from '../lib/mdx'
+
+import Link from 'next/link'
+
+export default function Home({ posts }) {
+  return (
+    <>
+      <h1 className='mb-8 text-6xl font-bold'>Blog</h1>
+      <hr className='my-8' />
+      <ul className='flex flex-col gap-3'>
+        {posts.map(({ slug, title, summary, date }) => (
+          <li key={slug}>
+            <Link href={`/blog/${slug}`}>
+              <a className='block rounded-lg border border-solid border-gray-300 p-6 shadow-md'>
+                <div className='flex justify-between'>
+                  <h2>{title}</h2>
+                  <time dateTime={date}>{formatDate(date)}</time>
+                </div>
+                <p className='mt-4'>{summary}</p>
+              </a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+}
+
+// getStaticProps ですべての記事を取得
+export const getStaticProps = async () => {
+  const posts = getAllPosts()
+
+  return {
+    props: {
+      posts,
+    },
+  }
+}
+```
+
+### 記事ページ
+
+```jsx title='pages/[slug].jsx'
+import { formatDate } from '../../lib/format-date'
+import { allSlugs, formatSlug, getPostBySlug } from '../../lib/mdx'
+
+import { MDXRemote } from 'next-mdx-remote'
+
+export default function Blog({ post }) {
+  const { title, date } = post.frontMatter
+
+  return (
+    <div>
+      <h1 className='mb-2 text-6xl font-bold'>{title}</h1>
+      <time dateTime={date} className='text-lg font-medium'>
+        {formatDate(date)}
+      </time>
+      <hr className='my-8' />
+      <article className='prose max-w-none'>
+        <MDXRemote {...post.source} />
+      </article>
+    </div>
+  )
+}
+
+export const getStaticProps = async ({ params }) => {
+  const post = await getPostBySlug(params.slug)
+
+  return {
+    props: {
+      post,
+    },
+  }
+}
+
+export const getStaticPaths = async () => {
+  const paths = allSlugs.map((slug) => ({
+    params: {
+      slug: formatSlug(slug),
+    },
+  }))
+  /*
+   * paths の出力例：
+   *   [
+   *     { params: { slug: 'markdown' } },
+   *     { params: { slug: 'nextjs' } },
+   *     { params: { slug: 'react' } }
+   *   ]
+   */
+
+  return {
+    paths,
+    fallback: false,
+  }
+}
+```
+
+これでシンプルなブログが完成しました。
+
+## 参考リンク
+
+- [getStaticPaths](https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths)
+- [getStaticProps](https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-props)
+- [動的ルーティング](https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes)
+- [mdx](https://mdxjs.com/)

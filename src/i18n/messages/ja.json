@@ -1,0 +1,313 @@
+{
+  "about": {
+    "description": "こんにちは！Nelson Lai です。HTML、CSS、JavaScript を使って革新的なプロジェクトを作る、情熱的な Web 開発学生です。私のポートフォリオ、スキル、そして使いやすいアプリ作りの旅をご覧ください。ぜひつながりましょう！"
+  },
+  "account": {
+    "account-created": "アカウント作成日",
+    "active-sessions": "アクティブなセッション",
+    "avatar": "アバター",
+    "description": "アカウントを管理します。",
+    "display-name": "表示名",
+    "edit-name": "名前を編集",
+    "edit-name-description": "表示名を変更します。この名前はプロフィールとコメントに表示されます。",
+    "email": "メールアドレス",
+    "location-not-accurate": "位置情報は正確でない場合があります",
+    "mobile-nav": {
+      "description": "モバイルナビゲーションをドロワーで表示します。",
+      "title": "ドロワー"
+    },
+    "no-active-sessions": "アクティブなセッションがありません",
+    "open-navigation-menu": "ナビゲーションメニューを開く",
+    "profile": "プロフィール",
+    "revoke-session": "取り消す",
+    "this-device": "このデバイス",
+    "update-avatar": "アバターを更新"
+  },
+  "admin": {
+    "page-header": {
+      "comments": {
+        "description": "コメントを管理"
+      },
+      "users": {
+        "description": "ユーザーを管理"
+      }
+    },
+    "toggle-sidebar": "サイドバーを切り替え"
+  },
+  "blog": {
+    "comments": {
+      "author": "投稿者",
+      "comments": "{count, plural, =1 {コメント} other {コメント}}",
+      "copy-link": "リンクをコピー",
+      "dislike": "低評価",
+      "highlighted-comment": "ハイライトされたコメント",
+      "newest": "新しい順",
+      "no-comments": "コメントがありません",
+      "nothing-to-preview": "プレビューするものがありません",
+      "oldest": "古い順",
+      "open-menu": "メニューを開く",
+      "placeholder": "コメントを残す",
+      "preview": "プレビュー",
+      "replies": "{count, plural, =1 {返信} other {返信}}",
+      "reply": "返信",
+      "reply-to-comment": "コメントに返信",
+      "send-comment": "コメントを送信",
+      "sort-by": "並び替え",
+      "this-comment-has-been-deleted": "[このコメントは削除されました]",
+      "toggle-bold": "太字を切り替え",
+      "toggle-italic": "斜体を切り替え",
+      "toggle-strikethrough": "取り消し線を切り替え",
+      "write": "書く"
+    },
+    "description": "私のウェブサイトとブログへようこそ！香港在住のフルスタックエンジニアとして、2020年12月から Web 開発を独学し、チュートリアルやメモ、日々の出来事を発信しています。私の旅をご覧ください！",
+    "footer": {
+      "edit-on-github": "GitHub で編集",
+      "last-updated": "最終更新日：{date}"
+    },
+    "header": {
+      "published-on": "公開日",
+      "views": "閲覧数",
+      "written-by": "執筆者"
+    },
+    "like-this-post": "この投稿にいいね",
+    "on-this-page": "目次"
+  },
+  "command-menu": {
+    "actions": {
+      "copy-link": "リンクをコピー",
+      "source-code": "ソースコード"
+    },
+    "description": "実行するコマンドを検索...",
+    "groups": {
+      "social": "ソーシャル"
+    },
+    "no-results": "結果が見つかりませんでした。",
+    "open-menu": "コマンドメニューを開く",
+    "placeholder": "コマンドを入力または検索",
+    "title": "コマンドパレット"
+  },
+  "common": {
+    "aria-labels": {
+      "close": "閉じる",
+      "copy-code": "コードをクリップボードにコピー",
+      "loading": "読み込み中",
+      "toggle-sidebar": "サイドバーを切り替え",
+      "tree-view": "ツリービュー"
+    },
+    "avatar-alt": "{name} のアバター",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "dialogs": {
+      "delete-comment": {
+        "description": "このコメントを削除してもよろしいですか？この操作は元に戻せません。",
+        "title": "コメントを削除"
+      }
+    },
+    "error": "エラー",
+    "loading": "読み込み中...",
+    "labels": {
+      "about": "概要",
+      "account": "アカウント",
+      "blog": "ブログ",
+      "close": "閉じる",
+      "comment": "コメント",
+      "comments": "コメント",
+      "dashboard": "ダッシュボード",
+      "facebook": "Facebook",
+      "general": "一般",
+      "github": "GitHub",
+      "guestbook": "ゲストブック",
+      "home": "ホーム",
+      "instagram": "Instagram",
+      "links": "リンク",
+      "privacy": "プライバシーポリシー",
+      "projects": "プロジェクト",
+      "settings": "設定",
+      "terms": "利用規約",
+      "unsubscribe": "配信停止",
+      "users": "ユーザー",
+      "uses": "使用機材",
+      "youtube": "YouTube"
+    },
+    "like": "いいね",
+    "likes": "{count, plural, =1 {# いいね} other {# いいね}}",
+    "save": "保存",
+    "reset": "リセット",
+    "sign-in": "サインイン",
+    "sign-out": "サインアウト",
+    "unknown": "不明",
+    "views": "{count, plural, =1 {# 回閲覧} other {# 回閲覧}}"
+  },
+  "components": {
+    "filtered-posts": {
+      "no-posts-found": "投稿が見つかりませんでした",
+      "placeholder": "記事を検索"
+    },
+    "go-to-homepage": "ホームページへ戻る"
+  },
+  "dashboard": {
+    "description": "これは私の個人ダッシュボードです。Next.js API ルートを使って構築し、サーバーレス関数としてデプロイしています。YouTube や GitHub などのプラットフォームの各種統計を追跡するために使っています。",
+    "stat": {
+      "blog-total-likes": "ブログ総いいね数",
+      "blog-total-views": "ブログ総閲覧数",
+      "coding-hours": "コーディング時間",
+      "github-followers": "GitHub フォロワー",
+      "github-stars": "GitHub スター",
+      "youtube-subscribers": "YouTube 登録者数",
+      "youtube-views": "YouTube 再生回数"
+    }
+  },
+  "dialog": {
+    "sign-in": {
+      "continue-with": "{provider} で続ける",
+      "description": "nelsonlai.dev に続けるには",
+      "last-used": "最後に使用",
+      "notice": "続けることで、<terms>利用規約</terms>と<privacy>プライバシーポリシー</privacy>に同意したことになります"
+    }
+  },
+  "error": {
+    "avatar-too-large": "アバターファイルが大きすぎます。{size} MB 未満のファイルを選択してください。",
+    "avatar-unsupported-file": "サポートされている画像形式（JPEG、PNG、WEBP、GIF、AVIF）を選択してください。",
+    "comment-cannot-be-empty": "コメントを入力してください",
+    "copy-to-clipboard-error": "クリップボードにコピーできません。もう一度お試しください。",
+    "failed-to-fetch-comments-data": "コメントデータの取得に失敗しました。ページを更新してください。",
+    "failed-to-fetch-users-data": "ユーザーデータの取得に失敗しました。ページを更新してください。",
+    "failed-to-load-comments": "コメントの読み込みに失敗しました。ページを更新してください。",
+    "failed-to-load-messages": "メッセージの読み込みに失敗しました。ページを更新してください。",
+    "failed-to-load-replies": "返信の読み込みに失敗しました。ページを更新してください。",
+    "failed-to-load-settings": "設定の読み込みに失敗しました。ページを更新してください。",
+    "like-limit-reached": "1つの投稿につきいいねは3回までです",
+    "message-cannot-be-empty": "メッセージを入力してください",
+    "name-cannot-be-empty": "名前を入力してください",
+    "name-too-long": "名前が長すぎます",
+    "need-logged-in-to-vote": "コメントに投票するにはログインが必要です",
+    "not-found": "ページが見つかりません。",
+    "now-playing-error": "Spotify データの取得に失敗しました",
+    "reply-cannot-be-empty": "返信を入力してください",
+    "sign-in-error": "サインインに失敗しました。もう一度お試しください。",
+    "sign-out-failed": "サインアウトに失敗しました。もう一度お試しください。",
+    "something-went-wrong": "問題が発生しました。もう一度お試しください。",
+    "update-avatar-failed": "アバターの更新に失敗しました。もう一度お試しください。",
+    "try-again": "もう一度試す"
+  },
+  "guestbook": {
+    "description": "ゲストブックにサインして、あなたのアイデアを共有してください。何でも話しかけてください！",
+    "no-messages": "メッセージがありません。最初のメッセージを残しましょう！",
+    "pinned": {
+      "description": "私のウェブサイトにお越しいただきありがとうございます。お時間があれば、私の作品についてのご意見をお聞かせください。コメントを残すにはアカウントでログインしてください。よろしくお願いします！",
+      "greeting": "こんにちは！ 👋"
+    },
+    "placeholder": "メッセージを残す",
+    "signin": {
+      "description": "メッセージを残す"
+    },
+    "submit": "送信"
+  },
+  "homepage": {
+    "about-me": {
+      "coding-hours": "コーディング時間",
+      "connect": "つながる",
+      "fav-framework": "お気に入りのフレームワーク",
+      "location": "香港",
+      "more": "私についてもっと知る",
+      "stacks": "技術スタック",
+      "title": "私について"
+    },
+    "get-in-touch": {
+      "description": "気軽にご連絡ください！",
+      "image-alt": "Nelson Lai のロゴ",
+      "title": "Next.js についてご質問があれば？"
+    },
+    "hero": {
+      "amazing": "素晴らしい",
+      "attractive": "魅力的な",
+      "fantastic": "最高な",
+      "location-timezone": "香港 • UTC/GMT +8",
+      "stunning": "圧倒的な",
+      "line-1": "Nelson です。フルスタックエンジニアとして",
+      "line-2-left": "制作している",
+      "line-2-right": "ウェブサイトを",
+      "line-3": "React で開発しています",
+      "image-alt": "Nelson Lai のロゴ"
+    },
+    "latest-articles": {
+      "card": "記事",
+      "more": "すべての記事を見る",
+      "title": "最新の記事"
+    },
+    "selected-projects": {
+      "card": "プロジェクト",
+      "more": "すべてのプロジェクトを見る",
+      "title": "厳選プロジェクト"
+    }
+  },
+  "layout": {
+    "change-language": "言語を変更",
+    "now-playing": {
+      "loading": "読み込み中...",
+      "not-listening": "再生停止中 - Spotify"
+    },
+    "sidebar": {
+      "description": "モバイルサイドバーを表示します。",
+      "title": "サイドバー"
+    },
+    "skip-to-main-content": "メインコンテンツへスキップ",
+    "toggle-menu": "メニューを切り替え"
+  },
+  "mdx": {
+    "link-to-section": "セクションへのリンク"
+  },
+  "metadata": {
+    "site-description": "Nelson Lai は香港在住のフルスタックエンジニアです。React、Node.js、最新技術を使ってパフォーマントで洗練されたウェブサイトを構築しています。"
+  },
+  "privacy": {
+    "description": "このページでは、当ウェブサイトをご利用いただく際のデータの取り扱いとプライバシー保護について説明します。"
+  },
+  "projects": {
+    "description": "心を込めて制作したプロジェクトのコレクションです。",
+    "visit-website": "ウェブサイトを訪問"
+  },
+  "settings": {
+    "description": "設定を管理します。",
+    "notification-settings": "通知設定",
+    "reply-notification": "返信通知",
+    "reply-notification-description": "コメントへの返信があった際にメール通知を受け取ります。"
+  },
+  "success": {
+    "avatar-updated": "アバターを更新しました",
+    "comment-deleted": "コメントを削除しました",
+    "comment-posted": "コメントを投稿しました",
+    "copied-to-clipboard": "クリップボードにコピーしました",
+    "link-copied": "リンクをクリップボードにコピーしました",
+    "message-created": "メッセージを作成しました",
+    "message-deleted": "メッセージを削除しました",
+    "name-updated": "表示名を更新しました",
+    "reply-posted": "返信を投稿しました",
+    "session-revoked": "セッションを取り消しました",
+    "settings-updated": "設定を更新しました",
+    "signed-out": "サインアウトしました"
+  },
+  "terms": {
+    "description": "この利用規約は、当ウェブサイトの利用に関するルールと規定を概説したものです。"
+  },
+  "theme-toggle": {
+    "options": {
+      "dark": "ダーク",
+      "light": "ライト",
+      "system": "システム"
+    },
+    "toggle-theme": "テーマを切り替え"
+  },
+  "unsubscribe": {
+    "invalid-link-description": "配信停止リンクが無効です。もう一度お試しください。",
+    "invalid-unsubscribe-link": "無効な配信停止リンク",
+    "stop-receiving-email-notifications": "このコメントへの返信メール通知を停止する",
+    "unsubscribe-from-this-comment": "このコメントの通知を配信停止",
+    "unsubscribed-description": "このコメントへの返信通知メールは今後届きません。",
+    "you-are-unsubscribing-as": "{email} として配信停止します",
+    "you-have-been-unsubscribed": "配信停止しました"
+  },
+  "uses": {
+    "description": "ゲーム、プログラミング、動画制作、日常使いで現在使用している機材です。"
+  }
+}
