@@ -10,14 +10,8 @@ import { cn } from '@/utils/cn'
 import { buttonVariants } from '../ui/button'
 
 const variants = {
-  initial: {
-    y: 40,
-    opacity: 0,
-  },
-  animate: {
-    y: 0,
-    opacity: 1,
-  },
+  initial: { y: 40, opacity: 0 },
+  animate: { y: 0, opacity: 1 },
 }
 
 export function GetInTouch() {
@@ -55,9 +49,7 @@ export function GetInTouch() {
       animate={isInView ? 'animate' : 'initial'}
       variants={variants}
       ref={cardsRef}
-      transition={{
-        duration: 0.5,
-      }}
+      transition={{ duration: 0.5 }}
     >
       <div className='relative size-64 max-md:mx-auto' ref={scope}>
         <BlurImage
