@@ -30,7 +30,7 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 
 ### UI/UX
 
-- Radix UI for accessible UI components
+- Base UI for accessible UI components
 - Responsive design
 - Light/Dark mode
 - Image zoom in blog posts
@@ -60,7 +60,7 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 - ESLint configuration
 - Prettier code formatting
 - Lefthook
-- Conventional commit lint
+- Conventional commit
 
 ### Authentication & Data
 
@@ -102,15 +102,18 @@ nelsonlai.dev/
 ├── src/
 │   ├── app/          # Next.js app router pages
 │   ├── components/   # React components
-│   ├── config/       # Configuration files
+│   ├── constants/    # Application constants
 │   ├── content/      # MDX blog posts and content
+│   ├── contexts/     # React contexts
 │   ├── db/           # Database schema and migrations
 │   ├── emails/       # Email templates
 │   ├── hooks/        # Custom React hooks
 │   ├── i18n/         # Internationalization
 │   ├── lib/          # Utility libraries
+│   ├── mdx-plugins   # Custom Rehype and Remark plugins
 │   ├── orpc/         # oRPC API routes
 │   ├── styles/       # Global styles
+│   ├── tests/        # Unit and E2E tests
 │   └── utils/        # Utility functions
 ├── docker-compose.yml
 └── package.json
