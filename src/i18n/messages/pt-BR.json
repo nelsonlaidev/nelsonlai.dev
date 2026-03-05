@@ -13,8 +13,8 @@
     "email": "Email",
     "location-not-accurate": "A localização pode não ser precisa",
     "mobile-nav": {
-      "description": "Exibe a navegação móvel na gaveta.",
-      "title": "Gaveta"
+      "description": "Exibe a navegação móvel no menu lateral.",
+      "title": "Menu lateral"
     },
     "no-active-sessions": "Nenhuma sessão ativa",
     "open-navigation-menu": "Abrir menu de navegação",
@@ -59,7 +59,7 @@
       "toggle-strikethrough": "Alternar tachado",
       "write": "Escrever"
     },
-    "description": "Descubra meu site e blog, onde compartilho tutoriais, notas e experiências como um engenheiro full-stack sediado em Hong Kong. Comecei o desenvolvimento web como um hobby em dez de 2020. Explore minha jornada!",
+    "description": "Descubra meu site e blog, onde compartilho tutoriais, notas e experiências como um engenheiro full-stack sediado em Hong Kong. Comecei o desenvolvimento web como um hobby em dezembro de 2020. Explore minha jornada!",
     "footer": {
       "edit-on-github": "Editar no GitHub",
       "last-updated": "Última atualização: {date}"
@@ -304,7 +304,7 @@
     "unsubscribe-from-this-comment": "Cancelar inscrição deste comentário",
     "unsubscribed-description": "Você não receberá mais e-mails de notificações de resposta para este comentário.",
     "you-are-unsubscribing-as": "Você está cancelando a inscrição como {email}",
-    "you-have-been-unsubscribed": "Você teve a inscrição cancelada"
+    "you-have-been-unsubscribed": "Sua inscrição foi cancelada"
   },
   "uses": {
     "description": "Este é o equipamento que uso atualmente para jogos, programação, criação de vídeos e todos os dias."
