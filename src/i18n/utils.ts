@@ -9,18 +9,3 @@ export async function loadMessages(locale: string) {
 
   return messages
 }
-
-export function flattenKeys(object: DeepObject, prefix = ''): string[] {
-  const keys: string[] = []
-
-  for (const [key, value] of Object.entries(object)) {
-    const fullKey = prefix ? `${prefix}.${key}` : key
-    if (typeof value === 'string') {
-      keys.push(fullKey)
-    } else {
-      keys.push(...flattenKeys(value, fullKey))
-    }
-  }
-
-  return keys
-}

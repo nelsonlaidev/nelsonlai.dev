@@ -199,7 +199,8 @@
     "placeholder": "Deixe uma mensagem",
     "signin": {
       "description": "para deixar uma mensagem"
-    }
+    },
+    "submit": "Enviar"
   },
   "homepage": {
     "about-me": {
