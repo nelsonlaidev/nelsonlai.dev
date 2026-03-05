@@ -1,19 +1,30 @@
+'use client'
+
 import type { DecoratorProps } from 'react-cosmos-core'
 
-import { NextIntlClientProvider } from 'next-intl'
+import { MoonIcon, SunIcon } from 'lucide-react'
+import { useTheme } from 'next-themes'
 
-import { Toaster } from './ui/sonner'
+import { Button } from './ui/button'
 
 function Decorator(props: DecoratorProps) {
   const { children } = props
+  const { resolvedTheme, setTheme } = useTheme()
 
   return (
-    <NextIntlClientProvider>
-      <div className='mx-auto w-full max-w-3xl p-8'>
-        {children}
-        <Toaster />
-      </div>
-    </NextIntlClientProvider>
+    <div className='mx-auto w-full max-w-3xl bg-background p-8 text-foreground'>
+      {children}
+      <Button
+        type='button'
+        onClick={() => {
+          setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+        }}
+        size='icon'
+        className='fixed right-4 bottom-4'
+      >
+        {resolvedTheme === 'dark' ? <SunIcon /> : <MoonIcon />}
+      </Button>
+    </div>
   )
 }
 
