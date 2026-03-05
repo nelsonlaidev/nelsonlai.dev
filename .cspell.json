@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
-  "import": ["@cspell/dict-es-es/cspell-ext.json"],
-  "language": "en,es",
+  "import": ["@cspell/dict-es-es/cspell-ext.json", "@cspell/dict-pt-br/cspell-ext.json"],
+  "language": "en,es,pt-br",
   "useGitignore": true,
   "enableGlobDot": true,
   "enabledFileTypes": { "*": true },
