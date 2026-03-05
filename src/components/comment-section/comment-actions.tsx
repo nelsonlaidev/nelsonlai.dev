@@ -10,18 +10,16 @@ import { useCreateVote } from '@/hooks/queries/vote.query'
 import { useSession } from '@/lib/auth-client'
 
 export function CommentActions() {
-  const { slug } = useCommentsContext()
+  const { slug, sort } = useCommentsContext()
   const { comment, setIsReplying, isOpenReplies, setIsOpenReplies } = useCommentContext()
   const { data: session } = useSession()
   const t = useTranslations()
 
-  const { mutate: voteComment, isPending: isVoting } = useCreateVote({ slug })
+  const { mutate: voteComment } = useCreateVote({ slug, sort, type: comment.parentId ? 'replies' : 'comments' })
 
   const isAuthenticated = session !== null
 
   function handleVoteComment(like: boolean) {
-    if (isVoting) return
-
     if (!isAuthenticated) {
       toast.error(t('error.need-logged-in-to-vote'))
       return
@@ -43,7 +41,6 @@ export function CommentActions() {
           size='sm'
           className='font-mono text-xs text-muted-foreground data-active:bg-accent data-active:text-accent-foreground'
           aria-label={t('common.like')}
-          disabled={isVoting}
         >
           <ThumbsUpIcon />
           <NumberFlow value={comment.likeCount} />
@@ -57,7 +54,6 @@ export function CommentActions() {
           size='sm'
           className='font-mono text-xs text-muted-foreground data-active:bg-accent data-active:text-accent-foreground'
           aria-label={t('blog.comments.dislike')}
-          disabled={isVoting}
         >
           <ThumbsDownIcon />
           <NumberFlow value={comment.dislikeCount} />
