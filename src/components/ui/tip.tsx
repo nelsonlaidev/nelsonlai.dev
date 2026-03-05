@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
 
 type TipProps = {
   children: React.ReactNode
@@ -12,9 +12,20 @@ type TipProps = {
 export function Tip(props: TipProps) {
   const { children, content } = props
   const [open, setOpen] = useState(false)
+  const [canHover, setCanHover] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
-  const canHover = globalThis.matchMedia('(hover: hover)').matches
+  useEffect(() => {
+    const mql = globalThis.matchMedia('(hover: hover)')
+    setCanHover(mql.matches)
+    function onChange(e: MediaQueryListEvent) {
+      setCanHover(e.matches)
+    }
+    mql.addEventListener('change', onChange)
+    return () => {
+      mql.removeEventListener('change', onChange)
+    }
+  }, [])
 
   useEffect(() => {
     function handleClickOutside(event: TouchEvent) {
@@ -30,7 +41,12 @@ export function Tip(props: TipProps) {
   }, [])
 
   return (
-    <Tooltip open={open} onOpenChange={setOpen}>
+    <Tooltip
+      open={open}
+      onOpenChange={(nextOpen) => {
+        if (canHover) setOpen(nextOpen)
+      }}
+    >
       <TooltipTrigger
         render={
           <button
@@ -39,12 +55,6 @@ export function Tip(props: TipProps) {
             ref={buttonRef}
             onClick={() => {
               if (!canHover) setOpen((v) => !v)
-            }}
-            onMouseEnter={() => {
-              if (canHover) setOpen(true)
-            }}
-            onMouseLeave={() => {
-              if (canHover) setOpen(false)
             }}
           >
             {children}

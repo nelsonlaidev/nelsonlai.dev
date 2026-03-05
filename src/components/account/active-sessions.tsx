@@ -10,12 +10,11 @@ import { toast } from 'sonner'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { Tip } from '@/components/ui/tip'
 import { useListSessions, useRevokeSession } from '@/hooks/queries/auth.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useRouter } from '@/i18n/routing'
 import { useSession } from '@/lib/auth-client'
-
-import { Tip } from '../tip'
 
 import { ActiveSessionsSkeleton } from './active-sessions-skeleton'
 
