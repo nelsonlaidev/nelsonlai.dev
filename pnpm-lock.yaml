@@ -343,14 +343,14 @@ importers:
         specifier: 3.0.0
         version: 3.0.0(prettier@3.8.1)
       react-cosmos:
-        specifier: 7.1.1
-        version: 7.1.1
+        specifier: 7.1.2-canary.579b2b0.0
+        version: 7.1.2-canary.579b2b0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-cosmos-core:
-        specifier: 7.1.1
-        version: 7.1.1
+        specifier: 7.1.2-canary.579b2b0.0
+        version: 7.1.2-canary.579b2b0.0(react@19.2.4)
       react-cosmos-next:
-        specifier: 7.1.1
-        version: 7.1.1
+        specifier: 7.1.2-canary.579b2b0.0
+        version: 7.1.2-canary.579b2b0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       schema-dts:
         specifier: 1.1.5
         version: 1.1.5
@@ -7902,24 +7902,40 @@ packages:
   rc9@2.1.2:
     resolution: {integrity: sha512-btXCnMmRIBINM2LDZoEmOogIZU7Qe7zn4BpomSKZ/ykbLObuBdvG+mFq11DL6fjH1DRwHhrlgtYWG96bJiC7Cg==}
 
-  react-cosmos-core@7.1.1:
-    resolution: {integrity: sha512-5aQ2hq0HzzjONS6qU8pld7HqFh0hWoguMDnvYYmP2wYtBb1jVCiCWVePB4SQUPc0qOOFP0RUvnXv7hd49NiKBQ==}
+  react-cosmos-core@7.1.2-canary.579b2b0.0:
+    resolution: {integrity: sha512-kRgjqn2OIot0VS4viIBvOQNokpP1ssnQbobl4X2fLnwu80zqLLi7XlHdOX47ahR4pfcmZPvT44hQeIUpetszqA==}
+    peerDependencies:
+      react: '>=18'
 
-  react-cosmos-dom@7.1.1:
-    resolution: {integrity: sha512-vhkbQrjtwxFw7AX6cAXJcz7uclANWTO3W5cCKZYj/02CC1taGm6/9RIkWJus0j5YKdLOOo9Adu34zb9J8YiaWw==}
+  react-cosmos-dom@7.1.2-canary.579b2b0.0:
+    resolution: {integrity: sha512-ZZ2e9p2Sw4JbB3ZvU3/elUUjHOhSEsoBHJmQfK3vYUznML0iK6g1qPO7D66y0A52LuvC18iwceZX0qY4fEe1Yg==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
 
-  react-cosmos-next@7.1.1:
-    resolution: {integrity: sha512-1cAqs0DKza+ctvPjq7O7yGMJ5MJkg/n9IEA34OOyhQcRzIKTGCLSc6vef0uVH3kR8wRplnItnS2rxVNtRYSDOA==}
+  react-cosmos-next@7.1.2-canary.579b2b0.0:
+    resolution: {integrity: sha512-e+IuRGm3Ho6NxOTZabHZz9BFEOmeW3+WWa4+MC/73b+Xs5yMMTRkDAS0U74wqAkg3suBtvjgE4zcZ4uXRxM2/g==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
 
-  react-cosmos-renderer@7.1.1:
-    resolution: {integrity: sha512-Zr/9jdBRaczDT9zOUE1oz6rYnTTmFxmBUDXI/gF4qC/WebXoWkPWMtQwmhvcTTCM1wuI6UvGX+yuxanhPPUHdQ==}
+  react-cosmos-renderer@7.1.2-canary.579b2b0.0:
+    resolution: {integrity: sha512-Xcsl149khtvjf2pb/d1m7ekNt6a3vlATryTCj1IQOZoihbNi7RgeeTAmt+dnUnrpK0Jl8Qaq/hSun33FMMLxVw==}
+    peerDependencies:
+      react: '>=18'
 
-  react-cosmos-ui@7.1.1:
-    resolution: {integrity: sha512-H9GuYpFoRizWCw9LOWVTwj+byK+UrqKo105hS0XPkE8EHV3T5aDHqX3S+muWdMCw2RqIlJ4mNvnnrHc3Bc5NIw==}
+  react-cosmos-ui@7.1.2-canary.579b2b0.0:
+    resolution: {integrity: sha512-Tb/z0hmBkwRRdMmrLl0M+TM8F4yT/+muu2Po0OWst0+gv8hnwpvFtWvmnwxGNW3nanYEC939tJqiaeWFyEJSjA==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
 
-  react-cosmos@7.1.1:
-    resolution: {integrity: sha512-9n/xV1JLoln4zph3rEYiYVISuJ7WeF1iexRT32ENWOGUaj9By3jA8mQjT+5PeVXZJHdsB/LWOBNZorTQUeQbrw==}
+  react-cosmos@7.1.2-canary.579b2b0.0:
+    resolution: {integrity: sha512-Ys+De5S2cE+cUkQMVclOqqHd0Fn1Zn+wDNfWCj5mo6UgH+zQmbpLWjHxOhuMELwYB2qG7KGWDDOhxEI8doOUrA==}
     hasBin: true
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
 
   react-dom@19.2.4:
     resolution: {integrity: sha512-AXJdLo8kgMbimY95O2aKQqsz2iWi9jMgKJhRBAxECE4IFxfcazB2LmzloIoibJI3C12IlY20+KFaLv+71bUJeQ==}
@@ -17612,35 +17628,43 @@ snapshots:
       defu: 6.1.4
       destr: 2.0.5
 
-  react-cosmos-core@7.1.1:
+  react-cosmos-core@7.1.2-canary.579b2b0.0(react@19.2.4):
     dependencies:
       js-base64: 3.7.8
       lodash-es: 4.17.23
+      react: 19.2.4
 
-  react-cosmos-dom@7.1.1:
+  react-cosmos-dom@7.1.2-canary.579b2b0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       lodash-es: 4.17.23
-      react-cosmos-core: 7.1.1
-      react-cosmos-renderer: 7.1.1
+      react: 19.2.4
+      react-cosmos-core: 7.1.2-canary.579b2b0.0(react@19.2.4)
+      react-cosmos-renderer: 7.1.2-canary.579b2b0.0(react@19.2.4)
+      react-dom: 19.2.4(react@19.2.4)
 
-  react-cosmos-next@7.1.1:
+  react-cosmos-next@7.1.2-canary.579b2b0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       lodash-es: 4.17.23
-      react-cosmos-core: 7.1.1
-      react-cosmos-dom: 7.1.1
-      react-cosmos-renderer: 7.1.1
+      react: 19.2.4
+      react-cosmos-core: 7.1.2-canary.579b2b0.0(react@19.2.4)
+      react-cosmos-dom: 7.1.2-canary.579b2b0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react-cosmos-renderer: 7.1.2-canary.579b2b0.0(react@19.2.4)
+      react-dom: 19.2.4(react@19.2.4)
 
-  react-cosmos-renderer@7.1.1:
+  react-cosmos-renderer@7.1.2-canary.579b2b0.0(react@19.2.4):
     dependencies:
       lodash-es: 4.17.23
-      react-cosmos-core: 7.1.1
+      react: 19.2.4
+      react-cosmos-core: 7.1.2-canary.579b2b0.0(react@19.2.4)
 
-  react-cosmos-ui@7.1.1:
+  react-cosmos-ui@7.1.2-canary.579b2b0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       lodash-es: 4.17.23
-      react-cosmos-core: 7.1.1
+      react: 19.2.4
+      react-cosmos-core: 7.1.2-canary.579b2b0.0(react@19.2.4)
+      react-dom: 19.2.4(react@19.2.4)
 
-  react-cosmos@7.1.1:
+  react-cosmos@7.1.2-canary.579b2b0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       '@skidding/launch-editor': 2.2.3
       chokidar: 3.6.0
@@ -17651,9 +17675,11 @@ snapshots:
       micromatch: 4.0.8
       open: 10.2.0
       pem: 1.15.1
-      react-cosmos-core: 7.1.1
-      react-cosmos-renderer: 7.1.1
-      react-cosmos-ui: 7.1.1
+      react: 19.2.4
+      react-cosmos-core: 7.1.2-canary.579b2b0.0(react@19.2.4)
+      react-cosmos-renderer: 7.1.2-canary.579b2b0.0(react@19.2.4)
+      react-cosmos-ui: 7.1.2-canary.579b2b0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react-dom: 19.2.4(react@19.2.4)
       ws: 8.19.0
       yargs: 17.7.2
     transitivePeerDependencies:
