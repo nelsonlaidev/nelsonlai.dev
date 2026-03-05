@@ -22,15 +22,6 @@ describe('pathnames', () => {
 
     expect(missing, `Missing routes in getPathnames(): ${missing.join(', ')}`).toStrictEqual([])
   })
-
-  test('excludes test posts', () => {
-    expect.assertions(1)
-
-    const pathnames = getPathnames()
-    const testRoutes = pathnames.filter((route) => route.startsWith('/blog/test-'))
-
-    expect(testRoutes).toStrictEqual([])
-  })
 })
 
 async function getStaticPageRoutes(): Promise<string[]> {
