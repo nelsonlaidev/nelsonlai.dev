@@ -31,7 +31,7 @@ export async function GET(_request: Request, props: RouteContext<'/[locale]/rss.
     webMaster: 'me@nelsonlai.dev',
   })
 
-  const posts = allPosts.filter((p) => p.locale === locale)
+  const posts = allPosts.filter((p) => p.locale === locale && !p.test)
 
   for (const post of posts) {
     feed.item({

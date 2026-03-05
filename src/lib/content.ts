@@ -4,7 +4,7 @@ import { allPages, allPosts, allProjects } from 'content-collections'
 
 export function getLatestPosts(locale: string, limit: number = allPosts.length) {
   return allPosts
-    .filter((post) => post.locale === locale)
+    .filter((post) => post.locale === locale && !post.test)
     .toSorted((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, limit)
 }
