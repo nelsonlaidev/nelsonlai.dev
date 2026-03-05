@@ -1,12 +1,15 @@
 import '@/styles/globals.css'
 
 import { NextIntlClientProvider } from 'next-intl'
+import { setRequestLocale } from 'next-intl/server'
 import { ThemeProvider } from 'next-themes'
 
 import { Toaster } from '@/components/ui/sonner'
 
 function Layout(props: LayoutProps<'/cosmos/[fixture]'>) {
   const { children } = props
+
+  setRequestLocale('en')
 
   return (
     <html lang='en' data-scroll-behavior='smooth' suppressHydrationWarning>
