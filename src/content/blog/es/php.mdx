@@ -23,7 +23,7 @@ Cuando el navegador lee `<?php` de arriba a abajo, ejecuta `PHP` y termina con `
     </head>
     <body>
         <?php
-            echo "This is a sentence."
+            echo "Esta es una oración."
         ?>
     </body>
 </html>
@@ -31,11 +31,11 @@ Cuando el navegador lee `<?php` de arriba a abajo, ejecuta `PHP` y termina con `
 
 ## Precauciones
 
-En `PHP`, si no hay otro `HTML` después de que se completa la directiva `PHP`, se recomienda no terminar con `?>`. Causará problemas si se cierra.
+En `PHP`, no debe haber otro `HTML` después de que se completa la directiva `PHP`. Se recomienda no terminar con `?>`. Causará problemas si se cierra.
 
 ```php
 <?php
-    echo "No HTML after PHP ends";
+    echo "No hay HTML después de que termina PHP";
 ```
 
 ## Comentarios en PHP
@@ -44,11 +44,11 @@ Casi todos los lenguajes de programación web pueden comentar, y la forma de **u
 
 ```php
 <?php
-    echo = "This is a single line comment"; // I am a single line comment
-    echo = "This is a multi-line comment";
+    echo = "Este es un comentario de una línea"; // Soy un comentario de una línea
+    echo = "Este es un comentario de múltiples líneas";
     /*
-        I am a multi-line comment
-        Second line
+        Soy un comentario de múltiples líneas
+        Segunda línea
     */
 ?>
 ```
@@ -59,8 +59,8 @@ La sintaxis más simple en `PHP` es `Echo`. El contenido de `Echo` debe encerrar
 
 ```php
 <?php
-    echo "This is the example of using double quotes.";
-    echo 'This is the example of using single quotes.';
+    echo "Este es un ejemplo de uso de comillas dobles.";
+    echo 'Este es un ejemplo de uso de comillas simples.';
 ?>
 ```
 
@@ -68,9 +68,9 @@ El contenido de `Echo` también puede usar sintaxis `HTML`. Por ejemplo, usé `<
 
 ```php
 <?php
-    echo "This is the first sentence<br/>";
-    echo "This is the second sentence";
-    echo "<a href=\"https://example.com\">here is a link</a>";
+    echo "Esta es la primera oración<br/>";
+    echo "Esta es la segunda oración";
+    echo "<a href=\"https://example.com\">aquí hay un enlace</a>";
 ?>
 ```
 
@@ -80,7 +80,7 @@ Podemos asignar un valor a una variable para facilitar la escritura en `PHP`, si
 
 ```php
 <?php
-    $value = "I am a value";
+    $value = "Soy un valor";
 ?>
 ```
 
@@ -128,7 +128,7 @@ Hay dos operadores de cadena. El primero es el operador de concatenación ("."),
 
 ```php
 <?php
-    echo "This" . " " . "is" . " " . "String" . " " . "operators" . ".";
+    echo "Estos" . " " . "son" . " " . "operadores" . " " . "de" . " " . "cadena" . ".";
 ?>
 ```
 
@@ -136,13 +136,13 @@ Hay dos operadores de cadena. El primero es el operador de concatenación ("."),
 
 ```php
 <?php
-    $value0 = 1.5 // Float
-    $value1 = 1 + 1 // Suma
-    $value2 = 1 - 1 // Resta
-    $value3 = 1 * 1 // Multiplicación
-    $value4 = 1 / 1 // División
-    $value5 = 12 / 5 // División | La división incompleta se convierte en float, que es diferente de otros lenguajes de programación, php calculará el resto
-    $value6 = 3 % 5 // Obtener el resto
+    $value0 = 1.5; // Float
+    $value1 = 1 + 1; // Suma
+    $value2 = 1 - 1; // Resta
+    $value3 = 1 * 1; // Multiplicación
+    $value4 = 1 / 1; // División
+    $value5 = 12 / 5; // División (La división incompleta se convierte en float, que es diferente de otros lenguajes de programación, php calculará el resto)
+    $value6 = 3 % 5; // Obtener el resto
 ?>
 ```
 
