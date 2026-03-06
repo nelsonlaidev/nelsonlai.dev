@@ -34,7 +34,7 @@ yarn create next-app nextjs-mdx-blog
 次に、以下のファイルを作成します：
 
 - `components/layout.jsx` - すべてのコンポーネントをコンテナにラップする（任意、スタイルのみ）
-- `date/blog/*.mdx` - ブログ記事
+- `data/blog/*.mdx` - ブログ記事
 - `lib/format-date.js` - 日付を `MM DD, YYYY` 形式にフォーマット
 - `pages/blog/[slug].jsx` - 記事ページ、[動的ルーティング](https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes)を使用
 
@@ -258,7 +258,7 @@ export const getStaticProps = async () => {
 
 ### 記事ページ
 
-```jsx title='pages/[slug].jsx'
+```jsx title='pages/blog/[slug].jsx'
 import { formatDate } from '../../lib/format-date'
 import { allSlugs, formatSlug, getPostBySlug } from '../../lib/mdx'
 
