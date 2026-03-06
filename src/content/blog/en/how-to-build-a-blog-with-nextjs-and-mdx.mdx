@@ -34,7 +34,7 @@ yarn create next-app nextjs-mdx-blog
 Next, create the following file:
 
 - `components/layout.jsx` - Wrap all components in a container (optional, just the style)
-- `date/blog/*.mdx` - Blog Articles
+- `data/blog/*.mdx` - Blog Articles
 - `lib/format-date.js` - Format the date as `MM DD, YYYY`
 - `pages/blog/[slug].jsx` - article page, using [dynamic routes](https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes)
 
@@ -258,7 +258,7 @@ export const getStaticProps = async () => {
 
 ### Article Page
 
-```jsx title='pages/[slug].jsx'
+```jsx title='pages/blog/[slug].jsx'
 import { formatDate } from '../../lib/format-date'
 import { allSlugs, formatSlug, getPostBySlug } from '../../lib/mdx'
 
