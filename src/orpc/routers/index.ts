@@ -7,7 +7,6 @@ import { messageRouter } from './message.router'
 import { r2Router } from './r2.router'
 import { replyRouter } from './reply.router'
 import { settingsRouter } from './settings.router'
-import { spotifyRouter } from './spotify.router'
 import { unsubscribeRouter } from './unsubscribe.router'
 import { viewRouter } from './view.router'
 import { voteRouter } from './vote.router'
@@ -18,7 +17,6 @@ export const router = {
   github: githubRouter,
   youtube: youtubeRouter,
   wakatime: wakatimeRouter,
-  spotify: spotifyRouter,
   view: viewRouter,
   like: likeRouter,
   comment: commentRouter,
