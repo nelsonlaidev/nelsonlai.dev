@@ -181,7 +181,6 @@
     "name-too-long": "El nombre es demasiado largo",
     "need-logged-in-to-vote": "Debes iniciar sesión para votar comentarios",
     "not-found": "Página no encontrada.",
-    "now-playing-error": "Error al obtener datos de Spotify",
     "reply-cannot-be-empty": "La respuesta no puede estar vacía",
     "sign-in-error": "Error al iniciar sesión. Por favor intenta de nuevo.",
     "sign-out-failed": "Error al cerrar sesión. Por favor intenta de nuevo.",
@@ -242,10 +241,6 @@
   },
   "layout": {
     "change-language": "Cambiar idioma",
-    "now-playing": {
-      "loading": "Cargando...",
-      "not-listening": "Sin reproducción - Spotify"
-    },
     "sidebar": {
       "description": "Muestra la barra lateral móvil.",
       "title": "Barra lateral"

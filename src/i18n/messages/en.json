@@ -181,7 +181,6 @@
     "name-too-long": "Name is too long",
     "need-logged-in-to-vote": "You need to be logged in to vote comments",
     "not-found": "Page not found.",
-    "now-playing-error": "Failed to fetch Spotify data",
     "reply-cannot-be-empty": "Reply cannot be empty",
     "sign-in-error": "Failed to sign in. Please try again.",
     "sign-out-failed": "Sign out failed. Please try again.",
@@ -242,10 +241,6 @@
   },
   "layout": {
     "change-language": "Change language",
-    "now-playing": {
-      "loading": "Loading...",
-      "not-listening": "Not Listening - Spotify"
-    },
     "sidebar": {
       "description": "Displays the mobile sidebar.",
       "title": "Sidebar"
