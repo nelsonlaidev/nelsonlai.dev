@@ -181,6 +181,7 @@
     "name-too-long": "名稱過長",
     "need-logged-in-to-vote": "您必須登入才能投票評論",
     "not-found": "找不到頁面。",
+    "now-playing-error": "無法獲取 Spotify 資料",
     "reply-cannot-be-empty": "回覆不能為空",
     "sign-in-error": "登入失敗。請再試一次。",
     "sign-out-failed": "登出失敗，請再試一次。",
@@ -241,6 +242,10 @@
   },
   "layout": {
     "change-language": "更改語言",
+    "now-playing": {
+      "loading": "載入中...",
+      "not-listening": "未在收聽 - Spotify"
+    },
     "sidebar": {
       "description": "顯示行動版側邊欄。",
       "title": "側邊欄"

@@ -21,3 +21,7 @@ export function useViewStats() {
 export function useWakatimeStats() {
   return useQuery(orpc.wakatime.getStats.queryOptions({ refetchOnWindowFocus: false }))
 }
+
+export function useSpotifyStats() {
+  return useQuery(orpc.spotify.getStats.queryOptions())
+}

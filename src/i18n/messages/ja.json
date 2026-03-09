@@ -181,6 +181,7 @@
     "name-too-long": "名前が長すぎます",
     "need-logged-in-to-vote": "コメントに投票するにはログインが必要です",
     "not-found": "ページが見つかりません。",
+    "now-playing-error": "Spotify データの取得に失敗しました",
     "reply-cannot-be-empty": "返信を入力してください",
     "sign-in-error": "サインインに失敗しました。もう一度お試しください。",
     "sign-out-failed": "サインアウトに失敗しました。もう一度お試しください。",
@@ -241,6 +242,10 @@
   },
   "layout": {
     "change-language": "言語を変更",
+    "now-playing": {
+      "loading": "読み込み中...",
+      "not-listening": "再生停止中 - Spotify"
+    },
     "sidebar": {
       "description": "モバイルサイドバーを表示します。",
       "title": "サイドバー"
