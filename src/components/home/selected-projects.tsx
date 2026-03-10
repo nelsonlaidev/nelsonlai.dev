@@ -51,7 +51,7 @@ export function SelectedProjects(props: SelectedProjectsProps) {
         transition={{ duration: 0.3 }}
       >
         {projects.map((project) => (
-          <ProjectCard key={project.slug} project={project} featured />
+          <ProjectCard key={project.slug} project={project} featured lazy={false} />
         ))}
       </motion.div>
       <div className='my-8 flex items-center justify-center'>

@@ -10,11 +10,12 @@ type ContentCardProps = {
   imageAlt: string
   icon?: React.ReactNode
   featured?: boolean
+  lazy?: boolean
   children?: React.ReactNode
 }
 
 export function ContentCard(props: ContentCardProps) {
-  const { href, title, image, imageAlt, icon, featured = false, children } = props
+  const { href, title, image, imageAlt, icon, featured = false, lazy = true, children } = props
 
   return (
     <Link href={href} className='group rounded-2xl p-2 shadow-feature-card'>
@@ -27,7 +28,7 @@ export function ContentCard(props: ContentCardProps) {
           <ArrowUpRightIcon className='size-4.5 opacity-0 transition-opacity group-hover:opacity-100' />
         </div>
       )}
-      <BlurImage width={1200} height={630} src={image} alt={imageAlt} className='rounded-lg' />
+      <BlurImage width={1200} height={630} src={image} alt={imageAlt} className='rounded-lg' lazy={lazy} />
       {children}
     </Link>
   )

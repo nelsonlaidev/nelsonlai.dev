@@ -8,10 +8,11 @@ import { ContentCard } from './content-card'
 type ProjectCardProps = {
   project: Project
   featured?: boolean
+  lazy?: boolean
 }
 
 export function ProjectCard(props: ProjectCardProps) {
-  const { project, featured = false } = props
+  const { project, featured = false, lazy = true } = props
   const t = useTranslations()
 
   return (
@@ -23,6 +24,7 @@ export function ProjectCard(props: ProjectCardProps) {
       imageAlt={project.description}
       icon={<LightbulbIcon className='size-4.5' />}
       featured={featured}
+      lazy={lazy}
     >
       <div className='flex flex-col px-2 py-4 transition-transform ease-out group-hover:translate-x-0.5'>
         <h3 className='text-2xl font-semibold'>{project.name}</h3>
