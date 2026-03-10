@@ -31,7 +31,13 @@ export function Marquee(props: MarqueeProps) {
   return (
     <div
       data-slot='marquee'
-      className={cn('group flex overflow-hidden', direction === 'left' ? 'flex-row' : 'flex-col', className)}
+      data-direction={direction}
+      data-pause-on-hover={pauseOnHover}
+      data-reverse={reverse}
+      className={cn(
+        'group flex overflow-hidden data-[direction=left]:flex-row data-[direction=up]:flex-col',
+        className,
+      )}
       style={{
         maskImage: mask,
         WebkitMaskImage: mask,
@@ -45,12 +51,7 @@ export function Marquee(props: MarqueeProps) {
             '--marquee-gap': gap,
             '--marquee-duration': `${duration}s`,
           }}
-          className={cn(
-            'flex shrink-0 justify-around gap-(--marquee-gap)',
-            direction === 'left' ? 'animate-marquee-x flex-row' : 'animate-marquee-y flex-col',
-            pauseOnHover && 'group-hover:paused',
-            reverse && 'direction-reverse',
-          )}
+          className='flex shrink-0 justify-around gap-(--marquee-gap) group-data-[direction=left]:animate-marquee-x group-data-[direction=left]:flex-row group-data-[direction=up]:animate-marquee-y group-data-[direction=up]:flex-col group-data-[pause-on-hover=true]:group-hover:paused group-data-[reverse=true]:direction-reverse'
         >
           {children}
         </div>
