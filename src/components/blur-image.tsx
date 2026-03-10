@@ -20,9 +20,12 @@ export function BlurImage(props: ImageProps) {
   const [isLoading, setIsLoading] = useState(true)
 
   return (
-    <div className={cn('overflow-hidden', isLoading && 'animate-pulse', className)}>
+    <div data-loading={isLoading} className={cn('group overflow-hidden data-[loading=true]:animate-pulse', className)}>
       <NextImage
-        className={cn(isLoading && 'scale-[1.02] blur-xl grayscale', imageClassName)}
+        className={cn(
+          'group-data-[loading=true]:scale-[1.02] group-data-[loading=true]:blur-xl group-data-[loading=true]:grayscale',
+          imageClassName,
+        )}
         style={{
           transition: 'filter 700ms ease, scale 150ms ease',
         }}
