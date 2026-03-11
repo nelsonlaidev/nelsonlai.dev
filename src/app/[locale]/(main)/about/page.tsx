@@ -10,8 +10,14 @@ import { use } from 'react'
 import { JsonLd } from '@/components/json-ld'
 import { Mdx } from '@/components/mdx'
 import { PageHeader } from '@/components/page-header'
-import { SITE_FACEBOOK_URL, SITE_GITHUB_URL, SITE_INSTAGRAM_URL, SITE_X_URL, SITE_YOUTUBE_URL } from '@/constants/site'
-import { MY_NAME } from '@/lib/constants'
+import {
+  MY_NAME,
+  SITE_FACEBOOK_URL,
+  SITE_GITHUB_URL,
+  SITE_INSTAGRAM_URL,
+  SITE_X_URL,
+  SITE_YOUTUBE_URL,
+} from '@/constants/site'
 import { getPageBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'

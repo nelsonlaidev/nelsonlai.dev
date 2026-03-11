@@ -4,8 +4,8 @@ import { hasLocale } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 import RSS from 'rss'
 
+import { MY_NAME } from '@/constants/site'
 import { routing } from '@/i18n/routing'
-import { MY_NAME } from '@/lib/constants'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
 export const dynamic = 'force-static'

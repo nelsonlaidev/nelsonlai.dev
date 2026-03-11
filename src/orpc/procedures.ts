@@ -4,7 +4,7 @@ import { ORPCError } from '@orpc/client'
 import { os } from '@orpc/server'
 import * as z from 'zod'
 
-import { IS_PRODUCTION } from '@/lib/constants'
+import { IS_PRODUCTION } from '@/constants/common'
 import { TraceableError } from '@/lib/errors'
 import { ratelimit } from '@/lib/kv'
 import { getPostHogServer } from '@/lib/posthog'

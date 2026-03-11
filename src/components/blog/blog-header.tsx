@@ -9,10 +9,10 @@ import { useEffect, useRef } from 'react'
 import { BlurImage } from '@/components/blur-image'
 import { ImageZoom } from '@/components/image-zoom'
 import { Link } from '@/components/ui/link'
+import { MY_NAME } from '@/constants/site'
 import { useCountComment } from '@/hooks/queries/comment.query'
 import { useCountView, useIncrementView } from '@/hooks/queries/view.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
-import { MY_NAME } from '@/lib/constants'
 
 type BlogHeaderProps = {
   post: Post

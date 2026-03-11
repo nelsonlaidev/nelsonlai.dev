@@ -1,8 +1,8 @@
 import { ORPCError } from '@orpc/client'
 import { and, desc, eq, lt } from 'drizzle-orm'
 
+import { IS_PRODUCTION } from '@/constants/common'
 import { messages } from '@/db/schemas'
-import { IS_PRODUCTION } from '@/lib/constants'
 import { sendGuestbookNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
 

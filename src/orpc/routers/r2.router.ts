@@ -1,4 +1,4 @@
-import type { AvatarMimeType } from '@/lib/constants'
+import type { AvatarMimeType } from '@/constants/site'
 
 import { randomUUID } from 'node:crypto'
 

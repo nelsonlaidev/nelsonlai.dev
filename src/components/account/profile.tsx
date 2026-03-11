@@ -1,7 +1,7 @@
 'use client'
 
+import type { AvatarMimeType } from '@/constants/site'
 import type { User } from '@/lib/auth-client'
-import type { AvatarMimeType } from '@/lib/constants'
 
 import { useForm } from '@tanstack/react-form'
 import { useTranslations } from 'next-intl'
@@ -24,11 +24,11 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Field, FieldError, FieldGroup } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import { AVATAR_MAX_FILE_SIZE, SUPPORTED_AVATAR_MIME_TYPES } from '@/constants/site'
 import { useUpdateUser } from '@/hooks/queries/auth.query'
 import { useGetAvatarUploadUrl } from '@/hooks/queries/r2.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useSession } from '@/lib/auth-client'
-import { AVATAR_MAX_FILE_SIZE, SUPPORTED_AVATAR_MIME_TYPES } from '@/lib/constants'
 import { getAbbreviation } from '@/utils/get-abbreviation'
 
 import { Spinner } from '../ui/spinner'

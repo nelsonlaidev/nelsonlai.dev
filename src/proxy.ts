@@ -1,9 +1,8 @@
 import type { NextRequest } from 'next/server'
 
+import { IS_PRODUCTION } from '@/constants/common'
 import { env } from '@/env'
 import { i18nMiddleware } from '@/i18n/middleware'
-
-import { IS_PRODUCTION } from './lib/constants'
 
 const IS_PREVIEW = env.VERCEL_ENV === 'preview'
 

@@ -5,7 +5,7 @@ import { createORPCClient } from '@orpc/client'
 import { RPCLink } from '@orpc/client/fetch'
 import { createTanstackQueryUtils } from '@orpc/tanstack-query'
 
-import { IS_SERVER } from '@/lib/constants'
+import { IS_SERVER } from '@/constants/common'
 import { getBaseUrl } from '@/utils/get-base-url'
 
 const link = new RPCLink({

@@ -1,6 +1,6 @@
 import * as z from 'zod'
 
-import { AVATAR_MAX_FILE_SIZE, SUPPORTED_AVATAR_MIME_TYPES } from '@/lib/constants'
+import { AVATAR_MAX_FILE_SIZE, SUPPORTED_AVATAR_MIME_TYPES } from '@/constants/site'
 
 export const GetAvatarUploadUrlInputSchema = z.object({
   fileName: z.string().min(1),

@@ -1,7 +1,7 @@
 import Script from 'next/script'
 
+import { IS_PRODUCTION } from '@/constants/common'
 import { env } from '@/env'
-import { IS_PRODUCTION } from '@/lib/constants'
 
 export function Analytics() {
   if (!IS_PRODUCTION || !env.NEXT_PUBLIC_UMAMI_URL || !env.NEXT_PUBLIC_UMAMI_WEBSITE_ID) return null

@@ -4,8 +4,9 @@ import { withContentCollections } from '@content-collections/next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 import { env } from '@/env'
-import { IS_PRODUCTION } from '@/lib/constants'
 import { withPostHog } from '@/lib/posthog'
+
+import { IS_PRODUCTION } from './src/constants/common'
 
 const withNextIntl = createNextIntlPlugin()
 

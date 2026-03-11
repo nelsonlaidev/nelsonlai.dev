@@ -1,4 +1,4 @@
-import { GITHUB_USERNAME } from '@/lib/constants'
+import { GITHUB_USERNAME } from '@/constants/site'
 import { octokit } from '@/lib/octokit'
 
 import { cache } from '../cache'
