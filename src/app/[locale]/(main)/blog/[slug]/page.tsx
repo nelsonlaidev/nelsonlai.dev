@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import type { Locale } from 'next-intl'
 import type { BlogPosting, WithContext } from 'schema-dts'
 
-import { allPosts } from 'content-collections'
 import { notFound } from 'next/navigation'
 import { setRequestLocale } from 'next-intl/server'
 import { Suspense, use } from 'react'
@@ -17,13 +16,13 @@ import { CommentSection } from '@/components/comment-section'
 import { JsonLd } from '@/components/json-ld'
 import { Mdx } from '@/components/mdx'
 import { MY_NAME } from '@/constants/site'
-import { getPostBySlug } from '@/lib/content'
+import { getAllPosts, getPostBySlug } from '@/lib/content'
 import { createMetadata } from '@/lib/metadata'
 import { getBaseUrl } from '@/utils/get-base-url'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
 export function generateStaticParams(): Array<{ slug: string; locale: string }> {
-  return allPosts.map((post) => ({
+  return getAllPosts().map((post) => ({
     slug: post.slug,
     locale: post.locale,
   }))

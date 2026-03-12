@@ -1,4 +1,3 @@
-import { allPosts } from 'content-collections'
 import { NextResponse } from 'next/server'
 import { hasLocale } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
@@ -6,6 +5,7 @@ import RSS from 'rss'
 
 import { MY_NAME } from '@/constants/site'
 import { routing } from '@/i18n/routing'
+import { getAllPostsByLocale } from '@/lib/content'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
 export const dynamic = 'force-static'
@@ -31,7 +31,7 @@ export async function GET(_request: Request, props: RouteContext<'/[locale]/rss.
     webMaster: 'me@nelsonlai.dev',
   })
 
-  const posts = allPosts.filter((p) => p.locale === locale && !p.test)
+  const posts = getAllPostsByLocale(locale)
 
   for (const post of posts) {
     feed.item({
