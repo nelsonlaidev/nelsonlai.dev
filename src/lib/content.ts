@@ -2,14 +2,14 @@ import 'server-only'
 
 import { allPages, allPosts, allProjects } from 'content-collections'
 
-import { IS_TEST } from '@/constants/common'
+import { env } from '@/env'
 
 export function getAllPosts() {
-  return allPosts.filter((p) => p.test === IS_TEST)
+  return allPosts.filter((p) => p.test === env.IS_TEST)
 }
 
 export function getAllPostsByLocale(locale: string) {
-  return allPosts.filter((p) => p.locale === locale && p.test === IS_TEST)
+  return allPosts.filter((p) => p.locale === locale && p.test === env.IS_TEST)
 }
 
 export function getLatestPosts(locale: string, limit: number = allPosts.length) {
@@ -20,7 +20,7 @@ export function getLatestPosts(locale: string, limit: number = allPosts.length) 
 }
 
 export function getPostBySlug(locale: string, slug: string) {
-  return allPosts.find((p) => p.slug === slug && p.locale === locale && p.test === IS_TEST)
+  return allPosts.find((p) => p.slug === slug && p.locale === locale && p.test === env.IS_TEST)
 }
 
 export function getLatestProjects(locale: string, limit: number = allProjects.length) {

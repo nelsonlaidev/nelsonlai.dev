@@ -7,6 +7,10 @@ export const env = createEnv({
 
   shared: {
     NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
+    IS_TEST: z
+      .enum(['true', 'false', '1', '0'])
+      .default('false')
+      .transform((v) => v === 'true' || v === '1'),
     CI: z
       .enum(['true', 'false', '1', '0'])
       .default('false')
@@ -73,6 +77,7 @@ export const env = createEnv({
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     CI: process.env.CI,
+    IS_TEST: process.env.IS_TEST,
 
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_VERCEL_ENV: process.env.NEXT_PUBLIC_VERCEL_ENV,
