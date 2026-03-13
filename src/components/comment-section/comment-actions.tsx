@@ -7,15 +7,23 @@ import { Button } from '@/components/ui/button'
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
 import { useCreateVote } from '@/hooks/queries/vote.query'
+import { useCommentParams } from '@/hooks/use-comment-params'
 import { useSession } from '@/lib/auth-client'
 
 export function CommentActions() {
   const { slug, sort } = useCommentsContext()
+  const [params] = useCommentParams()
   const { comment, setIsReplying, isOpenReplies, setIsOpenReplies } = useCommentContext()
   const { data: session } = useSession()
   const t = useTranslations()
 
-  const { mutate: voteComment } = useCreateVote({ slug, sort, type: comment.parentId ? 'replies' : 'comments' })
+  const { mutate: voteComment } = useCreateVote({
+    slug,
+    sort: comment.parentId === null ? sort : 'oldest',
+    type: comment.parentId === null ? 'comments' : 'replies',
+    parentId: comment.parentId ?? undefined,
+    highlightedCommentId: params.comment ?? undefined,
+  })
 
   const isAuthenticated = session !== null
 
