@@ -1,10 +1,25 @@
 import { createSelectSchema } from 'drizzle-zod'
 import * as z from 'zod'
 
+import { DEFAULT_PAGE_SIZE } from '@/constants/common'
 import { comments, users } from '@/db/schemas'
 
+export const ListCommentsInputSchema = z.object({
+  page: z.number().min(1).default(1),
+  limit: z.number().min(1).max(100).default(DEFAULT_PAGE_SIZE),
+})
+
 export const ListCommentsOutputSchema = z.object({
-  comments: z.array(createSelectSchema(comments)),
+  comments: z.array(
+    createSelectSchema(comments).extend({
+      user: createSelectSchema(users).pick({
+        name: true,
+        image: true,
+      }),
+    }),
+  ),
+  pageCount: z.number(),
+  totalCount: z.number(),
 })
 
 export const ListUsersOutputSchema = z.object({
