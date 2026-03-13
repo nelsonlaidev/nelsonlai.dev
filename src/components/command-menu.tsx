@@ -1,6 +1,6 @@
 'use client'
 
-import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon, UserCircleIcon } from 'lucide-react'
+import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon, ShieldIcon, UserCircleIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Fragment, useEffect, useState } from 'react'
 
@@ -69,6 +69,11 @@ export function CommandMenu() {
     router.push('/account')
   }
 
+  function handleAdminNavigate() {
+    closeMenu()
+    router.push('/admin')
+  }
+
   function handleSignIn() {
     closeMenu()
     openDialog()
@@ -102,6 +107,15 @@ export function CommandMenu() {
           icon: <UserCircleIcon />,
           onSelect: handleAccountNavigate,
         },
+        ...(session.user.role === 'admin'
+          ? [
+              {
+                title: 'Admin',
+                icon: <ShieldIcon />,
+                onSelect: handleAdminNavigate,
+              },
+            ]
+          : []),
         {
           title: t('common.sign-out'),
           icon: <LogOutIcon />,
