@@ -1,34 +1,41 @@
 // eslint-disable-next-line no-restricted-imports
 import { Link as LocalizedLink } from '@/i18n/routing'
 
-type LinkProps = React.ComponentProps<'a'>
+type InternalLink = '/' | `/${string}`
+type ExternalLink = `http://${string}` | `https://${string}` | `mailto:${string}` | `tel:${string}`
+type ValidLink = InternalLink | ExternalLink
 
-export function Link(props: LinkProps) {
-  const { href, children, ...rest } = props
+type LinkProps<Href> = Href extends ExternalLink
+  ? React.ComponentProps<'a'> & { href: Href }
+  : React.ComponentProps<typeof LocalizedLink>
 
-  if (!href) {
-    throw new Error('Link must have an href')
-  }
+export function Link<Href extends ValidLink>(props: LinkProps<Href>) {
+  if (isExternalLink(props)) {
+    const { href, ...rest } = props
 
-  if (href.startsWith('/')) {
     return (
-      <LocalizedLink href={href} {...rest}>
-        {children}
-      </LocalizedLink>
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
+      <a href={href} {...(href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })} {...rest} />
     )
   }
 
-  if (href.startsWith('#')) {
-    return (
-      <a href={href} {...rest}>
-        {children}
-      </a>
-    )
+  if (isInternalLink(props)) {
+    const { href, ...rest } = props
+
+    return <LocalizedLink href={href} {...rest} />
   }
 
-  return (
-    <a target='_blank' rel='noopener noreferrer' href={href} {...rest}>
-      {children}
-    </a>
-  )
+  throw new Error(`Invalid link: ${JSON.stringify(props)}`)
+}
+
+function isInternalLink(props: LinkProps<ValidLink>): props is LinkProps<InternalLink> {
+  const { href } = props
+  if (!href) return false
+  return typeof href === 'object' || (typeof href === 'string' && href.startsWith('/'))
+}
+
+function isExternalLink(props: LinkProps<ValidLink>): props is LinkProps<ExternalLink> {
+  const { href } = props
+  if (!href || typeof href !== 'string') return false
+  return href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')
 }

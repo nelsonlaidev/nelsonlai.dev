@@ -38,7 +38,7 @@ export function MobileTableOfContents(props: MobileTableOfContentsProps) {
           return (
             <Link
               key={url}
-              href={`#${url}`}
+              href={{ hash: url }}
               className='block py-2 pr-2.5 text-sm/tight text-muted-foreground transition-colors hover:text-foreground'
               style={{
                 paddingLeft: (depth - 1) * 16,

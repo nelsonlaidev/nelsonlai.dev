@@ -25,10 +25,14 @@ const components = {
   h5: (props: React.ComponentProps<'h5'>) => <Heading as='h5' {...props} />,
   h6: (props: React.ComponentProps<'h6'>) => <Heading as='h6' {...props} />,
   a: (props: React.ComponentProps<'a'>) => {
-    const { children, ...rest } = props
+    const { children, href, ...rest } = props
+
+    if (!href) {
+      throw new Error('Href is required for Link component')
+    }
 
     return (
-      <Link className='underline underline-offset-4' {...rest}>
+      <Link href={href} className='underline underline-offset-4' {...rest}>
         {children}
       </Link>
     )

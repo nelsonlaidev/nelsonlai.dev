@@ -21,7 +21,7 @@ export function Heading<T extends Types = 'h1'>(props: HeadingProps<T>) {
 
   return (
     <Component className={cn('scroll-m-32', className)} id={id} {...rest}>
-      <Link href={`#${id}`} className='group'>
+      <Link href={{ hash: id }} className='group'>
         {children}
         <LinkIcon
           aria-label={t('mdx.link-to-section')}
