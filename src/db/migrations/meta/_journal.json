@@ -50,6 +50,13 @@
       "when": 1767678630544,
       "tag": "0006_brown_gorgon",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1773495076074,
+      "tag": "0007_lying_mantis",
+      "breakpoints": true
     }
   ]
 }

@@ -1,8 +1,9 @@
 import { createId } from '@paralleldrive/cuid2'
 import { relations } from 'drizzle-orm'
-import { index, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
+import { index, pgTable, text } from 'drizzle-orm/pg-core'
 
 import { users } from './auth.schema'
+import { createdAt, updatedAt } from './shared.schema'
 
 export const messages = pgTable(
   'messages',
@@ -14,13 +15,8 @@ export const messages = pgTable(
     userId: text('user_id')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
-    createdAt: timestamp('created_at')
-      .notNull()
-      .$defaultFn(() => new Date()),
-    updatedAt: timestamp('updated_at')
-      .notNull()
-      .$defaultFn(() => new Date())
-      .$onUpdateFn(() => new Date()),
+    createdAt: createdAt(),
+    updatedAt: updatedAt(),
   },
   (table) => [
     index('messages_created_at_desc_idx').on(table.createdAt.desc()),
