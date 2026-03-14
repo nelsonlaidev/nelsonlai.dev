@@ -32,7 +32,7 @@ const listMessages = publicProcedure
           },
         },
       },
-      orderBy: desc(messages.updatedAt),
+      orderBy: desc(messages.createdAt),
     })
 
     const result = query.map((message) => {
@@ -50,7 +50,7 @@ const listMessages = publicProcedure
 
     return {
       messages: result,
-      nextCursor: result.at(-1)?.updatedAt,
+      nextCursor: result.length >= input.limit ? result.at(-1)?.createdAt : undefined,
     }
   })
 

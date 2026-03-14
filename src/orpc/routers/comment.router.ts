@@ -97,7 +97,7 @@ const listComments = publicProcedure
 
     return {
       comments: result,
-      nextCursor: result.at(-1)?.createdAt,
+      nextCursor: result.length >= input.limit ? result.at(-1)?.createdAt : undefined,
     }
   })
 

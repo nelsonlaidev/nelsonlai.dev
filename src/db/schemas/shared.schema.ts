@@ -1,6 +1,6 @@
 import { timestamp } from 'drizzle-orm/pg-core'
 
-export const timestamptz = (name: string) => timestamp(name, { withTimezone: true })
+export const timestamptz = (name: string) => timestamp(name, { withTimezone: true, mode: 'date' })
 
 export const createdAt = () => timestamptz('created_at').notNull().defaultNow()
 
