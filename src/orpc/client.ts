@@ -20,6 +20,7 @@ type Inputs = InferRouterInputs<typeof router>
 type Outputs = InferRouterOutputs<typeof router>
 
 export type AdminCommentListInput = Inputs['admin']['comment']['list']
+export type AdminUserListInput = Inputs['admin']['user']['list']
 export type CommentCountInput = Inputs['comment']['count']
 export type CommentListInput = Inputs['comment']['list']
 export type LikeCountInput = Inputs['like']['count']

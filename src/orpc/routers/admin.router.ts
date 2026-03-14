@@ -4,7 +4,12 @@ import { count, desc } from 'drizzle-orm'
 import { comments, users } from '@/db/schemas'
 
 import { adminProcedure } from '../procedures'
-import { ListCommentsInputSchema, ListCommentsOutputSchema, ListUsersOutputSchema } from '../schemas/admin.schema'
+import {
+  ListCommentsInputSchema,
+  ListCommentsOutputSchema,
+  ListUsersInputSchema,
+  ListUsersOutputSchema,
+} from '../schemas/admin.schema'
 
 const listComments = adminProcedure
   .input(ListCommentsInputSchema)
@@ -40,21 +45,39 @@ const listComments = adminProcedure
     }
   })
 
-const listUsers = adminProcedure.output(ListUsersOutputSchema).handler(async ({ context }) => {
-  const result = await context.db
-    .select({
-      id: users.id,
-      name: users.name,
-      email: users.email,
-      role: users.role,
-      createdAt: users.createdAt,
-    })
-    .from(users)
+const listUsers = adminProcedure
+  .input(ListUsersInputSchema)
+  .output(ListUsersOutputSchema)
+  .handler(async ({ input, context }) => {
+    const [result, [totalCountResult]] = await Promise.all([
+      context.db
+        .select({
+          id: users.id,
+          name: users.name,
+          image: users.image,
+          email: users.email,
+          role: users.role,
+          createdAt: users.createdAt,
+        })
+        .from(users)
+        .limit(input.limit)
+        .offset((input.page - 1) * input.limit)
+        .orderBy(desc(users.createdAt)),
+      context.db.select({ count: count() }).from(users),
+    ])
 
-  return {
-    users: result,
-  }
-})
+    if (!totalCountResult) {
+      throw new ORPCError('INTERNAL_SERVER_ERROR', {
+        message: 'Failed to fetch total count of users',
+      })
+    }
+
+    return {
+      users: result,
+      pageCount: Math.ceil(totalCountResult.count / input.limit),
+      totalCount: totalCountResult.count,
+    }
+  })
 
 export const adminRouter = {
   comment: {

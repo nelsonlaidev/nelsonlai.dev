@@ -1,4 +1,4 @@
-import type { AdminCommentListInput } from '@/orpc/client'
+import type { AdminCommentListInput, AdminUserListInput } from '@/orpc/client'
 
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 
@@ -8,6 +8,6 @@ export function useListCommentsAdmin(input: AdminCommentListInput) {
   return useQuery(orpc.admin.comment.list.queryOptions({ input, placeholderData: keepPreviousData }))
 }
 
-export function useListUsersAdmin() {
-  return useQuery(orpc.admin.user.list.queryOptions({ placeholderData: keepPreviousData }))
+export function useListUsersAdmin(input: AdminUserListInput) {
+  return useQuery(orpc.admin.user.list.queryOptions({ input, placeholderData: keepPreviousData }))
 }
