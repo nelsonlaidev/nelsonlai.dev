@@ -24,6 +24,28 @@
     "update-avatar": "更新头像"
   },
   "admin": {
+    "dashboard": {
+      "description": "网站概览",
+      "recent-activity": {
+        "commented-on": "{name} 在 <link>{post}</link> 发表了评论",
+        "empty": "没有最近的活动",
+        "guestbook-message": "{name} 留下了一条留言",
+        "title": "最近活动"
+      },
+      "stats": {
+        "comments": "评论",
+        "likes": "点赞",
+        "messages": "消息",
+        "users": "用户",
+        "views": "浏览次数"
+      },
+      "trends": {
+        "comments": "评论",
+        "last-n-days": "最近 {days} 天",
+        "messages": "留言板",
+        "title": "趋势"
+      }
+    },
     "page-header": {
       "comments": {
         "description": "管理评论"
@@ -170,6 +192,7 @@
     "comment-cannot-be-empty": "评论不能为空",
     "copy-to-clipboard-error": "无法复制到剪贴板，请再试一次。",
     "failed-to-fetch-comments-data": "无法获取评论数据。请刷新页面。",
+    "failed-to-fetch-dashboard-data": "无法获取仪表板数据。请刷新页面。",
     "failed-to-fetch-users-data": "无法获取用户数据。请刷新页面。",
     "failed-to-load-comments": "无法载入评论。请刷新页面。",
     "failed-to-load-messages": "无法载入留言。请刷新页面。",

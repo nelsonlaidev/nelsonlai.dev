@@ -24,6 +24,28 @@
     "update-avatar": "アバターを更新"
   },
   "admin": {
+    "dashboard": {
+      "description": "サイトの概要",
+      "recent-activity": {
+        "commented-on": "{name} が <link>{post}</link> にコメントしました",
+        "empty": "最近のアクティビティはありません",
+        "guestbook-message": "{name} がゲストブックにメッセージを残しました",
+        "title": "最近のアクティビティ"
+      },
+      "stats": {
+        "comments": "コメント",
+        "likes": "いいね",
+        "messages": "メッセージ",
+        "users": "ユーザー",
+        "views": "閲覧数"
+      },
+      "trends": {
+        "comments": "コメント",
+        "last-n-days": "過去 {days} 日間",
+        "messages": "ゲストブック",
+        "title": "トレンド"
+      }
+    },
     "page-header": {
       "comments": {
         "description": "コメントを管理"
@@ -170,6 +192,7 @@
     "comment-cannot-be-empty": "コメントを入力してください",
     "copy-to-clipboard-error": "クリップボードにコピーできません。もう一度お試しください。",
     "failed-to-fetch-comments-data": "コメントデータの取得に失敗しました。ページを更新してください。",
+    "failed-to-fetch-dashboard-data": "ダッシュボードデータの取得に失敗しました。ページを更新してください。",
     "failed-to-fetch-users-data": "ユーザーデータの取得に失敗しました。ページを更新してください。",
     "failed-to-load-comments": "コメントの読み込みに失敗しました。ページを更新してください。",
     "failed-to-load-messages": "メッセージの読み込みに失敗しました。ページを更新してください。",

@@ -24,6 +24,28 @@
     "update-avatar": "更新頭像"
   },
   "admin": {
+    "dashboard": {
+      "description": "網站概覽",
+      "recent-activity": {
+        "commented-on": "{name} 在 <link>{post}</link> 發表了評論",
+        "empty": "沒有最近的活動",
+        "guestbook-message": "{name} 留下了一則留言",
+        "title": "最近活動"
+      },
+      "stats": {
+        "comments": "評論",
+        "likes": "按讚",
+        "messages": "訊息",
+        "users": "使用者",
+        "views": "瀏覽次數"
+      },
+      "trends": {
+        "comments": "評論",
+        "last-n-days": "最近 {days} 天",
+        "messages": "留言板",
+        "title": "趨勢"
+      }
+    },
     "page-header": {
       "comments": {
         "description": "管理評論"
@@ -170,6 +192,7 @@
     "comment-cannot-be-empty": "評論不能為空",
     "copy-to-clipboard-error": "無法複製到剪貼簿，請再試一次。",
     "failed-to-fetch-comments-data": "無法獲取評論資料。請重新整理頁面。",
+    "failed-to-fetch-dashboard-data": "無法獲取儀表板資料。請重新整理頁面。",
     "failed-to-fetch-users-data": "無法獲取使用者資料。請重新整理頁面。",
     "failed-to-load-comments": "無法載入評論。請重新整理頁面。",
     "failed-to-load-messages": "無法載入留言。請重新整理頁面。",

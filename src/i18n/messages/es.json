@@ -24,6 +24,28 @@
     "update-avatar": "Actualizar avatar"
   },
   "admin": {
+    "dashboard": {
+      "description": "Resumen de tu sitio",
+      "recent-activity": {
+        "commented-on": "{name} comentó en <link>{post}</link>",
+        "empty": "No hay actividad reciente",
+        "guestbook-message": "{name} dejó un mensaje en el libro de visitas",
+        "title": "Actividad Reciente"
+      },
+      "stats": {
+        "comments": "Comentarios",
+        "likes": "Me gusta",
+        "messages": "Mensajes",
+        "users": "Usuarios",
+        "views": "Vistas"
+      },
+      "trends": {
+        "comments": "Comentarios",
+        "last-n-days": "Últimos {days} días",
+        "messages": "Libro de Visitas",
+        "title": "Tendencias"
+      }
+    },
     "page-header": {
       "comments": {
         "description": "Administrar comentarios"
@@ -170,6 +192,7 @@
     "comment-cannot-be-empty": "El comentario no puede estar vacío",
     "copy-to-clipboard-error": "No se pudo copiar al portapapeles. Por favor intenta de nuevo.",
     "failed-to-fetch-comments-data": "Error al obtener datos de comentarios. Por favor recarga la página.",
+    "failed-to-fetch-dashboard-data": "Error al obtener datos del panel. Por favor recarga la página.",
     "failed-to-fetch-users-data": "Error al obtener datos de usuarios. Por favor recarga la página.",
     "failed-to-load-comments": "Error al cargar comentarios. Por favor recarga la página.",
     "failed-to-load-messages": "Error al cargar mensajes. Por favor recarga la página.",

@@ -24,6 +24,28 @@
     "update-avatar": "Atualizar avatar"
   },
   "admin": {
+    "dashboard": {
+      "description": "Visão geral do seu site",
+      "recent-activity": {
+        "commented-on": "{name} comentou em <link>{post}</link>",
+        "empty": "Nenhuma atividade recente",
+        "guestbook-message": "{name} deixou uma mensagem no livro de visitas",
+        "title": "Atividade Recente"
+      },
+      "stats": {
+        "comments": "Comentários",
+        "likes": "Curtidas",
+        "messages": "Mensagens",
+        "users": "Usuários",
+        "views": "Visualizações"
+      },
+      "trends": {
+        "comments": "Comentários",
+        "last-n-days": "Últimos {days} dias",
+        "messages": "Livro de Visitas",
+        "title": "Tendências"
+      }
+    },
     "page-header": {
       "comments": {
         "description": "Gerenciar comentários"
@@ -170,6 +192,7 @@
     "comment-cannot-be-empty": "O comentário não pode ficar vazio",
     "copy-to-clipboard-error": "Não foi possível copiar para a área de transferência. Por favor, tente novamente.",
     "failed-to-fetch-comments-data": "Falha ao buscar dados de comentários. Por favor, atualize a página.",
+    "failed-to-fetch-dashboard-data": "Falha ao buscar dados do painel. Por favor, atualize a página.",
     "failed-to-fetch-users-data": "Falha ao buscar dados de usuários. Por favor, atualize a página.",
     "failed-to-load-comments": "Falha ao carregar comentários. Por favor, atualize a página.",
     "failed-to-load-messages": "Falha ao carregar mensagens. Por favor, atualize a página.",

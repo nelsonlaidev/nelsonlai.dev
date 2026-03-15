@@ -24,6 +24,28 @@
     "update-avatar": "Update avatar"
   },
   "admin": {
+    "dashboard": {
+      "description": "Overview of your site",
+      "recent-activity": {
+        "commented-on": "{name} commented on <link>{post}</link>",
+        "empty": "No recent activity",
+        "guestbook-message": "{name} left a guestbook message",
+        "title": "Recent Activity"
+      },
+      "stats": {
+        "comments": "Comments",
+        "likes": "Likes",
+        "messages": "Messages",
+        "users": "Users",
+        "views": "Views"
+      },
+      "trends": {
+        "comments": "Comments",
+        "last-n-days": "Last {days} days",
+        "messages": "Guestbook",
+        "title": "Trends"
+      }
+    },
     "page-header": {
       "comments": {
         "description": "Manage comments"
@@ -170,6 +192,7 @@
     "comment-cannot-be-empty": "Comment cannot be empty",
     "copy-to-clipboard-error": "Unable to copy to clipboard. Please try again.",
     "failed-to-fetch-comments-data": "Failed to fetch comments data. Please refresh the page.",
+    "failed-to-fetch-dashboard-data": "Failed to fetch dashboard data. Please refresh the page.",
     "failed-to-fetch-users-data": "Failed to fetch users data. Please refresh the page.",
     "failed-to-load-comments": "Failed to load comments. Please refresh the page.",
     "failed-to-load-messages": "Failed to load messages. Please refresh the page.",

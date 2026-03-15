@@ -41,3 +41,52 @@ export const ListUsersOutputSchema = z.object({
   pageCount: z.number(),
   totalCount: z.number(),
 })
+
+export const StatsOutputSchema = z.object({
+  totalUsers: z.number(),
+  totalComments: z.number(),
+  totalViews: z.number(),
+  totalLikes: z.number(),
+  totalMessages: z.number(),
+})
+
+const ActivityUserSchema = createSelectSchema(users).pick({
+  id: true,
+  name: true,
+  image: true,
+})
+
+const CommentActivitySchema = z.object({
+  type: z.literal('comment'),
+  id: z.string(),
+  body: z.string(),
+  user: ActivityUserSchema,
+  postId: z.string(),
+  createdAt: z.date(),
+})
+
+const MessageActivitySchema = z.object({
+  type: z.literal('message'),
+  id: z.string(),
+  body: z.string(),
+  user: ActivityUserSchema,
+  createdAt: z.date(),
+})
+
+export const RecentActivityOutputSchema = z.object({
+  activities: z.array(z.discriminatedUnion('type', [CommentActivitySchema, MessageActivitySchema])),
+})
+
+export const TrendsInputSchema = z.object({
+  start: z.iso.datetime({ offset: true }),
+  end: z.iso.datetime({ offset: true }),
+  timezone: z.string(),
+})
+
+export const TrendsOutputSchema = z.array(
+  z.object({
+    date: z.string(),
+    comments: z.number(),
+    messages: z.number(),
+  }),
+)

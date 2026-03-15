@@ -29,6 +29,7 @@ export type ViewCountInput = Inputs['view']['count']
 
 export type AdminCommentListOutput = Outputs['admin']['comment']['list']
 export type AdminUserListOutput = Outputs['admin']['user']['list']
+export type AdminRecentActivityOutput = Outputs['admin']['recentActivity']
 export type SessionListOutput = Outputs['auth']['session']['list']
 export type CommentListOutput = Outputs['comment']['list']
 export type LikeCountOutput = Outputs['like']['count']
