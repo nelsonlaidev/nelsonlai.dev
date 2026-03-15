@@ -9,7 +9,7 @@ import { SettingsForm } from './settings-form'
 
 export function Settings() {
   const t = useTranslations()
-  const { data, isSuccess, isError, isLoading } = useGetSettings()
+  const { data, isSuccess, isLoading, isError } = useGetSettings()
 
   return (
     <>

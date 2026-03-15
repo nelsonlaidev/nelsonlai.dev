@@ -24,6 +24,29 @@
     "update-avatar": "更新头像"
   },
   "admin": {
+    "dashboard": {
+      "description": "网站概览",
+      "recent-activity": {
+        "commented-on": "{name} 在 <link>{post}</link> 发表了评论",
+        "empty": "没有最近的活动",
+        "guestbook-message": "{name} 留下了一条留言",
+        "title": "最近活动"
+      },
+      "stats": {
+        "comments": "评论",
+        "likes": "点赞",
+        "messages": "消息",
+        "users": "用户",
+        "views": "浏览次数"
+      },
+      "trends": {
+        "comments": "评论",
+        "last-n-days": "最近 {days} 天",
+        "messages": "留言板",
+        "no-data": "没有可用的数据",
+        "title": "趋势"
+      }
+    },
     "page-header": {
       "comments": {
         "description": "管理评论"
@@ -142,7 +165,30 @@
       "no-posts-found": "没有找到文章",
       "placeholder": "搜寻文章"
     },
-    "go-to-homepage": "回到首页"
+    "go-to-homepage": "回到首页",
+    "tables": {
+      "users": {
+        "user": "用户",
+        "email": "邮箱",
+        "role": "角色",
+        "created-at": "创建时间"
+      },
+      "comments": {
+        "user": "用户",
+        "comment": "评论",
+        "post": "文章",
+        "created-at": "创建时间"
+      }
+    },
+    "table-pagination": {
+      "go-to-first-page": "前往第一页",
+      "go-to-last-page": "前往最后一页",
+      "go-to-next-page": "前往下一页",
+      "go-to-previous-page": "前往上一页",
+      "page-of": "第 {page} 页，共 {total} 页",
+      "rows-per-page": "每页行数",
+      "rows-selected": "已选取 {selected} / {total} 行"
+    }
   },
   "dashboard": {
     "description": "这是我的个人仪表板，使用 Next.js API 路由建立，并部署为 serverless functions。我使用这个仪表板追踪 YouTube、GitHub 等平台的各种统计。",
@@ -170,6 +216,7 @@
     "comment-cannot-be-empty": "评论不能为空",
     "copy-to-clipboard-error": "无法复制到剪贴板，请再试一次。",
     "failed-to-fetch-comments-data": "无法获取评论数据。请刷新页面。",
+    "failed-to-fetch-dashboard-data": "无法获取仪表板数据。请刷新页面。",
     "failed-to-fetch-users-data": "无法获取用户数据。请刷新页面。",
     "failed-to-load-comments": "无法载入评论。请刷新页面。",
     "failed-to-load-messages": "无法载入留言。请刷新页面。",

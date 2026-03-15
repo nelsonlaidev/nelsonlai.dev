@@ -48,6 +48,8 @@ const errorMiddleware = base.middleware(async ({ path, context, next }) => {
   try {
     return await next()
   } catch (error) {
+    console.error(error)
+
     const posthog = getPostHogServer()
 
     let metadata: Record<string, unknown> = { path: path.join(':') }
@@ -58,7 +60,6 @@ const errorMiddleware = base.middleware(async ({ path, context, next }) => {
       metadata.validationIssues = z.flattenError(error)
     }
 
-    console.error(error)
     posthog.captureException(error, context.session?.user.id, metadata)
     throw error
   }

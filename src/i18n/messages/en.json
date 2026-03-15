@@ -24,6 +24,29 @@
     "update-avatar": "Update avatar"
   },
   "admin": {
+    "dashboard": {
+      "description": "Overview of your site",
+      "recent-activity": {
+        "commented-on": "{name} commented on <link>{post}</link>",
+        "empty": "No recent activity",
+        "guestbook-message": "{name} left a guestbook message",
+        "title": "Recent Activity"
+      },
+      "stats": {
+        "comments": "Comments",
+        "likes": "Likes",
+        "messages": "Messages",
+        "users": "Users",
+        "views": "Views"
+      },
+      "trends": {
+        "comments": "Comments",
+        "last-n-days": "Last {days} days",
+        "messages": "Guestbook",
+        "no-data": "No data available",
+        "title": "Trends"
+      }
+    },
     "page-header": {
       "comments": {
         "description": "Manage comments"
@@ -142,7 +165,30 @@
       "no-posts-found": "No posts found",
       "placeholder": "Search articles"
     },
-    "go-to-homepage": "Go to homepage"
+    "go-to-homepage": "Go to homepage",
+    "tables": {
+      "users": {
+        "user": "User",
+        "email": "Email",
+        "role": "Role",
+        "created-at": "Created At"
+      },
+      "comments": {
+        "user": "User",
+        "comment": "Comment",
+        "post": "Post",
+        "created-at": "Created At"
+      }
+    },
+    "table-pagination": {
+      "go-to-first-page": "Go to first page",
+      "go-to-last-page": "Go to last page",
+      "go-to-next-page": "Go to next page",
+      "go-to-previous-page": "Go to previous page",
+      "page-of": "Page {page} of {total}",
+      "rows-per-page": "Rows per page",
+      "rows-selected": "{selected} of {total} row(s) selected."
+    }
   },
   "dashboard": {
     "description": "This is my personal dashboard, built with Next.js API routes deployed as serverless functions. I use this dashboard to track various stats across platforms like YouTube, GitHub, and more.",
@@ -170,6 +216,7 @@
     "comment-cannot-be-empty": "Comment cannot be empty",
     "copy-to-clipboard-error": "Unable to copy to clipboard. Please try again.",
     "failed-to-fetch-comments-data": "Failed to fetch comments data. Please refresh the page.",
+    "failed-to-fetch-dashboard-data": "Failed to fetch dashboard data. Please refresh the page.",
     "failed-to-fetch-users-data": "Failed to fetch users data. Please refresh the page.",
     "failed-to-load-comments": "Failed to load comments. Please refresh the page.",
     "failed-to-load-messages": "Failed to load messages. Please refresh the page.",

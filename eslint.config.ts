@@ -20,7 +20,7 @@ export default defineConfig(
     },
     importX: {
       noNamespace: {
-        ignore: ['./schemas', '../../../../cosmos.imports'],
+        ignore: ['./schemas', '../../../../cosmos.imports', 'recharts'],
       },
     },
   },

@@ -18,7 +18,7 @@ async function Layout(props: LayoutProps<'/[locale]'>) {
   return (
     <SidebarProvider>
       <AdminSidebar />
-      <div className='flex w-full flex-col overflow-x-hidden px-4'>
+      <div className='flex w-full flex-col overflow-x-hidden px-4 pb-22'>
         <AdminHeader />
         <main className='py-6'>{children}</main>
       </div>

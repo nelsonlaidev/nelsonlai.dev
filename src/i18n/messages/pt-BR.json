@@ -24,6 +24,29 @@
     "update-avatar": "Atualizar avatar"
   },
   "admin": {
+    "dashboard": {
+      "description": "Visão geral do seu site",
+      "recent-activity": {
+        "commented-on": "{name} comentou em <link>{post}</link>",
+        "empty": "Nenhuma atividade recente",
+        "guestbook-message": "{name} deixou uma mensagem no livro de visitas",
+        "title": "Atividade Recente"
+      },
+      "stats": {
+        "comments": "Comentários",
+        "likes": "Curtidas",
+        "messages": "Mensagens",
+        "users": "Usuários",
+        "views": "Visualizações"
+      },
+      "trends": {
+        "comments": "Comentários",
+        "last-n-days": "Últimos {days} dias",
+        "messages": "Livro de Visitas",
+        "no-data": "Nenhum dado disponível",
+        "title": "Tendências"
+      }
+    },
     "page-header": {
       "comments": {
         "description": "Gerenciar comentários"
@@ -142,7 +165,30 @@
       "no-posts-found": "Nenhuma postagem encontrada",
       "placeholder": "Pesquisar artigos"
     },
-    "go-to-homepage": "Ir para a página inicial"
+    "go-to-homepage": "Ir para a página inicial",
+    "tables": {
+      "users": {
+        "user": "Usuário",
+        "email": "Email",
+        "role": "Função",
+        "created-at": "Criado em"
+      },
+      "comments": {
+        "user": "Usuário",
+        "comment": "Comentário",
+        "post": "Publicação",
+        "created-at": "Criado em"
+      }
+    },
+    "table-pagination": {
+      "go-to-first-page": "Ir para a primeira página",
+      "go-to-last-page": "Ir para a última página",
+      "go-to-next-page": "Ir para a próxima página",
+      "go-to-previous-page": "Ir para a página anterior",
+      "page-of": "Página {page} de {total}",
+      "rows-per-page": "Linhas por página",
+      "rows-selected": "{selected} de {total} linha(s) selecionada(s)."
+    }
   },
   "dashboard": {
     "description": "Este é meu painel pessoal, construído com rotas API do Next.js implantadas como funções sem servidor. Uso este painel para rastrear várias estatísticas em plataformas como YouTube, GitHub e mais.",
@@ -170,6 +216,7 @@
     "comment-cannot-be-empty": "O comentário não pode ficar vazio",
     "copy-to-clipboard-error": "Não foi possível copiar para a área de transferência. Por favor, tente novamente.",
     "failed-to-fetch-comments-data": "Falha ao buscar dados de comentários. Por favor, atualize a página.",
+    "failed-to-fetch-dashboard-data": "Falha ao buscar dados do painel. Por favor, atualize a página.",
     "failed-to-fetch-users-data": "Falha ao buscar dados de usuários. Por favor, atualize a página.",
     "failed-to-load-comments": "Falha ao carregar comentários. Por favor, atualize a página.",
     "failed-to-load-messages": "Falha ao carregar mensagens. Por favor, atualize a página.",

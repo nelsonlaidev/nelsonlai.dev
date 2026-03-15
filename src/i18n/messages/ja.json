@@ -24,6 +24,29 @@
     "update-avatar": "アバターを更新"
   },
   "admin": {
+    "dashboard": {
+      "description": "サイトの概要",
+      "recent-activity": {
+        "commented-on": "{name} が <link>{post}</link> にコメントしました",
+        "empty": "最近のアクティビティはありません",
+        "guestbook-message": "{name} がゲストブックにメッセージを残しました",
+        "title": "最近のアクティビティ"
+      },
+      "stats": {
+        "comments": "コメント",
+        "likes": "いいね",
+        "messages": "メッセージ",
+        "users": "ユーザー",
+        "views": "閲覧数"
+      },
+      "trends": {
+        "comments": "コメント",
+        "last-n-days": "過去 {days} 日間",
+        "messages": "ゲストブック",
+        "no-data": "データがありません",
+        "title": "トレンド"
+      }
+    },
     "page-header": {
       "comments": {
         "description": "コメントを管理"
@@ -142,7 +165,30 @@
       "no-posts-found": "投稿が見つかりませんでした",
       "placeholder": "記事を検索"
     },
-    "go-to-homepage": "ホームページへ戻る"
+    "go-to-homepage": "ホームページへ戻る",
+    "tables": {
+      "users": {
+        "user": "ユーザー",
+        "email": "メールアドレス",
+        "role": "ロール",
+        "created-at": "作成日時"
+      },
+      "comments": {
+        "user": "ユーザー",
+        "comment": "コメント",
+        "post": "投稿",
+        "created-at": "作成日時"
+      }
+    },
+    "table-pagination": {
+      "go-to-first-page": "最初のページへ",
+      "go-to-last-page": "最後のページへ",
+      "go-to-next-page": "次のページへ",
+      "go-to-previous-page": "前のページへ",
+      "page-of": "{page} / {total} ページ",
+      "rows-per-page": "ページあたりの行数",
+      "rows-selected": "{total} 行中 {selected} 行を選択中"
+    }
   },
   "dashboard": {
     "description": "これは私の個人ダッシュボードです。Next.js API ルートを使って構築し、サーバーレス関数としてデプロイしています。YouTube や GitHub などのプラットフォームの各種統計を追跡するために使っています。",
@@ -170,6 +216,7 @@
     "comment-cannot-be-empty": "コメントを入力してください",
     "copy-to-clipboard-error": "クリップボードにコピーできません。もう一度お試しください。",
     "failed-to-fetch-comments-data": "コメントデータの取得に失敗しました。ページを更新してください。",
+    "failed-to-fetch-dashboard-data": "ダッシュボードデータの取得に失敗しました。ページを更新してください。",
     "failed-to-fetch-users-data": "ユーザーデータの取得に失敗しました。ページを更新してください。",
     "failed-to-load-comments": "コメントの読み込みに失敗しました。ページを更新してください。",
     "failed-to-load-messages": "メッセージの読み込みに失敗しました。ページを更新してください。",

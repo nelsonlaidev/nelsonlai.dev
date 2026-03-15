@@ -19,6 +19,8 @@ export const orpc = createTanstackQueryUtils(client)
 type Inputs = InferRouterInputs<typeof router>
 type Outputs = InferRouterOutputs<typeof router>
 
+export type AdminCommentListInput = Inputs['admin']['comment']['list']
+export type AdminUserListInput = Inputs['admin']['user']['list']
 export type CommentCountInput = Inputs['comment']['count']
 export type CommentListInput = Inputs['comment']['list']
 export type LikeCountInput = Inputs['like']['count']
@@ -27,6 +29,7 @@ export type ViewCountInput = Inputs['view']['count']
 
 export type AdminCommentListOutput = Outputs['admin']['comment']['list']
 export type AdminUserListOutput = Outputs['admin']['user']['list']
+export type AdminRecentActivityOutput = Outputs['admin']['recentActivity']
 export type SessionListOutput = Outputs['auth']['session']['list']
 export type CommentListOutput = Outputs['comment']['list']
 export type LikeCountOutput = Outputs['like']['count']

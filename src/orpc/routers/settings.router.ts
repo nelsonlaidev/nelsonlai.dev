@@ -22,7 +22,7 @@ const getSettings = protectedProcedure.output(GetSettingsOutputSchema).handler(a
 const updateSettings = protectedProcedure
   .input(UpdateSettingsInputSchema)
   .output(UpdateSettingsOutputSchema)
-  .handler(async ({ context, input }) => {
+  .handler(async ({ input, context }) => {
     const [result] = await context.db
       .insert(settings)
       .values({
