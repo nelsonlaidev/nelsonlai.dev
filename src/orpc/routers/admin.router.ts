@@ -162,8 +162,8 @@ const getTrends = adminProcedure
     const rows = await context.db.execute(sql`
       WITH date_series AS (
         SELECT generate_series(
-          (${start} AT TIME ZONE ${timezone})::date,
-          (${end}   AT TIME ZONE ${timezone})::date,
+          (${start}::timestamptz AT TIME ZONE ${timezone})::date,
+          (${end}::timestamptz   AT TIME ZONE ${timezone})::date,
           INTERVAL '1 day'
         )::date AS day
       ),
