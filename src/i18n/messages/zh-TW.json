@@ -43,6 +43,7 @@
         "comments": "評論",
         "last-n-days": "最近 {days} 天",
         "messages": "留言板",
+        "no-data": "沒有可用的資料",
         "title": "趨勢"
       }
     },

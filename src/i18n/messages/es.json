@@ -43,6 +43,7 @@
         "comments": "Comentarios",
         "last-n-days": "Últimos {days} días",
         "messages": "Libro de Visitas",
+        "no-data": "No hay datos disponibles",
         "title": "Tendencias"
       }
     },

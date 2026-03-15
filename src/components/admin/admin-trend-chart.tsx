@@ -85,7 +85,7 @@ export function TrendsChart() {
               </AreaChart>
             </ChartContainer>
           ) : (
-            <p>No data is available</p>
+            <p className='text-sm text-muted-foreground'>{t('admin.dashboard.trends.no-data')}</p>
           ))}
       </CardContent>
     </Card>

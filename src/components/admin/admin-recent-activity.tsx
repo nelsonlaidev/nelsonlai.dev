@@ -5,6 +5,7 @@ import type { AdminRecentActivityOutput } from '@/orpc/client'
 import { useTranslations } from 'next-intl'
 
 import { useAdminRecentActivity } from '@/hooks/queries/admin.query'
+import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { getAbbreviation } from '@/utils/get-abbreviation'
 import { getDefaultImage } from '@/utils/get-default-image'
 import { range } from '@/utils/range'
@@ -59,7 +60,7 @@ function ActivityItem(props: ActivityProps) {
   const t = useTranslations()
 
   const userName = activity.user.name
-  const timeAgo = getRelativeTime(activity.createdAt)
+  const timeAgo = useFormattedDate(activity.createdAt, { relative: true, threshold: 30 })
 
   return (
     <div className='flex items-start gap-3 py-3'>
@@ -88,20 +89,4 @@ function ActivityItem(props: ActivityProps) {
       </div>
     </div>
   )
-}
-
-function getRelativeTime(date: Date | string): string {
-  const now = new Date()
-  const target = typeof date === 'string' ? new Date(date) : date
-  const diffMs = now.getTime() - target.getTime()
-  const diffMins = Math.floor(diffMs / 60_000)
-  const diffHours = Math.floor(diffMs / 3_600_000)
-  const diffDays = Math.floor(diffMs / 86_400_000)
-
-  if (diffMins < 1) return 'just now'
-  if (diffMins < 60) return `${diffMins}m ago`
-  if (diffHours < 24) return `${diffHours}h ago`
-  if (diffDays < 30) return `${diffDays}d ago`
-
-  return target.toLocaleDateString()
 }

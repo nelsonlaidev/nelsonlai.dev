@@ -43,6 +43,7 @@
         "comments": "Comments",
         "last-n-days": "Last {days} days",
         "messages": "Guestbook",
+        "no-data": "No data available",
         "title": "Trends"
       }
     },

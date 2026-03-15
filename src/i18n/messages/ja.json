@@ -43,6 +43,7 @@
         "comments": "コメント",
         "last-n-days": "過去 {days} 日間",
         "messages": "ゲストブック",
+        "no-data": "データがありません",
         "title": "トレンド"
       }
     },
