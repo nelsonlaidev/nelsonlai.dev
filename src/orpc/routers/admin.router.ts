@@ -157,13 +157,18 @@ const getTrends = adminProcedure
   .input(TrendsInputSchema)
   .output(TrendsOutputSchema)
   .handler(async ({ input, context }) => {
-    const { timezone, start, end } = input
+    const { timezone, days } = input
 
     const rows = await context.db.execute(sql`
-      WITH date_series AS (
+      WITH boundaries AS (
+        SELECT
+          (NOW() AT TIME ZONE ${timezone})::date - (${days} - 1) AS start_day,
+          (NOW() AT TIME ZONE ${timezone})::date                 AS end_day
+      ),
+      date_series AS (
         SELECT generate_series(
-          (${start}::timestamptz AT TIME ZONE ${timezone})::date,
-          (${end}::timestamptz   AT TIME ZONE ${timezone})::date,
+          (SELECT start_day FROM boundaries),
+          (SELECT end_day   FROM boundaries),
           INTERVAL '1 day'
         )::date AS day
       ),
@@ -172,7 +177,8 @@ const getTrends = adminProcedure
           (${comments.createdAt} AT TIME ZONE ${timezone})::date AS day,
           COUNT(*)::int AS count
         FROM ${comments}
-        WHERE ${comments.createdAt} BETWEEN ${start} AND ${end}
+        WHERE ${comments.createdAt} >= (SELECT start_day FROM boundaries)::timestamp AT TIME ZONE ${timezone}
+          AND ${comments.createdAt} <  (SELECT end_day   FROM boundaries)::timestamp AT TIME ZONE ${timezone} + INTERVAL '1 day'
         GROUP BY 1
       ),
       message_counts AS (
@@ -180,7 +186,8 @@ const getTrends = adminProcedure
           (${messages.createdAt} AT TIME ZONE ${timezone})::date AS day,
           COUNT(*)::int AS count
         FROM ${messages}
-        WHERE ${messages.createdAt} BETWEEN ${start} AND ${end}
+        WHERE ${messages.createdAt} >= (SELECT start_day FROM boundaries)::timestamp AT TIME ZONE ${timezone}
+          AND ${messages.createdAt} <  (SELECT end_day   FROM boundaries)::timestamp AT TIME ZONE ${timezone} + INTERVAL '1 day'
         GROUP BY 1
       )
       SELECT

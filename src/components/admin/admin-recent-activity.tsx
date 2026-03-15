@@ -29,7 +29,9 @@ export function RecentActivity() {
         {isError && <p className='text-sm text-destructive'>{t('error.failed-to-fetch-dashboard-data')}</p>}
         {data &&
           (data.activities.length > 0 ? (
-            data.activities.map((activity) => <ActivityItem key={activity.id} activity={activity} />)
+            data.activities.map((activity) => (
+              <ActivityItem key={`${activity.type}-${activity.id}`} activity={activity} />
+            ))
           ) : (
             <p className='text-sm text-muted-foreground'>{t('admin.dashboard.recent-activity.empty')}</p>
           ))}

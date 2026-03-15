@@ -78,8 +78,7 @@ export const RecentActivityOutputSchema = z.object({
 })
 
 export const TrendsInputSchema = z.object({
-  start: z.iso.datetime({ offset: true }),
-  end: z.iso.datetime({ offset: true }),
+  days: z.number().int().min(1).max(365),
   timezone: z.string(),
 })
 
