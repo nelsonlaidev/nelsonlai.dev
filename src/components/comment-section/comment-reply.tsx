@@ -39,11 +39,6 @@ export function CommentReply() {
       slug,
       content,
       parentId: comment.id,
-      date: new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      }),
     })
   }
 

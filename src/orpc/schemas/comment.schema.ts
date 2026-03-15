@@ -32,7 +32,6 @@ export const ListCommentsOutputSchema = z.object({
 export const CreateCommentInputSchema = z.object({
   slug: z.string().min(1),
   content: z.string().min(1),
-  date: z.string().min(1),
   parentId: z.string().optional(),
 })
 
