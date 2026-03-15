@@ -201,7 +201,7 @@ const getTrends = adminProcedure
     `)
 
     return rows.map((row) => ({
-      date: new Date(row.date as string).toISOString(),
+      date: row.date as string,
       comments: row.comments as number,
       messages: row.messages as number,
     }))
