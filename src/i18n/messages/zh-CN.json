@@ -166,6 +166,20 @@
       "placeholder": "搜寻文章"
     },
     "go-to-homepage": "回到首页",
+    "tables": {
+      "users": {
+        "user": "用户",
+        "email": "邮箱",
+        "role": "角色",
+        "created-at": "创建时间"
+      },
+      "comments": {
+        "user": "用户",
+        "comment": "评论",
+        "post": "文章",
+        "created-at": "创建时间"
+      }
+    },
     "table-pagination": {
       "go-to-first-page": "前往第一页",
       "go-to-last-page": "前往最后一页",

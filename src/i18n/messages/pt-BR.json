@@ -166,6 +166,20 @@
       "placeholder": "Pesquisar artigos"
     },
     "go-to-homepage": "Ir para a página inicial",
+    "tables": {
+      "users": {
+        "user": "Usuário",
+        "email": "Email",
+        "role": "Função",
+        "created-at": "Criado em"
+      },
+      "comments": {
+        "user": "Usuário",
+        "comment": "Comentário",
+        "post": "Publicação",
+        "created-at": "Criado em"
+      }
+    },
     "table-pagination": {
       "go-to-first-page": "Ir para a primeira página",
       "go-to-last-page": "Ir para a última página",

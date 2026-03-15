@@ -166,6 +166,20 @@
       "placeholder": "搜尋文章"
     },
     "go-to-homepage": "回到首頁",
+    "tables": {
+      "users": {
+        "user": "使用者",
+        "email": "電子郵件",
+        "role": "角色",
+        "created-at": "建立時間"
+      },
+      "comments": {
+        "user": "使用者",
+        "comment": "評論",
+        "post": "文章",
+        "created-at": "建立時間"
+      }
+    },
     "table-pagination": {
       "go-to-first-page": "前往第一頁",
       "go-to-last-page": "前往最後一頁",

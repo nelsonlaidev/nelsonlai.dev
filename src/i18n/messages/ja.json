@@ -166,6 +166,20 @@
       "placeholder": "記事を検索"
     },
     "go-to-homepage": "ホームページへ戻る",
+    "tables": {
+      "users": {
+        "user": "ユーザー",
+        "email": "メールアドレス",
+        "role": "ロール",
+        "created-at": "作成日時"
+      },
+      "comments": {
+        "user": "ユーザー",
+        "comment": "コメント",
+        "post": "投稿",
+        "created-at": "作成日時"
+      }
+    },
     "table-pagination": {
       "go-to-first-page": "最初のページへ",
       "go-to-last-page": "最後のページへ",

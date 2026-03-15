@@ -166,6 +166,20 @@
       "placeholder": "Search articles"
     },
     "go-to-homepage": "Go to homepage",
+    "tables": {
+      "users": {
+        "user": "User",
+        "email": "Email",
+        "role": "Role",
+        "created-at": "Created At"
+      },
+      "comments": {
+        "user": "User",
+        "comment": "Comment",
+        "post": "Post",
+        "created-at": "Created At"
+      }
+    },
     "table-pagination": {
       "go-to-first-page": "Go to first page",
       "go-to-last-page": "Go to last page",

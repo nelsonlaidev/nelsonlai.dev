@@ -7,7 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 
 import { TablePagination } from '../table-pagination'
 
-import { columns } from './columns'
+import { useColumns } from './columns'
 
 type CommentsTableProps = {
   comments: Comment[]
@@ -19,6 +19,7 @@ type CommentsTableProps = {
 
 export function CommentsTable(props: CommentsTableProps) {
   const { comments, pageCount, pagination, onPaginationChange, isFetching = false } = props
+  const columns = useColumns()
 
   // @tanstack/react-table is incompatible with React Compiler
   // See https://github.com/TanStack/table/issues/5567
