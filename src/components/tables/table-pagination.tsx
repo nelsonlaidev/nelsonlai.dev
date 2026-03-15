@@ -1,6 +1,9 @@
+'use client'
+
 import type { Table } from '@tanstack/react-table'
 
 import { ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { Button } from '../ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
@@ -12,15 +15,19 @@ type TablePaginationProps<TData> = {
 
 export function TablePagination<TData>(props: TablePaginationProps<TData>) {
   const { table, disabled = false } = props
+  const t = useTranslations()
 
   return (
     <div className='flex flex-col-reverse items-center justify-between gap-4 px-2 sm:flex-row'>
       <div className='flex-1 text-sm text-muted-foreground'>
-        {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected.
+        {t('components.table-pagination.rows-selected', {
+          selected: table.getFilteredSelectedRowModel().rows.length,
+          total: table.getFilteredRowModel().rows.length,
+        })}
       </div>
       <div className='flex flex-col-reverse items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8'>
         <div className='flex items-center gap-2'>
-          <p className='text-sm font-medium'>Rows per page</p>
+          <p className='text-sm font-medium'>{t('components.table-pagination.rows-per-page')}</p>
           <Select
             value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => {
@@ -41,7 +48,10 @@ export function TablePagination<TData>(props: TablePaginationProps<TData>) {
           </Select>
         </div>
         <div className='text-sm font-medium'>
-          Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+          {t('components.table-pagination.page-of', {
+            page: table.getState().pagination.pageIndex + 1,
+            total: table.getPageCount(),
+          })}
         </div>
         <div className='flex items-center gap-2'>
           <Button
@@ -51,7 +61,7 @@ export function TablePagination<TData>(props: TablePaginationProps<TData>) {
               table.setPageIndex(0)
             }}
             className='hidden lg:flex'
-            aria-label='Go to first page'
+            aria-label={t('components.table-pagination.go-to-first-page')}
             disabled={!table.getCanPreviousPage() || disabled}
           >
             <ChevronsLeftIcon />
@@ -62,7 +72,7 @@ export function TablePagination<TData>(props: TablePaginationProps<TData>) {
             onClick={() => {
               table.previousPage()
             }}
-            aria-label='Go to previous page'
+            aria-label={t('components.table-pagination.go-to-previous-page')}
             disabled={!table.getCanPreviousPage() || disabled}
           >
             <ChevronLeftIcon />
@@ -73,7 +83,7 @@ export function TablePagination<TData>(props: TablePaginationProps<TData>) {
             onClick={() => {
               table.nextPage()
             }}
-            aria-label='Go to next page'
+            aria-label={t('components.table-pagination.go-to-next-page')}
             disabled={!table.getCanNextPage() || disabled}
           >
             <ChevronRightIcon />
@@ -85,7 +95,7 @@ export function TablePagination<TData>(props: TablePaginationProps<TData>) {
               table.setPageIndex(table.getPageCount() - 1)
             }}
             className='hidden lg:flex'
-            aria-label='Go to last page'
+            aria-label={t('components.table-pagination.go-to-last-page')}
             disabled={!table.getCanNextPage() || disabled}
           >
             <ChevronsRightIcon />

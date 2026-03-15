@@ -165,7 +165,16 @@
       "no-posts-found": "Nenhuma postagem encontrada",
       "placeholder": "Pesquisar artigos"
     },
-    "go-to-homepage": "Ir para a página inicial"
+    "go-to-homepage": "Ir para a página inicial",
+    "table-pagination": {
+      "go-to-first-page": "Ir para a primeira página",
+      "go-to-last-page": "Ir para a última página",
+      "go-to-next-page": "Ir para a próxima página",
+      "go-to-previous-page": "Ir para a página anterior",
+      "page-of": "Página {page} de {total}",
+      "rows-per-page": "Linhas por página",
+      "rows-selected": "{selected} de {total} linha(s) selecionada(s)."
+    }
   },
   "dashboard": {
     "description": "Este é meu painel pessoal, construído com rotas API do Next.js implantadas como funções sem servidor. Uso este painel para rastrear várias estatísticas em plataformas como YouTube, GitHub e mais.",

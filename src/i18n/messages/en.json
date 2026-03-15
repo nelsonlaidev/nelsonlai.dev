@@ -165,7 +165,16 @@
       "no-posts-found": "No posts found",
       "placeholder": "Search articles"
     },
-    "go-to-homepage": "Go to homepage"
+    "go-to-homepage": "Go to homepage",
+    "table-pagination": {
+      "go-to-first-page": "Go to first page",
+      "go-to-last-page": "Go to last page",
+      "go-to-next-page": "Go to next page",
+      "go-to-previous-page": "Go to previous page",
+      "page-of": "Page {page} of {total}",
+      "rows-per-page": "Rows per page",
+      "rows-selected": "{selected} of {total} row(s) selected."
+    }
   },
   "dashboard": {
     "description": "This is my personal dashboard, built with Next.js API routes deployed as serverless functions. I use this dashboard to track various stats across platforms like YouTube, GitHub, and more.",

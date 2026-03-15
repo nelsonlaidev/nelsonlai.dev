@@ -165,7 +165,16 @@
       "no-posts-found": "投稿が見つかりませんでした",
       "placeholder": "記事を検索"
     },
-    "go-to-homepage": "ホームページへ戻る"
+    "go-to-homepage": "ホームページへ戻る",
+    "table-pagination": {
+      "go-to-first-page": "最初のページへ",
+      "go-to-last-page": "最後のページへ",
+      "go-to-next-page": "次のページへ",
+      "go-to-previous-page": "前のページへ",
+      "page-of": "{page} / {total} ページ",
+      "rows-per-page": "ページあたりの行数",
+      "rows-selected": "{total} 行中 {selected} 行を選択中"
+    }
   },
   "dashboard": {
     "description": "これは私の個人ダッシュボードです。Next.js API ルートを使って構築し、サーバーレス関数としてデプロイしています。YouTube や GitHub などのプラットフォームの各種統計を追跡するために使っています。",

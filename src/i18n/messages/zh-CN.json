@@ -165,7 +165,16 @@
       "no-posts-found": "没有找到文章",
       "placeholder": "搜寻文章"
     },
-    "go-to-homepage": "回到首页"
+    "go-to-homepage": "回到首页",
+    "table-pagination": {
+      "go-to-first-page": "前往第一页",
+      "go-to-last-page": "前往最后一页",
+      "go-to-next-page": "前往下一页",
+      "go-to-previous-page": "前往上一页",
+      "page-of": "第 {page} 页，共 {total} 页",
+      "rows-per-page": "每页行数",
+      "rows-selected": "已选取 {selected} / {total} 行"
+    }
   },
   "dashboard": {
     "description": "这是我的个人仪表板，使用 Next.js API 路由建立，并部署为 serverless functions。我使用这个仪表板追踪 YouTube、GitHub 等平台的各种统计。",
