@@ -22,7 +22,9 @@ export async function getLocation(ip: string): Promise<string | null> {
     const region = data.region ? `, ${data.region}` : ''
 
     return `${country}${region}`
-  } catch {
+  } catch (error) {
+    console.warn(error)
+
     return null
   }
 }
