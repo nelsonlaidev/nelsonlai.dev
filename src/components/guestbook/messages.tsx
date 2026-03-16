@@ -10,8 +10,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useListMessages } from '@/hooks/queries/message.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useSession } from '@/lib/auth-client'
-import { getAbbreviation } from '@/utils/get-abbreviation'
 import { getDefaultImage } from '@/utils/get-default-image'
+import { getInitials } from '@/utils/get-initials'
 
 import { DeleteButton } from './delete-button'
 import { MessagesLoader } from './messages-loader'
@@ -67,7 +67,7 @@ function Message(props: MessageProps) {
       <div className='mb-3 flex gap-3'>
         <Avatar className='size-10'>
           <AvatarImage src={message.user.image ?? defaultImage} alt={message.user.name} />
-          <AvatarFallback>{getAbbreviation(message.user.name)}</AvatarFallback>
+          <AvatarFallback>{getInitials(message.user.name)}</AvatarFallback>
         </Avatar>
         <div className='flex flex-col justify-center gap-px text-sm'>
           <div>{message.user.name}</div>

@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Link } from '@/components/ui/link'
-import { getAbbreviation } from '@/utils/get-abbreviation'
 import { getDefaultImage } from '@/utils/get-default-image'
+import { getInitials } from '@/utils/get-initials'
 
 import { FormattedDateCell } from '../formatted-date-cell'
 
@@ -26,7 +26,7 @@ export function useColumns(): Array<ColumnDef<Comment>> {
               src={row.original.user.image ?? getDefaultImage(row.original.userId)}
               alt={row.original.user.name}
             />
-            <AvatarFallback>{getAbbreviation(row.original.user.name)}</AvatarFallback>
+            <AvatarFallback>{getInitials(row.original.user.name)}</AvatarFallback>
           </Avatar>
           {row.original.user.name}
         </div>

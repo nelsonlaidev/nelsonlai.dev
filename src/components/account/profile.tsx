@@ -29,7 +29,7 @@ import { useUpdateUser } from '@/hooks/queries/auth.query'
 import { useAvatarUploadUrl } from '@/hooks/queries/r2.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useSession } from '@/lib/auth-client'
-import { getAbbreviation } from '@/utils/get-abbreviation'
+import { getInitials } from '@/utils/get-initials'
 
 import { Spinner } from '../ui/spinner'
 
@@ -69,7 +69,7 @@ function ProfileInfo(props: ProfileInfoProps) {
                 alt={t('common.avatar-alt', { name: user.name })}
                 className='size-full'
               />
-              <AvatarFallback>{getAbbreviation(user.name)}</AvatarFallback>
+              <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
             </Avatar>
           </div>
           <UpdateAvatar />

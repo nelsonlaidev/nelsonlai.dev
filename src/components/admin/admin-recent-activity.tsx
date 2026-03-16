@@ -6,8 +6,8 @@ import { useTranslations } from 'next-intl'
 
 import { useAdminRecentActivity } from '@/hooks/queries/admin.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
-import { getAbbreviation } from '@/utils/get-abbreviation'
 import { getDefaultImage } from '@/utils/get-default-image'
+import { getInitials } from '@/utils/get-initials'
 import { range } from '@/utils/range'
 
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
@@ -68,7 +68,7 @@ function ActivityItem(props: ActivityProps) {
     <div className='flex items-start gap-3 py-3'>
       <Avatar size='sm'>
         <AvatarImage src={activity.user.image ?? getDefaultImage(activity.user.id)} alt={userName} />
-        <AvatarFallback>{getAbbreviation(userName)}</AvatarFallback>
+        <AvatarFallback>{getInitials(userName)}</AvatarFallback>
       </Avatar>
       <div className='flex-1 space-y-1'>
         <p className='text-sm'>

@@ -4,8 +4,8 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { useTranslations } from 'next-intl'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { getAbbreviation } from '@/utils/get-abbreviation'
 import { getDefaultImage } from '@/utils/get-default-image'
+import { getInitials } from '@/utils/get-initials'
 
 import { FormattedDateCell } from '../formatted-date-cell'
 
@@ -22,7 +22,7 @@ export function useColumns(): Array<ColumnDef<User>> {
         <div className='flex items-center gap-2'>
           <Avatar size='sm'>
             <AvatarImage src={row.original.image ?? getDefaultImage(row.original.id)} alt={row.original.name} />
-            <AvatarFallback>{getAbbreviation(row.original.name)}</AvatarFallback>
+            <AvatarFallback>{getInitials(row.original.name)}</AvatarFallback>
           </Avatar>
           {row.original.name}
         </div>

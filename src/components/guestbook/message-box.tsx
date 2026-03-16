@@ -13,8 +13,8 @@ import { Field, FieldError, FieldGroup } from '@/components/ui/field'
 import { Textarea } from '@/components/ui/textarea'
 import { useCreateMessage } from '@/hooks/queries/message.query'
 import { useSignOut } from '@/hooks/use-sign-out'
-import { getAbbreviation } from '@/utils/get-abbreviation'
 import { getDefaultImage } from '@/utils/get-default-image'
+import { getInitials } from '@/utils/get-initials'
 
 type MessageBoxProps = {
   user: User
@@ -58,7 +58,7 @@ export function MessageBox(props: MessageBoxProps) {
     <div className='flex gap-3'>
       <Avatar className='size-10'>
         <AvatarImage src={user.image ?? defaultImage} alt={user.name} />
-        <AvatarFallback>{getAbbreviation(user.name)}</AvatarFallback>
+        <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
       </Avatar>
       <form onSubmit={handleSubmit} className='w-full space-y-4'>
         <FieldGroup>
