@@ -6,14 +6,12 @@ import { useTranslations } from 'next-intl'
 
 import { useAdminRecentActivity } from '@/hooks/queries/admin.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
-import { getDefaultImage } from '@/utils/get-default-image'
-import { getInitials } from '@/utils/get-initials'
 import { range } from '@/utils/range'
 
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Link } from '../ui/link'
 import { Skeleton } from '../ui/skeleton'
+import { UserAvatar } from '../ui/user-avatar'
 
 export function RecentActivity() {
   const { data, isLoading, isError } = useAdminRecentActivity()
@@ -66,10 +64,7 @@ function ActivityItem(props: ActivityProps) {
 
   return (
     <div className='flex items-start gap-3 py-3'>
-      <Avatar size='sm'>
-        <AvatarImage src={activity.user.image ?? getDefaultImage(activity.user.id)} alt={userName} />
-        <AvatarFallback>{getInitials(userName)}</AvatarFallback>
-      </Avatar>
+      <UserAvatar id={activity.user.id} name={userName} image={activity.user.image} size='sm' />
       <div className='flex-1 space-y-1'>
         <p className='text-sm'>
           {activity.type === 'comment'

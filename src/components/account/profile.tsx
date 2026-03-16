@@ -19,17 +19,16 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Field, FieldError, FieldGroup } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import { UserAvatar } from '@/components/ui/user-avatar'
 import { AVATAR_MAX_FILE_SIZE, SUPPORTED_AVATAR_MIME_TYPES } from '@/constants/site'
 import { useUpdateUser } from '@/hooks/queries/auth.query'
 import { useAvatarUploadUrl } from '@/hooks/queries/r2.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useSession } from '@/lib/auth-client'
-import { getInitials } from '@/utils/get-initials'
 
 import { Spinner } from '../ui/spinner'
 
@@ -63,14 +62,7 @@ function ProfileInfo(props: ProfileInfoProps) {
         <div className='flex items-center justify-between'>
           <div className='flex flex-col gap-2'>
             <span className='text-muted-foreground'>{t('account.avatar')}</span>
-            <Avatar className='size-24'>
-              <AvatarImage
-                src={user.image ?? undefined}
-                alt={t('common.avatar-alt', { name: user.name })}
-                className='size-full'
-              />
-              <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
-            </Avatar>
+            <UserAvatar id={user.id} name={user.name} image={user.image} className='size-24' />
           </div>
           <UpdateAvatar />
         </div>

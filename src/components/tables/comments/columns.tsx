@@ -3,10 +3,8 @@ import type { ColumnDef } from '@tanstack/react-table'
 
 import { useTranslations } from 'next-intl'
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Link } from '@/components/ui/link'
-import { getDefaultImage } from '@/utils/get-default-image'
-import { getInitials } from '@/utils/get-initials'
+import { UserAvatar } from '@/components/ui/user-avatar'
 
 import { FormattedDateCell } from '../formatted-date-cell'
 
@@ -21,13 +19,12 @@ export function useColumns(): Array<ColumnDef<Comment>> {
       header: t('components.tables.comments.user'),
       cell: ({ row }) => (
         <div className='flex items-center gap-2'>
-          <Avatar size='sm'>
-            <AvatarImage
-              src={row.original.user.image ?? getDefaultImage(row.original.userId)}
-              alt={row.original.user.name}
-            />
-            <AvatarFallback>{getInitials(row.original.user.name)}</AvatarFallback>
-          </Avatar>
+          <UserAvatar
+            id={row.original.userId}
+            name={row.original.user.name}
+            image={row.original.user.image}
+            size='sm'
+          />
           {row.original.user.name}
         </div>
       ),

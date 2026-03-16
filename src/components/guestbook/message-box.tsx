@@ -7,14 +7,12 @@ import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 import * as z from 'zod'
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Field, FieldError, FieldGroup } from '@/components/ui/field'
 import { Textarea } from '@/components/ui/textarea'
+import { UserAvatar } from '@/components/ui/user-avatar'
 import { useCreateMessage } from '@/hooks/queries/message.query'
 import { useSignOut } from '@/hooks/use-sign-out'
-import { getDefaultImage } from '@/utils/get-default-image'
-import { getInitials } from '@/utils/get-initials'
 
 type MessageBoxProps = {
   user: User
@@ -52,14 +50,9 @@ export function MessageBox(props: MessageBoxProps) {
     void form.handleSubmit()
   }
 
-  const defaultImage = getDefaultImage(user.id)
-
   return (
     <div className='flex gap-3'>
-      <Avatar className='size-10'>
-        <AvatarImage src={user.image ?? defaultImage} alt={user.name} />
-        <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
-      </Avatar>
+      <UserAvatar id={user.id} name={user.name} image={user.image} size='lg' />
       <form onSubmit={handleSubmit} className='w-full space-y-4'>
         <FieldGroup>
           <form.Field name='message'>
