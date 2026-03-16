@@ -33,14 +33,14 @@ export function CommentPost() {
 
     if (isCreating) return
 
-    if (!content) {
+    if (!content.trim()) {
       toast.error(t('error.comment-cannot-be-empty'))
       return
     }
 
     createComment({
       slug,
-      content,
+      content: content.trim(),
     })
   }
 
@@ -73,9 +73,9 @@ export function CommentPost() {
           size='icon-xs'
           className='absolute right-3 bottom-3'
           type='submit'
-          disabled={disabled || !content}
+          disabled={disabled || !content.trim()}
           aria-label={t('blog.comments.send-comment')}
-          aria-disabled={disabled || !content}
+          aria-disabled={disabled || !content.trim()}
           data-testid='comment-submit-button'
         >
           <SendIcon className='size-4' />

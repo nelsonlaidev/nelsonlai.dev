@@ -30,14 +30,14 @@ export function CommentReply() {
 
     if (isCreating) return
 
-    if (!content) {
+    if (!content.trim()) {
       toast.error(t('error.reply-cannot-be-empty'))
       return
     }
 
     createReply({
       slug,
-      content,
+      content: content.trim(),
       parentId: comment.id,
     })
   }
@@ -70,8 +70,8 @@ export function CommentReply() {
           variant='secondary'
           size='sm'
           type='submit'
-          disabled={disabled || !content}
-          aria-disabled={disabled || !content}
+          disabled={disabled || !content.trim()}
+          aria-disabled={disabled || !content.trim()}
           data-testid='comment-submit-reply-button'
         >
           {t('blog.comments.reply')}
