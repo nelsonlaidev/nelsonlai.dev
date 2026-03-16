@@ -21,6 +21,8 @@ export async function getLocation(ip: string): Promise<string | null> {
       },
     })
 
+    console.warn(response.ok, response.status, response.statusText)
+
     if (!response.ok) throw new Error('Failed to fetch location')
 
     const data = (await response.json()) as LocationResponse
