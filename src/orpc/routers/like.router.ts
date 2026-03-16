@@ -195,5 +195,5 @@ const getStats = publicProcedure.output(LikesStatsOutputSchema).handler(async ({
 export const likeRouter = {
   count: countLike,
   increment: incrementLike,
-  getStats,
+  stats: getStats,
 }

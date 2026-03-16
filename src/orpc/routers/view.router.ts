@@ -91,5 +91,5 @@ const getStats = publicProcedure.output(ViewsStatsOutputSchema).handler(async ({
 export const viewRouter = {
   count: countView,
   increment: incrementView,
-  getStats,
+  stats: getStats,
 }

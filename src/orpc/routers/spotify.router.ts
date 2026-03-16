@@ -93,5 +93,5 @@ const getStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(async 
 })
 
 export const spotifyRouter = {
-  getStats,
+  stats: getStats,
 }

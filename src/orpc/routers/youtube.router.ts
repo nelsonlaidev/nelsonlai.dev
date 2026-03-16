@@ -57,5 +57,5 @@ const getStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(async 
 })
 
 export const youtubeRouter = {
-  getStats,
+  stats: getStats,
 }

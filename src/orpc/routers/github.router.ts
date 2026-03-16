@@ -39,5 +39,5 @@ const getStats = publicProcedure.output(GithubStatsOutputSchema).handler(async (
 })
 
 export const githubRouter = {
-  getStats,
+  stats: getStats,
 }

@@ -48,5 +48,5 @@ const getAvatarUploadUrl = protectedProcedure
   })
 
 export const r2Router = {
-  getAvatarUploadUrl,
+  avatarUploadUrl: getAvatarUploadUrl,
 }

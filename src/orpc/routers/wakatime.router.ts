@@ -45,5 +45,5 @@ const getStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(async
 })
 
 export const wakatimeRouter = {
-  getStats,
+  stats: getStats,
 }
