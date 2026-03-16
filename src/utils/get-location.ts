@@ -22,7 +22,7 @@ export async function getLocation(ip: string): Promise<string | null> {
       },
     })
 
-    console.warn(response.ok, response.status, response.statusText)
+    console.warn(response.ok, response.status, response.statusText, env.NELSONLAI_API_KEY)
 
     if (!response.ok) throw new Error('Failed to fetch location')
 
