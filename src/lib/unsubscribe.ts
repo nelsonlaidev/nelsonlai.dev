@@ -19,7 +19,7 @@ const CommentReplyUnsubPayloadSchema = z.object({
 
 const UnsubPayloadSchema = z.discriminatedUnion('type', [CommentReplyUnsubPayloadSchema])
 
-type UnsubTokenResult<T> = { success: true; data: T } | { success: false }
+type UnsubTokenResult<TData> = { success: true; data: TData } | { success: false }
 type UnsubPayload = z.infer<typeof UnsubPayloadSchema>
 type CommentReplyUnsubPayload = z.infer<typeof CommentReplyUnsubPayloadSchema>
 

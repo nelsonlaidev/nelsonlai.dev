@@ -11,7 +11,7 @@ type BaseDoc = {
   content: string
 }
 
-async function transform<D extends BaseDoc>(document: D, context: Context) {
+async function transform<TDoc extends BaseDoc>(document: TDoc, context: Context) {
   const code = await compileMDX(context, document, {
     remarkPlugins,
     rehypePlugins,

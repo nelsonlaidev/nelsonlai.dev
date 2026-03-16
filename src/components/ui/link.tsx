@@ -5,11 +5,11 @@ type InternalLink = '/' | `/${string}`
 type ExternalLink = `http://${string}` | `https://${string}` | `mailto:${string}` | `tel:${string}`
 type ValidLink = InternalLink | ExternalLink
 
-type LinkProps<Href> = Href extends ExternalLink
-  ? React.ComponentProps<'a'> & { href: Href }
+type LinkProps<THref> = THref extends ExternalLink
+  ? React.ComponentProps<'a'> & { href: THref }
   : React.ComponentProps<typeof LocalizedLink>
 
-export function Link<Href extends ValidLink>(props: LinkProps<Href>) {
+export function Link<THref extends ValidLink>(props: LinkProps<THref>) {
   if (isExternalLink(props)) {
     const { href, ...rest } = props
 
