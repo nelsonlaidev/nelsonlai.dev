@@ -44,6 +44,8 @@ export const env = createEnv({
     GITHUB_CLIENT_ID: z.string().min(1).optional(),
     GITHUB_CLIENT_SECRET: z.string().min(1).optional(),
 
+    NELSONLAI_API_KEY: z.string().min(1).optional(),
+
     DISCORD_WEBHOOK_URL: z.url().optional(),
 
     RESEND_API_KEY: z.string().min(1).optional(),
