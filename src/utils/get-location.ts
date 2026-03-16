@@ -16,6 +16,7 @@ type LocationResponse = {
 export async function getLocation(ip: string): Promise<string | null> {
   try {
     const response = await fetch(`https://api.nelsonlai.dev/ip/geo?ip=${ip}`, {
+      cache: 'no-store',
       headers: {
         ...(env.NELSONLAI_API_KEY && { 'x-api-key': env.NELSONLAI_API_KEY }),
       },
