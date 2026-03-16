@@ -57,6 +57,13 @@
       "when": 1773495076074,
       "tag": "0007_lying_mantis",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1773648286049,
+      "tag": "0008_clumsy_miss_america",
+      "breakpoints": true
     }
   ]
 }

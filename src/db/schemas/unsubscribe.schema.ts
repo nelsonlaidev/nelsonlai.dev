@@ -25,7 +25,7 @@ export const unsubscribes = pgTable(
     unique('unsubscribes_user_id_type_comment_id_uq').on(table.userId, table.type, table.commentId),
     check(
       'unsubscribes_comment_reply_check',
-      sql`(${table.type} = 'comment_reply' AND ${table.commentId} IS NOT NULL)`,
+      sql`(${table.type} = 'comment_reply' AND ${table.commentId} IS NOT NULL) OR (${table.type} != 'comment_reply' AND ${table.commentId} IS NULL)`,
     ),
   ],
 )

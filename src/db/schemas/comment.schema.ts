@@ -35,7 +35,6 @@ export const comments = pgTable(
       foreignColumns: [table.id],
     }).onDelete('restrict'),
     index('comments_post_id_idx').on(table.postId),
-    index('comments_parent_id_idx').on(table.parentId),
     index('comments_user_id_idx').on(table.userId),
     index('comments_post_id_created_at_desc_idx')
       .on(table.postId, table.createdAt.desc())

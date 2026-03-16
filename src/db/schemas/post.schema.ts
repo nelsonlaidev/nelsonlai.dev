@@ -2,6 +2,7 @@ import { relations } from 'drizzle-orm'
 import { index, integer, pgTable, text } from 'drizzle-orm/pg-core'
 
 import { comments } from './comment.schema'
+import { postLikes } from './post-like.schema'
 import { createdAt } from './shared.schema'
 
 export const posts = pgTable(
@@ -17,4 +18,5 @@ export const posts = pgTable(
 
 export const postsRelations = relations(posts, ({ many }) => ({
   comments: many(comments),
+  postLikes: many(postLikes),
 }))
