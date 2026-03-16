@@ -26,7 +26,7 @@ import { Field, FieldError, FieldGroup } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { AVATAR_MAX_FILE_SIZE, SUPPORTED_AVATAR_MIME_TYPES } from '@/constants/site'
 import { useUpdateUser } from '@/hooks/queries/auth.query'
-import { useGetAvatarUploadUrl } from '@/hooks/queries/r2.query'
+import { useAvatarUploadUrl } from '@/hooks/queries/r2.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useSession } from '@/lib/auth-client'
 import { getAbbreviation } from '@/utils/get-abbreviation'
@@ -189,7 +189,7 @@ function UpdateAvatar() {
   const [isUploading, setIsUploading] = useState(false)
   const { refetch: refetchSession } = useSession()
 
-  const { mutateAsync: getAvatarUploadUrl } = useGetAvatarUploadUrl()
+  const { mutateAsync: getAvatarUploadUrl } = useAvatarUploadUrl()
   const { mutateAsync: updateUser } = useUpdateUser(() => {
     toast.success(t('success.avatar-updated'))
     void refetchSession()

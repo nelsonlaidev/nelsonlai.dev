@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { orpc } from '@/orpc/client'
 
-export function useGetSettings() {
+export function useSettings() {
   return useQuery(orpc.settings.get.queryOptions())
 }
 

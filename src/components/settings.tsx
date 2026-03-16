@@ -3,13 +3,13 @@
 import { useTranslations } from 'next-intl'
 
 import { Skeleton } from '@/components/ui/skeleton'
-import { useGetSettings } from '@/hooks/queries/settings.query'
+import { useSettings } from '@/hooks/queries/settings.query'
 
 import { SettingsForm } from './settings-form'
 
 export function Settings() {
   const t = useTranslations()
-  const { data, isSuccess, isLoading, isError } = useGetSettings()
+  const { data, isSuccess, isLoading, isError } = useSettings()
 
   return (
     <>
