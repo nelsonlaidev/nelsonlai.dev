@@ -14,6 +14,9 @@ type LocationResponse = {
 export async function getLocation(ip: string): Promise<string | null> {
   try {
     const response = await fetch(`https://api.nelsonlai.dev/ip/geo?ip=${ip}`)
+
+    console.warn(response.ok, response.status, response.statusText)
+
     if (!response.ok) throw new Error('Failed to fetch location')
 
     const data = (await response.json()) as LocationResponse
@@ -23,7 +26,7 @@ export async function getLocation(ip: string): Promise<string | null> {
 
     return `${country}${region}`
   } catch (error) {
-    console.warn(error)
+    console.warn(`Error fetching location for IP ${ip}:`, error)
 
     return null
   }
