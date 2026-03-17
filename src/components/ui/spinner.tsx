@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-restricted-syntax
 import { LoaderIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 

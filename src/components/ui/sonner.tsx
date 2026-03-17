@@ -2,10 +2,11 @@
 
 import type { ToasterProps } from 'sonner'
 
-// eslint-disable-next-line no-restricted-syntax
-import { CircleCheckIcon, InfoIcon, LoaderIcon, OctagonXIcon, TriangleAlertIcon } from 'lucide-react'
+import { CircleCheckIcon, InfoIcon, OctagonXIcon, TriangleAlertIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Toaster as Sonner } from 'sonner'
+
+import { Spinner } from './spinner'
 
 export function Toaster(props: ToasterProps) {
   const { theme = 'system' } = useTheme()
@@ -19,7 +20,7 @@ export function Toaster(props: ToasterProps) {
         info: <InfoIcon className='size-4' />,
         warning: <TriangleAlertIcon className='size-4' />,
         error: <OctagonXIcon className='size-4' />,
-        loading: <LoaderIcon className='size-4 animate-spin' />,
+        loading: <Spinner />,
       }}
       style={{
         '--normal-bg': 'var(--popover)',

@@ -127,7 +127,7 @@
     "@cspell/dict-pt-br": "2.4.2",
     "@dotenvx/dotenvx": "1.52.0",
     "@lingual/i18n-check": "0.9.0-beta.1",
-    "@nelsonlaidev/eslint-config": "3.6.0",
+    "@nelsonlaidev/eslint-config": "3.7.2",
     "@nelsonlaidev/prettier-config": "0.2.0",
     "@nelsonlaidev/typescript-config": "1.2.1",
     "@playwright/test": "1.58.2",
