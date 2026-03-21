@@ -6,7 +6,7 @@ export function Hello() {
   useEffect(() => {
     // This is a fun little message for anyone who might be inspecting the code.
     // So we disable the rule for this line.
-    // eslint-disable-next-line no-console
+    // oxlint-disable-next-line no-console
     console.log(
       `\
 %cHey there, awesome developer!

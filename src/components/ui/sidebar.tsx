@@ -61,6 +61,7 @@ export function SidebarProvider(props: SidebarProviderProps) {
 
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.
+  // oxlint-disable-next-line react-x/use-state
   const [_open, _setOpen] = useState(defaultOpen)
   const open = openProp ?? _open
   const setOpen = useCallback(

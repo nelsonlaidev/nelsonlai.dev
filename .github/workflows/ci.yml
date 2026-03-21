@@ -35,7 +35,7 @@ jobs:
         run: pnpm test:unit
 
   lint:
-    name: ESLint
+    name: Oxlint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
@@ -44,7 +44,7 @@ jobs:
       - name: Configure environment
         uses: ./.github/actions/setup
 
-      - name: Run ESLint
+      - name: Run Oxlint
         run: pnpm lint
 
   spellcheck:

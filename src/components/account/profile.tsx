@@ -31,7 +31,6 @@ import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useSession } from '@/lib/auth-client'
 
 import { Spinner } from '../ui/spinner'
-
 import { ProfileSkeleton } from './profile-skeleton'
 
 export function Profile() {
@@ -197,6 +196,7 @@ function UpdateAvatar() {
 
     if (!file) return
 
+    // oxlint-disable-next-line react-x/immutability
     event.target.value = ''
 
     if (!SUPPORTED_AVATAR_MIME_TYPES.includes(file.type as AvatarMimeType)) {

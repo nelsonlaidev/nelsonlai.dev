@@ -13,7 +13,7 @@ async function Page(props: PageProps<'/[locale]/unsubscribe'>) {
   }
 
   // Allow for future types
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  // oxlint-disable-next-line typescript/no-unnecessary-condition
   if (data.type === 'comment_reply') {
     return <UnsubscribeCommentReplyForm data={data} />
   }

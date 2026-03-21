@@ -1,5 +1,5 @@
-import type { CommentListInput, CommentListOutput } from '@/orpc/client'
 import type { InfiniteData } from '@tanstack/react-query'
+import type { CommentListInput, CommentListOutput } from '@/orpc/client'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 

@@ -17,7 +17,6 @@ import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { getDefaultImage } from '@/utils/get-default-image'
 
 import { Markdown } from '../mdx/markdown'
-
 import { CommentActions } from './comment-actions'
 import { CommentMenu } from './comment-menu'
 import { CommentReplies } from './comment-replies'
@@ -96,6 +95,7 @@ export function Comment(props: CommentProps) {
                       <TooltipTrigger>
                         <span>{formattedDate}</span>
                       </TooltipTrigger>
+                      {/* oxlint-disable-next-line react-x/purity */}
                       <TooltipContent>{new Date(createdAt).toLocaleString()}</TooltipContent>
                     </Tooltip>
                   ) : (

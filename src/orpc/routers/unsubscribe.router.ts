@@ -16,7 +16,7 @@ const createCommentReplyUnsubscribe = publicProcedure
     const result = await verifyUnsubToken(input.token)
 
     // Future types may be added
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    // oxlint-disable-next-line typescript/no-unnecessary-condition
     if (!result.success || result.data.type !== 'comment_reply') {
       throw new ORPCError('BAD_REQUEST', { message: 'Invalid token' })
     }

@@ -1,8 +1,24 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
+
+function subscribeHover(onStoreChange: () => void) {
+  const mql = globalThis.matchMedia('(hover: hover)')
+  mql.addEventListener('change', onStoreChange)
+  return () => {
+    mql.removeEventListener('change', onStoreChange)
+  }
+}
+
+function getCanHover() {
+  return globalThis.matchMedia('(hover: hover)').matches
+}
+
+function getCanHoverServer() {
+  return false
+}
 
 type TipProps = {
   children: React.ReactNode
@@ -12,20 +28,8 @@ type TipProps = {
 export function Tip(props: TipProps) {
   const { children, content } = props
   const [open, setOpen] = useState(false)
-  const [canHover, setCanHover] = useState(false)
+  const canHover = useSyncExternalStore(subscribeHover, getCanHover, getCanHoverServer)
   const buttonRef = useRef<HTMLButtonElement>(null)
-
-  useEffect(() => {
-    const mql = globalThis.matchMedia('(hover: hover)')
-    setCanHover(mql.matches)
-    function onChange(e: MediaQueryListEvent) {
-      setCanHover(e.matches)
-    }
-    mql.addEventListener('change', onChange)
-    return () => {
-      mql.removeEventListener('change', onChange)
-    }
-  }, [])
 
   useEffect(() => {
     function handleClickOutside(event: TouchEvent) {

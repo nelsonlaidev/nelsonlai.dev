@@ -33,6 +33,7 @@ export function LayoutFooter() {
       <div className='mt-20 space-y-4'>
         <LocaleSwitcher />
         <div className='flex items-center justify-between text-sm'>
+          {/* oxlint-disable-next-line react-x/purity */}
           <div className='text-muted-foreground'>&copy; {new Date().getFullYear()} Nelson Lai</div>
           <GithubStarButton />
         </div>

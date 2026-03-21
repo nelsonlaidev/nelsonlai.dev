@@ -5,7 +5,8 @@
       "@/*": ["./src/*"],
       "~/*": ["./public/*"],
       "content-collections": ["./.content-collections/generated"]
-    }
+    },
+    "types": ["node"]
   },
   "extends": "@nelsonlaidev/typescript-config/nextjs.json",
   "exclude": ["node_modules"],

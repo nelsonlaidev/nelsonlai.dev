@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-restricted-imports
 import { Link as LocalizedLink } from '@/i18n/routing'
 
 type InternalLink = '/' | `/${string}`
@@ -14,7 +13,7 @@ export function Link<THref extends ValidLink>(props: LinkProps<THref>) {
     const { href, ...rest } = props
 
     return (
-      // eslint-disable-next-line jsx-a11y/anchor-has-content
+      // oxlint-disable-next-line jsx_a11y/anchor-has-content
       <a href={href} {...(href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })} {...rest} />
     )
   }
