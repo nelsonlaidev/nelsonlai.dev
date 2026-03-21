@@ -23,11 +23,11 @@
     "dev": "pnpm with-env next dev -p 3000",
     "email:dev": "email dev --port 3001 --dir ./src/emails/templates",
     "email:export": "email export --dir ./src/emails/templates",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "knip": "pnpm with-env knip",
-    "lint": "oxlint .",
-    "lint:fix": "oxlint --fix .",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "lint:spell": "cspell .",
     "prepare": "lefthook install",
     "start": "pnpm with-env next start -p 3000",
@@ -126,8 +126,8 @@
     "@cspell/dict-pt-br": "2.4.2",
     "@dotenvx/dotenvx": "1.52.0",
     "@lingual/i18n-check": "0.9.0-beta.1",
+    "@nelsonlaidev/oxfmt-config": "https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/oxfmt-config@8f9e60d",
     "@nelsonlaidev/oxlint-config": "https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/oxlint-config@b4b22e9",
-    "@nelsonlaidev/prettier-config": "0.2.0",
     "@nelsonlaidev/typescript-config": "1.2.1",
     "@playwright/test": "1.58.2",
     "@react-email/preview-server": "5.2.9",
@@ -154,11 +154,10 @@
     "jsdom": "28.1.0",
     "knip": "6.0.1",
     "lefthook": "2.1.2",
+    "oxfmt": "0.41.0",
     "oxlint": "1.56.0",
     "oxlint-tsgolint": "0.17.0",
     "postcss-load-config": "6.0.1",
-    "prettier": "3.8.1",
-    "prettier-plugin-packagejson": "3.0.0",
     "react-cosmos": "7.1.2-canary.579b2b0.0",
     "react-cosmos-core": "7.1.2-canary.579b2b0.0",
     "react-cosmos-next": "7.1.2-canary.579b2b0.0",
@@ -169,8 +168,8 @@
     "typescript": "5.9.3",
     "vitest": "4.0.18"
   },
-  "packageManager": "pnpm@10.32.1",
   "engines": {
     "node": ">=24"
-  }
+  },
+  "packageManager": "pnpm@10.32.1"
 }

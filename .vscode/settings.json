@@ -3,6 +3,9 @@
     "source.fixAll.oxc": "always"
   },
 
+  "oxc.fmt.configPath": "oxfmt.config.ts",
+
+  "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
 

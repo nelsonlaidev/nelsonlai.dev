@@ -83,7 +83,7 @@ jobs:
       - name: Configure environment
         uses: ./.github/actions/setup
 
-      - name: Run Prettier format check
+      - name: Run Oxfmt format check
         run: pnpm format:check
 
   knip:

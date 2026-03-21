@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "oxc.oxc-vscode",
-    "esbenp.prettier-vscode",
     "bradlc.vscode-tailwindcss",
     "unifiedjs.vscode-mdx",
     "streetsidesoftware.code-spell-checker",
