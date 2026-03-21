@@ -83,7 +83,7 @@ export function CommentCodeBlock(props: CommentCodeBlockProps) {
   return (
     <CodeBlock data-lang={lang} title={title} className='shiki' figureClassName='my-2' scrollAreaClassName='max-h-120'>
       {/* HTML of highlighted code is safely generated. */}
-      {/* eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml */}
+      {/* oxlint-disable-next-line react/no-danger */}
       {isHighlighted && codeHtml ? <code dangerouslySetInnerHTML={{ __html: codeHtml }} /> : <code>{code}</code>}
     </CodeBlock>
   )

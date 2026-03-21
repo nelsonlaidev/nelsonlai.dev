@@ -50,9 +50,9 @@ export function LocationCard() {
       markers: [{ location: [22.3193, 114.1694], size: 0.1 }],
       scale: 1.05,
       onRender: (state) => {
-        state.phi = 2.75 + springRotation.get()
-        state.width = width * 2
-        state.height = width * 2
+        state.phi = 2.75 + springRotation.get() // oxlint-disable-line react-x/immutability
+        state.width = width * 2 // oxlint-disable-line react-x/immutability
+        state.height = width * 2 // oxlint-disable-line react-x/immutability
       },
     })
 

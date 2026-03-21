@@ -1,6 +1,6 @@
-import type { TOC } from '../types'
 import type { Heading, Node } from 'mdast'
 import type { VFile } from 'vfile'
+import type { TOC } from '../types'
 
 import Slugger from 'github-slugger'
 import { visit } from 'unist-util-visit'

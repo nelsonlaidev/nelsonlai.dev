@@ -1,5 +1,5 @@
-import type { router } from './routers'
 import type { InferRouterInputs, InferRouterOutputs, RouterClient } from '@orpc/server'
+import type { router } from './routers'
 
 import { createORPCClient } from '@orpc/client'
 import { RPCLink } from '@orpc/client/fetch'

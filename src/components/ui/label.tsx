@@ -10,7 +10,7 @@ export function Label(props: LabelProps) {
   return (
     // Label is a reusable wrapper component.
     // The below rule will be enabled on <Label /> usage sites instead of here.
-    // eslint-disable-next-line jsx-a11y/label-has-associated-control
+    // oxlint-disable-next-line jsx_a11y/label-has-associated-control
     <label
       data-slot='label'
       className={cn(

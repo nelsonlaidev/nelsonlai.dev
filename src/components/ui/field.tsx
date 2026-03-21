@@ -190,7 +190,7 @@ export function FieldError(props: FieldErrorProps) {
 
   // ReactNode includes Promise<AwaitedReactNode>,
   // which triggers this rule incorrectly in Client Components.
-  // eslint-disable-next-line @typescript-eslint/promise-function-async
+  // oxlint-disable-next-line typescript/promise-function-async
   const content = useMemo(() => {
     if (children) {
       return children

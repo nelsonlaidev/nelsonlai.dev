@@ -7,10 +7,12 @@ fumadocs
 lokalise
 nuqs
 orpc
+oxlint
 radixui
 rmiz
 shiki
 shikijs
 sonarjs
+tsgolint
 unifiedjs
 vaul

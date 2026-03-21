@@ -36,7 +36,7 @@ export function useFormattedDate(date: DateInput, options: Options = {}): string
       ? format.relativeTime(dateTime, now)
       : format.dateTime(dateTime, formatName, formatOptionsWithTimeZone)
 
-    setFormattedDate(result)
+    setFormattedDate(result) // oxlint-disable-line react-x/set-state-in-effect
   }, [date, relative, threshold, formatOptions, format, now, formatName])
 
   return formattedDate

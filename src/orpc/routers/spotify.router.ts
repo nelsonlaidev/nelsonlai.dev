@@ -1,5 +1,5 @@
-import type { NotPlayingSchema } from '../schemas/spotify.schema'
 import type * as z from 'zod'
+import type { NotPlayingSchema } from '../schemas/spotify.schema'
 
 import { Buffer } from 'node:buffer'
 

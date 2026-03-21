@@ -40,21 +40,21 @@ export function CommentReplies() {
     if (params.comment === comment.id) setIsOpenReplies(true)
   }, [comment.id, params.comment, setIsOpenReplies])
 
-  return (
-    <>
-      {isOpenReplies && (
-        <div className='space-y-8 pl-7'>
-          {isSuccess &&
-            data.pages.map((page) => page.comments.map((reply) => <Comment key={reply.id} comment={reply} />))}
-          {(isLoading || isFetchingNextPage) && <CommentLoader />}
-          {isError && (
-            <div className='flex min-h-20 items-center justify-center'>
-              <p className='text-sm text-muted-foreground'>{t('error.failed-to-load-replies')}</p>
-            </div>
-          )}
-          <span ref={ref} className='invisible' />
-        </div>
-      )}
-    </>
-  )
+  if (isOpenReplies) {
+    return (
+      <div className='space-y-8 pl-7'>
+        {isSuccess &&
+          data.pages.map((page) => page.comments.map((reply) => <Comment key={reply.id} comment={reply} />))}
+        {(isLoading || isFetchingNextPage) && <CommentLoader />}
+        {isError && (
+          <div className='flex min-h-20 items-center justify-center'>
+            <p className='text-sm text-muted-foreground'>{t('error.failed-to-load-replies')}</p>
+          </div>
+        )}
+        <span ref={ref} className='invisible' />
+      </div>
+    )
+  }
+
+  return null
 }

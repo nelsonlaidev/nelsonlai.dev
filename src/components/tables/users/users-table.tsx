@@ -1,12 +1,12 @@
-import type { User } from './columns'
 import type { OnChangeFn, PaginationState } from '@tanstack/react-table'
+import type { User } from './columns'
 
-import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { flexRender, getCoreRowModel } from '@tanstack/react-table'
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { useReactTable } from '@/hooks/use-react-table'
 
 import { TablePagination } from '../table-pagination'
-
 import { useColumns } from './columns'
 
 type UsersTableProps = {
@@ -21,9 +21,6 @@ export function UsersTable(props: UsersTableProps) {
   const { users, pageCount, pagination, onPaginationChange, isFetching = false } = props
   const columns = useColumns()
 
-  // @tanstack/react-table is incompatible with React Compiler
-  // See https://github.com/TanStack/table/issues/5567
-  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data: users,
     columns,

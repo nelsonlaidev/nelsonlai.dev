@@ -1,6 +1,6 @@
-import type { Viewport } from 'next'
-
 import '@/styles/globals.css'
+
+import type { Viewport } from 'next'
 
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Geist, Geist_Mono, Noto_Sans_SC, Noto_Sans_TC } from 'next/font/google'

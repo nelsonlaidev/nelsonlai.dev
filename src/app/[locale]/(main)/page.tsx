@@ -62,9 +62,11 @@ function Page(props: PageProps<'/[locale]'>) {
       url: getBaseUrl(),
       sameAs: [SITE_FACEBOOK_URL, SITE_INSTAGRAM_URL, SITE_X_URL, SITE_GITHUB_URL, SITE_YOUTUBE_URL],
     },
-    copyrightYear: new Date().getFullYear(),
     dateCreated: '2022-02-01T00:00:00Z',
+    // oxlint-disable-next-line react-x/purity
     dateModified: new Date().toISOString(),
+    // oxlint-disable-next-line react-x/purity
+    copyrightYear: new Date().getFullYear(),
     inLanguage: locale,
   }
 

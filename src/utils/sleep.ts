@@ -5,7 +5,7 @@
  */
 export async function sleep(ms: number): Promise<void> {
   // This function intentionally uses a new Promise with setTimeout to create a delay.
-  // eslint-disable-next-line promise/avoid-new
+  // oxlint-disable-next-line promise/avoid-new
   return new Promise((resolve) => {
     setTimeout(resolve, ms)
   })

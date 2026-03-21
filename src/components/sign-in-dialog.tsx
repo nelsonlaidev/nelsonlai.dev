@@ -51,7 +51,7 @@ export function SignInDialog() {
 
   useEffect(() => {
     const provider = localStorage.getItem('last-used-provider') as Provider | null
-    setLastUsedProvider(provider)
+    setLastUsedProvider(provider) // oxlint-disable-line react-x/set-state-in-effect
   }, [])
 
   async function handleSignIn(provider: Provider) {

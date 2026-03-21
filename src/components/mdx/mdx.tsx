@@ -5,7 +5,6 @@ import { CodeBlock } from '@/components/ui/code-block'
 import { Link } from '@/components/ui/link'
 
 import { ImageZoom } from '../image-zoom'
-
 import { Heading } from './heading'
 import { ItemGrid } from './item-grid'
 import { LinkCard } from './link-card'

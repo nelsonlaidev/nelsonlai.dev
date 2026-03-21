@@ -8,9 +8,10 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { useCommentsContext } from '@/contexts/comments.context'
 import { useCreatePostComment } from '@/hooks/queries/comment.query'
-import { useIsMounted } from '@/hooks/use-is-mounted'
+import { useIsHydrated } from '@/hooks/use-is-hydrated'
 import { useSession } from '@/lib/auth-client'
 
+import { Spinner } from '../ui/spinner'
 import { CommentEditor } from './comment-editor'
 import { UnauthenticatedOverlay } from './unauthenticated-overlay'
 
@@ -18,7 +19,7 @@ export function CommentPost() {
   const { slug } = useCommentsContext()
   const [content, setContent] = useState('')
   const [tabsValue, setTabsValue] = useState<'write' | 'preview'>('write')
-  const isMounted = useIsMounted()
+  const isHydrated = useIsHydrated()
   const { data: session, isPending: isSessionLoading } = useSession()
   const t = useTranslations()
 
@@ -44,8 +45,12 @@ export function CommentPost() {
     })
   }
 
-  if (!isMounted) {
-    return null
+  if (!isHydrated) {
+    return (
+      <div className='flex h-32.5 items-center justify-center'>
+        <Spinner />
+      </div>
+    )
   }
 
   const isAuthenticated = session !== null && !isSessionLoading

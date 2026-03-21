@@ -2,7 +2,6 @@ import { relations } from 'drizzle-orm'
 import { boolean, pgTable, text } from 'drizzle-orm/pg-core'
 
 import { DEFAULT_SETTINGS } from '../constants'
-
 import { users } from './auth.schema'
 import { createdAt, updatedAt } from './shared.schema'
 

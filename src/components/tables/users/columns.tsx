@@ -1,5 +1,5 @@
-import type { AdminUserListOutput } from '@/orpc/client'
 import type { ColumnDef } from '@tanstack/react-table'
+import type { AdminUserListOutput } from '@/orpc/client'
 
 import { useTranslations } from 'next-intl'
 
