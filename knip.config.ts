@@ -7,7 +7,7 @@ const config: KnipConfig = {
     // Required by react-email
     '@react-email/preview-server',
   ],
-  ignore: ['src/components/ui/*.tsx'],
+  ignore: ['src/components/ui/*.{ts,tsx}'],
   entry: ['content-collections.ts', 'src/db/reset.ts', 'src/db/seed.ts'],
 }
 
