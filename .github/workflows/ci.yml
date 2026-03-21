@@ -35,7 +35,7 @@ jobs:
         run: pnpm test:unit
 
   lint:
-    name: Oxlint
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
