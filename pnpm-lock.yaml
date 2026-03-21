@@ -250,11 +250,11 @@ importers:
         specifier: 0.9.0-beta.1
         version: 0.9.0-beta.1
       '@nelsonlaidev/oxfmt-config':
-        specifier: https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/oxfmt-config@8f9e60d
-        version: https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/oxfmt-config@8f9e60d(oxfmt@0.41.0)
+        specifier: 0.1.0
+        version: 0.1.0(oxfmt@0.41.0)
       '@nelsonlaidev/oxlint-config':
-        specifier: https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/oxlint-config@b4b22e9
-        version: https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/oxlint-config@b4b22e9(@typescript-eslint/utils@8.57.1(eslint@10.1.0(jiti@2.6.1))(typescript@5.9.3))(jiti@2.6.1)(oxlint@1.56.0(oxlint-tsgolint@0.17.0))(tailwindcss@4.2.1)(typescript@5.9.3)
+        specifier: 0.1.0
+        version: 0.1.0(@typescript-eslint/utils@8.57.1(eslint@10.1.0(jiti@2.6.1))(typescript@5.9.3))(jiti@2.6.1)(oxlint@1.56.0(oxlint-tsgolint@0.17.0))(tailwindcss@4.2.1)(typescript@5.9.3)
       '@nelsonlaidev/typescript-config':
         specifier: 1.2.1
         version: 1.2.1
@@ -2126,21 +2126,18 @@ packages:
   '@napi-rs/wasm-runtime@1.1.1':
     resolution: {integrity: sha512-p64ah1M1ld8xjWv3qbvFwHiFVWrq1yFvV4f7w+mzaqiR4IlSgkqhcRdHwsGgomwzBH51sRY4NEowLxnaBjcW/A==}
 
-  '@nelsonlaidev/eslint-plugin@https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/eslint-plugin@b4b22e98a87331bcc850368a066793794ff7270b':
-    resolution: {tarball: https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/eslint-plugin@b4b22e98a87331bcc850368a066793794ff7270b}
-    version: 0.2.0
+  '@nelsonlaidev/eslint-plugin@0.2.0':
+    resolution: {integrity: sha512-AP6JCq9l8WfR+FltMCzzwZrmqiZAgq9tgO22aq9GgDC1D4ThRiy7MP5IVSypjeCKOng48PoaWBWgZ1+aeFxwTA==}
     peerDependencies:
       eslint: ^9.0.0
 
-  '@nelsonlaidev/oxfmt-config@https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/oxfmt-config@8f9e60d':
-    resolution: {integrity: sha512-H76TVygayY9vMWPjYGWGy3Kula/RPx5xtex9yQr7qma7vMuSGMRJieF5/OmZ4eA4YfnwGs1SPdAUHDIJeDTgpg==, tarball: https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/oxfmt-config@8f9e60d}
-    version: 0.0.0
+  '@nelsonlaidev/oxfmt-config@0.1.0':
+    resolution: {integrity: sha512-YR45SOwfgrPIGx836qJ5WY/bEpVbFU6wvIXu0Cr96aXK6MbpJeY2kWe1eh25++iEW6g4S/2WUYv7bOKWIpc+2g==}
     peerDependencies:
       oxfmt: '>=0.41.0'
 
-  '@nelsonlaidev/oxlint-config@https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/oxlint-config@b4b22e9':
-    resolution: {tarball: https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/oxlint-config@b4b22e9}
-    version: 0.0.0
+  '@nelsonlaidev/oxlint-config@0.1.0':
+    resolution: {integrity: sha512-gxL+YdufSOZ92FTJL4VOQAUap4IuQWWbdr/TDQYDNE3yRvW6dF0QfhG1OVV72DZmX0j6DHgHfHBUVGiGq86RRg==}
     peerDependencies:
       oxlint: '>=1.56.0'
 
@@ -10599,7 +10596,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@nelsonlaidev/eslint-plugin@https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/eslint-plugin@b4b22e98a87331bcc850368a066793794ff7270b(eslint@10.1.0(jiti@2.6.1))(typescript@5.9.3)':
+  '@nelsonlaidev/eslint-plugin@0.2.0(eslint@10.1.0(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
       '@typescript-eslint/utils': 8.57.1(eslint@10.1.0(jiti@2.6.1))(typescript@5.9.3)
       eslint: 10.1.0(jiti@2.6.1)
@@ -10608,13 +10605,13 @@ snapshots:
       - supports-color
       - typescript
 
-  '@nelsonlaidev/oxfmt-config@https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/oxfmt-config@8f9e60d(oxfmt@0.41.0)':
+  '@nelsonlaidev/oxfmt-config@0.1.0(oxfmt@0.41.0)':
     dependencies:
       oxfmt: 0.41.0
 
-  '@nelsonlaidev/oxlint-config@https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/oxlint-config@b4b22e9(@typescript-eslint/utils@8.57.1(eslint@10.1.0(jiti@2.6.1))(typescript@5.9.3))(jiti@2.6.1)(oxlint@1.56.0(oxlint-tsgolint@0.17.0))(tailwindcss@4.2.1)(typescript@5.9.3)':
+  '@nelsonlaidev/oxlint-config@0.1.0(@typescript-eslint/utils@8.57.1(eslint@10.1.0(jiti@2.6.1))(typescript@5.9.3))(jiti@2.6.1)(oxlint@1.56.0(oxlint-tsgolint@0.17.0))(tailwindcss@4.2.1)(typescript@5.9.3)':
     dependencies:
-      '@nelsonlaidev/eslint-plugin': https://pkg.pr.new/nelsonlaidev/config/@nelsonlaidev/eslint-plugin@b4b22e98a87331bcc850368a066793794ff7270b(eslint@10.1.0(jiti@2.6.1))(typescript@5.9.3)
+      '@nelsonlaidev/eslint-plugin': 0.2.0(eslint@10.1.0(jiti@2.6.1))(typescript@5.9.3)
       '@stylistic/eslint-plugin': 5.10.0(eslint@10.1.0(jiti@2.6.1))
       es-toolkit: 1.45.1
       eslint: 10.1.0(jiti@2.6.1)
