@@ -89,7 +89,7 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 ### Prerequisites
 
 - Node.js >= 24
-- pnpm >= 10
+- bun >= 1
 - Docker
 - [Visual Studio Code](https://code.visualstudio.com/) with [recommended extensions](.vscode/extensions.json)
 - Optionally [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
@@ -137,10 +137,10 @@ git clone https://github.com/nelsonlaidev/nelsonlai.dev
 cd nelsonlai.dev
 ```
 
-3. Install dependencies using pnpm:
+3. Install dependencies using bun:
 
 ```bash
-pnpm install
+bun install
 ```
 
 ### Environment Setup
@@ -160,21 +160,21 @@ docker compose up -d
 3. Run the database migrations:
 
 ```bash
-pnpm db:migrate
+bun db:migrate
 ```
 
 4. Seed the database:
 
 ```bash
-pnpm db:seed
+bun db:seed
 ```
 
 5. Run the app:
 
 ```bash
-pnpm dev          # Run the development server
+bun dev          # Run the development server
 # or
-pnpm email:dev    # Run the email preview server separately
+bun email:dev    # Run the email preview server separately
 ```
 
 The services will be available at the following URLs:
@@ -183,6 +183,7 @@ The services will be available at the following URLs:
 | ---------------- | ---------------- |
 | App              | `localhost:3000` |
 | React Email      | `localhost:3001` |
+| Cosmos           | `localhost:3002` |
 | Database         | `localhost:5432` |
 | Redis            | `localhost:6379` |
 | Redis serverless | `localhost:8079` |
@@ -190,17 +191,17 @@ The services will be available at the following URLs:
 ### Available Scripts
 
 ```bash
-pnpm dev              # Start development server
-pnpm build            # Build for production
-pnpm start            # Start production server
-pnpm lint             # Run Oxlint
-pnpm typecheck        # Run TypeScript type checking
-pnpm format           # Format code with Oxfmt
-pnpm test:unit        # Run unit tests
-pnpm test:e2e         # Run E2E tests
-pnpm db:migrate       # Run database migrations
-pnpm db:seed          # Seed the database
-pnpm db:studio        # Open Drizzle Studio
+bun dev              # Start development server
+bun build            # Build for production
+bun start            # Start production server
+bun lint             # Run Oxlint
+bun typecheck        # Run TypeScript type checking
+bun format           # Format code with Oxfmt
+bun test:unit        # Run unit tests
+bun test:e2e         # Run E2E tests
+bun db:migrate       # Run database migrations
+bun db:seed          # Seed the database
+bun db:studio        # Open Drizzle Studio
 ```
 
 ## Credits
