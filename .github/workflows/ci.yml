@@ -132,6 +132,13 @@ jobs:
       - name: Run services
         run: docker compose up -d
 
+      - name: Verify MariaDB/Postgres is ready
+        run: |
+          until docker exec $(docker ps -qf "name=nelsonlaidev-postgres") pg_isready; do
+            echo "Waiting for database..."
+            sleep 2
+          done
+
       - name: Migrate database
         run: bun db:migrate
 
