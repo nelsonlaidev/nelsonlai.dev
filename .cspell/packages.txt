@@ -2,7 +2,6 @@ bradlc
 cmdk
 cobe
 dbaeumer
-dotenvx
 fumadocs
 lokalise
 nuqs
