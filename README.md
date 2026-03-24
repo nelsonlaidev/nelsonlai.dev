@@ -192,7 +192,7 @@ The services will be available at the following URLs:
 
 ```bash
 bun dev              # Start development server
-bun build            # Build for production
+bun run build            # Build for production
 bun start            # Start production server
 bun lint             # Run Oxlint
 bun typecheck        # Run TypeScript type checking

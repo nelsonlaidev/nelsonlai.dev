@@ -127,7 +127,7 @@ jobs:
         run: bun playwright install --with-deps chromium --only-shell
 
       - name: Build apps
-        run: bun build
+        run: bun run build
 
       - name: Run services
         run: docker compose up -d
