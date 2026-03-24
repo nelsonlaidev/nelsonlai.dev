@@ -9,6 +9,11 @@ runs:
       with:
         bun-version: latest
 
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: 'package.json'
+
     - name: Install dependencies
       shell: bash
       run: bun install --frozen-lockfile
