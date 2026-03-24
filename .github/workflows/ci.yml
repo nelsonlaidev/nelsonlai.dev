@@ -132,7 +132,7 @@ jobs:
       - name: Run services
         run: docker compose up -d
 
-      - name: Verify MariaDB/Postgres is ready
+      - name: Verify Postgres is ready
         run: |
           until docker exec $(docker ps -qf "name=nelsonlaidev-postgres") pg_isready; do
             echo "Waiting for database..."

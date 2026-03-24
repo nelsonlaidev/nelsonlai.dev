@@ -6,11 +6,8 @@ runs:
   steps:
     - name: Install bun
       uses: oven-sh/setup-bun@v2
-
-    - name: Install Node.js
-      uses: actions/setup-node@v4
       with:
-        node-version-file: 'package.json'
+        bun-version: latest
 
     - name: Install dependencies
       shell: bash
