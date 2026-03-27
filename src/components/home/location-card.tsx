@@ -1,66 +1,144 @@
 'use client'
 
+import type { Globe } from 'cobe'
+
 import createGlobe from 'cobe'
 import { MapPinIcon } from 'lucide-react'
-import { useMotionValue, useSpring } from 'motion/react'
 import { useTranslations } from 'next-intl'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+
+import { Badge } from '../ui/badge'
+
+const MARKERS = [{ id: 'hk', location: [22.3193, 114.1694] as [number, number], size: 0.03 }]
+
+function getThemeOptions(isDark: boolean) {
+  return {
+    dark: isDark ? 1 : 0,
+    diffuse: isDark ? 2 : 1.5,
+    mapBrightness: isDark ? 2 : 1.5,
+    baseColor: isDark ? ([0.8, 0.8, 0.8] as [number, number, number]) : ([1, 1, 1] as [number, number, number]),
+    markerColor: isDark ? ([1, 1, 1] as [number, number, number]) : ([0, 0, 0] as [number, number, number]),
+    glowColor: isDark
+      ? ([0.5, 0.5, 0.5] as [number, number, number])
+      : ([0.94, 0.93, 0.91] as [number, number, number]),
+  }
+}
 
 export function LocationCard() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const dragOriginXRef = useRef<number | null>(null)
-  const dragDeltaRef = useRef(0)
-  const fadeMask = 'radial-gradient(circle at 50% 50%, rgb(0, 0, 0) 60%, rgb(0, 0, 0, 0) 70%)'
+  const globeRef = useRef<Globe | null>(null)
+  const [ready, setReady] = useState(false)
+  const pointerInteractingRef = useRef<{ x: number; y: number } | null>(null)
+  const dragOffsetRef = useRef({ phi: 0 })
+  const phiOffsetRef = useRef(2.75)
+
   const t = useTranslations()
 
-  const rotation = useMotionValue(0)
-  const springRotation = useSpring(rotation, {
-    stiffness: 280,
-    damping: 40,
-    mass: 1,
-  })
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    pointerInteractingRef.current = { x: e.clientX, y: e.clientY }
+    if (canvasRef.current) canvasRef.current.style.cursor = 'grabbing'
+  }, [])
 
   useEffect(() => {
-    let width = 0
-
-    function onResize() {
-      if (canvasRef.current) {
-        width = canvasRef.current.offsetWidth
+    function handlePointerMove(e: PointerEvent) {
+      if (pointerInteractingRef.current !== null) {
+        const deltaX = e.clientX - pointerInteractingRef.current.x
+        dragOffsetRef.current = { phi: deltaX / 300 }
       }
     }
 
-    onResize()
-    window.addEventListener('resize', onResize)
+    function handlePointerUp() {
+      if (pointerInteractingRef.current !== null) {
+        phiOffsetRef.current += dragOffsetRef.current.phi
+        dragOffsetRef.current = { phi: 0 }
+      }
+      pointerInteractingRef.current = null
+      if (canvasRef.current) canvasRef.current.style.cursor = 'grab'
+    }
 
+    globalThis.addEventListener('pointermove', handlePointerMove, { passive: true })
+    globalThis.addEventListener('pointerup', handlePointerUp, { passive: true })
+
+    return () => {
+      globalThis.removeEventListener('pointermove', handlePointerMove)
+      globalThis.removeEventListener('pointerup', handlePointerUp)
+    }
+  }, [])
+
+  useEffect(() => {
     if (!canvasRef.current) return
 
-    const globe = createGlobe(canvasRef.current, {
-      devicePixelRatio: 2,
-      width: width * 2,
-      height: width * 2,
-      phi: 0,
+    const canvas = canvasRef.current
+    const width = canvas.offsetWidth
+    const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 640 ? 1.8 : 2)
+
+    globeRef.current = createGlobe(canvas, {
+      devicePixelRatio: dpr,
+      width,
+      height: width,
+      phi: phiOffsetRef.current,
       theta: 0,
-      dark: 1,
-      diffuse: 2,
       mapSamples: 16_000,
-      mapBrightness: 2,
-      baseColor: [0.8, 0.8, 0.8],
-      markerColor: [1, 1, 1],
-      glowColor: [0.5, 0.5, 0.5],
-      markers: [{ location: [22.3193, 114.1694], size: 0.1 }],
-      scale: 1.05,
-      onRender: (state) => {
-        state.phi = 2.75 + springRotation.get() // oxlint-disable-line react-x/immutability
-        state.width = width * 2 // oxlint-disable-line react-x/immutability
-        state.height = width * 2 // oxlint-disable-line react-x/immutability
-      },
+      markerElevation: 0.01,
+      markers: MARKERS,
+      ...getThemeOptions(false),
+    })
+
+    let animationId = 0
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      const entry = entries[0]
+      if (!entry) return
+
+      const nextWidth = Math.round(entry.contentRect.width)
+      const nextDpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 640 ? 1.8 : 2)
+
+      globeRef.current?.update({
+        devicePixelRatio: nextDpr,
+        width: nextWidth,
+        height: nextWidth,
+      })
+    })
+
+    resizeObserver.observe(canvas)
+
+    function animate() {
+      globeRef.current?.update({
+        phi: phiOffsetRef.current + dragOffsetRef.current.phi,
+      })
+      animationId = requestAnimationFrame(animate)
+    }
+
+    animate()
+
+    const fadeInId = requestAnimationFrame(() => {
+      setReady(true)
     })
 
     return () => {
-      globe.destroy()
-      window.removeEventListener('resize', onResize)
+      cancelAnimationFrame(animationId)
+      cancelAnimationFrame(fadeInId)
+      resizeObserver.disconnect()
+      globeRef.current?.destroy()
+      globeRef.current = null
     }
-  }, [springRotation])
+  }, [])
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains('dark')
+      globeRef.current?.update(getThemeOptions(isDark))
+    })
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
 
   return (
     <div className='relative flex h-60 flex-col gap-6 overflow-hidden rounded-2xl p-4 shadow-feature-card lg:p-6'>
@@ -68,64 +146,26 @@ export function LocationCard() {
         <MapPinIcon className='size-4.5' />
         <h2 className='text-sm'>{t('homepage.about-me.location')}</h2>
       </div>
-      <div className='absolute inset-x-0 -bottom-44 mx-auto aspect-square h-84 lg:-bottom-48 lg:h-96'>
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            placeItems: 'center',
-            placeContent: 'center',
-            overflow: 'visible',
-          }}
-        >
+      <div className='relative mx-auto -mt-4 aspect-square max-w-125 select-none'>
+        <canvas
+          ref={canvasRef}
+          onPointerDown={handlePointerDown}
+          data-ready={ready}
+          className='aspect-square size-full cursor-grab touch-none opacity-0 transition-opacity data-[ready=true]:opacity-100'
+        />
+        {MARKERS.map((m) => (
           <div
+            key={m.id}
+            className='pointer-events-none absolute bottom-[anchor(top)] left-[anchor(center)] -translate-x-1/2 -translate-y-2 transition-[opacity,filter]'
             style={{
-              width: '100%',
-              aspectRatio: '1/1',
-              maxWidth: 800,
-              WebkitMaskImage: fadeMask,
-              maskImage: fadeMask,
+              positionAnchor: `--cobe-${m.id}`,
+              opacity: `var(--cobe-visible-${m.id}, 0)`,
+              filter: `blur(calc((1 - var(--cobe-visible-${m.id}, 0)) * 8px))`,
             }}
           >
-            <canvas
-              ref={canvasRef}
-              onPointerDown={(e) => {
-                dragOriginXRef.current = e.clientX - dragDeltaRef.current
-                if (canvasRef.current) canvasRef.current.style.cursor = 'grabbing'
-              }}
-              onPointerUp={() => {
-                dragOriginXRef.current = null
-                if (canvasRef.current) canvasRef.current.style.cursor = 'grab'
-              }}
-              onPointerOut={() => {
-                dragOriginXRef.current = null
-                if (canvasRef.current) canvasRef.current.style.cursor = 'grab'
-              }}
-              onMouseMove={(e) => {
-                if (dragOriginXRef.current !== null) {
-                  const delta = e.clientX - dragOriginXRef.current
-                  dragDeltaRef.current = delta
-                  rotation.set(delta / 200)
-                }
-              }}
-              onTouchMove={(e) => {
-                if (dragOriginXRef.current !== null && e.touches[0]) {
-                  const delta = e.touches[0].clientX - dragOriginXRef.current
-                  dragDeltaRef.current = delta
-                  rotation.set(delta / 100)
-                }
-              }}
-              style={{
-                width: '100%',
-                height: '100%',
-                contain: 'layout paint size',
-                cursor: 'auto',
-                userSelect: 'none',
-              }}
-            />
+            <Badge>{t('homepage.about-me.location-value')}</Badge>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   )

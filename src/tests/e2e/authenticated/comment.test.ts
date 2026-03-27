@@ -3,7 +3,7 @@ import test, { expect } from '@playwright/test'
 
 import { db } from '@/db'
 import { comments } from '@/db/schemas'
-import en from '@/i18n/messages/en.json' assert { type: 'json' }
+import en from '@/i18n/messages/en.json' with { type: 'json' }
 
 import { TEST_UNIQUE_ID } from '../fixtures/auth'
 import { getNumberFlow } from '../utils/number-flow'
