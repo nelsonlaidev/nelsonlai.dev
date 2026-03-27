@@ -254,7 +254,8 @@
       "coding-hours": "コーディング時間",
       "connect": "つながる",
       "fav-framework": "お気に入りのフレームワーク",
-      "location": "香港",
+      "location": "所在地",
+      "location-value": "🇭🇰 香港",
       "more": "私についてもっと知る",
       "stacks": "技術スタック",
       "title": "私について"
