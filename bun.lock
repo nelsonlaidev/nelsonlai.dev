@@ -35,7 +35,7 @@
         "class-variance-authority": "0.7.1",
         "clsx": "2.1.1",
         "cmdk": "1.1.1",
-        "cobe": "0.6.5",
+        "cobe": "2.0.1",
         "dayjs": "1.11.20",
         "drizzle-orm": "0.45.1",
         "drizzle-zod": "0.8.3",
@@ -1827,7 +1827,7 @@
 
     "cmdk": ["cmdk@1.1.1", "", { "dependencies": { "@radix-ui/react-compose-refs": "^1.1.1", "@radix-ui/react-dialog": "^1.1.6", "@radix-ui/react-id": "^1.1.0", "@radix-ui/react-primitive": "^2.0.2" }, "peerDependencies": { "react": "^18 || ^19 || ^19.0.0-rc", "react-dom": "^18 || ^19 || ^19.0.0-rc" } }, "sha512-Vsv7kFaXm+ptHDMZ7izaRsP70GgrW9NBNGswt9OZaVBLlE0SNpDq8eu/VGXyF9r7M0azK3Wy7OlYXsuyYLFzHg=="],
 
-    "cobe": ["cobe@0.6.5", "", { "dependencies": { "phenomenon": "^1.6.0" } }, "sha512-MA8bu81EFY6JjQpj+FovEuhyJ25khx2Q7Lh+ot/UkCJe5yKyDgzdc6u2lGZIOmsZTXK6Itg1i4lQZIJZbPWnAg=="],
+    "cobe": ["cobe@2.0.1", "", {}, "sha512-aaa6vcIlaC8C1SF50LDH0Anybo/EAXnrxqe+bwvr4+YUtZydqjeBjTTD7ziCCkbRrRGSns3I3F6cZsf3W+L+ag=="],
 
     "collapse-white-space": ["collapse-white-space@2.1.0", "", {}, "sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw=="],
 
@@ -2766,8 +2766,6 @@
     "pem": ["pem@1.15.1", "", { "dependencies": { "es6-promisify": "^7.0.0", "md5": "^2.3.0", "os-tmpdir": "^1.0.2", "which": "^2.0.2" } }, "sha512-kNNaflLX8Cpb3mrDNxSy8qIwpsNFKgBZx9pgFhbj4h+Rid4j2SMYQxcjtIjyhJg8/lwJTL+A3NHdD0M+UwyrCw=="],
 
     "perfect-freehand": ["perfect-freehand@1.2.3", "", {}, "sha512-bHZSfqDHGNlPpgH2yxXgPHlQSPpEbo+qg7li0M78J9vNAi2yjwLeA4x79BEQhX44lEWpCLSFCeRZwpw0niiXPA=="],
-
-    "phenomenon": ["phenomenon@1.6.0", "", {}, "sha512-7h9/fjPD3qNlgggzm88cY58l9sudZ6Ey+UmZsizfhtawO6E3srZQXywaNm2lBwT72TbpHYRPy7ytIHeBUD/G0A=="],
 
     "picocolors": ["picocolors@1.1.1", "", {}, "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="],
 
