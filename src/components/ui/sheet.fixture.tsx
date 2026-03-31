@@ -1,5 +1,7 @@
 'use client'
 
+import { range } from '@/utils/range'
+
 import { Button } from './button'
 import { Demo, DemoItem } from './demo'
 import { Field, FieldGroup, FieldLabel } from './field'
@@ -96,8 +98,8 @@ function SheetWithSides() {
               <SheetDescription>Make changes to your profile here. Click save when you're done.</SheetDescription>
             </SheetHeader>
             <div className='no-scrollbar overflow-y-auto px-6'>
-              {Array.from({ length: 10 }).map((_, index) => (
-                <p key={index} className='mb-4 leading-normal'>
+              {range(10).map((number) => (
+                <p key={number} className='mb-4 leading-normal'>
                   But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born
                   and I will give you a complete account of the system, and expound the actual teachings of the great
                   explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids

@@ -8,6 +8,6 @@ export function JsonLd(props: JsonLdProps) {
   const { json } = props
 
   // We need to use `dangerouslySetInnerHTML` to insert the JSON-LD script tag.
-  // oxlint-disable-next-line react/no-danger
+  // eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml
   return <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }} />
 }

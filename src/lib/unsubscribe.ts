@@ -115,7 +115,7 @@ export async function getUnsubData(token: string | null) {
 
   // Allow for future types
   // Note: use switch in the future
-  // oxlint-disable-next-line typescript/no-unnecessary-condition
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (data.type === 'comment_reply') {
     return getCommentReplyUnsubData(data, token)
   }

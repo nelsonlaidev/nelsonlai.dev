@@ -1,3 +1,7 @@
+// Static MDX table content.
+// Array index keys are acceptable here because rows/cells are fixed
+// and not reordered, inserted, or removed dynamically.
+/* eslint-disable @eslint-react/no-array-index-key */
 import { Table as UITable, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 type TableProps = {
@@ -29,3 +33,4 @@ export function Table(props: TableProps) {
     </UITable>
   )
 }
+/* eslint-enable @eslint-react/no-array-index-key */

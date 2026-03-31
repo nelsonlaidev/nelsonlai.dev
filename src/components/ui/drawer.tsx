@@ -8,7 +8,7 @@ type DrawerProps = React.ComponentProps<typeof DrawerPrimitive.Root>
 
 export function Drawer(props: DrawerProps) {
   // See: https://github.com/emilkowalski/vaul/issues/517#issuecomment-2571619213
-  // oxlint-disable-next-line jsx_a11y/no-autofocus
+  // eslint-disable-next-line jsx-a11y/no-autofocus
   return <DrawerPrimitive.Root data-slot='drawer' autoFocus {...props} />
 }
 

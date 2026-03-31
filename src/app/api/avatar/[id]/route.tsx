@@ -14,9 +14,8 @@ export const runtime = 'edge'
 function djb2(str: string) {
   let hash = 5381
   for (let i = 0; i < str.length; i++) {
-    // Bitwise is allowed here for the hash function.
     // `i` is always in range due to the loop condition, so `codePointAt` will never return `undefined`.
-    // oxlint-disable-next-line no-bitwise, typescript/no-non-null-assertion
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     hash = (hash << 5) + hash + str.codePointAt(i)!
   }
   return hash

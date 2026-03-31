@@ -1,7 +1,5 @@
 'use client'
 
-import type { PaginationState } from '@tanstack/react-table'
-
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
@@ -11,7 +9,7 @@ import { useListCommentsAdmin } from '@/hooks/queries/admin.query'
 import { CommentsTable } from '../tables/comments'
 
 export function AdminComments() {
-  const [pagination, setPagination] = useState<PaginationState>({
+  const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: DEFAULT_PAGE_SIZE,
   })

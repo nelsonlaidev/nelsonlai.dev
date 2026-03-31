@@ -1,7 +1,11 @@
 import { useSyncExternalStore } from 'react'
 
+function noop() {
+  // No-op
+}
+
 function subscribe() {
-  return () => {}
+  return noop
 }
 
 export function useIsHydrated() {

@@ -196,7 +196,6 @@ function UpdateAvatar() {
 
     if (!file) return
 
-    // oxlint-disable-next-line react-x/immutability
     event.target.value = ''
 
     if (!SUPPORTED_AVATAR_MIME_TYPES.includes(file.type as AvatarMimeType)) {

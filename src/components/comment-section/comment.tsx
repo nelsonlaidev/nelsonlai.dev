@@ -95,7 +95,7 @@ export function Comment(props: CommentProps) {
                       <TooltipTrigger>
                         <span>{formattedDate}</span>
                       </TooltipTrigger>
-                      {/* oxlint-disable-next-line react-x/purity */}
+                      {/* eslint-disable-next-line @eslint-react/purity */}
                       <TooltipContent>{new Date(createdAt).toLocaleString()}</TooltipContent>
                     </Tooltip>
                   ) : (

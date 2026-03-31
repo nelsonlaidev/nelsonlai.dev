@@ -13,7 +13,7 @@ export function Link<THref extends ValidLink>(props: LinkProps<THref>) {
     const { href, ...rest } = props
 
     return (
-      // oxlint-disable-next-line jsx_a11y/anchor-has-content
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
       <a href={href} {...(href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })} {...rest} />
     )
   }

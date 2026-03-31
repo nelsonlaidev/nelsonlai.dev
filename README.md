@@ -57,8 +57,8 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 
 - Vitest for unit/integration testing
 - Playwright for E2E testing
-- Oxlint configuration
-- Oxfmt code formatting
+- ESLint configuration
+- Prettier code formatting
 - Lefthook
 - Conventional commit
 
@@ -194,9 +194,9 @@ The services will be available at the following URLs:
 bun dev              # Start development server
 bun run build            # Build for production
 bun start            # Start production server
-bun lint             # Run Oxlint
+bun lint             # Run ESLint
 bun typecheck        # Run TypeScript type checking
-bun format           # Format code with Oxfmt
+bun format           # Format code with Prettier
 bun test:unit        # Run unit tests
 bun test:e2e         # Run E2E tests
 bun db:migrate       # Run database migrations

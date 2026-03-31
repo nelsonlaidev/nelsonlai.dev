@@ -4,12 +4,14 @@ import { remark } from 'remark'
 
 import { remarkHeading } from './remark/remark-heading'
 
+type Data = {
+  toc?: TOC[]
+}
+
 export async function getTOC(content: string) {
   const result = await remark().use(remarkHeading).process(content)
 
-  if ('toc' in result.data) {
-    return result.data.toc as TOC[]
-  }
+  const toc = (result.data as Data).toc
 
-  return []
+  return Array.isArray(toc) ? toc : []
 }

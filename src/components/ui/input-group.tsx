@@ -51,7 +51,7 @@ export function InputGroupAddon(props: InputGroupAddonProps) {
   const { className, align = 'inline-start', ...rest } = props
 
   return (
-    // oxlint-disable-next-line jsx_a11y/click-events-have-key-events
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
     <div
       role='group'
       data-slot='input-group-addon'

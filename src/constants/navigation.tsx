@@ -54,6 +54,7 @@ export const HEADER_LINKS = [
 
 export const FOOTER_GROUPS = [
   {
+    id: 'main',
     links: [
       // i18n-check t('common.labels.home')
       { href: '/', labelKey: 'common.labels.home' },
@@ -66,6 +67,7 @@ export const FOOTER_GROUPS = [
     ],
   },
   {
+    id: 'site',
     links: [
       // i18n-check t('common.labels.guestbook')
       { href: '/guestbook', labelKey: 'common.labels.guestbook' },
@@ -78,6 +80,7 @@ export const FOOTER_GROUPS = [
     ],
   },
   {
+    id: 'social',
     links: [
       // i18n-check t('common.labels.facebook')
       { href: SITE_FACEBOOK_URL, labelKey: 'common.labels.facebook' },
@@ -90,6 +93,7 @@ export const FOOTER_GROUPS = [
     ],
   },
   {
+    id: 'legal',
     links: [
       // i18n-check t('common.labels.terms')
       { href: '/terms', labelKey: 'common.labels.terms' },

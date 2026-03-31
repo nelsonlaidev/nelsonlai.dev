@@ -16,8 +16,8 @@ export function LayoutFooter() {
     <footer className='mx-auto mb-12 w-full max-w-5xl rounded-2xl bg-background/30 p-8 backdrop-blur-md'>
       <NowPlaying className='mb-12' />
       <div className='mb-30 grid grid-cols-2 gap-10 sm:grid-cols-3'>
-        {FOOTER_GROUPS.map((group, index) => (
-          <div key={index} className='flex flex-col items-start gap-4'>
+        {FOOTER_GROUPS.map((group) => (
+          <div key={group.id} className='flex flex-col items-start gap-4'>
             {group.links.map((link) => (
               <Link
                 key={link.href}
@@ -33,7 +33,7 @@ export function LayoutFooter() {
       <div className='mt-20 space-y-4'>
         <LocaleSwitcher />
         <div className='flex items-center justify-between text-sm'>
-          {/* oxlint-disable-next-line react-x/purity */}
+          {/* eslint-disable-next-line @eslint-react/purity */}
           <div className='text-muted-foreground'>&copy; {new Date().getFullYear()} Nelson Lai</div>
           <GithubStarButton />
         </div>
