@@ -160,7 +160,7 @@ type FieldSeparatorProps = React.ComponentProps<'div'> & {
 
 export function FieldSeparator(props: FieldSeparatorProps) {
   const { children, className, ...rest } = props
-  const hasChildren = children !== null
+  const hasChildren = Boolean(children)
 
   return (
     <div
@@ -193,7 +193,7 @@ export function FieldError(props: FieldErrorProps) {
   // which causes a false positive for this sync useMemo callback.
   // eslint-disable-next-line @typescript-eslint/promise-function-async
   const content = useMemo(() => {
-    if (children !== null) {
+    if (children) {
       return children
     }
 
