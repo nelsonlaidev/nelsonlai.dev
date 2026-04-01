@@ -10,7 +10,7 @@ function parsePostHogCookie(cookieValue: string) {
   }
 }
 
-export function getPostHogCookieValue(cookieHeader?: string | string[]) {
+function getPostHogCookieValue(cookieHeader?: string | string[]) {
   if (!cookieHeader) return
 
   const cookieString = Array.isArray(cookieHeader) ? cookieHeader.join('; ') : cookieHeader
@@ -29,7 +29,7 @@ export function getDistinctIdFromPostHogCookie(cookieHeader?: string | string[])
   return typeof parsed.distinct_id === 'string' && parsed.distinct_id.length > 0 ? parsed.distinct_id : undefined
 }
 
-export function getAnonymousDistinctId(headers: Headers) {
+function getAnonymousDistinctId(headers: Headers) {
   const forwardedDistinctId = headers.get('x-posthog-distinct-id')
   if (forwardedDistinctId) return forwardedDistinctId
 

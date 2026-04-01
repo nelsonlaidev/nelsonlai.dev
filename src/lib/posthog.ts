@@ -10,7 +10,7 @@ import { getErrorKind, sanitizeProperties } from './posthog-sanitize'
 
 let posthogInstance: PostHog | null = null
 
-export function getPostHogServerOrNull() {
+function getPostHogServerOrNull() {
   const host = getPostHogHost()
 
   if (!env.NEXT_PUBLIC_POSTHOG_KEY || !host) {

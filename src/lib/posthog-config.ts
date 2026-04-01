@@ -10,7 +10,7 @@ export function getPostHogHost() {
   return env.NEXT_PUBLIC_POSTHOG_HOST ? trimTrailingSlash(env.NEXT_PUBLIC_POSTHOG_HOST) : undefined
 }
 
-export function isPostHogEnabled() {
+function isPostHogEnabled() {
   return Boolean(env.NEXT_PUBLIC_POSTHOG_KEY && getPostHogHost())
 }
 

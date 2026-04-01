@@ -6,7 +6,6 @@ import posthog from 'posthog-js'
 
 import { env } from '@/env'
 import { POSTHOG_EVENT_VERSION } from '@/lib/posthog-events'
-import { POSTHOG_FEATURE_FLAGS } from '@/lib/posthog-flags'
 import { getErrorKind, sanitizeProperties } from '@/lib/posthog-sanitize'
 
 function getBaseProperties(pathname?: string, locale?: string, userRole?: string) {
@@ -20,14 +19,8 @@ function getBaseProperties(pathname?: string, locale?: string, userRole?: string
   }
 }
 
-export function isPostHogClientEnabled() {
+function isPostHogClientEnabled() {
   return Boolean(env.NEXT_PUBLIC_POSTHOG_KEY && env.NEXT_PUBLIC_POSTHOG_HOST)
-}
-
-export function areClientAnalyticsEventsEnabled() {
-  if (!isPostHogClientEnabled()) return false
-
-  return posthog.isFeatureEnabled(POSTHOG_FEATURE_FLAGS.analyticsClientEvents) !== false
 }
 
 export function captureClientEvent<
@@ -43,7 +36,7 @@ export function captureClientEvent<
   properties: EventProperties<TEvent>,
   context: { pathname?: string; locale?: string; userRole?: string } = {},
 ) {
-  if (!areClientAnalyticsEventsEnabled()) return
+  if (!isPostHogClientEnabled()) return
 
   posthog.capture(event, {
     ...getBaseProperties(context.pathname, context.locale, context.userRole),

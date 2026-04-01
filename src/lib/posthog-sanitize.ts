@@ -32,7 +32,7 @@ function sanitizeRecord(value: Record<string, unknown>) {
   )
 }
 
-export function sanitizeValue(value: unknown): unknown {
+function sanitizeValue(value: unknown): unknown {
   if (value === null || value === undefined) return value
   if (typeof value === 'boolean' || typeof value === 'number') return value
   if (typeof value === 'string') return sanitizeString(value)
