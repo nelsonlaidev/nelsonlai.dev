@@ -3,24 +3,26 @@ import type { NextRequest } from 'next/server'
 import { IS_PRODUCTION } from '@/constants/common'
 import { env } from '@/env'
 import { i18nMiddleware } from '@/i18n/middleware'
+import { getPostHogAllowedOrigins } from '@/lib/posthog-config'
 
 const IS_PREVIEW = env.VERCEL_ENV === 'preview'
+const POSTHOG_ORIGINS = getPostHogAllowedOrigins().join(' ')
 
 export function proxy(request: NextRequest) {
   const csp = `
     default-src 'none';
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.nelsonlai.dev https://*.posthog.com https://va.vercel-scripts.com ${IS_PREVIEW ? 'https://vercel.live' : ''};
-    style-src 'self' 'unsafe-inline' https://*.posthog.com ${IS_PREVIEW ? 'https://vercel.live' : ''};
-    img-src 'self' data: https://avatars.githubusercontent.com https://*.googleusercontent.com https://*.posthog.com https://github.com https://images.unsplash.com ${env.CLOUDFLARE_R2_PUBLIC_URL} ${IS_PREVIEW ? 'https://vercel.live https://vercel.com blob:' : ''};
-    font-src 'self' https://*.posthog.com ${IS_PREVIEW ? 'https://vercel.live https://assets.vercel.com' : ''};
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.nelsonlai.dev https://*.posthog.com ${POSTHOG_ORIGINS} https://va.vercel-scripts.com ${IS_PREVIEW ? 'https://vercel.live' : ''};
+    style-src 'self' 'unsafe-inline' https://*.posthog.com ${POSTHOG_ORIGINS} ${IS_PREVIEW ? 'https://vercel.live' : ''};
+    img-src 'self' data: https://avatars.githubusercontent.com https://*.googleusercontent.com https://*.posthog.com ${POSTHOG_ORIGINS} https://github.com https://images.unsplash.com ${env.CLOUDFLARE_R2_PUBLIC_URL} ${IS_PREVIEW ? 'https://vercel.live https://vercel.com blob:' : ''};
+    font-src 'self' https://*.posthog.com ${POSTHOG_ORIGINS} ${IS_PREVIEW ? 'https://vercel.live https://assets.vercel.com' : ''};
     worker-src 'self' blob:;
     object-src 'none';
     base-uri 'none';
     form-action 'none';
-    connect-src 'self' https://*.nelsonlai.dev https://*.posthog.com ${env.CLOUDFLARE_R2_ENDPOINT} ${IS_PREVIEW ? 'https://vercel.live wss://ws-us3.pusher.com' : ''};
-    media-src 'self' https://*.posthog.com;
+    connect-src 'self' https://*.nelsonlai.dev https://*.posthog.com ${POSTHOG_ORIGINS} ${env.CLOUDFLARE_R2_ENDPOINT} ${IS_PREVIEW ? 'https://vercel.live wss://ws-us3.pusher.com' : ''};
+    media-src 'self' https://*.posthog.com ${POSTHOG_ORIGINS};
     manifest-src 'self';
-    frame-ancestors 'self' https://*.posthog.com ${IS_PRODUCTION ? '' : 'http://localhost:3002'};
+    frame-ancestors 'self' https://*.posthog.com ${POSTHOG_ORIGINS} ${IS_PRODUCTION ? '' : 'http://localhost:3002'};
     ${IS_PREVIEW ? 'frame-src https://vercel.live;' : ''}
   `
 

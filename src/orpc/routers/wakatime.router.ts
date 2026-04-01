@@ -32,7 +32,7 @@ const getStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(async
     throw new TraceableError('WakaTime API error', {
       status: response.status,
       statusText: response.statusText,
-      body,
+      hasResponseBody: body.length > 0,
     })
   }
 

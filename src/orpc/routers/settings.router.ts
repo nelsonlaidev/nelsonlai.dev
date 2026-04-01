@@ -3,6 +3,8 @@ import { eq } from 'drizzle-orm'
 
 import { DEFAULT_SETTINGS } from '@/db/constants'
 import { settings } from '@/db/schemas'
+import { captureServerEvent } from '@/lib/posthog'
+import { POSTHOG_EVENTS } from '@/lib/posthog-events'
 
 import { protectedProcedure } from '../procedures'
 import {
@@ -38,6 +40,18 @@ const updateSettings = protectedProcedure
     if (!result) {
       throw new ORPCError('INTERNAL_SERVER_ERROR', { message: 'Failed to update settings' })
     }
+
+    captureServerEvent(
+      POSTHOG_EVENTS.accountSettingsUpdated,
+      {
+        reply_notifications_enabled: result.replyNotificationsEnabled,
+      },
+      {
+        headers: context.headers,
+        userId: context.session.user.id,
+        userRole: context.session.user.role,
+      },
+    )
 
     return result
   })

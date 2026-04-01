@@ -2,30 +2,19 @@
 
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import posthog from 'posthog-js'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
 function createQueryClient() {
   return new QueryClient({
     queryCache: new QueryCache({
-      onError: (error, query) => {
+      onError: (error) => {
         toast.error(error.message)
-
-        posthog.captureException(error, {
-          type: 'query',
-          queryKey: query.queryKey,
-        })
       },
     }),
     mutationCache: new MutationCache({
-      onError: (error, _variables, _context, mutation) => {
+      onError: (error) => {
         toast.error(error.message)
-
-        posthog.captureException(error, {
-          type: 'mutation',
-          mutationKey: mutation.options.mutationKey,
-        })
       },
     }),
   })

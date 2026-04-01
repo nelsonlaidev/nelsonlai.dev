@@ -2,6 +2,8 @@ import { ORPCError } from '@orpc/client'
 import { eq, sql, sum } from 'drizzle-orm'
 
 import { posts } from '@/db/schemas'
+import { captureServerEvent } from '@/lib/posthog'
+import { POSTHOG_EVENTS } from '@/lib/posthog-events'
 
 import { cache } from '../cache'
 import { publicProcedure } from '../procedures'
@@ -35,6 +37,19 @@ const countView = publicProcedure
     const { views } = post
 
     await cache.posts.views.set(input.slug, views)
+
+    captureServerEvent(
+      POSTHOG_EVENTS.contentPostViewed,
+      {
+        post_slug: input.slug,
+        viewer_type: context.session?.user ? 'authenticated' : 'anonymous',
+      },
+      {
+        headers: context.headers,
+        userId: context.session?.user.id,
+        userRole: context.session?.user.role,
+      },
+    )
 
     return {
       views,

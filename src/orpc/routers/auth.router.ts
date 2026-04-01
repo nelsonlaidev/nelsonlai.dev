@@ -2,6 +2,8 @@ import { ORPCError } from '@orpc/client'
 import { APIError } from 'better-auth'
 
 import { auth } from '@/lib/auth'
+import { captureServerEvent } from '@/lib/posthog'
+import { POSTHOG_EVENTS } from '@/lib/posthog-events'
 import { getLocation } from '@/utils/get-location'
 
 import { cache } from '../cache'
@@ -20,6 +22,18 @@ async function resolveLocation(ip: string) {
   }
 
   return location
+}
+
+function getDeviceType(userAgent?: string | null) {
+  if (!userAgent) return 'unknown'
+
+  const normalized = userAgent.toLowerCase()
+
+  if (normalized.includes('tablet') || normalized.includes('ipad')) return 'tablet'
+  if (normalized.includes('mobile') || normalized.includes('iphone') || normalized.includes('android')) return 'mobile'
+  if (normalized.includes('bot') || normalized.includes('crawler') || normalized.includes('spider')) return 'bot'
+
+  return 'desktop'
 }
 
 const listSessions = protectedProcedure.output(ListSessionsOutputSchema).handler(async ({ context }) => {
@@ -49,10 +63,30 @@ const revokeSession = protectedProcedure
   .output(EmptyOutputSchema)
   .handler(async ({ input, context }) => {
     try {
+      const sessions = await auth.api.listSessions({
+        headers: context.headers,
+      })
+
+      const targetSession = sessions.find((session) => session.token === input.token)
+
       await auth.api.revokeSession({
         headers: context.headers,
         body: { token: input.token },
       })
+
+      captureServerEvent(
+        POSTHOG_EVENTS.accountSessionRevoked,
+        {
+          revoked_session_is_current: targetSession?.id === context.session.session.id,
+          had_location: Boolean(targetSession?.ipAddress),
+          device_type: getDeviceType(targetSession?.userAgent),
+        },
+        {
+          headers: context.headers,
+          userId: context.session.user.id,
+          userRole: context.session.user.role,
+        },
+      )
     } catch (error) {
       if (error instanceof APIError) {
         if (error.status === 'UNAUTHORIZED') throw new ORPCError('UNAUTHORIZED')
@@ -81,6 +115,18 @@ const updateUser = protectedProcedure
       headers: context.headers,
       body,
     })
+
+    captureServerEvent(
+      POSTHOG_EVENTS.accountProfileUpdated,
+      {
+        updated_fields: Object.keys(body).toSorted((a, b) => a.localeCompare(b)),
+      },
+      {
+        headers: context.headers,
+        userId: context.session.user.id,
+        userRole: context.session.user.role,
+      },
+    )
   })
 
 export const authRouter = {

@@ -10,6 +10,7 @@ node_modules/
 
 # Misc
 .DS_Store
+.omx
 
 # Outputs
 .next/

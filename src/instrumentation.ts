@@ -1,42 +1,38 @@
 import type { Instrumentation } from 'next'
 
-import * as z from 'zod'
-
-const PostHogCookieDataSchema = z.object({
-  distinct_id: z.string(),
-})
+import { captureServerException } from '@/lib/posthog'
 
 export function register() {
   // Do nothing
 }
 
-export async function onRequestError(...args: Parameters<Instrumentation.onRequestError>) {
+export function onRequestError(...args: Parameters<Instrumentation.onRequestError>) {
   const [error, request] = args
 
-  if (process.env.NEXT_RUNTIME === 'nodejs' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
-    const { getPostHogServer } = await import('./lib/posthog')
-    const posthog = getPostHogServer()
+  if (process.env.NEXT_RUNTIME !== 'nodejs') return
 
-    let distinctId: string | undefined
-    if (request.headers.cookie) {
-      const cookieString = Array.isArray(request.headers.cookie)
-        ? request.headers.cookie.join('; ')
-        : request.headers.cookie
+  const headers = new Headers()
 
-      const postHogCookieMatch = /ph_phc_.*?_posthog=([^;]+)/.exec(cookieString)
-
-      if (postHogCookieMatch?.[1]) {
-        try {
-          const decodedCookie = decodeURIComponent(postHogCookieMatch[1])
-          const rawData = JSON.parse(decodedCookie)
-          const postHogData = PostHogCookieDataSchema.parse(rawData)
-          distinctId = postHogData.distinct_id
-        } catch (parseError) {
-          console.error('Error parsing PostHog cookie:', parseError)
-        }
+  for (const [key, value] of Object.entries(request.headers)) {
+    if (Array.isArray(value)) {
+      for (const item of value) {
+        if (item) headers.append(key, item)
       }
+      continue
     }
 
-    posthog.captureException(error, distinctId)
+    if (value) {
+      headers.append(key, value)
+    }
   }
+
+  captureServerException(
+    error,
+    {
+      headers,
+    },
+    {
+      source: 'next_request',
+    },
+  )
 }

@@ -34,7 +34,7 @@ const getStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(async 
     throw new TraceableError('YouTube API error', {
       status: response.status,
       statusText: response.statusText,
-      body,
+      hasResponseBody: body.length > 0,
     })
   }
 

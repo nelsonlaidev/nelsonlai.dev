@@ -4,7 +4,8 @@ import { withContentCollections } from '@content-collections/next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 import { env } from '@/env'
-import { withPostHog } from '@/lib/posthog'
+import { getPostHogProxyRewrites } from '@/lib/posthog-config'
+import { withPostHog } from '@/lib/posthog-next'
 
 import { IS_PRODUCTION } from './src/constants/common'
 
@@ -60,16 +61,7 @@ const config: NextConfig = {
   skipTrailingSlashRedirect: true,
 
   rewrites() {
-    return [
-      {
-        source: '/_ph/static/:path*',
-        destination: 'https://us-assets.i.posthog.com/static/:path*',
-      },
-      {
-        source: '/_ph/:path*',
-        destination: 'https://us.i.posthog.com/:path*',
-      },
-    ]
+    return getPostHogProxyRewrites()
   },
 
   redirects() {

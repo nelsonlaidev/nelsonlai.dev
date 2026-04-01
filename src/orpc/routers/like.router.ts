@@ -2,6 +2,8 @@ import { ORPCError } from '@orpc/client'
 import { and, eq, sql, sum } from 'drizzle-orm'
 
 import { postLikes, posts } from '@/db/schemas'
+import { captureServerEvent } from '@/lib/posthog'
+import { POSTHOG_EVENTS } from '@/lib/posthog-events'
 import { getAnonKey } from '@/utils/get-anon-key'
 import { getIp } from '@/utils/get-ip'
 
@@ -171,6 +173,21 @@ const incrementLike = publicProcedure
       cache.posts.likes.set(input.slug, post.likes),
       cache.posts.userLikes.set(`${input.slug}:${anonKey}`, currentUserLikes.likeCount),
     ])
+
+    captureServerEvent(
+      POSTHOG_EVENTS.contentPostLiked,
+      {
+        post_slug: input.slug,
+        increment_value: input.value,
+        current_user_like_count: currentUserLikes.likeCount,
+        viewer_type: context.session?.user ? 'authenticated' : 'anonymous',
+      },
+      {
+        headers: context.headers,
+        userId: context.session?.user.id,
+        userRole: context.session?.user.role,
+      },
+    )
 
     return {
       likes: post.likes,

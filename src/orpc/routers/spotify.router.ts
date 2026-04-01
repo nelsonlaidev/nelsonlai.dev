@@ -50,7 +50,7 @@ const getStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(async 
     throw new TraceableError('Spotify token API error', {
       status: tokenResponse.status,
       statusText: tokenResponse.statusText,
-      body,
+      hasResponseBody: body.length > 0,
     })
   }
 
@@ -71,7 +71,7 @@ const getStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(async 
     throw new TraceableError('Spotify now playing API error', {
       status: nowPlayingResponse.status,
       statusText: nowPlayingResponse.statusText,
-      body,
+      hasResponseBody: body.length > 0,
     })
   }
 
