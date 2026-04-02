@@ -138,7 +138,7 @@
     "@types/canvas-confetti": "1.9.0",
     "@types/hast": "3.0.4",
     "@types/mdast": "4.0.4",
-    "@types/node": "24.11.0",
+    "@types/node": "25.5.0",
     "@types/react": "19.2.14",
     "@types/rss": "0.0.32",
     "@types/tinycolor2": "1.4.6",
