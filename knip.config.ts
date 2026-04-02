@@ -7,12 +7,7 @@ const config: KnipConfig = {
     // Required by react-email
     '@react-email/preview-server',
   ],
-  ignore: [
-    'src/components/ui/*.{ts,tsx}',
-    // Remove spotify now playing temporarily until we have a premium account to fetch the data
-    'src/components/layout/now-playing.tsx',
-    'src/hooks/queries/stats.query.ts',
-  ],
+  ignore: ['src/components/ui/*.{ts,tsx}'],
   entry: ['content-collections.ts', 'src/db/reset.ts', 'src/db/seed.ts'],
 }
 
