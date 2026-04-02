@@ -47,6 +47,8 @@ if (env.CLOUDFLARE_R2_PUBLIC_URL) {
 }
 
 const config: NextConfig = {
+  reactCompiler: true,
+
   productionBrowserSourceMaps: true,
 
   typescript: {
