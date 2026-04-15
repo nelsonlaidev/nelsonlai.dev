@@ -191,17 +191,31 @@ The services will be available at the following URLs:
 ### Available Scripts
 
 ```bash
-bun dev              # Start development server
-bun run build            # Build for production
-bun start            # Start production server
-bun lint             # Run ESLint
-bun typecheck        # Run TypeScript type checking
-bun format           # Format code with Prettier
-bun test:unit        # Run unit tests
-bun test:e2e         # Run E2E tests
-bun db:migrate       # Run database migrations
-bun db:seed          # Seed the database
-bun db:studio        # Open Drizzle Studio
+# Development
+bun dev               # Start development server
+bun email:dev         # Run email preview server
+bun cosmos            # Start Cosmos component playground
+
+# Build & Production
+bun run build         # Build for production (includes cosmos:export)
+bun start             # Start production server
+bun analyze           # Analyze bundle size
+
+# Quality & Testing
+bun check             # Run all quality checks (lint, typecheck, format, etc.)
+bun lint              # Run ESLint
+bun typecheck         # Run TypeScript type checking
+bun format            # Format code with Prettier
+bun knip              # Find unused dependencies/exports
+bun test:unit         # Run unit tests
+bun test:e2e          # Run Playwright E2E tests
+
+# Database
+bun db:migrate        # Run database migrations
+bun db:seed           # Seed the database
+bun db:push           # Push schema changes directly to DB
+bun db:reset          # Reset database
+bun db:studio         # Open Drizzle Studio
 ```
 
 ## Credits
