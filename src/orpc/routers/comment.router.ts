@@ -7,8 +7,6 @@ import { comments, settings, unsubscribes, votes } from '@/db/schemas'
 import { CommentEmailTemplate, ReplyEmailTemplate } from '@/emails'
 import { env } from '@/env'
 import { getPostBySlug } from '@/lib/content'
-import { captureServerEvent } from '@/lib/posthog'
-import { POSTHOG_EVENTS } from '@/lib/posthog-events'
 import { sendEmail } from '@/lib/resend'
 import { generateCommentReplyUnsubToken } from '@/lib/unsubscribe'
 import { getDefaultImage } from '@/utils/get-default-image'
@@ -209,27 +207,6 @@ const createComment = protectedProcedure
       return c
     })
 
-    captureServerEvent(
-      input.parentId ? POSTHOG_EVENTS.contentReplyCreated : POSTHOG_EVENTS.contentCommentCreated,
-      input.parentId
-        ? {
-            post_slug: input.slug,
-            comment_id: comment.id,
-            parent_comment_id: input.parentId,
-            content_length: input.content.length,
-          }
-        : {
-            post_slug: input.slug,
-            comment_id: comment.id,
-            content_length: input.content.length,
-          },
-      {
-        headers: context.headers,
-        userId: user.id,
-        userRole: user.role,
-      },
-    )
-
     return comment
   })
 
@@ -288,21 +265,6 @@ const deleteComment = protectedProcedure
         }
       }
     })
-
-    captureServerEvent(
-      POSTHOG_EVENTS.contentCommentDeleted,
-      {
-        comment_id: comment.id,
-        post_slug: comment.postId,
-        had_replies: comment.replies.length > 0,
-        was_reply: Boolean(comment.parentId),
-      },
-      {
-        headers: context.headers,
-        userId,
-        userRole: context.session.user.role,
-      },
-    )
   })
 
 const countComment = publicProcedure

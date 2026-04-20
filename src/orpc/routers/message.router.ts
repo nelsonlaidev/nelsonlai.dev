@@ -4,8 +4,6 @@ import { and, desc, eq, lt } from 'drizzle-orm'
 import { IS_PRODUCTION } from '@/constants/common'
 import { messages } from '@/db/schemas'
 import { sendGuestbookNotification } from '@/lib/discord'
-import { captureServerEvent } from '@/lib/posthog'
-import { POSTHOG_EVENTS } from '@/lib/posthog-events'
 import { getDefaultImage } from '@/utils/get-default-image'
 
 import { protectedProcedure, publicProcedure } from '../procedures'
@@ -80,19 +78,6 @@ const createMessage = protectedProcedure
       await sendGuestbookNotification(input.message, user.name, user.image ?? getDefaultImage(user.id))
     }
 
-    captureServerEvent(
-      POSTHOG_EVENTS.guestbookMessageCreated,
-      {
-        message_id: message.id,
-        content_length: input.message.length,
-      },
-      {
-        headers: context.headers,
-        userId: user.id,
-        userRole: user.role,
-      },
-    )
-
     return message
   })
 
@@ -113,18 +98,6 @@ const deleteMessage = protectedProcedure
     }
 
     await context.db.delete(messages).where(eq(messages.id, input.id))
-
-    captureServerEvent(
-      POSTHOG_EVENTS.guestbookMessageDeleted,
-      {
-        message_id: message.id,
-      },
-      {
-        headers: context.headers,
-        userId: user.id,
-        userRole: user.role,
-      },
-    )
   })
 
 export const messageRouter = {

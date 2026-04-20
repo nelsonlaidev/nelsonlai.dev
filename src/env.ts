@@ -57,9 +57,6 @@ export const env = createEnv({
     CLOUDFLARE_R2_SECRET_ACCESS_KEY: z.string().min(1).optional(),
     CLOUDFLARE_R2_BUCKET_NAME: z.string().min(1).optional(),
     CLOUDFLARE_R2_PUBLIC_URL: z.url().optional(),
-
-    POSTHOG_ENV_ID: z.string().min(1).optional(),
-    POSTHOG_API_KEY: z.string().min(1).optional(),
   },
 
   client: {
@@ -71,9 +68,6 @@ export const env = createEnv({
 
     NEXT_PUBLIC_UMAMI_URL: z.url().optional(),
     NEXT_PUBLIC_UMAMI_WEBSITE_ID: z.uuid().optional(),
-
-    NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1).optional(),
-    NEXT_PUBLIC_POSTHOG_HOST: z.string().min(1).optional(),
   },
 
   experimental__runtimeEnv: {
@@ -87,9 +81,6 @@ export const env = createEnv({
 
     NEXT_PUBLIC_UMAMI_URL: process.env.NEXT_PUBLIC_UMAMI_URL,
     NEXT_PUBLIC_UMAMI_WEBSITE_ID: process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID,
-
-    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
-    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   },
 
   emptyStringAsUndefined: true,

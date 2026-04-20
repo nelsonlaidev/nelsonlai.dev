@@ -12,8 +12,6 @@ import { Link } from '@/components/ui/link'
 import { useSignInDialog } from '@/hooks/use-sign-in-dialog'
 import { usePathname } from '@/i18n/routing'
 import { authClient } from '@/lib/auth-client'
-import { captureClientEvent } from '@/lib/posthog-client'
-import { POSTHOG_EVENTS } from '@/lib/posthog-events'
 
 import { Spinner } from './ui/spinner'
 
@@ -57,15 +55,8 @@ export function SignInDialog() {
     setLastUsedProvider(provider)
   }, [])
 
-  useEffect(() => {
-    if (!open) return
-
-    captureClientEvent(POSTHOG_EVENTS.uiSignInDialogOpened, {}, { locale, pathname })
-  }, [locale, open, pathname])
-
   async function handleSignIn(provider: Provider) {
     localStorage.setItem('last-used-provider', provider)
-    captureClientEvent(POSTHOG_EVENTS.authSignInStarted, { provider }, { locale, pathname })
 
     await authClient.signIn.social({
       provider,
@@ -76,14 +67,6 @@ export function SignInDialog() {
         },
         onError: () => {
           setIsPending(false)
-          captureClientEvent(
-            POSTHOG_EVENTS.authSignInFailed,
-            {
-              provider,
-              error_kind: 'social_sign_in_failed',
-            },
-            { locale, pathname },
-          )
           toast.error(t('error.sign-in-error'))
         },
         onRequest: () => {

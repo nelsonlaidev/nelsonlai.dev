@@ -116,9 +116,7 @@ export function Comment(props: CommentProps) {
                 {t('blog.comments.this-comment-has-been-deleted')}
               </p>
             ) : (
-              <div data-posthog-mask>
-                <Markdown>{body}</Markdown>
-              </div>
+              <Markdown>{body}</Markdown>
             )}
 
             {isReplying ? <CommentReply /> : <CommentActions />}

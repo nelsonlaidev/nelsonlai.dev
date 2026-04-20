@@ -11,7 +11,6 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 import { Analytics } from '@/components/analytics'
 import { Hello } from '@/components/hello'
-import { PostHogUserSync } from '@/components/posthog-user-sync'
 import { Providers } from '@/components/providers'
 import { SignInDialog } from '@/components/sign-in-dialog'
 import { routing } from '@/i18n/routing'
@@ -71,7 +70,6 @@ async function Layout(props: LayoutProps<'/[locale]'>) {
         <NuqsAdapter>
           <Providers>
             <NextIntlClientProvider>
-              <PostHogUserSync />
               <Hello />
               {children}
               <Analytics />

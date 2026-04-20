@@ -4,8 +4,6 @@ import { withContentCollections } from '@content-collections/next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 import { env } from '@/env'
-import { getPostHogProxyRewrites } from '@/lib/posthog-config'
-import { withPostHog } from '@/lib/posthog-next'
 
 import { IS_PRODUCTION } from './src/constants/common'
 
@@ -62,10 +60,6 @@ const config: NextConfig = {
 
   skipTrailingSlashRedirect: true,
 
-  rewrites() {
-    return getPostHogProxyRewrites()
-  },
-
   redirects() {
     return [
       {
@@ -118,4 +112,4 @@ const config: NextConfig = {
   },
 }
 
-export default withPostHog(withContentCollections(withNextIntl(config)))
+export default withContentCollections(withNextIntl(config))

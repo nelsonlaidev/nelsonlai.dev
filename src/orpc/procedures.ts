@@ -2,12 +2,9 @@ import type { Context } from './context'
 
 import { ORPCError } from '@orpc/client'
 import { os } from '@orpc/server'
-import * as z from 'zod'
 
 import { IS_PRODUCTION } from '@/constants/common'
-import { TraceableError } from '@/lib/errors'
 import { ratelimit } from '@/lib/kv'
-import { captureServerException } from '@/lib/posthog'
 import { getIp } from '@/utils/get-ip'
 import { sleep } from '@/utils/sleep'
 
@@ -44,29 +41,11 @@ const authMiddleware = base.middleware(async ({ context, next }) => {
   })
 })
 
-const errorMiddleware = base.middleware(async ({ path, context, next }) => {
+const errorMiddleware = base.middleware(async ({ next }) => {
   try {
     return await next()
   } catch (error) {
     console.error(error)
-
-    let metadata: Record<string, unknown> = { path: path.join(':') }
-
-    if (error instanceof TraceableError) {
-      metadata = { ...metadata, ...error.context }
-    } else if (error instanceof z.ZodError) {
-      metadata.validationIssues = z.flattenError(error)
-    }
-
-    captureServerException(
-      error,
-      {
-        headers: context.headers,
-        userId: context.session?.user.id,
-        userRole: context.session?.user.role,
-      },
-      metadata,
-    )
 
     throw error
   }
