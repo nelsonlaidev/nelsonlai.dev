@@ -10,7 +10,7 @@
     "build:mdx": "content-collections build",
     "check": "bun lint && bun typecheck && bun format:check && bun knip && bun check:i18n && bun lint:spell",
     "check:i18n": "i18n-check -s en -l ./src/i18n/messages -u ./src -f next-intl",
-    "clean": "rm -rf .content-collections coverage test-results playwright-report tsconfig.tsbuildinfo .next next-env.d.ts node_modules cosmos-export cosmos.imports.ts",
+    "clean": "rm -rf .content-collections .next cosmos-export coverage node_modules playwright-report test-results cosmos.imports.ts next-env.d.ts tsconfig.tsbuildinfo",
     "cosmos": "cosmos --expose-imports",
     "cosmos:export": "cosmos-export --expose-imports",
     "db:check": "bun with-env drizzle-kit check",
