@@ -55,7 +55,7 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 
 ### Development Experience
 
-- Vitest for unit/integration testing
+- Vitest for unit testing
 - Playwright for E2E testing
 - ESLint configuration
 - Prettier code formatting
@@ -89,7 +89,7 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 ### Prerequisites
 
 - Node.js >= 24
-- bun >= 1
+- bun >= 1.3
 - Docker
 - [Visual Studio Code](https://code.visualstudio.com/) with [recommended extensions](.vscode/extensions.json)
 - Optionally [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
@@ -110,7 +110,7 @@ nelsonlai.dev/
 │   ├── hooks/        # Custom React hooks
 │   ├── i18n/         # Internationalization
 │   ├── lib/          # Utility libraries
-│   ├── mdx-plugins   # Custom Rehype and Remark plugins
+│   ├── mdx-plugins/  # Custom Rehype and Remark plugins
 │   ├── orpc/         # oRPC API routes
 │   ├── styles/       # Global styles
 │   ├── tests/        # Unit and E2E tests
