@@ -37,7 +37,7 @@ export default defineConfig({
     { name: 'teardown', testMatch: '**/*.teardown.ts' },
   ],
   webServer: {
-    command: env.CI ? 'IS_TEST=true bun start' : 'IS_TEST=true bun dev',
+    command: env.CI ? 'bun start' : 'bun dev',
     url: baseURL,
     reuseExistingServer: !env.CI,
   },

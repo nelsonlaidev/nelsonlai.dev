@@ -40,7 +40,6 @@ const posts = defineCollection({
     date: z.string(),
     modifiedTime: z.string(),
     summary: z.string(),
-    test: z.boolean().optional().default(false),
     content: z.string(),
   }),
   transform,

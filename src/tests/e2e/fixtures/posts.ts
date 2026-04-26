@@ -1,26 +1,23 @@
+export const COMMENT_SUBMIT_AND_VIEW_POST_SLUG = 'e2e-testing-with-better-auth'
+export const COMMENT_DELETE_AND_LIKE_POST_SLUG = 'how-to-build-a-blog-with-nextjs-and-mdx'
+export const COMMENT_REPLY_POST_SLUG = 'top-8-attractive-web-design-websites'
+export const COMMENT_DELETE_REPLY_POST_SLUG = 'php'
+
 export const TEST_POSTS = [
   {
-    slug: 'test-submit',
-    title: 'Test Submit Comment',
+    slug: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+    title: 'E2E Testing with Better Auth',
   },
   {
-    slug: 'test-delete',
-    title: 'Test Delete Comment',
+    slug: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+    title: 'How to build a blog with Next.js and MDX',
   },
   {
-    slug: 'test-reply',
-    title: 'Test Reply Comment',
+    slug: COMMENT_REPLY_POST_SLUG,
+    title: 'Top 8 Attractive Web Design Websites',
   },
   {
-    slug: 'test-delete-reply',
-    title: 'Test Delete Reply',
-  },
-  {
-    slug: 'test-view',
-    title: 'Test View Post',
-  },
-  {
-    slug: 'test-like',
-    title: 'Test Like Post',
+    slug: COMMENT_DELETE_REPLY_POST_SLUG,
+    title: 'PHP study notes',
   },
 ]
