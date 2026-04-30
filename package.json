@@ -115,7 +115,7 @@
   "devDependencies": {
     "@axe-core/playwright": "4.11.2",
     "@content-collections/cli": "0.1.9",
-    "@content-collections/core": "0.14.3",
+    "@content-collections/core": "0.15.0",
     "@content-collections/mdx": "0.2.2",
     "@content-collections/next": "0.2.11",
     "@cspell/dict-es-es": "3.0.8",
