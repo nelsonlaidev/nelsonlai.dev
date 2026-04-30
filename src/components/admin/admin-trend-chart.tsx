@@ -55,8 +55,8 @@ export function TrendsChart() {
                 <ChartTooltip
                   content={
                     <ChartTooltipContent
-                      labelFormatter={(label: string) => {
-                        const date = new Date(label)
+                      labelFormatter={(label) => {
+                        const date = new Date(label as string | number)
 
                         return date.toLocaleDateString(locale, {
                           month: 'long',
