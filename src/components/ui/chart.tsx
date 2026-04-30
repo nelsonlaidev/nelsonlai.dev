@@ -1,6 +1,6 @@
 'use client'
 
-import type { NameType, Payload, ValueType } from 'recharts/types/component/DefaultTooltipContent'
+import type { TooltipValueType } from 'recharts'
 
 import { createContext, use, useId, useInsertionEffect, useMemo } from 'react'
 import * as RechartsPrimitive from 'recharts'
@@ -9,6 +9,10 @@ import { cn } from '@/utils/cn'
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const
+
+const INITIAL_DIMENSION = { width: 320, height: 200 } as const
+
+type TooltipNameType = number | string
 
 export type ChartConfig = Record<
   string,
@@ -37,11 +41,12 @@ function useChart() {
 
 type ChartContainerProps = React.ComponentProps<'div'> & {
   config: ChartConfig
+  initialDimension?: { width: number; height: number }
   children: React.ComponentProps<typeof RechartsPrimitive.ResponsiveContainer>['children']
 }
 
 export function ChartContainer(props: ChartContainerProps) {
-  const { className, children, config, ...rest } = props
+  const { className, children, config, initialDimension = INITIAL_DIMENSION, ...rest } = props
 
   const uniqueId = useId()
   const chartId = `chart-${rest.id ?? uniqueId.replaceAll(':', '')}`
@@ -60,7 +65,9 @@ export function ChartContainer(props: ChartContainerProps) {
         {...rest}
       >
         <ChartStyle id={chartId} config={config} />
-        <RechartsPrimitive.ResponsiveContainer>{children}</RechartsPrimitive.ResponsiveContainer>
+        <RechartsPrimitive.ResponsiveContainer initialDimension={initialDimension}>
+          {children}
+        </RechartsPrimitive.ResponsiveContainer>
       </div>
     </ChartContext>
   )
@@ -119,7 +126,7 @@ type ChartTooltipContentProps = React.ComponentProps<typeof RechartsPrimitive.To
     indicator?: 'line' | 'dot' | 'dashed'
     nameKey?: string
     labelKey?: string
-  }
+  } & Omit<RechartsPrimitive.DefaultTooltipContentProps<TooltipValueType, TooltipNameType>, 'accessibilityLayer'>
 
 export function ChartTooltipContent(props: ChartTooltipContentProps) {
   const {
@@ -148,6 +155,7 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
     }
 
     const [item] = payload
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     const key = `${labelKey ?? item?.dataKey ?? item?.name ?? 'value'}`
     const itemConfig = getPayloadConfigFromPayload(config, item, key)
     const value = !labelKey && typeof label === 'string' ? (config[label]?.label ?? label) : itemConfig?.label
@@ -181,20 +189,23 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
         {payload
           .filter((item) => item.type !== 'none')
           .map((item, index) => {
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             const key = `${nameKey ?? item.name ?? item.dataKey ?? 'value'}`
             const itemConfig = getPayloadConfigFromPayload(config, item, key)
             const indicatorColor = color ?? (item.payload as ChartTooltipPayload).fill ?? item.color
 
             return (
               <div
-                key={item.dataKey ?? index}
+                // eslint-disable-next-line @eslint-react/no-array-index-key
+                key={index}
                 className={cn(
                   'flex w-full flex-wrap items-stretch gap-2 [&>svg]:size-2.5 [&>svg]:text-muted-foreground',
                   indicator === 'dot' && 'items-center',
                 )}
               >
                 {formatter && item.value !== undefined && item.name ? (
-                  formatter(item.value, item.name, item, index, item.payload as Array<Payload<ValueType, NameType>>)
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                  formatter(item.value, item.name, item, index, item.payload)
                 ) : (
                   <>
                     {itemConfig?.icon ? (
@@ -225,9 +236,10 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
                         {nestLabel ? tooltipLabel : null}
                         <span className='text-muted-foreground'>{itemConfig?.label ?? item.name}</span>
                       </div>
-                      {typeof item.value === 'number' && (
+                      {/* eslint-disable-next-line eqeqeq */}
+                      {item.value != null && (
                         <span className='font-mono font-medium text-foreground tabular-nums'>
-                          {item.value.toLocaleString()}
+                          {typeof item.value === 'number' ? item.value.toLocaleString() : String(item.value)}
                         </span>
                       )}
                     </div>
@@ -243,11 +255,10 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
 
 export const ChartLegend = RechartsPrimitive.Legend
 
-type ChartLegendContentProps = React.ComponentProps<'div'> &
-  Pick<RechartsPrimitive.LegendProps, 'payload' | 'verticalAlign'> & {
-    hideIcon?: boolean
-    nameKey?: string
-  }
+type ChartLegendContentProps = React.ComponentProps<'div'> & {
+  hideIcon?: boolean
+  nameKey?: string
+} & RechartsPrimitive.DefaultLegendContentProps
 
 export function ChartLegendContent(props: ChartLegendContentProps) {
   const { className, hideIcon = false, payload, verticalAlign = 'bottom', nameKey } = props
@@ -262,13 +273,14 @@ export function ChartLegendContent(props: ChartLegendContentProps) {
     <div className={cn('flex items-center justify-center gap-4', verticalAlign === 'top' ? 'pb-3' : 'pt-3', className)}>
       {payload
         .filter((item) => item.type !== 'none')
-        .map((item) => {
+        .map((item, index) => {
           const key = nameKey ?? (typeof item.dataKey === 'string' ? item.dataKey : String(item.dataKey ?? 'value'))
           const itemConfig = getPayloadConfigFromPayload(config, item, key)
 
           return (
             <div
-              key={String(item.value ?? '')}
+              // eslint-disable-next-line @eslint-react/no-array-index-key
+              key={index}
               className={cn('flex items-center gap-1.5 [&>svg]:size-3 [&>svg]:text-muted-foreground')}
             >
               {itemConfig?.icon && !hideIcon ? (

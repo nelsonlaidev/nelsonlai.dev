@@ -94,7 +94,7 @@
     "react-dom": "19.2.5",
     "react-intersection-observer": "10.0.3",
     "react-medium-image-zoom": "5.4.3",
-    "recharts": "2.15.4",
+    "recharts": "3.8.1",
     "remark": "15.0.1",
     "remark-gfm": "4.0.1",
     "resend": "6.12.2",
