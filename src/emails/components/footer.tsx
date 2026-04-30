@@ -1,4 +1,4 @@
-import { Column, Hr, Img, Link, Row, Section, Text } from '@react-email/components'
+import { Column, Hr, Img, Link, Row, Section, Text } from 'react-email'
 
 const currentYear = new Date().getFullYear()
 
