@@ -17,13 +17,9 @@ Use Bun for all local work.
 - `bun db:migrate` and `bun db:seed`: prepare the local database
 - `bun email:dev`: preview React Email templates on `localhost:3001`
 
-<!-- BEGIN:nextjs-agent-rules -->
+## Code Review Approach
 
-# This is NOT the Next.js you know
-
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-
-<!-- END:nextjs-agent-rules -->
+Apply full engineering judgment when working in this codebase. If you find dead code, broken abstractions, or anything that does not pull its weight — delete it. Prefer correctness over ceremony. Flag security issues without softening the finding.
 
 ## Coding Style & Naming Conventions
 
