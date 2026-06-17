@@ -1,6 +1,7 @@
 import type { SettingsGetOutput } from '@/orpc/client'
 
-import { useForm, useStore } from '@tanstack/react-form'
+import { useForm } from '@tanstack/react-form'
+import { useSelector } from '@tanstack/react-store'
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 import * as z from 'zod'
@@ -48,7 +49,7 @@ export function SettingsForm(props: SettingsFormProps) {
     void form.handleSubmit()
   }
 
-  const isDirty = useStore(form.store, (state) => state.isDirty)
+  const isDirty = useSelector(form.store, (state) => state.isDirty)
 
   return (
     <Card>
