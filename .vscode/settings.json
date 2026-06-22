@@ -1,7 +1,10 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always"
+    "source.fixAll.oxc": "explicit"
   },
+
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "oxc.fmt.configPath": "oxfmt.config.ts",
 
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,

@@ -11,7 +11,7 @@ Use Bun for all local work.
 - `bun dev`: start the app on `localhost:3000`
 - `bun run build`: export Cosmos fixtures, then build production output
 - `bun start`: run the production build locally
-- `bun check`: run lint, typecheck, Prettier, Knip, i18n, and spellcheck
+- `bun check`: run lint, typecheck, Oxfmt, Knip, i18n, and spellcheck
 - `bun test:unit` or `bun test:unit:coverage`: run Vitest tests with optional coverage
 - `bun test:e2e`: run Playwright end-to-end tests when the maintainer asks for them
 - `bun db:migrate` and `bun db:seed`: prepare the local database
@@ -27,7 +27,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Coding Style & Naming Conventions
 
-TypeScript is strict; prefer small typed helpers over `any`. Follow ESLint and Prettier defaults via `eslint.config.ts` and `prettier.config.js`; run `bun lint:fix` and `bun format` before opening a PR. Use the `@/` alias for `src/` imports and `~/` for `public/`. Components use PascalCase exports, utility files use kebab-case names such as `get-pathnames.ts`, and tests end in `.test.ts` or `.test.tsx`.
+TypeScript is strict; prefer small typed helpers over `any`. Follow Oxlint and Oxfmt defaults via `oxlint.config.ts` and `oxfmt.config.js`; run `bun lint:fix` and `bun format` before opening a PR. Use the `@/` alias for `src/` imports and `~/` for `public/`. Components use PascalCase exports, utility files use kebab-case names such as `get-pathnames.ts`, and tests end in `.test.ts` or `.test.tsx`.
 
 ## Testing Guidelines
 
