@@ -155,7 +155,7 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
     }
 
     const [item] = payload
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    // oxlint-disable-next-line @typescript-eslint/restrict-template-expressions
     const key = `${labelKey ?? item?.dataKey ?? item?.name ?? 'value'}`
     const itemConfig = getPayloadConfigFromPayload(config, item, key)
     const value = !labelKey && typeof label === 'string' ? (config[label]?.label ?? label) : itemConfig?.label
@@ -189,14 +189,14 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
         {payload
           .filter((item) => item.type !== 'none')
           .map((item, index) => {
-            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+            // oxlint-disable-next-line @typescript-eslint/restrict-template-expressions
             const key = `${nameKey ?? item.name ?? item.dataKey ?? 'value'}`
             const itemConfig = getPayloadConfigFromPayload(config, item, key)
             const indicatorColor = color ?? (item.payload as ChartTooltipPayload).fill ?? item.color
 
             return (
               <div
-                // eslint-disable-next-line @eslint-react/no-array-index-key
+                // oxlint-disable-next-line @eslint-react/no-array-index-key
                 key={index}
                 className={cn(
                   'flex w-full flex-wrap items-stretch gap-2 [&>svg]:size-2.5 [&>svg]:text-muted-foreground',
@@ -204,7 +204,7 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
                 )}
               >
                 {formatter && item.value !== undefined && item.name ? (
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                  // oxlint-disable-next-line @typescript-eslint/no-unsafe-argument
                   formatter(item.value, item.name, item, index, item.payload)
                 ) : (
                   <>
@@ -236,7 +236,7 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
                         {nestLabel ? tooltipLabel : null}
                         <span className='text-muted-foreground'>{itemConfig?.label ?? item.name}</span>
                       </div>
-                      {/* eslint-disable-next-line eqeqeq */}
+                      {/* oxlint-disable-next-line eqeqeq */}
                       {item.value != null && (
                         <span className='font-mono font-medium text-foreground tabular-nums'>
                           {typeof item.value === 'number' ? item.value.toLocaleString() : String(item.value)}
@@ -279,7 +279,7 @@ export function ChartLegendContent(props: ChartLegendContentProps) {
 
           return (
             <div
-              // eslint-disable-next-line @eslint-react/no-array-index-key
+              // oxlint-disable-next-line @eslint-react/no-array-index-key
               key={index}
               className={cn('flex items-center gap-1.5 [&>svg]:size-3 [&>svg]:text-muted-foreground')}
             >

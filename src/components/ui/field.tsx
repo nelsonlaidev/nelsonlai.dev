@@ -191,7 +191,7 @@ export function FieldError(props: FieldErrorProps) {
 
   // ReactNode types may include Promise-like branches in React's typings,
   // which causes a false positive for this sync useMemo callback.
-  // eslint-disable-next-line @typescript-eslint/promise-function-async
+  // oxlint-disable-next-line @typescript-eslint/promise-function-async
   const content = useMemo(() => {
     if (children) {
       return children

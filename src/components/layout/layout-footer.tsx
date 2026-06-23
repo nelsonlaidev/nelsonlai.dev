@@ -33,7 +33,7 @@ export function LayoutFooter() {
       <div className='mt-20 space-y-4'>
         <LocaleSwitcher />
         <div className='flex items-center justify-between text-sm'>
-          {/* eslint-disable-next-line @eslint-react/purity */}
+          {/* oxlint-disable-next-line @eslint-react/purity */}
           <div className='text-muted-foreground'>&copy; {new Date().getFullYear()} Nelson Lai</div>
           <GithubStarButton />
         </div>

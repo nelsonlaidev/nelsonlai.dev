@@ -6,6 +6,7 @@ fumadocs
 lokalise
 nuqs
 orpc
+oxlint
 radixui
 rmiz
 shiki
