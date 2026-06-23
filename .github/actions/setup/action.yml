@@ -20,14 +20,6 @@ runs:
       env:
         PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
 
-    - name: Build MDX
-      shell: bash
-      run: bun build:mdx
-
-    - name: Build Cosmos
-      shell: bash
-      run: bun cosmos:export
-
     - name: Generate Next.js route types
       shell: bash
       run: bun typegen

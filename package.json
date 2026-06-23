@@ -40,7 +40,7 @@
     "test:unit:ui": "bun with-env vitest --ui",
     "test:unit:watch": "bun with-env vitest watch",
     "typecheck": "tsc --noEmit",
-    "typegen": "next typegen",
+    "typegen": "bun build:mdx && bun cosmos:export && next typegen",
     "with-env": "bun --env-file=.env.local"
   },
   "dependencies": {
@@ -122,7 +122,7 @@
     "@cspell/dict-pt-br": "2.4.2",
     "@lingual/i18n-check": "0.9.5",
     "@nelsonlaidev/oxfmt-config": "0.1.4",
-    "@nelsonlaidev/oxlint-config": "0.2.4",
+    "@nelsonlaidev/oxlint-config": "0.2.5",
     "@nelsonlaidev/typescript-config": "1.2.1",
     "@playwright/test": "1.61.0",
     "@tailwindcss/postcss": "4.3.1",

@@ -83,7 +83,7 @@
         "@cspell/dict-pt-br": "2.4.2",
         "@lingual/i18n-check": "0.9.5",
         "@nelsonlaidev/oxfmt-config": "0.1.4",
-        "@nelsonlaidev/oxlint-config": "0.2.4",
+        "@nelsonlaidev/oxlint-config": "0.2.5",
         "@nelsonlaidev/typescript-config": "1.2.1",
         "@playwright/test": "1.61.0",
         "@tailwindcss/postcss": "4.3.1",
@@ -666,7 +666,7 @@
 
     "@nelsonlaidev/oxfmt-config": ["@nelsonlaidev/oxfmt-config@0.1.4", "", { "peerDependencies": { "oxfmt": "^0.47.0" } }, "sha512-JSq1WXmiRiDk+JJQkuiDhPk2t36/2EvPAlXXe6Odd2L2+yxqLcjpIjmE+TQVj9w015oA2YEOyM8a6aX5evh9DA=="],
 
-    "@nelsonlaidev/oxlint-config": ["@nelsonlaidev/oxlint-config@0.2.4", "", { "dependencies": { "@eslint-react/eslint-plugin": "4.0.2-beta.6", "@nelsonlaidev/eslint-plugin": "0.2.4", "@stylistic/eslint-plugin": "^5.10.0", "es-toolkit": "^1.45.1", "eslint-plugin-better-tailwindcss": "^4.3.2", "eslint-plugin-de-morgan": "^2.1.1", "eslint-plugin-import-zod": "^1.2.1", "eslint-plugin-playwright": "^2.10.1", "eslint-plugin-react-hooks": "^7.0.1", "eslint-plugin-regexp": "^3.1.0", "eslint-plugin-simple-import-sort": "^12.1.1", "eslint-plugin-sonarjs": "^4.0.2", "local-pkg": "^1.1.2" }, "peerDependencies": { "oxlint": ">=1.56.0" } }, "sha512-9D/LQf5MQ+0druOu3o+/QhbBjpw5mSTDEEFXMA4rP5VJq1iPv5p9Ghh7sc+bO05/MRDMD0VGz4hfUwKteBsnoA=="],
+    "@nelsonlaidev/oxlint-config": ["@nelsonlaidev/oxlint-config@0.2.5", "", { "dependencies": { "@eslint-react/eslint-plugin": "4.0.2-beta.6", "@nelsonlaidev/eslint-plugin": "0.2.4", "@stylistic/eslint-plugin": "^5.10.0", "es-toolkit": "^1.45.1", "eslint-plugin-better-tailwindcss": "^4.3.2", "eslint-plugin-de-morgan": "^2.1.1", "eslint-plugin-import-zod": "^1.2.1", "eslint-plugin-playwright": "^2.10.1", "eslint-plugin-react-hooks": "^7.0.1", "eslint-plugin-regexp": "^3.1.0", "eslint-plugin-simple-import-sort": "^12.1.1", "eslint-plugin-sonarjs": "^4.0.2", "local-pkg": "^1.1.2" }, "peerDependencies": { "oxlint": ">=1.56.0" } }, "sha512-cY31KfftHvLVcI8EoJj4fdxSxpivY1pAqpT7GgTmLO2MjIrky7SS0NrCANKQsfTILRkiylYUipir1WvKTH7k8A=="],
 
     "@nelsonlaidev/typescript-config": ["@nelsonlaidev/typescript-config@1.2.1", "", {}, "sha512-VNzLgRl14HgB8qjkXyQhIX34LGCeo0t2f+EAZ3tC6bOI9SCMp+yaSs4g2+KRTWZmJiBZF6z3zYLdHkCd3Neb0g=="],
 
