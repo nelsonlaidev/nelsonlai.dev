@@ -108,7 +108,7 @@ export function DialogFooter(props: DialogFooterProps) {
     >
       {children}
       {showCloseButton && (
-        <DialogPrimitive.Close render={<Button variant='outline' />}>{t('common.labels.close')}</DialogPrimitive.Close>
+        <DialogPrimitive.Close render={<Button variant='outline'>{t('common.labels.close')}</Button>} />
       )}
     </div>
   )
