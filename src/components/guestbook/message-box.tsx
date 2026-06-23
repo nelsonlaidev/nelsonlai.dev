@@ -45,9 +45,14 @@ export function MessageBox(props: MessageBoxProps) {
     toast.success(t('success.message-created'), { testId: 'guestbook-message-created-toast' })
   })
 
-  function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
-    void form.handleSubmit()
+
+    try {
+      await form.handleSubmit()
+    } catch (error) {
+      console.error('Failed to submit message:', error)
+    }
   }
 
   return (

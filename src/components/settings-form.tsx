@@ -44,9 +44,14 @@ export function SettingsForm(props: SettingsFormProps) {
     toast.success(t('success.settings-updated'))
   })
 
-  function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
-    void form.handleSubmit()
+
+    try {
+      await form.handleSubmit()
+    } catch (error) {
+      console.error('Failed to submit settings:', error)
+    }
   }
 
   const isDirty = useSelector(form.store, (state) => state.isDirty)
