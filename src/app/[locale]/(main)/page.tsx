@@ -63,9 +63,9 @@ function Page(props: PageProps<'/[locale]'>) {
       sameAs: [SITE_FACEBOOK_URL, SITE_INSTAGRAM_URL, SITE_X_URL, SITE_GITHUB_URL, SITE_YOUTUBE_URL],
     },
     dateCreated: '2022-02-01T00:00:00Z',
-    // eslint-disable-next-line @eslint-react/purity
+    // oxlint-disable-next-line @eslint-react/purity
     dateModified: new Date().toISOString(),
-    // eslint-disable-next-line @eslint-react/purity
+    // oxlint-disable-next-line @eslint-react/purity
     copyrightYear: new Date().getFullYear(),
     inLanguage: locale,
   }

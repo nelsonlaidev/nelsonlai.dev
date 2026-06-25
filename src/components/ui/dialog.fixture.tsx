@@ -26,7 +26,7 @@ function DialogBasic() {
     <DemoItem>
       <Dialog>
         <form>
-          <DialogTrigger render={<Button variant='outline' />}>Edit Profile</DialogTrigger>
+          <DialogTrigger render={<Button variant='outline'>Edit Profile</Button>} />
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Edit profile</DialogTitle>
@@ -46,7 +46,7 @@ function DialogBasic() {
               </Field>
             </FieldGroup>
             <DialogFooter>
-              <DialogClose render={<Button variant='outline' />}>Cancel</DialogClose>
+              <DialogClose render={<Button variant='outline'>Cancel</Button>} />
               <Button type='submit'>Save changes</Button>
             </DialogFooter>
           </DialogContent>

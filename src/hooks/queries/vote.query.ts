@@ -48,8 +48,8 @@ export function useCreateVote(input: CommentListInput) {
           queryClient.setQueryData(queryKey, context.previousData)
         }
       },
-      onSettled: () => {
-        void queryClient.invalidateQueries({ queryKey })
+      onSettled: async () => {
+        await queryClient.invalidateQueries({ queryKey })
       },
     }),
   )

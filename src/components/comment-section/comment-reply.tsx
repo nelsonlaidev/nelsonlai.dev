@@ -60,7 +60,7 @@ export function CommentReply() {
           placeholder={t('blog.comments.reply-to-comment')}
           disabled={disabled}
           // autoFocus is necessary because user is replying to a comment
-          // eslint-disable-next-line jsx-a11y/no-autofocus
+          // oxlint-disable-next-line jsx-a11y/no-autofocus
           autoFocus
           data-testid='comment-textarea-reply'
         />

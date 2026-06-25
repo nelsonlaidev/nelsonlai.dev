@@ -23,8 +23,12 @@ export function CodeBlock(props: CodeBlockProps) {
   const preRef = useRef<HTMLPreElement>(null)
   const Icon = getIconByLanguage(lang ?? '')
 
-  function onCopy() {
-    void navigator.clipboard.writeText(preRef.current?.textContent ?? '')
+  async function onCopy() {
+    try {
+      await navigator.clipboard.writeText(preRef.current?.textContent ?? '')
+    } catch (error) {
+      console.error('Failed to copy code to clipboard:', error)
+    }
   }
 
   return (

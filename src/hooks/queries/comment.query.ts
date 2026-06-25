@@ -25,10 +25,12 @@ export function useCreatePostComment(input: CommentListInput, onSuccess?: () => 
 
   return useMutation(
     orpc.comment.create.mutationOptions({
-      onSuccess: () => {
-        void queryClient.invalidateQueries({ queryKey: orpc.comment.list.key({ input }) })
-        void queryClient.invalidateQueries({ queryKey: orpc.comment.count.key({ input }) })
-        void queryClient.invalidateQueries({ queryKey: orpc.reply.count.key({ input }) })
+      onSuccess: async () => {
+        await Promise.all([
+          queryClient.invalidateQueries({ queryKey: orpc.comment.list.key({ input }) }),
+          queryClient.invalidateQueries({ queryKey: orpc.comment.count.key({ input }) }),
+          queryClient.invalidateQueries({ queryKey: orpc.reply.count.key({ input }) }),
+        ])
         onSuccess?.()
       },
     }),
@@ -40,10 +42,12 @@ export function useDeletePostComment(input: CommentListInput, onSuccess?: () => 
 
   return useMutation(
     orpc.comment.delete.mutationOptions({
-      onSuccess: () => {
-        void queryClient.invalidateQueries({ queryKey: orpc.comment.list.key({ input }) })
-        void queryClient.invalidateQueries({ queryKey: orpc.comment.count.key({ input }) })
-        void queryClient.invalidateQueries({ queryKey: orpc.reply.count.key({ input }) })
+      onSuccess: async () => {
+        await Promise.all([
+          queryClient.invalidateQueries({ queryKey: orpc.comment.list.key({ input }) }),
+          queryClient.invalidateQueries({ queryKey: orpc.comment.count.key({ input }) }),
+          queryClient.invalidateQueries({ queryKey: orpc.reply.count.key({ input }) }),
+        ])
         onSuccess?.()
       },
     }),

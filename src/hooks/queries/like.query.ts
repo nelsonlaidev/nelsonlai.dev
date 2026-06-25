@@ -34,8 +34,8 @@ export function useIncrementLike(input: LikeCountInput) {
           queryClient.setQueryData(queryKey, context.previousData)
         }
       },
-      onSettled: () => {
-        void queryClient.invalidateQueries({ queryKey: orpc.like.count.key({ input }) })
+      onSettled: async () => {
+        await queryClient.invalidateQueries({ queryKey: orpc.like.count.key({ input }) })
       },
     }),
   )

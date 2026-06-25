@@ -5,7 +5,7 @@ import { routing } from '@/i18n/routing'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 import { getPathnames } from '@/utils/get-pathnames'
 
-describe(sitemap, () => {
+describe('sitemap', () => {
   test('generates sitemap entries for all locales and pathnames', () => {
     expect.assertions(1)
 

@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest'
 
 import { getPathnames, PROTECTED_ROUTES } from '@/utils/get-pathnames'
 
-describe('pathnames', () => {
+describe('getPathnames', () => {
   // Routes that exist as page files but are intentionally excluded from getPathnames()
   const EXCLUDED_ROUTES = ['/cosmos', '/unsubscribe', '/admin']
 

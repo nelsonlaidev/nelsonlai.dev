@@ -499,7 +499,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
 
     pushUndo(createSnapshot(ta))
     // Only run once
-    // eslint-disable-next-line @eslint-react/exhaustive-deps
+    // oxlint-disable-next-line @eslint-react/exhaustive-deps
   }, [])
 
   return {

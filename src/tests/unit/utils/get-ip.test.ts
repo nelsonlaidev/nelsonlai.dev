@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest'
 
 import { getIp } from '@/utils/get-ip'
 
-describe(getIp, () => {
+describe('getIp', () => {
   test('returns the ip from the x-real-ip header', () => {
     expect.assertions(1)
 

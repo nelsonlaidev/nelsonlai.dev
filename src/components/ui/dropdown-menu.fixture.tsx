@@ -68,7 +68,7 @@ function DropdownMenuComplex() {
   return (
     <DemoItem>
       <DropdownMenu>
-        <DropdownMenuTrigger render={<Button variant='outline' />}>Open Menu</DropdownMenuTrigger>
+        <DropdownMenuTrigger render={<Button variant='outline'>Open Menu</Button>} />
         <DropdownMenuContent className='w-56'>
           <DropdownMenuGroup>
             <DropdownMenuLabel>File</DropdownMenuLabel>

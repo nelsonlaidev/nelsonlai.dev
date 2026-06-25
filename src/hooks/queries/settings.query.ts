@@ -11,8 +11,8 @@ export function useUpdateSettings(onSuccess?: () => void) {
 
   return useMutation(
     orpc.settings.update.mutationOptions({
-      onSuccess: () => {
-        void queryClient.invalidateQueries({ queryKey: orpc.settings.get.key() })
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({ queryKey: orpc.settings.get.key() })
         onSuccess?.()
       },
     }),

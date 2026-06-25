@@ -51,7 +51,7 @@ export function SignInDialog() {
 
   useEffect(() => {
     const provider = localStorage.getItem('last-used-provider') as Provider | null
-    // eslint-disable-next-line @eslint-react/set-state-in-effect
+    // oxlint-disable-next-line @eslint-react/set-state-in-effect
     setLastUsedProvider(provider)
   }, [])
 

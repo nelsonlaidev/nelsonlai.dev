@@ -57,8 +57,8 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 
 - Vitest for unit testing
 - Playwright for E2E testing
-- ESLint configuration
-- Prettier code formatting
+- Oxlint configuration
+- Oxfmt code formatting
 - Lefthook
 - Conventional commit
 
@@ -203,9 +203,9 @@ bun analyze           # Analyze bundle size
 
 # Quality & Testing
 bun check             # Run all quality checks (lint, typecheck, format, etc.)
-bun lint              # Run ESLint
+bun lint              # Run Oxlint
 bun typecheck         # Run TypeScript type checking
-bun format            # Format code with Prettier
+bun format            # Format code with Oxfmt
 bun knip              # Find unused dependencies/exports
 bun test:unit         # Run unit tests
 bun test:e2e          # Run Playwright E2E tests
