@@ -4,16 +4,10 @@ import { MY_NAME } from '@/constants/site'
 const BRAND_COLOR = '#ffffff'
 
 function getTitleFontSize(text: string) {
-  const baseSize = 80
-  const minSize = 50
-  const maxChars = 80
-
-  if (text.length <= 30) return baseSize
-
-  if (text.length >= maxChars) return minSize
-
-  const scale = 1 - (text.length - 20) / (maxChars - 20)
-  return Math.round(minSize + (baseSize - minSize) * scale)
+  const len = text.length
+  if (len <= 25) return 80
+  if (len <= 50) return 64
+  return 50
 }
 
 function getDescriptionFontSize(text: string) {
