@@ -1,7 +1,4 @@
 {
-  "about": {
-    "description": "Hi! I'm Nelson Lai, a passionate web development student creating innovative projects with HTML, CSS, and JavaScript. Explore my portfolio, skills, and journey in building user-friendly apps. Let's connect!"
-  },
   "account": {
     "account-created": "Account created",
     "active-sessions": "Active sessions",
@@ -82,7 +79,6 @@
       "toggle-strikethrough": "Toggle strikethrough",
       "write": "Write"
     },
-    "description": "Discover my website and blog, where I share tutorials, notes, and experiences as a full-stack engineer based in Hong Kong. I began web dev as a hobby in Dec 2020. Explore my journey!",
     "footer": {
       "edit-on-github": "Edit on GitHub",
       "last-updated": "Last updated: {date}"
@@ -191,7 +187,6 @@
     }
   },
   "dashboard": {
-    "description": "This is my personal dashboard, built with Next.js API routes deployed as serverless functions. I use this dashboard to track various stats across platforms like YouTube, GitHub, and more.",
     "stat": {
       "blog-total-likes": "Blog Total Likes",
       "blog-total-views": "Blog Total Views",
@@ -237,7 +232,6 @@
     "try-again": "Try again"
   },
   "guestbook": {
-    "description": "Sign my guestbook and share your idea. You can tell me anything here!",
     "no-messages": "No messages. Be the first to leave a message!",
     "pinned": {
       "description": "Thanks for visiting my website. If you have a moment, I'd love to hear your thoughts on my work. Please log in with your account to leave a comment. Thanks!",
@@ -307,11 +301,7 @@
   "metadata": {
     "site-description": "Nelson Lai is a full stack engineer based in Hong Kong. He builds performant and elegant websites using React, Node.js, and modern technologies."
   },
-  "privacy": {
-    "description": "This page explains how we handle your data and protect your privacy when you use our website."
-  },
   "projects": {
-    "description": "A collection of my projects, crafted with dedication.",
     "visit-website": "Visit Website"
   },
   "settings": {
@@ -334,9 +324,6 @@
     "settings-updated": "Settings updated successfully",
     "signed-out": "Signed out successfully"
   },
-  "terms": {
-    "description": "These terms and conditions outline the rules and regulations for the use our website."
-  },
   "theme-toggle": {
     "options": {
       "dark": "Dark",
@@ -353,8 +340,5 @@
     "unsubscribed-description": "You will no longer receive reply notifications emails for this comment.",
     "you-are-unsubscribing-as": "You're unsubscribing as {email}",
     "you-have-been-unsubscribed": "You've been unsubscribed"
-  },
-  "uses": {
-    "description": "This is the equipment I currently use for gaming, programming, making videos, and every day."
   }
 }

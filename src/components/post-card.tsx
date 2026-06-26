@@ -48,7 +48,7 @@ export function PostCard(props: PostCardProps) {
       </div>
       <div className='flex flex-col px-2 py-4 transition-transform ease-out group-hover:translate-x-0.5'>
         <h3 className='text-2xl font-semibold'>{post.title}</h3>
-        <p className='mt-2 text-muted-foreground'>{post.summary}</p>
+        <p className='mt-2 text-muted-foreground'>{post.description}</p>
       </div>
     </ContentCard>
   )

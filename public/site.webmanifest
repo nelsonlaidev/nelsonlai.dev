@@ -1,19 +1,21 @@
 {
   "display": "standalone",
+  "name": "Nelson Lai",
+  "short_name": "Nelson",
+  "theme_color": "#000000",
+  "background_color": "#000000",
   "icons": [
     {
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
-      "src": "/android-chrome-192x192.png",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
+      "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
-      "src": "/android-chrome-512x512.png",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
     }
-  ],
-  "name": "Nelson Lai",
-  "short_name": "Nelson Lai",
-  "background_color": "#000000",
-  "theme_color": "#000000"
+  ]
 }

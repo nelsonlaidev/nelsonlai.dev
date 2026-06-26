@@ -1,7 +1,4 @@
 {
-  "about": {
-    "description": "Olá! Sou Nelson Lai, um estudante apaixonado por desenvolvimento web criando projetos inovadores com HTML, CSS e JavaScript. Explore meu portfólio, habilidades e jornada na construção de aplicativos fáceis de usar. Vamos nos conectar!"
-  },
   "account": {
     "account-created": "Conta criada",
     "active-sessions": "Sessões ativas",
@@ -82,7 +79,6 @@
       "toggle-strikethrough": "Alternar tachado",
       "write": "Escrever"
     },
-    "description": "Descubra meu site e blog, onde compartilho tutoriais, notas e experiências como um engenheiro full-stack sediado em Hong Kong. Comecei o desenvolvimento web como um hobby em dezembro de 2020. Explore minha jornada!",
     "footer": {
       "edit-on-github": "Editar no GitHub",
       "last-updated": "Última atualização: {date}"
@@ -191,7 +187,6 @@
     }
   },
   "dashboard": {
-    "description": "Este é meu painel pessoal, construído com rotas API do Next.js implantadas como funções sem servidor. Uso este painel para rastrear várias estatísticas em plataformas como YouTube, GitHub e mais.",
     "stat": {
       "blog-total-likes": "Total de Curtidas do Blog",
       "blog-total-views": "Total de Visualizações do Blog",
@@ -237,7 +232,6 @@
     "try-again": "Tentar novamente"
   },
   "guestbook": {
-    "description": "Assine meu livro de visitas e compartilhe sua ideia. Você pode me dizer qualquer coisa aqui!",
     "no-messages": "Sem mensagens. Seja o primeiro a deixar uma mensagem!",
     "pinned": {
       "description": "Obrigado por visitar meu site. Se você tiver um momento, eu adoraria ouvir seus pensamentos sobre meu trabalho. Por favor, faça login com sua conta para deixar um comentário. Obrigado!",
@@ -307,11 +301,7 @@
   "metadata": {
     "site-description": "Nelson Lai é um engenheiro full stack sediado em Hong Kong. Ele constrói sites de alto desempenho e elegantes usando React, Node.js e tecnologias modernas."
   },
-  "privacy": {
-    "description": "Esta página explica como lidamos com seus dados e protegemos sua privacidade quando você usa nosso site."
-  },
   "projects": {
-    "description": "Uma coleção dos meus projetos, criados com dedicação.",
     "visit-website": "Visitar Site"
   },
   "settings": {
@@ -334,9 +324,6 @@
     "settings-updated": "Configurações atualizadas com sucesso",
     "signed-out": "Saiu com sucesso"
   },
-  "terms": {
-    "description": "Estes termos e condições descrevem as regras e regulamentos para o uso do nosso site."
-  },
   "theme-toggle": {
     "options": {
       "dark": "Escuro",
@@ -353,8 +340,5 @@
     "unsubscribed-description": "Você não receberá mais e-mails de notificações de resposta para este comentário.",
     "you-are-unsubscribing-as": "Você está cancelando a inscrição como {email}",
     "you-have-been-unsubscribed": "Sua inscrição foi cancelada"
-  },
-  "uses": {
-    "description": "Este é o equipamento que uso atualmente para jogos, programação, criação de vídeos e todos os dias."
   }
 }

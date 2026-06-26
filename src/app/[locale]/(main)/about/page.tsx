@@ -1,44 +1,33 @@
 import type { Metadata } from 'next'
 import type { Locale } from 'next-intl'
-import type { AboutPage, WithContext } from 'schema-dts'
 
 import { notFound } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 import { use } from 'react'
 
 import { JsonLd } from '@/components/json-ld'
 import { Mdx } from '@/components/mdx'
 import { PageHeader } from '@/components/page-header'
-import {
-  MY_NAME,
-  SITE_FACEBOOK_URL,
-  SITE_GITHUB_URL,
-  SITE_INSTAGRAM_URL,
-  SITE_X_URL,
-  SITE_YOUTUBE_URL,
-} from '@/constants/site'
-import { getPageBySlug } from '@/lib/content'
-import { createMetadata } from '@/lib/metadata'
-import { getBaseUrl } from '@/utils/get-base-url'
+import { getSite } from '@/lib/content'
+import { createJsonLdAboutPage } from '@/lib/json-ld'
+import { createPageMetadata } from '@/lib/metadata'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
 export async function generateMetadata(props: PageProps<'/[locale]/about'>): Promise<Metadata> {
   const { params } = props
   const { locale } = await params
 
-  const t = await getTranslations({ locale: locale as Locale })
-  const title = t('common.labels.about')
-  const description = t('about.description')
+  const page = getSite('about', locale)
 
-  return createMetadata({
-    pathname: '/about',
-    title,
-    description,
-    locale,
-    openGraph: {
-      type: 'profile',
-    },
+  if (!page) return {}
+
+  return createPageMetadata({
+    title: page.title,
+    description: page.description,
+    canonical: '/about',
+    openGraphImage: page.opengraphImage.url,
+    locale: locale as Locale,
   })
 }
 
@@ -49,32 +38,21 @@ function Page(props: PageProps<'/[locale]/about'>) {
   setRequestLocale(locale as Locale)
 
   const t = useTranslations()
-  const title = t('common.labels.about')
-  const description = t('about.description')
-  const url = getLocalizedPath({ locale, pathname: '/about' })
-  const page = getPageBySlug(locale, 'about')
 
-  const jsonLd: WithContext<AboutPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    name: title,
+  const page = getSite('about', locale)
+  const url = getLocalizedPath('/about', locale as Locale)
+
+  if (!page) notFound()
+
+  const { title, description, code } = page
+
+  const jsonLd = createJsonLdAboutPage({
+    title,
     description,
     url,
-    mainEntity: {
-      '@type': 'Person',
-      name: MY_NAME,
-      description: t('metadata.site-description'),
-      url: getBaseUrl(),
-      sameAs: [SITE_FACEBOOK_URL, SITE_INSTAGRAM_URL, SITE_X_URL, SITE_GITHUB_URL, SITE_YOUTUBE_URL],
-    },
-    inLanguage: locale,
-  }
-
-  if (!page) {
-    return notFound()
-  }
-
-  const { code } = page
+    siteDescription: t('metadata.site-description'),
+    locale: locale as Locale,
+  })
 
   return (
     <>

@@ -1,7 +1,8 @@
-import type { Context, Meta } from '@content-collections/core'
+import type { CollectionContext, Meta } from '@content-collections/core'
 
 import { defineCollection, defineConfig } from '@content-collections/core'
 import { compileMDX } from '@content-collections/mdx'
+import { x } from 'tinyexec'
 import * as z from 'zod'
 
 import { getTOC, rehypePlugins, remarkPlugins } from '@/mdx-plugins'
@@ -11,7 +12,7 @@ type BaseDoc = {
   content: string
 }
 
-async function transform<TDoc extends BaseDoc>(document: TDoc, context: Context) {
+async function transform<TDoc extends BaseDoc>(document: TDoc, context: CollectionContext) {
   const code = await compileMDX(context, document, {
     remarkPlugins,
     rehypePlugins,
@@ -22,35 +23,61 @@ async function transform<TDoc extends BaseDoc>(document: TDoc, context: Context)
     throw new Error(`Invalid path: ${document._meta.path}`)
   }
 
+  // oxlint-disable-next-line no-deprecated -- false positive
+  const fullPath = `${context.collection.directory}/${document._meta.filePath}`
+
+  const lastModified = await context.cache(fullPath, async () => {
+    const { stdout } = await x('git', ['log', '-1', `--format=%ai`, '--', fullPath])
+    if (stdout) {
+      return new Date(stdout.trim()).toISOString()
+    }
+    return new Date().toISOString()
+  })
+
+  const date = await context.cache(`${fullPath}:date`, async () => {
+    const { stdout } = await x('git', ['log', '--diff-filter=A', '--follow', `--format=%ai`, '--', fullPath])
+    if (stdout) {
+      return new Date(stdout.trim()).toISOString()
+    }
+    return new Date().toISOString()
+  })
+
+  // oxlint-disable-next-line no-deprecated -- false positive
+  const opengraphSegments = [context.collection.name, path, 'image.png']
+
   return {
     ...document,
     code,
     locale,
     slug: path,
+    date,
+    lastModified,
     toc: await getTOC(document.content),
+    opengraphImage: {
+      segments: opengraphSegments,
+      url: `/og/${opengraphSegments.join('/')}`,
+    },
   }
 }
 
 const posts = defineCollection({
-  name: 'Post',
+  name: 'posts',
   directory: 'src/content/blog',
   include: '**/*.mdx',
   schema: z.object({
     title: z.string(),
-    date: z.string(),
-    modifiedTime: z.string(),
-    summary: z.string(),
+    description: z.string(),
     content: z.string(),
   }),
   transform,
 })
 
 const projects = defineCollection({
-  name: 'Project',
+  name: 'projects',
   directory: 'src/content/projects',
   include: '**/*.mdx',
   schema: z.object({
-    name: z.string(),
+    title: z.string(),
     description: z.string(),
     homepage: z.string().optional(),
     github: z.string(),
@@ -62,16 +89,18 @@ const projects = defineCollection({
   transform,
 })
 
-const pages = defineCollection({
-  name: 'Page',
+const sites = defineCollection({
+  name: 'sites',
   directory: 'src/content/pages',
   include: '**/*.mdx',
   schema: z.object({
+    title: z.string(),
+    description: z.string(),
     content: z.string(),
   }),
   transform,
 })
 
 export default defineConfig({
-  content: [posts, projects, pages],
+  content: [posts, projects, sites],
 })

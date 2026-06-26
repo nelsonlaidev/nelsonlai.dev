@@ -11,7 +11,7 @@ import {
   UsersIcon,
 } from 'lucide-react'
 
-import { SITE_FACEBOOK_URL, SITE_GITHUB_URL, SITE_INSTAGRAM_URL, SITE_X_URL, SITE_YOUTUBE_URL } from './site'
+import { SITE_FACEBOOK_URL, SITE_GITHUB_URL, SITE_INSTAGRAM_URL, SITE_TWITTER_URL, SITE_YOUTUBE_URL } from './site'
 
 export const HEADER_LINKS = [
   {
@@ -156,7 +156,7 @@ export const SOCIAL_LINKS = [
     icon: <SiInstagram />,
   },
   {
-    href: SITE_X_URL,
+    href: SITE_TWITTER_URL,
     title: 'X',
     icon: <SiX />,
   },

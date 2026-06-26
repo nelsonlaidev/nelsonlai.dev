@@ -1,34 +1,32 @@
 import type { Metadata } from 'next'
 import type { Locale } from 'next-intl'
-import type { WebPage, WithContext } from 'schema-dts'
 
 import { notFound } from 'next/navigation'
-import { useTranslations } from 'next-intl'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 import { use } from 'react'
 
 import { JsonLd } from '@/components/json-ld'
 import { Mdx } from '@/components/mdx'
 import { PageHeader } from '@/components/page-header'
-import { MY_NAME } from '@/constants/site'
-import { getPageBySlug } from '@/lib/content'
-import { createMetadata } from '@/lib/metadata'
-import { getBaseUrl } from '@/utils/get-base-url'
+import { getSite } from '@/lib/content'
+import { createJsonLdWebPage } from '@/lib/json-ld'
+import { createPageMetadata } from '@/lib/metadata'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
 export async function generateMetadata(props: PageProps<'/[locale]/uses'>): Promise<Metadata> {
   const { params } = props
   const { locale } = await params
 
-  const t = await getTranslations({ locale: locale as Locale })
-  const title = t('common.labels.uses')
-  const description = t('uses.description')
+  const page = getSite('uses', locale)
 
-  return createMetadata({
-    pathname: '/uses',
-    title,
-    description,
-    locale,
+  if (!page) return {}
+
+  return createPageMetadata({
+    title: page.title,
+    description: page.description,
+    canonical: '/uses',
+    openGraphImage: page.opengraphImage.url,
+    locale: locale as Locale,
   })
 }
 
@@ -38,30 +36,14 @@ function Page(props: PageProps<'/[locale]/uses'>) {
 
   setRequestLocale(locale as Locale)
 
-  const t = useTranslations()
-  const title = t('common.labels.uses')
-  const description = t('uses.description')
-  const url = getLocalizedPath({ locale, pathname: '/uses' })
-  const page = getPageBySlug(locale, 'uses')
+  const page = getSite('uses', locale)
+  const url = getLocalizedPath('/uses', locale as Locale)
 
-  const jsonLd: WithContext<WebPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: title,
-    description,
-    url,
-    isPartOf: {
-      '@type': 'WebSite',
-      name: MY_NAME,
-      url: getBaseUrl(),
-    },
-  }
+  if (!page) notFound()
 
-  if (!page) {
-    return notFound()
-  }
+  const { title, description, code } = page
 
-  const { code } = page
+  const jsonLd = createJsonLdWebPage({ title, description, url, locale: locale as Locale })
 
   return (
     <>

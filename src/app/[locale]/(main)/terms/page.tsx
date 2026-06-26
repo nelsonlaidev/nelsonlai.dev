@@ -2,28 +2,31 @@ import type { Metadata } from 'next'
 import type { Locale } from 'next-intl'
 
 import { notFound } from 'next/navigation'
-import { useTranslations } from 'next-intl'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 import { use } from 'react'
 
+import { JsonLd } from '@/components/json-ld'
 import { Mdx } from '@/components/mdx'
 import { PageHeader } from '@/components/page-header'
-import { getPageBySlug } from '@/lib/content'
-import { createMetadata } from '@/lib/metadata'
+import { getSite } from '@/lib/content'
+import { createJsonLdWebPage } from '@/lib/json-ld'
+import { createPageMetadata } from '@/lib/metadata'
+import { getLocalizedPath } from '@/utils/get-localized-path'
 
 export async function generateMetadata(props: PageProps<'/[locale]/terms'>): Promise<Metadata> {
   const { params } = props
   const { locale } = await params
 
-  const t = await getTranslations({ locale: locale as Locale })
-  const title = t('common.labels.terms')
-  const description = t('terms.description')
+  const page = getSite('terms', locale)
 
-  return createMetadata({
-    pathname: '/terms',
-    title,
-    description,
-    locale,
+  if (!page) return {}
+
+  return createPageMetadata({
+    title: page.title,
+    description: page.description,
+    canonical: '/terms',
+    openGraphImage: page.opengraphImage.url,
+    locale: locale as Locale,
   })
 }
 
@@ -33,19 +36,18 @@ function Page(props: PageProps<'/[locale]/terms'>) {
 
   setRequestLocale(locale as Locale)
 
-  const t = useTranslations()
-  const title = t('common.labels.terms')
-  const description = t('terms.description')
-  const page = getPageBySlug(locale, 'terms')
+  const page = getSite('terms', locale)
 
-  if (!page) {
-    return notFound()
-  }
+  if (!page) notFound()
 
-  const { code } = page
+  const url = getLocalizedPath('/terms', locale as Locale)
+  const { title, description, code } = page
+
+  const jsonLd = createJsonLdWebPage({ title, description, url, locale: locale as Locale })
 
   return (
     <>
+      <JsonLd json={jsonLd} />
       <PageHeader title={title} description={description} />
       <Mdx code={code} />
     </>

@@ -6,7 +6,7 @@ import { IS_PRODUCTION } from '@/constants/common'
 import { comments, settings, unsubscribes, votes } from '@/db/schemas'
 import { CommentEmailTemplate, ReplyEmailTemplate } from '@/emails'
 import { env } from '@/env'
-import { getPostBySlug } from '@/lib/content'
+import { getPost } from '@/lib/content'
 import { sendEmail } from '@/lib/resend'
 import { generateCommentReplyUnsubToken } from '@/lib/unsubscribe'
 import { getDefaultImage } from '@/utils/get-default-image'
@@ -109,7 +109,7 @@ const createComment = protectedProcedure
 
     const locale = await getLocale()
 
-    const post = getPostBySlug(locale, input.slug)
+    const post = getPost(input.slug, locale)
 
     if (!post) throw new ORPCError('NOT_FOUND', { message: 'Blog post not found' })
 

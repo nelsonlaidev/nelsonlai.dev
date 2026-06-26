@@ -1,7 +1,4 @@
 {
-  "about": {
-    "description": "こんにちは！Nelson Lai です。HTML、CSS、JavaScript を使って革新的なプロジェクトを作る、情熱的な Web 開発学生です。私のポートフォリオ、スキル、そして使いやすいアプリ作りの旅をご覧ください。ぜひつながりましょう！"
-  },
   "account": {
     "account-created": "アカウント作成日",
     "active-sessions": "アクティブなセッション",
@@ -82,7 +79,6 @@
       "toggle-strikethrough": "取り消し線を切り替え",
       "write": "書く"
     },
-    "description": "私のウェブサイトとブログへようこそ！香港在住のフルスタックエンジニアとして、2020年12月から Web 開発を独学し、チュートリアルやメモ、日々の出来事を発信しています。私の旅をご覧ください！",
     "footer": {
       "edit-on-github": "GitHub で編集",
       "last-updated": "最終更新日：{date}"
@@ -191,7 +187,6 @@
     }
   },
   "dashboard": {
-    "description": "これは私の個人ダッシュボードです。Next.js API ルートを使って構築し、サーバーレス関数としてデプロイしています。YouTube や GitHub などのプラットフォームの各種統計を追跡するために使っています。",
     "stat": {
       "blog-total-likes": "ブログ総いいね数",
       "blog-total-views": "ブログ総閲覧数",
@@ -237,7 +232,6 @@
     "try-again": "もう一度試す"
   },
   "guestbook": {
-    "description": "ゲストブックにサインして、あなたのアイデアを共有してください。何でも話しかけてください！",
     "no-messages": "メッセージがありません。最初のメッセージを残しましょう！",
     "pinned": {
       "description": "私のウェブサイトにお越しいただきありがとうございます。お時間があれば、私の作品についてのご意見をお聞かせください。コメントを残すにはアカウントでログインしてください。よろしくお願いします！",
@@ -307,11 +301,7 @@
   "metadata": {
     "site-description": "Nelson Lai は香港在住のフルスタックエンジニアです。React、Node.js、最新技術を使ってパフォーマントで洗練されたウェブサイトを構築しています。"
   },
-  "privacy": {
-    "description": "このページでは、当ウェブサイトをご利用いただく際のデータの取り扱いとプライバシー保護について説明します。"
-  },
   "projects": {
-    "description": "心を込めて制作したプロジェクトのコレクションです。",
     "visit-website": "ウェブサイトを訪問"
   },
   "settings": {
@@ -334,9 +324,6 @@
     "settings-updated": "設定を更新しました",
     "signed-out": "サインアウトしました"
   },
-  "terms": {
-    "description": "この利用規約は、当ウェブサイトの利用に関するルールと規定を概説したものです。"
-  },
   "theme-toggle": {
     "options": {
       "dark": "ダーク",
@@ -353,8 +340,5 @@
     "unsubscribed-description": "このコメントへの返信通知メールは今後届きません。",
     "you-are-unsubscribing-as": "{email} として配信停止します",
     "you-have-been-unsubscribed": "配信停止しました"
-  },
-  "uses": {
-    "description": "ゲーム、プログラミング、動画制作、日常使いで現在使用している機材です。"
   }
 }

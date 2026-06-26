@@ -1,33 +1,32 @@
 import type { Metadata } from 'next'
 import type { Locale } from 'next-intl'
-import type { CollectionPage, WithContext } from 'schema-dts'
 
-import { useTranslations } from 'next-intl'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { setRequestLocale } from 'next-intl/server'
 import { use } from 'react'
 
 import { FilteredPosts } from '@/components/filtered-posts'
 import { JsonLd } from '@/components/json-ld'
 import { PageHeader } from '@/components/page-header'
-import { MY_NAME } from '@/constants/site'
-import { getLatestPosts } from '@/lib/content'
-import { createMetadata } from '@/lib/metadata'
-import { getBaseUrl } from '@/utils/get-base-url'
+import { getLatestPosts, getSite } from '@/lib/content'
+import { createJsonLdCollectionPage } from '@/lib/json-ld'
+import { createPageMetadata } from '@/lib/metadata'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
 export async function generateMetadata(props: PageProps<'/[locale]/blog'>): Promise<Metadata> {
   const { params } = props
   const { locale } = await params
 
-  const t = await getTranslations({ locale: locale as Locale })
-  const title = t('common.labels.blog')
-  const description = t('blog.description')
+  const page = getSite('blog', locale)
 
-  return createMetadata({
-    pathname: '/blog',
-    title,
-    description,
-    locale,
+  if (!page) return {}
+
+  return createPageMetadata({
+    title: page.title,
+    description: page.description,
+    canonical: '/blog',
+    openGraphImage: page.opengraphImage.url,
+    locale: locale as Locale,
   })
 }
 
@@ -37,38 +36,30 @@ function Page(props: PageProps<'/[locale]/blog'>) {
 
   setRequestLocale(locale as Locale)
 
-  const t = useTranslations()
-  const title = t('common.labels.blog')
-  const description = t('blog.description')
-  const url = getLocalizedPath({ locale, pathname: '/blog' })
+  const page = getSite('blog', locale)
+  const url = getLocalizedPath('/blog', locale as Locale)
+
+  if (!page) notFound()
+
+  const { title, description } = page
 
   const posts = getLatestPosts(locale)
 
-  const jsonLd: WithContext<CollectionPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    '@id': url,
-    name: title,
+  const jsonLd = createJsonLdCollectionPage({
+    id: url,
+    title,
     description,
     url,
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: posts.map((post, index) => ({
-        '@type': 'BlogPosting',
-        headline: post.title,
-        url: `${url}/${post.slug}`,
-        datePublished: post.date,
-        dateModified: post.modifiedTime,
-        position: index + 1,
-      })),
-    },
-    isPartOf: {
-      '@type': 'WebSite',
-      name: MY_NAME,
-      url: getBaseUrl(),
-    },
-    inLanguage: locale,
-  }
+    locale: locale as Locale,
+    items: posts.map((post, index) => ({
+      '@type': 'BlogPosting' as const,
+      headline: post.title,
+      url: `${url}/${post.slug}`,
+      datePublished: post.date,
+      dateModified: post.lastModified,
+      position: index + 1,
+    })),
+  })
 
   return (
     <>

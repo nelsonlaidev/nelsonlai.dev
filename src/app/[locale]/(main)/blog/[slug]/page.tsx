@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import type { Locale } from 'next-intl'
-import type { BlogPosting, WithContext } from 'schema-dts'
 
 import { notFound } from 'next/navigation'
 import { setRequestLocale } from 'next-intl/server'
@@ -15,14 +14,13 @@ import { TableOfContents } from '@/components/blog/table-of-contents'
 import { CommentSection } from '@/components/comment-section'
 import { JsonLd } from '@/components/json-ld'
 import { Mdx } from '@/components/mdx'
-import { MY_NAME } from '@/constants/site'
-import { getAllPosts, getPostBySlug } from '@/lib/content'
-import { createMetadata } from '@/lib/metadata'
-import { getBaseUrl } from '@/utils/get-base-url'
+import { getPost, getPosts } from '@/lib/content'
+import { createJsonLdBlogPosting } from '@/lib/json-ld'
+import { createPageMetadata } from '@/lib/metadata'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
 export function generateStaticParams(): Array<{ slug: string; locale: string }> {
-  return getAllPosts().map((post) => ({
+  return getPosts().map((post) => ({
     slug: post.slug,
     locale: post.locale,
   }))
@@ -32,20 +30,18 @@ export async function generateMetadata(props: PageProps<'/[locale]/blog/[slug]'>
   const { params } = props
   const { slug, locale } = await params
 
-  const post = getPostBySlug(locale, slug)
+  const post = getPost(slug, locale)
 
   if (!post) return {}
 
-  return createMetadata({
-    pathname: `/blog/${slug}`,
+  return createPageMetadata({
     title: post.title,
-    description: post.summary,
-    locale,
-    openGraph: {
-      type: 'article',
-      publishedTime: post.date,
-      modifiedTime: post.modifiedTime,
-    },
+    description: post.description,
+    canonical: `/blog/${slug}`,
+    openGraphImage: post.opengraphImage.url,
+    locale: locale as Locale,
+    date: post.date,
+    lastModified: post.lastModified,
   })
 }
 
@@ -55,40 +51,20 @@ function Page(props: PageProps<'/[locale]/blog/[slug]'>) {
 
   setRequestLocale(locale as Locale)
 
-  const post = getPostBySlug(locale, slug)
-  const url = getLocalizedPath({ locale, pathname: `/blog/${slug}` })
-  const baseUrl = getBaseUrl()
+  const post = getPost(slug, locale)
+  const url = getLocalizedPath(`/blog/${slug}`, locale as Locale)
 
-  if (!post) {
-    notFound()
-  }
+  if (!post) notFound()
 
-  const ogImage = getLocalizedPath({ locale, pathname: `/og/blog/${post.slug}/image.webp` })
-
-  const jsonLd: WithContext<BlogPosting> = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
+  const jsonLd = createJsonLdBlogPosting({
     headline: post.title,
-    description: post.summary,
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': url,
-    },
-    image: ogImage,
+    description: post.description,
+    url,
+    image: getLocalizedPath(post.opengraphImage.url, locale as Locale),
     datePublished: post.date,
-    dateModified: post.modifiedTime,
-    author: {
-      '@type': 'Person',
-      name: MY_NAME,
-      url: baseUrl,
-    },
-    publisher: {
-      '@type': 'Person',
-      name: MY_NAME,
-      url: baseUrl,
-    },
-    inLanguage: locale,
-  }
+    dateModified: post.lastModified,
+    locale: locale as Locale,
+  })
 
   return (
     <>

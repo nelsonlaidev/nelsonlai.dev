@@ -4,7 +4,7 @@ import type { Locale } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 
 import { Settings } from '@/components/settings'
-import { createMetadata } from '@/lib/metadata'
+import { createPageMetadata } from '@/lib/metadata'
 
 export async function generateMetadata(props: PageProps<'/[locale]/account/settings'>): Promise<Metadata> {
   const { params } = props
@@ -14,11 +14,12 @@ export async function generateMetadata(props: PageProps<'/[locale]/account/setti
   const title = t('common.labels.settings')
   const description = t('settings.description')
 
-  return createMetadata({
-    pathname: '/account/settings',
+  return createPageMetadata({
     title,
     description,
-    locale,
+    canonical: '/account/settings',
+    openGraphImage: null,
+    locale: locale as Locale,
   })
 }
 

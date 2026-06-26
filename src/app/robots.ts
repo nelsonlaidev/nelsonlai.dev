@@ -3,6 +3,8 @@ import type { MetadataRoute } from 'next'
 import { getBaseUrl } from '@/utils/get-base-url'
 
 function robots(): MetadataRoute.Robots {
+  const baseUrl = getBaseUrl()
+
   return {
     rules: [
       {
@@ -11,7 +13,7 @@ function robots(): MetadataRoute.Robots {
         disallow: ['/api/'],
       },
     ],
-    sitemap: `${getBaseUrl()}/sitemap.xml`,
+    sitemap: `${baseUrl}/sitemap.xml`,
   }
 }
 

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import type { Locale } from 'next-intl'
-import type { SoftwareSourceCode, WithContext } from 'schema-dts'
 
 import { allProjects } from 'content-collections'
 import { notFound } from 'next/navigation'
@@ -11,10 +10,9 @@ import { BlurImage } from '@/components/blur-image'
 import { JsonLd } from '@/components/json-ld'
 import { Mdx } from '@/components/mdx'
 import { ProjectHeader } from '@/components/project-header'
-import { MY_NAME } from '@/constants/site'
-import { getProjectBySlug } from '@/lib/content'
-import { createMetadata } from '@/lib/metadata'
-import { getBaseUrl } from '@/utils/get-base-url'
+import { getProject } from '@/lib/content'
+import { createJsonLdSoftwareSourceCode } from '@/lib/json-ld'
+import { createPageMetadata } from '@/lib/metadata'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
 export function generateStaticParams(): Array<{ slug: string; locale: string }> {
@@ -28,19 +26,18 @@ export async function generateMetadata(props: PageProps<'/[locale]/projects/[slu
   const { params } = props
   const { slug, locale } = await params
 
-  const project = getProjectBySlug(locale, slug)
+  const project = getProject(slug, locale)
 
-  if (!project) {
-    return {}
-  }
+  if (!project) return {}
 
-  const { name, description } = project
-
-  return createMetadata({
-    pathname: `/projects/${slug}`,
-    title: name,
-    description,
-    locale,
+  return createPageMetadata({
+    title: project.title,
+    description: project.description,
+    canonical: `/projects/${slug}`,
+    openGraphImage: project.opengraphImage.url,
+    locale: locale as Locale,
+    date: project.date,
+    lastModified: project.lastModified,
   })
 }
 
@@ -50,34 +47,25 @@ function Page(props: PageProps<'/[locale]/projects/[slug]'>) {
 
   setRequestLocale(locale as Locale)
 
-  const project = getProjectBySlug(locale, slug)
-  const url = getLocalizedPath({ locale, pathname: `/projects/${slug}` })
+  const project = getProject(slug, locale)
+  const url = getLocalizedPath(`/projects/${slug}`, locale as Locale)
 
   if (!project) {
     notFound()
   }
 
-  const { name, code, description, github, dateCreated } = project
-  const baseUrl = getBaseUrl()
+  const { title, code, description, github, date, lastModified } = project
 
-  const jsonLd: WithContext<SoftwareSourceCode> = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareSourceCode',
-    name,
+  const jsonLd = createJsonLdSoftwareSourceCode({
+    name: title,
     description,
     url,
     codeRepository: github,
-    license: 'https://opensource.org/licenses/MIT',
-    programmingLanguage: 'TypeScript',
-    dateCreated,
-    author: {
-      '@type': 'Person',
-      name: MY_NAME,
-      url: baseUrl,
-    },
-    thumbnailUrl: `${baseUrl}/images/projects/${slug}/cover.png`,
-    inLanguage: locale,
-  }
+    dateCreated: date,
+    dateModified: lastModified,
+    slug,
+    locale: locale as Locale,
+  })
 
   return (
     <>
@@ -88,7 +76,7 @@ function Page(props: PageProps<'/[locale]/projects/[slug]'>) {
           src={`/images/projects/${slug}/cover.png`}
           width={1200}
           height={630}
-          alt={name}
+          alt={title}
           className='my-12 rounded-lg'
           lazy={false}
         />

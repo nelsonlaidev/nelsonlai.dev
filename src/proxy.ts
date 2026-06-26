@@ -45,6 +45,6 @@ export const config = {
   // - robots.txt
   // - site.webmanifest
   matcher: [
-    '/((?!api|cosmos|rpc|_next/static|_next/image|_vercel|favicon|android-chrome|apple-touch-icon|fonts|images|videos|favicon.ico|sitemap.xml|robots.txt|site.webmanifest).*)',
+    '/((?!api|cosmos|rpc|_next/static|_next/image|_vercel|favicon|web-app-manifest|apple-touch-icon|images|videos|favicon.ico|sitemap.xml|robots.txt|site.webmanifest).*)',
   ],
 }

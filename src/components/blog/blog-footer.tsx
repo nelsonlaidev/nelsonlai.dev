@@ -18,7 +18,7 @@ export function BlogFooter(props: BlogFooterProps) {
 
   const editURL = `https://github.com/nelsonlaidev/nelsonlai.dev/blob/main/src/content/blog/${locale}/${post.slug}.mdx?plain=1`
 
-  const formattedDate = useFormattedDate(post.modifiedTime)
+  const formattedDate = useFormattedDate(post.lastModified)
 
   return (
     <div className='my-8 flex w-full items-center justify-between py-4 text-sm'>

@@ -1,17 +1,25 @@
+import type { Locale } from 'next-intl'
+
 import { routing } from '@/i18n/routing'
 
-import { getBaseUrl } from './get-base-url'
+export function getLocalizedPath(path: string, locale: Locale): string {
+  if (isFullUrl(path)) {
+    throw new Error(`getLocalizedPath: path must not be a full URL, got "${path}"`)
+  }
 
-type LocalizedDocument = {
-  locale: string
-  pathname?: string
+  if (hasLocalePrefix(path)) {
+    throw new Error(`getLocalizedPath: path must not contain a locale prefix, got "${path}"`)
+  }
+
+  if (locale === routing.defaultLocale) return path
+
+  return `/${locale}${path}`
 }
 
-export function getLocalizedPath(doc: LocalizedDocument) {
-  const { locale, pathname = '' } = doc
-  const baseUrl = getBaseUrl()
+function isFullUrl(path: string): boolean {
+  return path.startsWith('http://') || path.startsWith('https://') || path.startsWith('//')
+}
 
-  const localePath = locale === routing.defaultLocale ? baseUrl : `${baseUrl}/${locale}`
-
-  return `${localePath}${pathname}`
+function hasLocalePrefix(path: string): boolean {
+  return routing.locales.some((locale) => path === `/${locale}` || path.startsWith(`/${locale}/`))
 }

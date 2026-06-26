@@ -11,12 +11,13 @@ describe('getPathnames', () => {
   test('includes all static page routes', async () => {
     expect.assertions(1)
 
-    const pathnames = getPathnames({ includeProtectedRoutes: true })
+    const entries = getPathnames({ includeProtectedRoutes: true })
+    const pathnameSet = new Set(entries.map((e) => e.pathname))
     const staticRoutes = await getStaticPageRoutes()
 
     const missing = staticRoutes.filter(
       (route) =>
-        !pathnames.includes(route) &&
+        !pathnameSet.has(route) &&
         !EXCLUDED_ROUTES.some((excluded) => route === excluded || route.startsWith(`${excluded}/`)),
     )
 

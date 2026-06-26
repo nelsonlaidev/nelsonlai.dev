@@ -19,7 +19,7 @@ const animation = {
 type ProjectHeaderProps = Project
 
 export function ProjectHeader(props: ProjectHeaderProps) {
-  const { name, description, homepage, github } = props
+  const { title, description, homepage, github } = props
   const t = useTranslations()
 
   const repo = github.split('/').pop()
@@ -28,7 +28,7 @@ export function ProjectHeader(props: ProjectHeaderProps) {
     <div className='space-y-8 pt-10'>
       <motion.div className='flex items-center gap-3' initial={animation.hide} animate={animation.show}>
         <div className='flex flex-col gap-3'>
-          <h1 className='text-3xl font-semibold'>{name}</h1>
+          <h1 className='text-3xl font-semibold'>{title}</h1>
           <h2 className='text-muted-foreground'>{description}</h2>
         </div>
       </motion.div>

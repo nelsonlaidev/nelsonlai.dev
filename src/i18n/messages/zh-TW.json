@@ -1,7 +1,4 @@
 {
-  "about": {
-    "description": "嗨！我是 Nelson Lai，一位熱愛網頁開發的學生，使用 HTML、CSS 和 JavaScript 創作創新專案。探索我的作品集、技能與開發歷程，一起探索數位世界吧！"
-  },
   "account": {
     "account-created": "帳戶建立時間",
     "active-sessions": "使用中的工作階段",
@@ -82,7 +79,6 @@
       "toggle-strikethrough": "切換刪除線",
       "write": "撰寫"
     },
-    "description": "歡迎來到我的網站和部落格！作為香港的全端工程師，我從 2020 年 12 月起自學網頁開發，分享教學、筆記與生活點滴。探索我的旅程！",
     "footer": {
       "edit-on-github": "在 GitHub 上編輯",
       "last-updated": "最後更新日期：{date}"
@@ -191,7 +187,6 @@
     }
   },
   "dashboard": {
-    "description": "這是我的個人儀表板，使用 Next.js API 路由建立，並部署為 serverless functions。我使用這個儀表板追蹤 YouTube、GitHub 等平台的各種統計。",
     "stat": {
       "blog-total-likes": "部落格總按讚數",
       "blog-total-views": "部落格總瀏覽量",
@@ -237,7 +232,6 @@
     "try-again": "再試一次"
   },
   "guestbook": {
-    "description": "在我的留言板上留下您的想法。您可以在這裡告訴我任何事情！",
     "no-messages": "沒有留言，快來成為第一位留言者！",
     "pinned": {
       "description": "感謝您造訪我的網站。如果您有時間，我很樂意聽取您對我作品的看法。請使用您的帳戶登入以留下評論。謝謝！",
@@ -307,11 +301,7 @@
   "metadata": {
     "site-description": "Nelson Lai 是一位居住於香港的全端工程師。他使用 React、Node.js 和現代技術構建高效且優雅的網站。"
   },
-  "privacy": {
-    "description": "此頁面說明當您使用我們的網站時，我們如何處理您的資料並保護您的隱私。"
-  },
   "projects": {
-    "description": "我的專案集，每個都傾注了心血製作。",
     "visit-website": "前往網站"
   },
   "settings": {
@@ -334,9 +324,6 @@
     "settings-updated": "設定更新成功",
     "signed-out": "成功登出"
   },
-  "terms": {
-    "description": "這些條款和條件概述了使用我們網站的規則和規定。"
-  },
   "theme-toggle": {
     "options": {
       "dark": "深色",
@@ -353,8 +340,5 @@
     "unsubscribed-description": "您將不再收到此評論的回覆通知電子郵件。",
     "you-are-unsubscribing-as": "您正以 {email} 的身份取消訂閱",
     "you-have-been-unsubscribed": "您已取消訂閱"
-  },
-  "uses": {
-    "description": "這是我目前用來玩遊戲、程式設計、製作影片和日常使用的裝備。"
   }
 }
