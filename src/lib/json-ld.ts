@@ -21,12 +21,12 @@ import { getBaseUrl } from '@/utils/get-base-url'
 
 const ALL_SAME_AS = [SITE_FACEBOOK_URL, SITE_INSTAGRAM_URL, SITE_TWITTER_URL, SITE_GITHUB_URL, SITE_YOUTUBE_URL]
 
-export type JsonLdPersonOptions = {
+type JsonLdPersonOptions = {
   description?: string
   sameAs?: string[]
 }
 
-export function createJsonLdPerson(options?: JsonLdPersonOptions): Person {
+function createJsonLdPerson(options?: JsonLdPersonOptions): Person {
   return {
     '@type': 'Person',
     name: MY_NAME,
@@ -36,7 +36,7 @@ export function createJsonLdPerson(options?: JsonLdPersonOptions): Person {
   }
 }
 
-export function createJsonLdWebSiteRef(): WebSite {
+function createJsonLdWebSiteRef(): WebSite {
   return {
     '@type': 'WebSite',
     name: MY_NAME,
