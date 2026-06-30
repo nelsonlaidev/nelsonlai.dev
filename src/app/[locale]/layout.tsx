@@ -49,13 +49,11 @@ const geistMono = Geist_Mono({
 const notoSansTC = Noto_Sans_TC({
   variable: '--font-noto-sans-tc',
   subsets: ['latin'],
-  display: 'swap',
 })
 
 const notoSansSC = Noto_Sans_SC({
   variable: '--font-noto-sans-sc',
   subsets: ['latin'],
-  display: 'swap',
 })
 
 async function Layout(props: LayoutProps<'/[locale]'>) {
