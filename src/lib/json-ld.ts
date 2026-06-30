@@ -1,3 +1,4 @@
+import type { Locale } from 'next-intl'
 import type {
   AboutPage,
   BlogPosting,
@@ -47,7 +48,7 @@ function createJsonLdWebSiteRef(): WebSite {
 export type JsonLdWebSiteOptions = {
   description: string
   url: string
-  locale: string
+  locale: Locale
 }
 
 export function createJsonLdWebSite(options: JsonLdWebSiteOptions): WithContext<WebSite> {
@@ -73,7 +74,7 @@ export type JsonLdWebPageOptions = {
   title: string
   description: string
   url: string
-  locale: string
+  locale: Locale
 }
 
 export function createJsonLdWebPage(options: JsonLdWebPageOptions): WithContext<WebPage> {
@@ -96,7 +97,7 @@ export type JsonLdAboutPageOptions = {
   description: string
   url: string
   siteDescription: string
-  locale: string
+  locale: Locale
 }
 
 export function createJsonLdAboutPage(options: JsonLdAboutPageOptions): WithContext<AboutPage> {
@@ -121,7 +122,7 @@ export type JsonLdBlogPostingOptions = {
   image: string
   datePublished: string
   dateModified: string
-  locale: string
+  locale: Locale
 }
 
 export function createJsonLdBlogPosting(options: JsonLdBlogPostingOptions): WithContext<BlogPosting> {
@@ -156,7 +157,7 @@ export type JsonLdSoftwareSourceCodeOptions = {
   dateCreated: string
   dateModified: string
   slug: string
-  locale: string
+  locale: Locale
 }
 
 export function createJsonLdSoftwareSourceCode(
@@ -187,7 +188,7 @@ export type JsonLdCollectionPageOptions<T extends { '@type': string; url: string
   title: string
   description: string
   url: string
-  locale: string
+  locale: Locale
   items: Array<T & { position: number }>
 }
 

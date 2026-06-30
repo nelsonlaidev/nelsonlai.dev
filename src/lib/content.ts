@@ -1,8 +1,10 @@
 import 'server-only'
 
+import type { Locale } from 'next-intl'
+
 import { allPosts, allProjects, allSites } from 'content-collections'
 
-export function getPage(slug: string, locale?: string) {
+export function getPage(slug: string, locale?: Locale) {
   const all = [...allSites, ...allPosts, ...allProjects]
 
   if (locale) {
