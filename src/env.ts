@@ -6,7 +6,7 @@ export const env = createEnv({
   extends: [vercel()],
 
   shared: {
-    NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
+    NODE_ENV: z.enum(['development', 'production']).default('development'),
     CI: z
       .enum(['true', 'false', '1', '0'])
       .default('false')
