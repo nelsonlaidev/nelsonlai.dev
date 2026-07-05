@@ -11,6 +11,7 @@ export function Spinner(props: SpinnerProps) {
 
   return (
     <LoaderIcon
+      // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
       role='status'
       aria-label={t('common.aria-labels.loading')}
       className={cn('size-4 animate-spin', className)}
