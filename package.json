@@ -17,8 +17,8 @@
     "db:generate": "bun with-env drizzle-kit generate",
     "db:migrate": "bun with-env drizzle-kit migrate",
     "db:push": "bun with-env drizzle-kit push",
-    "db:reset": "bun with-env tsx ./src/db/reset.ts",
-    "db:seed": "bun with-env tsx ./src/db/seed.ts",
+    "db:reset": "bun with-env run ./src/db/reset.ts",
+    "db:seed": "bun with-env run ./src/db/seed.ts",
     "db:studio": "bun with-env drizzle-kit studio",
     "dev": "next dev -p 3000",
     "email:dev": "email dev --port 3001 --dir ./src/emails/templates",
@@ -164,7 +164,6 @@
     "react-email": "6.6.3",
     "schema-dts": "2.0.0",
     "tailwindcss": "4.3.1",
-    "tsx": "4.22.4",
     "typescript": "6.0.3",
     "vitest": "4.1.9"
   },
