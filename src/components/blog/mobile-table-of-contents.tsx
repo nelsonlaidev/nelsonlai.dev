@@ -7,7 +7,6 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
-import { Link } from '@/components/ui/link'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { useRouter } from '@/i18n/routing'
 
@@ -36,9 +35,9 @@ export function MobileTableOfContents(props: MobileTableOfContentsProps) {
           const { title, url, depth } = item
 
           return (
-            <Link
+            <a
               key={url}
-              href={{ hash: url }}
+              href={`#${url}`}
               className='block py-2 pr-2.5 text-sm/tight text-muted-foreground transition-colors hover:text-foreground'
               style={{
                 paddingLeft: (depth - 1) * 16,
@@ -49,7 +48,7 @@ export function MobileTableOfContents(props: MobileTableOfContentsProps) {
               }}
             >
               {title}
-            </Link>
+            </a>
           )
         })}
       </PopoverContent>
