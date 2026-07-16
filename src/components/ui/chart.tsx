@@ -190,7 +190,7 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
           .filter((item) => item.type !== 'none')
           .map((item, index) => {
             // oxlint-disable-next-line @typescript-eslint/restrict-template-expressions
-            const key = `${nameKey ?? item.name ?? item.dataKey ?? 'value'}`
+            const key = `${nameKey ?? item.dataKey ?? item.name ?? 'value'}`
             const itemConfig = getPayloadConfigFromPayload(config, item, key)
             const indicatorColor = color ?? (item.payload as ChartTooltipPayload).fill ?? item.color
 
