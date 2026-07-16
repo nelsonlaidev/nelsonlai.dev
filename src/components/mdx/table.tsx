@@ -33,4 +33,3 @@ export function Table(props: TableProps) {
     </UITable>
   )
 }
-/* eslint-enable @eslint-react/no-array-index-key */
