@@ -9,12 +9,12 @@ import { useCommentEditor } from '@/hooks/use-comment-editor'
 import { Markdown } from '../mdx/markdown'
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupTextarea } from '../ui/input-group'
 
-type CommentEditorProps = {
+type CommentEditorProps = React.ComponentProps<typeof Textarea> & {
   tabsValue?: string
   onTabsValueChange?: (value: string) => void
   onModEnter?: () => void
   onEscape?: () => void
-} & React.ComponentProps<typeof Textarea>
+}
 
 export function CommentEditor(props: CommentEditorProps) {
   const { value, tabsValue, onTabsValueChange, onModEnter, onEscape, ...rest } = props

@@ -11,11 +11,11 @@ import { getIconByLanguage } from '@/utils/get-icon-by-language'
 import { Button } from './button'
 import { ScrollArea } from './scroll-area'
 
-type CodeBlockProps = {
+type CodeBlockProps = React.ComponentProps<'pre'> & {
   'data-lang'?: string
   figureClassName?: string
   scrollAreaClassName?: string
-} & React.ComponentProps<'pre'>
+}
 
 export function CodeBlock(props: CodeBlockProps) {
   const { children, className, title, 'data-lang': lang, figureClassName, scrollAreaClassName, ref, ...rest } = props
@@ -59,9 +59,9 @@ export function CodeBlock(props: CodeBlockProps) {
   )
 }
 
-type CopyButtonProps = {
+type CopyButtonProps = React.ComponentProps<typeof Button> & {
   onCopy: () => void
-} & React.ComponentProps<typeof Button>
+}
 
 function CopyButton(props: CopyButtonProps) {
   const { onCopy, className, ...rest } = props

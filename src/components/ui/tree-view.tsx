@@ -10,9 +10,9 @@ type Node = {
   children?: Node[]
 }
 
-type TreeViewProps = {
+type TreeViewProps = React.ComponentProps<typeof TreeViewPrimitive.Root<Node>> & {
   label?: string
-} & React.ComponentProps<typeof TreeViewPrimitive.Root<Node>>
+}
 
 export function TreeView(props: TreeViewProps) {
   const t = useTranslations()

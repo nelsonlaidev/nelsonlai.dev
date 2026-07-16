@@ -1,11 +1,11 @@
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { cn } from '@/utils/cn'
 
-type VideoProps = {
+type VideoProps = React.ComponentProps<'video'> & {
   src: string
   width: number
   height: number
-} & React.ComponentProps<'video'>
+}
 
 export function Video(props: VideoProps) {
   const { src, width, height, controls = true, className, ...rest } = props

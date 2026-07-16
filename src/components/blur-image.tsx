@@ -10,10 +10,10 @@ import { useState } from 'react'
 
 import { cn } from '@/utils/cn'
 
-type ImageProps = {
+type ImageProps = React.ComponentProps<typeof NextImage> & {
   imageClassName?: string
   lazy?: boolean
-} & React.ComponentProps<typeof NextImage>
+}
 
 export function BlurImage(props: ImageProps) {
   const { alt, src, className, imageClassName, lazy = true, ...rest } = props

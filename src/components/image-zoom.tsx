@@ -5,9 +5,9 @@ import 'react-medium-image-zoom/dist/styles.css'
 
 import Zoom from 'react-medium-image-zoom'
 
-type ImageZoomProps = {
+type ImageZoomProps = React.ComponentProps<typeof Zoom> & {
   children: React.ReactNode
-} & React.ComponentProps<typeof Zoom>
+}
 
 export function ImageZoom(props: ImageZoomProps) {
   const { children, ...rest } = props

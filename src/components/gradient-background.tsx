@@ -2,9 +2,9 @@ import { useId } from 'react'
 
 import { cn } from '@/utils/cn'
 
-type GradientBackgroundProps = {
+type GradientBackgroundProps = React.ComponentProps<'div'> & {
   position?: 'top' | 'bottom'
-} & React.ComponentProps<'div'>
+}
 
 export function GradientBackground(props: GradientBackgroundProps) {
   const { position = 'top', className, ...rest } = props

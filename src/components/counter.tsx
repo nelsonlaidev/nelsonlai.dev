@@ -1,10 +1,10 @@
 import { useInView, useMotionValue, useSpring } from 'motion/react'
 import { useEffect, useRef } from 'react'
 
-type CounterProps = {
+type CounterProps = React.ComponentProps<'span'> & {
   value: number
   direction?: 'up' | 'down'
-} & React.ComponentProps<'span'>
+}
 
 export function Counter(props: CounterProps) {
   const { value, direction = 'up', ...rest } = props
