@@ -14,4 +14,3 @@ shikijs
 sonarjs
 tsgolint
 unifiedjs
-vaul

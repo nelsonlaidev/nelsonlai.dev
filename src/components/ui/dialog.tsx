@@ -62,7 +62,7 @@ export function DialogContent(props: DialogContentProps) {
       <DialogPrimitive.Popup
         data-slot='dialog-content'
         className={cn(
-          'fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-1/2 gap-6 rounded-4xl bg-background p-6 text-sm ring-1 ring-foreground/5 duration-100 outline-none sm:max-w-md data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
+          'fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-1/2 gap-6 rounded-4xl bg-popover p-6 text-sm text-popover-foreground ring-1 ring-foreground/5 duration-100 outline-none sm:max-w-md data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
           className,
         )}
         {...rest}
@@ -122,7 +122,7 @@ export function DialogTitle(props: DialogTitleProps) {
   return (
     <DialogPrimitive.Title
       data-slot='dialog-title'
-      className={cn('text-base leading-none font-medium', className)}
+      className={cn('font-heading text-base leading-none font-medium', className)}
       {...rest}
     />
   )

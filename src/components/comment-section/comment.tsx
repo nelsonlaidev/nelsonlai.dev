@@ -65,7 +65,7 @@ export function Comment(props: CommentProps) {
 
   const defaultImage = getDefaultImage(userId)
 
-  const context = useMemo<CommentContextValue>(
+  const contextValue = useMemo<CommentContextValue>(
     () => ({
       isEditing,
       isReplying,
@@ -80,7 +80,7 @@ export function Comment(props: CommentProps) {
   )
 
   return (
-    <CommentProvider value={context}>
+    <CommentProvider value={contextValue}>
       <div ref={commentRef} className='p-2.5' data-testid={`comment-${id}`}>
         {isHighlighted && <Badge className='mb-4'>{t('blog.comments.highlighted-comment')}</Badge>}
         <div className='flex gap-4'>

@@ -51,10 +51,10 @@ export function ChartContainer(props: ChartContainerProps) {
   const uniqueId = useId()
   const chartId = `chart-${rest.id ?? uniqueId.replaceAll(':', '')}`
 
-  const value = useMemo(() => ({ config }), [config])
+  const contextValue = useMemo(() => ({ config }), [config])
 
   return (
-    <ChartContext value={value}>
+    <ChartContext value={contextValue}>
       <div
         data-slot='chart'
         data-chart={chartId}

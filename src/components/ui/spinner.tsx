@@ -11,6 +11,7 @@ export function Spinner(props: SpinnerProps) {
 
   return (
     <LoaderIcon
+      data-slot='spinner'
       // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
       role='status'
       aria-label={t('common.aria-labels.loading')}

@@ -113,7 +113,7 @@ export function FieldLabel(props: FieldLabelProps) {
     <Label
       data-slot='field-label'
       className={cn(
-        'group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:border-primary/50 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-4 dark:has-data-checked:bg-primary/10',
+        'group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-4 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10',
         className,
       )}
       {...rest}
@@ -130,7 +130,7 @@ export function FieldTitle(props: FieldTitleProps) {
     <div
       data-slot='field-label'
       className={cn(
-        'flex w-fit items-center gap-2 text-sm/snug font-medium group-data-[disabled=true]/field:opacity-50',
+        'flex w-fit items-center gap-2 text-sm font-medium group-data-[disabled=true]/field:opacity-50',
         className,
       )}
       {...rest}
@@ -147,7 +147,7 @@ export function FieldDescription(props: FieldDescriptionProps) {
     <p
       data-slot='field-description'
       className={cn(
-        'text-left text-sm/normal font-normal text-muted-foreground group-has-data-[orientation=horizontal]/field:text-balance last:mt-0 nth-last-2:-mt-1 [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary [[data-variant=legend]+&]:-mt-1.5',
+        'text-left text-sm/normal font-normal text-muted-foreground group-has-data-horizontal/field:text-balance last:mt-0 nth-last-2:-mt-1 [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary [[data-variant=legend]+&]:-mt-1.5',
         className,
       )}
       {...rest}

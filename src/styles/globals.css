@@ -1,69 +1,10 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 @import './shiki.css';
 @import './typography.css';
 
 @custom-variant dark (&:is(.dark *));
-
-@custom-variant data-open {
-  &:where([data-state='open']),
-  &:where([data-open]:not([data-open='false'])) {
-    @slot;
-  }
-}
-
-@custom-variant data-closed {
-  &:where([data-state='closed']),
-  &:where([data-closed]:not([data-closed='false'])) {
-    @slot;
-  }
-}
-
-@custom-variant data-checked {
-  &:where([data-state='checked']),
-  &:where([data-checked]:not([data-checked='false'])) {
-    @slot;
-  }
-}
-
-@custom-variant data-unchecked {
-  &:where([data-state='unchecked']),
-  &:where([data-unchecked]:not([data-unchecked='false'])) {
-    @slot;
-  }
-}
-
-@custom-variant data-selected {
-  &:where([data-selected='true']) {
-    @slot;
-  }
-}
-
-@custom-variant data-disabled {
-  &:where([data-disabled='true']),
-  &:where([data-disabled]:not([data-disabled='false'])) {
-    @slot;
-  }
-}
-
-@custom-variant data-active {
-  &:where([data-state='active']),
-  &:where([data-active]:not([data-active='false'])) {
-    @slot;
-  }
-}
-
-@custom-variant data-horizontal {
-  &:where([data-orientation='horizontal']) {
-    @slot;
-  }
-}
-
-@custom-variant data-vertical {
-  &:where([data-orientation='vertical']) {
-    @slot;
-  }
-}
 
 @theme inline {
   --color-background: var(--background);
@@ -157,6 +98,7 @@
     }
   }
 
+  --font-heading: var(--font-sans);
   --font-sans: var(--font-geist-sans), var(--font-noto-sans-tc), var(--font-noto-sans-sc);
   --font-mono: var(--font-geist-mono);
 
@@ -273,13 +215,9 @@
   body {
     @apply bg-background text-foreground antialiased relative min-h-svh flex flex-col;
   }
-}
 
-@utility no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
   }
 }

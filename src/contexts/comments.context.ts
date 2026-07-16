@@ -2,7 +2,7 @@ import type { CommentListInput } from '@/orpc/client'
 
 import { createContext, use } from 'react'
 
-type CommentsContextValue = {
+export type CommentsContextValue = {
   slug: string
   sort: CommentListInput['sort']
   setSort: (sort: CommentListInput['sort']) => void
