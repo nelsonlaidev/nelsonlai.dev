@@ -23,8 +23,11 @@ async function transform<TDoc extends BaseDoc>(document: TDoc, context: Collecti
     throw new Error(`Invalid path: ${document._meta.path}`)
   }
 
-  // oxlint-disable-next-line no-deprecated -- false positive
-  const fullPath = `${context.collection.directory}/${document._meta.filePath}`
+  // `CollectionContext` exposes `collection` to collection transforms, but its intersection with
+  // the deprecated base `Context.collection` incorrectly preserves the deprecation marker.
+  // oxlint-disable-next-line no-deprecated
+  const { directory, name: collectionName } = context.collection
+  const fullPath = `${directory}/${document._meta.filePath}`
 
   const lastModified = await context.cache(fullPath, async () => {
     const { stdout } = await x('git', ['log', '-1', `--format=%ai`, '--', fullPath])
@@ -42,8 +45,7 @@ async function transform<TDoc extends BaseDoc>(document: TDoc, context: Collecti
     return new Date().toISOString()
   })
 
-  // oxlint-disable-next-line no-deprecated -- false positive
-  const opengraphSegments = [context.collection.name, path, 'image.png']
+  const opengraphSegments = [collectionName, path, 'image.png']
 
   return {
     ...document,

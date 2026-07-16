@@ -16,9 +16,11 @@ export function Counter(props: CounterProps) {
   })
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
+  /* oxlint-disable @eslint-react/immutability -- MotionValue instances are mutable by design. */
   useEffect(() => {
     if (isInView) motionValue.set(direction === 'down' ? 0 : value)
   }, [motionValue, isInView, direction, value])
+  /* oxlint-enable @eslint-react/immutability */
 
   useEffect(() => {
     if (ref.current && value === 0) {
