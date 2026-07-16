@@ -26,7 +26,3 @@ src/tests/e2e/.auth/
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
-
-# Cosmos
-cosmos.imports.ts
-cosmos-export

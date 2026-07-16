@@ -17,13 +17,6 @@ export default defineConfig({
   config: {
     overrides: [
       {
-        files: ['src/components/ui/*.fixture.tsx'],
-        plugins: ['nextjs'],
-        rules: {
-          'nextjs/no-html-link-for-pages': 'off',
-        },
-      },
-      {
         files: ['**/*.{ts,tsx}'],
         rules: {
           'no-restricted-imports': [

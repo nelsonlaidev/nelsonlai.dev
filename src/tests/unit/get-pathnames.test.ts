@@ -6,7 +6,7 @@ import { getPathnames, PROTECTED_ROUTES } from '@/utils/get-pathnames'
 
 describe('getPathnames', () => {
   // Routes that exist as page files but are intentionally excluded from getPathnames()
-  const EXCLUDED_ROUTES = ['/cosmos', '/unsubscribe', '/admin']
+  const EXCLUDED_ROUTES = ['/unsubscribe', '/admin']
 
   test('includes all static page routes', async () => {
     expect.assertions(1)

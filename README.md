@@ -183,7 +183,6 @@ The services will be available at the following URLs:
 | ---------------- | ---------------- |
 | App              | `localhost:3000` |
 | React Email      | `localhost:3001` |
-| Cosmos           | `localhost:3002` |
 | Database         | `localhost:5432` |
 | Redis            | `localhost:6379` |
 | Redis serverless | `localhost:8079` |
@@ -194,10 +193,9 @@ The services will be available at the following URLs:
 # Development
 bun dev               # Start development server
 bun email:dev         # Run email preview server
-bun cosmos            # Start Cosmos component playground
 
 # Build & Production
-bun run build         # Build for production (includes cosmos:export)
+bun run build         # Build for production
 bun start             # Start production server
 bun analyze           # Analyze bundle size
 

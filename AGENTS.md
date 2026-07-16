@@ -9,7 +9,7 @@ This is a Bun-based Next.js 16 App Router project. Application code lives in `sr
 Use Bun for all local work.
 
 - `bun dev`: start the app on `localhost:3000`
-- `bun run build`: export Cosmos fixtures, then build production output
+- `bun run build`: build production output
 - `bun start`: run the production build locally
 - `bun check`: run lint, typecheck, Oxfmt, Knip, i18n, and spellcheck
 - `bun test:unit` or `bun test:unit:coverage`: run Vitest tests with optional coverage

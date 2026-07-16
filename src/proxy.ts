@@ -34,7 +34,6 @@ export function proxy(request: NextRequest) {
 export const config = {
   // Match all request paths except for the ones starting with:
   // - api (API routes)
-  // - cosmos (React Cosmos routes)
   // - rpc (oRPC routes)
   // - _next/static (static files)
   // - _next/image (image optimization files)
@@ -45,6 +44,6 @@ export const config = {
   // - robots.txt
   // - site.webmanifest
   matcher: [
-    '/((?!api|cosmos|rpc|_next/static|_next/image|_vercel|favicon|web-app-manifest|apple-touch-icon|images|videos|favicon.ico|sitemap.xml|robots.txt|site.webmanifest).*)',
+    '/((?!api|rpc|_next/static|_next/image|_vercel|favicon|web-app-manifest|apple-touch-icon|images|videos|favicon.ico|sitemap.xml|robots.txt|site.webmanifest).*)',
   ],
 }
