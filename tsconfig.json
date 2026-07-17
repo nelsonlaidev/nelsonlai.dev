@@ -9,6 +9,6 @@
     "types": ["node"]
   },
   "extends": "@nelsonlaidev/typescript-config/nextjs.json",
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts", ".next/dev/types/**/*.ts"]
+  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts", ".next/dev/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
