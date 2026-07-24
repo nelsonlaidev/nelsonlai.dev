@@ -43,7 +43,7 @@ type PageMetadataOptions = {
 export function createPageMetadata(options: PageMetadataOptions): Metadata {
   const baseUrl = getBaseUrl()
   const localizedCanonical = getLocalizedPath(options.canonical, options.locale)
-  const ogImageUrl = options.openGraphImage ?? '/images/banner.png'
+  const ogImageUrl = options.openGraphImage
 
   return {
     ...(options.title !== null && { title: options.title }),
@@ -55,7 +55,7 @@ export function createPageMetadata(options: PageMetadataOptions): Metadata {
       type: options.date ? 'article' : 'website',
       locale: options.locale,
       images: {
-        url: getLocalizedPath(ogImageUrl, options.locale),
+        url: ogImageUrl ? getLocalizedPath(ogImageUrl, options.locale) : '/images/banner.png',
         width: OG_IMAGE_WIDTH,
         height: OG_IMAGE_HEIGHT,
         type: OG_IMAGE_TYPE,
