@@ -5,7 +5,8 @@ import { useLocale, useTranslations } from 'next-intl'
 import { useTransition } from 'react'
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { LOCALE_ITEMS, usePathname, useRouter } from '@/i18n/routing'
+import { usePathname, useRouter } from '@/i18n/navigation'
+import { LOCALE_ITEMS } from '@/i18n/routing'
 
 export function LocaleSwitcher() {
   const t = useTranslations()

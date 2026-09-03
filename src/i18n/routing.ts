@@ -1,4 +1,3 @@
-import { createNavigation } from 'next-intl/navigation'
 import { defineRouting } from 'next-intl/routing'
 
 export const routing = defineRouting({
@@ -27,5 +26,3 @@ export const LOCALE_ITEMS: LocaleItem[] = [
   { label: 'Español', value: 'es' },
   { label: 'Português (Brasil)', value: 'pt-BR' },
 ]
-
-export const { Link, usePathname, useRouter, redirect } = createNavigation(routing)

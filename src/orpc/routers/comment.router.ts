@@ -1,6 +1,5 @@
 import { ORPCError } from '@orpc/client'
 import { and, asc, count, desc, eq, gt, isNotNull, isNull, lt, ne } from 'drizzle-orm'
-import { getLocale } from 'next-intl/server'
 
 import { IS_PRODUCTION } from '@/constants/common'
 import { comments, settings, unsubscribes, votes } from '@/db/schemas'
@@ -107,9 +106,7 @@ const createComment = protectedProcedure
   .handler(async ({ input, context }) => {
     const { user } = context.session
 
-    const locale = await getLocale()
-
-    const post = getPost(input.slug, locale)
+    const post = getPost(input.slug, input.locale)
 
     if (!post) throw new ORPCError('NOT_FOUND', { message: 'Blog post not found' })
 

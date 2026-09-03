@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
-import { useRouter } from '@/i18n/routing'
+import { useRouter } from '@/i18n/navigation'
 import { authClient } from '@/lib/auth-client'
 
 type UseSignOutOptions = {

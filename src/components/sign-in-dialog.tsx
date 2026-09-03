@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Link } from '@/components/ui/link'
 import { useSignInDialog } from '@/hooks/use-sign-in-dialog'
-import { usePathname } from '@/i18n/routing'
+import { usePathname } from '@/i18n/navigation'
 import { authClient } from '@/lib/auth-client'
 
 import { Spinner } from './ui/spinner'

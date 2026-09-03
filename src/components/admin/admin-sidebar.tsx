@@ -13,7 +13,7 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 import { ADMIN_SIDEBAR_LINKS } from '@/constants/navigation'
-import { usePathname } from '@/i18n/routing'
+import { usePathname } from '@/i18n/navigation'
 
 import { Link } from '../ui/link'
 

@@ -3,7 +3,7 @@ import { getLocale } from 'next-intl/server'
 import { AdminHeader } from '@/components/admin/admin-header'
 import { AdminSidebar } from '@/components/admin/admin-sidebar'
 import { SidebarProvider } from '@/components/ui/sidebar'
-import { redirect } from '@/i18n/routing'
+import { redirect } from '@/i18n/navigation'
 import { getSession } from '@/lib/auth'
 
 async function Layout(props: LayoutProps<'/[locale]'>) {
