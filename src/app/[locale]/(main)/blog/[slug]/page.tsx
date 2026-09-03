@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
-import type { Locale } from 'next-intl'
 
 import { notFound } from 'next/navigation'
-import { setRequestLocale } from 'next-intl/server'
-import { Suspense, use } from 'react'
+import { getLocale } from 'next-intl/server'
+import { Suspense } from 'react'
 
 import { BlogFooter } from '@/components/blog/blog-footer'
 import { BlogHeader } from '@/components/blog/blog-header'
@@ -28,7 +27,8 @@ export function generateStaticParams(): Array<{ slug: string; locale: string }> 
 
 export async function generateMetadata(props: PageProps<'/[locale]/blog/[slug]'>): Promise<Metadata> {
   const { params } = props
-  const { slug, locale } = await params
+  const { slug } = await params
+  const locale = await getLocale()
 
   const post = getPost(slug, locale)
 
@@ -39,20 +39,19 @@ export async function generateMetadata(props: PageProps<'/[locale]/blog/[slug]'>
     description: post.description,
     canonical: `/blog/${slug}`,
     openGraphImage: post.opengraphImage.url,
-    locale: locale as Locale,
+    locale,
     date: post.date,
     lastModified: post.lastModified,
   })
 }
 
-function Page(props: PageProps<'/[locale]/blog/[slug]'>) {
+async function Page(props: PageProps<'/[locale]/blog/[slug]'>) {
   const { params } = props
-  const { slug, locale } = use(params)
-
-  setRequestLocale(locale as Locale)
+  const { slug } = await params
+  const locale = await getLocale()
 
   const post = getPost(slug, locale)
-  const url = getLocalizedPath(`/blog/${slug}`, locale as Locale)
+  const url = getLocalizedPath(`/blog/${slug}`, locale)
 
   if (!post) notFound()
 
@@ -60,10 +59,10 @@ function Page(props: PageProps<'/[locale]/blog/[slug]'>) {
     headline: post.title,
     description: post.description,
     url,
-    image: getLocalizedPath(post.opengraphImage.url, locale as Locale),
+    image: getLocalizedPath(post.opengraphImage.url, locale),
     datePublished: post.date,
     dateModified: post.lastModified,
-    locale: locale as Locale,
+    locale,
   })
 
   return (

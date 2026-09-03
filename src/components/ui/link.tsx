@@ -1,4 +1,4 @@
-import { Link as LocalizedLink } from '@/i18n/routing'
+import { Link as LocalizedLink } from '@/i18n/navigation'
 
 type InternalLink = '/' | `/${string}`
 type ExternalLink = `http://${string}` | `https://${string}` | `mailto:${string}` | `tel:${string}`

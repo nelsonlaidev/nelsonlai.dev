@@ -6,7 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Geist, Geist_Mono, Noto_Sans_SC, Noto_Sans_TC } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
-import { setRequestLocale } from 'next-intl/server'
+import { getLocale } from 'next-intl/server'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 import { Analytics } from '@/components/analytics'
@@ -57,14 +57,12 @@ const notoSansSC = Noto_Sans_SC({
 })
 
 async function Layout(props: LayoutProps<'/[locale]'>) {
-  const { children, params } = props
-  const { locale } = await params
+  const { children } = props
+  const locale = await getLocale()
 
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
-
-  setRequestLocale(locale)
 
   return (
     <html

@@ -2,6 +2,7 @@ import { createSelectSchema } from 'drizzle-zod'
 import * as z from 'zod'
 
 import { comments, users, votes } from '@/db/schemas'
+import { routing } from '@/i18n/routing'
 
 import { InfiniteQuerySchema } from './common.schema'
 
@@ -32,6 +33,7 @@ export const ListCommentsOutputSchema = z.object({
 export const CreateCommentInputSchema = z.object({
   slug: z.string().min(1),
   content: z.string().min(1),
+  locale: z.enum(routing.locales),
   parentId: z.string().optional(),
 })
 

@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { useRouter } from '@/i18n/routing'
+import { useRouter } from '@/i18n/navigation'
 
 type MobileTableOfContentsProps = {
   toc: TOC[]

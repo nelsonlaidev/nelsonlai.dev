@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 
 import { SegmentGroup, SegmentGroupItem } from '@/components/ui/segment-group'
 import { useScrollspy } from '@/hooks/use-scrollspy'
-import { useRouter } from '@/i18n/routing'
+import { useRouter } from '@/i18n/navigation'
 
 type TableOfContentsProps = {
   toc: TOC[]

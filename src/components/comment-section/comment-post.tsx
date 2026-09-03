@@ -1,7 +1,7 @@
 'use client'
 
 import { SendIcon } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
@@ -21,6 +21,7 @@ export function CommentPost() {
   const [tabsValue, setTabsValue] = useState<'write' | 'preview'>('write')
   const isHydrated = useIsHydrated()
   const { data: session, isPending: isSessionLoading } = useSession()
+  const locale = useLocale()
   const t = useTranslations()
 
   const { mutate: createComment, isPending: isCreating } = useCreatePostComment({ slug }, () => {
@@ -42,6 +43,7 @@ export function CommentPost() {
     createComment({
       slug,
       content: content.trim(),
+      locale,
     })
   }
 

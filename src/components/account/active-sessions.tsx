@@ -13,7 +13,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Tip } from '@/components/ui/tip'
 import { useListSessions, useRevokeSession } from '@/hooks/queries/auth.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
-import { useRouter } from '@/i18n/routing'
+import { useRouter } from '@/i18n/navigation'
 import { useSession } from '@/lib/auth-client'
 
 import { ActiveSessionsSkeleton } from './active-sessions-skeleton'

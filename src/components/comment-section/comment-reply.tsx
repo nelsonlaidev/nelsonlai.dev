@@ -1,6 +1,6 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
@@ -18,6 +18,7 @@ export function CommentReply() {
   const { data: session } = useSession()
   const { comment, setIsReplying } = useCommentContext()
   const { slug } = useCommentsContext()
+  const locale = useLocale()
   const t = useTranslations()
 
   const { mutate: createReply, isPending: isCreating } = useCreatePostComment({ slug }, () => {
@@ -38,6 +39,7 @@ export function CommentReply() {
     createReply({
       slug,
       content: content.trim(),
+      locale,
       parentId: comment.id,
     })
   }

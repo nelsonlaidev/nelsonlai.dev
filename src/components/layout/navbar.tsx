@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import { Link } from '@/components/ui/link'
 import { HEADER_LINKS } from '@/constants/navigation'
-import { usePathname } from '@/i18n/routing'
+import { usePathname } from '@/i18n/navigation'
 
 export function Navbar() {
   const pathname = usePathname()

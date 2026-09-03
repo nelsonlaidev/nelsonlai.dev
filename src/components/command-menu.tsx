@@ -19,7 +19,7 @@ import { SOCIAL_LINKS } from '@/constants/navigation'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
 import { useSignInDialog } from '@/hooks/use-sign-in-dialog'
 import { useSignOut } from '@/hooks/use-sign-out'
-import { useRouter } from '@/i18n/routing'
+import { useRouter } from '@/i18n/navigation'
 import { useSession } from '@/lib/auth-client'
 
 type CommandAction = {
@@ -28,7 +28,7 @@ type CommandAction = {
   handleSelect: () => void | Promise<void>
 }
 
-type CommandGroup = {
+type CommandSection = {
   name: string
   actions: CommandAction[]
 }
@@ -153,7 +153,7 @@ export function CommandMenu() {
     },
   }))
 
-  const groups: CommandGroup[] = [
+  const groups: CommandSection[] = [
     { name: t('common.labels.account'), actions: accountActions },
     { name: t('common.labels.general'), actions: generalActions },
     { name: t('command-menu.groups.social'), actions: socialActions },
