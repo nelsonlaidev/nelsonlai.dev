@@ -1,10 +1,8 @@
 import type { Metadata } from 'next'
-import type { Locale } from 'next-intl'
 
 import { allProjects } from 'content-collections'
 import { notFound } from 'next/navigation'
-import { setRequestLocale } from 'next-intl/server'
-import { use } from 'react'
+import { getLocale } from 'next-intl/server'
 
 import { BlurImage } from '@/components/blur-image'
 import { JsonLd } from '@/components/json-ld'
@@ -24,7 +22,8 @@ export function generateStaticParams(): Array<{ slug: string; locale: string }> 
 
 export async function generateMetadata(props: PageProps<'/[locale]/projects/[slug]'>): Promise<Metadata> {
   const { params } = props
-  const { slug, locale } = await params
+  const { slug } = await params
+  const locale = await getLocale()
 
   const project = getProject(slug, locale)
 
@@ -35,20 +34,19 @@ export async function generateMetadata(props: PageProps<'/[locale]/projects/[slu
     description: project.description,
     canonical: `/projects/${slug}`,
     openGraphImage: project.opengraphImage.url,
-    locale: locale as Locale,
+    locale,
     date: project.date,
     lastModified: project.lastModified,
   })
 }
 
-function Page(props: PageProps<'/[locale]/projects/[slug]'>) {
+async function Page(props: PageProps<'/[locale]/projects/[slug]'>) {
   const { params } = props
-  const { slug, locale } = use(params)
-
-  setRequestLocale(locale as Locale)
+  const { slug } = await params
+  const locale = await getLocale()
 
   const project = getProject(slug, locale)
-  const url = getLocalizedPath(`/projects/${slug}`, locale as Locale)
+  const url = getLocalizedPath(`/projects/${slug}`, locale)
 
   if (!project) {
     notFound()
@@ -64,7 +62,7 @@ function Page(props: PageProps<'/[locale]/projects/[slug]'>) {
     dateCreated: date,
     dateModified: lastModified,
     slug,
-    locale: locale as Locale,
+    locale,
   })
 
   return (

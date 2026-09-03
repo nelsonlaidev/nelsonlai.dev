@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
-import type { Locale } from 'next-intl'
 
 import { notFound } from 'next/navigation'
-import { useTranslations } from 'next-intl'
-import { setRequestLocale } from 'next-intl/server'
-import { use } from 'react'
+import { getLocale, getTranslations } from 'next-intl/server'
 
 import { JsonLd } from '@/components/json-ld'
 import { Mdx } from '@/components/mdx'
@@ -14,9 +11,8 @@ import { createJsonLdAboutPage } from '@/lib/json-ld'
 import { createPageMetadata } from '@/lib/metadata'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
-export async function generateMetadata(props: PageProps<'/[locale]/about'>): Promise<Metadata> {
-  const { params } = props
-  const { locale } = await params
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
 
   const page = getSite('about', locale)
 
@@ -27,20 +23,17 @@ export async function generateMetadata(props: PageProps<'/[locale]/about'>): Pro
     description: page.description,
     canonical: '/about',
     openGraphImage: page.opengraphImage.url,
-    locale: locale as Locale,
+    locale,
   })
 }
 
-function Page(props: PageProps<'/[locale]/about'>) {
-  const { params } = props
-  const { locale } = use(params)
+async function Page() {
+  const locale = await getLocale()
 
-  setRequestLocale(locale as Locale)
-
-  const t = useTranslations()
+  const t = await getTranslations()
 
   const page = getSite('about', locale)
-  const url = getLocalizedPath('/about', locale as Locale)
+  const url = getLocalizedPath('/about', locale)
 
   if (!page) notFound()
 
@@ -51,7 +44,7 @@ function Page(props: PageProps<'/[locale]/about'>) {
     description,
     url,
     siteDescription: t('metadata.site-description'),
-    locale: locale as Locale,
+    locale,
   })
 
   return (

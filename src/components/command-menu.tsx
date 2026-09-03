@@ -28,7 +28,7 @@ type CommandAction = {
   handleSelect: () => void | Promise<void>
 }
 
-type CommandGroup = {
+type CommandSection = {
   name: string
   actions: CommandAction[]
 }
@@ -153,7 +153,7 @@ export function CommandMenu() {
     },
   }))
 
-  const groups: CommandGroup[] = [
+  const groups: CommandSection[] = [
     { name: t('common.labels.account'), actions: accountActions },
     { name: t('common.labels.general'), actions: generalActions },
     { name: t('command-menu.groups.social'), actions: socialActions },

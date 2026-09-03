@@ -1,16 +1,14 @@
 import type { Metadata } from 'next'
-import type { Locale } from 'next-intl'
 
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 
 import { Settings } from '@/components/settings'
 import { createPageMetadata } from '@/lib/metadata'
 
-export async function generateMetadata(props: PageProps<'/[locale]/account/settings'>): Promise<Metadata> {
-  const { params } = props
-  const { locale } = await params
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
 
-  const t = await getTranslations({ locale: locale as Locale })
+  const t = await getTranslations({ locale })
   const title = t('common.labels.settings')
   const description = t('settings.description')
 
@@ -19,7 +17,7 @@ export async function generateMetadata(props: PageProps<'/[locale]/account/setti
     description,
     canonical: '/account/settings',
     openGraphImage: null,
-    locale: locale as Locale,
+    locale,
   })
 }
 

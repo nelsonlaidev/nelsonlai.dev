@@ -1,6 +1,4 @@
-import type { Locale } from 'next-intl'
-
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 
 import { AccountMobileNav } from '@/components/account/account-mobile-nav'
 import { AccountSidebar } from '@/components/account/account-sidebar'
@@ -10,13 +8,13 @@ import { redirect } from '@/i18n/routing'
 import { getSession } from '@/lib/auth'
 
 async function Layout(props: LayoutProps<'/[locale]'>) {
-  const { children, params } = props
-  const { locale } = await params
+  const { children } = props
+  const locale = await getLocale()
 
   const session = await getSession()
 
   if (!session) {
-    redirect({ href: '/', locale: locale as Locale })
+    redirect({ href: '/', locale })
   }
 
   const t = await getTranslations()

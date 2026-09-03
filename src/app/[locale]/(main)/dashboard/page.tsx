@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
-import type { Locale } from 'next-intl'
 
 import { notFound } from 'next/navigation'
-import { setRequestLocale } from 'next-intl/server'
-import { use } from 'react'
+import { getLocale } from 'next-intl/server'
 
 import { JsonLd } from '@/components/json-ld'
 import { PageHeader } from '@/components/page-header'
@@ -13,9 +11,8 @@ import { createJsonLdWebPage } from '@/lib/json-ld'
 import { createPageMetadata } from '@/lib/metadata'
 import { getLocalizedPath } from '@/utils/get-localized-path'
 
-export async function generateMetadata(props: PageProps<'/[locale]/dashboard'>): Promise<Metadata> {
-  const { params } = props
-  const { locale } = await params
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
 
   const page = getSite('dashboard', locale)
 
@@ -26,24 +23,21 @@ export async function generateMetadata(props: PageProps<'/[locale]/dashboard'>):
     description: page.description,
     canonical: '/dashboard',
     openGraphImage: page.opengraphImage.url,
-    locale: locale as Locale,
+    locale,
   })
 }
 
-function Page(props: PageProps<'/[locale]/dashboard'>) {
-  const { params } = props
-  const { locale } = use(params)
-
-  setRequestLocale(locale as Locale)
+async function Page() {
+  const locale = await getLocale()
 
   const page = getSite('dashboard', locale)
-  const url = getLocalizedPath('/dashboard', locale as Locale)
+  const url = getLocalizedPath('/dashboard', locale)
 
   if (!page) notFound()
 
   const { title, description } = page
 
-  const jsonLd = createJsonLdWebPage({ title, description, url, locale: locale as Locale })
+  const jsonLd = createJsonLdWebPage({ title, description, url, locale })
 
   return (
     <>
