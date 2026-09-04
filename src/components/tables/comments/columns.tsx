@@ -1,5 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { AdminCommentListOutput } from '@/orpc/client'
+import type { features } from '../features'
 
 import { useTranslations } from 'next-intl'
 
@@ -10,7 +11,7 @@ import { FormattedDateCell } from '../formatted-date-cell'
 
 export type Comment = AdminCommentListOutput['comments'][number]
 
-export function useColumns(): Array<ColumnDef<Comment>> {
+export function useColumns(): Array<ColumnDef<typeof features, Comment>> {
   const t = useTranslations()
 
   return [
