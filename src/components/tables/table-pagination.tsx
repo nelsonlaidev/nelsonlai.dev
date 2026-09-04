@@ -1,6 +1,7 @@
 'use client'
 
-import type { Table } from '@tanstack/react-table'
+import type { ReactTable, RowData } from '@tanstack/react-table'
+import type { features } from './features'
 
 import { ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -8,12 +9,12 @@ import { useTranslations } from 'next-intl'
 import { Button } from '../ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 
-type TablePaginationProps<TData> = {
-  table: Table<TData>
+type TablePaginationProps<TData extends RowData> = {
+  table: ReactTable<typeof features, TData>
   disabled?: boolean
 }
 
-export function TablePagination<TData>(props: TablePaginationProps<TData>) {
+export function TablePagination<TData extends RowData>(props: TablePaginationProps<TData>) {
   const { table, disabled = false } = props
   const t = useTranslations()
 
@@ -29,14 +30,14 @@ export function TablePagination<TData>(props: TablePaginationProps<TData>) {
         <div className='flex items-center gap-2'>
           <p className='text-sm font-medium'>{t('components.table-pagination.rows-per-page')}</p>
           <Select
-            value={`${table.getState().pagination.pageSize}`}
+            value={`${table.state.pagination.pageSize}`}
             onValueChange={(value) => {
               table.setPageSize(Number(value))
             }}
             disabled={disabled}
           >
             <SelectTrigger size='sm'>
-              <SelectValue placeholder={table.getState().pagination.pageSize} />
+              <SelectValue placeholder={table.state.pagination.pageSize} />
             </SelectTrigger>
             <SelectContent side='top'>
               {[10, 20, 25, 30, 40, 50].map((pageSize) => (
@@ -49,7 +50,7 @@ export function TablePagination<TData>(props: TablePaginationProps<TData>) {
         </div>
         <div className='text-sm font-medium'>
           {t('components.table-pagination.page-of', {
-            page: table.getState().pagination.pageIndex + 1,
+            page: table.state.pagination.pageIndex + 1,
             total: table.getPageCount(),
           })}
         </div>

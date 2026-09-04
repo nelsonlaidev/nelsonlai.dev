@@ -28,23 +28,6 @@ export default defineConfig({
     vitest({
       files: [`src/tests/unit/**/*.test.{ts,tsx}`],
     }),
-    {
-      files: ['**/*.{ts,tsx}'],
-      rules: {
-        'no-restricted-imports': [
-          'error',
-          {
-            paths: [
-              {
-                name: '@tanstack/react-table',
-                importNames: ['useReactTable'],
-                message: 'Please use the custom hook from `@/hooks/use-react-table` instead.',
-              },
-            ],
-          },
-        ],
-      },
-    },
   ],
   // },
 })

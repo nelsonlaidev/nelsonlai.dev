@@ -1,11 +1,11 @@
 import type { OnChangeFn, PaginationState } from '@tanstack/react-table'
 import type { Comment } from './columns'
 
-import { flexRender, getCoreRowModel } from '@tanstack/react-table'
+import { flexRender, useTable } from '@tanstack/react-table'
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { useReactTable } from '@/hooks/use-react-table'
 
+import { features } from '../features'
 import { TablePagination } from '../table-pagination'
 import { useColumns } from './columns'
 
@@ -18,18 +18,16 @@ type CommentsTableProps = {
 }
 
 export function CommentsTable(props: CommentsTableProps) {
-  'use no memo'
-
   const { comments, pageCount, pagination, onPaginationChange, isFetching = false } = props
   const columns = useColumns()
 
-  const table = useReactTable({
+  const table = useTable({
+    features,
     data: comments,
     columns,
     pageCount,
     state: { pagination },
     onPaginationChange,
-    getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
   })
 

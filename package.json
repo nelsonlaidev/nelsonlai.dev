@@ -60,7 +60,7 @@
     "@tanstack/react-form": "1.33.5",
     "@tanstack/react-query": "5.102.8",
     "@tanstack/react-store": "0.11.1",
-    "@tanstack/react-table": "8.21.3",
+    "@tanstack/react-table": "9.2.4",
     "@upstash/ratelimit": "2.0.8",
     "@upstash/redis": "1.38.3",
     "@vercel/functions": "3.9.5",

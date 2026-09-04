@@ -1,5 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { AdminUserListOutput } from '@/orpc/client'
+import type { features } from '../features'
 
 import { useTranslations } from 'next-intl'
 
@@ -9,7 +10,7 @@ import { FormattedDateCell } from '../formatted-date-cell'
 
 export type User = AdminUserListOutput['users'][number]
 
-export function useColumns(): Array<ColumnDef<User>> {
+export function useColumns(): Array<ColumnDef<typeof features, User>> {
   const t = useTranslations()
 
   return [
