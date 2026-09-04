@@ -3,10 +3,9 @@
 // Source: https://github.com/fuma-nama/fumadocs/blob/82c273917280f63da95687852135f89a08593e71/packages/ui/src/components/heading.tsx
 //
 // Modified by: Nelson Lai
+import { cn } from 'cn'
 import { LinkIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-
-import { cn } from '@/utils/cn'
 
 type Types = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 type HeadingProps<TTag extends Types> = Omit<React.ComponentProps<TTag>, 'as'> & {

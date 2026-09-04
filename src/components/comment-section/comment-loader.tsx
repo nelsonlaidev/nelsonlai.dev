@@ -1,4 +1,4 @@
-import { cn } from '@/utils/cn'
+import { cn } from 'cn'
 
 import { Spinner } from '../ui/spinner'
 

@@ -1,5 +1,6 @@
+import { cn } from 'cn'
+
 import { Skeleton } from '@/components/ui/skeleton'
-import { cn } from '@/utils/cn'
 import { range } from '@/utils/range'
 
 function Placeholder() {

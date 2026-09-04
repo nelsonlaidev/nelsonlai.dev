@@ -1,7 +1,6 @@
+import { cn } from 'cn'
 import { LoaderIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-
-import { cn } from '@/utils/cn'
 
 type SpinnerProps = React.ComponentProps<'svg'>
 

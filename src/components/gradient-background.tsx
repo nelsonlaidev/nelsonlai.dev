@@ -1,6 +1,5 @@
+import { cn } from 'cn'
 import { useId } from 'react'
-
-import { cn } from '@/utils/cn'
 
 type GradientBackgroundProps = React.ComponentProps<'div'> & {
   position?: 'top' | 'bottom'

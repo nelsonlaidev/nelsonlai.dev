@@ -3,6 +3,7 @@ import '@/styles/globals.css'
 import type { Metadata, Viewport } from 'next'
 
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { cn } from 'cn'
 import { Geist, Geist_Mono, Noto_Sans_SC, Noto_Sans_TC } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
@@ -16,7 +17,6 @@ import { SignInDialog } from '@/components/sign-in-dialog'
 import { MY_NAME } from '@/constants/site'
 import { routing } from '@/i18n/routing'
 import { createRootMetadata } from '@/lib/metadata'
-import { cn } from '@/utils/cn'
 
 export function generateStaticParams(): Array<{ locale: string }> {
   return routing.locales.map((locale) => ({ locale }))

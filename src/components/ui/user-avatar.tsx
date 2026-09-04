@@ -1,4 +1,5 @@
-import { cn } from '@/utils/cn'
+import { cn } from 'cn'
+
 import { getDefaultImage } from '@/utils/get-default-image'
 import { getInitials } from '@/utils/get-initials'
 

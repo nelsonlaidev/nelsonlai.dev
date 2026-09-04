@@ -2,6 +2,7 @@
 
 import type { Project } from 'content-collections'
 
+import { cn } from 'cn'
 import { ArrowUpRightIcon } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
@@ -9,7 +10,6 @@ import { useTranslations } from 'next-intl'
 import { buttonVariants } from '@/components/ui/button'
 import { Link } from '@/components/ui/link'
 import { GITHUB_USERNAME } from '@/constants/site'
-import { cn } from '@/utils/cn'
 
 const animation = {
   hide: { x: -30, opacity: 0 },

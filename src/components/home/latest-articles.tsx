@@ -2,13 +2,13 @@
 
 import type { Post } from 'content-collections'
 
+import { cn } from 'cn'
 import { motion, useInView } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useRef } from 'react'
 
 import { buttonVariants } from '@/components/ui/button'
 import { Link } from '@/components/ui/link'
-import { cn } from '@/utils/cn'
 
 import { PostCard } from '../post-card'
 

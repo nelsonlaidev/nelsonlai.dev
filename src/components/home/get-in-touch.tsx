@@ -1,11 +1,11 @@
 'use client'
 
+import { cn } from 'cn'
 import { motion, useAnimate, useInView } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
 import { BlurImage } from '@/components/blur-image'
-import { cn } from '@/utils/cn'
 
 import { buttonVariants } from '../ui/button'
 

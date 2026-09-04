@@ -1,8 +1,7 @@
 import { TreeView as TreeViewPrimitive } from '@ark-ui/react/tree-view'
+import { cn } from 'cn'
 import { ChevronRightIcon, FileIcon, FolderIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-
-import { cn } from '@/utils/cn'
 
 type Node = {
   id: string

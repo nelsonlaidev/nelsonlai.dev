@@ -1,4 +1,4 @@
-import { cn } from '@/utils/cn'
+import { cn } from 'cn'
 
 type SkeletonProps = React.ComponentProps<'div'>
 

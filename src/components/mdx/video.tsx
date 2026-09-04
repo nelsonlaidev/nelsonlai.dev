@@ -1,5 +1,6 @@
+import { cn } from 'cn'
+
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { cn } from '@/utils/cn'
 
 type VideoProps = React.ComponentProps<'video'> & {
   src: string

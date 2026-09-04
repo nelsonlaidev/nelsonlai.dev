@@ -1,8 +1,7 @@
 'use client'
 
 import { Avatar as AvatarPrimitive } from '@base-ui/react/avatar'
-
-import { cn } from '@/utils/cn'
+import { cn } from 'cn'
 
 type AvatarProps = AvatarPrimitive.Root.Props & {
   size?: 'default' | 'sm' | 'lg'

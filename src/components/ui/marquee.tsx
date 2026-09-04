@@ -1,4 +1,5 @@
-import { cn } from '@/utils/cn'
+import { cn } from 'cn'
+
 import { range } from '@/utils/range'
 
 type MarqueeProps = {

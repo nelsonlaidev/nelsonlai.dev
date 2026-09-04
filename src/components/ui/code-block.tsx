@@ -1,11 +1,11 @@
 'use client'
 
+import { cn } from 'cn'
 import { CheckIcon, CopyIcon } from 'lucide-react'
 import mergeRefs from 'merge-refs'
 import { useTranslations } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
 
-import { cn } from '@/utils/cn'
 import { getIconByLanguage } from '@/utils/get-icon-by-language'
 
 import { Button } from './button'

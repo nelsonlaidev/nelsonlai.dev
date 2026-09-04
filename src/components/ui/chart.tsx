@@ -2,10 +2,9 @@
 
 import type { TooltipValueType } from 'recharts'
 
+import { cn } from 'cn'
 import { createContext, use, useId, useInsertionEffect, useMemo } from 'react'
 import * as RechartsPrimitive from 'recharts'
-
-import { cn } from '@/utils/cn'
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const

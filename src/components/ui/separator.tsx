@@ -1,8 +1,7 @@
 'use client'
 
 import { Separator as SeparatorPrimitive } from '@base-ui/react/separator'
-
-import { cn } from '@/utils/cn'
+import { cn } from 'cn'
 
 type SeparatorProps = SeparatorPrimitive.Props
 

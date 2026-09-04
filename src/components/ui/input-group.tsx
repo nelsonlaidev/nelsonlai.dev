@@ -3,11 +3,11 @@
 import type { VariantProps } from 'class-variance-authority'
 
 import { cva } from 'class-variance-authority'
+import { cn } from 'cn'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { cn } from '@/utils/cn'
 
 type InputGroupProps = React.ComponentProps<'div'>
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/utils/cn'
+import { cn } from 'cn'
 
 type TableProps = React.ComponentProps<'table'>
 

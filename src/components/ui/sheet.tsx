@@ -1,11 +1,11 @@
 'use client'
 
 import { Dialog as SheetPrimitive } from '@base-ui/react/dialog'
+import { cn } from 'cn'
 import { XIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/ui/button'
-import { cn } from '@/utils/cn'
 
 type SheetProps = SheetPrimitive.Root.Props
 

@@ -5,10 +5,9 @@
 // Modified by: Nelson Lai
 'use client'
 
+import { cn } from 'cn'
 import NextImage from 'next/image'
 import { useState } from 'react'
-
-import { cn } from '@/utils/cn'
 
 type ImageProps = React.ComponentProps<typeof NextImage> & {
   imageClassName?: string

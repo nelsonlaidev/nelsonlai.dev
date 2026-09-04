@@ -1,10 +1,10 @@
 'use client'
 
+import { cn } from 'cn'
 import { useTranslations } from 'next-intl'
 
 import { Link } from '@/components/ui/link'
 import { useSpotifyStats } from '@/hooks/queries/stats.query'
-import { cn } from '@/utils/cn'
 
 type NowPlayingProps = React.ComponentProps<'div'>
 

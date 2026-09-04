@@ -1,11 +1,11 @@
 'use client'
 
+import { cn } from 'cn'
 import { AnimatePresence, motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 
 import { BlurImage } from '@/components/blur-image'
-import { cn } from '@/utils/cn'
 
 const WORDS = [
   {
