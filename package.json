@@ -120,7 +120,7 @@
     "@eslint-react/eslint-plugin": "5.19.0",
     "@lingual/i18n-check": "0.9.5",
     "@nelsonlaidev/oxfmt-config": "0.3.1",
-    "@nelsonlaidev/oxlint-config": "1.0.2",
+    "@nelsonlaidev/oxlint-config": "1.1.0",
     "@nelsonlaidev/typescript-config": "1.2.3",
     "@playwright/test": "1.62.1",
     "@tailwindcss/postcss": "4.3.3",
