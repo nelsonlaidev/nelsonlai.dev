@@ -71,6 +71,7 @@ export function LocationCard() {
     const canvas = canvasRef.current
     const width = canvas.offsetWidth
     const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 640 ? 1.8 : 2)
+    const isDark = document.documentElement.classList.contains('dark')
 
     globeRef.current = createGlobe(canvas, {
       devicePixelRatio: dpr,
@@ -81,7 +82,7 @@ export function LocationCard() {
       mapSamples: 16_000,
       markerElevation: 0.01,
       markers: MARKERS,
-      ...getThemeOptions(false),
+      ...getThemeOptions(isDark),
     })
 
     let animationId = 0
@@ -125,10 +126,14 @@ export function LocationCard() {
   }, [])
 
   useEffect(() => {
-    const observer = new MutationObserver(() => {
+    function applyTheme() {
       const isDark = document.documentElement.classList.contains('dark')
       globeRef.current?.update(getThemeOptions(isDark))
-    })
+    }
+
+    applyTheme()
+
+    const observer = new MutationObserver(applyTheme)
 
     observer.observe(document.documentElement, {
       attributes: true,
