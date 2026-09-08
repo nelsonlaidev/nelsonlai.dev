@@ -21,12 +21,14 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 
 ### Core Technologies
 
-- Next.js 16 with App Router
+- Next.js 16 with App Router and React Compiler
+- React 19
 - TypeScript with strict configuration
-- Tailwind CSS for styling
-- MDX for content
-- Drizzle ORM
-- I18n for internationalization support
+- Tailwind CSS v4 for styling
+- MDX for content (Content Collections)
+- Drizzle ORM with Zod schemas
+- next-intl for internationalization (6 locales)
+- oRPC for the type-safe API layer
 
 ### UI/UX
 
@@ -37,6 +39,13 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 - Shiki for code syntax highlighting
 - Motion for animations
 - Table of contents for blog posts
+- Keyboard-driven command menu
+
+### Site Features
+
+- Guestbook
+- Admin dashboard with live stats
+- Account settings
 
 ### Blog Features
 
@@ -59,16 +68,22 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 - Playwright for E2E testing
 - Oxlint configuration
 - Oxfmt code formatting
+- Knip for unused code detection
+- CSpell for spell checking
+- i18n-check for translation validation
 - Lefthook
 - Conventional commit
+- GitHub Actions CI
 
 ### Authentication & Data
 
 - Better Auth
-- Redis caching
+- Redis caching with Upstash
 - Upstash for API rate limiting
 - t3-env for environment variables
 - Umami Analytics
+- Cloudflare R2 for image storage
+- Resend for transactional emails
 
 ### Email Templates
 
@@ -89,7 +104,7 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 ### Prerequisites
 
 - Node.js >= 24
-- bun >= 1.3
+- bun >= 1.4
 - Docker
 - [Visual Studio Code](https://code.visualstudio.com/) with [recommended extensions](.vscode/extensions.json)
 - Optionally [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
@@ -98,9 +113,12 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 
 ```
 nelsonlai.dev/
+├── .github/          # CI workflows and shared actions
+├── .vscode/          # Editor settings and recommended extensions
 ├── public/           # Static assets (images, fonts, videos)
 ├── src/
 │   ├── app/          # Next.js app router pages
+│   ├── assets/       # Shared assets
 │   ├── components/   # React components
 │   ├── constants/    # Application constants
 │   ├── content/      # MDX blog posts and content
@@ -198,22 +216,35 @@ bun email:dev         # Run email preview server
 bun run build         # Build for production
 bun start             # Start production server
 bun analyze           # Analyze bundle size
+bun build:mdx         # Build MDX collections
+bun typegen           # Generate types
 
 # Quality & Testing
 bun check             # Run all quality checks (lint, typecheck, format, etc.)
 bun lint              # Run Oxlint
+bun lint:fix          # Auto-fix lint issues
+bun lint:spell        # Run spell check
 bun typecheck         # Run TypeScript type checking
 bun format            # Format code with Oxfmt
+bun format:check      # Check formatting
 bun knip              # Find unused dependencies/exports
+bun check:i18n        # Validate translations
 bun test:unit         # Run unit tests
+bun test:unit:coverage # Run unit tests with coverage
 bun test:e2e          # Run Playwright E2E tests
+bun test:e2e:install  # Install Playwright browsers
 
 # Database
+bun db:generate       # Generate database migrations
 bun db:migrate        # Run database migrations
 bun db:seed           # Seed the database
 bun db:push           # Push schema changes directly to DB
 bun db:reset          # Reset database
 bun db:studio         # Open Drizzle Studio
+
+# Emails & Cleanup
+bun email:export      # Export email templates
+bun clean             # Clean build artifacts
 ```
 
 ## Credits
