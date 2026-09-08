@@ -3,10 +3,12 @@ title: Scoutly
 description: 高速・軽量な CLI ウェブクローラー兼 SEO アナライザー
 github: https://github.com/nelsonlaidev/scoutly
 techstack:
-  - Rust
-  - clap
-  - reqwest
+  - Go
+  - Bubble Tea
+  - Kong
 dateCreated: '2025-11-04T00:00:00Z'
 ---
 
-しばらく Rust を学んでいた中で、そのパフォーマンスと安全性の特長を活かしたプロジェクトを作りたいと思いました。また、Rust のスキルを磨くため、高速・軽量な CLI ウェブクローラー兼 SEO アナライザー「Scoutly」を開発しました。[Scrutiny](https://peacockmedia.software/mac/scrutiny/) にインスパイアされたプロジェクトです。
+Scoutly は、高速・軽量なウェブクローラー兼 SEO アナライザーです。2025 年 11 月に Rust の練習として開発を始め、2026 年に Go で書き直しました。[Scrutiny](https://peacockmedia.software/mac/scrutiny/) にインスパイアされたプロジェクトです。
+
+Scoutly は、深さ・ページ数・並行度・リクエストレートの上限を設定して同一オリジンの HTML ページをクロールし、robots.txt を尊重し、XML サイトマップからページを発見します。見つかったリンクと画像を検査し、タイトル、meta description、H1、画像の alt テキスト欠如などの一般的な SEO 問題を指摘します。結果はキーボード操作の TUI で閲覧できるほか、テキストや JSON レポートとして出力でき、クローラーはインポート可能な Go ライブラリとしても利用できます。

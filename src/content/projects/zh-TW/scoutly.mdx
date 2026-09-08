@@ -3,10 +3,12 @@ title: Scoutly
 description: 一款快速、輕量級的命令行網站爬蟲和 SEO 分析工具
 github: https://github.com/nelsonlaidev/scoutly
 techstack:
-  - Rust
-  - clap
-  - reqwest
+  - Go
+  - Bubble Tea
+  - Kong
 dateCreated: '2025-11-04T00:00:00Z'
 ---
 
-學習 Rust 一段時間後，我希望能構建一個能充分發揮其效能與安全特性的專案，同時也想練習 Rust 技能。因此我決定開發 Scoutly ── 一款快速輕量級的命令行網站爬蟲與 SEO 分析工具。此專案靈感源自 [Scrutiny](https://peacockmedia.software/mac/scrutiny/)。
+Scoutly 是一款快速、輕量級的網站爬蟲與 SEO 分析工具。我在 2025 年 11 月為了練習 Rust 而展開這個專案，並於 2026 年以 Go 重新實作。此專案靈感源自 [Scrutiny](https://peacockmedia.software/mac/scrutiny/)。
+
+Scoutly 以可設定的深度、頁數、並行度與請求速率限制爬取同源 HTML 頁面，遵守 robots.txt，並從 XML sitemap 發掘頁面。它會檢查發現的連結與圖片，並標記標題、meta description、H1 標題、圖片 alt text 等常見 SEO 問題。結果可在鍵盤操作的 TUI 中瀏覽，或以純文字與 JSON 報告輸出；爬蟲核心也同時以 Go library 的形式提供。

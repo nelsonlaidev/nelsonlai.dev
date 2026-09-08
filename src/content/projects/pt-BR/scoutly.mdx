@@ -3,10 +3,12 @@ title: Scoutly
 description: Um rastreador de sites CLI rápido e leve e analisador de SEO
 github: https://github.com/nelsonlaidev/scoutly
 techstack:
-  - Rust
-  - clap
-  - reqwest
+  - Go
+  - Bubble Tea
+  - Kong
 dateCreated: '2025-11-04T00:00:00Z'
 ---
 
-Depois de aprender Rust por um tempo, eu queria construir um projeto que pudesse tirar proveito de suas características de desempenho e segurança. Também quero praticar minhas habilidades em Rust. Decidi criar o Scoutly, um rastreador de sites CLI rápido e leve e analisador de SEO. É inspirado no [Scrutiny](https://peacockmedia.software/mac/scrutiny/).
+O Scoutly é um rastreador de sites e analisador de SEO rápido e leve que comecei em novembro de 2025 para praticar Rust e reescrevi em Go em 2026. É inspirado no [Scrutiny](https://peacockmedia.software/mac/scrutiny/).
+
+O Scoutly rastreia páginas HTML de mesma origem com limites configuráveis de profundidade, páginas, concorrência e taxa de requisições, respeita robots.txt e descobre páginas em sitemaps XML. Ele verifica links e imagens encontrados e sinaliza problemas comuns de SEO, como títulos, meta descriptions, cabeçalhos H1 e textos alternativos de imagem ausentes. Os resultados podem ser explorados em uma interface de terminal por teclado ou emitidos como relatórios de texto e JSON, e o rastreador também está disponível como uma biblioteca Go importável.
