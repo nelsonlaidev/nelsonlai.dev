@@ -3,7 +3,6 @@ import { Buffer } from 'node:buffer'
 import * as z from 'zod'
 
 import { env } from '@/env'
-import { TraceableError } from '@/lib/errors'
 
 import { publicProcedure } from '../procedures'
 import { WakatimeStatsOutputSchema } from '../schemas/wakatime.schema'
@@ -28,12 +27,7 @@ const getStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(async
   })
 
   if (!response.ok) {
-    const body = await response.text()
-    throw new TraceableError('WakaTime API error', {
-      status: response.status,
-      statusText: response.statusText,
-      hasResponseBody: body.length > 0,
-    })
+    throw new Error(`WakaTime API error: ${response.status} ${response.statusText}`)
   }
 
   const rawData = await response.json()

@@ -4,7 +4,6 @@ import type { NotPlayingSchema } from '../schemas/spotify.schema'
 import { Buffer } from 'node:buffer'
 
 import { env } from '@/env'
-import { TraceableError } from '@/lib/errors'
 
 import { publicProcedure } from '../procedures'
 import {
@@ -46,12 +45,7 @@ const getStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(async 
   })
 
   if (!tokenResponse.ok) {
-    const body = await tokenResponse.text()
-    throw new TraceableError('Spotify token API error', {
-      status: tokenResponse.status,
-      statusText: tokenResponse.statusText,
-      hasResponseBody: body.length > 0,
-    })
+    throw new Error(`Spotify token API error: ${tokenResponse.status} ${tokenResponse.statusText}`)
   }
 
   const { access_token } = AccessTokenResponseSchema.parse(await tokenResponse.json())
@@ -67,12 +61,7 @@ const getStats = publicProcedure.output(SpotifyStatsOutputSchema).handler(async 
   }
 
   if (!nowPlayingResponse.ok) {
-    const body = await nowPlayingResponse.text()
-    throw new TraceableError('Spotify now playing API error', {
-      status: nowPlayingResponse.status,
-      statusText: nowPlayingResponse.statusText,
-      hasResponseBody: body.length > 0,
-    })
+    throw new Error(`Spotify now playing API error: ${nowPlayingResponse.status} ${nowPlayingResponse.statusText}`)
   }
 
   const song = NowPlayingResponseSchema.parse(await nowPlayingResponse.json())

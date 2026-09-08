@@ -1,7 +1,6 @@
 import * as z from 'zod'
 
 import { env } from '@/env'
-import { TraceableError } from '@/lib/errors'
 
 import { publicProcedure } from '../procedures'
 import { YoutubeStatsOutputSchema } from '../schemas/youtube.schema'
@@ -30,12 +29,7 @@ const getStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(async 
   )
 
   if (!response.ok) {
-    const body = await response.text()
-    throw new TraceableError('YouTube API error', {
-      status: response.status,
-      statusText: response.statusText,
-      hasResponseBody: body.length > 0,
-    })
+    throw new Error(`YouTube API error: ${response.status} ${response.statusText}`)
   }
 
   const rawData = await response.json()
@@ -45,7 +39,7 @@ const getStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(async 
   const channel = data.items[0]
 
   if (!channel) {
-    throw new TraceableError('YouTube channel not found')
+    throw new Error('YouTube channel not found')
   }
 
   const { statistics } = channel
