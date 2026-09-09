@@ -29,5 +29,4 @@ export default defineConfig({
       files: [`src/tests/unit/**/*.test.{ts,tsx}`],
     }),
   ],
-  // },
 })
