@@ -104,7 +104,7 @@ Welcome to my personal blog and portfolio website! This repository contains a mo
 ### Prerequisites
 
 - Node.js >= 24
-- bun >= 1.4
+- pnpm >= 12
 - Docker
 - [Visual Studio Code](https://code.visualstudio.com/) with [recommended extensions](.vscode/extensions.json)
 - Optionally [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
@@ -155,10 +155,10 @@ git clone https://github.com/nelsonlaidev/nelsonlai.dev
 cd nelsonlai.dev
 ```
 
-3. Install dependencies using bun:
+3. Install dependencies using pnpm:
 
 ```bash
-bun install
+pnpm install
 ```
 
 ### Environment Setup
@@ -178,21 +178,21 @@ docker compose up -d
 3. Run the database migrations:
 
 ```bash
-bun db:migrate
+pnpm db:migrate
 ```
 
 4. Seed the database:
 
 ```bash
-bun db:seed
+pnpm db:seed
 ```
 
 5. Run the app:
 
 ```bash
-bun dev          # Run the development server
+pnpm dev          # Run the development server
 # or
-bun email:dev    # Run the email preview server separately
+pnpm email:dev    # Run the email preview server separately
 ```
 
 The services will be available at the following URLs:
@@ -209,42 +209,42 @@ The services will be available at the following URLs:
 
 ```bash
 # Development
-bun dev               # Start development server
-bun email:dev         # Run email preview server
+pnpm dev                # Start development server
+pnpm email:dev          # Run email preview server
 
 # Build & Production
-bun run build         # Build for production
-bun start             # Start production server
-bun analyze           # Analyze bundle size
-bun build:mdx         # Build MDX collections
-bun typegen           # Generate types
+pnpm build              # Build for production
+pnpm start              # Start production server
+pnpm analyze            # Analyze bundle size
+pnpm build:mdx          # Build MDX collections
+pnpm typegen            # Generate types
 
 # Quality & Testing
-bun check             # Run all quality checks (lint, typecheck, format, etc.)
-bun lint              # Run Oxlint
-bun lint:fix          # Auto-fix lint issues
-bun lint:spell        # Run spell check
-bun typecheck         # Run TypeScript type checking
-bun format            # Format code with Oxfmt
-bun format:check      # Check formatting
-bun knip              # Find unused dependencies/exports
-bun check:i18n        # Validate translations
-bun test:unit         # Run unit tests
-bun test:unit:coverage # Run unit tests with coverage
-bun test:e2e          # Run Playwright E2E tests
-bun test:e2e:install  # Install Playwright browsers
+pnpm check              # Run all quality checks (lint, typecheck, format, etc.)
+pnpm lint               # Run Oxlint
+pnpm lint:fix           # Auto-fix lint issues
+pnpm lint:spell         # Run spell check
+pnpm typecheck          # Run TypeScript type checking
+pnpm format             # Format code with Oxfmt
+pnpm format:check       # Check formatting
+pnpm knip               # Find unused dependencies/exports
+pnpm check:i18n         # Validate translations
+pnpm test:unit          # Run unit tests
+pnpm test:unit:coverage # Run unit tests with coverage
+pnpm test:e2e           # Run Playwright E2E tests
+pnpm test:e2e:install   # Install Playwright browsers
 
 # Database
-bun db:generate       # Generate database migrations
-bun db:migrate        # Run database migrations
-bun db:seed           # Seed the database
-bun db:push           # Push schema changes directly to DB
-bun db:reset          # Reset database
-bun db:studio         # Open Drizzle Studio
+pnpm db:generate        # Generate database migrations
+pnpm db:migrate         # Run database migrations
+pnpm db:seed            # Seed the database
+pnpm db:push            # Push schema changes directly to DB
+pnpm db:reset           # Reset database
+pnpm db:studio          # Open Drizzle Studio
 
 # Emails & Cleanup
-bun email:export      # Export email templates
-bun clean             # Clean build artifacts
+pnpm email:export       # Export email templates
+pnpm clean              # Clean build artifacts
 ```
 
 ## Credits
