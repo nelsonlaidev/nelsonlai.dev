@@ -21,20 +21,25 @@ services:
       - redis:/data
     networks:
       - nelsonlaidev-network
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
-  serverless-redis-http:
-    image: hiett/serverless-redis-http:latest
-    container_name: nelsonlaidev-redis-http
+  uprest:
+    image: ghcr.io/nelsonlaidev/uprest:v0.1.0
+    container_name: nelsonlaidev-uprest
     ports:
-      - 8079:80
+      - 8079:8080
     environment:
-      SRH_MODE: env
-      SRH_TOKEN: nelsonlaidev
-      SRH_CONNECTION_STRING: redis://redis:6379
+      UPREST_TOKEN: nelsonlaidev
+      UPREST_CONNECTION_STRING: redis://redis:6379
     networks:
       - nelsonlaidev-network
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
 
 volumes:
   db:
