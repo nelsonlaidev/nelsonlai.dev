@@ -165,7 +165,7 @@
   },
   "engines": {
     "node": ">=24",
-    "pnpm": ">=12"
+    "pnpm": ">=12.7"
   },
-  "packageManager": "pnpm@12.6.0"
+  "packageManager": "pnpm@12.7.0"
 }
