@@ -32,7 +32,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run unit tests
-        run: bun test:unit
+        run: pnpm test:unit
 
   lint:
     name: Lint
@@ -45,7 +45,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run Oxlint
-        run: bun lint
+        run: pnpm lint
 
   spellcheck:
     name: Spell Check
@@ -58,7 +58,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run cspell
-        run: bun lint:spell
+        run: pnpm lint:spell
 
   types:
     name: TypeScript
@@ -71,7 +71,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run type check
-        run: bun typecheck
+        run: pnpm typecheck
 
   format:
     name: Format
@@ -84,7 +84,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run Oxfmt format check
-        run: bun format:check
+        run: pnpm format:check
 
   knip:
     name: Knip
@@ -97,7 +97,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run Knip
-        run: bun knip
+        run: pnpm knip
 
   i18n:
     name: i18n
@@ -110,7 +110,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Run i18n check
-        run: bun check:i18n
+        run: pnpm check:i18n
 
   e2e:
     name: End-to-end Tests
@@ -124,10 +124,10 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Install Playwright with dependencies
-        run: bun playwright install --with-deps chromium --only-shell
+        run: pnpm playwright install --with-deps chromium --only-shell
 
       - name: Build apps
-        run: bun run build
+        run: pnpm build
 
       - name: Run services
         run: docker compose up -d
@@ -140,13 +140,13 @@ jobs:
           done
 
       - name: Migrate database
-        run: bun db:migrate
+        run: pnpm db:migrate
 
       - name: Seed database
-        run: bun db:seed
+        run: pnpm db:seed
 
       - name: Run Playwright tests
-        run: bun test:e2e
+        run: pnpm test:e2e
 
       - name: Upload Playwright report
         if: always()

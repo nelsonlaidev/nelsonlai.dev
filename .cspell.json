@@ -64,5 +64,5 @@
       "caseSensitive": false
     }
   ],
-  "ignorePaths": [".git"]
+  "ignorePaths": [".git", "pnpm-lock.yaml"]
 }

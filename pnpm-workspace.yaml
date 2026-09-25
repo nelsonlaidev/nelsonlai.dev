@@ -1,0 +1,8 @@
+allowBuilds:
+  '@parcel/watcher': false
+  '@swc/core': false
+  esbuild: true
+  lefthook: true
+
+engineStrict: true
+saveExact: true
