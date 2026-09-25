@@ -11,14 +11,14 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
-  UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
-  UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
-  IP_ADDRESS_SALT: ${{ secrets.IP_ADDRESS_SALT }}
-  BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
-  GITHUB_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
-  GITHUB_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
+  NEXT_PUBLIC_SITE_URL: 'http://localhost:3000'
+  DATABASE_URL: 'postgres://postgres:postgres@localhost:5432/nelsonlaidev'
+  UPSTASH_REDIS_REST_URL: 'http://localhost:8079'
+  UPSTASH_REDIS_REST_TOKEN: 'nelsonlaidev'
+  IP_ADDRESS_SALT: 'ci-ip-address-salt'
+  BETTER_AUTH_SECRET: 'ci-better-auth-secret-for-testing-purposes'
+  GITHUB_CLIENT_ID: 'ci-github-client-id'
+  GITHUB_CLIENT_SECRET: 'ci-github-client-secret'
 
 jobs:
   tests:
