@@ -257,10 +257,11 @@ export const ChartLegend = RechartsPrimitive.Legend
 type ChartLegendContentProps = React.ComponentProps<'div'> & {
   hideIcon?: boolean
   nameKey?: string
-} & RechartsPrimitive.DefaultLegendContentProps
+} & RechartsPrimitive.DefaultLegendContentProps &
+  Pick<React.ComponentProps<typeof RechartsPrimitive.Legend>, 'position'>
 
 export function ChartLegendContent(props: ChartLegendContentProps) {
-  const { className, hideIcon = false, payload, verticalAlign = 'bottom', nameKey } = props
+  const { className, hideIcon = false, payload, position = 'bottom', nameKey } = props
 
   const { config } = useChart()
 
@@ -269,7 +270,7 @@ export function ChartLegendContent(props: ChartLegendContentProps) {
   }
 
   return (
-    <div className={cn('flex items-center justify-center gap-4', verticalAlign === 'top' ? 'pb-3' : 'pt-3', className)}>
+    <div className={cn('flex items-center justify-center gap-4', position === 'top' ? 'pb-3' : 'pt-3', className)}>
       {payload
         .filter((item) => item.type !== 'none')
         .map((item, index) => {
