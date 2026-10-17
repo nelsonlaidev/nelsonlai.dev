@@ -1,6 +1,5 @@
+import { ENV } from 'varlock/env'
 import * as z from 'zod'
-
-import { env } from '@/env'
 
 import { publicProcedure } from '../procedures'
 import { YoutubeStatsOutputSchema } from '../schemas/youtube.schema'
@@ -22,10 +21,10 @@ const EMPTY_RESPONSE = {
 }
 
 const getStats = publicProcedure.output(YoutubeStatsOutputSchema).handler(async () => {
-  if (!env.GOOGLE_API_KEY) return EMPTY_RESPONSE
+  if (!ENV.GOOGLE_API_KEY) return EMPTY_RESPONSE
 
   const response = await fetch(
-    `https://www.googleapis.com/youtube/v3/channels?id=UC2hMWOaOlk9vrkvFVaGmn0Q&part=statistics&key=${env.GOOGLE_API_KEY}`,
+    `https://www.googleapis.com/youtube/v3/channels?id=UC2hMWOaOlk9vrkvFVaGmn0Q&part=statistics&key=${ENV.GOOGLE_API_KEY}`,
   )
 
   if (!response.ok) {

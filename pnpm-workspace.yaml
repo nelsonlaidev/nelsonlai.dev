@@ -6,3 +6,9 @@ allowBuilds:
 
 engineStrict: true
 saveExact: true
+
+packages:
+  - .
+
+overrides:
+  '@next/env': npm:@varlock/nextjs-integration@1.2.5

@@ -33,7 +33,7 @@ services:
     ports:
       - 8079:8080
     environment:
-      UPREST_TOKEN: nelsonlaidev
+      UPREST_TOKEN: local-uprest-token-7f3c9a2e6b1d4f80
       UPREST_CONNECTION_STRING: redis://redis:6379
     networks:
       - nelsonlaidev-network

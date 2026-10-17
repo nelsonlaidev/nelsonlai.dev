@@ -1,12 +1,11 @@
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
 import { consola } from 'consola'
-
-import { env } from '@/env'
+import { ENV } from 'varlock/env'
 
 export const redis = new Redis({
-  url: env.UPSTASH_REDIS_REST_URL,
-  token: env.UPSTASH_REDIS_REST_TOKEN,
+  url: ENV.UPSTASH_REDIS_REST_URL,
+  token: ENV.UPSTASH_REDIS_REST_TOKEN,
 })
 
 export const ratelimit = new Ratelimit({

@@ -1,15 +1,16 @@
-import { defineConfig, devices } from '@playwright/test'
+import 'varlock/auto-load'
 
-import { env } from './src/env'
+import { defineConfig, devices } from '@playwright/test'
+import { ENV } from 'varlock/env'
 
 const baseURL = 'http://localhost:3000'
 
 export default defineConfig({
   testDir: './src/tests/e2e',
-  fullyParallel: !env.CI,
-  forbidOnly: env.CI,
-  retries: env.CI ? 2 : 1,
-  workers: env.CI ? 1 : '50%',
+  fullyParallel: !ENV.CI,
+  forbidOnly: ENV.CI,
+  retries: ENV.CI ? 2 : 1,
+  workers: ENV.CI ? 1 : '50%',
   reporter: 'html',
   use: {
     baseURL,
@@ -37,8 +38,12 @@ export default defineConfig({
     { name: 'teardown', testMatch: '**/*.teardown.ts' },
   ],
   webServer: {
-    command: env.CI ? 'pnpm start' : 'pnpm dev',
+    // Resolve the app's environment independently of the test runner's serialized config.
+    command: ENV.CI ? 'env -u __VARLOCK_ENV pnpm start' : 'env -u __VARLOCK_ENV pnpm dev',
+    env: {
+      NODE_ENV: ENV.CI ? 'production' : 'development',
+    },
     url: baseURL,
-    reuseExistingServer: !env.CI,
+    reuseExistingServer: !ENV.CI,
   },
 })

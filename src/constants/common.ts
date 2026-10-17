@@ -1,6 +1,6 @@
-import { env } from '../env'
+import { ENV } from 'varlock/env'
 
-export const IS_PRODUCTION = env.NODE_ENV === 'production'
+export const IS_PRODUCTION = ENV.NODE_ENV === 'production'
 
 // window is not always defined
 // oxlint-disable-next-line unicorn/no-typeof-undefined

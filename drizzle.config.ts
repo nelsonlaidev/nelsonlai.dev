@@ -1,13 +1,14 @@
-import { defineConfig } from 'drizzle-kit'
+import 'varlock/auto-load'
 
-import { env } from './src/env'
+import { defineConfig } from 'drizzle-kit'
+import { ENV } from 'varlock/env'
 
 export default defineConfig({
   dialect: 'postgresql',
   schema: './src/db/schemas/index.ts',
   out: './src/db/migrations',
   dbCredentials: {
-    url: env.DATABASE_URL,
+    url: ENV.DATABASE_URL,
   },
   strict: true,
   verbose: true,

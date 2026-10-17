@@ -1,3 +1,5 @@
+import 'varlock/auto-load'
+
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 

@@ -3,7 +3,7 @@ import type { NotPlayingSchema } from '../schemas/spotify.schema'
 
 import { Buffer } from 'node:buffer'
 
-import { env } from '@/env'
+import { ENV } from 'varlock/env'
 
 import { publicProcedure } from '../procedures'
 import {
@@ -19,9 +19,9 @@ const EMPTY_RESPONSE: z.infer<typeof NotPlayingSchema> = {
   artist: null,
 }
 
-const CLIENT_ID = env.SPOTIFY_CLIENT_ID
-const CLIENT_SECRET = env.SPOTIFY_CLIENT_SECRET
-const REFRESH_TOKEN = env.SPOTIFY_REFRESH_TOKEN
+const CLIENT_ID = ENV.SPOTIFY_CLIENT_ID
+const CLIENT_SECRET = ENV.SPOTIFY_CLIENT_SECRET
+const REFRESH_TOKEN = ENV.SPOTIFY_REFRESH_TOKEN
 
 const BASIC = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')
 const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing'

@@ -1,3 +1,5 @@
+import 'varlock/auto-load'
+
 import type { KnipConfig } from 'knip'
 
 const config: KnipConfig = {

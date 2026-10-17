@@ -1,3 +1,5 @@
+import 'varlock/auto-load'
+
 import fs from 'node:fs/promises'
 import path from 'node:path'
 

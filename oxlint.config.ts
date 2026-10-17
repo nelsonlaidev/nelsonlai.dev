@@ -1,6 +1,7 @@
 import { defineConfig, nextjs, playwright, react, tailwindcss, vitest } from '@nelsonlaidev/oxlint-config'
 
 export default defineConfig({
+  ignorePatterns: ['env.d.ts'],
   settings: {
     'better-tailwindcss': {
       entryPoint: 'src/styles/globals.css',
