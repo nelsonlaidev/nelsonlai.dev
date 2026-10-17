@@ -55,6 +55,7 @@ type DialogContentProps = {
 
 export function DialogContent(props: DialogContentProps) {
   const { className, children, showCloseButton = true, ...rest } = props
+  const t = useTranslations()
 
   return (
     <DialogPortal>
@@ -78,7 +79,7 @@ export function DialogContent(props: DialogContentProps) {
             render={<Button variant='ghost' className='absolute top-4 right-4' size='icon-sm' />}
           >
             <XIcon />
-            <span className='sr-only'>Close</span>
+            <span className='sr-only'>{t('common.labels.close')}</span>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Popup>
