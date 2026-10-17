@@ -1,8 +1,7 @@
 import { Buffer } from 'node:buffer'
 
+import { ENV } from 'varlock/env'
 import * as z from 'zod'
-
-import { env } from '@/env'
 
 import { publicProcedure } from '../procedures'
 import { WakatimeStatsOutputSchema } from '../schemas/wakatime.schema'
@@ -14,7 +13,7 @@ const WakatimeResponseSchema = z.object({
 })
 
 const getStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(async () => {
-  if (!env.WAKATIME_API_KEY) {
+  if (!ENV.WAKATIME_API_KEY) {
     return {
       hours: 0,
     }
@@ -22,7 +21,7 @@ const getStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(async
 
   const response = await fetch('https://wakatime.com/api/v1/users/current/all_time_since_today', {
     headers: {
-      Authorization: `Basic ${Buffer.from(env.WAKATIME_API_KEY).toString('base64')}`,
+      Authorization: `Basic ${Buffer.from(ENV.WAKATIME_API_KEY).toString('base64')}`,
     },
   })
 

@@ -1,13 +1,14 @@
 import type { NextConfig } from 'next'
 
 import { withContentCollections } from '@content-collections/next'
+import { varlockNextConfigPlugin } from '@varlock/nextjs-integration/plugin'
 import createNextIntlPlugin from 'next-intl/plugin'
-
-import { env } from '@/env'
+import { ENV } from 'varlock/env'
 
 import { IS_PRODUCTION } from './src/constants/common'
 
 const withNextIntl = createNextIntlPlugin()
+const withVarlock = varlockNextConfigPlugin()
 
 const remotePatterns: NonNullable<NextConfig['images']>['remotePatterns'] = [
   {
@@ -35,8 +36,8 @@ if (!IS_PRODUCTION) {
   })
 }
 
-if (env.CLOUDFLARE_R2_PUBLIC_URL) {
-  const { hostname } = new URL(env.CLOUDFLARE_R2_PUBLIC_URL)
+if (ENV.CLOUDFLARE_R2_PUBLIC_URL) {
+  const { hostname } = new URL(ENV.CLOUDFLARE_R2_PUBLIC_URL)
 
   remotePatterns.push({
     protocol: 'https',
@@ -50,7 +51,7 @@ const config: NextConfig = {
   productionBrowserSourceMaps: true,
 
   typescript: {
-    ignoreBuildErrors: env.CI,
+    ignoreBuildErrors: ENV.CI,
   },
 
   images: {
@@ -112,4 +113,4 @@ const config: NextConfig = {
   },
 }
 
-export default withContentCollections(withNextIntl(config))
+export default withVarlock(async () => withContentCollections(withNextIntl(config)))

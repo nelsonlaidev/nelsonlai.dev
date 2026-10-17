@@ -1,8 +1,9 @@
+import 'varlock/auto-load'
+
 import { consola } from 'consola'
 import { sql } from 'drizzle-orm'
 import { execa } from 'execa'
-
-import { env } from '@/env'
+import { ENV } from 'varlock/env'
 
 import { db } from './index'
 
@@ -17,7 +18,7 @@ async function main() {
     return
   }
 
-  if (!env.DATABASE_URL.includes('localhost')) {
+  if (!ENV.DATABASE_URL.includes('localhost')) {
     const nonLocalConfirmed = await consola.prompt('Non-local database detected. Are you sure you want to continue?', {
       type: 'confirm',
     })

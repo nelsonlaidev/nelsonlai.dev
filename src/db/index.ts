@@ -1,8 +1,8 @@
 import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
+import { ENV } from 'varlock/env'
 
 import { IS_PRODUCTION } from '@/constants/common'
-import { env } from '@/env'
 
 import * as schema from './schemas'
 
@@ -13,9 +13,9 @@ declare global {
 let client: ReturnType<typeof postgres>
 
 if (IS_PRODUCTION) {
-  client = postgres(env.DATABASE_URL)
+  client = postgres(ENV.DATABASE_URL)
 } else {
-  globalThis.pgClient ??= postgres(env.DATABASE_URL)
+  globalThis.pgClient ??= postgres(ENV.DATABASE_URL)
   client = globalThis.pgClient
 }
 

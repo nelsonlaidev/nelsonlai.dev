@@ -1,4 +1,4 @@
-import { env } from '@/env'
+import { ENV } from 'varlock/env'
 
 type LocationResponse = {
   ip: string
@@ -17,7 +17,7 @@ export async function getLocation(ip: string): Promise<string | null> {
   try {
     const response = await fetch(`https://api.nelsonlai.dev/ip/geo?ip=${ip}`, {
       headers: {
-        ...(env.NELSONLAI_API_KEY && { 'x-api-key': env.NELSONLAI_API_KEY }),
+        ...(ENV.NELSONLAI_API_KEY && { 'x-api-key': ENV.NELSONLAI_API_KEY }),
       },
     })
 

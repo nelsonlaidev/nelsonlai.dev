@@ -2,11 +2,11 @@ import 'server-only'
 
 import { and, eq } from 'drizzle-orm'
 import { jwtVerify, SignJWT } from 'jose'
+import { ENV } from 'varlock/env'
 import * as z from 'zod'
 
 import { db } from '@/db'
 import { comments, unsubscribes } from '@/db/schemas'
-import { env } from '@/env'
 import { getMaskedEmail } from '@/utils/get-masked-email'
 
 const TokenSchema = z.jwt({ alg: 'HS256' })
@@ -24,18 +24,18 @@ type UnsubPayload = z.infer<typeof UnsubPayloadSchema>
 type CommentReplyUnsubPayload = z.infer<typeof CommentReplyUnsubPayloadSchema>
 
 async function generateUnsubToken(payload: UnsubPayload): Promise<string> {
-  if (!env.JWT_SECRET) {
+  if (!ENV.JWT_SECRET) {
     throw new Error('JWT_SECRET is not set')
   }
 
   return new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setExpirationTime('30d')
-    .sign(new TextEncoder().encode(env.JWT_SECRET))
+    .sign(new TextEncoder().encode(ENV.JWT_SECRET))
 }
 
 export async function verifyUnsubToken(token: string): Promise<UnsubTokenResult<UnsubPayload>> {
-  if (!env.JWT_SECRET) {
+  if (!ENV.JWT_SECRET) {
     throw new Error('JWT_SECRET is not set')
   }
 
@@ -46,7 +46,7 @@ export async function verifyUnsubToken(token: string): Promise<UnsubTokenResult<
   }
 
   try {
-    const decoded = await jwtVerify(token, new TextEncoder().encode(env.JWT_SECRET), { algorithms: ['HS256'] })
+    const decoded = await jwtVerify(token, new TextEncoder().encode(ENV.JWT_SECRET), { algorithms: ['HS256'] })
 
     const parsedPayload = UnsubPayloadSchema.safeParse(decoded.payload)
 

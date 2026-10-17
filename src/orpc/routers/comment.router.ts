@@ -1,10 +1,10 @@
 import { ORPCError } from '@orpc/client'
 import { and, asc, count, desc, eq, gt, isNotNull, isNull, lt, ne } from 'drizzle-orm'
+import { ENV } from 'varlock/env'
 
 import { IS_PRODUCTION } from '@/constants/common'
 import { comments, settings, unsubscribes, votes } from '@/db/schemas'
 import { CommentEmailTemplate, ReplyEmailTemplate } from '@/emails'
-import { env } from '@/env'
 import { getPost } from '@/lib/content'
 import { sendEmail } from '@/lib/resend'
 import { generateCommentReplyUnsubToken } from '@/lib/unsubscribe'
@@ -134,9 +134,9 @@ const createComment = protectedProcedure
 
       // Notify the author of the blog post via email
       if (IS_PRODUCTION && !input.parentId && user.role === 'user') {
-        if (env.AUTHOR_EMAIL) {
+        if (ENV.AUTHOR_EMAIL) {
           await sendEmail({
-            to: env.AUTHOR_EMAIL,
+            to: ENV.AUTHOR_EMAIL,
             subject: 'New comment on your blog post',
             react: CommentEmailTemplate({
               comment: input.content,

@@ -1,6 +1,5 @@
 import { Resend } from 'resend'
-
-import { env } from '@/env'
+import { ENV } from 'varlock/env'
 
 type SendEmailOptions = {
   subject: string
@@ -9,13 +8,13 @@ type SendEmailOptions = {
 }
 
 export async function sendEmail(options: SendEmailOptions) {
-  if (!env.RESEND_API_KEY) {
+  if (!ENV.RESEND_API_KEY) {
     console.warn('RESEND_API_KEY is not set. Skipping email sending.')
     return
   }
 
   const { subject, to, react } = options
-  const resend = new Resend(env.RESEND_API_KEY)
+  const resend = new Resend(ENV.RESEND_API_KEY)
 
   return resend.emails.send({
     from: 'Nelson Lai <me@nelsonlai.dev>',

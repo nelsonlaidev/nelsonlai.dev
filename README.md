@@ -163,10 +163,24 @@ pnpm install
 
 ### Environment Setup
 
-1. Copy `.env.example` to `.env.local` and update the environment variables as needed.
+1. Create `.env.local` using the variables documented in `.env.schema`. For the local Docker services, start with:
+
+```dotenv
+DATABASE_URL=postgres://postgres:postgres@localhost:5432/nelsonlaidev
+UPSTASH_REDIS_REST_URL=http://localhost:8079
+UPSTASH_REDIS_REST_TOKEN=local-uprest-token-7f3c9a2e6b1d4f80
+IP_ADDRESS_SALT=
+BETTER_AUTH_SECRET=
+```
+
+Generate separate random values of at least 32 characters for `IP_ADDRESS_SALT` and `BETTER_AUTH_SECRET` (for example, with `openssl rand -hex 32`). Keep an existing `IP_ADDRESS_SALT` stable to preserve anonymous identifiers. Optional integrations can be left unset.
+
+Varlock validates configuration against `.env.schema`, loads `.env.local` automatically, and generates `env.d.ts`. Next.js uses the official Varlock integration. Database scripts, test runners, and Knip load configuration through `varlock/auto-load` in their Node.js entry points; external CLIs such as React Email use `varlock run`. Application code reads typed values directly from `varlock/env`.
+
+Validate your environment before continuing:
 
 ```bash
-cp .env.example .env.local
+pnpm env:check
 ```
 
 2. Run required services using Docker:
@@ -220,6 +234,7 @@ pnpm build:mdx          # Build MDX collections
 pnpm typegen            # Generate types
 
 # Quality & Testing
+pnpm env:check          # Validate environment variables
 pnpm check              # Run all quality checks (lint, typecheck, format, etc.)
 pnpm lint               # Run Oxlint
 pnpm lint:fix           # Auto-fix lint issues

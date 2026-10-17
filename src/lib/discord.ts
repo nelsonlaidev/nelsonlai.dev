@@ -1,13 +1,13 @@
 import type { RESTPostAPIWebhookWithTokenFormDataBody } from 'discord-api-types/rest'
 
-import { env } from '@/env'
+import { ENV } from 'varlock/env'
 
 const BOT_AVATAR_URL = 'https://cdn.discordapp.com/avatars/1123845082672537751/8af603a10f1d2f86ebc922ede339cd3a.webp'
 
 async function sendWebhook(body: RESTPostAPIWebhookWithTokenFormDataBody) {
-  if (!env.DISCORD_WEBHOOK_URL) return
+  if (!ENV.DISCORD_WEBHOOK_URL) return
 
-  await fetch(env.DISCORD_WEBHOOK_URL, {
+  await fetch(ENV.DISCORD_WEBHOOK_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

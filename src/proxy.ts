@@ -1,23 +1,24 @@
 import type { NextRequest } from 'next/server'
 
+import { ENV } from 'varlock/env'
+
 import { IS_PRODUCTION } from '@/constants/common'
-import { env } from '@/env'
 import { i18nMiddleware } from '@/i18n/middleware'
 
-const IS_PREVIEW = env.VERCEL_ENV === 'preview'
+const IS_PREVIEW = ENV.VERCEL_ENV === 'preview'
 
 export function proxy(request: NextRequest) {
   const csp = `
     default-src 'none';
     script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.nelsonlai.dev https://va.vercel-scripts.com ${IS_PREVIEW ? 'https://vercel.live' : ''};
     style-src 'self' 'unsafe-inline' ${IS_PREVIEW ? 'https://vercel.live' : ''};
-    img-src 'self' data: https://avatars.githubusercontent.com https://*.googleusercontent.com https://github.com https://images.unsplash.com ${env.CLOUDFLARE_R2_PUBLIC_URL} ${IS_PREVIEW ? 'https://vercel.live https://vercel.com blob:' : ''};
+    img-src 'self' data: https://avatars.githubusercontent.com https://*.googleusercontent.com https://github.com https://images.unsplash.com ${ENV.CLOUDFLARE_R2_PUBLIC_URL} ${IS_PREVIEW ? 'https://vercel.live https://vercel.com blob:' : ''};
     font-src 'self' ${IS_PREVIEW ? 'https://vercel.live https://assets.vercel.com' : ''};
     worker-src 'self' blob:;
     object-src 'none';
     base-uri 'none';
     form-action 'none';
-    connect-src 'self' https://*.nelsonlai.dev ${env.CLOUDFLARE_R2_ENDPOINT} ${IS_PREVIEW ? 'https://vercel.live wss://ws-us3.pusher.com' : ''};
+    connect-src 'self' https://*.nelsonlai.dev ${ENV.CLOUDFLARE_R2_ENDPOINT} ${IS_PREVIEW ? 'https://vercel.live wss://ws-us3.pusher.com' : ''};
     media-src 'self';
     manifest-src 'self';
     frame-ancestors 'self' ${IS_PRODUCTION ? '' : 'http://localhost:3002'};
