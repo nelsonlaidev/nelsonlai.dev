@@ -40,7 +40,8 @@ export function DialogOverlay(props: DialogOverlayProps) {
     <DialogPrimitive.Backdrop
       data-slot='dialog-overlay'
       className={cn(
-        'fixed inset-0 isolate z-50 bg-black/80 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0',
+        'fixed inset-0 isolate z-50 bg-black/80 duration-100 supports-backdrop-filter:backdrop-blur-xs',
+        'data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0',
         className,
       )}
       {...rest}
@@ -48,13 +49,12 @@ export function DialogOverlay(props: DialogOverlayProps) {
   )
 }
 
-type DialogContentProps = DialogPrimitive.Popup.Props & {
+type DialogContentProps = {
   showCloseButton?: boolean
-}
+} & DialogPrimitive.Popup.Props
 
 export function DialogContent(props: DialogContentProps) {
   const { className, children, showCloseButton = true, ...rest } = props
-  const t = useTranslations()
 
   return (
     <DialogPortal>
@@ -62,7 +62,11 @@ export function DialogContent(props: DialogContentProps) {
       <DialogPrimitive.Popup
         data-slot='dialog-content'
         className={cn(
-          'fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-1/2 gap-6 rounded-4xl bg-popover p-6 text-sm text-popover-foreground ring-1 ring-foreground/5 duration-100 outline-none sm:max-w-md data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
+          'fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-1/2 gap-6',
+          'rounded-4xl bg-popover p-6 text-sm text-popover-foreground ring-1 ring-foreground/5 duration-100 outline-none',
+          'sm:max-w-md',
+          'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95',
+          'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
           className,
         )}
         {...rest}
@@ -71,13 +75,11 @@ export function DialogContent(props: DialogContentProps) {
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot='dialog-close'
-            render={
-              <Button variant='ghost' className='absolute top-4 right-4' size='icon-sm'>
-                <XIcon />
-                <span className='sr-only'>{t('common.labels.close')}</span>
-              </Button>
-            }
-          />
+            render={<Button variant='ghost' className='absolute top-4 right-4' size='icon-sm' />}
+          >
+            <XIcon />
+            <span className='sr-only'>Close</span>
+          </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Popup>
     </DialogPortal>
@@ -92,9 +94,9 @@ export function DialogHeader(props: DialogHeaderProps) {
   return <div data-slot='dialog-header' className={cn('flex flex-col gap-2', className)} {...rest} />
 }
 
-type DialogFooterProps = React.ComponentProps<'div'> & {
+type DialogFooterProps = {
   showCloseButton?: boolean
-}
+} & React.ComponentProps<'div'>
 
 export function DialogFooter(props: DialogFooterProps) {
   const { className, showCloseButton = false, children, ...rest } = props
@@ -108,7 +110,7 @@ export function DialogFooter(props: DialogFooterProps) {
     >
       {children}
       {showCloseButton && (
-        <DialogPrimitive.Close render={<Button variant='outline'>{t('common.labels.close')}</Button>} />
+        <DialogPrimitive.Close render={<Button variant='outline' />}>{t('common.labels.close')}</DialogPrimitive.Close>
       )}
     </div>
   )

@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { toast } from 'sonner'
+
+import { toast } from '@/components/ui/toast'
 
 type CopyOptions = {
   text: string
@@ -19,13 +20,13 @@ export function useCopyToClipboard(): [(options: CopyOptions) => Promise<void>, 
     try {
       await navigator.clipboard.writeText(text)
       setIsCopied(true)
-      toast.success(successMessage ?? t('success.copied-to-clipboard'))
+      toast.add({ type: 'success', title: successMessage ?? t('success.copied-to-clipboard') })
 
       setTimeout(() => {
         setIsCopied(false)
       }, timeout ?? 2000)
     } catch {
-      toast.error(errorMessage ?? t('error.copy-to-clipboard-error'))
+      toast.add({ type: 'error', title: errorMessage ?? t('error.copy-to-clipboard-error') })
     }
   }
 

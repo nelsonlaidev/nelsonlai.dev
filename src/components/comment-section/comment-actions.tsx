@@ -1,9 +1,9 @@
 import NumberFlow from '@number-flow/react'
 import { ChevronDownIcon, MessageSquareIcon, ThumbsDownIcon, ThumbsUpIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
+import { toast } from '@/components/ui/toast'
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
 import { useCreateVote } from '@/hooks/queries/vote.query'
@@ -29,7 +29,7 @@ export function CommentActions() {
 
   function handleVoteComment(like: boolean) {
     if (!isAuthenticated) {
-      toast.error(t('error.need-logged-in-to-vote'))
+      toast.add({ type: 'error', title: t('error.need-logged-in-to-vote') })
       return
     }
     voteComment({ id: comment.id, isLike: like === comment.liked ? null : like })

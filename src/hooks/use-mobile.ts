@@ -1,17 +1,17 @@
 import { useSyncExternalStore } from 'react'
 
-const MOBILE_BREAKPOINT = 768
+const MOBILE_QUERY = '(width < 768px)'
 
 function subscribe(onStoreChange: () => void) {
-  const mql = globalThis.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
-  mql.addEventListener('change', onStoreChange)
+  const mediaQuery = globalThis.matchMedia(MOBILE_QUERY)
+  mediaQuery.addEventListener('change', onStoreChange)
   return () => {
-    mql.removeEventListener('change', onStoreChange)
+    mediaQuery.removeEventListener('change', onStoreChange)
   }
 }
 
 function getSnapshot() {
-  return window.innerWidth < MOBILE_BREAKPOINT
+  return globalThis.matchMedia(MOBILE_QUERY).matches
 }
 
 function getServerSnapshot() {

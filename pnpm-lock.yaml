@@ -337,9 +337,6 @@ importers:
       shiki:
         specifier: 4.5.0
         version: 4.5.0
-      sonner:
-        specifier: 2.0.8
-        version: 2.0.8(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       tinycolor2:
         specifier: 1.6.0
         version: 1.6.0
@@ -400,7 +397,7 @@ importers:
         version: 0.3.1(oxfmt@0.72.0)
       '@nelsonlaidev/oxlint-config':
         specifier: 1.2.1
-        version: 1.2.1(f6a15ed47bbe66035a1032a08d16aa33)
+        version: 1.2.1(88549ad6b59e9a43df856d22f648f79c)
       '@nelsonlaidev/typescript-config':
         specifier: 1.2.3
         version: 1.2.3
@@ -471,8 +468,8 @@ importers:
         specifier: 0.31.11
         version: 0.31.11
       eslint-plugin-better-tailwindcss:
-        specifier: 4.9.0
-        version: 4.9.0(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))(oxlint@1.87.0(oxlint-tsgolint@7.0.2003))(tailwindcss@4.3.3)(typescript@6.0.3)
+        specifier: 4.9.1
+        version: 4.9.1(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))(oxlint@1.87.0(oxlint-tsgolint@7.0.2003))(tailwindcss@4.3.3)(typescript@6.0.3)
       eslint-plugin-playwright:
         specifier: 2.12.1
         version: 2.12.1(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))
@@ -1248,6 +1245,9 @@ packages:
 
   '@drizzle-team/brocli@0.10.2':
     resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
+
+  '@dual-bundle/import-meta-resolve@4.2.1':
+    resolution: {integrity: sha512-id+7YRUgoUX6CgV0DtuhirQWodeeA7Lf4i2x71JS/vtA5pRb/hIGWlw+G6MeXvsM+MXrz0VAydTGElX1rAfgPg==}
 
   '@eloqnt/config@0.1.1':
     resolution: {integrity: sha512-YRDigSaiJEzKDfzTth5kG+L/PKfB3mo8h7yNzpXExPfvQmcD05WoZT57PdhJE0jI+Vva6eb0OCU8hnHHgdME3g==}
@@ -5363,8 +5363,8 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  eslint-plugin-better-tailwindcss@4.9.0:
-    resolution: {integrity: sha512-L8z5Wpdzji/qYS4Dz27LZAKVk9ZQ3yTvUbvRtyFhefu6g6T7ZnRqyWkNBiHDD7Pm1vHJW/KcV8oo3ehdoNZ1JA==}
+  eslint-plugin-better-tailwindcss@4.9.1:
+    resolution: {integrity: sha512-WOuUOlc27Ib3tcYNt6qhRpvQUie5Y/pNTkwO779QGdfF1tu0k51avWtmvfPv++7/1oVjntoFHcUK4+5a6SPZvA==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=23.0.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
@@ -7621,16 +7621,6 @@ packages:
     peerDependencies:
       solid-js: ^1.6.12
 
-  sonner@2.0.8:
-    resolution: {integrity: sha512-UM/ByIoFra8yzV75n1o0Puu0bw5U/9UNnDacrJNspekBewIfsQ3D6ez1nvlWpt7aTsO6rujQtifBpycwIivqlg==}
-    peerDependencies:
-      '@types/react': ^18.0.0 || ^19.0.0
-      react: ^18.0.0 || ^19.0.0 || ^19.0.0-rc
-      react-dom: ^18.0.0 || ^19.0.0 || ^19.0.0-rc
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -7752,8 +7742,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  synckit@0.11.13:
-    resolution: {integrity: sha512-eNRKgb3z66Yp3D2CixVujOUvXLFUTij/zVnV8KRyvFdQwpz7I5DS8UfRkTeLzb64u+dkzDSdelE24izu+zSSUg==}
+  synckit@0.12.3:
+    resolution: {integrity: sha512-U+/AXT6LWsxnj2vz9HeUuPWBNgdWxjyIEjEPdbJARC9txmgPzo2VEdqnFo4hHaNyMPtycyVJrSaQYeQv/PoyyA==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
   systeminformation@5.33.13:
@@ -9245,6 +9235,8 @@ snapshots:
 
   '@drizzle-team/brocli@0.10.2': {}
 
+  '@dual-bundle/import-meta-resolve@4.2.1': {}
+
   '@eloqnt/config@0.1.1': {}
 
   '@eloqnt/format-json@0.1.0':
@@ -10069,7 +10061,7 @@ snapshots:
     dependencies:
       oxfmt: 0.72.0
 
-  '@nelsonlaidev/oxlint-config@1.2.1(f6a15ed47bbe66035a1032a08d16aa33)':
+  '@nelsonlaidev/oxlint-config@1.2.1(88549ad6b59e9a43df856d22f648f79c)':
     dependencies:
       '@nelsonlaidev/eslint-plugin': 0.2.5(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
       '@stylistic/eslint-plugin': 5.10.0(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))
@@ -10083,7 +10075,7 @@ snapshots:
       ts-deepmerge: 8.0.0
     optionalDependencies:
       '@eslint-react/eslint-plugin': 5.24.9(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
-      eslint-plugin-better-tailwindcss: 4.9.0(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))(oxlint@1.87.0(oxlint-tsgolint@7.0.2003))(tailwindcss@4.3.3)(typescript@6.0.3)
+      eslint-plugin-better-tailwindcss: 4.9.1(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))(oxlint@1.87.0(oxlint-tsgolint@7.0.2003))(tailwindcss@4.3.3)(typescript@6.0.3)
       eslint-plugin-playwright: 2.12.1(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))
       eslint-plugin-react-hooks: 7.1.1(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)
       oxlint-tsgolint: 7.0.2003
@@ -13065,13 +13057,13 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eslint-plugin-better-tailwindcss@4.9.0(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))(oxlint@1.87.0(oxlint-tsgolint@7.0.2003))(tailwindcss@4.3.3)(typescript@6.0.3):
+  eslint-plugin-better-tailwindcss@4.9.1(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))(oxlint@1.87.0(oxlint-tsgolint@7.0.2003))(tailwindcss@4.3.3)(typescript@6.0.3):
     dependencies:
       '@eslint/css-tree': 4.1.1
       '@valibot/to-json-schema': 1.8.0(valibot@1.5.0(typescript@6.0.3))
       enhanced-resolve: 5.25.1
       jiti: 2.7.0
-      synckit: 0.11.13
+      synckit: 0.12.3
       tailwind-csstree: 0.3.3
       tailwindcss: 4.3.3
       tsconfig-paths-webpack-plugin: 4.2.0
@@ -15870,13 +15862,6 @@ snapshots:
       '@solid-primitives/transition-group': 1.1.2(solid-js@1.9.15)
       solid-js: 1.9.15
 
-  sonner@2.0.8(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
-    dependencies:
-      react: 19.3.0
-      react-dom: 19.3.0(react@19.3.0)
-    optionalDependencies:
-      '@types/react': 19.3.0
-
   source-map-js@1.2.1: {}
 
   source-map-support@0.5.21:
@@ -15979,8 +15964,9 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  synckit@0.11.13:
+  synckit@0.12.3:
     dependencies:
+      '@dual-bundle/import-meta-resolve': 4.2.1
       '@pkgr/core': 0.3.6
 
   systeminformation@5.33.13: {}

@@ -3,7 +3,7 @@
 import { Provider as JotaiProvider } from 'jotai'
 import { ThemeProvider } from 'next-themes'
 
-import { Toaster } from '@/components/ui/sonner'
+import { Toaster } from '@/components/ui/toast'
 import { TooltipProvider } from '@/components/ui/tooltip'
 
 import { QueryProvider } from './query-provider'
@@ -21,13 +21,7 @@ export function Providers(props: ProvidesProps) {
         <ThemeProvider attribute='class' disableTransitionOnChange>
           <TooltipProvider>
             {children}
-            <Toaster
-              toastOptions={{
-                duration: 2500,
-              }}
-              visibleToasts={5}
-              expand
-            />
+            <Toaster timeout={2500} limit={5} />
           </TooltipProvider>
         </ThemeProvider>
       </QueryProvider>

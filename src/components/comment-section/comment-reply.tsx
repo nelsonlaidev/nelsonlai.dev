@@ -2,9 +2,9 @@
 
 import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
+import { toast } from '@/components/ui/toast'
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
 import { useCreatePostComment } from '@/hooks/queries/comment.query'
@@ -23,7 +23,7 @@ export function CommentReply() {
 
   const { mutate: createReply, isPending: isCreating } = useCreatePostComment({ slug }, () => {
     setIsReplying(false)
-    toast.success(t('success.reply-posted'), { testId: 'comment-reply-posted-toast' })
+    toast.add({ type: 'success', title: t('success.reply-posted'), data: { testId: 'comment-reply-posted-toast' } })
   })
 
   function submitCommentReply(e?: React.SubmitEvent<HTMLFormElement>) {
@@ -32,7 +32,7 @@ export function CommentReply() {
     if (isCreating) return
 
     if (!content.trim()) {
-      toast.error(t('error.reply-cannot-be-empty'))
+      toast.add({ type: 'error', title: t('error.reply-cannot-be-empty') })
       return
     }
 

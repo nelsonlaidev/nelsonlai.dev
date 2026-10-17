@@ -1,7 +1,6 @@
 import { CopyIcon, MoreVerticalIcon, Trash2Icon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { toast } from 'sonner'
 
 import {
   AlertDialog,
@@ -15,6 +14,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { toast } from '@/components/ui/toast'
 import { useCommentContext } from '@/contexts/comment.context'
 import { useCommentsContext } from '@/contexts/comments.context'
 import { useDeletePostComment } from '@/hooks/queries/comment.query'
@@ -30,7 +30,7 @@ export function CommentMenu() {
   const t = useTranslations()
 
   const { mutate: deleteComment, isPending: isDeleting } = useDeletePostComment({ slug }, () => {
-    toast.success(t('success.comment-deleted'), { testId: 'comment-deleted-toast' })
+    toast.add({ type: 'success', title: t('success.comment-deleted'), data: { testId: 'comment-deleted-toast' } })
   })
 
   const {

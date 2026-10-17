@@ -5,10 +5,10 @@ import NumberFlow from '@number-flow/react'
 import { motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
-import { toast } from 'sonner'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { Separator } from '@/components/ui/separator'
+import { toast } from '@/components/ui/toast'
 import { useCountLike, useIncrementLike } from '@/hooks/queries/like.query'
 
 type LikeButtonProps = {
@@ -55,7 +55,7 @@ export function LikeButton(props: LikeButtonProps) {
   function handleLikeButtonClick() {
     if (isLoading || !data) return
     if (data.currentUserLikes + cacheCount >= 3) {
-      toast.error(t('error.like-limit-reached'))
+      toast.add({ type: 'error', title: t('error.like-limit-reached') })
       return
     }
 

@@ -6,7 +6,6 @@ import type { User } from '@/lib/auth-client'
 import { useForm } from '@tanstack/react-form'
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
-import { toast } from 'sonner'
 import * as z from 'zod'
 
 import {
@@ -23,6 +22,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Field, FieldError, FieldGroup } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import { toast } from '@/components/ui/toast'
 import { UserAvatar } from '@/components/ui/user-avatar'
 import { AVATAR_MAX_FILE_SIZE, SUPPORTED_AVATAR_MIME_TYPES } from '@/constants/site'
 import { useUpdateUser } from '@/hooks/queries/auth.query'
@@ -118,7 +118,7 @@ function EditName(props: EditNameProps) {
 
   const { mutate: updateUser, isPending: isUpdating } = useUpdateUser(() => {
     setOpen(false)
-    toast.success(t('success.name-updated'))
+    toast.add({ type: 'success', title: t('success.name-updated') })
     void refetchSession()
   })
 
@@ -187,7 +187,7 @@ function UpdateAvatar() {
 
   const { mutateAsync: getAvatarUploadUrl } = useAvatarUploadUrl()
   const { mutateAsync: updateUser } = useUpdateUser(() => {
-    toast.success(t('success.avatar-updated'))
+    toast.add({ type: 'success', title: t('success.avatar-updated') })
     void refetchSession()
   })
 
@@ -204,13 +204,13 @@ function UpdateAvatar() {
     event.target.value = ''
 
     if (!SUPPORTED_AVATAR_MIME_TYPES.includes(file.type as AvatarMimeType)) {
-      toast.error(t('error.avatar-unsupported-file'))
+      toast.add({ type: 'error', title: t('error.avatar-unsupported-file') })
       return
     }
 
     if (file.size > AVATAR_MAX_FILE_SIZE) {
       const maxSizeInMb = (AVATAR_MAX_FILE_SIZE / (1024 * 1024)).toFixed(1)
-      toast.error(t('error.avatar-too-large', { size: maxSizeInMb }))
+      toast.add({ type: 'error', title: t('error.avatar-too-large', { size: maxSizeInMb }) })
       return
     }
 
@@ -237,7 +237,7 @@ function UpdateAvatar() {
 
       await updateUser({ image: publicUrl })
     } catch {
-      toast.error(t('error.update-avatar-failed'))
+      toast.add({ type: 'error', title: t('error.update-avatar-failed') })
     } finally {
       setIsUploading(false)
     }

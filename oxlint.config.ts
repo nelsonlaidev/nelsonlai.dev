@@ -11,7 +11,7 @@ export default defineConfig({
     nextjs(),
     tailwindcss({
       rules: {
-        'better-tailwindcss/no-unknown-classes': ['error', { ignore: ['not-prose', 'shiki', 'toaster'] }],
+        'better-tailwindcss/no-unknown-classes': ['error', { ignore: ['not-prose', 'shiki'] }],
       },
     }),
     playwright({
