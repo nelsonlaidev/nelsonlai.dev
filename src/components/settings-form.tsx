@@ -3,13 +3,13 @@ import type { SettingsGetOutput } from '@/orpc/client'
 import { useForm } from '@tanstack/react-form'
 import { useSelector } from '@tanstack/react-store'
 import { useTranslations } from 'next-intl'
-import { toast } from 'sonner'
 import * as z from 'zod'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Switch } from '@/components/ui/switch'
+import { toast } from '@/components/ui/toast'
 import { useUpdateSettings } from '@/hooks/queries/settings.query'
 
 import { Spinner } from './ui/spinner'
@@ -41,7 +41,7 @@ export function SettingsForm(props: SettingsFormProps) {
 
   const { mutate: updateSettings, isPending: isUpdating } = useUpdateSettings(() => {
     form.reset()
-    toast.success(t('success.settings-updated'))
+    toast.add({ type: 'success', title: t('success.settings-updated') })
   })
 
   async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {

@@ -30,7 +30,7 @@ export function TableOfContents(props: TableOfContentsProps) {
         onValueChange={(details) => {
           router.push(`#${details.value}`)
         }}
-        className='text-sm'
+        className='bg-transparent'
       >
         {toc.map((item) => (
           <SegmentGroupItem

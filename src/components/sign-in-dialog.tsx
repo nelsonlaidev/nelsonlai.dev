@@ -3,12 +3,12 @@
 import { SiGithub } from '@icons-pack/react-simple-icons'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import { toast } from 'sonner'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Link } from '@/components/ui/link'
+import { toast } from '@/components/ui/toast'
 import { useSignInDialog } from '@/hooks/use-sign-in-dialog'
 import { usePathname } from '@/i18n/navigation'
 import { authClient } from '@/lib/auth-client'
@@ -67,7 +67,7 @@ export function SignInDialog() {
         },
         onError: () => {
           setIsPending(false)
-          toast.error(t('error.sign-in-error'))
+          toast.add({ type: 'error', title: t('error.sign-in-error') })
         },
         onRequest: () => {
           setIsPending(true)

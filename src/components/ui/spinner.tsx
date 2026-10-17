@@ -1,5 +1,5 @@
 import { cn } from 'cn'
-import { LoaderIcon } from 'lucide-react'
+import { LoaderCircleIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 type SpinnerProps = React.ComponentProps<'svg'>
@@ -9,12 +9,13 @@ export function Spinner(props: SpinnerProps) {
   const t = useTranslations()
 
   return (
-    <LoaderIcon
+    <LoaderCircleIcon
       data-slot='spinner'
+      // Expose the SVG spinner as a loading status.
       // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
       role='status'
       aria-label={t('common.aria-labels.loading')}
-      className={cn('size-4 animate-spin', className)}
+      className={cn('size-4 animate-spin motion-reduce:animate-none', className)}
       {...rest}
     />
   )

@@ -3,9 +3,9 @@
 import { SendIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
+import { toast } from '@/components/ui/toast'
 import { useCommentsContext } from '@/contexts/comments.context'
 import { useCreatePostComment } from '@/hooks/queries/comment.query'
 import { useIsHydrated } from '@/hooks/use-is-hydrated'
@@ -26,7 +26,7 @@ export function CommentPost() {
 
   const { mutate: createComment, isPending: isCreating } = useCreatePostComment({ slug }, () => {
     setContent('')
-    toast.success(t('success.comment-posted'), { testId: 'comment-posted-toast' })
+    toast.add({ type: 'success', title: t('success.comment-posted'), data: { testId: 'comment-posted-toast' } })
     setTabsValue('write')
   })
 
@@ -36,7 +36,7 @@ export function CommentPost() {
     if (isCreating) return
 
     if (!content.trim()) {
-      toast.error(t('error.comment-cannot-be-empty'))
+      toast.add({ type: 'error', title: t('error.comment-cannot-be-empty') })
       return
     }
 

@@ -26,7 +26,9 @@ export function FieldSet(props: FieldSetProps) {
   )
 }
 
-type FieldLegendProps = React.ComponentProps<'legend'> & { variant?: 'legend' | 'label' }
+type FieldLegendProps = {
+  variant?: 'legend' | 'label'
+} & React.ComponentProps<'legend'>
 
 export function FieldLegend(props: FieldLegendProps) {
   const { className, variant = 'legend', ...rest } = props
@@ -50,7 +52,9 @@ export function FieldGroup(props: FieldGroupProps) {
     <div
       data-slot='field-group'
       className={cn(
-        'group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-3 *:data-[slot=field-group]:gap-4',
+        'group/field-group @container/field-group flex w-full flex-col gap-7',
+        'data-[slot=checkbox-group]:gap-3',
+        '*:data-[slot=field-group]:gap-4',
         className,
       )}
       {...rest}
@@ -62,10 +66,22 @@ const fieldVariants = cva('group/field flex w-full gap-3 data-[invalid=true]:tex
   variants: {
     orientation: {
       vertical: 'flex-col *:w-full [&>.sr-only]:w-auto',
-      horizontal:
-        'flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',
-      responsive:
-        'flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',
+      horizontal: [
+        'flex-row items-center',
+        'has-[>[data-slot=field-content]]:items-start',
+        '*:data-[slot=field-label]:flex-auto',
+        'has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',
+      ],
+      responsive: [
+        'flex-col',
+        '*:w-full',
+        '@md/field-group:flex-row @md/field-group:items-center',
+        '@md/field-group:*:w-auto',
+        '@md/field-group:has-[>[data-slot=field-content]]:items-start',
+        '@md/field-group:*:data-[slot=field-label]:flex-auto',
+        '[&>.sr-only]:w-auto',
+        '@md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',
+      ],
     },
   },
   defaultVariants: {
@@ -80,6 +96,7 @@ export function Field(props: FieldProps) {
 
   return (
     <div
+      // Preserve the div-based grouping API.
       // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
       role='group'
       data-slot='field'
@@ -113,7 +130,15 @@ export function FieldLabel(props: FieldLabelProps) {
     <Label
       data-slot='field-label'
       className={cn(
-        'group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border *:data-[slot=field]:p-4 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10',
+        'group/field-label peer/field-label flex w-fit gap-2 leading-snug',
+        'group-data-[disabled=true]/field:opacity-50',
+        'has-data-checked:border-primary/30 has-data-checked:bg-primary/5',
+        'has-[>[data-slot=field]]:rounded-xl has-[>[data-slot=field]]:border',
+        'has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-input/40',
+        'has-[>[data-slot=field]]:has-focus-visible:border-ring has-[>[data-slot=field]]:has-focus-visible:ring-[3px] has-[>[data-slot=field]]:has-focus-visible:ring-ring/50',
+        '*:data-[slot=field]:p-4',
+        'dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10',
+        'has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col',
         className,
       )}
       {...rest}
@@ -147,7 +172,11 @@ export function FieldDescription(props: FieldDescriptionProps) {
     <p
       data-slot='field-description'
       className={cn(
-        'text-left text-sm/normal font-normal text-muted-foreground group-has-data-horizontal/field:text-balance last:mt-0 nth-last-2:-mt-1 [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary [[data-variant=legend]+&]:-mt-1.5',
+        'text-left text-sm/normal font-normal text-muted-foreground',
+        'group-has-data-horizontal/field:text-balance',
+        '[[data-variant=legend]+&]:-mt-1.5',
+        'last:mt-0 nth-last-2:-mt-1',
+        '[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary',
         className,
       )}
       {...rest}
@@ -155,23 +184,22 @@ export function FieldDescription(props: FieldDescriptionProps) {
   )
 }
 
-type FieldSeparatorProps = React.ComponentProps<'div'> & {
+type FieldSeparatorProps = {
   children?: React.ReactNode
-}
+} & React.ComponentProps<'div'>
 
 export function FieldSeparator(props: FieldSeparatorProps) {
   const { children, className, ...rest } = props
-  const hasChildren = Boolean(children)
 
   return (
     <div
       data-slot='field-separator'
-      data-content={hasChildren}
+      data-content={!!children}
       className={cn('relative -my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2', className)}
       {...rest}
     >
       <Separator className='absolute inset-0 top-1/2' />
-      {hasChildren && (
+      {children && (
         <span
           className='relative mx-auto block w-fit bg-background px-2 text-muted-foreground'
           data-slot='field-separator-content'
@@ -183,17 +211,19 @@ export function FieldSeparator(props: FieldSeparatorProps) {
   )
 }
 
-type FieldErrorProps = React.ComponentProps<'div'> & {
-  errors?: Array<{ message?: string } | undefined>
-}
+type FieldErrorProps = {
+  errors?: Array<
+    | {
+        message?: string
+      }
+    | undefined
+  >
+} & React.ComponentProps<'div'>
 
 export function FieldError(props: FieldErrorProps) {
   const { className, children, errors, ...rest } = props
 
-  // ReactNode types may include Promise-like branches in React's typings,
-  // which causes a false positive for this sync useMemo callback.
-  // oxlint-disable-next-line @typescript-eslint/promise-function-async
-  const content = useMemo(() => {
+  const content = useMemo((): React.ReactNode => {
     if (children) {
       return children
     }
@@ -202,21 +232,15 @@ export function FieldError(props: FieldErrorProps) {
       return null
     }
 
-    const uniqueMessages = [...new Set(errors.map((error) => error?.message).filter(Boolean))]
+    const uniqueErrors = [...new Map(errors.map((error) => [error?.message, error])).values()]
 
-    if (uniqueMessages.length === 0) {
-      return null
-    }
-
-    if (uniqueMessages.length === 1) {
-      return uniqueMessages[0]
+    if (uniqueErrors.length === 1) {
+      return uniqueErrors[0]?.message
     }
 
     return (
       <ul className='ml-4 flex list-disc flex-col gap-1'>
-        {uniqueMessages.map((message) => (
-          <li key={message}>{message}</li>
-        ))}
+        {uniqueErrors.map((error) => error?.message && <li key={error.message}>{error.message}</li>)}
       </ul>
     )
   }, [children, errors])

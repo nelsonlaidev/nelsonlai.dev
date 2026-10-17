@@ -4,12 +4,12 @@ import type { User } from '@/lib/auth-client'
 
 import { useForm } from '@tanstack/react-form'
 import { useTranslations } from 'next-intl'
-import { toast } from 'sonner'
 import * as z from 'zod'
 
 import { Button } from '@/components/ui/button'
 import { Field, FieldError, FieldGroup } from '@/components/ui/field'
 import { Textarea } from '@/components/ui/textarea'
+import { toast } from '@/components/ui/toast'
 import { UserAvatar } from '@/components/ui/user-avatar'
 import { useCreateMessage } from '@/hooks/queries/message.query'
 import { useSignOut } from '@/hooks/use-sign-out'
@@ -42,7 +42,11 @@ export function MessageBox(props: MessageBoxProps) {
 
   const { mutate: createMessage, isPending: isCreating } = useCreateMessage(() => {
     form.reset()
-    toast.success(t('success.message-created'), { testId: 'guestbook-message-created-toast' })
+    toast.add({
+      type: 'success',
+      title: t('success.message-created'),
+      data: { testId: 'guestbook-message-created-toast' },
+    })
   })
 
   async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {

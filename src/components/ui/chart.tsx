@@ -3,7 +3,7 @@
 import type { TooltipValueType } from 'recharts'
 
 import { cn } from 'cn'
-import { createContext, use, useId, useInsertionEffect, useMemo } from 'react'
+import { createContext, use, useId, useMemo } from 'react'
 import * as RechartsPrimitive from 'recharts'
 
 // Format: { THEME_NAME: CSS_SELECTOR }
@@ -18,7 +18,16 @@ export type ChartConfig = Record<
   {
     label?: React.ReactNode
     icon?: React.ComponentType
-  } & ({ color?: string; theme?: never } | { color?: never; theme: Record<keyof typeof THEMES, string> })
+  } & (
+    | {
+        color?: string
+        theme?: never
+      }
+    | {
+        color?: never
+        theme: Record<keyof typeof THEMES, string>
+      }
+  )
 >
 
 type ChartContextProps = {
@@ -38,17 +47,20 @@ function useChart() {
   return context
 }
 
-type ChartContainerProps = React.ComponentProps<'div'> & {
+type ChartContainerProps = {
   config: ChartConfig
-  initialDimension?: { width: number; height: number }
   children: React.ComponentProps<typeof RechartsPrimitive.ResponsiveContainer>['children']
-}
+  initialDimension?: {
+    width: number
+    height: number
+  }
+} & React.ComponentProps<'div'>
 
 export function ChartContainer(props: ChartContainerProps) {
-  const { className, children, config, initialDimension = INITIAL_DIMENSION, ...rest } = props
+  const { id, className, children, config, initialDimension = INITIAL_DIMENSION, ...rest } = props
 
   const uniqueId = useId()
-  const chartId = `chart-${rest.id ?? uniqueId.replaceAll(':', '')}`
+  const chartId = `chart-${id ?? uniqueId.replaceAll(':', '')}`
 
   const contextValue = useMemo(() => ({ config }), [config])
 
@@ -58,7 +70,15 @@ export function ChartContainer(props: ChartContainerProps) {
         data-slot='chart'
         data-chart={chartId}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
+          'flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground',
+          "[&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50",
+          '[&_.recharts-curve.recharts-tooltip-cursor]:stroke-border',
+          "[&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden",
+          "[&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted",
+          "[&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border",
+          '[&_.recharts-sector]:outline-hidden',
+          "[&_.recharts-sector[stroke='#fff']]:stroke-transparent",
+          '[&_.recharts-surface]:outline-hidden',
           className,
         )}
         {...rest}
@@ -77,55 +97,55 @@ type ChartStyleProps = {
   config: ChartConfig
 }
 
-export const ChartStyle = (props: ChartStyleProps) => {
+export function ChartStyle(props: ChartStyleProps) {
   const { id, config } = props
+  const selectorId = id
+    .replaceAll('\\', '\\\\')
+    .replaceAll('"', '\\"')
+    .replaceAll('\n', '\\a ')
+    .replaceAll('\r', '\\d ')
+    .replaceAll('\f', '\\c ')
+  const colorConfig = Object.entries(config).filter(([, config]) => config.theme ?? config.color)
 
-  useInsertionEffect(() => {
-    const colorConfig = Object.entries(config).filter(([, c]) => c.theme ?? c.color)
+  if (colorConfig.length === 0) {
+    return null
+  }
 
-    if (colorConfig.length === 0) return
-
-    const css = Object.entries(THEMES)
-      .map(
-        ([theme, prefix]) => `
-${prefix} [data-chart=${id}] {
+  return (
+    <style>
+      {Object.entries(THEMES)
+        .map(
+          ([theme, prefix]) => `
+${prefix} [data-chart="${selectorId}"] {
 ${colorConfig
   .map(([key, itemConfig]) => {
     const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ?? itemConfig.color
     return color ? `  --color-${key}: ${color};` : null
   })
-  .filter(Boolean)
   .join('\n')}
-}`,
-      )
-      .join('\n')
-
-    const style = document.createElement('style')
-    style.textContent = css
-    document.head.append(style)
-
-    return () => {
-      style.remove()
-    }
-  }, [id, config])
-
-  return null
+}
+`,
+        )
+        .join('\n')}
+    </style>
+  )
 }
 
 export const ChartTooltip = RechartsPrimitive.Tooltip
 
-type ChartTooltipPayload = {
-  fill?: string
-}
-
-type ChartTooltipContentProps = React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
-  React.ComponentProps<'div'> & {
-    hideLabel?: boolean
-    hideIndicator?: boolean
-    indicator?: 'line' | 'dot' | 'dashed'
-    nameKey?: string
-    labelKey?: string
-  } & Omit<RechartsPrimitive.DefaultTooltipContentProps<TooltipValueType, TooltipNameType>, 'accessibilityLayer'>
+type ChartTooltipContentProps = {
+  className?: string
+  color?: string
+  hideLabel?: boolean
+  hideIndicator?: boolean
+  indicator?: 'line' | 'dot' | 'dashed'
+  nameKey?: string
+  labelKey?: string
+} & Pick<
+  React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
+    RechartsPrimitive.DefaultTooltipContentProps<TooltipValueType, TooltipNameType>,
+  'active' | 'payload' | 'label' | 'labelFormatter' | 'labelClassName' | 'formatter'
+>
 
 export function ChartTooltipContent(props: ChartTooltipContentProps) {
   const {
@@ -135,16 +155,14 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
     indicator = 'dot',
     hideLabel = false,
     hideIndicator = false,
+    label,
     labelFormatter,
     labelClassName,
     formatter,
     color,
     nameKey,
     labelKey,
-    ...rest
   } = props
-
-  const label = rest.label as string | undefined
 
   const { config } = useChart()
 
@@ -154,8 +172,7 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
     }
 
     const [item] = payload
-    // oxlint-disable-next-line @typescript-eslint/restrict-template-expressions
-    const key = `${labelKey ?? item?.dataKey ?? item?.name ?? 'value'}`
+    const key = String(labelKey ?? item?.dataKey ?? item?.name ?? 'value')
     const itemConfig = getPayloadConfigFromPayload(config, item, key)
     const value = !labelKey && typeof label === 'string' ? (config[label]?.label ?? label) : itemConfig?.label
 
@@ -188,14 +205,14 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
         {payload
           .filter((item) => item.type !== 'none')
           .map((item, index) => {
-            // oxlint-disable-next-line @typescript-eslint/restrict-template-expressions
-            const key = `${nameKey ?? item.dataKey ?? item.name ?? 'value'}`
+            const key = String(nameKey ?? item.name ?? item.dataKey ?? 'value')
             const itemConfig = getPayloadConfigFromPayload(config, item, key)
-            const indicatorColor = color ?? (item.payload as ChartTooltipPayload).fill ?? item.color
+            const indicatorColor = color ?? (item.payload as { fill?: string } | undefined)?.fill ?? item.color
 
             return (
               <div
-                // oxlint-disable-next-line @eslint-react/no-array-index-key
+                // Recharts payload order provides stable row positions.
+                // eslint-disable-next-line @eslint-react/no-array-index-key
                 key={index}
                 className={cn(
                   'flex w-full flex-wrap items-stretch gap-2 [&>svg]:size-2.5 [&>svg]:text-muted-foreground',
@@ -203,7 +220,8 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
                 )}
               >
                 {formatter && item.value !== undefined && item.name ? (
-                  // oxlint-disable-next-line @typescript-eslint/no-unsafe-argument
+                  // Preserve the reference formatter payload from Recharts.
+                  // eslint-disable-next-line typescript/no-unsafe-argument
                   formatter(item.value, item.name, item, index, item.payload)
                 ) : (
                   <>
@@ -212,7 +230,9 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
                     ) : (
                       !hideIndicator && (
                         <div
-                          className={cn('shrink-0 rounded-xs border-border bg-(--color-bg)', {
+                          // border-border uses the theme token, not this per-series inline CSS variable.
+                          // oxlint-disable-next-line better-tailwindcss/enforce-canonical-classes
+                          className={cn('shrink-0 rounded-xs border-(--color-border) bg-(--color-bg)', {
                             'size-2.5': indicator === 'dot',
                             'w-1': indicator === 'line',
                             'w-0 border-[1.5px] border-dashed bg-transparent': indicator === 'dashed',
@@ -235,12 +255,15 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
                         {nestLabel ? tooltipLabel : null}
                         <span className='text-muted-foreground'>{itemConfig?.label ?? item.name}</span>
                       </div>
-                      {/* oxlint-disable-next-line eqeqeq */}
-                      {item.value != null && (
-                        <span className='font-mono font-medium text-foreground tabular-nums'>
-                          {typeof item.value === 'number' ? item.value.toLocaleString() : String(item.value)}
-                        </span>
-                      )}
+                      {
+                        // Preserve the null guard for runtime payloads from external chart data.
+                        // eslint-disable-next-line typescript/no-unnecessary-condition
+                        item.value !== null && item.value !== undefined && (
+                          <span className='font-mono font-medium text-foreground tabular-nums'>
+                            {typeof item.value === 'number' ? item.value.toLocaleString() : String(item.value)}
+                          </span>
+                        )
+                      }
                     </div>
                   </>
                 )}
@@ -254,11 +277,12 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
 
 export const ChartLegend = RechartsPrimitive.Legend
 
-type ChartLegendContentProps = React.ComponentProps<'div'> & {
+type ChartLegendContentProps = {
+  className?: string
   hideIcon?: boolean
   nameKey?: string
-} & RechartsPrimitive.DefaultLegendContentProps &
-  Pick<React.ComponentProps<typeof RechartsPrimitive.Legend>, 'position'>
+} & Pick<RechartsPrimitive.DefaultLegendContentProps, 'payload'> &
+  Pick<RechartsPrimitive.LegendProps, 'position'>
 
 export function ChartLegendContent(props: ChartLegendContentProps) {
   const { className, hideIcon = false, payload, position = 'bottom', nameKey } = props
@@ -274,12 +298,13 @@ export function ChartLegendContent(props: ChartLegendContentProps) {
       {payload
         .filter((item) => item.type !== 'none')
         .map((item, index) => {
-          const key = nameKey ?? (typeof item.dataKey === 'string' ? item.dataKey : String(item.dataKey ?? 'value'))
+          const key = String(nameKey ?? item.dataKey ?? 'value')
           const itemConfig = getPayloadConfigFromPayload(config, item, key)
 
           return (
             <div
-              // oxlint-disable-next-line @eslint-react/no-array-index-key
+              // Recharts payload order provides stable legend positions.
+              // eslint-disable-next-line @eslint-react/no-array-index-key
               key={index}
               className={cn('flex items-center gap-1.5 [&>svg]:size-3 [&>svg]:text-muted-foreground')}
             >

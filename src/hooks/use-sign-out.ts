@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
-import { toast } from 'sonner'
 
+import { toast } from '@/components/ui/toast'
 import { useRouter } from '@/i18n/navigation'
 import { authClient } from '@/lib/auth-client'
 
@@ -23,10 +23,10 @@ export function useSignOut(options: UseSignOutOptions = {}) {
           } else {
             router.refresh()
           }
-          toast.success(t('success.signed-out'))
+          toast.add({ type: 'success', title: t('success.signed-out') })
         },
         onError: () => {
-          toast.error(t('error.sign-out-failed'))
+          toast.add({ type: 'error', title: t('error.sign-out-failed') })
         },
       },
     })

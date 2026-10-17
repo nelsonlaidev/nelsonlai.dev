@@ -5,12 +5,12 @@ import type { SessionListOutput } from '@/orpc/client'
 import Bowser from 'bowser'
 import { BotIcon, InfoIcon, MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { toast } from 'sonner'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Tip } from '@/components/ui/tip'
+import { toast } from '@/components/ui/toast'
 import { useListSessions, useRevokeSession } from '@/hooks/queries/auth.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { useRouter } from '@/i18n/navigation'
@@ -82,7 +82,7 @@ function Session(props: SessionProps) {
   const lastActive = useFormattedDate(session.createdAt, { formatName: 'long' })
 
   const { mutate: revokeSession, isPending: isRevoking } = useRevokeSession(() => {
-    toast.success(t('success.session-revoked'))
+    toast.add({ type: 'success', title: t('success.session-revoked') })
     if (session.isCurrentSession) {
       router.push('/')
       void refetchSession()

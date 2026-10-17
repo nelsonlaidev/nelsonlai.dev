@@ -1,7 +1,6 @@
 import type { MessageListOutput } from '@/orpc/client'
 
 import { useTranslations } from 'next-intl'
-import { toast } from 'sonner'
 
 import {
   AlertDialog,
@@ -15,6 +14,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
+import { toast } from '@/components/ui/toast'
 import { useDeleteMessage } from '@/hooks/queries/message.query'
 
 type DeleteButtonProps = {
@@ -26,7 +26,11 @@ export function DeleteButton(props: DeleteButtonProps) {
   const t = useTranslations()
 
   const { mutate: deleteMessage, isPending: isDeleting } = useDeleteMessage(() => {
-    toast.success(t('success.message-deleted'), { testId: 'guestbook-message-deleted-toast' })
+    toast.add({
+      type: 'success',
+      title: t('success.message-deleted'),
+      data: { testId: 'guestbook-message-deleted-toast' },
+    })
   })
 
   function handleDeleteMessage(id: string) {
