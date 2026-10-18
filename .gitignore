@@ -5,6 +5,8 @@ node_modules/
 .env*.local
 .env
 
+/src/env.ts
+
 # Vercel
 .vercel/
 

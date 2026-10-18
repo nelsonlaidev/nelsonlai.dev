@@ -1,6 +1,6 @@
 import { createHmac } from 'node:crypto'
 
-import { ENV } from 'varlock/env'
+import { ENV } from '@/env'
 
 export function getAnonKey(ip: string): string {
   const raw = createHmac('sha256', ENV.IP_ADDRESS_SALT).update(ip).digest().subarray(0, 16)

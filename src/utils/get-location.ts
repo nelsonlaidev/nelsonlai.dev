@@ -1,4 +1,4 @@
-import { ENV } from 'varlock/env'
+import { ENV } from '@/env'
 
 type LocationResponse = {
   ip: string

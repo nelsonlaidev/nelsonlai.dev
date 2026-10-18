@@ -1,8 +1,8 @@
 import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
-import { ENV } from 'varlock/env'
 
 import { IS_PRODUCTION } from '@/constants/common'
+import { ENV } from '@/env'
 
 import * as schema from './schemas'
 

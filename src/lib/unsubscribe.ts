@@ -2,11 +2,11 @@ import 'server-only'
 
 import { and, eq } from 'drizzle-orm'
 import { jwtVerify, SignJWT } from 'jose'
-import { ENV } from 'varlock/env'
 import * as z from 'zod'
 
 import { db } from '@/db'
 import { comments, unsubscribes } from '@/db/schemas'
+import { ENV } from '@/env'
 import { getMaskedEmail } from '@/utils/get-masked-email'
 
 const TokenSchema = z.jwt({ alg: 'HS256' })

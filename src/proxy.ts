@@ -1,9 +1,9 @@
 import type { NextRequest } from 'next/server'
 
-import { ENV } from 'varlock/env'
-
 import { IS_PRODUCTION } from '@/constants/common'
 import { i18nMiddleware } from '@/i18n/middleware'
+
+import { ENV } from './env'
 
 const IS_PREVIEW = ENV.VERCEL_ENV === 'preview'
 
