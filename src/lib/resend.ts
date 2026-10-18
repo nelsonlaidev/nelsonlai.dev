@@ -18,7 +18,7 @@ export async function sendEmail(options: SendEmailOptions) {
   const resend = new Resend(ENV.RESEND_API_KEY)
 
   return resend.emails.send({
-    from: 'Nelson Lai <me@nelsonlai.dev>',
+    from: ENV.RESEND_FROM_EMAIL,
     to,
     subject,
     react,
