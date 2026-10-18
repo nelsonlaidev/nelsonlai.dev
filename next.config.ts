@@ -6,8 +6,6 @@ import createNextIntlPlugin from 'next-intl/plugin'
 
 import { ENV } from '@/env'
 
-import { IS_PRODUCTION } from './src/constants/common'
-
 const withNextIntl = createNextIntlPlugin()
 const withVarlock = varlockNextConfigPlugin()
 
@@ -30,7 +28,7 @@ const remotePatterns: NonNullable<NextConfig['images']>['remotePatterns'] = [
   },
 ]
 
-if (!IS_PRODUCTION) {
+if (ENV.NODE_ENV !== 'production') {
   remotePatterns.push({
     protocol: 'http',
     hostname: 'localhost',
