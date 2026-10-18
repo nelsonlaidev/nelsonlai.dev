@@ -1,7 +1,8 @@
 import { Buffer } from 'node:buffer'
 
-import { ENV } from 'varlock/env'
 import * as z from 'zod'
+
+import { ENV } from '@/env'
 
 import { publicProcedure } from '../procedures'
 import { WakatimeStatsOutputSchema } from '../schemas/wakatime.schema'

@@ -4,9 +4,9 @@ import type { NextRequest } from 'next/server'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { headers } from 'next/headers'
-import { ENV } from 'varlock/env'
 
 import { db } from '@/db'
+import { ENV } from '@/env'
 import { getBaseUrl } from '@/utils/get-base-url'
 
 function getSocialProviders(): SocialProviders {

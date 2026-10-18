@@ -1,7 +1,8 @@
 import 'varlock/auto-load'
 
 import { defineConfig } from 'drizzle-kit'
-import { ENV } from 'varlock/env'
+
+import { ENV } from '@/env'
 
 export default defineConfig({
   dialect: 'postgresql',

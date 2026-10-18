@@ -3,7 +3,8 @@ import type { NextConfig } from 'next'
 import { withContentCollections } from '@content-collections/next'
 import { varlockNextConfigPlugin } from '@varlock/nextjs-integration/plugin'
 import createNextIntlPlugin from 'next-intl/plugin'
-import { ENV } from 'varlock/env'
+
+import { ENV } from '@/env'
 
 import { IS_PRODUCTION } from './src/constants/common'
 

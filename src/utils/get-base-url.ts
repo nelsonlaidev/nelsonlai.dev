@@ -1,4 +1,4 @@
-import { ENV } from 'varlock/env'
+import { ENV } from '@/env'
 
 export function getBaseUrl() {
   if (ENV.NEXT_PUBLIC_VERCEL_ENV === 'preview') return `https://${ENV.NEXT_PUBLIC_VERCEL_BRANCH_URL}`

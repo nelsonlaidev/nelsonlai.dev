@@ -3,7 +3,8 @@ import 'varlock/auto-load'
 import { consola } from 'consola'
 import { sql } from 'drizzle-orm'
 import { execa } from 'execa'
-import { ENV } from 'varlock/env'
+
+import { ENV } from '@/env'
 
 import { db } from './index'
 

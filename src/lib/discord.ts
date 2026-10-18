@@ -1,6 +1,6 @@
 import type { RESTPostAPIWebhookWithTokenFormDataBody } from 'discord-api-types/rest'
 
-import { ENV } from 'varlock/env'
+import { ENV } from '@/env'
 
 const BOT_AVATAR_URL = 'https://cdn.discordapp.com/avatars/1123845082672537751/8af603a10f1d2f86ebc922ede339cd3a.webp'
 

@@ -1,7 +1,7 @@
 import Script from 'next/script'
-import { ENV } from 'varlock/env'
 
 import { IS_PRODUCTION } from '@/constants/common'
+import { ENV } from '@/env'
 
 export function Analytics() {
   if (!IS_PRODUCTION || !ENV.NEXT_PUBLIC_UMAMI_URL || !ENV.NEXT_PUBLIC_UMAMI_WEBSITE_ID) return null

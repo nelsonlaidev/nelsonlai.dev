@@ -1,5 +1,6 @@
 import { Resend } from 'resend'
-import { ENV } from 'varlock/env'
+
+import { ENV } from '@/env'
 
 type SendEmailOptions = {
   subject: string

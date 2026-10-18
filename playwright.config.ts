@@ -1,7 +1,8 @@
 import 'varlock/auto-load'
 
 import { defineConfig, devices } from '@playwright/test'
-import { ENV } from 'varlock/env'
+
+import { ENV } from '@/env'
 
 const baseURL = 'http://localhost:3000'
 

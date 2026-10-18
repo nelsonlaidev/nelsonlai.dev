@@ -3,7 +3,7 @@ import type { NotPlayingSchema } from '../schemas/spotify.schema'
 
 import { Buffer } from 'node:buffer'
 
-import { ENV } from 'varlock/env'
+import { ENV } from '@/env'
 
 import { publicProcedure } from '../procedures'
 import {

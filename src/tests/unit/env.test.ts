@@ -1,7 +1,7 @@
-import { ENV } from 'varlock/env'
 import { describe, expect, test } from 'vitest'
 
 import { IS_PRODUCTION } from '@/constants/common'
+import { ENV } from '@/env'
 
 describe('environment initialization', () => {
   test('loads the test environment before application modules', () => {
