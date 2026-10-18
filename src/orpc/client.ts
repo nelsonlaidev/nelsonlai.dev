@@ -9,7 +9,8 @@ import { IS_SERVER } from '@/constants/common'
 import { getBaseUrl } from '@/utils/get-base-url'
 
 const link = new RPCLink({
-  url: `${IS_SERVER ? getBaseUrl() : globalThis.location.origin}/rpc`,
+  origin: IS_SERVER ? getBaseUrl() : globalThis.location.origin,
+  url: `/rpc`,
 })
 
 const client: RouterClient<typeof router> = createORPCClient(link)
@@ -35,4 +36,3 @@ export type CommentListOutput = Outputs['comment']['list']
 export type LikeCountOutput = Outputs['like']['count']
 export type MessageListOutput = Outputs['message']['list']
 export type SettingsGetOutput = Outputs['settings']['get']
-export type GithubStatsGetOutput = Outputs['github']['stats']

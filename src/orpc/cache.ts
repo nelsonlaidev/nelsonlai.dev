@@ -1,4 +1,5 @@
-import type { GithubStatsGetOutput } from './client'
+import type * as z from 'zod'
+import type { GithubStatsOutputSchema } from './schemas/github.schema'
 
 import { createCache } from '@/lib/kv'
 
@@ -14,5 +15,5 @@ export const cache = {
   auth: {
     location: createCache<string>('auth:location', LOCATION_CACHE_TTL),
   },
-  github: createCache<GithubStatsGetOutput>('github', GITHUB_STATS_CACHE_TTL),
+  github: createCache<z.infer<typeof GithubStatsOutputSchema>>('github', GITHUB_STATS_CACHE_TTL),
 }
