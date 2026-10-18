@@ -47,6 +47,15 @@ if (ENV.CLOUDFLARE_R2_PUBLIC_URL) {
 const config: NextConfig = {
   reactCompiler: true,
 
+  turbopack: {
+    rules: {
+      '*.css': {
+        loaders: ['@tailwindcss/turbopack'],
+        as: '*.css',
+      },
+    },
+  },
+
   productionBrowserSourceMaps: true,
 
   typescript: {

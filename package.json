@@ -123,7 +123,7 @@
     "@nelsonlaidev/oxlint-config": "1.2.1",
     "@nelsonlaidev/typescript-config": "1.2.3",
     "@playwright/test": "1.64.0",
-    "@tailwindcss/postcss": "4.3.3",
+    "@tailwindcss/turbopack": "4.3.3",
     "@tailwindcss/typography": "0.5.20",
     "@tanstack/react-query-devtools": "5.104.1",
     "@testing-library/jest-dom": "7.0.1",
