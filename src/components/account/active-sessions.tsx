@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Tip } from '@/components/ui/tip'
+import { InfoTip } from '@/components/ui/info-tip'
 import { toast } from '@/components/ui/toast'
 import { useListSessions, useRevokeSession } from '@/hooks/queries/auth.query'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
@@ -115,9 +115,9 @@ function Session(props: SessionProps) {
                 {session.location && (
                   <div className='flex items-center gap-2'>
                     <span className='text-muted-foreground'>{session.location}</span>
-                    <Tip content={t('account.location-not-accurate')}>
-                      <InfoIcon className='size-4 text-muted-foreground' />
-                    </Tip>
+                    <InfoTip label={t('account.location-not-accurate')} content={t('account.location-not-accurate')}>
+                      <InfoIcon aria-hidden className='size-4 text-muted-foreground' />
+                    </InfoTip>
                   </div>
                 )}
               </div>
