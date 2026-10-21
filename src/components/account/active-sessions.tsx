@@ -69,14 +69,14 @@ function Session(props: SessionProps) {
   const { refetch: refetchSession } = useSession()
   const router = useRouter()
 
-  const { browser, os, platform } = Bowser.parse(session.userAgent ?? '')
+  const parsedUserAgent = session.userAgent ? Bowser.parse(session.userAgent) : undefined
 
-  const platformType = (platform.type ?? 'desktop') as keyof typeof PLATFORM_ICONS
+  const platformType = (parsedUserAgent?.platform.type ?? 'desktop') as keyof typeof PLATFORM_ICONS
   const PlatformIcon = PLATFORM_ICONS[platformType]
 
-  const browserName = browser.name ?? t('common.unknown')
-  const browserVersion = browser.version ? `v${browser.version}` : ''
-  const osName = os.name ?? t('common.unknown')
+  const browserName = parsedUserAgent?.browser.name ?? t('common.unknown')
+  const browserVersion = parsedUserAgent?.browser.version ? `v${parsedUserAgent.browser.version}` : ''
+  const osName = parsedUserAgent?.os.name ?? t('common.unknown')
 
   const ipAddress = session.ipAddress ?? t('common.unknown')
   const lastActive = useFormattedDate(session.createdAt, { formatName: 'long' })
