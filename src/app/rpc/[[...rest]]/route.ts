@@ -1,6 +1,6 @@
 import type { NextRequest } from 'next/server'
 
-import { onError } from '@orpc/client'
+import { onError, ORPCError } from '@orpc/client'
 import { RPCHandler } from '@orpc/server/fetch'
 
 import { createORPCContext } from '@/orpc/context'
@@ -8,9 +8,17 @@ import { router } from '@/orpc/routers'
 
 const handler = new RPCHandler(router, {
   interceptors: [
-    onError((e) => {
+    onError((e, { request }) => {
+      if (request.signal?.aborted && e === request.signal.reason) {
+        throw new ORPCError('CLIENT_CLOSED_REQUEST', { cause: e })
+      }
+
       console.error(e)
     }),
+    async (options) => {
+      options.request.signal?.throwIfAborted()
+      return options.next()
+    },
   ],
 })
 
