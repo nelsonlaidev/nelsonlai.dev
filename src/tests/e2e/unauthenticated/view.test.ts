@@ -11,13 +11,13 @@ test.describe('views', () => {
     const viewCount = page.getByTestId('view-count')
 
     await expect(viewCount).toBeVisible()
-    const initialViewCount = Number.parseInt(String(await getNumberFlow(viewCount)), 10)
+    const initialViewCount = Number(String(await getNumberFlow(viewCount)).replaceAll(',', ''))
 
     // Ensure the view count is incremented
     await page.reload()
 
-    const viewCountValue = String(await getNumberFlow(viewCount))
-
-    expect(Number.parseInt(viewCountValue, 10)).toBeGreaterThan(initialViewCount)
+    await expect
+      .poll(async () => Number(String(await getNumberFlow(viewCount)).replaceAll(',', '')))
+      .toBeGreaterThan(initialViewCount)
   })
 })

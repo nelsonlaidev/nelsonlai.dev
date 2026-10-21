@@ -12,12 +12,18 @@ type TimestampPaginationColumns = {
 
 type TimestampPaginationOptions = {
   cursor?: z.infer<typeof InfiniteQueryCursorSchema>
+  limit: number
   sort?: 'newest' | 'oldest'
+}
+
+type TimestampPaginationRow = {
+  createdAt: Date
+  id: string
 }
 
 export function createTimestampPagination(
   { createdAt, id }: TimestampPaginationColumns,
-  { cursor, sort = 'newest' }: TimestampPaginationOptions,
+  { cursor, limit, sort = 'newest' }: TimestampPaginationOptions,
 ) {
   const compare = sort === 'newest' ? lt : gt
   const order = sort === 'newest' ? desc : asc
@@ -30,6 +36,16 @@ export function createTimestampPagination(
 
   return {
     where,
+    limit: limit + 1,
     orderBy: [order(createdAt), order(id)],
+    getPage<T extends TimestampPaginationRow>(rows: T[]) {
+      const items = rows.slice(0, limit)
+      const last = items.at(-1)
+
+      return {
+        items,
+        nextCursor: rows.length > limit && last ? { createdAt: last.createdAt.toISOString(), id: last.id } : undefined,
+      }
+    },
   }
 }

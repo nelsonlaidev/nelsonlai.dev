@@ -38,7 +38,7 @@ const listComments = publicProcedure
         pagination.where,
         input.highlightedCommentId ? ne(comments.id, input.highlightedCommentId) : undefined,
       ),
-      limit: input.limit,
+      limit: pagination.limit,
       with: {
         user: {
           columns: {
@@ -54,6 +54,8 @@ const listComments = publicProcedure
       },
       orderBy: pagination.orderBy,
     })
+
+    const { items, nextCursor } = pagination.getPage(query)
 
     if (input.highlightedCommentId && !input.cursor) {
       const highlightedComment = await context.db.query.comments.findFirst({
@@ -73,10 +75,10 @@ const listComments = publicProcedure
         },
       })
 
-      if (highlightedComment) query.unshift(highlightedComment)
+      if (highlightedComment) items.unshift(highlightedComment)
     }
 
-    const result = query.map((comment) => {
+    const result = items.map((comment) => {
       const selfVote = comment.votes.length > 0 ? comment.votes[0] : null
       const defaultImage = getDefaultImage(comment.user.id)
 
@@ -91,14 +93,9 @@ const listComments = publicProcedure
       }
     })
 
-    const lastComment = query.at(-1)
-
     return {
       comments: result,
-      nextCursor:
-        result.length >= input.limit && lastComment
-          ? { createdAt: lastComment.createdAt.toISOString(), id: lastComment.id }
-          : undefined,
+      nextCursor,
     }
   })
 

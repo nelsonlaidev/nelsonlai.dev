@@ -1,5 +1,7 @@
+import type { MessageListOutput } from '@/orpc/client'
+
 import { createId } from '@paralleldrive/cuid2'
-import { eq, inArray, sql } from 'drizzle-orm'
+import { asc, eq, inArray, sql } from 'drizzle-orm'
 
 import { db } from '@/db'
 import { messages, users } from '@/db/schemas'
@@ -72,6 +74,78 @@ test.describe('guestbook page', () => {
       expect(await db.query.messages.findFirst({ where: eq(messages.id, id) })).toMatchObject({ userId })
     } finally {
       await db.delete(users).where(eq(users.id, userId))
+    }
+  })
+
+  test.describe('pagination boundaries', () => {
+    for (const count of [0, 9, 10, 11]) {
+      test.describe(`${count} messages`, () => {
+        const limit = 10
+        let records: Array<typeof messages.$inferInsert & { id: string }>
+        let initialCursor: MessageListOutput['nextCursor']
+        let expectedPages: Array<{ ids: string[]; nextCursor: MessageListOutput['nextCursor'] }>
+
+        test.beforeEach(async () => {
+          const prefix = `pagination-${createId()}`
+          const oldest = await db.query.messages.findFirst({
+            columns: { createdAt: true },
+            orderBy: [asc(messages.createdAt)],
+          })
+          // Keep this cursor range before the public messages used by the other tests.
+          const createdAt = new Date((oldest?.createdAt.getTime() ?? Date.now()) - 60_000)
+          records = Array.from({ length: count }, (_, index) => ({
+            id: `${prefix}-${String(index).padStart(2, '0')}`,
+            body: `Pagination message ${index}`,
+            userId: TEST_UNIQUE_ID,
+            createdAt,
+          }))
+          initialCursor = { createdAt: new Date(createdAt.getTime() + 1).toISOString(), id: prefix }
+          const ordered = records.toReversed()
+          const visible = ordered.slice(0, limit)
+          const lastVisible = visible.at(-1)
+          expectedPages = [
+            {
+              ids: visible.map(({ id }) => id),
+              nextCursor:
+                count > limit && lastVisible ? { createdAt: createdAt.toISOString(), id: lastVisible.id } : undefined,
+            },
+          ]
+          if (count > limit) {
+            expectedPages.push({ ids: ordered.slice(limit).map(({ id }) => id), nextCursor: undefined })
+          }
+
+          if (records.length > 0) await db.insert(messages).values(records)
+        })
+
+        test.afterEach(async () => {
+          if (records.length > 0) {
+            await db.delete(messages).where(
+              inArray(
+                messages.id,
+                records.map(({ id }) => id),
+              ),
+            )
+          }
+        })
+
+        test('returns each page once and omits the cursor on the final page', async ({ request }) => {
+          let cursor = initialCursor
+
+          // Each request must use the cursor returned by the previous page.
+          // oxlint-disable no-await-in-loop
+          for (const expected of expectedPages) {
+            const response = await request.post('/rpc/message/list', { data: { json: { limit, cursor } } })
+            await expect(response).toBeOK()
+
+            const body = (await response.json()) as { json: MessageListOutput }
+            expect(body.json.messages).toMatchObject(expected.ids.map((id) => ({ id })))
+            expect(body.json.messages).toHaveLength(expected.ids.length)
+            expect(body.json.nextCursor).toEqual(expected.nextCursor)
+            cursor = body.json.nextCursor
+          }
+          // oxlint-enable no-await-in-loop
+        })
+      })
     }
   })
 

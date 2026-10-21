@@ -1,8 +1,10 @@
+import type { CommentListInput, CommentListOutput } from '@/orpc/client'
+
 import { createId } from '@paralleldrive/cuid2'
 import { and, eq, inArray, sql } from 'drizzle-orm'
 
 import { db } from '@/db'
-import { comments, users, votes } from '@/db/schemas'
+import { comments, posts, users, votes } from '@/db/schemas'
 import en from '@/i18n/messages/en.json' with { type: 'json' }
 import zhTW from '@/i18n/messages/zh-TW.json' with { type: 'json' }
 
@@ -471,6 +473,89 @@ test.describe('comment page', () => {
         await expect(like).toHaveAttribute('data-active', 'false')
         expect(await getNumberFlow(like.locator('number-flow-react'))).toBe('0')
       })
+    }
+  })
+
+  test.describe('pagination boundaries', () => {
+    for (const sort of ['newest', 'oldest'] as const) {
+      for (const { count, highlighted, limit } of [
+        { count: 0, highlighted: false, limit: 10 },
+        { count: 9, highlighted: false, limit: 10 },
+        { count: 10, highlighted: false, limit: 10 },
+        { count: 11, highlighted: false, limit: 10 },
+        { count: 0, highlighted: true, limit: 1 },
+        { count: 9, highlighted: true, limit: 10 },
+        { count: 10, highlighted: true, limit: 10 },
+        { count: 11, highlighted: true, limit: 10 },
+      ]) {
+        test.describe(`${count} ordinary comments in ${sort} order with highlighted=${highlighted} and limit=${limit}`, () => {
+          let slug: string
+          let input: CommentListInput
+          let expectedPages: Array<{ ids: string[]; nextCursor: CommentListOutput['nextCursor'] }>
+
+          test.beforeEach(async () => {
+            slug = `pagination-${createId()}`
+            const createdAt = new Date('2040-01-01T00:00:00.123Z')
+            const ordinary = Array.from({ length: count }, (_, index) => ({
+              id: `${slug}-${String(index).padStart(2, '0')}`,
+              body: `Pagination comment ${index}`,
+              postId: slug,
+              userId: TEST_UNIQUE_ID,
+              createdAt,
+            }))
+            const highlightedComment = highlighted
+              ? {
+                  id: `${slug}-highlighted`,
+                  body: 'Highlighted pagination comment',
+                  postId: slug,
+                  userId: TEST_UNIQUE_ID,
+                  createdAt: new Date('2039-01-01T00:00:00.000Z'),
+                }
+              : undefined
+            const records = highlightedComment ? [...ordinary, highlightedComment] : ordinary
+            const ordered = sort === 'newest' ? ordinary.toReversed() : ordinary
+            const visible = ordered.slice(0, limit)
+            const lastVisible = visible.at(-1)
+            const expected = highlightedComment ? [highlightedComment, ...visible] : visible
+            input = { slug, sort, limit, highlightedCommentId: highlightedComment?.id }
+            expectedPages = [
+              {
+                ids: expected.map(({ id }) => id),
+                nextCursor:
+                  count > limit && lastVisible ? { createdAt: createdAt.toISOString(), id: lastVisible.id } : undefined,
+              },
+            ]
+            if (count > limit) {
+              expectedPages.push({ ids: ordered.slice(limit).map(({ id }) => id), nextCursor: undefined })
+            }
+
+            await db.insert(posts).values({ slug })
+            if (records.length > 0) await db.insert(comments).values(records)
+          })
+
+          test.afterEach(async () => {
+            await db.delete(posts).where(eq(posts.slug, slug))
+          })
+
+          test('returns each page once and omits the cursor on the final page', async ({ request }) => {
+            let cursor: CommentListInput['cursor']
+
+            // Each request must use the cursor returned by the previous page.
+            // oxlint-disable no-await-in-loop
+            for (const expected of expectedPages) {
+              const response = await request.post('/rpc/comment/list', { data: { json: { ...input, cursor } } })
+              await expect(response).toBeOK()
+
+              const body = (await response.json()) as { json: CommentListOutput }
+              expect(body.json.comments).toMatchObject(expected.ids.map((id) => ({ id })))
+              expect(body.json.comments).toHaveLength(expected.ids.length)
+              expect(body.json.nextCursor).toEqual(expected.nextCursor)
+              cursor = body.json.nextCursor
+            }
+            // oxlint-enable no-await-in-loop
+          })
+        })
+      }
     }
   })
 

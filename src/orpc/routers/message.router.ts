@@ -25,7 +25,7 @@ const listMessages = publicProcedure
 
     const query = await context.db.query.messages.findMany({
       where: pagination.where,
-      limit: input.limit,
+      limit: pagination.limit,
       with: {
         user: {
           columns: {
@@ -38,7 +38,9 @@ const listMessages = publicProcedure
       orderBy: pagination.orderBy,
     })
 
-    const result = query.map((message) => {
+    const { items, nextCursor } = pagination.getPage(query)
+
+    const result = items.map((message) => {
       const defaultImage = getDefaultImage(message.user.id)
 
       return {
@@ -51,14 +53,9 @@ const listMessages = publicProcedure
       }
     })
 
-    const lastMessage = query.at(-1)
-
     return {
       messages: result,
-      nextCursor:
-        result.length >= input.limit && lastMessage
-          ? { createdAt: lastMessage.createdAt.toISOString(), id: lastMessage.id }
-          : undefined,
+      nextCursor,
     }
   })
 
