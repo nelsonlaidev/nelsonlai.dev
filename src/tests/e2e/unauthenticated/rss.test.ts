@@ -1,5 +1,6 @@
-import { expect, test } from '@playwright/test'
 import { SyntaxValidator } from 'fast-xml-validator'
+
+import { expect, test } from '../fixtures/test'
 
 test.describe('rss page', () => {
   test('validates rss xml', async ({ page }) => {

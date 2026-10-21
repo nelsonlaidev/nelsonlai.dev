@@ -1,5 +1,4 @@
-import { test } from '@playwright/test'
-
+import { test } from '../fixtures/test'
 import { checkAppliedTheme, checkStoredTheme, setThemeInLocalStorage } from '../utils/theme'
 
 function getInitialTheme(theme: string) {

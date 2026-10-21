@@ -1,5 +1,6 @@
-import { expect, test } from '@playwright/test'
 import { SyntaxValidator } from 'fast-xml-validator'
+
+import { expect, test } from '../fixtures/test'
 
 test.describe('sitemap page', () => {
   test('validates sitemap xml', async ({ page }) => {

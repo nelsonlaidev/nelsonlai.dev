@@ -1,6 +1,5 @@
-import { expect, test } from '@playwright/test'
-
 import { COMMENT_SUBMIT_AND_VIEW_POST_SLUG } from '../fixtures/posts'
+import { expect, test } from '../fixtures/test'
 import { getNumberFlow } from '../utils/number-flow'
 
 test.describe('views', () => {
