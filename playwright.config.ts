@@ -39,12 +39,17 @@ export default defineConfig({
     { name: 'teardown', testMatch: '**/*.teardown.ts' },
   ],
   webServer: {
-    // Resolve the app's environment independently of the test runner's serialized config.
-    command: ENV.CI ? 'env -u __VARLOCK_ENV pnpm start' : 'env -u __VARLOCK_ENV pnpm dev',
+    command: ENV.CI
+      ? 'env -u __VARLOCK_ENV pnpm start'
+      : 'env -u __VARLOCK_ENV pnpm build && env -u __VARLOCK_ENV pnpm start',
     env: {
-      NODE_ENV: ENV.CI ? 'production' : 'development',
+      NODE_ENV: 'production',
+      DISCORD_WEBHOOK_URL: '',
+      AUTHOR_EMAIL: '',
+      RESEND_API_KEY: '',
     },
     url: baseURL,
-    reuseExistingServer: !ENV.CI,
+    timeout: 180_000,
+    reuseExistingServer: false,
   },
 })
