@@ -5,21 +5,19 @@ import type { InfiniteQueryCursorSchema } from './schemas/common.schema'
 
 import { and, asc, desc, eq, gt, lt, or } from 'drizzle-orm'
 
+type TimestampPaginationColumns = {
+  createdAt: AnyPgColumn<{ columnType: 'PgTimestamp'; data: Date; notNull: true }>
+  id: AnyPgColumn<{ data: string; notNull: true }>
+}
+
+type TimestampPaginationOptions = {
+  cursor?: z.infer<typeof InfiniteQueryCursorSchema>
+  sort?: 'newest' | 'oldest'
+}
+
 export function createTimestampPagination(
-  {
-    createdAt,
-    id,
-  }: {
-    createdAt: AnyPgColumn<{ columnType: 'PgTimestamp'; data: Date; notNull: true }>
-    id: AnyPgColumn<{ data: string; notNull: true }>
-  },
-  {
-    cursor,
-    sort = 'newest',
-  }: {
-    cursor?: z.infer<typeof InfiniteQueryCursorSchema>
-    sort?: 'newest' | 'oldest'
-  },
+  { createdAt, id }: TimestampPaginationColumns,
+  { cursor, sort = 'newest' }: TimestampPaginationOptions,
 ) {
   const compare = sort === 'newest' ? lt : gt
   const order = sort === 'newest' ? desc : asc
