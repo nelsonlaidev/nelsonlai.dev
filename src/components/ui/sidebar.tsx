@@ -697,9 +697,9 @@ export function SidebarMenuSkeleton(props: SidebarMenuSkeletonProps) {
       className={cn('flex h-8 items-center gap-2 rounded-md px-2', className)}
       {...rest}
     >
-      {showIcon && <Skeleton className='size-4 rounded-md' data-sidebar='menu-skeleton-icon' />}
+      {showIcon && <Skeleton className='size-4 rounded-md bg-sidebar-skeleton' data-sidebar='menu-skeleton-icon' />}
       <Skeleton
-        className='h-4 max-w-(--skeleton-width) flex-1'
+        className='h-4 max-w-(--skeleton-width) flex-1 bg-sidebar-skeleton'
         data-sidebar='menu-skeleton-text'
         style={{
           '--skeleton-width': width,
