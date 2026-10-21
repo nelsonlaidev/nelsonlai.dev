@@ -17,6 +17,7 @@ env:
   UPSTASH_REDIS_REST_TOKEN: 'local-uprest-token-7f3c9a2e6b1d4f80'
   IP_ADDRESS_SALT: 'ci-ip-address-salt-for-testing-purposes'
   BETTER_AUTH_SECRET: 'ci-better-auth-secret-for-testing-purposes'
+  JWT_SECRET: 'ci-jwt-secret-for-testing-purposes'
   RESEND_FROM_EMAIL: 'Nelson Lai <noreply@example.com>'
   GITHUB_CLIENT_ID: 'ci-github-client-id'
   GITHUB_CLIENT_SECRET: 'ci-github-client-secret'
