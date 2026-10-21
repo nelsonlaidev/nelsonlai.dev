@@ -1,22 +1,21 @@
 import { createId } from '@paralleldrive/cuid2'
-import { inArray, sql } from 'drizzle-orm'
+import { eq, inArray, sql } from 'drizzle-orm'
 
 import { db } from '@/db'
-import { messages } from '@/db/schemas'
+import { messages, users } from '@/db/schemas'
 import en from '@/i18n/messages/en.json' with { type: 'json' }
 
 import { TEST_UNIQUE_ID } from '../fixtures/auth'
 import { expect, test } from '../fixtures/test'
 
 test.describe('guestbook page', () => {
+  // These tests insert and remove messages from the same public list.
   test.describe.configure({ mode: 'default' })
-
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/guestbook')
-  })
 
   test('submits a message', async ({ page }) => {
     const message = createId()
+
+    await page.goto('/guestbook')
 
     await page.getByTestId('guestbook-textarea').fill(message)
 
@@ -35,6 +34,8 @@ test.describe('guestbook page', () => {
       userId: TEST_UNIQUE_ID,
     })
 
+    await page.goto('/guestbook')
+
     const messageBlock = page.getByTestId(`message-${id}`)
     await expect(messageBlock).toBeVisible()
     await messageBlock.getByTestId('guestbook-delete-button').click()
@@ -45,6 +46,33 @@ test.describe('guestbook page', () => {
 
     await expect(messageBlock).toBeHidden()
     await expect(page.getByTestId('guestbook-message-deleted-toast')).toContainText(en.success['message-deleted'])
+  })
+
+  test("cannot delete another user's message through the UI or API", async ({ page }) => {
+    const userId = createId()
+    const id = createId()
+    await db
+      .insert(users)
+      .values({ id: userId, name: 'Other Guestbook User', email: `${userId}@example.com`, emailVerified: false })
+
+    try {
+      await db.insert(messages).values({ id, body: `Other message ${id}`, userId })
+      await page.goto('/guestbook')
+
+      const message = page.getByTestId(`message-${id}`)
+      await expect(message).toBeVisible()
+      await expect(message.getByTestId('guestbook-delete-button')).toBeHidden()
+
+      const response = await page.request.post('/rpc/message/delete', { data: { json: { id } } })
+      expect(response.status()).toBe(404)
+      expect(await response.json()).toMatchObject({ json: { code: 'NOT_FOUND' } })
+
+      await page.reload()
+      await expect(message).toBeVisible()
+      expect(await db.query.messages.findFirst({ where: eq(messages.id, id) })).toMatchObject({ userId })
+    } finally {
+      await db.delete(users).where(eq(users.id, userId))
+    }
   })
 
   test('loads every message once after timestamps are rounded to milliseconds', async ({ page }) => {

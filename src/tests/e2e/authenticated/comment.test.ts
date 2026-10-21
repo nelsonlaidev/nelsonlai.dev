@@ -1,9 +1,10 @@
 import { createId } from '@paralleldrive/cuid2'
-import { eq, inArray, sql } from 'drizzle-orm'
+import { and, eq, inArray, sql } from 'drizzle-orm'
 
 import { db } from '@/db'
-import { comments } from '@/db/schemas'
+import { comments, users, votes } from '@/db/schemas'
 import en from '@/i18n/messages/en.json' with { type: 'json' }
+import zhTW from '@/i18n/messages/zh-TW.json' with { type: 'json' }
 
 import { TEST_UNIQUE_ID } from '../fixtures/auth'
 import {
@@ -20,6 +21,7 @@ async function getCount(locator: Parameters<typeof getNumberFlow>[0]) {
 }
 
 test.describe('comment page', () => {
+  // Comment mutations share article counts across these tests.
   test.describe.configure({ mode: 'default' })
 
   test('submits a comment', async ({ page }) => {
@@ -148,6 +150,328 @@ test.describe('comment page', () => {
     // Reply count should be updated in the comment header
     expect(await getCount(page.getByTestId('comment-count'))).toBe(commentCountWithInsertedReply - 1)
     expect(await getNumberFlow(page.getByTestId('reply-count'))).toBe('0 replies')
+  })
+
+  for (const type of ['comment', 'reply'] as const) {
+    test(`cancels deleting a ${type}`, async ({ page }) => {
+      const commentIds = { comment: createId(), reply: createId() }
+      const parentId = commentIds.comment
+      const commentId = commentIds[type]
+      const commentText = `cancel-delete-${commentId}`
+
+      await db.insert(comments).values({
+        id: parentId,
+        body: `cancel-delete-${parentId}`,
+        postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+        userId: TEST_UNIQUE_ID,
+      })
+      await db.insert(comments).values({
+        id: commentIds.reply,
+        body: `cancel-delete-${commentIds.reply}`,
+        postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+        userId: TEST_UNIQUE_ID,
+        parentId,
+      })
+
+      await page.goto(`/blog/${COMMENT_DELETE_AND_LIKE_POST_SLUG}?comment=${parentId}`)
+
+      const commentBlock = page.getByTestId(`comment-${commentId}`)
+      await expect(commentBlock.getByText(commentText, { exact: true })).toBeVisible()
+      const initialCommentCount = await getCount(page.getByTestId('comment-count'))
+      const initialTopLevelCount = await getCount(page.getByTestId('blog-comment-count'))
+      const initialReplyCount = await getCount(page.getByTestId('reply-count'))
+
+      await commentBlock.getByTestId('comment-menu-button').click()
+      await page.getByTestId('comment-delete-button').click()
+
+      const deleteDialog = page.getByTestId('comment-dialog')
+      await expect(deleteDialog).toBeVisible()
+      await deleteDialog.getByRole('button', { name: en.common.cancel, exact: true }).click()
+
+      await expect(deleteDialog).toBeHidden()
+      await expect(commentBlock.getByText(commentText, { exact: true })).toBeVisible()
+      await expect(page.getByTestId('comment-deleted-toast')).toBeHidden()
+      expect(await getCount(page.getByTestId('comment-count'))).toBe(initialCommentCount)
+      expect(await getCount(page.getByTestId('blog-comment-count'))).toBe(initialTopLevelCount)
+      expect(await getCount(page.getByTestId('reply-count'))).toBe(initialReplyCount)
+
+      await page.reload()
+
+      await expect(commentBlock.getByText(commentText, { exact: true })).toBeVisible()
+      expect(await getCount(page.getByTestId('comment-count'))).toBe(initialCommentCount)
+      expect(await getCount(page.getByTestId('blog-comment-count'))).toBe(initialTopLevelCount)
+      expect(await getCount(page.getByTestId('reply-count'))).toBe(initialReplyCount)
+    })
+  }
+
+  test("cannot delete another user's comment through the menu or API", async ({ page }) => {
+    const otherUserId = createId()
+    const commentId = createId()
+    const commentText = `other-user-comment-${commentId}`
+
+    await db.insert(users).values({
+      id: otherUserId,
+      name: 'Other Test User',
+      email: `${otherUserId}@example.com`,
+      emailVerified: false,
+    })
+
+    try {
+      await db.insert(comments).values({
+        id: commentId,
+        body: commentText,
+        postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+        userId: otherUserId,
+      })
+
+      const sessionResponse = await page.request.get('/api/auth/get-session')
+      await expect(sessionResponse).toBeOK()
+      expect(await sessionResponse.json()).toMatchObject({ user: { id: TEST_UNIQUE_ID } })
+
+      await page.goto(`/blog/${COMMENT_DELETE_AND_LIKE_POST_SLUG}?comment=${commentId}`)
+
+      const commentBlock = page.getByTestId(`comment-${commentId}`)
+      await expect(commentBlock.getByText(commentText, { exact: true })).toBeVisible()
+      const initialCommentCount = await getCount(page.getByTestId('comment-count'))
+      const initialTopLevelCount = await getCount(page.getByTestId('blog-comment-count'))
+
+      await commentBlock.getByTestId('comment-menu-button').click()
+      await expect(page.getByRole('menuitem', { name: en.blog.comments['copy-link'] })).toBeVisible()
+      await expect(page.getByTestId('comment-delete-button')).toBeHidden()
+
+      const deleteResponse = await page.request.post('/rpc/comment/delete', {
+        data: { json: { id: commentId } },
+      })
+
+      expect(deleteResponse.status()).toBe(403)
+      expect(await deleteResponse.json()).toMatchObject({ json: { code: 'FORBIDDEN' } })
+
+      await page.reload()
+
+      await expect(commentBlock.getByText(commentText, { exact: true })).toBeVisible()
+      expect(await getCount(page.getByTestId('comment-count'))).toBe(initialCommentCount)
+      expect(await getCount(page.getByTestId('blog-comment-count'))).toBe(initialTopLevelCount)
+    } finally {
+      await db.delete(comments).where(eq(comments.id, commentId))
+      await db.delete(users).where(eq(users.id, otherUserId))
+    }
+  })
+
+  test('preserves replies when their parent comment is deleted', async ({ page }) => {
+    const parentId = createId()
+    const replyId = createId()
+    const parentText = `parent-${parentId}`
+    const replyText = `reply-${replyId}`
+
+    await db.insert(comments).values({
+      id: parentId,
+      body: parentText,
+      postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+      userId: TEST_UNIQUE_ID,
+    })
+    await db.insert(comments).values({
+      id: replyId,
+      body: replyText,
+      postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+      userId: TEST_UNIQUE_ID,
+      parentId,
+    })
+
+    await page.goto(`/blog/${COMMENT_DELETE_AND_LIKE_POST_SLUG}?comment=${parentId}`)
+
+    const parentBlock = page.getByTestId(`comment-${parentId}`)
+    const replyBlock = page.getByTestId(`comment-${replyId}`)
+    await expect(parentBlock.getByText(parentText, { exact: true })).toBeVisible()
+    await expect(replyBlock.getByText(replyText, { exact: true })).toBeVisible()
+    const initialCommentCount = await getCount(page.getByTestId('comment-count'))
+    const initialTopLevelCount = await getCount(page.getByTestId('blog-comment-count'))
+    const initialReplyCount = await getCount(page.getByTestId('reply-count'))
+
+    await parentBlock.getByTestId('comment-menu-button').click()
+    await page.getByTestId('comment-delete-button').click()
+    await page.getByTestId('comment-dialog').getByTestId('comment-dialog-delete-button').click()
+
+    await expect(page.getByTestId('comment-deleted-toast')).toContainText(en.success['comment-deleted'])
+    await expect(
+      parentBlock.getByText(en.blog.comments['this-comment-has-been-deleted'], { exact: true }),
+    ).toBeVisible()
+    await expect(parentBlock.getByText(parentText, { exact: true })).toBeHidden()
+    await expect(replyBlock.getByText(replyText, { exact: true })).toBeVisible()
+    expect(await getCount(page.getByTestId('comment-count'))).toBe(initialCommentCount)
+    expect(await getCount(page.getByTestId('blog-comment-count'))).toBe(initialTopLevelCount)
+    expect(await getCount(page.getByTestId('reply-count'))).toBe(initialReplyCount)
+
+    await page.reload()
+
+    await expect(
+      parentBlock.getByText(en.blog.comments['this-comment-has-been-deleted'], { exact: true }),
+    ).toBeVisible()
+    await expect(parentBlock.getByText(parentText, { exact: true })).toBeHidden()
+    await expect(replyBlock.getByText(replyText, { exact: true })).toBeVisible()
+    await parentBlock.getByTestId('comment-menu-button').click()
+    await expect(page.getByRole('menuitem', { name: en.blog.comments['copy-link'] })).toBeVisible()
+    await expect(page.getByTestId('comment-delete-button')).toBeHidden()
+  })
+
+  test('removes a deleted parent when its last reply is deleted', async ({ page }) => {
+    const parentId = createId()
+    const replyId = createId()
+
+    await db.insert(comments).values({
+      id: parentId,
+      body: 'Deleted Parent Comment',
+      postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+      userId: TEST_UNIQUE_ID,
+      isDeleted: true,
+    })
+    await db.insert(comments).values({
+      id: replyId,
+      body: 'Last Reply',
+      postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+      userId: TEST_UNIQUE_ID,
+      parentId,
+    })
+
+    await page.goto(`/blog/${COMMENT_DELETE_AND_LIKE_POST_SLUG}?comment=${parentId}`)
+
+    const parentBlock = page.getByTestId(`comment-${parentId}`)
+    const replyBlock = page.getByTestId(`comment-${replyId}`)
+    await expect(
+      parentBlock.getByText(en.blog.comments['this-comment-has-been-deleted'], { exact: true }),
+    ).toBeVisible()
+    await expect(replyBlock).toBeVisible()
+    const initialCommentCount = await getCount(page.getByTestId('comment-count'))
+    const initialTopLevelCount = await getCount(page.getByTestId('blog-comment-count'))
+    const initialReplyCount = await getCount(page.getByTestId('reply-count'))
+
+    await replyBlock.getByTestId('comment-menu-button').click()
+    await page.getByTestId('comment-delete-button').click()
+    await page.getByTestId('comment-dialog').getByTestId('comment-dialog-delete-button').click()
+
+    await expect(page.getByTestId('comment-deleted-toast')).toContainText(en.success['comment-deleted'])
+    await expect(parentBlock).toBeHidden()
+    await expect(replyBlock).toBeHidden()
+    expect(await getCount(page.getByTestId('comment-count'))).toBe(initialCommentCount - 2)
+    expect(await getCount(page.getByTestId('blog-comment-count'))).toBe(initialTopLevelCount - 1)
+    expect(await getCount(page.getByTestId('reply-count'))).toBe(initialReplyCount - 1)
+
+    const commentsResponse = page.waitForResponse(
+      (response) => response.url().includes('/rpc/comment/list') && response.ok(),
+    )
+    await page.reload()
+    await commentsResponse
+
+    await expect(page.getByTestId('comments-list')).toBeVisible()
+    await expect(parentBlock).toBeHidden()
+    await expect(replyBlock).toBeHidden()
+    expect(await getCount(page.getByTestId('comment-count'))).toBe(initialCommentCount - 2)
+    expect(await getCount(page.getByTestId('blog-comment-count'))).toBe(initialTopLevelCount - 1)
+    expect(await getCount(page.getByTestId('reply-count'))).toBe(initialReplyCount - 1)
+  })
+
+  test.describe('voting', () => {
+    let parentId: string
+    let replyId: string
+
+    test.beforeEach(async () => {
+      parentId = createId()
+      replyId = createId()
+      await db.insert(comments).values({
+        id: parentId,
+        body: 'Vote parent',
+        postId: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+        userId: TEST_UNIQUE_ID,
+      })
+      await db.insert(comments).values({
+        id: replyId,
+        parentId,
+        body: 'Vote reply',
+        postId: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+        userId: TEST_UNIQUE_ID,
+      })
+    })
+
+    test.afterEach(async () => {
+      await db.delete(comments).where(eq(comments.id, replyId))
+      await db.delete(comments).where(eq(comments.id, parentId))
+    })
+
+    for (const type of ['comment', 'reply'] as const) {
+      test(`persists liking, disliking, and removing a vote on a ${type}`, async ({ page }) => {
+        const id = { comment: parentId, reply: replyId }[type]
+        await page.goto(`/blog/${COMMENT_SUBMIT_AND_VIEW_POST_SLUG}?comment=${parentId}`)
+
+        const comment = page.getByTestId(`comment-${id}`)
+        const like = comment.getByRole('button', { name: en.common.like, exact: true })
+        const dislike = comment.getByRole('button', { name: en.blog.comments.dislike, exact: true })
+
+        // Each transition depends on the vote saved by the previous step.
+        // oxlint-disable no-await-in-loop
+        for (const state of [
+          { action: like, liked: true, likes: '1', dislikes: '0' },
+          { action: dislike, liked: false, likes: '0', dislikes: '1' },
+          { action: dislike, liked: null, likes: '0', dislikes: '0' },
+        ]) {
+          const saved = page.waitForResponse((response) => response.url().includes('/rpc/vote/create') && response.ok())
+          await state.action.click()
+          await saved
+          await expect(like).toHaveAttribute('data-active', String(state.liked === true))
+          await expect(dislike).toHaveAttribute('data-active', String(state.liked === false))
+          expect(await getNumberFlow(like.locator('number-flow-react'))).toBe(state.likes)
+          expect(await getNumberFlow(dislike.locator('number-flow-react'))).toBe(state.dislikes)
+
+          const vote = await db.query.votes.findFirst({
+            where: and(eq(votes.commentId, id), eq(votes.userId, TEST_UNIQUE_ID)),
+          })
+          expect(vote?.isLike ?? null).toBe(state.liked)
+
+          await page.reload()
+
+          await expect(like).toHaveAttribute('data-active', String(state.liked === true))
+          await expect(dislike).toHaveAttribute('data-active', String(state.liked === false))
+          expect(await getNumberFlow(like.locator('number-flow-react'))).toBe(state.likes)
+          expect(await getNumberFlow(dislike.locator('number-flow-react'))).toBe(state.dislikes)
+        }
+        // oxlint-enable no-await-in-loop
+      })
+
+      test(`rolls back an optimistic vote on a ${type} when saving fails`, async ({ page }) => {
+        const id = { comment: parentId, reply: replyId }[type]
+        await page.goto(`/blog/${COMMENT_SUBMIT_AND_VIEW_POST_SLUG}?comment=${parentId}`)
+        const like = page.getByTestId(`comment-${id}`).getByRole('button', { name: en.common.like, exact: true })
+        const pending = Promise.withResolvers<boolean>()
+        const failed = page.waitForResponse(
+          (response) => response.url().includes('/rpc/vote/create') && response.status() === 500,
+        )
+
+        await page.route('**/rpc/vote/create', async (route) => {
+          await pending.promise
+          await route.fulfill({
+            status: 500,
+            json: { json: { defined: false, code: 'INTERNAL_SERVER_ERROR', status: 500, message: 'Vote failed' } },
+          })
+        })
+
+        try {
+          await like.click()
+          await expect(like).toHaveAttribute('data-active', 'true')
+          expect(await getNumberFlow(like.locator('number-flow-react'))).toBe('1')
+        } finally {
+          pending.resolve(true)
+        }
+
+        await failed
+        await expect(like).toHaveAttribute('data-active', 'false')
+        expect(await getNumberFlow(like.locator('number-flow-react'))).toBe('0')
+        expect(
+          await db.query.votes.findFirst({ where: and(eq(votes.commentId, id), eq(votes.userId, TEST_UNIQUE_ID)) }),
+        ).toBeUndefined()
+
+        await page.reload()
+        await expect(like).toHaveAttribute('data-active', 'false')
+        expect(await getNumberFlow(like.locator('number-flow-react'))).toBe('0')
+      })
+    }
   })
 
   test.describe('pagination and sorting', () => {
@@ -286,5 +610,73 @@ test.describe('comment page', () => {
         ).toEqual(expected)
       }).toPass({ timeout: 15_000 })
     })
+  })
+
+  test.describe('comment links', () => {
+    for (const { locale, prefix, messages } of [
+      { locale: 'en', prefix: '', messages: en },
+      { locale: 'zh-TW', prefix: '/zh-TW', messages: zhTW },
+    ]) {
+      for (const type of ['comment', 'reply'] as const) {
+        test(`opens a copied ${type} link in ${locale} in a fresh browser context`, async ({
+          page,
+          browser,
+          baseURL,
+          extraHTTPHeaders,
+        }) => {
+          const parentId = createId()
+          const replyId = createId()
+          const id = { comment: parentId, reply: replyId }[type]
+          await db.insert(comments).values({
+            id: parentId,
+            body: `Link parent ${parentId}`,
+            postId: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+            userId: TEST_UNIQUE_ID,
+          })
+          await db.insert(comments).values({
+            id: replyId,
+            parentId,
+            body: `Link reply ${replyId}`,
+            postId: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+            userId: TEST_UNIQUE_ID,
+          })
+
+          const fresh = await browser.newContext({
+            baseURL,
+            extraHTTPHeaders,
+            storageState: { cookies: [], origins: [] },
+          })
+
+          try {
+            await page.goto(`${prefix}/blog/${COMMENT_SUBMIT_AND_VIEW_POST_SLUG}?comment=${parentId}`)
+            await page.getByTestId(`comment-${id}`).getByTestId('comment-menu-button').click()
+            await page.getByRole('menuitem', { name: messages.blog.comments['copy-link'], exact: true }).click()
+            await expect(page.getByText(messages.success['link-copied'], { exact: true })).toBeVisible()
+
+            const copied = await page.evaluate(async () => navigator.clipboard.readText())
+            const query = { comment: `comment=${parentId}`, reply: `comment=${parentId}&reply=${replyId}` }[type]
+            expect(copied).toBe(`${baseURL}${prefix}/blog/${COMMENT_SUBMIT_AND_VIEW_POST_SLUG}?${query}`)
+
+            const target = await fresh.newPage()
+            await target.goto(copied)
+            await expect(target.locator('html')).toHaveAttribute('lang', locale)
+            await expect(
+              target
+                .getByTestId(`comment-${id}`)
+                .getByText(messages.blog.comments['highlighted-comment'], { exact: true }),
+            ).toBeVisible()
+            await expect(target.getByTestId(`comment-${id}`)).toBeInViewport()
+            await expect(
+              target.getByTestId(`comment-${parentId}`).getByTestId('comment-replies-expand-button'),
+            ).toHaveAttribute('data-state', 'open')
+            await expect(target.getByText(`Link reply ${replyId}`, { exact: true })).toBeVisible()
+          } finally {
+            await fresh.close()
+            await db.delete(comments).where(eq(comments.id, replyId))
+            await db.delete(comments).where(eq(comments.id, parentId))
+          }
+        })
+      }
+    }
   })
 })
