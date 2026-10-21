@@ -1,5 +1,5 @@
 import { CopyIcon, MoreVerticalIcon, Trash2Icon } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import {
@@ -20,6 +20,7 @@ import { useCommentsContext } from '@/contexts/comments.context'
 import { useDeletePostComment } from '@/hooks/queries/comment.query'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
 import { useSession } from '@/lib/auth-client'
+import { getLocalizedPath } from '@/utils/get-localized-path'
 
 export function CommentMenu() {
   const { comment } = useCommentContext()
@@ -28,6 +29,7 @@ export function CommentMenu() {
   const [copy] = useCopyToClipboard()
   const [open, setOpen] = useState(false)
   const t = useTranslations()
+  const locale = useLocale()
 
   const { mutate: deleteComment, isPending: isDeleting } = useDeletePostComment({ slug }, () => {
     toast.add({ type: 'success', title: t('success.comment-deleted'), data: { testId: 'comment-deleted-toast' } })
@@ -41,6 +43,7 @@ export function CommentMenu() {
   } = comment
 
   const commentQuery = parentId ? `comment=${parentId}&reply=${id}` : `comment=${id}`
+  const commentPath = getLocalizedPath(`/blog/${slug}`, locale)
 
   const isAuthor = !isDeleted && session?.user.id === userId
 
@@ -68,7 +71,7 @@ export function CommentMenu() {
           <DropdownMenuItem
             onClick={() => {
               void copy({
-                text: `${globalThis.location.origin}/blog/${slug}?${commentQuery}`,
+                text: `${globalThis.location.origin}${commentPath}?${commentQuery}`,
                 successMessage: t('success.link-copied'),
               })
             }}

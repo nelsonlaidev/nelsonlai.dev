@@ -22,7 +22,7 @@ export function CommentActions() {
     sort: comment.parentId === null ? sort : 'oldest',
     type: comment.parentId === null ? 'comments' : 'replies',
     parentId: comment.parentId ?? undefined,
-    highlightedCommentId: params.comment ?? undefined,
+    highlightedCommentId: (comment.parentId === null ? params.comment : params.reply) ?? undefined,
   })
 
   const isAuthenticated = session !== null
