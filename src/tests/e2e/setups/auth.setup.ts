@@ -7,7 +7,8 @@ import dayjs from 'dayjs'
 import { db } from '@/db'
 import { accounts, sessions, users } from '@/db/schemas'
 
-import { createSessionCookie, TEST_UNIQUE_ID, TEST_USER } from '../fixtures/auth'
+import { TEST_UNIQUE_ID, TEST_USER } from '../fixtures/auth'
+import { createSessionCookie } from '../utils/auth'
 
 const authStoragePath = path.join(import.meta.dirname, '../.auth/user.json')
 
