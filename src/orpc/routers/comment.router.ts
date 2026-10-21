@@ -230,7 +230,7 @@ const deleteComment = protectedProcedure
 
     // Check if the user is the owner of the comment
     if (comment.userId !== userId) {
-      throw new ORPCError('UNAUTHORIZED')
+      throw new ORPCError('FORBIDDEN')
     }
 
     // If the comment has replies, just mark it as deleted.
