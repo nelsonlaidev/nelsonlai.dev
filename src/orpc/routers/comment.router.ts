@@ -1,5 +1,5 @@
 import { ORPCError } from '@orpc/client'
-import { and, asc, count, desc, eq, gt, isNotNull, isNull, lt, ne } from 'drizzle-orm'
+import { and, count, eq, isNotNull, isNull, ne } from 'drizzle-orm'
 
 import { IS_PRODUCTION } from '@/constants/common'
 import { comments, settings, unsubscribes, votes } from '@/db/schemas'
@@ -10,6 +10,7 @@ import { sendEmail } from '@/lib/resend'
 import { generateCommentReplyUnsubToken } from '@/lib/unsubscribe'
 import { getDefaultImage } from '@/utils/get-default-image'
 
+import { createTimestampPagination } from '../pagination'
 import { protectedProcedure, publicProcedure } from '../procedures'
 import {
   CountCommentInputSchema,
@@ -27,18 +28,14 @@ const listComments = publicProcedure
   .output(ListCommentsOutputSchema)
   .handler(async ({ input, context }) => {
     const { session } = context
-
-    function getCursorFilter() {
-      if (!input.cursor) return
-      return input.sort === 'newest' ? lt(comments.createdAt, input.cursor) : gt(comments.createdAt, input.cursor)
-    }
+    const pagination = createTimestampPagination(comments, input)
 
     const query = await context.db.query.comments.findMany({
       where: and(
         eq(comments.postId, input.slug),
         input.parentId ? eq(comments.parentId, input.parentId) : isNull(comments.parentId),
         input.type === 'comments' ? isNull(comments.parentId) : isNotNull(comments.parentId),
-        getCursorFilter(),
+        pagination.where,
         input.highlightedCommentId ? ne(comments.id, input.highlightedCommentId) : undefined,
       ),
       limit: input.limit,
@@ -55,7 +52,7 @@ const listComments = publicProcedure
           where: eq(votes.userId, session?.user.id ?? ''),
         },
       },
-      orderBy: input.sort === 'newest' ? desc(comments.createdAt) : asc(comments.createdAt),
+      orderBy: pagination.orderBy,
     })
 
     if (input.highlightedCommentId && !input.cursor) {
@@ -94,9 +91,14 @@ const listComments = publicProcedure
       }
     })
 
+    const lastComment = query.at(-1)
+
     return {
       comments: result,
-      nextCursor: result.length >= input.limit ? result.at(-1)?.createdAt : undefined,
+      nextCursor:
+        result.length >= input.limit && lastComment
+          ? { createdAt: lastComment.createdAt.toISOString(), id: lastComment.id }
+          : undefined,
     }
   })
 

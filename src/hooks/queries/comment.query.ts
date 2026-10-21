@@ -4,7 +4,7 @@ import { keepPreviousData, useInfiniteQuery, useMutation, useQuery, useQueryClie
 
 import { orpc } from '@/orpc/client'
 
-export function useListComments(input: (pageParam: Date | undefined) => CommentListInput, enabled = true) {
+export function useListComments(input: (pageParam: CommentListInput['cursor']) => CommentListInput, enabled = true) {
   return useInfiniteQuery(
     orpc.comment.list.infiniteOptions({
       input,

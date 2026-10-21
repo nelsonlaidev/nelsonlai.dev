@@ -64,6 +64,13 @@
       "when": 1773648286049,
       "tag": "0008_clumsy_miss_america",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1792602965027,
+      "tag": "0009_timestamp_millisecond_precision",
+      "breakpoints": true
     }
   ]
 }

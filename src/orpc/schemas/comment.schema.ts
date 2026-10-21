@@ -4,7 +4,7 @@ import * as z from 'zod'
 import { comments, users, votes } from '@/db/schemas'
 import { routing } from '@/i18n/routing'
 
-import { InfiniteQuerySchema } from './common.schema'
+import { InfiniteQueryCursorSchema, InfiniteQuerySchema } from './common.schema'
 
 export const ListCommentsInputSchema = InfiniteQuerySchema.extend({
   slug: z.string().min(1),
@@ -27,7 +27,7 @@ export const ListCommentsOutputSchema = z.object({
       votes: z.array(createSelectSchema(votes)),
     }),
   ),
-  nextCursor: z.date().optional(),
+  nextCursor: InfiniteQueryCursorSchema.optional(),
 })
 
 export const CreateCommentInputSchema = z.object({

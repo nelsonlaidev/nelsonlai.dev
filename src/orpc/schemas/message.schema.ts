@@ -3,6 +3,8 @@ import * as z from 'zod'
 
 import { messages, users } from '@/db/schemas'
 
+import { InfiniteQueryCursorSchema } from './common.schema'
+
 export const CreateMessageOutputSchema = createSelectSchema(messages).pick({
   id: true,
   createdAt: true,
@@ -25,7 +27,7 @@ export const ListMessagesOutputSchema = z.object({
       }),
     }),
   ),
-  nextCursor: z.date().optional(),
+  nextCursor: InfiniteQueryCursorSchema.optional(),
 })
 
 export const DeleteMessageInputSchema = z.object({

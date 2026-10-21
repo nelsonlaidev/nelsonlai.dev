@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { orpc } from '@/orpc/client'
 
-type CommentListInfiniteData = InfiniteData<CommentListOutput, undefined>
+type CommentListInfiniteData = InfiniteData<CommentListOutput, CommentListInput['cursor']>
 
 export function useCreateVote(input: CommentListInput) {
   const queryClient = useQueryClient()
@@ -45,7 +45,7 @@ export function useCreateVote(input: CommentListInput) {
       },
       onError: (_error, _variables, context) => {
         if (context?.previousData) {
-          queryClient.setQueryData(queryKey, context.previousData)
+          queryClient.setQueryData<CommentListInfiniteData>(queryKey, context.previousData)
         }
       },
       onSettled: async () => {

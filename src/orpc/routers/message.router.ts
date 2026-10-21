@@ -1,11 +1,12 @@
 import { ORPCError } from '@orpc/client'
-import { and, desc, eq, lt } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 
 import { IS_PRODUCTION } from '@/constants/common'
 import { messages } from '@/db/schemas'
 import { sendGuestbookNotification } from '@/lib/discord'
 import { getDefaultImage } from '@/utils/get-default-image'
 
+import { createTimestampPagination } from '../pagination'
 import { protectedProcedure, publicProcedure } from '../procedures'
 import { EmptyOutputSchema } from '../schemas/common.schema'
 import {
@@ -20,8 +21,10 @@ const listMessages = publicProcedure
   .input(ListMessagesInputSchema)
   .output(ListMessagesOutputSchema)
   .handler(async ({ input, context }) => {
+    const pagination = createTimestampPagination(messages, input)
+
     const query = await context.db.query.messages.findMany({
-      where: and(input.cursor ? lt(messages.createdAt, input.cursor) : undefined),
+      where: pagination.where,
       limit: input.limit,
       with: {
         user: {
@@ -32,7 +35,7 @@ const listMessages = publicProcedure
           },
         },
       },
-      orderBy: desc(messages.createdAt),
+      orderBy: pagination.orderBy,
     })
 
     const result = query.map((message) => {
@@ -48,9 +51,14 @@ const listMessages = publicProcedure
       }
     })
 
+    const lastMessage = query.at(-1)
+
     return {
       messages: result,
-      nextCursor: result.length >= input.limit ? result.at(-1)?.createdAt : undefined,
+      nextCursor:
+        result.length >= input.limit && lastMessage
+          ? { createdAt: lastMessage.createdAt.toISOString(), id: lastMessage.id }
+          : undefined,
     }
   })
 

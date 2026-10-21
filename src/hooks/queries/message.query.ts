@@ -1,3 +1,5 @@
+import type { MessageListOutput } from '@/orpc/client'
+
 import { keepPreviousData, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { orpc } from '@/orpc/client'
@@ -5,7 +7,7 @@ import { orpc } from '@/orpc/client'
 export function useListMessages() {
   return useInfiniteQuery(
     orpc.message.list.infiniteOptions({
-      input: (pageParam: Date | undefined) => ({ cursor: pageParam }),
+      input: (pageParam: MessageListOutput['nextCursor']) => ({ cursor: pageParam }),
       initialPageParam: undefined,
       getNextPageParam: (lastPage) => lastPage.nextCursor,
       placeholderData: keepPreviousData,

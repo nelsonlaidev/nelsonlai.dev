@@ -1,5 +1,5 @@
 import { createId } from '@paralleldrive/cuid2'
-import test, { expect } from '@playwright/test'
+import { eq, inArray, sql } from 'drizzle-orm'
 
 import { db } from '@/db'
 import { comments } from '@/db/schemas'
@@ -12,6 +12,7 @@ import {
   COMMENT_REPLY_POST_SLUG,
   COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
 } from '../fixtures/posts'
+import { expect, test } from '../fixtures/test'
 import { getNumberFlow } from '../utils/number-flow'
 
 async function getCount(locator: Parameters<typeof getNumberFlow>[0]) {
@@ -19,6 +20,8 @@ async function getCount(locator: Parameters<typeof getNumberFlow>[0]) {
 }
 
 test.describe('comment page', () => {
+  test.describe.configure({ mode: 'default' })
+
   test('submits a comment', async ({ page }) => {
     const commentText = `comment-${createId()}`
 
@@ -145,5 +148,143 @@ test.describe('comment page', () => {
     // Reply count should be updated in the comment header
     expect(await getCount(page.getByTestId('comment-count'))).toBe(commentCountWithInsertedReply - 1)
     expect(await getNumberFlow(page.getByTestId('reply-count'))).toBe('0 replies')
+  })
+
+  test.describe('pagination and sorting', () => {
+    let prefix: string
+    let parentId: string
+    let records: Array<typeof comments.$inferInsert & { id: string }>
+
+    test.beforeEach(async () => {
+      prefix = `pagination-${createId()}`
+      parentId = createId()
+      await db.insert(comments).values({
+        id: parentId,
+        body: 'Pagination parent',
+        postId: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+        userId: TEST_UNIQUE_ID,
+      })
+      records = ['comment', 'reply'].flatMap((type) =>
+        Array.from({ length: 23 }, (_, index) => ({
+          // Reverse timestamp groups relative to IDs so ordering cannot rely on the ID alone.
+          id: `${prefix}-${type}-${String((7 - Math.floor(index / 3)) * 3 + (index % 3)).padStart(2, '0')}`,
+          body: `${prefix} ${type} ${index}`,
+          postId: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+          userId: TEST_UNIQUE_ID,
+          parentId: type === 'reply' ? parentId : null,
+        })),
+      )
+      await db.insert(comments).values(
+        records.map((record, index) => ({
+          ...record,
+          // Let PostgreSQL round SQL inputs so the fixture exercises the stored column precision.
+          createdAt: sql`'2040-01-01T00:00:00.123456Z'::timestamptz + ${Math.floor((index % 23) / 3)} * interval '1 millisecond'`,
+        })),
+      )
+    })
+
+    test.afterEach(async () => {
+      await db.delete(comments).where(
+        inArray(
+          comments.id,
+          records.map(({ id }) => id),
+        ),
+      )
+      await db.delete(comments).where(eq(comments.id, parentId))
+    })
+
+    for (const sort of ['newest', 'oldest'] as const) {
+      test(`loads every top-level comment once in ${sort} order after timestamps are rounded to milliseconds`, async ({
+        page,
+      }) => {
+        const commentRecords = records.filter(({ parentId }) => parentId === null)
+        const boundary = {
+          newest: {
+            cursorId: commentRecords[9]?.id,
+            nextId: commentRecords[8]?.id,
+            createdAt: '2040-01-01T00:00:00.125Z',
+          },
+          oldest: {
+            cursorId: commentRecords[11]?.id,
+            nextId: commentRecords[12]?.id,
+            createdAt: '2040-01-01T00:00:00.127Z',
+          },
+        }[sort]
+        const response = await page.request.post('/rpc/comment/list', {
+          data: {
+            json: {
+              slug: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+              sort,
+              type: 'comments',
+              limit: 1,
+              cursor: { createdAt: '2040-01-01T00:00:00.126Z', id: boundary.cursorId },
+            },
+          },
+        })
+        await expect(response).toBeOK()
+        expect(await response.json()).toMatchObject({
+          json: {
+            comments: [{ id: boundary.nextId }],
+            nextCursor: { createdAt: boundary.createdAt, id: boundary.nextId },
+          },
+        })
+
+        await page.goto(`/blog/${COMMENT_SUBMIT_AND_VIEW_POST_SLUG}`)
+        await page.getByRole('button', { name: en.blog.comments['sort-by'] }).click()
+        await page.getByRole('menuitemradio', { name: en.blog.comments[sort], exact: true }).click()
+
+        const loaded = page.getByTestId(new RegExp(`^comment-${prefix}-comment-`))
+        const expected = records.filter(({ parentId }) => parentId === null).map(({ id }) => `comment-${id}`)
+        const expectedBySort = { newest: expected.toReversed(), oldest: expected }
+
+        await expect(async () => {
+          await page
+            .getByTestId('comments-list')
+            .getByTestId(/^comment-/)
+            .last()
+            .scrollIntoViewIfNeeded()
+          await page.mouse.wheel(0, 1000)
+          expect(
+            await loaded.evaluateAll((elements) => elements.map((element) => element.getAttribute('data-testid'))),
+          ).toEqual(expectedBySort[sort])
+        }).toPass({ timeout: 15_000 })
+      })
+    }
+
+    test('loads every reply once in oldest order after timestamps are rounded to milliseconds', async ({ page }) => {
+      const replyRecords = records.filter((record) => record.parentId === parentId)
+      const response = await page.request.post('/rpc/comment/list', {
+        data: {
+          json: {
+            slug: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+            sort: 'oldest',
+            type: 'replies',
+            parentId,
+            limit: 1,
+            cursor: { createdAt: '2040-01-01T00:00:00.123Z', id: replyRecords[0]?.id },
+          },
+        },
+      })
+      await expect(response).toBeOK()
+      expect(await response.json()).toMatchObject({
+        json: {
+          comments: [{ id: replyRecords[1]?.id }],
+          nextCursor: { createdAt: '2040-01-01T00:00:00.123Z', id: replyRecords[1]?.id },
+        },
+      })
+
+      await page.goto(`/blog/${COMMENT_SUBMIT_AND_VIEW_POST_SLUG}?comment=${parentId}`)
+      const loaded = page.getByTestId(new RegExp(`^comment-${prefix}-reply-`))
+      await expect(loaded).toHaveCount(10)
+      const expected = records.filter((record) => record.parentId === parentId).map(({ id }) => `comment-${id}`)
+
+      await expect(async () => {
+        await loaded.last().scrollIntoViewIfNeeded()
+        await page.mouse.wheel(0, 1000)
+        expect(
+          await loaded.evaluateAll((elements) => elements.map((element) => element.getAttribute('data-testid'))),
+        ).toEqual(expected)
+      }).toPass({ timeout: 15_000 })
+    })
   })
 })
