@@ -1,5 +1,3 @@
-import { Buffer } from 'node:buffer'
-
 import * as z from 'zod'
 
 import { ENV } from '@/env'
@@ -20,11 +18,9 @@ const getStats = publicProcedure.output(WakatimeStatsOutputSchema).handler(async
     }
   }
 
-  const response = await fetch('https://wakatime.com/api/v1/users/current/all_time_since_today', {
-    headers: {
-      Authorization: `Basic ${Buffer.from(ENV.WAKATIME_API_KEY).toString('base64')}`,
-    },
-  })
+  const response = await fetch(
+    `https://wakatime.com/api/v1/users/current/all_time_since_today?api_key=${ENV.WAKATIME_API_KEY}`,
+  )
 
   if (!response.ok) {
     throw new Error(`WakaTime API error: ${response.status} ${response.statusText}`)
