@@ -1,4 +1,3 @@
-import crypto from 'node:crypto'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
@@ -7,9 +6,8 @@ import dayjs from 'dayjs'
 
 import { db } from '@/db'
 import { accounts, sessions, users } from '@/db/schemas'
-import { ENV } from '@/env'
 
-import { TEST_UNIQUE_ID, TEST_USER } from '../fixtures/auth'
+import { createSessionCookie, TEST_UNIQUE_ID, TEST_USER } from '../fixtures/auth'
 
 const authStoragePath = path.join(import.meta.dirname, '../.auth/user.json')
 
@@ -61,20 +59,7 @@ setup('setup auth', async () => {
       })
   })
 
-  const signature = crypto.createHmac('sha256', ENV.BETTER_AUTH_SECRET).update(TEST_USER.sessionToken).digest('base64')
-  const signedValue = `${TEST_USER.sessionToken}.${signature}`
-
-  const cookieValue = encodeURIComponent(signedValue)
-  const cookieObject = {
-    name: 'better-auth.session_token',
-    value: cookieValue,
-    domain: 'localhost',
-    path: '/',
-    httpOnly: true,
-    secure: false,
-    sameSite: 'Lax',
-    expires: Math.floor(expiresAt.getTime() / 1000),
-  }
+  const cookieObject = createSessionCookie(TEST_USER.sessionToken, expiresAt)
 
   const authDir = path.dirname(authStoragePath)
   await fs.mkdir(authDir, { recursive: true })
