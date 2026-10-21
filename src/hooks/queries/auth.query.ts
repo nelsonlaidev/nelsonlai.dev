@@ -12,8 +12,8 @@ export function useRevokeSession(onSuccess?: () => void) {
   return useMutation(
     orpc.auth.session.revoke.mutationOptions({
       onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey: orpc.auth.session.list.key() })
         onSuccess?.()
+        await queryClient.invalidateQueries({ queryKey: orpc.auth.session.list.key() })
       },
     }),
   )
