@@ -1,5 +1,0 @@
-antec
-asus
-ryzen
-umami
-wakatime

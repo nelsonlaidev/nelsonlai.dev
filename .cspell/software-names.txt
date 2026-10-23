@@ -1,7 +1,0 @@
-ghostty
-iina
-karabiner
-keka
-motrix
-nextdotjs
-nodedotjs

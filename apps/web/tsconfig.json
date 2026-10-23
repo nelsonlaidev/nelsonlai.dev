@@ -1,0 +1,4 @@
+{
+  "extends": "@nelsonlaidev/typescript-config/tanstack-start.json",
+  "include": ["**/*.ts", "**/*.tsx"]
+}

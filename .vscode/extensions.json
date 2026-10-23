@@ -1,9 +1,0 @@
-{
-  "recommendations": [
-    "oxc.oxc-vscode",
-    "bradlc.vscode-tailwindcss",
-    "unifiedjs.vscode-mdx",
-    "streetsidesoftware.code-spell-checker",
-    "lokalise.i18n-ally"
-  ]
-}

@@ -1,6 +1,2 @@
-argb
-gifs
-jsxs
-khtml
-nums
-plpgsql
+doublestar
+wght

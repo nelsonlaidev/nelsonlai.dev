@@ -1,4 +1,14 @@
 {
+  "files.watcherExclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "search.exclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "files.readonlyInclude": {
+    "**/routeTree.gen.ts": true
+  },
+
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "explicit"
   },
@@ -18,8 +28,5 @@
 
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "js/ts.preferences.preferTypeOnlyAutoImports": true,
-  "js/ts.tsdk.path": "node_modules/typescript/lib",
-
-  "i18n-ally.localesPaths": ["src/i18n/messages"],
-  "i18n-ally.keystyle": "nested"
+  "js/ts.tsdk.path": "node_modules/typescript/lib"
 }

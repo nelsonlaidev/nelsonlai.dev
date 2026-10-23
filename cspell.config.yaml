@@ -1,0 +1,33 @@
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+
+version: '0.2'
+language: en
+useGitignore: true
+enableGlobDot: true
+
+ignorePaths:
+  - pnpm-lock.yaml
+
+files:
+  - '**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}'
+  - '**/*.{md,mdx}'
+  - '**/*.{json,jsonc,yaml,yml}'
+  - '**/*.css'
+  - '**/.gitignore'
+
+dictionaryDefinitions:
+  - name: custom-words
+    path: ./.cspell/custom-words.txt
+  - name: names
+    path: ./.cspell/names.txt
+  - name: names
+    path: ./.cspell/names.txt
+  - name: tech-terms
+    path: ./.cspell/tech-terms.txt
+
+dictionaries:
+  - custom-words
+  - names
+  - names
+  - tech-terms
+  - npm
