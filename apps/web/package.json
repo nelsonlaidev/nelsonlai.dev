@@ -6,6 +6,7 @@
     "build": "vite build",
     "dev": "vite dev --port 3000",
     "generate-routes": "tsr generate",
+    "i18n:check": "inlang check --project ./project.inlang",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
   },
@@ -23,6 +24,8 @@
     "react-dom": "19.3.1"
   },
   "devDependencies": {
+    "@inlang/cli": "3.4.4",
+    "@inlang/paraglide-js": "2.29.1",
     "@nelsonlaidev/typescript-config": "catalog:",
     "@tanstack/devtools-vite": "0.8.5",
     "@tanstack/router-cli": "1.167.46",

@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "inlang.vs-code-extension",
+    "oxc.oxc-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "unifiedjs.vscode-mdx"
+  ]
+}
