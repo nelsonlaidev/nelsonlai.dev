@@ -11,6 +11,7 @@ allowBuilds:
 catalog:
   '@nelsonlaidev/typescript-config': 1.2.3
   '@types/react': 19.3.0
+  lucide-react: 1.61.0
   react: 19.3.1
   tailwindcss: 4.3.3
   typescript: 6.0.3

@@ -1,4 +1,15 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "你好世界 {username}"
+  "nav_home": "首頁",
+  "nav_blog": "部落格",
+  "nav_guestbook": "留言板",
+  "nav_dashboard": "儀表板",
+  "nav_projects": "專案",
+  "nav_about": "關於",
+  "nav_uses": "裝備",
+  "a11y_skip_to_content": "跳至主要內容",
+  "theme_switcher_light": "淺色",
+  "theme_switcher_dark": "深色",
+  "theme_switcher_system": "跟隨系統",
+  "theme_switcher_label": "切換主題"
 }

@@ -1,4 +1,15 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "Hello world {username}"
+  "nav_home": "Home",
+  "nav_blog": "Blog",
+  "nav_guestbook": "Guestbook",
+  "nav_dashboard": "Dashboard",
+  "nav_projects": "Projects",
+  "nav_about": "About",
+  "nav_uses": "Uses",
+  "a11y_skip_to_content": "Skip to main content",
+  "theme_switcher_light": "Light",
+  "theme_switcher_dark": "Dark",
+  "theme_switcher_system": "System",
+  "theme_switcher_label": "Switch theme"
 }

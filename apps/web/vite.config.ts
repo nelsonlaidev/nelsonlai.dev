@@ -17,10 +17,17 @@ const config = defineConfig({
       strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale'],
       urlPatterns: [
         {
+          pattern: '/',
+          localized: [
+            ['en', '/'],
+            ['zh-TW', '/zh-TW'],
+          ],
+        },
+        {
           pattern: '/:path(.*)?',
           localized: [
-            ['en', '/en/:path(.*)?'],
             ['zh-TW', '/zh-TW/:path(.*)?'],
+            ['en', '/:path(.*)?'],
           ],
         },
       ],

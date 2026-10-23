@@ -9,50 +9,206 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as MainRouteRouteImport } from './routes/_main/route'
+import { Route as MainIndexRouteImport } from './routes/_main/index'
+import { Route as MainAboutRouteImport } from './routes/_main/about'
+import { Route as MainBlogRouteImport } from './routes/_main/blog'
+import { Route as MainDashboardRouteImport } from './routes/_main/dashboard'
+import { Route as MainGuestbookRouteImport } from './routes/_main/guestbook'
+import { Route as MainProjectsRouteImport } from './routes/_main/projects'
+import { Route as MainUsesRouteImport } from './routes/_main/uses'
 
-const IndexRoute = IndexRouteImport.update({
+const MainRouteRoute = MainRouteRouteImport.update({
+  id: '/_main',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MainIndexRoute = MainIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainAboutRoute = MainAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainBlogRoute = MainBlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainDashboardRoute = MainDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainGuestbookRoute = MainGuestbookRouteImport.update({
+  id: '/guestbook',
+  path: '/guestbook',
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainProjectsRoute = MainProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainUsesRoute = MainUsesRouteImport.update({
+  id: '/uses',
+  path: '/uses',
+  getParentRoute: () => MainRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof MainIndexRoute
+  '/about': typeof MainAboutRoute
+  '/blog': typeof MainBlogRoute
+  '/dashboard': typeof MainDashboardRoute
+  '/guestbook': typeof MainGuestbookRoute
+  '/projects': typeof MainProjectsRoute
+  '/uses': typeof MainUsesRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/about': typeof MainAboutRoute
+  '/blog': typeof MainBlogRoute
+  '/dashboard': typeof MainDashboardRoute
+  '/guestbook': typeof MainGuestbookRoute
+  '/projects': typeof MainProjectsRoute
+  '/uses': typeof MainUsesRoute
+  '/': typeof MainIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_main': typeof MainRouteRouteWithChildren
+  '/_main/about': typeof MainAboutRoute
+  '/_main/blog': typeof MainBlogRoute
+  '/_main/dashboard': typeof MainDashboardRoute
+  '/_main/guestbook': typeof MainGuestbookRoute
+  '/_main/projects': typeof MainProjectsRoute
+  '/_main/uses': typeof MainUsesRoute
+  '/_main/': typeof MainIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/blog'
+    | '/dashboard'
+    | '/guestbook'
+    | '/projects'
+    | '/uses'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/about'
+    | '/blog'
+    | '/dashboard'
+    | '/guestbook'
+    | '/projects'
+    | '/uses'
+    | '/'
+  id:
+    | '__root__'
+    | '/_main'
+    | '/_main/about'
+    | '/_main/blog'
+    | '/_main/dashboard'
+    | '/_main/guestbook'
+    | '/_main/projects'
+    | '/_main/uses'
+    | '/_main/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  MainRouteRoute: typeof MainRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_main': {
+      id: '/_main'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof MainRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_main/': {
+      id: '/_main/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof MainIndexRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
+    '/_main/about': {
+      id: '/_main/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof MainAboutRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
+    '/_main/blog': {
+      id: '/_main/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof MainBlogRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
+    '/_main/dashboard': {
+      id: '/_main/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof MainDashboardRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
+    '/_main/guestbook': {
+      id: '/_main/guestbook'
+      path: '/guestbook'
+      fullPath: '/guestbook'
+      preLoaderRoute: typeof MainGuestbookRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
+    '/_main/projects': {
+      id: '/_main/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof MainProjectsRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
+    '/_main/uses': {
+      id: '/_main/uses'
+      path: '/uses'
+      fullPath: '/uses'
+      preLoaderRoute: typeof MainUsesRouteImport
+      parentRoute: typeof MainRouteRoute
     }
   }
 }
 
+interface MainRouteRouteChildren {
+  MainAboutRoute: typeof MainAboutRoute
+  MainBlogRoute: typeof MainBlogRoute
+  MainDashboardRoute: typeof MainDashboardRoute
+  MainGuestbookRoute: typeof MainGuestbookRoute
+  MainProjectsRoute: typeof MainProjectsRoute
+  MainUsesRoute: typeof MainUsesRoute
+  MainIndexRoute: typeof MainIndexRoute
+}
+
+const MainRouteRouteChildren: MainRouteRouteChildren = {
+  MainAboutRoute: MainAboutRoute,
+  MainBlogRoute: MainBlogRoute,
+  MainDashboardRoute: MainDashboardRoute,
+  MainGuestbookRoute: MainGuestbookRoute,
+  MainProjectsRoute: MainProjectsRoute,
+  MainUsesRoute: MainUsesRoute,
+  MainIndexRoute: MainIndexRoute,
+}
+
+const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
+  MainRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  MainRouteRoute: MainRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
