@@ -10,9 +10,7 @@ export function Navbar() {
           <li key={link.to}>
             <Link
               to={link.to}
-              activeProps={{
-                'data-active': 'true',
-              }}
+              activeProps={{ 'data-active': 'true' }}
               className='px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-active:text-foreground'
             >
               {link.label()}

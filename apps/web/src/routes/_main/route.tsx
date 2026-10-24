@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
+import { GradientBackground } from './-components/gradient-background'
 import { Header } from './-components/header'
 
 export const Route = createFileRoute('/_main')({
@@ -17,6 +18,8 @@ function RouteComponent() {
       >
         <Outlet />
       </main>
+      <GradientBackground position='top' />
+      <GradientBackground position='bottom' />
     </>
   )
 }

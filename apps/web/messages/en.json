@@ -7,6 +7,8 @@
   "nav_projects": "Projects",
   "nav_about": "About",
   "nav_uses": "Uses",
+  "nav_primary": "Main navigation",
+  "nav_toggle": "Toggle navigation",
   "a11y_skip_to_content": "Skip to main content",
   "theme_switcher_light": "Light",
   "theme_switcher_dark": "Dark",
