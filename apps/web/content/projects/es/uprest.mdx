@@ -1,0 +1,15 @@
+---
+title: Uprest
+description: Un proxy HTTP-to-Redis local para la API REST de Upstash Redis
+github: https://github.com/nelsonlaidev/uprest
+techstack:
+  - Go
+  - Redis
+  - Docker
+selected: true
+dateCreated: '2026-09-25T00:00:00Z'
+---
+
+Uprest es un proxy HTTP-to-Redis local para aplicaciones que usan la [API REST de Upstash Redis](https://upstash.com/docs/redis/features/restapi). Reenvía las peticiones a un servidor Redis real, de modo que las aplicaciones pueden seguir usando `@upstash/redis` durante el desarrollo local y la CI sin una base de datos de Upstash.
+
+Al principio usaba [serverless-redis-http](https://github.com/hiett/serverless-redis-http) (SRH) para esto, pero parece no tener mantenimiento y las versiones más recientes de `@upstash/redis` lo rompen, así que decidí crear mi propio reemplazo. Uprest admite comandos de Redis, pipelines, transacciones, Pub/Sub mediante SSE, respuestas JSON y RESP2, autenticación con bearer o token en la URL, y versiones recientes de `@upstash/ratelimit`. Se publica como imágenes Docker para múltiples arquitecturas y binarios precompilados para Linux, macOS y Windows.

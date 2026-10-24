@@ -10,3 +10,6 @@ node_modules/
 
 # TypeScript
 tsconfig.tsbuildinfo
+
+# Content Collections
+.content-collections/

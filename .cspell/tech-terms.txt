@@ -1,2 +1,4 @@
 doublestar
+ratatui
+techstack
 wght

@@ -1,3 +1,4 @@
+import contentCollections from '@content-collections/vite'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { devtools } from '@tanstack/devtools-vite'
@@ -9,6 +10,7 @@ import { defineConfig } from 'vite'
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
+    contentCollections(),
     paraglideVitePlugin({
       project: './project.inlang',
       outdir: './src/paraglide',

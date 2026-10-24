@@ -1,0 +1,60 @@
+import type { ProjectSummary } from '@/lib/projects'
+
+import { buttonVariants } from '@repo/ui/components/button'
+import { Link } from '@tanstack/react-router'
+import { cn } from 'cn'
+import { motion, useInView, useReducedMotion } from 'motion/react'
+import { useRef } from 'react'
+
+import { ProjectCard } from '@/components/project-card'
+
+const variants = {
+  initial: { y: 40, opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+}
+
+type SelectedProjectsProps = {
+  projects: ProjectSummary[]
+}
+
+export function SelectedProjects(props: SelectedProjectsProps) {
+  const { projects } = props
+  const reducedMotion = useReducedMotion()
+  const projectsRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(projectsRef, { once: true, margin: '-100px' })
+
+  return (
+    <motion.div
+      initial={reducedMotion ? false : 'initial'}
+      animate={reducedMotion || isInView ? 'animate' : 'initial'}
+      variants={variants}
+      ref={projectsRef}
+      transition={{ duration: reducedMotion ? 0 : 0.5 }}
+      className='relative my-24'
+    >
+      <motion.h2
+        className='text-center text-3xl font-semibold'
+        initial={reducedMotion ? false : { y: 30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: reducedMotion ? 0 : 0.3 }}
+      >
+        Selected Projects
+      </motion.h2>
+      <motion.div
+        className='mt-12 grid gap-4 md:grid-cols-2'
+        initial={reducedMotion ? false : { y: 40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: reducedMotion ? 0 : 0.3 }}
+      >
+        {projects.map((project) => (
+          <ProjectCard key={project.slug} project={project} featured lazy={false} />
+        ))}
+      </motion.div>
+      <div className='my-8 flex items-center justify-center'>
+        <Link to='/projects' className={cn(buttonVariants({ variant: 'outline' }))}>
+          See all projects
+        </Link>
+      </div>
+    </motion.div>
+  )
+}

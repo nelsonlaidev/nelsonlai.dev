@@ -1,7 +1,10 @@
 bradlc
 inlang
+linktree
 nelsonlai
 nelsonlaidev
+scoutly
+uprest
 paraglide
 tsgolint
 unifiedjs

@@ -63,6 +63,8 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  --shadow-feature-card: var(--feature-card);
 }
 
 :root {
@@ -111,6 +113,8 @@
   --sidebar-skeleton: var(--skeleton);
 
   --radius: 0.625rem;
+
+  --feature-card: 0 -1px 3px 0 rgb(0 0 0 / 0.05);
 }
 
 .dark {
@@ -157,15 +161,23 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
   --sidebar-skeleton: var(--skeleton);
+
+  --feature-card: 0 0 0 1px rgb(255 255 255 / 0.06), 0 -1px rgb(255 255 255 / 0.1);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  html {
+    @apply motion-safe:scroll-smooth;
   }
+
+  body {
+    @apply bg-background text-foreground antialiased relative min-h-svh flex flex-col;
+  }
+
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;

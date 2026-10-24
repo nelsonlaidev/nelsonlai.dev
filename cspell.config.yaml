@@ -7,6 +7,8 @@ enableGlobDot: true
 
 ignorePaths:
   - pnpm-lock.yaml
+  # These translations are outside the English dictionary's scope.
+  - apps/web/content/projects/{es,pt-BR}/**/*.mdx
 
 files:
   - '**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}'

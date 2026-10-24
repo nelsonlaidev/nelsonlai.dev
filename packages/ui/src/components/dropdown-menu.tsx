@@ -1,5 +1,3 @@
-'use client'
-
 import { Menu as MenuPrimitive } from '@base-ui/react/menu'
 import { cn } from 'cn'
 import { CheckIcon, ChevronRightIcon } from 'lucide-react'
