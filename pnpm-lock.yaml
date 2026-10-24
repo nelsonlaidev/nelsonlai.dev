@@ -187,6 +187,12 @@ importers:
 
   .:
     devDependencies:
+      '@cspell/dict-es-es':
+        specifier: 3.0.9
+        version: 3.0.9
+      '@cspell/dict-pt-br':
+        specifier: 2.4.4
+        version: 2.4.4
       '@eslint-react/eslint-plugin':
         specifier: 5.28.6
         version: 5.28.6(eslint@10.13.0(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
@@ -710,6 +716,9 @@ packages:
   '@cspell/dict-en_us@4.4.43':
     resolution: {integrity: sha512-RK0zfFXSPi0G/zmV9YgUhS2xw9eTV/8DtQ+ouLIiRZ8ejWRt2zhAonu5di+qmIhzhQ62fg7d3tMz3WwRy82yJA==}
 
+  '@cspell/dict-es-es@3.0.9':
+    resolution: {integrity: sha512-OQG7g1th8Py73CKTLyJPeJKzwZXmlIvYA5wyoIGpWYsmDKR+cT3Mx0kCGjC3dnk5OO58WqjF5BZlRr3gqMRGjg==}
+
   '@cspell/dict-filetypes@3.0.18':
     resolution: {integrity: sha512-yU7RKD/x1IWmDLzWeiItMwgV+6bUcU/af23uS0+uGiFUbsY1qWV/D4rxlAAO6Z7no3J2z8aZOkYIOvUrJq0Rcw==}
 
@@ -792,6 +801,9 @@ packages:
 
   '@cspell/dict-powershell@5.0.17':
     resolution: {integrity: sha512-khOoIdBgKRk2scnr7888pf70yJ1Tr3RGdnYcAN0MJ2vtaNRKoOTCFc13gXUkNDHwEyhMI1h9oz3KsT180F2amw==}
+
+  '@cspell/dict-pt-br@2.4.4':
+    resolution: {integrity: sha512-oIwgc7pTQAXBMlqf0rCZb+WtCWxuE+PAzB77uFzyvNqlPTKfLFh3pkfL0czGYQY/mccAYKbBkeq16B0fzDIDKw==}
 
   '@cspell/dict-public-licenses@2.0.17':
     resolution: {integrity: sha512-Asdumgg3oZ4ki//b2a+beiVIsNZA5thim4t4v3lTDLY/6a8VAPmTjzC3Y2t0x7ywC/bzAhi1KW/fg8JlwHDgig==}
@@ -5860,6 +5872,8 @@ snapshots:
 
   '@cspell/dict-en_us@4.4.43': {}
 
+  '@cspell/dict-es-es@3.0.9': {}
+
   '@cspell/dict-filetypes@3.0.18': {}
 
   '@cspell/dict-flutter@1.1.1': {}
@@ -5916,6 +5930,8 @@ snapshots:
   '@cspell/dict-php@4.1.3': {}
 
   '@cspell/dict-powershell@5.0.17': {}
+
+  '@cspell/dict-pt-br@2.4.4': {}
 
   '@cspell/dict-public-licenses@2.0.17': {}
 

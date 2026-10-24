@@ -15,6 +15,8 @@
     "typecheck:root": "tsc --noEmit"
   },
   "devDependencies": {
+    "@cspell/dict-es-es": "3.0.9",
+    "@cspell/dict-pt-br": "2.4.4",
     "@eslint-react/eslint-plugin": "5.28.6",
     "@nelsonlaidev/oxfmt-config": "0.3.1",
     "@nelsonlaidev/oxlint-config": "1.2.3",

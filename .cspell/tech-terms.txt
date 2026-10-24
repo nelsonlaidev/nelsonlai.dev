@@ -1,4 +1,3 @@
 doublestar
-ratatui
 techstack
 wght

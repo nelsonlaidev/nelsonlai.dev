@@ -3,8 +3,8 @@ inlang
 linktree
 nelsonlai
 nelsonlaidev
-scoutly
-uprest
 paraglide
+scoutly
 tsgolint
 unifiedjs
+uprest
