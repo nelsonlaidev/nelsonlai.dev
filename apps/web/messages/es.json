@@ -1,0 +1,22 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "nav_home": "Inicio",
+  "nav_blog": "Blog",
+  "nav_guestbook": "Libro de visitas",
+  "nav_dashboard": "Panel",
+  "nav_projects": "Proyectos",
+  "nav_about": "Sobre mí",
+  "nav_uses": "Herramientas",
+  "nav_primary": "Navegación principal",
+  "nav_toggle": "Alternar el menú de navegación",
+  "a11y_skip_to_content": "Saltar al contenido principal",
+  "theme_switcher_light": "Claro",
+  "theme_switcher_dark": "Oscuro",
+  "theme_switcher_system": "Sistema",
+  "theme_switcher_label": "Cambiar tema",
+  "hero_intro": "Soy Nelson. Creo sitios web y herramientas de desarrollo.",
+  "hero_location": "Hong Kong · UTC+8",
+  "selected_projects_title": "Proyectos destacados",
+  "selected_projects_view_all": "Ver todos los proyectos",
+  "project_category": "Proyecto"
+}

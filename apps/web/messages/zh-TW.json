@@ -14,12 +14,9 @@
   "theme_switcher_dark": "深色",
   "theme_switcher_system": "跟隨系統",
   "theme_switcher_label": "切換主題",
-  "hero_intro": "我是 Nelson，一位全端工程師",
-  "hero_description": "製作{#quality/}的網站，使用",
-  "hero_heading": "我是 Nelson，一位使用 React 製作網站的全端工程師。",
+  "hero_intro": "你好，我是 Nelson。我寫網站和開發工具。",
   "hero_location": "香港 · UTC+8",
-  "hero_amazing": "精彩絕倫",
-  "hero_attractive": "引人入勝",
-  "hero_fantastic": "極致出色",
-  "hero_stunning": "驚豔非凡"
+  "selected_projects_title": "精選專案",
+  "selected_projects_view_all": "查看所有專案",
+  "project_category": "專案"
 }

@@ -3,6 +3,8 @@ import type { ProjectSummary } from '@/lib/projects'
 import { Badge } from '@repo/ui/components/badge'
 import { LightbulbIcon } from 'lucide-react'
 
+import { m } from '@/paraglide/messages'
+
 import { ContentCard } from './content-card'
 
 type ProjectCardProps = {
@@ -19,7 +21,7 @@ export function ProjectCard(props: ProjectCardProps) {
     <ContentCard
       key={project.slug}
       to={`/projects/${project.slug}`}
-      title='Project'
+      title={m.project_category()}
       image={`/images/projects/${project.slug}/cover.png`}
       imageAlt=''
       icon={<LightbulbIcon className='size-4.5' />}

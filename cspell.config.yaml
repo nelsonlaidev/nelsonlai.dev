@@ -27,7 +27,7 @@ overrides:
     dictionaries:
       - es-custom
   - filename:
-      - 'apps/web/messages/pt-br.json'
+      - 'apps/web/messages/pt-BR.json'
       - 'apps/web/content/**/pt-BR/*.mdx'
     language: en,pt-br
     dictionaries:

@@ -14,12 +14,9 @@
   "theme_switcher_dark": "Dark",
   "theme_switcher_system": "System",
   "theme_switcher_label": "Switch theme",
-  "hero_intro": "I'm Nelson, a Full Stack Engineer",
-  "hero_description": "building {#quality/} websites using",
-  "hero_heading": "I'm Nelson, a Full Stack Engineer building websites using React.",
+  "hero_intro": "I'm Nelson. I build websites and tools for developers.",
   "hero_location": "Hong Kong · UTC+8",
-  "hero_amazing": "amazing",
-  "hero_attractive": "attractive",
-  "hero_fantastic": "fantastic",
-  "hero_stunning": "stunning"
+  "selected_projects_title": "Selected Projects",
+  "selected_projects_view_all": "See all projects",
+  "project_category": "Project"
 }

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "nav_home": "首页",
+  "nav_blog": "博客",
+  "nav_guestbook": "留言板",
+  "nav_dashboard": "仪表盘",
+  "nav_projects": "项目",
+  "nav_about": "关于",
+  "nav_uses": "装备",
+  "nav_primary": "主导航",
+  "nav_toggle": "切换导航菜单",
+  "a11y_skip_to_content": "跳至主要内容",
+  "theme_switcher_light": "浅色",
+  "theme_switcher_dark": "深色",
+  "theme_switcher_system": "跟随系统",
+  "theme_switcher_label": "切换主题",
+  "hero_intro": "你好，我是 Nelson。我写网站和开发工具。",
+  "hero_location": "香港 · UTC+8",
+  "selected_projects_title": "精选项目",
+  "selected_projects_view_all": "查看所有项目",
+  "project_category": "项目"
+}

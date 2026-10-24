@@ -23,12 +23,20 @@ const config = defineConfig({
           localized: [
             ['en', '/'],
             ['zh-TW', '/zh-TW'],
+            ['zh-CN', '/zh-CN'],
+            ['ja', '/ja'],
+            ['es', '/es'],
+            ['pt-BR', '/pt-BR'],
           ],
         },
         {
           pattern: '/:path(.*)?',
           localized: [
             ['zh-TW', '/zh-TW/:path(.*)?'],
+            ['zh-CN', '/zh-CN/:path(.*)?'],
+            ['ja', '/ja/:path(.*)?'],
+            ['es', '/es/:path(.*)?'],
+            ['pt-BR', '/pt-BR/:path(.*)?'],
             ['en', '/:path(.*)?'],
           ],
         },

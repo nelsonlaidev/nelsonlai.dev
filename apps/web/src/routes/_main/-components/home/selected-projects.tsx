@@ -7,6 +7,7 @@ import { motion, useInView, useReducedMotion } from 'motion/react'
 import { useRef } from 'react'
 
 import { ProjectCard } from '@/components/project-card'
+import { m } from '@/paraglide/messages'
 
 const variants = {
   initial: { y: 40, opacity: 0 },
@@ -38,7 +39,7 @@ export function SelectedProjects(props: SelectedProjectsProps) {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: reducedMotion ? 0 : 0.3 }}
       >
-        Selected Projects
+        {m.selected_projects_title()}
       </motion.h2>
       <motion.div
         className='mt-12 grid gap-4 md:grid-cols-2'
@@ -52,7 +53,7 @@ export function SelectedProjects(props: SelectedProjectsProps) {
       </motion.div>
       <div className='my-8 flex items-center justify-center'>
         <Link to='/projects' className={cn(buttonVariants({ variant: 'outline' }))}>
-          See all projects
+          {m.selected_projects_view_all()}
         </Link>
       </div>
     </motion.div>

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "nav_home": "ホーム",
+  "nav_blog": "ブログ",
+  "nav_guestbook": "ゲストブック",
+  "nav_dashboard": "ダッシュボード",
+  "nav_projects": "プロジェクト",
+  "nav_about": "プロフィール",
+  "nav_uses": "使用機材",
+  "nav_primary": "メインナビゲーション",
+  "nav_toggle": "ナビゲーションメニューを切り替える",
+  "a11y_skip_to_content": "メインコンテンツへ移動",
+  "theme_switcher_light": "ライト",
+  "theme_switcher_dark": "ダーク",
+  "theme_switcher_system": "システム設定に従う",
+  "theme_switcher_label": "テーマを切り替える",
+  "hero_intro": "Nelson です。ウェブサイトや開発ツールを作っています。",
+  "hero_location": "香港 · UTC+8",
+  "selected_projects_title": "厳選プロジェクト",
+  "selected_projects_view_all": "すべてのプロジェクトを見る",
+  "project_category": "プロジェクト"
+}
