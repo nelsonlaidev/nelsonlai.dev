@@ -25,6 +25,7 @@
   },
 
   "tailwindCSS.classFunctions": ["cva", "cn"],
+  "tailwindCSS.experimental.classRegex": ["className\\s*:\\s*['\"`]([^'\"`]*)['\"`]"],
 
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "js/ts.preferences.preferTypeOnlyAutoImports": true,
