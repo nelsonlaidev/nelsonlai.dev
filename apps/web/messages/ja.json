@@ -36,6 +36,7 @@
   "admin_page_header_comments_description": "コメントを管理",
   "admin_page_header_users_description": "ユーザーを管理",
   "admin_toggle_sidebar": "サイドバーを切り替え",
+  "article_category": "記事",
   "blog_comments_author": "投稿者",
   "blog_comments_comments": [
     {
@@ -222,9 +223,8 @@
   "homepage_get_in_touch_title": "Next.js についてご質問があれば？",
   "homepage_hero_intro": "Nelson です。ウェブサイトや開発ツールを作っています。",
   "homepage_hero_location": "香港 · UTC+8",
-  "homepage_latest_articles_card": "記事",
-  "homepage_latest_articles_more": "すべての記事を見る",
   "homepage_latest_articles_title": "最新の記事",
+  "homepage_latest_articles_view_all": "すべての記事を見る",
   "layout_change_language": "言語を変更",
   "layout_now_playing_loading": "読み込み中...",
   "layout_now_playing_not_listening": "再生停止中 - Spotify",

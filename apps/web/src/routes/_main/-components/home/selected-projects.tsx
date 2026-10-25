@@ -26,7 +26,7 @@ export function SelectedProjects(props: SelectedProjectsProps) {
 
   return (
     <motion.div
-      initial={reducedMotion ? false : 'initial'}
+      initial='initial'
       animate={reducedMotion || isInView ? 'animate' : 'initial'}
       variants={variants}
       ref={projectsRef}
@@ -35,7 +35,7 @@ export function SelectedProjects(props: SelectedProjectsProps) {
     >
       <motion.h2
         className='text-center text-3xl font-semibold'
-        initial={reducedMotion ? false : { y: 30, opacity: 0 }}
+        initial={{ y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: reducedMotion ? 0 : 0.3 }}
       >
@@ -43,7 +43,7 @@ export function SelectedProjects(props: SelectedProjectsProps) {
       </motion.h2>
       <motion.div
         className='mt-12 grid gap-4 md:grid-cols-2'
-        initial={reducedMotion ? false : { y: 40, opacity: 0 }}
+        initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: reducedMotion ? 0 : 0.3 }}
       >

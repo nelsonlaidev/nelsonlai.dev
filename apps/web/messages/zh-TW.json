@@ -36,6 +36,7 @@
   "admin_page_header_comments_description": "管理評論",
   "admin_page_header_users_description": "管理使用者",
   "admin_toggle_sidebar": "切換側邊欄",
+  "article_category": "文章",
   "blog_comments_author": "作者",
   "blog_comments_comments": [
     {
@@ -222,9 +223,8 @@
   "homepage_get_in_touch_title": "有關 Next.js 的任何問題？",
   "homepage_hero_intro": "你好，我是 Nelson。我寫網站和開發工具。",
   "homepage_hero_location": "香港 · UTC+8",
-  "homepage_latest_articles_card": "文章",
-  "homepage_latest_articles_more": "查看所有文章",
   "homepage_latest_articles_title": "最新文章",
+  "homepage_latest_articles_view_all": "查看所有文章",
   "layout_change_language": "更改語言",
   "layout_now_playing_loading": "載入中...",
   "layout_now_playing_not_listening": "未在收聽 - Spotify",

@@ -36,6 +36,7 @@
   "admin_page_header_comments_description": "Manage comments",
   "admin_page_header_users_description": "Manage users",
   "admin_toggle_sidebar": "Toggle sidebar",
+  "article_category": "Article",
   "blog_comments_author": "Author",
   "blog_comments_comments": [
     {
@@ -222,9 +223,8 @@
   "homepage_get_in_touch_title": "Any questions about Next.js?",
   "homepage_hero_intro": "I'm Nelson. I build websites and tools for developers.",
   "homepage_hero_location": "Hong Kong · UTC+8",
-  "homepage_latest_articles_card": "Article",
-  "homepage_latest_articles_more": "See all articles",
   "homepage_latest_articles_title": "Latest Articles",
+  "homepage_latest_articles_view_all": "See all articles",
   "layout_change_language": "Change language",
   "layout_now_playing_loading": "Loading...",
   "layout_now_playing_not_listening": "Not Listening - Spotify",

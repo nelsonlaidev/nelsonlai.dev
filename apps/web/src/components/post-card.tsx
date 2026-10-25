@@ -1,0 +1,58 @@
+import type { PostStats, PostSummary } from '@/features/posts/types'
+
+import { PencilIcon } from 'lucide-react'
+
+import { m } from '@/paraglide/messages'
+import { getLocale } from '@/paraglide/runtime'
+
+import { ContentCard } from './content-card'
+
+type PostCardProps = {
+  post: PostSummary
+  stats?: PostStats
+  isStatsError?: boolean
+  featured?: boolean
+  lazy?: boolean
+}
+
+export function PostCard(props: PostCardProps) {
+  const { post, stats, isStatsError = false, featured = false, lazy = true } = props
+  const formattedDate = new Intl.DateTimeFormat(getLocale(), {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'Asia/Hong_Kong',
+  }).format(new Date(post.publishedAt))
+  const statsFallback = isStatsError ? m.common_error() : '--'
+
+  return (
+    <ContentCard
+      to={`/blog/${post.slug}`}
+      title={m.article_category()}
+      image={`/images/blog/${post.slug}/cover.png`}
+      imageAlt=''
+      icon={<PencilIcon className='size-4.5' aria-hidden='true' />}
+      featured={featured}
+      lazy={lazy}
+    >
+      <div className='flex flex-wrap items-center justify-between gap-x-2 gap-y-1 px-2 pt-4 text-sm text-muted-foreground'>
+        <time dateTime={post.publishedAt}>{formattedDate}</time>
+        <div className='flex gap-2'>
+          {stats ? (
+            <>
+              <span>{m.common_likes({ count: stats.likes })}</span>
+              <span aria-hidden='true'>&middot;</span>
+              <span>{m.common_views({ count: stats.views })}</span>
+            </>
+          ) : (
+            statsFallback
+          )}
+        </div>
+      </div>
+      <div className='flex flex-col px-2 py-4 transition-transform ease-out motion-safe:group-hover:translate-x-0.5 motion-reduce:transition-none'>
+        <h3 className='text-2xl font-semibold'>{post.title}</h3>
+        <p className='mt-2 text-muted-foreground'>{post.description}</p>
+      </div>
+    </ContentCard>
+  )
+}
