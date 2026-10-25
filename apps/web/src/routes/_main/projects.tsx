@@ -4,6 +4,7 @@ import { PageHeader } from '@/components/page-header'
 import { ProjectCard } from '@/components/project-card'
 import { getPage } from '@/features/pages/pages.functions'
 import { getProjects } from '@/features/projects/projects.functions'
+import { createSeoHead } from '@/lib/seo'
 import { getLocale } from '@/paraglide/runtime'
 
 export const Route = createFileRoute('/_main/projects')({
@@ -18,16 +19,18 @@ export const Route = createFileRoute('/_main/projects')({
       throw notFound()
     }
 
-    return { page, projects }
+    return { page, projects, locale }
   },
-  head: ({ loaderData }) => ({
-    meta: loaderData
-      ? [
-          { title: `${loaderData.page.title} | Nelson Lai` },
-          { name: 'description', content: loaderData.page.description },
-        ]
-      : [],
-  }),
+  head: ({ loaderData }) => {
+    if (!loaderData) return {}
+
+    return createSeoHead({
+      title: loaderData.page.title,
+      description: loaderData.page.description,
+      pathname: '/projects',
+      locale: loaderData.locale,
+    })
+  },
   component: RouteComponent,
 })
 

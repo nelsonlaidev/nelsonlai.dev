@@ -2,6 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { getPosts } from '@/features/posts/posts.functions'
 import { getProjects } from '@/features/projects/projects.functions'
+import { createSeoHead } from '@/lib/seo'
+import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
 
 import { AboutMe } from './-components/home/about-me'
@@ -18,7 +20,17 @@ export const Route = createFileRoute('/_main/')({
       getPosts({ data: { locale, limit: 2 } }),
     ])
 
-    return { projects, posts }
+    return { projects, posts, locale }
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) return {}
+
+    return createSeoHead({
+      title: null,
+      description: m.metadata_site_description({}, { locale: loaderData.locale }),
+      pathname: '/',
+      locale: loaderData.locale,
+    })
   },
   component: RouteComponent,
 })

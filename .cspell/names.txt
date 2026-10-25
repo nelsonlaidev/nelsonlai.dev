@@ -2,6 +2,7 @@ bradlc
 cobe
 facebook
 figma
+googlebot
 inlang
 instagram
 linktree

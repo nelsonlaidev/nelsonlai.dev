@@ -40,5 +40,7 @@
     "env:generate": {
       "cache": false
     }
-  }
+  },
+  "globalEnv": ["SITE_URL", "UMAMI_URL", "UMAMI_WEBSITE_ID"],
+  "globalDependencies": [".env*", "apps/*/.env*", "packages/*/.env*"]
 }
