@@ -1,0 +1,22 @@
+import { RPCHandler } from '@orpc/server/fetch'
+import { router } from '@repo/api/routers'
+import { createFileRoute } from '@tanstack/react-router'
+
+import { createORPCContext } from '@/lib/orpc-context'
+
+const handler = new RPCHandler(router)
+
+export const Route = createFileRoute('/api/rpc/$')({
+  server: {
+    handlers: {
+      ANY: async ({ request }) => {
+        const { response } = await handler.handle(request, {
+          prefix: '/api/rpc',
+          context: await createORPCContext(request),
+        })
+
+        return response ?? new Response('Not Found', { status: 404 })
+      },
+    },
+  },
+})

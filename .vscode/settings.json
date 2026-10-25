@@ -20,8 +20,7 @@
   "editor.formatOnSave": true,
 
   "files.associations": {
-    "*.css": "tailwindcss",
-    ".env*": "properties"
+    "*.css": "tailwindcss"
   },
 
   "tailwindCSS.classFunctions": ["cva", "cn"],
@@ -29,5 +28,6 @@
 
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "js/ts.preferences.preferTypeOnlyAutoImports": true,
+  "js/ts.preferences.includePackageJsonAutoImports": "on",
   "js/ts.tsdk.path": "node_modules/typescript/lib"
 }

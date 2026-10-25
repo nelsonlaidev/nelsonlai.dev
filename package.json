@@ -5,6 +5,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "env:check": "turbo run env:check",
+    "env:generate": "turbo run env:generate",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "knip": "knip",

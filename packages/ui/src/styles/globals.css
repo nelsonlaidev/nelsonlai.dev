@@ -65,6 +65,27 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 
   --shadow-feature-card: var(--feature-card);
+
+  --animate-marquee-x: marquee-x var(--marquee-duration) linear infinite;
+  --animate-marquee-y: marquee-y var(--marquee-duration) linear infinite;
+
+  @keyframes marquee-x {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--marquee-gap)));
+    }
+  }
+
+  @keyframes marquee-y {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--marquee-gap)));
+    }
+  }
 }
 
 :root {

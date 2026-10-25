@@ -17,7 +17,7 @@ files:
   - '**/*.{md,mdx}'
   - '**/*.{json,jsonc,yaml,yml}'
   - '**/*.css'
-  - '**/.gitignore'
+  - '**/.{gitignore,env.schema}'
 
 overrides:
   - filename:
@@ -50,5 +50,6 @@ dictionaries:
   - names
   - tech-terms
   - npm
+  - sql
   - python
   - rust-crates

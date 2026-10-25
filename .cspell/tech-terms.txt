@@ -1,3 +1,9 @@
+codegen
 doublestar
+nextdotjs
+nodedotjs
+radixui
+reactquery
 techstack
+webp
 wght

@@ -1,4 +1,7 @@
 {
+  "compilerOptions": {
+    "types": ["@total-typescript/ts-reset", "@nelsonlaidev/typescript-config/react"]
+  },
   "extends": "@nelsonlaidev/typescript-config/react-library.json",
   "include": ["**/*.ts", "**/*.tsx"]
 }

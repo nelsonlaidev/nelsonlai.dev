@@ -1,15 +1,12 @@
 # Dependencies
 node_modules/
 
-# TanStack
-.tanstack/
-.output/
-
 # Turborepo
 .turbo/
 
 # TypeScript
 tsconfig.tsbuildinfo
 
-# Content Collections
-.content-collections/
+# Environment Variables
+.env*
+!.env.schema

@@ -1,2 +1,3 @@
 configurables
 precompilados
+previsualizar

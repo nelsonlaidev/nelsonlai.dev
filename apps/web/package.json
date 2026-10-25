@@ -5,6 +5,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite dev --port 3000",
+    "env:check": "varlock load",
+    "env:generate": "varlock codegen",
     "generate-routes": "tsr generate",
     "i18n:check": "inlang check --project ./project.inlang",
     "preview": "vite preview",
@@ -13,19 +15,31 @@
   "dependencies": {
     "@fontsource-variable/geist": "5.3.0",
     "@fontsource-variable/geist-mono": "5.3.0",
+    "@icons-pack/react-simple-icons": "13.15.1",
+    "@orpc/client": "2.0.0-beta.45",
+    "@orpc/server": "catalog:",
+    "@orpc/tanstack-query": "2.0.0-beta.45",
+    "@repo/api": "workspace:*",
+    "@repo/auth": "workspace:*",
+    "@repo/db": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tailwindcss/vite": "4.3.3",
     "@tanstack/react-devtools": "0.10.13",
+    "@tanstack/react-query": "5.104.5",
+    "@tanstack/react-query-devtools": "5.104.5",
     "@tanstack/react-router": "1.170.46",
     "@tanstack/react-router-devtools": "1.167.2",
+    "@tanstack/react-router-ssr-query": "1.167.3",
     "@tanstack/react-start": "1.169.4",
-    "cn": "0.5.0",
+    "@varlock/vite-integration": "1.5.4",
+    "cn": "catalog:",
+    "cobe": "2.0.1",
     "lucide-react": "catalog:",
     "motion": "14.6.0",
     "nitro": "3.0.260903-beta",
     "react": "catalog:",
     "react-dom": "19.3.1",
-    "zod": "4.6.7"
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@content-collections/core": "0.15.3",
@@ -36,11 +50,13 @@
     "@nelsonlaidev/typescript-config": "catalog:",
     "@tanstack/devtools-vite": "0.8.5",
     "@tanstack/router-cli": "1.167.46",
+    "@total-typescript/ts-reset": "catalog:",
     "@types/node": "26.6.5",
     "@types/react": "catalog:",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.2",
     "typescript": "catalog:",
+    "varlock": "catalog:",
     "vite": "8.3.5"
   }
 }

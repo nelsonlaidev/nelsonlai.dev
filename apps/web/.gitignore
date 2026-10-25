@@ -1,0 +1,9 @@
+# TanStack
+.tanstack/
+.output/
+
+# Content Collections
+.content-collections/
+
+# Varlock
+/src/env.ts

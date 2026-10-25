@@ -1,0 +1,26 @@
+{
+  "name": "@repo/api",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": "./src/*.ts",
+    "./routers": "./src/routers/index.ts"
+  },
+  "scripts": {
+    "env:check": "varlock load",
+    "env:generate": "varlock codegen",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@orpc/server": "catalog:",
+    "@repo/auth": "workspace:*",
+    "@repo/db": "workspace:*",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@nelsonlaidev/typescript-config": "catalog:",
+    "@total-typescript/ts-reset": "catalog:",
+    "typescript": "catalog:",
+    "varlock": "catalog:"
+  }
+}

@@ -1,7 +1,7 @@
 import { cn } from 'cn'
 import { useEffect, useRef, useState } from 'react'
 
-type ImageProps = Omit<React.ComponentProps<'img'>, 'src' | 'alt'> & {
+type ImageProps = React.ComponentProps<'img'> & {
   src: string
   alt: string
   imageClassName?: string

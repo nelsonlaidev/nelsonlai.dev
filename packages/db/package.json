@@ -1,0 +1,26 @@
+{
+  "name": "@repo/db",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "env:check": "varlock load",
+    "env:generate": "varlock codegen",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "drizzle-orm": "1.0.0-rc.5",
+    "pg": "8.23.1"
+  },
+  "devDependencies": {
+    "@nelsonlaidev/typescript-config": "catalog:",
+    "@total-typescript/ts-reset": "catalog:",
+    "@types/pg": "8.23.1",
+    "drizzle-kit": "1.0.0-rc.5",
+    "typescript": "catalog:",
+    "varlock": "catalog:"
+  }
+}

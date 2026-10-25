@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "types": ["@total-typescript/ts-reset"]
+  },
+  "extends": "@nelsonlaidev/typescript-config/base.json",
+  "include": ["**/*.ts", "**/*.tsx"]
+}

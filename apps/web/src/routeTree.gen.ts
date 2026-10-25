@@ -17,6 +17,7 @@ import { Route as MainDashboardRouteImport } from './routes/_main/dashboard'
 import { Route as MainGuestbookRouteImport } from './routes/_main/guestbook'
 import { Route as MainProjectsRouteImport } from './routes/_main/projects'
 import { Route as MainUsesRouteImport } from './routes/_main/uses'
+import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc.$'
 
 const MainRouteRoute = MainRouteRouteImport.update({
   id: '/_main',
@@ -57,6 +58,11 @@ const MainUsesRoute = MainUsesRouteImport.update({
   path: '/uses',
   getParentRoute: () => MainRouteRoute,
 } as any)
+const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
+  id: '/api/rpc/$',
+  path: '/api/rpc/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof MainIndexRoute
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/guestbook': typeof MainGuestbookRoute
   '/projects': typeof MainProjectsRoute
   '/uses': typeof MainUsesRoute
+  '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesByTo {
   '/about': typeof MainAboutRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/projects': typeof MainProjectsRoute
   '/uses': typeof MainUsesRoute
   '/': typeof MainIndexRoute
+  '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/_main/projects': typeof MainProjectsRoute
   '/_main/uses': typeof MainUsesRoute
   '/_main/': typeof MainIndexRoute
+  '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/guestbook'
     | '/projects'
     | '/uses'
+    | '/api/rpc/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/about'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/uses'
     | '/'
+    | '/api/rpc/$'
   id:
     | '__root__'
     | '/_main'
@@ -116,10 +127,12 @@ export interface FileRouteTypes {
     | '/_main/projects'
     | '/_main/uses'
     | '/_main/'
+    | '/api/rpc/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   MainRouteRoute: typeof MainRouteRouteWithChildren
+  ApiRpcSplatRoute: typeof ApiRpcSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -180,6 +193,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainUsesRouteImport
       parentRoute: typeof MainRouteRoute
     }
+    '/api/rpc/$': {
+      id: '/api/rpc/$'
+      path: '/api/rpc/$'
+      fullPath: '/api/rpc/$'
+      preLoaderRoute: typeof ApiRpcSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -209,6 +229,7 @@ const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   MainRouteRoute: MainRouteRouteWithChildren,
+  ApiRpcSplatRoute: ApiRpcSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

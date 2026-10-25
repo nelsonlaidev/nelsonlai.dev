@@ -14,6 +14,12 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "env:check": {
+      "cache": false
+    },
+    "env:generate": {
+      "cache": false
     }
   }
 }

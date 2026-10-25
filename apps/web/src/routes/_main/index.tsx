@@ -3,6 +3,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { getProjects } from '@/lib/projects.functions'
 import { getLocale } from '@/paraglide/runtime'
 
+import { AboutMe } from './-components/home/about-me'
 import { Hero } from './-components/home/hero'
 import { SelectedProjects } from './-components/home/selected-projects'
 
@@ -18,6 +19,7 @@ function RouteComponent() {
     <>
       <Hero />
       <SelectedProjects projects={projects} />
+      <AboutMe />
     </>
   )
 }
