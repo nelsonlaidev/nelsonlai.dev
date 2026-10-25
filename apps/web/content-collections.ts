@@ -2,6 +2,7 @@ import type { CollectionContext, Meta } from '@content-collections/core'
 
 import { defineCollection, defineConfig } from '@content-collections/core'
 import { compileMDX } from '@content-collections/mdx'
+import rehypeSlug from 'rehype-slug'
 import * as z from 'zod'
 
 import { isLocale } from '@/paraglide/runtime'
@@ -19,7 +20,7 @@ async function transformContent<T extends { _meta: Meta; content: string }>(docu
     throw new Error(`Missing slug in path "${document._meta.path}".`)
   }
 
-  const mdx = await compileMDX(context, document)
+  const mdx = await compileMDX(context, document, { rehypePlugins: [rehypeSlug] })
 
   return { ...document, locale, slug, mdx }
 }

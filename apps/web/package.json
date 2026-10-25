@@ -56,6 +56,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.2",
+    "rehype-slug": "6.0.0",
     "typescript": "catalog:",
     "varlock": "catalog:",
     "vite": "8.3.5"

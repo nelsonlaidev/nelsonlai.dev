@@ -7,5 +7,5 @@ export function findPage(slug: string, locale: Locale) {
 
   if (!page) return null
 
-  return { title: page.title, description: page.description }
+  return { title: page.title, description: page.description, mdx: page.mdx }
 }

@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@nelsonlaidev/typescript-config": "catalog:",
+    "@tailwindcss/typography": "0.5.20",
     "@total-typescript/ts-reset": "catalog:",
     "@types/react": "catalog:",
     "tailwindcss": "catalog:",
