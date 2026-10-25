@@ -43,6 +43,7 @@ export function Header() {
 
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current)
+        rafRef.current = null
       }
     }
   }, [])
