@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
+    "check:ssr": "node scripts/check-ssr.ts",
     "dev": "vite dev --port 3000",
     "env:check": "varlock load",
     "env:generate": "varlock codegen",

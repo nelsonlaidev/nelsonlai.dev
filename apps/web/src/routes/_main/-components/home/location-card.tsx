@@ -118,6 +118,14 @@ export function LocationCard() {
       resizeObserver.disconnect()
       globeRef.current?.destroy()
       globeRef.current = null
+
+      // Cobe 2.0.1 deletes buffers but leaves attributes enabled, breaking canvas reuse in Strict Mode.
+      // Remove once https://github.com/shuding/cobe/issues/115 is fixed and canvas reinitialization passes.
+      const gl = canvas.getContext('webgl2') ?? canvas.getContext('webgl')
+      if (gl) {
+        const attributeCount = Number(gl.getParameter(gl.MAX_VERTEX_ATTRIBS))
+        for (let index = 0; index < attributeCount; index++) gl.disableVertexAttribArray(index)
+      }
     }
   }, [])
 

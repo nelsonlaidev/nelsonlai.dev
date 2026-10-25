@@ -6,11 +6,21 @@ import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import { varlockVitePlugin } from '@varlock/vite-integration'
 import viteReact from '@vitejs/plugin-react'
 import { nitro } from 'nitro/vite'
-import { defineConfig } from 'vite'
+import { defineConfig, esmExternalRequirePlugin } from 'vite'
 
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
+    // Keep CJS React consumers on the renderer's bundled React instance during SSR.
+    // Remove after upgrading to a Nitro release containing https://github.com/nitrojs/nitro/pull/4889
+    // and passing check:ssr. See https://github.com/nitrojs/nitro/issues/4171.
+    {
+      name: 'ssr-react-require-compat',
+      apply: 'build',
+      applyToEnvironment(environment) {
+        return environment.name === 'ssr' ? esmExternalRequirePlugin({ external: ['react'] }) : false
+      },
+    },
     varlockVitePlugin(),
     contentCollections(),
     paraglideVitePlugin({
