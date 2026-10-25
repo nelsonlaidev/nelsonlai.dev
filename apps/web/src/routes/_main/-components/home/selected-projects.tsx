@@ -1,4 +1,4 @@
-import type { ProjectSummary } from '@/lib/projects'
+import type { ProjectSummary } from '@/features/projects/types'
 
 import { buttonVariants } from '@repo/ui/components/button'
 import { Link } from '@tanstack/react-router'

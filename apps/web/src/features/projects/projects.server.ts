@@ -1,4 +1,4 @@
-import type { ProjectSummary } from './projects'
+import type { ProjectSummary } from './types'
 
 import { allProjects } from 'content-collections'
 

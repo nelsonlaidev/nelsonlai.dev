@@ -1,4 +1,4 @@
-import type { ProjectSummary } from '@/lib/projects'
+import type { ProjectSummary } from '@/features/projects/types'
 
 import { Badge } from '@repo/ui/components/badge'
 import { LightbulbIcon } from 'lucide-react'

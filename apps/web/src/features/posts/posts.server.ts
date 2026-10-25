@@ -1,5 +1,5 @@
 import type { Locale } from '@/paraglide/runtime'
-import type { PostSummary } from './posts'
+import type { PostSummary } from './types'
 
 import { allPosts } from 'content-collections'
 
