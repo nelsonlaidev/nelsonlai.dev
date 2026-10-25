@@ -9,7 +9,7 @@ type ImageProps = React.ComponentProps<'img'> & {
 }
 
 export function BlurImage(props: ImageProps) {
-  const { src, alt, imageClassName, lazy = true, className, onLoad, onError, ...rest } = props
+  const { src, alt, width, height, imageClassName, lazy = true, className, style, onLoad, onError, ...rest } = props
 
   const [isLoading, setIsLoading] = useState(true)
   const imgRef = useRef<HTMLImageElement>(null)
@@ -27,6 +27,8 @@ export function BlurImage(props: ImageProps) {
         ref={imgRef}
         src={src}
         alt={alt}
+        width={width}
+        height={height}
         loading={lazy ? 'lazy' : 'eager'}
         fetchPriority={lazy ? 'auto' : 'high'}
         decoding='async'
@@ -34,6 +36,7 @@ export function BlurImage(props: ImageProps) {
           'transition-[filter,transform] duration-[700ms,150ms] ease-[ease] group-data-[loading=true]:blur-xl group-data-[loading=true]:grayscale motion-safe:group-data-[loading=true]:scale-[1.02] motion-reduce:transition-none',
           imageClassName,
         )}
+        style={{ aspectRatio: width && height ? `${width} / ${height}` : undefined, ...style }}
         onLoad={(event) => {
           setIsLoading(false)
           onLoad?.(event)
