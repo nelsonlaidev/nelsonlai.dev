@@ -12,9 +12,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@octokit/rest": "22.0.1",
     "@orpc/server": "catalog:",
     "@repo/auth": "workspace:*",
     "@repo/db": "workspace:*",
+    "@repo/kv": "workspace:*",
     "zod": "catalog:"
   },
   "devDependencies": {

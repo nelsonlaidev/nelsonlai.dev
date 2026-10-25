@@ -1,3 +1,4 @@
+appendonly
 codegen
 doublestar
 frontmatter

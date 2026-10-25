@@ -1,13 +1,17 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
+import { Footer } from './-components/footer'
 import { GradientBackground } from './-components/gradient-background'
 import { Header } from './-components/header'
 
 export const Route = createFileRoute('/_main')({
+  loader: () => ({ copyrightYear: new Date().getFullYear() }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const { copyrightYear } = Route.useLoaderData()
+
   return (
     <>
       <Header />
@@ -18,6 +22,7 @@ function RouteComponent() {
       >
         <Outlet />
       </main>
+      <Footer copyrightYear={copyrightYear} />
       <GradientBackground position='top' />
       <GradientBackground position='bottom' />
     </>

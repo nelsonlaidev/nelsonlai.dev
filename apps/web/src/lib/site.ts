@@ -1,5 +1,7 @@
 export const SITE = {
   email: 'me@nelsonlai.dev',
+  links: 'https://nelsonlai.link',
+  repository: 'https://github.com/nelsonlaidev/nelsonlai.dev',
   socials: {
     github: 'https://github.com/nelsonlaidev',
     facebook: 'https://www.facebook.com/nelsonlaidev',
