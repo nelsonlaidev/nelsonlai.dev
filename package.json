@@ -4,6 +4,11 @@
   "type": "module",
   "scripts": {
     "build": "turbo run build",
+    "db:generate": "turbo run db:generate",
+    "db:migrate": "turbo run db:migrate",
+    "db:push": "turbo run db:push",
+    "db:seed": "turbo run db:seed",
+    "db:studio": "turbo run db:studio",
     "dev": "turbo run dev",
     "env:check": "turbo run env:check",
     "env:generate": "turbo run env:generate",
