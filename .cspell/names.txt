@@ -1,12 +1,14 @@
 bradlc
 cobe
 facebook
+figma
 inlang
 instagram
 linktree
 nelsonlai
 nelsonlaidev
 paraglide
+planetscale
 scoutly
 tsgolint
 umami

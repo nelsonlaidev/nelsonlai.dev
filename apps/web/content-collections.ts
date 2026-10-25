@@ -1,8 +1,41 @@
+import type { CollectionContext, Meta } from '@content-collections/core'
+
 import { defineCollection, defineConfig } from '@content-collections/core'
 import { compileMDX } from '@content-collections/mdx'
 import * as z from 'zod'
 
 import { isLocale } from '@/paraglide/runtime'
+
+async function transformContent<T extends { _meta: Meta; content: string }>(document: T, context: CollectionContext) {
+  const [locale, ...slugParts] = document._meta.path.split('/')
+
+  if (!isLocale(locale)) {
+    throw new Error(`Invalid locale "${locale}" in path "${document._meta.path}".`)
+  }
+
+  const slug = slugParts.join('/')
+
+  if (!slug) {
+    throw new Error(`Missing slug in path "${document._meta.path}".`)
+  }
+
+  const mdx = await compileMDX(context, document)
+
+  return { ...document, locale, slug, mdx }
+}
+
+const posts = defineCollection({
+  name: 'posts',
+  directory: 'content/blog',
+  include: '**/*.mdx',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    publishedAt: z.iso.datetime(),
+    content: z.string(),
+  }),
+  transform: transformContent,
+})
 
 const projects = defineCollection({
   name: 'projects',
@@ -18,24 +51,9 @@ const projects = defineCollection({
     dateCreated: z.string(),
     content: z.string(),
   }),
-  transform: async (document, context) => {
-    const mdx = await compileMDX(context, document)
-    const [locale, ...slugParts] = document._meta.path.split('/')
-
-    if (!isLocale(locale)) {
-      throw new Error(`Invalid locale "${locale}" in path "${document._meta.path}".`)
-    }
-
-    const slug = slugParts.join('/')
-
-    if (!slug) {
-      throw new Error(`Missing slug in path "${document._meta.path}".`)
-    }
-
-    return { ...document, locale, slug, mdx }
-  },
+  transform: transformContent,
 })
 
 export default defineConfig({
-  content: [projects],
+  content: [posts, projects],
 })

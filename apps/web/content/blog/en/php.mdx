@@ -1,0 +1,153 @@
+---
+title: PHP study notes
+description: Basics about PHP such as comments, Echo, variables, arithmetic operators
+publishedAt: '2022-02-25T10:45:49.000Z'
+---
+
+## Introduction of PHP
+
+PHP (full name: PHP: _Hypertext Preprocessor_) is an open source general-purpose computer scripting language, especially suitable for web development and embedded in HTML. The syntax of PHP draws on the characteristics of popular computer languages such as C language, Java and Perl, and is easy for general programmers to learn. The main goal of PHP is to allow web developers to quickly write dynamic pages, but PHP is also used in many other areas.
+
+The PHP file extension is `.php`, E.g `index.php`. As mentioned above, `PHP` can directly embed `HTML`.
+
+## Usage
+
+When the browser reads `<?php` from top to bottom, it executes `PHP` and ends with `?>`. Such as:
+
+```php
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PHP</title>
+    </head>
+    <body>
+        <?php
+            echo "This is a sentence."
+        ?>
+    </body>
+</html>
+```
+
+## Precautions
+
+In `PHP`, there is no other `HTML` after the `PHP` directive is completed. It is recommended not to end with `?>`. It will cause trouble if it is closed.
+
+```php
+<?php
+    echo "No HTML after PHP ends";
+```
+
+## PHP comments
+
+Almost most web programming languages can comment, and the **single-line** way of `PHP` is `//` and the **multi-line** way is `/* Some text here */`.
+
+```php
+<?php
+    echo "This is a single line comment"; // I am a single line comment
+    echo "This is a multi-line comment";
+    /*
+        I am a multi-line comment
+        Second line
+    */
+?>
+```
+
+## Echo
+
+The simplest syntax in `PHP` is `Echo`. The content of `Echo` must be enclosed in double quotes `""` or single quotes `''`. Each syntax must end with a semicolon `;`.
+
+```php
+<?php
+    echo "This is the example of using double quotes.";
+    echo 'This is the example of using single quotes.';
+?>
+```
+
+Content in `Echo` can also use `HTML` syntax. For example, I used `<br/>` here, so that the line can be broken.
+
+```php
+<?php
+    echo "This is the first sentence<br/>";
+    echo "This is the second sentence";
+    echo "<a href=\"https://example.com\">here is a link</a>";
+?>
+```
+
+## Variable
+
+We can assign a value to a variable to make it easier for us to write `PHP`, similar to `Javascript`. We will use the Dollar sign `$`.
+
+```php
+<?php
+    $value = "I am a value";
+?>
+```
+
+There are some rules to follow when we name variables.
+
+<Table
+  headers={['Example', 'Description', 'Rules']}
+  rows={[
+    ['$value', 'Lowercase', '✅'],
+    ['$Value', 'Uppercase', '✅'],
+    ['$_value', 'Underscore', '✅'],
+    ['$1value', 'Start from number', '❌'],
+  ]}
+/>
+
+There is a difference between `uppercase` and `lowercase` in variable names. Uppercase variables are not equal to lowercase variables.
+
+## Variable Naming Tips
+
+### Camel case
+
+When a variable name and a function name are linked together by two or more words to form a unique identification word, the use of "camel case" to represent, can increase the readability of variables and functions. Because we can't have `spaces` in variables.
+
+```php
+<?php
+    $onePlusOneAnswer = 1 + 1;
+    echo $onePlusOneAnswer;
+?>
+```
+
+### Snake case
+
+Snake case (like snake_case) refers to a writing style in which every space is replaced with an underscore ( \_ ) character and the first letter of every word is written in lowercase.
+
+```php
+<?php
+    $one_plus_one_answer = 1 + 1;
+    echo $one_plus_one_answer;
+?>
+```
+
+## String operator
+
+There are two string operators. The first is the concatenation operator ("."), which returns the concatenated string of its left and right arguments. The second is the concatenation assignment operator (".="), which appends the right-hand argument to the left-hand argument.
+
+```php
+<?php
+    echo "This" . " " . "is" . " " . "String" . " " . "operators" . ".";
+?>
+```
+
+## Arithmetic operator
+
+```php
+<?php
+    $value0 = 1.5; // Float
+    $value1 = 1 + 1; // Plus
+    $value2 = 1 - 1; // Minus
+    $value3 = 1 * 1; // Times
+    $value4 = 1 / 1; // Divide
+    $value5 = 12 / 5; // Divide (Incomplete division will become float, which is different from other programming languages, php will calculate the remainder)
+    $value6 = 3 % 5; // Take the remainder
+?>
+```
+
+## References
+
+- [PHP - Wikipedia, the free encyclopedia](https://en.wikipedia.org/wiki/PHP)
+- [Camel case - Wikipedia, the free encyclopedia](https://en.wikipedia.org/wiki/Camel_case)
+- [Snake case - Wikipedia, the free encyclopedia](https://en.wikipedia.org/wiki/Snake_case)
+- [String Operators](https://www.php.net/manual/en/language.operators.string.php)
