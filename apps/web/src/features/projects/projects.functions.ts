@@ -7,7 +7,7 @@ export const getProjects = createServerFn({ method: 'GET' })
   .validator(
     z.object({
       locale: z.string(),
-      limit: z.number().int().min(1).max(50).nullable(),
+      limit: z.number().int().min(1).max(50).nullable().default(null),
       selectedOnly: z.boolean().default(false),
     }),
   )

@@ -36,3 +36,4 @@ minimumReleaseAgeExclude:
   - '@tanstack/start-storage-context@1.167.41'
   - '@tanstack/router-cli@1.167.46'
   - '@nelsonlaidev/typescript-config@2.0.0'
+  - '@nelsonlaidev/oxlint-config@1.2.4'

@@ -54,6 +54,18 @@ const projects = defineCollection({
   transform: transformContent,
 })
 
+const pages = defineCollection({
+  name: 'pages',
+  directory: 'content/pages',
+  include: '**/*.mdx',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    content: z.string(),
+  }),
+  transform: transformContent,
+})
+
 export default defineConfig({
-  content: [posts, projects],
+  content: [posts, projects, pages],
 })
