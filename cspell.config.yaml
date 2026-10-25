@@ -1,7 +1,7 @@
 $schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
 
 version: '0.2'
-language: en
+language: en-US
 useGitignore: true
 enableGlobDot: true
 
@@ -24,13 +24,13 @@ overrides:
   - filename:
       - 'apps/web/messages/es.json'
       - 'apps/web/content/**/es/*.mdx'
-    language: en,es
+    language: en-US,es
     dictionaries:
       - es-custom
   - filename:
       - 'apps/web/messages/pt-BR.json'
       - 'apps/web/content/**/pt-BR/*.mdx'
-    language: en,pt-br
+    language: en-US,pt-br
     dictionaries:
       - pt-br-custom
 

@@ -13,7 +13,7 @@ import { ChevronDownIcon, LanguagesIcon } from 'lucide-react'
 import { m } from '@/paraglide/messages'
 import { getLocale, isLocale, locales, setLocale } from '@/paraglide/runtime'
 
-// cspell:language en,es,pt-br
+// cspell:language en-US,es,pt-br
 const LOCALE_LABELS: Record<Locale, string> = {
   en: 'English',
   'zh-TW': '繁體中文',
