@@ -5,12 +5,12 @@ import { compileMDX } from '@content-collections/mdx'
 import rehypeSlug from 'rehype-slug'
 import * as z from 'zod'
 
-import { isLocale } from '@/paraglide/runtime'
+import { locales } from './project.inlang/settings.json'
 
 async function transformContent<T extends { _meta: Meta; content: string }>(document: T, context: CollectionContext) {
   const [locale, ...slugParts] = document._meta.path.split('/')
 
-  if (!isLocale(locale)) {
+  if (!locale || !locales.includes(locale)) {
     throw new Error(`Invalid locale "${locale}" in path "${document._meta.path}".`)
   }
 

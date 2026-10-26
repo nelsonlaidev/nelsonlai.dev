@@ -9,5 +9,6 @@ nodedotjs
 radixui
 reactquery
 techstack
+unwasm
 webp
 wght

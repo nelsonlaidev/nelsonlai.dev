@@ -17,6 +17,7 @@ import { Route as MainDashboardRouteImport } from './routes/_main/dashboard'
 import { Route as MainGuestbookRouteImport } from './routes/_main/guestbook'
 import { Route as MainProjectsRouteImport } from './routes/_main/projects'
 import { Route as MainUsesRouteImport } from './routes/_main/uses'
+import { Route as OgSplatRouteImport } from './routes/og.$'
 import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc.$'
 
 const MainRouteRoute = MainRouteRouteImport.update({
@@ -58,6 +59,11 @@ const MainUsesRoute = MainUsesRouteImport.update({
   path: '/uses',
   getParentRoute: () => MainRouteRoute,
 } as any)
+const OgSplatRoute = OgSplatRouteImport.update({
+  id: '/og/$',
+  path: '/og/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/guestbook': typeof MainGuestbookRoute
   '/projects': typeof MainProjectsRoute
   '/uses': typeof MainUsesRoute
+  '/og/$': typeof OgSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesByTo {
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/guestbook': typeof MainGuestbookRoute
   '/projects': typeof MainProjectsRoute
   '/uses': typeof MainUsesRoute
+  '/og/$': typeof OgSplatRoute
   '/': typeof MainIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/_main/guestbook': typeof MainGuestbookRoute
   '/_main/projects': typeof MainProjectsRoute
   '/_main/uses': typeof MainUsesRoute
+  '/og/$': typeof OgSplatRoute
   '/_main/': typeof MainIndexRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/guestbook'
     | '/projects'
     | '/uses'
+    | '/og/$'
     | '/api/rpc/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | '/guestbook'
     | '/projects'
     | '/uses'
+    | '/og/$'
     | '/'
     | '/api/rpc/$'
   id:
@@ -126,12 +137,14 @@ export interface FileRouteTypes {
     | '/_main/guestbook'
     | '/_main/projects'
     | '/_main/uses'
+    | '/og/$'
     | '/_main/'
     | '/api/rpc/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   MainRouteRoute: typeof MainRouteRouteWithChildren
+  OgSplatRoute: typeof OgSplatRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
 }
 
@@ -193,6 +206,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainUsesRouteImport
       parentRoute: typeof MainRouteRoute
     }
+    '/og/$': {
+      id: '/og/$'
+      path: '/og/$'
+      fullPath: '/og/$'
+      preLoaderRoute: typeof OgSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/rpc/$': {
       id: '/api/rpc/$'
       path: '/api/rpc/$'
@@ -229,6 +249,7 @@ const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   MainRouteRoute: MainRouteRouteWithChildren,
+  OgSplatRoute: OgSplatRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
 }
 export const routeTree = rootRouteImport

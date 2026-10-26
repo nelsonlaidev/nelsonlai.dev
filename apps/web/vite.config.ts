@@ -56,7 +56,10 @@ const config = defineConfig({
       ],
     }),
     devtools(),
-    nitro(),
+    nitro({
+      exportConditions: ['!unwasm'],
+      traceDeps: ['takumi-js', '@takumi-rs/core*'],
+    }),
     tailwindcss(),
     tanstackStart(),
     viteReact(),

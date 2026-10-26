@@ -4,6 +4,7 @@ import type { Locale } from '@/paraglide/runtime'
 import { ENV } from '@/env'
 import { baseLocale, locales, localizeUrl } from '@/paraglide/runtime'
 
+import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from './og'
 import { SITE } from './site'
 
 type SeoHeadOptions = {
@@ -12,7 +13,6 @@ type SeoHeadOptions = {
   description: string
   pathname: `/${string}`
   locale: Locale
-  image?: string
   jsonLd?: Extract<MetaDescriptor, { 'script:ld+json': unknown }>['script:ld+json']
 } & ({ type?: 'website' } | { type: 'article'; publishedAt: string; updatedAt?: string })
 
@@ -31,10 +31,11 @@ export function getLocalizedUrl(pathname: `/${string}`, locale: Locale) {
 }
 
 export function createSeoHead(options: SeoHeadOptions) {
-  const { title, description, pathname, locale, image, jsonLd } = options
+  const { title, description, pathname, locale, jsonLd } = options
   const pageTitle = title === null ? SITE.name : `${title} | ${SITE.name}`
-  const canonical = getLocalizedUrl(pathname, locale)
-  const imageUrl = image ? new URL(image, ENV.SITE_URL).href : undefined
+  const canonicalUrl = getLocalizedUrl(pathname, locale)
+  const imagePath = `/og${pathname === '/' ? '' : pathname}/image.webp` as const
+  const imageUrl = getLocalizedUrl(imagePath, locale)
 
   const meta: MetaDescriptor[] = [
     { title: pageTitle },
@@ -44,15 +45,16 @@ export function createSeoHead(options: SeoHeadOptions) {
     { property: 'og:locale', content: OPEN_GRAPH_LOCALES[locale] },
     { property: 'og:title', content: pageTitle },
     { property: 'og:description', content: description },
-    { property: 'og:url', content: canonical },
-    { name: 'twitter:card', content: imageUrl ? 'summary_large_image' : 'summary' },
+    { property: 'og:url', content: canonicalUrl },
+    { property: 'og:image', content: imageUrl },
+    { property: 'og:image:type', content: 'image/webp' },
+    { property: 'og:image:width', content: String(OG_IMAGE_WIDTH) },
+    { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },
+    { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: pageTitle },
     { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: imageUrl },
   ]
-
-  if (imageUrl) {
-    meta.push({ property: 'og:image', content: imageUrl }, { name: 'twitter:image', content: imageUrl })
-  }
 
   if (options.type === 'article') {
     meta.push({ property: 'article:published_time', content: options.publishedAt })
@@ -69,7 +71,7 @@ export function createSeoHead(options: SeoHeadOptions) {
   return {
     meta,
     links: [
-      { rel: 'canonical', href: canonical },
+      { rel: 'canonical', href: canonicalUrl },
       { rel: 'alternate', hrefLang: 'x-default', href: getLocalizedUrl(pathname, baseLocale) },
       ...locales.map((alternateLocale) => ({
         rel: 'alternate',

@@ -12,6 +12,7 @@ paraglide
 planetscale
 scoutly
 shiki
+takumi
 tsgolint
 umami
 unifiedjs
