@@ -1,5 +1,5 @@
 import * as z from 'zod'
 
-export const GetStatsOutputSchema = z.object({
+export const WakatimeStatsSchema = z.object({
   hours: z.number(),
 })

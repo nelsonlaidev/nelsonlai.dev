@@ -6,25 +6,25 @@ import * as z from 'zod'
 import { cache } from '../cache'
 import { ENV } from '../env'
 import { publicProcedure } from '../procedures'
-import { GetNowPlayingOutputSchema } from '../schema/spotify'
+import { SpotifyNowPlayingSchema } from '../schema/spotify'
 
-const AccessTokenResponseSchema = z.object({
+const SpotifyAccessTokenResponseSchema = z.object({
   access_token: z.string().min(1),
   expires_in: z.number().int().positive(),
 })
 
-const NowPlayingResponseSchema = z.object({
+const SpotifyPlaybackResponseSchema = z.object({
   is_playing: z.boolean(),
   item: z.object({ type: z.string() }).loose().nullable(),
 })
 
-const TrackSchema = z.object({
+const SpotifyTrackSchema = z.object({
   name: z.string(),
   external_urls: z.object({ spotify: z.url() }),
   artists: z.array(z.object({ name: z.string() })).min(1),
 })
 
-const getNowPlaying = publicProcedure.output(GetNowPlayingOutputSchema).handler(async () => {
+const getNowPlaying = publicProcedure.output(SpotifyNowPlayingSchema).handler(async () => {
   const { SPOTIFY_CLIENT_ID: clientId, SPOTIFY_CLIENT_SECRET: clientSecret, SPOTIFY_REFRESH_TOKEN: refreshToken } = ENV
 
   if (!clientId || !clientSecret || !refreshToken) return { isPlaying: false }
@@ -48,7 +48,7 @@ const getNowPlaying = publicProcedure.output(GetNowPlayingOutputSchema).handler(
       throw new Error(`Spotify token API error: ${tokenResponse.status} ${tokenResponse.statusText}`)
     }
 
-    const token = AccessTokenResponseSchema.parse(await tokenResponse.json())
+    const token = SpotifyAccessTokenResponseSchema.parse(await tokenResponse.json())
     accessToken = token.access_token
     await cache.spotify.accessToken.set(cacheKey, accessToken, Math.max(1, token.expires_in - 30))
   }
@@ -65,10 +65,10 @@ const getNowPlaying = publicProcedure.output(GetNowPlayingOutputSchema).handler(
     throw new Error(`Spotify now playing API error: ${response.status} ${response.statusText}`)
   }
 
-  const playback = NowPlayingResponseSchema.parse(await response.json())
+  const playback = SpotifyPlaybackResponseSchema.parse(await response.json())
   if (!playback.is_playing || playback.item?.type !== 'track') return { isPlaying: false }
 
-  const track = TrackSchema.parse(playback.item)
+  const track = SpotifyTrackSchema.parse(playback.item)
 
   return {
     isPlaying: true,

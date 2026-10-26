@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "drizzle-orm": "1.0.0-rc.5",
+    "drizzle-orm": "catalog:",
     "pg": "8.23.1"
   },
   "devDependencies": {

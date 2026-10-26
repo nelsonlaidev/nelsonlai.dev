@@ -1,6 +1,6 @@
 import * as z from 'zod'
 
-export const GetNowPlayingOutputSchema = z.discriminatedUnion('isPlaying', [
+export const SpotifyNowPlayingSchema = z.discriminatedUnion('isPlaying', [
   z.object({ isPlaying: z.literal(false) }),
   z.object({
     isPlaying: z.literal(true),

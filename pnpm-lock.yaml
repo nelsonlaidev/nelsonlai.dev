@@ -179,6 +179,9 @@ catalogs:
     cn:
       specifier: 0.5.0
       version: 0.5.0
+    drizzle-orm:
+      specifier: 1.0.0-rc.5
+      version: 1.0.0-rc.5
     lucide-react:
       specifier: 1.61.0
       version: 1.61.0
@@ -407,6 +410,9 @@ importers:
       '@repo/kv':
         specifier: workspace:*
         version: link:../kv
+      drizzle-orm:
+        specifier: 'catalog:'
+        version: 1.0.0-rc.5(@types/pg@8.23.1)(@upstash/redis@1.39.0)(pg@8.23.1)(valibot@1.5.0(typescript@6.0.3))(zod@4.6.7)
       zod:
         specifier: 'catalog:'
         version: 4.6.7
@@ -452,7 +458,7 @@ importers:
   packages/db:
     dependencies:
       drizzle-orm:
-        specifier: 1.0.0-rc.5
+        specifier: 'catalog:'
         version: 1.0.0-rc.5(@types/pg@8.23.1)(@upstash/redis@1.39.0)(pg@8.23.1)(valibot@1.5.0(typescript@6.0.3))(zod@4.6.7)
       pg:
         specifier: 8.23.1
