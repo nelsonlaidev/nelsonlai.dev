@@ -49,7 +49,7 @@
     "@icons-pack/react-simple-icons": "13.15.1",
     "@number-flow/react": "0.6.2",
     "@octokit/rest": "22.0.1",
-    "@orpc/client": "2.0.0-beta.44",
+    "@orpc/client": "2.0.0-beta.45",
     "@orpc/server": "2.0.0-beta.44",
     "@orpc/tanstack-query": "2.0.0-beta.44",
     "@paralleldrive/cuid2": "3.3.0",
