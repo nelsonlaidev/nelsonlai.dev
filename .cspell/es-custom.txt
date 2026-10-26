@@ -4,6 +4,7 @@ creativamente
 microinteracciones
 minimalista
 parsear
+personalizador
 precompilados
 previsualizar
 prototipado

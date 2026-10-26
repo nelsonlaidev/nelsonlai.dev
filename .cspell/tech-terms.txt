@@ -1,4 +1,5 @@
 appendonly
+argb
 codegen
 dokploy
 doublestar
@@ -9,7 +10,9 @@ nextdotjs
 nodedotjs
 radixui
 reactquery
+rmiz
 techstack
 unwasm
 webp
 wght
+wifi

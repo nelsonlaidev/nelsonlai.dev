@@ -18,7 +18,7 @@ import { SITE } from '@/lib/site'
 import { m } from '@/paraglide/messages'
 
 import { getLocale } from '../paraglide/runtime'
-import appCss from '../styles.css?url'
+import appCss from '../styles/index.css?url'
 
 type RouterContext = {
   queryClient: QueryClient

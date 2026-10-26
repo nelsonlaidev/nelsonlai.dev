@@ -1,7 +1,9 @@
 import { MDXContent } from '@content-collections/mdx/react'
 
 import { Heading } from './heading'
+import { ItemGrid } from './item-grid'
 import { LogoShowcase } from './logo-showcase'
+import { MdxImage } from './mdx-image'
 import { MdxLink } from './mdx-link'
 import { SocialLinks } from './social-links'
 
@@ -18,6 +20,8 @@ const components = {
   h5: (props: MdxHeadingProps) => <Heading as='h5' {...props} />,
   h6: (props: MdxHeadingProps) => <Heading as='h6' {...props} />,
   a: MdxLink,
+  Image: MdxImage,
+  ItemGrid,
   LogoShowcase,
   SocialLinks,
 }
@@ -26,7 +30,7 @@ export function Mdx(props: MdxProps) {
   const { code } = props
 
   return (
-    <div className='prose w-full max-w-none'>
+    <div className='prose w-full'>
       <MDXContent code={code} components={components} />
     </div>
   )
