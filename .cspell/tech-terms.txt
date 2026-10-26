@@ -1,5 +1,6 @@
 appendonly
 codegen
+dokploy
 doublestar
 frontmatter
 healthcheck
