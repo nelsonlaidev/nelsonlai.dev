@@ -1,5 +1,6 @@
 import { ExternalLink } from '@repo/ui/components/external-link'
 import { Link } from '@tanstack/react-router'
+import { useState } from 'react'
 
 import { FOOTER_GROUPS } from '@/lib/navigation'
 import { m } from '@/paraglide/messages'
@@ -8,12 +9,8 @@ import { GitHubStarButton } from './github-star-button'
 import { LocaleSwitcher } from './locale-switcher'
 import { NowPlaying } from './now-playing'
 
-type FooterProps = {
-  copyrightYear: number
-}
-
-export function Footer(props: FooterProps) {
-  const { copyrightYear } = props
+export function Footer() {
+  const [copyrightYear] = useState(() => new Date().getUTCFullYear())
 
   return (
     <footer className='mx-auto mb-12 w-full max-w-5xl rounded-2xl bg-background/30 p-8 backdrop-blur-md'>

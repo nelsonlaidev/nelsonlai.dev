@@ -7,10 +7,10 @@ import { Footer } from '@/routes/_main/-components/footer'
 import { GradientBackground } from '@/routes/_main/-components/gradient-background'
 import { Header } from '@/routes/_main/-components/header'
 
-type MainLayoutProps = { children: React.ReactNode; copyrightYear: number }
+type MainLayoutProps = { children: React.ReactNode }
 
 export function MainLayout(props: MainLayoutProps) {
-  const { children, copyrightYear } = props
+  const { children } = props
   const router = useRouter()
   const { data: session, isPending, error } = authClient.useSession()
   const user = session?.user ?? null
@@ -33,7 +33,7 @@ export function MainLayout(props: MainLayoutProps) {
       >
         {children}
       </main>
-      <Footer copyrightYear={copyrightYear} />
+      <Footer />
       <GradientBackground position='top' />
       <GradientBackground position='bottom' />
       <SignInDialog />

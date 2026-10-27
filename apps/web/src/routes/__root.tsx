@@ -97,7 +97,6 @@ export const Route = createRootRouteWithContext<RouterContext>()({
     }
   },
   notFoundComponent: RootNotFound,
-  loader: () => ({ copyrightYear: new Date().getFullYear() }),
   shellComponent: RootDocument,
 })
 
@@ -154,9 +153,8 @@ function RootDocument(props: RootDocumentProps) {
 }
 
 function RootNotFound() {
-  const { copyrightYear } = Route.useLoaderData()
   return (
-    <MainLayout copyrightYear={copyrightYear}>
+    <MainLayout>
       <NotFound />
     </MainLayout>
   )
