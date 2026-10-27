@@ -25,7 +25,6 @@ export function LatestArticles(props: LatestArticlesProps) {
   const articlesRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(articlesRef, { once: true, margin: '-100px' })
   const statsQuery = usePostStats(posts.map((post) => post.slug))
-  const statsBySlug = new Map(statsQuery.data?.map((stats) => [stats.slug, stats]))
 
   return (
     <motion.div
@@ -54,7 +53,7 @@ export function LatestArticles(props: LatestArticlesProps) {
           <PostCard
             key={post.slug}
             post={post}
-            stats={statsBySlug.get(post.slug)}
+            stats={statsQuery.data?.get(post.slug)}
             isStatsError={statsQuery.isError}
             featured
           />

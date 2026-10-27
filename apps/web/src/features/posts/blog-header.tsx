@@ -21,6 +21,7 @@ export function BlogHeader(props: BlogHeaderProps) {
   const formattedDate = useFormattedDate(post.publishedAt)
   const queryClient = useQueryClient()
   const stats = usePostStats([post.slug])
+  const postStats = stats.data?.get(post.slug)
   const counts = useQuery(orpc.comments.counts.queryOptions({ input: { slug: post.slug } }))
   const hasIncrementedRef = useRef(false)
   const increment = useMutation(
@@ -69,7 +70,7 @@ export function BlogHeader(props: BlogHeaderProps) {
           </div>
           <div className='space-y-1 md:mx-auto'>
             <div className='text-muted-foreground'>{m.blog_header_views()}</div>
-            {stats.data?.[0] ? <NumberFlow value={stats.data[0].views} /> : statsFallback}
+            {postStats ? <NumberFlow value={postStats.views} /> : statsFallback}
           </div>
           <div className='space-y-1 md:mx-auto'>
             <div className='text-muted-foreground'>{m.common_labels_comments()}</div>

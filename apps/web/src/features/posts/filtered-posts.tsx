@@ -17,7 +17,6 @@ export function FilteredPosts(props: FilteredPostsProps) {
   const { posts } = props
   const [searchValue, setSearchValue] = useState('')
   const statsQuery = usePostStats(posts.map((post) => post.slug))
-  const statsBySlug = new Map(statsQuery.data?.map((stats) => [stats.slug, stats]))
   const query = searchValue.toLowerCase()
   const filteredPosts = posts.filter((post) => post.title.toLowerCase().includes(query))
 
@@ -43,7 +42,12 @@ export function FilteredPosts(props: FilteredPostsProps) {
       )}
       <div className='grid gap-4 md:grid-cols-2'>
         {filteredPosts.map((post) => (
-          <PostCard key={post.slug} post={post} stats={statsBySlug.get(post.slug)} isStatsError={statsQuery.isError} />
+          <PostCard
+            key={post.slug}
+            post={post}
+            stats={statsQuery.data?.get(post.slug)}
+            isStatsError={statsQuery.isError}
+          />
         ))}
       </div>
     </>
