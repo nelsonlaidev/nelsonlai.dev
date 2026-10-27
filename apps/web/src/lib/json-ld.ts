@@ -16,11 +16,20 @@ import { ENV } from '@/env'
 import { getLocalizedUrl } from './seo'
 import { SITE } from './site'
 
-const person = {
-  '@type': 'Person',
-  name: SITE.name,
-  url: ENV.SITE_URL,
-} satisfies Person
+type JsonLdPersonOptions = {
+  description?: string
+  sameAs?: string[]
+}
+
+function createJsonLdPerson(options?: JsonLdPersonOptions): Person {
+  return {
+    '@type': 'Person',
+    name: SITE.name,
+    url: ENV.SITE_URL,
+    ...(options?.description && { description: options.description }),
+    ...(options?.sameAs && { sameAs: options.sameAs }),
+  }
+}
 
 const webSite = {
   '@type': 'WebSite',
@@ -71,7 +80,7 @@ export function createJsonLdWebSite(options: JsonLdWebSiteOptions): WithContext<
     name: SITE.name,
     description: options.description,
     url,
-    publisher: { ...person, sameAs: Object.values(SITE.socials) },
+    publisher: createJsonLdPerson({ sameAs: Object.values(SITE.socials) }),
     dateCreated: '2022-02-01T00:00:00Z',
     copyrightYear: new Date().getFullYear(),
     inLanguage: options.locale,
@@ -97,16 +106,17 @@ export function createJsonLdAboutPage(options: JsonLdAboutPageOptions): WithCont
     name: options.title,
     description: options.description,
     url: getLocalizedUrl(options.pathname, options.locale),
-    mainEntity: {
-      ...person,
+    mainEntity: createJsonLdPerson({
       description: options.siteDescription,
       sameAs: Object.values(SITE.socials),
-    },
+    }),
     inLanguage: options.locale,
   }
 }
 
 export function createJsonLdBlogPosting(options: JsonLdBlogPostingOptions): WithContext<BlogPosting> {
+  const person = createJsonLdPerson()
+
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -139,7 +149,7 @@ export function createJsonLdSoftwareSourceCode(
     programmingLanguage: 'TypeScript',
     dateCreated: options.dateCreated,
     dateModified: options.dateModified,
-    author: person,
+    author: createJsonLdPerson(),
     thumbnailUrl: new URL(`/images/projects/${options.slug}/cover.png`, ENV.SITE_URL).href,
     inLanguage: options.locale,
   }
