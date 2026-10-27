@@ -1,10 +1,13 @@
+import { useQuery } from '@tanstack/react-query'
 import { ClockIcon } from 'lucide-react'
 
-import { useWakatimeStats } from '@/features/wakatime/use-wakatime'
+import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
 export function CodingHours() {
-  const { data, isSuccess, isLoading, isError } = useWakatimeStats()
+  const { data, isSuccess, isLoading, isError } = useQuery(
+    orpc.wakatime.stats.queryOptions({ refetchOnWindowFocus: false }),
+  )
 
   return (
     <div className='flex flex-col gap-6 rounded-2xl p-4 shadow-feature-card lg:p-6'>
