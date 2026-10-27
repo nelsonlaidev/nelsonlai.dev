@@ -3,7 +3,13 @@ import * as z from 'zod'
 
 import { locales } from '@/paraglide/runtime'
 
-import { listProjects } from './projects.server'
+import { findProject, listProjects } from './projects.server'
+
+export const getProject = createServerFn({ method: 'GET' })
+  .validator(z.object({ slug: z.string().min(1), locale: z.enum(locales) }))
+  .handler(({ data }) => {
+    return findProject(data.slug, data.locale)
+  })
 
 export const getProjects = createServerFn({ method: 'GET' })
   .validator(
