@@ -2,11 +2,10 @@ import { BlurImage } from '@repo/ui/components/blur-image'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { Mdx } from '@/components/mdx/mdx'
-import { ENV } from '@/env'
 import { ProjectHeader } from '@/features/projects/project-header'
 import { getProject } from '@/features/projects/projects.functions'
-import { createSeoHead, getLocalizedUrl } from '@/lib/seo'
-import { SITE } from '@/lib/site'
+import { createJsonLdSoftwareSourceCode } from '@/lib/json-ld'
+import { createSeoHead } from '@/lib/seo'
 import { getLocale } from '@/paraglide/runtime'
 
 export const Route = createFileRoute('/_main/projects/$slug')({
@@ -29,25 +28,16 @@ export const Route = createFileRoute('/_main/projects/$slug')({
       description: project.description,
       pathname,
       locale,
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'SoftwareSourceCode',
+      jsonLd: createJsonLdSoftwareSourceCode({
         name: project.title,
         description: project.description,
-        url: getLocalizedUrl(pathname, locale),
+        pathname,
         codeRepository: project.github,
         dateCreated: project.dateCreated,
         dateModified: project.updatedAt,
-        license: 'https://opensource.org/licenses/MIT',
-        programmingLanguage: 'TypeScript',
-        author: {
-          '@type': 'Person',
-          name: SITE.name,
-          url: ENV.SITE_URL,
-        },
-        thumbnailUrl: new URL(`/images/projects/${project.slug}/cover.png`, ENV.SITE_URL).href,
-        inLanguage: locale,
-      },
+        slug: project.slug,
+        locale,
+      }),
     })
   },
   component: RouteComponent,

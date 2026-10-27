@@ -2,7 +2,6 @@ import { createFileRoute, notFound } from '@tanstack/react-router'
 import * as z from 'zod'
 
 import { Mdx } from '@/components/mdx/mdx'
-import { ENV } from '@/env'
 import { CommentSection } from '@/features/comments/comment-section'
 import { BlogFooter } from '@/features/posts/blog-footer'
 import { BlogHeader } from '@/features/posts/blog-header'
@@ -10,8 +9,8 @@ import { LikeButton } from '@/features/posts/like-button'
 import { getPost } from '@/features/posts/posts.functions'
 import { ProgressBar } from '@/features/posts/progress-bar'
 import { TableOfContents } from '@/features/posts/table-of-contents'
-import { createSeoHead, getLocalizedUrl } from '@/lib/seo'
-import { SITE } from '@/lib/site'
+import { createJsonLdBlogPosting } from '@/lib/json-ld'
+import { createSeoHead } from '@/lib/seo'
 import { getLocale } from '@/paraglide/runtime'
 
 export const Route = createFileRoute('/_main/blog/$slug')({
@@ -36,7 +35,6 @@ export const Route = createFileRoute('/_main/blog/$slug')({
     const { post, locale } = loaderData
 
     const pathname = `/blog/${post.slug}` as const
-    const author = { '@type': 'Person', name: SITE.name, url: ENV.SITE_URL }
 
     return createSeoHead({
       title: post.title,
@@ -46,22 +44,15 @@ export const Route = createFileRoute('/_main/blog/$slug')({
       type: 'article',
       publishedAt: post.publishedAt,
       updatedAt: post.updatedAt,
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
+      jsonLd: createJsonLdBlogPosting({
         headline: post.title,
         description: post.description,
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': getLocalizedUrl(pathname, locale),
-        },
-        image: getLocalizedUrl(`/og/blog/${post.slug}/image.webp`, locale),
+        pathname,
+        image: `/og/blog/${post.slug}/image.webp`,
         datePublished: post.publishedAt,
         dateModified: post.updatedAt,
-        author,
-        publisher: author,
-        inLanguage: locale,
-      },
+        locale,
+      }),
     })
   },
   component: RouteComponent,

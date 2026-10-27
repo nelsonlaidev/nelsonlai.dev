@@ -1,4 +1,5 @@
 import type { MetaDescriptor } from '@tanstack/react-router'
+import type { Thing, WithContext } from 'schema-dts'
 import type { Locale } from '@/paraglide/runtime'
 
 import { ENV } from '@/env'
@@ -13,7 +14,7 @@ type SeoHeadOptions = {
   description: string
   pathname: `/${string}`
   locale: Locale
-  jsonLd?: Extract<MetaDescriptor, { 'script:ld+json': unknown }>['script:ld+json']
+  jsonLd?: WithContext<Thing>
 } & ({ type?: 'website' } | { type: 'article'; publishedAt: string; updatedAt?: string })
 
 export const OPEN_GRAPH_LOCALES: Record<Locale, string> = {

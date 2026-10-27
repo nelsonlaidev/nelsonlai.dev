@@ -2,10 +2,9 @@ import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { Mdx } from '@/components/mdx/mdx'
 import { PageHeader } from '@/components/page-header'
-import { ENV } from '@/env'
 import { getPage } from '@/features/pages/pages.functions'
-import { createSeoHead, getLocalizedUrl } from '@/lib/seo'
-import { SITE } from '@/lib/site'
+import { createJsonLdAboutPage } from '@/lib/json-ld'
+import { createSeoHead } from '@/lib/seo'
 import { getLocale } from '@/paraglide/runtime'
 
 export const Route = createFileRoute('/_main/about')({
@@ -27,21 +26,13 @@ export const Route = createFileRoute('/_main/about')({
       description: page.description,
       pathname: '/about',
       locale,
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'AboutPage',
-        name: page.title,
+      jsonLd: createJsonLdAboutPage({
+        title: page.title,
         description: page.description,
-        url: getLocalizedUrl('/about', locale),
-        inLanguage: locale,
-        mainEntity: {
-          '@type': 'Person',
-          name: SITE.name,
-          description: page.description,
-          url: ENV.SITE_URL,
-          sameAs: Object.values(SITE.socials),
-        },
-      },
+        pathname: '/about',
+        locale,
+        siteDescription: page.description,
+      }),
     })
   },
   component: RouteComponent,

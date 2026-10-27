@@ -1,12 +1,11 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { PageHeader } from '@/components/page-header'
-import { ENV } from '@/env'
 import { guestbookMessagesOptions } from '@/features/guestbook/guestbook.queries'
 import { MessageBoard } from '@/features/guestbook/message-board'
 import { getPage } from '@/features/pages/pages.functions'
-import { createSeoHead, getLocalizedUrl } from '@/lib/seo'
-import { SITE } from '@/lib/site'
+import { createJsonLdWebPage } from '@/lib/json-ld'
+import { createSeoHead } from '@/lib/seo'
 import { getLocale } from '@/paraglide/runtime'
 
 export const Route = createFileRoute('/_main/guestbook')({
@@ -30,19 +29,12 @@ export const Route = createFileRoute('/_main/guestbook')({
       description: page.description,
       pathname: '/guestbook',
       locale,
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'WebPage',
-        name: page.title,
+      jsonLd: createJsonLdWebPage({
+        title: page.title,
         description: page.description,
-        url: getLocalizedUrl('/guestbook', locale),
-        isPartOf: {
-          '@type': 'WebSite',
-          name: SITE.name,
-          url: ENV.SITE_URL,
-        },
-        inLanguage: locale,
-      },
+        pathname: '/guestbook',
+        locale,
+      }),
     })
   },
   component: RouteComponent,

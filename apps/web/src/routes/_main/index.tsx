@@ -1,10 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { ENV } from '@/env'
 import { getPosts } from '@/features/posts/posts.functions'
 import { getProjects } from '@/features/projects/projects.functions'
-import { createSeoHead, getLocalizedUrl } from '@/lib/seo'
-import { SITE } from '@/lib/site'
+import { createJsonLdWebSite } from '@/lib/json-ld'
+import { createSeoHead } from '@/lib/seo'
 import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
 
@@ -32,18 +31,11 @@ export const Route = createFileRoute('/_main/')({
       description: m.metadata_site_description({}, { locale: loaderData.locale }),
       pathname: '/',
       locale: loaderData.locale,
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        '@id': getLocalizedUrl('/', loaderData.locale),
-        name: SITE.name,
+      jsonLd: createJsonLdWebSite({
         description: m.metadata_site_description({}, { locale: loaderData.locale }),
-        url: getLocalizedUrl('/', loaderData.locale),
-        publisher: { '@type': 'Person', name: SITE.name, url: ENV.SITE_URL, sameAs: Object.values(SITE.socials) },
-        dateCreated: '2022-02-01T00:00:00Z',
-        copyrightYear: new Date().getFullYear(),
-        inLanguage: loaderData.locale,
-      },
+        pathname: '/',
+        locale: loaderData.locale,
+      }),
     })
   },
   component: RouteComponent,

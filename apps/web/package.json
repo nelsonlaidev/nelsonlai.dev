@@ -78,6 +78,7 @@
     "@types/rss": "0.0.32",
     "@types/tinycolor2": "1.4.6",
     "@vitejs/plugin-react": "6.1.2",
+    "schema-dts": "2.1.0",
     "typescript": "catalog:",
     "varlock": "catalog:",
     "vite": "8.3.5"
