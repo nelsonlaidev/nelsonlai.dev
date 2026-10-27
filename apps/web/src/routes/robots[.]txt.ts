@@ -7,7 +7,7 @@ export const Route = createFileRoute('/robots.txt')({
     handlers: {
       GET: () =>
         new Response(
-          `User-agent: *\nAllow: /\nAllow: /api/avatar/*\nAllow: /api/image\nDisallow: /api/\n\nSitemap: ${ENV.SITE_URL}/sitemap.xml\n`,
+          `User-agent: *\nAllow: /\nAllow: /api/avatar/*\nDisallow: /api/\n\nSitemap: ${ENV.SITE_URL}/sitemap.xml\n`,
           { headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=3600' } },
         ),
     },

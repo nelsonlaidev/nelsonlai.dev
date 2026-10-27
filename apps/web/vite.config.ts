@@ -80,7 +80,6 @@ const config = defineConfig({
     devtools(),
     nitro({
       exportConditions: ['!unwasm'],
-      serverAssets: [{ baseName: 'images', dir: './public/images' }],
       routeRules: {
         '/**': {
           headers: {

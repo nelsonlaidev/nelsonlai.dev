@@ -26,7 +26,6 @@ import { Route as MainUsesRouteImport } from './routes/_main/uses'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminCommentsRouteImport } from './routes/admin/comments'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
-import { Route as ApiImageRouteImport } from './routes/api/image'
 import { Route as OgSplatRouteImport } from './routes/og/$'
 import { Route as MainAccountIndexRouteImport } from './routes/_main/account/index'
 import { Route as MainAccountSettingsRouteImport } from './routes/_main/account/settings'
@@ -122,11 +121,6 @@ const AdminUsersRoute = AdminUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => AdminRouteRoute,
 } as any)
-const ApiImageRoute = ApiImageRouteImport.update({
-  id: '/api/image',
-  path: '/api/image',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const OgSplatRoute = OgSplatRouteImport.update({
   id: '/og/$',
   path: '/og/$',
@@ -195,7 +189,6 @@ export interface FileRoutesByFullPath {
   '/uses': typeof MainUsesRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/users': typeof AdminUsersRoute
-  '/api/image': typeof ApiImageRoute
   '/og/$': typeof OgSplatRoute
   '/admin/': typeof AdminIndexRoute
   '/account/settings': typeof MainAccountSettingsRoute
@@ -221,7 +214,6 @@ export interface FileRoutesByTo {
   '/uses': typeof MainUsesRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/users': typeof AdminUsersRoute
-  '/api/image': typeof ApiImageRoute
   '/og/$': typeof OgSplatRoute
   '/': typeof MainIndexRoute
   '/admin': typeof AdminIndexRoute
@@ -252,7 +244,6 @@ export interface FileRoutesById {
   '/_main/uses': typeof MainUsesRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/users': typeof AdminUsersRoute
-  '/api/image': typeof ApiImageRoute
   '/og/$': typeof OgSplatRoute
   '/_main/': typeof MainIndexRoute
   '/admin/': typeof AdminIndexRoute
@@ -284,7 +275,6 @@ export interface FileRouteTypes {
     | '/uses'
     | '/admin/comments'
     | '/admin/users'
-    | '/api/image'
     | '/og/$'
     | '/admin/'
     | '/account/settings'
@@ -310,7 +300,6 @@ export interface FileRouteTypes {
     | '/uses'
     | '/admin/comments'
     | '/admin/users'
-    | '/api/image'
     | '/og/$'
     | '/'
     | '/admin'
@@ -340,7 +329,6 @@ export interface FileRouteTypes {
     | '/_main/uses'
     | '/admin/comments'
     | '/admin/users'
-    | '/api/image'
     | '/og/$'
     | '/_main/'
     | '/admin/'
@@ -361,7 +349,6 @@ export interface RootRouteChildren {
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   RssDotxmlRoute: typeof RssDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  ApiImageRoute: typeof ApiImageRoute
   OgSplatRoute: typeof OgSplatRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiAvatarChar123idChar125DotwebpRoute: typeof ApiAvatarChar123idChar125DotwebpRoute
@@ -488,13 +475,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/users'
       preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof AdminRouteRoute
-    }
-    '/api/image': {
-      id: '/api/image'
-      path: '/api/image'
-      fullPath: '/api/image'
-      preLoaderRoute: typeof ApiImageRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/og/$': {
       id: '/og/$'
@@ -640,7 +620,6 @@ const rootRouteChildren: RootRouteChildren = {
   RobotsDottxtRoute: RobotsDottxtRoute,
   RssDotxmlRoute: RssDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  ApiImageRoute: ApiImageRoute,
   OgSplatRoute: OgSplatRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiAvatarChar123idChar125DotwebpRoute: ApiAvatarChar123idChar125DotwebpRoute,
