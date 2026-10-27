@@ -77,7 +77,7 @@ export function BlogHeader(props: BlogHeaderProps) {
           </div>
         </div>
       </div>
-      <Zoom zoomMargin={40}>
+      <Zoom zoomMargin={40} zoomImg={{ src: `/images/blog/${post.slug}/cover.png`, alt: post.title }}>
         <BlurImage
           src={`/images/blog/${post.slug}/cover.png`}
           className='rounded-lg'

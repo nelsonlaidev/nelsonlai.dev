@@ -285,5 +285,9 @@
   "unsubscribe_unsubscribe_from_this_comment": "このコメントの通知を配信停止",
   "unsubscribe_unsubscribed_description": "このコメントへの返信通知メールは今後届きません。",
   "unsubscribe_you_are_unsubscribing_as": "{email} として配信停止します",
-  "unsubscribe_you_have_been_unsubscribed": "配信停止しました"
+  "unsubscribe_you_have_been_unsubscribed": "配信停止しました",
+  "error_try_again": "もう一度試す",
+  "common_labels_admin": "管理",
+  "components_tables_users_empty": "ユーザーはいません。",
+  "components_tables_comments_empty": "コメントはありません。"
 }

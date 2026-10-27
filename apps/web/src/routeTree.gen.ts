@@ -10,6 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MainRouteRouteImport } from './routes/_main/route'
+import { Route as AdminRouteRouteImport } from './routes/admin/route'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as MainAboutRouteImport } from './routes/_main/about'
 import { Route as MainAccountRouteRouteImport } from './routes/_main/account/route'
@@ -19,6 +23,10 @@ import { Route as MainPrivacyRouteImport } from './routes/_main/privacy'
 import { Route as MainTermsRouteImport } from './routes/_main/terms'
 import { Route as MainUnsubscribeRouteImport } from './routes/_main/unsubscribe'
 import { Route as MainUsesRouteImport } from './routes/_main/uses'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminCommentsRouteImport } from './routes/admin/comments'
+import { Route as AdminUsersRouteImport } from './routes/admin/users'
+import { Route as ApiImageRouteImport } from './routes/api/image'
 import { Route as OgSplatRouteImport } from './routes/og/$'
 import { Route as MainAccountIndexRouteImport } from './routes/_main/account/index'
 import { Route as MainAccountSettingsRouteImport } from './routes/_main/account/settings'
@@ -32,6 +40,26 @@ import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc/$'
 
 const MainRouteRoute = MainRouteRouteImport.update({
   id: '/_main',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRouteRoute = AdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RssDotxmlRoute = RssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MainIndexRoute = MainIndexRouteImport.update({
@@ -78,6 +106,26 @@ const MainUsesRoute = MainUsesRouteImport.update({
   id: '/uses',
   path: '/uses',
   getParentRoute: () => MainRouteRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminCommentsRoute = AdminCommentsRouteImport.update({
+  id: '/comments',
+  path: '/comments',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const ApiImageRoute = ApiImageRouteImport.update({
+  id: '/api/image',
+  path: '/api/image',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const OgSplatRoute = OgSplatRouteImport.update({
   id: '/og/$',
@@ -133,6 +181,10 @@ const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof MainIndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/rss.xml': typeof RssDotxmlRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/account': typeof MainAccountRouteRouteWithChildren
   '/about': typeof MainAboutRoute
   '/dashboard': typeof MainDashboardRoute
@@ -141,7 +193,11 @@ export interface FileRoutesByFullPath {
   '/terms': typeof MainTermsRoute
   '/unsubscribe': typeof MainUnsubscribeRoute
   '/uses': typeof MainUsesRoute
+  '/admin/comments': typeof AdminCommentsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/api/image': typeof ApiImageRoute
   '/og/$': typeof OgSplatRoute
+  '/admin/': typeof AdminIndexRoute
   '/account/settings': typeof MainAccountSettingsRoute
   '/blog/$slug': typeof MainBlogSlugRoute
   '/projects/$slug': typeof MainProjectsSlugRoute
@@ -153,6 +209,9 @@ export interface FileRoutesByFullPath {
   '/projects/': typeof MainProjectsIndexRoute
 }
 export interface FileRoutesByTo {
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/rss.xml': typeof RssDotxmlRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/about': typeof MainAboutRoute
   '/dashboard': typeof MainDashboardRoute
   '/guestbook': typeof MainGuestbookRoute
@@ -160,8 +219,12 @@ export interface FileRoutesByTo {
   '/terms': typeof MainTermsRoute
   '/unsubscribe': typeof MainUnsubscribeRoute
   '/uses': typeof MainUsesRoute
+  '/admin/comments': typeof AdminCommentsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/api/image': typeof ApiImageRoute
   '/og/$': typeof OgSplatRoute
   '/': typeof MainIndexRoute
+  '/admin': typeof AdminIndexRoute
   '/account/settings': typeof MainAccountSettingsRoute
   '/blog/$slug': typeof MainBlogSlugRoute
   '/projects/$slug': typeof MainProjectsSlugRoute
@@ -175,6 +238,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_main': typeof MainRouteRouteWithChildren
+  '/admin': typeof AdminRouteRouteWithChildren
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/rss.xml': typeof RssDotxmlRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_main/account': typeof MainAccountRouteRouteWithChildren
   '/_main/about': typeof MainAboutRoute
   '/_main/dashboard': typeof MainDashboardRoute
@@ -183,8 +250,12 @@ export interface FileRoutesById {
   '/_main/terms': typeof MainTermsRoute
   '/_main/unsubscribe': typeof MainUnsubscribeRoute
   '/_main/uses': typeof MainUsesRoute
+  '/admin/comments': typeof AdminCommentsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/api/image': typeof ApiImageRoute
   '/og/$': typeof OgSplatRoute
   '/_main/': typeof MainIndexRoute
+  '/admin/': typeof AdminIndexRoute
   '/_main/account/settings': typeof MainAccountSettingsRoute
   '/_main/blog/$slug': typeof MainBlogSlugRoute
   '/_main/projects/$slug': typeof MainProjectsSlugRoute
@@ -199,6 +270,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
+    | '/robots.txt'
+    | '/rss.xml'
+    | '/sitemap.xml'
     | '/account'
     | '/about'
     | '/dashboard'
@@ -207,7 +282,11 @@ export interface FileRouteTypes {
     | '/terms'
     | '/unsubscribe'
     | '/uses'
+    | '/admin/comments'
+    | '/admin/users'
+    | '/api/image'
     | '/og/$'
+    | '/admin/'
     | '/account/settings'
     | '/blog/$slug'
     | '/projects/$slug'
@@ -219,6 +298,9 @@ export interface FileRouteTypes {
     | '/projects/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/robots.txt'
+    | '/rss.xml'
+    | '/sitemap.xml'
     | '/about'
     | '/dashboard'
     | '/guestbook'
@@ -226,8 +308,12 @@ export interface FileRouteTypes {
     | '/terms'
     | '/unsubscribe'
     | '/uses'
+    | '/admin/comments'
+    | '/admin/users'
+    | '/api/image'
     | '/og/$'
     | '/'
+    | '/admin'
     | '/account/settings'
     | '/blog/$slug'
     | '/projects/$slug'
@@ -240,6 +326,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_main'
+    | '/admin'
+    | '/robots.txt'
+    | '/rss.xml'
+    | '/sitemap.xml'
     | '/_main/account'
     | '/_main/about'
     | '/_main/dashboard'
@@ -248,8 +338,12 @@ export interface FileRouteTypes {
     | '/_main/terms'
     | '/_main/unsubscribe'
     | '/_main/uses'
+    | '/admin/comments'
+    | '/admin/users'
+    | '/api/image'
     | '/og/$'
     | '/_main/'
+    | '/admin/'
     | '/_main/account/settings'
     | '/_main/blog/$slug'
     | '/_main/projects/$slug'
@@ -263,6 +357,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   MainRouteRoute: typeof MainRouteRouteWithChildren
+  AdminRouteRoute: typeof AdminRouteRouteWithChildren
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  RssDotxmlRoute: typeof RssDotxmlRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiImageRoute: typeof ApiImageRoute
   OgSplatRoute: typeof OgSplatRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiAvatarChar123idChar125DotwebpRoute: typeof ApiAvatarChar123idChar125DotwebpRoute
@@ -276,6 +375,34 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof MainRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rss.xml': {
+      id: '/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/rss.xml'
+      preLoaderRoute: typeof RssDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_main/': {
@@ -340,6 +467,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/uses'
       preLoaderRoute: typeof MainUsesRouteImport
       parentRoute: typeof MainRouteRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/comments': {
+      id: '/admin/comments'
+      path: '/comments'
+      fullPath: '/admin/comments'
+      preLoaderRoute: typeof AdminCommentsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/api/image': {
+      id: '/api/image'
+      path: '/api/image'
+      fullPath: '/api/image'
+      preLoaderRoute: typeof ApiImageRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/og/$': {
       id: '/og/$'
@@ -463,8 +618,29 @@ const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
   MainRouteRouteChildren,
 )
 
+interface AdminRouteRouteChildren {
+  AdminCommentsRoute: typeof AdminCommentsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminCommentsRoute: AdminCommentsRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
+  AdminRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   MainRouteRoute: MainRouteRouteWithChildren,
+  AdminRouteRoute: AdminRouteRouteWithChildren,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  RssDotxmlRoute: RssDotxmlRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiImageRoute: ApiImageRoute,
   OgSplatRoute: OgSplatRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiAvatarChar123idChar125DotwebpRoute: ApiAvatarChar123idChar125DotwebpRoute,

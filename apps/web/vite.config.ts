@@ -80,6 +80,17 @@ const config = defineConfig({
     devtools(),
     nitro({
       exportConditions: ['!unwasm'],
+      serverAssets: [{ baseName: 'images', dir: './public/images' }],
+      routeRules: {
+        '/**': {
+          headers: {
+            'Referrer-Policy': 'strict-origin-when-cross-origin',
+            'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+            'X-Content-Type-Options': 'nosniff',
+            'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+          },
+        },
+      },
       traceDeps: ['takumi-js', '@takumi-rs/core*'],
     }),
     tailwindcss(),

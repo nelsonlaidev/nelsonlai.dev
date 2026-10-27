@@ -1,46 +1,30 @@
-import { createFileRoute, Outlet, useRouter } from '@tanstack/react-router'
-import { useEffect, useRef } from 'react'
+import type { ErrorComponentProps } from '@tanstack/react-router'
 
-import { SignInDialog } from '@/features/auth/sign-in-dialog'
-import { authClient } from '@/lib/auth-client'
+import { createFileRoute, Outlet } from '@tanstack/react-router'
 
-import { Footer } from './-components/footer'
-import { GradientBackground } from './-components/gradient-background'
-import { Header } from './-components/header'
+import { MainLayout } from '@/components/main-layout'
+import { RouteError } from '@/components/route-error'
+import { Route as RootRoute } from '@/routes/__root'
 
 export const Route = createFileRoute('/_main')({
-  loader: () => ({ copyrightYear: new Date().getFullYear() }),
+  errorComponent: MainError,
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { copyrightYear } = Route.useLoaderData()
-  const router = useRouter()
-  const { data: session, isPending, error } = authClient.useSession()
-  const user = session?.user ?? null
-  const previousUserRef = useRef<typeof user | undefined>(undefined)
-
-  useEffect(() => {
-    if (isPending || (error && error.status !== 401) || previousUserRef.current === user) return
-
-    previousUserRef.current = user
-    void router.invalidate()
-  }, [error, isPending, router, user])
-
+  const { copyrightYear } = RootRoute.useLoaderData()
   return (
-    <>
-      <Header />
-      <main
-        id='main-content'
-        tabIndex={-1}
-        className='mx-auto mb-16 w-full max-w-5xl flex-1 px-6 py-24 outline-none sm:px-8'
-      >
-        <Outlet />
-      </main>
-      <Footer copyrightYear={copyrightYear} />
-      <GradientBackground position='top' />
-      <GradientBackground position='bottom' />
-      <SignInDialog />
-    </>
+    <MainLayout copyrightYear={copyrightYear}>
+      <Outlet />
+    </MainLayout>
+  )
+}
+
+function MainError(props: ErrorComponentProps) {
+  const { copyrightYear } = RootRoute.useLoaderData()
+  return (
+    <MainLayout copyrightYear={copyrightYear}>
+      <RouteError {...props} />
+    </MainLayout>
   )
 }

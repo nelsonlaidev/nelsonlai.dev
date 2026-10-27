@@ -285,5 +285,9 @@
   "unsubscribe_unsubscribe_from_this_comment": "取消订阅此评论",
   "unsubscribe_unsubscribed_description": "您将不再收到此评论的回复通知电子邮件。",
   "unsubscribe_you_are_unsubscribing_as": "您正以 {email} 的身份取消订阅",
-  "unsubscribe_you_have_been_unsubscribed": "您已取消订阅"
+  "unsubscribe_you_have_been_unsubscribed": "您已取消订阅",
+  "error_try_again": "再试一次",
+  "common_labels_admin": "管理后台",
+  "components_tables_users_empty": "没有用户。",
+  "components_tables_comments_empty": "没有评论。"
 }

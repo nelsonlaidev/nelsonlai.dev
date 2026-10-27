@@ -12,6 +12,7 @@ import:
 ignorePaths:
   - pnpm-lock.yaml
   - '**/snapshot.json'
+  - '**/routeTree.gen.ts'
 
 files:
   - '**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}'

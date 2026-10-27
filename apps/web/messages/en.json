@@ -285,5 +285,9 @@
   "unsubscribe_unsubscribe_from_this_comment": "Unsubscribe from this comment",
   "unsubscribe_unsubscribed_description": "You will no longer receive reply notifications emails for this comment.",
   "unsubscribe_you_are_unsubscribing_as": "You're unsubscribing as {email}",
-  "unsubscribe_you_have_been_unsubscribed": "You've been unsubscribed"
+  "unsubscribe_you_have_been_unsubscribed": "You've been unsubscribed",
+  "error_try_again": "Try again",
+  "common_labels_admin": "Admin",
+  "components_tables_users_empty": "No users.",
+  "components_tables_comments_empty": "No comments."
 }

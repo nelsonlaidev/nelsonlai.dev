@@ -37,9 +37,9 @@ export async function verifyReplyUnsubscribeToken(token: string) {
   try {
     const { payload } = await jwtVerify(token, new TextEncoder().encode(ENV.JWT_SECRET ?? ENV.BETTER_AUTH_SECRET), {
       algorithms: ['HS256'],
-      issuer: ENV.SITE_URL,
-      audience: 'comment-reply-unsubscribe',
     })
+    const legacyToken = payload.iss === undefined && payload.aud === undefined
+    if (!legacyToken && (payload.iss !== ENV.SITE_URL || payload.aud !== 'comment-reply-unsubscribe')) return null
     const result = payloadSchema.safeParse(payload)
     return result.success ? result.data : null
   } catch {

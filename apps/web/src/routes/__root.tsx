@@ -14,9 +14,11 @@ import { createRootRouteWithContext, HeadContent, Scripts } from '@tanstack/reac
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { IntlProvider } from 'use-intl'
 
+import { MainLayout } from '@/components/main-layout'
+import { NotFound } from '@/components/not-found'
 import { ThemeProvider } from '@/components/theme-provider'
 import { ENV } from '@/env'
-import { OPEN_GRAPH_LOCALES } from '@/lib/seo'
+import { getLocalizedUrl, OPEN_GRAPH_LOCALES } from '@/lib/seo'
 import { SITE } from '@/lib/site'
 
 import { m } from '../paraglide/messages'
@@ -72,6 +74,12 @@ export const Route = createRootRouteWithContext<RouterContext>()({
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' },
         { rel: 'manifest', href: '/site.webmanifest' },
         {
+          rel: 'alternate',
+          type: 'application/rss+xml',
+          title: SITE.name,
+          href: getLocalizedUrl('/rss.xml', getLocale()),
+        },
+        {
           rel: 'preload',
           href: geistUrl,
           as: 'font',
@@ -88,6 +96,8 @@ export const Route = createRootRouteWithContext<RouterContext>()({
       ],
     }
   },
+  notFoundComponent: RootNotFound,
+  loader: () => ({ copyrightYear: new Date().getFullYear() }),
   shellComponent: RootDocument,
 })
 
@@ -118,6 +128,9 @@ function RootDocument(props: RootDocumentProps) {
             commandDialogTitle: m.command_menu_title(),
             commandDialogDescription: m.command_menu_description(),
             treeView: m.common_aria_labels_tree_view(),
+            sidebarTitle: m.layout_sidebar_title(),
+            sidebarDescription: m.layout_sidebar_description(),
+            toggleSidebar: m.common_aria_labels_toggle_sidebar(),
           }}
         >
           <IntlProvider locale={getLocale()} formats={formats}>
@@ -137,5 +150,14 @@ function RootDocument(props: RootDocumentProps) {
         <Scripts />
       </body>
     </html>
+  )
+}
+
+function RootNotFound() {
+  const { copyrightYear } = Route.useLoaderData()
+  return (
+    <MainLayout copyrightYear={copyrightYear}>
+      <NotFound />
+    </MainLayout>
   )
 }

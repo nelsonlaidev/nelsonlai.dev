@@ -1,4 +1,5 @@
 import { accountRouter } from './account'
+import { adminRouter } from './admin'
 import { commentsRouter } from './comments'
 import { githubRouter } from './github'
 import { guestbookRouter } from './guestbook'
@@ -10,6 +11,7 @@ import { youtubeRouter } from './youtube'
 
 export const router = {
   account: accountRouter,
+  admin: adminRouter,
   comments: commentsRouter,
   notifications: notificationsRouter,
   github: githubRouter,

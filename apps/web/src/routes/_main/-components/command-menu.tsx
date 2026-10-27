@@ -96,11 +96,11 @@ export function CommandMenu() {
                   <CommandItem
                     onSelect={() => {
                       setOpen(false)
-                      void navigate({ href: '/admin' })
+                      void navigate({ to: '/admin' })
                     }}
                   >
                     <ShieldIcon aria-hidden='true' />
-                    Admin
+                    {m.common_labels_admin()}
                   </CommandItem>
                 )}
                 <CommandItem disabled={isSigningOut} onSelect={handleSignOut}>

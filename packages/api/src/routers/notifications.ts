@@ -5,6 +5,7 @@ import { and, eq, sql } from 'drizzle-orm'
 import * as z from 'zod'
 
 import { verifyReplyUnsubscribeToken } from '../lib/comment-notifications'
+import { getMaskedEmail } from '../lib/get-masked-email'
 import { protectedProcedure, publicProcedure } from '../procedures'
 import { ReplyPreferenceSchema, UnsubscribeTokenInputSchema } from '../schema/comments'
 
@@ -47,7 +48,11 @@ const inspectUnsubscribe = publicProcedure
       )
       .where(and(eq(comments.id, payload.commentId), eq(comments.userId, payload.userId)))
     if (!comment) throw new ORPCError('NOT_FOUND')
-    return { comment: comment.body, isUnsubscribed: comment.isUnsubscribed, userEmail: comment.userEmail }
+    return {
+      comment: comment.body,
+      isUnsubscribed: comment.isUnsubscribed,
+      userEmail: getMaskedEmail(comment.userEmail),
+    }
   })
 
 const unsubscribe = publicProcedure

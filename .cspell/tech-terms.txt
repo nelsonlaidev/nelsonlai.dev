@@ -7,6 +7,7 @@ frontmatter
 healthcheck
 innerhtml
 isready
+nosniff
 techstack
 webp
 wght

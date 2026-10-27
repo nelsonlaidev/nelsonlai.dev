@@ -15,6 +15,7 @@ export function findProject(slug: string, locale: Locale) {
     homepage: project.homepage,
     github: project.github,
     dateCreated: project.dateCreated,
+    updatedAt: project.updatedAt,
     mdx: project.mdx,
   }
 }

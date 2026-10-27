@@ -285,5 +285,9 @@
   "unsubscribe_unsubscribe_from_this_comment": "Cancelar inscrição deste comentário",
   "unsubscribe_unsubscribed_description": "Você não receberá mais e-mails de notificações de resposta para este comentário.",
   "unsubscribe_you_are_unsubscribing_as": "Você está cancelando a inscrição como {email}",
-  "unsubscribe_you_have_been_unsubscribed": "Sua inscrição foi cancelada"
+  "unsubscribe_you_have_been_unsubscribed": "Sua inscrição foi cancelada",
+  "error_try_again": "Tentar novamente",
+  "common_labels_admin": "Administração",
+  "components_tables_users_empty": "Nenhum usuário.",
+  "components_tables_comments_empty": "Nenhum comentário."
 }

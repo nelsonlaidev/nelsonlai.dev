@@ -54,6 +54,7 @@ const projects = defineCollection({
     techstack: z.array(z.string()),
     selected: z.boolean().optional().default(false),
     dateCreated: z.string(),
+    updatedAt: z.iso.datetime(),
     content: z.string(),
   }),
   transform: transformContent,
@@ -65,6 +66,7 @@ const pages = defineCollection({
   include: '**/*.mdx',
   schema: z.object({
     title: z.string(),
+    updatedAt: z.iso.datetime(),
     description: z.string(),
     content: z.string(),
   }),

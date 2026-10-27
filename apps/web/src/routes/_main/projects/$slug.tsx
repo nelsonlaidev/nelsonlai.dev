@@ -37,6 +37,9 @@ export const Route = createFileRoute('/_main/projects/$slug')({
         url: getLocalizedUrl(pathname, locale),
         codeRepository: project.github,
         dateCreated: project.dateCreated,
+        dateModified: project.updatedAt,
+        license: 'https://opensource.org/licenses/MIT',
+        programmingLanguage: 'TypeScript',
         author: {
           '@type': 'Person',
           name: SITE.name,

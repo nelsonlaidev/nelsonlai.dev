@@ -6,6 +6,9 @@ export type UITranslations = {
   commandDialogTitle: string
   commandDialogDescription: string
   treeView: string
+  sidebarTitle: string
+  sidebarDescription: string
+  toggleSidebar: string
 }
 
 const UITranslationsContext = createContext<UITranslations | undefined>(undefined)

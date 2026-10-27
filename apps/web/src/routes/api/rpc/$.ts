@@ -15,6 +15,10 @@ export const Route = createFileRoute('/api/rpc/$')({
           context: await createORPCContext(request),
         })
 
+        if (response && new URL(request.url).pathname.startsWith('/api/rpc/admin/')) {
+          response.headers.set('Cache-Control', 'private, no-store')
+        }
+
         return response ?? new Response('Not Found', { status: 404 })
       },
     },
