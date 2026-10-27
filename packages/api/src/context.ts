@@ -4,4 +4,5 @@ import type { Database } from '@repo/db'
 export type Context = {
   session: Session | null
   db: Database
+  headers: Headers
 }

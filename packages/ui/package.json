@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",
+    "@repo/utils": "workspace:*",
     "class-variance-authority": "0.7.1",
+    "cmdk": "1.1.1",
     "cn": "catalog:",
     "lucide-react": "catalog:",
     "react": "catalog:",
@@ -22,8 +24,12 @@
     "@nelsonlaidev/typescript-config": "catalog:",
     "@tailwindcss/typography": "0.5.20",
     "@total-typescript/ts-reset": "catalog:",
+    "@types/node": "26.6.5",
     "@types/react": "catalog:",
+    "@types/react-dom": "19.3.0",
+    "react-dom": "19.3.1",
     "tailwindcss": "catalog:",
+    "tsx": "4.23.15",
     "typescript": "catalog:"
   }
 }

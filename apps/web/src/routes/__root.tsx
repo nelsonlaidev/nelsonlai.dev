@@ -2,21 +2,24 @@ import '@fontsource-variable/geist/wght.css'
 import '@fontsource-variable/geist-mono/wght.css'
 
 import type { QueryClient } from '@tanstack/react-query'
+import type { Formats } from 'use-intl'
 
 import geistUrl from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url'
 import geistMonoUrl from '@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2?url'
 import { Toaster } from '@repo/ui/components/toast'
+import { UIProvider } from '@repo/ui/components/ui-provider'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 import { createRootRouteWithContext, HeadContent, Scripts } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+import { IntlProvider } from 'use-intl'
 
 import { ThemeProvider } from '@/components/theme-provider'
 import { ENV } from '@/env'
 import { OPEN_GRAPH_LOCALES } from '@/lib/seo'
 import { SITE } from '@/lib/site'
-import { m } from '@/paraglide/messages'
 
+import { m } from '../paraglide/messages'
 import { getLocale } from '../paraglide/runtime'
 import appCss from '../styles/index.css?url'
 
@@ -25,6 +28,13 @@ type RouterContext = {
 }
 
 const twitterHandle = `@${new URL(SITE.socials.twitter).pathname.slice(1)}`
+
+const formats = {
+  dateTime: {
+    short: { year: 'numeric', month: 'short', day: 'numeric' },
+    long: { dateStyle: 'medium', timeStyle: 'short' },
+  },
+} satisfies Formats
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   head: () => {
@@ -101,10 +111,21 @@ function RootDocument(props: RootDocumentProps) {
         )}
       </head>
       <body>
-        <ThemeProvider>
-          {children}
-          <Toaster timeout={2500} limit={5} />
-        </ThemeProvider>
+        <UIProvider
+          translations={{
+            loading: m.common_aria_labels_loading(),
+            close: m.common_labels_close(),
+            commandDialogTitle: m.command_menu_title(),
+            commandDialogDescription: m.command_menu_description(),
+          }}
+        >
+          <IntlProvider locale={getLocale()} formats={formats}>
+            <ThemeProvider>
+              {children}
+              <Toaster timeout={2500} limit={5} />
+            </ThemeProvider>
+          </IntlProvider>
+        </UIProvider>
         <TanStackDevtools
           config={{ position: 'bottom-right' }}
           plugins={[

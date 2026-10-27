@@ -5,4 +5,5 @@ import * as schema from './schema'
 export const relations = {
   ...defineRelations(schema),
   ...schema.authRelations,
+  ...schema.guestbookRelations,
 }

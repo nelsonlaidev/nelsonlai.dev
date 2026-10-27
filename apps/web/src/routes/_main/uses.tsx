@@ -13,9 +13,7 @@ export const Route = createFileRoute('/_main/uses')({
     const locale = getLocale()
     const page = await getPage({ data: { slug: 'uses', locale } })
 
-    if (!page) {
-      throw notFound()
-    }
+    if (!page) throw notFound()
 
     return { page, locale }
   },

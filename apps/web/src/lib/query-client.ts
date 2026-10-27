@@ -1,15 +1,19 @@
 import { toast } from '@repo/ui/components/toast'
 import { QueryCache, QueryClient } from '@tanstack/react-query'
 
+import { m } from '@/paraglide/messages'
+
 export function createQueryClient() {
   const queryClient = new QueryClient({
     queryCache: new QueryCache({
       onError: (error, query) => {
+        if (import.meta.env.SSR) return
+
         toast.add({
           type: 'error',
-          description: `Error: ${error.message}`,
+          description: `${m.common_error()}: ${error.message}`,
           actionProps: {
-            children: 'Retry',
+            children: m.common_retry(),
             onClick: () => {
               void queryClient.refetchQueries({
                 queryKey: query.queryKey,

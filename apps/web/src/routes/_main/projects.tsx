@@ -15,9 +15,7 @@ export const Route = createFileRoute('/_main/projects')({
       getProjects({ data: { locale } }),
     ])
 
-    if (!page) {
-      throw notFound()
-    }
+    if (!page) throw notFound()
 
     return { page, projects, locale }
   },

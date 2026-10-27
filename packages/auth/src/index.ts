@@ -4,6 +4,8 @@ import type { SocialProviders } from 'better-auth'
 import { drizzleAdapter } from '@better-auth/drizzle-adapter/relations-v2'
 import * as schema from '@repo/db/schema/auth'
 import { betterAuth } from 'better-auth'
+import { admin, lastLoginMethod } from 'better-auth/plugins'
+import { tanstackStartCookies } from 'better-auth/tanstack-start'
 
 import { ENV } from './env'
 
@@ -29,6 +31,8 @@ function getSocialProviders(): SocialProviders {
 
 export function createAuth(database: Database) {
   return betterAuth({
+    baseURL: ENV.BETTER_AUTH_URL,
+    secret: ENV.BETTER_AUTH_SECRET,
     database: drizzleAdapter(database, {
       provider: 'pg',
       schema,
@@ -36,16 +40,7 @@ export function createAuth(database: Database) {
     }),
     trustedOrigins: [ENV.BETTER_AUTH_URL],
     socialProviders: getSocialProviders(),
-    user: {
-      additionalFields: {
-        role: {
-          type: ['user', 'admin'],
-          required: false,
-          defaultValue: 'user',
-          input: false,
-        },
-      },
-    },
+    plugins: [admin(), lastLoginMethod({ storeInDatabase: true }), tanstackStartCookies()],
   })
 }
 

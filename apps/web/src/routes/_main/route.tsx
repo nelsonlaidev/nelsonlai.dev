@@ -1,5 +1,7 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
+import { SignInDialog } from '@/features/auth/sign-in-dialog'
+
 import { Footer } from './-components/footer'
 import { GradientBackground } from './-components/gradient-background'
 import { Header } from './-components/header'
@@ -25,6 +27,7 @@ function RouteComponent() {
       <Footer copyrightYear={copyrightYear} />
       <GradientBackground position='top' />
       <GradientBackground position='bottom' />
+      <SignInDialog />
     </>
   )
 }

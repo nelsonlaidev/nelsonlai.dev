@@ -1,3 +1,4 @@
+import { createRange } from '@repo/utils'
 import { cn } from 'cn'
 
 type MarqueeProps = React.ComponentProps<'div'> & {
@@ -49,7 +50,7 @@ export function Marquee(props: MarqueeProps) {
       }}
       {...rest}
     >
-      {Array.from({ length: 2 }, (_element, index) => index).map((number) => (
+      {createRange(2).map((number) => (
         <div
           key={number}
           className={cn(

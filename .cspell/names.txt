@@ -6,6 +6,8 @@ cleanshot
 cobe
 facebook
 figma
+fuma
+fumadocs
 ghostty
 googlebot
 iina
@@ -24,11 +26,14 @@ planetscale
 ryzen
 scoutly
 shiki
+shikijs
 spotify
 takumi
 tsgolint
 umami
 unifiedjs
 uprest
+vocs
 wakatime
+wevm
 youtube

@@ -1,6 +1,9 @@
 autocompletado
 configurables
+contáctanos
 creativamente
+desinversión
+licenciantes
 microinteracciones
 minimalista
 parsear
@@ -10,3 +13,4 @@ previsualizar
 prototipado
 renderizado
 tacómetro
+troya

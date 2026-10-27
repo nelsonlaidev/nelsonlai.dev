@@ -12,13 +12,13 @@ import { SITE } from '@/lib/site'
 import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
 
-const TYPOGRAPHY_BY_LOCALE: Record<Locale, { fontFamily: string; lang: string }> = {
-  en: { fontFamily: 'Geist', lang: 'en' },
-  'zh-TW': { fontFamily: 'Noto Sans TC', lang: 'zh-Hant' },
-  'zh-CN': { fontFamily: 'Noto Sans SC', lang: 'zh-Hans' },
-  ja: { fontFamily: 'Noto Sans JP', lang: 'ja' },
-  'pt-BR': { fontFamily: 'Geist', lang: 'pt-BR' },
-  es: { fontFamily: 'Geist', lang: 'es' },
+const FONT_FAMILY_BY_LOCALE: Record<Locale, string> = {
+  en: 'Geist',
+  'zh-TW': 'Noto Sans TC',
+  'zh-CN': 'Noto Sans SC',
+  ja: 'Noto Sans JP',
+  'pt-BR': 'Geist',
+  es: 'Geist',
 }
 
 export const Route = createFileRoute('/og/$')({
@@ -55,7 +55,8 @@ export const Route = createFileRoute('/og/$')({
           return new Response('Content not found', { status: 404 })
         }
 
-        const { fontFamily, lang } = TYPOGRAPHY_BY_LOCALE[locale]
+        const fontFamily = FONT_FAMILY_BY_LOCALE[locale]
+        const fontFamilies = fontFamily === 'Geist' ? ['Geist'] : ['Geist', fontFamily]
 
         let titleFontSize = 64
 
@@ -72,7 +73,7 @@ export const Route = createFileRoute('/og/$')({
               height: '100%',
               padding: 80,
               overflow: 'hidden',
-              fontFamily,
+              fontFamily: fontFamilies.join(', '),
               color: 'white',
               background: 'black',
             }}
@@ -137,9 +138,9 @@ export const Route = createFileRoute('/og/$')({
             height: OG_IMAGE_HEIGHT,
             format: 'webp',
             lossless: true,
-            fonts: googleFonts([{ name: fontFamily, weight: '400..700' }]),
-            fontFamilies: [fontFamily],
-            lang,
+            fonts: fontFamily === 'Geist' ? undefined : googleFonts([{ name: fontFamily, weight: '400..700' }]),
+            fontFamilies,
+            lang: locale,
           },
         )
       },

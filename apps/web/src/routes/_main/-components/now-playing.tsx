@@ -29,7 +29,7 @@ export function NowPlaying(props: NowPlayingProps) {
           </ExternalLink>
         )}
         {data && !data.isPlaying && m.layout_now_playing_not_listening()}
-        {!data && isPending && m.layout_now_playing_loading()}
+        {!data && isPending && m.common_loading()}
         {!data && isError && m.error_now_playing_error()}
       </output>
     </div>

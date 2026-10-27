@@ -40,13 +40,11 @@ export function ThemeSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={
-          <Button variant='ghost' size='icon' aria-label={m.theme_switcher_label()} data-testid='theme-toggle'>
-            <SunIcon className='dark:hidden' />
-            <MoonIcon className='hidden dark:block' />
-          </Button>
-        }
-      />
+        render={<Button variant='ghost' size='icon' aria-label={m.theme_switcher_label()} data-testid='theme-toggle' />}
+      >
+        <SunIcon className='dark:hidden' />
+        <MoonIcon className='hidden dark:block' />
+      </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='min-w-36'>
         {THEMES.map((theme) => (
           <DropdownMenuItem

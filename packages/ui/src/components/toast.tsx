@@ -4,6 +4,7 @@ import { CircleCheckIcon, InfoIcon, OctagonXIcon, TriangleAlertIcon, XIcon } fro
 
 import { Button } from './button'
 import { Spinner } from './spinner'
+import { useUITranslation } from './ui-provider'
 
 export const toast = ToastPrimitive.createToastManager()
 
@@ -129,12 +130,13 @@ export function ToastAction(props: ToastActionProps) {
 type ToastCloseProps = ToastPrimitive.Close.Props
 
 export function ToastClose(props: ToastCloseProps) {
-  const { className, children, render, ...rest } = props
+  const { className, children, render, 'aria-label': ariaLabel, ...rest } = props
+  const label = useUITranslation('close', ariaLabel, !rest['aria-labelledby'])
 
   return (
     <ToastPrimitive.Close
       data-slot='toast-close'
-      aria-label='Close toast'
+      aria-label={label}
       render={render ?? <Button variant='ghost' size='icon-sm' />}
       className={cn(
         "relative shrink-0 text-muted-foreground after:absolute after:-inset-2 after:content-[''] hover:text-foreground",

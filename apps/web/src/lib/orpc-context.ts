@@ -8,5 +8,5 @@ export async function createORPCContext(request: Request): Promise<Context> {
     headers: request.headers,
   })
 
-  return { db, session }
+  return { db, session, headers: request.headers }
 }

@@ -11,9 +11,11 @@ export const users = pgTable('users', {
   image: text('image'),
   createdAt: createdAt(),
   updatedAt: updatedAt(),
-  role: text('role', { enum: ['user', 'admin'] })
-    .default('user')
-    .notNull(),
+  role: text('role'),
+  banned: boolean('banned').default(false),
+  banReason: text('ban_reason'),
+  banExpires: timestamptz('ban_expires'),
+  lastLoginMethod: text('last_login_method'),
 })
 
 export const sessions = pgTable(
@@ -29,6 +31,7 @@ export const sessions = pgTable(
     userId: text('user_id')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
+    impersonatedBy: text('impersonated_by'),
   },
   (table) => [index('sessions_user_id_idx').on(table.userId)],
 )

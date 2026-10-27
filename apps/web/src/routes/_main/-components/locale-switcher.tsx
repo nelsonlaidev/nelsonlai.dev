@@ -28,15 +28,11 @@ export function LocaleSwitcher() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger
-        render={
-          <Button variant='outline' aria-label={m.layout_change_language()}>
-            <LanguagesIcon aria-hidden='true' />
-            {LOCALE_LABELS[locale]}
-            <ChevronDownIcon aria-hidden='true' />
-          </Button>
-        }
-      />
+      <DropdownMenuTrigger render={<Button variant='outline' aria-label={m.layout_change_language()} />}>
+        <LanguagesIcon aria-hidden='true' />
+        {LOCALE_LABELS[locale]}
+        <ChevronDownIcon aria-hidden='true' />
+      </DropdownMenuTrigger>
       <DropdownMenuContent align='start' side='top'>
         <DropdownMenuRadioGroup
           value={locale}

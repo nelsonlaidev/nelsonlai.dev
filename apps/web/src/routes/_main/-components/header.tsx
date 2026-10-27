@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef } from 'react'
 
 import { m } from '@/paraglide/messages'
 
+import { CommandMenu } from './command-menu'
 import { MobileNav } from './mobile-nav'
 import { Navbar } from './navbar'
 import { SkipNav } from './skip-nav'
@@ -61,6 +62,7 @@ export function Header() {
         <div className='flex items-center gap-2'>
           <Navbar />
           <ThemeSwitcher />
+          <CommandMenu />
           <MobileNav />
         </div>
       </header>

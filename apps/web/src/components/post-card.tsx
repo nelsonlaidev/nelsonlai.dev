@@ -2,8 +2,8 @@ import type { PostStats, PostSummary } from '@/features/posts/types'
 
 import { PencilIcon } from 'lucide-react'
 
+import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { m } from '@/paraglide/messages'
-import { getLocale } from '@/paraglide/runtime'
 
 import { ContentCard } from './content-card'
 
@@ -17,12 +17,7 @@ type PostCardProps = {
 
 export function PostCard(props: PostCardProps) {
   const { post, stats, isStatsError = false, featured = false, lazy = true } = props
-  const formattedDate = new Intl.DateTimeFormat(getLocale(), {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    timeZone: 'Asia/Hong_Kong',
-  }).format(new Date(post.publishedAt))
+  const formattedDate = useFormattedDate(post.publishedAt)
   const statsFallback = isStatsError ? m.common_error() : '--'
 
   return (
@@ -36,7 +31,7 @@ export function PostCard(props: PostCardProps) {
       lazy={lazy}
     >
       <div className='flex flex-wrap items-center justify-between gap-x-2 gap-y-1 px-2 pt-4 text-sm text-muted-foreground'>
-        <time dateTime={post.publishedAt}>{formattedDate}</time>
+        <time dateTime={post.publishedAt}>{formattedDate ?? '--'}</time>
         <div className='flex gap-2'>
           {stats ? (
             <>

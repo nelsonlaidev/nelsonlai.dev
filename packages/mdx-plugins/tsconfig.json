@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "types": ["@total-typescript/ts-reset", "node"]
+  },
+  "extends": "@nelsonlaidev/typescript-config/base.json",
+  "include": ["**/*.ts"]
+}

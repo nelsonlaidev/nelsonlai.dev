@@ -15,10 +15,14 @@ import { Route as MainAboutRouteImport } from './routes/_main/about'
 import { Route as MainBlogRouteImport } from './routes/_main/blog'
 import { Route as MainDashboardRouteImport } from './routes/_main/dashboard'
 import { Route as MainGuestbookRouteImport } from './routes/_main/guestbook'
+import { Route as MainPrivacyRouteImport } from './routes/_main/privacy'
 import { Route as MainProjectsRouteImport } from './routes/_main/projects'
+import { Route as MainTermsRouteImport } from './routes/_main/terms'
 import { Route as MainUsesRouteImport } from './routes/_main/uses'
-import { Route as OgSplatRouteImport } from './routes/og.$'
-import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc.$'
+import { Route as OgSplatRouteImport } from './routes/og/$'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as ApiAvatarChar123idChar125DotwebpRouteImport } from './routes/api/avatar/{$id}[.]webp'
+import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc/$'
 
 const MainRouteRoute = MainRouteRouteImport.update({
   id: '/_main',
@@ -49,9 +53,19 @@ const MainGuestbookRoute = MainGuestbookRouteImport.update({
   path: '/guestbook',
   getParentRoute: () => MainRouteRoute,
 } as any)
+const MainPrivacyRoute = MainPrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => MainRouteRoute,
+} as any)
 const MainProjectsRoute = MainProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainTermsRoute = MainTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => MainRouteRoute,
 } as any)
 const MainUsesRoute = MainUsesRouteImport.update({
@@ -64,6 +78,17 @@ const OgSplatRoute = OgSplatRouteImport.update({
   path: '/og/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAvatarChar123idChar125DotwebpRoute =
+  ApiAvatarChar123idChar125DotwebpRouteImport.update({
+    id: '/api/avatar/{$id}.webp',
+    path: '/api/avatar/{$id}.webp',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
@@ -76,9 +101,13 @@ export interface FileRoutesByFullPath {
   '/blog': typeof MainBlogRoute
   '/dashboard': typeof MainDashboardRoute
   '/guestbook': typeof MainGuestbookRoute
+  '/privacy': typeof MainPrivacyRoute
   '/projects': typeof MainProjectsRoute
+  '/terms': typeof MainTermsRoute
   '/uses': typeof MainUsesRoute
   '/og/$': typeof OgSplatRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/avatar/{$id}.webp': typeof ApiAvatarChar123idChar125DotwebpRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesByTo {
@@ -86,10 +115,14 @@ export interface FileRoutesByTo {
   '/blog': typeof MainBlogRoute
   '/dashboard': typeof MainDashboardRoute
   '/guestbook': typeof MainGuestbookRoute
+  '/privacy': typeof MainPrivacyRoute
   '/projects': typeof MainProjectsRoute
+  '/terms': typeof MainTermsRoute
   '/uses': typeof MainUsesRoute
   '/og/$': typeof OgSplatRoute
   '/': typeof MainIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/avatar/{$id}.webp': typeof ApiAvatarChar123idChar125DotwebpRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesById {
@@ -99,10 +132,14 @@ export interface FileRoutesById {
   '/_main/blog': typeof MainBlogRoute
   '/_main/dashboard': typeof MainDashboardRoute
   '/_main/guestbook': typeof MainGuestbookRoute
+  '/_main/privacy': typeof MainPrivacyRoute
   '/_main/projects': typeof MainProjectsRoute
+  '/_main/terms': typeof MainTermsRoute
   '/_main/uses': typeof MainUsesRoute
   '/og/$': typeof OgSplatRoute
   '/_main/': typeof MainIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/avatar/{$id}.webp': typeof ApiAvatarChar123idChar125DotwebpRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRouteTypes {
@@ -113,9 +150,13 @@ export interface FileRouteTypes {
     | '/blog'
     | '/dashboard'
     | '/guestbook'
+    | '/privacy'
     | '/projects'
+    | '/terms'
     | '/uses'
     | '/og/$'
+    | '/api/auth/$'
+    | '/api/avatar/{$id}.webp'
     | '/api/rpc/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -123,10 +164,14 @@ export interface FileRouteTypes {
     | '/blog'
     | '/dashboard'
     | '/guestbook'
+    | '/privacy'
     | '/projects'
+    | '/terms'
     | '/uses'
     | '/og/$'
     | '/'
+    | '/api/auth/$'
+    | '/api/avatar/{$id}.webp'
     | '/api/rpc/$'
   id:
     | '__root__'
@@ -135,16 +180,22 @@ export interface FileRouteTypes {
     | '/_main/blog'
     | '/_main/dashboard'
     | '/_main/guestbook'
+    | '/_main/privacy'
     | '/_main/projects'
+    | '/_main/terms'
     | '/_main/uses'
     | '/og/$'
     | '/_main/'
+    | '/api/auth/$'
+    | '/api/avatar/{$id}.webp'
     | '/api/rpc/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   MainRouteRoute: typeof MainRouteRouteWithChildren
   OgSplatRoute: typeof OgSplatRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiAvatarChar123idChar125DotwebpRoute: typeof ApiAvatarChar123idChar125DotwebpRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
 }
 
@@ -192,11 +243,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainGuestbookRouteImport
       parentRoute: typeof MainRouteRoute
     }
+    '/_main/privacy': {
+      id: '/_main/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof MainPrivacyRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
     '/_main/projects': {
       id: '/_main/projects'
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof MainProjectsRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
+    '/_main/terms': {
+      id: '/_main/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof MainTermsRouteImport
       parentRoute: typeof MainRouteRoute
     }
     '/_main/uses': {
@@ -211,6 +276,20 @@ declare module '@tanstack/react-router' {
       path: '/og/$'
       fullPath: '/og/$'
       preLoaderRoute: typeof OgSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/avatar/{$id}.webp': {
+      id: '/api/avatar/{$id}.webp'
+      path: '/api/avatar/{$id}.webp'
+      fullPath: '/api/avatar/{$id}.webp'
+      preLoaderRoute: typeof ApiAvatarChar123idChar125DotwebpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/rpc/$': {
@@ -228,7 +307,9 @@ interface MainRouteRouteChildren {
   MainBlogRoute: typeof MainBlogRoute
   MainDashboardRoute: typeof MainDashboardRoute
   MainGuestbookRoute: typeof MainGuestbookRoute
+  MainPrivacyRoute: typeof MainPrivacyRoute
   MainProjectsRoute: typeof MainProjectsRoute
+  MainTermsRoute: typeof MainTermsRoute
   MainUsesRoute: typeof MainUsesRoute
   MainIndexRoute: typeof MainIndexRoute
 }
@@ -238,7 +319,9 @@ const MainRouteRouteChildren: MainRouteRouteChildren = {
   MainBlogRoute: MainBlogRoute,
   MainDashboardRoute: MainDashboardRoute,
   MainGuestbookRoute: MainGuestbookRoute,
+  MainPrivacyRoute: MainPrivacyRoute,
   MainProjectsRoute: MainProjectsRoute,
+  MainTermsRoute: MainTermsRoute,
   MainUsesRoute: MainUsesRoute,
   MainIndexRoute: MainIndexRoute,
 }
@@ -250,6 +333,8 @@ const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   MainRouteRoute: MainRouteRouteWithChildren,
   OgSplatRoute: OgSplatRoute,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiAvatarChar123idChar125DotwebpRoute: ApiAvatarChar123idChar125DotwebpRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
 }
 export const routeTree = rootRouteImport

@@ -2,7 +2,7 @@ import type { CollectionContext, Meta } from '@content-collections/core'
 
 import { defineCollection, defineConfig } from '@content-collections/core'
 import { compileMDX } from '@content-collections/mdx'
-import rehypeSlug from 'rehype-slug'
+import { getTOC, rehypePlugins, remarkPlugins } from '@repo/mdx-plugins'
 import * as z from 'zod'
 
 import { locales } from './project.inlang/settings.json'
@@ -20,9 +20,12 @@ async function transformContent<T extends { _meta: Meta; content: string }>(docu
     throw new Error(`Missing slug in path "${document._meta.path}".`)
   }
 
-  const mdx = await compileMDX(context, document, { rehypePlugins: [rehypeSlug] })
+  const [mdx, toc] = await Promise.all([
+    compileMDX(context, document, { remarkPlugins, rehypePlugins }),
+    context.cache(document.content, getTOC, { key: 'toc' }),
+  ])
 
-  return { ...document, locale, slug, mdx }
+  return { ...document, locale, slug, mdx, toc }
 }
 
 const posts = defineCollection({

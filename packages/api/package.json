@@ -23,6 +23,10 @@
   "devDependencies": {
     "@nelsonlaidev/typescript-config": "catalog:",
     "@total-typescript/ts-reset": "catalog:",
+    "@types/node": "26.6.5",
+    "@types/pg": "8.23.1",
+    "pg": "8.23.1",
+    "tsx": "4.23.15",
     "typescript": "catalog:",
     "varlock": "catalog:"
   }
