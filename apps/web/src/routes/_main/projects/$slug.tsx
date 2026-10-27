@@ -9,7 +9,7 @@ import { createSeoHead, getLocalizedUrl } from '@/lib/seo'
 import { SITE } from '@/lib/site'
 import { getLocale } from '@/paraglide/runtime'
 
-export const Route = createFileRoute('/_main/projects_/$slug')({
+export const Route = createFileRoute('/_main/projects/$slug')({
   loader: async ({ params }) => {
     const locale = getLocale()
     const project = await getProject({ data: { slug: params.slug, locale } })

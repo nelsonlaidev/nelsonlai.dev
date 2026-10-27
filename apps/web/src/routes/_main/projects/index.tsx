@@ -7,7 +7,7 @@ import { getProjects } from '@/features/projects/projects.functions'
 import { createSeoHead } from '@/lib/seo'
 import { getLocale } from '@/paraglide/runtime'
 
-export const Route = createFileRoute('/_main/projects')({
+export const Route = createFileRoute('/_main/projects/')({
   loader: async () => {
     const locale = getLocale()
     const [page, projects] = await Promise.all([
