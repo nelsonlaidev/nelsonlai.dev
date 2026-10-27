@@ -3,7 +3,9 @@ antec
 asus
 bradlc
 cleanshot
+cmdk
 cobe
+dokploy
 facebook
 figma
 fuma
@@ -20,9 +22,15 @@ linktree
 macbook
 nelsonlai
 nelsonlaidev
+nextdotjs
+nodedotjs
 orbstack
+paralleldrive
 paraglide
 planetscale
+radixui
+reactquery
+rmiz
 ryzen
 scoutly
 shiki
@@ -32,6 +40,7 @@ takumi
 tsgolint
 umami
 unifiedjs
+unwasm
 uprest
 vocs
 wakatime
