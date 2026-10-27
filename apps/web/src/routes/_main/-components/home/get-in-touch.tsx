@@ -20,7 +20,7 @@ export function GetInTouch() {
   const reducedMotion = useReducedMotion()
 
   useEffect(() => {
-    if (!isAnimationInView) return
+    if (!isAnimationInView || reducedMotion) return
 
     const controls = animate(
       [
@@ -42,23 +42,10 @@ export function GetInTouch() {
       ],
       { repeat: Number.POSITIVE_INFINITY },
     )
-    const motionPreference = globalThis.matchMedia('(prefers-reduced-motion: reduce)')
-    const updatePlayback = () => {
-      if (motionPreference.matches) {
-        controls.pause()
-      } else {
-        controls.play()
-      }
-    }
-
-    updatePlayback()
-    motionPreference.addEventListener('change', updatePlayback)
-
     return () => {
-      motionPreference.removeEventListener('change', updatePlayback)
       controls.stop()
     }
-  }, [animate, isAnimationInView])
+  }, [animate, isAnimationInView, reducedMotion])
 
   return (
     <motion.div
