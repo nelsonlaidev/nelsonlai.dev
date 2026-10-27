@@ -19,14 +19,14 @@ export function useSignOut() {
       const { error } = await authClient.signOut()
 
       if (error) {
-        toast.add({ type: 'error', description: error.message })
+        toast.add({ type: 'error', title: error.message })
         return false
       }
 
-      toast.add({ type: 'success', description: m.success_signed_out() })
+      toast.add({ type: 'success', title: m.success_signed_out() })
       return true
     } catch {
-      toast.add({ type: 'error', description: m.error_sign_out_failed() })
+      toast.add({ type: 'error', title: m.error_sign_out_failed() })
       return false
     } finally {
       pendingRef.current = false

@@ -9,7 +9,7 @@
     "db:push": "turbo run db:push",
     "db:seed": "turbo run db:seed",
     "db:studio": "turbo run db:studio",
-    "dev": "turbo run dev",
+    "dev": "turbo watch dev",
     "env:check": "turbo run env:check",
     "env:generate": "turbo run env:generate",
     "format": "oxfmt",

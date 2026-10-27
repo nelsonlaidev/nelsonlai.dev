@@ -70,6 +70,26 @@
 
   --animate-marquee-x: marquee-x var(--marquee-duration) linear infinite;
   --animate-marquee-y: marquee-y var(--marquee-duration) linear infinite;
+  --animate-tree-view-content-down: tree-view-content-down 0.2s ease-out;
+  --animate-tree-view-content-up: tree-view-content-up 0.2s ease-out;
+
+  @keyframes tree-view-content-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--height);
+    }
+  }
+
+  @keyframes tree-view-content-up {
+    from {
+      height: var(--height);
+    }
+    to {
+      height: 0;
+    }
+  }
 
   @keyframes marquee-x {
     from {

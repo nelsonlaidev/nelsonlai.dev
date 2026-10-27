@@ -12,8 +12,28 @@ codebase, which uses TanStack Start.
   extend existing code where practical.
 - The legacy checkout may not be at the same relative path when working in a Git
   worktree. Locate the original checkout before inspecting legacy code.
-- Leave `apps/web/scripts/check-ssr.ts` unchanged during the migration; no further
-  modifications to this script are needed.
+- Validate changes with formatting, linting, type checking, and builds. Add
+  automated tests only when explicitly requested.
+
+## Migration Fidelity
+
+- Migration means preserving the legacy website's appearance, content, behavior,
+  and component capabilities while adapting framework-specific integration to
+  TanStack Start and this repository's architecture.
+- Before migrating a component, inspect its legacy implementation, underlying UI
+  primitives, hooks, styles, assets, and call sites. Reuse the original
+  implementation and dependencies when compatible.
+- Do not replace existing library-backed components with simplified custom
+  implementations or omit features to make the page render. Preserve animations,
+  keyboard navigation, focus management, accessibility, responsive layouts,
+  loading and error states, and supported props.
+- Improvements must preserve existing capabilities. Explain any necessary
+  replacement and verify equivalent behavior; obtain explicit user approval for
+  intentional feature removals or redesigns.
+- Before declaring a migration complete, compare the migrated component against
+  the legacy version visually and interactively, including mobile layouts and
+  relevant states. Formatting, linting, type checking, and builds alone do not
+  establish migration fidelity. Report any unverified behavior or remaining gaps.
 
 ## Code Style
 

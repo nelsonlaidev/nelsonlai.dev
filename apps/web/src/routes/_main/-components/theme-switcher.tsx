@@ -39,9 +39,7 @@ export function ThemeSwitcher() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger
-        render={<Button variant='ghost' size='icon' aria-label={m.theme_switcher_label()} data-testid='theme-toggle' />}
-      >
+      <DropdownMenuTrigger render={<Button variant='ghost' size='icon' aria-label={m.theme_switcher_label()} />}>
         <SunIcon className='dark:hidden' />
         <MoonIcon className='hidden dark:block' />
       </DropdownMenuTrigger>
@@ -52,7 +50,6 @@ export function ThemeSwitcher() {
             onClick={() => {
               handleThemeChange(theme.value)
             }}
-            data-testid={`theme-option-${theme.value}`}
           >
             {theme.icon}
             {theme.label()}

@@ -1,6 +1,8 @@
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { createFileRoute, Outlet, useRouter } from '@tanstack/react-router'
+import { useEffect, useRef } from 'react'
 
 import { SignInDialog } from '@/features/auth/sign-in-dialog'
+import { authClient } from '@/lib/auth-client'
 
 import { Footer } from './-components/footer'
 import { GradientBackground } from './-components/gradient-background'
@@ -13,6 +15,17 @@ export const Route = createFileRoute('/_main')({
 
 function RouteComponent() {
   const { copyrightYear } = Route.useLoaderData()
+  const router = useRouter()
+  const { data: session, isPending, error } = authClient.useSession()
+  const user = session?.user ?? null
+  const previousUserRef = useRef<typeof user | undefined>(undefined)
+
+  useEffect(() => {
+    if (isPending || (error && error.status !== 401) || previousUserRef.current === user) return
+
+    previousUserRef.current = user
+    void router.invalidate()
+  }, [error, isPending, router, user])
 
   return (
     <>

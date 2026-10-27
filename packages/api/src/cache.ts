@@ -12,6 +12,9 @@ const YOUTUBE_STATS_TTL = 60 * 60
 const SPOTIFY_ACCESS_TOKEN_TTL = 60 * 60
 
 export const cache = {
+  account: {
+    location: createCache('account:location', z.string(), 24 * 60 * 60),
+  },
   github: {
     repositoryStats: createCache('github:repository', GithubRepositoryStatsSchema, GITHUB_REPOSITORY_STATS_TTL),
     stats: createCache('github:user', GithubStatsSchema, GITHUB_STATS_TTL),

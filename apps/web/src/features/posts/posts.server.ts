@@ -3,6 +3,23 @@ import type { PostSummary } from './types'
 
 import { allPosts } from 'content-collections'
 
+export function findPost(slug: string, locale: Locale) {
+  const post = allPosts.find((post) => post.slug === slug && post.locale === locale)
+
+  if (!post) return null
+
+  return {
+    slug: post.slug,
+    locale,
+    title: post.title,
+    description: post.description,
+    publishedAt: post.publishedAt,
+    updatedAt: post.updatedAt,
+    mdx: post.mdx,
+    toc: post.toc,
+  }
+}
+
 export function listPosts(locale: Locale, limit: number | null = null): PostSummary[] {
   return allPosts
     .filter((post) => post.locale === locale)

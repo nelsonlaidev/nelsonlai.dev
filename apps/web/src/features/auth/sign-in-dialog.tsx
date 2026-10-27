@@ -42,10 +42,10 @@ export function SignInDialog() {
       })
 
       if (error) {
-        toast.add({ type: 'error', description: error.message })
+        toast.add({ type: 'error', title: error.message })
       }
     } catch {
-      toast.add({ type: 'error', description: m.error_sign_in_error() })
+      toast.add({ type: 'error', title: m.error_sign_in_error() })
     } finally {
       setIsPending(false)
     }
@@ -53,7 +53,7 @@ export function SignInDialog() {
 
   return (
     <Dialog handle={signInDialogHandle}>
-      <DialogContent className='sm:max-w-120' data-testid='sign-in-dialog' aria-busy={isPending}>
+      <DialogContent className='sm:max-w-120' aria-busy={isPending}>
         <DialogHeader>
           <DialogTitle className='text-2xl'>{m.common_sign_in()}</DialogTitle>
           <DialogDescription>{m.dialog_sign_in_description()}</DialogDescription>
@@ -76,7 +76,6 @@ export function SignInDialog() {
                 onClick={() => {
                   void handleSignIn(provider)
                 }}
-                data-testid={`${provider}-sign-in-button`}
               >
                 {icon}
                 {m.dialog_sign_in_continue_with({ provider: provider === 'github' ? 'GitHub' : 'Google' })}

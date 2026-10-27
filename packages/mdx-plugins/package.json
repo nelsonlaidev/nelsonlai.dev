@@ -3,10 +3,13 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.mjs"
+    }
   },
   "scripts": {
-    "test": "node --import tsx --test tests/*.test.ts",
+    "build": "tsdown",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -27,8 +30,7 @@
     "@total-typescript/ts-reset": "catalog:",
     "@types/hast": "3.0.5",
     "@types/node": "26.6.5",
-    "rehype-slug": "6.0.0",
-    "tsx": "4.23.15",
+    "tsdown": "0.23.2",
     "typescript": "catalog:"
   }
 }

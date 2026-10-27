@@ -1,11 +1,16 @@
 import { MDXContent } from '@content-collections/mdx/react'
 
+import { CodeBlock } from './code-block'
 import { Heading } from './heading'
 import { ItemGrid } from './item-grid'
+import { LinkCard } from './link-card'
 import { LogoShowcase } from './logo-showcase'
 import { MdxImage } from './mdx-image'
 import { MdxLink } from './mdx-link'
 import { SocialLinks } from './social-links'
+import { Table } from './table'
+import { TreeView } from './tree-view'
+import { Video } from './video'
 
 type MdxProps = {
   code: string
@@ -20,10 +25,15 @@ const components = {
   h5: (props: MdxHeadingProps) => <Heading as='h5' {...props} />,
   h6: (props: MdxHeadingProps) => <Heading as='h6' {...props} />,
   a: MdxLink,
+  pre: CodeBlock,
   Image: MdxImage,
   ItemGrid,
   LogoShowcase,
   SocialLinks,
+  Table,
+  TreeView,
+  Video,
+  LinkCard,
 }
 
 export function Mdx(props: MdxProps) {

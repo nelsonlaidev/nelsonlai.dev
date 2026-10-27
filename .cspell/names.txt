@@ -1,6 +1,7 @@
 airpods
 antec
 asus
+bowser
 bradlc
 cleanshot
 cmdk
@@ -25,8 +26,8 @@ nelsonlaidev
 nextdotjs
 nodedotjs
 orbstack
-paralleldrive
 paraglide
+paralleldrive
 planetscale
 radixui
 reactquery

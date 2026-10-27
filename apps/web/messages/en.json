@@ -186,7 +186,7 @@
   "dialog_sign_in_last_used": "Last used",
   "dialog_sign_in_notice": "By continuing, you agree to our {#terms}Terms of Service{/terms} and {#privacy}Privacy Policy{/privacy}",
   "error_avatar_too_large": "Avatar file is too large. Please choose a file smaller than {size} MB.",
-  "error_avatar_unsupported_file": "Please choose a supported image type (JPEG, PNG, WEBP, GIF, AVIF).",
+  "error_avatar_unsupported_file": "Please choose a supported image type (JPEG, PNG, WebP).",
   "error_comment_cannot_be_empty": "Comment cannot be empty",
   "error_copy_to_clipboard_error": "Unable to copy to clipboard. Please try again.",
   "error_create_message_failed": "Failed to create your message. Please try again.",

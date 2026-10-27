@@ -1,0 +1,106 @@
+import NumberFlow, { NumberFlowGroup } from '@number-flow/react'
+import { Button } from '@repo/ui/components/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from '@repo/ui/components/dropdown-menu'
+import { toast } from '@repo/ui/components/toast'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { ListFilterIcon } from 'lucide-react'
+import { useState } from 'react'
+
+import { replyPreferenceOptions } from '@/features/notifications/notifications.queries'
+import { authClient } from '@/lib/auth-client'
+import { orpc } from '@/lib/orpc-client'
+import { m } from '@/paraglide/messages'
+
+import { CommentComposer } from './comment-composer'
+import { CommentList } from './comment-list'
+
+type CommentSectionProps = {
+  slug: string
+  highlightedCommentId?: string
+  highlightedReplyId?: string
+}
+
+export function CommentSection(props: CommentSectionProps) {
+  const { slug, highlightedCommentId, highlightedReplyId } = props
+  const [sort, setSort] = useState<'newest' | 'oldest'>('newest')
+  const session = authClient.useSession()
+  const queryClient = useQueryClient()
+  const counts = useQuery(orpc.comments.counts.queryOptions({ input: { slug } }))
+  const preferenceOptions = replyPreferenceOptions(session.data?.user.id)
+  const preference = useQuery(preferenceOptions)
+  const updatePreference = useMutation(
+    orpc.notifications.setPreference.mutationOptions({
+      onSuccess: (data) => queryClient.setQueryData(preferenceOptions.queryKey, data),
+      onError: () => toast.add({ type: 'error', title: m.error_something_went_wrong() }),
+    }),
+  )
+
+  const countsFallback = counts.isError ? m.common_error() : '--'
+
+  return (
+    <section id='comments' className='space-y-6' aria-label={m.common_labels_comments()}>
+      <CommentComposer slug={slug} />
+      {session.data && (
+        <label className='flex items-start gap-2 text-sm text-muted-foreground'>
+          <input
+            type='checkbox'
+            checked={preference.data?.repliesEnabled ?? false}
+            disabled={!preference.data || updatePreference.isPending}
+            onChange={(event) => {
+              updatePreference.mutate({ repliesEnabled: event.target.checked })
+            }}
+            className='mt-1'
+          />
+          <span>
+            {m.settings_reply_notification_description()}
+            {preference.isError && <span role='alert'>{m.error_failed_to_load_settings()}</span>}
+          </span>
+        </label>
+      )}
+      <div className='flex flex-wrap items-center justify-between gap-3 text-sm'>
+        <NumberFlowGroup>
+          <div>
+            {counts.data ? (
+              <>
+                <NumberFlow value={counts.data.comments} /> {m.blog_comments_comments({ count: counts.data.comments })}{' '}
+                · <NumberFlow value={counts.data.replies} /> {m.blog_comments_replies({ count: counts.data.replies })}
+              </>
+            ) : (
+              countsFallback
+            )}
+          </div>
+        </NumberFlowGroup>
+        <DropdownMenu>
+          <DropdownMenuTrigger render={<Button type='button' variant='outline' size='sm' />}>
+            <ListFilterIcon aria-hidden='true' />
+            {m.blog_comments_sort_by()}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align='end'>
+            <DropdownMenuRadioGroup
+              value={sort}
+              onValueChange={(value) => {
+                if (value === 'newest' || value === 'oldest') setSort(value === 'newest' ? 'newest' : 'oldest')
+              }}
+            >
+              <DropdownMenuRadioItem value='newest'>{m.blog_comments_newest()}</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value='oldest'>{m.blog_comments_oldest()}</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+      <CommentList
+        key={`${sort}:${highlightedCommentId}:${highlightedReplyId}`}
+        slug={slug}
+        sort={sort}
+        highlightedCommentId={highlightedCommentId}
+        highlightedReplyId={highlightedReplyId}
+      />
+    </section>
+  )
+}

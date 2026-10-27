@@ -30,6 +30,20 @@ export function getLocalizedUrl(pathname: `/${string}`, locale: Locale) {
   return localizeUrl(new URL(pathname, ENV.SITE_URL), { locale }).href
 }
 
+export function createPrivateSeoHead(options: Pick<SeoHeadOptions, 'title' | 'description' | 'pathname' | 'locale'>) {
+  const { title, description, pathname, locale } = options
+
+  return {
+    meta: [
+      { title: title === null ? SITE.name : `${title} | ${SITE.name}` },
+      { name: 'description', content: description },
+      { name: 'robots', content: 'noindex, nofollow' },
+      { name: 'googlebot', content: 'noindex, nofollow' },
+    ],
+    links: [{ rel: 'canonical', href: getLocalizedUrl(pathname, locale) }],
+  }
+}
+
 export function createSeoHead(options: SeoHeadOptions) {
   const { title, description, pathname, locale, jsonLd } = options
   const pageTitle = title === null ? SITE.name : `${title} | ${SITE.name}`

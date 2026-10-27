@@ -190,10 +190,10 @@ function ToastIcon(props: ToastIconProps) {
 }
 
 function ToastList() {
-  const { toasts } = ToastPrimitive.useToastManager<{ testId?: string }>()
+  const { toasts } = ToastPrimitive.useToastManager()
 
   return toasts.map((toastItem) => (
-    <Toast key={toastItem.id} toast={toastItem} data-testid={toastItem.data?.testId}>
+    <Toast key={toastItem.id} toast={toastItem}>
       <ToastContent>
         <ToastIcon type={toastItem.type} />
         <div className='flex min-w-0 flex-1 flex-col gap-1'>

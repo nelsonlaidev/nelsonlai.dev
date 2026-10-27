@@ -1,3 +1,7 @@
+import { createHash } from 'node:crypto'
+import { existsSync } from 'node:fs'
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+
 import contentCollections from '@content-collections/vite'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
@@ -13,7 +17,7 @@ const config = defineConfig({
   plugins: [
     // Keep CJS React consumers on the renderer's bundled React instance during SSR.
     // Remove after upgrading to a Nitro release containing https://github.com/nitrojs/nitro/pull/4889
-    // and passing check:ssr. See https://github.com/nitrojs/nitro/issues/4171.
+    // and verifying production SSR. See https://github.com/nitrojs/nitro/issues/4171.
     {
       name: 'ssr-react-require-compat',
       apply: 'build',
@@ -22,6 +26,24 @@ const config = defineConfig({
       },
     },
     varlockVitePlugin(),
+    {
+      name: 'content-collections-cache',
+      async config() {
+        // Content Collections excludes external packages from its configuration checksum.
+        const cacheDirectory = new URL('.content-collections/cache/', import.meta.url)
+        const fingerprintFile = new URL('mdx-plugins.hash', cacheDirectory)
+        const fingerprint = createHash('sha256')
+          .update(await readFile(new URL(import.meta.resolve('@repo/mdx-plugins'))))
+          .update(await readFile(new URL('../../pnpm-lock.yaml', import.meta.url)))
+          .digest('hex')
+
+        if (existsSync(fingerprintFile) && (await readFile(fingerprintFile, 'utf-8')) === fingerprint) return
+
+        await rm(cacheDirectory, { recursive: true, force: true })
+        await mkdir(cacheDirectory, { recursive: true })
+        await writeFile(fingerprintFile, fingerprint)
+      },
+    },
     contentCollections(),
     paraglideVitePlugin({
       project: './project.inlang',

@@ -11,7 +11,7 @@ export function createQueryClient() {
 
         toast.add({
           type: 'error',
-          description: `${m.common_error()}: ${error.message}`,
+          title: `${m.common_error()}: ${error.message}`,
           actionProps: {
             children: m.common_retry(),
             onClick: () => {

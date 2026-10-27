@@ -12,13 +12,18 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as MainRouteRouteImport } from './routes/_main/route'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as MainAboutRouteImport } from './routes/_main/about'
+import { Route as MainAccountRouteRouteImport } from './routes/_main/account/route'
 import { Route as MainDashboardRouteImport } from './routes/_main/dashboard'
 import { Route as MainGuestbookRouteImport } from './routes/_main/guestbook'
 import { Route as MainPrivacyRouteImport } from './routes/_main/privacy'
 import { Route as MainTermsRouteImport } from './routes/_main/terms'
+import { Route as MainUnsubscribeRouteImport } from './routes/_main/unsubscribe'
 import { Route as MainUsesRouteImport } from './routes/_main/uses'
 import { Route as OgSplatRouteImport } from './routes/og/$'
+import { Route as MainAccountIndexRouteImport } from './routes/_main/account/index'
+import { Route as MainAccountSettingsRouteImport } from './routes/_main/account/settings'
 import { Route as MainBlogIndexRouteImport } from './routes/_main/blog/index'
+import { Route as MainBlogSlugRouteImport } from './routes/_main/blog/$slug'
 import { Route as MainProjectsIndexRouteImport } from './routes/_main/projects/index'
 import { Route as MainProjectsSlugRouteImport } from './routes/_main/projects/$slug'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
@@ -37,6 +42,11 @@ const MainIndexRoute = MainIndexRouteImport.update({
 const MainAboutRoute = MainAboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainAccountRouteRoute = MainAccountRouteRouteImport.update({
+  id: '/account',
+  path: '/account',
   getParentRoute: () => MainRouteRoute,
 } as any)
 const MainDashboardRoute = MainDashboardRouteImport.update({
@@ -59,6 +69,11 @@ const MainTermsRoute = MainTermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => MainRouteRoute,
 } as any)
+const MainUnsubscribeRoute = MainUnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
+  getParentRoute: () => MainRouteRoute,
+} as any)
 const MainUsesRoute = MainUsesRouteImport.update({
   id: '/uses',
   path: '/uses',
@@ -69,9 +84,24 @@ const OgSplatRoute = OgSplatRouteImport.update({
   path: '/og/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MainAccountIndexRoute = MainAccountIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MainAccountRouteRoute,
+} as any)
+const MainAccountSettingsRoute = MainAccountSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => MainAccountRouteRoute,
+} as any)
 const MainBlogIndexRoute = MainBlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainBlogSlugRoute = MainBlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
   getParentRoute: () => MainRouteRoute,
 } as any)
 const MainProjectsIndexRoute = MainProjectsIndexRouteImport.update({
@@ -103,17 +133,22 @@ const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof MainIndexRoute
+  '/account': typeof MainAccountRouteRouteWithChildren
   '/about': typeof MainAboutRoute
   '/dashboard': typeof MainDashboardRoute
   '/guestbook': typeof MainGuestbookRoute
   '/privacy': typeof MainPrivacyRoute
   '/terms': typeof MainTermsRoute
+  '/unsubscribe': typeof MainUnsubscribeRoute
   '/uses': typeof MainUsesRoute
   '/og/$': typeof OgSplatRoute
+  '/account/settings': typeof MainAccountSettingsRoute
+  '/blog/$slug': typeof MainBlogSlugRoute
   '/projects/$slug': typeof MainProjectsSlugRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/avatar/{$id}.webp': typeof ApiAvatarChar123idChar125DotwebpRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/account/': typeof MainAccountIndexRoute
   '/blog/': typeof MainBlogIndexRoute
   '/projects/': typeof MainProjectsIndexRoute
 }
@@ -123,31 +158,40 @@ export interface FileRoutesByTo {
   '/guestbook': typeof MainGuestbookRoute
   '/privacy': typeof MainPrivacyRoute
   '/terms': typeof MainTermsRoute
+  '/unsubscribe': typeof MainUnsubscribeRoute
   '/uses': typeof MainUsesRoute
   '/og/$': typeof OgSplatRoute
   '/': typeof MainIndexRoute
+  '/account/settings': typeof MainAccountSettingsRoute
+  '/blog/$slug': typeof MainBlogSlugRoute
   '/projects/$slug': typeof MainProjectsSlugRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/avatar/{$id}.webp': typeof ApiAvatarChar123idChar125DotwebpRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/account': typeof MainAccountIndexRoute
   '/blog': typeof MainBlogIndexRoute
   '/projects': typeof MainProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_main': typeof MainRouteRouteWithChildren
+  '/_main/account': typeof MainAccountRouteRouteWithChildren
   '/_main/about': typeof MainAboutRoute
   '/_main/dashboard': typeof MainDashboardRoute
   '/_main/guestbook': typeof MainGuestbookRoute
   '/_main/privacy': typeof MainPrivacyRoute
   '/_main/terms': typeof MainTermsRoute
+  '/_main/unsubscribe': typeof MainUnsubscribeRoute
   '/_main/uses': typeof MainUsesRoute
   '/og/$': typeof OgSplatRoute
   '/_main/': typeof MainIndexRoute
+  '/_main/account/settings': typeof MainAccountSettingsRoute
+  '/_main/blog/$slug': typeof MainBlogSlugRoute
   '/_main/projects/$slug': typeof MainProjectsSlugRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/avatar/{$id}.webp': typeof ApiAvatarChar123idChar125DotwebpRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/_main/account/': typeof MainAccountIndexRoute
   '/_main/blog/': typeof MainBlogIndexRoute
   '/_main/projects/': typeof MainProjectsIndexRoute
 }
@@ -155,17 +199,22 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/account'
     | '/about'
     | '/dashboard'
     | '/guestbook'
     | '/privacy'
     | '/terms'
+    | '/unsubscribe'
     | '/uses'
     | '/og/$'
+    | '/account/settings'
+    | '/blog/$slug'
     | '/projects/$slug'
     | '/api/auth/$'
     | '/api/avatar/{$id}.webp'
     | '/api/rpc/$'
+    | '/account/'
     | '/blog/'
     | '/projects/'
   fileRoutesByTo: FileRoutesByTo
@@ -175,30 +224,39 @@ export interface FileRouteTypes {
     | '/guestbook'
     | '/privacy'
     | '/terms'
+    | '/unsubscribe'
     | '/uses'
     | '/og/$'
     | '/'
+    | '/account/settings'
+    | '/blog/$slug'
     | '/projects/$slug'
     | '/api/auth/$'
     | '/api/avatar/{$id}.webp'
     | '/api/rpc/$'
+    | '/account'
     | '/blog'
     | '/projects'
   id:
     | '__root__'
     | '/_main'
+    | '/_main/account'
     | '/_main/about'
     | '/_main/dashboard'
     | '/_main/guestbook'
     | '/_main/privacy'
     | '/_main/terms'
+    | '/_main/unsubscribe'
     | '/_main/uses'
     | '/og/$'
     | '/_main/'
+    | '/_main/account/settings'
+    | '/_main/blog/$slug'
     | '/_main/projects/$slug'
     | '/api/auth/$'
     | '/api/avatar/{$id}.webp'
     | '/api/rpc/$'
+    | '/_main/account/'
     | '/_main/blog/'
     | '/_main/projects/'
   fileRoutesById: FileRoutesById
@@ -234,6 +292,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainAboutRouteImport
       parentRoute: typeof MainRouteRoute
     }
+    '/_main/account': {
+      id: '/_main/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof MainAccountRouteRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
     '/_main/dashboard': {
       id: '/_main/dashboard'
       path: '/dashboard'
@@ -262,6 +327,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainTermsRouteImport
       parentRoute: typeof MainRouteRoute
     }
+    '/_main/unsubscribe': {
+      id: '/_main/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof MainUnsubscribeRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
     '/_main/uses': {
       id: '/_main/uses'
       path: '/uses'
@@ -276,11 +348,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OgSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_main/account/': {
+      id: '/_main/account/'
+      path: '/'
+      fullPath: '/account/'
+      preLoaderRoute: typeof MainAccountIndexRouteImport
+      parentRoute: typeof MainAccountRouteRoute
+    }
+    '/_main/account/settings': {
+      id: '/_main/account/settings'
+      path: '/settings'
+      fullPath: '/account/settings'
+      preLoaderRoute: typeof MainAccountSettingsRouteImport
+      parentRoute: typeof MainAccountRouteRoute
+    }
     '/_main/blog/': {
       id: '/_main/blog/'
       path: '/blog'
       fullPath: '/blog/'
       preLoaderRoute: typeof MainBlogIndexRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
+    '/_main/blog/$slug': {
+      id: '/_main/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof MainBlogSlugRouteImport
       parentRoute: typeof MainRouteRoute
     }
     '/_main/projects/': {
@@ -321,27 +414,46 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface MainAccountRouteRouteChildren {
+  MainAccountSettingsRoute: typeof MainAccountSettingsRoute
+  MainAccountIndexRoute: typeof MainAccountIndexRoute
+}
+
+const MainAccountRouteRouteChildren: MainAccountRouteRouteChildren = {
+  MainAccountSettingsRoute: MainAccountSettingsRoute,
+  MainAccountIndexRoute: MainAccountIndexRoute,
+}
+
+const MainAccountRouteRouteWithChildren =
+  MainAccountRouteRoute._addFileChildren(MainAccountRouteRouteChildren)
+
 interface MainRouteRouteChildren {
+  MainAccountRouteRoute: typeof MainAccountRouteRouteWithChildren
   MainAboutRoute: typeof MainAboutRoute
   MainDashboardRoute: typeof MainDashboardRoute
   MainGuestbookRoute: typeof MainGuestbookRoute
   MainPrivacyRoute: typeof MainPrivacyRoute
   MainTermsRoute: typeof MainTermsRoute
+  MainUnsubscribeRoute: typeof MainUnsubscribeRoute
   MainUsesRoute: typeof MainUsesRoute
   MainIndexRoute: typeof MainIndexRoute
+  MainBlogSlugRoute: typeof MainBlogSlugRoute
   MainProjectsSlugRoute: typeof MainProjectsSlugRoute
   MainBlogIndexRoute: typeof MainBlogIndexRoute
   MainProjectsIndexRoute: typeof MainProjectsIndexRoute
 }
 
 const MainRouteRouteChildren: MainRouteRouteChildren = {
+  MainAccountRouteRoute: MainAccountRouteRouteWithChildren,
   MainAboutRoute: MainAboutRoute,
   MainDashboardRoute: MainDashboardRoute,
   MainGuestbookRoute: MainGuestbookRoute,
   MainPrivacyRoute: MainPrivacyRoute,
   MainTermsRoute: MainTermsRoute,
+  MainUnsubscribeRoute: MainUnsubscribeRoute,
   MainUsesRoute: MainUsesRoute,
   MainIndexRoute: MainIndexRoute,
+  MainBlogSlugRoute: MainBlogSlugRoute,
   MainProjectsSlugRoute: MainProjectsSlugRoute,
   MainBlogIndexRoute: MainBlogIndexRoute,
   MainProjectsIndexRoute: MainProjectsIndexRoute,

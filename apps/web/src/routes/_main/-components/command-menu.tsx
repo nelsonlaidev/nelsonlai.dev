@@ -12,7 +12,7 @@ import {
 import { DialogTrigger } from '@repo/ui/components/dialog'
 import { toast } from '@repo/ui/components/toast'
 import { useNavigate } from '@tanstack/react-router'
-import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon } from 'lucide-react'
+import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon, ShieldIcon, UserCircleIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 import { signInDialogHandle } from '@/features/auth/sign-in-dialog'
@@ -67,7 +67,6 @@ export function CommandMenu() {
           render={<Button ref={triggerRef} variant='ghost' size='icon' />}
           aria-label={m.command_menu_open_menu()}
           aria-keyshortcuts='Meta+K Control+K'
-          data-testid='command-menu-button'
         >
           <CommandIcon aria-hidden='true' />
         </DialogTrigger>
@@ -83,10 +82,32 @@ export function CommandMenu() {
           <CommandEmpty>{m.command_menu_no_results()}</CommandEmpty>
           <CommandGroup heading={m.common_labels_account()}>
             {session ? (
-              <CommandItem disabled={isSigningOut} onSelect={handleSignOut}>
-                <LogOutIcon aria-hidden='true' />
-                {m.common_sign_out()}
-              </CommandItem>
+              <>
+                <CommandItem
+                  onSelect={() => {
+                    setOpen(false)
+                    void navigate({ to: '/account' })
+                  }}
+                >
+                  <UserCircleIcon aria-hidden='true' />
+                  {m.common_labels_account()}
+                </CommandItem>
+                {session.user.role === 'admin' && (
+                  <CommandItem
+                    onSelect={() => {
+                      setOpen(false)
+                      void navigate({ href: '/admin' })
+                    }}
+                  >
+                    <ShieldIcon aria-hidden='true' />
+                    Admin
+                  </CommandItem>
+                )}
+                <CommandItem disabled={isSigningOut} onSelect={handleSignOut}>
+                  <LogOutIcon aria-hidden='true' />
+                  {m.common_sign_out()}
+                </CommandItem>
+              </>
             ) : (
               <CommandItem
                 disabled={isPending}

@@ -55,8 +55,7 @@ export function MessageBox(props: MessageBoxProps) {
 
         toast.add({
           type: 'success',
-          description: m.success_message_created(),
-          data: { testId: 'guestbook-message-created-toast' },
+          title: m.success_message_created(),
         })
 
         void queryClient.invalidateQueries({ queryKey: orpc.guestbook.list.key() })
@@ -64,7 +63,7 @@ export function MessageBox(props: MessageBoxProps) {
       onError: (error) => {
         toast.add({
           type: 'error',
-          description:
+          title:
             error instanceof ORPCError && error.code === 'TOO_MANY_REQUESTS'
               ? m.error_too_many_requests()
               : m.error_create_message_failed(),
@@ -106,7 +105,6 @@ export function MessageBox(props: MessageBoxProps) {
                     aria-describedby={isInvalid ? errorId : undefined}
                     placeholder={m.guestbook_placeholder()}
                     disabled={isBusy}
-                    data-testid='guestbook-textarea'
                   />
                   {isInvalid && <FieldError id={errorId} errors={field.state.meta.errors} />}
                 </Field>
@@ -118,7 +116,7 @@ export function MessageBox(props: MessageBoxProps) {
           <Button variant='outline' onClick={onSignOut} disabled={isBusy}>
             {m.common_sign_out()}
           </Button>
-          <Button type='submit' disabled={isBusy} data-testid='guestbook-submit-button'>
+          <Button type='submit' disabled={isBusy}>
             {m.common_submit()}
           </Button>
         </div>

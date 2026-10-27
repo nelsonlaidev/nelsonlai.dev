@@ -6,6 +6,11 @@ import { m } from '@/paraglide/messages'
 import { SITE } from './site'
 import { SOCIAL_LINKS } from './social-links'
 
+export const ACCOUNT_LINKS = linkOptions([
+  { to: '/account', label: m.common_labels_account },
+  { to: '/account/settings', label: m.common_labels_settings },
+])
+
 export const HEADER_LINKS = linkOptions([
   {
     icon: PencilIcon,

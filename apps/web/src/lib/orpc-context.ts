@@ -1,5 +1,7 @@
 import type { Context } from '@repo/api/context'
 
+import { allPosts } from 'content-collections'
+
 import { auth } from './auth'
 import { db } from './db'
 
@@ -8,5 +10,5 @@ export async function createORPCContext(request: Request): Promise<Context> {
     headers: request.headers,
   })
 
-  return { db, session, headers: request.headers }
+  return { auth, db, session, headers: request.headers, posts: allPosts }
 }

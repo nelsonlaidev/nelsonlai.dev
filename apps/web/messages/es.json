@@ -186,7 +186,7 @@
   "dialog_sign_in_last_used": "Último usado",
   "dialog_sign_in_notice": "Al continuar, aceptas nuestros {#terms}Términos de servicio{/terms} y {#privacy}Política de privacidad{/privacy}",
   "error_avatar_too_large": "El archivo del avatar es demasiado grande. Por favor elige un archivo menor a {size} MB.",
-  "error_avatar_unsupported_file": "Por favor elige un tipo de imagen compatible (JPEG, PNG, WEBP, GIF, AVIF).",
+  "error_avatar_unsupported_file": "Por favor elige un tipo de imagen compatible (JPEG, PNG, WebP).",
   "error_comment_cannot_be_empty": "El comentario no puede estar vacío",
   "error_copy_to_clipboard_error": "No se pudo copiar al portapapeles. Por favor intenta de nuevo.",
   "error_create_message_failed": "No se pudo enviar el mensaje. Inténtalo de nuevo.",

@@ -186,7 +186,7 @@
   "dialog_sign_in_last_used": "最後に使用",
   "dialog_sign_in_notice": "続けることで、{#terms}利用規約{/terms}と{#privacy}プライバシーポリシー{/privacy}に同意したことになります",
   "error_avatar_too_large": "アバターファイルが大きすぎます。{size} MB 未満のファイルを選択してください。",
-  "error_avatar_unsupported_file": "サポートされている画像形式（JPEG、PNG、WEBP、GIF、AVIF）を選択してください。",
+  "error_avatar_unsupported_file": "サポートされている画像形式（JPEG、PNG、WebP）を選択してください。",
   "error_comment_cannot_be_empty": "コメントを入力してください",
   "error_copy_to_clipboard_error": "クリップボードにコピーできません。もう一度お試しください。",
   "error_create_message_failed": "メッセージを送信できませんでした。もう一度お試しください。",

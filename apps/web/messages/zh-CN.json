@@ -186,7 +186,7 @@
   "dialog_sign_in_last_used": "上次使用",
   "dialog_sign_in_notice": "继续即表示您同意我们的 {#terms}服务条款{/terms} 和 {#privacy}隐私权政策{/privacy}",
   "error_avatar_too_large": "头像文件过大。请选择小于 {size} MB 的文件。",
-  "error_avatar_unsupported_file": "请选择支持的图片格式（JPEG、PNG、WEBP、GIF、AVIF）。",
+  "error_avatar_unsupported_file": "请选择支持的图片格式（JPEG、PNG、WebP）。",
   "error_comment_cannot_be_empty": "评论不能为空",
   "error_copy_to_clipboard_error": "无法复制到剪贴板，请再试一次。",
   "error_create_message_failed": "留言发送失败，请重试。",

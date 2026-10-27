@@ -1,10 +1,11 @@
 appendonly
 argb
 codegen
-doublestar
 dotwebp
+doublestar
 frontmatter
 healthcheck
+innerhtml
 isready
 techstack
 webp

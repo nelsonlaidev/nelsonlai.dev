@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@ark-ui/react": "5.39.3",
     "@base-ui/react": "1.9.0",
     "@repo/utils": "workspace:*",
     "class-variance-authority": "0.7.1",

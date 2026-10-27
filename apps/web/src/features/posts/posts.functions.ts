@@ -3,7 +3,16 @@ import * as z from 'zod'
 
 import { locales } from '@/paraglide/runtime'
 
-import { listPosts } from './posts.server'
+import { findPost, listPosts } from './posts.server'
+
+export const getPost = createServerFn({ method: 'GET' })
+  .validator(
+    z.object({
+      slug: z.string().min(1),
+      locale: z.enum(locales),
+    }),
+  )
+  .handler(({ data }) => findPost(data.slug, data.locale))
 
 export const getPosts = createServerFn({ method: 'GET' })
   .validator(

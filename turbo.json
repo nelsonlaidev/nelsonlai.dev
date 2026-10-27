@@ -1,11 +1,17 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
   "ui": "tui",
+  "futureFlags": {
+    "watchUsingTaskInputs": true
+  },
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".output/**"]
+    },
+    "@repo/mdx-plugins#build": {
+      "outputs": ["dist/**"]
     },
     "db:generate": {
       "cache": false,
@@ -32,7 +38,10 @@
     "//#typecheck:root": {},
     "dev": {
       "cache": false,
-      "persistent": true
+      "dependsOn": ["^build"],
+      "inputs": ["package.json"],
+      "persistent": true,
+      "interruptible": true
     },
     "env:check": {
       "cache": false

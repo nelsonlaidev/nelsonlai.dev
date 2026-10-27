@@ -36,6 +36,7 @@ const posts = defineCollection({
     title: z.string(),
     description: z.string(),
     publishedAt: z.iso.datetime(),
+    updatedAt: z.iso.datetime(),
     content: z.string(),
   }),
   transform: transformContent,

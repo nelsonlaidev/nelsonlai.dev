@@ -117,6 +117,7 @@ function RootDocument(props: RootDocumentProps) {
             close: m.common_labels_close(),
             commandDialogTitle: m.command_menu_title(),
             commandDialogDescription: m.command_menu_description(),
+            treeView: m.common_aria_labels_tree_view(),
           }}
         >
           <IntlProvider locale={getLocale()} formats={formats}>

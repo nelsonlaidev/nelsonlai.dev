@@ -1,0 +1,27 @@
+{
+  "name": "@repo/email",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "env:check": "varlock load",
+    "env:generate": "varlock codegen",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "19.3.1",
+    "react-email": "6.11.2"
+  },
+  "devDependencies": {
+    "@nelsonlaidev/typescript-config": "catalog:",
+    "@total-typescript/ts-reset": "catalog:",
+    "@types/node": "26.6.5",
+    "@types/react": "catalog:",
+    "@types/react-dom": "19.3.0",
+    "typescript": "catalog:",
+    "varlock": "catalog:"
+  }
+}

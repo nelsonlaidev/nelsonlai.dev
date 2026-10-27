@@ -35,7 +35,6 @@ export function DeleteButton(props: DeleteButtonProps) {
         toast.add({
           type: 'success',
           title: m.success_message_deleted(),
-          data: { testId: 'guestbook-message-deleted-toast' },
         })
 
         void queryClient.invalidateQueries({ queryKey: orpc.guestbook.list.key() })
@@ -60,13 +59,10 @@ export function DeleteButton(props: DeleteButtonProps) {
           else setOpen(nextOpen)
         }}
       >
-        <AlertDialogTrigger
-          render={<Button variant='destructive' data-testid='guestbook-delete-button' />}
-          disabled={deletion.isPending}
-        >
+        <AlertDialogTrigger render={<Button variant='destructive' />} disabled={deletion.isPending}>
           {m.common_delete()}
         </AlertDialogTrigger>
-        <AlertDialogContent data-testid='guestbook-dialog' aria-busy={deletion.isPending}>
+        <AlertDialogContent aria-busy={deletion.isPending}>
           <AlertDialogHeader>
             <AlertDialogTitle>{m.common_dialogs_delete_message_title()}</AlertDialogTitle>
             <AlertDialogDescription>{m.common_dialogs_delete_message_description()}</AlertDialogDescription>
@@ -79,7 +75,6 @@ export function DeleteButton(props: DeleteButtonProps) {
               }}
               variant='destructive'
               disabled={deletion.isPending}
-              data-testid='guestbook-dialog-delete-button'
             >
               {m.common_delete()}
             </AlertDialogAction>
