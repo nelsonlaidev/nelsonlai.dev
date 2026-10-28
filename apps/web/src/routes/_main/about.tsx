@@ -31,7 +31,6 @@ export const Route = createFileRoute('/_main/about')({
         description: page.description,
         pathname: '/about',
         locale,
-        siteDescription: page.description,
       }),
     })
   },

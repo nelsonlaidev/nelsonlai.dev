@@ -47,10 +47,6 @@ type JsonLdWebPageOptions = JsonLdWebSiteOptions & {
   title: string
 }
 
-type JsonLdAboutPageOptions = JsonLdWebPageOptions & {
-  siteDescription: string
-}
-
 type JsonLdBlogPostingOptions = JsonLdWebSiteOptions & {
   headline: string
   image: `/${string}`
@@ -99,7 +95,7 @@ export function createJsonLdWebPage(options: JsonLdWebPageOptions): WithContext<
   }
 }
 
-export function createJsonLdAboutPage(options: JsonLdAboutPageOptions): WithContext<AboutPage> {
+export function createJsonLdAboutPage(options: JsonLdWebPageOptions): WithContext<AboutPage> {
   return {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
@@ -107,7 +103,7 @@ export function createJsonLdAboutPage(options: JsonLdAboutPageOptions): WithCont
     description: options.description,
     url: getLocalizedUrl(options.pathname, options.locale),
     mainEntity: createJsonLdPerson({
-      description: options.siteDescription,
+      description: options.description,
       sameAs: Object.values(SITE.socials),
     }),
     inLanguage: options.locale,
