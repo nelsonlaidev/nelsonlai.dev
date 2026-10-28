@@ -7,13 +7,10 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@repo/ui/components/dropdown-menu'
-import { toast } from '@repo/ui/components/toast'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { ListFilterIcon } from 'lucide-react'
 import { useState } from 'react'
 
-import { replyPreferenceOptions } from '@/features/notifications/notifications.queries'
-import { authClient } from '@/lib/auth-client'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -29,17 +26,7 @@ type CommentSectionProps = {
 export function CommentSection(props: CommentSectionProps) {
   const { slug, highlightedCommentId, highlightedReplyId } = props
   const [sort, setSort] = useState<'newest' | 'oldest'>('newest')
-  const session = authClient.useSession()
-  const queryClient = useQueryClient()
   const counts = useQuery(orpc.comments.counts.queryOptions({ input: { slug } }))
-  const preferenceOptions = replyPreferenceOptions(session.data?.user.id)
-  const preference = useQuery(preferenceOptions)
-  const updatePreference = useMutation(
-    orpc.notifications.setPreference.mutationOptions({
-      onSuccess: (data) => queryClient.setQueryData(preferenceOptions.queryKey, data),
-      onError: () => toast.add({ type: 'error', title: m.error_something_went_wrong() }),
-    }),
-  )
 
   let countsContent: React.ReactNode = '--'
 
@@ -57,23 +44,6 @@ export function CommentSection(props: CommentSectionProps) {
   return (
     <section id='comments' className='space-y-6' aria-label={m.common_labels_comments()}>
       <CommentComposer slug={slug} />
-      {session.data && (
-        <label className='flex items-start gap-2 text-sm text-muted-foreground'>
-          <input
-            type='checkbox'
-            checked={preference.data?.repliesEnabled ?? false}
-            disabled={!preference.data || updatePreference.isPending}
-            onChange={(event) => {
-              updatePreference.mutate({ repliesEnabled: event.target.checked })
-            }}
-            className='mt-1'
-          />
-          <span>
-            {m.settings_reply_notification_description()}
-            {preference.isError && <span role='alert'>{m.error_failed_to_load_settings()}</span>}
-          </span>
-        </label>
-      )}
       <div className='flex flex-wrap items-center justify-between gap-3 text-sm'>
         <NumberFlowGroup>
           <div>{countsContent}</div>
