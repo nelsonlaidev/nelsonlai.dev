@@ -4,7 +4,7 @@ import { createFileRoute, notFound } from '@tanstack/react-router'
 import { Mdx } from '@/components/mdx/mdx'
 import { ProjectHeader } from '@/features/projects/project-header'
 import { getProject } from '@/features/projects/projects.functions'
-import { createJsonLdSoftwareSourceCode } from '@/lib/json-ld'
+import { createJsonLdProject } from '@/lib/json-ld'
 import { createSeoHead } from '@/lib/seo'
 import { getLocale } from '@/paraglide/runtime'
 
@@ -28,11 +28,14 @@ export const Route = createFileRoute('/_main/projects/$slug')({
       description: project.description,
       pathname,
       locale,
-      jsonLd: createJsonLdSoftwareSourceCode({
+      jsonLd: createJsonLdProject({
         name: project.title,
         description: project.description,
         pathname,
         codeRepository: project.github,
+        schemaType: project.schemaType,
+        license: project.license,
+        programmingLanguages: project.programmingLanguages,
         dateCreated: project.dateCreated,
         dateModified: project.updatedAt,
         slug: project.slug,

@@ -1,9 +1,11 @@
+import type { Project } from 'content-collections'
 import type {
   AboutPage,
   BlogPosting,
   CollectionPage,
   ListItem,
   Person,
+  SoftwareApplication,
   SoftwareSourceCode,
   WebPage,
   WebSite,
@@ -54,13 +56,12 @@ type JsonLdBlogPostingOptions = JsonLdWebSiteOptions & {
   dateModified?: string
 }
 
-type JsonLdSoftwareSourceCodeOptions = JsonLdWebSiteOptions & {
-  name: string
-  codeRepository: string
-  dateCreated: string
-  dateModified?: string
-  slug: string
-}
+type JsonLdProjectOptions = JsonLdWebSiteOptions &
+  Pick<Project, 'schemaType' | 'license' | 'programmingLanguages' | 'dateCreated' | 'slug'> & {
+    name: string
+    codeRepository?: string
+    dateModified?: string
+  }
 
 type JsonLdCollectionPageOptions = JsonLdWebPageOptions & {
   items: Array<Omit<ListItem, '@type' | 'position'>>
@@ -131,18 +132,20 @@ export function createJsonLdBlogPosting(options: JsonLdBlogPostingOptions): With
   }
 }
 
-export function createJsonLdSoftwareSourceCode(
-  options: JsonLdSoftwareSourceCodeOptions,
-): WithContext<SoftwareSourceCode> {
+export function createJsonLdProject(
+  options: JsonLdProjectOptions,
+): WithContext<SoftwareSourceCode | SoftwareApplication> {
   return {
     '@context': 'https://schema.org',
-    '@type': 'SoftwareSourceCode',
+    '@type': options.schemaType,
     name: options.name,
     description: options.description,
     url: getLocalizedUrl(options.pathname, options.locale),
-    codeRepository: options.codeRepository,
-    license: 'https://opensource.org/licenses/MIT',
-    programmingLanguage: 'TypeScript',
+    ...(options.license && { license: options.license }),
+    ...(options.schemaType === 'SoftwareSourceCode' && {
+      ...(options.codeRepository && { codeRepository: options.codeRepository }),
+      ...(options.programmingLanguages && { programmingLanguage: options.programmingLanguages }),
+    }),
     dateCreated: options.dateCreated,
     dateModified: options.dateModified,
     author: createJsonLdPerson(),
