@@ -10,7 +10,7 @@ type NowPlayingProps = React.ComponentProps<'div'>
 
 export function NowPlaying(props: NowPlayingProps) {
   const { className, ...rest } = props
-  const { data, isPending, isError } = useQuery(
+  const { data, isError } = useQuery(
     orpc.spotify.nowPlaying.queryOptions({
       staleTime: 30_000,
       refetchInterval: 30_000,
@@ -18,20 +18,31 @@ export function NowPlaying(props: NowPlayingProps) {
     }),
   )
 
+  let content: React.ReactNode
+
+  if (data?.isPlaying) {
+    content = (
+      <ExternalLink href={data.songUrl} className='hover:underline'>
+        <span className='sr-only'>Spotify: </span>
+        {data.title} - {data.artist}
+      </ExternalLink>
+    )
+  } else if (data) {
+    content = m.layout_now_playing_not_listening()
+  } else if (isError) {
+    content = m.error_now_playing_error()
+  } else {
+    content = m.common_loading()
+  }
+
   return (
     <div className={cn('flex items-center gap-4 text-sm', className)} {...rest}>
       <SiSpotify className='size-5 shrink-0 text-[#1ed760]' aria-hidden='true' />
-      <output className='min-w-0 flex-1 wrap-anywhere'>
-        {data?.isPlaying && (
-          <ExternalLink href={data.songUrl} className='hover:underline'>
-            <span className='sr-only'>Spotify: </span>
-            {data.title} - {data.artist}
-          </ExternalLink>
-        )}
-        {data && !data.isPlaying && m.layout_now_playing_not_listening()}
-        {!data && isPending && m.common_loading()}
-        {!data && isError && m.error_now_playing_error()}
-      </output>
+      {/* Use a status region to announce Spotify playback updates. */}
+      {/* oxlint-disable-next-line jsx-a11y/prefer-tag-over-role */}
+      <span role='status' className='min-w-0 flex-1 wrap-anywhere'>
+        {content}
+      </span>
     </div>
   )
 }

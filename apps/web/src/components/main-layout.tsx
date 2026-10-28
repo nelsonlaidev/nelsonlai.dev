@@ -1,27 +1,14 @@
-import { useRouter } from '@tanstack/react-router'
-import { useEffect, useRef } from 'react'
-
 import { SignInDialog } from '@/features/auth/sign-in-dialog'
-import { authClient } from '@/lib/auth-client'
 import { Footer } from '@/routes/_main/-components/footer'
 import { GradientBackground } from '@/routes/_main/-components/gradient-background'
 import { Header } from '@/routes/_main/-components/header'
 
-type MainLayoutProps = { children: React.ReactNode }
+type MainLayoutProps = {
+  children: React.ReactNode
+}
 
 export function MainLayout(props: MainLayoutProps) {
   const { children } = props
-  const router = useRouter()
-  const { data: session, isPending, error } = authClient.useSession()
-  const user = session?.user ?? null
-  const previousUserRef = useRef<typeof user | undefined>(undefined)
-
-  useEffect(() => {
-    if (isPending || (error && error.status !== 401) || previousUserRef.current === user) return
-
-    previousUserRef.current = user
-    void router.invalidate()
-  }, [error, isPending, router, user])
 
   return (
     <>

@@ -14,19 +14,9 @@ export function MobileNav() {
   useEffect(() => {
     if (!open) return
 
-    const media = globalThis.matchMedia('(min-width: 48rem)')
-    const handleBreakpointChange = (event: MediaQueryListEvent) => {
-      if (event.matches) setOpen(false)
-    }
-    const unsubscribe = router.subscribe('onBeforeNavigate', () => {
+    return router.subscribe('onBeforeNavigate', () => {
       setOpen(false)
     })
-
-    media.addEventListener('change', handleBreakpointChange)
-    return () => {
-      media.removeEventListener('change', handleBreakpointChange)
-      unsubscribe()
-    }
   }, [open, router])
 
   return (

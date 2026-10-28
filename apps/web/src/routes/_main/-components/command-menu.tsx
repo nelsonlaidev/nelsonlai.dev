@@ -38,6 +38,7 @@ export function CommandMenu() {
     }
 
     document.addEventListener('keydown', handleKeyDown)
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
     }
@@ -45,6 +46,7 @@ export function CommandMenu() {
 
   async function copyCurrentUrl() {
     setOpen(false)
+
     try {
       await navigator.clipboard.writeText(globalThis.location.href)
       toast.add({ type: 'success', title: m.success_copied_to_clipboard() })
@@ -55,7 +57,8 @@ export function CommandMenu() {
 
   async function handleSignOut() {
     setOpen(false)
-    if (await signOut()) await navigate({ to: '/' })
+
+    await signOut()
   }
 
   return (
