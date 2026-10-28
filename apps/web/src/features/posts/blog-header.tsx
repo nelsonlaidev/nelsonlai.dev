@@ -34,8 +34,6 @@ export function BlogHeader(props: BlogHeaderProps) {
       },
     }),
   )
-  const statsFallback = stats.isError ? m.common_error() : '--'
-  const countsFallback = counts.isError ? m.common_error() : '--'
 
   useEffect(() => {
     if (!hasIncrementedRef.current) {
@@ -43,6 +41,21 @@ export function BlogHeader(props: BlogHeaderProps) {
       increment.mutate({ slug: post.slug })
     }
   }, [increment, post.slug])
+
+  let viewsContent: React.ReactNode = '--'
+  let commentsContent: React.ReactNode = '--'
+
+  if (postStats) {
+    viewsContent = <NumberFlow value={postStats.views} />
+  } else if (stats.isError) {
+    viewsContent = m.common_error()
+  }
+
+  if (counts.data) {
+    commentsContent = <NumberFlow value={counts.data.comments + counts.data.replies} />
+  } else if (counts.isError) {
+    commentsContent = m.common_error()
+  }
 
   return (
     <div className='space-y-16 py-16'>
@@ -70,11 +83,11 @@ export function BlogHeader(props: BlogHeaderProps) {
           </div>
           <div className='space-y-1 md:mx-auto'>
             <div className='text-muted-foreground'>{m.blog_header_views()}</div>
-            {postStats ? <NumberFlow value={postStats.views} /> : statsFallback}
+            {viewsContent}
           </div>
           <div className='space-y-1 md:mx-auto'>
             <div className='text-muted-foreground'>{m.common_labels_comments()}</div>
-            {counts.data ? <NumberFlow value={counts.data.comments + counts.data.replies} /> : countsFallback}
+            {commentsContent}
           </div>
         </div>
       </div>

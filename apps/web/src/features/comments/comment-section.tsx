@@ -41,7 +41,18 @@ export function CommentSection(props: CommentSectionProps) {
     }),
   )
 
-  const countsFallback = counts.isError ? m.common_error() : '--'
+  let countsContent: React.ReactNode = '--'
+
+  if (counts.data) {
+    countsContent = (
+      <>
+        <NumberFlow value={counts.data.comments} /> {m.blog_comments_comments({ count: counts.data.comments })} ·{' '}
+        <NumberFlow value={counts.data.replies} /> {m.blog_comments_replies({ count: counts.data.replies })}
+      </>
+    )
+  } else if (counts.isError) {
+    countsContent = m.common_error()
+  }
 
   return (
     <section id='comments' className='space-y-6' aria-label={m.common_labels_comments()}>
@@ -65,16 +76,7 @@ export function CommentSection(props: CommentSectionProps) {
       )}
       <div className='flex flex-wrap items-center justify-between gap-3 text-sm'>
         <NumberFlowGroup>
-          <div>
-            {counts.data ? (
-              <>
-                <NumberFlow value={counts.data.comments} /> {m.blog_comments_comments({ count: counts.data.comments })}{' '}
-                · <NumberFlow value={counts.data.replies} /> {m.blog_comments_replies({ count: counts.data.replies })}
-              </>
-            ) : (
-              countsFallback
-            )}
-          </div>
+          <div>{countsContent}</div>
         </NumberFlowGroup>
         <DropdownMenu>
           <DropdownMenuTrigger render={<Button type='button' variant='outline' size='sm' />}>

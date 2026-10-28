@@ -11,7 +11,14 @@ export function GitHubStarButton() {
   const { data, isError } = useQuery(
     orpc.github.repositoryStats.queryOptions({ staleTime: 5 * 60 * 1000, refetchOnWindowFocus: false }),
   )
-  const count = data ? new Intl.NumberFormat(getLocale()).format(data.stars) : '--'
+
+  let count = '--'
+
+  if (data) {
+    count = new Intl.NumberFormat(getLocale()).format(data.stars)
+  } else if (isError) {
+    count = m.common_error()
+  }
 
   return (
     <ExternalLink
@@ -23,9 +30,7 @@ export function GitHubStarButton() {
         {m.layout_footer_github_star()}
         <span className='sr-only'>GitHub</span>
       </span>
-      <span className='flex h-8 items-center border-l bg-background pr-3 pl-2'>
-        {!data && isError ? m.common_error() : count}
-      </span>
+      <span className='flex h-8 items-center border-l bg-background pr-3 pl-2'>{count}</span>
     </ExternalLink>
   )
 }

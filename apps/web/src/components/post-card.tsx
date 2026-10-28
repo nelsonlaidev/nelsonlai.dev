@@ -18,7 +18,20 @@ type PostCardProps = {
 export function PostCard(props: PostCardProps) {
   const { post, stats, isStatsError = false, featured = false, lazy = true } = props
   const formattedDate = useFormattedDate(post.publishedAt)
-  const statsFallback = isStatsError ? m.common_error() : '--'
+
+  let statsContent: React.ReactNode = '--'
+
+  if (stats) {
+    statsContent = (
+      <>
+        <span>{m.common_likes({ count: stats.likes })}</span>
+        <span aria-hidden='true'>&middot;</span>
+        <span>{m.common_views({ count: stats.views })}</span>
+      </>
+    )
+  } else if (isStatsError) {
+    statsContent = m.common_error()
+  }
 
   return (
     <ContentCard
@@ -32,17 +45,7 @@ export function PostCard(props: PostCardProps) {
     >
       <div className='flex flex-wrap items-center justify-between gap-x-2 gap-y-1 px-2 pt-4 text-sm text-muted-foreground'>
         <time dateTime={post.publishedAt}>{formattedDate ?? '--'}</time>
-        <div className='flex gap-2'>
-          {stats ? (
-            <>
-              <span>{m.common_likes({ count: stats.likes })}</span>
-              <span aria-hidden='true'>&middot;</span>
-              <span>{m.common_views({ count: stats.views })}</span>
-            </>
-          ) : (
-            statsFallback
-          )}
-        </div>
+        <div className='flex gap-2'>{statsContent}</div>
       </div>
       <div className='flex flex-col px-2 py-4 transition-transform ease-out motion-safe:group-hover:translate-x-0.5 motion-reduce:transition-none'>
         <h3 className='text-2xl font-semibold'>{post.title}</h3>

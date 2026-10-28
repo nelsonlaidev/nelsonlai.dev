@@ -12,7 +12,19 @@ import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
 export function RecentActivity() {
-  const { data, isLoading, isError } = useQuery(orpc.admin.recentActivity.queryOptions())
+  const { data, isError } = useQuery(orpc.admin.recentActivity.queryOptions())
+
+  let content: React.ReactNode = <RecentActivitySkeleton />
+
+  if (data && data.activities.length > 0) {
+    content = data.activities.map((activity) => (
+      <ActivityItem key={`${activity.type}-${activity.id}`} activity={activity} />
+    ))
+  } else if (data) {
+    content = <p className='text-sm text-muted-foreground'>{m.admin_dashboard_recent_activity_empty()}</p>
+  } else if (isError) {
+    content = null
+  }
 
   return (
     <Card>
@@ -20,16 +32,8 @@ export function RecentActivity() {
         <CardTitle>{m.admin_dashboard_recent_activity_title()}</CardTitle>
       </CardHeader>
       <CardContent className='divide-y'>
-        {isLoading && <RecentActivitySkeleton />}
         {isError && <p className='text-sm text-destructive'>{m.error_failed_to_fetch_dashboard_data()}</p>}
-        {data &&
-          (data.activities.length > 0 ? (
-            data.activities.map((activity) => (
-              <ActivityItem key={`${activity.type}-${activity.id}`} activity={activity} />
-            ))
-          ) : (
-            <p className='text-sm text-muted-foreground'>{m.admin_dashboard_recent_activity_empty()}</p>
-          ))}
+        {content}
       </CardContent>
     </Card>
   )

@@ -11,7 +11,7 @@ export function AdminComments() {
     pageIndex: 0,
     pageSize: 10,
   })
-  const { data, isSuccess, isLoading, isError, isFetching } = useQuery(
+  const { data, isSuccess, isError, isFetching } = useQuery(
     orpc.admin.comment.list.queryOptions({
       input: {
         page: pagination.pageIndex + 1,
@@ -21,19 +21,21 @@ export function AdminComments() {
     }),
   )
 
-  return (
-    <>
-      {isSuccess && (
-        <CommentsTable
-          comments={data.comments}
-          pageCount={data.pageCount}
-          pagination={pagination}
-          onPaginationChange={setPagination}
-          isFetching={isFetching}
-        />
-      )}
-      {isLoading && <div>{m.common_loading()}</div>}
-      {isError && <div>{m.error_failed_to_fetch_comments_data()}</div>}
-    </>
-  )
+  let content: React.ReactNode = <div>{m.common_loading()}</div>
+
+  if (isSuccess) {
+    content = (
+      <CommentsTable
+        comments={data.comments}
+        pageCount={data.pageCount}
+        pagination={pagination}
+        onPaginationChange={setPagination}
+        isFetching={isFetching}
+      />
+    )
+  } else if (isError) {
+    content = <div>{m.error_failed_to_fetch_comments_data()}</div>
+  }
+
+  return content
 }

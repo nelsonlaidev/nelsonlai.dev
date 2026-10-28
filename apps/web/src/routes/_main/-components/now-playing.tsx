@@ -18,7 +18,7 @@ export function NowPlaying(props: NowPlayingProps) {
     }),
   )
 
-  let content: React.ReactNode
+  let content: React.ReactNode = m.common_loading()
 
   if (data?.isPlaying) {
     content = (
@@ -31,8 +31,6 @@ export function NowPlaying(props: NowPlayingProps) {
     content = m.layout_now_playing_not_listening()
   } else if (isError) {
     content = m.error_now_playing_error()
-  } else {
-    content = m.common_loading()
   }
 
   return (

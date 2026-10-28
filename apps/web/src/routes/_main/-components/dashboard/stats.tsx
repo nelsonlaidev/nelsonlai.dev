@@ -170,6 +170,22 @@ function StatCards(props: StatCardsProps) {
       {stats.map(({ title, link, linkText, icon, field, gradient, suffix }) => {
         const value = values?.[field]
 
+        let content: React.ReactNode = <span className='text-muted-foreground'>--</span>
+
+        if (value !== undefined) {
+          content = (
+            <>
+              {icon}
+              <span className='bg-clip-text text-transparent' style={{ backgroundImage: gradient }}>
+                <Counter value={value} />
+                {suffix && <span>{` ${suffix}`}</span>}
+              </span>
+            </>
+          )
+        } else if (isError) {
+          content = <span className='text-muted-foreground'>{m.common_error()}</span>
+        }
+
         return (
           <ExternalLink
             key={title}
@@ -177,19 +193,7 @@ function StatCards(props: StatCardsProps) {
             className='group relative overflow-hidden rounded-xl border p-4 transition-colors hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none'
           >
             <div className='flex flex-col items-center justify-center gap-2 transition-transform group-hover:-translate-y-24 group-focus-visible:-translate-y-24 motion-reduce:transition-none'>
-              <div className='flex min-h-9 items-center gap-2 text-3xl font-semibold tabular-nums'>
-                {value === undefined ? (
-                  <span className='text-muted-foreground'>{isError ? m.common_error() : '--'}</span>
-                ) : (
-                  <>
-                    {icon}
-                    <span className='bg-clip-text text-transparent' style={{ backgroundImage: gradient }}>
-                      <Counter value={value} />
-                      {suffix && <span>{` ${suffix}`}</span>}
-                    </span>
-                  </>
-                )}
-              </div>
+              <div className='flex min-h-9 items-center gap-2 text-3xl font-semibold tabular-nums'>{content}</div>
               <h2 className='text-center text-xl font-semibold'>{title}</h2>
             </div>
             <span

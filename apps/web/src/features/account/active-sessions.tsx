@@ -41,29 +41,37 @@ export function ActiveSessions(props: ActiveSessionsProps) {
     }),
   )
 
+  let content: React.ReactNode = <ActiveSessionsSkeleton />
+
+  if (sessions.data && sessions.data.length > 0) {
+    content = (
+      <div className='space-y-4'>
+        {sessions.data.map((session) => (
+          <SessionCard
+            key={session.id}
+            session={session}
+            isRevoking={revoke.isPending && revoke.variables.id === session.id}
+            disabled={revoke.isPending}
+            onRevoke={() => {
+              if (!revoke.isPending) revoke.mutate({ id: session.id })
+            }}
+          />
+        ))}
+      </div>
+    )
+  } else if (sessions.data) {
+    content = <Card className='py-12 text-center'>{m.account_no_active_sessions()}</Card>
+  } else if (sessions.isError) {
+    content = null
+  }
+
   return (
     <section className='space-y-6' aria-labelledby='sessions-heading' aria-busy={sessions.isPending}>
       <h2 id='sessions-heading' className='text-lg font-semibold'>
         {m.account_active_sessions()}
       </h2>
-      {sessions.isPending && <ActiveSessionsSkeleton />}
       {sessions.isError && <p role='alert'>{m.error_something_went_wrong()}</p>}
-      {sessions.data?.length === 0 && <Card className='py-12 text-center'>{m.account_no_active_sessions()}</Card>}
-      {sessions.data && (
-        <div className='space-y-4'>
-          {sessions.data.map((session) => (
-            <SessionCard
-              key={session.id}
-              session={session}
-              isRevoking={revoke.isPending && revoke.variables.id === session.id}
-              disabled={revoke.isPending}
-              onRevoke={() => {
-                if (!revoke.isPending) revoke.mutate({ id: session.id })
-              }}
-            />
-          ))}
-        </div>
-      )}
+      {content}
     </section>
   )
 }

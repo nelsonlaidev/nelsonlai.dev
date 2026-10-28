@@ -107,7 +107,13 @@ export function LikeButton(props: LikeButtonProps) {
     }
   }
 
-  const fallback = query.isError ? m.common_error() : '--'
+  let likesContent: React.ReactNode = '--'
+
+  if (query.data) {
+    likesContent = <NumberFlow value={query.data.likes + draft} />
+  } else if (query.isError) {
+    likesContent = m.common_error()
+  }
 
   return (
     <div className='mt-12 mb-4 flex justify-center'>
@@ -158,7 +164,7 @@ export function LikeButton(props: LikeButtonProps) {
         </svg>
         {m.common_like()}
         <Separator orientation='vertical' className='h-5 bg-current/20' />
-        {query.data ? <NumberFlow value={query.data.likes + draft} /> : fallback}
+        {likesContent}
       </motion.button>
     </div>
   )

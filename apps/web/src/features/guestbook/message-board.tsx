@@ -13,7 +13,7 @@ export function MessageBoard() {
   const session = authClient.useSession()
   const { isSigningOut, signOut } = useSignOut()
 
-  let composer: React.ReactNode
+  let composer: React.ReactNode = <SignIn />
 
   if (session.isPending) {
     composer = (
@@ -38,8 +38,6 @@ export function MessageBoard() {
         }}
       />
     )
-  } else {
-    composer = <SignIn />
   }
 
   return (

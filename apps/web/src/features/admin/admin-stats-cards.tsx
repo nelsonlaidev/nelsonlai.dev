@@ -21,7 +21,7 @@ const STAT_ITEMS = [
 ] as const
 
 export function AdminStatsCards() {
-  const { data, isSuccess, isLoading, isError } = useQuery(orpc.admin.stats.queryOptions())
+  const { data, isError } = useQuery(orpc.admin.stats.queryOptions())
 
   if (isError) {
     return <p className='text-sm text-destructive'>{m.error_failed_to_fetch_dashboard_data()}</p>
@@ -29,19 +29,24 @@ export function AdminStatsCards() {
 
   return (
     <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-5'>
-      {STAT_ITEMS.map((item) => (
-        <Card key={item.field} size='sm'>
-          <CardHeader>
-            <CardTitle className='flex items-center justify-between'>
-              {item.label()} <item.icon className='size-4 text-muted-foreground' />
-            </CardTitle>
-          </CardHeader>
-          <CardContent className='text-2xl font-bold'>
-            {isLoading && <Skeleton className='h-8 w-20' />}
-            {isSuccess && <NumberFlow value={data[item.field]} />}
-          </CardContent>
-        </Card>
-      ))}
+      {STAT_ITEMS.map((item) => {
+        let content: React.ReactNode = <Skeleton className='h-8 w-20' />
+
+        if (data) {
+          content = <NumberFlow value={data[item.field]} />
+        }
+
+        return (
+          <Card key={item.field} size='sm'>
+            <CardHeader>
+              <CardTitle className='flex items-center justify-between'>
+                {item.label()} <item.icon className='size-4 text-muted-foreground' />
+              </CardTitle>
+            </CardHeader>
+            <CardContent className='text-2xl font-bold'>{content}</CardContent>
+          </Card>
+        )
+      })}
     </div>
   )
 }

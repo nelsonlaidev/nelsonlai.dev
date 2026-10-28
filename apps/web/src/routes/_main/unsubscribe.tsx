@@ -50,6 +50,43 @@ function RouteComponent() {
         description={m.unsubscribe_invalid_link_description()}
       />
     )
+
+  let content: React.ReactNode = (
+    <CardContent className='flex justify-center'>
+      <Spinner />
+    </CardContent>
+  )
+
+  if (query.data && !query.data.isUnsubscribed) {
+    content = (
+      <CardContent className='space-y-8'>
+        <div className='space-y-2'>
+          <p>{m.common_labels_comment()}</p>
+          <blockquote className='rounded-xl border p-3 text-sm text-pretty wrap-break-word whitespace-pre-wrap text-muted-foreground dark:bg-input/30'>
+            {query.data.comment}
+          </blockquote>
+        </div>
+        <div className='space-y-3'>
+          <Button
+            disabled={unsubscribe.isPending}
+            className='w-full'
+            onClick={() => {
+              if (!unsubscribe.isPending) unsubscribe.mutate({ token })
+            }}
+          >
+            {unsubscribe.isPending && <Spinner />}
+            {m.common_labels_unsubscribe()}
+          </Button>
+          <p className='text-center text-xs text-balance text-muted-foreground'>
+            {m.unsubscribe_you_are_unsubscribing_as({ email: query.data.userEmail })}
+          </p>
+        </div>
+      </CardContent>
+    )
+  } else if (query.data) {
+    content = null
+  }
+
   return (
     <div className='flex justify-center py-12'>
       <Card className='w-full max-w-lg'>
@@ -70,36 +107,7 @@ function RouteComponent() {
             </CardDescription>
           </div>
         </CardHeader>
-        {query.data && !query.data.isUnsubscribed && (
-          <CardContent className='space-y-8'>
-            <div className='space-y-2'>
-              <p>{m.common_labels_comment()}</p>
-              <blockquote className='rounded-xl border p-3 text-sm text-pretty wrap-break-word whitespace-pre-wrap text-muted-foreground dark:bg-input/30'>
-                {query.data.comment}
-              </blockquote>
-            </div>
-            <div className='space-y-3'>
-              <Button
-                disabled={unsubscribe.isPending}
-                className='w-full'
-                onClick={() => {
-                  if (!unsubscribe.isPending) unsubscribe.mutate({ token })
-                }}
-              >
-                {unsubscribe.isPending && <Spinner />}
-                {m.common_labels_unsubscribe()}
-              </Button>
-              <p className='text-center text-xs text-balance text-muted-foreground'>
-                {m.unsubscribe_you_are_unsubscribing_as({ email: query.data.userEmail })}
-              </p>
-            </div>
-          </CardContent>
-        )}
-        {query.isPending && (
-          <CardContent className='flex justify-center'>
-            <Spinner />
-          </CardContent>
-        )}
+        {content}
         {unsubscribe.isError && <CardContent role='alert'>{m.error_something_went_wrong()}</CardContent>}
       </Card>
     </div>
