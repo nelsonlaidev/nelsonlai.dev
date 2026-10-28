@@ -163,7 +163,7 @@ export function LikeButton(props: LikeButtonProps) {
           </g>
         </svg>
         {m.common_like()}
-        <Separator orientation='vertical' className='h-5 bg-current/20' />
+        <Separator orientation='vertical' className='h-5 bg-current/20 data-vertical:self-center' />
         {likesContent}
       </motion.button>
     </div>
