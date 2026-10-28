@@ -17,12 +17,14 @@ const incrementView = publicProcedure
   .input(PostSlugInputSchema)
   .output(PostStatsListSchema.element)
   .handler(async ({ input, context }) => {
+    if (!context.posts.some((post) => post.slug === input.slug)) throw new ORPCError('NOT_FOUND')
+
     const [post] = await context.db
-      .update(posts)
-      .set({ views: sql`${posts.views} + 1` })
-      .where(eq(posts.slug, input.slug))
+      .insert(posts)
+      .values({ slug: input.slug, views: 1 })
+      .onConflictDoUpdate({ target: posts.slug, set: { views: sql`${posts.views} + 1` } })
       .returning({ slug: posts.slug, views: posts.views, likes: posts.likes })
-    if (!post) throw new ORPCError('NOT_FOUND')
+    if (!post) throw new ORPCError('INTERNAL_SERVER_ERROR')
     return post
   })
 
