@@ -12,6 +12,7 @@ export const Route = createFileRoute('/rss.xml')({
     handlers: {
       GET: () => {
         const locale = getLocale()
+
         const feed = new RSS({
           title: SITE.name,
           description: m.metadata_site_description({}, { locale }),
@@ -22,6 +23,7 @@ export const Route = createFileRoute('/rss.xml')({
           copyright: `© ${new Date().getFullYear()} ${SITE.name}. All rights reserved.`,
           webMaster: SITE.email,
         })
+
         for (const post of listPosts(locale)) {
           feed.item({
             title: post.title,
@@ -31,6 +33,7 @@ export const Route = createFileRoute('/rss.xml')({
             author: SITE.name,
           })
         }
+
         return new Response(feed.xml({ indent: true }), {
           headers: {
             'Content-Type': 'application/xml; charset=utf-8',
