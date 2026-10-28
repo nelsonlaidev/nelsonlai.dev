@@ -25,6 +25,7 @@ nelsonlai
 nelsonlaidev
 nextdotjs
 nodedotjs
+noto
 orbstack
 paraglide
 paralleldrive

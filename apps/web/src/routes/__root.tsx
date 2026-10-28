@@ -1,5 +1,7 @@
 import '@fontsource-variable/geist/wght.css'
 import '@fontsource-variable/geist-mono/wght.css'
+import '@fontsource-variable/noto-sans-tc/wght.css'
+import '@fontsource-variable/noto-sans-sc/wght.css'
 
 import type { QueryClient } from '@tanstack/react-query'
 import type { Formats } from 'use-intl'
