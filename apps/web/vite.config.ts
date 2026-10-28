@@ -51,7 +51,13 @@ const config = defineConfig({
       outputStructure: 'message-modules',
       emitTsDeclarations: true,
       cookieName: 'PARAGLIDE_LOCALE',
-      strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale'],
+      strategy: ['cookie', 'preferredLanguage', 'url', 'baseLocale'],
+      routeStrategies: [
+        {
+          match: '/:locale(zh-TW|zh-CN|ja|es|pt-BR){/:path(.*)}?',
+          strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale'],
+        },
+      ],
       urlPatterns: [
         {
           pattern: '/',
