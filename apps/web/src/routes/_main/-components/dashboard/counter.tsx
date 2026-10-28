@@ -11,7 +11,7 @@ export function Counter(props: CounterProps) {
   const { value } = props
 
   const ref = useRef<HTMLSpanElement>(null)
-  const isInView = useInView(ref, { once: true })
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
   const reducedMotion = useReducedMotion()
   const locale = getLocale()
   const formattedValue = new Intl.NumberFormat(locale).format(value)
@@ -21,14 +21,20 @@ export function Counter(props: CounterProps) {
     if (!element) return
 
     const formatter = new Intl.NumberFormat(locale)
-    if (!isInView || reducedMotion) {
+    if (reducedMotion) {
       element.textContent = formatter.format(value)
       return
     }
 
+    if (!isInView) {
+      element.textContent = formatter.format(0)
+      return
+    }
+
     const controls = animate(0, value, {
-      duration: 1,
-      ease: 'easeOut',
+      type: 'spring',
+      damping: 100,
+      stiffness: 300,
       onUpdate: (latest) => {
         element.textContent = formatter.format(Math.round(latest))
       },
@@ -42,7 +48,7 @@ export function Counter(props: CounterProps) {
   return (
     <>
       <span ref={ref} aria-hidden='true'>
-        {formattedValue}
+        0
       </span>
       <span className='sr-only'>{formattedValue}</span>
     </>
