@@ -14,6 +14,7 @@ import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as MainAboutRouteImport } from './routes/_main/about'
 import { Route as MainAccountRouteRouteImport } from './routes/_main/account/route'
@@ -21,7 +22,6 @@ import { Route as MainDashboardRouteImport } from './routes/_main/dashboard'
 import { Route as MainGuestbookRouteImport } from './routes/_main/guestbook'
 import { Route as MainPrivacyRouteImport } from './routes/_main/privacy'
 import { Route as MainTermsRouteImport } from './routes/_main/terms'
-import { Route as MainUnsubscribeRouteImport } from './routes/_main/unsubscribe'
 import { Route as MainUsesRouteImport } from './routes/_main/uses'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminCommentsRouteImport } from './routes/admin/comments'
@@ -61,6 +61,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MainIndexRoute = MainIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -94,11 +99,6 @@ const MainPrivacyRoute = MainPrivacyRouteImport.update({
 const MainTermsRoute = MainTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
-  getParentRoute: () => MainRouteRoute,
-} as any)
-const MainUnsubscribeRoute = MainUnsubscribeRouteImport.update({
-  id: '/unsubscribe',
-  path: '/unsubscribe',
   getParentRoute: () => MainRouteRoute,
 } as any)
 const MainUsesRoute = MainUsesRouteImport.update({
@@ -179,13 +179,13 @@ export interface FileRoutesByFullPath {
   '/robots.txt': typeof RobotsDottxtRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/account': typeof MainAccountRouteRouteWithChildren
   '/about': typeof MainAboutRoute
   '/dashboard': typeof MainDashboardRoute
   '/guestbook': typeof MainGuestbookRoute
   '/privacy': typeof MainPrivacyRoute
   '/terms': typeof MainTermsRoute
-  '/unsubscribe': typeof MainUnsubscribeRoute
   '/uses': typeof MainUsesRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/users': typeof AdminUsersRoute
@@ -205,12 +205,12 @@ export interface FileRoutesByTo {
   '/robots.txt': typeof RobotsDottxtRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/about': typeof MainAboutRoute
   '/dashboard': typeof MainDashboardRoute
   '/guestbook': typeof MainGuestbookRoute
   '/privacy': typeof MainPrivacyRoute
   '/terms': typeof MainTermsRoute
-  '/unsubscribe': typeof MainUnsubscribeRoute
   '/uses': typeof MainUsesRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/users': typeof AdminUsersRoute
@@ -234,13 +234,13 @@ export interface FileRoutesById {
   '/robots.txt': typeof RobotsDottxtRoute
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/_main/account': typeof MainAccountRouteRouteWithChildren
   '/_main/about': typeof MainAboutRoute
   '/_main/dashboard': typeof MainDashboardRoute
   '/_main/guestbook': typeof MainGuestbookRoute
   '/_main/privacy': typeof MainPrivacyRoute
   '/_main/terms': typeof MainTermsRoute
-  '/_main/unsubscribe': typeof MainUnsubscribeRoute
   '/_main/uses': typeof MainUsesRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/users': typeof AdminUsersRoute
@@ -265,13 +265,13 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/rss.xml'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/account'
     | '/about'
     | '/dashboard'
     | '/guestbook'
     | '/privacy'
     | '/terms'
-    | '/unsubscribe'
     | '/uses'
     | '/admin/comments'
     | '/admin/users'
@@ -291,12 +291,12 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/rss.xml'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/about'
     | '/dashboard'
     | '/guestbook'
     | '/privacy'
     | '/terms'
-    | '/unsubscribe'
     | '/uses'
     | '/admin/comments'
     | '/admin/users'
@@ -319,13 +319,13 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/rss.xml'
     | '/sitemap.xml'
+    | '/unsubscribe'
     | '/_main/account'
     | '/_main/about'
     | '/_main/dashboard'
     | '/_main/guestbook'
     | '/_main/privacy'
     | '/_main/terms'
-    | '/_main/unsubscribe'
     | '/_main/uses'
     | '/admin/comments'
     | '/admin/users'
@@ -349,6 +349,7 @@ export interface RootRouteChildren {
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   RssDotxmlRoute: typeof RssDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
   OgSplatRoute: typeof OgSplatRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiAvatarChar123idChar125DotwebpRoute: typeof ApiAvatarChar123idChar125DotwebpRoute
@@ -390,6 +391,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_main/': {
@@ -439,13 +447,6 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof MainTermsRouteImport
-      parentRoute: typeof MainRouteRoute
-    }
-    '/_main/unsubscribe': {
-      id: '/_main/unsubscribe'
-      path: '/unsubscribe'
-      fullPath: '/unsubscribe'
-      preLoaderRoute: typeof MainUnsubscribeRouteImport
       parentRoute: typeof MainRouteRoute
     }
     '/_main/uses': {
@@ -569,7 +570,6 @@ interface MainRouteRouteChildren {
   MainGuestbookRoute: typeof MainGuestbookRoute
   MainPrivacyRoute: typeof MainPrivacyRoute
   MainTermsRoute: typeof MainTermsRoute
-  MainUnsubscribeRoute: typeof MainUnsubscribeRoute
   MainUsesRoute: typeof MainUsesRoute
   MainIndexRoute: typeof MainIndexRoute
   MainBlogSlugRoute: typeof MainBlogSlugRoute
@@ -585,7 +585,6 @@ const MainRouteRouteChildren: MainRouteRouteChildren = {
   MainGuestbookRoute: MainGuestbookRoute,
   MainPrivacyRoute: MainPrivacyRoute,
   MainTermsRoute: MainTermsRoute,
-  MainUnsubscribeRoute: MainUnsubscribeRoute,
   MainUsesRoute: MainUsesRoute,
   MainIndexRoute: MainIndexRoute,
   MainBlogSlugRoute: MainBlogSlugRoute,
@@ -620,6 +619,7 @@ const rootRouteChildren: RootRouteChildren = {
   RobotsDottxtRoute: RobotsDottxtRoute,
   RssDotxmlRoute: RssDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
   OgSplatRoute: OgSplatRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiAvatarChar123idChar125DotwebpRoute: ApiAvatarChar123idChar125DotwebpRoute,

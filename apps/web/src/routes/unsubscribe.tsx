@@ -6,11 +6,10 @@ import { createFileRoute } from '@tanstack/react-router'
 import { BellOffIcon } from 'lucide-react'
 import * as z from 'zod'
 
-import { PageHeader } from '@/components/page-header'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
-export const Route = createFileRoute('/_main/unsubscribe')({
+export const Route = createFileRoute('/unsubscribe')({
   validateSearch: (search) => {
     const parsed = z.object({ token: z.string().max(4096).optional() }).safeParse(search)
     return parsed.success ? parsed.data : { token: undefined }
@@ -43,21 +42,26 @@ function RouteComponent() {
     }),
   )
 
-  if (!token || query.isError)
-    return (
-      <PageHeader
-        title={m.unsubscribe_invalid_unsubscribe_link()}
-        description={m.unsubscribe_invalid_link_description()}
-      />
-    )
-
+  const isInvalid = !token || query.isError
+  let title = m.common_loading()
+  let description: string | undefined
   let content: React.ReactNode = (
     <CardContent className='flex justify-center'>
       <Spinner />
     </CardContent>
   )
 
-  if (query.data && !query.data.isUnsubscribed) {
+  if (isInvalid) {
+    title = m.unsubscribe_invalid_unsubscribe_link()
+    description = m.unsubscribe_invalid_link_description()
+    content = null
+  } else if (query.data?.isUnsubscribed) {
+    title = m.unsubscribe_you_have_been_unsubscribed()
+    description = m.unsubscribe_unsubscribed_description()
+    content = null
+  } else if (query.data) {
+    title = m.unsubscribe_unsubscribe_from_this_comment()
+    description = m.unsubscribe_stop_receiving_email_notifications()
     content = (
       <CardContent className='space-y-8'>
         <div className='space-y-2'>
@@ -83,33 +87,27 @@ function RouteComponent() {
         </div>
       </CardContent>
     )
-  } else if (query.data) {
-    content = null
   }
 
   return (
-    <div className='flex justify-center py-12'>
-      <Card className='w-full max-w-lg'>
+    <main className='flex min-h-svh w-full items-center justify-center p-4'>
+      <Card className='w-full max-w-lg' aria-busy={(Boolean(token) && query.isPending) || unsubscribe.isPending}>
         <CardHeader className='space-y-4 text-center'>
           <div className='mx-auto flex size-16 items-center justify-center rounded-full bg-accent'>
             <BellOffIcon className='size-8' aria-hidden='true' />
           </div>
-          <div className='space-y-2'>
+          <div className={isInvalid ? 'space-y-4' : 'space-y-2'} aria-live='polite'>
             <CardTitle className='text-2xl text-balance'>
-              {query.data?.isUnsubscribed
-                ? m.unsubscribe_you_have_been_unsubscribed()
-                : m.unsubscribe_unsubscribe_from_this_comment()}
+              <h1>{title}</h1>
             </CardTitle>
-            <CardDescription className='text-base text-pretty text-muted-foreground'>
-              {query.data?.isUnsubscribed
-                ? m.unsubscribe_unsubscribed_description()
-                : m.unsubscribe_stop_receiving_email_notifications()}
-            </CardDescription>
+            {description && (
+              <CardDescription className='text-base text-pretty text-muted-foreground'>{description}</CardDescription>
+            )}
           </div>
         </CardHeader>
         {content}
         {unsubscribe.isError && <CardContent role='alert'>{m.error_something_went_wrong()}</CardContent>}
       </Card>
-    </div>
+    </main>
   )
 }
