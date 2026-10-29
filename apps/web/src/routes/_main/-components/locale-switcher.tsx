@@ -28,7 +28,9 @@ export function LocaleSwitcher() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' aria-label={m.layout_change_language()} />}>
+      <DropdownMenuTrigger
+        render={<Button variant='outline' aria-label={`${m.layout_change_language()}: ${LOCALE_LABELS[locale]}`} />}
+      >
         <LanguagesIcon aria-hidden='true' />
         {LOCALE_LABELS[locale]}
         <ChevronDownIcon aria-hidden='true' />

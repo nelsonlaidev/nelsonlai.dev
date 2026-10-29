@@ -33,8 +33,10 @@ export function CommentSection(props: CommentSectionProps) {
   if (counts.data) {
     countsContent = (
       <>
-        <NumberFlow value={counts.data.comments} /> {m.blog_comments_comments({ count: counts.data.comments })} ·{' '}
-        <NumberFlow value={counts.data.replies} /> {m.blog_comments_replies({ count: counts.data.replies })}
+        <NumberFlow data-testid='blog-comment-count' value={counts.data.comments} />{' '}
+        {m.blog_comments_comments({ count: counts.data.comments })} ·{' '}
+        <NumberFlow data-testid='reply-count' value={counts.data.replies} />{' '}
+        {m.blog_comments_replies({ count: counts.data.replies })}
       </>
     )
   } else if (counts.isError) {

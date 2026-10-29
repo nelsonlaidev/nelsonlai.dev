@@ -10,3 +10,9 @@ tsconfig.tsbuildinfo
 # Environment Variables
 .env*
 !.env.schema
+
+# Test artifacts
+coverage/
+playwright-report/
+test-results/
+apps/web/src/tests/e2e/.auth/

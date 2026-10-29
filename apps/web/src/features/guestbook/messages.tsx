@@ -39,7 +39,7 @@ export function Messages(props: MessagesProps) {
   const noMessages = isSuccess && data.pages.every((page) => page.messages.length === 0)
 
   return (
-    <div className='flex flex-col gap-4'>
+    <div data-testid='guestbook-messages-list' className='flex flex-col gap-4'>
       {data?.pages.map((page) =>
         page.messages.map((message) => (
           <Message key={message.id} message={message} isAuthor={message.userId === userId} />
@@ -71,7 +71,7 @@ function Message(props: MessageProps) {
   const formattedDate = useFormattedDate(message.createdAt, { formatName: 'long' })
 
   return (
-    <div className='rounded-xl border p-4'>
+    <div data-testid={`message-${message.id}`} className='rounded-xl border p-4'>
       <div className='mb-3 flex gap-3'>
         <UserAvatar id={message.userId} name={message.user.name} image={message.user.image} size='lg' />
         <div className='flex flex-col justify-center gap-px text-sm'>

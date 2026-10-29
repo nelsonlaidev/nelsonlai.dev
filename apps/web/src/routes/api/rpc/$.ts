@@ -17,6 +17,10 @@ export const Route = createFileRoute('/api/rpc/$')({
   server: {
     handlers: {
       ANY: async ({ request }) => {
+        if (request.signal.aborted) {
+          return Response.json({ json: { code: 'CLIENT_CLOSED_REQUEST' } }, { status: 499 })
+        }
+
         const { response } = await handler.handle(request, {
           prefix: '/api/rpc',
           context: await createORPCContext(request),

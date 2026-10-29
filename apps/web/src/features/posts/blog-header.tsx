@@ -46,13 +46,13 @@ export function BlogHeader(props: BlogHeaderProps) {
   let commentsContent: React.ReactNode = '--'
 
   if (postStats) {
-    viewsContent = <NumberFlow value={postStats.views} />
+    viewsContent = <NumberFlow data-testid='view-count' value={postStats.views} />
   } else if (stats.isError) {
     viewsContent = m.common_error()
   }
 
   if (counts.data) {
-    commentsContent = <NumberFlow value={counts.data.comments + counts.data.replies} />
+    commentsContent = <NumberFlow data-testid='comment-count' value={counts.data.comments + counts.data.replies} />
   } else if (counts.isError) {
     commentsContent = m.common_error()
   }

@@ -1,0 +1,25 @@
+name: Setup
+description: Install Node.js, pnpm, and workspace dependencies
+
+runs:
+  using: composite
+  steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v6
+
+    - name: Install Node.js
+      uses: actions/setup-node@v7
+      with:
+        node-version: '24'
+        cache: pnpm
+        cache-dependency-path: pnpm-lock.yaml
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
+      env:
+        PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+
+    - name: Generate workspace environment modules
+      shell: bash
+      run: pnpm env:generate

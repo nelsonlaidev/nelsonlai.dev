@@ -2,7 +2,8 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],
-      "content-collections": ["./.content-collections/generated"]
+      "content-collections": ["./.content-collections/generated"],
+      "@messages/*": ["./messages/*"]
     },
     "types": ["@total-typescript/ts-reset", "@nelsonlaidev/typescript-config/react"]
   },

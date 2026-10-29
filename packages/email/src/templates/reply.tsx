@@ -32,8 +32,10 @@ type ReplyEmailTemplateProps = {
 }
 
 function ReplyEmailTemplate(props: ReplyEmailTemplateProps) {
-  const { reply, replierName, replierImage, comment, date, replyUrl, postTitle, postUrl, siteUrl, unsubscribeUrl } =
-    props
+  const { reply, replierName, replierImage, comment, date, replyUrl, postTitle, postUrl, siteUrl, unsubscribeUrl } = {
+    ...ReplyEmailTemplate.PreviewProps,
+    ...props,
+  }
 
   return (
     <Html>

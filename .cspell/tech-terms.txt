@@ -4,11 +4,16 @@ codegen
 dotwebp
 doublestar
 frontmatter
+haspopup
 healthcheck
 innerhtml
 isready
+menuitemradio
 nosniff
+parsererror
 techstack
+tmpfs
+wcag
 webp
 wght
 wifi

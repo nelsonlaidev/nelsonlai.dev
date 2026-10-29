@@ -31,7 +31,6 @@
     "@types/react-dom": "19.3.0",
     "react-dom": "19.3.1",
     "tailwindcss": "catalog:",
-    "tsx": "4.23.15",
     "typescript": "catalog:"
   }
 }

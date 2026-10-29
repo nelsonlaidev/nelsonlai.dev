@@ -132,12 +132,23 @@ function CommentItem(props: CommentItemProps) {
   const highlighted = comment.id === (highlightedReplyId ?? highlightedCommentId)
   const elementRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
+  const [optimisticVote, setOptimisticVote] = useState<boolean | null | undefined>()
+  const liked = optimisticVote === undefined ? comment.liked : optimisticVote
+  const likeCount = comment.likeCount + Number(liked === true) - Number(comment.liked === true)
+  const dislikeCount = comment.dislikeCount + Number(liked === false) - Number(comment.liked === false)
   const vote = useMutation(
     orpc.comments.vote.mutationOptions({
-      onSuccess: () => {
-        void queryClient.invalidateQueries({ queryKey: orpc.comments.list.key() })
+      onMutate: (input) => {
+        setOptimisticVote(input.isLike)
       },
-      onError: () => toast.add({ type: 'error', title: m.error_something_went_wrong() }),
+      onError: () => {
+        setOptimisticVote(undefined)
+        toast.add({ type: 'error', title: m.error_something_went_wrong() })
+      },
+      onSettled: async () => {
+        await queryClient.invalidateQueries({ queryKey: orpc.comments.list.key() })
+        setOptimisticVote(undefined)
+      },
     }),
   )
 
@@ -170,7 +181,7 @@ function CommentItem(props: CommentItemProps) {
 
   return (
     <>
-      <div ref={elementRef} className='scroll-m-32 p-2.5'>
+      <div data-testid={`comment-${comment.id}`} ref={elementRef} className='scroll-m-32 p-2.5'>
         {highlighted && <Badge className='mb-4'>{m.blog_comments_highlighted_comment()}</Badge>}
         <div className='flex gap-4'>
           <UserAvatar id={comment.user.id} name={comment.user.name} image={comment.user.image} />
@@ -237,14 +248,14 @@ function CommentItem(props: CommentItemProps) {
                   size='sm'
                   className='font-mono text-xs text-muted-foreground aria-pressed:bg-accent aria-pressed:text-accent-foreground'
                   aria-label={m.common_like()}
-                  aria-pressed={comment.liked === true}
+                  aria-pressed={liked === true}
                   disabled={vote.isPending}
                   onClick={() => {
                     castVote(true)
                   }}
                 >
                   <ThumbsUpIcon aria-hidden='true' />
-                  <NumberFlow value={comment.likeCount} />
+                  <NumberFlow value={likeCount} />
                 </Button>
                 <Button
                   type='button'
@@ -252,14 +263,14 @@ function CommentItem(props: CommentItemProps) {
                   size='sm'
                   className='font-mono text-xs text-muted-foreground aria-pressed:bg-accent aria-pressed:text-accent-foreground'
                   aria-label={m.blog_comments_dislike()}
-                  aria-pressed={comment.liked === false}
+                  aria-pressed={liked === false}
                   disabled={vote.isPending}
                   onClick={() => {
                     castVote(false)
                   }}
                 >
                   <ThumbsDownIcon aria-hidden='true' />
-                  <NumberFlow value={comment.dislikeCount} />
+                  <NumberFlow value={dislikeCount} />
                 </Button>
                 {!comment.parentId && (
                   <Button
@@ -302,7 +313,7 @@ function CommentItem(props: CommentItemProps) {
                   aria-hidden='true'
                   className='size-4 transition-transform duration-200 motion-reduce:transition-none'
                 />
-                <NumberFlow value={comment.replyCount} />
+                <NumberFlow data-testid='comment-reply-count' value={comment.replyCount} />
                 {m.blog_comments_replies({ count: comment.replyCount })}
               </Button>
             )}

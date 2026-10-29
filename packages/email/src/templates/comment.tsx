@@ -30,7 +30,10 @@ type CommentEmailTemplateProps = {
 }
 
 function CommentEmailTemplate(props: CommentEmailTemplateProps) {
-  const { comment, commenterName, commenterImage, date, commentUrl, postTitle, postUrl, siteUrl } = props
+  const { comment, commenterName, commenterImage, date, commentUrl, postTitle, postUrl, siteUrl } = {
+    ...CommentEmailTemplate.PreviewProps,
+    ...props,
+  }
 
   return (
     <Html>

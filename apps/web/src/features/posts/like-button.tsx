@@ -110,7 +110,7 @@ export function LikeButton(props: LikeButtonProps) {
   let likesContent: React.ReactNode = '--'
 
   if (query.data) {
-    likesContent = <NumberFlow value={query.data.likes + draft} />
+    likesContent = <NumberFlow data-testid='like-count' value={query.data.likes + draft} />
   } else if (query.isError) {
     likesContent = m.common_error()
   }

@@ -1,4 +1,4 @@
-import { defineConfig, react, tailwindcss } from '@nelsonlaidev/oxlint-config'
+import { defineConfig, playwright, react, tailwindcss, vitest } from '@nelsonlaidev/oxlint-config'
 import { getDefaultSelectors } from 'eslint-plugin-better-tailwindcss/defaults'
 
 export default defineConfig({
@@ -8,6 +8,20 @@ export default defineConfig({
       rules: {
         'better-tailwindcss/no-unknown-classes': ['error', { ignore: ['not-prose', 'shiki'] }],
       },
+    }),
+    playwright({
+      files: ['apps/web/src/tests/e2e/**/*.test.{ts,tsx}'],
+      rules: {
+        'playwright/expect-expect': [
+          'error',
+          {
+            assertFunctionNames: ['a11y', 'checkAppliedTheme', 'checkStoredTheme'],
+          },
+        ],
+      },
+    }),
+    vitest({
+      files: ['apps/web/src/tests/unit/**/*.test.{ts,tsx}'],
     }),
   ],
   settings: {
