@@ -1,6 +1,7 @@
 import type { Globe } from 'cobe'
 
 import { Badge } from '@repo/ui/components/badge'
+import { cn } from 'cn'
 import createGlobe from 'cobe'
 import { MapPinIcon } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -159,8 +160,10 @@ export function LocationCard() {
         <canvas
           ref={canvasRef}
           onPointerDown={handlePointerDown}
-          data-ready={ready}
-          className='aspect-square size-full cursor-grab touch-none opacity-0 transition-opacity data-[ready=true]:opacity-100'
+          className={cn(
+            'aspect-square size-full cursor-grab touch-none transition-opacity',
+            ready ? 'opacity-100' : 'opacity-0',
+          )}
         />
         {MARKERS.map((marker) => (
           <div

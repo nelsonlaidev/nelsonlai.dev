@@ -55,7 +55,7 @@ export function CommentCodeBlock(props: CommentCodeBlockProps) {
   }, [code, lang])
 
   return (
-    <CodeBlock data-lang={lang} title={title} className='shiki max-h-120' figureClassName='my-2'>
+    <CodeBlock data-lang={lang} title={title} className='shiki max-h-120' figureClassName='my-6.25 mb-8.75'>
       {/* Shiki escapes user content before generating highlighted HTML. */}
       {highlighted?.code === code && highlighted.lang === lang ? (
         // oxlint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml

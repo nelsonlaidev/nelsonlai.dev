@@ -5,9 +5,10 @@ import { m } from '@/paraglide/messages'
 import { Hero } from '@/routes/_main/-components/home/hero'
 
 describe('<Hero />', () => {
-  test('renders the current introduction and location', () => {
+  test('renders the ocean introduction and links to the projects chapter', () => {
     render(<Hero />)
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(m.homepage_hero_intro())
-    expect(screen.getByText(m.homepage_hero_location())).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(m.ocean_hero_title())
+    expect(screen.getByText(m.ocean_coordinate())).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: m.ocean_dive() })).toHaveAttribute('href', '#discoveries')
   })
 })

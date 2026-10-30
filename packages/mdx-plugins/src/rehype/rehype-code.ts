@@ -24,7 +24,7 @@ export const DEFAULT_SHIKI_THEMES = {
   dark: 'github-dark-default',
 }
 
-export function rehypeCode(): Transformer<Root, Root> {
+export function rehypeCode(options?: { ocean?: boolean }): Transformer<Root, Root> {
   const transformers: ShikiTransformer[] = [
     {
       preprocess(code, { meta }) {
@@ -69,11 +69,36 @@ export function rehypeCode(): Transformer<Root, Root> {
 
   return async (tree, file) => {
     const instance = await highlighter
+    const oceanTokens: Record<string, string> = {
+      '#6A737D': '#9aafb7',
+      '#F97583': '#a7dacc',
+      '#79B8FF': '#a7dacc',
+      '#B392F0': '#d9cfac',
+      '#9ECBFF': '#bcdab3',
+      '#FDAEB7': '#e9b8ad',
+    }
+    if (options?.ocean) {
+      await instance.loadTheme('github-dark')
+    }
     const transformer = rehypeShikiFromHighlighter(instance, {
-      themes: DEFAULT_SHIKI_THEMES,
+      themes: options?.ocean ? { light: 'github-dark', dark: 'github-dark' } : DEFAULT_SHIKI_THEMES,
       defaultColor: false,
       defaultLanguage: 'plaintext',
-      transformers,
+      transformers: options?.ocean
+        ? [
+            ...transformers,
+            {
+              span(node) {
+                const style = node.properties.style
+                if (typeof style === 'string')
+                  node.properties.style = style.replaceAll(
+                    /#[0-9a-f]{6}/gi,
+                    (color) => oceanTokens[color.toUpperCase()] ?? color,
+                  )
+              },
+            },
+          ]
+        : transformers,
       parseMetaString: (meta) => {
         const titleMatch = titleRegex.exec(meta)
         const title = titleMatch?.[1] ?? null

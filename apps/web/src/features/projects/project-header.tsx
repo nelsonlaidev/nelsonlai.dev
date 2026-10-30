@@ -1,64 +1,52 @@
-import type { Project } from 'content-collections'
+import type { ProjectSummary } from './types'
 
-import { buttonVariants } from '@repo/ui/components/button'
 import { ExternalLink } from '@repo/ui/components/external-link'
-import { cn } from 'cn'
-import { ArrowUpRightIcon } from 'lucide-react'
-import { motion, useReducedMotion } from 'motion/react'
+import { ArrowRightIcon } from 'lucide-react'
 
 import { m } from '@/paraglide/messages'
 
-type ProjectHeaderProps = Pick<Project, 'title' | 'description' | 'homepage' | 'github'>
+import { projectSpecimen } from './presentation'
 
-const variants = {
-  hide: { x: -30, opacity: 0 },
-  show: { x: 0, opacity: 1 },
+type ProjectHeaderProps = Pick<ProjectSummary, 'slug' | 'title' | 'description'> & {
+  homepage?: string
+  github?: string
+  category: string
 }
 
 export function ProjectHeader(props: ProjectHeaderProps) {
-  const { title, description, homepage, github } = props
-  const reducedMotion = useReducedMotion()
-  const repository = github ? new URL(github).pathname.replaceAll(/^\/|\/$/g, '') : undefined
+  const { slug, title, description, homepage, github, category } = props
 
   return (
-    <div className='space-y-8 pt-10'>
-      <motion.div
-        className='flex flex-col gap-3'
-        variants={variants}
-        initial={reducedMotion ? false : 'hide'}
-        animate='show'
-        transition={{ duration: reducedMotion ? 0 : 0.3 }}
-      >
-        <h1 className='text-3xl font-semibold'>{title}</h1>
-        <p className='text-muted-foreground'>{description}</p>
-      </motion.div>
+    <div className='mb-8.75 flex flex-col items-start justify-between gap-6.75 min-[701px]:mb-12.5 min-[701px]:flex-row min-[701px]:items-end min-[701px]:gap-7.5'>
+      <div className='min-w-0'>
+        <span className='mb-6 block text-xs/normal tracking-[0.02em] text-[#b9d4c7]'>
+          {m.project_category()} {String(projectSpecimen(slug).number).padStart(2, '0')} / {category}
+        </span>
+        <h1 className='text-[clamp(68px,9vw,130px)] leading-[1.04] font-[420] tracking-[-0.065em] max-[701px]:text-[70px]'>
+          {title}
+        </h1>
+        <p className='mt-3.75 text-[17px]/[1.6] tracking-tight text-[#b1ccc3] min-[701px]:mt-5 min-[701px]:text-xl'>
+          {description}
+        </p>
+      </div>
       {(homepage ?? github) && (
-        <motion.div
-          className='flex flex-col items-start gap-2 sm:flex-row sm:gap-4'
-          variants={variants}
-          initial={reducedMotion ? false : 'hide'}
-          animate='show'
-          transition={{ duration: reducedMotion ? 0 : 0.3, delay: reducedMotion ? 0 : 0.1 }}
-        >
-          {homepage && (
-            <ExternalLink href={homepage} className={cn(buttonVariants(), 'group')}>
-              {m.projects_visit_website()}
-              <ArrowUpRightIcon
-                className='size-5 transition-transform motion-safe:group-hover:-rotate-12 motion-reduce:transition-none'
-                aria-hidden='true'
-              />
-            </ExternalLink>
-          )}
+        <div className='flex shrink-0 flex-col items-start gap-5 pb-2 min-[701px]:items-end'>
           {github && (
-            <ExternalLink href={github} className={cn(buttonVariants(), 'group')}>
-              {repository}
-              <ArrowUpRightIcon
-                className='size-5 transition-transform motion-safe:group-hover:-rotate-12 motion-reduce:transition-none'
-                aria-hidden='true'
-              />
+            <ExternalLink
+              href={github}
+              className='inline-flex min-h-11 items-center justify-center gap-7 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5 py-3 text-sm text-[#e0ecde] transition-colors hover:border-[#c4e0cc] hover:bg-[#b0d3c31c] motion-reduce:transition-none min-[701px]:px-5.75 min-[701px]:py-3.5'
+            >
+              {m.projects_github()}
+              <ArrowRightIcon className='size-5' aria-hidden='true' />
             </ExternalLink>
           )}
-        </motion.div>
+          {homepage && (
+            <ExternalLink href={homepage} className='inline-flex min-h-11 items-center gap-4 text-sm text-[#b9d3c7]'>
+              {m.projects_visit_website()}
+              <ArrowRightIcon className='size-5' aria-hidden='true' />
+            </ExternalLink>
+          )}
+        </div>
       )}
     </div>
   )

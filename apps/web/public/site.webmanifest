@@ -2,8 +2,8 @@
   "display": "standalone",
   "name": "Nelson Lai",
   "short_name": "Nelson",
-  "theme_color": "#000000",
-  "background_color": "#000000",
+  "theme_color": "#08213f",
+  "background_color": "#08213f",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

@@ -63,14 +63,18 @@ export function ActiveSessions(props: ActiveSessionsProps) {
       </div>
     )
   } else if (sessions.data) {
-    content = <Card className='py-12 text-center'>{m.account_no_active_sessions()}</Card>
+    content = (
+      <Card className='border border-border py-12 text-center shadow-none ring-0'>
+        {m.account_no_active_sessions()}
+      </Card>
+    )
   } else if (sessions.isError) {
     content = null
   }
 
   return (
     <section className='space-y-6' aria-labelledby='sessions-heading' aria-busy={sessions.isPending}>
-      <h2 id='sessions-heading' className='text-lg font-semibold'>
+      <h2 id='sessions-heading' className='text-xl/[calc(1.75/1.125)] font-[450] tracking-tight'>
         {m.account_active_sessions()}
       </h2>
       {sessions.isError && <p role='alert'>{m.error_something_went_wrong()}</p>}
@@ -101,8 +105,8 @@ function SessionCard(props: SessionCardProps) {
   const lastActive = useFormattedDate(session.updatedAt, { formatName: 'long' })
 
   return (
-    <Card>
-      <CardContent className='flex flex-col justify-between gap-4 sm:flex-row sm:items-start'>
+    <Card className='border border-border shadow-none ring-0'>
+      <CardContent className='flex flex-col justify-between gap-4 wrap-anywhere sm:flex-row sm:items-start'>
         <div className='flex min-w-0 gap-4'>
           <div className='hidden size-12 shrink-0 items-center justify-center rounded-full bg-secondary md:flex'>
             <PlatformIcon aria-hidden='true' className='size-6' />

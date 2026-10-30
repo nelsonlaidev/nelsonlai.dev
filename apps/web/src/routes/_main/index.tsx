@@ -8,7 +8,8 @@ import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
 
 import { AboutMe } from './-components/home/about-me'
-import { GetInTouch } from './-components/home/get-in-touch'
+import { ChapterNavigation } from './-components/home/chapter-navigation'
+import { HomeGuestbook } from './-components/home/guestbook'
 import { Hero } from './-components/home/hero'
 import { LatestArticles } from './-components/home/latest-articles'
 import { SelectedProjects } from './-components/home/selected-projects'
@@ -17,8 +18,8 @@ export const Route = createFileRoute('/_main/')({
   loader: async () => {
     const locale = getLocale()
     const [projects, posts] = await Promise.all([
-      getProjects({ data: { locale, limit: 2, selectedOnly: true } }),
-      getPosts({ data: { locale, limit: 2 } }),
+      getProjects({ data: { locale, limit: 3, selectedOnly: true } }),
+      getPosts({ data: { locale, limit: 3 } }),
     ])
 
     return { projects, posts, locale }
@@ -46,11 +47,12 @@ function RouteComponent() {
 
   return (
     <>
+      <ChapterNavigation />
       <Hero />
       <SelectedProjects projects={projects} />
-      <AboutMe />
       <LatestArticles posts={posts} />
-      <GetInTouch />
+      <AboutMe />
+      <HomeGuestbook />
     </>
   )
 }

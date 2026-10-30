@@ -21,7 +21,9 @@ export function AdminComments() {
     }),
   )
 
-  let content: React.ReactNode = <div>{m.common_loading()}</div>
+  let content: React.ReactNode = (
+    <output className='rounded-xl border bg-card p-6 text-muted-foreground'>{m.common_loading()}</output>
+  )
 
   if (isSuccess) {
     content = (
@@ -34,7 +36,11 @@ export function AdminComments() {
       />
     )
   } else if (isError) {
-    content = <div>{m.error_failed_to_fetch_comments_data()}</div>
+    content = (
+      <div role='alert' className='rounded-xl border border-destructive/40 bg-card p-6 text-destructive'>
+        {m.error_failed_to_fetch_comments_data()}
+      </div>
+    )
   }
 
   return content

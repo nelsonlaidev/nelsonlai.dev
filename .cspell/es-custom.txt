@@ -3,6 +3,7 @@ configurables
 contáctanos
 creativamente
 desinversión
+encuéntrame
 licenciantes
 microinteracciones
 minimalista
@@ -11,6 +12,7 @@ personalizador
 precompilados
 previsualizar
 prototipado
+rediseño
 renderizado
 tacómetro
 troya

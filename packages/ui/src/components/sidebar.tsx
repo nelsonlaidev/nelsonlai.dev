@@ -360,7 +360,7 @@ export function SidebarHeader(props: SidebarHeaderProps) {
     <div
       data-slot='sidebar-header'
       data-sidebar='header'
-      className={cn('flex flex-col gap-2 p-2 [--radius:var(--radius-xl)]', className)}
+      className={cn('flex flex-col gap-2 p-2', className)}
       {...rest}
     />
   )
@@ -406,7 +406,7 @@ export function SidebarContent(props: SidebarContentProps) {
       data-slot='sidebar-content'
       data-sidebar='content'
       className={cn(
-        'no-scrollbar flex min-h-0 flex-1 flex-col gap-2 overflow-auto [--radius:var(--radius-xl)]',
+        'no-scrollbar flex min-h-0 flex-1 flex-col gap-2 overflow-auto',
         'group-data-[collapsible=icon]:overflow-hidden',
         className,
       )}
@@ -440,7 +440,7 @@ export function SidebarGroupLabel(props: SidebarGroupLabelProps) {
     props: mergeProps<'div'>(
       {
         className: cn(
-          'flex h-8 shrink-0 items-center rounded-md px-3 text-xs font-medium text-sidebar-foreground/70 ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear',
+          'flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear',
           'group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0',
           'focus-visible:ring-2',
           '[&>svg]:size-4 [&>svg]:shrink-0',
@@ -534,7 +534,7 @@ export function SidebarMenuItem(props: SidebarMenuItemProps) {
 
 export const sidebarMenuButtonVariants = cva(
   [
-    'peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-lg px-3 py-2 text-left text-sm ring-sidebar-ring outline-hidden transition-[width,height,padding]',
+    'peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm ring-sidebar-ring outline-hidden transition-[width,height,padding]',
     'group-has-data-[sidebar=menu-action]/menu-item:pr-8',
     'group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2!',
     'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
@@ -557,9 +557,9 @@ export const sidebarMenuButtonVariants = cva(
         ],
       },
       size: {
-        default: 'h-9 text-sm',
-        sm: 'h-8 text-xs',
-        lg: 'h-14 px-3 text-sm group-data-[collapsible=icon]:p-0!',
+        default: 'h-8 text-sm',
+        sm: 'h-7 text-xs',
+        lg: 'h-12 px-2 text-sm group-data-[collapsible=icon]:p-0!',
       },
     },
     defaultVariants: {
@@ -627,7 +627,7 @@ export function SidebarMenuAction(props: SidebarMenuActionProps) {
           'absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground ring-sidebar-ring outline-hidden transition-transform',
           'group-data-[collapsible=icon]:hidden',
           'peer-hover/menu-button:text-sidebar-accent-foreground',
-          'peer-data-[size=default]/menu-button:top-2',
+          'peer-data-[size=default]/menu-button:top-1.5',
           'peer-data-[size=lg]/menu-button:top-2.5',
           'peer-data-[size=sm]/menu-button:top-1',
           'after:absolute after:-inset-2',

@@ -1,8 +1,8 @@
-import { SiGithub, SiWakatime, SiYoutube } from '@icons-pack/react-simple-icons'
 import { ExternalLink } from '@repo/ui/components/external-link'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { CatchBoundary } from '@tanstack/react-router'
-import { ArrowRightIcon, PencilIcon, StarIcon } from 'lucide-react'
+import { CatchBoundary, Link } from '@tanstack/react-router'
+import { cn } from 'cn'
+import { ArrowRightIcon } from 'lucide-react'
 import { Suspense } from 'react'
 
 import { orpc } from '@/lib/orpc-client'
@@ -14,95 +14,100 @@ import { Counter } from './counter'
 
 type Stat = {
   title: string
-  link: string
-  linkText: string
-  icon: React.ReactNode
   field: 'hours' | 'subscribers' | 'views' | 'followers' | 'stars' | 'likes'
-  gradient: string
   suffix?: string
 }
 
 export function DashboardStats() {
-  const wakatimeStats: Stat[] = [
+  const groups = [
     {
-      title: m.dashboard_stat_coding_hours(),
+      id: 'coding',
+      name: m.dashboard_coding(),
       link: 'https://wakatime.com/@nelsonlaidev',
       linkText: 'WakaTime',
-      icon: <SiWakatime className='size-6 text-[#0061ff]' aria-hidden='true' />,
-      field: 'hours',
-      gradient: 'linear-gradient(122.25deg, #0061ff 12.16%, #6f7bf7 70.98%)',
-      suffix: 'hrs',
-    },
-  ]
-  const youtubeStats: Stat[] = [
-    {
-      title: m.dashboard_stat_youtube_subscribers(),
-      link: SITE.socials.youtube,
-      linkText: 'YouTube',
-      icon: <SiYoutube className='size-6 text-[#ff0000]' aria-hidden='true' />,
-      field: 'subscribers',
-      gradient: 'linear-gradient(122.25deg, #ff0000 12.16%, #ca1a1a 70.98%)',
+      stats: [{ title: m.dashboard_stat_coding_hours(), field: 'hours', suffix: m.dashboard_hours() }],
+      Source: WakatimeStats,
     },
     {
-      title: m.dashboard_stat_youtube_views(),
-      link: SITE.socials.youtube,
-      linkText: 'YouTube',
-      icon: <SiYoutube className='size-6 text-[#ff0000]' aria-hidden='true' />,
-      field: 'views',
-      gradient: 'linear-gradient(122.25deg, #ff0000 12.16%, #ca1a1a 70.98%)',
-    },
-  ]
-  const githubStats: Stat[] = [
-    {
-      title: m.dashboard_stat_github_followers(),
+      id: 'github',
+      name: 'GitHub',
       link: SITE.socials.github,
       linkText: 'GitHub',
-      icon: <SiGithub className='size-6 text-[#fee000]' aria-hidden='true' />,
-      field: 'followers',
-      gradient: 'linear-gradient(122.25deg, #fee000 12.16%, #ffce63 70.98%)',
+      stats: [
+        { title: m.dashboard_stat_github_stars(), field: 'stars' },
+        { title: m.dashboard_stat_github_followers(), field: 'followers' },
+      ],
+      Source: GithubStats,
     },
     {
-      title: m.dashboard_stat_github_stars(),
-      link: SITE.socials.github,
-      linkText: 'GitHub',
-      icon: <StarIcon className='size-6 text-[#fee000]' aria-hidden='true' />,
-      field: 'stars',
-      gradient: 'linear-gradient(122.25deg, #fee000 12.16%, #ffce63 70.98%)',
-    },
-  ]
-  const postStats: Stat[] = [
-    {
-      title: m.dashboard_stat_blog_total_views(),
-      link: 'https://nelsonlai.dev',
-      linkText: 'Blog',
-      icon: <PencilIcon className='size-6 text-[#ff0f7b]' aria-hidden='true' />,
-      field: 'views',
-      gradient: 'linear-gradient(122.25deg, #ff0f7b 12.16%, #f945ff 70.98%)',
+      id: 'youtube',
+      name: 'YouTube',
+      link: SITE.socials.youtube,
+      linkText: 'YouTube',
+      stats: [
+        { title: m.dashboard_stat_youtube_subscribers(), field: 'subscribers' },
+        { title: m.dashboard_stat_youtube_views(), field: 'views' },
+      ],
+      Source: YoutubeStats,
     },
     {
-      title: m.dashboard_stat_blog_total_likes(),
-      link: 'https://nelsonlai.dev',
-      linkText: 'Blog',
-      icon: <PencilIcon className='size-6 text-[#ff0f7b]' aria-hidden='true' />,
-      field: 'likes',
-      gradient: 'linear-gradient(122.25deg, #ff0f7b 12.16%, #f945ff 70.98%)',
+      id: 'blog',
+      name: m.dashboard_blog(),
+      link: '/blog',
+      linkText: m.projects_read_blog(),
+      stats: [
+        { title: m.dashboard_stat_blog_total_views(), field: 'views' },
+        { title: m.dashboard_stat_blog_total_likes(), field: 'likes' },
+      ],
+      Source: PostStats,
     },
-  ]
+  ] satisfies Array<{
+    id: string
+    name: string
+    link: string
+    linkText: string
+    stats: Stat[]
+    Source: React.ComponentType<StatSourceProps>
+  }>
 
   return (
-    <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3'>
-      <StatGroup stats={wakatimeStats}>
-        <WakatimeStats stats={wakatimeStats} />
-      </StatGroup>
-      <StatGroup stats={youtubeStats}>
-        <YoutubeStats stats={youtubeStats} />
-      </StatGroup>
-      <StatGroup stats={githubStats}>
-        <GithubStats stats={githubStats} />
-      </StatGroup>
-      <StatGroup stats={postStats}>
-        <PostStats stats={postStats} />
-      </StatGroup>
+    <div className='grid grid-cols-2 border border-[#8eb8aa66] bg-[#082e3b] max-[851px]:grid-cols-1'>
+      {groups.map((group) => (
+        <section
+          key={group.id}
+          aria-labelledby={`dashboard-${group.id}-heading`}
+          className='min-w-0 px-8.5 pt-8.5 pb-10.5 even:border-l even:border-l-[#8eb8aa45] nth-[n+3]:border-t nth-[n+3]:border-t-[#8eb8aa45] max-[1101px]:px-6 max-[1101px]:pt-7 max-[1101px]:pb-8.5 max-[851px]:not-first:border-t max-[851px]:not-first:border-t-[#8eb8aa45] max-[851px]:even:border-l-0 max-[601px]:px-5 max-[601px]:pt-6 max-[601px]:pb-7.5'
+        >
+          <div className='mb-9.5 flex items-center justify-between gap-5 max-[601px]:mb-7 max-[601px]:gap-3.75'>
+            <h2
+              id={`dashboard-${group.id}-heading`}
+              className='text-[26px] leading-[1.3] font-[450] tracking-[-0.035em] max-[601px]:text-2xl'
+            >
+              {group.name}
+            </h2>
+            {group.id === 'blog' ? (
+              <Link
+                to='/blog'
+                className='inline-flex min-h-11 items-center justify-end gap-3 text-sm/normal text-[#bdd7c9] hover:text-[#f0f6eb]'
+              >
+                {group.linkText}
+                <ArrowRightIcon aria-hidden='true' className='size-5 shrink-0' />
+              </Link>
+            ) : (
+              <ExternalLink
+                href={group.link}
+                className='inline-flex min-h-11 items-center justify-end gap-3 text-sm/normal text-[#bdd7c9] hover:text-[#f0f6eb]'
+              >
+                {group.linkText}
+                <ArrowRightIcon aria-hidden='true' className='size-5 shrink-0' />
+              </ExternalLink>
+            )}
+          </div>
+          <StatGroup stats={group.stats}>
+            <group.Source stats={group.stats} />
+          </StatGroup>
+        </section>
+      ))}
     </div>
   )
 }
@@ -114,7 +119,6 @@ type StatGroupProps = {
 
 function StatGroup(props: StatGroupProps) {
   const { stats, children } = props
-
   const locale = getLocale()
 
   return (
@@ -124,9 +128,7 @@ function StatGroup(props: StatGroupProps) {
   )
 }
 
-type StatSourceProps = {
-  stats: Stat[]
-}
+type StatSourceProps = { stats: Stat[] }
 
 function WakatimeStats(props: StatSourceProps) {
   const { stats } = props
@@ -162,50 +164,56 @@ type StatCardsProps = {
   isError?: boolean
 }
 
-function StatCards(props: StatCardsProps) {
+export function StatCards(props: StatCardsProps) {
   const { stats, values, isError = false } = props
 
   return (
-    <>
-      {stats.map(({ title, link, linkText, icon, field, gradient, suffix }) => {
+    <dl
+      aria-busy={!values && !isError}
+      className={cn(
+        'm-0 grid gap-7 max-[1101px]:gap-5 max-[601px]:grid-cols-1 max-[601px]:gap-6.5',
+        stats[0]?.field !== 'hours' && 'grid-cols-2',
+        stats[0]?.field === 'hours' && 'grid-cols-1',
+      )}
+    >
+      {stats.map(({ title, field, suffix }) => {
         const value = values?.[field]
-
-        let content: React.ReactNode = <span className='text-muted-foreground'>--</span>
-
-        if (value !== undefined) {
-          content = (
-            <>
-              {icon}
-              <span className='bg-clip-text text-transparent' style={{ backgroundImage: gradient }}>
-                <Counter value={value} />
-                {suffix && <span>{` ${suffix}`}</span>}
-              </span>
-            </>
-          )
-        } else if (isError) {
-          content = <span className='text-muted-foreground'>{m.common_error()}</span>
-        }
-
         return (
-          <ExternalLink
-            key={title}
-            href={link}
-            className='group relative overflow-hidden rounded-xl border p-4 transition-colors hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none'
+          <div
+            key={field}
+            className='min-w-0 max-[601px]:not-first:border-t max-[601px]:not-first:border-t-[#8eb8aa30] max-[601px]:not-first:pt-6'
           >
-            <div className='flex flex-col items-center justify-center gap-2 transition-transform group-hover:-translate-y-24 group-focus-visible:-translate-y-24 motion-reduce:transition-none'>
-              <div className='flex min-h-9 items-center gap-2 text-3xl font-semibold tabular-nums'>{content}</div>
-              <h2 className='text-center text-xl font-semibold'>{title}</h2>
-            </div>
-            <span
-              aria-hidden='true'
-              className='absolute top-1/2 left-1/2 flex -translate-x-1/2 translate-y-24 items-center gap-1 text-2xl font-semibold opacity-0 transition group-hover:-translate-y-1/2 group-hover:opacity-100 group-focus-visible:-translate-y-1/2 group-focus-visible:opacity-100 motion-reduce:transition-none'
+            <dt className='mb-3 text-base leading-[1.4] font-medium text-[#e0eade] max-[601px]:mb-2'>{title}</dt>
+            <dd
+              className={cn(
+                'm-0 flex min-h-[1.1em] flex-wrap items-baseline gap-2.5 leading-[1.1] font-[420] tracking-[-0.055em] text-[#edf2e9] tabular-nums max-[601px]:text-5xl',
+                stats[0]?.field !== 'hours' &&
+                  'text-[clamp(40px,4vw,64px)] max-[1101px]:text-[44px] max-[851px]:text-[56px]',
+                stats[0]?.field === 'hours' &&
+                  'text-[clamp(56px,5vw,72px)] max-[1101px]:text-[64px] max-[851px]:text-[64px]',
+                'leading-[1.1]',
+              )}
             >
-              {linkText}
-              <ArrowRightIcon className='size-6' />
-            </span>
-          </ExternalLink>
+              {value !== undefined && Number.isFinite(value) ? (
+                <>
+                  <span className='max-w-full wrap-anywhere'>
+                    <Counter value={value} />
+                  </span>
+                  {suffix && (
+                    <span className='max-w-full text-lg/normal font-normal tracking-normal wrap-anywhere text-[#bdd7c9]'>
+                      {suffix}
+                    </span>
+                  )}
+                </>
+              ) : (
+                <output className='text-lg/[1.65] tracking-normal text-[#bdd7c9]'>
+                  {isError || values ? m.dashboard_unavailable() : m.common_loading()}
+                </output>
+              )}
+            </dd>
+          </div>
         )
       })}
-    </>
+    </dl>
   )
 }

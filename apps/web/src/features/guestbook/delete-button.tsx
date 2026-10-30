@@ -62,10 +62,17 @@ export function DeleteButton(props: DeleteButtonProps) {
         <AlertDialogTrigger render={<Button variant='destructive' />} disabled={deletion.isPending}>
           {m.common_delete()}
         </AlertDialogTrigger>
-        <AlertDialogContent aria-busy={deletion.isPending}>
+        <AlertDialogContent
+          aria-busy={deletion.isPending}
+          className='max-h-[calc(100dvh-32px)] overflow-y-auto border border-border shadow-md ring-0 data-[size=default]:max-w-[min(480px,calc(100vw-32px))] data-[size=sm]:max-w-[min(480px,calc(100vw-32px))] sm:data-[size=default]:max-w-[min(480px,calc(100vw-32px))]'
+        >
           <AlertDialogHeader>
-            <AlertDialogTitle>{m.common_dialogs_delete_message_title()}</AlertDialogTitle>
-            <AlertDialogDescription>{m.common_dialogs_delete_message_description()}</AlertDialogDescription>
+            <AlertDialogTitle className='pr-8 leading-tight tracking-[-0.035em]'>
+              {m.common_dialogs_delete_message_title()}
+            </AlertDialogTitle>
+            <AlertDialogDescription className='leading-[1.65]'>
+              {m.common_dialogs_delete_message_description()}
+            </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={deletion.isPending}>{m.common_cancel()}</AlertDialogCancel>

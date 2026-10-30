@@ -1,92 +1,58 @@
 import type { TOC } from '@repo/mdx-plugins'
 
-import { Button } from '@repo/ui/components/button'
-import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui/components/popover'
-import { SegmentGroup, SegmentGroupItem } from '@repo/ui/components/segment-group'
-import { useNavigate } from '@tanstack/react-router'
-import { AlignLeftIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 import { m } from '@/paraglide/messages'
 
-type TableOfContentsProps = {
-  toc: TOC[]
-}
-
-export function TableOfContents(props: TableOfContentsProps) {
-  const { toc } = props
+export function TableOfContents(props: { toc: TOC[]; children?: React.ReactNode }) {
+  const { toc, children } = props
   const [activeId, setActiveId] = useState<string>()
-  const [open, setOpen] = useState(false)
-  const navigate = useNavigate()
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) setActiveId(entry.target.id)
-        }
+        for (const entry of entries) if (entry.isIntersecting) setActiveId(entry.target.id)
       },
-      { rootMargin: '0% 0% -80% 0%' },
+      { rootMargin: '-15% 0px -65% 0px' },
     )
-
     for (const item of toc) {
       const element = document.querySelector(`#${CSS.escape(item.url)}`)
       if (element) observer.observe(element)
     }
-
     return () => {
       observer.disconnect()
     }
   }, [toc])
-
-  if (toc.length === 0) return null
-
   return (
-    <>
-      <nav aria-label={m.blog_on_this_page()} className='hidden max-h-[60vh] overflow-y-auto pl-4 lg:block'>
-        <div className='mb-4'>{m.blog_on_this_page()}</div>
-        <SegmentGroup
-          orientation='vertical'
-          value={activeId}
-          onValueChange={(details) => {
-            if (details.value) void navigate({ hash: details.value })
-          }}
-          className='bg-transparent'
-          aria-label={m.blog_on_this_page()}
+    <aside className='sticky top-8.75 max-h-[calc(100vh-70px)] self-start overflow-y-auto max-[1001px]:static max-[1001px]:mb-11.25 max-[1001px]:max-h-none max-[1001px]:border-b max-[1001px]:border-b-border max-[1001px]:pb-7'>
+      <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-[#b4cec4]'>
+        {m.blog_on_this_page()}
+      </span>
+      <nav
+        aria-label={m.blog_on_this_page()}
+        className='flex flex-col gap-4.25 max-[1001px]:grid max-[1001px]:grid-cols-2 max-[1001px]:gap-x-6.25 max-[1001px]:gap-y-3.5 max-[601px]:grid-cols-1 max-[601px]:gap-3.25'
+      >
+        {toc.map((item) => (
+          <a
+            key={item.url}
+            href={`#${encodeURIComponent(item.url)}`}
+            aria-current={activeId === item.url ? 'location' : undefined}
+            style={{ paddingLeft: Math.max(0, item.depth - 2) * 12 + 13 }}
+            className='min-h-11 border-l border-l-[#6e928640] py-2 pl-3.25 text-sm leading-[1.6] text-[#8cafa2] aria-[current=location]:border-l-[#d6e6d2] aria-[current=location]:text-[#d6e6d2]'
+          >
+            {item.title}
+          </a>
+        ))}
+        <a
+          href='#comments'
+          className='min-h-11 border-l border-l-[#6e928640] py-2 pl-3.25 text-sm leading-[1.6] text-[#8cafa2] aria-[current=location]:border-l-[#d6e6d2] aria-[current=location]:text-[#d6e6d2]'
         >
-          {toc.map((item) => (
-            <SegmentGroupItem key={item.url} value={item.url} style={{ paddingLeft: (item.depth - 1) * 12 }}>
-              {item.title}
-            </SegmentGroupItem>
-          ))}
-        </SegmentGroup>
+          {m.ocean_blog_conversation()}
+        </a>
       </nav>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger render={<Button variant='secondary' className='fixed right-2 bottom-2 z-50 lg:hidden' />}>
-          <AlignLeftIcon aria-hidden='true' />
-          {m.blog_on_this_page()}
-        </PopoverTrigger>
-        <PopoverContent
-          align='end'
-          side='top'
-          className='max-h-[60vh] max-w-[90vw] overflow-y-auto px-0 py-2'
-          aria-label={m.blog_on_this_page()}
-        >
-          {toc.map((item) => (
-            <a
-              key={item.url}
-              href={`#${encodeURIComponent(item.url)}`}
-              className='block py-2 pr-2.5 text-sm/tight text-muted-foreground transition-colors hover:text-foreground'
-              style={{ paddingLeft: (item.depth - 1) * 16 }}
-              onClick={() => {
-                setOpen(false)
-              }}
-            >
-              {item.title}
-            </a>
-          ))}
-        </PopoverContent>
-      </Popover>
-    </>
+      <a href='#main-content' className='mt-7.5 block text-sm/normal text-[#8cafaa] max-[1001px]:hidden'>
+        {m.ocean_blog_top()}
+      </a>
+      {children}
+    </aside>
   )
 }

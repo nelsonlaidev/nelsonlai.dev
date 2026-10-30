@@ -8,11 +8,14 @@ haspopup
 healthcheck
 innerhtml
 isready
+lightbox
 menuitemradio
 nosniff
 parsererror
+substeps
 techstack
 tmpfs
+unstub
 wcag
 webp
 wght

@@ -1,8 +1,8 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
-import { Mdx } from '@/components/mdx/mdx'
-import { PageHeader } from '@/components/page-header'
 import { getPage } from '@/features/pages/pages.functions'
+import { AboutPage } from '@/features/profile/about-page'
+import { ProfileError, ProfilePending } from '@/features/profile/profile-layout'
 import { createJsonLdAboutPage } from '@/lib/json-ld'
 import { createSeoHead } from '@/lib/seo'
 import { getLocale } from '@/paraglide/runtime'
@@ -35,15 +35,12 @@ export const Route = createFileRoute('/_main/about')({
     })
   },
   component: RouteComponent,
+  pendingComponent: ProfilePending,
+  errorComponent: ProfileError,
 })
 
 function RouteComponent() {
   const { page } = Route.useLoaderData()
 
-  return (
-    <>
-      <PageHeader title={page.title} description={page.description} />
-      <Mdx code={page.mdx} />
-    </>
-  )
+  return <AboutPage page={page} />
 }

@@ -27,7 +27,7 @@ export function RecentActivity() {
   }
 
   return (
-    <Card>
+    <Card className='border border-border shadow-none ring-0'>
       <CardHeader>
         <CardTitle>{m.admin_dashboard_recent_activity_title()}</CardTitle>
       </CardHeader>
@@ -65,7 +65,7 @@ function ActivityItem(props: ActivityProps) {
   return (
     <div className='flex items-start gap-3 py-3'>
       <UserAvatar id={activity.user.id} name={userName} image={activity.user.image} className='size-6' />
-      <div className='flex-1 space-y-1'>
+      <div className='min-w-0 flex-1 space-y-1 wrap-anywhere'>
         <p className='text-sm'>
           {activity.type === 'comment'
             ? m
@@ -89,8 +89,8 @@ function ActivityItem(props: ActivityProps) {
                 name: userName,
               })}
         </p>
-        <p className='line-clamp-1 text-xs text-muted-foreground'>{activity.body}</p>
-        <p className='text-xs text-muted-foreground'>{timeAgo}</p>
+        <p className='line-clamp-1 text-sm text-muted-foreground'>{activity.body}</p>
+        <p className='text-sm text-muted-foreground'>{timeAgo}</p>
       </div>
     </div>
   )

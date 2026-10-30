@@ -15,9 +15,9 @@ export function GradientBackground(props: GradientBackgroundProps) {
 
   return (
     <div
-      data-position={position}
       className={cn(
-        'absolute left-1/2 -z-10 w-full max-w-300 -translate-x-1/2 data-[position=bottom]:bottom-0 data-[position=top]:top-0 data-[position=bottom]:[&>svg]:rotate-180',
+        'absolute left-1/2 -z-10 w-full max-w-300 -translate-x-1/2',
+        position === 'bottom' ? 'bottom-0 [&>svg]:rotate-180' : 'top-0',
         className,
       )}
       {...rest}

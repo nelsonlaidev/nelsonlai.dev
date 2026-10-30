@@ -16,11 +16,11 @@ test.describe('blog search', () => {
   })
 
   test('filters articles by a partial title and shows multiple matches', async ({ page }) => {
-    const postTitles = page.getByRole('main').getByRole('heading', { level: 3 })
+    const postTitles = page.getByRole('main').getByRole('article').getByRole('heading', { level: 2 })
     const query = 'with'
     const expectedPosts = englishPosts.filter((post) => post.title.toLowerCase().includes(query))
 
-    await page.getByRole('textbox', { name: searchMessages.placeholder }).fill(query)
+    await page.getByRole('searchbox', { name: searchMessages.placeholder }).fill(query)
 
     await expect(postTitles).toHaveCount(expectedPosts.length)
     await Promise.all(
@@ -36,9 +36,9 @@ test.describe('blog search', () => {
       const resultLinks = page
         .getByRole('main')
         .getByRole('link')
-        .filter({ has: page.getByRole('heading', { level: 3 }) })
+        .filter({ has: page.getByRole('heading', { level: 2 }) })
 
-      await page.getByRole('textbox', { name: searchMessages.placeholder }).fill(query)
+      await page.getByRole('searchbox', { name: searchMessages.placeholder }).fill(query)
 
       await expect(resultLinks).toHaveCount(1)
       await expect(resultLinks).toHaveAttribute('href', `/blog/${COMMENT_SUBMIT_AND_VIEW_POST_SLUG}`)
@@ -47,8 +47,8 @@ test.describe('blog search', () => {
   }
 
   test('shows an empty state and recovers when the search matches an article', async ({ page }) => {
-    const searchInput = page.getByRole('textbox', { name: searchMessages.placeholder })
-    const postTitles = page.getByRole('main').getByRole('heading', { level: 3 })
+    const searchInput = page.getByRole('searchbox', { name: searchMessages.placeholder })
+    const postTitles = page.getByRole('main').getByRole('article').getByRole('heading', { level: 2 })
     const emptyState = page.getByText(searchMessages['no-posts-found'], { exact: true })
     const post = englishPosts.find((entry) => entry.slug === COMMENT_SUBMIT_AND_VIEW_POST_SLUG)
     expect(post).toBeDefined()
@@ -65,8 +65,8 @@ test.describe('blog search', () => {
   })
 
   test('restores all articles in their original order when the search is cleared', async ({ page }) => {
-    const searchInput = page.getByRole('textbox', { name: searchMessages.placeholder })
-    const postTitles = page.getByRole('main').getByRole('heading', { level: 3 })
+    const searchInput = page.getByRole('searchbox', { name: searchMessages.placeholder })
+    const postTitles = page.getByRole('main').getByRole('article').getByRole('heading', { level: 2 })
 
     await expect(postTitles).toHaveCount(englishPosts.length)
     const initialTitles = await postTitles.allTextContents()
@@ -85,11 +85,11 @@ test.describe('blog search', () => {
     const resultLinks = page
       .getByRole('main')
       .getByRole('link')
-      .filter({ has: page.getByRole('heading', { level: 3 }) })
+      .filter({ has: page.getByRole('heading', { level: 2 }) })
     const post = englishPosts.find((entry) => entry.slug === COMMENT_SUBMIT_AND_VIEW_POST_SLUG)
     expect(post).toBeDefined()
 
-    await page.getByRole('textbox', { name: searchMessages.placeholder }).fill('Better Auth')
+    await page.getByRole('searchbox', { name: searchMessages.placeholder }).fill('Better Auth')
     await expect(resultLinks).toHaveCount(1)
     await resultLinks.click()
 

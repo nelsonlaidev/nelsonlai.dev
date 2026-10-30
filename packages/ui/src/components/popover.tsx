@@ -14,10 +14,18 @@ export function PopoverTrigger(props: PopoverTriggerProps) {
 }
 
 type PopoverContentProps = PopoverPrimitive.Popup.Props &
-  Pick<PopoverPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset'>
+  Pick<PopoverPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset' | 'collisionPadding'>
 
 export function PopoverContent(props: PopoverContentProps) {
-  const { className, align = 'center', alignOffset = 0, side = 'bottom', sideOffset = 4, ...rest } = props
+  const {
+    className,
+    align = 'center',
+    alignOffset = 0,
+    side = 'bottom',
+    sideOffset = 4,
+    collisionPadding,
+    ...rest
+  } = props
 
   return (
     <PopoverPrimitive.Portal>
@@ -26,12 +34,13 @@ export function PopoverContent(props: PopoverContentProps) {
         alignOffset={alignOffset}
         side={side}
         sideOffset={sideOffset}
+        collisionPadding={collisionPadding}
         className='isolate z-50'
       >
         <PopoverPrimitive.Popup
           data-slot='popover-content'
           className={cn(
-            'z-50 flex w-72 origin-(--transform-origin) flex-col gap-4 rounded-2xl bg-popover p-4 text-sm text-popover-foreground shadow-2xl ring-1 ring-foreground/5 outline-hidden duration-100',
+            'z-50 flex w-72 origin-(--transform-origin) flex-col gap-4 rounded-md bg-popover p-4 text-sm text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-hidden duration-100',
             'data-[side=bottom]:slide-in-from-top-2',
             'data-[side=inline-end]:slide-in-from-left-2',
             'data-[side=inline-start]:slide-in-from-right-2',

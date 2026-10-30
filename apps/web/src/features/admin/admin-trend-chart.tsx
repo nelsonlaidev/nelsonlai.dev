@@ -45,6 +45,7 @@ export function TrendsChart() {
           <CartesianGrid vertical={false} />
           <XAxis
             dataKey='date'
+            tick={{ fill: 'var(--muted-foreground)', fontSize: 14 }}
             tickLine={false}
             axisLine={false}
             tickMargin={8}
@@ -69,7 +70,7 @@ export function TrendsChart() {
               />
             }
           />
-          <ChartLegend content={<ChartLegendContent />} />
+          <ChartLegend content={<ChartLegendContent className='text-sm' />} />
           <Area
             dataKey='comments'
             type='monotone'
@@ -94,7 +95,7 @@ export function TrendsChart() {
   }
 
   return (
-    <Card>
+    <Card className='border border-border shadow-none ring-0'>
       <CardHeader>
         <CardTitle>{m.admin_dashboard_trends_title()}</CardTitle>
         <CardDescription>{m.admin_dashboard_trends_last_n_days({ days: 30 })}</CardDescription>

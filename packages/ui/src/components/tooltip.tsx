@@ -43,7 +43,7 @@ export function TooltipContent(props: TooltipContentProps) {
           className={cn(
             hintPopupClassName,
             'has-data-[slot=kbd]:pr-1.5',
-            '**:data-[slot=kbd]:relative **:data-[slot=kbd]:isolate **:data-[slot=kbd]:z-50 **:data-[slot=kbd]:rounded-4xl',
+            '**:data-[slot=kbd]:relative **:data-[slot=kbd]:isolate **:data-[slot=kbd]:z-50 **:data-[slot=kbd]:rounded-sm',
             'data-[state=delayed-open]:animate-in data-[state=delayed-open]:fade-in-0 data-[state=delayed-open]:zoom-in-95',
             className,
           )}

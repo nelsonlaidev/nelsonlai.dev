@@ -13,6 +13,16 @@ techstack:
 selected: true
 dateCreated: '2026-09-25T00:00:00Z'
 updatedAt: '2026-09-30T06:20:40.000Z'
+subtitle: '熟悉的 API，在本地流動。'
+category: '開發基礎設施'
+features:
+  - title: '保留原有工作流程'
+    text: '透過 HTTP 介面支援 Redis 指令、pipeline 和交易。'
+  - title: '不只單次請求'
+    text: '支援透過 SSE 的 Pub/Sub、JSON 與 RESP2 回應，以及 token 驗證。'
+  - title: '在開發的地方執行'
+    text: '多架構 Docker 映像檔，以及 Linux、macOS、Windows 預編譯檔，適用於不同開發環境。'
+journey: '開發流程中缺少的一塊，成了一個開源工具。Uprest 探索如何讓基礎設施更平易近人，也更容易在本地執行。'
 ---
 
 Uprest 是一款本地 HTTP-to-Redis 代理，適合使用 [Upstash Redis REST API](https://upstash.com/docs/redis/features/restapi) 的應用程式。它會將請求轉發到真實的 Redis 伺服器，讓應用程式在本地開發與 CI 中不需 Upstash 資料庫也能繼續使用 `@upstash/redis`。

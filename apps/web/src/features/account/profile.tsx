@@ -42,11 +42,11 @@ export function Profile(props: ProfileProps) {
 
   return (
     <section className='space-y-6' aria-labelledby='profile-heading'>
-      <h2 id='profile-heading' className='text-lg font-semibold'>
+      <h2 id='profile-heading' className='text-xl/[calc(1.75/1.125)] font-[450] tracking-tight'>
         {m.account_profile()}
       </h2>
-      <Card>
-        <CardContent className='space-y-6'>
+      <Card className='border border-border shadow-none ring-0'>
+        <CardContent className='space-y-6 wrap-anywhere'>
           <div className='flex flex-wrap items-center justify-between gap-4'>
             <div className='space-y-2'>
               <p className='text-sm text-muted-foreground'>{m.account_avatar()}</p>
@@ -137,10 +137,17 @@ function EditName(props: EditNameProps) {
       }}
     >
       <AlertDialogTrigger render={<Button variant='outline' />}>{m.account_edit_name()}</AlertDialogTrigger>
-      <AlertDialogContent aria-busy={update.isPending}>
+      <AlertDialogContent
+        aria-busy={update.isPending}
+        className='max-h-[calc(100dvh-32px)] overflow-y-auto border border-border shadow-md ring-0 data-[size=default]:max-w-[min(480px,calc(100vw-32px))] data-[size=sm]:max-w-[min(480px,calc(100vw-32px))] sm:data-[size=default]:max-w-[min(480px,calc(100vw-32px))]'
+      >
         <AlertDialogHeader>
-          <AlertDialogTitle>{m.account_edit_name()}</AlertDialogTitle>
-          <AlertDialogDescription>{m.account_edit_name_description()}</AlertDialogDescription>
+          <AlertDialogTitle className='pr-8 leading-tight tracking-[-0.035em]'>
+            {m.account_edit_name()}
+          </AlertDialogTitle>
+          <AlertDialogDescription className='leading-[1.65]'>
+            {m.account_edit_name_description()}
+          </AlertDialogDescription>
         </AlertDialogHeader>
         <form
           className='space-y-6'

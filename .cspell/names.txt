@@ -47,6 +47,7 @@ rmiz
 ryzen
 samuelkraft
 scoutly
+seafold
 shiki
 shikijs
 spotify

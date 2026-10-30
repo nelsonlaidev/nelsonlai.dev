@@ -1,7 +1,7 @@
 import { cn } from 'cn'
 
 export const hintPopupClassName = cn(
-  'z-50 inline-flex w-fit max-w-xs origin-(--transform-origin) items-center gap-1.5 rounded-2xl bg-foreground px-3 py-1.5 text-xs text-background',
+  'z-50 inline-flex w-fit max-w-xs origin-(--transform-origin) items-center gap-1.5 rounded-md bg-foreground px-3 py-1.5 text-xs text-background',
   'data-[side=bottom]:slide-in-from-top-2',
   'data-[side=inline-end]:slide-in-from-left-2',
   'data-[side=inline-start]:slide-in-from-right-2',

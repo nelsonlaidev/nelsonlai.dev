@@ -1,27 +1,19 @@
-import { MessageCircleIcon, PinIcon } from 'lucide-react'
-
 import { m } from '@/paraglide/messages'
 
 export function Pinned() {
   return (
-    <div className='relative overflow-hidden rounded-2xl border text-card-foreground'>
-      <div className='absolute inset-0 bg-linear-to-br from-blue-50 via-purple-50 to-rose-50 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-rose-900/10' />
-
-      <div className='absolute top-4 right-4'>
-        <PinIcon className='size-5 rotate-45 text-muted-foreground' aria-hidden='true' />
-      </div>
-
-      <div className='relative p-4'>
-        <div className='flex items-start gap-4'>
-          <div className='hidden size-10 shrink-0 items-center justify-center rounded-full bg-muted sm:flex'>
-            <MessageCircleIcon className='size-5 text-primary' aria-hidden='true' />
-          </div>
-          <div className='space-y-4'>
-            <h2 className='text-xl font-semibold'>{m.guestbook_pinned_greeting()}</h2>
-            <p className='text-sm text-muted-foreground'>{m.guestbook_pinned_description()}</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <aside className='pt-5.5 max-[601px]:mb-10 max-[601px]:pt-0'>
+      <span className='block text-xs leading-[normal] tracking-[0.02em] text-[#b4cec4]'>
+        {m.seabed_context_label()}
+      </span>
+      <h2 className='mt-6 text-[42px] leading-[1.12] font-[410] tracking-tighter max-[851px]:text-[32px] max-[601px]:text-4xl'>
+        {m.seabed_context_title()}
+        <br />
+        <em className='font-serif font-normal tracking-[-0.04em] text-[#bed3c6]'>{m.seabed_context_emphasis()}</em>
+      </h2>
+      <p className='mt-6.25 max-w-82.5 text-base/[1.65] text-[#9ebcb0] max-[601px]:max-w-none'>
+        {m.seabed_context_description()}
+      </p>
+    </aside>
   )
 }

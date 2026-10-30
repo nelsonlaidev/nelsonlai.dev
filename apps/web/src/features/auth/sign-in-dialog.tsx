@@ -53,10 +53,13 @@ export function SignInDialog() {
 
   return (
     <Dialog handle={signInDialogHandle}>
-      <DialogContent className='sm:max-w-120' aria-busy={isPending}>
+      <DialogContent
+        className='max-h-[calc(100dvh-32px)] max-w-[min(480px,calc(100vw-32px))] overflow-y-auto border border-border shadow-md ring-0 sm:max-w-[min(480px,calc(100vw-32px))]'
+        aria-busy={isPending}
+      >
         <DialogHeader>
-          <DialogTitle className='text-2xl'>{m.common_sign_in()}</DialogTitle>
-          <DialogDescription>{m.dialog_sign_in_description()}</DialogDescription>
+          <DialogTitle className='pr-8 text-2xl/tight tracking-[-0.035em]'>{m.common_sign_in()}</DialogTitle>
+          <DialogDescription className='leading-[1.65]'>{m.dialog_sign_in_description()}</DialogDescription>
         </DialogHeader>
         <div className='my-2 flex flex-col gap-4'>
           {PROVIDERS.map((provider) => {
@@ -69,9 +72,9 @@ export function SignInDialog() {
             return (
               <Button
                 key={provider}
-                className={provider === 'google' ? 'relative border-border' : 'relative'}
+                className='relative min-h-11 w-full whitespace-normal'
                 size='lg'
-                variant={provider === 'github' ? 'default' : 'ghost'}
+                variant={provider === 'github' ? 'default' : 'outline'}
                 disabled={isPending}
                 onClick={() => {
                   void handleSignIn(provider)
@@ -80,7 +83,7 @@ export function SignInDialog() {
                 {icon}
                 {m.dialog_sign_in_continue_with({ provider: provider === 'github' ? 'GitHub' : 'Google' })}
                 {lastMethod === provider && (
-                  <Badge variant='outline' className='absolute -top-2 -right-2 bg-background'>
+                  <Badge variant='outline' className='absolute -top-2 right-2 bg-background'>
                     {m.dialog_sign_in_last_used()}
                   </Badge>
                 )}
@@ -88,7 +91,7 @@ export function SignInDialog() {
             )
           })}
         </div>
-        <div className='text-center text-xs text-muted-foreground'>
+        <div className='text-center text-sm/relaxed text-muted-foreground'>
           <ParaglideMessage
             message={m.dialog_sign_in_notice}
             markup={{

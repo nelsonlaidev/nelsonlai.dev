@@ -1,12 +1,14 @@
 type LogoProps = React.SVGAttributes<SVGElement>
 
+/** Nacre, the approved Seafold mark. Color follows the surrounding UI. */
 export function Logo(props: LogoProps) {
   return (
-    <svg version='1.0' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 715' {...props}>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' {...props}>
       <path
-        d='M0 0V625C0 652.614 22.3858 675 50 675H150C177.614 675 200 652.614 200 625V200H350C377.614 200 400 222.386 400 250V625C400 652.614 422.386 675 450 675H550C577.614 675 600 652.614 600 625V200C600 89.5431 510.457 0 400 0H0Z'
         fill='currentColor'
+        d='M81 31C72 13 51 8 32 19 13 30 9 53 20 72c9 16 30 22 48 12 16-9 22-27 13-42l-10 6c6 10 3 22-8 28-12 7-26 2-32-9-8-14-5-30 8-38 12-7 26-4 33 7Z'
       />
+      <circle cx='53' cy='52' r='10' fill='currentColor' />
     </svg>
   )
 }

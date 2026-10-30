@@ -49,8 +49,8 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
   })
 
   return (
-    <Card>
-      <CardContent>
+    <Card className='border border-border shadow-none ring-0'>
+      <CardContent className='wrap-anywhere'>
         <form
           id={`${inputId}-form`}
           className='space-y-6'
@@ -86,7 +86,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
       </CardContent>
       <form.Subscribe selector={(state) => state.values.repliesEnabled !== repliesEnabled}>
         {(isChanged) => (
-          <CardFooter className='justify-end gap-2'>
+          <CardFooter className='justify-end gap-2 border-t'>
             {isChanged && (
               <Button
                 type='button'

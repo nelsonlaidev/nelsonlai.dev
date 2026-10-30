@@ -20,6 +20,7 @@ export function CodeBlock(props: CodeBlockProps) {
   const preRef = useRef<HTMLPreElement>(null)
   const [copied, setCopied] = useState(false)
   const Icon = getIconByLanguage(lang ?? '')
+  const hasCaption = Boolean(title) || Boolean(lang)
 
   useEffect(() => {
     if (!copied) return
@@ -46,8 +47,10 @@ export function CodeBlock(props: CodeBlockProps) {
       variant='ghost'
       size='icon-sm'
       className={cn(
-        'size-7.5 opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100',
-        title ? '-me-2' : 'absolute top-2 right-2 z-10',
+        'opacity-100 transition-opacity',
+        hasCaption
+          ? 'm-0 size-auto min-h-11 min-w-11 shrink-0 gap-0 rounded-md border border-[#8cae9d55] bg-[#12303a] bg-clip-border px-3.5 py-2 text-sm/5 text-[#d6eee3] opacity-100 hover:bg-[#12303a] hover:text-[#d6eee3] focus-visible:border-[#8cae9d55] dark:hover:bg-[#12303a]'
+          : 'absolute top-2 right-2 z-10 size-8 md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100',
       )}
       onClick={() => {
         void copyCode()
@@ -55,33 +58,44 @@ export function CodeBlock(props: CodeBlockProps) {
       aria-label={m.common_aria_labels_copy_code()}
     >
       {copied ? (
-        <CheckIcon className='size-3.5' aria-hidden='true' />
+        <CheckIcon className={cn('size-3.5', hasCaption && 'hidden size-4.5')} aria-hidden='true' />
       ) : (
-        <CopyIcon className='size-3.5' aria-hidden='true' />
+        <CopyIcon className={cn('size-3.5', hasCaption && 'hidden size-4.5')} aria-hidden='true' />
       )}
+      <span className='inline'>{copied ? m.ocean_code_copied() : m.ocean_code_copy()}</span>
     </Button>
   )
 
   return (
     <figure
       className={cn(
-        'not-prose group relative my-6 overflow-hidden rounded-2xl border bg-input/30 text-sm',
+        'not-prose group relative my-6.25 mb-8.75 overflow-hidden rounded-xl border border-[#8cae9d28] bg-[#03131ff0] text-sm',
         figureClassName,
       )}
     >
-      {title ? (
-        <div className='flex flex-row items-center gap-2 border-b bg-muted px-4 py-1.5'>
-          <div className='text-muted-foreground'>
+      {hasCaption ? (
+        <div className='flex flex-row items-center gap-x-5 gap-y-2 border-b border-b-[#8cae9d20] bg-transparent px-4.5 py-3 text-sm/5 max-[601px]:gap-2 max-[601px]:px-3.5 max-[601px]:py-2.75'>
+          <div className='text-muted-foreground first:hidden'>
             <Icon className='size-3.5' aria-hidden='true' />
           </div>
-          <figcaption className='flex-1 truncate text-muted-foreground'>{title}</figcaption>
+          <figcaption className='m-0 flex-1 truncate leading-[1.8] wrap-anywhere whitespace-normal text-[#bfd3c9]'>
+            {title ?? lang}
+          </figcaption>
           {copyButton}
         </div>
       ) : (
         copyButton
       )}
       <ScrollArea className={scrollAreaClassName}>
-        <pre ref={mergeRefs(preRef, ref)} data-lang={lang} className={cn('p-4 text-[13px]', className)} {...rest}>
+        <pre
+          ref={mergeRefs(preRef, ref)}
+          data-lang={lang}
+          className={cn(
+            'bg-transparent px-0! py-5! text-sm leading-[1.85]! [&>code]:block [&>code]:w-max [&>code]:min-w-full [&>code]:font-mono',
+            className,
+          )}
+          {...rest}
+        >
           {children}
         </pre>
       </ScrollArea>

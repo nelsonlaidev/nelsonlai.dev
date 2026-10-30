@@ -37,8 +37,8 @@ export function MobileNav() {
               <li key={link.to}>
                 <Link
                   to={link.to}
-                  activeProps={{ 'data-active': 'true' }}
-                  className='flex min-h-12 items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-colors outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring data-active:bg-accent data-active:text-accent-foreground'
+
+                  className='flex min-h-12 items-center gap-3 rounded-md px-4 py-3 text-sm font-medium text-muted-foreground transition-colors outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring aria-[current=page]:bg-accent aria-[current=page]:text-accent-foreground'
                 >
                   <link.icon aria-hidden='true' className='size-4 shrink-0' />
                   {link.label()}

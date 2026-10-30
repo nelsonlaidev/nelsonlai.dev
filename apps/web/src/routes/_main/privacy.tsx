@@ -1,7 +1,6 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
-import { Mdx } from '@/components/mdx/mdx'
-import { PageHeader } from '@/components/page-header'
+import { LegalError, LegalPage, LegalPending } from '@/features/legal/legal-page'
 import { getPage } from '@/features/pages/pages.functions'
 import { createJsonLdWebPage } from '@/lib/json-ld'
 import { createSeoHead } from '@/lib/seo'
@@ -34,16 +33,13 @@ export const Route = createFileRoute('/_main/privacy')({
       }),
     })
   },
+  pendingComponent: LegalPending,
+  errorComponent: LegalError,
   component: RouteComponent,
 })
 
 function RouteComponent() {
   const { page } = Route.useLoaderData()
 
-  return (
-    <>
-      <PageHeader title={page.title} description={page.description} />
-      <Mdx code={page.mdx} />
-    </>
-  )
+  return <LegalPage page={page} kind='privacy' />
 }

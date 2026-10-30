@@ -21,7 +21,7 @@ export function AccountMobileNav() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger
-        render={<Button variant='outline' size='icon' className='size-10 md:hidden' />}
+        render={<Button variant='outline' size='icon' className='size-11 md:hidden' />}
         aria-label={m.account_open_navigation_menu()}
       >
         <MenuIcon aria-hidden='true' />
@@ -36,8 +36,8 @@ export function AccountMobileNav() {
             <li key={link.to}>
               <DrawerClose
                 nativeButton={false}
-                render={<Link to={link.to} activeOptions={{ exact: true }} activeProps={{ 'data-active': 'true' }} />}
-                className='block py-2.5 text-muted-foreground transition-colors data-active:text-foreground'
+                render={<Link to={link.to} activeOptions={{ exact: true }} />}
+                className='block min-h-11 rounded-md px-3 py-2.5 text-muted-foreground transition-colors aria-[current=page]:bg-accent aria-[current=page]:text-foreground'
               >
                 {link.label()}
               </DrawerClose>
@@ -58,8 +58,8 @@ export function AccountSidebar() {
             <Link
               to={link.to}
               activeOptions={{ exact: true }}
-              activeProps={{ 'data-active': 'true' }}
-              className='block rounded-xl px-3 py-2 text-muted-foreground transition-colors hover:bg-accent data-active:text-foreground'
+
+              className='block min-h-11 rounded-md border border-transparent px-3 py-2.5 text-muted-foreground transition-colors hover:bg-accent aria-[current=page]:border-border aria-[current=page]:bg-accent aria-[current=page]:text-foreground'
             >
               {link.label()}
             </Link>

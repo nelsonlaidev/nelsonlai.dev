@@ -65,7 +65,7 @@ export function SheetContent(props: SheetContentProps) {
         data-slot='sheet-content'
         data-side={side}
         className={cn(
-          'fixed z-50 flex flex-col bg-popover bg-clip-padding text-sm text-popover-foreground shadow-lg transition duration-200 ease-in-out',
+          'fixed z-50 flex flex-col gap-4 bg-popover bg-clip-padding text-sm text-popover-foreground shadow-lg transition duration-200 ease-in-out',
           'data-ending-style:opacity-0',
           'data-starting-style:opacity-0',
           'data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:h-auto data-[side=bottom]:border-t',
@@ -105,7 +105,7 @@ type SheetHeaderProps = React.ComponentProps<'div'>
 export function SheetHeader(props: SheetHeaderProps) {
   const { className, ...rest } = props
 
-  return <div data-slot='sheet-header' className={cn('flex flex-col gap-1.5 p-6', className)} {...rest} />
+  return <div data-slot='sheet-header' className={cn('flex flex-col gap-1.5 p-4', className)} {...rest} />
 }
 
 type SheetFooterProps = React.ComponentProps<'div'>
@@ -113,7 +113,7 @@ type SheetFooterProps = React.ComponentProps<'div'>
 export function SheetFooter(props: SheetFooterProps) {
   const { className, ...rest } = props
 
-  return <div data-slot='sheet-footer' className={cn('mt-auto flex flex-col gap-2 p-6', className)} {...rest} />
+  return <div data-slot='sheet-footer' className={cn('mt-auto flex flex-col gap-2 p-4', className)} {...rest} />
 }
 
 type SheetTitleProps = SheetPrimitive.Title.Props

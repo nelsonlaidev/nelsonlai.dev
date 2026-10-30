@@ -1,1 +1,122 @@
 @import '@repo/ui/globals.css';
+
+@theme inline {
+  --font-serif: Georgia, 'Times New Roman', serif;
+}
+
+/* Seafold is the application palette, including all body-mounted portals.
+   Keep the shared UI package's neutral defaults independent of this app. */
+:root,
+:root.dark {
+  --background: #052d3c;
+  --foreground: #e7eee5;
+  --card: #0d3341;
+  --card-foreground: #e7eee5;
+  --popover: #0b303e;
+  --popover-foreground: #e7eee5;
+  --primary: #b5d9ca;
+  --primary-foreground: #092e3b;
+  --secondary: #1a4650;
+  --secondary-foreground: #e7eee5;
+  --muted: #173e49;
+  --muted-foreground: #aac2bf;
+  --accent: #1c4750;
+  --accent-foreground: #e7eee5;
+  --border: #cbe5d833;
+  --input: #cbe5d84d;
+  --ring: #c4f1d5;
+  --destructive: #ffaea5;
+  --skeleton: #23505a;
+  --chart-1: #b5d9ca;
+  --chart-2: #77b9d1;
+  --chart-3: #e6c792;
+  --chart-4: #b7a6d9;
+  --chart-5: #e9b3ac;
+  --sidebar: #082a38;
+  --sidebar-foreground: #e7eee5;
+  --sidebar-primary: #b5d9ca;
+  --sidebar-primary-foreground: #092e3b;
+  --sidebar-accent: #1c4750;
+  --sidebar-accent-foreground: #e7eee5;
+  --sidebar-border: #cbe5d833;
+  --sidebar-ring: #c4f1d5;
+  --sidebar-skeleton: #23505a;
+}
+
+@layer base {
+  body {
+    color-scheme: dark;
+  }
+
+  /* The app's touch and keyboard baseline also covers native controls. */
+  :is(button, input, [role='combobox']) {
+    min-height: 44px;
+  }
+  button {
+    min-width: 44px;
+  }
+}
+
+:root :is(button, a):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes like-settle {
+  from {
+    transform: translateX(-6px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes like-bubble {
+  15% {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-17px);
+  }
+}
+
+@keyframes like-ripple {
+  from {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+/* Shiki generates these line spans, diff markers and highlight classes. */
+pre.shiki .line {
+  display: inline-block;
+  min-width: 100%;
+  padding-inline: 22px;
+  min-height: 1.85em;
+  border-left: 3px solid transparent;
+  margin-inline: 0;
+}
+pre.shiki .line.highlighted {
+  border-left-color: #8dd5bd;
+  background: #8dd5bd14;
+}
+@media (max-width: 600px) {
+  pre.shiki .line {
+    padding-inline: 13px 16px;
+  }
+}

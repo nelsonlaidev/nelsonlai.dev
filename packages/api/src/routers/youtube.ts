@@ -20,7 +20,7 @@ const YoutubeChannelListResponseSchema = z.object({
 })
 
 const getStats = publicProcedure.output(YoutubeStatsSchema).handler(async () => {
-  if (!ENV.GOOGLE_API_KEY) return { subscribers: 0, views: 0 }
+  if (!ENV.GOOGLE_API_KEY) throw new Error('YouTube is not configured')
 
   const cached = await cache.youtube.stats.get(CHANNEL_ID)
   if (cached !== null) return cached

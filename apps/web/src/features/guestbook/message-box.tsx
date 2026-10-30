@@ -1,7 +1,7 @@
 import type { Session } from '@repo/auth'
 
 import { ORPCError } from '@orpc/client'
-import { CreateGuestbookMessageInputSchema } from '@repo/api/schema/guestbook'
+import { CreateGuestbookMessageInputSchema, GUESTBOOK_MESSAGE_MAX_LENGTH } from '@repo/api/schema/guestbook'
 import { Button } from '@repo/ui/components/button'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@repo/ui/components/field'
 import { Textarea } from '@repo/ui/components/textarea'
@@ -80,9 +80,12 @@ export function MessageBox(props: MessageBoxProps) {
   }
 
   return (
-    <div className='flex gap-3'>
-      <UserAvatar id={user.id} name={user.name} image={user.image} size='lg' />
-      <form onSubmit={handleSubmit} className='w-full space-y-4'>
+    <div className='rounded-xl border border-[#9abda32b] bg-[#153b3a19] p-7.5 max-[601px]:px-5 max-[601px]:py-6'>
+      <div className='mb-6 flex items-center gap-3'>
+        <UserAvatar id={user.id} name={user.name} image={user.image} size='lg' />
+        <span>{user.name}</span>
+      </div>
+      <form onSubmit={handleSubmit} className='w-full space-y-4' aria-busy={isBusy}>
         <FieldGroup>
           <form.Field name='body'>
             {(field) => {
@@ -90,7 +93,7 @@ export function MessageBox(props: MessageBoxProps) {
 
               return (
                 <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name} className='sr-only'>
+                  <FieldLabel htmlFor={field.name} className='mx-0 mt-0 mb-3.25 block text-sm/normal text-[#bad3be]'>
                     {m.guestbook_placeholder()}
                   </FieldLabel>
                   <Textarea
@@ -104,7 +107,10 @@ export function MessageBox(props: MessageBoxProps) {
                     aria-invalid={isInvalid}
                     aria-describedby={isInvalid ? errorId : undefined}
                     placeholder={m.guestbook_placeholder()}
+                    rows={5}
+                    maxLength={GUESTBOOK_MESSAGE_MAX_LENGTH}
                     disabled={isBusy}
+                    className='max-h-87.5 min-h-37.5 w-full resize-y rounded-md border border-input bg-transparent px-2.5 py-2 text-base/[1.65] text-[#d7e5d0] shadow-xs transition-[border-color,box-shadow] duration-200 ease-linear placeholder:text-[#8eaf9d] focus-visible:border-ring focus-visible:shadow-[0_0_0_3px_color-mix(in_oklab,var(--ring)_50%,transparent)] focus-visible:outline-2 focus-visible:outline-offset-[5px] focus-visible:outline-[#c4e0cc] focus-visible:outline-solid disabled:[background:color-mix(in_oklab,var(--input)_50%,transparent)] aria-invalid:border-destructive aria-invalid:shadow-[0_0_0_3px_color-mix(in_oklab,var(--destructive)_20%,transparent)] md:text-base/[1.65] dark:bg-transparent dark:disabled:bg-input/50'
                   />
                   {isInvalid && <FieldError id={errorId} errors={field.state.meta.errors} />}
                 </Field>
@@ -112,12 +118,30 @@ export function MessageBox(props: MessageBoxProps) {
             }}
           </form.Field>
         </FieldGroup>
-        <div className='flex items-center justify-end gap-2'>
-          <Button variant='outline' onClick={onSignOut} disabled={isBusy}>
+        {creation.isError && (
+          <p role='alert' className='text-sm text-[#f5b9b9]'>
+            {creation.error instanceof ORPCError && creation.error.code === 'TOO_MANY_REQUESTS'
+              ? m.error_too_many_requests()
+              : m.error_create_message_failed()}
+          </p>
+        )}
+        <form.Subscribe selector={(state) => state.values.body.length}>
+          {(length) => (
+            <p className='text-right text-sm text-muted-foreground'>
+              {length}/{GUESTBOOK_MESSAGE_MAX_LENGTH}
+            </p>
+          )}
+        </form.Subscribe>
+        <div className='flex flex-col-reverse items-stretch gap-3'>
+          <Button variant='ghost' onClick={onSignOut} disabled={isBusy} className='min-h-11 text-[#b8d1b6]'>
             {m.common_sign_out()}
           </Button>
-          <Button type='submit' disabled={isBusy}>
-            {m.common_submit()}
+          <Button
+            type='submit'
+            disabled={isBusy}
+            className='inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5.75 py-3.5 text-sm/5 text-[#e0ecde] transition-colors duration-200 ease-linear hover:border-[#c4e0cc] hover:bg-[#b0d3c31c] disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none'
+          >
+            {creation.isPending ? m.common_loading() : m.ocean_message_submit()}
           </Button>
         </div>
       </form>

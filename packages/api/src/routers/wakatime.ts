@@ -11,7 +11,7 @@ const WakatimeAllTimeResponseSchema = z.object({
 
 const getStats = publicProcedure.output(WakatimeStatsSchema).handler(async () => {
   if (!ENV.WAKATIME_API_KEY) {
-    return { hours: 0 }
+    throw new Error('WakaTime is not configured')
   }
 
   const cached = await cache.wakatime.stats.get('all-time')

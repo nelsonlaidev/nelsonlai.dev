@@ -110,6 +110,7 @@ export function CommentList(props: CommentListProps) {
           onClick={() => {
             void query.fetchNextPage()
           }}
+          className='min-h-11'
         >
           {m.common_load_more()}
         </Button>
@@ -199,23 +200,24 @@ function CommentItem(props: CommentItemProps) {
                   <TooltipContent>{fullDate ?? '--'}</TooltipContent>
                 </Tooltip>
                 {comment.user.role === 'admin' && (
-                  <div className='rounded-full border border-red-500/50 bg-red-100/50 px-2 py-0.5 text-sm dark:bg-red-900/50'>
+                  <div className='rounded-md border border-red-500/50 bg-red-100/50 px-2 py-0.5 text-sm dark:bg-red-900/50'>
                     {m.blog_comments_author()}
                   </div>
                 )}
               </div>
               <DropdownMenu>
                 <DropdownMenuTrigger
-                  render={<Button type='button' variant='ghost' size='icon-sm' />}
+                  render={<Button type='button' variant='ghost' size='icon-sm' className='min-h-11' />}
                   aria-label={m.blog_comments_open_menu()}
                 >
                   <MoreVerticalIcon aria-hidden='true' />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align='end' className='min-w-36'>
+                <DropdownMenuContent align='end' className='min-w-36 border border-border shadow-md ring-0'>
                   <DropdownMenuItem
                     onClick={() => {
                       void copyLink()
                     }}
+                    className='min-h-11'
                   >
                     <CopyIcon aria-hidden='true' /> {m.blog_comments_copy_link()}
                   </DropdownMenuItem>
@@ -225,6 +227,7 @@ function CommentItem(props: CommentItemProps) {
                       onClick={() => {
                         setDeleteOpen(true)
                       }}
+                      className='min-h-11'
                     >
                       <TrashIcon aria-hidden='true' /> {m.common_delete()}
                     </DropdownMenuItem>
@@ -246,7 +249,7 @@ function CommentItem(props: CommentItemProps) {
                   type='button'
                   variant='secondary'
                   size='sm'
-                  className='font-mono text-xs text-muted-foreground aria-pressed:bg-accent aria-pressed:text-accent-foreground'
+                  className='min-h-11 font-mono text-xs text-muted-foreground aria-pressed:bg-accent aria-pressed:text-accent-foreground'
                   aria-label={m.common_like()}
                   aria-pressed={liked === true}
                   disabled={vote.isPending}
@@ -261,7 +264,7 @@ function CommentItem(props: CommentItemProps) {
                   type='button'
                   variant='secondary'
                   size='sm'
-                  className='font-mono text-xs text-muted-foreground aria-pressed:bg-accent aria-pressed:text-accent-foreground'
+                  className='min-h-11 font-mono text-xs text-muted-foreground aria-pressed:bg-accent aria-pressed:text-accent-foreground'
                   aria-label={m.blog_comments_dislike()}
                   aria-pressed={liked === false}
                   disabled={vote.isPending}
@@ -277,7 +280,7 @@ function CommentItem(props: CommentItemProps) {
                     type='button'
                     variant='secondary'
                     size='sm'
-                    className='text-xs text-muted-foreground'
+                    className='min-h-11 text-xs text-muted-foreground'
                     onClick={() => {
                       setReplying(true)
                     }}
@@ -303,8 +306,7 @@ function CommentItem(props: CommentItemProps) {
                 variant='ghost'
                 size='sm'
                 aria-expanded={repliesOpen}
-                data-state={repliesOpen ? 'open' : 'closed'}
-                className='mt-4 text-xs data-open:[&>svg]:rotate-180'
+                className='mt-4 min-h-11 text-xs aria-expanded:[&>svg]:rotate-180'
                 onClick={() => {
                   setRepliesOpen(!repliesOpen)
                 }}

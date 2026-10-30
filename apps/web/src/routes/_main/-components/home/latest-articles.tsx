@@ -1,69 +1,66 @@
 import type { PostSummary } from '@/features/posts/types'
 
-import { buttonVariants } from '@repo/ui/components/button'
 import { Link } from '@tanstack/react-router'
-import { cn } from 'cn'
-import { motion, useInView, useReducedMotion } from 'motion/react'
-import { useRef } from 'react'
+import { ArrowRightIcon } from 'lucide-react'
 
-import { PostCard } from '@/components/post-card'
-import { usePostStats } from '@/features/posts/use-post-stats'
+import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { m } from '@/paraglide/messages'
 
-const variants = {
-  initial: { y: 40, opacity: 0 },
-  animate: { y: 0, opacity: 1 },
-}
+import { SectionHeading } from './section-heading'
 
-type LatestArticlesProps = {
-  posts: PostSummary[]
-}
-
-export function LatestArticles(props: LatestArticlesProps) {
+export function LatestArticles(props: { posts: PostSummary[] }) {
   const { posts } = props
-  const reducedMotion = useReducedMotion()
-  const articlesRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(articlesRef, { once: true, margin: '-100px' })
-  const statsQuery = usePostStats(posts.map((post) => post.slug))
 
   return (
-    <motion.div
-      initial='initial'
-      animate={reducedMotion || isInView ? 'animate' : 'initial'}
-      variants={variants}
-      ref={articlesRef}
-      transition={{ duration: reducedMotion ? 0 : 0.5 }}
-      className='relative my-24'
+    <section
+      id='notes'
+      aria-labelledby='notes-title'
+      className='mx-auto grid w-full max-w-400 scroll-mt-12.5 gap-10 pt-30 pr-[max(16px,env(safe-area-inset-right))] pb-27.5 pl-[max(16px,env(safe-area-inset-left))] min-[701px]:scroll-mt-17.5 min-[701px]:grid-cols-[1fr_1.05fr] min-[701px]:items-center min-[701px]:gap-17.5 min-[701px]:px-[10%] min-[701px]:py-47.5'
     >
-      <motion.h2
-        className='text-center text-3xl font-semibold'
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: reducedMotion ? 0 : 0.3 }}
-      >
-        {m.homepage_latest_articles_title()}
-      </motion.h2>
-      <motion.div
-        className='mt-12 grid gap-4 md:grid-cols-2'
-        initial={{ y: 40, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: reducedMotion ? 0 : 0.3 }}
-      >
-        {posts.map((post) => (
-          <PostCard
-            key={post.slug}
-            post={post}
-            stats={statsQuery.data?.get(post.slug)}
-            isStatsError={statsQuery.isError}
-            featured
-          />
-        ))}
-      </motion.div>
-      <div className='my-8 flex items-center justify-center'>
-        <Link to='/blog' className={cn(buttonVariants({ variant: 'outline' }))}>
-          {m.homepage_latest_articles_view_all()}
+      <SectionHeading
+        id='notes-title'
+        eyebrow={`02 / ${m.nav_blog()}`}
+        title={m.ocean_notes_title()}
+        emphasis={m.ocean_notes_emphasis()}
+        description={m.ocean_notes_description()}
+      />
+      <div className='min-w-0'>
+        <div className='border-t'>
+          {posts.map((post, index) => (
+            <ArticleRow key={post.slug} post={post} index={index} />
+          ))}
+        </div>
+        {posts.length === 0 && <p className='py-8 text-muted-foreground'>{m.ocean_empty_notes()}</p>}
+        <Link to='/blog' className='mt-8 inline-flex min-h-11 items-center gap-3 text-sm text-primary'>
+          {m.ocean_all_articles()}
+          <ArrowRightIcon className='size-5' aria-hidden='true' />
         </Link>
       </div>
-    </motion.div>
+    </section>
+  )
+}
+
+function ArticleRow(props: { post: PostSummary; index: number }) {
+  const { post, index } = props
+  const date = useFormattedDate(post.publishedAt)
+  return (
+    <article className='border-b'>
+      <Link to='/blog/$slug' params={{ slug: post.slug }} className='group flex items-center gap-4 py-7.5'>
+        <span className='text-sm text-muted-foreground' aria-hidden='true'>
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <div className='min-w-0 flex-1'>
+          <time dateTime={post.publishedAt} className='text-sm text-primary'>
+            {m.article_category()} · {date ?? '--'}
+          </time>
+          <h3 className='mt-3 text-lg/normal font-normal tracking-tight min-[701px]:text-xl/normal'>{post.title}</h3>
+          <p className='mt-3 text-base/[1.65] text-muted-foreground'>{post.description}</p>
+        </div>
+        <ArrowRightIcon
+          className='size-5 shrink-0 text-primary transition-transform motion-safe:group-hover:translate-x-1 motion-reduce:transition-none'
+          aria-hidden='true'
+        />
+      </Link>
+    </article>
   )
 }

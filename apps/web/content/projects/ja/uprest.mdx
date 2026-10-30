@@ -13,6 +13,16 @@ techstack:
 selected: true
 dateCreated: '2026-09-25T00:00:00Z'
 updatedAt: '2026-09-30T06:20:40.000Z'
+subtitle: '使い慣れた API を、ローカルでも。'
+category: '開発インフラ'
+features:
+  - title: 'ワークフローをそのままに'
+    text: 'HTTP インターフェースで Redis コマンド、パイプライン、トランザクションをサポート。'
+  - title: '単発のリクエストを超えて'
+    text: 'SSE による Pub/Sub、JSON・RESP2 レスポンス、トークン認証で、より高度なローカル用途にも対応。'
+  - title: '開発する場所で実行'
+    text: 'マルチアーキテクチャの Docker イメージと Linux・macOS・Windows 向けバイナリで、さまざまな開発環境に対応。'
+journey: 'ローカル開発に欠けていた一片が、オープンソースのツールになりました。インフラを身近に、手元で動かしやすくする探求です。'
 ---
 
 Uprest は、[Upstash Redis REST API](https://upstash.com/docs/redis/features/restapi) を使うアプリケーション向けのローカル HTTP-to-Redis プロキシです。リクエストを実際の Redis サーバーに転送するため、アプリケーションは Upstash データベースなしでローカル開発や CI でも `@upstash/redis` を使い続けられます。

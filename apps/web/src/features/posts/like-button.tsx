@@ -1,30 +1,24 @@
 import NumberFlow from '@number-flow/react'
 import { ORPCError } from '@orpc/client'
-import { Separator } from '@repo/ui/components/separator'
 import { toast } from '@repo/ui/components/toast'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { motion, useReducedMotion } from 'motion/react'
+import { cn } from 'cn'
+import { useReducedMotion } from 'motion/react'
 import { useEffect, useId, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
-type LikeButtonProps = {
-  slug: string
-}
-
-export function LikeButton(props: LikeButtonProps) {
-  const { slug } = props
+export function usePostLike(slug: string) {
   const queryClient = useQueryClient()
   const likesOptions = orpc.posts.likes.queryOptions({ input: { slug } })
   const query = useQuery(likesOptions)
 
   const [draft, setDraft] = useState(0)
-  const clipId = useId()
+  const [pulse, setPulse] = useState(0)
 
   const draftRef = useRef(0)
-  const buttonRef = useRef<HTMLButtonElement>(null)
 
   const reducedMotion = useReducedMotion()
 
@@ -77,7 +71,7 @@ export function LikeButton(props: LikeButtonProps) {
     [scheduleSave],
   )
 
-  async function like() {
+  function like() {
     if (!query.data || save.isPending) return
 
     if (query.data.currentUserLikes + draftRef.current >= 3) {
@@ -89,23 +83,18 @@ export function LikeButton(props: LikeButtonProps) {
     setDraft(draftRef.current)
     scheduleSave(draftRef.current)
 
-    if (!reducedMotion && query.data.currentUserLikes + draftRef.current === 3) {
-      const box = buttonRef.current?.getBoundingClientRect()
-
-      if (box) {
-        const { default: confetti } = await import('canvas-confetti')
-
-        void confetti({
-          particleCount: 100,
-          spread: 100,
-          zIndex: 999,
-          shapes: [confetti.shapeFromText({ text: '❤️', scalar: 2 })],
-          origin: { x: (box.x + box.width / 2) / innerWidth, y: box.y / innerHeight },
-          disableForReducedMotion: true,
-        })
-      }
-    }
+    if (!reducedMotion) setPulse((value) => value + 1)
   }
+
+  return { query, save, draft, pulse, like }
+}
+
+export function LikeButton(props: { state: ReturnType<typeof usePostLike>; placement: 'desktop' | 'mobile' }) {
+  const { state, placement } = props
+  const { query, save, draft, pulse, like } = state
+  const clipId = useId()
+  const count = Math.min(3, (query.data?.currentUserLikes ?? 0) + draft)
+  const heart = 'M12 21S2 15.2 2 8.5C2 3.5 8 1.5 12 6c4-4.5 10-2.5 10 2.5C22 15.2 12 21 12 21Z'
 
   let likesContent: React.ReactNode = '--'
 
@@ -116,56 +105,63 @@ export function LikeButton(props: LikeButtonProps) {
   }
 
   return (
-    <div className='mt-12 mb-4 flex justify-center'>
-      <motion.button
-        ref={buttonRef}
+    <div
+      className={cn(
+        'mt-6',
+        placement === 'desktop' && 'p-2.5 max-[1001px]:hidden',
+        placement === 'mobile' && 'hidden max-[1001px]:mt-6 max-[1001px]:block',
+      )}
+    >
+      <button
         type='button'
-        tabIndex={0}
         onClick={() => {
-          void like()
+          like()
         }}
         disabled={!query.data || save.isPending}
-        whileTap={reducedMotion ? undefined : { scale: 0.96 }}
+        aria-disabled={count === 3 || undefined}
         aria-label={m.blog_like_this_post()}
-        className='flex items-center gap-3 rounded-4xl bg-primary px-4 py-2 text-lg text-primary-foreground disabled:opacity-60 dark:bg-primary/5 dark:text-foreground'
+        aria-describedby={`${clipId}-status`}
+        className='relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-md border border-[#8cae9d55] bg-[#082734] px-4 py-2.5 font-[inherit] text-base/normal [font-weight:inherit] text-[#d1e6dc] [font-style:inherit] transition-colors duration-180 ease-linear hover:bg-[#123844] focus-visible:outline-2 focus-visible:-outline-offset-4! focus-visible:outline-[#c4f1d5] focus-visible:outline-solid not-aria-disabled:active:transform-[scale(0.97)] aria-disabled:cursor-default motion-reduce:transition-none motion-reduce:not-aria-disabled:active:transform-none'
       >
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='28'
-          height='28'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke='currentColor'
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          className='size-7 text-red-500'
-          aria-hidden='true'
-        >
-          <defs>
-            <clipPath id={clipId}>
-              <path d='M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572' />
-            </clipPath>
-          </defs>
-          <path d='M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572' />
-          <g clipPath={`url(#${clipId})`}>
-            <motion.rect
-              x='0'
-              y='0'
-              width='24'
-              height='24'
-              fill='currentColor'
-              stroke='none'
-              initial={reducedMotion ? false : { y: 24 }}
-              animate={{ y: 24 - ((query.data?.currentUserLikes ?? 0) + draft) * 8 }}
-              transition={{ duration: reducedMotion ? 0 : 0.3 }}
-            />
-          </g>
-        </svg>
-        {m.common_like()}
-        <Separator orientation='vertical' className='h-5 bg-current/20 data-vertical:self-center' />
-        {likesContent}
-      </motion.button>
+        <span className='relative flex text-[#9bd7c0]'>
+          <svg width='26' height='26' viewBox='0 0 24 24' aria-hidden='true'>
+            <defs>
+              <clipPath id={clipId}>
+                <path d={heart} />
+              </clipPath>
+            </defs>
+            <g clipPath={`url(#${clipId})`}>
+              <g
+                style={{ transform: `translateY(${[24, 15, 10, 2][count]}px)` }}
+                className='transition-transform duration-400 ease-out motion-reduce:transition-none'
+              >
+                <path
+                  key={pulse}
+                  d='M-12 0Q-6-2 0 0T12 0T24 0T36 0V30H-12Z'
+                  fill='currentColor'
+                  className={cn('motion-reduce:animate-none', pulse > 0 && 'animate-[like-settle_0.6s_ease-out_both]')}
+                />
+              </g>
+            </g>
+            <path d={heart} fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinejoin='round' />
+          </svg>
+          {pulse > 0 && (
+            <span key={pulse} aria-hidden='true' className='pointer-events-none absolute inset-0 motion-reduce:hidden'>
+              <i className='absolute top-1.75 left-0.75 size-1 animate-[like-bubble_0.65s_ease-out] rounded-full border border-[#a7dfc9] opacity-0' />
+              <i className='absolute top-0.75 left-3.25 size-1 animate-[like-bubble_0.65s_ease-out] rounded-full border border-[#a7dfc9] opacity-0 [animation-delay:0.05s]' />
+              <i className='absolute top-2.25 left-5.5 size-1 animate-[like-bubble_0.65s_ease-out] rounded-full border border-[#a7dfc9] opacity-0 [animation-delay:0.1s]' />
+              {count === 3 && (
+                <b className='absolute -inset-1 animate-[like-ripple_0.65s_ease-out_both] rounded-full border border-[#a7dfc9]' />
+              )}
+            </span>
+          )}
+        </span>
+        <span>{count === 3 ? m.ocean_blog_liked() : m.common_like()}</span>
+        <span className='border-l border-l-[#8cae9d40] pl-2.5 text-[#b8d0c7] tabular-nums'>{likesContent}</span>
+      </button>
+      <output id={`${clipId}-status`} className='sr-only'>
+        {count} / 3
+      </output>
     </div>
   )
 }

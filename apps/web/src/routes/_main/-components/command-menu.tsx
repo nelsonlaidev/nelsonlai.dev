@@ -61,23 +61,26 @@ export function CommandMenu() {
     await signOut()
   }
 
+  const contentProps = {
+    initialFocus: inputRef,
+    finalFocus: () => (signInDialogHandle.isOpen ? false : triggerRef.current),
+  }
+
   return (
     <CommandDialog
+      className='max-h-[calc(100dvh-32px)] max-w-[min(480px,calc(100vw-32px))] overflow-y-auto border border-border shadow-md ring-0 **:data-[slot=input-group]:min-h-11 sm:max-w-[min(480px,calc(100vw-32px))]'
       open={open}
       onOpenChange={setOpen}
       trigger={
         <DialogTrigger
-          render={<Button ref={triggerRef} variant='ghost' size='icon' />}
+          render={<Button ref={triggerRef} variant='ghost' size='icon' className='size-11' />}
           aria-label={m.command_menu_open_menu()}
           aria-keyshortcuts='Meta+K Control+K'
         >
           <CommandIcon aria-hidden='true' />
         </DialogTrigger>
       }
-      contentProps={{
-        initialFocus: inputRef,
-        finalFocus: () => (signInDialogHandle.isOpen ? false : triggerRef.current),
-      }}
+      contentProps={contentProps}
     >
       <Command loop label={m.command_menu_title()}>
         <CommandInput ref={inputRef} placeholder={m.command_menu_placeholder()} />
@@ -87,6 +90,7 @@ export function CommandMenu() {
             {session ? (
               <>
                 <CommandItem
+                  className='min-h-11'
                   onSelect={() => {
                     setOpen(false)
                     void navigate({ to: '/account' })
@@ -97,6 +101,7 @@ export function CommandMenu() {
                 </CommandItem>
                 {session.user.role === 'admin' && (
                   <CommandItem
+                    className='min-h-11'
                     onSelect={() => {
                       setOpen(false)
                       void navigate({ to: '/admin' })
@@ -106,13 +111,14 @@ export function CommandMenu() {
                     {m.common_labels_admin()}
                   </CommandItem>
                 )}
-                <CommandItem disabled={isSigningOut} onSelect={handleSignOut}>
+                <CommandItem className='min-h-11' disabled={isSigningOut} onSelect={handleSignOut}>
                   <LogOutIcon aria-hidden='true' />
                   {m.common_sign_out()}
                 </CommandItem>
               </>
             ) : (
               <CommandItem
+                className='min-h-11'
                 disabled={isPending}
                 onSelect={() => {
                   setOpen(false)
@@ -126,11 +132,12 @@ export function CommandMenu() {
           </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading={m.common_labels_general()}>
-            <CommandItem onSelect={copyCurrentUrl}>
+            <CommandItem className='min-h-11' onSelect={copyCurrentUrl}>
               <LinkIcon aria-hidden='true' />
               {m.command_menu_actions_copy_link()}
             </CommandItem>
             <CommandItem
+              className='min-h-11'
               onSelect={() => {
                 setOpen(false)
                 window.open(SITE.repository, '_blank', 'noopener,noreferrer')
@@ -144,6 +151,7 @@ export function CommandMenu() {
           <CommandGroup heading={m.command_menu_groups_social()}>
             {SOCIAL_LINKS.map((link) => (
               <CommandItem
+                className='min-h-11'
                 key={link.href}
                 value={link.title}
                 onSelect={() => {

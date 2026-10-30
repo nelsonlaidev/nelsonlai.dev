@@ -28,7 +28,7 @@ export function AdminStatsCards() {
   }
 
   return (
-    <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-5'>
+    <div className='grid gap-4 min-[400px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'>
       {STAT_ITEMS.map((item) => {
         let content: React.ReactNode = <Skeleton className='h-8 w-20' />
 
@@ -37,7 +37,7 @@ export function AdminStatsCards() {
         }
 
         return (
-          <Card key={item.field} size='sm'>
+          <Card key={item.field} size='sm' className='border border-border shadow-none ring-0'>
             <CardHeader>
               <CardTitle className='flex items-center justify-between'>
                 {item.label()} <item.icon className='size-4 text-muted-foreground' />

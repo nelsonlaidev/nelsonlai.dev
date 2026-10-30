@@ -1,17 +1,16 @@
 import type { PostDetail } from './types'
 
 import NumberFlow from '@number-flow/react'
-import { BlurImage } from '@repo/ui/components/blur-image'
 import { ExternalLink } from '@repo/ui/components/external-link'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef } from 'react'
-import Zoom from 'react-medium-image-zoom'
 
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { orpc } from '@/lib/orpc-client'
 import { SITE } from '@/lib/site'
 import { m } from '@/paraglide/messages'
 
+import { articleNumber, articleTopic, articleTopicLabel } from './presentation'
 import { usePostStats } from './use-post-stats'
 
 type BlogHeaderProps = { post: PostDetail }
@@ -19,6 +18,7 @@ type BlogHeaderProps = { post: PostDetail }
 export function BlogHeader(props: BlogHeaderProps) {
   const { post } = props
   const formattedDate = useFormattedDate(post.publishedAt)
+  const updatedDate = useFormattedDate(post.updatedAt)
   const queryClient = useQueryClient()
   const stats = usePostStats([post.slug])
   const postStats = stats.data?.get(post.slug)
@@ -58,50 +58,43 @@ export function BlogHeader(props: BlogHeaderProps) {
   }
 
   return (
-    <div className='space-y-16 py-16'>
-      <div className='space-y-16 sm:px-8'>
-        <h1 className='bg-linear-to-b from-black via-black/90 to-black/70 to-90% bg-clip-text text-center text-4xl font-semibold text-transparent md:text-5xl/16 dark:from-white dark:via-white/90 dark:to-white/70'>
-          {post.title}
-        </h1>
-        <div className='grid grid-cols-2 gap-4 text-sm md:grid-cols-4'>
-          <div className='space-y-1 md:mx-auto'>
-            <div className='text-muted-foreground'>{m.blog_header_written_by()}</div>
-            <ExternalLink href={SITE.socials.github} className='flex items-center gap-2'>
-              <BlurImage
-                src='/images/avatar.png'
-                className='size-6 rounded-full'
-                width={1024}
-                height={1024}
-                alt={m.common_avatar_alt({ name: SITE.name })}
-              />
-              {SITE.name}
-            </ExternalLink>
-          </div>
-          <div className='space-y-1 md:mx-auto'>
-            <div className='text-muted-foreground'>{m.blog_header_published_on()}</div>
-            <time dateTime={post.publishedAt}>{formattedDate ?? '--'}</time>
-          </div>
-          <div className='space-y-1 md:mx-auto'>
-            <div className='text-muted-foreground'>{m.blog_header_views()}</div>
-            {viewsContent}
-          </div>
-          <div className='space-y-1 md:mx-auto'>
-            <div className='text-muted-foreground'>{m.common_labels_comments()}</div>
-            {commentsContent}
+    <header className='mb-16.25 max-w-225 max-[601px]:mb-10'>
+      <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-[#b4cec4]'>
+        {articleTopicLabel(articleTopic(post.slug))} / {m.ocean_blog_article()} {articleNumber(post.slug)}
+      </span>
+      <h1 className='text-[clamp(44px,5.2vw,76px)] leading-[1.1] font-[420] tracking-[-0.065em] max-[1001px]:text-[55px] max-[601px]:text-[42px] max-[601px]:leading-[1.12]'>
+        {post.title}
+      </h1>
+      <p className='mt-6.75 max-w-180 text-lg/[1.65] text-[#a8c6bb]'>{post.description}</p>
+      <div className='mt-8.75 flex flex-wrap items-center gap-3.25 text-sm/normal'>
+        <span
+          aria-hidden='true'
+          className='grid size-9.5 shrink-0 place-items-center rounded-full border border-[#b6d1bc4a] font-serif text-[#c5dbc8] italic'
+        >
+          N
+        </span>
+        <div className='min-w-0 flex-1 max-[601px]:basis-[calc(100%-55px)]'>
+          <ExternalLink href={SITE.socials.github}>{SITE.name}</ExternalLink>
+          <div className='mt-2 flex flex-wrap gap-x-5 gap-y-1.5 text-sm leading-[1.6] text-[#8cafaa]'>
+            <span className='block'>
+              {m.blog_header_published_on()} <time dateTime={post.publishedAt}>{formattedDate ?? '--'}</time>
+            </span>
+            {post.updatedAt !== post.publishedAt && (
+              <span className='block'>
+                <time dateTime={post.updatedAt}>{m.blog_footer_last_updated({ date: updatedDate ?? '--' })}</time>
+              </span>
+            )}
           </div>
         </div>
+        <div className='flex flex-wrap gap-4 text-sm/normal text-[#8cafaa] max-[601px]:basis-full max-[601px]:pl-12.75'>
+          <span>
+            {viewsContent} {m.blog_header_views()}
+          </span>
+          <a href='#comments'>
+            {commentsContent} {m.common_labels_comments()}
+          </a>
+        </div>
       </div>
-      <Zoom zoomMargin={40} zoomImg={{ src: `/images/blog/${post.slug}/cover.png`, alt: post.title }}>
-        <BlurImage
-          src={`/images/blog/${post.slug}/cover.png`}
-          className='rounded-lg'
-          width={1200}
-          height={630}
-          lazy={false}
-          fetchPriority='high'
-          alt={post.title}
-        />
-      </Zoom>
-    </div>
+    </header>
   )
 }

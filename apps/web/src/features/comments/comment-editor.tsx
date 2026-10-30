@@ -31,12 +31,15 @@ export function CommentEditor(props: CommentEditorProps) {
         if (typeof next === 'string') onTabsValueChange?.(next)
       }}
     >
-      <TabsList aria-label={isReply ? m.blog_comments_reply_to_comment() : m.blog_comments_placeholder()}>
+      <TabsList
+        aria-label={isReply ? m.blog_comments_reply_to_comment() : m.blog_comments_placeholder()}
+        className='bg-[#031e2950]'
+      >
         <TabsTrigger value='write'>{m.blog_comments_write()}</TabsTrigger>
         <TabsTrigger value='preview'>{m.blog_comments_preview()}</TabsTrigger>
       </TabsList>
       <TabsContent value='write'>
-        <InputGroup>
+        <InputGroup className='min-h-11 bg-transparent'>
           <InputGroupTextarea
             id={id}
             ref={editor.textareaRef}
@@ -63,7 +66,7 @@ export function CommentEditor(props: CommentEditorProps) {
             onKeyDown={editor.handleKeyDown}
             onCompositionStart={editor.handleCompositionStart}
             onCompositionEnd={editor.handleCompositionEnd}
-            className='min-h-10 resize-none font-mono'
+            className='min-h-27.5 resize-none font-sans text-lg/normal text-[#e0ece5] md:text-lg/[calc(1.25/0.875)]'
           />
           <InputGroupAddon align='block-end'>
             <InputGroupButton

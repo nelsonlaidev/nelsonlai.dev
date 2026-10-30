@@ -12,3 +12,5 @@ export const rehypePlugins: PluggableList = [rehypeHeading, rehypeCode, rehypeIn
 export { rehypeHeading } from './rehype/rehype-heading'
 export type { TOC } from './types'
 export { getTOC } from './utils'
+
+export const oceanRehypePlugins: PluggableList = [rehypeHeading, [rehypeCode, { ocean: true }], rehypeInlineCode]

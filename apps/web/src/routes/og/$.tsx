@@ -1,16 +1,35 @@
 import type { Locale } from '@/paraglide/runtime'
 
-import { Logo } from '@repo/ui/components/logo'
+import geistUrl from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?inline'
 import { createFileRoute } from '@tanstack/react-router'
 import { allPosts, allProjects } from 'content-collections'
 import { googleFonts } from 'takumi-js/helpers'
 import { ImageResponse } from 'takumi-js/response'
 
 import { findPage } from '@/features/pages/pages.server'
+import { listPosts } from '@/features/posts/posts.server'
+import { listProjects } from '@/features/projects/projects.server'
+import { ShareCard } from '@/features/sharing/share-card'
+import { surfacePoster } from '@/features/sharing/surface.server'
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '@/lib/og'
-import { SITE } from '@/lib/site'
-import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
+
+import nacreSvg from '../../../public/brand/seafold-nacre.svg?raw'
+
+const geistFont = Buffer.from(geistUrl.slice(geistUrl.indexOf(',') + 1), 'base64')
+const logo = `data:image/svg+xml;base64,${Buffer.from(nacreSvg).toString('base64')}`
+let mainImage: ReturnType<typeof surfacePoster> | undefined
+
+const PAGE_GROUPS: Record<string, { group: string; index: number }> = {
+  blog: { group: 'Writing', index: 1 },
+  projects: { group: 'Selected work', index: 2 },
+  about: { group: 'Nelson Lai', index: 3 },
+  uses: { group: 'Everyday tools', index: 4 },
+  guestbook: { group: 'Say hello', index: 5 },
+  dashboard: { group: 'At a glance', index: 6 },
+  terms: { group: 'Legal', index: 7 },
+  privacy: { group: 'Legal', index: 8 },
+}
 
 const FONT_FAMILY_BY_LOCALE: Record<Locale, string> = {
   en: 'Geist',
@@ -24,7 +43,7 @@ const FONT_FAMILY_BY_LOCALE: Record<Locale, string> = {
 export const Route = createFileRoute('/og/$')({
   server: {
     handlers: {
-      GET: ({ params }) => {
+      GET: async ({ params }) => {
         const pathSegments = (params._splat ?? '').split('/')
 
         if (pathSegments.pop() !== 'image.webp') {
@@ -35,18 +54,34 @@ export const Route = createFileRoute('/og/$')({
         const contentPath = pathSegments.join('/')
 
         let content: { title: string; description: string } | null | undefined
-        let categoryLabel: string | undefined
+        let group = PAGE_GROUPS[contentPath]?.group ?? 'Nelson Lai'
+        let index = PAGE_GROUPS[contentPath]?.index ?? 0
 
         if (!contentPath) {
-          content = { title: SITE.name, description: m.metadata_site_description({}, { locale }) }
+          // The approved Surface poster is identical in every locale. Only its
+          // immutable bytes are shared; failed renders can retry on the next request.
+          mainImage ??= surfacePoster(geistFont, logo)
+          let bytes
+          try {
+            bytes = await mainImage
+          } catch (error) {
+            mainImage = undefined
+            throw error
+          }
+          return new Response(new Uint8Array(bytes), {
+            headers: { 'Content-Type': 'image/webp' },
+          })
         } else if (contentPath.startsWith('blog/')) {
           content = allPosts.find((post) => post.locale === locale && post.slug === contentPath.slice('blog/'.length))
-          categoryLabel = m.article_category({}, { locale })
+          group = 'Blog'
+          index = 9 + listPosts(locale).findIndex((post) => post.slug === contentPath.slice('blog/'.length))
         } else if (contentPath.startsWith('projects/')) {
           content = allProjects.find(
             (project) => project.locale === locale && project.slug === contentPath.slice('projects/'.length),
           )
-          categoryLabel = m.project_category({}, { locale })
+          group = 'Projects'
+          index =
+            13 + listProjects(locale).findIndex((project) => project.slug === contentPath.slice('projects/'.length))
         } else {
           content = findPage(contentPath, locale)
         }
@@ -58,87 +93,24 @@ export const Route = createFileRoute('/og/$')({
         const fontFamily = FONT_FAMILY_BY_LOCALE[locale]
         const fontFamilies = fontFamily === 'Geist' ? ['Geist'] : ['Geist', fontFamily]
 
-        let titleFontSize = 64
-
-        if (content.title.length > 80) titleFontSize = 48
-        else if (content.title.length > 40) titleFontSize = 56
-
         return new ImageResponse(
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              position: 'relative',
-              width: '100%',
-              height: '100%',
-              padding: 80,
-              overflow: 'hidden',
-              fontFamily: fontFamilies.join(', '),
-              color: 'white',
-              background: 'black',
-            }}
-          >
-            <svg width={OG_IMAGE_WIDTH} height={OG_IMAGE_HEIGHT} style={{ position: 'absolute', inset: 0 }} fill='none'>
-              <path d='M40 0v630M1160 0v630M0 40h1200M0 590h1200' stroke='#26292d' />
-              <path
-                d='M34 40h12M40 34v12M1154 40h12M1160 34v12M34 590h12M40 584v12M1154 590h12M1160 584v12'
-                stroke='#53575d'
-              />
-            </svg>
-
-            <Logo width={26} height={30} />
-
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                marginTop: 'auto',
-                minHeight: 0,
-                flexShrink: 0,
-              }}
-            >
-              {categoryLabel && (
-                <p style={{ margin: 0, marginBottom: 20, fontSize: 28, lineHeight: 1.4, color: '#f3f3f3' }}>
-                  {categoryLabel}
-                </p>
-              )}
-              <p
-                style={{
-                  margin: 0,
-                  marginBottom: 16,
-                  fontSize: titleFontSize,
-                  fontWeight: 500,
-                  letterSpacing: -1.5,
-                  lineHeight: 1.25,
-                  lineClamp: 2,
-                  overflow: 'hidden',
-                  overflowWrap: 'anywhere',
-                  flexShrink: 0,
-                }}
-              >
-                {content.title}
-              </p>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: 32,
-                  lineHeight: 1.45,
-                  lineClamp: 3,
-                  overflow: 'hidden',
-                  overflowWrap: 'anywhere',
-                  color: '#989ca3',
-                }}
-              >
-                {content.description}
-              </p>
-            </div>
-          </div>,
+          <ShareCard
+            title={content.title}
+            description={content.description}
+            group={group}
+            index={index}
+            fontFamily={fontFamilies.join(', ')}
+            logo={logo}
+          />,
           {
             width: OG_IMAGE_WIDTH,
             height: OG_IMAGE_HEIGHT,
             format: 'webp',
             lossless: true,
-            fonts: fontFamily === 'Geist' ? undefined : googleFonts([{ name: fontFamily, weight: '400..700' }]),
+            fonts: [
+              geistFont,
+              ...(fontFamily === 'Geist' ? [] : await googleFonts([{ name: fontFamily, weight: '400..500' }])),
+            ],
             fontFamilies,
             lang: locale,
           },

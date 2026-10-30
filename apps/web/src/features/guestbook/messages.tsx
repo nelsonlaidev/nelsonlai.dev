@@ -17,7 +17,7 @@ type MessagesProps = {
 
 export function Messages(props: MessagesProps) {
   const { userId } = props
-  const { data, isSuccess, isPending, isError, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } =
+  const { data, isSuccess, isPending, isError, fetchNextPage, refetch, hasNextPage, isFetching, isFetchingNextPage } =
     useInfiniteQuery(guestbookMessagesOptions)
   const sentinelRef = useRef<HTMLSpanElement>(null)
 
@@ -39,21 +39,47 @@ export function Messages(props: MessagesProps) {
   const noMessages = isSuccess && data.pages.every((page) => page.messages.length === 0)
 
   return (
-    <div data-testid='guestbook-messages-list' className='flex flex-col gap-4'>
+    <div data-testid='guestbook-messages-list' className='mt-6.25 flex flex-col gap-5'>
       {data?.pages.map((page) =>
         page.messages.map((message) => (
           <Message key={message.id} message={message} isAuthor={message.userId === userId} />
         )),
       )}
-      {(isPending || isFetchingNextPage) && <MessagesLoader />}
-      <span ref={sentinelRef} className='invisible' />
+      {(isPending || isFetchingNextPage) && (
+        <output aria-label={m.common_aria_labels_loading()}>
+          <MessagesLoader />
+        </output>
+      )}
+      <span ref={sentinelRef} className='invisible' aria-hidden='true' />
+      {hasNextPage && !isFetchingNextPage && !isError && (
+        <button
+          type='button'
+
+          disabled={isFetching}
+          onClick={() => {
+            void fetchNextPage()
+          }}
+          className='inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5.75 py-3.5 text-sm/normal text-[#e0ecde] transition-colors duration-200 ease-linear hover:border-[#c4e0cc] hover:bg-[#b0d3c31c] disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none'
+        >
+          {m.common_load_more()}
+        </button>
+      )}
       {isError && (
-        <div className='flex min-h-24 items-center justify-center'>
-          <p className='text-sm text-muted-foreground'>{m.error_failed_to_load_messages()}</p>
+        <div role='alert' className='border border-[#a3d1b528] px-6 py-10 text-center text-base/[1.65] text-[#adcab0]'>
+          <p>{m.error_failed_to_load_messages()}</p>
+          <button
+            type='button'
+            className='mt-4 inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5.75 py-3.5 text-sm/normal text-[#e0ecde] transition-colors duration-200 ease-linear hover:border-[#c4e0cc] hover:bg-[#b0d3c31c] disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none'
+            onClick={() => {
+              void refetch()
+            }}
+          >
+            {m.common_retry()}
+          </button>
         </div>
       )}
       {noMessages && (
-        <div className='flex min-h-24 items-center justify-center'>
+        <div className='border border-[#a3d1b528] px-6 py-10 text-center text-base/[1.65] text-[#adcab0]'>
           <p className='text-sm text-muted-foreground'>{m.guestbook_no_messages()}</p>
         </div>
       )}
@@ -71,16 +97,26 @@ function Message(props: MessageProps) {
   const formattedDate = useFormattedDate(message.createdAt, { formatName: 'long' })
 
   return (
-    <div data-testid={`message-${message.id}`} className='rounded-xl border p-4'>
-      <div className='mb-3 flex gap-3'>
-        <UserAvatar id={message.userId} name={message.user.name} image={message.user.image} size='lg' />
-        <div className='flex flex-col justify-center gap-px text-sm'>
-          <div>{message.user.name}</div>
-          <div className='text-xs text-muted-foreground'>{formattedDate ?? '--'}</div>
-        </div>
+    <article
+      data-testid={`message-${message.id}`}
+      className='relative border border-[#a3d1b528] p-7.5 [background:radial-gradient(ellipse_at_0_0,#89ccaa10,transparent)] max-[601px]:p-6.25'
+    >
+      <span
+        aria-hidden='true'
+        className='absolute top-9 right-7.5 size-1.25 rounded-full bg-[#c9e9bb] shadow-[0_0_12px_#a4edb5]'
+      />
+      <span className='block pr-5 text-xs leading-[normal] tracking-[0.02em] text-[#a8c9b2]'>{m.seabed_light()}</span>
+      <blockquote className='mx-0 my-6.25 font-serif text-[22px] leading-[1.65] wrap-anywhere whitespace-pre-wrap text-[#d3e3cb] italic max-[601px]:text-[21px]'>
+        {message.body}
+      </blockquote>
+      <div className='flex flex-wrap items-center justify-between gap-3.75 text-sm/normal text-[#adcab0]'>
+        <span className='flex min-w-0 items-center gap-3'>
+          <UserAvatar id={message.userId} name={message.user.name} image={message.user.image} />
+          <span className='min-w-0 wrap-anywhere'>{message.user.name}</span>
+        </span>
+        <time dateTime={message.createdAt.toISOString()}>{formattedDate ?? '--'}</time>
       </div>
-      <div className='pl-13 wrap-break-word'>{message.body}</div>
       {isAuthor && <DeleteButton id={message.id} />}
-    </div>
+    </article>
   )
 }

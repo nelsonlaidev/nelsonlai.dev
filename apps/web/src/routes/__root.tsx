@@ -17,9 +17,10 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { IntlProvider } from 'use-intl'
 
 import { MainLayout } from '@/components/main-layout'
-import { NotFound } from '@/components/not-found'
+import { PublicNotFound } from '@/components/not-found'
 import { ThemeProvider } from '@/components/theme-provider'
 import { ENV } from '@/env'
+import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '@/lib/og'
 import { getLocalizedUrl, OPEN_GRAPH_LOCALES } from '@/lib/seo'
 import { SITE } from '@/lib/site'
 
@@ -43,6 +44,9 @@ const formats = {
 export const Route = createRootRouteWithContext<RouterContext>()({
   head: () => {
     const description = m.metadata_site_description()
+    // Public brand fallback for missing content and system pages. Private route
+    // metadata still controls indexing and never supplies private content here.
+    const fallbackImage = getLocalizedUrl('/og/image.webp', getLocale())
 
     return {
       meta: [
@@ -59,7 +63,12 @@ export const Route = createRootRouteWithContext<RouterContext>()({
         { property: 'og:locale', content: OPEN_GRAPH_LOCALES[getLocale()] },
         { property: 'og:title', content: SITE.name },
         { property: 'og:description', content: description },
-        { name: 'twitter:card', content: 'summary' },
+        { property: 'og:image', content: fallbackImage },
+        { property: 'og:image:type', content: 'image/webp' },
+        { property: 'og:image:width', content: String(OG_IMAGE_WIDTH) },
+        { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },
+        { name: 'twitter:image', content: fallbackImage },
+        { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:site', content: twitterHandle },
         { name: 'twitter:site:id', content: SITE.twitterUserId },
         { name: 'twitter:creator', content: twitterHandle },
@@ -113,8 +122,8 @@ function RootDocument(props: RootDocumentProps) {
     <html lang={getLocale()} suppressHydrationWarning>
       <head>
         {/* Router deduplicates metadata by name, so keep both media-specific colors here. */}
-        <meta name='theme-color' media='(prefers-color-scheme: light)' content='white' />
-        <meta name='theme-color' media='(prefers-color-scheme: dark)' content='black' />
+        <meta name='theme-color' media='(prefers-color-scheme: light)' content='#eef0df' />
+        <meta name='theme-color' media='(prefers-color-scheme: dark)' content='#031a2e' />
         <HeadContent />
         {/* Keep the tracker in the document shell so route updates do not reload it. */}
         {import.meta.env.PROD && ENV.UMAMI_URL && ENV.UMAMI_WEBSITE_ID && (
@@ -157,7 +166,7 @@ function RootDocument(props: RootDocumentProps) {
 function RootNotFound() {
   return (
     <MainLayout>
-      <NotFound />
+      <PublicNotFound />
     </MainLayout>
   )
 }

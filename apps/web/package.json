@@ -69,6 +69,7 @@
     "tinycolor2": "1.6.0",
     "use-debounce": "10.1.1",
     "use-intl": "4.14.9",
+    "yet-another-react-lightbox": "3.32.2",
     "zod": "catalog:"
   },
   "devDependencies": {

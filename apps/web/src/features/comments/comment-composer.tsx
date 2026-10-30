@@ -58,7 +58,7 @@ export function CommentComposer(props: CommentComposerProps) {
         event.preventDefault()
         submit()
       }}
-      className='space-y-3'
+      className='space-y-3 rounded-xl border border-[#b2d4c74a] p-5.5 shadow-[0_14px_35px_#02152220] [background:linear-gradient(135deg,#123d46e8,#092a37ed)] max-[601px]:p-4.25'
       aria-busy={creation.isPending}
     >
       <div className='relative'>
@@ -77,7 +77,7 @@ export function CommentComposer(props: CommentComposerProps) {
             type='submit'
             variant='ghost'
             size='icon-xs'
-            className='absolute right-3 bottom-3'
+            className='absolute right-3 bottom-3 min-h-11'
             disabled={!session.data || creation.isPending || !body.trim()}
             aria-label={m.blog_comments_send_comment()}
           >
@@ -88,7 +88,8 @@ export function CommentComposer(props: CommentComposerProps) {
           <div className='absolute inset-0 flex items-center justify-center rounded-md bg-black/5 backdrop-blur-[0.8px]'>
             <DialogTrigger
               handle={signInDialogHandle}
-              render={<Button type='button' size='sm' disabled={session.isPending} />}
+              render={<Button type='button' size='sm' disabled={session.isPending} className='min-h-11' />}
+              className='min-h-11'
             >
               {m.common_sign_in()}
             </DialogTrigger>
@@ -107,11 +108,19 @@ export function CommentComposer(props: CommentComposerProps) {
             variant='secondary'
             size='sm'
             disabled={!session.data || creation.isPending || !body.trim()}
+            className='min-h-11'
           >
             {m.blog_comments_reply()}
           </Button>
           {onCancel && (
-            <Button type='button' variant='secondary' size='sm' onClick={onCancel} disabled={creation.isPending}>
+            <Button
+              type='button'
+              variant='secondary'
+              size='sm'
+              onClick={onCancel}
+              disabled={creation.isPending}
+              className='min-h-11'
+            >
               {m.common_cancel()}
             </Button>
           )}

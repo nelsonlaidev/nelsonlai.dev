@@ -27,7 +27,7 @@ export function Counter(props: CounterProps) {
     }
 
     if (!isInView) {
-      element.textContent = formatter.format(0)
+      element.textContent = formatter.format(value)
       return
     }
 
@@ -48,7 +48,7 @@ export function Counter(props: CounterProps) {
   return (
     <>
       <span ref={ref} aria-hidden='true'>
-        0
+        {formattedValue}
       </span>
       <span className='sr-only'>{formattedValue}</span>
     </>

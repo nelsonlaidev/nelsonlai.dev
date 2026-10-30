@@ -6,7 +6,7 @@ export function ProgressBar() {
   return (
     <motion.div
       aria-hidden='true'
-      className='fixed inset-x-0 top-0 z-50 h-1 origin-left bg-foreground'
+      className='fixed inset-x-0 top-0 left-0 z-30 h-0.5 origin-left bg-[#c4e1c3]'
       style={{ scaleX: scrollYProgress }}
     />
   )

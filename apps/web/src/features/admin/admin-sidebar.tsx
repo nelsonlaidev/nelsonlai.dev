@@ -4,13 +4,14 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
 } from '@repo/ui/components/sidebar'
 import { Link, useRouterState } from '@tanstack/react-router'
-import { LayoutDashboardIcon, MessagesSquareIcon, UsersIcon } from 'lucide-react'
+import { HomeIcon, LayoutDashboardIcon, MessagesSquareIcon, UsersIcon } from 'lucide-react'
 
 import { m } from '@/paraglide/messages'
 
@@ -26,6 +27,16 @@ export function AdminSidebar() {
 
   return (
     <Sidebar collapsible='icon' variant='floating'>
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton className='min-h-11' render={<Link to='/' />} tooltip={m.nav_home()}>
+              <HomeIcon aria-hidden='true' />
+              <span>Seafold</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>{m.common_labels_general()}</SidebarGroupLabel>
@@ -34,6 +45,7 @@ export function AdminSidebar() {
               {links.map((link) => (
                 <SidebarMenuItem key={link.to}>
                   <SidebarMenuButton
+                    className='min-h-11'
                     isActive={link.to === pathname || `${link.to}/` === pathname}
                     tooltip={link.label()}
                     render={<Link to={link.to} />}

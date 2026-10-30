@@ -43,13 +43,14 @@ export function ThemeSwitcher() {
         <SunIcon className='dark:hidden' />
         <MoonIcon className='hidden dark:block' />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end' className='min-w-36'>
+      <DropdownMenuContent align='end' className='min-w-36 border border-border shadow-md ring-0'>
         {THEMES.map((theme) => (
           <DropdownMenuItem
             key={theme.value}
             onClick={() => {
               handleThemeChange(theme.value)
             }}
+            className='min-h-11'
           >
             {theme.icon}
             {theme.label()}

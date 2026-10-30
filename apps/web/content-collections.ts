@@ -2,12 +2,16 @@ import type { CollectionContext, Meta } from '@content-collections/core'
 
 import { defineCollection, defineConfig } from '@content-collections/core'
 import { compileMDX } from '@content-collections/mdx'
-import { getTOC, rehypePlugins, remarkPlugins } from '@repo/mdx-plugins'
+import { getTOC, oceanRehypePlugins, rehypePlugins, remarkPlugins } from '@repo/mdx-plugins'
 import * as z from 'zod'
 
 import { locales } from './project.inlang/settings.json'
 
-async function transformContent<T extends { _meta: Meta; content: string }>(document: T, context: CollectionContext) {
+async function transformContent<T extends { _meta: Meta; content: string }>(
+  document: T,
+  context: CollectionContext,
+  ocean = false,
+) {
   const [locale, ...slugParts] = document._meta.path.split('/')
 
   if (!locale || !locales.includes(locale)) {
@@ -21,7 +25,7 @@ async function transformContent<T extends { _meta: Meta; content: string }>(docu
   }
 
   const [mdx, toc] = await Promise.all([
-    compileMDX(context, document, { remarkPlugins, rehypePlugins }),
+    compileMDX(context, document, { remarkPlugins, rehypePlugins: ocean ? oceanRehypePlugins : rehypePlugins }),
     context.cache(document.content, getTOC, { key: 'toc' }),
   ])
 
@@ -39,7 +43,7 @@ const posts = defineCollection({
     updatedAt: z.iso.datetime(),
     content: z.string(),
   }),
-  transform: transformContent,
+  transform: async (document, context) => transformContent(document, context, true),
 })
 
 const projects = defineCollection({
@@ -55,6 +59,10 @@ const projects = defineCollection({
     license: z.url().optional(),
     programmingLanguages: z.array(z.string().min(1)).min(1).optional(),
     techstack: z.array(z.string()),
+    subtitle: z.string().optional(),
+    category: z.string().optional(),
+    features: z.array(z.object({ title: z.string(), text: z.string() })).optional(),
+    journey: z.string().optional(),
     selected: z.boolean().optional().default(false),
     dateCreated: z.iso.datetime(),
     updatedAt: z.iso.datetime(),

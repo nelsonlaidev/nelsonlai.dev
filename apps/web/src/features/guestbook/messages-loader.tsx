@@ -6,14 +6,14 @@ function Placeholder() {
   return (
     <div className='rounded-xl border p-4'>
       <div className='mb-3 flex gap-3'>
-        <Skeleton className='size-10 shrink-0 rounded-full' />
+        <Skeleton className='size-10 shrink-0 rounded-full bg-[#b0d3c31a] motion-reduce:animate-none' />
         <div className='flex min-w-0 flex-1 flex-col justify-center gap-2'>
-          <Skeleton className='h-4 w-full max-w-40' />
-          <Skeleton className='h-3 w-full max-w-36' />
+          <Skeleton className='h-4 w-full max-w-40 bg-[#b0d3c31a] motion-reduce:animate-none' />
+          <Skeleton className='h-3 w-full max-w-36 bg-[#b0d3c31a] motion-reduce:animate-none' />
         </div>
       </div>
       <div className='pl-13'>
-        <Skeleton className='h-6 w-full max-w-xs' />
+        <Skeleton className='h-6 w-full max-w-xs bg-[#b0d3c31a] motion-reduce:animate-none' />
       </div>
     </div>
   )

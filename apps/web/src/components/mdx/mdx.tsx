@@ -1,4 +1,5 @@
 import { MDXContent } from '@content-collections/mdx/react'
+import { cn } from 'cn'
 
 import { CodeBlock } from './code-block'
 import { Heading } from './heading'
@@ -14,6 +15,7 @@ import { Video } from './video'
 
 type MdxProps = {
   code: string
+  className?: string
 }
 
 type MdxHeadingProps = Omit<React.ComponentProps<typeof Heading>, 'as'>
@@ -37,10 +39,10 @@ const components = {
 }
 
 export function Mdx(props: MdxProps) {
-  const { code } = props
+  const { code, className } = props
 
   return (
-    <div className='prose w-full'>
+    <div className={cn('prose w-full', className)}>
       <MDXContent code={code} components={components} />
     </div>
   )

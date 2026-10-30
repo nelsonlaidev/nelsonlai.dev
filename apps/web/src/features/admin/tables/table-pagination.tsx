@@ -33,12 +33,12 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
             }}
             disabled={disabled}
           >
-            <SelectTrigger size='sm' aria-label={m.components_table_pagination_rows_per_page()}>
+            <SelectTrigger className='min-h-11' aria-label={m.components_table_pagination_rows_per_page()}>
               <SelectValue placeholder={table.state.pagination.pageSize} />
             </SelectTrigger>
-            <SelectContent side='top'>
+            <SelectContent side='top' className='border border-border shadow-md ring-0'>
               {[10, 20, 25, 30, 40, 50].map((pageSize) => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
+                <SelectItem className='min-h-11' key={pageSize} value={`${pageSize}`}>
                   {pageSize}
                 </SelectItem>
               ))}
@@ -54,7 +54,7 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
         <div className='flex items-center gap-2'>
           <Button
             variant='outline'
-            size='icon-sm'
+            size='icon'
             onClick={() => {
               table.setPageIndex(0)
             }}
@@ -66,7 +66,7 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
           </Button>
           <Button
             variant='outline'
-            size='icon-sm'
+            size='icon'
             onClick={() => {
               table.previousPage()
             }}
@@ -77,7 +77,7 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
           </Button>
           <Button
             variant='outline'
-            size='icon-sm'
+            size='icon'
             onClick={() => {
               table.nextPage()
             }}
@@ -88,7 +88,7 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
           </Button>
           <Button
             variant='outline'
-            size='icon-sm'
+            size='icon'
             onClick={() => {
               table.setPageIndex(table.getPageCount() - 1)
             }}

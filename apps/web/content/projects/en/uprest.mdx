@@ -13,6 +13,16 @@ techstack:
 selected: true
 dateCreated: '2026-09-25T00:00:00Z'
 updatedAt: '2026-09-30T06:20:40.000Z'
+subtitle: 'A familiar API. A local current.'
+category: 'Developer infrastructure'
+features:
+  - title: 'Keep the workflow'
+    text: 'Redis commands, pipelines, and transactions are supported through the HTTP interface.'
+  - title: 'Beyond single requests'
+    text: 'Pub/Sub over server-sent events, JSON and RESP2 responses, and token authentication cover more demanding local use cases.'
+  - title: 'Run where you build'
+    text: 'Multi-architecture Docker images and prebuilt Linux, macOS, and Windows binaries make it available across development setups.'
+journey: 'A missing piece in a local development workflow became an open-source tool. Uprest is an exploration of making infrastructure feel a little more ordinary — and a lot easier to run locally.'
 ---
 
 Uprest is a local HTTP-to-Redis proxy for applications that use the [Upstash Redis REST API](https://upstash.com/docs/redis/features/restapi). It forwards requests to a real Redis server, so applications can keep using `@upstash/redis` during local development and CI without an Upstash database.
