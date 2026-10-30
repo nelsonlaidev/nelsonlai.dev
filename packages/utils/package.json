@@ -6,11 +6,13 @@
     ".": "./src/index.ts"
   },
   "scripts": {
+    "test:unit": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@nelsonlaidev/typescript-config": "catalog:",
     "@total-typescript/ts-reset": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "5.0.5"
   }
 }

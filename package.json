@@ -25,7 +25,7 @@
     "test:e2e:install": "pnpm --filter @repo/web test:e2e:install",
     "test:e2e:ui": "pnpm test:services && pnpm --filter @repo/web test:e2e:ui",
     "test:services": "docker compose -f docker-compose.test.yaml -p nelsonlai-tests up -d --wait",
-    "test:unit": "pnpm --filter @repo/web test:unit",
+    "test:unit": "pnpm --filter @repo/utils --filter @repo/web test:unit",
     "test:unit:coverage": "pnpm --filter @repo/web test:unit:coverage",
     "test:unit:ui": "pnpm --filter @repo/web test:unit:ui",
     "test:unit:watch": "pnpm --filter @repo/web test:unit:watch",
