@@ -8,7 +8,11 @@ import { m } from '@/paraglide/messages'
 
 import { SectionHeading } from './section-heading'
 
-export function LatestArticles(props: { posts: PostSummary[] }) {
+type LatestArticlesProps = {
+  posts: PostSummary[]
+}
+
+export function LatestArticles(props: LatestArticlesProps) {
   const { posts } = props
 
   return (
@@ -40,9 +44,15 @@ export function LatestArticles(props: { posts: PostSummary[] }) {
   )
 }
 
-function ArticleRow(props: { post: PostSummary; index: number }) {
+type ArticleRowProps = {
+  post: PostSummary
+  index: number
+}
+
+function ArticleRow(props: ArticleRowProps) {
   const { post, index } = props
   const date = useFormattedDate(post.publishedAt)
+
   return (
     <article className='border-b'>
       <Link to='/blog/$slug' params={{ slug: post.slug }} className='group flex items-center gap-4 py-7.5'>

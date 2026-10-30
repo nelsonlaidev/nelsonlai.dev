@@ -4,12 +4,16 @@ import { OceanPage } from '@/components/ocean-page'
 import { RouteError } from '@/components/route-error'
 import { m } from '@/paraglide/messages'
 
-type ProjectsLayoutProps = { children: React.ReactNode }
+type ProjectsLayoutProps = {
+  children: React.ReactNode
+}
 
 export function ProjectsLayout(props: ProjectsLayoutProps) {
+  const { children } = props
+
   return (
     <OceanPage>
-      <div className='wrap-anywhere'>{props.children}</div>
+      <div className='wrap-anywhere'>{children}</div>
     </OceanPage>
   )
 }

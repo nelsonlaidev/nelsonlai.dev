@@ -39,6 +39,7 @@ export function OceanFooter() {
       ],
     },
   ]
+
   return (
     <footer className='mt-14 bg-linear-to-b from-transparent to-[#031d2bb3] pr-[max(16px,env(safe-area-inset-right))] pb-8 pl-[max(16px,env(safe-area-inset-left))] text-[#bfd5cc] min-[541px]:px-[8%] min-[1101px]:px-[10%]'>
       <div className='mx-auto max-w-7xl border-t border-[#a6c9bc50]'>

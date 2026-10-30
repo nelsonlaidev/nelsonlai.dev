@@ -2,10 +2,15 @@ import { BlurImage } from '@repo/ui/components/blur-image'
 import { ExternalLink } from '@repo/ui/components/external-link'
 import { ExternalLinkIcon } from 'lucide-react'
 
-type LinkCardProps = { href: string; hostname: string; title: string }
+type LinkCardProps = {
+  href: string
+  hostname: string
+  title: string
+}
 
 export function LinkCard(props: LinkCardProps) {
   const { href, hostname, title } = props
+
   return (
     <div className='not-prose flex justify-center'>
       <ExternalLink

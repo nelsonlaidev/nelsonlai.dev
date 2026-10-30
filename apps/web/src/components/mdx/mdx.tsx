@@ -20,7 +20,7 @@ type MdxProps = {
 
 type MdxHeadingProps = Omit<React.ComponentProps<typeof Heading>, 'as'>
 
-const components = {
+const MDX_COMPONENTS = {
   h2: (props: MdxHeadingProps) => <Heading as='h2' {...props} />,
   h3: (props: MdxHeadingProps) => <Heading as='h3' {...props} />,
   h4: (props: MdxHeadingProps) => <Heading as='h4' {...props} />,
@@ -43,7 +43,7 @@ export function Mdx(props: MdxProps) {
 
   return (
     <div className={cn('prose w-full', className)}>
-      <MDXContent code={code} components={components} />
+      <MDXContent code={code} components={MDX_COMPONENTS} />
     </div>
   )
 }

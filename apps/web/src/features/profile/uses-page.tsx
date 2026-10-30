@@ -11,7 +11,7 @@ import { m } from '@/paraglide/messages'
 import { ProductImage } from './product-image'
 import { ProfileLayout } from './profile-layout'
 
-const categories = [
+const USE_CATEGORIES = [
   { id: 'laptop', label: m.profile_uses_laptop, note: m.profile_uses_go },
   { id: 'accessories', label: m.profile_uses_accessories, note: m.profile_uses_ride },
   { id: 'hardware', label: m.profile_uses_hardware, note: m.profile_uses_at_desk },
@@ -19,68 +19,82 @@ const categories = [
   { id: 'software', label: m.profile_uses_software, note: m.profile_uses_companions },
 ] as const
 
-type UseKind = (typeof categories)[number]['id']
-type UseItem = { image: string; name: string; description: string; url: string; quantity?: number }
+type UseKind = (typeof USE_CATEGORIES)[number]['id']
+type UseItem = {
+  image: string
+  name: string
+  description: string
+  url: string
+  quantity?: number
+}
 
-function UsesSection(props: { kind: UseKind; title: string; children: React.ReactNode }) {
-  const category = categories.find((item) => item.id === props.kind) ?? categories[0]
-  const index = categories.indexOf(category)
+type UsesSectionProps = {
+  kind: UseKind
+  title: string
+  children: React.ReactNode
+}
+
+function UsesSection(props: UsesSectionProps) {
+  const { kind, title, children } = props
+
+  const category = USE_CATEGORIES.find((item) => item.id === kind) ?? USE_CATEGORIES[0]
+  const index = USE_CATEGORIES.indexOf(category)
+
   return (
-    <section
-      id={props.kind}
-      aria-labelledby={`${props.kind}-heading`}
-      className='mb-16.25 scroll-mt-10 max-[601px]:mb-11.25'
-    >
+    <section id={kind} aria-labelledby={`${kind}-heading`} className='mb-16.25 scroll-mt-10 max-[601px]:mb-11.25'>
       <div className='mb-6 flex items-baseline justify-between gap-4 max-[1101px]:flex-wrap max-[601px]:mb-5 max-[601px]:flex-col max-[601px]:gap-2'>
         <h2
-          id={`${props.kind}-heading`}
+          id={`${kind}-heading`}
           className='text-[25px] leading-[1.35] font-[410] tracking-[-0.035em] max-[601px]:text-[23px]'
         >
-          {props.title}
+          {title}
         </h2>
         <span className='text-sm/normal whitespace-nowrap text-[#b3cbc1]'>
           {String(index + 1).padStart(2, '0')} / {category.note()}
         </span>
       </div>
-      {props.children}
+      {children}
     </section>
   )
 }
 
-function UsesItems(props: { items: UseItem[]; kind: UseKind }) {
+type UsesItemsProps = {
+  items: UseItem[]
+  kind: UseKind
+}
+
+function UsesItems(props: UsesItemsProps) {
+  const { kind, items } = props
+
   return (
     <div
       className={cn(
-        props.kind === 'laptop' &&
+        kind === 'laptop' &&
           'border-[#a8cbbe45] [background:radial-gradient(ellipse_at_50%_12%,#a9d6bf18,transparent_70%),#082f3ba8]',
-        (props.kind === 'laptop' || props.kind === 'accessories') && 'border',
-        (props.kind === 'accessories' || props.kind === 'coding' || props.kind === 'software') && 'grid grid-cols-2',
-        props.kind === 'accessories' && 'border-border bg-[#082f3ba8] max-[1101px]:grid-cols-1',
-        (props.kind === 'hardware' || props.kind === 'coding' || props.kind === 'software') &&
-          'border-t border-t-border',
-        (props.kind === 'coding' || props.kind === 'software') && 'gap-y-0 max-[601px]:grid-cols-1',
-        props.kind === 'coding' && 'gap-x-7 bg-[#082f3b80] px-6 pt-1 pb-0 max-[601px]:px-4.5 max-[601px]:py-0',
-        props.kind === 'software' && 'gap-x-8.75',
+        (kind === 'laptop' || kind === 'accessories') && 'border',
+        (kind === 'accessories' || kind === 'coding' || kind === 'software') && 'grid grid-cols-2',
+        kind === 'accessories' && 'border-border bg-[#082f3ba8] max-[1101px]:grid-cols-1',
+        (kind === 'hardware' || kind === 'coding' || kind === 'software') && 'border-t border-t-border',
+        (kind === 'coding' || kind === 'software') && 'gap-y-0 max-[601px]:grid-cols-1',
+        kind === 'coding' && 'gap-x-7 bg-[#082f3b80] px-6 pt-1 pb-0 max-[601px]:px-4.5 max-[601px]:py-0',
+        kind === 'software' && 'gap-x-8.75',
       )}
     >
-      {props.items.map((item, index) => (
+      {items.map((item, index) => (
         <ExternalLink
           href={item.url}
           key={item.name}
           className={cn(
             'flex min-w-0 items-center gap-5.5 border-b-border transition-colors duration-200 ease-linear hover:bg-[#bdd9ca0a] motion-reduce:transition-none max-[601px]:gap-3.5',
-            (props.kind === 'laptop' ||
-              props.kind === 'hardware' ||
-              props.kind === 'coding' ||
-              props.kind === 'software') &&
+            (kind === 'laptop' || kind === 'hardware' || kind === 'coding' || kind === 'software') &&
               'border-b py-5.75 max-[601px]:px-0 max-[601px]:py-5',
-            (props.kind === 'laptop' || props.kind === 'coding' || props.kind === 'software') && 'px-0',
-            props.kind === 'accessories' &&
+            (kind === 'laptop' || kind === 'coding' || kind === 'software') && 'px-0',
+            kind === 'accessories' &&
               'border-0 p-6.25 not-first:border-l not-first:border-l-border max-[1101px]:not-first:border-t max-[1101px]:not-first:border-l-0 max-[1101px]:not-first:border-t-border max-[601px]:px-5 max-[601px]:py-5.5',
-            props.kind === 'hardware' && 'pr-3 pl-0 max-[601px]:pr-3',
+            kind === 'hardware' && 'pr-3 pl-0 max-[601px]:pr-3',
           )}
         >
-          {props.kind === 'hardware' && (
+          {kind === 'hardware' && (
             <span
               aria-hidden='true'
               className='min-w-4.5 text-xs/normal text-[#b3cbc1] tabular-nums max-[601px]:hidden'
@@ -96,11 +110,11 @@ function UsesItems(props: { items: UseItem[]; kind: UseKind }) {
             loading='lazy'
             className={cn(
               'flex-[0_0_48px] object-contain',
-              props.kind === 'laptop' && 'size-12',
-              props.kind === 'accessories' &&
+              kind === 'laptop' && 'size-12',
+              kind === 'accessories' &&
                 'h-17.5 w-15 basis-15 max-[601px]:h-13.5 max-[601px]:w-10.5 max-[601px]:basis-10.5',
-              props.kind === 'hardware' && 'h-15 w-16 basis-16 max-[601px]:size-11.5 max-[601px]:basis-11.5',
-              (props.kind === 'coding' || props.kind === 'software') && 'size-8.5 basis-8.5',
+              kind === 'hardware' && 'h-15 w-16 basis-16 max-[601px]:size-11.5 max-[601px]:basis-11.5',
+              (kind === 'coding' || kind === 'software') && 'size-8.5 basis-8.5',
             )}
           />
           <span className='min-w-0 flex-1'>
@@ -122,8 +136,18 @@ function UsesItems(props: { items: UseItem[]; kind: UseKind }) {
   )
 }
 
-function UsesLaptop(props: { src: string; alt: string; width: number; height: number }) {
-  const [name, detail] = props.alt.split(' (')
+type UsesLaptopProps = {
+  src: string
+  alt: string
+  width: number
+  height: number
+}
+
+function UsesLaptop(props: UsesLaptopProps) {
+  const { alt } = props
+
+  const [name, detail] = alt.split(' (')
+
   return (
     <div className='border border-[#a8cbbe45] [background:radial-gradient(ellipse_at_50%_12%,#a9d6bf18,transparent_70%),#082f3ba8]'>
       <div className='px-[9%] pt-8.5 pb-2.5 max-[601px]:px-[4%] max-[601px]:pt-6.25 max-[601px]:pb-3.75'>
@@ -148,7 +172,13 @@ function UsesLaptop(props: { src: string; alt: string; width: number; height: nu
   )
 }
 
-export function UsesPage(props: { page: ProfilePageData }) {
+type UsesPageProps = {
+  page: ProfilePageData
+}
+
+export function UsesPage(props: UsesPageProps) {
+  const { page } = props
+
   return (
     <ProfileLayout>
       <div>
@@ -156,12 +186,12 @@ export function UsesPage(props: { page: ProfilePageData }) {
           <div className='m-0'>
             <span className='block text-xs/normal text-[#b4cec4]'>05 / {m.profile_uses_log()}</span>
             <h1 className='mt-6 text-[clamp(48px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em]'>
-              {props.page.title}
+              {page.title}
               <span className='text-[#a8d3b7]'>.</span>
               <br />
               <em className='font-serif font-normal text-[#bed3c6]'>{m.profile_uses_behind()}</em>
             </h1>
-            <p className='mt-7 max-w-150 text-lg/[1.65] whitespace-pre-line text-[#b1cbc4]'>{props.page.description}</p>
+            <p className='mt-7 max-w-150 text-lg/[1.65] whitespace-pre-line text-[#b1cbc4]'>{page.description}</p>
           </div>
           <div className='flex flex-col gap-2.5 pb-1.25 text-sm/normal text-[#b1cbc4] max-[801px]:hidden'>
             <span className='first:text-[#dfebdf]'>{m.profile_uses_desk()}</span>
@@ -178,21 +208,16 @@ export function UsesPage(props: { page: ProfilePageData }) {
               <span className='mb-6.25 block text-xs/normal text-[#b4cec4] max-[801px]:mb-2.5 max-[801px]:w-full'>
                 {m.profile_uses_index()}
               </span>
-              {categories.map((category, index) => (
+              {USE_CATEGORIES.map((category, index) => (
                 <a
                   href={`#${category.id}`}
                   key={category.id}
                   className='grid grid-cols-[20px_1fr_24px] items-baseline gap-2 border-b border-b-border px-0 py-4 text-sm leading-[1.6] text-[#d1e2d6] hover:border-[#b8d5c8] hover:text-white max-[801px]:flex max-[801px]:min-h-11 max-[801px]:rounded-md max-[801px]:border max-[801px]:border-border max-[801px]:px-3 max-[801px]:py-2.5 max-[801px]:text-sm'
                 >
                   <span className='text-xs/[1.6] text-[#a6c5bb] max-[801px]:hidden'>0{index + 1}</span>
-                  <span>
-                    {props.page.sections?.find((section) => section.id === category.id)?.title ?? category.label()}
-                  </span>
+                  <span>{page.sections?.find((section) => section.id === category.id)?.title ?? category.label()}</span>
                   <span className='text-right text-xs/[1.6] text-[#a6c5bb] max-[801px]:hidden'>
-                    {String(props.page.sections?.find((section) => section.id === category.id)?.count ?? 0).padStart(
-                      2,
-                      '0',
-                    )}
+                    {String(page.sections?.find((section) => section.id === category.id)?.count ?? 0).padStart(2, '0')}
                   </span>
                 </a>
               ))}
@@ -202,7 +227,7 @@ export function UsesPage(props: { page: ProfilePageData }) {
             </p>
           </aside>
           <div>
-            <MDXContent code={props.page.mdx} components={{ UsesSection, UsesItems, UsesLaptop }} />
+            <MDXContent code={page.mdx} components={{ UsesSection, UsesItems, UsesLaptop }} />
             <div className='px-0 pt-3.75 pb-8.75'>
               <p className='mx-0 mt-0 mb-6.25 text-[27px] leading-normal tracking-[-0.03em] max-[601px]:text-2xl'>
                 {m.profile_uses_tools_part()}

@@ -6,8 +6,8 @@ import { MainLayout } from '@/components/main-layout'
 import { RouteError } from '@/components/route-error'
 
 export const Route = createFileRoute('/_main')({
-  component: RouteComponent,
   errorComponent: MainError,
+  component: RouteComponent,
 })
 
 function RouteComponent() {

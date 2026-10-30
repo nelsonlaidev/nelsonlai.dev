@@ -4,7 +4,10 @@ import { m } from '@/paraglide/messages'
 
 import { projectSpecimen } from './presentation'
 
-type ProjectArtProps = { slug: string; large?: boolean }
+type ProjectArtProps = {
+  slug: string
+  large?: boolean
+}
 
 export function ProjectArt(props: ProjectArtProps) {
   const { slug, large = false } = props

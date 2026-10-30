@@ -58,7 +58,6 @@ export function AccountSidebar() {
             <Link
               to={link.to}
               activeOptions={{ exact: true }}
-
               className='block min-h-11 rounded-md border border-transparent px-3 py-2.5 text-muted-foreground transition-colors hover:bg-accent aria-[current=page]:border-border aria-[current=page]:bg-accent aria-[current=page]:text-foreground'
             >
               {link.label()}

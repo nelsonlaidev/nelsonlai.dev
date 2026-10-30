@@ -18,7 +18,7 @@ import * as z from 'zod'
 
 import { ENV } from '../env'
 
-const payloadSchema = z.object({
+const ReplyUnsubscribePayloadSchema = z.object({
   type: z.literal('comment_reply'),
   userId: z.string().min(1),
   commentId: z.string().min(1),
@@ -40,7 +40,7 @@ export async function verifyReplyUnsubscribeToken(token: string) {
     })
     const legacyToken = payload.iss === undefined && payload.aud === undefined
     if (!legacyToken && (payload.iss !== ENV.SITE_URL || payload.aud !== 'comment-reply-unsubscribe')) return null
-    const result = payloadSchema.safeParse(payload)
+    const result = ReplyUnsubscribePayloadSchema.safeParse(payload)
     return result.success ? result.data : null
   } catch {
     return null

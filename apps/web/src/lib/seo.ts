@@ -15,7 +15,16 @@ type SeoHeadOptions = {
   pathname: `/${string}`
   locale: Locale
   jsonLd?: WithContext<Thing>
-} & ({ type?: 'website' } | { type: 'article'; publishedAt: string; updatedAt?: string })
+} & (
+  | {
+      type?: 'website'
+    }
+  | {
+      type: 'article'
+      publishedAt: string
+      updatedAt?: string
+    }
+)
 
 export const OPEN_GRAPH_LOCALES: Record<Locale, string> = {
   en: 'en_US',

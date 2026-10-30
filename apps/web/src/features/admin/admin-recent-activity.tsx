@@ -11,7 +11,7 @@ import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
-export function RecentActivity() {
+export function AdminRecentActivity() {
   const { data, isError } = useQuery(orpc.admin.recentActivity.queryOptions())
 
   let content: React.ReactNode = <RecentActivitySkeleton />

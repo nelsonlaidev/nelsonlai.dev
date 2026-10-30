@@ -7,38 +7,34 @@ import { InfoTip } from '@repo/ui/components/info-tip'
 import { Spinner } from '@repo/ui/components/spinner'
 import { toast } from '@repo/ui/components/toast'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useRouter } from '@tanstack/react-router'
 import Bowser from 'bowser'
 import { BotIcon, InfoIcon, MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } from 'lucide-react'
 
+import { useSessionEnded } from '@/features/auth/use-session-ended'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
-import { authClient } from '@/lib/auth-client'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
+import { accountSessionsQueryOptions } from './account.queries'
 import { ActiveSessionsSkeleton } from './active-sessions-skeleton'
 
-type ActiveSessionsProps = { userId: string }
+type ActiveSessionsProps = {
+  userId: string
+}
 
 export function ActiveSessions(props: ActiveSessionsProps) {
   const { userId } = props
   const queryClient = useQueryClient()
-  const router = useRouter()
-  const { refetch } = authClient.useSession()
-  const options = orpc.account.listSessions.queryOptions({ queryKey: [...orpc.account.listSessions.key(), { userId }] })
+  const reconcileSessionEnded = useSessionEnded()
+  const options = accountSessionsQueryOptions(userId)
   const sessions = useQuery(options)
   const revoke = useMutation(
     orpc.account.revokeSession.mutationOptions({
       onSuccess: async ({ isCurrentSession }) => {
         toast.add({ type: 'success', title: m.success_session_revoked() })
-        if (isCurrentSession) {
-          queryClient.removeQueries({ queryKey: orpc.account.key() })
-          queryClient.removeQueries({ queryKey: orpc.notifications.getPreference.key() })
-          await refetch()
-          await router.invalidate()
-        } else {
-          await queryClient.invalidateQueries({ queryKey: options.queryKey })
-        }
+        await (isCurrentSession
+          ? reconcileSessionEnded()
+          : queryClient.invalidateQueries({ queryKey: options.queryKey }))
       },
       onError: () => toast.add({ type: 'error', title: m.error_something_went_wrong() }),
     }),

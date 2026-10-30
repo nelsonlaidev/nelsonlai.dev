@@ -55,9 +55,9 @@ export const Route = createFileRoute('/_main/projects/$slug')({
       }),
     })
   },
-  component: RouteComponent,
-  errorComponent: ProjectsError,
   pendingComponent: ProjectsPending,
+  errorComponent: ProjectsError,
+  component: RouteComponent,
 })
 
 function RouteComponent() {

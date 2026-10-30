@@ -2,7 +2,7 @@ import type { AvoidanceState } from './fish-motion'
 
 import { useEffect, useRef } from 'react'
 
-import { advanceAvoidance, approach, createAvoidance, motionLimits } from './fish-motion'
+import { advanceAvoidance, approach, createAvoidance, FISH_MOTION_LIMITS } from './fish-motion'
 
 type Fish = {
   x: number
@@ -14,9 +14,14 @@ type Fish = {
   sensitivity: number
   avoidance: AvoidanceState
 }
+
 const mix = (a: number, b: number, t: number) => a + (b - a) * t
 
-export function OceanCanvas(props: { depthBias?: number }) {
+type OceanCanvasProps = {
+  depthBias?: number
+}
+
+export function OceanCanvas(props: OceanCanvasProps) {
   const { depthBias = 0 } = props
   const ref = useRef<HTMLCanvasElement>(null)
   const depthRef = useRef(depthBias)
@@ -120,10 +125,10 @@ export function OceanCanvas(props: { depthBias?: number }) {
       const still = media.matches
       if (!still) {
         time += dt
-        pointer.strength = approach(pointer.strength, pointer.active ? 1 : 0, dt, motionLimits.activationTime)
+        pointer.strength = approach(pointer.strength, pointer.active ? 1 : 0, dt, FISH_MOTION_LIMITS.activationTime)
         if (pointer.initialized) {
-          pointer.x = approach(pointer.x, pointer.targetX, dt, motionLimits.pointerTime)
-          pointer.y = approach(pointer.y, pointer.targetY, dt, motionLimits.pointerTime)
+          pointer.x = approach(pointer.x, pointer.targetX, dt, FISH_MOTION_LIMITS.pointerTime)
+          pointer.y = approach(pointer.y, pointer.targetY, dt, FISH_MOTION_LIMITS.pointerTime)
         }
       }
       const scrollDepth = Math.min(globalThis.scrollY / Math.max(document.documentElement.scrollHeight - height, 1), 1)

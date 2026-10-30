@@ -8,7 +8,11 @@ import { RouteError } from '@/components/route-error'
 import { m } from '@/paraglide/messages'
 
 type LegalPageProps = {
-  page: { title: string; description: string; mdx: string }
+  page: {
+    title: string
+    description: string
+    mdx: string
+  }
   kind: 'terms' | 'privacy'
 }
 

@@ -14,7 +14,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
-type DeleteCommentProps = { id: string; open: boolean; onOpenChange: (open: boolean) => void }
+type DeleteCommentProps = {
+  id: string
+  open: boolean
+  onOpenChange: (open: boolean) => void
+}
 
 export function DeleteComment(props: DeleteCommentProps) {
   const { id, open, onOpenChange } = props
@@ -29,6 +33,7 @@ export function DeleteComment(props: DeleteCommentProps) {
       onError: () => toast.add({ type: 'error', title: m.error_something_went_wrong() }),
     }),
   )
+
   return (
     <AlertDialog
       open={open}

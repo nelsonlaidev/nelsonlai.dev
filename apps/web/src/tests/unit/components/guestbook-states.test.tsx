@@ -12,7 +12,7 @@ const fixture = vi.hoisted(() => ({
   retry: vi.fn<() => void>(),
   more: false,
 }))
-vi.mock('@/features/guestbook/guestbook.queries', () => ({ guestbookMessagesOptions: {} }))
+vi.mock('@/features/guestbook/guestbook.queries', () => ({ guestbookMessagesInfiniteOptions: {} }))
 vi.mock('@/hooks/use-formatted-date', () => ({ useFormattedDate: () => 'January 1, 2026' }))
 vi.mock('@/components/user-avatar', () => ({ UserAvatar: () => null }))
 vi.mock('@/features/guestbook/delete-button', () => ({

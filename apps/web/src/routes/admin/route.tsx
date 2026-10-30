@@ -8,7 +8,9 @@ import { getAccountUser } from '@/features/auth/auth.functions'
 export const Route = createFileRoute('/admin')({
   beforeLoad: async () => {
     const user = await getAccountUser()
+
     if (user?.role !== 'admin') throw redirect({ to: '/' })
+
     return { user }
   },
   head: () => ({

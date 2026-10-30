@@ -44,7 +44,16 @@ export const HEADER_LINKS = linkOptions([
   },
 ])
 
-type FooterLink = { label: string | (() => string) } & ({ to: string } | { href: string })
+type FooterLink = {
+  label: string | (() => string)
+} & (
+  | {
+      to: string
+    }
+  | {
+      href: string
+    }
+)
 
 export const FOOTER_GROUPS: Array<{ id: string; links: FooterLink[] }> = [
   {

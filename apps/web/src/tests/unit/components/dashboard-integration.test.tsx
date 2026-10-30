@@ -13,7 +13,7 @@ vi.mock('@/lib/orpc-client', () => ({
     wakatime: { stats: { queryOptions: (options: object) => ({ source: 'wakatime', ...options }) } },
     youtube: { stats: { queryOptions: (options: object) => ({ source: 'youtube', ...options }) } },
     github: { stats: { queryOptions: (options: object) => ({ source: 'github', ...options }) } },
-    posts: { totals: { queryOptions: () => ({ source: 'posts' }) } },
+    posts: { totals: { queryOptions: (options: object) => ({ source: 'posts', ...options }) } },
   },
 }))
 vi.mock('@tanstack/react-router', async (importOriginal) => ({
@@ -55,8 +55,12 @@ describe('Dashboard service mapping', () => {
     expect(values).toEqual(['2,345hrs', '89', '10', '123', '4,567', '1,112', '13'])
     expect(screen.getByRole('link', { name: m.projects_read_blog() })).toHaveAttribute('href', '/blog')
     for (const source of ['wakatime', 'github', 'youtube'])
-      expect(fixture.queries).toHaveBeenCalledWith({ source, refetchOnWindowFocus: false })
-    expect(fixture.queries).toHaveBeenCalledWith({ source: 'posts' })
+      expect(fixture.queries).toHaveBeenCalledWith({
+        source,
+        refetchOnWindowFocus: false,
+        meta: { errorHandledLocally: true },
+      })
+    expect(fixture.queries).toHaveBeenCalledWith({ source: 'posts', meta: { errorHandledLocally: true } })
   })
   test('isolates a failed service without hiding the other totals', () => {
     fixture.failed = 'youtube'

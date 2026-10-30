@@ -7,7 +7,7 @@ import { useId, useState } from 'react'
 
 import { signInDialogHandle } from '@/features/auth/sign-in-dialog'
 import { useSignOut } from '@/features/auth/use-sign-out'
-import { guestbookMessagesOptions } from '@/features/guestbook/guestbook.queries'
+import { guestbookMessagesInfiniteOptions } from '@/features/guestbook/guestbook.queries'
 import { authClient } from '@/lib/auth-client'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
@@ -50,7 +50,7 @@ function GuestbookComposer() {
   const session = authClient.useSession()
   const { signOut, isSigningOut } = useSignOut()
   const queryClient = useQueryClient()
-  const messages = useInfiniteQuery(guestbookMessagesOptions)
+  const messages = useInfiniteQuery(guestbookMessagesInfiniteOptions)
   const latest = messages.data?.pages[0]?.messages[0]
   const creation = useMutation(
     orpc.guestbook.create.mutationOptions({

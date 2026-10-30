@@ -14,7 +14,11 @@ import { getLocale } from '@/paraglide/runtime'
 
 import { CommentEditor } from './comment-editor'
 
-type CommentComposerProps = { slug: string; parentId?: string; onCancel?: () => void }
+type CommentComposerProps = {
+  slug: string
+  parentId?: string
+  onCancel?: () => void
+}
 
 export function CommentComposer(props: CommentComposerProps) {
   const { slug, parentId, onCancel } = props

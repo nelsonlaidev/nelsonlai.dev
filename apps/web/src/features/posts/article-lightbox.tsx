@@ -11,9 +11,19 @@ import Zoom from 'yet-another-react-lightbox/plugins/zoom'
 
 import { m } from '@/paraglide/messages'
 
-export type ArticleLightboxProps = { images: ArticleImage[]; index: number; close: () => void }
-function Icon(props: { kind: 'close' | 'prev' | 'next' | 'in' | 'out' }) {
+export type ArticleLightboxProps = {
+  images: ArticleImage[]
+  index: number
+  close: () => void
+}
+
+type IconProps = {
+  kind: 'close' | 'prev' | 'next' | 'in' | 'out'
+}
+
+function Icon(props: IconProps) {
   const { kind } = props
+
   return (
     <svg
       className='yarl__icon pointer-events-none block size-6!'
@@ -49,6 +59,7 @@ function CloseControl() {
       close()
     }
   }
+
   return (
     <button
       type='button'
@@ -103,6 +114,7 @@ export default function ArticleLightbox(props: ArticleLightboxProps) {
       media.removeEventListener('change', update)
     }
   }, [])
+
   return (
     <Lightbox
       open

@@ -6,7 +6,7 @@ type Icon = {
   icon: React.FC<React.SVGProps<SVGSVGElement>>
 }
 
-const icons: Icon[] = [
+const LANGUAGE_ICONS: Icon[] = [
   {
     language: ['javascript', 'js', 'mjs', 'cjs'],
     icon: SiJavascript,
@@ -43,7 +43,7 @@ const icons: Icon[] = [
 
 const languageToIcon = new Map<string, React.FC<React.SVGProps<SVGSVGElement>>>()
 
-for (const icon of icons) {
+for (const icon of LANGUAGE_ICONS) {
   for (const language of icon.language) {
     languageToIcon.set(language, icon.icon)
   }

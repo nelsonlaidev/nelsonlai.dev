@@ -34,7 +34,7 @@ type RouterContext = {
 
 const twitterHandle = `@${new URL(SITE.socials.twitter).pathname.slice(1)}`
 
-const formats = {
+const INTL_FORMATS = {
   dateTime: {
     short: { year: 'numeric', month: 'short', day: 'numeric' },
     long: { dateStyle: 'medium', timeStyle: 'short' },
@@ -143,7 +143,7 @@ function RootDocument(props: RootDocumentProps) {
             toggleSidebar: m.common_aria_labels_toggle_sidebar(),
           }}
         >
-          <IntlProvider locale={getLocale()} formats={formats}>
+          <IntlProvider locale={getLocale()} formats={INTL_FORMATS}>
             <ThemeProvider>
               {children}
               <Toaster timeout={2500} limit={5} />

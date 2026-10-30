@@ -1,5 +1,6 @@
+import { Button } from '@repo/ui/components/button'
 import { ExternalLink } from '@repo/ui/components/external-link'
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { QueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query'
 import { CatchBoundary, Link } from '@tanstack/react-router'
 import { cn } from 'cn'
 import { ArrowRightIcon } from 'lucide-react'
@@ -122,38 +123,66 @@ function StatGroup(props: StatGroupProps) {
   const locale = getLocale()
 
   return (
-    <CatchBoundary getResetKey={() => locale} errorComponent={() => <StatCards stats={stats} isError />}>
-      <Suspense fallback={<StatCards stats={stats} />}>{children}</Suspense>
-    </CatchBoundary>
+    <QueryErrorResetBoundary>
+      {({ reset }) => (
+        <CatchBoundary
+          getResetKey={() => locale}
+          errorComponent={(errorProps) => (
+            <div className='space-y-4'>
+              <StatCards stats={stats} isError />
+              <Button
+                variant='outline'
+                onClick={() => {
+                  reset()
+                  errorProps.reset()
+                }}
+              >
+                {m.common_retry()}
+              </Button>
+            </div>
+          )}
+        >
+          <Suspense fallback={<StatCards stats={stats} />}>{children}</Suspense>
+        </CatchBoundary>
+      )}
+    </QueryErrorResetBoundary>
   )
 }
 
-type StatSourceProps = { stats: Stat[] }
+type StatSourceProps = {
+  stats: Stat[]
+}
 
 function WakatimeStats(props: StatSourceProps) {
   const { stats } = props
-  const { data } = useSuspenseQuery(orpc.wakatime.stats.queryOptions({ refetchOnWindowFocus: false }))
+  const { data } = useSuspenseQuery(
+    orpc.wakatime.stats.queryOptions({ refetchOnWindowFocus: false, meta: { errorHandledLocally: true } }),
+  )
 
   return <StatCards stats={stats} values={data} />
 }
 
 function YoutubeStats(props: StatSourceProps) {
   const { stats } = props
-  const { data } = useSuspenseQuery(orpc.youtube.stats.queryOptions({ refetchOnWindowFocus: false }))
+  const { data } = useSuspenseQuery(
+    orpc.youtube.stats.queryOptions({ refetchOnWindowFocus: false, meta: { errorHandledLocally: true } }),
+  )
 
   return <StatCards stats={stats} values={data} />
 }
 
 function GithubStats(props: StatSourceProps) {
   const { stats } = props
-  const { data } = useSuspenseQuery(orpc.github.stats.queryOptions({ refetchOnWindowFocus: false }))
+  const { data } = useSuspenseQuery(
+    orpc.github.stats.queryOptions({ refetchOnWindowFocus: false, meta: { errorHandledLocally: true } }),
+  )
 
   return <StatCards stats={stats} values={data} />
 }
 
 function PostStats(props: StatSourceProps) {
   const { stats } = props
-  const { data } = useSuspenseQuery(orpc.posts.totals.queryOptions())
+  const { data } = useSuspenseQuery(orpc.posts.totals.queryOptions({ meta: { errorHandledLocally: true } }))
 
   return <StatCards stats={stats} values={data} />
 }

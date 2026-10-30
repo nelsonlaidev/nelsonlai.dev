@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { ArrowRightIcon } from 'lucide-react'
 
 import { OceanPage } from '@/components/ocean-page'
-import { guestbookMessagesOptions } from '@/features/guestbook/guestbook.queries'
+import { guestbookMessagesInfiniteOptions } from '@/features/guestbook/guestbook.queries'
 import { MessageBoard } from '@/features/guestbook/message-board'
 import { getPage } from '@/features/pages/pages.functions'
 import { ProfileError, ProfilePending } from '@/features/profile/profile-layout'
@@ -19,7 +19,7 @@ export const Route = createFileRoute('/_main/guestbook')({
     if (!page) throw notFound()
 
     try {
-      await context.queryClient.infiniteQuery(guestbookMessagesOptions)
+      await context.queryClient.infiniteQuery(guestbookMessagesInfiniteOptions)
     } catch {
       // Messages owns the query error and retry UI, so the composer stays usable.
     }
@@ -44,9 +44,9 @@ export const Route = createFileRoute('/_main/guestbook')({
       }),
     })
   },
-  component: RouteComponent,
   pendingComponent: ProfilePending,
   errorComponent: ProfileError,
+  component: RouteComponent,
 })
 
 function RouteComponent() {

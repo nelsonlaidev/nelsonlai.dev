@@ -21,6 +21,4 @@ export const getPosts = createServerFn({ method: 'GET' })
       limit: z.number().int().min(1).max(50).nullable().default(null),
     }),
   )
-  .handler(({ data }) => {
-    return listPosts(data.locale, data.limit)
-  })
+  .handler(({ data }) => listPosts(data.locale, data.limit))

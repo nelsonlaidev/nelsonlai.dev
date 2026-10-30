@@ -10,7 +10,11 @@ import { getLocale } from '@/paraglide/runtime'
 
 import { articleTopic, articleTopicLabel } from './presentation'
 
-export function FilteredPosts(props: { posts: PostSummary[] }) {
+type FilteredPostsProps = {
+  posts: PostSummary[]
+}
+
+export function FilteredPosts(props: FilteredPostsProps) {
   const { posts } = props
   const [searchValue, setSearchValue] = useState('')
   const [topic, setTopic] = useState<ArticleTopic | 'all'>('all')
@@ -21,6 +25,7 @@ export function FilteredPosts(props: { posts: PostSummary[] }) {
       `${post.title} ${post.description}`.toLocaleLowerCase().includes(query),
   )
   const date = new Intl.DateTimeFormat(getLocale(), { month: 'short', day: 'numeric', timeZone: 'UTC' })
+
   return (
     <>
       <div className='flex flex-wrap items-center justify-between gap-5 max-[601px]:flex-col max-[601px]:items-stretch max-[601px]:gap-5.5'>

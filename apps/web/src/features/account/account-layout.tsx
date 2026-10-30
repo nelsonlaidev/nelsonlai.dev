@@ -3,7 +3,13 @@ import { m } from '@/paraglide/messages'
 
 import { AccountMobileNav, AccountSidebar } from './account-nav'
 
-export function AccountLayout(props: { children: React.ReactNode }) {
+type AccountLayoutProps = {
+  children: React.ReactNode
+}
+
+export function AccountLayout(props: AccountLayoutProps) {
+  const { children } = props
+
   return (
     <OceanPage>
       <div>
@@ -18,7 +24,7 @@ export function AccountLayout(props: { children: React.ReactNode }) {
         </div>
         <div className='gap-10 md:flex'>
           <AccountSidebar />
-          <div className='min-w-0 flex-1 space-y-12'>{props.children}</div>
+          <div className='min-w-0 flex-1 space-y-12'>{children}</div>
         </div>
       </div>
     </OceanPage>

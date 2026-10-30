@@ -21,5 +21,6 @@ export const Route = createFileRoute('/unsubscribe')({
 
 function RouteComponent() {
   const { token } = Route.useSearch()
+
   return <UnsubscribePage token={token} />
 }

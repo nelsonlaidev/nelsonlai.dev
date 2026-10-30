@@ -4,7 +4,7 @@ import type * as z from 'zod'
 
 import { orpc } from '@/lib/orpc-client'
 
-export function commentListOptions(
+export function commentListInfiniteOptions(
   input: Omit<z.input<typeof ListCommentsInputSchema>, 'cursor'>,
   userId: string | null = null,
 ) {

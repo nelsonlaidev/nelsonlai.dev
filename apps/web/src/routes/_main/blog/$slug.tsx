@@ -37,13 +37,13 @@ export const Route = createFileRoute('/_main/blog/$slug')({
     if (!post) throw notFound()
 
     const next = posts[(posts.findIndex((item) => item.slug === post.slug) + 1) % posts.length]
+
     return { post, locale, next }
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {}
 
     const { post, locale } = loaderData
-
     const pathname = `/blog/${post.slug}` as const
 
     return createSeoHead({
@@ -73,6 +73,7 @@ export const Route = createFileRoute('/_main/blog/$slug')({
 function RouteComponent() {
   const { post, locale, next } = Route.useLoaderData()
   const { comment, reply } = Route.useSearch()
+
   return (
     <BlogLayout>
       <ArticleDetail key={`${locale}:${post.slug}`} post={post} next={next} comment={comment} reply={reply} />
@@ -80,9 +81,17 @@ function RouteComponent() {
   )
 }
 
-function ArticleDetail(props: { post: PostDetail; next?: PostSummary; comment?: string; reply?: string }) {
+type ArticleDetailProps = {
+  post: PostDetail
+  next?: PostSummary
+  comment?: string
+  reply?: string
+}
+
+function ArticleDetail(props: ArticleDetailProps) {
   const { post, next, comment, reply } = props
   const likes = usePostLike(post.slug)
+
   return (
     <>
       <Link
@@ -103,7 +112,7 @@ function ArticleDetail(props: { post: PostDetail; next?: PostSummary; comment?: 
               <span className='mb-3.5 block text-xs leading-[normal] tracking-[normal] text-[#b5cdbb]'>
                 {m.ocean_blog_before()}
               </span>
-              <p className='text-base/[1.65] leading-[1.65] text-[#8eafa1]'>{post.description}</p>
+              <p className='text-base/[1.65] text-[#8eafa1]'>{post.description}</p>
             </div>
             <Mdx
               code={post.mdx}

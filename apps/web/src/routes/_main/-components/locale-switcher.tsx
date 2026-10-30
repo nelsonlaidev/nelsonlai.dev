@@ -23,7 +23,12 @@ const LOCALE_LABELS: Record<Locale, string> = {
   'pt-BR': 'Português (Brasil)',
 }
 
-export function LocaleSwitcher(props: { compact?: boolean; iconOnlyOnMobile?: boolean }) {
+type LocaleSwitcherProps = {
+  compact?: boolean
+  iconOnlyOnMobile?: boolean
+}
+
+export function LocaleSwitcher(props: LocaleSwitcherProps) {
   const { compact = false, iconOnlyOnMobile = false } = props
   const locale = getLocale()
 

@@ -34,9 +34,9 @@ export const Route = createFileRoute('/_main/uses')({
       }),
     })
   },
-  component: RouteComponent,
   pendingComponent: ProfilePending,
   errorComponent: ProfileError,
+  component: RouteComponent,
 })
 
 function RouteComponent() {

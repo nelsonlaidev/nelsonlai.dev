@@ -75,7 +75,7 @@ export function CodeBlock(props: CodeBlockProps) {
     >
       {hasCaption ? (
         <div className='flex flex-row items-center gap-x-5 gap-y-2 border-b border-b-[#8cae9d20] bg-transparent px-4.5 py-3 text-sm/5 max-[601px]:gap-2 max-[601px]:px-3.5 max-[601px]:py-2.75'>
-          <div className='text-muted-foreground first:hidden'>
+          <div className='hidden text-muted-foreground'>
             <Icon className='size-3.5' aria-hidden='true' />
           </div>
           <figcaption className='m-0 flex-1 truncate leading-[1.8] wrap-anywhere whitespace-normal text-[#bfd3c9]'>

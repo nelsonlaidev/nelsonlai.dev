@@ -25,6 +25,7 @@ export function MdxImage(props: React.ComponentProps<typeof BlurImage>) {
     })
   }, [register, src, alt, width, height])
   const image = <BlurImage className={cn('rounded-lg border', className)} src={src} alt={alt} {...rest} />
+
   return (
     <figure>
       {gallery && typeof src === 'string' ? (

@@ -89,7 +89,12 @@ export function usePostLike(slug: string) {
   return { query, save, draft, pulse, like }
 }
 
-export function LikeButton(props: { state: ReturnType<typeof usePostLike>; placement: 'desktop' | 'mobile' }) {
+type LikeButtonProps = {
+  state: ReturnType<typeof usePostLike>
+  placement: 'desktop' | 'mobile'
+}
+
+export function LikeButton(props: LikeButtonProps) {
   const { state, placement } = props
   const { query, save, draft, pulse, like } = state
   const clipId = useId()

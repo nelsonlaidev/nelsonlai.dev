@@ -7,9 +7,7 @@ import { findProject, listProjects } from './projects.server'
 
 export const getProject = createServerFn({ method: 'GET' })
   .validator(z.object({ slug: z.string().min(1), locale: z.enum(locales) }))
-  .handler(({ data }) => {
-    return findProject(data.slug, data.locale)
-  })
+  .handler(({ data }) => findProject(data.slug, data.locale))
 
 export const getProjects = createServerFn({ method: 'GET' })
   .validator(
@@ -19,6 +17,4 @@ export const getProjects = createServerFn({ method: 'GET' })
       selectedOnly: z.boolean().default(false),
     }),
   )
-  .handler(({ data }) => {
-    return listProjects(data.locale, data.limit, data.selectedOnly)
-  })
+  .handler(({ data }) => listProjects(data.locale, data.limit, data.selectedOnly))

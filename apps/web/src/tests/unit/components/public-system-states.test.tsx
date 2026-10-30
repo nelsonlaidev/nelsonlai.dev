@@ -21,22 +21,17 @@ vi.mock('@/components/main-layout', () => ({
   MainLayout: (props: { children: React.ReactNode }) => <main>{props.children}</main>,
 }))
 vi.mock('@/components/mdx/mdx', () => ({ Mdx: () => null }))
-vi.mock('@/lib/orpc-client', () => ({
-  orpc: {
-    notifications: {
-      inspectUnsubscribe: {
-        queryOptions: (options: { input: { token: string }; enabled?: boolean; retry?: boolean }) => ({
-          queryKey: ['safe-unsubscribe', options.input.token],
-          queryFn: fixture.inspect,
-          ...options,
-        }),
+vi.mock('@/lib/orpc-client', async () => {
+  const { createTanstackQueryUtils } = await import('@orpc/tanstack-query')
+  return {
+    orpc: createTanstackQueryUtils({
+      notifications: {
+        inspectUnsubscribe: fixture.inspect,
+        unsubscribe: fixture.unsubscribe,
       },
-      unsubscribe: {
-        mutationOptions: (options: object) => ({ ...options, mutationFn: fixture.unsubscribe }),
-      },
-    },
-  },
-}))
+    }),
+  }
+})
 
 function setup(token?: string) {
   return render(

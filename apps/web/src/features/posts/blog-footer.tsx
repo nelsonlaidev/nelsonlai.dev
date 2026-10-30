@@ -6,9 +6,15 @@ import { ArrowUpRightIcon } from 'lucide-react'
 import { SITE } from '@/lib/site'
 import { m } from '@/paraglide/messages'
 
-export function BlogFooter(props: { post: PostDetail; children?: React.ReactNode }) {
+type BlogFooterProps = {
+  post: PostDetail
+  children?: React.ReactNode
+}
+
+export function BlogFooter(props: BlogFooterProps) {
   const { post, children } = props
   const editUrl = `${SITE.repository}/blob/main/apps/web/content/blog/${post.locale}/${post.slug}.mdx?plain=1`
+
   return (
     <>
       <div className='mt-7'>

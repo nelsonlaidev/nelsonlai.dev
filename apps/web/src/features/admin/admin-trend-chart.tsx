@@ -16,7 +16,9 @@ import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
 
-export function TrendsChart() {
+import { formatTrendDate } from './trend-date'
+
+export function AdminTrendChart() {
   const { data, isSuccess, isError } = useQuery(
     orpc.admin.trends.queryOptions({
       input: { days: 30, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone },
@@ -49,24 +51,19 @@ export function TrendsChart() {
             tickLine={false}
             axisLine={false}
             tickMargin={8}
-            tickFormatter={(value: string) => {
-              const date = new Date(value)
-              return date.toLocaleDateString(locale, { month: 'short', day: 'numeric' })
-            }}
+            tickFormatter={(value: string) => formatTrendDate(value, locale, { month: 'short', day: 'numeric' })}
             minTickGap={32}
           />
           <ChartTooltip
             content={
               <ChartTooltipContent
-                labelFormatter={(label) => {
-                  const date = new Date(label as string | number)
-
-                  return date.toLocaleDateString(locale, {
+                labelFormatter={(label) =>
+                  formatTrendDate(label as string, locale, {
                     month: 'long',
                     day: 'numeric',
                     year: 'numeric',
                   })
-                }}
+                }
               />
             }
           />

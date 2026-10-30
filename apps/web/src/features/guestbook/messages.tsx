@@ -8,7 +8,7 @@ import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { m } from '@/paraglide/messages'
 
 import { DeleteButton } from './delete-button'
-import { guestbookMessagesOptions } from './guestbook.queries'
+import { guestbookMessagesInfiniteOptions } from './guestbook.queries'
 import { MessagesLoader } from './messages-loader'
 
 type MessagesProps = {
@@ -18,7 +18,7 @@ type MessagesProps = {
 export function Messages(props: MessagesProps) {
   const { userId } = props
   const { data, isSuccess, isPending, isError, fetchNextPage, refetch, hasNextPage, isFetching, isFetchingNextPage } =
-    useInfiniteQuery(guestbookMessagesOptions)
+    useInfiniteQuery(guestbookMessagesInfiniteOptions)
   const sentinelRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
@@ -54,7 +54,6 @@ export function Messages(props: MessagesProps) {
       {hasNextPage && !isFetchingNextPage && !isError && (
         <button
           type='button'
-
           disabled={isFetching}
           onClick={() => {
             void fetchNextPage()

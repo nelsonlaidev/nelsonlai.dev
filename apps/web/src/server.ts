@@ -25,7 +25,7 @@ const contentSecurityPolicy = [
   `frame-ancestors 'self' ${import.meta.env.DEV ? 'http://localhost:3002' : ''}`,
 ].join('; ')
 
-const redirects: Record<string, string> = {
+const LEGACY_REDIRECTS: Record<string, string> = {
   '/pc-specs': '/uses',
   '/atom': '/rss.xml',
   '/feed': '/rss.xml',
@@ -37,7 +37,7 @@ export default createServerEntry({
     const response = await paraglideMiddleware(request, async () => {
       const url = new URL(request.url)
       const pathname = deLocalizeUrl(url).pathname.replace(/\/$/, '') || '/'
-      const destination = redirects[pathname]
+      const destination = LEGACY_REDIRECTS[pathname]
       if (destination) {
         const firstSegment = url.pathname.split('/')[1]
         const prefix = firstSegment && isLocale(firstSegment) ? `/${firstSegment}` : ''

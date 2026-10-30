@@ -40,7 +40,7 @@ codebase, which uses TanStack Start.
 - Follow the existing code style and nearby implementation patterns.
 - Component functions must accept a named `props` parameter rather than
   destructuring props in the function signature. Destructure inside the function
-  body when needed, following `apps/web/src/components/page-header.tsx`.
+  body when needed, following `apps/web/src/features/admin/admin-page-header.tsx`.
 - When using a `render` prop, keep the element passed to it self-closing and
   place children on the component receiving the prop. For example:
   `<DialogTrigger render={<Button />}>Sign in</DialogTrigger>`.

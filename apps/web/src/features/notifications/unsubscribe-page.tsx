@@ -9,7 +9,11 @@ import { MainLayout } from '@/components/main-layout'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
-export function UnsubscribePage(props: { token?: string }) {
+type UnsubscribePageProps = {
+  token?: string
+}
+
+export function UnsubscribePage(props: UnsubscribePageProps) {
   const { token } = props
   const queryClient = useQueryClient()
   const options = orpc.notifications.inspectUnsubscribe.queryOptions({
@@ -21,7 +25,7 @@ export function UnsubscribePage(props: { token?: string }) {
   const unsubscribe = useMutation(
     orpc.notifications.unsubscribe.mutationOptions({
       onSuccess: (_data, input) => {
-        const queryKey = orpc.notifications.inspectUnsubscribe.queryOptions({ input }).queryKey
+        const queryKey = orpc.notifications.inspectUnsubscribe.queryKey({ input })
         queryClient.setQueryData(queryKey, (previous) => (previous ? { ...previous, isUnsubscribed: true } : previous))
       },
     }),

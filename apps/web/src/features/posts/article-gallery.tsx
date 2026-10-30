@@ -7,16 +7,29 @@ import { createContext, use, useCallback, useEffect, useMemo, useRef, useState }
 
 import { m } from '@/paraglide/messages'
 
-export type ArticleImage = { src: string; alt?: string; width?: number; height?: number }
+export type ArticleImage = {
+  src: string
+  alt?: string
+  width?: number
+  height?: number
+}
+
 const GalleryContext = createContext<{
   register: (image: ArticleImage) => () => void
   open: (src: string, trigger: HTMLButtonElement) => void
   loading: boolean
 } | null>(null)
 GalleryContext.displayName = 'ArticleGallery'
+
 export const useArticleGallery = () => use(GalleryContext)
 
-export function ArticleGallery(props: { children: React.ReactNode }) {
+type ArticleGalleryProps = {
+  children: React.ReactNode
+}
+
+export function ArticleGallery(props: ArticleGalleryProps) {
+  const { children } = props
+
   const imagesRef = useRef(new Map<string, ArticleImage>())
   const [Viewer, setViewer] = useState<ComponentType<ArticleLightboxProps> | null>(null)
   const [slides, setSlides] = useState<ArticleImage[]>([])
@@ -70,9 +83,10 @@ export function ArticleGallery(props: { children: React.ReactNode }) {
     setIndex(null)
     triggerRef.current?.focus({ preventScroll: true })
   }
+
   return (
     <GalleryContext value={context}>
-      {props.children}
+      {children}
       {loading && <output className='sr-only'>{m.common_loading()}</output>}
       {failed && (
         <p role='alert' className='text-base/[1.6] text-[#e7eee5] [&_a]:underline'>

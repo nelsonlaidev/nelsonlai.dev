@@ -18,6 +18,7 @@ function Toolbox() {
     { label: m.profile_about_backend(), tools: ['Node.js', 'PostgreSQL', 'Drizzle'] },
     { label: m.profile_about_delivery(), tools: ['GitHub', 'Docker', 'MDX'] },
   ]
+
   return (
     <section className='mt-30 grid grid-cols-[1fr_2fr] gap-22.5 max-[1101px]:gap-13.75 max-[1001px]:mt-21.25 max-[1001px]:grid-cols-1 max-[1001px]:gap-6.25'>
       <div>
@@ -61,7 +62,13 @@ function Toolbox() {
   )
 }
 
-function AboutStory(props: { children: React.ReactNode }) {
+type AboutStoryProps = {
+  children: React.ReactNode
+}
+
+function AboutStory(props: AboutStoryProps) {
+  const { children } = props
+
   return (
     <>
       <section className='mt-33.75 grid grid-cols-[1fr_2fr] gap-22.5 border-t border-t-border pt-16.25 max-[1101px]:gap-13.75 max-[1001px]:mt-21.25 max-[1001px]:grid-cols-1 max-[1001px]:gap-6.25 max-[601px]:pt-10 [&_a]:text-[#c5dfce] [&_a]:underline [&_a]:underline-offset-4 [&_p]:mt-6 [&_p]:text-base/[1.65] [&_p]:text-[#adc5bb]'>
@@ -74,7 +81,7 @@ function AboutStory(props: { children: React.ReactNode }) {
               {m.profile_about_story_emphasis()}
             </em>
           </h2>
-          {props.children}
+          {children}
         </div>
       </section>
       <Toolbox />
@@ -82,7 +89,13 @@ function AboutStory(props: { children: React.ReactNode }) {
   )
 }
 
-function AboutSite(props: { children: React.ReactNode }) {
+type AboutSiteProps = {
+  children: React.ReactNode
+}
+
+function AboutSite(props: AboutSiteProps) {
+  const { children } = props
+
   return (
     <section className='mx-auto mt-31.25 mb-11.25 max-w-187.5 text-center max-[601px]:mt-21.25'>
       <span className='block text-xs/normal text-[#b4cec4]'>{m.profile_about_ocean()}</span>
@@ -110,21 +123,27 @@ function AboutSite(props: { children: React.ReactNode }) {
         <summary className='min-h-11 cursor-pointer py-5 focus-visible:outline-2 focus-visible:outline-offset-[5px] focus-visible:outline-[#c4e0cc] focus-visible:outline-solid'>
           {m.profile_about_details()}
         </summary>
-        <div>{props.children}</div>
+        <div>{children}</div>
       </details>
     </section>
   )
 }
 
-export function AboutPage(props: { page: ProfilePageData }) {
+type AboutPageProps = {
+  page: ProfilePageData
+}
+
+export function AboutPage(props: AboutPageProps) {
+  const { page } = props
+
   return (
     <ProfileLayout>
       <div>
         <div className='grid grid-cols-[1.5fr_1fr] items-center gap-16.25 max-[1101px]:gap-7.5 max-[1001px]:grid-cols-1'>
           <div className='mb-0'>
-            <span className='block text-xs/normal text-[#b4cec4]'>03 / {props.page.title}</span>
+            <span className='block text-xs/normal text-[#b4cec4]'>03 / {page.title}</span>
             <h1 className='mt-6 text-[clamp(48px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em]'>
-              {props.page.title}
+              {page.title}
             </h1>
             <p className='mt-7 max-w-150 text-lg/[1.65] whitespace-pre-line text-[#b1cbc4]'>
               {m.profile_about_intro()}
@@ -147,10 +166,7 @@ export function AboutPage(props: { page: ProfilePageData }) {
             </span>
           </div>
         </div>
-        <MDXContent
-          code={props.page.mdx}
-          components={{ AboutStory, AboutSite, a: MdxLink, SocialLinks, LogoShowcase }}
-        />
+        <MDXContent code={page.mdx} components={{ AboutStory, AboutSite, a: MdxLink, SocialLinks, LogoShowcase }} />
       </div>
     </ProfileLayout>
   )

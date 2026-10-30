@@ -39,16 +39,13 @@ export function PublicNotFound() {
           to='/'
           className={cn(
             buttonVariants(),
-            'first:h-auto first:min-h-12 first:rounded-md first:border first:border-[#a7cabb65] first:bg-[#b0d3c30b] first:px-5.75 first:py-3.5 first:text-sm/normal first:whitespace-normal first:text-[#e0ecde] first:hover:border-[#b0d3c3] first:hover:bg-[#b0d3c31c]',
+            'h-auto min-h-12 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5.75 py-3.5 text-sm/normal whitespace-normal text-[#e0ecde] hover:border-[#b0d3c3] hover:bg-[#b0d3c31c]',
           )}
         >
           {m.components_go_to_homepage()}
           <ArrowUpRightIcon aria-hidden='true' className='size-4' />
         </Link>
-        <Link
-          to='/projects'
-          className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-[#b9d3c7] first:h-auto first:min-h-12 first:rounded-md first:border first:border-[#a7cabb65] first:bg-[#b0d3c30b] first:px-5.75 first:py-3.5 first:text-sm/normal first:whitespace-normal first:text-[#e0ecde] first:hover:border-[#b0d3c3] first:hover:bg-[#b0d3c31c]'
-        >
+        <Link to='/projects' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-[#b9d3c7]'>
           {m.nav_projects()}
           <ArrowUpRightIcon aria-hidden='true' className='size-4' />
         </Link>

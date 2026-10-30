@@ -27,26 +27,28 @@ export const Route = createFileRoute('/_main/projects/')({
   head: ({ loaderData }) => {
     if (!loaderData) return {}
 
+    const { page, projects, locale } = loaderData
+
     return createSeoHead({
-      title: loaderData.page.title,
-      description: loaderData.page.description,
+      title: page.title,
+      description: page.description,
       pathname: '/projects',
-      locale: loaderData.locale,
+      locale,
       jsonLd: createJsonLdCollectionPage({
-        title: loaderData.page.title,
-        description: loaderData.page.description,
+        title: page.title,
+        description: page.description,
         pathname: '/projects',
-        locale: loaderData.locale,
-        items: loaderData.projects.map((project) => ({
+        locale,
+        items: projects.map((project) => ({
           name: project.title,
-          url: getLocalizedUrl(`/projects/${project.slug}`, loaderData.locale),
+          url: getLocalizedUrl(`/projects/${project.slug}`, locale),
         })),
       }),
     })
   },
-  component: RouteComponent,
-  errorComponent: ProjectsError,
   pendingComponent: ProjectsPending,
+  errorComponent: ProjectsError,
+  component: RouteComponent,
 })
 
 function RouteComponent() {

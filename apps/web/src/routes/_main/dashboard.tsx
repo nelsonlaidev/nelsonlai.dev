@@ -45,9 +45,9 @@ export const Route = createFileRoute('/_main/dashboard')({
       }),
     })
   },
-  component: RouteComponent,
   pendingComponent: ProfilePending,
   errorComponent: ProfileError,
+  component: RouteComponent,
 })
 
 function RouteComponent() {

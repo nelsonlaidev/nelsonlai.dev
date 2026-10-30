@@ -33,7 +33,7 @@ import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
 import { CommentComposer } from './comment-composer'
-import { commentListOptions } from './comments.queries'
+import { commentListInfiniteOptions } from './comments.queries'
 import { DeleteComment } from './delete-comment'
 
 type CommentListProps = {
@@ -47,7 +47,7 @@ type CommentListProps = {
 export function CommentList(props: CommentListProps) {
   const { slug, sort, parentId, highlightedCommentId, highlightedReplyId } = props
   const session = authClient.useSession()
-  const options = commentListOptions(
+  const options = commentListInfiniteOptions(
     {
       slug,
       sort,
@@ -119,7 +119,9 @@ export function CommentList(props: CommentListProps) {
   )
 }
 
-type CommentItemProps = Omit<CommentListProps, 'sort' | 'parentId'> & { comment: Comment }
+type CommentItemProps = Omit<CommentListProps, 'sort' | 'parentId'> & {
+  comment: Comment
+}
 
 function CommentItem(props: CommentItemProps) {
   const { comment, slug, highlightedCommentId, highlightedReplyId } = props

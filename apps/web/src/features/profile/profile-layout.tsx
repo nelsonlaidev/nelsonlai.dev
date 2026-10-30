@@ -11,10 +11,16 @@ export type ProfilePageData = {
   sections?: Array<{ id: string; title: string; count: number }>
 }
 
-export function ProfileLayout(props: { children: React.ReactNode }) {
+type ProfileLayoutProps = {
+  children: React.ReactNode
+}
+
+export function ProfileLayout(props: ProfileLayoutProps) {
+  const { children } = props
+
   return (
     <OceanPage>
-      <div className='wrap-anywhere'>{props.children}</div>
+      <div className='wrap-anywhere'>{children}</div>
     </OceanPage>
   )
 }

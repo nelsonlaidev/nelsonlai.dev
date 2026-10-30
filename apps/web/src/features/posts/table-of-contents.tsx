@@ -4,7 +4,12 @@ import { useEffect, useState } from 'react'
 
 import { m } from '@/paraglide/messages'
 
-export function TableOfContents(props: { toc: TOC[]; children?: React.ReactNode }) {
+type TableOfContentsProps = {
+  toc: TOC[]
+  children?: React.ReactNode
+}
+
+export function TableOfContents(props: TableOfContentsProps) {
   const { toc, children } = props
   const [activeId, setActiveId] = useState<string>()
   useEffect(() => {
@@ -22,6 +27,7 @@ export function TableOfContents(props: { toc: TOC[]; children?: React.ReactNode 
       observer.disconnect()
     }
   }, [toc])
+
   return (
     <aside className='sticky top-8.75 max-h-[calc(100vh-70px)] self-start overflow-y-auto max-[1001px]:static max-[1001px]:mb-11.25 max-[1001px]:max-h-none max-[1001px]:border-b max-[1001px]:border-b-border max-[1001px]:pb-7'>
       <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-[#b4cec4]'>

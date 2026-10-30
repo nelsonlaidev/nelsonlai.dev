@@ -13,7 +13,9 @@ import { m } from '@/paraglide/messages'
 import { articleNumber, articleTopic, articleTopicLabel } from './presentation'
 import { usePostStats } from './use-post-stats'
 
-type BlogHeaderProps = { post: PostDetail }
+type BlogHeaderProps = {
+  post: PostDetail
+}
 
 export function BlogHeader(props: BlogHeaderProps) {
   const { post } = props
@@ -27,7 +29,7 @@ export function BlogHeader(props: BlogHeaderProps) {
   const increment = useMutation(
     orpc.posts.incrementView.mutationOptions({
       onSuccess: async (data) => {
-        const queryKey = orpc.posts.stats.queryOptions({ input: { slugs: [post.slug] } }).queryKey
+        const queryKey = orpc.posts.stats.queryKey({ input: { slugs: [post.slug] } })
         await queryClient.cancelQueries({ queryKey })
         queryClient.setQueryData(queryKey, [data])
         void queryClient.invalidateQueries({ queryKey: orpc.posts.stats.key() })

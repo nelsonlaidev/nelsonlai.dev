@@ -13,9 +13,7 @@ import { createORPCContext } from './orpc-context'
 const getORPCClient = createIsomorphicFn()
   .server(() =>
     createRouterClient(router, {
-      context: async () => {
-        return createORPCContext(getRequest())
-      },
+      context: async () => createORPCContext(getRequest()),
     }),
   )
   .client((): RouterClient<typeof router> => {

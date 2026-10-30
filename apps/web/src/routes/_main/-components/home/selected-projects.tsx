@@ -8,7 +8,9 @@ import { m } from '@/paraglide/messages'
 
 import { SectionHeading } from './section-heading'
 
-type SelectedProjectsProps = { projects: ProjectSummary[] }
+type SelectedProjectsProps = {
+  projects: ProjectSummary[]
+}
 
 export function SelectedProjects(props: SelectedProjectsProps) {
   const { projects } = props

@@ -15,7 +15,7 @@ import { HomeIcon, LayoutDashboardIcon, MessagesSquareIcon, UsersIcon } from 'lu
 
 import { m } from '@/paraglide/messages'
 
-const links = [
+const ADMIN_LINKS = [
   { to: '/admin', label: m.common_labels_dashboard, icon: LayoutDashboardIcon },
   { to: '/admin/users', label: m.common_labels_users, icon: UsersIcon },
   { to: '/admin/comments', label: m.common_labels_comments, icon: MessagesSquareIcon },
@@ -42,7 +42,7 @@ export function AdminSidebar() {
           <SidebarGroupLabel>{m.common_labels_general()}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {links.map((link) => (
+              {ADMIN_LINKS.map((link) => (
                 <SidebarMenuItem key={link.to}>
                   <SidebarMenuButton
                     className='min-h-11'

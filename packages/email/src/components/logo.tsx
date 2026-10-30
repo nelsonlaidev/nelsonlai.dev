@@ -1,10 +1,16 @@
 import { Img, Section } from 'react-email'
 
-function Logo(props: { siteUrl: string }) {
+type LogoProps = {
+  siteUrl: string
+}
+
+function Logo(props: LogoProps) {
+  const { siteUrl } = props
+
   return (
     <Section className='mb-6'>
       <Img
-        src={new URL('/images/avatar.png', props.siteUrl).href}
+        src={new URL('/images/avatar.png', siteUrl).href}
         alt="Nelson Lai's logo"
         width='48'
         height='48'

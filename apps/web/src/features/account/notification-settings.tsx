@@ -9,15 +9,17 @@ import { useForm } from '@tanstack/react-form'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useId } from 'react'
 
-import { replyPreferenceOptions } from '@/features/notifications/notifications.queries'
+import { replyPreferenceQueryOptions } from '@/features/notifications/notifications.queries'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
-type NotificationSettingsProps = { userId: string }
+type NotificationSettingsProps = {
+  userId: string
+}
 
 export function NotificationSettings(props: NotificationSettingsProps) {
   const { userId } = props
-  const preference = useQuery(replyPreferenceOptions(userId))
+  const preference = useQuery(replyPreferenceQueryOptions(userId))
 
   if (preference.isPending) return <Skeleton className='h-60 w-full rounded-2xl' />
   if (preference.isError) return <p role='alert'>{m.error_failed_to_load_settings()}</p>
@@ -25,7 +27,9 @@ export function NotificationSettings(props: NotificationSettingsProps) {
   return <NotificationSettingsForm userId={userId} repliesEnabled={preference.data.repliesEnabled} />
 }
 
-type NotificationSettingsFormProps = NotificationSettingsProps & { repliesEnabled: boolean }
+type NotificationSettingsFormProps = NotificationSettingsProps & {
+  repliesEnabled: boolean
+}
 
 function NotificationSettingsForm(props: NotificationSettingsFormProps) {
   const { userId, repliesEnabled } = props
@@ -34,7 +38,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
   const update = useMutation(
     orpc.notifications.setPreference.mutationOptions({
       onSuccess: (data) => {
-        queryClient.setQueryData(replyPreferenceOptions(userId).queryKey, data)
+        queryClient.setQueryData(replyPreferenceQueryOptions(userId).queryKey, data)
         form.reset(data)
         toast.add({ type: 'success', title: m.success_settings_updated() })
       },
