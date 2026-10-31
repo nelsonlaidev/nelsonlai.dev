@@ -1,6 +1,6 @@
 ---
 title: Scoutly
-description: 一款快速、輕量級的命令行網站爬蟲和 SEO 分析工具
+description: 一款快速、輕量級的命令列網站爬蟲和 SEO 分析工具
 github: https://github.com/nelsonlaidev/scoutly
 schemaType: SoftwareSourceCode
 license: https://opensource.org/licenses/MIT
@@ -12,7 +12,7 @@ techstack:
   - Clap
 selected: true
 dateCreated: '2025-11-04T00:00:00Z'
-updatedAt: '2026-09-23T17:03:37.000Z'
+updatedAt: '2026-10-31T00:00:00Z'
 subtitle: '追蹤每個連結，發現重要細節。'
 category: '命令列工具'
 features:
@@ -21,10 +21,10 @@ features:
   - title: '找出遺漏之處'
     text: '找出失效資源與 SEO 問題，並支援 robots 和 sitemap，呈現更完整的網站面貌。'
   - title: '在終端機工作'
-    text: 'CLI 與終端介面方便探索，文字與 JSON 報告讓結果也能用於其他工作流程。'
+    text: 'CLI 與終端機介面方便探索，文字與 JSON 報告讓結果也能用於其他工作流程。'
 journey: '從實作中學習：一邊探索 Rust，一邊為自己經手的網站打造實用工具。'
 ---
 
 Scoutly 是一款快速、輕量級的網站爬蟲與 SEO 分析工具。我在 2025 年 11 月為了練習 Rust 而展開這個專案。此專案靈感源自 [Scrutiny](https://peacockmedia.software/mac/scrutiny/)。
 
-Scoutly 以可設定的深度、頁數、並行度與請求速率限制爬取同源 HTML 頁面，遵守 robots.txt，並從 XML sitemap 發掘頁面。它會檢查發現的連結與圖片，並標記標題、meta description、H1 標題、圖片 alt text 等常見 SEO 問題。結果可在鍵盤操作的 TUI 中瀏覽，或以純文字與 JSON 報告輸出；爬蟲核心也同時以 Rust 函式庫的形式提供。
+Scoutly 以可設定的深度、頁數、並行度與請求速率限制爬取同源 HTML 頁面，遵守 robots.txt，並從 XML sitemap 發掘頁面。它會檢查發現的連結與圖片，並找出與頁面標題、中繼描述、H1 標題及缺少圖片替代文字相關的常見 SEO 問題。結果可在透過鍵盤操作的終端機介面（TUI）中瀏覽，或以純文字與 JSON 報告輸出；爬蟲核心也同時以 Rust 函式庫的形式提供。
