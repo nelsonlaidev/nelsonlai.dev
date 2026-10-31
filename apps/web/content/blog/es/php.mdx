@@ -13,7 +13,7 @@ La extensión de archivo PHP es `.php`, por ejemplo `index.php`. Como se mencion
 
 ## Uso
 
-Cuando el navegador lee `<?php` de arriba a abajo, ejecuta `PHP` y termina con `?>`. Por ejemplo:
+En una aplicación web, PHP se ejecuta en el servidor. El intérprete de PHP ejecuta el código entre `<?php` y `?>`, y el servidor envía el resultado al navegador. Por ejemplo:
 
 ```php
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ Cuando el navegador lee `<?php` de arriba a abajo, ejecuta `PHP` y termina con `
 
 ## Precauciones
 
-En `PHP`, no debe haber otro `HTML` después de que se completa la directiva `PHP`. Se recomienda no terminar con `?>`. Causará problemas si se cierra.
+Si un archivo contiene únicamente código PHP o termina con código PHP, omite la etiqueta final `?>` para evitar espacios o saltos de línea accidentales en la salida. Al incrustar PHP en HTML, utiliza `?>` para volver al HTML fuera del bloque PHP.
 
 ```php
 <?php
@@ -55,7 +55,7 @@ Casi todos los lenguajes de programación web pueden comentar, y la forma de **u
 
 ## Echo
 
-La sintaxis más simple en `PHP` es `Echo`. El contenido de `Echo` debe encerrarse entre comillas dobles `""` o comillas simples `''`. Cada sintaxis debe terminar con un punto y coma `;`.
+Utiliza `echo` para mostrar texto o el resultado de una expresión. Las cadenas de texto pueden encerrarse entre comillas dobles `""` o simples `''`. Termina cada instrucción `echo` con un punto y coma `;`.
 
 ```php
 <?php
@@ -64,7 +64,7 @@ La sintaxis más simple en `PHP` es `Echo`. El contenido de `Echo` debe encerrar
 ?>
 ```
 
-El contenido de `Echo` también puede usar sintaxis `HTML`. Por ejemplo, usé `<br/>` aquí, para que se pueda hacer un salto de línea.
+El contenido de `echo` también puede usar sintaxis `HTML`. Por ejemplo, usé `<br/>` aquí, para que se pueda hacer un salto de línea.
 
 ```php
 <?php
@@ -76,7 +76,7 @@ El contenido de `Echo` también puede usar sintaxis `HTML`. Por ejemplo, usé `<
 
 ## Variable
 
-Podemos asignar un valor a una variable para facilitar la escritura en `PHP`, similar a `Javascript`. Usaremos el signo de Dólar `$`.
+Podemos asignar un valor a una variable para facilitar la escritura en `PHP`, similar a `JavaScript`. Usaremos el signo de Dólar `$`.
 
 ```php
 <?php
@@ -96,9 +96,9 @@ Hay algunas reglas a seguir al nombrar variables.
   ]}
 />
 
-Hay una diferencia entre `mayúsculas` y `minúsculas` en los nombres de variables. Las variables en mayúsculas no son iguales a las variables en minúsculas.
+Los nombres de variables distinguen entre mayúsculas y minúsculas: `$value` y `$Value` son variables diferentes, aunque contengan el mismo valor.
 
-## Consejos para Nombrar Variables
+## Consejos para nombrar variables
 
 ### Camel case
 
@@ -136,12 +136,12 @@ Hay dos operadores de cadena. El primero es el operador de concatenación ("."),
 
 ```php
 <?php
-    $value0 = 1.5; // Float
+    $value0 = 1.5; // Número de punto flotante
     $value1 = 1 + 1; // Suma
     $value2 = 1 - 1; // Resta
     $value3 = 1 * 1; // Multiplicación
     $value4 = 1 / 1; // División
-    $value5 = 12 / 5; // División (La división incompleta se convierte en float, que es diferente de otros lenguajes de programación, php calculará el resto)
+    $value5 = 12 / 5; // División: el resultado es 2.4
     $value6 = 3 % 5; // Obtener el resto
 ?>
 ```

@@ -10,8 +10,8 @@ updatedAt: '2026-06-26T07:58:40.000Z'
 The packages to be used:
 
 - [next](https://github.com/vercel/next.js) Next.js framework
-- [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) handling and loading mdx content
-- [gray-matter](https://github.com/jonschlinkert/gray-matter) parse the front matter in markdown
+- [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) handling and loading MDX content
+- [gray-matter](https://github.com/jonschlinkert/gray-matter) parsing Markdown front matter
 
 The repository for this tutorial:
 
@@ -31,7 +31,7 @@ First, we create the Next.js project with the following command:
 yarn create next-app nextjs-mdx-blog
 ```
 
-Next, create the following file:
+Next, create the following files:
 
 - `components/layout.jsx` - Wrap all components in a container (optional, just the style)
 - `data/blog/*.mdx` - Blog Articles
@@ -89,13 +89,13 @@ Next, create the following file:
 
 ### How to Handle Markdown Files
 
-First `const root{:js}` - the root directory, and the `process.cwd(){:js}` method returns the current working directory of the Node.js process.
+First, define `root{:js}` as the project root directory. The `process.cwd(){:js}` method returns the current working directory of the Node.js process.
 
 ```js title='lib/mdx.js'
 const root = process.cwd()
 ```
 
-Another variable `POSTS_PATH{:.entity.name.constant}` for the path where the article files are stored.
+Next, define `POSTS_PATH{:.entity.name.constant}` as the directory where the article files are stored.
 
 ```js title='lib/mdx.js'
 import path from 'path'
@@ -152,7 +152,7 @@ export const getPostBySlug = async (slug) => {
    */
 
   const mdxSource = await serialize(content)
-  // Put content to serialize (next-mdx-remote) to handle
+  // Serialize the content with next-mdx-remote
 
   const frontMatter = {
     ...data,
@@ -197,7 +197,7 @@ const dateSortDesc = (a, b) => {
 }
 ```
 
-### Formatting Date
+### Formatting Dates
 
 ```js title='lib/format-date.js'
 export const formatDate = (date) =>

@@ -19,7 +19,7 @@ Por simplicidad, usaremos un ejemplo de autenticación basada en credenciales. S
 
 Además, usamos una base de datos SQLite con fines de demostración. Ajusta las interacciones con la base de datos **(por ejemplo, nombres de tablas, tipos de columnas)** según tu configuración.
 
-## Generando un Token de Sesión
+## Generando un token de sesión
 
 Para simular una sesión autenticada, necesitaremos generar un token de sesión firmado usando `BETTER_AUTH_SECRET`. Este token se usará en las cookies de sesión.
 
@@ -40,7 +40,7 @@ const signature = crypto
 const signedValue = `${TEST_USER.sessionToken}.${signature}`
 ```
 
-## Insertando Datos de Prueba
+## Insertando datos de prueba
 
 Queremos mantener nuestro usuario de prueba estático para evitar crear múltiples usuarios durante las pruebas. Inserta un usuario de prueba, cuenta y sesión en la base de datos si aún no existen. Usamos `0` como ID único para todas las claves primarias por simplicidad.
 
@@ -84,7 +84,7 @@ const transaction = db.transaction(() => {
 transaction()
 ```
 
-## Almacenando la Sesión
+## Almacenando la sesión
 
 Guarda el token firmado como una cookie en un archivo JSON para usarlo en los frameworks de pruebas. No olvides aplicar `encodeURIComponent{:.entity.name.function}` al valor de la cookie.
 
@@ -102,10 +102,11 @@ const cookieObject = {
   expires: Math.round(expiresAt / 1000),
 }
 
+await fs.mkdir('.auth', { recursive: true })
 await fs.writeFile('.auth/auth.json', JSON.stringify({ cookies: [cookieObject], origins: [] }, null, 2))
 ```
 
-## Usando la Sesión en las Pruebas
+## Usando la sesión en las pruebas
 
 Carga la sesión almacenada en tus pruebas E2E para acceder a rutas protegidas sin iniciar sesión. El ejemplo a continuación usa Playwright, pero esto se puede adaptar a cualquier biblioteca de pruebas (por ejemplo, Cypress) que soporte inyección de cookies.
 
@@ -129,9 +130,9 @@ export default defineConfig({
 })
 ```
 
-## Enlaces Útiles
+## Enlaces útiles
 
-- [Configuración y Desmontaje de Playwright](https://playwright.dev/docs/test-global-setup-teardown)
-- [Estado de Almacenamiento de Playwright](https://playwright.dev/docs/auth#reuse-authentication-in-other-scenarios)
+- [Configuración y desmontaje de Playwright](https://playwright.dev/docs/test-global-setup-teardown)
+- [Estado de almacenamiento de Playwright](https://playwright.dev/docs/auth#reuse-authentication-in-other-scenarios)
 - [Hooks de Cypress](https://docs.cypress.io/app/core-concepts/writing-and-organizing-tests#Hooks)
-- [Set Cookie de Cypress](https://docs.cypress.io/api/commands/setcookie)
+- [Configuración de cookies de Cypress](https://docs.cypress.io/api/commands/setcookie)

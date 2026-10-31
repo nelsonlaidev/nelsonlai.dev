@@ -33,7 +33,7 @@ yarn create next-app nextjs-mdx-blog
 
 接著，建立以下檔案：
 
-- `components/layout.jsx` - 將所有組件包裝在容器中（可選，用於樣式）
+- `components/layout.jsx` - 將所有元件包裝在容器中（可選，用於樣式）
 - `data/blog/*.mdx` - 部落格文章
 - `lib/format-date.js` - 將日期格式化為 `MM DD, YYYY`
 - `pages/blog/[slug].jsx` - 文章頁面，使用 [動態路由](https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes)
@@ -89,7 +89,7 @@ yarn create next-app nextjs-mdx-blog
 
 ### 如何處理 Markdown 檔案
 
-首先建立變數 `const root{:js}`，其值為根目錄，`process.cwd(){:js}` 方法返回當前 Node.js 進程的工作目錄。
+首先建立變數 `const root{:js}`，其值為根目錄，`process.cwd(){:js}` 方法回傳當前 Node.js 程序的工作目錄。
 
 ```js title='lib/mdx.js'
 const root = process.cwd()
@@ -104,7 +104,7 @@ const POSTS_PATH = path.join(root, 'data', 'blog') // [!code highlight]
 // 輸出: A:/nextjs-mdx-blog/data/blog
 ```
 
-使用 `fs` 讀取該目錄下的內容，即 `data/blog` 下的所有檔案名。
+使用 `fs` 讀取該目錄下的內容，即 `data/blog` 下的所有檔案名稱。
 
 ```js title='lib/mdx.js'
 import fs from 'fs'
@@ -113,7 +113,7 @@ export const allSlugs = fs.readdirSync(POSTS_PATH)
 // 輸出: ['markdown.mdx', 'nextjs.mdx', 'react.mdx']
 ```
 
-然後撰寫一個函數移除檔案副檔名，稍後會用到。
+然後撰寫一個函式移除檔案副檔名，稍後會用到。
 
 ```js title='lib/mdx.js'
 export const formatSlug = (slug) => slug.replace(/\.mdx$/, '')
@@ -123,14 +123,14 @@ export const formatSlug = (slug) => slug.replace(/\.mdx$/, '')
  */
 ```
 
-接著根據 slug 獲取文章內容。
+接著根據 slug 取得文章內容。
 
 ```js title='lib/mdx.js'
 export const getPostBySlug = async (slug) => {
   const postFilePath = path.join(POSTS_PATH, `${slug}.mdx`)
   // 輸出: A:/nextjs-mdx-blog/data/blog/slug.mdx
   const source = fs.readFileSync(postFilePath)
-  // 返回檔案內容
+  // 回傳檔案內容
 
   const { content, data } = matter(source)
   /*
@@ -141,7 +141,7 @@ export const getPostBySlug = async (slug) => {
    *  ---
    *  <h1>Hello world!</h1>
    *
-   * 返回:
+   * 回傳:
    *  {
    *    content: '<h1>Hello world!</h1>',
    *    data: {
@@ -167,7 +167,7 @@ export const getPostBySlug = async (slug) => {
 }
 ```
 
-接下來可以獲取所有文章，以顯示在首頁。
+接下來可以取得所有文章，以顯示在首頁。
 
 ```js title='lib/mdx.js'
 export const getAllPosts = () => {
@@ -244,7 +244,7 @@ export default function Home({ posts }) {
   )
 }
 
-// 使用 getStaticProps 獲取所有文章
+// 使用 getStaticProps 取得所有文章
 export const getStaticProps = async () => {
   const posts = getAllPosts()
 

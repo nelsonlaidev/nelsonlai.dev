@@ -1,33 +1,33 @@
 ---
 title: 使用 Better Auth 進行端到端測試
-description: 了解如何使用 Better Auth 設置端到端測試。
+description: 了解如何使用 Better Auth 設定端到端測試。
 publishedAt: '2025-09-18T09:00:34.000Z'
 updatedAt: '2026-06-26T07:58:40.000Z'
 ---
 
 ## 簡要概述
 
-您需要生成一個有效的會話令牌並將其儲存為 Cookie。這允許您的端到端測試訪問需要身份驗證的路由，而無需手動登錄。此方法適用於基於憑證和 OAuth 的身份驗證。
+您需要產生一個有效的工作階段權杖並將其儲存為 Cookie。這允許您的端到端測試存取需要身分驗證的路由，而無需手動登入。此方法適用於使用帳號密碼或 OAuth 的身分驗證。
 
-> GitHub 倉庫：[nelsonlaidev/e2e-testing-with-better-auth](https://github.com/nelsonlaidev/e2e-testing-with-better-auth)
+> GitHub 程式碼庫：[nelsonlaidev/e2e-testing-with-better-auth](https://github.com/nelsonlaidev/e2e-testing-with-better-auth)
 
 ## 前言
 
 在本指南中，我們將使用 [Playwright](https://playwright.dev/) 作為我們的端到端測試框架，但這些概念同樣適用於其他框架，如 [Cypress](https://www.cypress.io/)。
 
-為了簡單起見，我們將使用基於憑證的身份驗證範例。然而，相同的原則也適用於 OAuth 提供者。
+為了簡化說明，本範例採用帳號密碼驗證；相同原則也適用於 OAuth 提供者。
 
-此外，我們使用 SQLite 資料庫進行示範。請根據您的設置調整資料庫交互（例如，表名、欄位類型）。
+此外，我們使用 SQLite 資料庫進行示範。請根據您的設定調整資料庫操作（例如，資料表名稱、欄位型別）。
 
-## 生成會話令牌
+## 產生工作階段權杖
 
-為了模擬已驗證的會話，我們需要使用 `BETTER_AUTH_SECRET` 生成一個簽名的會話令牌。此令牌將用於會話 Cookie 中。
+為了模擬已通過驗證的工作階段，我們需要使用 `BETTER_AUTH_SECRET` 產生一個簽章的工作階段權杖。此權杖將用於工作階段 Cookie 中。
 
 ```ts
 import crypto from 'node:crypto'
 
 export const TEST_USER = {
-  name: '測試用戶',
+  name: '測試使用者',
   email: 'test@example.com',
   sessionToken: '00000000000000000000000000000000',
   accountId: '000',
@@ -42,7 +42,7 @@ const signedValue = `${TEST_USER.sessionToken}.${signature}`
 
 ## 插入測試資料
 
-我們希望保持測試用戶的靜態，以避免在測試期間創建多個用戶。如果測試用戶、帳戶和會話尚未存在，則將其插入資料庫。為簡單起見，我們使用 `0` 作為所有主鍵的唯一 ID。
+我們希望重複使用固定的測試使用者，避免在測試期間建立多個使用者。如果測試使用者、帳戶和工作階段尚未存在，則將其插入資料庫。為簡單起見，我們使用 `0` 作為所有主鍵的唯一 ID。
 
 ```ts
 import { db } from '@/lib/db'
@@ -84,9 +84,9 @@ const transaction = db.transaction(() => {
 transaction()
 ```
 
-## 儲存會話
+## 儲存工作階段
 
-將簽名的令牌儲存為 JSON 檔案中的 Cookie，以便在測試框架中使用。不要忘記對 Cookie 值進行 `encodeURIComponent{:.entity.name.function}` 編碼。
+將簽章的權杖儲存為 JSON 檔案中的 Cookie，以便在測試框架中使用。不要忘記對 Cookie 值進行 `encodeURIComponent{:.entity.name.function}` 編碼。
 
 ```ts
 import fs from 'node:fs/promises'
@@ -102,12 +102,13 @@ const cookieObject = {
   expires: Math.round(expiresAt / 1000),
 }
 
+await fs.mkdir('.auth', { recursive: true })
 await fs.writeFile('.auth/auth.json', JSON.stringify({ cookies: [cookieObject], origins: [] }, null, 2))
 ```
 
-## 在測試中使用會話
+## 在測試中使用工作階段
 
-在您的端到端測試中載入儲存的會話，以訪問受保護的路由，而無需登錄。以下範例使用 Playwright，但這可以適應任何支援 Cookie 注入的測試庫（例如，Cypress）。
+在您的端到端測試中載入儲存的工作階段，以存取受保護的路由，而無需登入。以下範例使用 Playwright，但這可以適應任何支援 Cookie 注入的測試函式庫（例如，Cypress）。
 
 ```ts title='playwright.config.ts'
 export default defineConfig({
@@ -131,7 +132,7 @@ export default defineConfig({
 
 ## 有用的連結
 
-- [Playwright 設置與拆卸](https://playwright.dev/docs/test-global-setup-teardown)
+- [Playwright 設定與清理](https://playwright.dev/docs/test-global-setup-teardown)
 - [Playwright 儲存狀態](https://playwright.dev/docs/auth#reuse-authentication-in-other-scenarios)
-- [Cypress 鉤子](https://docs.cypress.io/app/core-concepts/writing-and-organizing-tests#Hooks)
-- [Cypress 設置 Cookie](https://docs.cypress.io/api/commands/setcookie)
+- [Cypress 生命週期鉤子](https://docs.cypress.io/app/core-concepts/writing-and-organizing-tests#Hooks)
+- [Cypress 設定 Cookie](https://docs.cypress.io/api/commands/setcookie)

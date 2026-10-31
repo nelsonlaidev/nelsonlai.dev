@@ -13,7 +13,7 @@ A extensão de arquivo PHP é `.php`, ex. `index.php`. Como mencionado acima, o 
 
 ## Uso
 
-Quando o navegador lê `<?php` de cima para baixo, ele executa o `PHP` e termina com `?>`. Como:
+Em uma aplicação web, o PHP é executado no servidor. O interpretador PHP executa o código entre `<?php` e `?>`, e o servidor envia o resultado ao navegador. Por exemplo:
 
 ```php
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ Quando o navegador lê `<?php` de cima para baixo, ele executa o `PHP` e termina
 
 ## Precauções
 
-No `PHP`, não há outro `HTML` depois que a diretiva `PHP` for concluída. É recomendável não terminar com `?>`. Isso causará problemas caso seja fechado.
+Se um arquivo contém apenas código PHP ou termina com código PHP, omita a tag final `?>` para evitar espaços ou quebras de linha acidentais na saída. Ao incorporar PHP em HTML, use `?>` para voltar ao HTML fora do bloco PHP.
 
 ```php
 <?php
@@ -55,7 +55,7 @@ A maioria das linguagens de programação web pode comentar, e a forma de **linh
 
 ## Echo
 
-A sintaxe mais simples no `PHP` é o `Echo`. O conteúdo do `Echo` deve ser envolvido por aspas duplas `""` ou aspas simples `''`. Cada sintaxe deve terminar com um ponto-e-vírgula `;`.
+Use `echo` para exibir texto ou o resultado de uma expressão. Strings podem ser delimitadas por aspas duplas `""` ou simples `''`. Termine cada instrução `echo` com um ponto e vírgula `;`.
 
 ```php
 <?php
@@ -64,7 +64,7 @@ A sintaxe mais simples no `PHP` é o `Echo`. O conteúdo do `Echo` deve ser envo
 ?>
 ```
 
-O conteúdo no `Echo` também pode usar a sintaxe do `HTML`. Por exemplo, eu usei `<br/>` aqui, para que a linha possa ser quebrada.
+O conteúdo no `echo` também pode usar a sintaxe do `HTML`. Por exemplo, eu usei `<br/>` aqui, para que a linha possa ser quebrada.
 
 ```php
 <?php
@@ -76,7 +76,7 @@ O conteúdo no `Echo` também pode usar a sintaxe do `HTML`. Por exemplo, eu use
 
 ## Variável
 
-Podemos atribuir um valor a uma variável para facilitar a escrita de `PHP` para nós, semelhante ao `Javascript`. Usaremos o cifrão `$`.
+Podemos atribuir um valor a uma variável para facilitar a escrita de `PHP` para nós, semelhante ao `JavaScript`. Usaremos o cifrão `$`.
 
 ```php
 <?php
@@ -96,13 +96,13 @@ Há algumas regras a serem seguidas ao nomear variáveis.
   ]}
 />
 
-Há uma diferença entre os nomes de variáveis em `maiúsculas` e `minúsculas`. Variáveis em maiúsculas não são iguais a variáveis ​​em minúsculas.
+Os nomes de variáveis diferenciam maiúsculas de minúsculas: `$value` e `$Value` são variáveis diferentes, mesmo que contenham o mesmo valor.
 
-## Dicas para Nomeação de Variáveis
+## Dicas para nomeação de variáveis
 
 ### Camel case
 
-Quando o nome de uma variável e o nome de uma função estão vinculados por duas ou mais palavras para formar uma palavra de identificação única, o uso de "camel case" para representação pode aumentar a legibilidade de variáveis ​​e funções. Porque não podemos ter `espaços` em variáveis.
+Quando o nome de uma variável e o nome de uma função estão vinculados por duas ou mais palavras para formar uma palavra de identificação única, o uso de "camel case" para representação pode aumentar a legibilidade de variáveis e funções. Porque não podemos ter `espaços` em variáveis.
 
 ```php
 <?php
@@ -136,12 +136,12 @@ Existem dois operadores de cadeia de caracteres (string). O primeiro é o operad
 
 ```php
 <?php
-    $value0 = 1.5; // Float
+    $value0 = 1.5; // Número de ponto flutuante
     $value1 = 1 + 1; // Mais
     $value2 = 1 - 1; // Menos
     $value3 = 1 * 1; // Vezes
     $value4 = 1 / 1; // Dividir
-    $value5 = 12 / 5; // Dividir (Divisão incompleta resultará em float, diferente de outras linguagens de programação onde seria divisão inteira)
+    $value5 = 12 / 5; // Divisão: o resultado é 2.4
     $value6 = 3 % 5; // Pegar o resto
 ?>
 ```
@@ -151,4 +151,4 @@ Existem dois operadores de cadeia de caracteres (string). O primeiro é o operad
 - [PHP - Wikipedia, a enciclopédia livre](https://pt.wikipedia.org/wiki/PHP)
 - [Camel case - Wikipedia, a enciclopédia livre](https://pt.wikipedia.org/wiki/Camel_case)
 - [Snake case - Wikipedia, a enciclopédia livre](https://pt.wikipedia.org/wiki/Snake_case)
-- [Operadores de String](https://www.php.net/manual/pt_BR/language.operators.string.php)
+- [Operadores de string](https://www.php.net/manual/pt_BR/language.operators.string.php)

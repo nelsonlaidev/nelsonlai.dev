@@ -42,7 +42,7 @@ const signedValue = `${TEST_USER.sessionToken}.${signature}`
 
 ## 插入测试数据
 
-我们希望保持测试用户的静态，以避免在测试期间创建多个用户。如果测试用户、账户和会话尚未存在，则将其插入数据库。为简单起见，我们使用 `0` 作为所有主键的唯一 ID。
+我们希望重复使用固定的测试用户，避免在测试期间创建多个用户。如果测试用户、账户和会话尚未存在，则将其插入数据库。为简单起见，我们使用 `0` 作为所有主键的唯一 ID。
 
 ```ts
 import { db } from '@/lib/db'
@@ -102,12 +102,13 @@ const cookieObject = {
   expires: Math.round(expiresAt / 1000),
 }
 
+await fs.mkdir('.auth', { recursive: true })
 await fs.writeFile('.auth/auth.json', JSON.stringify({ cookies: [cookieObject], origins: [] }, null, 2))
 ```
 
 ## 在测试中使用会话
 
-在您的端到端测试中加载存储的会话，以访问受保护的路由，而无需登录。以下示例使用 Playwright，但这可以适应任何支持 Cookie 注入的测试库（例如，Cypress）。
+在您的端到端测试中加载存储的会话，以访问受保护的路由，而无需登录。以下示例使用 Playwright，但这可以适应任何支持 Cookie 注入的测试框架（例如，Cypress）。
 
 ```ts title='playwright.config.ts'
 export default defineConfig({
@@ -131,7 +132,7 @@ export default defineConfig({
 
 ## 有用的链接
 
-- [Playwright 设置与拆卸](https://playwright.dev/docs/test-global-setup-teardown)
+- [Playwright 设置与清理](https://playwright.dev/docs/test-global-setup-teardown)
 - [Playwright 存储状态](https://playwright.dev/docs/auth#reuse-authentication-in-other-scenarios)
 - [Cypress 钩子](https://docs.cypress.io/app/core-concepts/writing-and-organizing-tests#Hooks)
 - [Cypress 设置 Cookie](https://docs.cypress.io/api/commands/setcookie)

@@ -7,11 +7,11 @@ updatedAt: '2026-06-26T07:58:40.000Z'
 
 ## 前言
 
-将使用的套件：
+将使用的软件包：
 
 - [next](https://github.com/vercel/next.js) Next.js 框架
-- [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) 处理和载入 MDX 内容
-- [gray-matter](https://github.com/jonschlinkert/gray-matter) 解析 Markdown 的前置资料
+- [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) 处理和加载 MDX 内容
+- [gray-matter](https://github.com/jonschlinkert/gray-matter) 解析 Markdown 的前置元数据
 
 本教学的源代码库：
 
@@ -19,19 +19,19 @@ https://github.com/nelsonlaidev/nextjs-mdx-blog
 
 ## 示例
 
-[线上示例](https://nelsonlai-nextjs-mdx-blog.vercel.app)
+[在线示例](https://nelsonlai-nextjs-mdx-blog.vercel.app)
 
 <Video src='/videos/blog/how-to-build-a-blog-with-nextjs-and-mdx/demo.mp4' width={1920} height={1080} />
 
 ## 如何建立博客
 
-首先，我们使用以下指令建立 Next.js 项目：
+首先，我们使用以下命令建立 Next.js 项目：
 
 ```bash title='Terminal'
 yarn create next-app nextjs-mdx-blog
 ```
 
-接着，建立以下档案：
+接着，建立以下文件：
 
 - `components/layout.jsx` - 将所有组件包装在容器中（可选，用于样式）
 - `data/blog/*.mdx` - 博客文章
@@ -87,15 +87,15 @@ yarn create next-app nextjs-mdx-blog
   }}
 />
 
-### 如何处理 Markdown 档案
+### 如何处理 Markdown 文件
 
-首先建立变数 `const root{:js}`，其值为根目录，`process.cwd(){:js}` 方法返回当前 Node.js 进程的工作目录。
+首先建立变量 `const root{:js}`，其值为根目录，`process.cwd(){:js}` 方法返回当前 Node.js 进程的工作目录。
 
 ```js title='lib/mdx.js'
 const root = process.cwd()
 ```
 
-接着定义变数 `POSTS_PATH`，用于储存文章档案的路径。
+接着定义变量 `POSTS_PATH`，用于存储文章文件的路径。
 
 ```js title='lib/mdx.js'
 import path from 'path'
@@ -104,7 +104,7 @@ const POSTS_PATH = path.join(root, 'data', 'blog') // [!code highlight]
 // 输出: A:/nextjs-mdx-blog/data/blog
 ```
 
-使用 `fs` 读取该目录下的内容，即 `data/blog` 下的所有档案名。
+使用 `fs` 读取该目录下的内容，即 `data/blog` 下的所有文件名。
 
 ```js title='lib/mdx.js'
 import fs from 'fs'
@@ -113,7 +113,7 @@ export const allSlugs = fs.readdirSync(POSTS_PATH)
 // 输出: ['markdown.mdx', 'nextjs.mdx', 'react.mdx']
 ```
 
-然后撰写一个函数移除档案后缀名，稍后会用到。
+然后撰写一个函数移除文件后缀名，稍后会用到。
 
 ```js title='lib/mdx.js'
 export const formatSlug = (slug) => slug.replace(/\.mdx$/, '')
@@ -130,7 +130,7 @@ export const getPostBySlug = async (slug) => {
   const postFilePath = path.join(POSTS_PATH, `${slug}.mdx`)
   // 输出: A:/nextjs-mdx-blog/data/blog/slug.mdx
   const source = fs.readFileSync(postFilePath)
-  // 返回档案内容
+  // 返回文件内容
 
   const { content, data } = matter(source)
   /*
@@ -158,7 +158,7 @@ export const getPostBySlug = async (slug) => {
     ...data,
     slug,
   }
-  // 将 slug 加入前置资料，稍后会用到
+  // 将 slug 加入前置元数据，稍后会用到
 
   return {
     source: mdxSource,
@@ -315,7 +315,7 @@ export const getStaticPaths = async () => {
 
 这样，一个简单的博客就完成了。
 
-## 相关连结
+## 相关链接
 
 - [getStaticPaths](https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths)
 - [getStaticProps](https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-props)

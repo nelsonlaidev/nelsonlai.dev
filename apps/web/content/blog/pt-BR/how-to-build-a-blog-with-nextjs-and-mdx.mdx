@@ -10,8 +10,8 @@ updatedAt: '2026-06-26T07:58:40.000Z'
 Os pacotes a serem usados:
 
 - [next](https://github.com/vercel/next.js) framework Next.js
-- [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) manipulando e carregando conteúdo mdx
-- [gray-matter](https://github.com/jonschlinkert/gray-matter) analisar as front matter no markdown
+- [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) processamento e carregamento de conteúdo MDX
+- [gray-matter](https://github.com/jonschlinkert/gray-matter) analisar o front matter em Markdown
 
 O repositório para este tutorial:
 
@@ -19,7 +19,7 @@ https://github.com/nelsonlaidev/nextjs-mdx-blog
 
 ## Demonstração
 
-[Demonstração Online](https://nelsonlai-nextjs-mdx-blog.vercel.app)
+[Demonstração online](https://nelsonlai-nextjs-mdx-blog.vercel.app)
 
 <Video src='/videos/blog/how-to-build-a-blog-with-nextjs-and-mdx/demo.mp4' width={1920} height={1080} />
 
@@ -31,7 +31,7 @@ Primeiro, criamos o projeto Next.js com o seguinte comando:
 yarn create next-app nextjs-mdx-blog
 ```
 
-A seguir, crie o seguinte arquivo:
+A seguir, crie os seguintes arquivos:
 
 - `components/layout.jsx` - Envolva todos os componentes em um contêiner (opcional, apenas para o estilo)
 - `data/blog/*.mdx` - Artigos do blog
@@ -152,7 +152,7 @@ export const getPostBySlug = async (slug) => {
    */
 
   const mdxSource = await serialize(content)
-  // Coloque o conteúdo para serializado (next-mdx-remote) para manusear
+  // Serialize o conteúdo com next-mdx-remote
 
   const frontMatter = {
     ...data,
@@ -167,7 +167,7 @@ export const getPostBySlug = async (slug) => {
 }
 ```
 
-Onde você pode obter todos os artigos a serem exibidos na página inicial.
+Em seguida, você pode obter todos os artigos para exibi-los na página inicial.
 
 ```js title='lib/mdx.js'
 export const getAllPosts = () => {
@@ -197,7 +197,7 @@ const dateSortDesc = (a, b) => {
 }
 ```
 
-### Formatando a Data
+### Formatando a data
 
 ```js title='lib/format-date.js'
 export const formatDate = (date) =>
@@ -212,7 +212,7 @@ export const formatDate = (date) =>
  */
 ```
 
-### Página Inicial
+### Página inicial
 
 ```jsx title='pages/index.jsx'
 import { formatDate } from '../lib/format-date'
@@ -256,7 +256,7 @@ export const getStaticProps = async () => {
 }
 ```
 
-### Página de Artigo
+### Página de artigo
 
 ```jsx title='pages/blog/[slug].jsx'
 import { formatDate } from '../../lib/format-date'

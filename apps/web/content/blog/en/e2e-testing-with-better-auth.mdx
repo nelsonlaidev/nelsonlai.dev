@@ -102,6 +102,7 @@ const cookieObject = {
   expires: Math.round(expiresAt / 1000),
 }
 
+await fs.mkdir('.auth', { recursive: true })
 await fs.writeFile('.auth/auth.json', JSON.stringify({ cookies: [cookieObject], origins: [] }, null, 2))
 ```
 
