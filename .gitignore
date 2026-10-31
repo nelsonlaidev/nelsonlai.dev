@@ -11,7 +11,7 @@ tsconfig.tsbuildinfo
 .env*
 !.env.schema
 
-# Test artifacts
+# Test Artifacts
 coverage/
 playwright-report/
 test-results/

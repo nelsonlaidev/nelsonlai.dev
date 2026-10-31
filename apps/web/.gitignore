@@ -1,5 +1,7 @@
 # TanStack
 .tanstack/
+
+# Nitro
 .output/
 
 # Content Collections

@@ -2,5 +2,5 @@
 src/env.ts
 
 # React Email
-/.react-email/
-/out/
+.react-email/
+out/
