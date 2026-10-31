@@ -144,6 +144,11 @@ schema changes through migration files, use `pnpm db:generate` and
 records. The seed command inserts missing blog post slugs; it does not transfer
 legacy users, comments, likes, or other records.
 
+Run `pnpm db:reset` in an interactive terminal to delete all data and rebuild the
+database. The command asks for confirmation and asks again for non-local hosts.
+It drops the `public` and `drizzle` schemas, recreates `public`, applies SQL
+migrations when present (otherwise runs `db:push`), and runs `db:seed`.
+
 ### Start the application
 
 ```sh
@@ -260,6 +265,7 @@ requests and pushes to `main`.
 | `pnpm db:generate` / `pnpm db:migrate`         | Generate / apply SQL migrations                       |
 | `pnpm db:push` / `pnpm db:seed`                | Apply the schema directly / seed missing post slugs   |
 | `pnpm db:studio`                               | Open Drizzle Studio                                   |
+| `pnpm db:reset`                                | Confirm, rebuild the database, and seed post slugs    |
 | `pnpm test:unit:watch` / `pnpm test:unit:ui`   | Run unit tests interactively                          |
 | `pnpm test:unit:coverage`                      | Generate unit test coverage                           |
 | `pnpm test:e2e:ui` / `pnpm test:e2e:inspector` | Run Playwright interactively                          |

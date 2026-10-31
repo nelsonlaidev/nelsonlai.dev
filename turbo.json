@@ -28,6 +28,10 @@
     "db:seed": {
       "cache": false
     },
+    "db:reset": {
+      "cache": false,
+      "interactive": true
+    },
     "db:studio": {
       "cache": false,
       "persistent": true
