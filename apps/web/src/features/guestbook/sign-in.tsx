@@ -31,9 +31,7 @@ export function SignIn() {
       >
         {m.common_sign_in()}
       </DialogTrigger>
-      <p>
-        {m.common_sign_in()} {m.guestbook_signin_description()}
-      </p>
+      <p>{m.guestbook_signin_description()}</p>
     </div>
   )
 }

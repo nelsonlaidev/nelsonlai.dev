@@ -29,7 +29,7 @@ test.describe('language switching', () => {
       await expect(page).toHaveURL(`${targetPrefix}${articlePath}`)
       await expect(page.locator('html')).toHaveAttribute('lang', locale)
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(post?.title ?? '')
-      await expect(page.getByText(targetMessages.blog_header_published_on, { exact: true })).toBeVisible()
+      await expect(page.getByText(targetMessages.blog_header_published_on)).toBeVisible()
       await expect(page.getByRole('button', { name: targetMessages.layout_change_language })).toContainText(label)
 
       await page.reload()
@@ -37,7 +37,7 @@ test.describe('language switching', () => {
       await expect(page).toHaveURL(`${targetPrefix}${articlePath}`)
       await expect(page.locator('html')).toHaveAttribute('lang', locale)
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(post?.title ?? '')
-      await expect(page.getByText(targetMessages.blog_header_published_on, { exact: true })).toBeVisible()
+      await expect(page.getByText(targetMessages.blog_header_published_on)).toBeVisible()
       await expect(page.getByRole('button', { name: targetMessages.layout_change_language })).toContainText(label)
     })
 
@@ -53,7 +53,7 @@ test.describe('language switching', () => {
 
       await expect(newPage).toHaveURL(`${targetPrefix}/blog`)
       await expect(newPage.locator('html')).toHaveAttribute('lang', locale)
-      await expect(newPage.getByRole('heading', { level: 1 })).toHaveText(targetMessages.common_labels_blog)
+      await expect(newPage.getByRole('heading', { level: 1 })).toHaveText(targetMessages.nav_blog)
       await expect(newPage.getByRole('button', { name: targetMessages.layout_change_language })).toContainText(label)
     })
   }

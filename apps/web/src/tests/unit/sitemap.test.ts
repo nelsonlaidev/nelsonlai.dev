@@ -42,7 +42,9 @@ describe('sitemap HTTP response', () => {
         for (const record of records.filter((record) => record.locale === locale)) {
           const entry = entryFor(`${prefix}/${record.slug}`, locale)
           expect(entry).toBeDefined()
-          expect(new Date(entry?.querySelector('lastmod')?.textContent ?? '').toISOString()).toBe(record.updatedAt)
+          expect(new Date(entry?.querySelector('lastmod')?.textContent ?? '').toISOString()).toBe(
+            new Date(record.updatedAt).toISOString(),
+          )
         }
       }
     }

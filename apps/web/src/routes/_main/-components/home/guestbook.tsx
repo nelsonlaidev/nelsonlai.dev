@@ -172,7 +172,7 @@ function GuestbookComposer() {
             }}
             className='min-h-11 underline underline-offset-4'
           >
-            {m.common_sign_in()} {m.guestbook_signin_description()}
+            {m.guestbook_signin_description()}
           </button>
         )}
       </div>
