@@ -4,6 +4,7 @@
     "inlang.vs-code-extension",
     "oxc.oxc-vscode",
     "streetsidesoftware.code-spell-checker",
-    "unifiedjs.vscode-mdx"
+    "unifiedjs.vscode-mdx",
+    "varlock.env-spec-language"
   ]
 }
