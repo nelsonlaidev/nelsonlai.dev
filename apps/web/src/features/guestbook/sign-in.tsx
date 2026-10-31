@@ -18,7 +18,7 @@ export function SignIn() {
       <Textarea
         id={fieldId}
         rows={5}
-        placeholder={m.ocean_message_placeholder()}
+        placeholder={m.guestbook_message_placeholder()}
         disabled
         maxLength={GUESTBOOK_MESSAGE_MAX_LENGTH}
         className='max-h-87.5 min-h-37.5 w-full resize-y rounded-md border border-input bg-input/50 px-2.5 py-2 text-base/[1.65] text-[#d7e5d0] shadow-xs transition-[border-color,box-shadow] duration-200 ease-linear placeholder:text-[#8eaf9d] focus-visible:border-ring focus-visible:shadow-[0_0_0_3px_color-mix(in_oklab,var(--ring)_50%,transparent)] focus-visible:outline-2 focus-visible:outline-offset-[5px] focus-visible:outline-[#c4e0cc] focus-visible:outline-solid disabled:[background:color-mix(in_oklab,var(--input)_50%,transparent)] aria-invalid:border-destructive aria-invalid:shadow-[0_0_0_3px_color-mix(in_oklab,var(--destructive)_20%,transparent)] md:text-base/[1.65] dark:bg-transparent dark:disabled:bg-input/50'

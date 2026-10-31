@@ -62,7 +62,7 @@ export function CodeBlock(props: CodeBlockProps) {
       ) : (
         <CopyIcon className={cn('size-3.5', hasCaption && 'hidden size-4.5')} aria-hidden='true' />
       )}
-      <span className='inline'>{copied ? m.ocean_code_copied() : m.ocean_code_copy()}</span>
+      <span className='inline'>{copied ? m.common_copied() : m.common_copy()}</span>
     </Button>
   )
 

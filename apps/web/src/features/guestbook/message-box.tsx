@@ -141,7 +141,7 @@ export function MessageBox(props: MessageBoxProps) {
             disabled={isBusy}
             className='inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5.75 py-3.5 text-sm/5 text-[#e0ecde] transition-colors duration-200 ease-linear hover:border-[#c4e0cc] hover:bg-[#b0d3c31c] disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none'
           >
-            {creation.isPending ? m.common_loading() : m.ocean_message_submit()}
+            {creation.isPending ? m.common_loading() : m.guestbook_message_submit()}
           </Button>
         </div>
       </form>

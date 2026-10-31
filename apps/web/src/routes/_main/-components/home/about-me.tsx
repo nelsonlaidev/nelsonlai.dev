@@ -18,23 +18,23 @@ export function AboutMe() {
             <div className='absolute inset-[9%] overflow-hidden rounded-full [background:radial-gradient(ellipse_at_40%_0%,#8ab6a41a,transparent_65%)] after:absolute after:top-[45%] after:left-[15%] after:h-[20%] after:w-[70%] after:transform-[rotate(-15deg)] after:rounded-[50%_10%_50%_40%] after:bg-[#99c2b527] after:content-[""] after:[clip-path:polygon(0_45%,12%_0,19%_30%,45%_10%,80%_20%,100%_45%,78%_70%,42%_68%,29%_100%,29%_64%,15%_60%,5%_100%)]' />
             <span className='absolute top-[9%] left-[25%] size-1 rounded-full bg-[#c4e8d3] shadow-[0_0_15px_#c4e8d3]' />
           </div>
-          <span className='mt-17.5 block font-serif text-sm text-[#769c9c] italic'>{m.ocean_curiosity()}</span>
+          <span className='mt-17.5 block font-serif text-sm text-[#769c9c] italic'>{m.home_about_curiosity()}</span>
         </div>
         <div>
           <SectionHeading
             compact
             id='about-title'
             eyebrow={`03 / ${m.nav_about()}`}
-            title={m.ocean_about_title()}
-            emphasis={m.ocean_about_emphasis()}
+            title={m.home_about_title()}
+            emphasis={m.home_about_emphasis()}
           />
-          <p className='max-w-107.5 text-base/[1.65] text-muted-foreground'>{m.ocean_about_intro()}</p>
-          <p className='mt-5 max-w-107.5 text-base/[1.65] text-muted-foreground'>{m.ocean_about_story()}</p>
+          <p className='max-w-107.5 text-base/[1.65] text-muted-foreground'>{m.home_about_intro()}</p>
+          <p className='mt-5 max-w-107.5 text-base/[1.65] text-muted-foreground'>{m.home_about_story()}</p>
           <p className='mt-7.5 max-w-107.5 text-base/[1.65] whitespace-pre-line text-[#c0d0c5]'>
-            {m.ocean_about_aside()}
+            {m.home_about_aside()}
           </p>
           <Link to='/about' className='mt-8 inline-flex min-h-11 items-center gap-3 text-sm text-primary'>
-            {m.ocean_more_about()}
+            {m.home_about_more()}
             <ArrowRightIcon className='size-5' aria-hidden='true' />
           </Link>
         </div>

@@ -92,7 +92,7 @@ export function ArticleGallery(props: ArticleGalleryProps) {
         <p role='alert' className='text-base/[1.6] text-[#e7eee5] [&_a]:underline'>
           {m.common_error()}{' '}
           <a href={failed} target='_blank' rel='noopener noreferrer'>
-            {m.ocean_viewer_original()}
+            {m.blog_image_viewer_original()}
           </a>
         </p>
       )}

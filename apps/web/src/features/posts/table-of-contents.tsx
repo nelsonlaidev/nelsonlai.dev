@@ -52,11 +52,11 @@ export function TableOfContents(props: TableOfContentsProps) {
           href='#comments'
           className='min-h-11 border-l border-l-[#6e928640] py-2 pl-3.25 text-sm leading-[1.6] text-[#8cafa2] aria-[current=location]:border-l-[#d6e6d2] aria-[current=location]:text-[#d6e6d2]'
         >
-          {m.ocean_blog_conversation()}
+          {m.blog_comments_conversation()}
         </a>
       </nav>
       <a href='#main-content' className='mt-7.5 block text-sm/normal text-[#8cafaa] max-[1001px]:hidden'>
-        {m.ocean_blog_top()}
+        {m.blog_top()}
       </a>
       {children}
     </aside>

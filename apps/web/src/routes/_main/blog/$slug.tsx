@@ -99,7 +99,7 @@ function ArticleDetail(props: ArticleDetailProps) {
         className='mb-13.75 inline-flex min-h-11 items-center gap-3 text-sm/normal text-[#a9c6bf] max-[601px]:mb-9.5'
       >
         <ArrowLeftIcon size={17} aria-hidden='true' />
-        {m.ocean_blog_all()}
+        {m.blog_all_articles()}
       </Link>
       <BlogHeader post={post} />
       <div className='grid grid-cols-[200px_minmax(0,1fr)] gap-16.25 border-t border-t-border pt-11.25 max-[1201px]:grid-cols-[155px_minmax(0,1fr)] max-[1201px]:gap-8.75 max-[1001px]:block max-[601px]:pt-7.5'>
@@ -110,7 +110,7 @@ function ArticleDetail(props: ArticleDetailProps) {
           <article className='max-w-[70ch] min-w-0 bg-[#062633] px-7.5 pt-0 pb-7.5 max-[1201px]:px-2.5 max-[1001px]:max-w-none max-[1001px]:px-4 max-[1001px]:py-5 max-[601px]:-mx-4 max-[601px]:px-4'>
             <div className='mx-0 mt-0 mb-11.25 border-l border-l-[#9cbeac55] py-0.5 pr-0 pl-5.75'>
               <span className='mb-3.5 block text-xs leading-[normal] tracking-[normal] text-[#b5cdbb]'>
-                {m.ocean_blog_before()}
+                {m.blog_before()}
               </span>
               <p className='text-base/[1.65] text-[#8eafa1]'>{post.description}</p>
             </div>
@@ -134,7 +134,7 @@ function ArticleDetail(props: ArticleDetailProps) {
         >
           <div>
             <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-[#b4cec4]'>
-              {m.ocean_blog_next()}
+              {m.blog_next()}
             </span>
             <h2 className='max-w-175 text-[33px] leading-normal font-[410] tracking-tighter max-[601px]:text-[25px] max-[601px]:leading-[1.3]'>
               {next.title}

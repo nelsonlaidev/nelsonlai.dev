@@ -31,7 +31,7 @@ export function MdxImage(props: React.ComponentProps<typeof BlurImage>) {
       {gallery && typeof src === 'string' ? (
         <button
           type='button'
-          aria-label={m.ocean_viewer_enlarge({ alt })}
+          aria-label={m.blog_image_viewer_enlarge({ alt })}
           aria-haspopup='dialog'
           aria-busy={gallery.loading || undefined}
           onClick={(event) => {

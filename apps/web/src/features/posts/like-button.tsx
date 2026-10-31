@@ -161,7 +161,7 @@ export function LikeButton(props: LikeButtonProps) {
             </span>
           )}
         </span>
-        <span>{count === 3 ? m.ocean_blog_liked() : m.common_like()}</span>
+        <span>{count === 3 ? m.blog_liked() : m.common_like()}</span>
         <span className='border-l border-l-[#8cae9d40] pl-2.5 text-[#b8d0c7] tabular-nums'>{likesContent}</span>
       </button>
       <output id={`${clipId}-status`} className='sr-only'>

@@ -55,7 +55,7 @@ function RouteComponent() {
   const { page, projects } = Route.useLoaderData()
   const [category, setCategory] = useState('all')
   const categories = [
-    { value: 'all', label: m.ocean_all_projects() },
+    { value: 'all', label: m.projects_all() },
     { value: 'developer', label: m.projects_category_developer() },
     { value: 'personal', label: m.projects_category_personal() },
     { value: 'publishing', label: m.projects_category_publishing() },
@@ -127,13 +127,13 @@ function RouteComponent() {
               params={{ slug: project.slug }}
               className='mt-6.25 flex min-h-11 items-center justify-between gap-4 border-t pt-4 text-sm'
             >
-              {m.ocean_project_cta()}
+              {m.projects_explore()}
               <ArrowRightIcon className='size-5 shrink-0' aria-hidden='true' />
             </Link>
           </article>
         ))}
       </div>
-      {visible.length === 0 && <p className='text-muted-foreground'>{m.ocean_empty_projects()}</p>}
+      {visible.length === 0 && <p className='text-muted-foreground'>{m.projects_empty()}</p>}
       <aside className='mt-16.25 flex flex-wrap items-center gap-4.5 border-y py-8.75 min-[701px]:mt-23.75 min-[701px]:gap-6.25'>
         <span className='hidden size-1.5 shrink-0 rounded-full bg-primary min-[701px]:block' aria-hidden='true' />
         <div>

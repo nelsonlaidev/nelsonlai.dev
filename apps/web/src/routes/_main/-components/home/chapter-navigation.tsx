@@ -55,14 +55,14 @@ export function ChapterNavigation() {
     }
   }, [])
 
-  let depthLabel = m.ocean_quiet()
-  if (active === 'surface' || active === 'discoveries') depthLabel = m.ocean_sunlit()
-  else if (active === 'guestbook') depthLabel = m.ocean_floor()
+  let depthLabel = m.home_chapters_depth_quiet()
+  if (active === 'surface' || active === 'discoveries') depthLabel = m.home_chapters_depth_sunlit()
+  else if (active === 'guestbook') depthLabel = m.home_chapters_depth_floor()
 
   return (
     <>
       <nav
-        aria-label={m.ocean_chapters()}
+        aria-label={m.home_chapters_label()}
         className='fixed top-1/2 right-2.5 z-30 flex -translate-y-1/2 flex-col gap-1.75 min-[701px]:right-7.75 min-[701px]:gap-2.5'
       >
         {CHAPTERS.map((chapter) => (

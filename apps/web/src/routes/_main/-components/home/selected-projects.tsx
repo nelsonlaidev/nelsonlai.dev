@@ -24,9 +24,9 @@ export function SelectedProjects(props: SelectedProjectsProps) {
       <SectionHeading
         id='discoveries-title'
         eyebrow={`01 / ${m.nav_projects()}`}
-        title={m.ocean_projects_title()}
-        emphasis={m.ocean_projects_emphasis()}
-        description={m.ocean_projects_description()}
+        title={m.home_projects_title()}
+        emphasis={m.home_projects_emphasis()}
+        description={m.home_projects_description()}
       />
       <div className='grid gap-12 min-[701px]:grid-cols-3 min-[701px]:gap-7.5'>
         {projects.map((project, index) => (
@@ -75,7 +75,9 @@ export function SelectedProjects(props: SelectedProjectsProps) {
                 <span className='absolute top-4.5 left-4.75 text-xs text-[#94bab3]'>
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <span className='absolute bottom-4.75 left-4.75 text-xs text-[#88aaa5]'>{m.ocean_selected()}</span>
+                <span className='absolute bottom-4.75 left-4.75 text-xs text-[#88aaa5]'>
+                  {m.home_projects_selected()}
+                </span>
               </div>
             </Link>
             <p className='mt-5.5 text-sm text-muted-foreground'>{project.techstack.join(' · ')}</p>
@@ -90,15 +92,15 @@ export function SelectedProjects(props: SelectedProjectsProps) {
               params={{ slug: project.slug }}
               className='mt-6 flex min-h-11 items-center justify-between gap-4 border-t pt-4 text-sm'
             >
-              {m.ocean_project_cta()}
+              {m.projects_explore()}
               <ArrowRightIcon className='size-5 shrink-0' aria-hidden='true' />
             </Link>
           </article>
         ))}
       </div>
-      {projects.length === 0 && <p className='text-muted-foreground'>{m.ocean_empty_projects()}</p>}
+      {projects.length === 0 && <p className='text-muted-foreground'>{m.projects_empty()}</p>}
       <Link to='/projects' className='mt-8 inline-flex min-h-11 items-center gap-3 text-sm text-primary'>
-        {m.ocean_all_projects()}
+        {m.projects_all()}
         <ArrowRightIcon className='size-5' aria-hidden='true' />
       </Link>
     </section>

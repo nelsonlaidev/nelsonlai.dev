@@ -77,7 +77,7 @@ function RouteComponent() {
         className='mb-9.5 inline-flex min-h-11 items-center gap-3 text-sm text-[#a9c6bf] min-[701px]:mb-13.75'
       >
         <ArrowLeftIcon className='size-4.25' aria-hidden='true' />
-        {m.ocean_all_projects()}
+        {m.projects_all()}
       </Link>
       <ProjectHeader
         slug={project.slug}

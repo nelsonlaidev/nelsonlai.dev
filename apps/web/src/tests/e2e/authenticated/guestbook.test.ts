@@ -24,7 +24,7 @@ test.describe('guestbook page', () => {
 
     await page.getByRole('textbox').fill(message)
 
-    await page.getByRole('button', { name: en.ocean_message_submit, exact: true }).click()
+    await page.getByRole('button', { name: en.guestbook_message_submit, exact: true }).click()
     await expect(page.getByText(en.success_message_created, { exact: true })).toContainText(en.success_message_created)
 
     await expect(page.getByTestId('guestbook-messages-list').getByText(message)).toBeVisible()

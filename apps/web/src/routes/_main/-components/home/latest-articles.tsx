@@ -24,9 +24,9 @@ export function LatestArticles(props: LatestArticlesProps) {
       <SectionHeading
         id='notes-title'
         eyebrow={`02 / ${m.nav_blog()}`}
-        title={m.ocean_notes_title()}
-        emphasis={m.ocean_notes_emphasis()}
-        description={m.ocean_notes_description()}
+        title={m.home_notes_title()}
+        emphasis={m.home_notes_emphasis()}
+        description={m.home_notes_description()}
       />
       <div className='min-w-0'>
         <div className='border-t'>
@@ -34,9 +34,9 @@ export function LatestArticles(props: LatestArticlesProps) {
             <ArticleRow key={post.slug} post={post} index={index} />
           ))}
         </div>
-        {posts.length === 0 && <p className='py-8 text-muted-foreground'>{m.ocean_empty_notes()}</p>}
+        {posts.length === 0 && <p className='py-8 text-muted-foreground'>{m.blog_empty()}</p>}
         <Link to='/blog' className='mt-8 inline-flex min-h-11 items-center gap-3 text-sm text-primary'>
-          {m.ocean_all_articles()}
+          {m.blog_all_articles()}
           <ArrowRightIcon className='size-5' aria-hidden='true' />
         </Link>
       </div>

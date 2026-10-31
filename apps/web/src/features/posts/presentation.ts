@@ -12,7 +12,7 @@ export function articleTopic(slug: string): ArticleTopic {
 }
 
 export function articleTopicLabel(topic: ArticleTopic) {
-  return { testing: m.ocean_blog_testing, design: m.ocean_blog_design, engineering: m.ocean_blog_engineering }[topic]()
+  return { testing: m.blog_testing, design: m.blog_design, engineering: m.blog_engineering }[topic]()
 }
 
 const ARTICLE_NUMBERS: Record<string, string> = {

@@ -129,12 +129,12 @@ export default function ArticleLightbox(props: ArticleLightboxProps) {
       zoom={{ maxZoomPixelRatio: 1, zoomInMultiplier: 1.5, doubleClickMaxStops: 2 }}
       animation={{ fade: reduced ? 0 : 160, swipe: reduced ? 0 : 220, zoom: reduced ? 0 : 180 }}
       labels={{
-        Lightbox: m.ocean_viewer_images(),
+        Lightbox: m.blog_image_viewer_images(),
         Close: m.common_labels_close(),
-        Previous: m.ocean_viewer_previous(),
-        Next: m.ocean_viewer_next(),
-        'Zoom in': m.ocean_viewer_in(),
-        'Zoom out': m.ocean_viewer_out(),
+        Previous: m.blog_image_viewer_previous(),
+        Next: m.blog_image_viewer_next(),
+        'Zoom in': m.blog_image_viewer_zoom_in(),
+        'Zoom out': m.blog_image_viewer_zoom_out(),
       }}
       render={{
         buttonClose: () => <CloseControl key='close' />,

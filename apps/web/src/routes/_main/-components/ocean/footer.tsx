@@ -14,7 +14,7 @@ export function OceanFooter() {
   const [year] = useState(() => new Date().getUTCFullYear())
   const groups = [
     {
-      title: m.ocean_explore(),
+      title: m.nav_explore(),
       links: [
         { to: '/', label: m.nav_home },
         { to: '/projects', label: m.nav_projects },
@@ -23,14 +23,14 @@ export function OceanFooter() {
       ],
     },
     {
-      title: m.ocean_around(),
+      title: m.nav_footer_around(),
       links: FOOTER_GROUPS.filter((group) => group.id === 'site')
         .flatMap((group) => group.links)
         .filter((link) => !('to' in link) || link.to !== '/projects')
         .toSpliced(0, 0, { to: '/dashboard', label: m.nav_dashboard }),
     },
     {
-      title: m.ocean_elsewhere(),
+      title: m.nav_footer_elsewhere(),
       links: [
         { href: SITE.socials.github, label: 'GitHub' },
         { href: SITE.socials.youtube, label: 'YouTube' },
@@ -70,7 +70,7 @@ export function OceanFooter() {
                 <h2 className='mb-4 text-base/normal font-medium text-foreground min-[541px]:mt-2'>{group.title}</h2>
                 <ul
                   className={
-                    group.title === m.ocean_elsewhere() ? 'grid grid-cols-2 min-[541px]:grid-cols-1' : undefined
+                    group.title === m.nav_footer_elsewhere() ? 'grid grid-cols-2 min-[541px]:grid-cols-1' : undefined
                   }
                 >
                   {group.links.map((link) => (
@@ -100,7 +100,7 @@ export function OceanFooter() {
         </div>
         <div className='flex flex-wrap items-center gap-x-8.75 gap-y-2 border-t border-[#a6c9bc30] pt-5 text-sm/relaxed'>
           <p className='max-[540px]:w-full'>&copy; {year} Nelson Lai</p>
-          <nav aria-label={m.ocean_legal()} className='flex flex-wrap gap-x-6 text-base'>
+          <nav aria-label={m.nav_legal()} className='flex flex-wrap gap-x-6 text-base'>
             <Link to='/terms' className='inline-flex min-h-11 items-center hover:underline'>
               {m.common_labels_terms()}
             </Link>
@@ -111,7 +111,7 @@ export function OceanFooter() {
           <div className='min-[541px]:ml-auto'>
             <LocaleSwitcher compact />
           </div>
-          <span className='font-mono text-sm text-muted-foreground'>{m.ocean_revision_unavailable()}</span>
+          <span className='font-mono text-sm text-muted-foreground'>{m.layout_revision_unavailable()}</span>
         </div>
       </div>
     </footer>

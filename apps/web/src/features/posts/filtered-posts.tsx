@@ -29,7 +29,7 @@ export function FilteredPosts(props: FilteredPostsProps) {
   return (
     <>
       <div className='flex flex-wrap items-center justify-between gap-5 max-[601px]:flex-col max-[601px]:items-stretch max-[601px]:gap-5.5'>
-        <fieldset aria-label={m.ocean_blog_all()} className='flex flex-wrap gap-1.75 max-[601px]:gap-0.75'>
+        <fieldset aria-label={m.blog_all_articles()} className='flex flex-wrap gap-1.75 max-[601px]:gap-0.75'>
           {(['all', 'testing', 'design', 'engineering'] as const).map((item) => (
             <button
               key={item}
@@ -40,7 +40,7 @@ export function FilteredPosts(props: FilteredPostsProps) {
               }}
               className='min-h-11 cursor-pointer rounded-md border border-transparent px-3.75 py-2.25 text-sm/normal text-[#91b2aa] hover:text-[#e3eddf] aria-pressed:border-[#b3d4c53b] aria-pressed:bg-[#b3d4c50a] aria-pressed:text-[#e3eddf] max-[601px]:px-2.75 max-[601px]:py-2'
             >
-              {item === 'all' ? m.ocean_blog_everything() : articleTopicLabel(item)}
+              {item === 'all' ? m.blog_everything() : articleTopicLabel(item)}
             </button>
           ))}
         </fieldset>
@@ -60,7 +60,7 @@ export function FilteredPosts(props: FilteredPostsProps) {
         </label>
       </div>
       <p aria-live='polite' className='mx-0 mt-7 mb-5 text-sm/normal text-[#8cafaa]'>
-        {filteredPosts.length === 1 ? m.ocean_blog_one() : m.ocean_blog_count({ count: filteredPosts.length })}
+        {filteredPosts.length === 1 ? m.blog_one() : m.blog_count({ count: filteredPosts.length })}
       </p>
       <div className='border-t border-t-border'>
         {filteredPosts.map((post) => (
@@ -108,14 +108,14 @@ export function FilteredPosts(props: FilteredPostsProps) {
             }}
             className='mt-7 inline-flex min-h-11 cursor-pointer items-center gap-7 rounded-md border border-[#a7cabb65] px-5.75 py-3.5'
           >
-            {m.ocean_blog_reset()} <ArrowRightIcon aria-hidden='true' className='w-4.5' />
+            {m.blog_reset()} <ArrowRightIcon aria-hidden='true' className='w-4.5' />
           </button>
         </div>
       )}
       <p className='mt-9.5 text-sm leading-[1.9] text-[#8cafaa]'>
-        {m.ocean_blog_archive()}{' '}
+        {m.blog_archive()}{' '}
         <Link to='/about' className='ml-1.25 inline-flex items-center gap-1.75 text-[#bad2c4]'>
-          {m.ocean_blog_author()} <ArrowRightIcon aria-hidden='true' className='w-4.5' />
+          {m.blog_author()} <ArrowRightIcon aria-hidden='true' className='w-4.5' />
         </Link>
       </p>
     </>

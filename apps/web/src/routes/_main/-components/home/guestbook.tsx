@@ -21,19 +21,19 @@ export function HomeGuestbook() {
     >
       <div className='text-center'>
         <Link to='/guestbook' className='mb-17.5 block text-xs text-primary'>
-          04 / {m.ocean_guestbook_visit()}
+          04 / {m.home_guestbook_visit()}
         </Link>
         <span
           className='absolute top-32.5 left-1/2 block size-1.25 rounded-full bg-[#e2f6d1] shadow-[0_0_25px_8px_#92d9bd50,0_0_100px_45px_#5aab9920] min-[701px]:top-47.5'
           aria-hidden='true'
         />
         <h2 id='guestbook-title' className='text-[clamp(36px,4.1vw,64px)] leading-[1.12] font-[410] tracking-tighter'>
-          {m.ocean_guestbook_title()}
+          {m.home_guestbook_title()}
           <br />
-          <em className='font-serif tracking-[-0.04em] text-primary'>{m.ocean_guestbook_emphasis()}</em>
+          <em className='font-serif tracking-[-0.04em] text-primary'>{m.home_guestbook_emphasis()}</em>
         </h2>
         <p className='mx-auto mt-6 max-w-lg text-base/[1.65] whitespace-pre-line text-muted-foreground'>
-          {m.ocean_guestbook_description()}
+          {m.home_guestbook_description()}
         </p>
       </div>
       <GuestbookComposer />
@@ -94,7 +94,7 @@ function GuestbookComposer() {
         aria-busy={busy}
       >
         <label htmlFor={fieldId} className='mb-4 block text-sm text-[#a5c6bd]'>
-          {m.ocean_message_label()}
+          {m.guestbook_message_label()}
         </label>
         <textarea
           id={fieldId}
@@ -106,7 +106,7 @@ function GuestbookComposer() {
           }}
           aria-describedby={error ? errorId : undefined}
           aria-invalid={Boolean(error)}
-          placeholder={m.ocean_message_placeholder()}
+          placeholder={m.guestbook_message_placeholder()}
           maxLength={280}
           required
           rows={3}
@@ -125,7 +125,7 @@ function GuestbookComposer() {
             disabled={busy}
             className='flex min-h-11 items-center gap-1.5 rounded-md border border-input px-2.5 text-sm transition-colors hover:bg-accent disabled:opacity-50'
           >
-            {creation.isPending ? m.common_loading() : m.ocean_message_submit()}
+            {creation.isPending ? m.common_loading() : m.guestbook_message_submit()}
             <ArrowRightIcon className='size-5' aria-hidden='true' />
           </button>
         </div>

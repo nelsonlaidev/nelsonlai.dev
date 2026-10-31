@@ -28,13 +28,13 @@ export function BlogFooter(props: BlogFooterProps) {
       <div className='mt-11 border-t border-t-border pt-11.25 text-center'>
         <span className='mb-5 inline-block h-px w-7 bg-[#b2d2be]' />
         <p className='font-serif text-2xl leading-[1.6] text-[#c5d7c5] italic'>
-          {m.ocean_blog_thanks()}
+          {m.blog_thanks()}
           <br />
-          {m.ocean_blog_discovery()}
+          {m.blog_discovery()}
         </p>
         {children}
         <a href='#comments' className='mt-7 inline-flex items-center gap-3.25 text-sm/normal text-[#9fc0aa]'>
-          {m.ocean_blog_join()} <ArrowUpRightIcon size={18} aria-hidden='true' />
+          {m.blog_join()} <ArrowUpRightIcon size={18} aria-hidden='true' />
         </a>
       </div>
     </>

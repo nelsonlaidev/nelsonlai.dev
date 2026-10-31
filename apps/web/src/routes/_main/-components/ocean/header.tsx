@@ -65,7 +65,7 @@ export function OceanHeader() {
                 }
                 aria-label={m.nav_toggle()}
               >
-                {open ? m.common_labels_close() : m.ocean_explore()}
+                {open ? m.common_labels_close() : m.nav_explore()}
                 <span className='text-lg text-primary' aria-hidden='true'>
                   {open ? '−' : '+'}
                 </span>
