@@ -17,6 +17,7 @@
     "env:generate": "turbo run env:generate",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
+    "i18n:check": "turbo run i18n:check",
     "knip": "knip",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",

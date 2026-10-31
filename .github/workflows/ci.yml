@@ -60,7 +60,7 @@ jobs:
         run: pnpm knip
 
       - name: Check translations
-        run: pnpm --filter @repo/web i18n:check
+        run: pnpm i18n:check
 
       - name: Run unit tests
         run: pnpm test:unit

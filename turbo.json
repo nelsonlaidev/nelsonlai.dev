@@ -52,6 +52,9 @@
     },
     "env:generate": {
       "cache": false
+    },
+    "i18n:check": {
+      "cache": false
     }
   },
   "globalEnv": [
