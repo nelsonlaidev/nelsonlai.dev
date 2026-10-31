@@ -1,5 +1,4 @@
 import { defineConfig, playwright, react, tailwindcss, vitest } from '@nelsonlaidev/oxlint-config'
-import { getDefaultSelectors } from 'eslint-plugin-better-tailwindcss/defaults'
 
 export default defineConfig({
   overrides: [
@@ -28,14 +27,6 @@ export default defineConfig({
     'better-tailwindcss': {
       cwd: './packages/ui',
       entryPoint: './src/styles/globals.css',
-      selectors: [
-        ...getDefaultSelectors(),
-        {
-          kind: 'variable',
-          name: '^WORDS$',
-          match: [{ type: 'objectValues', path: '^\\[\\d+\\]\\.className$' }],
-        },
-      ],
     },
   },
 })
