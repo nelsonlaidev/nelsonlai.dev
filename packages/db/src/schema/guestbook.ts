@@ -29,6 +29,10 @@ export const guestbookMessages = pgTable(
 
 export const guestbookRelations = defineRelationsPart({ guestbookMessages, users }, (r) => ({
   guestbookMessages: {
-    user: r.one.users({ from: r.guestbookMessages.userId, to: r.users.id, optional: false }),
+    user: r.one.users({
+      from: r.guestbookMessages.userId,
+      to: r.users.id,
+      optional: false,
+    }),
   },
 }))

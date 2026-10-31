@@ -7,15 +7,15 @@ export const users = pgTable('users', {
   id: text('id').primaryKey(),
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
-  emailVerified: boolean('email_verified').default(false).notNull(),
+  emailVerified: boolean('email_verified').notNull().default(false),
   image: text('image'),
-  createdAt: createdAt(),
-  updatedAt: updatedAt(),
   role: text('role'),
   banned: boolean('banned').default(false),
   banReason: text('ban_reason'),
   banExpires: timestamptz('ban_expires'),
   lastLoginMethod: text('last_login_method'),
+  createdAt: createdAt(),
+  updatedAt: updatedAt(),
 })
 
 export const sessions = pgTable(
@@ -24,14 +24,14 @@ export const sessions = pgTable(
     id: text('id').primaryKey(),
     expiresAt: timestamptz('expires_at').notNull(),
     token: text('token').notNull().unique(),
-    createdAt: createdAt(),
-    updatedAt: updatedAt(),
     ipAddress: text('ip_address'),
     userAgent: text('user_agent'),
     userId: text('user_id')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
     impersonatedBy: text('impersonated_by'),
+    createdAt: createdAt(),
+    updatedAt: updatedAt(),
   },
   (table) => [index('sessions_user_id_idx').on(table.userId)],
 )
@@ -86,12 +86,14 @@ export const authRelations = defineRelationsPart({ users, sessions, accounts, ve
     user: r.one.users({
       from: r.sessions.userId,
       to: r.users.id,
+      optional: false,
     }),
   },
   accounts: {
     user: r.one.users({
       from: r.accounts.userId,
       to: r.users.id,
+      optional: false,
     }),
   },
 }))

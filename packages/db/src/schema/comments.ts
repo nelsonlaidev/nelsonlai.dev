@@ -23,9 +23,9 @@ export const comments = pgTable(
   },
   (table) => [
     foreignKey({ columns: [table.parentId], foreignColumns: [table.id] }).onDelete('restrict'),
-    index('comments_post_created_id_idx').on(table.postId, table.createdAt, table.id),
-    index('comments_parent_created_id_idx').on(table.parentId, table.createdAt, table.id),
-    index('comments_user_idx').on(table.userId),
+    index('comments_post_id_created_at_id_idx').on(table.postId, table.createdAt, table.id),
+    index('comments_parent_id_created_at_id_idx').on(table.parentId, table.createdAt, table.id),
+    index('comments_user_id_idx').on(table.userId),
   ],
 )
 
@@ -42,7 +42,7 @@ export const commentVotes = pgTable(
   },
   (table) => [
     primaryKey({ columns: [table.userId, table.commentId] }),
-    index('comment_votes_comment_like_idx').on(table.commentId, table.isLike),
+    index('comment_votes_comment_id_is_like_idx').on(table.commentId, table.isLike),
   ],
 )
 
