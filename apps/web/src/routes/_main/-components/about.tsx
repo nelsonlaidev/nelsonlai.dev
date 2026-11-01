@@ -2,6 +2,8 @@ import { ExternalLink } from '@repo/ui/components/external-link'
 import { Link } from '@tanstack/react-router'
 import { ArrowRightIcon } from 'lucide-react'
 
+import { SITE } from '@/lib/site'
+
 type AboutToolboxProps = {
   label: string
   title: React.ReactNode
@@ -128,12 +130,11 @@ export function AboutHero(props: AboutHeroProps) {
   return (
     <div className='grid grid-cols-[1.5fr_1fr] items-center gap-16.25 max-[1101px]:gap-7.5 max-[1001px]:grid-cols-1'>
       <div className='mb-0'>
-        <span className='block text-xs/normal text-[#b4cec4]'>03 / {title}</span>
-        <h1 className='mt-6 text-[clamp(48px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em]'>{title}</h1>
+        <h1 className='text-[clamp(48px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em]'>{title}</h1>
         <p className='mt-7 max-w-150 text-lg/[1.65] whitespace-pre-line text-[#b1cbc4]'>{intro}</p>
         <ExternalLink
-          href='https://github.com/nelsonlaidev'
-          className='mt-7 inline-flex min-h-11 items-center gap-4 text-sm/normal text-[#b9d3c7]'
+          href={SITE.socials.github}
+          className='mt-7 inline-flex min-h-11 items-center gap-2 text-sm/normal text-[#b9d3c7]'
         >
           {githubLabel}
           <ArrowRightIcon className='size-4.75' aria-hidden='true' />

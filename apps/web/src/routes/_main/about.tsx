@@ -50,18 +50,16 @@ function RouteComponent() {
 
   return (
     <OceanPage>
-      <div className='wrap-anywhere'>
-        <Mdx
-          path={page.path}
-          unstyled
-          components={{
-            AboutHero,
-            AboutStory,
-            AboutToolbox,
-            AboutSite,
-          }}
-        />
-      </div>
+      <Mdx
+        path={page.path}
+        unstyled
+        components={{
+          AboutHero,
+          AboutStory,
+          AboutToolbox,
+          AboutSite,
+        }}
+      />
     </OceanPage>
   )
 }
