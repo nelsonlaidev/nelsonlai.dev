@@ -79,7 +79,7 @@ export function FilteredPosts(props: FilteredPostsProps) {
                 </time>
               </div>
               <div>
-                <span className='mb-3.25 block text-xs leading-[normal] tracking-[normal] text-[#b4cec4] max-[601px]:mb-2.75'>
+                <span className='mb-3.25 block text-xs leading-[normal] tracking-[normal] text-section-label max-[601px]:mb-2.75'>
                   {articleTopicLabel(articleTopic(post.slug))}
                 </span>
                 <h2 className='text-[clamp(23px,2.6vw,36px)] leading-[1.3] font-[410] tracking-tighter max-[601px]:text-2xl'>

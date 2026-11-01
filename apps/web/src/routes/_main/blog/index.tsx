@@ -58,7 +58,9 @@ function RouteComponent() {
   return (
     <BlogLayout>
       <header className='mb-18.75 max-[601px]:mb-12.5'>
-        <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-[#b4cec4]'>02 / {page.title}</span>
+        <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-section-label'>
+          02 / {page.title}
+        </span>
         <h1 className='text-[clamp(48px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em]'>{page.title}</h1>
         <p className='mt-7 max-w-150 text-lg/[1.65] whitespace-pre-line text-[#b1cbc4]'>{m.blog_intro()}</p>
       </header>

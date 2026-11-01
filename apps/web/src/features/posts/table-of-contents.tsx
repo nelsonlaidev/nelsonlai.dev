@@ -31,7 +31,7 @@ export function TableOfContents(props: TableOfContentsProps) {
 
   return (
     <aside className='sticky top-8.75 max-h-[calc(100vh-70px)] self-start overflow-y-auto max-[1001px]:static max-[1001px]:mb-11.25 max-[1001px]:max-h-none max-[1001px]:border-b max-[1001px]:border-b-border max-[1001px]:pb-7'>
-      <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-[#b4cec4]'>
+      <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-section-label'>
         {m.blog_on_this_page()}
       </span>
       <nav

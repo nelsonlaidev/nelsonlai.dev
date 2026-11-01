@@ -52,7 +52,7 @@ export function CommentSection(props: CommentSectionProps) {
       aria-label={m.common_labels_comments()}
     >
       <header className='mb-5.5'>
-        <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-[#b4cec4]'>
+        <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-section-label'>
           {m.blog_comments_discussion_kicker()}
         </span>
         <h2 className='mt-3 text-[clamp(26px,3vw,34px)] leading-normal font-[450] tracking-tighter'>

@@ -134,7 +134,7 @@ function ArticleDetail(props: ArticleDetailProps) {
           className='mt-27.5 flex items-center justify-between gap-7.5 border-t border-t-border pt-11.25 max-[601px]:mt-16.25 max-[601px]:gap-5 max-[601px]:pt-8'
         >
           <div>
-            <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-[#b4cec4]'>
+            <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-section-label'>
               {m.blog_next()}
             </span>
             <h2 className='max-w-175 text-[33px] leading-normal font-[410] tracking-tighter max-[601px]:text-[25px] max-[601px]:leading-[1.3]'>

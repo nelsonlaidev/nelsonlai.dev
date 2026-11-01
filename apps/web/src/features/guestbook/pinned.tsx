@@ -3,7 +3,7 @@ import { m } from '@/paraglide/messages'
 export function Pinned() {
   return (
     <aside className='pt-5.5 max-[601px]:mb-10 max-[601px]:pt-0'>
-      <span className='block text-xs leading-[normal] tracking-[0.02em] text-[#b4cec4]'>
+      <span className='block text-xs leading-[normal] tracking-[0.02em] text-section-label'>
         {m.seabed_context_label()}
       </span>
       <h2 className='mt-6 text-[42px] leading-[1.12] font-[410] tracking-tighter max-[851px]:text-[32px] max-[601px]:text-4xl'>

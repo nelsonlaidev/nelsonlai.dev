@@ -60,7 +60,7 @@ function RouteComponent() {
           className='mx-auto mt-0 mb-11.25 size-1.25 rounded-full bg-[#d6f1cb] shadow-[0_0_25px_10px_#9fe4c045,0_0_130px_70px_#69beaa14]'
         />
         <header className='text-center'>
-          <span className='block text-xs leading-[normal] tracking-[0.02em] text-[#b4cec4]'>04 / {page.title}</span>
+          <span className='block text-xs leading-[normal] tracking-[0.02em] text-section-label'>04 / {page.title}</span>
           <h1 className='mx-auto mt-6 mb-0 w-full text-[clamp(48px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em] max-[601px]:text-[43px]'>
             {page.title}
           </h1>

@@ -41,7 +41,7 @@ export function ProjectHeader(props: ProjectHeaderProps) {
             </ExternalLink>
           )}
           {homepage && (
-            <ExternalLink href={homepage} className='inline-flex min-h-11 items-center gap-4 text-sm text-[#b9d3c7]'>
+            <ExternalLink href={homepage} className='inline-flex min-h-11 items-center gap-4 text-sm text-link'>
               {m.projects_visit_website()}
               <ArrowRightIcon className='size-5' aria-hidden='true' />
             </ExternalLink>

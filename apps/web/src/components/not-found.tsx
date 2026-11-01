@@ -19,7 +19,7 @@ export function NotFound() {
 export function PublicNotFound() {
   return (
     <div className='relative mx-auto my-0 block min-h-[85vh] w-full overflow-hidden px-[max(16px,10%)] pt-55 pb-25 text-center wrap-anywhere subpixel-antialiased max-[541px]:px-4 max-[541px]:pt-47.5 max-[541px]:pb-20'>
-      <span className='text-xs/normal text-[#b4cec4]'>{m.not_found_eyebrow()}</span>
+      <span className='text-xs/normal text-section-label'>{m.not_found_eyebrow()}</span>
       <span
         aria-hidden='true'
         className='pointer-events-none absolute top-[43%] left-1/2 block transform-[translate(-50%,-50%)] font-serif text-[clamp(230px,40vw,480px)] leading-normal -tracking-widest text-[#9ac6b407]'
@@ -45,7 +45,7 @@ export function PublicNotFound() {
           {m.common_go_to_homepage()}
           <ArrowUpRightIcon aria-hidden='true' className='size-4' />
         </Link>
-        <Link to='/projects' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-[#b9d3c7]'>
+        <Link to='/projects' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-link'>
           {m.nav_projects()}
           <ArrowUpRightIcon aria-hidden='true' className='size-4' />
         </Link>

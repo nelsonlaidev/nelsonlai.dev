@@ -65,7 +65,7 @@ export function BlogHeader(props: BlogHeaderProps) {
 
   return (
     <header className='mb-16.25 max-w-225 max-[601px]:mb-10'>
-      <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-[#b4cec4]'>
+      <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-section-label'>
         {articleTopicLabel(articleTopic(post.slug))} / {m.article_category()} {articleNumber(post.slug)}
       </span>
       <h1 className='text-[clamp(44px,5.2vw,76px)] leading-[1.1] font-[420] tracking-[-0.065em] max-[1001px]:text-[55px] max-[601px]:text-[42px] max-[601px]:leading-[1.12]'>

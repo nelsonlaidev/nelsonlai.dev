@@ -179,7 +179,7 @@ export function UsesPage(props: UsesPageProps) {
       <div>
         <div className='flex items-end justify-between gap-8.75 border-b border-b-border pb-15.5 max-[801px]:pb-10'>
           <div className='m-0'>
-            <span className='block text-xs/normal text-[#b4cec4]'>05 / {m.profile_uses_log()}</span>
+            <span className='block text-xs/normal text-section-label'>05 / {m.profile_uses_log()}</span>
             <h1 className='mt-6 text-[clamp(48px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em]'>
               {page.title}
               <span className='text-[#a8d3b7]'>.</span>
@@ -223,7 +223,7 @@ function UsesSections(props: UsesSectionsProps) {
     <div className='grid grid-cols-[230px_minmax(0,1fr)] gap-12.5 pt-13.75 max-[1101px]:grid-cols-[180px_minmax(0,1fr)] max-[1101px]:gap-8.75 max-[801px]:block max-[801px]:pt-7.5'>
       <aside className='sticky top-10 self-start max-[801px]:static max-[801px]:mb-11.25'>
         <nav aria-label={m.profile_uses_index()} className='max-[801px]:flex max-[801px]:flex-wrap max-[801px]:gap-2'>
-          <span className='mb-6.25 block text-xs/normal text-[#b4cec4] max-[801px]:mb-2.5 max-[801px]:w-full'>
+          <span className='mb-6.25 block text-xs/normal text-section-label max-[801px]:mb-2.5 max-[801px]:w-full'>
             {m.profile_uses_index()}
           </span>
           {sections.map((section, index) => (
@@ -260,7 +260,7 @@ function UsesSections(props: UsesSectionsProps) {
             <br />
             <em className='text-[#bed3c6] not-italic'>{m.profile_uses_make()}</em>
           </p>
-          <Link to='/projects' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-[#b9d3c7]'>
+          <Link to='/projects' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-link'>
             {m.profile_about_projects()}
             <ArrowRightIcon className='size-4.75' aria-hidden='true' />
           </Link>

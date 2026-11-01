@@ -30,6 +30,9 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
+  --color-section-label: var(--section-label);
+  --color-link: var(--link);
+
   --color-skeleton: var(--skeleton);
 
   --color-accent: var(--accent);
@@ -128,6 +131,9 @@
 
   --muted: #173e49;
   --muted-foreground: #aac2bf;
+
+  --section-label: #b4cec4;
+  --link: #b9d3c7;
 
   --skeleton: #23505a;
 

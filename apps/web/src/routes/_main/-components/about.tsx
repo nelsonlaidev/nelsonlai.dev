@@ -20,7 +20,7 @@ export function AboutToolbox(props: AboutToolboxProps) {
   return (
     <section className='mt-30 grid grid-cols-[1fr_2fr] gap-22.5 max-[1101px]:gap-13.75 max-[1001px]:mt-21.25 max-[1001px]:grid-cols-1 max-[1001px]:gap-6.25'>
       <div>
-        <span className='block text-xs/normal text-[#b4cec4]'>{label}</span>
+        <span className='block text-xs/normal text-section-label'>{label}</span>
         <h2 className='mt-6 text-[clamp(38px,4.1vw,64px)] leading-[1.12] font-[410] tracking-tighter max-[601px]:text-[37px] [&_em]:font-serif [&_em]:font-normal [&_em]:tracking-[-0.04em] [&_em]:text-[#bed3c6]'>
           {title}
         </h2>
@@ -49,7 +49,7 @@ export function AboutToolbox(props: AboutToolboxProps) {
             </p>
           </div>
         ))}
-        <Link to='/uses' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-[#b9d3c7]'>
+        <Link to='/uses' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-link'>
           {setupLabel}
           <ArrowRightIcon className='size-4.75' aria-hidden='true' />
         </Link>
@@ -69,7 +69,7 @@ export function AboutStory(props: AboutStoryProps) {
 
   return (
     <section className='mt-33.75 grid grid-cols-[1fr_2fr] gap-22.5 border-t border-t-border pt-16.25 max-[1101px]:gap-13.75 max-[1001px]:mt-21.25 max-[1001px]:grid-cols-1 max-[1001px]:gap-6.25 max-[601px]:pt-10 [&_a]:text-[#c5dfce] [&_a]:underline [&_a]:underline-offset-4 [&_p]:mt-6 [&_p]:text-base/[1.65] [&_p]:text-[#adc5bb]'>
-      <span className='block text-xs/normal text-[#b4cec4]'>{label}</span>
+      <span className='block text-xs/normal text-section-label'>{label}</span>
       <div>
         <h2 className='mb-8 text-[clamp(38px,4.1vw,64px)] leading-[1.12] font-[410] tracking-tighter max-[601px]:text-[37px] [&_em]:font-serif [&_em]:font-normal [&_em]:tracking-[-0.04em] [&_em]:text-[#bed3c6]'>
           {title}
@@ -94,7 +94,7 @@ export function AboutSite(props: AboutSiteProps) {
 
   return (
     <section className='mx-auto mt-31.25 mb-11.25 max-w-187.5 text-center max-[601px]:mt-21.25'>
-      <span className='block text-xs/normal text-[#b4cec4]'>{label}</span>
+      <span className='block text-xs/normal text-section-label'>{label}</span>
       <h2 className='mt-6 text-[clamp(38px,4.1vw,64px)] leading-[1.12] font-[410] tracking-tighter max-[601px]:text-[34px] [&_em]:font-serif [&_em]:font-normal [&_em]:tracking-[-0.04em] [&_em]:text-[#bed3c6]'>
         {title}
       </h2>
@@ -108,7 +108,7 @@ export function AboutSite(props: AboutSiteProps) {
           {projectsLabel}
           <ArrowRightIcon className='size-4.75' aria-hidden='true' />
         </Link>
-        <Link to='/guestbook' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-[#b9d3c7]'>
+        <Link to='/guestbook' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-link'>
           {helloLabel}
           <ArrowRightIcon className='size-4.75' aria-hidden='true' />
         </Link>
@@ -134,7 +134,7 @@ export function AboutHero(props: AboutHeroProps) {
         <p className='mt-7 max-w-150 text-lg/[1.65] whitespace-pre-line text-[#b1cbc4]'>{intro}</p>
         <ExternalLink
           href={SITE.socials.github}
-          className='mt-7 inline-flex min-h-11 items-center gap-2 text-sm/normal text-[#b9d3c7]'
+          className='mt-7 inline-flex min-h-11 items-center gap-2 text-sm/normal text-link'
         >
           {githubLabel}
           <ArrowRightIcon className='size-4.75' aria-hidden='true' />
