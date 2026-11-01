@@ -27,6 +27,7 @@ async function main() {
   }
 
   const databaseUrl = new URL(ENV.DATABASE_URL)
+
   if (!['localhost', '127.0.0.1', '[::1]'].includes(databaseUrl.hostname)) {
     const nonLocalConfirmed = await consola.prompt('Non-local database detected. Are you sure you want to continue?', {
       type: 'confirm',
@@ -72,8 +73,10 @@ async function main() {
 
 await main().catch((error: unknown) => {
   consola.error('Error resetting database:', error)
+
   if (error instanceof AggregateError) {
     for (const cause of error.errors) consola.error(cause)
   }
+
   process.exitCode = 1
 })
