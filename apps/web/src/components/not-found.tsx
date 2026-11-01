@@ -18,7 +18,7 @@ export function NotFound() {
 
 export function PublicNotFound() {
   return (
-    <div className='relative mx-auto my-0 block min-h-[85vh] w-full overflow-hidden px-[max(16px,10%)] pt-55 pb-25 text-center wrap-anywhere subpixel-antialiased max-[541px]:px-4 max-[541px]:pt-47.5 max-[541px]:pb-20'>
+    <div className='relative mx-auto min-h-[85vh] w-full overflow-hidden px-[max(16px,10%)] pt-55 pb-25 text-center wrap-anywhere subpixel-antialiased max-[541px]:px-4 max-[541px]:pt-47.5 max-[541px]:pb-20'>
       <span className='text-xs/normal text-section-label'>{m.not_found_eyebrow()}</span>
       <span
         aria-hidden='true'
@@ -26,14 +26,12 @@ export function PublicNotFound() {
       >
         404
       </span>
-      <h1 className='relative mt-0 text-[clamp(40px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em] text-[#edf3e8] max-[541px]:text-[53px]'>
+      <h1 className='relative text-[clamp(40px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em] text-[#edf3e8] max-[541px]:text-[53px]'>
         {m.not_found_title()}
         <br />
         <em className='font-serif font-normal text-primary'>{m.not_found_emphasis()}</em>
       </h1>
-      <p className='relative mx-auto mt-7.5 mb-0 max-w-117.5 text-base/[1.65] text-[#a3c0b4]'>
-        {m.not_found_description()}
-      </p>
+      <p className='relative mx-auto mt-7.5 max-w-117.5 text-base/[1.65] text-[#a3c0b4]'>{m.not_found_description()}</p>
       <div className='relative mt-10 flex flex-wrap items-center justify-center gap-7.5'>
         <Link
           to='/'

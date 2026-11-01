@@ -80,7 +80,7 @@ export function UnsubscribePage(props: UnsubscribePageProps) {
 
   return (
     <MainLayout>
-      <div className='relative mx-auto my-0 w-[min(84%,640px)] px-0 pt-41.25 pb-16.25 wrap-anywhere subpixel-antialiased max-[541px]:mx-4 max-[541px]:my-0 max-[541px]:w-auto max-[541px]:pt-32.5'>
+      <div className='relative mx-auto w-[min(84%,640px)] pt-41.25 pb-16.25 wrap-anywhere subpixel-antialiased max-[541px]:mx-4 max-[541px]:w-auto max-[541px]:pt-32.5'>
         <Card
           className='w-full max-w-none rounded-xl border border-[#a6c9bc30] bg-[#062633] p-[clamp(24px,4vw,48px)] shadow-none ring-0'
           aria-busy={(Boolean(token) && query.isPending) || unsubscribe.isPending}

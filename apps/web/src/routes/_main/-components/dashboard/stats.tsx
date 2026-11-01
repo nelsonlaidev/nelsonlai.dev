@@ -200,7 +200,7 @@ export function StatCards(props: StatCardsProps) {
     <dl
       aria-busy={!values && !isError}
       className={cn(
-        'm-0 grid gap-7 max-[1101px]:gap-5 max-[601px]:grid-cols-1 max-[601px]:gap-6.5',
+        'grid gap-7 max-[1101px]:gap-5 max-[601px]:grid-cols-1 max-[601px]:gap-6.5',
         stats[0]?.field !== 'hours' && 'grid-cols-2',
         stats[0]?.field === 'hours' && 'grid-cols-1',
       )}
@@ -215,12 +215,10 @@ export function StatCards(props: StatCardsProps) {
             <dt className='mb-3 text-base leading-[1.4] font-medium text-[#e0eade] max-[601px]:mb-2'>{title}</dt>
             <dd
               className={cn(
-                'm-0 flex min-h-[1.1em] flex-wrap items-baseline gap-2.5 leading-[1.1] font-[420] tracking-[-0.055em] text-[#edf2e9] tabular-nums max-[601px]:text-5xl',
+                'flex min-h-[1.1em] flex-wrap items-baseline gap-2.5 leading-[1.1] font-[420] tracking-[-0.055em] text-[#edf2e9] tabular-nums max-[601px]:text-5xl',
                 stats[0]?.field !== 'hours' &&
                   'text-[clamp(40px,4vw,64px)] max-[1101px]:text-[44px] max-[851px]:text-[56px]',
-                stats[0]?.field === 'hours' &&
-                  'text-[clamp(56px,5vw,72px)] max-[1101px]:text-[64px] max-[851px]:text-[64px]',
-                'leading-[1.1]',
+                stats[0]?.field === 'hours' && 'text-[clamp(56px,5vw,72px)] max-[1101px]:text-[64px]',
               )}
             >
               {value !== undefined && Number.isFinite(value) ? (

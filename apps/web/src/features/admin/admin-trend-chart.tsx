@@ -92,7 +92,7 @@ export function AdminTrendChart() {
   }
 
   return (
-    <Card className='border border-border shadow-none ring-0'>
+    <Card className='border shadow-none ring-0'>
       <CardHeader>
         <CardTitle>{m.admin_dashboard_trends_title()}</CardTitle>
         <CardDescription>{m.admin_dashboard_trends_last_n_days({ days: 30 })}</CardDescription>

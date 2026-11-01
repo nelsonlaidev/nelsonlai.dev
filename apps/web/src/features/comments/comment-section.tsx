@@ -61,7 +61,7 @@ export function CommentSection(props: CommentSectionProps) {
             {counts.data ? counts.data.comments + counts.data.replies : '--'}
           </span>
         </h2>
-        <p className='mx-0 mt-4.25 mb-5.5 text-base/[1.65] text-[#acc7be]'>{m.blog_comments_discussion_intro()}</p>
+        <p className='mt-4.25 mb-5.5 text-base/[1.65] text-[#acc7be]'>{m.blog_comments_discussion_intro()}</p>
       </header>
       <CommentComposer slug={slug} />
       <div className='flex flex-wrap items-center justify-between gap-3 text-sm'>
@@ -73,7 +73,7 @@ export function CommentSection(props: CommentSectionProps) {
             <ListFilterIcon aria-hidden='true' />
             {m.blog_comments_sort_by()}
           </DropdownMenuTrigger>
-          <DropdownMenuContent align='end' className='border border-border shadow-md ring-0'>
+          <DropdownMenuContent align='end' className='border shadow-md ring-0'>
             <DropdownMenuRadioGroup
               value={sort}
               onValueChange={(value) => {

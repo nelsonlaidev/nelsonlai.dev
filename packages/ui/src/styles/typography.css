@@ -4,7 +4,7 @@
   --tw-prose-body: color-mix(in oklab, var(--color-foreground) 90%, transparent);
   --tw-prose-headings: var(--color-foreground);
   --tw-prose-lead: var(--color-foreground);
-  --tw-prose-links: var(--color-foreground);
+  --tw-prose-links: var(--color-link);
   --tw-prose-bold: var(--color-foreground);
   --tw-prose-counters: var(--color-muted-foreground);
   --tw-prose-bullets: var(--color-muted-foreground);

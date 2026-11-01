@@ -25,7 +25,7 @@ export function BlogFooter(props: BlogFooterProps) {
           {m.blog_footer_edit_on_github()} <ArrowUpRightIcon size={16} aria-hidden='true' />
         </ExternalLink>
       </div>
-      <div className='mt-11 border-t border-t-border pt-11.25 text-center'>
+      <div className='mt-11 border-t pt-11.25 text-center'>
         <span className='mb-5 inline-block h-px w-7 bg-[#b2d2be]' />
         <p className='font-serif text-2xl leading-[1.6] text-[#c5d7c5] italic'>
           {m.blog_thanks()}

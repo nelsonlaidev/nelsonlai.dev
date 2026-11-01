@@ -13,7 +13,7 @@ export function SignIn() {
 
   return (
     <div className='flex flex-col items-stretch gap-5.5 rounded-xl border border-[#9abda32b] bg-[#153b3a19] p-7.5 text-base/normal text-[#b1cbc4] max-[601px]:px-5 max-[601px]:py-6'>
-      <label htmlFor={fieldId} className='mx-0 mt-0 mb-3.25 block text-sm/normal text-[#bad3be]'>
+      <label htmlFor={fieldId} className='mb-3.25 block text-sm/normal text-[#bad3be]'>
         {m.guestbook_placeholder()}
       </label>
       <Textarea

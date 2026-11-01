@@ -22,7 +22,7 @@ export function LegalPage(props: LegalPageProps) {
   const { page, kind } = props
 
   return (
-    <div className='mx-auto my-0 min-h-[85vh] w-[84%] max-w-250 px-0 pt-41.25 pb-8.75 subpixel-antialiased max-[541px]:mr-[max(16px,env(safe-area-inset-right))] max-[541px]:ml-[max(16px,env(safe-area-inset-left))] max-[541px]:w-auto max-[541px]:pt-32.5'>
+    <div className='mx-auto min-h-[85vh] w-[84%] max-w-250 pt-41.25 pb-8.75 subpixel-antialiased max-[541px]:mr-[max(16px,env(safe-area-inset-right))] max-[541px]:ml-[max(16px,env(safe-area-inset-left))] max-[541px]:w-auto max-[541px]:pt-32.5'>
       <header className='mb-11 max-[541px]:mb-7.5'>
         <h1 className='text-[clamp(40px,5vw,68px)] leading-[1.1] font-normal tracking-[-0.045em] wrap-anywhere text-[#edf3e8]'>
           {page.title}
@@ -53,7 +53,7 @@ export function LegalPage(props: LegalPageProps) {
 
 export function LegalPending() {
   return (
-    <div className='mx-auto my-0 min-h-[85vh] w-[84%] max-w-250 px-0 pt-41.25 pb-8.75 subpixel-antialiased max-[541px]:mr-[max(16px,env(safe-area-inset-right))] max-[541px]:ml-[max(16px,env(safe-area-inset-left))] max-[541px]:w-auto max-[541px]:pt-32.5'>
+    <div className='mx-auto min-h-[85vh] w-[84%] max-w-250 pt-41.25 pb-8.75 subpixel-antialiased max-[541px]:mr-[max(16px,env(safe-area-inset-right))] max-[541px]:ml-[max(16px,env(safe-area-inset-left))] max-[541px]:w-auto max-[541px]:pt-32.5'>
       <output aria-busy='true' className='block text-muted-foreground'>
         {m.common_loading()}
       </output>
@@ -63,7 +63,7 @@ export function LegalPending() {
 
 export function LegalError(props: ErrorComponentProps) {
   return (
-    <div className='mx-auto my-0 min-h-[85vh] w-[84%] max-w-250 px-0 pt-41.25 pb-8.75 subpixel-antialiased max-[541px]:mr-[max(16px,env(safe-area-inset-right))] max-[541px]:ml-[max(16px,env(safe-area-inset-left))] max-[541px]:w-auto max-[541px]:pt-32.5'>
+    <div className='mx-auto min-h-[85vh] w-[84%] max-w-250 pt-41.25 pb-8.75 subpixel-antialiased max-[541px]:mr-[max(16px,env(safe-area-inset-right))] max-[541px]:ml-[max(16px,env(safe-area-inset-left))] max-[541px]:w-auto max-[541px]:pt-32.5'>
       <RouteError {...props} />
     </div>
   )

@@ -113,7 +113,7 @@ function Message(props: MessageProps) {
         className='absolute top-9 right-7.5 size-1.25 rounded-full bg-[#c9e9bb] shadow-[0_0_12px_#a4edb5]'
       />
       <span className='block pr-5 text-xs leading-[normal] tracking-[0.02em] text-[#a8c9b2]'>{m.seabed_light()}</span>
-      <blockquote className='mx-0 my-6.25 font-serif text-[22px] leading-[1.65] wrap-anywhere whitespace-pre-wrap text-[#d3e3cb] italic max-[601px]:text-[21px]'>
+      <blockquote className='my-6.25 font-serif text-[22px] leading-[1.65] wrap-anywhere whitespace-pre-wrap text-[#d3e3cb] italic max-[601px]:text-[21px]'>
         {message.body}
       </blockquote>
       <div className='flex flex-wrap items-center justify-between gap-3.75 text-sm/normal text-[#adcab0]'>

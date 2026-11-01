@@ -68,7 +68,7 @@ export function CommandMenu() {
 
   return (
     <CommandDialog
-      className='max-h-[calc(100dvh-32px)] max-w-[min(480px,calc(100vw-32px))] overflow-y-auto border border-border shadow-md ring-0 **:data-[slot=input-group]:min-h-11 sm:max-w-[min(480px,calc(100vw-32px))]'
+      className='max-h-[calc(100dvh-32px)] max-w-[min(480px,calc(100vw-32px))] overflow-y-auto border shadow-md ring-0 **:data-[slot=input-group]:min-h-11 sm:max-w-[min(480px,calc(100vw-32px))]'
       open={open}
       onOpenChange={setOpen}
       trigger={

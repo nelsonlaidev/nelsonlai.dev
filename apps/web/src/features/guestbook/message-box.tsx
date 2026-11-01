@@ -94,7 +94,7 @@ export function MessageBox(props: MessageBoxProps) {
 
               return (
                 <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name} className='mx-0 mt-0 mb-3.25 block text-sm/normal text-[#bad3be]'>
+                  <FieldLabel htmlFor={field.name} className='mb-3.25 block text-sm/normal text-[#bad3be]'>
                     {m.guestbook_placeholder()}
                   </FieldLabel>
                   <Textarea

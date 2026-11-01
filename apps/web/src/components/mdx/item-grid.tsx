@@ -28,7 +28,7 @@ export function ItemGrid(props: ItemGridProps) {
             height={256}
             alt={item.name}
             className='shrink-0'
-            imageClassName='m-0 size-24 sm:size-full'
+            imageClassName='size-24 sm:size-full'
           />
           <div className='flex min-w-0 flex-col justify-center gap-2 wrap-break-word'>
             <div className='text-lg font-semibold'>{item.name}</div>

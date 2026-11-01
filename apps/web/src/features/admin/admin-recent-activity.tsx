@@ -28,7 +28,7 @@ export function AdminRecentActivity() {
   }
 
   return (
-    <Card className='border border-border shadow-none ring-0'>
+    <Card className='border shadow-none ring-0'>
       <CardHeader>
         <CardTitle>{m.admin_dashboard_recent_activity_title()}</CardTitle>
       </CardHeader>

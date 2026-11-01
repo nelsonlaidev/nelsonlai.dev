@@ -64,7 +64,7 @@ export function DeleteButton(props: DeleteButtonProps) {
         </AlertDialogTrigger>
         <AlertDialogContent
           aria-busy={deletion.isPending}
-          className='max-h-[calc(100dvh-32px)] overflow-y-auto border border-border shadow-md ring-0 data-[size=default]:max-w-[min(480px,calc(100vw-32px))] data-[size=sm]:max-w-[min(480px,calc(100vw-32px))] sm:data-[size=default]:max-w-[min(480px,calc(100vw-32px))]'
+          className='max-h-[calc(100dvh-32px)] overflow-y-auto border shadow-md ring-0 data-[size=default]:max-w-[min(480px,calc(100vw-32px))] data-[size=sm]:max-w-[min(480px,calc(100vw-32px))] sm:data-[size=default]:max-w-[min(480px,calc(100vw-32px))]'
         >
           <AlertDialogHeader>
             <AlertDialogTitle className='pr-8 leading-tight tracking-[-0.035em]'>

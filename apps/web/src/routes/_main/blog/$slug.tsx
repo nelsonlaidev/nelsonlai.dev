@@ -103,13 +103,13 @@ function ArticleDetail(props: ArticleDetailProps) {
         {m.blog_all_articles()}
       </Link>
       <BlogHeader post={post} />
-      <div className='grid grid-cols-[200px_minmax(0,1fr)] gap-16.25 border-t border-t-border pt-11.25 max-[1201px]:grid-cols-[155px_minmax(0,1fr)] max-[1201px]:gap-8.75 max-[1001px]:block max-[601px]:pt-7.5'>
+      <div className='grid grid-cols-[200px_minmax(0,1fr)] gap-16.25 border-t pt-11.25 max-[1201px]:grid-cols-[155px_minmax(0,1fr)] max-[1201px]:gap-8.75 max-[1001px]:block max-[601px]:pt-7.5'>
         <TableOfContents toc={post.toc}>
           <LikeButton state={likes} placement='desktop' />
         </TableOfContents>
         <ArticleGallery>
-          <article className='max-w-[70ch] min-w-0 bg-[#062633] px-7.5 pt-0 pb-7.5 max-[1201px]:px-2.5 max-[1001px]:max-w-none max-[1001px]:px-4 max-[1001px]:py-5 max-[601px]:-mx-4 max-[601px]:px-4'>
-            <div className='mx-0 mt-0 mb-11.25 border-l border-l-[#9cbeac55] py-0.5 pr-0 pl-5.75'>
+          <article className='max-w-[70ch] min-w-0 bg-[#062633] px-7.5 pb-7.5 max-[1201px]:px-2.5 max-[1001px]:max-w-none max-[1001px]:px-4 max-[1001px]:py-5 max-[601px]:-mx-4 max-[601px]:px-4'>
+            <div className='mb-11.25 border-l border-l-[#9cbeac55] py-0.5 pl-5.75'>
               <span className='mb-3.5 block text-xs leading-[normal] tracking-[normal] text-[#b5cdbb]'>
                 {m.blog_before()}
               </span>
@@ -117,7 +117,7 @@ function ArticleDetail(props: ArticleDetailProps) {
             </div>
             <Mdx
               path={post.path}
-              className='text-lg leading-[1.7] text-[#b7cbbf] prose-headings:scroll-mt-10 prose-headings:leading-[1.35] prose-headings:font-normal prose-headings:tracking-[-0.035em] prose-headings:text-foreground prose-h2:mx-0 prose-h2:mt-12 prose-h2:mb-5.5 prose-h2:text-[29px] max-[601px]:prose-h2:text-[26px] prose-h3:mx-0 prose-h3:mt-8 prose-h3:mb-5 prose-h3:text-[23px] prose-p:my-4.75 prose-a:text-[#d0e0c7]! prose-a:decoration-[#8eae9270] prose-a:underline-offset-4 prose-figure:my-7.5! prose-figcaption:mt-3 prose-figcaption:text-left prose-figcaption:text-sm/[1.8] prose-figcaption:text-[#85aa96] prose-strong:font-[550] prose-strong:text-[#d0e0c7] prose-code:rounded-[3px]! prose-code:border-[#a8c2a21c]! prose-code:bg-[#b9d4b30c]! prose-code:px-1.25! prose-code:py-0.5! prose-code:text-[0.85em]! prose-code:text-inherit prose-ol:mt-4.75 prose-ol:mb-6.25 prose-ol:pl-5.75 prose-ul:mt-4.75 prose-ul:mb-6.25 prose-ul:pl-5.75 prose-li:my-1.75 prose-li:pl-1.25 prose-table:text-base prose-th:border prose-th:border-[#8eae922b] prose-th:px-3.75 prose-th:py-3.25 prose-td:border prose-td:border-[#8eae922b] prose-td:px-3.75 prose-td:py-3.25 prose-img:rounded-[3px] prose-img:border-border [&>h2:first-child]:mt-0 [&>p:first-child]:mt-0 [&>p:first-child]:mb-11.25 [&>p:first-child]:border-l [&>p:first-child]:border-[#9cbeac55] [&>p:first-child]:py-0.5 [&>p:first-child]:pl-5.75 [&>p:first-child]:text-base [&>p:first-child]:text-[#8eafa1]'
+              className='text-lg leading-[1.7] text-[#b7cbbf] prose-headings:scroll-mt-10 prose-headings:leading-[1.35] prose-headings:font-normal prose-headings:tracking-[-0.035em] prose-headings:text-foreground prose-h2:mx-0 prose-h2:mt-12 prose-h2:mb-5.5 prose-h2:text-[29px] max-[601px]:prose-h2:text-[26px] prose-h3:mx-0 prose-h3:mt-8 prose-h3:mb-5 prose-h3:text-[23px] prose-p:my-4.75 prose-figure:my-7.5! prose-figcaption:mt-3 prose-figcaption:text-left prose-figcaption:text-sm/[1.8] prose-figcaption:text-[#85aa96] prose-strong:font-[550] prose-strong:text-[#d0e0c7] prose-code:rounded-[3px]! prose-code:border-[#a8c2a21c]! prose-code:bg-[#b9d4b30c]! prose-code:px-1.25! prose-code:py-0.5! prose-code:text-[0.85em]! prose-code:text-inherit prose-ol:mt-4.75 prose-ol:mb-6.25 prose-ol:pl-5.75 prose-ul:mt-4.75 prose-ul:mb-6.25 prose-ul:pl-5.75 prose-li:my-1.75 prose-li:pl-1.25 prose-table:text-base prose-th:border prose-th:border-[#8eae922b] prose-th:px-3.75 prose-th:py-3.25 prose-td:border prose-td:border-[#8eae922b] prose-td:px-3.75 prose-td:py-3.25 prose-img:rounded-[3px] prose-img:border-border [&>h2:first-child]:mt-0 [&>p:first-child]:mt-0 [&>p:first-child]:mb-11.25 [&>p:first-child]:border-l [&>p:first-child]:border-[#9cbeac55] [&>p:first-child]:py-0.5 [&>p:first-child]:pl-5.75 [&>p:first-child]:text-base [&>p:first-child]:text-[#8eafa1]'
             />
             <BlogFooter post={post}>
               <LikeButton state={likes} placement='mobile' />
@@ -131,7 +131,7 @@ function ArticleDetail(props: ArticleDetailProps) {
         <Link
           to='/blog/$slug'
           params={{ slug: next.slug }}
-          className='mt-27.5 flex items-center justify-between gap-7.5 border-t border-t-border pt-11.25 max-[601px]:mt-16.25 max-[601px]:gap-5 max-[601px]:pt-8'
+          className='mt-27.5 flex items-center justify-between gap-7.5 border-t pt-11.25 max-[601px]:mt-16.25 max-[601px]:gap-5 max-[601px]:pt-8'
         >
           <div>
             <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-section-label'>

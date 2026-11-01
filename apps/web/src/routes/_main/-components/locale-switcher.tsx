@@ -46,7 +46,7 @@ export function LocaleSwitcher(props: LocaleSwitcherProps) {
         <span className={iconOnlyOnMobile ? 'hidden sm:inline' : undefined}>{LOCALE_LABELS[locale]}</span>
         <ChevronDownIcon aria-hidden='true' />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='start' side='top' className='border border-border shadow-md ring-0'>
+      <DropdownMenuContent align='start' side='top' className='border shadow-md ring-0'>
         <DropdownMenuRadioGroup
           value={locale}
           onValueChange={(value) => {

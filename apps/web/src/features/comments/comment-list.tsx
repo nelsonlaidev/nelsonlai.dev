@@ -216,7 +216,7 @@ function CommentItem(props: CommentItemProps) {
                 >
                   <MoreVerticalIcon aria-hidden='true' />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align='end' className='min-w-36 border border-border shadow-md ring-0'>
+                <DropdownMenuContent align='end' className='min-w-36 border shadow-md ring-0'>
                   <DropdownMenuItem
                     onClick={() => {
                       void copyLink()

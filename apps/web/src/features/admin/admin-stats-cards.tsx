@@ -39,7 +39,7 @@ export function AdminStatsCards() {
         }
 
         return (
-          <Card key={item.field} size='sm' className='border border-border shadow-none ring-0'>
+          <Card key={item.field} size='sm' className='border shadow-none ring-0'>
             <CardHeader>
               <CardTitle className='flex items-center justify-between'>
                 {item.label()} <item.icon className='size-4 text-muted-foreground' />

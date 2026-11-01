@@ -6,7 +6,7 @@ export function ActiveSessionsSkeleton() {
   return (
     <div className='space-y-4'>
       {createRange(5).map((sessionNumber) => (
-        <Card key={sessionNumber} className='border border-border shadow-none ring-0'>
+        <Card key={sessionNumber} className='border shadow-none ring-0'>
           <CardContent className='flex gap-4 wrap-anywhere'>
             <Skeleton className='size-12 rounded-full' />
             <div className='space-y-1'>

@@ -36,7 +36,7 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
             <SelectTrigger className='min-h-11' aria-label={m.admin_pagination_rows_per_page()}>
               <SelectValue placeholder={table.state.pagination.pageSize} />
             </SelectTrigger>
-            <SelectContent side='top' className='border border-border shadow-md ring-0'>
+            <SelectContent side='top' className='border shadow-md ring-0'>
               {[10, 20, 25, 30, 40, 50].map((pageSize) => (
                 <SelectItem className='min-h-11' key={pageSize} value={`${pageSize}`}>
                   {pageSize}

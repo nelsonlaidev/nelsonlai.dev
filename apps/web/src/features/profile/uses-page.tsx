@@ -69,10 +69,10 @@ function UsesItems(props: UsesItemsProps) {
       className={cn(
         kind === 'accessories' && 'border',
         (kind === 'accessories' || kind === 'coding' || kind === 'software') && 'grid grid-cols-2',
-        kind === 'accessories' && 'border-border bg-[#082f3ba8] max-[1101px]:grid-cols-1',
-        (kind === 'hardware' || kind === 'coding' || kind === 'software') && 'border-t border-t-border',
+        kind === 'accessories' && 'bg-[#082f3ba8] max-[1101px]:grid-cols-1',
+        (kind === 'hardware' || kind === 'coding' || kind === 'software') && 'border-t',
         (kind === 'coding' || kind === 'software') && 'gap-y-0 max-[601px]:grid-cols-1',
-        kind === 'coding' && 'gap-x-7 bg-[#082f3b80] px-6 pt-1 pb-0 max-[601px]:px-4.5 max-[601px]:py-0',
+        kind === 'coding' && 'gap-x-7 bg-[#082f3b80] px-6 pt-1 max-[601px]:px-4.5 max-[601px]:py-0',
         kind === 'software' && 'gap-x-8.75',
       )}
     >
@@ -81,13 +81,11 @@ function UsesItems(props: UsesItemsProps) {
           href={item.url}
           key={item.name}
           className={cn(
-            'flex min-w-0 items-center gap-5.5 border-b-border transition-colors duration-200 ease-linear hover:bg-[#bdd9ca0a] motion-reduce:transition-none max-[601px]:gap-3.5',
-            (kind === 'hardware' || kind === 'coding' || kind === 'software') &&
-              'border-b py-5.75 max-[601px]:px-0 max-[601px]:py-5',
-            (kind === 'coding' || kind === 'software') && 'px-0',
+            'flex min-w-0 items-center gap-5.5 transition-colors duration-200 ease-linear hover:bg-[#bdd9ca0a] motion-reduce:transition-none max-[601px]:gap-3.5',
+            (kind === 'hardware' || kind === 'coding' || kind === 'software') && 'border-b py-5.75 max-[601px]:py-5',
             kind === 'accessories' &&
-              'border-0 p-6.25 not-first:border-l not-first:border-l-border max-[1101px]:not-first:border-t max-[1101px]:not-first:border-l-0 max-[1101px]:not-first:border-t-border max-[601px]:px-5 max-[601px]:py-5.5',
-            kind === 'hardware' && 'pr-3 pl-0 max-[601px]:pr-3',
+              'border-0 p-6.25 not-first:border-l max-[1101px]:not-first:border-t max-[1101px]:not-first:border-l-0 max-[601px]:px-5 max-[601px]:py-5.5',
+            kind === 'hardware' && 'pr-3',
           )}
         >
           {kind === 'hardware' && (
@@ -148,13 +146,13 @@ function UsesLaptop(props: UsesLaptopProps) {
       <div className='px-[9%] pt-8.5 pb-2.5 max-[601px]:px-[4%] max-[601px]:pt-6.25 max-[601px]:pb-3.75'>
         <ProductImage {...imageProps} fetchPriority='high' className='block h-auto w-full' />
       </div>
-      <div className='flex items-center justify-between gap-5 border-t border-t-border px-8 py-6.5 max-[601px]:p-5'>
+      <div className='flex items-center justify-between gap-5 border-t px-8 py-6.5 max-[601px]:p-5'>
         <div>
           <span className='block text-xs/normal text-[#b3cbc1]'>{m.profile_uses_portable()}</span>
-          <h3 className='mx-0 mt-3.25 mb-2.5 text-[clamp(20px,2.2vw,28px)] leading-normal font-[450] tracking-[-0.035em]'>
+          <h3 className='mt-3.25 mb-2.5 text-[clamp(20px,2.2vw,28px)] leading-normal font-[450] tracking-[-0.035em]'>
             {name}
           </h3>
-          <p className='m-0 text-base/[1.65] text-[#b3cbc1]'>{description}</p>
+          <p className='text-base/[1.65] text-[#b3cbc1]'>{description}</p>
         </div>
         <span
           aria-hidden='true'
@@ -177,8 +175,8 @@ export function UsesPage(props: UsesPageProps) {
   return (
     <ProfileLayout>
       <div>
-        <div className='flex items-end justify-between gap-8.75 border-b border-b-border pb-15.5 max-[801px]:pb-10'>
-          <div className='m-0'>
+        <div className='flex items-end justify-between gap-8.75 border-b pb-15.5 max-[801px]:pb-10'>
+          <div>
             <span className='block text-xs/normal text-section-label'>05 / {m.profile_uses_log()}</span>
             <h1 className='mt-6 text-[clamp(48px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em]'>
               {page.title}
@@ -230,7 +228,7 @@ function UsesSections(props: UsesSectionsProps) {
             <a
               href={`#${section.kind}`}
               key={section.kind}
-              className='grid grid-cols-[20px_1fr_24px] items-baseline gap-2 border-b border-b-border px-0 py-4 text-sm leading-[1.6] text-[#d1e2d6] hover:border-[#b8d5c8] hover:text-white max-[801px]:flex max-[801px]:min-h-11 max-[801px]:rounded-md max-[801px]:border max-[801px]:border-border max-[801px]:px-3 max-[801px]:py-2.5 max-[801px]:text-sm'
+              className='grid grid-cols-[20px_1fr_24px] items-baseline gap-2 border-b py-4 text-sm leading-[1.6] text-[#d1e2d6] hover:border-[#b8d5c8] hover:text-white max-[801px]:flex max-[801px]:min-h-11 max-[801px]:rounded-md max-[801px]:border max-[801px]:px-3 max-[801px]:py-2.5'
             >
               <span className='text-xs/[1.6] text-[#a6c5bb] max-[801px]:hidden'>0{index + 1}</span>
               <span>{section.title}</span>
@@ -254,8 +252,8 @@ function UsesSections(props: UsesSectionsProps) {
             )}
           </UsesSection>
         ))}
-        <div className='px-0 pt-3.75 pb-8.75'>
-          <p className='mx-0 mt-0 mb-6.25 text-[27px] leading-normal tracking-[-0.03em] max-[601px]:text-2xl'>
+        <div className='pt-3.75 pb-8.75'>
+          <p className='mb-6.25 text-[27px] leading-normal tracking-[-0.03em] max-[601px]:text-2xl'>
             {m.profile_uses_tools_part()}
             <br />
             <em className='text-[#bed3c6] not-italic'>{m.profile_uses_make()}</em>

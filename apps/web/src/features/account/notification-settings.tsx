@@ -53,7 +53,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
   })
 
   return (
-    <Card className='border border-border shadow-none ring-0'>
+    <Card className='border shadow-none ring-0'>
       <CardContent className='wrap-anywhere'>
         <form
           id={`${inputId}-form`}

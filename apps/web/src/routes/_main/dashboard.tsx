@@ -57,7 +57,7 @@ function RouteComponent() {
     <OceanPage>
       <div className='wrap-anywhere'>
         <header className='mb-13.75 max-[601px]:mb-9'>
-          <h1 className='m-0 text-[clamp(48px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em] max-[601px]:text-[46px]'>
+          <h1 className='text-[clamp(48px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em] max-[601px]:text-[46px]'>
             {page.title}
             <span aria-hidden='true' className='text-[#b9d7bf]'>
               .

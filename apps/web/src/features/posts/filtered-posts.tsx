@@ -44,7 +44,7 @@ export function FilteredPosts(props: FilteredPostsProps) {
             </button>
           ))}
         </fieldset>
-        <label className='flex items-center gap-3 rounded-md border border-input px-2.5 py-0 shadow-xs focus-within:border-ring focus-within:shadow-[0_0_0_3px_color-mix(in_oklab,var(--ring)_50%,transparent)]'>
+        <label className='flex items-center gap-3 rounded-md border border-input px-2.5 shadow-xs focus-within:border-ring focus-within:shadow-[0_0_0_3px_color-mix(in_oklab,var(--ring)_50%,transparent)]'>
           <SearchIcon aria-hidden='true' className='size-4 text-[#93b2a7]' />
           <span className='sr-only'>{m.blog_search_placeholder()}</span>
           <input
@@ -55,20 +55,20 @@ export function FilteredPosts(props: FilteredPostsProps) {
             onChange={(event) => {
               setSearchValue(event.target.value)
             }}
-            className='min-h-11 w-50 min-w-0 border-0 bg-transparent px-0 py-1.25 text-base/normal text-[#e2ebde] placeholder:text-[#83a79e] focus-visible:outline-offset-4 focus-visible:outline-none max-[601px]:w-full'
+            className='min-h-11 w-50 min-w-0 border-0 bg-transparent py-1.25 text-base/normal text-[#e2ebde] placeholder:text-[#83a79e] focus-visible:outline-offset-4 focus-visible:outline-none max-[601px]:w-full'
           />
         </label>
       </div>
-      <p aria-live='polite' className='mx-0 mt-7 mb-5 text-sm/normal text-[#8cafaa]'>
+      <p aria-live='polite' className='mt-7 mb-5 text-sm/normal text-[#8cafaa]'>
         {filteredPosts.length === 1 ? m.blog_one() : m.blog_count({ count: filteredPosts.length })}
       </p>
-      <div className='border-t border-t-border'>
+      <div className='border-t'>
         {filteredPosts.map((post) => (
-          <article key={post.slug} className='border-b border-b-border'>
+          <article key={post.slug} className='border-b'>
             <Link
               to='/blog/$slug'
               params={{ slug: post.slug }}
-              className='group/row grid grid-cols-[95px_1fr_35px] items-center gap-8.75 px-0 py-10.5 max-[601px]:grid-cols-[1fr_20px] max-[601px]:gap-3.5 max-[601px]:px-0 max-[601px]:py-6.75'
+              className='group/row grid grid-cols-[95px_1fr_35px] items-center gap-8.75 py-10.5 max-[601px]:grid-cols-[1fr_20px] max-[601px]:gap-3.5 max-[601px]:py-6.75'
             >
               <div className='flex flex-col gap-2.25 self-start pt-0.75 text-[#a8c4b7] max-[601px]:col-span-full max-[601px]:flex-row max-[601px]:items-center max-[601px]:gap-2.5 max-[601px]:p-0'>
                 <span className='text-[29px] leading-normal font-[350] tracking-[-0.04em] max-[601px]:text-sm'>
@@ -96,7 +96,7 @@ export function FilteredPosts(props: FilteredPostsProps) {
         ))}
       </div>
       {filteredPosts.length === 0 && (
-        <div className='border border-border px-5 py-20 text-center'>
+        <div className='border px-5 py-20 text-center'>
           <h2 className='text-3xl/normal font-[410] tracking-tighter'>{m.blog_search_no_posts_found()}</h2>
           <button
             type='button'

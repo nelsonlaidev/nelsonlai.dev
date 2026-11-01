@@ -59,11 +59,7 @@ export function ActiveSessions(props: ActiveSessionsProps) {
       </div>
     )
   } else if (sessions.data) {
-    content = (
-      <Card className='border border-border py-12 text-center shadow-none ring-0'>
-        {m.account_no_active_sessions()}
-      </Card>
-    )
+    content = <Card className='border py-12 text-center shadow-none ring-0'>{m.account_no_active_sessions()}</Card>
   } else if (sessions.isError) {
     content = null
   }
@@ -101,7 +97,7 @@ function SessionCard(props: SessionCardProps) {
   const lastActive = useFormattedDate(session.updatedAt, { formatName: 'long' })
 
   return (
-    <Card className='border border-border shadow-none ring-0'>
+    <Card className='border shadow-none ring-0'>
       <CardContent className='flex flex-col justify-between gap-4 wrap-anywhere sm:flex-row sm:items-start'>
         <div className='flex min-w-0 gap-4'>
           <div className='hidden size-12 shrink-0 items-center justify-center rounded-full bg-secondary md:flex'>
