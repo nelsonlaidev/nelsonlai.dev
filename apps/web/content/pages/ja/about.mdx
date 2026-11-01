@@ -4,7 +4,14 @@ description: Nelson Lai は香港在住のフルスタックエンジニアで�
 updatedAt: '2026-06-26T07:58:40.000Z'
 ---
 
-<AboutStory>
+<AboutHero
+  title='概要'
+  intro={'香港のフルスタックエンジニア。\nウェブのものづくりを通して、学び続けています。'}
+  githubLabel='GitHub で見る'
+  caption='広い海に、小さな好奇心。'
+/>
+
+<AboutStory label="私の小さな物語" title={<>始まりは、<br /><em>「どうやるんだろう。」</em></>}>
 
 私は香港在住のフルスタックエンジニアです。TypeScript、Next.js/TanStack Start、React.js、Node.js、データベース管理を学んでいます。現在は UI/UX の学習にも情熱を注いでいます。
 
@@ -14,34 +21,34 @@ Web 開発の学習を始めたのは 2020年12月5日です（当時14歳）。
 
 </AboutStory>
 
-<AboutSite>
+<AboutToolbox
+  label='使い慣れたツール'
+  title={
+    <>
+      ものづくりを
+      <br />
+      <em>支えるもの。</em>
+    </>
+  }
+  groups={[
+    { label: 'インターフェース', tools: ['React', 'Next.js / TanStack Start', 'TypeScript'] },
+    { label: '舞台裏', tools: ['Node.js', 'PostgreSQL', 'Drizzle'] },
+    { label: 'アイデアを形に', tools: ['GitHub', 'Docker', 'MDX'] },
+  ]}
+  setupLabel='すべての機材を見る'
+/>
 
-### このサイトについて
-
-- フレームワーク：[TanStack Start](https://tanstack.com/start/latest)
-- データベース：[PostgreSQL](https://www.postgresql.org/)
-- ORM：[Drizzle](https://orm.drizzle.team/)
-- 認証：[Better Auth](https://www.better-auth.com/)
-- デプロイ：[Docker](https://www.docker.com/)
-- コンテンツ：[MDX](https://mdxjs.com/)
-- アナリティクス：[Umami](https://github.com/umami-software/umami)
-- スタイリング：[Tailwind CSS](https://tailwindcss.com)
-- コードハイライト：[Shiki](https://github.com/shikijs/shiki)
-
-このサイトの最初のバージョンは、**Timothy Lin** の [tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) から着想を得ました。ゼロからブログを作るきっかけとなり、それ以来サイトは大きく進化してきました。
-
-### インスピレーション
-
-素晴らしいウェブサイトを作る上でインスピレーションを与えてくれたサイトを紹介します。
-
-[README](https://github.com/nelsonlaidev/nelsonlai.dev?tab=readme-ov-file#credits) をご覧ください。
-
-### SNS リンク
-
-<SocialLinks />
-
-### ロゴ
-
-<LogoShowcase />
-
-</AboutSite>
+<AboutSite
+  label='この小さな海について'
+  title={
+    <>
+      自由に歩き回れる場所。
+      <br />
+      <em>訪れるだけでなく。</em>
+    </>
+  }
+  intro='Seafold は、より個人的なウェブの探究です。作品、記事、ゲストブックが、水面下の小さな世界でひとつになります。'
+  world='魚、光、奥行きはプログラムによって生まれ、作品と物語は私自身のものです。探究し、共有し、つくり続けるための小さな場所です。'
+  projectsLabel='作品を見てみる'
+  helloLabel='ひとこと挨拶を残す'
+/>

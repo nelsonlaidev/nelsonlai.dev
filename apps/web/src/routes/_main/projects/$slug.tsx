@@ -16,14 +16,14 @@ import { getLocale } from '@/paraglide/runtime'
 export const Route = createFileRoute('/_main/projects/$slug')({
   loader: async ({ params }) => {
     const locale = getLocale()
-    const [project, projects] = await Promise.all([
+    const [project, summaries] = await Promise.all([
       getProject({ data: { slug: params.slug, locale } }),
       getProjects({ data: { locale } }),
     ])
 
     if (!project) throw notFound()
 
-    const ordered = orderProjectSpecimens(projects)
+    const ordered = orderProjectSpecimens(summaries)
     const index = ordered.findIndex((item) => item.slug === project.slug)
     const next = ordered.length > 1 ? ordered[(index + 1) % ordered.length] : undefined
 
@@ -120,7 +120,7 @@ function RouteComponent() {
             <em className='font-serif tracking-[-0.04em] text-primary italic'>{m.projects_idea_emphasis()}</em>
           </h2>
           <Mdx
-            code={project.mdx}
+            path={project.path}
             className='max-w-none text-base/[1.65] text-[#aac4bd] *:first:mt-5.75 prose-h2:mt-6.75 prose-h2:mb-3 prose-h2:border-t prose-h2:pt-6.75 prose-h2:text-[19px] prose-h2:font-[450] prose-h2:tracking-tight prose-h3:mt-6.75 prose-h3:mb-3 prose-h3:border-t prose-h3:pt-6.75 prose-h3:text-[19px] prose-h3:font-[450] prose-h3:tracking-tight prose-p:mt-5.75 prose-p:mb-0 prose-a:text-[#d0e0c7]! prose-a:decoration-[#8eae9270] prose-blockquote:my-8.75 prose-blockquote:border-[#8bbbaf] prose-blockquote:py-1 prose-blockquote:pl-6.5 prose-blockquote:font-serif prose-blockquote:text-[23px] prose-blockquote:leading-[1.6] prose-blockquote:text-[#c2d7ca] prose-blockquote:italic! max-[701px]:prose-blockquote:text-[21px] prose-strong:text-inherit prose-code:text-inherit [&_blockquote_p]:m-0'
           />
           {project.features && project.features.length > 0 && (

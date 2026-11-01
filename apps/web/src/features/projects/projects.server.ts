@@ -9,7 +9,9 @@ export function findProject(slug: string, locale: Locale) {
   if (!project) return null
 
   return {
+    path: project.path,
     slug: project.slug,
+    locale,
     title: project.title,
     description: project.description,
     techstack: project.techstack,
@@ -24,7 +26,6 @@ export function findProject(slug: string, locale: Locale) {
     programmingLanguages: project.programmingLanguages,
     dateCreated: project.dateCreated,
     updatedAt: project.updatedAt,
-    mdx: project.mdx,
   }
 }
 

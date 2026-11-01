@@ -10,15 +10,24 @@ import { AdminUsers } from '@/features/admin/admin-users'
 import { m } from '@/paraglide/messages'
 import { setLocale } from '@/paraglide/runtime'
 
+type MockLinkProps = {
+  children: React.ReactNode
+  to: string
+}
+
 const fixture = vi.hoisted(() => ({
   users: vi.fn<() => Promise<object>>(),
   comments: vi.fn<() => Promise<object>>(),
   sessions: vi.fn<() => Promise<object[]>>(),
-  preference: vi.fn<() => Promise<{ repliesEnabled: boolean }>>(),
+  preference: vi.fn<
+    () => Promise<{
+      repliesEnabled: boolean
+    }>
+  >(),
   mutate: vi.fn<() => Promise<never>>(),
 }))
 vi.mock('@tanstack/react-router', () => ({
-  Link: (props: { children: React.ReactNode; to: string }) => <a href={props.to}>{props.children}</a>,
+  Link: (props: MockLinkProps) => <a href={props.to}>{props.children}</a>,
   useRouter: () => ({ invalidate: vi.fn<() => Promise<void>>() }),
 }))
 vi.mock('@/lib/auth-client', () => ({ authClient: { useSession: () => ({ refetch: vi.fn<() => Promise<void>>() }) } }))
@@ -63,9 +72,9 @@ describe('Account and admin presentation with isolated API fixtures', () => {
   test.each(['en', 'zh-TW', 'zh-CN', 'ja', 'es', 'pt-BR'] as const)('localizes empty tables in %s', async (locale) => {
     await setLocale(locale, { reload: false })
     setup(<AdminUsers />)
-    expect(await screen.findByText(m.components_tables_users_empty())).toBeInTheDocument()
+    expect(await screen.findByText(m.admin_users_table_empty())).toBeInTheDocument()
     expect(screen.getByRole('table', { name: m.common_labels_users() })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: m.components_table_pagination_go_to_next_page() })).toBeDisabled()
+    expect(screen.getByRole('button', { name: m.admin_pagination_go_to_next_page() })).toBeDisabled()
     expect(fixture.mutate).not.toHaveBeenCalled()
   })
   test('announces admin loading while no rows are available', () => {

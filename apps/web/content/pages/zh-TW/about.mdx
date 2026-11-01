@@ -4,7 +4,14 @@ description: Nelson Lai 是一位居住於香港的全端工程師。他使用 R
 updatedAt: '2026-06-26T07:58:40.000Z'
 ---
 
-<AboutStory>
+<AboutHero
+  title='關於'
+  intro={'一名來自香港的全端工程師。\n為網路創作，也一路學習。'}
+  githubLabel='在 GitHub 找到我'
+  caption='在廣闊的海洋裡，保持好奇心。'
+/>
+
+<AboutStory label="我的一點故事" title={<>一切始於<br /><em>「這是怎麼做到的？」</em></>}>
 
 我是一名來自香港的全端工程師。正在學習 TypeScript、Next.js/TanStack Start、React.js、Node.js 和資料庫管理。同時，我對學習 UI/UX 充滿熱情。
 
@@ -14,34 +21,34 @@ updatedAt: '2026-06-26T07:58:40.000Z'
 
 </AboutStory>
 
-<AboutSite>
+<AboutToolbox
+  label='一些熟悉的工具'
+  title={
+    <>
+      我用什麼
+      <br />
+      <em>來創作。</em>
+    </>
+  }
+  groups={[
+    { label: '介面', tools: ['React', 'Next.js / TanStack Start', 'TypeScript'] },
+    { label: '幕後運作', tools: ['Node.js', 'PostgreSQL', 'Drizzle'] },
+    { label: '讓想法成真', tools: ['GitHub', 'Docker', 'MDX'] },
+  ]}
+  setupLabel='探索我的完整裝備'
+/>
 
-### 關於本站
-
-- 框架：[TanStack Start](https://tanstack.com/start/latest)
-- 資料庫：[PostgreSQL](https://www.postgresql.org/)
-- ORM：[Drizzle](https://orm.drizzle.team/)
-- 認證：[Better Auth](https://www.better-auth.com/)
-- 部署：[Docker](https://www.docker.com/)
-- 內容：[MDX](https://mdxjs.com/)
-- 分析：[Umami](https://github.com/umami-software/umami)
-- 樣式：[Tailwind CSS](https://tailwindcss.com)
-- 程式碼語法醒目提示：[Shiki](https://github.com/shikijs/shiki)
-
-這個網站的最初版本受到 **Timothy Lin** 的 [tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) 啟發。它幫助我從零開始建立部落格，而網站至今已經歷許多改變。
-
-### 靈感來源
-
-以下是一些對我建立一個出色網站啟發良多的網站。
-
-詳見 [README](https://github.com/nelsonlaidev/nelsonlai.dev?tab=readme-ov-file#credits)
-
-### 社交連結
-
-<SocialLinks />
-
-### 標誌
-
-<LogoShowcase />
-
-</AboutSite>
+<AboutSite
+  label='關於這片小海洋'
+  title={
+    <>
+      一個可以漫遊的地方。
+      <br />
+      <em>不只是一個網頁。</em>
+    </>
+  }
+  intro='Seafold 是對個人化網路的探索。作品、文章與留言板，在水面下匯聚成一個小世界。'
+  world='魚群、光線與深度由程式生成，作品與故事則來自我的生活。它們共同構成一個探索、分享與持續創作的小天地。'
+  projectsLabel='探索我的作品'
+  helloLabel='留下簡單的問候'
+/>

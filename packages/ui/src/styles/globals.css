@@ -214,7 +214,7 @@
   }
 
   html {
-    @apply motion-safe:scroll-smooth;
+    @apply font-sans antialiased motion-safe:scroll-smooth;
   }
 
   body {
@@ -224,9 +224,6 @@
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
-  }
-  html {
-    @apply font-sans antialiased;
   }
 }
 
@@ -252,4 +249,13 @@
   ::view-transition-new(root) {
     animation: none;
   }
+}
+
+/* Base UI scrollbar rules use external CSS under the strict CSP. */
+.base-ui-disable-scrollbar {
+  scrollbar-width: none;
+}
+
+.base-ui-disable-scrollbar::-webkit-scrollbar {
+  display: none;
 }

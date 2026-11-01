@@ -35,7 +35,7 @@ export function CommentsTable(props: CommentsTableProps) {
     <AdminDataTable
       table={table}
       label={m.common_labels_comments()}
-      emptyMessage={m.components_tables_comments_empty()}
+      emptyMessage={m.admin_comments_table_empty()}
       isFetching={isFetching}
     />
   )

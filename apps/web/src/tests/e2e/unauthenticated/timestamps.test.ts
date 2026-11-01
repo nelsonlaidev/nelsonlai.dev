@@ -8,7 +8,11 @@ import { expect, test } from '../fixtures/test'
 
 test.describe('database timestamp precision', () => {
   test('stores every application timestamp column with millisecond precision', async () => {
-    const columns = await db.execute<{ tableName: string; columnName: string; precision: number }>(sql`
+    const columns = await db.execute<{
+      tableName: string
+      columnName: string
+      precision: number
+    }>(sql`
       SELECT table_name AS "tableName", column_name AS "columnName", datetime_precision AS precision
       FROM information_schema.columns
       WHERE table_schema = 'public'

@@ -4,6 +4,7 @@ import '@fontsource-variable/noto-sans-tc/wght.css'
 import '@fontsource-variable/noto-sans-sc/wght.css'
 
 import type { QueryClient } from '@tanstack/react-query'
+import type { AnyRouteMatch } from '@tanstack/react-router'
 import type { Formats } from 'use-intl'
 
 import geistUrl from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url'
@@ -14,6 +15,7 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 import { createRootRouteWithContext, HeadContent, Scripts } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+import { createIsomorphicFn, getGlobalStartContext } from '@tanstack/react-start'
 import { IntlProvider } from 'use-intl'
 
 import { MainLayout } from '@/components/main-layout'
@@ -42,11 +44,24 @@ const INTL_FORMATS = {
 } satisfies Formats
 
 export const Route = createRootRouteWithContext<RouterContext>()({
+  loader: createIsomorphicFn()
+    .server(() => ({ nonce: getGlobalStartContext()?.nonce }))
+    .client(() => ({ nonce: document.querySelector<HTMLScriptElement>('script[nonce]')?.nonce })),
   head: () => {
     const description = m.metadata_site_description()
-    // Public brand fallback for missing content and system pages. Private route
-    // metadata still controls indexing and never supplies private content here.
     const fallbackImage = getLocalizedUrl('/og/image.webp', getLocale())
+
+    const scripts: AnyRouteMatch['scripts'] = []
+
+    if (ENV.UMAMI_URL && ENV.UMAMI_WEBSITE_ID) {
+      const umamiScript = {
+        src: `${ENV.UMAMI_URL}/script.js`,
+        defer: true,
+        'data-website-id': ENV.UMAMI_WEBSITE_ID,
+      }
+
+      scripts.push(umamiScript)
+    }
 
     return {
       meta: [
@@ -105,6 +120,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
           crossOrigin: 'anonymous',
         },
       ],
+      scripts,
     }
   },
   notFoundComponent: RootNotFound,
@@ -117,29 +133,24 @@ type RootDocumentProps = {
 
 function RootDocument(props: RootDocumentProps) {
   const { children } = props
+  const { nonce } = Route.useLoaderData()
 
   return (
     <html lang={getLocale()} suppressHydrationWarning>
       <head>
-        {/* Router deduplicates metadata by name, so keep both media-specific colors here. */}
-        <meta name='theme-color' media='(prefers-color-scheme: light)' content='#eef0df' />
-        <meta name='theme-color' media='(prefers-color-scheme: dark)' content='#031a2e' />
         <HeadContent />
-        {/* Keep the tracker in the document shell so route updates do not reload it. */}
-        {import.meta.env.PROD && ENV.UMAMI_URL && ENV.UMAMI_WEBSITE_ID && (
-          <script defer src={`${ENV.UMAMI_URL.replace(/\/$/, '')}/script.js`} data-website-id={ENV.UMAMI_WEBSITE_ID} />
-        )}
       </head>
       <body>
         <UIProvider
+          nonce={nonce}
           translations={{
             loading: m.common_aria_labels_loading(),
             close: m.common_labels_close(),
             commandDialogTitle: m.command_menu_title(),
             commandDialogDescription: m.command_menu_description(),
             treeView: m.common_aria_labels_tree_view(),
-            sidebarTitle: m.layout_sidebar_title(),
-            sidebarDescription: m.layout_sidebar_description(),
+            sidebarTitle: m.admin_sidebar_title(),
+            sidebarDescription: m.admin_sidebar_description(),
             toggleSidebar: m.common_aria_labels_toggle_sidebar(),
           }}
         >

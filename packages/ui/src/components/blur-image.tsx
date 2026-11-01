@@ -1,14 +1,14 @@
 import { cn } from 'cn'
 import { useEffect, useRef, useState } from 'react'
 
-type ImageProps = React.ComponentProps<'img'> & {
+type BlurImageProps = React.ComponentProps<'img'> & {
   src: string
   alt: string
   imageClassName?: string
   lazy?: boolean
 }
 
-export function BlurImage(props: ImageProps) {
+export function BlurImage(props: BlurImageProps) {
   const { src, alt, width, height, imageClassName, lazy = true, className, style, onLoad, onError, ...rest } = props
 
   const [isLoading, setIsLoading] = useState(true)

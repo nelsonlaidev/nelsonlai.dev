@@ -46,11 +46,11 @@ export function FilteredPosts(props: FilteredPostsProps) {
         </fieldset>
         <label className='flex items-center gap-3 rounded-md border border-input px-2.5 py-0 shadow-xs focus-within:border-ring focus-within:shadow-[0_0_0_3px_color-mix(in_oklab,var(--ring)_50%,transparent)]'>
           <SearchIcon aria-hidden='true' className='size-4 text-[#93b2a7]' />
-          <span className='sr-only'>{m.components_filtered_posts_placeholder()}</span>
+          <span className='sr-only'>{m.blog_search_placeholder()}</span>
           <input
             type='search'
             id='search'
-            placeholder={m.components_filtered_posts_placeholder()}
+            placeholder={m.blog_search_placeholder()}
             value={searchValue}
             onChange={(event) => {
               setSearchValue(event.target.value)
@@ -97,9 +97,7 @@ export function FilteredPosts(props: FilteredPostsProps) {
       </div>
       {filteredPosts.length === 0 && (
         <div className='border border-border px-5 py-20 text-center'>
-          <h2 className='text-3xl/normal font-[410] tracking-tighter'>
-            {m.components_filtered_posts_no_posts_found()}
-          </h2>
+          <h2 className='text-3xl/normal font-[410] tracking-tighter'>{m.blog_search_no_posts_found()}</h2>
           <button
             type='button'
             onClick={() => {

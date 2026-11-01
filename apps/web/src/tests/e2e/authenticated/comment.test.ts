@@ -491,7 +491,10 @@ test.describe('comment page', () => {
         test.describe(`${count} ordinary comments in ${sort} order with highlighted=${highlighted} and limit=${limit}`, () => {
           let slug: string
           let input: CommentListInput
-          let expectedPages: Array<{ ids: string[]; nextCursor: CommentListOutput['nextCursor'] }>
+          let expectedPages: Array<{
+            ids: string[]
+            nextCursor: CommentListOutput['nextCursor']
+          }>
 
           test.beforeEach(async () => {
             slug = `pagination-${createId()}`
@@ -546,7 +549,9 @@ test.describe('comment page', () => {
               const response = await request.post('/api/rpc/comments/list', { data: { json: { ...input, cursor } } })
               await expect(response).toBeOK()
 
-              const body = (await response.json()) as { json: CommentListOutput }
+              const body = (await response.json()) as {
+                json: CommentListOutput
+              }
               expect(body.json.comments).toMatchObject(expected.ids.map((id) => ({ id })))
               expect(body.json.comments).toHaveLength(expected.ids.length)
               expect(body.json.nextCursor).toEqual(expected.nextCursor)
@@ -562,7 +567,11 @@ test.describe('comment page', () => {
   test.describe('pagination and sorting', () => {
     let prefix: string
     let parentId: string
-    let records: Array<typeof comments.$inferInsert & { id: string }>
+    let records: Array<
+      typeof comments.$inferInsert & {
+        id: string
+      }
+    >
 
     test.beforeEach(async () => {
       prefix = `pagination-${createId()}`
@@ -761,7 +770,7 @@ test.describe('comment page', () => {
             await expect(target.getByTestId(`comment-${id}`)).toBeInViewport()
             await expect(
               target.getByTestId(`comment-${parentId}`).locator('button[aria-expanded]:not([aria-haspopup])'),
-            ).toHaveAttribute('data-state', 'open')
+            ).toHaveAttribute('aria-expanded', 'true')
             await expect(target.getByText(`Link reply ${replyId}`, { exact: true })).toBeVisible()
           } finally {
             await fresh.close()

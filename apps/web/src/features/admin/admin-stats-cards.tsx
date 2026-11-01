@@ -1,6 +1,7 @@
 import NumberFlow from '@number-flow/react'
 import { Card, CardContent, CardHeader, CardTitle } from '@repo/ui/components/card'
 import { Skeleton } from '@repo/ui/components/skeleton'
+import { useCspNonce } from '@repo/ui/components/ui-provider'
 import { useQuery } from '@tanstack/react-query'
 import { EyeIcon, HeartIcon, MessageSquareIcon, MessagesSquareIcon, UsersIcon } from 'lucide-react'
 
@@ -21,6 +22,7 @@ const STAT_ITEMS = [
 ] as const
 
 export function AdminStatsCards() {
+  const nonce = useCspNonce()
   const { data, isError } = useQuery(orpc.admin.stats.queryOptions())
 
   if (isError) {
@@ -33,7 +35,7 @@ export function AdminStatsCards() {
         let content: React.ReactNode = <Skeleton className='h-8 w-20' />
 
         if (data) {
-          content = <NumberFlow value={data[item.field]} />
+          content = <NumberFlow nonce={nonce} value={data[item.field]} />
         }
 
         return (

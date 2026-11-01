@@ -4,9 +4,13 @@ import { describe, expect, test, vi } from 'vitest'
 import { m } from '@/paraglide/messages'
 import { StatCards } from '@/routes/_main/-components/dashboard/stats'
 
+type CounterProps = {
+  value: number
+}
+
 vi.mock('@/lib/orpc-client', () => ({ orpc: {} }))
 vi.mock('@/routes/_main/-components/dashboard/counter', () => ({
-  Counter: (props: { value: number }) => <>{new Intl.NumberFormat('en').format(props.value)}</>,
+  Counter: (props: CounterProps) => <>{new Intl.NumberFormat('en').format(props.value)}</>,
 }))
 
 const metrics = [

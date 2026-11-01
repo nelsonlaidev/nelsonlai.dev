@@ -3,7 +3,6 @@ import { Link } from '@tanstack/react-router'
 import { ArrowUpRightIcon } from 'lucide-react'
 import { useState } from 'react'
 
-import { FOOTER_GROUPS } from '@/lib/navigation'
 import { SITE } from '@/lib/site'
 import { m } from '@/paraglide/messages'
 
@@ -14,6 +13,7 @@ export function OceanFooter() {
   const [year] = useState(() => new Date().getUTCFullYear())
   const groups = [
     {
+      id: 'explore',
       title: m.nav_explore(),
       links: [
         { to: '/', label: m.nav_home },
@@ -23,13 +23,17 @@ export function OceanFooter() {
       ],
     },
     {
+      id: 'around',
       title: m.nav_footer_around(),
-      links: FOOTER_GROUPS.filter((group) => group.id === 'site')
-        .flatMap((group) => group.links)
-        .filter((link) => !('to' in link) || link.to !== '/projects')
-        .toSpliced(0, 0, { to: '/dashboard', label: m.nav_dashboard }),
+      links: [
+        { to: '/dashboard', label: m.nav_dashboard },
+        { to: '/guestbook', label: m.nav_guestbook },
+        { to: '/uses', label: m.nav_uses },
+        { href: SITE.links, label: m.common_labels_links },
+      ],
     },
     {
+      id: 'elsewhere',
       title: m.nav_footer_elsewhere(),
       links: [
         { href: SITE.socials.github, label: 'GitHub' },
@@ -66,13 +70,9 @@ export function OceanFooter() {
             className='grid grid-cols-2 gap-x-5 gap-y-7 min-[541px]:grid-cols-3 min-[1101px]:gap-8.75'
           >
             {groups.map((group) => (
-              <div key={group.title} className='min-w-0 max-[540px]:last:col-span-full'>
+              <div key={group.id} className='min-w-0 max-[540px]:last:col-span-full'>
                 <h2 className='mb-4 text-base/normal font-medium text-foreground min-[541px]:mt-2'>{group.title}</h2>
-                <ul
-                  className={
-                    group.title === m.nav_footer_elsewhere() ? 'grid grid-cols-2 min-[541px]:grid-cols-1' : undefined
-                  }
-                >
+                <ul className={group.id === 'elsewhere' ? 'grid grid-cols-2 min-[541px]:grid-cols-1' : undefined}>
                   {group.links.map((link) => (
                     <li key={'to' in link ? link.to : link.href}>
                       {'to' in link ? (
@@ -111,7 +111,7 @@ export function OceanFooter() {
           <div className='min-[541px]:ml-auto'>
             <LocaleSwitcher compact />
           </div>
-          <span className='font-mono text-sm text-muted-foreground'>{m.layout_revision_unavailable()}</span>
+          <span className='font-mono text-sm text-muted-foreground'>{m.nav_revision_unavailable()}</span>
         </div>
       </div>
     </footer>

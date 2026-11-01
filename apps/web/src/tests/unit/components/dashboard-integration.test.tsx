@@ -7,6 +7,19 @@ import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { m } from '@/paraglide/messages'
 import { DashboardStats } from '@/routes/_main/-components/dashboard/stats'
 
+type MockLinkProps = {
+  to: string
+  children: React.ReactNode
+}
+
+type SourceProps = {
+  source: string
+}
+
+type CounterProps = {
+  value: number
+}
+
 const fixture = vi.hoisted(() => ({ failed: '', queries: vi.fn<(options: unknown) => void>() }))
 vi.mock('@/lib/orpc-client', () => ({
   orpc: {
@@ -18,11 +31,11 @@ vi.mock('@/lib/orpc-client', () => ({
 }))
 vi.mock('@tanstack/react-router', async (importOriginal) => ({
   ...(await importOriginal<typeof Router>()),
-  Link: (props: { to: string; children: React.ReactNode }) => <a href={props.to}>{props.children}</a>,
+  Link: (props: MockLinkProps) => <a href={props.to}>{props.children}</a>,
 }))
 vi.mock('@tanstack/react-query', async (importOriginal) => ({
   ...(await importOriginal<typeof ReactQuery>()),
-  useSuspenseQuery: (options: { source: string }) => {
+  useSuspenseQuery: (options: SourceProps) => {
     fixture.queries(options)
     if (options.source === fixture.failed) throw new Error('Local service error')
     const values: Record<string, object> = {
@@ -35,7 +48,7 @@ vi.mock('@tanstack/react-query', async (importOriginal) => ({
   },
 }))
 vi.mock('@/routes/_main/-components/dashboard/counter', () => ({
-  Counter: (props: { value: number }) => <>{new Intl.NumberFormat('en').format(props.value)}</>,
+  Counter: (props: CounterProps) => <>{new Intl.NumberFormat('en').format(props.value)}</>,
 }))
 beforeEach(() => {
   fixture.failed = ''

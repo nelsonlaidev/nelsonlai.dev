@@ -100,7 +100,10 @@ async function hue(str: string): Promise<number> {
   return n % 360
 }
 
-async function generateGradient(username: string): Promise<{ fromColor: string; toColor: string }> {
+async function generateGradient(username: string): Promise<{
+  fromColor: string
+  toColor: string
+}> {
   const h = await hue(username)
   const first = color({ h, s: 0.95, l: 0.5 })
   const second = first.triad()[1]

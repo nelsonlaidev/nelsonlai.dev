@@ -22,7 +22,7 @@ export function createCache<TValue>(prefix: string, schema: z.ZodType<TValue>, t
       return null
     },
 
-    async set(key: string, value: TValue, customTtl: number = ttl): Promise<void> {
+    async set(key: string, value: TValue, customTtl = ttl): Promise<void> {
       const fullKey = `${prefix}:${key}`
       const parsed = schema.parse(value)
 

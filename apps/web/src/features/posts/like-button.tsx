@@ -1,6 +1,7 @@
 import NumberFlow from '@number-flow/react'
 import { ORPCError } from '@orpc/client'
 import { toast } from '@repo/ui/components/toast'
+import { useCspNonce } from '@repo/ui/components/ui-provider'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { cn } from 'cn'
 import { useReducedMotion } from 'motion/react'
@@ -96,6 +97,7 @@ type LikeButtonProps = {
 
 export function LikeButton(props: LikeButtonProps) {
   const { state, placement } = props
+  const nonce = useCspNonce()
   const { query, save, draft, pulse, like } = state
   const clipId = useId()
   const count = Math.min(3, (query.data?.currentUserLikes ?? 0) + draft)
@@ -104,7 +106,7 @@ export function LikeButton(props: LikeButtonProps) {
   let likesContent: React.ReactNode = '--'
 
   if (query.data) {
-    likesContent = <NumberFlow data-testid='like-count' value={query.data.likes + draft} />
+    likesContent = <NumberFlow nonce={nonce} data-testid='like-count' value={query.data.likes + draft} />
   } else if (query.isError) {
     likesContent = m.common_error()
   }

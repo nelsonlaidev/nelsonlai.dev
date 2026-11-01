@@ -1,6 +1,8 @@
 import type { PostLikesSchema } from '@repo/api/schema/posts'
 import type * as z from 'zod'
 
+import assert from 'node:assert/strict'
+
 import en from '@messages/en.json' with { type: 'json' }
 import { getAnonymousKey } from '@repo/api/lib/anonymous-key'
 
@@ -18,7 +20,7 @@ test.describe('like button', () => {
   })
 
   test('persists three likes and rejects a fourth after reloading', async ({ page, extraHTTPHeaders }) => {
-    const likeCount = page.getByTestId('like-count')
+    const likeCount = page.getByTestId('like-count').filter({ visible: true })
     const likeButton = page.getByRole('button', { name: en.blog_like_this_post, exact: true })
 
     await expect(likeCount).toBeVisible()
@@ -26,7 +28,9 @@ test.describe('like button', () => {
     const saved = page.waitForResponse(async (response) => {
       if (!response.url().includes('/api/rpc/posts/like') || !response.ok()) return false
 
-      const body = (await response.json()) as { json: LikeCountOutput }
+      const body = (await response.json()) as {
+        json: LikeCountOutput
+      }
       return body.json.currentUserLikes === 3
     })
 
@@ -53,7 +57,12 @@ test.describe('like button', () => {
     await expect(likeCount).toBeVisible()
 
     expect(await getNumberFlow(likeCount)).toBe(String(initialCount + 3))
-    await likeButton.click()
+    await expect(likeButton).toBeDisabled()
+    // The aria-disabled control still handles pointer clicks to explain the limit.
+    await likeButton.scrollIntoViewIfNeeded()
+    const bounds = await likeButton.boundingBox()
+    assert.ok(bounds, 'Expected the like button to be visible')
+    await page.mouse.click(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2)
 
     await expect(page.getByText(en.error_like_limit_reached, { exact: true })).toBeVisible()
     expect(await getNumberFlow(likeCount)).toBe(String(initialCount + 3))

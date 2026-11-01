@@ -9,6 +9,7 @@ healthcheck
 innerhtml
 isready
 lightbox
+mdxjs
 menuitemradio
 nosniff
 parsererror

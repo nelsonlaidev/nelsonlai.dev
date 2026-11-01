@@ -78,8 +78,8 @@ jobs:
       - name: Set up workspace
         uses: ./.github/actions/setup
 
-      - name: Build MDX plugins
-        run: pnpm --filter @repo/mdx-plugins build
+      - name: Build MDX compiler
+        run: pnpm --filter @repo/mdx build
 
       - name: Install Chromium and system dependencies
         run: pnpm --filter @repo/web exec playwright install --with-deps chromium

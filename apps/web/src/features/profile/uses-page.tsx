@@ -1,25 +1,25 @@
 import type { ProfilePageData } from './profile-layout'
 
-import { MDXContent } from '@content-collections/mdx/react'
 import { ExternalLink } from '@repo/ui/components/external-link'
 import { Link } from '@tanstack/react-router'
 import { cn } from 'cn'
 import { ArrowRightIcon } from 'lucide-react'
 
+import { Mdx } from '@/components/mdx/mdx'
 import { m } from '@/paraglide/messages'
 
 import { ProductImage } from './product-image'
 import { ProfileLayout } from './profile-layout'
 
-const USE_CATEGORIES = [
-  { id: 'laptop', label: m.profile_uses_laptop, note: m.profile_uses_go },
-  { id: 'accessories', label: m.profile_uses_accessories, note: m.profile_uses_ride },
-  { id: 'hardware', label: m.profile_uses_hardware, note: m.profile_uses_at_desk },
-  { id: 'coding', label: m.profile_uses_coding, note: m.profile_uses_making },
-  { id: 'software', label: m.profile_uses_software, note: m.profile_uses_companions },
-] as const
+const USES_SECTION_NOTES = {
+  laptop: m.profile_uses_go,
+  accessories: m.profile_uses_ride,
+  hardware: m.profile_uses_at_desk,
+  coding: m.profile_uses_making,
+  software: m.profile_uses_companions,
+} as const
 
-type UseKind = (typeof USE_CATEGORIES)[number]['id']
+type UseKind = keyof typeof USES_SECTION_NOTES
 type UseItem = {
   image: string
   name: string
@@ -31,14 +31,12 @@ type UseItem = {
 type UsesSectionProps = {
   kind: UseKind
   title: string
+  index: number
   children: React.ReactNode
 }
 
 function UsesSection(props: UsesSectionProps) {
-  const { kind, title, children } = props
-
-  const category = USE_CATEGORIES.find((item) => item.id === kind) ?? USE_CATEGORIES[0]
-  const index = USE_CATEGORIES.indexOf(category)
+  const { kind, title, index, children } = props
 
   return (
     <section id={kind} aria-labelledby={`${kind}-heading`} className='mb-16.25 scroll-mt-10 max-[601px]:mb-11.25'>
@@ -50,7 +48,7 @@ function UsesSection(props: UsesSectionProps) {
           {title}
         </h2>
         <span className='text-sm/normal whitespace-nowrap text-[#b3cbc1]'>
-          {String(index + 1).padStart(2, '0')} / {category.note()}
+          {String(index + 1).padStart(2, '0')} / {USES_SECTION_NOTES[kind]()}
         </span>
       </div>
       {children}
@@ -60,7 +58,7 @@ function UsesSection(props: UsesSectionProps) {
 
 type UsesItemsProps = {
   items: UseItem[]
-  kind: UseKind
+  kind: Exclude<UseKind, 'laptop'>
 }
 
 function UsesItems(props: UsesItemsProps) {
@@ -69,9 +67,7 @@ function UsesItems(props: UsesItemsProps) {
   return (
     <div
       className={cn(
-        kind === 'laptop' &&
-          'border-[#a8cbbe45] [background:radial-gradient(ellipse_at_50%_12%,#a9d6bf18,transparent_70%),#082f3ba8]',
-        (kind === 'laptop' || kind === 'accessories') && 'border',
+        kind === 'accessories' && 'border',
         (kind === 'accessories' || kind === 'coding' || kind === 'software') && 'grid grid-cols-2',
         kind === 'accessories' && 'border-border bg-[#082f3ba8] max-[1101px]:grid-cols-1',
         (kind === 'hardware' || kind === 'coding' || kind === 'software') && 'border-t border-t-border',
@@ -86,9 +82,9 @@ function UsesItems(props: UsesItemsProps) {
           key={item.name}
           className={cn(
             'flex min-w-0 items-center gap-5.5 border-b-border transition-colors duration-200 ease-linear hover:bg-[#bdd9ca0a] motion-reduce:transition-none max-[601px]:gap-3.5',
-            (kind === 'laptop' || kind === 'hardware' || kind === 'coding' || kind === 'software') &&
+            (kind === 'hardware' || kind === 'coding' || kind === 'software') &&
               'border-b py-5.75 max-[601px]:px-0 max-[601px]:py-5',
-            (kind === 'laptop' || kind === 'coding' || kind === 'software') && 'px-0',
+            (kind === 'coding' || kind === 'software') && 'px-0',
             kind === 'accessories' &&
               'border-0 p-6.25 not-first:border-l not-first:border-l-border max-[1101px]:not-first:border-t max-[1101px]:not-first:border-l-0 max-[1101px]:not-first:border-t-border max-[601px]:px-5 max-[601px]:py-5.5',
             kind === 'hardware' && 'pr-3 pl-0 max-[601px]:pr-3',
@@ -110,7 +106,6 @@ function UsesItems(props: UsesItemsProps) {
             loading='lazy'
             className={cn(
               'flex-[0_0_48px] object-contain',
-              kind === 'laptop' && 'size-12',
               kind === 'accessories' &&
                 'h-17.5 w-15 basis-15 max-[601px]:h-13.5 max-[601px]:w-10.5 max-[601px]:basis-10.5',
               kind === 'hardware' && 'h-15 w-16 basis-16 max-[601px]:size-11.5 max-[601px]:basis-11.5',
@@ -141,17 +136,17 @@ type UsesLaptopProps = {
   alt: string
   width: number
   height: number
+  name: string
+  description: string
 }
 
 function UsesLaptop(props: UsesLaptopProps) {
-  const { alt } = props
-
-  const [name, detail] = alt.split(' (')
+  const { name, description, ...imageProps } = props
 
   return (
     <div className='border border-[#a8cbbe45] [background:radial-gradient(ellipse_at_50%_12%,#a9d6bf18,transparent_70%),#082f3ba8]'>
       <div className='px-[9%] pt-8.5 pb-2.5 max-[601px]:px-[4%] max-[601px]:pt-6.25 max-[601px]:pb-3.75'>
-        <ProductImage {...props} fetchPriority='high' className='block h-auto w-full' />
+        <ProductImage {...imageProps} fetchPriority='high' className='block h-auto w-full' />
       </div>
       <div className='flex items-center justify-between gap-5 border-t border-t-border px-8 py-6.5 max-[601px]:p-5'>
         <div>
@@ -159,7 +154,7 @@ function UsesLaptop(props: UsesLaptopProps) {
           <h3 className='mx-0 mt-3.25 mb-2.5 text-[clamp(20px,2.2vw,28px)] leading-normal font-[450] tracking-[-0.035em]'>
             {name}
           </h3>
-          <p className='m-0 text-base/[1.65] text-[#b3cbc1]'>{detail?.replace(/\)$/, '')}</p>
+          <p className='m-0 text-base/[1.65] text-[#b3cbc1]'>{description}</p>
         </div>
         <span
           aria-hidden='true'
@@ -199,49 +194,78 @@ export function UsesPage(props: UsesPageProps) {
             <span className='mt-5 h-4.5 border-b border-b-[#9abfb273] [background:repeating-linear-gradient(to_right,#9abfb273_0_1px,transparent_1px_10px)] first:text-[#dfebdf]' />
           </div>
         </div>
-        <div className='grid grid-cols-[230px_minmax(0,1fr)] gap-12.5 pt-13.75 max-[1101px]:grid-cols-[180px_minmax(0,1fr)] max-[1101px]:gap-8.75 max-[801px]:block max-[801px]:pt-7.5'>
-          <aside className='sticky top-10 self-start max-[801px]:static max-[801px]:mb-11.25'>
-            <nav
-              aria-label={m.profile_uses_index()}
-              className='max-[801px]:flex max-[801px]:flex-wrap max-[801px]:gap-2'
-            >
-              <span className='mb-6.25 block text-xs/normal text-[#b4cec4] max-[801px]:mb-2.5 max-[801px]:w-full'>
-                {m.profile_uses_index()}
-              </span>
-              {USE_CATEGORIES.map((category, index) => (
-                <a
-                  href={`#${category.id}`}
-                  key={category.id}
-                  className='grid grid-cols-[20px_1fr_24px] items-baseline gap-2 border-b border-b-border px-0 py-4 text-sm leading-[1.6] text-[#d1e2d6] hover:border-[#b8d5c8] hover:text-white max-[801px]:flex max-[801px]:min-h-11 max-[801px]:rounded-md max-[801px]:border max-[801px]:border-border max-[801px]:px-3 max-[801px]:py-2.5 max-[801px]:text-sm'
-                >
-                  <span className='text-xs/[1.6] text-[#a6c5bb] max-[801px]:hidden'>0{index + 1}</span>
-                  <span>{page.sections?.find((section) => section.id === category.id)?.title ?? category.label()}</span>
-                  <span className='text-right text-xs/[1.6] text-[#a6c5bb] max-[801px]:hidden'>
-                    {String(page.sections?.find((section) => section.id === category.id)?.count ?? 0).padStart(2, '0')}
-                  </span>
-                </a>
-              ))}
-            </nav>
-            <p className='mt-7.5 max-w-43.75 text-sm leading-[1.9] text-[#a6c5bb] max-[801px]:hidden'>
-              {m.profile_uses_inventory()}
-            </p>
-          </aside>
-          <div>
-            <MDXContent code={page.mdx} components={{ UsesSection, UsesItems, UsesLaptop }} />
-            <div className='px-0 pt-3.75 pb-8.75'>
-              <p className='mx-0 mt-0 mb-6.25 text-[27px] leading-normal tracking-[-0.03em] max-[601px]:text-2xl'>
-                {m.profile_uses_tools_part()}
-                <br />
-                <em className='text-[#bed3c6] not-italic'>{m.profile_uses_make()}</em>
-              </p>
-              <Link to='/projects' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-[#b9d3c7]'>
-                {m.profile_about_projects()}
-                <ArrowRightIcon className='size-4.75' aria-hidden='true' />
-              </Link>
-            </div>
-          </div>
-        </div>
+        <Mdx path={page.path} unstyled components={{ UsesSections }} />
       </div>
     </ProfileLayout>
+  )
+}
+
+export type UsesSectionData =
+  | {
+      kind: 'laptop'
+      title: string
+      items: UsesLaptopProps[]
+    }
+  | {
+      kind: Exclude<UseKind, 'laptop'>
+      title: string
+      items: UseItem[]
+    }
+
+type UsesSectionsProps = {
+  sections: UsesSectionData[]
+}
+
+function UsesSections(props: UsesSectionsProps) {
+  const { sections } = props
+
+  return (
+    <div className='grid grid-cols-[230px_minmax(0,1fr)] gap-12.5 pt-13.75 max-[1101px]:grid-cols-[180px_minmax(0,1fr)] max-[1101px]:gap-8.75 max-[801px]:block max-[801px]:pt-7.5'>
+      <aside className='sticky top-10 self-start max-[801px]:static max-[801px]:mb-11.25'>
+        <nav aria-label={m.profile_uses_index()} className='max-[801px]:flex max-[801px]:flex-wrap max-[801px]:gap-2'>
+          <span className='mb-6.25 block text-xs/normal text-[#b4cec4] max-[801px]:mb-2.5 max-[801px]:w-full'>
+            {m.profile_uses_index()}
+          </span>
+          {sections.map((section, index) => (
+            <a
+              href={`#${section.kind}`}
+              key={section.kind}
+              className='grid grid-cols-[20px_1fr_24px] items-baseline gap-2 border-b border-b-border px-0 py-4 text-sm leading-[1.6] text-[#d1e2d6] hover:border-[#b8d5c8] hover:text-white max-[801px]:flex max-[801px]:min-h-11 max-[801px]:rounded-md max-[801px]:border max-[801px]:border-border max-[801px]:px-3 max-[801px]:py-2.5 max-[801px]:text-sm'
+            >
+              <span className='text-xs/[1.6] text-[#a6c5bb] max-[801px]:hidden'>0{index + 1}</span>
+              <span>{section.title}</span>
+              <span className='text-right text-xs/[1.6] text-[#a6c5bb] max-[801px]:hidden'>
+                {String(section.items.length).padStart(2, '0')}
+              </span>
+            </a>
+          ))}
+        </nav>
+        <p className='mt-7.5 max-w-43.75 text-sm leading-[1.9] text-[#a6c5bb] max-[801px]:hidden'>
+          {m.profile_uses_inventory()}
+        </p>
+      </aside>
+      <div>
+        {sections.map((section, index) => (
+          <UsesSection key={section.kind} kind={section.kind} title={section.title} index={index}>
+            {section.kind === 'laptop' ? (
+              section.items.map((item) => <UsesLaptop key={item.name} {...item} />)
+            ) : (
+              <UsesItems kind={section.kind} items={section.items} />
+            )}
+          </UsesSection>
+        ))}
+        <div className='px-0 pt-3.75 pb-8.75'>
+          <p className='mx-0 mt-0 mb-6.25 text-[27px] leading-normal tracking-[-0.03em] max-[601px]:text-2xl'>
+            {m.profile_uses_tools_part()}
+            <br />
+            <em className='text-[#bed3c6] not-italic'>{m.profile_uses_make()}</em>
+          </p>
+          <Link to='/projects' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-[#b9d3c7]'>
+            {m.profile_about_projects()}
+            <ArrowRightIcon className='size-4.75' aria-hidden='true' />
+          </Link>
+        </div>
+      </div>
+    </div>
   )
 }

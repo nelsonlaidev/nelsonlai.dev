@@ -5,7 +5,11 @@ import { useEffect, useState } from 'react'
 import { CodeBlock } from '@/components/mdx/code-block'
 
 type CommentCodeBlockProps = {
-  children: React.ReactElement<{ children: string; className?: string; title?: string }>
+  children: React.ReactElement<{
+    children: string
+    className?: string
+    title?: string
+  }>
 }
 
 export function CommentCodeBlock(props: CommentCodeBlockProps) {
@@ -19,7 +23,11 @@ export function CommentCodeBlock(props: CommentCodeBlockProps) {
       ?.split(' ')
       .find((name) => /^(?:lang-|language-)/.test(name))
       ?.replace(/^(?:lang-|language-)/, '') ?? 'plaintext'
-  const [highlighted, setHighlighted] = useState<{ code: string; lang: string; html: string }>()
+  const [highlighted, setHighlighted] = useState<{
+    code: string
+    lang: string
+    html: string
+  }>()
 
   useEffect(() => {
     let cancelled = false

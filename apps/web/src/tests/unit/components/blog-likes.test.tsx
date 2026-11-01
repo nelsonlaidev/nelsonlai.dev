@@ -5,13 +5,32 @@ import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { LikeButton, usePostLike } from '@/features/posts/like-button'
 import { m } from '@/paraglide/messages'
 
+type CounterProps = {
+  value: number
+}
+
+type ToastOptions = {
+  type: string
+  title: string
+}
+
 const fixture = vi.hoisted(() => ({
   data: { likes: 12, currentUserLikes: 0 },
-  load: vi.fn<() => Promise<{ likes: number; currentUserLikes: number }>>(),
-  save: vi.fn<(input: { value: number }) => Promise<{ likes: number; currentUserLikes: number }>>(),
-  toast: vi.fn<(input: { type: string; title: string }) => void>(),
+  load: vi.fn<
+    () => Promise<{
+      likes: number
+      currentUserLikes: number
+    }>
+  >(),
+  save: vi.fn<
+    (input: CounterProps) => Promise<{
+      likes: number
+      currentUserLikes: number
+    }>
+  >(),
+  toast: vi.fn<(input: ToastOptions) => void>(),
 }))
-vi.mock('@number-flow/react', () => ({ default: (props: { value: number }) => <span>{props.value}</span> }))
+vi.mock('@number-flow/react', () => ({ default: (props: CounterProps) => <span>{props.value}</span> }))
 vi.mock('motion/react', () => ({ useReducedMotion: () => true }))
 vi.mock('@repo/ui/components/toast', () => ({ toast: { add: fixture.toast } }))
 vi.mock('@/lib/orpc-client', () => ({
@@ -52,7 +71,7 @@ beforeEach(() => {
   fixture.data = { likes: 12, currentUserLikes: 0 }
   fixture.toast.mockReset()
   fixture.load.mockReset().mockResolvedValue(fixture.data)
-  fixture.save.mockReset().mockImplementation(async (input: { value: number }) => {
+  fixture.save.mockReset().mockImplementation(async (input: CounterProps) => {
     fixture.data = {
       likes: fixture.data.likes + input.value,
       currentUserLikes: fixture.data.currentUserLikes + input.value,

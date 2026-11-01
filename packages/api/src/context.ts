@@ -6,5 +6,9 @@ export type Context = {
   session: Session | null
   db: Database
   headers: Headers
-  posts: ReadonlyArray<{ slug: string; locale: string; title: string }>
+  posts: ReadonlyArray<{
+    slug: string
+    locale: string
+    title: string
+  }>
 }

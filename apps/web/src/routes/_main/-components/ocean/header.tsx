@@ -11,9 +11,6 @@ import { CommandMenu } from '../command-menu'
 import { SkipNav } from '../skip-nav'
 import { OceanBrand } from './brand'
 
-const ORDER = ['/projects', '/blog', '/about', '/guestbook', '/uses', '/dashboard']
-const LINKS = HEADER_LINKS.toSorted((a, b) => ORDER.indexOf(a.to) - ORDER.indexOf(b.to))
-
 export function OceanHeader() {
   const router = useRouter()
   const [open, setOpen] = useState(false)
@@ -40,7 +37,7 @@ export function OceanHeader() {
         </Link>
         <nav aria-label={m.nav_primary()} className='hidden min-[1001px]:block'>
           <ul className='flex items-center gap-6'>
-            {LINKS.map((link) => (
+            {HEADER_LINKS.map((link) => (
               <li key={link.to}>
                 <Link
                   to={link.to}
@@ -88,7 +85,7 @@ export function OceanHeader() {
                       <span className='text-sm text-muted-foreground'>00</span>
                     </Link>
                   </li>
-                  {LINKS.map((link, index) => (
+                  {HEADER_LINKS.map((link, index) => (
                     <li key={link.to}>
                       <Link
                         to={link.to}

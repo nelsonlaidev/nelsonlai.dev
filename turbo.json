@@ -10,7 +10,7 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".output/**"]
     },
-    "@repo/mdx-plugins#build": {
+    "@repo/mdx#build": {
       "outputs": ["dist/**"]
     },
     "db:generate": {

@@ -4,7 +4,7 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import * as z from 'zod'
 
-import { Mdx } from '@/components/mdx/mdx'
+import { loadMdx, Mdx } from '@/components/mdx/mdx'
 import { CommentSection } from '@/features/comments/comment-section'
 import { ArticleGallery } from '@/features/posts/article-gallery'
 import { BlogFooter } from '@/features/posts/blog-footer'
@@ -29,16 +29,17 @@ export const Route = createFileRoute('/_main/blog/$slug')({
   },
   loader: async ({ params }) => {
     const locale = getLocale()
-    const [post, posts] = await Promise.all([
+    const [post, summaries] = await Promise.all([
       getPost({ data: { slug: params.slug, locale } }),
       getPosts({ data: { locale } }),
     ])
 
     if (!post) throw notFound()
 
-    const next = posts[(posts.findIndex((item) => item.slug === post.slug) + 1) % posts.length]
+    const { toc } = await loadMdx(post.path)
+    const next = summaries[(summaries.findIndex((item) => item.slug === post.slug) + 1) % summaries.length]
 
-    return { post, locale, next }
+    return { post: { ...post, toc }, locale, next }
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {}
@@ -115,7 +116,7 @@ function ArticleDetail(props: ArticleDetailProps) {
               <p className='text-base/[1.65] text-[#8eafa1]'>{post.description}</p>
             </div>
             <Mdx
-              code={post.mdx}
+              path={post.path}
               className='text-lg leading-[1.7] text-[#b7cbbf] prose-headings:scroll-mt-10 prose-headings:leading-[1.35] prose-headings:font-normal prose-headings:tracking-[-0.035em] prose-headings:text-[#e7eee5] prose-h2:mx-0 prose-h2:mt-12 prose-h2:mb-5.5 prose-h2:text-[29px] max-[601px]:prose-h2:text-[26px] prose-h3:mx-0 prose-h3:mt-8 prose-h3:mb-5 prose-h3:text-[23px] prose-p:my-4.75 prose-a:text-[#d0e0c7]! prose-a:decoration-[#8eae9270] prose-a:underline-offset-4 prose-figure:my-7.5! prose-figcaption:mt-3 prose-figcaption:text-left prose-figcaption:text-sm/[1.8] prose-figcaption:text-[#85aa96] prose-strong:font-[550] prose-strong:text-[#d0e0c7] prose-code:rounded-[3px]! prose-code:border-[#a8c2a21c]! prose-code:bg-[#b9d4b30c]! prose-code:px-1.25! prose-code:py-0.5! prose-code:text-[0.85em]! prose-code:text-inherit prose-ol:mt-4.75 prose-ol:mb-6.25 prose-ol:pl-5.75 prose-ul:mt-4.75 prose-ul:mb-6.25 prose-ul:pl-5.75 prose-li:my-1.75 prose-li:pl-1.25 prose-table:text-base prose-th:border prose-th:border-[#8eae922b] prose-th:px-3.75 prose-th:py-3.25 prose-td:border prose-td:border-[#8eae922b] prose-td:px-3.75 prose-td:py-3.25 prose-img:rounded-[3px] prose-img:border-border [&>h2:first-child]:mt-0 [&>p:first-child]:mt-0 [&>p:first-child]:mb-11.25 [&>p:first-child]:border-l [&>p:first-child]:border-[#9cbeac55] [&>p:first-child]:py-0.5 [&>p:first-child]:pl-5.75 [&>p:first-child]:text-base [&>p:first-child]:text-[#8eafa1]'
             />
             <BlogFooter post={post}>

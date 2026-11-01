@@ -10,7 +10,7 @@ export function NotFound() {
     <div className='mt-52 mb-40 flex flex-col items-center justify-center gap-12'>
       <h1 className='text-center text-6xl font-semibold'>{m.error_not_found()}</h1>
       <Link to='/' className={cn(buttonVariants())}>
-        {m.components_go_to_homepage()}
+        {m.common_go_to_homepage()}
       </Link>
     </div>
   )
@@ -42,7 +42,7 @@ export function PublicNotFound() {
             'h-auto min-h-12 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5.75 py-3.5 text-sm/normal whitespace-normal text-[#e0ecde] hover:border-[#b0d3c3] hover:bg-[#b0d3c31c]',
           )}
         >
-          {m.components_go_to_homepage()}
+          {m.common_go_to_homepage()}
           <ArrowUpRightIcon aria-hidden='true' className='size-4' />
         </Link>
         <Link to='/projects' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-[#b9d3c7]'>

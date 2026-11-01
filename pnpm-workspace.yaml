@@ -19,7 +19,7 @@ catalog:
   react: 19.3.1
   tailwindcss: 4.3.3
   typescript: 6.0.3
-  varlock: 1.23.0
+  varlock: 1.24.0
   zod: 4.6.7
 
 minimumReleaseAgeExclude:
@@ -50,3 +50,21 @@ minimumReleaseAgeExclude:
   - '@takumi-rs/helpers@2.18.1'
   - '@takumi-rs/wasm@2.18.1'
   - takumi-js@2.18.1
+  - knip@6.44.1
+  - '@aws-sdk/checksums@3.1002.1'
+  - '@aws-sdk/client-s3@3.1161.0'
+  - '@aws-sdk/core@3.979.1'
+  - '@aws-sdk/credential-provider-env@3.972.80'
+  - '@aws-sdk/credential-provider-http@3.972.82'
+  - '@aws-sdk/credential-provider-ini@3.973.25'
+  - '@aws-sdk/credential-provider-login@3.972.87'
+  - '@aws-sdk/credential-provider-node@3.972.92'
+  - '@aws-sdk/credential-provider-process@3.972.80'
+  - '@aws-sdk/credential-provider-sso@3.973.24'
+  - '@aws-sdk/credential-provider-web-identity@3.972.86'
+  - '@aws-sdk/middleware-sdk-s3@3.972.85'
+  - '@aws-sdk/nested-clients@3.997.54'
+  - '@aws-sdk/s3-request-presigner@3.1161.0'
+  - '@aws-sdk/signature-v4-multi-region@3.996.51'
+  - '@aws-sdk/token-providers@3.1161.0'
+  - yet-another-react-lightbox@3.33.0

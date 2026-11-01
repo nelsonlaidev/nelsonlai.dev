@@ -8,9 +8,24 @@ import { createQueryClient } from '@/lib/query-client'
 import { m } from '@/paraglide/messages'
 import { DashboardStats } from '@/routes/_main/-components/dashboard/stats'
 
+type MockLinkProps = {
+  to: string
+  children: React.ReactNode
+}
+
+type CounterProps = {
+  value: number
+}
+
 const fixture = vi.hoisted(() => ({
   youtube: vi.fn<() => Promise<object>>(),
-  toast: vi.fn<(message: { actionProps?: { onClick: () => void } }) => void>(),
+  toast: vi.fn<
+    (message: {
+      actionProps?: {
+        onClick: () => void
+      }
+    }) => void
+  >(),
 }))
 vi.mock('@repo/ui/components/toast', () => ({ toast: { add: fixture.toast } }))
 function source(name: string, data: object) {
@@ -35,10 +50,10 @@ vi.mock('@/lib/orpc-client', () => {
 })
 vi.mock('@tanstack/react-router', async (importOriginal) => ({
   ...(await importOriginal<typeof Router>()),
-  Link: (props: { to: string; children: React.ReactNode }) => <a href={props.to}>{props.children}</a>,
+  Link: (props: MockLinkProps) => <a href={props.to}>{props.children}</a>,
 }))
 vi.mock('@/routes/_main/-components/dashboard/counter', () => ({
-  Counter: (props: { value: number }) => <>{props.value}</>,
+  Counter: (props: CounterProps) => <>{props.value}</>,
 }))
 beforeEach(() => {
   fixture.youtube.mockReset().mockRejectedValue(new Error('Fixture service unavailable'))

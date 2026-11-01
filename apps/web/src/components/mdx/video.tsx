@@ -1,4 +1,3 @@
-import { AspectRatio } from '@repo/ui/components/aspect-ratio'
 import { cn } from 'cn'
 
 type VideoProps = React.ComponentProps<'video'> & {
@@ -11,7 +10,7 @@ export function Video(props: VideoProps) {
   const { src, width, height, controls = true, className, ...rest } = props
 
   return (
-    <AspectRatio ratio={16 / 9}>
+    <div className='relative aspect-video'>
       <video
         className={cn('my-4 rounded-lg', className)}
         preload='metadata'
@@ -23,6 +22,6 @@ export function Video(props: VideoProps) {
         height={height}
         {...rest}
       />
-    </AspectRatio>
+    </div>
   )
 }

@@ -18,14 +18,14 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
   return (
     <div className='flex flex-col-reverse items-center justify-between gap-4 px-2 sm:flex-row'>
       <div className='flex-1 text-sm text-muted-foreground'>
-        {m.components_table_pagination_rows_selected({
+        {m.admin_pagination_rows_selected({
           selected: table.getFilteredSelectedRowModel().rows.length,
           total: table.getFilteredRowModel().rows.length,
         })}
       </div>
       <div className='flex flex-col-reverse items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8'>
         <div className='flex items-center gap-2'>
-          <p className='text-sm font-medium'>{m.components_table_pagination_rows_per_page()}</p>
+          <p className='text-sm font-medium'>{m.admin_pagination_rows_per_page()}</p>
           <Select
             value={`${table.state.pagination.pageSize}`}
             onValueChange={(value) => {
@@ -33,7 +33,7 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
             }}
             disabled={disabled}
           >
-            <SelectTrigger className='min-h-11' aria-label={m.components_table_pagination_rows_per_page()}>
+            <SelectTrigger className='min-h-11' aria-label={m.admin_pagination_rows_per_page()}>
               <SelectValue placeholder={table.state.pagination.pageSize} />
             </SelectTrigger>
             <SelectContent side='top' className='border border-border shadow-md ring-0'>
@@ -46,7 +46,7 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
           </Select>
         </div>
         <div className='text-sm font-medium'>
-          {m.components_table_pagination_page_of({
+          {m.admin_pagination_page_of({
             page: table.state.pagination.pageIndex + 1,
             total: Math.max(1, table.getPageCount()),
           })}
@@ -59,7 +59,7 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
               table.setPageIndex(0)
             }}
             className='hidden lg:flex'
-            aria-label={m.components_table_pagination_go_to_first_page()}
+            aria-label={m.admin_pagination_go_to_first_page()}
             disabled={!table.getCanPreviousPage() || disabled}
           >
             <ChevronsLeftIcon />
@@ -70,7 +70,7 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
             onClick={() => {
               table.previousPage()
             }}
-            aria-label={m.components_table_pagination_go_to_previous_page()}
+            aria-label={m.admin_pagination_go_to_previous_page()}
             disabled={!table.getCanPreviousPage() || disabled}
           >
             <ChevronLeftIcon />
@@ -81,7 +81,7 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
             onClick={() => {
               table.nextPage()
             }}
-            aria-label={m.components_table_pagination_go_to_next_page()}
+            aria-label={m.admin_pagination_go_to_next_page()}
             disabled={!table.getCanNextPage() || disabled}
           >
             <ChevronRightIcon />
@@ -93,7 +93,7 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
               table.setPageIndex(table.getPageCount() - 1)
             }}
             className='hidden lg:flex'
-            aria-label={m.components_table_pagination_go_to_last_page()}
+            aria-label={m.admin_pagination_go_to_last_page()}
             disabled={!table.getCanNextPage() || disabled}
           >
             <ChevronsRightIcon />

@@ -13,7 +13,7 @@ export function getColumns(): Array<ColumnDef<typeof features, User>> {
   return [
     {
       accessorKey: 'name',
-      header: m.components_tables_users_user(),
+      header: m.admin_users_table_user(),
       cell: ({ row }) => (
         <div className='flex items-center gap-2'>
           <UserAvatar id={row.original.id} name={row.original.name} image={row.original.image} className='size-6' />
@@ -23,15 +23,15 @@ export function getColumns(): Array<ColumnDef<typeof features, User>> {
     },
     {
       accessorKey: 'email',
-      header: m.components_tables_users_email(),
+      header: m.admin_users_table_email(),
     },
     {
       accessorKey: 'role',
-      header: m.components_tables_users_role(),
+      header: m.admin_users_table_role(),
     },
     {
       accessorKey: 'createdAt',
-      header: m.components_tables_users_created_at(),
+      header: m.admin_users_table_created_at(),
       cell: ({ row }) => <FormattedDateCell date={row.original.createdAt} />,
     },
   ]

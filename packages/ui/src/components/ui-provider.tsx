@@ -1,3 +1,4 @@
+import { CSPProvider } from '@base-ui/react/csp-provider'
 import { createContext, use } from 'react'
 
 export type UITranslations = {
@@ -14,15 +15,25 @@ export type UITranslations = {
 const UITranslationsContext = createContext<UITranslations | undefined>(undefined)
 UITranslationsContext.displayName = 'UITranslationsContext'
 
+const CspNonceContext = createContext<string | undefined>(undefined)
+CspNonceContext.displayName = 'CspNonceContext'
+
 type UIProviderProps = {
   children: React.ReactNode
   translations: UITranslations
+  nonce?: string
 }
 
 export function UIProvider(props: UIProviderProps) {
-  const { children, translations } = props
+  const { children, translations, nonce } = props
 
-  return <UITranslationsContext value={translations}>{children}</UITranslationsContext>
+  return (
+    <CspNonceContext value={nonce}>
+      <CSPProvider nonce={nonce} disableStyleElements>
+        <UITranslationsContext value={translations}>{children}</UITranslationsContext>
+      </CSPProvider>
+    </CspNonceContext>
+  )
 }
 
 export function useUITranslation(key: keyof UITranslations, override?: string, required = true) {
@@ -34,4 +45,9 @@ export function useUITranslation(key: keyof UITranslations, override?: string, r
   }
 
   return translations[key]
+}
+
+/** Share the current document nonce with components that inject styles. */
+export function useCspNonce() {
+  return use(CspNonceContext)
 }

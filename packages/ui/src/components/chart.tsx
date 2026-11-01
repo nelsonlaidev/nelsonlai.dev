@@ -4,6 +4,8 @@ import { cn } from 'cn'
 import { createContext, use, useId, useMemo } from 'react'
 import * as RechartsPrimitive from 'recharts'
 
+import { useCspNonce } from './ui-provider'
+
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const
 
@@ -97,6 +99,7 @@ type ChartStyleProps = {
 
 export function ChartStyle(props: ChartStyleProps) {
   const { id, config } = props
+  const nonce = useCspNonce()
   const selectorId = id
     .replaceAll('\\', '\\\\')
     .replaceAll('"', '\\"')
@@ -110,7 +113,7 @@ export function ChartStyle(props: ChartStyleProps) {
   }
 
   return (
-    <style>
+    <style nonce={nonce}>
       {Object.entries(THEMES)
         .map(
           ([theme, prefix]) => `
@@ -205,7 +208,15 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
           .map((item, index) => {
             const key = String(nameKey ?? item.name ?? item.dataKey ?? 'value')
             const itemConfig = getPayloadConfigFromPayload(config, item, key)
-            const indicatorColor = color ?? (item.payload as { fill?: string } | undefined)?.fill ?? item.color
+            const entryPayload: unknown = item.payload
+            const fill =
+              typeof entryPayload === 'object' &&
+              entryPayload !== null &&
+              'fill' in entryPayload &&
+              typeof entryPayload.fill === 'string'
+                ? entryPayload.fill
+                : undefined
+            const indicatorColor = color ?? fill ?? item.color
 
             return (
               <div

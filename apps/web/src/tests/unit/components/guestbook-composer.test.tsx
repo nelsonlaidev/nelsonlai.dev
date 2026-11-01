@@ -6,6 +6,10 @@ import { MessageBoard } from '@/features/guestbook/message-board'
 import { MessageBox } from '@/features/guestbook/message-box'
 import { m } from '@/paraglide/messages'
 
+type ChildrenProps = {
+  children: React.ReactNode
+}
+
 const fixture = vi.hoisted(() => ({
   signedIn: false,
   pending: false,
@@ -36,7 +40,7 @@ vi.mock('@/lib/orpc-client', () => ({
   },
 }))
 
-function Wrapper(props: { children: React.ReactNode }) {
+function Wrapper(props: ChildrenProps) {
   return <QueryClientProvider client={new QueryClient()}>{props.children}</QueryClientProvider>
 }
 function setup(isSigningOut = false) {

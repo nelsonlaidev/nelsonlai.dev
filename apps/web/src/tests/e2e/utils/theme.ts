@@ -18,7 +18,10 @@ export async function checkStoredTheme(page: Page, theme: 'light' | 'dark' | 'sy
 type CreateBrowserContextOptions = {
   baseURL?: string
   colorScheme?: 'light' | 'dark' | 'no-preference'
-  localStorage?: Array<{ name: string; value: string }>
+  localStorage?: Array<{
+    name: string
+    value: string
+  }>
 }
 
 export async function createBrowserContext(browser: Browser, options: CreateBrowserContextOptions = {}) {

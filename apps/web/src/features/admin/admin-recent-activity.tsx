@@ -1,5 +1,6 @@
 import type { AdminRecentActivityOutput } from './types'
 
+import { ParaglideMessage } from '@inlang/paraglide-js-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@repo/ui/components/card'
 import { Skeleton } from '@repo/ui/components/skeleton'
 import { createRange } from '@repo/utils'
@@ -67,27 +68,23 @@ function ActivityItem(props: ActivityProps) {
       <UserAvatar id={activity.user.id} name={userName} image={activity.user.image} className='size-6' />
       <div className='min-w-0 flex-1 space-y-1 wrap-anywhere'>
         <p className='text-sm'>
-          {activity.type === 'comment'
-            ? m
-                .admin_dashboard_recent_activity_commented_on({ name: userName, post: activity.postId })
-                .split(/(<link>.*?<\/link>)/)
-                .map((part) =>
-                  part.startsWith('<link>') ? (
-                    <Link
-                      key={part}
-                      to='/blog/$slug'
-                      params={{ slug: activity.postId }}
-                      className='underline underline-offset-4'
-                    >
-                      {part.slice(6, -7)}
-                    </Link>
-                  ) : (
-                    part
-                  ),
-                )
-            : m.admin_dashboard_recent_activity_guestbook_message({
-                name: userName,
-              })}
+          {activity.type === 'comment' ? (
+            <ParaglideMessage
+              message={m.admin_dashboard_recent_activity_commented_on}
+              inputs={{ name: userName, post: activity.postId }}
+              markup={{
+                link: (props) => (
+                  <Link to='/blog/$slug' params={{ slug: activity.postId }} className='underline underline-offset-4'>
+                    {props.children}
+                  </Link>
+                ),
+              }}
+            />
+          ) : (
+            m.admin_dashboard_recent_activity_guestbook_message({
+              name: userName,
+            })
+          )}
         </p>
         <p className='line-clamp-1 text-sm text-muted-foreground'>{activity.body}</p>
         <p className='text-sm text-muted-foreground'>{timeAgo}</p>

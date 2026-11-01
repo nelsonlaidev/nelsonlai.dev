@@ -1,5 +1,6 @@
-import type { TOC } from '@repo/mdx-plugins'
+import type { TOC } from '@repo/mdx'
 
+import { cn } from 'cn'
 import { useEffect, useState } from 'react'
 
 import { m } from '@/paraglide/messages'
@@ -42,8 +43,13 @@ export function TableOfContents(props: TableOfContentsProps) {
             key={item.url}
             href={`#${encodeURIComponent(item.url)}`}
             aria-current={activeId === item.url ? 'location' : undefined}
-            style={{ paddingLeft: Math.max(0, item.depth - 2) * 12 + 13 }}
-            className='min-h-11 border-l border-l-[#6e928640] py-2 pl-3.25 text-sm leading-[1.6] text-[#8cafa2] aria-[current=location]:border-l-[#d6e6d2] aria-[current=location]:text-[#d6e6d2]'
+            className={cn(
+              'min-h-11 border-l border-l-[#6e928640] py-2 pl-3.25 text-sm leading-[1.6] text-[#8cafa2] aria-[current=location]:border-l-[#d6e6d2] aria-[current=location]:text-[#d6e6d2]',
+              item.depth === 3 && 'pl-6.25',
+              item.depth === 4 && 'pl-9.25',
+              item.depth === 5 && 'pl-12.25',
+              item.depth === 6 && 'pl-15.25',
+            )}
           >
             {item.title}
           </a>

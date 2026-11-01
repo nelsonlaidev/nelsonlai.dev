@@ -38,7 +38,7 @@ export function LocaleSwitcher(props: LocaleSwitcherProps) {
         render={
           <Button
             variant={compact ? 'ghost' : 'outline'}
-            aria-label={`${m.layout_change_language()}: ${LOCALE_LABELS[locale]}`}
+            aria-label={`${m.nav_change_language()}: ${LOCALE_LABELS[locale]}`}
           />
         }
       >

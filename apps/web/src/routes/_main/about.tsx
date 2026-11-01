@@ -1,11 +1,17 @@
+import type { ErrorComponentProps } from '@tanstack/react-router'
+
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
+import { Mdx } from '@/components/mdx/mdx'
+import { OceanPage } from '@/components/ocean-page'
+import { RouteError } from '@/components/route-error'
 import { getPage } from '@/features/pages/pages.functions'
-import { AboutPage } from '@/features/profile/about-page'
-import { ProfileError, ProfilePending } from '@/features/profile/profile-layout'
 import { createJsonLdAboutPage } from '@/lib/json-ld'
 import { createSeoHead } from '@/lib/seo'
+import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
+
+import { AboutHero, AboutSite, AboutStory, AboutToolbox } from './-components/about'
 
 export const Route = createFileRoute('/_main/about')({
   loader: async () => {
@@ -34,13 +40,46 @@ export const Route = createFileRoute('/_main/about')({
       }),
     })
   },
-  pendingComponent: ProfilePending,
-  errorComponent: ProfileError,
+  pendingComponent: AboutPending,
+  errorComponent: AboutError,
   component: RouteComponent,
 })
 
 function RouteComponent() {
   const { page } = Route.useLoaderData()
 
-  return <AboutPage page={page} />
+  return (
+    <OceanPage>
+      <div className='wrap-anywhere'>
+        <Mdx
+          path={page.path}
+          unstyled
+          components={{
+            AboutHero,
+            AboutStory,
+            AboutToolbox,
+            AboutSite,
+          }}
+        />
+      </div>
+    </OceanPage>
+  )
+}
+
+function AboutPending() {
+  return (
+    <OceanPage>
+      <output aria-busy='true' className='block text-muted-foreground'>
+        {m.common_loading()}
+      </output>
+    </OceanPage>
+  )
+}
+
+function AboutError(props: ErrorComponentProps) {
+  return (
+    <OceanPage>
+      <RouteError {...props} />
+    </OceanPage>
+  )
 }

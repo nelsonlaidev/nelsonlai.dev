@@ -5,8 +5,8 @@ import { COMMENT_SUBMIT_AND_VIEW_POST_SLUG } from '../fixtures/posts'
 import { expect, test } from '../fixtures/test'
 
 const searchMessages = {
-  placeholder: en.components_filtered_posts_placeholder,
-  'no-posts-found': en.components_filtered_posts_no_posts_found,
+  placeholder: en.blog_search_placeholder,
+  'no-posts-found': en.blog_search_no_posts_found,
 }
 const englishPosts = allPosts.filter((post) => post.locale === 'en')
 

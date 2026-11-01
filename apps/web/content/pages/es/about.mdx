@@ -4,7 +4,14 @@ description: Nelson Lai es un ingeniero full-stack con base en Hong Kong. Constr
 updatedAt: '2026-06-26T07:58:40.000Z'
 ---
 
-<AboutStory>
+<AboutHero
+  title='Acerca de'
+  intro={'Un ingeniero full-stack en Hong Kong.\nCreando para la web y aprendiendo por el camino.'}
+  githubLabel='Encuéntrame en GitHub'
+  caption='Una mente curiosa en un océano inmenso.'
+/>
+
+<AboutStory label="Un poco de mi historia" title={<>Todo empezó con<br /><em>«¿Cómo se hace?»</em></>}>
 
 Soy un ingeniero full-stack en Hong Kong. Estoy aprendiendo TypeScript, Next.js/TanStack Start, React.js, Node.js y gestión de bases de datos. Ahora tengo pasión por aprender UI/UX.
 
@@ -14,34 +21,34 @@ Me encanta usar [Next.js](https://nextjs.org/)/[TanStack Start](https://tanstack
 
 </AboutStory>
 
-<AboutSite>
+<AboutToolbox
+  label='Herramientas familiares'
+  title={
+    <>
+      Con qué
+      <br />
+      <em>construyo.</em>
+    </>
+  }
+  groups={[
+    { label: 'Interfaces', tools: ['React', 'Next.js / TanStack Start', 'TypeScript'] },
+    { label: 'Entre bastidores', tools: ['Node.js', 'PostgreSQL', 'Drizzle'] },
+    { label: 'Hacerlo realidad', tools: ['GitHub', 'Docker', 'MDX'] },
+  ]}
+  setupLabel='Explora mi equipo completo'
+/>
 
-### Acerca de este sitio
-
-- Framework: [TanStack Start](https://tanstack.com/start/latest)
-- Base de datos: [PostgreSQL](https://www.postgresql.org/)
-- ORM: [Drizzle](https://orm.drizzle.team/)
-- Autenticación: [Better Auth](https://www.better-auth.com/)
-- Despliegue: [Docker](https://www.docker.com/)
-- Contenido: [MDX](https://mdxjs.com/)
-- Análisis: [Umami](https://github.com/umami-software/umami)
-- Estilos: [Tailwind CSS](https://tailwindcss.com)
-- Resaltado de sintaxis: [Shiki](https://github.com/shikijs/shiki)
-
-La primera versión de este sitio se inspiró en [tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) de **Timothy Lin**. Me ayudó a empezar a crear un blog desde cero, y el sitio ha evolucionado considerablemente desde entonces.
-
-### Inspiración
-
-Aquí hay algunos sitios web que me inspiraron mucho para crear un sitio web fantástico.
-
-Consulta el [README](https://github.com/nelsonlaidev/nelsonlai.dev?tab=readme-ov-file#credits)
-
-### Redes sociales
-
-<SocialLinks />
-
-### Logo
-
-<LogoShowcase />
-
-</AboutSite>
+<AboutSite
+  label='Sobre este pequeño océano'
+  title={
+    <>
+      Un lugar para explorar.
+      <br />
+      <em>Más que una página que visitar.</em>
+    </>
+  }
+  intro='Seafold explora una web más personal. Proyectos, artículos y un libro de visitas se reúnen en un pequeño mundo bajo la superficie.'
+  world='Los peces, la luz y la profundidad se generan mediante código. Los proyectos y las historias son míos. Juntos forman un lugar para explorar, compartir y seguir creando.'
+  projectsLabel='Explora mis proyectos'
+  helloLabel='Deja un pequeño saludo'
+/>

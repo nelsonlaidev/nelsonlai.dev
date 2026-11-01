@@ -60,7 +60,7 @@ The header artwork is preserved from the original project.
 ### Prerequisites
 
 - Node.js 24 or newer.
-- pnpm 12.15.0, as declared in [package.json](package.json).
+- The pnpm version declared in [package.json](package.json).
 - Docker with Docker Compose for local PostgreSQL, Redis, and UpREST services.
 - Optionally, Visual Studio Code with the [recommended extensions](.vscode/extensions.json).
 
@@ -155,7 +155,7 @@ migrations when present (otherwise runs `db:push`), and runs `db:seed`.
 pnpm dev
 ```
 
-Turborepo builds the shared MDX plugins before starting the web application. Vite
+Turborepo builds the shared MDX compiler before starting the web application. Vite
 generates content collections, translated messages, and route files.
 
 | Service         | Address                 |
@@ -190,7 +190,7 @@ generates content collections, translated messages, and route files.
 │   ├── db/                  # Drizzle schema, relations, and seed script
 │   ├── email/               # React Email templates and delivery
 │   ├── kv/                  # Redis cache and rate limiting
-│   ├── mdx-plugins/         # Shared Rehype and Remark plugins
+│   ├── mdx/                 # MDX compilation, metadata, and syntax highlighting
 │   ├── ui/                  # UI components and shared theme styles
 │   └── utils/               # Shared utilities
 ├── docker-compose.yaml      # Development services

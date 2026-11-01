@@ -1,58 +1,49 @@
-import type { CollectionContext, Meta } from '@content-collections/core'
+import type { Meta } from '@content-collections/core'
 
 import { defineCollection, defineConfig } from '@content-collections/core'
-import { compileMDX } from '@content-collections/mdx'
-import { getTOC, oceanRehypePlugins, rehypePlugins, remarkPlugins } from '@repo/mdx-plugins'
 import * as z from 'zod'
 
 import { locales } from './project.inlang/settings.json'
 
-async function transformContent<T extends { _meta: Meta; content: string }>(
-  document: T,
-  context: CollectionContext,
-  ocean = false,
-) {
-  const [locale, ...slugParts] = document._meta.path.split('/')
-
-  if (!locale || !locales.includes(locale)) {
-    throw new Error(`Invalid locale "${locale}" in path "${document._meta.path}".`)
-  }
-
+function documentMetadata<
+  T extends {
+    _meta: Meta
+    content: string
+  },
+>(document: T, kind: 'blog' | 'projects' | 'pages') {
+  // oxlint-disable-next-line sonarjs/no-unused-vars -- Exclude document bodies from generated metadata.
+  const { _meta, content: _content, ...metadata } = document
+  const [locale, ...slugParts] = _meta.path.split('/')
   const slug = slugParts.join('/')
 
-  if (!slug) {
-    throw new Error(`Missing slug in path "${document._meta.path}".`)
+  if (!locale || !locales.includes(locale) || !slug) {
+    throw new Error(`Invalid content path: content/${kind}/${_meta.filePath}`)
   }
 
-  const [mdx, toc] = await Promise.all([
-    compileMDX(context, document, { remarkPlugins, rehypePlugins: ocean ? oceanRehypePlugins : rehypePlugins }),
-    context.cache(document.content, getTOC, { key: 'toc' }),
-  ])
-
-  return { ...document, locale, slug, mdx, toc }
+  // Matches Vite's root-relative MDX glob keys, including nested slugs.
+  return { ...metadata, path: `/content/${kind}/${_meta.filePath}`, locale, slug }
 }
+
+const pageSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  updatedAt: z.iso.datetime(),
+  content: z.string(),
+})
 
 const posts = defineCollection({
   name: 'posts',
   directory: 'content/blog',
   include: '**/*.mdx',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    publishedAt: z.iso.datetime(),
-    updatedAt: z.iso.datetime(),
-    content: z.string(),
-  }),
-  transform: async (document, context) => transformContent(document, context, true),
+  schema: pageSchema.extend({ publishedAt: z.iso.datetime() }),
+  transform: (document) => documentMetadata(document, 'blog'),
 })
 
 const projects = defineCollection({
   name: 'projects',
   directory: 'content/projects',
   include: '**/*.mdx',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
+  schema: pageSchema.extend({
     homepage: z.url().optional(),
     github: z.url().optional(),
     schemaType: z.enum(['SoftwareSourceCode', 'SoftwareApplication']),
@@ -63,27 +54,18 @@ const projects = defineCollection({
     category: z.string().optional(),
     features: z.array(z.object({ title: z.string(), text: z.string() })).optional(),
     journey: z.string().optional(),
-    selected: z.boolean().optional().default(false),
+    selected: z.boolean().default(false),
     dateCreated: z.iso.datetime(),
-    updatedAt: z.iso.datetime(),
-    content: z.string(),
   }),
-  transform: transformContent,
+  transform: (document) => documentMetadata(document, 'projects'),
 })
 
 const pages = defineCollection({
   name: 'pages',
   directory: 'content/pages',
   include: '**/*.mdx',
-  schema: z.object({
-    title: z.string(),
-    updatedAt: z.iso.datetime(),
-    description: z.string(),
-    content: z.string(),
-  }),
-  transform: transformContent,
+  schema: pageSchema,
+  transform: (document) => documentMetadata(document, 'pages'),
 })
 
-export default defineConfig({
-  content: [posts, projects, pages],
-})
+export default defineConfig({ content: [posts, projects, pages] })

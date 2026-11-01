@@ -12,6 +12,7 @@ import {
 import { Spinner } from '@repo/ui/components/spinner'
 import { toast } from '@repo/ui/components/toast'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@repo/ui/components/tooltip'
+import { useCspNonce } from '@repo/ui/components/ui-provider'
 import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   ChevronDownIcon,
@@ -125,6 +126,7 @@ type CommentItemProps = Omit<CommentListProps, 'sort' | 'parentId'> & {
 
 function CommentItem(props: CommentItemProps) {
   const { comment, slug, highlightedCommentId, highlightedReplyId } = props
+  const nonce = useCspNonce()
   const [replying, setReplying] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [repliesOpen, setRepliesOpen] = useState(comment.id === highlightedCommentId)
@@ -260,7 +262,7 @@ function CommentItem(props: CommentItemProps) {
                   }}
                 >
                   <ThumbsUpIcon aria-hidden='true' />
-                  <NumberFlow value={likeCount} />
+                  <NumberFlow nonce={nonce} value={likeCount} />
                 </Button>
                 <Button
                   type='button'
@@ -275,7 +277,7 @@ function CommentItem(props: CommentItemProps) {
                   }}
                 >
                   <ThumbsDownIcon aria-hidden='true' />
-                  <NumberFlow value={dislikeCount} />
+                  <NumberFlow nonce={nonce} value={dislikeCount} />
                 </Button>
                 {!comment.parentId && (
                   <Button
@@ -317,7 +319,7 @@ function CommentItem(props: CommentItemProps) {
                   aria-hidden='true'
                   className='size-4 transition-transform duration-200 motion-reduce:transition-none'
                 />
-                <NumberFlow data-testid='comment-reply-count' value={comment.replyCount} />
+                <NumberFlow nonce={nonce} data-testid='comment-reply-count' value={comment.replyCount} />
                 {m.blog_comments_replies({ count: comment.replyCount })}
               </Button>
             )}

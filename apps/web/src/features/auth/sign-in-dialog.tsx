@@ -59,7 +59,7 @@ export function SignInDialog() {
       >
         <DialogHeader>
           <DialogTitle className='pr-8 text-2xl/tight tracking-[-0.035em]'>{m.common_sign_in()}</DialogTitle>
-          <DialogDescription className='leading-[1.65]'>{m.dialog_sign_in_description()}</DialogDescription>
+          <DialogDescription className='leading-[1.65]'>{m.auth_sign_in_description()}</DialogDescription>
         </DialogHeader>
         <div className='my-2 flex flex-col gap-4'>
           {PROVIDERS.map((provider) => {
@@ -81,10 +81,10 @@ export function SignInDialog() {
                 }}
               >
                 {icon}
-                {m.dialog_sign_in_continue_with({ provider: provider === 'github' ? 'GitHub' : 'Google' })}
+                {m.auth_sign_in_continue_with({ provider: provider === 'github' ? 'GitHub' : 'Google' })}
                 {lastMethod === provider && (
                   <Badge variant='outline' className='absolute -top-2 right-2 bg-background'>
-                    {m.dialog_sign_in_last_used()}
+                    {m.auth_sign_in_last_used()}
                   </Badge>
                 )}
               </Button>
@@ -93,7 +93,7 @@ export function SignInDialog() {
         </div>
         <div className='text-center text-sm/relaxed text-muted-foreground'>
           <ParaglideMessage
-            message={m.dialog_sign_in_notice}
+            message={m.auth_sign_in_notice}
             markup={{
               terms: ({ children }) => (
                 <DialogClose nativeButton={false} render={<Link to='/terms' className='text-foreground underline' />}>

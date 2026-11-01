@@ -9,9 +9,11 @@ import { m } from '@/paraglide/messages'
 
 type LegalPageProps = {
   page: {
+    path: string
     title: string
     description: string
-    mdx: string
+    slug: string
+    locale: string
   }
   kind: 'terms' | 'privacy'
 }
@@ -32,7 +34,7 @@ export function LegalPage(props: LegalPageProps) {
         className='border border-[#a6c9bc30] bg-[#062633] p-[clamp(24px,4vw,60px)] wrap-anywhere text-[#cfddd3] max-[541px]:-mr-[max(16px,env(safe-area-inset-right))] max-[541px]:-ml-[max(16px,env(safe-area-inset-left))] max-[541px]:border-x-0 max-[541px]:py-6 max-[541px]:pr-[max(16px,env(safe-area-inset-right))] max-[541px]:pl-[max(16px,env(safe-area-inset-left))]'
       >
         <Mdx
-          code={page.mdx}
+          path={page.path}
           className='max-w-none text-inherit prose-headings:font-medium prose-headings:text-[#edf3e8] prose-h2:mt-12 prose-h2:mb-5.5 prose-h2:text-[clamp(24px,3vw,30px)] prose-h2:leading-[1.3] prose-h2:tracking-tight prose-h3:mt-7.5 prose-h3:mb-4 prose-h3:text-xl prose-h3:leading-[1.4] prose-h4:mt-6.5 prose-h4:mb-4 prose-h4:text-lg/[1.4] prose-p:mt-0 prose-p:mb-6 prose-p:text-lg prose-p:leading-[1.7] max-[541px]:prose-p:text-[17px] prose-a:text-[#b6dfc9] prose-a:underline prose-a:underline-offset-4 prose-strong:font-semibold prose-strong:text-[#edf3e8] prose-ol:mt-0 prose-ol:mb-6 prose-ol:pl-6 prose-ul:mt-0 prose-ul:mb-6 prose-ul:pl-6 prose-li:my-0 prose-li:p-0 prose-li:text-lg prose-li:leading-[1.7] prose-li:not-first:mt-3 max-[541px]:prose-li:text-[17px] [&_li>p]:mb-3'
         />
         <nav className='mt-10 border-t border-t-[#a6c9bc30] pt-6 text-base/normal'>

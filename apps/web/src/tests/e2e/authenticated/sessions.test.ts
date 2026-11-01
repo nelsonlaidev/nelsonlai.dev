@@ -10,7 +10,12 @@ import { expect, test as base } from '../fixtures/test'
 import { createSessionCookie } from '../utils/auth'
 
 const test = base.extend<{
-  isolatedSession: { userId: string; token: string; otherToken: string; expiresAt: Date }
+  isolatedSession: {
+    userId: string
+    token: string
+    otherToken: string
+    expiresAt: Date
+  }
 }>({
   isolatedSession: async ({ context, page }, provide) => {
     const userId = createId()
@@ -80,7 +85,7 @@ test.describe('session lifecycle', () => {
       await expect(page.getByRole('textbox')).toBeVisible()
       await page.getByRole('button', { name: messages.common_sign_out, exact: true }).click()
 
-      await expect(page.getByRole('textbox')).toBeHidden()
+      await expect(page.getByRole('textbox')).toBeDisabled()
       await expect(page.getByRole('button', { name: messages.common_sign_in, exact: true })).toBeVisible()
       expect(await db.query.sessions.findFirst({ where: { token: isolatedSession.token } })).toBeUndefined()
 

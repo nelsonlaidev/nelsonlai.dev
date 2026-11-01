@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@upstash/ratelimit": "2.2.0",
-    "@upstash/redis": "1.39.0",
+    "@upstash/redis": "1.40.0",
     "zod": "catalog:"
   },
   "devDependencies": {

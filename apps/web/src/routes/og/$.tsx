@@ -20,7 +20,13 @@ const geistFont = Buffer.from(geistUrl.slice(geistUrl.indexOf(',') + 1), 'base64
 const logo = `data:image/svg+xml;base64,${Buffer.from(nacreSvg).toString('base64')}`
 let mainImage: ReturnType<typeof surfacePoster> | undefined
 
-const PAGE_GROUPS: Record<string, { group: string; index: number }> = {
+const PAGE_GROUPS: Record<
+  string,
+  {
+    group: string
+    index: number
+  }
+> = {
   blog: { group: 'Writing', index: 1 },
   projects: { group: 'Selected work', index: 2 },
   about: { group: 'Nelson Lai', index: 3 },
@@ -53,7 +59,13 @@ export const Route = createFileRoute('/og/$')({
         const locale = getLocale()
         const contentPath = pathSegments.join('/')
 
-        let content: { title: string; description: string } | null | undefined
+        let content:
+          | {
+              title: string
+              description: string
+            }
+          | null
+          | undefined
         let group = PAGE_GROUPS[contentPath]?.group ?? 'Nelson Lai'
         let index = PAGE_GROUPS[contentPath]?.index ?? 0
 

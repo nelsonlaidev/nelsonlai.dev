@@ -3,11 +3,8 @@ import type { KnipConfig } from 'knip'
 export default {
   workspaces: {
     'apps/web': {
-      entry: ['content-collections.ts', 'scripts/check-ssr.ts'],
-    },
-    'packages/mdx-plugins': {
-      // Required by the VFile DataMap module augmentation in src/types.ts.
-      ignoreDependencies: ['vfile'],
+      // Content Collections loads its configuration through the Vite plugin.
+      entry: ['content-collections.ts'],
     },
   },
 } satisfies KnipConfig

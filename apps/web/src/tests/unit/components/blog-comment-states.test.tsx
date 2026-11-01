@@ -7,6 +7,10 @@ import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { CommentList } from '@/features/comments/comment-list'
 import { m } from '@/paraglide/messages'
 
+type ChildrenProps = {
+  children: React.ReactNode
+}
+
 const fixture = vi.hoisted(() => ({ state: 'loading' as 'loading' | 'empty' | 'error' }))
 vi.mock('@/lib/auth-client', () => ({ authClient: { useSession: () => ({ data: null, isPending: false }) } }))
 vi.mock('@/features/comments/comments.queries', () => ({ commentListInfiniteOptions: () => ({}) }))
@@ -22,7 +26,7 @@ vi.mock('@tanstack/react-query', async (importOriginal) => ({
     data: fixture.state === 'empty' ? { pages: [{ comments: [] }] } : undefined,
   }),
 }))
-function Labels(props: { children: React.ReactNode }) {
+function Labels(props: ChildrenProps) {
   return (
     <UIProvider
       translations={{
@@ -31,8 +35,8 @@ function Labels(props: { children: React.ReactNode }) {
         commandDialogTitle: m.command_menu_title(),
         commandDialogDescription: m.command_menu_description(),
         treeView: m.common_aria_labels_tree_view(),
-        sidebarTitle: m.layout_sidebar_title(),
-        sidebarDescription: m.layout_sidebar_description(),
+        sidebarTitle: m.admin_sidebar_title(),
+        sidebarDescription: m.admin_sidebar_description(),
         toggleSidebar: m.common_aria_labels_toggle_sidebar(),
       }}
     >

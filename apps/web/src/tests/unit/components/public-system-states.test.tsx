@@ -7,18 +7,33 @@ import { LegalPending } from '@/features/legal/legal-page'
 import { UnsubscribePage } from '@/features/notifications/unsubscribe-page'
 import { m } from '@/paraglide/messages'
 
+type MockLinkProps = {
+  children: React.ReactNode
+  to: string
+}
+
+type ChildrenProps = {
+  children: React.ReactNode
+}
+
 const fixture = vi.hoisted(() => ({
   invalidate: vi.fn<() => Promise<void>>(),
   reset: vi.fn<() => void>(),
-  inspect: vi.fn<() => Promise<{ comment: string; userEmail: string; isUnsubscribed: boolean }>>(),
+  inspect: vi.fn<
+    () => Promise<{
+      comment: string
+      userEmail: string
+      isUnsubscribed: boolean
+    }>
+  >(),
   unsubscribe: vi.fn<() => Promise<void>>(),
 }))
 vi.mock('@tanstack/react-router', () => ({
-  Link: (props: { children: React.ReactNode; to: string }) => <a href={props.to}>{props.children}</a>,
+  Link: (props: MockLinkProps) => <a href={props.to}>{props.children}</a>,
   useRouter: () => ({ invalidate: fixture.invalidate }),
 }))
 vi.mock('@/components/main-layout', () => ({
-  MainLayout: (props: { children: React.ReactNode }) => <main>{props.children}</main>,
+  MainLayout: (props: ChildrenProps) => <main>{props.children}</main>,
 }))
 vi.mock('@/components/mdx/mdx', () => ({ Mdx: () => null }))
 vi.mock('@/lib/orpc-client', async () => {

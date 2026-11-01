@@ -1,7 +1,13 @@
+import type { ProjectSummary } from './types'
+
 // Stable specimen identities keep artwork and numbering consistent across filters and pages.
 const PROJECT_SPECIMENS: Record<
   string,
-  { art: string; category: 'developer' | 'personal' | 'publishing'; number: number }
+  {
+    art: string
+    category: 'developer' | 'personal' | 'publishing'
+    number: number
+  }
 > = {
   uprest: { art: 'pearl', category: 'developer', number: 1 },
   scoutly: { art: 'blue', category: 'developer', number: 2 },
@@ -16,6 +22,6 @@ export function projectSpecimen(slug: string) {
   return PROJECT_SPECIMENS[slug] ?? { art: 'pearl', category: 'personal', number: 8 }
 }
 
-export function orderProjectSpecimens<T extends { slug: string }>(projects: T[]) {
+export function orderProjectSpecimens<T extends Pick<ProjectSummary, 'slug'>>(projects: T[]) {
   return projects.toSorted((a, b) => projectSpecimen(a.slug).number - projectSpecimen(b.slug).number)
 }

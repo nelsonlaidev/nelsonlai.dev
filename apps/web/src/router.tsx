@@ -1,5 +1,6 @@
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
+import { getGlobalStartContext } from '@tanstack/react-start'
 
 import { PublicNotFound } from '@/components/not-found'
 import { RouteError } from '@/components/route-error'
@@ -13,6 +14,9 @@ export function getRouter() {
 
   const router = createTanStackRouter({
     routeTree,
+    ssr: {
+      nonce: getGlobalStartContext()?.nonce,
+    },
     defaultErrorComponent: RouteError,
     defaultNotFoundComponent: PublicNotFound,
     scrollRestoration: true,

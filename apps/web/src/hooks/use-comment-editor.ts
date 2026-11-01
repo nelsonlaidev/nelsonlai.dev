@@ -29,9 +29,9 @@ function isSpace(char: string) {
   return /\s/.test(char)
 }
 
-function getWordBounds(value: string, pos: number) {
-  let left = pos
-  let right = pos
+function getWordBounds(value: string, position: number) {
+  let left = position
+  let right = position
   while (left > 0 && !isSpace(value[left - 1] ?? ' ')) left -= 1
   while (right < value.length && !isSpace(value[right] ?? ' ')) right += 1
   return { left, right }
@@ -49,17 +49,25 @@ function getDecorationPosition(value: string, start: number, end: number, marker
   return 'none'
 }
 
-function applyPairAtCaret(ta: HTMLTextAreaElement, pos: number, marker: string) {
+function applyPairAtCaret(textarea: HTMLTextAreaElement, position: number, marker: string) {
   const insert = marker + marker
-  setRangeText(ta, insert, { start: pos, end: pos, selectionMode: 'end' })
-  const caretPos = pos + marker.length
-  ta.setSelectionRange(caretPos, caretPos)
-  ta.focus()
+  setRangeText(textarea, insert, { start: position, end: position, selectionMode: 'end' })
+  const caretPosition = position + marker.length
+  textarea.setSelectionRange(caretPosition, caretPosition)
+  textarea.focus()
 }
 
 type ToggleAction = 'add' | 'remove'
 
-function getReplacementAndRange(value: string, start: number, end: number, marker: string) {
+type DecorationChange = {
+  rangeStart: number
+  rangeEnd: number
+  replacement: string
+  action: ToggleAction
+  position: DecorationPosition
+}
+
+function getReplacementAndRange(value: string, start: number, end: number, marker: string): DecorationChange {
   const selected = value.slice(start, end)
   const position = getDecorationPosition(value, start, end, marker)
 
@@ -68,8 +76,8 @@ function getReplacementAndRange(value: string, start: number, end: number, marke
       rangeStart: start,
       rangeEnd: end,
       replacement: selected.slice(marker.length, selected.length - marker.length),
-      action: 'remove' as ToggleAction,
-      position: 'inside' as DecorationPosition,
+      action: 'remove',
+      position: 'inside',
     }
   }
 
@@ -78,8 +86,8 @@ function getReplacementAndRange(value: string, start: number, end: number, marke
       rangeStart: start - marker.length,
       rangeEnd: end + marker.length,
       replacement: selected,
-      action: 'remove' as ToggleAction,
-      position: 'outside' as DecorationPosition,
+      action: 'remove',
+      position: 'outside',
     }
   }
 
@@ -87,8 +95,8 @@ function getReplacementAndRange(value: string, start: number, end: number, marke
     rangeStart: start,
     rangeEnd: end,
     replacement: marker + selected + marker,
-    action: 'add' as ToggleAction,
-    position: 'none' as DecorationPosition,
+    action: 'add',
+    position: 'none',
   }
 }
 
@@ -97,7 +105,7 @@ function computeNewSelection(
   action: ToggleAction,
   markerLength: number,
   position: DecorationPosition,
-  keepCaretPos: boolean,
+  preserveCaretPosition: boolean,
 ) {
   let { selectionStart, selectionEnd } = textarea
 
@@ -111,7 +119,7 @@ function computeNewSelection(
   }
 
   if (action === 'remove') {
-    if (keepCaretPos || position === 'outside') {
+    if (preserveCaretPosition || position === 'outside') {
       shift(-markerLength)
     } else if (position === 'inside') {
       selectionEnd -= markerLength * 2
@@ -121,19 +129,19 @@ function computeNewSelection(
   return { selectionStart, selectionEnd }
 }
 
-function setRangeText(ta: HTMLTextAreaElement, replacement: string, options: SetRangeTextOptions = {}) {
-  const { start = ta.selectionStart, end = ta.selectionEnd, selectionMode = 'preserve' } = options
+function setRangeText(textarea: HTMLTextAreaElement, replacement: string, options: SetRangeTextOptions = {}) {
+  const { start = textarea.selectionStart, end = textarea.selectionEnd, selectionMode = 'preserve' } = options
 
-  ta.setRangeText(replacement, start, end, selectionMode)
+  textarea.setRangeText(replacement, start, end, selectionMode)
   // Trigger input event to update the value
-  ta.dispatchEvent(new InputEvent('input', { bubbles: true }))
+  textarea.dispatchEvent(new InputEvent('input', { bubbles: true }))
 }
 
-function createSnapshot(ta: HTMLTextAreaElement): Snapshot {
+function createSnapshot(textarea: HTMLTextAreaElement): Snapshot {
   return {
-    value: ta.value,
-    selectionStart: ta.selectionStart,
-    selectionEnd: ta.selectionEnd,
+    value: textarea.value,
+    selectionStart: textarea.selectionStart,
+    selectionEnd: textarea.selectionEnd,
   }
 }
 
@@ -152,11 +160,11 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
   const isComposingRef = useRef(false)
   const isApplyingHistoryRef = useRef(false)
 
-  const pushUndo = useCallback((snap: Snapshot) => {
+  const pushUndo = useCallback((snapshot: Snapshot) => {
     const stack = undoStackRef.current
     const last = stack.at(-1)
-    if (!snapshotsEqual(last, snap)) {
-      stack.push(snap)
+    if (!snapshotsEqual(last, snapshot)) {
+      stack.push(snapshot)
       if (stack.length > MAX_UNDO_STACK_SIZE) stack.shift()
     }
   }, [])
@@ -165,20 +173,20 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
     redoStackRef.current = []
   }
 
-  function applySnapshot(ta: HTMLTextAreaElement, snap: Snapshot) {
+  function applySnapshot(textarea: HTMLTextAreaElement, snapshot: Snapshot) {
     isApplyingHistoryRef.current = true
-    setRangeText(ta, snap.value, { start: 0, end: ta.value.length })
-    ta.setSelectionRange(snap.selectionStart, snap.selectionEnd)
-    ta.dispatchEvent(new InputEvent('input', { bubbles: true }))
+    setRangeText(textarea, snapshot.value, { start: 0, end: textarea.value.length })
+    textarea.setSelectionRange(snapshot.selectionStart, snapshot.selectionEnd)
+    textarea.dispatchEvent(new InputEvent('input', { bubbles: true }))
     isApplyingHistoryRef.current = false
-    ta.focus()
+    textarea.focus()
   }
 
   const undo = useCallback(() => {
-    const ta = textareaRef.current
+    const textarea = textareaRef.current
     const stack = undoStackRef.current
 
-    if (!ta || stack.length <= 1) return
+    if (!textarea || stack.length <= 1) return
 
     const current = stack.pop()
     if (!current) return
@@ -188,19 +196,19 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
     const target = stack.at(-1)
 
     if (target) {
-      applySnapshot(ta, target)
+      applySnapshot(textarea, target)
     }
   }, [])
 
   const redo = useCallback(() => {
-    const ta = textareaRef.current
+    const textarea = textareaRef.current
 
     const next = redoStackRef.current.pop()
 
-    if (!ta || !next) return
+    if (!textarea || !next) return
 
     pushUndo(next)
-    applySnapshot(ta, next)
+    applySnapshot(textarea, next)
   }, [pushUndo])
 
   const decorateText = useCallback((type: keyof typeof MARKER_MAP) => {
@@ -210,9 +218,9 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
     const marker = MARKER_MAP[type]
     const { value } = textarea
     let { selectionStart: start, selectionEnd: end } = textarea
-    let keepCaretPos = false
+    let preserveCaretPosition = false
 
-    // If there is no text is selected → handle the word under the caret
+    // When no text is selected, operate on the word under the caret.
     if (start === end) {
       const { left, right } = getWordBounds(value, start)
 
@@ -226,7 +234,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
       // If there is a word under the caret → select the whole word and keep the caret relative position
       start = left
       end = right
-      keepCaretPos = true
+      preserveCaretPosition = true
     }
 
     // Calculate replacement text and range
@@ -238,7 +246,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
       action,
       marker.length,
       position,
-      keepCaretPos,
+      preserveCaretPosition,
     )
 
     // Apply replacement and update caret
@@ -253,10 +261,10 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
 
   const handleInput = useCallback(
     (event: React.InputEvent<HTMLTextAreaElement>) => {
-      const ta = event.currentTarget
+      const textarea = event.currentTarget
       if (isApplyingHistoryRef.current) return
       if (isComposingRef.current) return
-      pushUndo(createSnapshot(ta))
+      pushUndo(createSnapshot(textarea))
       clearRedo()
     },
     [pushUndo],
@@ -350,13 +358,13 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
       if (event.key !== 'Tab') return
 
       event.preventDefault()
-      const tabSpace = '  '
+      const indentation = '  '
       const { selectionStart, selectionEnd, value } = target
 
       pushUndo(createSnapshot(target))
 
       if (!value) {
-        setRangeText(target, tabSpace, { selectionMode: 'end' })
+        setRangeText(target, indentation, { selectionMode: 'end' })
         clearRedo()
         return
       }
@@ -376,14 +384,14 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
         if (event.shiftKey) {
           const transformed = lines
             .map((line) => {
-              if (line.startsWith(tabSpace)) return line.slice(tabSpace.length)
+              if (line.startsWith(indentation)) return line.slice(indentation.length)
               if (line.startsWith('\t')) return line.slice(1)
               return line
             })
             .join('\n')
           setRangeText(target, transformed, { start: lineStart, end: lineBlockEnd, selectionMode: 'preserve' })
         } else {
-          const transformed = lines.map((line) => tabSpace + line).join('\n')
+          const transformed = lines.map((line) => indentation + line).join('\n')
           setRangeText(target, transformed, { start: lineStart, end: lineBlockEnd, selectionMode: 'preserve' })
         }
         clearRedo()
@@ -391,15 +399,15 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
       }
 
       if (event.shiftKey) {
-        if (value.startsWith(tabSpace, lineStart) || value[lineStart] === '\t') {
-          const removeLen = value.startsWith(tabSpace, lineStart) ? tabSpace.length : 1
-          setRangeText(target, '', { start: lineStart, end: lineStart + removeLen, selectionMode: 'preserve' })
+        if (value.startsWith(indentation, lineStart) || value[lineStart] === '\t') {
+          const indentLength = value.startsWith(indentation, lineStart) ? indentation.length : 1
+          setRangeText(target, '', { start: lineStart, end: lineStart + indentLength, selectionMode: 'preserve' })
           clearRedo()
         }
         return
       }
 
-      setRangeText(target, tabSpace, { selectionMode: 'end' })
+      setRangeText(target, indentation, { selectionMode: 'end' })
       clearRedo()
     },
     [pushUndo],
@@ -495,10 +503,10 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
   )
 
   useEffect(() => {
-    const ta = textareaRef.current
-    if (!ta) return
+    const textarea = textareaRef.current
+    if (!textarea) return
 
-    pushUndo(createSnapshot(ta))
+    pushUndo(createSnapshot(textarea))
     // Only run once
     // oxlint-disable-next-line @eslint-react/exhaustive-deps
   }, [])

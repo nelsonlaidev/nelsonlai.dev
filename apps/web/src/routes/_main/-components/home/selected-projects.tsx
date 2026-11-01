@@ -34,7 +34,7 @@ export function SelectedProjects(props: SelectedProjectsProps) {
             <Link
               to='/projects/$slug'
               params={{ slug: project.slug }}
-              aria-label={project.title}
+              aria-label={`${project.title}: ${String(index + 1).padStart(2, '0')} ${m.home_projects_selected()}`}
               className='group group/row relative block'
             >
               <div
@@ -74,7 +74,7 @@ export function SelectedProjects(props: SelectedProjectsProps) {
                 />
                 <span className='absolute top-4.5 left-4.75 text-xs text-[#94bab3]'>
                   {String(index + 1).padStart(2, '0')}
-                </span>
+                </span>{' '}
                 <span className='absolute bottom-4.75 left-4.75 text-xs text-[#88aaa5]'>
                   {m.home_projects_selected()}
                 </span>

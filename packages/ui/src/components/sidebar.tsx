@@ -580,7 +580,7 @@ export function SidebarMenuButton(props: SidebarMenuButtonProps) {
   const { render, isActive = false, variant = 'default', size = 'default', tooltip, className, ...rest } = props
 
   const { isMobile, state } = useSidebar()
-  const comp = useRender({
+  const button = useRender({
     defaultTagName: 'button',
     props: mergeProps<'button'>(
       {
@@ -598,14 +598,14 @@ export function SidebarMenuButton(props: SidebarMenuButtonProps) {
   })
 
   if (!tooltip) {
-    return comp
+    return button
   }
 
   const tooltipProps = typeof tooltip === 'string' ? { children: tooltip } : tooltip
 
   return (
     <Tooltip>
-      {comp}
+      {button}
       <TooltipContent side='inline-end' align='center' hidden={state !== 'collapsed' || isMobile} {...tooltipProps} />
     </Tooltip>
   )

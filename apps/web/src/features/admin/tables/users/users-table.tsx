@@ -35,7 +35,7 @@ export function UsersTable(props: UsersTableProps) {
     <AdminDataTable
       table={table}
       label={m.common_labels_users()}
-      emptyMessage={m.components_tables_users_empty()}
+      emptyMessage={m.admin_users_table_empty()}
       isFetching={isFetching}
     />
   )

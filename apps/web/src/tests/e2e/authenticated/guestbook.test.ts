@@ -84,9 +84,16 @@ test.describe('guestbook page', () => {
     for (const count of [0, 9, 10, 11]) {
       test.describe(`${count} messages`, () => {
         const limit = 10
-        let records: Array<typeof guestbookMessages.$inferInsert & { id: string }>
+        let records: Array<
+          typeof guestbookMessages.$inferInsert & {
+            id: string
+          }
+        >
         let initialCursor: MessageListOutput['nextCursor']
-        let expectedPages: Array<{ ids: string[]; nextCursor: MessageListOutput['nextCursor'] }>
+        let expectedPages: Array<{
+          ids: string[]
+          nextCursor: MessageListOutput['nextCursor']
+        }>
 
         test.beforeEach(async () => {
           const prefix = `pagination-${createId()}`
@@ -140,7 +147,9 @@ test.describe('guestbook page', () => {
             const response = await request.post('/api/rpc/guestbook/list', { data: { json: { limit, cursor } } })
             await expect(response).toBeOK()
 
-            const body = (await response.json()) as { json: MessageListOutput }
+            const body = (await response.json()) as {
+              json: MessageListOutput
+            }
             expect(body.json.messages).toMatchObject(expected.ids.map((id) => ({ id })))
             expect(body.json.messages).toHaveLength(expected.ids.length)
             expect(body.json.nextCursor).toEqual(expected.nextCursor)

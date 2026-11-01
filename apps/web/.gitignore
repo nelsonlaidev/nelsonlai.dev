@@ -4,8 +4,8 @@
 # Nitro
 .output/
 
-# Content Collections
-.content-collections/
-
 # Varlock
 src/env.ts
+
+# Content Collections
+.content-collections/

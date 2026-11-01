@@ -1,5 +1,5 @@
 {
-  "name": "@repo/mdx-plugins",
+  "name": "@repo/mdx",
   "private": true,
   "type": "module",
   "exports": {
@@ -13,24 +13,30 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@mdx-js/mdx": "3.1.1",
+    "@mdx-js/rollup": "3.1.1",
     "@shikijs/rehype": "4.5.0",
     "@shikijs/transformers": "4.5.0",
+    "estree-util-value-to-estree": "3.5.0",
     "github-slugger": "2.0.0",
-    "hast-util-heading-rank": "3.0.0",
-    "hast-util-to-string": "3.0.1",
+    "mdast-util-to-string": "4.0.0",
+    "remark-frontmatter": "5.0.0",
     "remark-gfm": "4.0.1",
     "shiki": "4.5.0",
     "unified": "11.0.5",
-    "unist-util-visit": "5.2.0",
-    "vfile": "6.0.3"
+    "unist-util-visit": "5.2.0"
   },
   "devDependencies": {
     "@nelsonlaidev/typescript-config": "catalog:",
     "@total-typescript/ts-reset": "catalog:",
     "@types/hast": "3.0.5",
-    "@types/node": "26.6.5",
-    "tsdown": "0.23.2",
-    "typescript": "catalog:"
+    "@types/mdast": "4.0.4",
+    "@types/mdx": "2.0.14",
+    "@types/node": "26.6.6",
+    "tsdown": "0.23.4",
+    "typescript": "catalog:",
+    "vite": "8.3.5"
+  },
+  "peerDependencies": {
+    "vite": ">=8"
   }
 }

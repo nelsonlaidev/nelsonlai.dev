@@ -7,13 +7,32 @@ import { useSignOut } from '@/features/auth/use-sign-out'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
+type ToastOptions = {
+  type: string
+  title: string
+}
+
+type ChildrenProps = {
+  children: React.ReactNode
+}
+
 const fixture = vi.hoisted(() => ({
-  signOut: vi.fn<() => Promise<{ error: { message: string } | null }>>(),
+  signOut: vi.fn<
+    () => Promise<{
+      error: {
+        message: string
+      } | null
+    }>
+  >(),
   refresh: vi.fn<() => Promise<void>>(),
   invalidate: vi.fn<() => Promise<void>>(),
   sessions: vi.fn<() => Promise<object[]>>(),
-  revoke: vi.fn<() => Promise<{ isCurrentSession: boolean }>>(),
-  toast: vi.fn<(message: { type: string; title: string }) => void>(),
+  revoke: vi.fn<
+    () => Promise<{
+      isCurrentSession: boolean
+    }>
+  >(),
+  toast: vi.fn<(message: ToastOptions) => void>(),
 }))
 vi.mock('@/lib/auth-client', () => ({
   authClient: { signOut: fixture.signOut, useSession: () => ({ refetch: fixture.refresh }) },
@@ -43,7 +62,7 @@ function setup() {
   const publicKey = orpc.posts.totals.queryKey()
   for (const key of [accountKey, preferenceKey, adminKey]) client.setQueryData(key, 'private')
   client.setQueryData(publicKey, { views: 100, likes: 13 })
-  function Wrapper(props: { children: React.ReactNode }) {
+  function Wrapper(props: ChildrenProps) {
     return <QueryClientProvider client={client}>{props.children}</QueryClientProvider>
   }
   return { client, accountKey, preferenceKey, adminKey, publicKey, Wrapper }
@@ -108,7 +127,9 @@ describe('successful session endings', () => {
 
   test('ignores duplicate submission while the request is pending', async () => {
     const { client, Wrapper } = setup()
-    const request = Promise.withResolvers<{ error: null }>()
+    const request = Promise.withResolvers<{
+      error: null
+    }>()
     fixture.signOut.mockReturnValue(request.promise)
     const { result, unmount } = renderHook(useSignOut, { wrapper: Wrapper })
     await act(async () => {

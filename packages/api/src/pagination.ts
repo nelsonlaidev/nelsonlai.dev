@@ -6,8 +6,14 @@ import type { InfiniteQueryCursorSchema } from './schema/pagination'
 import { and, asc, desc, eq, gt, lt, or } from 'drizzle-orm'
 
 type TimestampPaginationColumns = {
-  createdAt: AnyPgColumn<{ data: Date; notNull: true }>
-  id: AnyPgColumn<{ data: string; notNull: true }>
+  createdAt: AnyPgColumn<{
+    data: Date
+    notNull: true
+  }>
+  id: AnyPgColumn<{
+    data: string
+    notNull: true
+  }>
 }
 
 type TimestampPaginationOptions = {

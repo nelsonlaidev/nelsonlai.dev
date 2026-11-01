@@ -45,7 +45,7 @@ export function TreeViewNode(props: TreeViewNodeProps) {
     <TreeViewPrimitive.NodeProvider data-slot='tree-view-node' key={node.id} node={node} indexPath={indexPath}>
       {node.children ? (
         <TreeViewPrimitive.Branch>
-          <TreeViewPrimitive.BranchControl className='ml-[calc((var(--depth)-1)*8px)] flex items-center justify-between rounded-sm p-2 text-sm hover:bg-accent hover:text-accent-foreground'>
+          <TreeViewPrimitive.BranchControl className='flex items-center justify-between rounded-sm p-2 text-sm hover:bg-accent hover:text-accent-foreground'>
             <TreeViewPrimitive.BranchText className='flex items-center gap-2'>
               <FolderIcon aria-hidden='true' className='size-4' /> {node.name}
             </TreeViewPrimitive.BranchText>
@@ -53,7 +53,7 @@ export function TreeViewNode(props: TreeViewNodeProps) {
               <ChevronRightIcon aria-hidden='true' className='size-4 transition-transform duration-200' />
             </TreeViewPrimitive.BranchIndicator>
           </TreeViewPrimitive.BranchControl>
-          <TreeViewPrimitive.BranchContent className='overflow-hidden motion-reduce:animate-none data-open:animate-tree-view-content-down data-closed:animate-tree-view-content-up'>
+          <TreeViewPrimitive.BranchContent className='ml-2 overflow-hidden motion-reduce:animate-none data-open:animate-tree-view-content-down data-closed:animate-tree-view-content-up'>
             <TreeViewPrimitive.BranchIndentGuide />
             {node.children.map((child, index) => (
               <TreeViewNode key={child.id} node={child} indexPath={[...indexPath, index]} />
@@ -61,7 +61,7 @@ export function TreeViewNode(props: TreeViewNodeProps) {
           </TreeViewPrimitive.BranchContent>
         </TreeViewPrimitive.Branch>
       ) : (
-        <TreeViewPrimitive.Item className='relative ml-[calc((var(--depth)-1)*8px)] rounded-sm p-2 text-sm hover:bg-accent hover:text-accent-foreground data-selected:bg-accent'>
+        <TreeViewPrimitive.Item className='relative rounded-sm p-2 text-sm hover:bg-accent hover:text-accent-foreground data-selected:bg-accent'>
           <TreeViewPrimitive.ItemText className='flex items-center gap-2'>
             <FileIcon aria-hidden='true' className='size-4' />
             {node.name}

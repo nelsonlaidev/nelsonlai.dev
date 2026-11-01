@@ -2,6 +2,7 @@ import type { PostDetail } from './types'
 
 import NumberFlow from '@number-flow/react'
 import { ExternalLink } from '@repo/ui/components/external-link'
+import { useCspNonce } from '@repo/ui/components/ui-provider'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef } from 'react'
 
@@ -19,6 +20,7 @@ type BlogHeaderProps = {
 
 export function BlogHeader(props: BlogHeaderProps) {
   const { post } = props
+  const nonce = useCspNonce()
   const formattedDate = useFormattedDate(post.publishedAt)
   const updatedDate = useFormattedDate(post.updatedAt)
   const queryClient = useQueryClient()
@@ -48,13 +50,15 @@ export function BlogHeader(props: BlogHeaderProps) {
   let commentsContent: React.ReactNode = '--'
 
   if (postStats) {
-    viewsContent = <NumberFlow data-testid='view-count' value={postStats.views} />
+    viewsContent = <NumberFlow nonce={nonce} data-testid='view-count' value={postStats.views} />
   } else if (stats.isError) {
     viewsContent = m.common_error()
   }
 
   if (counts.data) {
-    commentsContent = <NumberFlow data-testid='comment-count' value={counts.data.comments + counts.data.replies} />
+    commentsContent = (
+      <NumberFlow nonce={nonce} data-testid='comment-count' value={counts.data.comments + counts.data.replies} />
+    )
   } else if (counts.isError) {
     commentsContent = m.common_error()
   }

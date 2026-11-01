@@ -110,7 +110,7 @@ export function UnsubscribePage(props: UnsubscribePageProps) {
           )}
         </Card>
         <Link to='/' className='mt-6 inline-flex min-h-11 items-center gap-4 text-sm/normal text-[#b9d3c7]'>
-          {m.components_go_to_homepage()}
+          {m.common_go_to_homepage()}
         </Link>
       </div>
     </MainLayout>

@@ -3,7 +3,13 @@ import { describe, expect, test, vi } from 'vitest'
 
 import { Counter } from '@/routes/_main/-components/dashboard/counter'
 
-const fixture = vi.hoisted(() => ({ animate: vi.fn<() => { stop: () => void }>(() => ({ stop: () => {} })) }))
+const fixture = vi.hoisted(() => ({
+  animate: vi.fn<
+    () => {
+      stop: () => void
+    }
+  >(() => ({ stop: () => {} })),
+}))
 vi.mock('motion/react', () => ({ animate: fixture.animate, useReducedMotion: () => true, useInView: () => true }))
 
 describe('Dashboard counter reduced motion', () => {

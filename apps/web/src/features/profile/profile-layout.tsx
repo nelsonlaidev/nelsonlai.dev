@@ -5,10 +5,11 @@ import { RouteError } from '@/components/route-error'
 import { m } from '@/paraglide/messages'
 
 export type ProfilePageData = {
+  path: string
   title: string
   description: string
-  mdx: string
-  sections?: Array<{ id: string; title: string; count: number }>
+  slug: string
+  locale: string
 }
 
 type ProfileLayoutProps = {

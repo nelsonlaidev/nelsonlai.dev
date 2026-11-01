@@ -7,6 +7,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@repo/ui/components/dropdown-menu'
+import { useCspNonce } from '@repo/ui/components/ui-provider'
 import { useQuery } from '@tanstack/react-query'
 import { ListFilterIcon } from 'lucide-react'
 import { useState } from 'react'
@@ -25,6 +26,7 @@ type CommentSectionProps = {
 
 export function CommentSection(props: CommentSectionProps) {
   const { slug, highlightedCommentId, highlightedReplyId } = props
+  const nonce = useCspNonce()
   const [sort, setSort] = useState<'newest' | 'oldest'>('newest')
   const counts = useQuery(orpc.comments.counts.queryOptions({ input: { slug } }))
 
@@ -33,9 +35,9 @@ export function CommentSection(props: CommentSectionProps) {
   if (counts.data) {
     countsContent = (
       <>
-        <NumberFlow data-testid='blog-comment-count' value={counts.data.comments} />{' '}
+        <NumberFlow nonce={nonce} data-testid='blog-comment-count' value={counts.data.comments} />{' '}
         {m.blog_comments_comments({ count: counts.data.comments })} ·{' '}
-        <NumberFlow data-testid='reply-count' value={counts.data.replies} />{' '}
+        <NumberFlow nonce={nonce} data-testid='reply-count' value={counts.data.replies} />{' '}
         {m.blog_comments_replies({ count: counts.data.replies })}
       </>
     )

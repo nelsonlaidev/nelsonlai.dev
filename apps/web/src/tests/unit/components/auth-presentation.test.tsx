@@ -6,16 +6,32 @@ import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { SignInDialog, signInDialogHandle } from '@/features/auth/sign-in-dialog'
 import { m } from '@/paraglide/messages'
 
+type ToastOptions = {
+  type: string
+  title: string
+}
+
+type MockLinkProps = {
+  children: React.ReactNode
+  to: string
+}
+
 const fixture = vi.hoisted(() => ({
-  signIn: vi.fn<() => Promise<{ error: { message: string } | null }>>(),
-  toast: vi.fn<(message: { type: string; title: string }) => void>(),
+  signIn: vi.fn<
+    () => Promise<{
+      error: {
+        message: string
+      } | null
+    }>
+  >(),
+  toast: vi.fn<(message: ToastOptions) => void>(),
 }))
 vi.mock('@/lib/auth-client', () => ({
   authClient: { getLastUsedLoginMethod: () => 'github', signIn: { social: fixture.signIn } },
 }))
 vi.mock('@repo/ui/components/toast', () => ({ toast: { add: fixture.toast } }))
 vi.mock('@tanstack/react-router', () => ({
-  Link: (props: { children: React.ReactNode; to: string }) => <a href={props.to}>{props.children}</a>,
+  Link: (props: MockLinkProps) => <a href={props.to}>{props.children}</a>,
 }))
 function setup() {
   render(
@@ -45,7 +61,7 @@ describe('Sign-in dialog with mocked providers only', () => {
   test('preserves providers, last-used badge and policy links', async () => {
     setup()
     expect(await screen.findByRole('dialog')).toHaveAttribute('data-slot', 'dialog-content')
-    expect(screen.getByRole('button', { name: /GitHub/ })).toHaveTextContent(m.dialog_sign_in_last_used())
+    expect(screen.getByRole('button', { name: /GitHub/ })).toHaveTextContent(m.auth_sign_in_last_used())
     expect(screen.getByRole('button', { name: /Google/ })).toBeEnabled()
     expect(screen.getByRole('link', { name: m.common_labels_terms() })).toHaveAttribute('href', '/terms')
     expect(screen.getByRole('link', { name: m.common_labels_privacy() })).toHaveAttribute('href', '/privacy')

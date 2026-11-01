@@ -169,9 +169,13 @@ const getTrends = adminProcedure
   .input(TrendsInputSchema)
   .output(TrendsOutputSchema)
   .handler(async ({ input, context }) => {
-    const { timezone, days } = input
+    const { days, timezone } = input
 
-    const rows = await context.db.execute<{ date: string; comments: number; messages: number }>(sql`
+    const rows = await context.db.execute<{
+      date: string
+      comments: number
+      messages: number
+    }>(sql`
       WITH boundaries AS (
         SELECT
           (NOW() AT TIME ZONE ${timezone})::date - (${days} - 1) AS start_day,
@@ -212,11 +216,7 @@ const getTrends = adminProcedure
       ORDER BY ds.day ASC
     `)
 
-    return rows.rows.map((row) => ({
-      date: row.date,
-      comments: row.comments,
-      messages: row.messages,
-    }))
+    return rows.rows
   })
 
 export const adminRouter = {

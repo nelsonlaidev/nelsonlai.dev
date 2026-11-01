@@ -15,7 +15,7 @@ export function getColumns(): Array<ColumnDef<typeof features, Comment>> {
   return [
     {
       accessorKey: 'userId',
-      header: m.components_tables_comments_user(),
+      header: m.admin_comments_table_user(),
       cell: ({ row }) => (
         <div className='flex items-center gap-2'>
           <UserAvatar
@@ -30,11 +30,11 @@ export function getColumns(): Array<ColumnDef<typeof features, Comment>> {
     },
     {
       accessorKey: 'body',
-      header: m.components_tables_comments_comment(),
+      header: m.admin_comments_table_comment(),
     },
     {
       accessorKey: 'postId',
-      header: m.components_tables_comments_post(),
+      header: m.admin_comments_table_post(),
       cell: ({ row }) => (
         <Link
           to='/blog/$slug'
@@ -51,7 +51,7 @@ export function getColumns(): Array<ColumnDef<typeof features, Comment>> {
     },
     {
       accessorKey: 'createdAt',
-      header: m.components_tables_comments_created_at(),
+      header: m.admin_comments_table_created_at(),
       cell: ({ row }) => <FormattedDateCell date={row.original.createdAt} />,
     },
   ]
