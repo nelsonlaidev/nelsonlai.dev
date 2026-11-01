@@ -4,6 +4,18 @@ import { Button as ButtonPrimitive } from '@base-ui/react/button'
 import { cva } from 'class-variance-authority'
 import { cn } from 'cn'
 
+export const outlineActionVariants = cva('border-[#a7cabb65] bg-[#b0d3c30b] text-[#e0ecde] hover:bg-[#b0d3c31c]', {
+  variants: {
+    hoverBorder: {
+      default: 'hover:border-[#c4e0cc]',
+      muted: 'hover:border-[#b0d3c3]',
+    },
+  },
+  defaultVariants: {
+    hoverBorder: 'default',
+  },
+})
+
 export const buttonVariants = cva(
   [
     'group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none',

@@ -1,4 +1,4 @@
-import { buttonVariants } from '@repo/ui/components/button'
+import { buttonVariants, outlineActionVariants } from '@repo/ui/components/button'
 import { Link } from '@tanstack/react-router'
 import { cn } from 'cn'
 import { ArrowUpRightIcon } from 'lucide-react'
@@ -39,7 +39,8 @@ export function PublicNotFound() {
           to='/'
           className={cn(
             buttonVariants(),
-            'h-auto min-h-12 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5.75 py-3.5 text-sm/normal whitespace-normal text-[#e0ecde] hover:border-[#b0d3c3] hover:bg-[#b0d3c31c]',
+            outlineActionVariants({ hoverBorder: 'muted' }),
+            'h-auto min-h-12 rounded-md border px-5.75 py-3.5 text-sm/normal whitespace-normal',
           )}
         >
           {m.common_go_to_homepage()}

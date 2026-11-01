@@ -1,6 +1,8 @@
 import type { ProjectSummary } from './types'
 
+import { outlineActionVariants } from '@repo/ui/components/button'
 import { ExternalLink } from '@repo/ui/components/external-link'
+import { cn } from 'cn'
 import { ArrowRightIcon } from 'lucide-react'
 
 import { m } from '@/paraglide/messages'
@@ -34,7 +36,10 @@ export function ProjectHeader(props: ProjectHeaderProps) {
           {github && (
             <ExternalLink
               href={github}
-              className='inline-flex min-h-11 items-center justify-center gap-7 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5 py-3 text-sm text-[#e0ecde] transition-colors hover:border-[#c4e0cc] hover:bg-[#b0d3c31c] motion-reduce:transition-none min-[701px]:px-5.75 min-[701px]:py-3.5'
+              className={cn(
+                outlineActionVariants(),
+                'inline-flex min-h-11 items-center justify-center gap-7 rounded-md border px-5 py-3 text-sm transition-colors motion-reduce:transition-none min-[701px]:px-5.75 min-[701px]:py-3.5',
+              )}
             >
               {m.projects_github()}
               <ArrowRightIcon className='size-5' aria-hidden='true' />

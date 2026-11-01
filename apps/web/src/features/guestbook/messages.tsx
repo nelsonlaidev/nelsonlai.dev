@@ -1,6 +1,8 @@
 import type { GuestbookMessage } from './types'
 
+import { outlineActionVariants } from '@repo/ui/components/button'
 import { useInfiniteQuery } from '@tanstack/react-query'
+import { cn } from 'cn'
 import { useEffect, useRef } from 'react'
 
 import { UserAvatar } from '@/components/user-avatar'
@@ -58,7 +60,10 @@ export function Messages(props: MessagesProps) {
           onClick={() => {
             void fetchNextPage()
           }}
-          className='inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5.75 py-3.5 text-sm/normal text-[#e0ecde] transition-colors duration-200 ease-linear hover:border-[#c4e0cc] hover:bg-[#b0d3c31c] disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none'
+          className={cn(
+            outlineActionVariants(),
+            'inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border px-5.75 py-3.5 text-sm/normal transition-colors duration-200 ease-linear disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none',
+          )}
         >
           {m.common_load_more()}
         </button>
@@ -68,7 +73,10 @@ export function Messages(props: MessagesProps) {
           <p>{m.error_failed_to_load_messages()}</p>
           <button
             type='button'
-            className='mt-4 inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5.75 py-3.5 text-sm/normal text-[#e0ecde] transition-colors duration-200 ease-linear hover:border-[#c4e0cc] hover:bg-[#b0d3c31c] disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none'
+            className={cn(
+              outlineActionVariants(),
+              'mt-4 inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border px-5.75 py-3.5 text-sm/normal transition-colors duration-200 ease-linear disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none',
+            )}
             onClick={() => {
               void refetch()
             }}

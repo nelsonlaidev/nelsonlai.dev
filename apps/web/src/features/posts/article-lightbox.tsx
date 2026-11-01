@@ -63,7 +63,7 @@ function CloseControl() {
   return (
     <button
       type='button'
-      className='yarl__button grid size-12 place-items-center rounded-md border border-[#a6c9bc50] bg-[#082b38] p-0 filter-none hover:not-disabled:bg-[#164353] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#c1e5cf] disabled:opacity-45'
+      className='yarl__button'
       aria-label={m.common_labels_close()}
       title={m.common_labels_close()}
       onClick={closeOnce}

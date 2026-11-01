@@ -1,7 +1,8 @@
 import { GUESTBOOK_MESSAGE_MAX_LENGTH } from '@repo/api/schema/guestbook'
-import { Button } from '@repo/ui/components/button'
+import { Button, outlineActionVariants } from '@repo/ui/components/button'
 import { DialogTrigger } from '@repo/ui/components/dialog'
 import { Textarea } from '@repo/ui/components/textarea'
+import { cn } from 'cn'
 import { useId } from 'react'
 
 import { signInDialogHandle } from '@/features/auth/sign-in-dialog'
@@ -26,7 +27,12 @@ export function SignIn() {
       <DialogTrigger
         handle={signInDialogHandle}
         render={
-          <Button className='inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5.75 py-3.5 text-sm/5 text-[#e0ecde] transition-colors duration-200 ease-linear hover:border-[#c4e0cc] hover:bg-[#b0d3c31c] disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none' />
+          <Button
+            className={cn(
+              outlineActionVariants(),
+              'inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border px-5.75 py-3.5 text-sm/5 transition-colors duration-200 ease-linear disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none',
+            )}
+          />
         }
       >
         {m.common_sign_in()}

@@ -1,5 +1,7 @@
+import { outlineActionVariants } from '@repo/ui/components/button'
 import { ExternalLink } from '@repo/ui/components/external-link'
 import { Link } from '@tanstack/react-router'
+import { cn } from 'cn'
 import { ArrowRightIcon } from 'lucide-react'
 
 import { SITE } from '@/lib/site'
@@ -103,7 +105,10 @@ export function AboutSite(props: AboutSiteProps) {
       <div className='mt-10 flex flex-wrap items-center justify-center gap-7.5 max-[601px]:gap-6.25'>
         <Link
           to='/projects'
-          className='inline-flex min-h-11 items-center justify-center gap-7 rounded-md border border-[#a7cabb65] bg-[#b0d3c30b] px-5.75 py-3.5 text-sm/normal text-[#e0ecde] transition-colors duration-200 ease-linear hover:border-[#c4e0cc] hover:bg-[#b0d3c31c] motion-reduce:transition-none'
+          className={cn(
+            outlineActionVariants(),
+            'inline-flex min-h-11 items-center justify-center gap-7 rounded-md border px-5.75 py-3.5 text-sm/normal transition-colors duration-200 ease-linear motion-reduce:transition-none',
+          )}
         >
           {projectsLabel}
           <ArrowRightIcon className='size-4.75' aria-hidden='true' />
