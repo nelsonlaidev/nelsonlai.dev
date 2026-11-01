@@ -128,7 +128,7 @@ export function LikeButton(props: LikeButtonProps) {
         aria-disabled={count === 3 || undefined}
         aria-label={m.blog_like_this_post()}
         aria-describedby={`${clipId}-status`}
-        className='relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-md border border-[#8cae9d55] bg-[#082734] px-4 py-2.5 font-[inherit] text-base/normal [font-weight:inherit] text-[#d1e6dc] [font-style:inherit] transition-colors duration-180 ease-linear hover:bg-[#123844] focus-visible:outline-2 focus-visible:-outline-offset-4! focus-visible:outline-[#c4f1d5] focus-visible:outline-solid not-aria-disabled:active:transform-[scale(0.97)] aria-disabled:cursor-default motion-reduce:transition-none motion-reduce:not-aria-disabled:active:transform-none'
+        className='relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-md border border-[#8cae9d55] bg-[#082734] px-4 py-2.5 font-[inherit] text-base/normal [font-weight:inherit] text-[#d1e6dc] [font-style:inherit] transition-colors duration-180 ease-linear hover:bg-[#123844] focus-visible:outline-2 focus-visible:-outline-offset-4! focus-visible:outline-ring focus-visible:outline-solid not-aria-disabled:active:transform-[scale(0.97)] aria-disabled:cursor-default motion-reduce:transition-none motion-reduce:not-aria-disabled:active:transform-none'
       >
         <span className='relative flex text-[#9bd7c0]'>
           <svg width='26' height='26' viewBox='0 0 24 24' aria-hidden='true'>

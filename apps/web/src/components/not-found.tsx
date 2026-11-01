@@ -29,7 +29,7 @@ export function PublicNotFound() {
       <h1 className='relative mt-0 text-[clamp(40px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em] text-[#edf3e8] max-[541px]:text-[53px]'>
         {m.not_found_title()}
         <br />
-        <em className='font-serif font-normal text-[#b5d9ca]'>{m.not_found_emphasis()}</em>
+        <em className='font-serif font-normal text-primary'>{m.not_found_emphasis()}</em>
       </h1>
       <p className='relative mx-auto mt-7.5 mb-0 max-w-117.5 text-base/[1.65] text-[#a3c0b4]'>
         {m.not_found_description()}

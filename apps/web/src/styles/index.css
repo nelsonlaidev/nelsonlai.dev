@@ -4,48 +4,7 @@
   --font-serif: Georgia, 'Times New Roman', serif;
 }
 
-/* Seafold is the application palette, including all body-mounted portals.
-   Keep the shared UI package's neutral defaults independent of this app. */
-:root {
-  color-scheme: dark;
-
-  --background: #052d3c;
-  --foreground: #e7eee5;
-  --card: #0d3341;
-  --card-foreground: #e7eee5;
-  --popover: #0b303e;
-  --popover-foreground: #e7eee5;
-  --primary: #b5d9ca;
-  --primary-foreground: #092e3b;
-  --secondary: #1a4650;
-  --secondary-foreground: #e7eee5;
-  --muted: #173e49;
-  --muted-foreground: #aac2bf;
-  --accent: #1c4750;
-  --accent-foreground: #e7eee5;
-  --border: #cbe5d833;
-  --input: #cbe5d84d;
-  --ring: #c4f1d5;
-  --destructive: #ffaea5;
-  --skeleton: #23505a;
-  --chart-1: #b5d9ca;
-  --chart-2: #77b9d1;
-  --chart-3: #e6c792;
-  --chart-4: #b7a6d9;
-  --chart-5: #e9b3ac;
-  --sidebar: #082a38;
-  --sidebar-foreground: #e7eee5;
-  --sidebar-primary: #b5d9ca;
-  --sidebar-primary-foreground: #092e3b;
-  --sidebar-accent: #1c4750;
-  --sidebar-accent-foreground: #e7eee5;
-  --sidebar-border: #cbe5d833;
-  --sidebar-ring: #c4f1d5;
-  --sidebar-skeleton: #23505a;
-}
-
 @layer base {
-  /* The app's touch and keyboard baseline also covers native controls. */
   :is(button, input, [role='combobox']) {
     min-height: 44px;
   }
@@ -99,7 +58,6 @@
   }
 }
 
-/* Shiki generates these line spans, diff markers and highlight classes. */
 pre.shiki .line {
   display: inline-block;
   min-width: 100%;

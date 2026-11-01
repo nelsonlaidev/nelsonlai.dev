@@ -109,49 +109,51 @@
 }
 
 :root {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
+  color-scheme: dark;
 
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
+  --background: #052d3c;
+  --foreground: #e7eee5;
 
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  --card: #0d3341;
+  --card-foreground: #e7eee5;
 
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --popover: #0b303e;
+  --popover-foreground: #e7eee5;
 
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
+  --primary: #b5d9ca;
+  --primary-foreground: #092e3b;
 
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --secondary: #1a4650;
+  --secondary-foreground: #e7eee5;
 
-  --skeleton: oklch(0.269 0 0);
+  --muted: #173e49;
+  --muted-foreground: #aac2bf;
 
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --skeleton: #23505a;
 
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --accent: #1c4750;
+  --accent-foreground: #e7eee5;
 
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --destructive: #ffaea5;
+  --border: #cbe5d833;
+  --input: #cbe5d84d;
+  --ring: #c4f1d5;
 
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-  --sidebar-skeleton: var(--skeleton);
+  --chart-1: #b5d9ca;
+  --chart-2: #77b9d1;
+  --chart-3: #e6c792;
+  --chart-4: #b7a6d9;
+  --chart-5: #e9b3ac;
+
+  --sidebar: #082a38;
+  --sidebar-foreground: #e7eee5;
+  --sidebar-primary: #b5d9ca;
+  --sidebar-primary-foreground: #092e3b;
+  --sidebar-accent: #1c4750;
+  --sidebar-accent-foreground: #e7eee5;
+  --sidebar-border: #cbe5d833;
+  --sidebar-ring: #c4f1d5;
+  --sidebar-skeleton: #23505a;
 
   --radius: 0.625rem;
 
