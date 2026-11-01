@@ -32,7 +32,6 @@ function getContentSecurityPolicy(nonce: string) {
 const securityMiddleware = createMiddleware().server(async ({ next, request }) => {
   const nonce = randomBytes(16).toString('base64')
 
-  setResponseHeader('Content-Security-Policy', getContentSecurityPolicy(nonce))
   setResponseHeader('Referrer-Policy', 'no-referrer')
   setResponseHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
   setResponseHeader('X-Content-Type-Options', 'nosniff')
@@ -43,6 +42,7 @@ const securityMiddleware = createMiddleware().server(async ({ next, request }) =
   }
 
   if (import.meta.env.PROD) {
+    setResponseHeader('Content-Security-Policy', getContentSecurityPolicy(nonce))
     setResponseHeader('Strict-Transport-Security', 'max-age=31536000')
   }
 
