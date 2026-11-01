@@ -69,9 +69,9 @@ function SegmentGroupIndicator() {
     <SegmentGroupPrimitive.Indicator
       data-slot='segment-group-indicator'
       className={cn(
-        'pointer-events-none absolute top-(--top) left-(--left) z-0 h-(--height) w-(--width) rounded-md border border-transparent bg-background shadow-sm [--transition-timing-function:ease-in-out]',
+        'pointer-events-none absolute top-(--top) left-(--left) z-0 h-(--height) w-(--width) rounded-md border shadow-sm [--transition-timing-function:ease-in-out]',
         'motion-reduce:transition-none!',
-        'dark:border-input dark:bg-input/30',
+        'border-input bg-input/30',
       )}
     />
   )
@@ -86,15 +86,13 @@ export function SegmentGroupItem(props: SegmentGroupItemProps) {
     <SegmentGroupPrimitive.Item
       data-slot='segment-group-item'
       className={cn(
-        'relative z-10 inline-flex h-full flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all outline-none select-none',
-        'hover:text-foreground',
+        'relative z-10 inline-flex h-full flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-all outline-none select-none',
         'data-focus-visible:border-ring data-focus-visible:ring-[3px] data-focus-visible:ring-ring/50 data-focus-visible:outline-1 data-focus-visible:outline-ring',
-        'data-invalid:border-destructive data-invalid:ring-destructive/20',
+        'data-invalid:border-destructive',
+        'text-muted-foreground',
+        'hover:text-foreground',
+        'data-invalid:ring-destructive/40',
         'data-checked:text-foreground',
-        'dark:text-muted-foreground',
-        'dark:hover:text-foreground',
-        'dark:data-invalid:ring-destructive/40',
-        'dark:data-checked:text-foreground',
         'data-disabled:pointer-events-none data-disabled:opacity-50',
         'data-vertical:h-8.5 data-vertical:w-full data-vertical:justify-start data-vertical:px-2 data-vertical:py-1.5',
         'group-data-[size=lg]/segment-group:data-vertical:h-9.5 group-data-[size=lg]/segment-group:data-vertical:py-2',

@@ -57,7 +57,7 @@ export function OceanHeader() {
                 render={
                   <Button
                     variant='ghost'
-                    className='min-h-11 gap-3 p-0 text-sm font-normal hover:bg-transparent hover:text-foreground aria-expanded:bg-transparent aria-expanded:text-foreground dark:hover:bg-transparent'
+                    className='min-h-11 gap-3 p-0 text-sm font-normal hover:bg-transparent hover:text-foreground aria-expanded:bg-transparent aria-expanded:text-foreground'
                   />
                 }
                 aria-label={m.nav_toggle()}

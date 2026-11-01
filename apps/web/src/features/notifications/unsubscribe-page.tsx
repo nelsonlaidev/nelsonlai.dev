@@ -55,7 +55,7 @@ export function UnsubscribePage(props: UnsubscribePageProps) {
       <CardContent className='space-y-8'>
         <div className='space-y-2'>
           <p>{m.common_labels_comment()}</p>
-          <blockquote className='rounded-none border bg-[#b0d3c308] p-3 text-sm/[1.7] text-pretty wrap-break-word whitespace-pre-wrap text-[#cfddd3] dark:bg-input/30'>
+          <blockquote className='rounded-none border bg-input/30 p-3 text-sm/[1.7] text-pretty wrap-break-word whitespace-pre-wrap text-[#cfddd3]'>
             {query.data.comment}
           </blockquote>
         </div>

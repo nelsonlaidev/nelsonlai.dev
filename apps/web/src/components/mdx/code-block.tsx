@@ -49,7 +49,7 @@ export function CodeBlock(props: CodeBlockProps) {
       className={cn(
         'opacity-100 transition-opacity',
         hasCaption
-          ? 'm-0 size-auto min-h-11 min-w-11 shrink-0 gap-0 rounded-md border border-[#8cae9d55] bg-[#12303a] bg-clip-border px-3.5 py-2 text-sm/5 text-[#d6eee3] opacity-100 hover:bg-[#12303a] hover:text-[#d6eee3] focus-visible:border-[#8cae9d55] dark:hover:bg-[#12303a]'
+          ? 'm-0 size-auto min-h-11 min-w-11 shrink-0 gap-0 rounded-md border border-[#8cae9d55] bg-[#12303a] bg-clip-border px-3.5 py-2 text-sm/5 text-[#d6eee3] opacity-100 hover:bg-[#12303a] hover:text-[#d6eee3] focus-visible:border-[#8cae9d55]'
           : 'absolute top-2 right-2 z-10 size-8 md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100',
       )}
       onClick={() => {

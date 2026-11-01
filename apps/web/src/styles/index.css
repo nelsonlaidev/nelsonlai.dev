@@ -6,8 +6,9 @@
 
 /* Seafold is the application palette, including all body-mounted portals.
    Keep the shared UI package's neutral defaults independent of this app. */
-:root,
-:root.dark {
+:root {
+  color-scheme: dark;
+
   --background: #052d3c;
   --foreground: #e7eee5;
   --card: #0d3341;
@@ -44,10 +45,6 @@
 }
 
 @layer base {
-  body {
-    color-scheme: dark;
-  }
-
   /* The app's touch and keyboard baseline also covers native controls. */
   :is(button, input, [role='combobox']) {
     min-height: 44px;

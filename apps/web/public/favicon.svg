@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-<style>:root { color: #08213f; } @media (prefers-color-scheme: dark) { :root { color: #e7eee5; } }</style>
+<style>:root { color: #e7eee5; }</style>
+<rect width="100" height="100" rx="20" fill="#052d3c" />
 <path fill="currentColor" d="M81 31C72 13 51 8 32 19 13 30 9 53 20 72c9 16 30 22 48 12 16-9 22-27 13-42l-10 6c6 10 3 22-8 28-12 7-26 2-32-9-8-14-5-30 8-38 12-7 26-4 33 7Z" />
 <circle cx="53" cy="52" r="10" fill="currentColor" />
 </svg>

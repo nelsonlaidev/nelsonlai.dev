@@ -41,13 +41,12 @@ export function CommentCodeBlock(props: CommentCodeBlockProps) {
         const language = lang in bundledLanguages ? (lang as BundledLanguage) : 'plaintext'
         const highlighter = await getSingletonHighlighter({
           langs: [language],
-          themes: ['github-light-default', 'github-dark-default'],
+          themes: ['github-dark-default'],
           engine: createJavaScriptRegexEngine(),
         })
         const html = highlighter.codeToHtml(code, {
           lang: language,
-          themes: { light: 'github-light-default', dark: 'github-dark-default' },
-          defaultColor: false,
+          theme: 'github-dark-default',
         })
         const codeHtml = /<code\b[^>]*>([\s\S]*?)<\/code>/.exec(html)?.[1]
         if (!cancelled && codeHtml) setHighlighted({ code, lang, html: codeHtml })

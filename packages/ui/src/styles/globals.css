@@ -7,8 +7,6 @@
 @source '../../../../apps/**/*.{ts,tsx}';
 @source '../**/*.{ts,tsx}';
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: 'Geist Variable', 'Noto Sans TC Variable', 'Noto Sans SC Variable', system-ui, sans-serif;
@@ -111,56 +109,6 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-
-  --skeleton: oklch(0.922 0 0);
-
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-  --sidebar-skeleton: var(--skeleton);
-
-  --radius: 0.625rem;
-
-  --feature-card: 0 -1px 3px 0 rgb(0 0 0 / 0.05);
-}
-
-.dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
 
@@ -205,6 +153,8 @@
   --sidebar-ring: oklch(0.556 0 0);
   --sidebar-skeleton: var(--skeleton);
 
+  --radius: 0.625rem;
+
   --feature-card: 0 0 0 1px rgb(255 255 255 / 0.06), 0 -1px rgb(255 255 255 / 0.1);
 }
 
@@ -224,30 +174,6 @@
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
-  }
-}
-
-::view-transition-old(root) {
-  animation: none;
-}
-
-::view-transition-new(root) {
-  animation: theme-rise 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes theme-rise {
-  from {
-    clip-path: inset(100% 0 0);
-  }
-  to {
-    clip-path: inset(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
   }
 }
 

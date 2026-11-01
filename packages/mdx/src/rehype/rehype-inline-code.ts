@@ -13,24 +13,20 @@ import type { Highlighter } from 'shiki'
 import { bundledLanguages, getSingletonHighlighter } from 'shiki'
 import { visit } from 'unist-util-visit'
 
-import { DEFAULT_SHIKI_THEMES } from './rehype-code'
+import { DEFAULT_SHIKI_THEME } from './rehype-code'
 
 const inlineShikiRegex = /^(.*?)\{:(.*)\}$/
 
-const themeNames = Object.values(DEFAULT_SHIKI_THEMES)
-const themeKeys = Object.keys(DEFAULT_SHIKI_THEMES)
-
-function getScopeColors(highlighter: Highlighter, scope: string): string[] {
-  return themeNames.map(
-    (name) =>
-      highlighter.getTheme(name).settings.find(({ scope: themeScope }) => themeScope?.includes(scope))?.settings
-        .foreground ?? 'inherit',
+function getScopeColor(highlighter: Highlighter, scope: string): string {
+  return (
+    highlighter.getTheme(DEFAULT_SHIKI_THEME).settings.find(({ scope: themeScope }) => themeScope?.includes(scope))
+      ?.settings.foreground ?? 'inherit'
   )
 }
 
 async function transformer(tree: Root) {
   const highlighter = await getSingletonHighlighter({
-    themes: themeNames,
+    themes: [DEFAULT_SHIKI_THEME],
     langs: Object.keys(bundledLanguages),
   })
 
@@ -51,9 +47,8 @@ async function transformer(tree: Root) {
     const isLang = !lang.startsWith('.')
 
     const hast = highlighter.codeToHast(code, {
-      themes: DEFAULT_SHIKI_THEMES,
+      theme: DEFAULT_SHIKI_THEME,
       lang: isLang ? lang : 'plaintext',
-      defaultColor: false,
     })
 
     const preNode = hast.children[0]
@@ -67,13 +62,13 @@ async function transformer(tree: Root) {
     // Set the color by scope if language is not specified
     // For example: `myFunction{:.entity.name.function}`
     if (!isLang) {
-      const colors = getScopeColors(highlighter, lang.slice(1))
+      const color = getScopeColor(highlighter, lang.slice(1))
       const spanNode = inlineCode.children[0]
 
       if (spanNode?.type !== 'element') return
       if (spanNode.tagName !== 'span') return
 
-      spanNode.properties.style = themeKeys.map((key, keyIndex) => `--shiki-${key}:${colors[keyIndex]}`).join(';')
+      spanNode.properties.style = `color:${color}`
     }
 
     inlineCode.properties.className = ['shiki']

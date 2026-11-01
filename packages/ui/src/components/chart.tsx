@@ -6,9 +6,6 @@ import * as RechartsPrimitive from 'recharts'
 
 import { useCspNonce } from './ui-provider'
 
-// Format: { THEME_NAME: CSS_SELECTOR }
-const THEMES = { light: '', dark: '.dark' } as const
-
 const INITIAL_DIMENSION = { width: 320, height: 200 } as const
 
 type TooltipNameType = number | string
@@ -18,16 +15,8 @@ export type ChartConfig = Record<
   {
     label?: React.ReactNode
     icon?: React.ComponentType
-  } & (
-    | {
-        color?: string
-        theme?: never
-      }
-    | {
-        color?: never
-        theme: Record<keyof typeof THEMES, string>
-      }
-  )
+    color?: string
+  }
 >
 
 type ChartContextProps = {
@@ -106,7 +95,7 @@ export function ChartStyle(props: ChartStyleProps) {
     .replaceAll('\n', '\\a ')
     .replaceAll('\r', '\\d ')
     .replaceAll('\f', '\\c ')
-  const colorConfig = Object.entries(config).filter(([, config]) => config.theme ?? config.color)
+  const colorConfig = Object.entries(config).filter(([, config]) => config.color)
 
   if (colorConfig.length === 0) {
     return null
@@ -114,20 +103,11 @@ export function ChartStyle(props: ChartStyleProps) {
 
   return (
     <style nonce={nonce}>
-      {Object.entries(THEMES)
-        .map(
-          ([theme, prefix]) => `
-${prefix} [data-chart="${selectorId}"] {
-${colorConfig
-  .map(([key, itemConfig]) => {
-    const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ?? itemConfig.color
-    return color ? `  --color-${key}: ${color};` : null
-  })
-  .join('\n')}
+      {`
+[data-chart="${selectorId}"] {
+${colorConfig.map(([key, itemConfig]) => `  --color-${key}: ${itemConfig.color};`).join('\n')}
 }
-`,
-        )
-        .join('\n')}
+`}
     </style>
   )
 }

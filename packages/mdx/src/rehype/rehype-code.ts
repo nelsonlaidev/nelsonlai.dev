@@ -19,10 +19,7 @@ import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
 const titleRegex = /title=["']([^"']*)["']/
 
-export const DEFAULT_SHIKI_THEMES = {
-  light: 'github-light-default',
-  dark: 'github-dark-default',
-}
+export const DEFAULT_SHIKI_THEME = 'github-dark-default'
 
 type RehypeCodeOptions = {
   ocean?: boolean
@@ -40,6 +37,8 @@ export function rehypeCode(options?: RehypeCodeOptions): Transformer<Root, Root>
       root(hast) {
         const pre = hast.children[0]
         if (pre?.type !== 'element') return
+        // The code block component owns the surface and base text colors.
+        delete pre.properties.style
         hast.children = [
           {
             ...pre,
@@ -67,7 +66,7 @@ export function rehypeCode(options?: RehypeCodeOptions): Transformer<Root, Root>
 
   const highlighter = getSingletonHighlighter({
     engine: createOnigurumaEngine(import('shiki/wasm')),
-    themes: Object.values(DEFAULT_SHIKI_THEMES),
+    themes: [DEFAULT_SHIKI_THEME],
     langs: Object.keys(bundledLanguages),
   })
 
@@ -86,8 +85,7 @@ export function rehypeCode(options?: RehypeCodeOptions): Transformer<Root, Root>
       await instance.loadTheme('github-dark')
     }
     const transformer = rehypeShikiFromHighlighter(instance, {
-      themes: ocean ? { light: 'github-dark', dark: 'github-dark' } : DEFAULT_SHIKI_THEMES,
-      defaultColor: false,
+      theme: ocean ? 'github-dark' : DEFAULT_SHIKI_THEME,
       defaultLanguage: 'plaintext',
       transformers: ocean
         ? [

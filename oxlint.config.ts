@@ -14,7 +14,7 @@ export default defineConfig({
         'playwright/expect-expect': [
           'error',
           {
-            assertFunctionNames: ['a11y', 'checkAppliedTheme', 'checkStoredTheme'],
+            assertFunctionNames: ['a11y'],
           },
         ],
       },

@@ -145,7 +145,7 @@ export function DrawerContent(props: DrawerContentProps) {
             'data-[swipe-direction=down]:border-t data-[swipe-direction=left]:border-r',
             'data-[swipe-direction=right]:border-l data-[swipe-direction=up]:border-b',
             '[interpolate-size:allow-keywords]',
-            'dark:border-border',
+            'border-border',
             // Nested
             'data-nested-drawer-open:overflow-hidden data-nested-drawer-open:brightness-95',
             // Bleed

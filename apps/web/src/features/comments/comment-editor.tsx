@@ -102,7 +102,7 @@ export function CommentEditor(props: CommentEditorProps) {
           </InputGroupAddon>
         </InputGroup>
       </TabsContent>
-      <TabsContent value='preview' className='rounded-md border border-input px-2.5 dark:bg-input/30'>
+      <TabsContent value='preview' className='rounded-md border border-input bg-input/30 px-2.5'>
         <Markdown>{value.trim() ? value : m.blog_comments_nothing_to_preview()}</Markdown>
       </TabsContent>
     </Tabs>

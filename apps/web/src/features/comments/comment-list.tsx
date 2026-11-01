@@ -204,7 +204,7 @@ function CommentItem(props: CommentItemProps) {
                   <TooltipContent>{fullDate ?? '--'}</TooltipContent>
                 </Tooltip>
                 {comment.user.role === 'admin' && (
-                  <div className='rounded-md border border-red-500/50 bg-red-100/50 px-2 py-0.5 text-sm dark:bg-red-900/50'>
+                  <div className='rounded-md border border-red-500/50 bg-red-900/50 px-2 py-0.5 text-sm'>
                     {m.blog_comments_author()}
                   </div>
                 )}

@@ -20,7 +20,6 @@ import { IntlProvider } from 'use-intl'
 
 import { MainLayout } from '@/components/main-layout'
 import { PublicNotFound } from '@/components/not-found'
-import { ThemeProvider } from '@/components/theme-provider'
 import { ENV } from '@/env'
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '@/lib/og'
 import { getLocalizedUrl, OPEN_GRAPH_LOCALES } from '@/lib/seo'
@@ -155,10 +154,8 @@ function RootDocument(props: RootDocumentProps) {
           }}
         >
           <IntlProvider locale={getLocale()} formats={INTL_FORMATS}>
-            <ThemeProvider>
-              {children}
-              <Toaster timeout={2500} limit={5} />
-            </ThemeProvider>
+            {children}
+            <Toaster timeout={2500} limit={5} />
           </IntlProvider>
         </UIProvider>
         <TanStackDevtools
