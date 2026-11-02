@@ -402,8 +402,8 @@ importers:
         specifier: 1.2.2
         version: 1.2.2(21a6192751e956e9108b7ae35d3c7380)
       '@nelsonlaidev/typescript-config':
-        specifier: 1.2.3
-        version: 1.2.3
+        specifier: 2.0.0
+        version: 2.0.0
       '@playwright/test':
         specifier: 1.64.1
         version: 1.64.1
@@ -2439,8 +2439,8 @@ packages:
       oxlint-tsgolint:
         optional: true
 
-  '@nelsonlaidev/typescript-config@1.2.3':
-    resolution: {integrity: sha512-uy8l31s+59C3ZTStorSFhmOmQ4vMSswBzTCaRCXoErfNCQxXHEQyyjuDNHahW6wuY9xE3i2Y2JnSX51hfRcVQw==}
+  '@nelsonlaidev/typescript-config@2.0.0':
+    resolution: {integrity: sha512-5vZ8BBcl/OH6vlq1G8/mu1oyRfUU8KaClhqPMpUkBecmmqOKuzxlxynxWbdSu+iRMoWeLh0gDDgfcnggZvB5jg==}
 
   '@next/swc-darwin-arm64@16.3.3':
     resolution: {integrity: sha512-8Hiv32QJPwdV6KYJ8meR9SBA061tQqnIKTJDocvOXlEQqib0xMFpzArosuffFUUc0sslbh7QQ8a3Yey1QV8EIw==}
@@ -10360,7 +10360,7 @@ snapshots:
       eslint-plugin-react-hooks: 7.1.1(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)
       oxlint-tsgolint: 7.0.2004
 
-  '@nelsonlaidev/typescript-config@1.2.3': {}
+  '@nelsonlaidev/typescript-config@2.0.0': {}
 
   '@next/swc-darwin-arm64@16.3.3':
     optional: true

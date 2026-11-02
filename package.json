@@ -121,7 +121,7 @@
     "@lingual/i18n-check": "0.9.5",
     "@nelsonlaidev/oxfmt-config": "0.3.1",
     "@nelsonlaidev/oxlint-config": "1.2.2",
-    "@nelsonlaidev/typescript-config": "1.2.3",
+    "@nelsonlaidev/typescript-config": "2.0.0",
     "@playwright/test": "1.64.1",
     "@tailwindcss/turbopack": "4.3.3",
     "@tailwindcss/typography": "0.5.20",
