@@ -51,7 +51,7 @@
     "@octokit/rest": "22.0.1",
     "@orpc/client": "2.0.0-beta.44",
     "@orpc/server": "2.0.0-beta.44",
-    "@orpc/tanstack-query": "2.0.0-beta.44",
+    "@orpc/tanstack-query": "2.0.0-beta.47",
     "@paralleldrive/cuid2": "3.3.0",
     "@react-email/ui": "6.11.2",
     "@shikijs/rehype": "4.5.0",
