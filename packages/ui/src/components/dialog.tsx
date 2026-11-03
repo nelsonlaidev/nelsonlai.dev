@@ -40,7 +40,7 @@ export function DialogOverlay(props: DialogOverlayProps) {
     <DialogPrimitive.Backdrop
       data-slot='dialog-overlay'
       className={cn(
-        'fixed inset-0 isolate z-50 bg-black/80 duration-100 supports-backdrop-filter:backdrop-blur-xs',
+        'fixed inset-0 isolate z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs',
         'data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0',
         className,
       )}
@@ -93,7 +93,7 @@ type DialogHeaderProps = React.ComponentProps<'div'>
 export function DialogHeader(props: DialogHeaderProps) {
   const { className, ...rest } = props
 
-  return <div data-slot='dialog-header' className={cn('flex flex-col gap-2 text-left', className)} {...rest} />
+  return <div data-slot='dialog-header' className={cn('flex flex-col gap-2', className)} {...rest} />
 }
 
 type DialogFooterProps = {
@@ -125,7 +125,7 @@ export function DialogTitle(props: DialogTitleProps) {
   return (
     <DialogPrimitive.Title
       data-slot='dialog-title'
-      className={cn('font-heading text-base font-medium', className)}
+      className={cn('font-heading leading-none font-medium', className)}
       {...rest}
     />
   )

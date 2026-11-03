@@ -22,6 +22,8 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "spellcheck": "cspell lint --no-progress",
+    "storybook": "pnpm --filter @repo/storybook storybook",
+    "storybook:build": "turbo run storybook:build --filter=@repo/storybook",
     "test:e2e": "pnpm test:services && pnpm --filter @repo/web test:e2e",
     "test:e2e:inspector": "pnpm test:services && pnpm --filter @repo/web test:e2e:inspector",
     "test:e2e:install": "pnpm --filter @repo/web test:e2e:install",

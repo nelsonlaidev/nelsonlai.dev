@@ -75,7 +75,7 @@ export function DrawerOverlay(props: DrawerOverlayProps) {
     <DrawerPrimitive.Backdrop
       data-slot='drawer-overlay'
       className={cn(
-        'fixed inset-0 z-50 min-h-dvh bg-black/80 opacity-[max(var(--drawer-overlay-min-opacity,0),calc(1-var(--drawer-swipe-progress)))] transition-opacity duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] select-none',
+        'fixed inset-0 z-50 min-h-dvh bg-black/10 opacity-[max(var(--drawer-overlay-min-opacity,0),calc(1-var(--drawer-swipe-progress)))] transition-opacity duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] select-none',
         'data-ending-style:pointer-events-none data-ending-style:opacity-0 data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)]',
         'data-snap-points:[--drawer-overlay-min-opacity:0.5]',
         'data-starting-style:opacity-0',
@@ -145,7 +145,6 @@ export function DrawerContent(props: DrawerContentProps) {
             'data-[swipe-direction=down]:border-t data-[swipe-direction=left]:border-r',
             'data-[swipe-direction=right]:border-l data-[swipe-direction=up]:border-b',
             '[interpolate-size:allow-keywords]',
-            'border-border',
             // Nested
             'data-nested-drawer-open:overflow-hidden data-nested-drawer-open:brightness-95',
             // Bleed
@@ -252,7 +251,7 @@ export function DrawerTitle(props: DrawerTitleProps) {
   return (
     <DrawerPrimitive.Title
       data-slot='drawer-title'
-      className={cn('font-heading text-base font-medium text-foreground', className)}
+      className={cn('font-heading font-medium text-foreground', className)}
       {...rest}
     />
   )

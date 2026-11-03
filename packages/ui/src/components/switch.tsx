@@ -13,7 +13,7 @@ export function Switch(props: SwitchProps) {
       data-slot='switch'
       data-size={size}
       className={cn(
-        'peer group/switch relative inline-flex shrink-0 items-center rounded-full border border-transparent transition-all outline-none',
+        'peer group/switch relative inline-flex shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none',
         'group-has-focus-visible/field-label:border-transparent group-has-focus-visible/field-label:ring-0',
         'after:absolute after:-inset-x-3 after:-inset-y-2',
         'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',

@@ -1,5 +1,7 @@
 @import '@repo/ui/globals.css';
 
+@source '../**/*.{ts,tsx}';
+
 @theme inline {
   --font-serif: Georgia, 'Times New Roman', serif;
 }

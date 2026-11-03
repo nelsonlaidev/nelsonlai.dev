@@ -1,0 +1,34 @@
+import type { Meta, StoryObj } from '@storybook/react-vite'
+
+import { Separator } from '@repo/ui/components/separator'
+
+const meta = {
+  title: 'Structure and navigation/Separator',
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Import { Separator } from @repo/ui/components/separator. Supports horizontal and vertical orientation. Use it to separate adjacent content, not to manufacture layout spacing.',
+      },
+    },
+  },
+} satisfies Meta
+
+export default meta
+
+type Story = StoryObj
+
+export const Orientations: Story = {
+  render: () => (
+    <div className='max-w-md space-y-6'>
+      <p>First section</p>
+      <Separator />
+      <p>Second section</p>
+      <div className='flex h-8 items-center gap-4'>
+        <span>Overview</span>
+        <Separator orientation='vertical' />
+        <span>Details</span>
+      </div>
+    </div>
+  ),
+}

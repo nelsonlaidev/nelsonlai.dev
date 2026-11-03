@@ -13,6 +13,9 @@
     "@repo/mdx#build": {
       "outputs": ["dist/**"]
     },
+    "storybook:build": {
+      "outputs": ["storybook-static/**"]
+    },
     "db:generate": {
       "cache": false,
       "interactive": true

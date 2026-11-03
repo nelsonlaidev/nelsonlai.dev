@@ -32,7 +32,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
       data-slot='select-trigger'
       data-size={size}
       className={cn(
-        'flex w-fit items-center justify-between gap-1.5 rounded-md border border-input py-2 pr-2 pl-2.5 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none select-none',
+        'flex w-fit items-center justify-between gap-1.5 rounded-md border border-input py-2 pr-2 pl-2.5 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none',
         'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
         'disabled:cursor-not-allowed disabled:opacity-50',
         'aria-invalid:ring-3',

@@ -47,7 +47,13 @@ type CardTitleProps = React.ComponentProps<'div'>
 export function CardTitle(props: CardTitleProps) {
   const { className, ...rest } = props
 
-  return <div data-slot='card-title' className={cn('font-heading text-base font-medium', className)} {...rest} />
+  return (
+    <div
+      data-slot='card-title'
+      className={cn('font-heading text-base/normal font-medium group-data-[size=sm]/card:text-sm/normal', className)}
+      {...rest}
+    />
+  )
 }
 
 type CardDescriptionProps = React.ComponentProps<'div'>
@@ -77,7 +83,7 @@ type CardContentProps = React.ComponentProps<'div'>
 export function CardContent(props: CardContentProps) {
   const { className, ...rest } = props
 
-  return <div data-slot='card-content' className={cn('px-(--card-spacing)', className)} {...rest} />
+  return <div data-slot='card-content' className={cn('flex flex-col gap-3 px-(--card-spacing)', className)} {...rest} />
 }
 
 type CardFooterProps = React.ComponentProps<'div'>

@@ -1,0 +1,36 @@
+{
+  "name": "@repo/storybook",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev --host 127.0.0.1 --port 6006 --no-open --disable-telemetry",
+    "storybook:build": "storybook build --output-dir storybook-static --disable-telemetry",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/ui": "workspace:*",
+    "lucide-react": "catalog:",
+    "react": "catalog:",
+    "react-dom": "19.3.1",
+    "recharts": "3.10.1"
+  },
+  "devDependencies": {
+    "@fontsource-variable/geist": "5.3.0",
+    "@fontsource-variable/geist-mono": "5.3.0",
+    "@fontsource-variable/noto-sans-sc": "5.3.1",
+    "@fontsource-variable/noto-sans-tc": "5.3.1",
+    "@nelsonlaidev/typescript-config": "catalog:",
+    "@storybook/addon-docs": "10.6.5",
+    "@storybook/react-vite": "10.6.5",
+    "@tailwindcss/vite": "4.3.3",
+    "@total-typescript/ts-reset": "catalog:",
+    "@types/node": "26.6.6",
+    "@types/react": "catalog:",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "oxc-transform-react": "0.152.0",
+    "storybook": "10.6.5",
+    "typescript": "catalog:",
+    "vite": "8.3.5"
+  }
+}

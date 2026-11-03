@@ -71,9 +71,7 @@ type PopoverTitleProps = PopoverPrimitive.Title.Props
 export function PopoverTitle(props: PopoverTitleProps) {
   const { className, ...rest } = props
 
-  return (
-    <PopoverPrimitive.Title data-slot='popover-title' className={cn('text-base font-medium', className)} {...rest} />
-  )
+  return <PopoverPrimitive.Title data-slot='popover-title' className={cn('font-medium', className)} {...rest} />
 }
 
 type PopoverDescriptionProps = PopoverPrimitive.Description.Props

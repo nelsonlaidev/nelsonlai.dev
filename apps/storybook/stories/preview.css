@@ -1,0 +1,25 @@
+/* cspell:ignore sbdocs */
+@import '@repo/ui/globals.css';
+
+@source './**/*.tsx';
+
+/* Confined to Storybook; the package's component styles remain unchanged. */
+.sb-show-main {
+  min-width: 0;
+}
+
+.sbdocs-wrapper,
+.sbdocs-preview {
+  background: var(--background) !important;
+  color: var(--foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

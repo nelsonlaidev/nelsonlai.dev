@@ -4,7 +4,6 @@
 @import './typography.css';
 @import './shiki.css';
 
-@source '../../../../apps/**/*.{ts,tsx}';
 @source '../**/*.{ts,tsx}';
 
 @theme inline {
@@ -66,8 +65,6 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-
-  --shadow-feature-card: var(--feature-card);
 
   --animate-marquee-x: marquee-x var(--marquee-duration) linear infinite;
   --animate-marquee-y: marquee-y var(--marquee-duration) linear infinite;
@@ -162,8 +159,6 @@
   --sidebar-skeleton: #23505a;
 
   --radius: 0.625rem;
-
-  --feature-card: 0 0 0 1px rgb(255 255 255 / 0.06), 0 -1px rgb(255 255 255 / 0.1);
 }
 
 @layer base {

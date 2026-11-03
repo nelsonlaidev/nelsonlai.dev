@@ -38,7 +38,7 @@ function SheetOverlay(props: SheetOverlayProps) {
     <SheetPrimitive.Backdrop
       data-slot='sheet-overlay'
       className={cn(
-        'fixed inset-0 z-50 bg-black/80 transition-opacity duration-150',
+        'fixed inset-0 z-50 bg-black/10 transition-opacity duration-150',
         'data-ending-style:opacity-0',
         'data-starting-style:opacity-0',
         'supports-backdrop-filter:backdrop-blur-xs',
@@ -124,7 +124,7 @@ export function SheetTitle(props: SheetTitleProps) {
   return (
     <SheetPrimitive.Title
       data-slot='sheet-title'
-      className={cn('font-heading text-base font-medium text-foreground', className)}
+      className={cn('font-heading font-medium text-foreground', className)}
       {...rest}
     />
   )
