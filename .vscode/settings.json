@@ -23,6 +23,11 @@
   },
 
   "tailwindCSS.classFunctions": ["cva", "cn"],
+  "tailwindCSS.experimental.configFile": {
+    "apps/web/src/styles/index.css": "apps/web/src/**",
+    "apps/storybook/stories/preview.css": "apps/storybook/**",
+    "packages/ui/src/styles/globals.css": "packages/ui/src/**"
+  },
 
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "js/ts.preferences.preferTypeOnlyAutoImports": true,
