@@ -1,4 +1,4 @@
-import { buttonVariants, outlineActionVariants } from '@repo/ui/components/button'
+import { buttonVariants } from '@repo/ui/components/button'
 import { Link } from '@tanstack/react-router'
 import { cn } from 'cn'
 import { ArrowUpRightIcon } from 'lucide-react'
@@ -33,14 +33,7 @@ export function PublicNotFound() {
       </h1>
       <p className='relative mx-auto mt-7.5 max-w-117.5 text-base/[1.65] text-[#a3c0b4]'>{m.not_found_description()}</p>
       <div className='relative mt-10 flex flex-wrap items-center justify-center gap-7.5'>
-        <Link
-          to='/'
-          className={cn(
-            buttonVariants(),
-            outlineActionVariants({ hoverBorder: 'muted' }),
-            'h-auto min-h-12 rounded-md border px-5.75 py-3.5 text-sm/normal whitespace-normal',
-          )}
-        >
+        <Link to='/' className={cn(buttonVariants({ variant: 'outline', size: 'xl' }))}>
           {m.common_go_to_homepage()}
           <ArrowUpRightIcon aria-hidden='true' className='size-4' />
         </Link>

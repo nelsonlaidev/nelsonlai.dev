@@ -1,6 +1,6 @@
 import type { GuestbookMessage } from './types'
 
-import { outlineActionVariants } from '@repo/ui/components/button'
+import { buttonVariants } from '@repo/ui/components/button'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { cn } from 'cn'
 import { useEffect, useRef } from 'react'
@@ -60,10 +60,7 @@ export function Messages(props: MessagesProps) {
           onClick={() => {
             void fetchNextPage()
           }}
-          className={cn(
-            outlineActionVariants(),
-            'inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border px-5.75 py-3.5 text-sm/normal transition-colors duration-200 ease-linear disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none',
-          )}
+          className={cn(buttonVariants({ variant: 'outline', size: 'xl' }))}
         >
           {m.common_load_more()}
         </button>
@@ -73,10 +70,7 @@ export function Messages(props: MessagesProps) {
           <p>{m.error_failed_to_load_messages()}</p>
           <button
             type='button'
-            className={cn(
-              outlineActionVariants(),
-              'mt-4 inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border px-5.75 py-3.5 text-sm/normal transition-colors duration-200 ease-linear disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none',
-            )}
+            className={cn(buttonVariants({ variant: 'outline', size: 'xl', className: 'mt-4' }))}
             onClick={() => {
               void refetch()
             }}

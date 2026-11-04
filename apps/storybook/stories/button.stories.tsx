@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Button, outlineActionVariants } from '@repo/ui/components/button'
+import { Button } from '@repo/ui/components/button'
 import { Spinner } from '@repo/ui/components/spinner'
 import { ArrowRightIcon, PlusIcon } from 'lucide-react'
 
@@ -11,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Import `{ Button, buttonVariants, outlineActionVariants }` from `@repo/ui/components/button`. Use native disabled state, label icon-only actions, and keep render elements self-closing. Sizes show the package defaults; the website adds its own 44px minimum control size.',
+          'Import `{ Button, buttonVariants }` from `@repo/ui/components/button`. Combine variants and sizes; use xl for larger actions with more padding. Use native disabled state, label icon-only actions, and keep render elements self-closing. Sizes show the package defaults; the website adds its own 44px minimum control size.',
       },
     },
   },
@@ -36,7 +36,7 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className='flex flex-wrap items-center gap-3'>
-      {(['xs', 'sm', 'default', 'lg'] as const).map((size) => (
+      {(['xs', 'sm', 'default', 'lg', 'xl'] as const).map((size) => (
         <Button key={size} size={size}>
           {size}
         </Button>
@@ -66,8 +66,10 @@ export const StatesAndComposition: Story = {
         Local link
         <ArrowRightIcon aria-hidden='true' data-icon='inline-end' />
       </Button>
-      <Button className={outlineActionVariants()}>Outline action</Button>
-      <Button className={outlineActionVariants({ hoverBorder: 'muted' })}>Muted action</Button>
+      <Button variant='outline' size='xl'>
+        Outline action
+        <ArrowRightIcon aria-hidden='true' data-icon='inline-end' />
+      </Button>
     </div>
   ),
 }

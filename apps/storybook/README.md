@@ -14,7 +14,7 @@ pnpm storybook:build
 Development binds to `127.0.0.1:6006`. To use a different local port:
 
 ```sh
-pnpm --filter @repo/storybook exec storybook dev --host 127.0.0.1 --port 6007 --no-open --disable-telemetry
+pnpm --filter @repo/storybook exec storybook dev --port 6007 --no-open --disable-telemetry
 ```
 
 The separate static output is `apps/storybook/storybook-static/` and is ignored by Git.

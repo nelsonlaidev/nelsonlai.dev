@@ -1,6 +1,6 @@
 import type { ProjectSummary } from './types'
 
-import { outlineActionVariants } from '@repo/ui/components/button'
+import { buttonVariants } from '@repo/ui/components/button'
 import { ExternalLink } from '@repo/ui/components/external-link'
 import { cn } from 'cn'
 import { ArrowRightIcon } from 'lucide-react'
@@ -34,13 +34,7 @@ export function ProjectHeader(props: ProjectHeaderProps) {
       {(homepage ?? github) && (
         <div className='flex shrink-0 flex-col items-start gap-5 pb-2 min-[701px]:items-end'>
           {github && (
-            <ExternalLink
-              href={github}
-              className={cn(
-                outlineActionVariants(),
-                'inline-flex min-h-11 items-center justify-center gap-7 rounded-md border px-5 py-3 text-sm transition-colors motion-reduce:transition-none min-[701px]:px-5.75 min-[701px]:py-3.5',
-              )}
-            >
+            <ExternalLink href={github} className={cn(buttonVariants({ variant: 'outline', size: 'xl' }))}>
               {m.projects_github()}
               <ArrowRightIcon className='size-5' aria-hidden='true' />
             </ExternalLink>

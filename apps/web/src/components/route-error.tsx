@@ -1,8 +1,7 @@
 import type { ErrorComponentProps } from '@tanstack/react-router'
 
-import { Button, outlineActionVariants } from '@repo/ui/components/button'
+import { Button } from '@repo/ui/components/button'
 import { useRouter } from '@tanstack/react-router'
-import { cn } from 'cn'
 
 import { m } from '@/paraglide/messages'
 
@@ -16,14 +15,12 @@ export function RouteError(props: ErrorComponentProps) {
         {m.error_something_went_wrong()}
       </h1>
       <Button
+        variant='outline'
+        size='xl'
         onClick={async () => {
           await router.invalidate()
           reset()
         }}
-        className={cn(
-          outlineActionVariants({ hoverBorder: 'muted' }),
-          'h-auto min-h-12 rounded-md border px-5.75 py-3.5 text-sm/normal whitespace-normal',
-        )}
       >
         {m.error_try_again()}
       </Button>

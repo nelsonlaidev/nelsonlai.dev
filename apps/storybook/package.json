@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "storybook": "storybook dev --host 127.0.0.1 --port 6006 --no-open --disable-telemetry",
-    "storybook:build": "storybook build --output-dir storybook-static --disable-telemetry",
+    "storybook": "storybook dev --port 6006 --no-open --disable-telemetry",
+    "storybook:build": "storybook build --disable-telemetry",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

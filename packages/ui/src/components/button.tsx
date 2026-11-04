@@ -4,18 +4,6 @@ import { Button as ButtonPrimitive } from '@base-ui/react/button'
 import { cva } from 'class-variance-authority'
 import { cn } from 'cn'
 
-export const outlineActionVariants = cva('border-[#a7cabb65] bg-[#b0d3c30b] text-[#e0ecde] hover:bg-[#b0d3c31c]', {
-  variants: {
-    hoverBorder: {
-      default: 'hover:border-[#c4e0cc]',
-      muted: 'hover:border-[#b0d3c3]',
-    },
-  },
-  defaultVariants: {
-    hoverBorder: 'default',
-  },
-})
-
 export const buttonVariants = cva(
   [
     'group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none',
@@ -54,6 +42,7 @@ export const buttonVariants = cva(
         ],
         sm: 'h-8 gap-1 rounded-[min(var(--radius-md),10px)] px-2.5 in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5',
         lg: 'h-10 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
+        xl: 'h-12 gap-2 px-6',
         icon: 'size-9',
         'icon-xs':
           "size-6 rounded-[min(var(--radius-md),8px)] in-data-[slot=button-group]:rounded-md [&_svg:not([class*='size-'])]:size-3",

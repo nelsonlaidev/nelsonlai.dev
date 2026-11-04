@@ -2,13 +2,12 @@ import type { Session } from '@repo/auth'
 
 import { ORPCError } from '@orpc/client'
 import { CreateGuestbookMessageInputSchema, GUESTBOOK_MESSAGE_MAX_LENGTH } from '@repo/api/schema/guestbook'
-import { Button, outlineActionVariants } from '@repo/ui/components/button'
+import { Button } from '@repo/ui/components/button'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@repo/ui/components/field'
 import { Textarea } from '@repo/ui/components/textarea'
 import { toast } from '@repo/ui/components/toast'
 import { useForm } from '@tanstack/react-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { cn } from 'cn'
 import { useId } from 'react'
 
 import { UserAvatar } from '@/components/user-avatar'
@@ -137,14 +136,7 @@ export function MessageBox(props: MessageBoxProps) {
           <Button variant='ghost' onClick={onSignOut} disabled={isBusy} className='min-h-11 text-[#b8d1b6]'>
             {m.common_sign_out()}
           </Button>
-          <Button
-            type='submit'
-            disabled={isBusy}
-            className={cn(
-              outlineActionVariants(),
-              'inline-flex h-auto min-h-12 cursor-pointer items-center justify-center gap-7 rounded-md border px-5.75 py-3.5 text-sm/5 transition-colors duration-200 ease-linear disabled:cursor-wait disabled:opacity-[0.5] motion-reduce:transition-none',
-            )}
-          >
+          <Button variant='outline' size='xl' type='submit' disabled={isBusy}>
             {creation.isPending ? m.common_loading() : m.guestbook_message_submit()}
           </Button>
         </div>

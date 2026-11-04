@@ -1,4 +1,4 @@
-import { outlineActionVariants } from '@repo/ui/components/button'
+import { buttonVariants } from '@repo/ui/components/button'
 import { ExternalLink } from '@repo/ui/components/external-link'
 import { Link } from '@tanstack/react-router'
 import { cn } from 'cn'
@@ -26,7 +26,10 @@ export function AboutHero(props: AboutHeroProps) {
           className='group mt-7 inline-flex min-h-11 items-center gap-2 text-sm text-link'
         >
           {githubLabel}
-          <ArrowRightIcon className='size-4.75 transition-transform group-hover:translate-x-1' aria-hidden='true' />
+          <ArrowRightIcon
+            className='size-4.75 transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1 motion-reduce:transition-none'
+            aria-hidden='true'
+          />
         </ExternalLink>
       </div>
       <div aria-hidden='true' className='mt-17.5 lg:mt-0'>
@@ -106,7 +109,10 @@ export function AboutToolbox(props: AboutToolboxProps) {
         ))}
         <Link to='/uses' className='group inline-flex min-h-11 items-center gap-2 text-sm text-link'>
           {setupLabel}
-          <ArrowRightIcon className='size-4.75 transition-transform group-hover:translate-x-1' aria-hidden='true' />
+          <ArrowRightIcon
+            className='size-4.75 transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1 motion-reduce:transition-none'
+            aria-hidden='true'
+          />
         </Link>
       </div>
     </section>
@@ -134,19 +140,19 @@ export function AboutSite(props: AboutSiteProps) {
       <p className='mx-auto mt-6.5 max-w-152.5 text-base/[1.65] text-muted-foreground'>{intro}</p>
       <p className='mx-auto mt-6.5 max-w-152.5 text-base/[1.65] text-muted-foreground'>{world}</p>
       <div className='mt-10 flex flex-wrap items-center justify-center gap-6.25 sm:gap-7.5'>
-        <Link
-          to='/projects'
-          className={cn(
-            outlineActionVariants(),
-            'inline-flex min-h-11 items-center justify-center gap-7 rounded-md border px-5.75 py-3.5 text-sm/normal transition-colors duration-200 ease-linear motion-reduce:transition-none',
-          )}
-        >
+        <Link to='/projects' className={cn(buttonVariants({ variant: 'outline', size: 'xl' }))}>
           {projectsLabel}
-          <ArrowRightIcon className='size-4.75' aria-hidden='true' />
+          <ArrowRightIcon
+            className='size-4.75 transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1 motion-reduce:transition-none'
+            aria-hidden='true'
+          />
         </Link>
-        <Link to='/guestbook' className='inline-flex min-h-11 items-center gap-4 text-sm/normal text-link'>
+        <Link to='/guestbook' className='group inline-flex min-h-11 items-center gap-2 text-sm/normal text-link'>
           {helloLabel}
-          <ArrowRightIcon className='size-4.75' aria-hidden='true' />
+          <ArrowRightIcon
+            className='size-4.75 transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1 motion-reduce:transition-none'
+            aria-hidden='true'
+          />
         </Link>
       </div>
     </section>
