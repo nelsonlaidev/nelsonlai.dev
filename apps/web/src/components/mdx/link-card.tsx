@@ -15,7 +15,7 @@ export function LinkCard(props: LinkCardProps) {
     <div className='not-prose flex justify-center'>
       <ExternalLink
         href={href}
-        className='my-8 flex min-w-0 items-center justify-center gap-4 rounded-xl border p-4 transition-colors hover:bg-accent'
+        className='my-8 flex min-w-0 items-center justify-center gap-4 rounded-xl border p-4 transition-colors ease-linear hover:bg-accent motion-reduce:transition-none'
       >
         <BlurImage
           src={`/images/website-icons/${hostname}.png`}
@@ -28,7 +28,7 @@ export function LinkCard(props: LinkCardProps) {
           <div className='font-semibold'>{title}</div>
           <div className='text-sm wrap-break-word text-muted-foreground'>{href}</div>
         </div>
-        <ExternalLinkIcon className='size-5.5 shrink-0' aria-hidden='true' />
+        <ExternalLinkIcon className='size-5 shrink-0' aria-hidden='true' />
       </ExternalLink>
     </div>
   )

@@ -1,14 +1,37 @@
 import { cn } from 'cn'
+import { useId } from 'react'
 
-type TableProps = React.ComponentProps<'table'>
+type TableProps = React.ComponentProps<'table'> & {
+  caption?: string
+}
 
 export function Table(props: TableProps) {
-  const { className, ...rest } = props
+  const { caption, className, ...rest } = props
+  const captionId = useId()
+
+  const card = (
+    <div
+      data-slot='table-container'
+      className='relative w-full overflow-x-auto overscroll-x-contain rounded-xl border bg-card'
+    >
+      <table
+        data-slot='table'
+        aria-labelledby={caption && !rest['aria-label'] ? captionId : undefined}
+        className={cn('w-full caption-bottom text-sm', className)}
+        {...rest}
+      />
+    </div>
+  )
+
+  if (!caption) return card
 
   return (
-    <div data-slot='table-container' className='relative w-full overflow-x-auto'>
-      <table data-slot='table' className={cn('w-full caption-bottom text-sm', className)} {...rest} />
-    </div>
+    <figure className='min-w-0'>
+      {card}
+      <figcaption id={captionId} data-slot='table-caption' className='mt-4 text-center text-sm text-muted-foreground'>
+        {caption}
+      </figcaption>
+    </figure>
   )
 }
 
@@ -51,7 +74,7 @@ export function TableRow(props: TableRowProps) {
     <tr
       data-slot='table-row'
       className={cn(
-        'border-b transition-colors hover:bg-muted/50 has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted',
+        'border-b transition-colors ease-linear in-[tbody]:not-data-[state=empty]:hover:bg-muted/50 has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted motion-reduce:transition-none',
         className,
       )}
       {...rest}
@@ -68,7 +91,7 @@ export function TableHead(props: TableHeadProps) {
     <th
       data-slot='table-head'
       className={cn(
-        'h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground has-[[role=checkbox]]:pr-0',
+        'h-10 bg-surface px-3 text-left align-middle font-medium whitespace-nowrap text-muted-foreground has-[[role=checkbox]]:pr-0 sm:px-4',
         className,
       )}
       {...rest}
@@ -84,7 +107,10 @@ export function TableCell(props: TableCellProps) {
   return (
     <td
       data-slot='table-cell'
-      className={cn('p-2 align-middle whitespace-nowrap has-[[role=checkbox]]:pr-0', className)}
+      className={cn(
+        'max-w-md min-w-36 px-3 py-4 align-middle leading-relaxed wrap-anywhere has-[[role=checkbox]]:pr-0 sm:px-4',
+        className,
+      )}
       {...rest}
     />
   )

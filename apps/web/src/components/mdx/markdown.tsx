@@ -1,4 +1,4 @@
-import { TableCell, TableHead, TableHeader, TableRow } from '@repo/ui/components/table'
+import { TableBody, TableCell, TableHead, TableHeader, TableRow } from '@repo/ui/components/table'
 import MarkdownToJSX from 'markdown-to-jsx'
 import { Fragment, memo } from 'react'
 
@@ -23,6 +23,7 @@ export const Markdown = memo((props: MarkdownProps) => {
             pre: CommentCodeBlock,
             table: CommentTable,
             thead: TableHeader,
+            tbody: TableBody,
             tr: TableRow,
             th: TableHead,
             td: TableCell,

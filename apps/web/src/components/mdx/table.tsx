@@ -5,15 +5,16 @@
 import { Table as UITable, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@repo/ui/components/table'
 
 type TableProps = {
+  caption?: string
   headers: string[]
   rows: string[][]
 }
 
 export function Table(props: TableProps) {
-  const { headers, rows } = props
+  const { caption, headers, rows } = props
 
   return (
-    <UITable className='not-prose'>
+    <UITable caption={caption} className='not-prose'>
       <TableHeader>
         <TableRow>
           {headers.map((header, index) => (

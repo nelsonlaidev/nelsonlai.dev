@@ -1,15 +1,15 @@
 @reference './index.css';
 
 .mdx-lightbox {
-  --yarl__color_backdrop: var(--backdrop);
   --yarl__color_button: var(--link);
   --yarl__color_button_active: var(--foreground);
-  --yarl__color_button_disabled: --alpha(var(--muted-foreground) / 70%);
-  font-family: var(--font-sans);
+  --yarl__color_button_disabled: var(--yarl__color_button);
 }
+
 .mdx-lightbox .yarl__container {
   background: radial-gradient(ellipse at 50% 0, var(--card), var(--backdrop) 75%);
 }
+
 .mdx-lightbox .yarl__slide {
   padding: --spacing(20) --spacing(4) --spacing(24);
 
@@ -17,7 +17,10 @@
     padding: --spacing(20);
   }
 }
+
 .mdx-lightbox .yarl__button {
+  @apply transition-colors ease-linear motion-reduce:transition-none;
+
   display: grid;
   place-items: center;
   width: --spacing(12);
@@ -28,16 +31,20 @@
   background: var(--background);
   filter: none;
 }
+
 .mdx-lightbox .yarl__button:hover:not(:disabled) {
   background: var(--accent);
 }
+
 .mdx-lightbox .yarl__button:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 3px;
 }
+
 .mdx-lightbox .yarl__button:disabled {
   opacity: 0.5;
 }
+
 .mdx-lightbox .yarl__toolbar {
   gap: --spacing(2.5);
   padding: max(--spacing(4), env(safe-area-inset-top)) max(--spacing(4), env(safe-area-inset-right)) --spacing(3)
@@ -47,18 +54,16 @@
     padding-right: max(--spacing(5), env(safe-area-inset-right));
   }
 }
-.mdx-lightbox .yarl__navigation_prev,
-.mdx-lightbox .yarl__navigation_next {
-  top: auto;
-  bottom: max(--spacing(4), env(safe-area-inset-bottom));
-  transform: none;
 
-  @variant md {
-    top: 50%;
-    bottom: auto;
-    transform: translateY(-50%);
+@variant max-md {
+  .mdx-lightbox .yarl__navigation_prev,
+  .mdx-lightbox .yarl__navigation_next {
+    top: auto;
+    bottom: max(--spacing(4), env(safe-area-inset-bottom));
+    transform: none;
   }
 }
+
 .mdx-lightbox .yarl__navigation_prev {
   left: --spacing(4);
 
@@ -66,6 +71,7 @@
     left: --spacing(5);
   }
 }
+
 .mdx-lightbox .yarl__navigation_next {
   right: --spacing(4);
 

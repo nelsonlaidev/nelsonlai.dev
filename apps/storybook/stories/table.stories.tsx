@@ -1,15 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@repo/ui/components/table'
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@repo/ui/components/table'
 
 const meta = {
   title: 'Data and display/Table',
@@ -17,7 +8,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Import the Table* parts from @repo/ui/components/table. This is a semantic table, not a data-fetching grid. Table supplies a horizontal overflow container. Use headers, a caption, and caller-provided loading/empty/error presentations where relevant.',
+          'Import the Table* parts from @repo/ui/components/table. This is a semantic table, not a data-fetching grid. Table supplies a horizontal overflow container. Pass caption to label the table below the scroll container. Mark an empty-state row with data-state="empty".',
       },
     },
   },
@@ -30,8 +21,7 @@ type Story = StoryObj
 export const AnatomyAndOverflow: Story = {
   render: () => (
     <div className='max-w-2xl'>
-      <Table>
-        <TableCaption>Local component inventory</TableCaption>
+      <Table caption='Local component inventory'>
         <TableHeader>
           <TableRow>
             <TableHead scope='col'>Component</TableHead>
@@ -69,8 +59,7 @@ export const AnatomyAndOverflow: Story = {
 
 export const Empty: Story = {
   render: () => (
-    <Table>
-      <TableCaption>No matching local items</TableCaption>
+    <Table caption='No matching local items'>
       <TableHeader>
         <TableRow>
           <TableHead scope='col'>Name</TableHead>
@@ -78,7 +67,7 @@ export const Empty: Story = {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
+        <TableRow data-state='empty'>
           <TableCell colSpan={2} className='h-24 text-center text-muted-foreground'>
             No items to display.
           </TableCell>
