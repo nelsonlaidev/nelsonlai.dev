@@ -23,7 +23,7 @@ export function TreeView(props: TreeViewProps) {
     <TreeViewPrimitive.Root
       data-slot='tree-view'
       collection={collection}
-      className={cn('rounded-md border bg-card p-4', className)}
+      className={cn('rounded-md border bg-card p-1 sm:p-2', className)}
       {...rest}
     >
       <TreeViewPrimitive.Label className='sr-only'>{label}</TreeViewPrimitive.Label>
