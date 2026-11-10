@@ -45,7 +45,7 @@ export function TreeViewNode(props: TreeViewNodeProps) {
     <TreeViewPrimitive.NodeProvider data-slot='tree-view-node' key={node.id} node={node} indexPath={indexPath}>
       {node.children ? (
         <TreeViewPrimitive.Branch>
-          <TreeViewPrimitive.BranchControl className='flex items-center justify-between rounded-sm p-2 text-sm hover:bg-accent hover:text-accent-foreground'>
+          <TreeViewPrimitive.BranchControl className='flex items-center justify-between rounded-sm p-2 text-sm hover:bg-accent hover:text-accent-foreground focus-visible:-outline-offset-2'>
             <TreeViewPrimitive.BranchText className='flex items-center gap-2'>
               <FolderIcon aria-hidden='true' className='size-4' /> {node.name}
             </TreeViewPrimitive.BranchText>
@@ -61,7 +61,7 @@ export function TreeViewNode(props: TreeViewNodeProps) {
           </TreeViewPrimitive.BranchContent>
         </TreeViewPrimitive.Branch>
       ) : (
-        <TreeViewPrimitive.Item className='relative rounded-sm p-2 text-sm hover:bg-accent hover:text-accent-foreground data-selected:bg-accent'>
+        <TreeViewPrimitive.Item className='relative rounded-sm p-2 text-sm hover:bg-accent hover:text-accent-foreground focus-visible:-outline-offset-2 data-selected:bg-accent'>
           <TreeViewPrimitive.ItemText className='flex items-center gap-2'>
             <FileIcon aria-hidden='true' className='size-4' />
             {node.name}

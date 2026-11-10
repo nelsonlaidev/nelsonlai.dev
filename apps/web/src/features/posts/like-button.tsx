@@ -123,7 +123,7 @@ export function LikeButton(props: LikeButtonProps) {
         aria-disabled={count === 3 || undefined}
         aria-label={m.blog_like_this_post()}
         aria-describedby={`${clipId}-status`}
-        className='relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-md border border-input bg-surface px-4 py-2.5 text-base/normal text-foreground/90 transition-colors ease-linear hover:bg-accent focus-visible:outline-2 focus-visible:-outline-offset-4! focus-visible:outline-ring focus-visible:outline-solid aria-disabled:cursor-default motion-safe:not-aria-disabled:active:scale-97 motion-reduce:transition-none'
+        className='relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-md border border-input bg-surface px-4 py-2.5 text-base/normal text-foreground/90 transition-colors ease-linear hover:bg-accent focus-visible:-outline-offset-4 aria-disabled:cursor-default motion-safe:not-aria-disabled:active:scale-97 motion-reduce:transition-none'
       >
         <span className='relative flex text-primary'>
           <svg width='26' height='26' viewBox='0 0 24 24' aria-hidden='true'>

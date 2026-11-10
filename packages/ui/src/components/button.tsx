@@ -6,8 +6,7 @@ import { cn } from 'cn'
 
 export const buttonVariants = cva(
   [
-    'group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none',
-    'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
+    'group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all select-none',
     'active:not-aria-[haspopup]:translate-y-px',
     'disabled:pointer-events-none disabled:opacity-50',
     'aria-invalid:border-destructive/50 aria-invalid:ring-3 aria-invalid:ring-destructive/40',
@@ -25,10 +24,7 @@ export const buttonVariants = cva(
           'aria-expanded:bg-secondary aria-expanded:text-secondary-foreground',
         ],
         ghost: 'hover:bg-muted/50 hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground',
-        destructive: [
-          'bg-destructive/20 text-destructive hover:bg-destructive/30',
-          'focus-visible:border-destructive/40 focus-visible:ring-destructive/40',
-        ],
+        destructive: 'bg-destructive/20 text-destructive hover:bg-destructive/30',
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {

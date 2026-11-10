@@ -35,7 +35,7 @@ export function MdxImage(props: React.ComponentProps<typeof BlurImage>) {
         onClick={(event) => {
           if (captionRef.current) open(event.currentTarget, captionRef.current)
         }}
-        className='relative mb-4 block w-full cursor-zoom-in rounded-lg focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-ring'
+        className='relative mb-4 block w-full cursor-zoom-in rounded-lg focus-visible:outline-offset-5'
       >
         <BlurImage
           src={src}

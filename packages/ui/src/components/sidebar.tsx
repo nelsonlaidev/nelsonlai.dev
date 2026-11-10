@@ -440,9 +440,9 @@ export function SidebarGroupLabel(props: SidebarGroupLabelProps) {
     props: mergeProps<'div'>(
       {
         className: cn(
-          'flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear',
+          'flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 transition-[margin,opacity] duration-200 ease-linear',
           'group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0',
-          'focus-visible:ring-2',
+          'focus-visible:-outline-offset-2 focus-visible:outline-sidebar-ring',
           '[&>svg]:size-4 [&>svg]:shrink-0',
           className,
         ),
@@ -467,11 +467,11 @@ export function SidebarGroupAction(props: SidebarGroupActionProps) {
     props: mergeProps<'button'>(
       {
         className: cn(
-          'absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground ring-sidebar-ring outline-hidden transition-transform',
+          'absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground transition-transform',
           'group-data-[collapsible=icon]:hidden',
           'after:absolute after:-inset-2',
           'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
-          'focus-visible:ring-2',
+          'focus-visible:-outline-offset-2 focus-visible:outline-sidebar-ring',
           'md:after:hidden',
           '[&>svg]:size-4 [&>svg]:shrink-0',
           className,
@@ -534,11 +534,11 @@ export function SidebarMenuItem(props: SidebarMenuItemProps) {
 
 export const sidebarMenuButtonVariants = cva(
   [
-    'peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm ring-sidebar-ring outline-hidden transition-[width,height,padding]',
+    'peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm transition-[width,height,padding]',
     'group-has-data-[sidebar=menu-action]/menu-item:pr-8',
     'group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2!',
     'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
-    'focus-visible:ring-2',
+    'focus-visible:-outline-offset-2 focus-visible:outline-sidebar-ring',
     'active:bg-sidebar-accent active:text-sidebar-accent-foreground',
     'disabled:pointer-events-none disabled:opacity-50',
     'aria-disabled:pointer-events-none aria-disabled:opacity-50',
@@ -624,7 +624,7 @@ export function SidebarMenuAction(props: SidebarMenuActionProps) {
     props: mergeProps<'button'>(
       {
         className: cn(
-          'absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground ring-sidebar-ring outline-hidden transition-transform',
+          'absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground transition-transform',
           'group-data-[collapsible=icon]:hidden',
           'peer-hover/menu-button:text-sidebar-accent-foreground',
           'peer-data-[size=default]/menu-button:top-1.5',
@@ -632,7 +632,7 @@ export function SidebarMenuAction(props: SidebarMenuActionProps) {
           'peer-data-[size=sm]/menu-button:top-1',
           'after:absolute after:-inset-2',
           'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
-          'focus-visible:ring-2',
+          'focus-visible:-outline-offset-2 focus-visible:outline-sidebar-ring',
           'md:after:hidden',
           '[&>svg]:size-4 [&>svg]:shrink-0',
           showOnHover &&
@@ -756,10 +756,10 @@ export function SidebarMenuSubButton(props: SidebarMenuSubButtonProps) {
     props: mergeProps<'a'>(
       {
         className: cn(
-          'flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sidebar-foreground ring-sidebar-ring outline-hidden',
+          'flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sidebar-foreground',
           'group-data-[collapsible=icon]:hidden',
           'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
-          'focus-visible:ring-2',
+          'focus-visible:-outline-offset-2 focus-visible:outline-sidebar-ring',
           'active:bg-sidebar-accent active:text-sidebar-accent-foreground',
           'disabled:pointer-events-none disabled:opacity-50',
           'aria-disabled:pointer-events-none aria-disabled:opacity-50',

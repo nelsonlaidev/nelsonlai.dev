@@ -168,9 +168,21 @@
   --radius: 0.625rem;
 }
 
+@utility focus-outline {
+  outline: 2px solid var(--ring);
+}
+
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+  }
+
+  :focus-visible {
+    @apply focus-outline outline-offset-2;
+  }
+
+  :where(a[href]):focus-visible {
+    @apply rounded-sm;
   }
 
   ::selection {

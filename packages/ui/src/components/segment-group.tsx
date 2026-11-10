@@ -86,8 +86,8 @@ export function SegmentGroupItem(props: SegmentGroupItemProps) {
     <SegmentGroupPrimitive.Item
       data-slot='segment-group-item'
       className={cn(
-        'relative z-10 inline-flex h-full flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-all outline-none select-none',
-        'data-focus-visible:border-ring data-focus-visible:ring-3 data-focus-visible:ring-ring/50 data-focus-visible:outline-1 data-focus-visible:outline-ring',
+        'relative z-10 inline-flex h-full flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap outline-offset-2 transition-all select-none',
+        'data-focus-visible:focus-outline',
         'data-invalid:border-destructive',
         'text-muted-foreground',
         'hover:text-foreground',

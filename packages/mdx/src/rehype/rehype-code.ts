@@ -71,6 +71,7 @@ export function rehypeCode(): Transformer<Root, Root> {
       theme: DEFAULT_SHIKI_THEME,
       defaultLanguage: 'plaintext',
       rootStyle: false,
+      tabindex: false,
       transformers,
       parseMetaString: (meta) => {
         const titleMatch = titleRegex.exec(meta)

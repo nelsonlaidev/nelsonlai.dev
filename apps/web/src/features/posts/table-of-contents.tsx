@@ -45,7 +45,7 @@ export function TableOfContents(props: TableOfContentsProps) {
             href={`#${encodeURIComponent(item.url)}`}
             aria-current={activeId === item.url ? 'location' : undefined}
             className={cn(
-              'border-l py-1 pl-3 text-sm/5 text-muted-foreground hover:text-foreground aria-[current=location]:border-l-primary aria-[current=location]:text-foreground',
+              'border-l py-1 pl-3 text-sm/5 text-muted-foreground hover:text-foreground focus-visible:-outline-offset-2 aria-[current=location]:border-l-primary aria-[current=location]:text-foreground',
               item.depth === 3 && 'pl-6',
               item.depth === 4 && 'pl-9',
               item.depth === 5 && 'pl-12',

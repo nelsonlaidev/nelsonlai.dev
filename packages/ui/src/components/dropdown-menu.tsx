@@ -93,7 +93,7 @@ export function DropdownMenuItem(props: DropdownMenuItemProps) {
       data-inset={inset}
       data-variant={variant}
       className={cn(
-        'group/dropdown-menu-item relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none',
+        'group/dropdown-menu-item relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm select-none focus-visible:-outline-offset-2',
         'focus:bg-accent focus:text-accent-foreground',
         'not-data-[variant=destructive]:focus:**:text-accent-foreground',
         'data-inset:pl-8',
@@ -129,7 +129,7 @@ export function DropdownMenuSubTrigger(props: DropdownMenuSubTriggerProps) {
       data-slot='dropdown-menu-sub-trigger'
       data-inset={inset}
       className={cn(
-        'flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none',
+        'flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm select-none focus-visible:-outline-offset-2',
         'focus:bg-accent focus:text-accent-foreground',
         'not-data-[variant=destructive]:focus:**:text-accent-foreground',
         'data-inset:pl-8',
@@ -186,7 +186,7 @@ export function DropdownMenuCheckboxItem(props: DropdownMenuCheckboxItemProps) {
       data-slot='dropdown-menu-checkbox-item'
       data-inset={inset}
       className={cn(
-        'relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none',
+        'relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm select-none focus-visible:-outline-offset-2',
         'focus:bg-accent focus:text-accent-foreground',
         'focus:**:text-accent-foreground',
         'data-inset:pl-8',
@@ -229,7 +229,7 @@ export function DropdownMenuRadioItem(props: DropdownMenuRadioItemProps) {
       data-slot='dropdown-menu-radio-item'
       data-inset={inset}
       className={cn(
-        'relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none',
+        'relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm select-none focus-visible:-outline-offset-2',
         'focus:bg-accent focus:text-accent-foreground',
         'focus:**:text-accent-foreground',
         'data-inset:pl-8',

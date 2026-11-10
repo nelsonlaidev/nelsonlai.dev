@@ -13,10 +13,8 @@ export function Switch(props: SwitchProps) {
       data-slot='switch'
       data-size={size}
       className={cn(
-        'peer group/switch relative inline-flex shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none',
-        'group-has-focus-visible/field-label:border-transparent group-has-focus-visible/field-label:ring-0',
+        'peer group/switch relative inline-flex shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all',
         'after:absolute after:-inset-x-3 after:-inset-y-2',
-        'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
         'aria-invalid:ring-3',
         'data-[size=default]:h-[18.4px] data-[size=default]:w-8 data-[size=sm]:h-3.5 data-[size=sm]:w-6',
         'aria-invalid:border-destructive/50 aria-invalid:ring-destructive/40',

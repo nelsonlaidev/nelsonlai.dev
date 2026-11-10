@@ -15,7 +15,7 @@ export function Command(props: CommandProps) {
     <CommandPrimitive
       data-slot='command'
       className={cn(
-        'flex size-full flex-col overflow-hidden rounded-xl! bg-popover p-1 text-popover-foreground',
+        'group/command flex size-full flex-col overflow-hidden rounded-xl! bg-popover p-1 text-popover-foreground',
         className,
       )}
       {...rest}
@@ -76,7 +76,7 @@ export function CommandInput(props: CommandInputProps) {
       <InputGroup className='h-8! rounded-lg! border-input/30 bg-input/30 shadow-none! *:data-[slot=input-group-addon]:pl-2!'>
         <CommandPrimitive.Input
           data-slot='input-group-control'
-          className={cn('w-full text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50', className)}
+          className={cn('w-full text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50', className)}
           {...rest}
         />
         <InputGroupAddon>
@@ -152,10 +152,10 @@ export function CommandItem(props: CommandItemProps) {
     <CommandPrimitive.Item
       data-slot='command-item'
       className={cn(
-        'group/command-item relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none',
+        'group/command-item relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm -outline-offset-2 select-none',
         'in-data-[slot=dialog-content]:rounded-lg!',
         'data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50',
-        'data-selected:bg-muted data-selected:text-foreground',
+        'data-selected:bg-muted data-selected:text-foreground group-has-focus-visible/command:data-selected:focus-outline',
         '[&_svg]:pointer-events-none [&_svg]:shrink-0',
         "[&_svg:not([class*='size-'])]:size-4",
         'data-selected:**:[svg]:text-foreground',

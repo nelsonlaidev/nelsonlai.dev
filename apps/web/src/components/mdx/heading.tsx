@@ -16,10 +16,7 @@ export function Heading(props: HeadingProps) {
   return (
     <Component id={id} className={cn('scroll-m-32', className)} {...rest}>
       {id ? (
-        <a
-          href={`#${id}`}
-          className='group rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring'
-        >
+        <a href={`#${id}`} className='group rounded-sm focus-visible:outline-offset-4'>
           {children}
           <LinkIcon
             aria-hidden='true'

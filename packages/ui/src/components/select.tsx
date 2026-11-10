@@ -32,8 +32,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
       data-slot='select-trigger'
       data-size={size}
       className={cn(
-        'flex w-fit items-center justify-between gap-1.5 rounded-md border border-input py-2 pr-2 pl-2.5 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none',
-        'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
+        'flex w-fit items-center justify-between gap-1.5 rounded-md border border-input py-2 pr-2 pl-2.5 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow]',
         'disabled:cursor-not-allowed disabled:opacity-50',
         'aria-invalid:ring-3',
         'data-placeholder:text-muted-foreground',
@@ -129,7 +128,7 @@ export function SelectItem(props: SelectItemProps) {
     <SelectPrimitive.Item
       data-slot='select-item'
       className={cn(
-        'relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none',
+        'relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm select-none focus-visible:-outline-offset-2',
         'focus:bg-accent focus:text-accent-foreground',
         'not-data-[variant=destructive]:focus:**:text-accent-foreground',
         'data-disabled:pointer-events-none data-disabled:opacity-50',
