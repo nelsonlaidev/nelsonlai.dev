@@ -1,9 +1,10 @@
-import type { ComponentType } from 'react'
-import type { MdxLightboxProps } from './mdx-lightbox'
-
-import { createContext, use, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { CatchBoundary } from '@tanstack/react-router'
+import { createContext, lazy, Suspense, use, useCallback, useMemo, useRef, useState, useTransition } from 'react'
+import { createPortal } from 'react-dom'
 
 import { m } from '@/paraglide/messages'
+
+const MdxLightbox = lazy(async () => import('./mdx-lightbox'))
 
 export type GalleryImage = {
   src: string
@@ -12,17 +13,30 @@ export type GalleryImage = {
   height?: number
 }
 
-const GalleryContext = createContext<{
+type GalleryContextProps = {
   register: (trigger: HTMLButtonElement, image: GalleryImage) => () => void
-  open: (trigger: HTMLButtonElement) => void
+  open: (trigger: HTMLButtonElement, caption: HTMLElement) => void
   loading: boolean
-} | null>(null)
+}
+
+const GalleryContext = createContext<GalleryContextProps | null>(null)
 GalleryContext.displayName = 'MdxGallery'
 
 export function useMdxGallery() {
   const gallery = use(GalleryContext)
-  if (!gallery) throw new Error('useMdxGallery must be used within <MdxGallery />')
+
+  if (!gallery) {
+    throw new Error('useMdxGallery must be used within <MdxGallery />')
+  }
+
   return gallery
+}
+
+type GallerySelection = {
+  images: GalleryImage[]
+  index: number
+  trigger: HTMLButtonElement
+  caption: HTMLElement
 }
 
 type MdxGalleryProps = {
@@ -32,74 +46,68 @@ type MdxGalleryProps = {
 export function MdxGallery(props: MdxGalleryProps) {
   const { children } = props
 
+  const [selection, setSelection] = useState<GallerySelection | null>(null)
+  const [loading, startTransition] = useTransition()
   const imagesRef = useRef(new Map<HTMLButtonElement, GalleryImage>())
-  const [Viewer, setViewer] = useState<ComponentType<MdxLightboxProps> | null>(null)
-  const [slides, setSlides] = useState<GalleryImage[]>([])
-  const [index, setIndex] = useState<number | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [failed, setFailed] = useState<string | null>(null)
-  const requestRef = useRef(0)
-  const triggerRef = useRef<HTMLButtonElement | null>(null)
-  useEffect(
-    () => () => {
-      requestRef.current += 1
-    },
-    [],
-  )
+
   const register = useCallback((trigger: HTMLButtonElement, image: GalleryImage) => {
     imagesRef.current.set(trigger, image)
+
     return () => {
       imagesRef.current.delete(trigger)
     }
   }, [])
+
   const open = useCallback(
-    async function open(button: HTMLButtonElement) {
-      const image = imagesRef.current.get(button)
+    (trigger: HTMLButtonElement, caption: HTMLElement) => {
+      const image = imagesRef.current.get(trigger)
       if (!image) return
-      const collection = [...imagesRef.current.values()]
-      const next = collection.indexOf(image)
-      triggerRef.current = button
-      setSlides(collection)
-      setFailed(null)
-      requestRef.current += 1
-      const current = requestRef.current
-      if (Viewer) {
-        setIndex(next)
-        return
-      }
-      setLoading(true)
-      try {
-        const module = await import('./mdx-lightbox')
-        if (current !== requestRef.current) return
-        setViewer(() => module.default)
-        setIndex(next)
-      } catch {
-        if (current === requestRef.current) setFailed(image.src)
-      } finally {
-        if (current === requestRef.current) setLoading(false)
-      }
+
+      const images = [...imagesRef.current.values()]
+
+      startTransition(() => {
+        setSelection({ images, index: images.indexOf(image), trigger, caption })
+      })
     },
-    [Viewer],
+    [startTransition],
   )
+
   const context = useMemo(() => ({ register, open, loading }), [register, open, loading])
+
   function close() {
-    setIndex(null)
-    triggerRef.current?.focus({ preventScroll: true })
+    setSelection(null)
+    selection?.trigger.focus({ preventScroll: true })
   }
 
   return (
     <GalleryContext value={context}>
       {children}
       {loading && <output className='sr-only'>{m.common_loading()}</output>}
-      {failed && (
-        <p role='alert' className='text-base/relaxed text-foreground [&_a]:underline'>
-          {m.common_error()}{' '}
-          <a href={failed} target='_blank' rel='noopener noreferrer'>
-            {m.blog_image_viewer_original()}
-          </a>
-        </p>
-      )}
-      {Viewer && index !== null && <Viewer images={slides} index={index} close={close} />}
+      <Suspense fallback={null}>
+        {selection && (
+          <CatchBoundary
+            getResetKey={() => selection.trigger}
+            errorComponent={() =>
+              createPortal(
+                <span role='alert' className='mt-2 block text-sm text-foreground'>
+                  {m.blog_image_viewer_error()}{' '}
+                  <a
+                    className='text-link underline'
+                    href={selection.images[selection.index]?.src}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {m.blog_image_viewer_original()}
+                  </a>
+                </span>,
+                selection.caption,
+              )
+            }
+          >
+            <MdxLightbox images={selection.images} index={selection.index} close={close} />
+          </CatchBoundary>
+        )}
+      </Suspense>
     </GalleryContext>
   )
 }

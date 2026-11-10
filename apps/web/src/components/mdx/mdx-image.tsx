@@ -11,6 +11,7 @@ export function MdxImage(props: React.ComponentProps<typeof BlurImage>) {
 
   const { register, open, loading } = useMdxGallery()
   const triggerRef = useRef<HTMLButtonElement>(null)
+  const captionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     if (!triggerRef.current) return
@@ -32,7 +33,7 @@ export function MdxImage(props: React.ComponentProps<typeof BlurImage>) {
         aria-haspopup='dialog'
         aria-busy={loading || undefined}
         onClick={(event) => {
-          open(event.currentTarget)
+          if (captionRef.current) open(event.currentTarget, captionRef.current)
         }}
         className='relative mb-4 block w-full cursor-zoom-in rounded-lg focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-ring'
       >
@@ -45,7 +46,9 @@ export function MdxImage(props: React.ComponentProps<typeof BlurImage>) {
           {...rest}
         />
       </button>
-      <figcaption className='text-center'>{alt}</figcaption>
+      <figcaption ref={captionRef} className='text-center'>
+        <span>{alt}</span>
+      </figcaption>
     </figure>
   )
 }

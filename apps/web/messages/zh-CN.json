@@ -110,6 +110,7 @@
   "blog_header_published_on": "发布日期",
   "blog_header_views": "浏览次数",
   "blog_image_viewer_enlarge": "放大图片：{alt}",
+  "blog_image_viewer_error": "无法打开图片查看器。",
   "blog_image_viewer_images": "图片库",
   "blog_image_viewer_next": "下一张图片",
   "blog_image_viewer_original": "打开原始图片",

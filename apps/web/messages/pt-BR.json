@@ -119,6 +119,7 @@
   "blog_header_published_on": "Publicado em",
   "blog_header_views": "Visualizações",
   "blog_image_viewer_enlarge": "Ampliar imagem: {alt}",
+  "blog_image_viewer_error": "Não foi possível abrir o visualizador de imagens.",
   "blog_image_viewer_images": "Galeria de imagens",
   "blog_image_viewer_next": "Próxima imagem",
   "blog_image_viewer_original": "Abrir imagem original",

@@ -119,6 +119,7 @@
   "blog_header_published_on": "Publicado el",
   "blog_header_views": "Vistas",
   "blog_image_viewer_enlarge": "Ampliar imagen: {alt}",
+  "blog_image_viewer_error": "No se pudo abrir el visor de imágenes.",
   "blog_image_viewer_images": "Galería de imágenes",
   "blog_image_viewer_next": "Imagen siguiente",
   "blog_image_viewer_original": "Abrir imagen original",
