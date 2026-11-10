@@ -15,7 +15,7 @@ export function LinkCard(props: LinkCardProps) {
     <div className='not-prose flex justify-center'>
       <ExternalLink
         href={href}
-        className='my-8 flex min-w-0 items-center justify-center gap-4 rounded-xl border p-4 transition-colors ease-linear hover:bg-accent motion-reduce:transition-none'
+        className='my-8 flex min-w-0 items-center justify-center gap-4 rounded-xl border p-4 transition-[background-color] ease-linear hover:bg-accent motion-reduce:transition-none'
       >
         <BlurImage
           src={`/images/website-icons/${hostname}.png`}

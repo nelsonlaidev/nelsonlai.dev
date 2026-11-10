@@ -86,7 +86,7 @@ export function SegmentGroupItem(props: SegmentGroupItemProps) {
     <SegmentGroupPrimitive.Item
       data-slot='segment-group-item'
       className={cn(
-        'relative z-10 inline-flex h-full flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap outline-offset-2 transition-all select-none',
+        'relative z-10 inline-flex h-full flex-1 cursor-pointer items-center justify-center rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap outline-offset-2 transition-[border-color,color,opacity] select-none',
         'data-focus-visible:focus-outline',
         'data-invalid:border-destructive',
         'text-muted-foreground',

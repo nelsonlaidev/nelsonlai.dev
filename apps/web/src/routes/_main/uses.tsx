@@ -85,7 +85,7 @@ function UsesSection(props: UsesSectionProps) {
           <ExternalLink
             href={item.url}
             key={item.name}
-            className='group flex min-w-0 items-center gap-3.5 border-b px-4 py-5 transition-colors duration-200 ease-linear hover:bg-primary/5 motion-reduce:transition-none sm:gap-6 sm:px-5 sm:py-6'
+            className='group flex min-w-0 items-center gap-3.5 border-b px-4 py-5 transition-[background-color] duration-200 ease-linear hover:bg-primary/5 motion-reduce:transition-none sm:gap-6 sm:px-5 sm:py-6'
           >
             <BlurImage
               src={item.image}

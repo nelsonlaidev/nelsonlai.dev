@@ -63,7 +63,7 @@ export function TabsTrigger(props: TabsTriggerProps) {
     <TabsPrimitive.Tab
       data-slot='tabs-trigger'
       className={cn(
-        'relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-all',
+        'relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[background-color,border-color,box-shadow,color,opacity]',
         'group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start',
         'disabled:pointer-events-none disabled:opacity-50',
         'has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5',

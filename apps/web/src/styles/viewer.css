@@ -19,7 +19,7 @@
 }
 
 .mdx-lightbox .yarl__button {
-  @apply transition-colors ease-linear motion-reduce:transition-none;
+  @apply transition-[background-color,color] ease-linear motion-reduce:transition-none;
 
   display: grid;
   place-items: center;

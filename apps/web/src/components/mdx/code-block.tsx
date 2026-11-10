@@ -49,7 +49,7 @@ export function CodeBlock(props: CodeBlockProps) {
       variant={hasCaption ? 'outline' : 'ghost'}
       size='icon-sm'
       className={cn(
-        'group-hover/code-block:opacity-100 focus-visible:opacity-100 [@media(hover:hover)]:opacity-0',
+        'group-hover/code-block:opacity-100 focus-visible:opacity-100 focus-visible:transition-none [@media(hover:hover)]:opacity-0',
         !hasCaption && 'absolute top-2 right-2 z-10',
       )}
       onClick={() => {

@@ -6,7 +6,7 @@ import { cn } from 'cn'
 
 export const buttonVariants = cva(
   [
-    'group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all select-none',
+    'group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-[background-color,border-color,box-shadow,color,opacity,translate] select-none',
     'active:not-aria-[haspopup]:translate-y-px',
     'disabled:pointer-events-none disabled:opacity-50',
     'aria-invalid:border-destructive/50 aria-invalid:ring-3 aria-invalid:ring-destructive/40',
