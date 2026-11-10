@@ -11,7 +11,10 @@ pre.shiki {
   line-height: --spacing(5);
 }
 
-pre.shiki code {
+pre.shiki > code {
+  display: block;
+  width: max-content;
+  min-width: 100%;
   padding: 0;
   border: 0;
   background: transparent;

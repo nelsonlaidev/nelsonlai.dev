@@ -56,7 +56,7 @@ export function CommentCodeBlock(props: CommentCodeBlockProps) {
             code,
             lang,
             html: codeHtml,
-            style: { backgroundColor: theme.bg, color: theme.fg },
+            style: { color: theme.fg },
           })
       } catch (error) {
         console.error('Failed to highlight code:', error)

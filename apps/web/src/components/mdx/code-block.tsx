@@ -16,7 +16,7 @@ type CodeBlockProps = React.ComponentProps<'pre'> & {
 }
 
 export function CodeBlock(props: CodeBlockProps) {
-  const { children, className, title, 'data-lang': lang, figureClassName, scrollAreaClassName, ref, ...rest } = props
+  const { children, title, 'data-lang': lang, figureClassName, scrollAreaClassName, ref, ...rest } = props
   const preRef = useRef<HTMLPreElement>(null)
   const [copied, setCopied] = useState(false)
   const Icon = getIconByLanguage(lang ?? '')
@@ -24,9 +24,11 @@ export function CodeBlock(props: CodeBlockProps) {
 
   useEffect(() => {
     if (!copied) return
+
     const timeout = setTimeout(() => {
       setCopied(false)
     }, 2000)
+
     return () => {
       clearTimeout(timeout)
     }
@@ -44,38 +46,32 @@ export function CodeBlock(props: CodeBlockProps) {
   const copyButton = (
     <Button
       type='button'
-      variant='ghost'
+      variant={hasCaption ? 'outline' : 'ghost'}
       size='icon-sm'
       className={cn(
-        'transition-opacity',
-        hasCaption
-          ? 'size-auto min-w-11 shrink-0 gap-0 rounded-md border border-input bg-popover bg-clip-border px-3.5 py-2 text-sm/5 text-foreground hover:bg-popover hover:text-foreground focus-visible:border-ring'
-          : 'absolute top-2 right-2 z-10 size-8 md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100',
+        'group-hover/code-block:opacity-100 focus-visible:opacity-100 [@media(hover:hover)]:opacity-0',
+        !hasCaption && 'absolute top-2 right-2 z-10',
       )}
       onClick={() => {
         void copyCode()
       }}
-      aria-label={m.common_aria_labels_copy_code()}
+      aria-label={copied ? m.common_copied() : m.common_aria_labels_copy_code()}
     >
-      {copied ? (
-        <CheckIcon className={cn('size-3.5', hasCaption && 'hidden size-5')} aria-hidden='true' />
-      ) : (
-        <CopyIcon className={cn('size-3.5', hasCaption && 'hidden size-5')} aria-hidden='true' />
-      )}
-      <span className='inline'>{copied ? m.common_copied() : m.common_copy()}</span>
+      {copied ? <CheckIcon aria-hidden='true' /> : <CopyIcon aria-hidden='true' />}
     </Button>
   )
 
   return (
     <figure
-      className={cn('not-prose group relative my-6 mb-9 overflow-hidden rounded-xl border text-sm', figureClassName)}
+      className={cn(
+        'not-prose group/code-block relative my-8 overflow-hidden rounded-xl border bg-card text-sm',
+        figureClassName,
+      )}
     >
       {hasCaption ? (
-        <div className='flex flex-row items-center gap-2 border-b border-b-border/60 bg-transparent px-3.5 py-3 text-sm/5 sm:gap-x-5 sm:px-5'>
-          <div className='hidden text-muted-foreground'>
-            <Icon className='size-3.5' aria-hidden='true' />
-          </div>
-          <figcaption className='flex-1 truncate leading-loose wrap-anywhere whitespace-normal text-muted-foreground'>
+        <div className='flex flex-row items-center gap-3 border-b bg-transparent px-3 py-2 text-sm sm:px-5'>
+          <Icon className='size-3.5 shrink-0 text-muted-foreground' aria-hidden='true' />
+          <figcaption className='flex-1 truncate wrap-anywhere whitespace-normal text-muted-foreground'>
             {title ?? lang}
           </figcaption>
           {copyButton}
@@ -84,12 +80,7 @@ export function CodeBlock(props: CodeBlockProps) {
         copyButton
       )}
       <ScrollArea className={scrollAreaClassName}>
-        <pre
-          ref={mergeRefs(preRef, ref)}
-          data-lang={lang}
-          className={cn('text-sm [&>code]:block [&>code]:w-max [&>code]:min-w-full [&>code]:font-mono', className)}
-          {...rest}
-        >
+        <pre ref={mergeRefs(preRef, ref)} data-lang={lang} {...rest}>
           {children}
         </pre>
       </ScrollArea>

@@ -33,6 +33,7 @@ export function rehypeCode(): Transformer<Root, Root> {
       root(hast) {
         const pre = hast.children[0]
         if (pre?.type !== 'element') return
+
         hast.children = [
           {
             ...pre,
@@ -69,6 +70,7 @@ export function rehypeCode(): Transformer<Root, Root> {
     const transformer = rehypeShikiFromHighlighter(instance, {
       theme: DEFAULT_SHIKI_THEME,
       defaultLanguage: 'plaintext',
+      rootStyle: false,
       transformers,
       parseMetaString: (meta) => {
         const titleMatch = titleRegex.exec(meta)
