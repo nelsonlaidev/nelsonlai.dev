@@ -3,7 +3,7 @@ import 'yet-another-react-lightbox/styles.css'
 import '@/styles/viewer.css'
 
 import type { KeyboardEvent } from 'react'
-import type { ArticleImage } from './article-gallery'
+import type { GalleryImage } from './mdx-gallery'
 
 import { useEffect, useRef, useState } from 'react'
 import Lightbox, { useController } from 'yet-another-react-lightbox'
@@ -11,8 +11,8 @@ import Zoom from 'yet-another-react-lightbox/plugins/zoom'
 
 import { m } from '@/paraglide/messages'
 
-export type ArticleLightboxProps = {
-  images: ArticleImage[]
+export type MdxLightboxProps = {
+  images: GalleryImage[]
   index: number
   close: () => void
 }
@@ -101,7 +101,7 @@ function trapFocus(event: KeyboardEvent<HTMLDivElement>) {
   controls[next]?.focus({ preventScroll: true })
 }
 
-export default function ArticleLightbox(props: ArticleLightboxProps) {
+export default function MdxLightbox(props: MdxLightboxProps) {
   const { images, index, close } = props
   const [reduced, setReduced] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches)
   useEffect(() => {
@@ -122,7 +122,7 @@ export default function ArticleLightbox(props: ArticleLightboxProps) {
       index={index}
       slides={images}
       plugins={[Zoom]}
-      className='article-lightbox'
+      className='mdx-lightbox'
       portal={{ container: { onKeyDownCapture: trapFocus } }}
       controller={{ closeOnEscape: true, closeOnBackdropClick: false }}
       carousel={{ finite: true, preload: 1, padding: '0px', imageFit: 'contain' }}

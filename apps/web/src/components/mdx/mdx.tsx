@@ -8,6 +8,7 @@ import { Heading } from './heading'
 import { ItemGrid } from './item-grid'
 import { LinkCard } from './link-card'
 import { LogoShowcase } from './logo-showcase'
+import { MdxGallery } from './mdx-gallery'
 import { MdxImage } from './mdx-image'
 import { MdxLink } from './mdx-link'
 import { SocialLinks } from './social-links'
@@ -48,7 +49,9 @@ export function Mdx(props: MdxProps) {
 
   return (
     <div className={cn(!unstyled && 'prose w-full', className)}>
-      <Content components={{ ...MDX_COMPONENTS, ...components }} />
+      <MdxGallery key={code}>
+        <Content components={{ ...MDX_COMPONENTS, ...components }} />
+      </MdxGallery>
     </div>
   )
 }

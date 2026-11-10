@@ -1,52 +1,51 @@
-import 'react-medium-image-zoom/dist/styles.css'
-import '@/styles/viewer.css'
-
 import { BlurImage } from '@repo/ui/components/blur-image'
 import { cn } from 'cn'
-import { useEffect } from 'react'
-import Zoom from 'react-medium-image-zoom'
+import { useEffect, useRef } from 'react'
 
-import { useArticleGallery } from '@/features/posts/article-gallery'
 import { m } from '@/paraglide/messages'
 
-export function MdxImage(props: React.ComponentProps<typeof BlurImage>) {
-  const { alt, className, src, ...rest } = props
+import { useMdxGallery } from './mdx-gallery'
 
-  const gallery = useArticleGallery()
-  const register = gallery?.register
-  const { width, height } = rest
+export function MdxImage(props: React.ComponentProps<typeof BlurImage>) {
+  const { alt, className, src, width, height, ...rest } = props
+
+  const { register, open, loading } = useMdxGallery()
+  const triggerRef = useRef<HTMLButtonElement>(null)
+
   useEffect(() => {
-    if (typeof src !== 'string' || !register) return
-    return register({
+    if (!triggerRef.current) return
+
+    return register(triggerRef.current, {
       src,
       alt,
       width: width === undefined ? undefined : Number(width),
       height: height === undefined ? undefined : Number(height),
     })
   }, [register, src, alt, width, height])
-  const image = <BlurImage className={cn('rounded-lg border', className)} src={src} alt={alt} {...rest} />
 
   return (
     <figure>
-      {gallery && typeof src === 'string' ? (
-        <button
-          type='button'
-          aria-label={m.blog_image_viewer_enlarge({ alt })}
-          aria-haspopup='dialog'
-          aria-busy={gallery.loading || undefined}
-          onClick={(event) => {
-            gallery.open(src, event.currentTarget)
-          }}
-          className='relative block w-full cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-ring'
-        >
-          {image}
-        </button>
-      ) : (
-        <Zoom zoomMargin={40} zoomImg={{ src, alt }}>
-          {image}
-        </Zoom>
-      )}
-      <figcaption className='mt-4 text-center'>{alt}</figcaption>
+      <button
+        ref={triggerRef}
+        type='button'
+        aria-label={m.blog_image_viewer_enlarge({ alt })}
+        aria-haspopup='dialog'
+        aria-busy={loading || undefined}
+        onClick={(event) => {
+          open(event.currentTarget)
+        }}
+        className='relative mb-4 block w-full cursor-zoom-in rounded-lg focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-ring'
+      >
+        <BlurImage
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          className={cn('rounded-lg border', className)}
+          {...rest}
+        />
+      </button>
+      <figcaption className='text-center'>{alt}</figcaption>
     </figure>
   )
 }

@@ -1,13 +1,11 @@
-import '@/styles/viewer.css'
-
 import type { ComponentType } from 'react'
-import type { ArticleLightboxProps } from './article-lightbox'
+import type { MdxLightboxProps } from './mdx-lightbox'
 
 import { createContext, use, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { m } from '@/paraglide/messages'
 
-export type ArticleImage = {
+export type GalleryImage = {
   src: string
   alt?: string
   width?: number
@@ -15,24 +13,28 @@ export type ArticleImage = {
 }
 
 const GalleryContext = createContext<{
-  register: (image: ArticleImage) => () => void
-  open: (src: string, trigger: HTMLButtonElement) => void
+  register: (trigger: HTMLButtonElement, image: GalleryImage) => () => void
+  open: (trigger: HTMLButtonElement) => void
   loading: boolean
 } | null>(null)
-GalleryContext.displayName = 'ArticleGallery'
+GalleryContext.displayName = 'MdxGallery'
 
-export const useArticleGallery = () => use(GalleryContext)
+export function useMdxGallery() {
+  const gallery = use(GalleryContext)
+  if (!gallery) throw new Error('useMdxGallery must be used within <MdxGallery />')
+  return gallery
+}
 
-type ArticleGalleryProps = {
+type MdxGalleryProps = {
   children: React.ReactNode
 }
 
-export function ArticleGallery(props: ArticleGalleryProps) {
+export function MdxGallery(props: MdxGalleryProps) {
   const { children } = props
 
-  const imagesRef = useRef(new Map<string, ArticleImage>())
-  const [Viewer, setViewer] = useState<ComponentType<ArticleLightboxProps> | null>(null)
-  const [slides, setSlides] = useState<ArticleImage[]>([])
+  const imagesRef = useRef(new Map<HTMLButtonElement, GalleryImage>())
+  const [Viewer, setViewer] = useState<ComponentType<MdxLightboxProps> | null>(null)
+  const [slides, setSlides] = useState<GalleryImage[]>([])
   const [index, setIndex] = useState<number | null>(null)
   const [loading, setLoading] = useState(false)
   const [failed, setFailed] = useState<string | null>(null)
@@ -44,17 +46,18 @@ export function ArticleGallery(props: ArticleGalleryProps) {
     },
     [],
   )
-  const register = useCallback((image: ArticleImage) => {
-    imagesRef.current.set(image.src, image)
+  const register = useCallback((trigger: HTMLButtonElement, image: GalleryImage) => {
+    imagesRef.current.set(trigger, image)
     return () => {
-      imagesRef.current.delete(image.src)
+      imagesRef.current.delete(trigger)
     }
   }, [])
   const open = useCallback(
-    async function open(src: string, button: HTMLButtonElement) {
+    async function open(button: HTMLButtonElement) {
+      const image = imagesRef.current.get(button)
+      if (!image) return
       const collection = [...imagesRef.current.values()]
-      const next = collection.findIndex((image) => image.src === src)
-      if (next === -1) return
+      const next = collection.indexOf(image)
       triggerRef.current = button
       setSlides(collection)
       setFailed(null)
@@ -66,12 +69,12 @@ export function ArticleGallery(props: ArticleGalleryProps) {
       }
       setLoading(true)
       try {
-        const module = await import('./article-lightbox')
+        const module = await import('./mdx-lightbox')
         if (current !== requestRef.current) return
         setViewer(() => module.default)
         setIndex(next)
       } catch {
-        if (current === requestRef.current) setFailed(src)
+        if (current === requestRef.current) setFailed(image.src)
       } finally {
         if (current === requestRef.current) setLoading(false)
       }

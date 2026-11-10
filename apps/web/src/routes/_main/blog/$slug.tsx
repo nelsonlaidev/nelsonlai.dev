@@ -9,7 +9,6 @@ import { OceanPage } from '@/components/ocean-page'
 import { PagePending } from '@/components/page-pending'
 import { RouteError } from '@/components/route-error'
 import { CommentSection } from '@/features/comments/comment-section'
-import { ArticleGallery } from '@/features/posts/article-gallery'
 import { BlogFooter } from '@/features/posts/blog-footer'
 import { BlogHeader } from '@/features/posts/blog-header'
 import { LikeButton, usePostLike } from '@/features/posts/like-button'
@@ -112,15 +111,13 @@ function ArticleDetail(props: ArticleDetailProps) {
         <TableOfContents toc={post.toc}>
           <LikeButton state={likes} placement='desktop' />
         </TableOfContents>
-        <ArticleGallery>
-          <article className='mx-auto w-full max-w-prose min-w-0 lg:order-first'>
-            <Mdx code={post.code} />
-            <BlogFooter post={post}>
-              <LikeButton state={likes} placement='mobile' />
-            </BlogFooter>
-            <CommentSection slug={post.slug} highlightedCommentId={comment} highlightedReplyId={reply} />
-          </article>
-        </ArticleGallery>
+        <article className='mx-auto w-full max-w-prose min-w-0 lg:order-first'>
+          <Mdx code={post.code} />
+          <BlogFooter post={post}>
+            <LikeButton state={likes} placement='mobile' />
+          </BlogFooter>
+          <CommentSection slug={post.slug} highlightedCommentId={comment} highlightedReplyId={reply} />
+        </article>
       </div>
       <ProgressBar />
       {next && (
