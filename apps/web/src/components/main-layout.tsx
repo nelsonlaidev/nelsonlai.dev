@@ -2,9 +2,9 @@ import { useRouterState } from '@tanstack/react-router'
 
 import { SignInDialog } from '@/features/auth/sign-in-dialog'
 
-import { OceanFooter } from './ocean/footer'
-import { OceanHeader } from './ocean/header'
-import { OceanCanvas } from './ocean/ocean-canvas'
+import { OceanFooter } from './footer'
+import { OceanHeader } from './header'
+import { OceanCanvas } from './ocean-canvas'
 
 type MainLayoutProps = {
   children: React.ReactNode
