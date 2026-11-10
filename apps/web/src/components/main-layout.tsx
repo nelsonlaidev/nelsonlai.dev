@@ -28,7 +28,6 @@ export function MainLayout(props: MainLayoutProps) {
   return (
     <div className='isolate flex min-h-svh flex-col bg-background text-foreground'>
       <OceanCanvas depthBias={page === 'home' ? 0 : pageDepth} />
-      <div className='pointer-events-none fixed inset-0 -z-1 bg-[url(/brand/grain.svg)] opacity-9' aria-hidden='true' />
       <OceanHeader />
       <main id='main-content' tabIndex={-1} className='mx-auto w-full flex-1 outline-none'>
         {children}

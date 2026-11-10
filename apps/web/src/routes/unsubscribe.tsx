@@ -13,6 +13,7 @@ export const Route = createFileRoute('/unsubscribe')({
     meta: [
       { title: m.common_labels_unsubscribe() },
       { name: 'robots', content: 'noindex, nofollow' },
+      { name: 'googlebot', content: 'noindex, nofollow' },
       { name: 'referrer', content: 'no-referrer' },
     ],
   }),

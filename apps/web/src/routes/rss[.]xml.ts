@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import RSS from 'rss'
 
+import { ENV } from '@/env'
 import { listPosts } from '@/features/posts/posts.server'
 import { getLocalizedUrl } from '@/lib/seo'
 import { SITE } from '@/lib/site'
@@ -19,7 +20,7 @@ export const Route = createFileRoute('/rss.xml')({
           site_url: getLocalizedUrl('/', locale),
           feed_url: getLocalizedUrl('/rss.xml', locale),
           language: locale,
-          image_url: getLocalizedUrl('/og/image.webp', locale),
+          image_url: new URL('/favicon-96x96.png', ENV.SITE_URL).href,
           copyright: `© ${new Date().getFullYear()} ${SITE.name}. All rights reserved.`,
           webMaster: SITE.email,
         })
