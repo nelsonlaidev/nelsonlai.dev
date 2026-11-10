@@ -3,7 +3,7 @@ import { useRouterState } from '@tanstack/react-router'
 import { SignInDialog } from '@/features/auth/sign-in-dialog'
 
 import { OceanFooter } from './footer'
-import { OceanHeader } from './header'
+import { Header } from './header'
 import { OceanCanvas } from './ocean-canvas'
 
 type MainLayoutProps = {
@@ -28,7 +28,7 @@ export function MainLayout(props: MainLayoutProps) {
   return (
     <div className='isolate flex min-h-svh flex-col bg-background text-foreground'>
       <OceanCanvas depthBias={page === 'home' ? 0 : pageDepth} />
-      <OceanHeader />
+      <Header />
       <main id='main-content' tabIndex={-1} className='mx-auto w-full flex-1 outline-none'>
         {children}
       </main>

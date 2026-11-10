@@ -11,7 +11,7 @@ import { SkipNav } from '@/routes/_main/-components/skip-nav'
 
 import { OceanBrand } from './brand'
 
-export function OceanHeader() {
+export function Header() {
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
