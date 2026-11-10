@@ -6,7 +6,6 @@ import { cn } from 'cn'
 import { CodeBlock } from './code-block'
 import { Heading } from './heading'
 import { LinkCard } from './link-card'
-import { LogoShowcase } from './logo-showcase'
 import { MdxGallery } from './mdx-gallery'
 import { MdxImage } from './mdx-image'
 import { MdxLink } from './mdx-link'
@@ -33,7 +32,6 @@ const MDX_COMPONENTS = {
   a: MdxLink,
   pre: CodeBlock,
   Image: MdxImage,
-  LogoShowcase,
   SocialLinks,
   Table,
   TreeView,
