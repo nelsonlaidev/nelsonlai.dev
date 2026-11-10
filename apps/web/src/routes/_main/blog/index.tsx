@@ -1,7 +1,10 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
+import { OceanPage } from '@/components/ocean-page'
+import { PageHeader } from '@/components/page-header'
+import { PagePending } from '@/components/page-pending'
+import { RouteError } from '@/components/route-error'
 import { getPage } from '@/features/pages/pages.functions'
-import { BlogError, BlogLayout, BlogPending } from '@/features/posts/blog-layout'
 import { FilteredPosts } from '@/features/posts/filtered-posts'
 import { getPosts } from '@/features/posts/posts.functions'
 import { createJsonLdCollectionPage } from '@/lib/json-ld'
@@ -42,13 +45,18 @@ export const Route = createFileRoute('/_main/blog/')({
             headline: post.title,
             url: getLocalizedUrl(`/blog/${post.slug}`, locale),
             datePublished: post.publishedAt,
+            dateModified: post.updatedAt,
           },
         })),
       }),
     })
   },
-  pendingComponent: BlogPending,
-  errorComponent: BlogError,
+  pendingComponent: () => <PagePending title={m.nav_blog()} description={m.blog_intro()} />,
+  errorComponent: (props) => (
+    <OceanPage>
+      <RouteError {...props} />
+    </OceanPage>
+  ),
   component: RouteComponent,
 })
 
@@ -56,15 +64,9 @@ function RouteComponent() {
   const { page, posts, locale } = Route.useLoaderData()
 
   return (
-    <BlogLayout>
-      <header className='mb-18.75 max-[601px]:mb-12.5'>
-        <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-section-label'>
-          02 / {page.title}
-        </span>
-        <h1 className='text-[clamp(48px,5.8vw,86px)] leading-[1.04] font-[420] tracking-[-0.065em]'>{page.title}</h1>
-        <p className='mt-7 max-w-150 text-lg/[1.65] whitespace-pre-line text-[#b1cbc4]'>{m.blog_intro()}</p>
-      </header>
+    <OceanPage>
+      <PageHeader title={page.title} description={m.blog_intro()} />
       <FilteredPosts key={locale} posts={posts} />
-    </BlogLayout>
+    </OceanPage>
   )
 }

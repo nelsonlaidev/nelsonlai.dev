@@ -60,15 +60,6 @@ export function MessageBox(props: MessageBoxProps) {
 
         void queryClient.invalidateQueries({ queryKey: orpc.guestbook.list.key() })
       },
-      onError: (error) => {
-        toast.add({
-          type: 'error',
-          title:
-            error instanceof ORPCError && error.code === 'TOO_MANY_REQUESTS'
-              ? m.error_too_many_requests()
-              : m.error_create_message_failed(),
-        })
-      },
     }),
   )
 
@@ -80,7 +71,7 @@ export function MessageBox(props: MessageBoxProps) {
   }
 
   return (
-    <div className='rounded-xl border border-[#9abda32b] bg-[#153b3a19] p-7.5 max-[601px]:px-5 max-[601px]:py-6'>
+    <div className='rounded-xl border bg-card/10 px-5 py-6 sm:p-8'>
       <div className='mb-6 flex items-center gap-3'>
         <UserAvatar id={user.id} name={user.name} image={user.image} size='lg' />
         <span>{user.name}</span>
@@ -93,7 +84,7 @@ export function MessageBox(props: MessageBoxProps) {
 
               return (
                 <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name} className='mb-3.25 block text-sm/normal text-[#bad3be]'>
+                  <FieldLabel htmlFor={field.name} className='sr-only'>
                     {m.guestbook_placeholder()}
                   </FieldLabel>
                   <Textarea
@@ -107,10 +98,9 @@ export function MessageBox(props: MessageBoxProps) {
                     aria-invalid={isInvalid}
                     aria-describedby={isInvalid ? errorId : undefined}
                     placeholder={m.guestbook_placeholder()}
-                    rows={5}
                     maxLength={GUESTBOOK_MESSAGE_MAX_LENGTH}
                     disabled={isBusy}
-                    className='max-h-87.5 min-h-37.5 w-full resize-y rounded-md border border-input bg-transparent px-2.5 py-2 text-base/[1.65] text-[#d7e5d0] shadow-xs transition-[border-color,box-shadow] duration-200 ease-linear placeholder:text-[#8eaf9d] focus-visible:border-ring focus-visible:shadow-[0_0_0_3px_color-mix(in_oklab,var(--ring)_50%,transparent)] focus-visible:outline-2 focus-visible:outline-offset-[5px] focus-visible:outline-[#c4e0cc] focus-visible:outline-solid disabled:bg-input/50 disabled:[background:color-mix(in_oklab,var(--input)_50%,transparent)] aria-invalid:border-destructive aria-invalid:shadow-[0_0_0_3px_color-mix(in_oklab,var(--destructive)_20%,transparent)] md:text-base/[1.65]'
+                    className='max-h-96 min-h-36'
                   />
                   {isInvalid && <FieldError id={errorId} errors={field.state.meta.errors} />}
                 </Field>
@@ -119,7 +109,7 @@ export function MessageBox(props: MessageBoxProps) {
           </form.Field>
         </FieldGroup>
         {creation.isError && (
-          <p role='alert' className='text-sm text-[#f5b9b9]'>
+          <p role='alert' className='text-sm text-destructive'>
             {creation.error instanceof ORPCError && creation.error.code === 'TOO_MANY_REQUESTS'
               ? m.error_too_many_requests()
               : m.error_create_message_failed()}
@@ -133,7 +123,7 @@ export function MessageBox(props: MessageBoxProps) {
           )}
         </form.Subscribe>
         <div className='flex flex-col-reverse items-stretch gap-3'>
-          <Button variant='ghost' onClick={onSignOut} disabled={isBusy} className='min-h-11 text-[#b8d1b6]'>
+          <Button variant='ghost' onClick={onSignOut} disabled={isBusy} className='text-link'>
             {m.common_sign_out()}
           </Button>
           <Button variant='outline' size='xl' type='submit' disabled={isBusy}>

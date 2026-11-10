@@ -18,7 +18,6 @@ vi.mock('@/components/user-avatar', () => ({ UserAvatar: () => null }))
 vi.mock('@/features/guestbook/delete-button', () => ({
   DeleteButton: () => <button type='button'>Delete fixture</button>,
 }))
-vi.mock('@/features/guestbook/messages-loader', () => ({ MessagesLoader: () => <span>Skeleton</span> }))
 vi.mock('@tanstack/react-query', async (importOriginal) => ({
   ...(await importOriginal<typeof ReactQuery>()),
   useInfiniteQuery: () => ({
@@ -61,9 +60,9 @@ beforeEach(() => {
 })
 
 describe('Guestbook read states with local query fixtures', () => {
-  test('announces pending reads', () => {
+  test('provides a skeleton label for pending reads', () => {
     render(<Messages />)
-    expect(screen.getByRole('status')).toHaveAccessibleName(m.common_aria_labels_loading())
+    expect(screen.getByText(m.common_aria_labels_loading())).toHaveAttribute('skullet-status')
     expect(screen.queryByText(m.guestbook_no_messages())).not.toBeInTheDocument()
   })
   test('shows an honest empty state', () => {

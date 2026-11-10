@@ -7,42 +7,38 @@ import { ArrowRightIcon } from 'lucide-react'
 
 import { m } from '@/paraglide/messages'
 
-import { projectSpecimen } from './presentation'
-
-type ProjectHeaderProps = Pick<ProjectSummary, 'slug' | 'title' | 'description'> & {
+type ProjectHeaderProps = Pick<ProjectSummary, 'title' | 'description'> & {
   homepage?: string
   github?: string
-  category: string
 }
 
 export function ProjectHeader(props: ProjectHeaderProps) {
-  const { slug, title, description, homepage, github, category } = props
+  const { title, description, homepage, github } = props
 
   return (
-    <div className='mb-8.75 flex flex-col items-start justify-between gap-6.75 min-[701px]:mb-12.5 min-[701px]:flex-row min-[701px]:items-end min-[701px]:gap-7.5'>
+    <div className='mb-9 flex flex-col items-start justify-between gap-7 md:mb-12 md:flex-row md:items-end md:gap-8'>
       <div className='min-w-0'>
-        <span className='mb-6 block text-xs/normal tracking-[0.02em] text-[#b9d4c7]'>
-          {m.project_category()} {String(projectSpecimen(slug).number).padStart(2, '0')} / {category}
-        </span>
-        <h1 className='text-[clamp(68px,9vw,130px)] leading-[1.04] font-[420] tracking-[-0.065em] max-[701px]:text-[70px]'>
-          {title}
-        </h1>
-        <p className='mt-3.75 text-[17px]/[1.6] tracking-tight text-[#b1ccc3] min-[701px]:mt-5 min-[701px]:text-xl'>
-          {description}
-        </p>
+        <h1 className='mb-4 text-7xl tracking-tighter md:mb-5 lg:text-8xl xl:text-9xl'>{title}</h1>
+        <p className='text-base/relaxed tracking-tight text-muted-foreground md:text-xl'>{description}</p>
       </div>
       {(homepage ?? github) && (
-        <div className='flex shrink-0 flex-col items-start gap-5 pb-2 min-[701px]:items-end'>
+        <div className='flex max-w-full flex-wrap items-center gap-2 pb-2 md:justify-end'>
           {github && (
             <ExternalLink href={github} className={cn(buttonVariants({ variant: 'outline', size: 'xl' }))}>
               {m.projects_github()}
-              <ArrowRightIcon className='size-5' aria-hidden='true' />
+              <ArrowRightIcon
+                className='size-5 motion-safe:transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1'
+                aria-hidden='true'
+              />
             </ExternalLink>
           )}
           {homepage && (
-            <ExternalLink href={homepage} className='inline-flex min-h-11 items-center gap-4 text-sm text-link'>
+            <ExternalLink href={homepage} className={cn(buttonVariants({ variant: 'ghost', size: 'xl' }))}>
               {m.projects_visit_website()}
-              <ArrowRightIcon className='size-5' aria-hidden='true' />
+              <ArrowRightIcon
+                className='size-5 motion-safe:transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1'
+                aria-hidden='true'
+              />
             </ExternalLink>
           )}
         </div>

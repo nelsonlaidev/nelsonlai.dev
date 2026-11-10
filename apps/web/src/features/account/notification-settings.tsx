@@ -1,13 +1,13 @@
 import { Button } from '@repo/ui/components/button'
 import { Card, CardContent, CardFooter } from '@repo/ui/components/card'
 import { Field, FieldContent, FieldDescription, FieldLabel } from '@repo/ui/components/field'
-import { Skeleton } from '@repo/ui/components/skeleton'
 import { Spinner } from '@repo/ui/components/spinner'
 import { Switch } from '@repo/ui/components/switch'
 import { toast } from '@repo/ui/components/toast'
 import { useForm } from '@tanstack/react-form'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useId } from 'react'
+import { Skeleton } from 'skullet/react'
 
 import { replyPreferenceQueryOptions } from '@/features/notifications/notifications.queries'
 import { orpc } from '@/lib/orpc-client'
@@ -21,10 +21,13 @@ export function NotificationSettings(props: NotificationSettingsProps) {
   const { userId } = props
   const preference = useQuery(replyPreferenceQueryOptions(userId))
 
-  if (preference.isPending) return <Skeleton className='h-60 w-full rounded-2xl' />
   if (preference.isError) return <p role='alert'>{m.error_failed_to_load_settings()}</p>
 
-  return <NotificationSettingsForm userId={userId} repliesEnabled={preference.data.repliesEnabled} />
+  return (
+    <Skeleton data={preference.data?.repliesEnabled} sample={true} label={m.common_aria_labels_loading()}>
+      {(repliesEnabled) => <NotificationSettingsForm userId={userId} repliesEnabled={repliesEnabled} />}
+    </Skeleton>
+  )
 }
 
 type NotificationSettingsFormProps = NotificationSettingsProps & {

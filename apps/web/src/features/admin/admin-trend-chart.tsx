@@ -8,9 +8,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@repo/ui/components/chart'
-import { Skeleton } from '@repo/ui/components/skeleton'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
+import { SkeletonBox } from 'skullet/react'
 
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
@@ -38,7 +38,12 @@ export function AdminTrendChart() {
     },
   } satisfies ChartConfig
 
-  let content: React.ReactNode = <Skeleton className='h-62.5 w-full' />
+  let content: React.ReactNode = (
+    <output className='block h-62.5'>
+      <span className='sr-only'>{m.common_aria_labels_loading()}</span>
+      <SkeletonBox width='100%' height='100%' />
+    </output>
+  )
 
   if (isSuccess && data.length > 0) {
     content = (

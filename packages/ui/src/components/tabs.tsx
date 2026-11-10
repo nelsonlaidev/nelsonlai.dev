@@ -65,7 +65,7 @@ export function TabsTrigger(props: TabsTriggerProps) {
       className={cn(
         'relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-all',
         'group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start',
-        'focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring',
+        'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring',
         'disabled:pointer-events-none disabled:opacity-50',
         'has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5',
         'aria-disabled:pointer-events-none aria-disabled:opacity-50',

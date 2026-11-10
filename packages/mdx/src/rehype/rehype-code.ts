@@ -19,13 +19,9 @@ import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
 const titleRegex = /title=["']([^"']*)["']/
 
-export const DEFAULT_SHIKI_THEME = 'github-dark-default'
+export const DEFAULT_SHIKI_THEME = 'vitesse-dark'
 
-type RehypeCodeOptions = {
-  ocean?: boolean
-}
-
-export function rehypeCode(options?: RehypeCodeOptions): Transformer<Root, Root> {
+export function rehypeCode(): Transformer<Root, Root> {
   const transformers: ShikiTransformer[] = [
     {
       preprocess(code, { meta }) {
@@ -37,8 +33,6 @@ export function rehypeCode(options?: RehypeCodeOptions): Transformer<Root, Root>
       root(hast) {
         const pre = hast.children[0]
         if (pre?.type !== 'element') return
-        // The code block component owns the surface and base text colors.
-        delete pre.properties.style
         hast.children = [
           {
             ...pre,
@@ -72,36 +66,10 @@ export function rehypeCode(options?: RehypeCodeOptions): Transformer<Root, Root>
 
   return async (tree, file) => {
     const instance = await highlighter
-    const ocean = options?.ocean ?? /(?:^|\/)content\/blog\//.test(file.path.replaceAll('\\', '/'))
-    const oceanTokens: Record<string, string> = {
-      '#6A737D': '#9aafb7',
-      '#F97583': '#a7dacc',
-      '#79B8FF': '#a7dacc',
-      '#B392F0': '#d9cfac',
-      '#9ECBFF': '#bcdab3',
-      '#FDAEB7': '#e9b8ad',
-    }
-    if (ocean) {
-      await instance.loadTheme('github-dark')
-    }
     const transformer = rehypeShikiFromHighlighter(instance, {
-      theme: ocean ? 'github-dark' : DEFAULT_SHIKI_THEME,
+      theme: DEFAULT_SHIKI_THEME,
       defaultLanguage: 'plaintext',
-      transformers: ocean
-        ? [
-            ...transformers,
-            {
-              span(node) {
-                const style = node.properties.style
-                if (typeof style === 'string')
-                  node.properties.style = style.replaceAll(
-                    /#[0-9a-f]{6}/gi,
-                    (color) => oceanTokens[color.toUpperCase()] ?? color,
-                  )
-              },
-            },
-          ]
-        : transformers,
+      transformers,
       parseMetaString: (meta) => {
         const titleMatch = titleRegex.exec(meta)
         const title = titleMatch?.[1] ?? null

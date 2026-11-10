@@ -27,6 +27,7 @@ export function CommentCodeBlock(props: CommentCodeBlockProps) {
     code: string
     lang: string
     html: string
+    style: React.CSSProperties
   }>()
 
   useEffect(() => {
@@ -41,15 +42,22 @@ export function CommentCodeBlock(props: CommentCodeBlockProps) {
         const language = lang in bundledLanguages ? (lang as BundledLanguage) : 'plaintext'
         const highlighter = await getSingletonHighlighter({
           langs: [language],
-          themes: ['github-dark-default'],
+          themes: ['vitesse-dark'],
           engine: createJavaScriptRegexEngine(),
         })
         const html = highlighter.codeToHtml(code, {
           lang: language,
-          theme: 'github-dark-default',
+          theme: 'vitesse-dark',
         })
+        const theme = highlighter.getTheme('vitesse-dark')
         const codeHtml = /<code\b[^>]*>([\s\S]*?)<\/code>/.exec(html)?.[1]
-        if (!cancelled && codeHtml) setHighlighted({ code, lang, html: codeHtml })
+        if (!cancelled && codeHtml)
+          setHighlighted({
+            code,
+            lang,
+            html: codeHtml,
+            style: { backgroundColor: theme.bg, color: theme.fg },
+          })
       } catch (error) {
         console.error('Failed to highlight code:', error)
       }
@@ -62,7 +70,13 @@ export function CommentCodeBlock(props: CommentCodeBlockProps) {
   }, [code, lang])
 
   return (
-    <CodeBlock data-lang={lang} title={title} className='shiki max-h-120' figureClassName='my-6.25 mb-8.75'>
+    <CodeBlock
+      data-lang={lang}
+      title={title}
+      className='shiki max-h-120'
+      style={highlighted?.style}
+      figureClassName='my-6 mb-9'
+    >
       {/* Shiki escapes user content before generating highlighted HTML. */}
       {highlighted?.code === code && highlighted.lang === lang ? (
         // oxlint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml

@@ -1,38 +1,24 @@
-import type { PluginOption } from 'vite'
+import type { PluggableList } from 'unified'
+import type { TOC } from './types'
 
-import mdxRollup from '@mdx-js/rollup'
-import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
+import remarkMdx from 'remark-mdx'
+import remarkParse from 'remark-parse'
+import { unified } from 'unified'
 
 import { rehypeCode } from './rehype/rehype-code'
 import { rehypeInlineCode } from './rehype/rehype-inline-code'
-import { rehypeShikiStyles } from './rehype/rehype-shiki-styles'
 import { remarkHeadings } from './remark/remark-headings'
 
-const remarkPlugins = [remarkFrontmatter, remarkGfm, remarkHeadings]
-const rehypePlugins = [rehypeCode, rehypeInlineCode, rehypeShikiStyles]
+export const remarkPlugins: PluggableList = [remarkGfm, remarkHeadings]
+export const rehypePlugins: PluggableList = [rehypeCode, rehypeInlineCode]
 
-/** Compile static React modules with the official MDX Rollup integration. */
-export function mdx(): PluginOption {
-  const compiler = mdxRollup({ remarkPlugins, rehypePlugins })
-
-  return {
-    ...compiler,
-    transform: {
-      async handler(source, id) {
-        const result = await compiler.transform(source, id)
-        // Normalize Rollup's result for Vite's Rolldown-backed transform interface.
-        const map = result?.map
-        const normalizedMap = typeof map === 'object' && map !== null ? JSON.stringify(map) : map
-        return (
-          result && {
-            code: result.code,
-            map: normalizedMap,
-          }
-        )
-      },
-    },
-  }
+/** Read the TOC with the same parser and heading IDs used by the MDX compiler. */
+export async function getTOC(content: string): Promise<TOC[]> {
+  const processor = unified().use(remarkParse).use(remarkMdx).use(remarkGfm).use(remarkHeadings)
+  const file = { value: content, data: { toc: [] as TOC[] } }
+  await processor.run(processor.parse(content), file)
+  return file.data.toc
 }
 
-export type { MdxModule, TOC } from './types'
+export type { TOC } from './types'

@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { act, fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react'
+import { IntlProvider } from 'use-intl'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 
 import { ActiveSessions } from '@/features/account/active-sessions'
@@ -63,7 +64,11 @@ function setup() {
   for (const key of [accountKey, preferenceKey, adminKey]) client.setQueryData(key, 'private')
   client.setQueryData(publicKey, { views: 100, likes: 13 })
   function Wrapper(props: ChildrenProps) {
-    return <QueryClientProvider client={client}>{props.children}</QueryClientProvider>
+    return (
+      <IntlProvider locale='en'>
+        <QueryClientProvider client={client}>{props.children}</QueryClientProvider>
+      </IntlProvider>
+    )
   }
   return { client, accountKey, preferenceKey, adminKey, publicKey, Wrapper }
 }

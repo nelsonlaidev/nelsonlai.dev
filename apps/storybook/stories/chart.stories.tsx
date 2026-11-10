@@ -16,7 +16,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Import `ChartContainer`, `ChartTooltip`, `ChartTooltipContent`, `ChartLegend`, and `ChartLegendContent` from `@repo/ui/components/chart`. Use Recharts for the actual chart. The container supplies context, responsive sizing, and nonce-bearing series styles through ChartStyle. Give charts a text description as well as color.',
+          'Import `ChartContainer`, `ChartTooltip`, `ChartTooltipContent`, `ChartLegend`, and `ChartLegendContent` from `@repo/ui/components/chart`. Use Recharts for the actual chart. The container supplies context, responsive sizing, and series styles through ChartStyle. Give charts a text description as well as color.',
       },
     },
   },

@@ -1,6 +1,5 @@
 import contentCollections from '@content-collections/vite'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
-import { mdx } from '@repo/mdx'
 import tailwindcss from '@tailwindcss/vite'
 import { devtools } from '@tanstack/devtools-vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
@@ -20,7 +19,6 @@ const config = defineConfig({
   plugins: [
     varlockVitePlugin(),
     contentCollections(),
-    mdx(),
     paraglideVitePlugin({
       project: './project.inlang',
       outdir: './src/paraglide',

@@ -24,7 +24,7 @@ export function AdminDataTable<TData extends RowData>(props: AdminDataTableProps
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} className='bg-[#092b38] text-muted-foreground'>
+                  <TableHead key={header.id} className='bg-surface text-muted-foreground'>
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 ))}
@@ -38,7 +38,7 @@ export function AdminDataTable<TData extends RowData>(props: AdminDataTableProps
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className='max-w-md min-w-36 py-4 leading-[1.65] wrap-anywhere whitespace-normal'
+                      className='max-w-md min-w-36 py-4 leading-relaxed wrap-anywhere whitespace-normal'
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
@@ -49,7 +49,7 @@ export function AdminDataTable<TData extends RowData>(props: AdminDataTableProps
               <TableRow>
                 <TableCell
                   colSpan={table.getAllLeafColumns().length}
-                  className='h-24 max-w-md min-w-36 py-4 text-center leading-[1.65] wrap-anywhere whitespace-normal'
+                  className='h-24 max-w-md min-w-36 py-4 text-center leading-relaxed wrap-anywhere whitespace-normal'
                 >
                   {emptyMessage}
                 </TableCell>

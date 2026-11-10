@@ -29,9 +29,8 @@
   }
 
   :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-    padding: 2px 4px;
-    font-size: 13px;
-    border-radius: 6px;
+    @apply px-1 py-0.5 text-sm;
+    border-radius: var(--radius-sm);
     background: color-mix(in oklab, var(--color-secondary) 50%, transparent);
     border: 1px solid var(--color-border);
 
@@ -53,13 +52,12 @@
   }
 
   :where(video):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-    margin-top: 16px;
-    margin-bottom: 16px;
+    margin-block: --spacing(4);
   }
 
   :where(a):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
     overflow-wrap: anywhere;
-    text-underline-offset: 4px;
+    text-underline-offset: --spacing(1);
   }
 
   :is(:where(h1, h2, h3, h4, h5, h6, th):not(:where([class~='not-prose'], [class~='not-prose'] *))) {

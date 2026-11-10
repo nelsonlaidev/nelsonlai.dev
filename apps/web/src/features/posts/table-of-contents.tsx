@@ -13,6 +13,7 @@ type TableOfContentsProps = {
 export function TableOfContents(props: TableOfContentsProps) {
   const { toc, children } = props
   const [activeId, setActiveId] = useState<string>()
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -20,23 +21,23 @@ export function TableOfContents(props: TableOfContentsProps) {
       },
       { rootMargin: '-15% 0px -65% 0px' },
     )
+
     for (const item of toc) {
       const element = document.querySelector(`#${CSS.escape(item.url)}`)
       if (element) observer.observe(element)
     }
+
     return () => {
       observer.disconnect()
     }
   }, [toc])
 
   return (
-    <aside className='sticky top-8.75 max-h-[calc(100vh-70px)] self-start overflow-y-auto max-[1001px]:static max-[1001px]:mb-11.25 max-[1001px]:max-h-none max-[1001px]:border-b max-[1001px]:border-b-border max-[1001px]:pb-7'>
-      <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-section-label'>
-        {m.blog_on_this_page()}
-      </span>
+    <aside className='mb-11 self-start overflow-y-auto border-b border-b-border pb-7 lg:sticky lg:top-9 lg:mb-0 lg:max-h-[calc(100dvh-(--spacing(9)*2))] lg:border-b-0 lg:pb-0'>
+      <span className='mb-3 block text-xs text-section-label'>{m.blog_on_this_page()}</span>
       <nav
         aria-label={m.blog_on_this_page()}
-        className='flex flex-col gap-4.25 max-[1001px]:grid max-[1001px]:grid-cols-2 max-[1001px]:gap-x-6.25 max-[1001px]:gap-y-3.5 max-[601px]:grid-cols-1 max-[601px]:gap-3.25'
+        className='grid grid-cols-1 gap-y-1 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-1'
       >
         {toc.map((item) => (
           <a
@@ -44,26 +45,17 @@ export function TableOfContents(props: TableOfContentsProps) {
             href={`#${encodeURIComponent(item.url)}`}
             aria-current={activeId === item.url ? 'location' : undefined}
             className={cn(
-              'min-h-11 border-l border-l-[#6e928640] py-2 pl-3.25 text-sm leading-[1.6] text-[#8cafa2] aria-[current=location]:border-l-[#d6e6d2] aria-[current=location]:text-[#d6e6d2]',
-              item.depth === 3 && 'pl-6.25',
-              item.depth === 4 && 'pl-9.25',
-              item.depth === 5 && 'pl-12.25',
-              item.depth === 6 && 'pl-15.25',
+              'border-l py-1 pl-3 text-sm/5 text-muted-foreground hover:text-foreground aria-[current=location]:border-l-primary aria-[current=location]:text-foreground',
+              item.depth === 3 && 'pl-6',
+              item.depth === 4 && 'pl-9',
+              item.depth === 5 && 'pl-12',
+              item.depth === 6 && 'pl-16',
             )}
           >
             {item.title}
           </a>
         ))}
-        <a
-          href='#comments'
-          className='min-h-11 border-l border-l-[#6e928640] py-2 pl-3.25 text-sm leading-[1.6] text-[#8cafa2] aria-[current=location]:border-l-[#d6e6d2] aria-[current=location]:text-[#d6e6d2]'
-        >
-          {m.blog_comments_conversation()}
-        </a>
       </nav>
-      <a href='#main-content' className='mt-7.5 block text-sm/normal text-[#8cafaa] max-[1001px]:hidden'>
-        {m.blog_top()}
-      </a>
       {children}
     </aside>
   )

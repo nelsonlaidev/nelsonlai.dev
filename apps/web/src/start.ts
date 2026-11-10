@@ -1,22 +1,30 @@
-import { randomBytes } from 'node:crypto'
-
 import { createCsrfMiddleware, createMiddleware, createStart } from '@tanstack/react-start'
 import { setResponseHeader } from '@tanstack/react-start/server'
 
 import { ENV } from './env'
 
-function getContentSecurityPolicy(nonce: string) {
-  const connectSrc = ["'self'", ENV.UMAMI_URL && new URL(ENV.UMAMI_URL).origin].filter(Boolean).join(' ')
+function getContentSecurityPolicy() {
+  const scriptSources = ["'self'", ENV.UMAMI_URL && new URL(ENV.UMAMI_URL).origin].filter(Boolean).join(' ')
+  const connectSources = [scriptSources, ENV.CLOUDFLARE_R2_ENDPOINT && new URL(ENV.CLOUDFLARE_R2_ENDPOINT).origin]
+    .filter(Boolean)
+    .join(' ')
+  const imageSources = [
+    "'self'",
+    'https://avatars.githubusercontent.com',
+    'https://*.googleusercontent.com',
+    ENV.CLOUDFLARE_R2_PUBLIC_URL && new URL(ENV.CLOUDFLARE_R2_PUBLIC_URL).origin,
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   return [
     "default-src 'none'",
-    `script-src 'nonce-${nonce}' 'strict-dynamic'`,
+    `script-src ${scriptSources} 'unsafe-inline' 'unsafe-eval'`,
     "script-src-attr 'none'",
-    `style-src 'self' 'nonce-${nonce}'`,
-    "style-src-attr 'none'",
-    "img-src 'self'",
+    "style-src 'self' 'unsafe-inline'",
+    `img-src ${imageSources}`,
     "font-src 'self'",
-    `connect-src ${connectSrc}`,
+    `connect-src ${connectSources}`,
     "media-src 'self'",
     "worker-src 'none'",
     "frame-src 'none'",
@@ -30,8 +38,6 @@ function getContentSecurityPolicy(nonce: string) {
 }
 
 const securityMiddleware = createMiddleware().server(async ({ next, request }) => {
-  const nonce = randomBytes(16).toString('base64')
-
   setResponseHeader('Referrer-Policy', 'no-referrer')
   setResponseHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
   setResponseHeader('X-Content-Type-Options', 'nosniff')
@@ -42,11 +48,11 @@ const securityMiddleware = createMiddleware().server(async ({ next, request }) =
   }
 
   if (import.meta.env.PROD) {
-    setResponseHeader('Content-Security-Policy', getContentSecurityPolicy(nonce))
+    setResponseHeader('Content-Security-Policy', getContentSecurityPolicy())
     setResponseHeader('Strict-Transport-Security', 'max-age=31536000')
   }
 
-  return next({ context: { nonce } })
+  return next()
 })
 
 export const startInstance = createStart(() => ({

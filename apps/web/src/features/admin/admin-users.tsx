@@ -1,17 +1,28 @@
+import { createRange } from '@repo/utils'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
+import { Skeleton } from 'skullet/react'
 
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
 import { UsersTable } from './tables/users'
 
+const SAMPLE_USERS = createRange(10).map((index) => ({
+  id: String(index),
+  name: 'Ocean visitor',
+  email: 'visitor@example.com',
+  role: 'user',
+  image: '/images/avatar.png',
+  createdAt: new Date('2026-01-01T12:00:00Z'),
+}))
+
 export function AdminUsers() {
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
   })
-  const { data, isSuccess, isError, isFetching } = useQuery(
+  const { data, isError, isFetching } = useQuery(
     orpc.admin.user.list.queryOptions({
       input: {
         page: pagination.pageIndex + 1,
@@ -21,27 +32,27 @@ export function AdminUsers() {
     }),
   )
 
-  let content: React.ReactNode = (
-    <output className='rounded-xl border bg-card p-6 text-muted-foreground'>{m.common_loading()}</output>
-  )
-
-  if (isSuccess) {
-    content = (
-      <UsersTable
-        users={data.users}
-        pageCount={data.pageCount}
-        pagination={pagination}
-        onPaginationChange={setPagination}
-        isFetching={isFetching}
-      />
-    )
-  } else if (isError) {
-    content = (
+  if (isError) {
+    return (
       <div role='alert' className='rounded-xl border border-destructive/40 bg-card p-6 text-destructive'>
         {m.error_failed_to_fetch_users_data()}
       </div>
     )
   }
 
-  return content
+  return (
+    <div role={data ? undefined : 'status'}>
+      <Skeleton data={data?.users} sample={SAMPLE_USERS} label={m.common_aria_labels_loading()}>
+        {(users) => (
+          <UsersTable
+            users={users}
+            pageCount={data?.pageCount ?? 1}
+            pagination={pagination}
+            onPaginationChange={setPagination}
+            isFetching={isFetching}
+          />
+        )}
+      </Skeleton>
+    </div>
+  )
 }

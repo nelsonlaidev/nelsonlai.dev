@@ -15,6 +15,13 @@ codebase, which uses TanStack Start.
 - Validate changes with formatting, linting, type checking, and builds. Add
   automated tests only when explicitly requested.
 
+## Vega Reference
+
+`vega` refers to the local shadcn `base-vega` project at
+`/Users/nelson/Developer/playground/start-vega`. When comparing a UI component
+with Vega, look for its original implementation under `src/components/ui/` in
+that project.
+
 ## Migration Fidelity
 
 - Migration means preserving the legacy website's appearance, content, behavior,

@@ -38,7 +38,7 @@ describe('Dashboard metric states', () => {
   })
   test('announces loading without inventing a number', () => {
     const view = render(<StatCards stats={[metrics[0]]} />)
-    expect(screen.getByRole('status')).toHaveTextContent(m.common_loading())
+    expect(screen.getByRole('status')).toHaveTextContent(m.common_aria_labels_loading())
     expect(view.container.querySelector('dl')).toHaveAttribute('aria-busy', 'true')
     expect(screen.queryByText('0')).not.toBeInTheDocument()
   })

@@ -1,7 +1,5 @@
 import type { AvoidanceState } from './fish-motion'
 
-import { useEffect, useRef } from 'react'
-
 import { advanceAvoidance, approach, createAvoidance, FISH_MOTION_LIMITS } from './fish-motion'
 
 type Fish = {
@@ -17,24 +15,23 @@ type Fish = {
 
 const mix = (a: number, b: number, t: number) => a + (b - a) * t
 
-type OceanCanvasProps = {
-  depthBias?: number
-}
+class OceanCanvasElement extends HTMLElement {
+  static readonly observedAttributes = ['data-depth']
 
-export function OceanCanvas(props: OceanCanvasProps) {
-  const { depthBias = 0 } = props
-  const ref = useRef<HTMLCanvasElement>(null)
-  const depthRef = useRef(depthBias)
-  const invalidateRef = useRef<(() => void) | null>(null)
+  private depthBias = 0
+  private requestDraw?: () => void
+  private stop?: () => void
 
-  useEffect(() => {
-    depthRef.current = depthBias
-    invalidateRef.current?.()
-  }, [depthBias])
+  attributeChangedCallback() {
+    this.depthBias = Number(this.dataset.depth ?? 0)
+    this.requestDraw?.()
+  }
 
-  useEffect(() => {
-    const canvas = ref.current
-    if (!canvas) return
+  connectedCallback() {
+    const root = this.shadowRoot ?? this.attachShadow({ mode: 'open' })
+    const canvas = document.createElement('canvas')
+    canvas.style.cssText = 'display: block; width: 100%; height: 100%'
+    root.replaceChildren(canvas)
     const context = canvas.getContext('2d', { alpha: false })
     if (!context) return
     const ctx = context
@@ -114,7 +111,7 @@ export function OceanCanvas(props: OceanCanvasProps) {
       requestDraw()
     }
 
-    function draw(stamp: number) {
+    const draw = (stamp: number) => {
       frame = 0
       if (document.hidden) {
         previous = null
@@ -132,7 +129,7 @@ export function OceanCanvas(props: OceanCanvasProps) {
         }
       }
       const scrollDepth = Math.min(globalThis.scrollY / Math.max(document.documentElement.scrollHeight - height, 1), 1)
-      const targetDepth = depthRef.current + scrollDepth * (1 - depthRef.current)
+      const targetDepth = this.depthBias + scrollDepth * (1 - this.depthBias)
       displayedDepth = displayedDepth === null || still ? targetDepth : approach(displayedDepth, targetDepth, dt, 0.3)
       const depth = displayedDepth
       const sky = ctx.createLinearGradient(0, 0, width * 0.3, height)
@@ -282,7 +279,7 @@ export function OceanCanvas(props: OceanCanvasProps) {
       }
       if (!still) requestDraw()
     }
-    invalidateRef.current = requestDraw
+    this.requestDraw = requestDraw
     resize()
     media.addEventListener('change', resetClock)
     document.addEventListener('visibilitychange', resetClock)
@@ -292,9 +289,8 @@ export function OceanCanvas(props: OceanCanvasProps) {
     globalThis.addEventListener('resize', resize)
     globalThis.addEventListener('pointermove', move)
     globalThis.addEventListener('pointerout', leave)
-    return () => {
+    this.stop = () => {
       cancelAnimationFrame(frame)
-      invalidateRef.current = null
       media.removeEventListener('change', resetClock)
       document.removeEventListener('visibilitychange', resetClock)
       globalThis.removeEventListener('blur', clearPointer)
@@ -304,7 +300,13 @@ export function OceanCanvas(props: OceanCanvasProps) {
       globalThis.removeEventListener('pointermove', move)
       globalThis.removeEventListener('pointerout', leave)
     }
-  }, [])
+  }
 
-  return <canvas ref={ref} className='pointer-events-none fixed inset-0 -z-20 size-full' aria-hidden='true' />
+  disconnectedCallback() {
+    this.stop?.()
+    this.stop = undefined
+    this.requestDraw = undefined
+  }
 }
+
+if (!customElements.get('ocean-canvas')) customElements.define('ocean-canvas', OceanCanvasElement)

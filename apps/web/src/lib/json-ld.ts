@@ -60,7 +60,6 @@ type JsonLdProjectOptions = JsonLdWebSiteOptions &
   Pick<Project, 'schemaType' | 'license' | 'programmingLanguages' | 'dateCreated' | 'slug'> & {
     name: string
     codeRepository?: string
-    dateModified?: string
   }
 
 type JsonLdCollectionPageOptions = JsonLdWebPageOptions & {
@@ -147,7 +146,6 @@ export function createJsonLdProject(
       ...(options.programmingLanguages && { programmingLanguage: options.programmingLanguages }),
     }),
     dateCreated: options.dateCreated,
-    dateModified: options.dateModified,
     author: createJsonLdPerson(),
     thumbnailUrl: new URL(`/images/projects/${options.slug}/cover.png`, ENV.SITE_URL).href,
     inLanguage: options.locale,

@@ -2,24 +2,6 @@
 
 @source '../**/*.{ts,tsx}';
 
-@theme inline {
-  --font-serif: Georgia, 'Times New Roman', serif;
-}
-
-@layer base {
-  :is(button, input, [role='combobox']) {
-    min-height: 44px;
-  }
-  button {
-    min-width: 44px;
-  }
-}
-
-:root :is(button, a):focus-visible {
-  outline: 2px solid var(--ring);
-  outline-offset: 3px;
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -57,23 +39,5 @@
   to {
     opacity: 0;
     transform: scale(1.5);
-  }
-}
-
-pre.shiki .line {
-  display: inline-block;
-  min-width: 100%;
-  padding-inline: 22px;
-  min-height: 1.85em;
-  border-left: 3px solid transparent;
-  margin-inline: 0;
-}
-pre.shiki .line.highlighted {
-  border-left-color: #8dd5bd;
-  background: #8dd5bd14;
-}
-@media (max-width: 600px) {
-  pre.shiki .line {
-    padding-inline: 13px 16px;
   }
 }

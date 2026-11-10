@@ -22,6 +22,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@content-collections/mdx": "0.2.2",
     "@fontsource-variable/geist": "5.3.0",
     "@fontsource-variable/geist-mono": "5.3.0",
     "@fontsource-variable/noto-sans-sc": "5.3.1",
@@ -63,6 +64,7 @@
     "rss": "1.2.2",
     "shiki": "4.5.0",
     "sitemap": "10.0.0",
+    "skullet": "0.0.3",
     "takumi-js": "2.19.0",
     "tinycolor2": "1.6.0",
     "use-debounce": "10.1.1",

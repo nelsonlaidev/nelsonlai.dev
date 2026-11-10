@@ -1,8 +1,13 @@
+import type { Locale } from '@/paraglide/runtime'
+
 import { render } from 'takumi-js'
+import { googleFonts } from 'takumi-js/helpers'
+
+import { m } from '@/paraglide/messages'
 
 // Two crisp Takumi text plates, composed with native SVG clipping paths.
 // No shader, browser, baked texture, or GPU is involved in the build.
-export async function surfacePoster(font: Uint8Array, logo: string) {
+export async function surfacePoster(font: Uint8Array, logo: string, locale: Locale, fontFamily: string) {
   const plate = async (color: string) =>
     `data:image/png;base64,${Buffer.from(
       await render(
@@ -58,10 +63,17 @@ export async function surfacePoster(font: Uint8Array, logo: string) {
       <img alt='' src={art} width={1200} height={630} />
       <div style={{ position: 'absolute', left: 72, top: 58, fontSize: 26, color: '#244f57' }}>Nelson Lai</div>
       <img alt='' src={logo} width={70} height={70} style={{ position: 'absolute', right: 65, bottom: 42 }} />
-      <div style={{ position: 'absolute', left: 72, bottom: 53, fontSize: 28, color: '#c4dcd3' }}>
-        A little below the surface.
+      <div style={{ position: 'absolute', left: 72, bottom: 53, fontFamily, fontSize: 28, color: '#c4dcd3' }}>
+        {m.home_og_tagline({}, { locale })}
       </div>
     </div>,
-    { width: 1200, height: 630, format: 'webp', lossless: true, fonts: [font] },
+    {
+      width: 1200,
+      height: 630,
+      format: 'webp',
+      lossless: true,
+      lang: locale,
+      fonts: [font, ...(fontFamily === 'Geist' ? [] : await googleFonts([fontFamily]))],
+    },
   )
 }

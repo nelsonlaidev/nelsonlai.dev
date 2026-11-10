@@ -30,7 +30,7 @@ export function AdminSidebar() {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton className='min-h-11' render={<Link to='/' />} tooltip={m.nav_home()}>
+            <SidebarMenuButton render={<Link to='/' />} tooltip={m.nav_home()}>
               <HomeIcon aria-hidden='true' />
               <span>Seafold</span>
             </SidebarMenuButton>
@@ -45,7 +45,6 @@ export function AdminSidebar() {
               {ADMIN_LINKS.map((link) => (
                 <SidebarMenuItem key={link.to}>
                   <SidebarMenuButton
-                    className='min-h-11'
                     isActive={link.to === pathname || `${link.to}/` === pathname}
                     tooltip={link.label()}
                     render={<Link to={link.to} />}

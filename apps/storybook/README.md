@@ -57,7 +57,7 @@ All 36 public visual families are represented:
 | Data and display         | Avatar, Badge, BlurImage, Chart, ExternalLink, Logo, Marquee, Skeleton, Spinner, Table      |
 
 Foundations document the actual dark palette, typography including CJK samples,
-radii, surfaces, keyboard/motion guidance, and UIProvider labels/nonce behavior.
+radii, surfaces, keyboard/motion guidance, and UIProvider label behavior.
 Colors reference live CSS variables rather than copied token values. There is no
 light/system theme in the current UI package.
 
@@ -95,6 +95,5 @@ Review keyboard focus, arrow-key navigation, Escape/focus return, touch dragging
 mobile sidebar/sheets, long text, and reduced motion in the browser. A successful
 build does not verify those behaviors. No new automated tests are included.
 
-The preview provider's nonce is illustrative. It does not install or relax the
-application's production CSP, and a Storybook preview does not establish
-production SSR, hydration, or CSP compatibility.
+The preview does not install or relax the application's production CSP. A
+Storybook preview does not establish production SSR, hydration, or CSP compatibility.

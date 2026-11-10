@@ -4,8 +4,6 @@ import { cn } from 'cn'
 import { createContext, use, useId, useMemo } from 'react'
 import * as RechartsPrimitive from 'recharts'
 
-import { useCspNonce } from './ui-provider'
-
 const INITIAL_DIMENSION = { width: 320, height: 200 } as const
 
 type TooltipNameType = number | string
@@ -88,7 +86,6 @@ type ChartStyleProps = {
 
 export function ChartStyle(props: ChartStyleProps) {
   const { id, config } = props
-  const nonce = useCspNonce()
   const selectorId = id
     .replaceAll('\\', '\\\\')
     .replaceAll('"', '\\"')
@@ -102,7 +99,7 @@ export function ChartStyle(props: ChartStyleProps) {
   }
 
   return (
-    <style nonce={nonce}>
+    <style>
       {`
 [data-chart="${selectorId}"] {
 ${colorConfig.map(([key, itemConfig]) => `  --color-${key}: ${itemConfig.color};`).join('\n')}
@@ -219,18 +216,13 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
                     ) : (
                       !hideIndicator && (
                         <div
-                          // border-border uses the theme token, not this per-series inline CSS variable.
-                          // oxlint-disable-next-line better-tailwindcss/enforce-canonical-classes
-                          className={cn('shrink-0 rounded-xs border-(--color-border) bg-(--color-bg)', {
+                          className={cn('shrink-0 rounded-xs border-(--indicator-color) bg-(--indicator-color)', {
                             'size-2.5': indicator === 'dot',
                             'w-1': indicator === 'line',
                             'w-0 border-[1.5px] border-dashed bg-transparent': indicator === 'dashed',
                             'my-0.5': nestLabel && indicator === 'dashed',
                           })}
-                          style={{
-                            '--color-bg': indicatorColor,
-                            '--color-border': indicatorColor,
-                          }}
+                          style={{ '--indicator-color': indicatorColor }}
                         />
                       )
                     )}

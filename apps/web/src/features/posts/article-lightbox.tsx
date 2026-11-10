@@ -142,9 +142,9 @@ export default function ArticleLightbox(props: ArticleLightboxProps) {
         iconNext: () => <Icon kind='next' />,
         iconZoomIn: () => <Icon kind='in' />,
         iconZoomOut: () => <Icon kind='out' />,
-        iconError: () => <output className='text-base text-[#c7dfd3]'>{m.common_error()}</output>,
+        iconError: () => <output className='text-base text-link'>{m.common_error()}</output>,
         slideFooter: ({ slide }) => (
-          <div className='pointer-events-none absolute inset-x-21 bottom-[max(20px,env(safe-area-inset-bottom))] mx-auto w-fit bg-[#041c29ee] px-2.5 py-1 text-center text-base/normal wrap-anywhere text-[#c7dfd3] max-[701px]:inset-x-19 max-[701px]:bottom-[max(30px,env(safe-area-inset-bottom))]'>
+          <div className='pointer-events-none absolute inset-x-20 bottom-[max(--spacing(8),env(safe-area-inset-bottom))] mx-auto w-fit bg-backdrop/95 px-2.5 py-1 text-center text-base/normal wrap-anywhere text-link md:bottom-[max(--spacing(5),env(safe-area-inset-bottom))]'>
             {slide.alt}
           </div>
         ),

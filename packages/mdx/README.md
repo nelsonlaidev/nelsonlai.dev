@@ -1,35 +1,22 @@
 # @repo/mdx
 
-MDX compilation for Vite using `@mdx-js/rollup`. This package owns the shared
-Markdown plugins, heading IDs, table of contents, and
-Shiki syntax highlighting. It does not manage content collections or routing.
+Shared Markdown plugins and table-of-contents extraction for Content Collections.
+The package exports `remarkPlugins`, `rehypePlugins`, `getTOC`, and the `TOC` type.
 
-```ts
-import { mdx } from '@repo/mdx'
-import { defineConfig } from 'vite'
+The web app compiles MDX during Content Collections transforms with
+`@content-collections/mdx`. The renderer uses its official `useMDXComponent` hook.
+Production does not compile MDX or read content files from the filesystem.
 
-export default defineConfig({ plugins: [mdx()] })
-```
+The heading plugin assigns GitHub-compatible IDs. `getTOC` uses the same MDX
+parser and heading plugin, including formatted headings and duplicate IDs, and
+returns URLs without a leading `#`. Content Collections caches compiled code and
+TOCs. List and API responses select metadata without sending document bodies.
 
-An MDX module exports a React component as its default export, plus `toc`.
-The heading transform assigns IDs and builds the TOC in the same compiler pass.
-Headings use GitHub-compatible IDs; TOC URLs contain the ID without a
-leading `#`. The existing code highlighting, inline-code annotations, code block
-titles, and CSP-compatible styles are preserved.
+Shiki uses the unmodified `vitesse-dark` theme for all MDX code blocks and
+inline-code annotations. Code block titles and notation transforms are preserved.
+Its generated inline styles are allowed by the web app's CSP. Compilation resolves
+imports relative to each document's directory.
 
-The web app's `content-collections.ts` owns frontmatter schemas, build-time
-validation, locale and slug resolution. Its generated collections contain
-metadata, not MDX source or executable code strings. Each document's `path`
-matches the root-relative Vite glob key (`/content/blog/en/example.mdx`),
-including nested slugs. Content Collections does not compile MDX.
-
-The web renderer and article loader use the same document registry. The article
-loader reads the TOC from the compiled module, without parsing Markdown again.
-List and API requests import generated collections without loading document
-bodies. Documents are eager on the server for complete SSR HTML and lazy chunks
-in the browser. React Suspense boundaries belong to the web app.
-
-The small Rollup wrapper only normalizes source maps for Vite 8's Rolldown
-transform interface. It does not implement another compiler or import protocol.
-Content is compiled during development or builds; production does not compile
-MDX or read content files from the filesystem.
+Only repository-owned content is compiled as MDX. User comments use the separate
+Markdown renderer with raw HTML parsing disabled. MDX code is executable and must
+never be compiled from untrusted user content.

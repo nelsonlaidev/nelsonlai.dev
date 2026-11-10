@@ -10,9 +10,13 @@
   --font-heading: var(--font-sans);
   --font-sans: 'Geist Variable', 'Noto Sans TC Variable', 'Noto Sans SC Variable', system-ui, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
+  --font-serif: Georgia, 'Times New Roman', serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-surface: var(--surface);
+  --color-backdrop: var(--backdrop);
 
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -113,6 +117,9 @@
 
   --background: #052d3c;
   --foreground: #e7eee5;
+
+  --surface: #062633;
+  --backdrop: #041c29;
 
   --card: #0d3341;
   --card-foreground: #e7eee5;

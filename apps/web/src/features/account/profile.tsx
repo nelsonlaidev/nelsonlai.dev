@@ -42,7 +42,7 @@ export function Profile(props: ProfileProps) {
 
   return (
     <section className='space-y-6' aria-labelledby='profile-heading'>
-      <h2 id='profile-heading' className='text-xl/[calc(1.75/1.125)] font-[450] tracking-tight'>
+      <h2 id='profile-heading' className='text-xl/relaxed font-medium tracking-tight'>
         {m.account_profile()}
       </h2>
       <Card className='border shadow-none ring-0'>
@@ -142,10 +142,8 @@ function EditName(props: EditNameProps) {
         className='max-h-[calc(100dvh-32px)] overflow-y-auto border shadow-md ring-0 data-[size=default]:max-w-[min(480px,calc(100vw-32px))] data-[size=sm]:max-w-[min(480px,calc(100vw-32px))] sm:data-[size=default]:max-w-[min(480px,calc(100vw-32px))]'
       >
         <AlertDialogHeader>
-          <AlertDialogTitle className='pr-8 leading-tight tracking-[-0.035em]'>
-            {m.account_edit_name()}
-          </AlertDialogTitle>
-          <AlertDialogDescription className='leading-[1.65]'>
+          <AlertDialogTitle className='pr-8 leading-tight tracking-tight'>{m.account_edit_name()}</AlertDialogTitle>
+          <AlertDialogDescription className='leading-relaxed'>
             {m.account_edit_name_description()}
           </AlertDialogDescription>
         </AlertDialogHeader>

@@ -75,6 +75,7 @@ describe('Dashboard suspense recovery with real Query and Router boundaries', ()
     await waitFor(() => {
       expect(within(youtube).getAllByText(m.dashboard_unavailable())).toHaveLength(2)
     })
+    expect(fixture.toast).not.toHaveBeenCalled()
     expect(
       client
         .getQueryCache()

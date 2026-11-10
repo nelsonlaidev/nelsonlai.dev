@@ -1,13 +1,12 @@
 import './src/tests/env'
 
 import contentCollections from '@content-collections/vite'
-import { mdx } from '@repo/mdx'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   // Dev/build generates the collections; unit tests only need the official import alias.
-  plugins: [contentCollections({ isEnabled: () => false }), mdx(), react()],
+  plugins: [contentCollections({ isEnabled: () => false }), react()],
   resolve: {
     alias: {
       '@': new URL('src', import.meta.url).pathname,

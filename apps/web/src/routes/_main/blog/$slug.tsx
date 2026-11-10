@@ -4,12 +4,14 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import * as z from 'zod'
 
-import { loadMdx, Mdx } from '@/components/mdx/mdx'
+import { Mdx } from '@/components/mdx/mdx'
+import { OceanPage } from '@/components/ocean-page'
+import { PagePending } from '@/components/page-pending'
+import { RouteError } from '@/components/route-error'
 import { CommentSection } from '@/features/comments/comment-section'
 import { ArticleGallery } from '@/features/posts/article-gallery'
 import { BlogFooter } from '@/features/posts/blog-footer'
 import { BlogHeader } from '@/features/posts/blog-header'
-import { BlogError, BlogLayout, BlogPending } from '@/features/posts/blog-layout'
 import { LikeButton, usePostLike } from '@/features/posts/like-button'
 import { getPost, getPosts } from '@/features/posts/posts.functions'
 import { ProgressBar } from '@/features/posts/progress-bar'
@@ -36,10 +38,9 @@ export const Route = createFileRoute('/_main/blog/$slug')({
 
     if (!post) throw notFound()
 
-    const { toc } = await loadMdx(post.path)
     const next = summaries[(summaries.findIndex((item) => item.slug === post.slug) + 1) % summaries.length]
 
-    return { post: { ...post, toc }, locale, next }
+    return { post, locale, next }
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {}
@@ -66,8 +67,12 @@ export const Route = createFileRoute('/_main/blog/$slug')({
       }),
     })
   },
-  pendingComponent: BlogPending,
-  errorComponent: BlogError,
+  pendingComponent: () => <PagePending title={m.blog_all_articles()} description={m.blog_intro()} />,
+  errorComponent: (props) => (
+    <OceanPage>
+      <RouteError {...props} />
+    </OceanPage>
+  ),
   component: RouteComponent,
 })
 
@@ -76,9 +81,9 @@ function RouteComponent() {
   const { comment, reply } = Route.useSearch()
 
   return (
-    <BlogLayout>
+    <OceanPage className={next ? 'pb-0 sm:pb-0' : undefined}>
       <ArticleDetail key={`${locale}:${post.slug}`} post={post} next={next} comment={comment} reply={reply} />
-    </BlogLayout>
+    </OceanPage>
   )
 }
 
@@ -95,30 +100,21 @@ function ArticleDetail(props: ArticleDetailProps) {
 
   return (
     <>
-      <Link
-        to='/blog'
-        className='mb-13.75 inline-flex min-h-11 items-center gap-3 text-sm/normal text-[#a9c6bf] max-[601px]:mb-9.5'
-      >
-        <ArrowLeftIcon size={17} aria-hidden='true' />
+      <Link to='/blog' className='group mb-10 inline-flex items-center gap-3 text-sm/normal text-link sm:mb-14'>
+        <ArrowLeftIcon
+          className='size-4 motion-safe:transition-transform motion-safe:group-hover:-translate-x-1 motion-safe:group-focus-visible:-translate-x-1'
+          aria-hidden='true'
+        />
         {m.blog_all_articles()}
       </Link>
       <BlogHeader post={post} />
-      <div className='grid grid-cols-[200px_minmax(0,1fr)] gap-16.25 border-t pt-11.25 max-[1201px]:grid-cols-[155px_minmax(0,1fr)] max-[1201px]:gap-8.75 max-[1001px]:block max-[601px]:pt-7.5'>
+      <div className='border-t pt-8 sm:pt-11 lg:grid lg:grid-cols-[minmax(0,65ch)_--spacing(48)] lg:justify-center lg:gap-10 xl:gap-12'>
         <TableOfContents toc={post.toc}>
           <LikeButton state={likes} placement='desktop' />
         </TableOfContents>
         <ArticleGallery>
-          <article className='max-w-[70ch] min-w-0 bg-[#062633] px-7.5 pb-7.5 max-[1201px]:px-2.5 max-[1001px]:max-w-none max-[1001px]:px-4 max-[1001px]:py-5 max-[601px]:-mx-4 max-[601px]:px-4'>
-            <div className='mb-11.25 border-l border-l-[#9cbeac55] py-0.5 pl-5.75'>
-              <span className='mb-3.5 block text-xs leading-[normal] tracking-[normal] text-[#b5cdbb]'>
-                {m.blog_before()}
-              </span>
-              <p className='text-base/[1.65] text-[#8eafa1]'>{post.description}</p>
-            </div>
-            <Mdx
-              path={post.path}
-              className='text-lg leading-[1.7] text-[#b7cbbf] prose-headings:scroll-mt-10 prose-headings:leading-[1.35] prose-headings:font-normal prose-headings:tracking-[-0.035em] prose-headings:text-foreground prose-h2:mx-0 prose-h2:mt-12 prose-h2:mb-5.5 prose-h2:text-[29px] max-[601px]:prose-h2:text-[26px] prose-h3:mx-0 prose-h3:mt-8 prose-h3:mb-5 prose-h3:text-[23px] prose-p:my-4.75 prose-figure:my-7.5! prose-figcaption:mt-3 prose-figcaption:text-left prose-figcaption:text-sm/[1.8] prose-figcaption:text-[#85aa96] prose-strong:font-[550] prose-strong:text-[#d0e0c7] prose-code:rounded-[3px]! prose-code:border-[#a8c2a21c]! prose-code:bg-[#b9d4b30c]! prose-code:px-1.25! prose-code:py-0.5! prose-code:text-[0.85em]! prose-code:text-inherit prose-ol:mt-4.75 prose-ol:mb-6.25 prose-ol:pl-5.75 prose-ul:mt-4.75 prose-ul:mb-6.25 prose-ul:pl-5.75 prose-li:my-1.75 prose-li:pl-1.25 prose-table:text-base prose-th:border prose-th:border-[#8eae922b] prose-th:px-3.75 prose-th:py-3.25 prose-td:border prose-td:border-[#8eae922b] prose-td:px-3.75 prose-td:py-3.25 prose-img:rounded-[3px] prose-img:border-border [&>h2:first-child]:mt-0 [&>p:first-child]:mt-0 [&>p:first-child]:mb-11.25 [&>p:first-child]:border-l [&>p:first-child]:border-[#9cbeac55] [&>p:first-child]:py-0.5 [&>p:first-child]:pl-5.75 [&>p:first-child]:text-base [&>p:first-child]:text-[#8eafa1]'
-            />
+          <article className='mx-auto w-full max-w-prose min-w-0 lg:order-first'>
+            <Mdx code={post.code} />
             <BlogFooter post={post}>
               <LikeButton state={likes} placement='mobile' />
             </BlogFooter>
@@ -131,18 +127,17 @@ function ArticleDetail(props: ArticleDetailProps) {
         <Link
           to='/blog/$slug'
           params={{ slug: next.slug }}
-          className='mt-27.5 flex items-center justify-between gap-7.5 border-t pt-11.25 max-[601px]:mt-16.25 max-[601px]:gap-5 max-[601px]:pt-8'
+          className='group mt-16 flex items-center justify-between gap-5 border-t pt-14 sm:mt-28 sm:gap-8'
         >
           <div>
-            <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-section-label'>
-              {m.blog_next()}
-            </span>
-            <h2 className='max-w-175 text-[33px] leading-normal font-[410] tracking-tighter max-[601px]:text-[25px] max-[601px]:leading-[1.3]'>
-              {next.title}
-            </h2>
-            <p className='mt-4.5 max-w-130 text-base/[1.65] text-[#93b2aa]'>{next.description}</p>
+            <span className='mb-6 block text-xs text-section-label'>{m.blog_next()}</span>
+            <h2 className='max-w-2xl text-2xl tracking-tighter sm:text-3xl'>{next.title}</h2>
+            <p className='mt-5 max-w-lg text-base/relaxed text-muted-foreground/80'>{next.description}</p>
           </div>
-          <ArrowRightIcon aria-hidden='true' className='size-10.5 shrink-0 max-[601px]:size-7' />
+          <ArrowRightIcon
+            aria-hidden='true'
+            className='size-7 shrink-0 motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1 sm:size-11'
+          />
         </Link>
       )}
     </>

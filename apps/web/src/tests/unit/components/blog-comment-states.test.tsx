@@ -1,7 +1,9 @@
 import type * as ReactQuery from '@tanstack/react-query'
 
 import { UIProvider } from '@repo/ui/components/ui-provider'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, screen } from '@testing-library/react'
+import { IntlProvider } from 'use-intl'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 
 import { CommentList } from '@/features/comments/comment-list'
@@ -40,7 +42,12 @@ function Labels(props: ChildrenProps) {
         toggleSidebar: m.common_aria_labels_toggle_sidebar(),
       }}
     >
-      {props.children}
+      <IntlProvider
+        locale='en'
+        formats={{ dateTime: { short: { dateStyle: 'short' }, long: { dateStyle: 'medium' } } }}
+      >
+        <QueryClientProvider client={new QueryClient()}>{props.children}</QueryClientProvider>
+      </IntlProvider>
     </UIProvider>
   )
 }

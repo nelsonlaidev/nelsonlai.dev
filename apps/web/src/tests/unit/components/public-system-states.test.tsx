@@ -3,9 +3,10 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 
 import { RouteError } from '@/components/route-error'
-import { LegalPending } from '@/features/legal/legal-page'
 import { UnsubscribePage } from '@/features/notifications/unsubscribe-page'
 import { m } from '@/paraglide/messages'
+import { Route as PrivacyRoute } from '@/routes/_main/privacy'
+import { Route as TermsRoute } from '@/routes/_main/terms'
 
 type MockLinkProps = {
   children: React.ReactNode
@@ -28,13 +29,15 @@ const fixture = vi.hoisted(() => ({
   >(),
   unsubscribe: vi.fn<() => Promise<void>>(),
 }))
-vi.mock('@tanstack/react-router', () => ({
+vi.mock('@tanstack/react-router', async (importOriginal) => ({
+  ...(await importOriginal()),
   Link: (props: MockLinkProps) => <a href={props.to}>{props.children}</a>,
   useRouter: () => ({ invalidate: fixture.invalidate }),
 }))
 vi.mock('@/components/main-layout', () => ({
   MainLayout: (props: ChildrenProps) => <main>{props.children}</main>,
 }))
+vi.mock('@/features/pages/pages.functions', () => ({ getPage: vi.fn<() => void>() }))
 vi.mock('@/components/mdx/mdx', () => ({ Mdx: () => null }))
 vi.mock('@/lib/orpc-client', async () => {
   const { createTanstackQueryUtils } = await import('@orpc/tanstack-query')
@@ -86,7 +89,7 @@ describe('Public system states with isolated API fixtures', () => {
     fixture.inspect.mockReturnValue(new Promise(() => {}))
     const view = setup('local-fixture')
     expect(view.container.querySelector('[aria-busy]')).toHaveAttribute('aria-busy', 'true')
-    expect(screen.getByRole('heading')).toHaveTextContent(m.common_loading())
+    expect(screen.getByText(m.common_aria_labels_loading())).toHaveAttribute('skullet-status')
     expect(screen.queryByText(m.unsubscribe_you_have_been_unsubscribed())).not.toBeInTheDocument()
   })
   test('confirmation requires an explicit click and updates the cached result', async () => {
@@ -124,8 +127,12 @@ describe('Public system states with isolated API fixtures', () => {
       fixture.reset.mock.invocationCallOrder[0] ?? Infinity,
     )
   })
-  test('legal pending view announces loading', () => {
-    render(<LegalPending />)
-    expect(screen.getByRole('status')).toHaveTextContent(m.common_loading())
+  test.each([
+    ['privacy', PrivacyRoute.options.pendingComponent],
+    ['terms', TermsRoute.options.pendingComponent],
+  ] as const)('%s pending view announces loading', (_page, Pending) => {
+    if (!Pending) throw new Error('Missing route pending component')
+    render(<Pending />)
+    expect(screen.getByRole('status')).toHaveTextContent(m.common_aria_labels_loading())
   })
 })

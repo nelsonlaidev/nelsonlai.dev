@@ -47,10 +47,11 @@ describe('Blog comment composer with local session fixtures', () => {
     expect(screen.getByRole('button', { name: m.blog_comments_send_comment() })).toBeDisabled()
     expect(fixture.create).not.toHaveBeenCalled()
   })
-  test('keeps sign in disabled while session resolution is pending', () => {
+  test('keeps the composer inaccessible while session resolution is pending', () => {
     fixture.pending = true
     setup()
-    expect(screen.getByRole('button', { name: m.common_sign_in() })).toBeDisabled()
+    expect(screen.getByText(m.common_aria_labels_loading())).toHaveAttribute('skullet-status')
+    expect(screen.queryByRole('button', { name: m.common_sign_in() })).not.toBeInTheDocument()
   })
   test('enables editing, formatting and preview for a signed-in user without writing remotely', () => {
     fixture.signedIn = true

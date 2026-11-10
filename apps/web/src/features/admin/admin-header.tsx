@@ -10,7 +10,7 @@ export function AdminHeader() {
       <SidebarTrigger variant='outline' aria-label={m.admin_toggle_sidebar()} />
       <div className='flex items-center gap-2'>
         <CommandMenu />
-        <LocaleSwitcher iconOnlyOnMobile />
+        <LocaleSwitcher />
       </div>
     </header>
   )

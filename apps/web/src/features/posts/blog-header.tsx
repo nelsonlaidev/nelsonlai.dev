@@ -2,16 +2,15 @@ import type { PostDetail } from './types'
 
 import NumberFlow from '@number-flow/react'
 import { ExternalLink } from '@repo/ui/components/external-link'
-import { useCspNonce } from '@repo/ui/components/ui-provider'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef } from 'react'
 
+import { PendingCount } from '@/components/pending-count'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { orpc } from '@/lib/orpc-client'
 import { SITE } from '@/lib/site'
 import { m } from '@/paraglide/messages'
 
-import { articleNumber, articleTopic, articleTopicLabel } from './presentation'
 import { usePostStats } from './use-post-stats'
 
 type BlogHeaderProps = {
@@ -20,9 +19,7 @@ type BlogHeaderProps = {
 
 export function BlogHeader(props: BlogHeaderProps) {
   const { post } = props
-  const nonce = useCspNonce()
   const formattedDate = useFormattedDate(post.publishedAt)
-  const updatedDate = useFormattedDate(post.updatedAt)
   const queryClient = useQueryClient()
   const stats = usePostStats([post.slug])
   const postStats = stats.data?.get(post.slug)
@@ -46,59 +43,49 @@ export function BlogHeader(props: BlogHeaderProps) {
     }
   }, [increment, post.slug])
 
-  let viewsContent: React.ReactNode = '--'
-  let commentsContent: React.ReactNode = '--'
+  let viewsContent: React.ReactNode = stats.isPending ? <PendingCount /> : '--'
+  let commentsContent: React.ReactNode = <PendingCount />
 
   if (postStats) {
-    viewsContent = <NumberFlow nonce={nonce} data-testid='view-count' value={postStats.views} />
+    viewsContent = <NumberFlow data-testid='view-count' value={postStats.views} />
   } else if (stats.isError) {
     viewsContent = m.common_error()
   }
 
   if (counts.data) {
-    commentsContent = (
-      <NumberFlow nonce={nonce} data-testid='comment-count' value={counts.data.comments + counts.data.replies} />
-    )
+    commentsContent = <NumberFlow data-testid='comment-count' value={counts.data.comments + counts.data.replies} />
   } else if (counts.isError) {
     commentsContent = m.common_error()
   }
 
   return (
-    <header className='mb-16.25 max-w-225 max-[601px]:mb-10'>
-      <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-section-label'>
-        {articleTopicLabel(articleTopic(post.slug))} / {m.article_category()} {articleNumber(post.slug)}
-      </span>
-      <h1 className='text-[clamp(44px,5.2vw,76px)] leading-[1.1] font-[420] tracking-[-0.065em] max-[1001px]:text-[55px] max-[601px]:text-[42px] max-[601px]:leading-[1.12]'>
+    <header className='mb-10 max-w-3xl sm:mb-12'>
+      <h1 className='mb-3 text-3xl/tight tracking-tight text-balance sm:text-4xl/tight lg:text-5xl/tight'>
         {post.title}
       </h1>
-      <p className='mt-6.75 max-w-180 text-lg/[1.65] text-[#a8c6bb]'>{post.description}</p>
-      <div className='mt-8.75 flex flex-wrap items-center gap-3.25 text-sm/normal'>
-        <span
-          aria-hidden='true'
-          className='grid size-9.5 shrink-0 place-items-center rounded-full border border-[#b6d1bc4a] font-serif text-[#c5dbc8] italic'
-        >
-          N
-        </span>
-        <div className='min-w-0 flex-1 max-[601px]:basis-[calc(100%-55px)]'>
-          <ExternalLink href={SITE.socials.github}>{SITE.name}</ExternalLink>
-          <div className='mt-2 flex flex-wrap gap-x-5 gap-y-1.5 text-sm leading-[1.6] text-[#8cafaa]'>
-            <span className='block'>
-              {m.blog_header_published_on()} <time dateTime={post.publishedAt}>{formattedDate ?? '--'}</time>
-            </span>
-            {post.updatedAt !== post.publishedAt && (
-              <span className='block'>
-                <time dateTime={post.updatedAt}>{m.blog_footer_last_updated({ date: updatedDate ?? '--' })}</time>
-              </span>
-            )}
+      <p className='mb-6 max-w-prose text-base/relaxed text-muted-foreground sm:text-lg/relaxed'>{post.description}</p>
+      <div className='flex items-center gap-3 text-sm text-muted-foreground'>
+        <img src='/images/avatar.png' alt='' width={36} height={36} className='size-9 shrink-0 rounded-full' />
+        <div className='grid gap-1'>
+          <div className='flex flex-wrap items-baseline gap-x-2'>
+            <ExternalLink href={SITE.socials.github} className='font-medium text-foreground'>
+              {SITE.name}
+            </ExternalLink>
+            <span aria-hidden='true'>·</span>
+            <time dateTime={post.publishedAt}>
+              <span className='sr-only'>{m.blog_header_published_on()} </span>
+              {formattedDate ?? '--'}
+            </time>
           </div>
-        </div>
-        <div className='flex flex-wrap gap-4 text-sm/normal text-[#8cafaa] max-[601px]:basis-full max-[601px]:pl-12.75'>
-          <span>
-            {viewsContent} {m.blog_header_views()}
-          </span>
-          <a href='#comments'>
-            {commentsContent} {m.common_labels_comments()}
-          </a>
+          <div className='flex items-baseline gap-2 text-xs'>
+            <span>
+              {viewsContent} {m.blog_header_views()}
+            </span>
+            <span aria-hidden='true'>·</span>
+            <span>
+              {commentsContent} {m.common_labels_comments()}
+            </span>
+          </div>
         </div>
       </div>
     </header>

@@ -7,11 +7,11 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@repo/ui/components/dropdown-menu'
-import { useCspNonce } from '@repo/ui/components/ui-provider'
 import { useQuery } from '@tanstack/react-query'
 import { ListFilterIcon } from 'lucide-react'
 import { useState } from 'react'
 
+import { PendingCount } from '@/components/pending-count'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -26,42 +26,42 @@ type CommentSectionProps = {
 
 export function CommentSection(props: CommentSectionProps) {
   const { slug, highlightedCommentId, highlightedReplyId } = props
-  const nonce = useCspNonce()
   const [sort, setSort] = useState<'newest' | 'oldest'>('newest')
   const counts = useQuery(orpc.comments.counts.queryOptions({ input: { slug } }))
 
-  let countsContent: React.ReactNode = '--'
+  let total: React.ReactNode = <PendingCount />
+  let countsContent: React.ReactNode = <PendingCount />
 
   if (counts.data) {
+    total = counts.data.comments + counts.data.replies
     countsContent = (
       <>
-        <NumberFlow nonce={nonce} data-testid='blog-comment-count' value={counts.data.comments} />{' '}
+        <NumberFlow data-testid='blog-comment-count' value={counts.data.comments} />{' '}
         {m.blog_comments_comments({ count: counts.data.comments })} ·{' '}
-        <NumberFlow nonce={nonce} data-testid='reply-count' value={counts.data.replies} />{' '}
+        <NumberFlow data-testid='reply-count' value={counts.data.replies} />{' '}
         {m.blog_comments_replies({ count: counts.data.replies })}
       </>
     )
   } else if (counts.isError) {
+    total = '--'
     countsContent = m.common_error()
   }
 
   return (
     <section
       id='comments'
-      className='mt-16 scroll-mt-11.25 space-y-6 border-t border-t-[#a8d3c540] pt-10 text-[#dce8e1] max-[601px]:mt-11.25 max-[601px]:pt-7.5'
+      className='mt-11 scroll-mt-11 space-y-6 border-t border-t-border pt-8 text-foreground/90 sm:mt-16 sm:pt-10'
       aria-label={m.common_labels_comments()}
     >
-      <header className='mb-5.5'>
-        <span className='mb-6 block text-xs leading-[normal] tracking-[normal] text-section-label'>
-          {m.blog_comments_discussion_kicker()}
-        </span>
-        <h2 className='mt-3 text-[clamp(26px,3vw,34px)] leading-normal font-[450] tracking-tighter'>
+      <header className='mb-6'>
+        <span className='mb-6 block text-xs text-section-label'>{m.blog_comments_discussion_kicker()}</span>
+        <h2 className='mt-3 text-3xl/normal font-medium tracking-tighter'>
           {m.blog_comments_conversation()}
-          <span className='ml-3.5 inline-flex h-7.75 min-w-7.75 items-center justify-center rounded-full border border-[#9dc9bc40] align-middle text-sm/normal text-[#a4cdbf]'>
-            {counts.data ? counts.data.comments + counts.data.replies : '--'}
+          <span className='ml-3.5 inline-flex h-8 min-w-8 items-center justify-center rounded-full border align-middle text-sm/normal text-primary'>
+            {total}
           </span>
         </h2>
-        <p className='mt-4.25 mb-5.5 text-base/[1.65] text-[#acc7be]'>{m.blog_comments_discussion_intro()}</p>
+        <p className='mt-4 mb-6 text-base/relaxed text-muted-foreground'>{m.blog_comments_discussion_intro()}</p>
       </header>
       <CommentComposer slug={slug} />
       <div className='flex flex-wrap items-center justify-between gap-3 text-sm'>
@@ -69,7 +69,7 @@ export function CommentSection(props: CommentSectionProps) {
           <div>{countsContent}</div>
         </NumberFlowGroup>
         <DropdownMenu>
-          <DropdownMenuTrigger render={<Button type='button' variant='outline' size='sm' className='min-h-11' />}>
+          <DropdownMenuTrigger render={<Button type='button' variant='outline' size='sm' />}>
             <ListFilterIcon aria-hidden='true' />
             {m.blog_comments_sort_by()}
           </DropdownMenuTrigger>
@@ -80,12 +80,8 @@ export function CommentSection(props: CommentSectionProps) {
                 if (value === 'newest' || value === 'oldest') setSort(value === 'newest' ? 'newest' : 'oldest')
               }}
             >
-              <DropdownMenuRadioItem value='newest' className='min-h-11'>
-                {m.blog_comments_newest()}
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value='oldest' className='min-h-11'>
-                {m.blog_comments_oldest()}
-              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value='newest'>{m.blog_comments_newest()}</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value='oldest'>{m.blog_comments_oldest()}</DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>
         </DropdownMenu>

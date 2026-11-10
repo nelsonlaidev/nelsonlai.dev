@@ -1,6 +1,8 @@
 import { cn } from 'cn'
 import { useEffect, useRef, useState } from 'react'
 
+import { Skeleton } from './skeleton'
+
 type BlurImageProps = React.ComponentProps<'img'> & {
   src: string
   alt: string
@@ -19,10 +21,7 @@ export function BlurImage(props: BlurImageProps) {
   }, [src])
 
   return (
-    <div
-      data-loading={isLoading}
-      className={cn('group overflow-hidden motion-safe:data-[loading=true]:animate-pulse', className)}
-    >
+    <div data-loading={isLoading} className={cn('group relative overflow-hidden', className)}>
       <img
         ref={imgRef}
         src={src}
@@ -33,7 +32,7 @@ export function BlurImage(props: BlurImageProps) {
         fetchPriority={lazy ? 'auto' : 'high'}
         decoding='async'
         className={cn(
-          'transition-[filter,transform] duration-[700ms,150ms] ease-[ease] group-data-[loading=true]:blur-xl group-data-[loading=true]:grayscale motion-safe:group-data-[loading=true]:scale-[1.02] motion-reduce:transition-none',
+          'transition-[filter,scale] duration-[700ms,150ms] ease-[ease] group-data-[loading=true]:blur-xl group-data-[loading=true]:grayscale motion-safe:group-data-[loading=true]:scale-102 motion-reduce:transition-none',
           imageClassName,
         )}
         style={{ aspectRatio: width && height ? `${width} / ${height}` : undefined, ...style }}
@@ -47,6 +46,9 @@ export function BlurImage(props: BlurImageProps) {
         }}
         {...rest}
       />
+      {isLoading && (
+        <Skeleton aria-hidden='true' className='pointer-events-none absolute inset-0 rounded-none bg-transparent' />
+      )}
     </div>
   )
 }

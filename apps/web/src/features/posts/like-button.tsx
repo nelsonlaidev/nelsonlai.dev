@@ -1,13 +1,13 @@
 import NumberFlow from '@number-flow/react'
 import { ORPCError } from '@orpc/client'
 import { toast } from '@repo/ui/components/toast'
-import { useCspNonce } from '@repo/ui/components/ui-provider'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { cn } from 'cn'
 import { useReducedMotion } from 'motion/react'
 import { useEffect, useId, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
+import { PendingCount } from '@/components/pending-count'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -97,27 +97,22 @@ type LikeButtonProps = {
 
 export function LikeButton(props: LikeButtonProps) {
   const { state, placement } = props
-  const nonce = useCspNonce()
   const { query, save, draft, pulse, like } = state
   const clipId = useId()
   const count = Math.min(3, (query.data?.currentUserLikes ?? 0) + draft)
   const heart = 'M12 21S2 15.2 2 8.5C2 3.5 8 1.5 12 6c4-4.5 10-2.5 10 2.5C22 15.2 12 21 12 21Z'
 
-  let likesContent: React.ReactNode = '--'
+  let likesContent: React.ReactNode = <PendingCount />
 
   if (query.data) {
-    likesContent = <NumberFlow nonce={nonce} data-testid='like-count' value={query.data.likes + draft} />
+    likesContent = <NumberFlow data-testid='like-count' value={query.data.likes + draft} />
   } else if (query.isError) {
     likesContent = m.common_error()
   }
 
   return (
     <div
-      className={cn(
-        'mt-6',
-        placement === 'desktop' && 'p-2.5 max-[1001px]:hidden',
-        placement === 'mobile' && 'hidden max-[1001px]:block',
-      )}
+      className={cn('mt-6', placement === 'desktop' && 'hidden p-2.5 lg:block', placement === 'mobile' && 'lg:hidden')}
     >
       <button
         type='button'
@@ -128,9 +123,9 @@ export function LikeButton(props: LikeButtonProps) {
         aria-disabled={count === 3 || undefined}
         aria-label={m.blog_like_this_post()}
         aria-describedby={`${clipId}-status`}
-        className='relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-md border border-[#8cae9d55] bg-[#082734] px-4 py-2.5 text-base/normal text-[#d1e6dc] transition-colors duration-180 ease-linear hover:bg-[#123844] focus-visible:outline-2 focus-visible:-outline-offset-4! focus-visible:outline-ring focus-visible:outline-solid not-aria-disabled:active:transform-[scale(0.97)] aria-disabled:cursor-default motion-reduce:transition-none motion-reduce:not-aria-disabled:active:transform-none'
+        className='relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-md border border-input bg-surface px-4 py-2.5 text-base/normal text-foreground/90 transition-colors duration-200 ease-linear hover:bg-accent focus-visible:outline-2 focus-visible:-outline-offset-4! focus-visible:outline-ring focus-visible:outline-solid aria-disabled:cursor-default motion-safe:not-aria-disabled:active:scale-97 motion-reduce:transition-none'
       >
-        <span className='relative flex text-[#9bd7c0]'>
+        <span className='relative flex text-primary'>
           <svg width='26' height='26' viewBox='0 0 24 24' aria-hidden='true'>
             <defs>
               <clipPath id={clipId}>
@@ -154,17 +149,17 @@ export function LikeButton(props: LikeButtonProps) {
           </svg>
           {pulse > 0 && (
             <span key={pulse} aria-hidden='true' className='pointer-events-none absolute inset-0 motion-reduce:hidden'>
-              <i className='absolute top-1.75 left-0.75 size-1 animate-[like-bubble_0.65s_ease-out] rounded-full border border-[#a7dfc9] opacity-0' />
-              <i className='absolute top-0.75 left-3.25 size-1 animate-[like-bubble_0.65s_ease-out] rounded-full border border-[#a7dfc9] opacity-0 [animation-delay:0.05s]' />
-              <i className='absolute top-2.25 left-5.5 size-1 animate-[like-bubble_0.65s_ease-out] rounded-full border border-[#a7dfc9] opacity-0 [animation-delay:0.1s]' />
+              <i className='absolute top-1.75 left-0.75 size-1 animate-[like-bubble_0.65s_ease-out] rounded-full border border-primary opacity-0' />
+              <i className='absolute top-0.75 left-3.25 size-1 animate-[like-bubble_0.65s_ease-out] rounded-full border border-primary opacity-0 [animation-delay:0.05s]' />
+              <i className='absolute top-2.25 left-5.5 size-1 animate-[like-bubble_0.65s_ease-out] rounded-full border border-primary opacity-0 [animation-delay:0.1s]' />
               {count === 3 && (
-                <b className='absolute -inset-1 animate-[like-ripple_0.65s_ease-out_both] rounded-full border border-[#a7dfc9]' />
+                <b className='absolute -inset-1 animate-[like-ripple_0.65s_ease-out_both] rounded-full border border-primary' />
               )}
             </span>
           )}
         </span>
         <span>{count === 3 ? m.blog_liked() : m.common_like()}</span>
-        <span className='border-l border-l-[#8cae9d40] pl-2.5 text-[#b8d0c7] tabular-nums'>{likesContent}</span>
+        <span className='border-l border-l-border pl-2.5 text-muted-foreground tabular-nums'>{likesContent}</span>
       </button>
       <output id={`${clipId}-status`} className='sr-only'>
         {count} / 3

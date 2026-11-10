@@ -5,6 +5,7 @@ import { toast } from '@repo/ui/components/toast'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SendIcon } from 'lucide-react'
 import { useState } from 'react'
+import { Skeleton } from 'skullet/react'
 
 import { signInDialogHandle } from '@/features/auth/sign-in-dialog'
 import { authClient } from '@/lib/auth-client'
@@ -57,79 +58,72 @@ export function CommentComposer(props: CommentComposerProps) {
   }
 
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault()
-        submit()
-      }}
-      className='space-y-3 rounded-xl border border-[#b2d4c74a] p-5.5 shadow-[0_14px_35px_#02152220] [background:linear-gradient(135deg,#123d46e8,#092a37ed)] max-[601px]:p-4.25'
-      aria-busy={creation.isPending}
-    >
-      <div className='relative'>
-        <CommentEditor
-          value={body}
-          onChange={setBody}
-          onSubmit={submit}
-          onCancel={onCancel}
-          disabled={!session.data || creation.isPending}
-          isReply={Boolean(parentId)}
-          tabsValue={tabsValue}
-          onTabsValueChange={setTabsValue}
-        />
-        {!parentId && (
-          <Button
-            type='submit'
-            variant='ghost'
-            size='icon-xs'
-            className='absolute right-3 bottom-3 min-h-11'
-            disabled={!session.data || creation.isPending || !body.trim()}
-            aria-label={m.blog_comments_send_comment()}
-          >
-            <SendIcon className='size-4' aria-hidden='true' />
-          </Button>
-        )}
-        {!session.data && (
-          <div className='absolute inset-0 flex items-center justify-center rounded-md bg-black/5 backdrop-blur-[0.8px]'>
-            <DialogTrigger
-              handle={signInDialogHandle}
-              render={<Button type='button' size='sm' disabled={session.isPending} className='min-h-11' />}
-              className='min-h-11'
-            >
-              {m.common_sign_in()}
-            </DialogTrigger>
-          </div>
-        )}
-      </div>
-      {error && (
-        <p role='alert' className='text-sm text-destructive'>
-          {error}
-        </p>
-      )}
-      {parentId && (
-        <div className='mt-2 flex items-center gap-1'>
-          <Button
-            type='submit'
-            variant='secondary'
-            size='sm'
-            disabled={!session.data || creation.isPending || !body.trim()}
-            className='min-h-11'
-          >
-            {m.blog_comments_reply()}
-          </Button>
-          {onCancel && (
+    <Skeleton loading={session.isPending} label={m.common_aria_labels_loading()}>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault()
+          submit()
+        }}
+        className='space-y-3 rounded-xl border border-input bg-linear-135 from-card/90 to-surface/95 p-4 shadow-xl shadow-backdrop/15 sm:p-6'
+        aria-busy={creation.isPending}
+      >
+        <div className='relative'>
+          <CommentEditor
+            value={body}
+            onChange={setBody}
+            onSubmit={submit}
+            onCancel={onCancel}
+            disabled={!session.data || creation.isPending}
+            isReply={Boolean(parentId)}
+            tabsValue={tabsValue}
+            onTabsValueChange={setTabsValue}
+          />
+          {!parentId && (
             <Button
-              type='button'
-              variant='secondary'
-              size='sm'
-              onClick={onCancel}
-              disabled={creation.isPending}
-              className='min-h-11'
+              type='submit'
+              variant='ghost'
+              size='icon-xs'
+              className='absolute right-3 bottom-3'
+              disabled={!session.data || creation.isPending || !body.trim()}
+              aria-label={m.blog_comments_send_comment()}
             >
-              {m.common_cancel()}
+              <SendIcon className='size-4' aria-hidden='true' />
             </Button>
           )}
+          {!session.data && (
+            <div className='absolute inset-0 flex items-center justify-center rounded-md bg-black/5 backdrop-blur-[0.8px]'>
+              <DialogTrigger
+                handle={signInDialogHandle}
+                render={<Button type='button' size='sm' disabled={session.isPending} />}
+              >
+                {m.common_sign_in()}
+              </DialogTrigger>
+            </div>
+          )}
         </div>
-      )}
-    </form>
+        {error && (
+          <p role='alert' className='text-sm text-destructive'>
+            {error}
+          </p>
+        )}
+        {parentId && (
+          <div className='mt-2 flex items-center gap-1'>
+            <Button
+              type='submit'
+              variant='secondary'
+              size='sm'
+              disabled={!session.data || creation.isPending || !body.trim()}
+            >
+              {m.blog_comments_reply()}
+            </Button>
+            {onCancel && (
+              <Button type='button' variant='secondary' size='sm' onClick={onCancel} disabled={creation.isPending}>
+                {m.common_cancel()}
+              </Button>
+            )}
+          </div>
+        )}
+      </form>
+    </Skeleton>
   )
 }

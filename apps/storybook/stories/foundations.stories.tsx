@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Button } from '@repo/ui/components/button'
 import { Spinner } from '@repo/ui/components/spinner'
-import { UIProvider, useCspNonce, useUITranslation } from '@repo/ui/components/ui-provider'
+import { UIProvider, useUITranslation } from '@repo/ui/components/ui-provider'
 
 import { translations } from './translations'
 
@@ -119,7 +119,7 @@ export const Geometry: Story = {
           </div>
         ))}
       </div>
-      <div className='grid grid-cols-[137px_1fr] gap-3 rounded-lg border p-6'>
+      <div className='grid grid-cols-[--spacing(36)_1fr] gap-3 rounded-lg border p-6'>
         <span>Spacing</span>
         <span>4px scale through Tailwind utilities</span>
       </div>
@@ -129,13 +129,11 @@ export const Geometry: Story = {
 
 function ProviderStatus() {
   const label = useUITranslation('loading')
-  const nonce = useCspNonce()
 
   return (
     <div className='space-y-3'>
       <Spinner />
       <p>Loading translation: {label}</p>
-      <p className='text-sm break-all text-muted-foreground'>Style nonce: {nonce ?? 'not provided'}</p>
     </div>
   )
 }
@@ -147,10 +145,7 @@ export const ProviderAndLabels: Story = {
         <h2 className='mb-4 font-medium'>Default preview provider</h2>
         <ProviderStatus />
       </div>
-      <UIProvider
-        nonce='nested-provider-example'
-        translations={{ ...translations, loading: '正在載入，請稍候', close: '關閉' }}
-      >
+      <UIProvider translations={{ ...translations, loading: '正在載入，請稍候', close: '關閉' }}>
         <div>
           <h2 className='mb-4 font-medium'>Nested translated provider</h2>
           <ProviderStatus />
@@ -158,9 +153,8 @@ export const ProviderAndLabels: Story = {
         </div>
       </UIProvider>
       <p className='text-sm text-muted-foreground sm:col-span-2'>
-        UIProvider supplies eight default labels and Base UI CSP configuration. Explicit labels take precedence. The
-        preview nonce is illustrative; production must supply its own per-request nonce and policy. Storybook is not a
-        production CSP audit.
+        UIProvider supplies default accessibility labels. Explicit labels take precedence. Storybook is not a production
+        CSP audit.
       </p>
     </div>
   ),

@@ -1,10 +1,7 @@
-import type { MdxModule } from '@repo/mdx'
 import type { MDXComponents } from 'mdx/types'
 
+import { useMDXComponent } from '@content-collections/mdx/react'
 import { cn } from 'cn'
-import { lazy, Suspense } from 'react'
-
-import { m } from '@/paraglide/messages'
 
 import { CodeBlock } from './code-block'
 import { Heading } from './heading'
@@ -13,14 +10,13 @@ import { LinkCard } from './link-card'
 import { LogoShowcase } from './logo-showcase'
 import { MdxImage } from './mdx-image'
 import { MdxLink } from './mdx-link'
-import { MdxStyle } from './mdx-style'
 import { SocialLinks } from './social-links'
 import { Table } from './table'
 import { TreeView } from './tree-view'
 import { Video } from './video'
 
 type MdxProps = {
-  path: string
+  code: string
   className?: string
   components?: MDXComponents
   unstyled?: boolean
@@ -35,7 +31,6 @@ const MDX_COMPONENTS = {
   h5: (props: MdxHeadingProps) => <Heading as='h5' {...props} />,
   h6: (props: MdxHeadingProps) => <Heading as='h6' {...props} />,
   a: MdxLink,
-  style: MdxStyle,
   pre: CodeBlock,
   Image: MdxImage,
   ItemGrid,
@@ -47,37 +42,13 @@ const MDX_COMPONENTS = {
   LinkCard,
 }
 
-// Render complete HTML during SSR; the browser keeps documents in separate chunks.
-const documents: Record<string, MdxModule | (() => Promise<MdxModule>)> = import.meta.env.SSR
-  ? import.meta.glob<MdxModule>('/content/**/*.mdx', { eager: true })
-  : import.meta.glob<MdxModule>('/content/**/*.mdx')
-const contentComponents = Object.fromEntries(
-  Object.entries(documents).map(([path, document]) => [
-    path,
-    typeof document === 'function' ? lazy(document) : document.default,
-  ]),
-)
-
-/** Load the same compiled module used by the renderer, including its TOC. */
-export async function loadMdx(path: string): Promise<MdxModule> {
-  const document = documents[path]
-
-  if (!document) throw new Error(`Unknown MDX module: ${path}`)
-
-  return typeof document === 'function' ? document() : document
-}
-
 export function Mdx(props: MdxProps) {
-  const { path, className, components, unstyled = false } = props
-  const Body = contentComponents[path]
-
-  if (!Body) throw new Error(`Unknown MDX module: ${path}`)
+  const { code, className, components, unstyled = false } = props
+  const Content = useMDXComponent(code)
 
   return (
     <div className={cn(!unstyled && 'prose w-full', className)}>
-      <Suspense fallback={<output aria-busy='true'>{m.common_loading()}</output>}>
-        <Body components={{ ...MDX_COMPONENTS, ...components }} />
-      </Suspense>
+      <Content components={{ ...MDX_COMPONENTS, ...components }} />
     </div>
   )
 }

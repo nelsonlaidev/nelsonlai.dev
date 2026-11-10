@@ -9,10 +9,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@repo/ui/components/dropdown-menu'
-import { Spinner } from '@repo/ui/components/spinner'
 import { toast } from '@repo/ui/components/toast'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@repo/ui/components/tooltip'
-import { useCspNonce } from '@repo/ui/components/ui-provider'
 import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   ChevronDownIcon,
@@ -25,6 +23,7 @@ import {
 } from 'lucide-react'
 import { useReducedMotion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
+import { Skeleton } from 'skullet/react'
 
 import { Markdown } from '@/components/mdx/markdown'
 import { UserAvatar } from '@/components/user-avatar'
@@ -36,6 +35,21 @@ import { m } from '@/paraglide/messages'
 import { CommentComposer } from './comment-composer'
 import { commentListInfiniteOptions } from './comments.queries'
 import { DeleteComment } from './delete-comment'
+
+const SAMPLE_COMMENT: Comment = {
+  id: 'sample-comment',
+  userId: 'sample',
+  user: { id: 'sample', name: 'Ocean visitor', image: '/images/avatar.png', role: 'user' },
+  postId: 'sample-post',
+  parentId: null,
+  body: 'Thanks for sharing the details of this project.',
+  createdAt: new Date('2026-01-01T12:00:00Z'),
+  isDeleted: false,
+  likeCount: 0,
+  dislikeCount: 0,
+  replyCount: 0,
+  liked: null,
+}
 
 type CommentListProps = {
   slug: string
@@ -90,9 +104,12 @@ export function CommentList(props: CommentListProps) {
           />
         ))}
       {(query.isPending || query.isFetchingNextPage) && (
-        <div className='flex min-h-20 items-center justify-center'>
-          <Spinner />
-        </div>
+        <>
+          <output className='sr-only'>{m.common_aria_labels_loading()}</output>
+          <Skeleton loading>
+            <CommentItem comment={parentId ? { ...SAMPLE_COMMENT, parentId } : SAMPLE_COMMENT} slug={slug} />
+          </Skeleton>
+        </>
       )}
       {query.isError && (
         <p role='alert' className='py-6 text-center text-sm text-muted-foreground'>
@@ -111,7 +128,6 @@ export function CommentList(props: CommentListProps) {
           onClick={() => {
             void query.fetchNextPage()
           }}
-          className='min-h-11'
         >
           {m.common_load_more()}
         </Button>
@@ -126,7 +142,6 @@ type CommentItemProps = Omit<CommentListProps, 'sort' | 'parentId'> & {
 
 function CommentItem(props: CommentItemProps) {
   const { comment, slug, highlightedCommentId, highlightedReplyId } = props
-  const nonce = useCspNonce()
   const [replying, setReplying] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [repliesOpen, setRepliesOpen] = useState(comment.id === highlightedCommentId)
@@ -211,7 +226,7 @@ function CommentItem(props: CommentItemProps) {
               </div>
               <DropdownMenu>
                 <DropdownMenuTrigger
-                  render={<Button type='button' variant='ghost' size='icon-sm' className='min-h-11' />}
+                  render={<Button type='button' variant='ghost' size='icon-sm' />}
                   aria-label={m.blog_comments_open_menu()}
                 >
                   <MoreVerticalIcon aria-hidden='true' />
@@ -221,7 +236,6 @@ function CommentItem(props: CommentItemProps) {
                     onClick={() => {
                       void copyLink()
                     }}
-                    className='min-h-11'
                   >
                     <CopyIcon aria-hidden='true' /> {m.blog_comments_copy_link()}
                   </DropdownMenuItem>
@@ -231,7 +245,6 @@ function CommentItem(props: CommentItemProps) {
                       onClick={() => {
                         setDeleteOpen(true)
                       }}
-                      className='min-h-11'
                     >
                       <TrashIcon aria-hidden='true' /> {m.common_delete()}
                     </DropdownMenuItem>
@@ -253,7 +266,7 @@ function CommentItem(props: CommentItemProps) {
                   type='button'
                   variant='secondary'
                   size='sm'
-                  className='min-h-11 font-mono text-xs text-muted-foreground aria-pressed:bg-accent aria-pressed:text-accent-foreground'
+                  className='font-mono text-xs text-muted-foreground aria-pressed:bg-accent aria-pressed:text-accent-foreground'
                   aria-label={m.common_like()}
                   aria-pressed={liked === true}
                   disabled={vote.isPending}
@@ -262,13 +275,13 @@ function CommentItem(props: CommentItemProps) {
                   }}
                 >
                   <ThumbsUpIcon aria-hidden='true' />
-                  <NumberFlow nonce={nonce} value={likeCount} />
+                  <NumberFlow value={likeCount} />
                 </Button>
                 <Button
                   type='button'
                   variant='secondary'
                   size='sm'
-                  className='min-h-11 font-mono text-xs text-muted-foreground aria-pressed:bg-accent aria-pressed:text-accent-foreground'
+                  className='font-mono text-xs text-muted-foreground aria-pressed:bg-accent aria-pressed:text-accent-foreground'
                   aria-label={m.blog_comments_dislike()}
                   aria-pressed={liked === false}
                   disabled={vote.isPending}
@@ -277,14 +290,14 @@ function CommentItem(props: CommentItemProps) {
                   }}
                 >
                   <ThumbsDownIcon aria-hidden='true' />
-                  <NumberFlow nonce={nonce} value={dislikeCount} />
+                  <NumberFlow value={dislikeCount} />
                 </Button>
                 {!comment.parentId && (
                   <Button
                     type='button'
                     variant='secondary'
                     size='sm'
-                    className='min-h-11 text-xs text-muted-foreground'
+                    className='text-xs text-muted-foreground'
                     onClick={() => {
                       setReplying(true)
                     }}
@@ -310,7 +323,7 @@ function CommentItem(props: CommentItemProps) {
                 variant='ghost'
                 size='sm'
                 aria-expanded={repliesOpen}
-                className='mt-4 min-h-11 text-xs aria-expanded:[&>svg]:rotate-180'
+                className='mt-4 text-xs aria-expanded:[&>svg]:rotate-180'
                 onClick={() => {
                   setRepliesOpen(!repliesOpen)
                 }}
@@ -319,7 +332,7 @@ function CommentItem(props: CommentItemProps) {
                   aria-hidden='true'
                   className='size-4 transition-transform duration-200 motion-reduce:transition-none'
                 />
-                <NumberFlow nonce={nonce} data-testid='comment-reply-count' value={comment.replyCount} />
+                <NumberFlow data-testid='comment-reply-count' value={comment.replyCount} />
                 {m.blog_comments_replies({ count: comment.replyCount })}
               </Button>
             )}

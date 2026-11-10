@@ -19,7 +19,7 @@ export const Route = createFileRoute('/rss.xml')({
           site_url: getLocalizedUrl('/', locale),
           feed_url: getLocalizedUrl('/rss.xml', locale),
           language: locale,
-          image_url: getLocalizedUrl('/images/banner.png', 'en'),
+          image_url: getLocalizedUrl('/og/image.webp', locale),
           copyright: `© ${new Date().getFullYear()} ${SITE.name}. All rights reserved.`,
           webMaster: SITE.email,
         })

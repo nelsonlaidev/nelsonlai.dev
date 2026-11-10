@@ -11,7 +11,7 @@ export function RouteError(props: ErrorComponentProps) {
 
   return (
     <div role='alert' className='relative space-y-4 px-2 py-8 wrap-anywhere subpixel-antialiased'>
-      <h1 className='text-[clamp(32px,4vw,60px)] leading-[1.1] font-[420] tracking-tighter text-[#edf3e8]'>
+      <h1 className='text-4xl tracking-tighter text-foreground lg:text-5xl xl:text-6xl'>
         {m.error_something_went_wrong()}
       </h1>
       <Button

@@ -5,13 +5,13 @@
   --color-diff-add-symbol: rgb(61, 214, 140);
 }
 
-.prose pre.shiki {
+pre.shiki {
   position: relative;
-  padding: 16px;
-  line-height: 20px;
+  padding: --spacing(4);
+  line-height: --spacing(5);
 }
 
-.prose pre.shiki code {
+pre.shiki code {
   padding: 0;
   border: 0;
   background: transparent;
@@ -21,15 +21,15 @@
 /* Highlighted, Diff */
 pre.shiki .highlighted,
 pre.shiki .diff {
-  margin: 0 -16px;
-  padding: 0 16px;
+  margin: 0 calc(--spacing(4) * -1);
+  padding: 0 --spacing(4);
   display: inline-block;
-  min-width: calc(100% + 32px);
-  line-height: 20px;
+  min-width: calc(100% + --spacing(8));
+  line-height: --spacing(5);
 }
 
 pre.shiki .highlighted {
-  background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  background-color: color-mix(in oklab, currentColor 10%, transparent);
 }
 
 /* Diff */
@@ -39,7 +39,7 @@ pre.shiki .highlighted {
 
 .shiki code .diff::before {
   position: absolute;
-  left: 4px;
+  left: --spacing(1);
 }
 
 .shiki code .diff.remove::before {
@@ -60,9 +60,9 @@ pre.shiki .highlighted {
 .shiki .highlighted-word {
   padding: 1px 2px;
   margin: -1px -3px;
-  border: 1px solid color-mix(in oklab, var(--color-primary) 50%, transparent);
-  background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
-  border-radius: 2px;
+  border: 1px solid color-mix(in oklab, currentColor 50%, transparent);
+  background-color: color-mix(in oklab, currentColor 10%, transparent);
+  border-radius: var(--radius-xs);
 }
 
 /* Focus */

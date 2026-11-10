@@ -6,6 +6,7 @@ import { cn } from 'cn'
 import { ArrowRightIcon } from 'lucide-react'
 import { Suspense } from 'react'
 
+import { PendingCount } from '@/components/pending-count'
 import { orpc } from '@/lib/orpc-client'
 import { SITE } from '@/lib/site'
 import { m } from '@/paraglide/messages'
@@ -19,15 +20,24 @@ type Stat = {
   suffix?: string
 }
 
+type Group = {
+  id: string
+  name: string
+  link: string
+  linkText: string
+  stats: Stat[]
+  source: React.ComponentType<StatSourceProps>
+}
+
 export function DashboardStats() {
-  const groups = [
+  const groups: Group[] = [
     {
       id: 'coding',
       name: m.dashboard_coding(),
       link: 'https://wakatime.com/@nelsonlaidev',
       linkText: 'WakaTime',
       stats: [{ title: m.dashboard_stat_coding_hours(), field: 'hours', suffix: m.dashboard_hours() }],
-      Source: WakatimeStats,
+      source: WakatimeStats,
     },
     {
       id: 'github',
@@ -38,7 +48,7 @@ export function DashboardStats() {
         { title: m.dashboard_stat_github_stars(), field: 'stars' },
         { title: m.dashboard_stat_github_followers(), field: 'followers' },
       ],
-      Source: GithubStats,
+      source: GithubStats,
     },
     {
       id: 'youtube',
@@ -49,7 +59,7 @@ export function DashboardStats() {
         { title: m.dashboard_stat_youtube_subscribers(), field: 'subscribers' },
         { title: m.dashboard_stat_youtube_views(), field: 'views' },
       ],
-      Source: YoutubeStats,
+      source: YoutubeStats,
     },
     {
       id: 'blog',
@@ -60,52 +70,48 @@ export function DashboardStats() {
         { title: m.dashboard_stat_blog_total_views(), field: 'views' },
         { title: m.dashboard_stat_blog_total_likes(), field: 'likes' },
       ],
-      Source: PostStats,
+      source: PostStats,
     },
-  ] satisfies Array<{
-    id: string
-    name: string
-    link: string
-    linkText: string
-    stats: Stat[]
-    Source: React.ComponentType<StatSourceProps>
-  }>
+  ]
 
   return (
-    <div className='grid grid-cols-2 border border-[#8eb8aa66] bg-[#082e3b] max-[851px]:grid-cols-1'>
+    <div className='grid grid-cols-1 border bg-card lg:grid-cols-2'>
       {groups.map((group) => (
         <section
           key={group.id}
           aria-labelledby={`dashboard-${group.id}-heading`}
-          className='min-w-0 px-8.5 pt-8.5 pb-10.5 even:border-l even:border-l-[#8eb8aa45] nth-[n+3]:border-t nth-[n+3]:border-t-[#8eb8aa45] max-[1101px]:px-6 max-[1101px]:pt-7 max-[1101px]:pb-8.5 max-[851px]:not-first:border-t max-[851px]:not-first:border-t-[#8eb8aa45] max-[851px]:even:border-l-0 max-[601px]:px-5 max-[601px]:pt-6 max-[601px]:pb-7.5'
+          className='min-w-0 px-5 pt-6 pb-8 not-first:border-t sm:px-6 sm:pt-7 sm:pb-9 lg:even:border-l lg:nth-2:border-t-0 xl:px-9 xl:pt-9 xl:pb-11'
         >
-          <div className='mb-9.5 flex items-center justify-between gap-5 max-[601px]:mb-7 max-[601px]:gap-3.75'>
-            <h2
-              id={`dashboard-${group.id}-heading`}
-              className='text-[26px] leading-[1.3] font-[450] tracking-[-0.035em] max-[601px]:text-2xl'
-            >
+          <div className='mb-7 flex items-center justify-between gap-4 sm:mb-10 sm:gap-5'>
+            <h2 id={`dashboard-${group.id}-heading`} className='text-2xl font-medium tracking-tight'>
               {group.name}
             </h2>
             {group.id === 'blog' ? (
               <Link
                 to='/blog'
-                className='inline-flex min-h-11 items-center justify-end gap-3 text-sm/normal text-[#bdd7c9] hover:text-[#f0f6eb]'
+                className='group inline-flex items-center justify-end gap-2 text-sm/normal text-link hover:text-foreground'
               >
                 {group.linkText}
-                <ArrowRightIcon aria-hidden='true' className='size-5 shrink-0' />
+                <ArrowRightIcon
+                  aria-hidden='true'
+                  className='size-5 shrink-0 transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1 motion-reduce:transition-none'
+                />
               </Link>
             ) : (
               <ExternalLink
                 href={group.link}
-                className='inline-flex min-h-11 items-center justify-end gap-3 text-sm/normal text-[#bdd7c9] hover:text-[#f0f6eb]'
+                className='group inline-flex items-center justify-end gap-2 text-sm/normal text-link hover:text-foreground'
               >
                 {group.linkText}
-                <ArrowRightIcon aria-hidden='true' className='size-5 shrink-0' />
+                <ArrowRightIcon
+                  aria-hidden='true'
+                  className='size-5 shrink-0 transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1 motion-reduce:transition-none'
+                />
               </ExternalLink>
             )}
           </div>
           <StatGroup stats={group.stats}>
-            <group.Source stats={group.stats} />
+            <group.source stats={group.stats} />
           </StatGroup>
         </section>
       ))}
@@ -156,7 +162,10 @@ type StatSourceProps = {
 function WakatimeStats(props: StatSourceProps) {
   const { stats } = props
   const { data } = useSuspenseQuery(
-    orpc.wakatime.stats.queryOptions({ refetchOnWindowFocus: false, meta: { errorHandledLocally: true } }),
+    orpc.wakatime.stats.queryOptions({
+      refetchOnWindowFocus: false,
+      meta: { initialErrorHandledByBoundary: true },
+    }),
   )
 
   return <StatCards stats={stats} values={data} />
@@ -165,7 +174,10 @@ function WakatimeStats(props: StatSourceProps) {
 function YoutubeStats(props: StatSourceProps) {
   const { stats } = props
   const { data } = useSuspenseQuery(
-    orpc.youtube.stats.queryOptions({ refetchOnWindowFocus: false, meta: { errorHandledLocally: true } }),
+    orpc.youtube.stats.queryOptions({
+      refetchOnWindowFocus: false,
+      meta: { initialErrorHandledByBoundary: true },
+    }),
   )
 
   return <StatCards stats={stats} values={data} />
@@ -174,7 +186,10 @@ function YoutubeStats(props: StatSourceProps) {
 function GithubStats(props: StatSourceProps) {
   const { stats } = props
   const { data } = useSuspenseQuery(
-    orpc.github.stats.queryOptions({ refetchOnWindowFocus: false, meta: { errorHandledLocally: true } }),
+    orpc.github.stats.queryOptions({
+      refetchOnWindowFocus: false,
+      meta: { initialErrorHandledByBoundary: true },
+    }),
   )
 
   return <StatCards stats={stats} values={data} />
@@ -182,7 +197,12 @@ function GithubStats(props: StatSourceProps) {
 
 function PostStats(props: StatSourceProps) {
   const { stats } = props
-  const { data } = useSuspenseQuery(orpc.posts.totals.queryOptions({ meta: { errorHandledLocally: true } }))
+  const { data } = useSuspenseQuery(
+    orpc.posts.totals.queryOptions({
+      refetchOnWindowFocus: false,
+      meta: { initialErrorHandledByBoundary: true },
+    }),
+  )
 
   return <StatCards stats={stats} values={data} />
 }
@@ -195,30 +215,32 @@ type StatCardsProps = {
 
 export function StatCards(props: StatCardsProps) {
   const { stats, values, isError = false } = props
+  const unavailable =
+    !values && !isError ? (
+      <PendingCount />
+    ) : (
+      <output className='text-lg/relaxed tracking-normal text-muted-foreground'>{m.dashboard_unavailable()}</output>
+    )
+  const hasMultipleStats = stats.length > 1
 
   return (
     <dl
       aria-busy={!values && !isError}
-      className={cn(
-        'grid gap-7 max-[1101px]:gap-5 max-[601px]:grid-cols-1 max-[601px]:gap-6.5',
-        stats[0]?.field !== 'hours' && 'grid-cols-2',
-        stats[0]?.field === 'hours' && 'grid-cols-1',
-      )}
+      className={cn('grid grid-cols-1 gap-7 sm:gap-5 xl:gap-7', hasMultipleStats && 'sm:grid-cols-2')}
     >
       {stats.map(({ title, field, suffix }) => {
         const value = values?.[field]
+
         return (
           <div
             key={field}
-            className='min-w-0 max-[601px]:not-first:border-t max-[601px]:not-first:border-t-[#8eb8aa30] max-[601px]:not-first:pt-6'
+            className='min-w-0 border-border/70 not-first:border-t not-first:pt-6 sm:not-first:border-t-0 sm:not-first:pt-0'
           >
-            <dt className='mb-3 text-base leading-[1.4] font-medium text-[#e0eade] max-[601px]:mb-2'>{title}</dt>
+            <dt className='mb-2 text-base/snug font-medium text-foreground sm:mb-3'>{title}</dt>
             <dd
               className={cn(
-                'flex min-h-[1.1em] flex-wrap items-baseline gap-2.5 leading-[1.1] font-[420] tracking-[-0.055em] text-[#edf2e9] tabular-nums max-[601px]:text-5xl',
-                stats[0]?.field !== 'hours' &&
-                  'text-[clamp(40px,4vw,64px)] max-[1101px]:text-[44px] max-[851px]:text-[56px]',
-                stats[0]?.field === 'hours' && 'text-[clamp(56px,5vw,72px)] max-[1101px]:text-[64px]',
+                'flex min-h-[1.1em] flex-wrap items-baseline gap-2.5 text-5xl tracking-tighter text-foreground tabular-nums sm:text-6xl',
+                hasMultipleStats && 'lg:text-5xl xl:text-6xl',
               )}
             >
               {value !== undefined && Number.isFinite(value) ? (
@@ -226,16 +248,10 @@ export function StatCards(props: StatCardsProps) {
                   <span className='max-w-full wrap-anywhere'>
                     <Counter value={value} />
                   </span>
-                  {suffix && (
-                    <span className='max-w-full text-lg/normal font-normal tracking-normal wrap-anywhere text-[#bdd7c9]'>
-                      {suffix}
-                    </span>
-                  )}
+                  {suffix && <span className='max-w-full text-lg tracking-normal text-muted-foreground'>{suffix}</span>}
                 </>
               ) : (
-                <output className='text-lg/[1.65] tracking-normal text-[#bdd7c9]'>
-                  {isError || values ? m.dashboard_unavailable() : m.common_loading()}
-                </output>
+                unavailable
               )}
             </dd>
           </div>

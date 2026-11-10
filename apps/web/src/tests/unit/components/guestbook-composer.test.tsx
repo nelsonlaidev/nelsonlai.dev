@@ -83,10 +83,10 @@ describe('Guestbook session and submission fixtures', () => {
     expect(screen.getByRole('textbox')).toBeEnabled()
     expect(fixture.create).not.toHaveBeenCalled()
   })
-  test('announces a resolving session', () => {
+  test('provides a skeleton label for a resolving session', () => {
     fixture.pending = true
     render(<MessageBoard />, { wrapper: Wrapper })
-    expect(screen.getByRole('status')).toHaveAccessibleName(m.common_aria_labels_loading())
+    expect(screen.getByText(m.common_aria_labels_loading())).toHaveAttribute('skullet-status')
     expect(screen.queryByRole('button', { name: 'Fixture sign in' })).not.toBeInTheDocument()
   })
   test('keeps the full server-supported length instead of the prototype limit', () => {

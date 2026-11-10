@@ -17,7 +17,7 @@ export function AdminLayout(props: AdminLayoutProps) {
     <SidebarProvider className='bg-background text-foreground'>
       <SkipNav />
       <AdminSidebar />
-      <div className='flex w-full min-w-0 flex-col overflow-x-hidden px-4 pb-22 sm:px-8 lg:px-10'>
+      <div className='flex w-full min-w-0 flex-col overflow-x-hidden px-4 pb-24 sm:px-8 lg:px-10'>
         <AdminHeader />
         <main id='main-content' tabIndex={-1} className='py-6 outline-none'>
           {children}

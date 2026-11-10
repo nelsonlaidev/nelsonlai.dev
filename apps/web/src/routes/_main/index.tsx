@@ -8,10 +8,10 @@ import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
 
 import { AboutMe } from './-components/home/about-me'
-import { ChapterNavigation } from './-components/home/chapter-navigation'
-import { HomeGuestbook } from './-components/home/guestbook'
+import { Cta } from './-components/home/cta'
 import { Hero } from './-components/home/hero'
 import { LatestArticles } from './-components/home/latest-articles'
+import { SectionNavigation } from './-components/home/section-navigation'
 import { SelectedProjects } from './-components/home/selected-projects'
 
 export const Route = createFileRoute('/_main/')({
@@ -50,12 +50,12 @@ function RouteComponent() {
 
   return (
     <>
-      <ChapterNavigation />
+      <SectionNavigation />
       <Hero />
       <SelectedProjects projects={projects} />
       <LatestArticles posts={posts} />
       <AboutMe />
-      <HomeGuestbook />
+      <Cta />
     </>
   )
 }

@@ -1,9 +1,8 @@
 import NumberFlow from '@number-flow/react'
 import { Card, CardContent, CardHeader, CardTitle } from '@repo/ui/components/card'
-import { Skeleton } from '@repo/ui/components/skeleton'
-import { useCspNonce } from '@repo/ui/components/ui-provider'
 import { useQuery } from '@tanstack/react-query'
 import { EyeIcon, HeartIcon, MessageSquareIcon, MessagesSquareIcon, UsersIcon } from 'lucide-react'
+import { Skeleton } from 'skullet/react'
 
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
@@ -22,7 +21,6 @@ const STAT_ITEMS = [
 ] as const
 
 export function AdminStatsCards() {
-  const nonce = useCspNonce()
   const { data, isError } = useQuery(orpc.admin.stats.queryOptions())
 
   if (isError) {
@@ -30,25 +28,26 @@ export function AdminStatsCards() {
   }
 
   return (
-    <div className='grid gap-4 min-[400px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'>
-      {STAT_ITEMS.map((item) => {
-        let content: React.ReactNode = <Skeleton className='h-8 w-20' />
-
-        if (data) {
-          content = <NumberFlow nonce={nonce} value={data[item.field]} />
-        }
-
-        return (
-          <Card key={item.field} size='sm' className='border shadow-none ring-0'>
-            <CardHeader>
-              <CardTitle className='flex items-center justify-between'>
-                {item.label()} <item.icon className='size-4 text-muted-foreground' />
-              </CardTitle>
-            </CardHeader>
-            <CardContent className='text-2xl font-bold'>{content}</CardContent>
-          </Card>
-        )
-      })}
+    <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'>
+      {STAT_ITEMS.map((item) => (
+        <Card key={item.field} size='sm' className='border shadow-none ring-0'>
+          <CardHeader>
+            <CardTitle className='flex items-center justify-between'>
+              {item.label()} <item.icon className='size-4 text-muted-foreground' />
+            </CardTitle>
+          </CardHeader>
+          <CardContent className='text-2xl/normal font-bold'>
+            <Skeleton
+              className='min-h-lh self-start [--skullet-text-bottom:baseline] [--skullet-text-top:cap-height]'
+              data={data?.[item.field]}
+              sample={123}
+              label={m.common_aria_labels_loading()}
+            >
+              {(value) => (data ? <NumberFlow className='block' value={value} /> : <span>{value}</span>)}
+            </Skeleton>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   )
 }

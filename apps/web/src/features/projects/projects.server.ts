@@ -9,23 +9,21 @@ export function findProject(slug: string, locale: Locale) {
   if (!project) return null
 
   return {
-    path: project.path,
+    code: project.code,
     slug: project.slug,
     locale,
     title: project.title,
     description: project.description,
+    artwork: project.artwork,
     techstack: project.techstack,
-    subtitle: project.subtitle,
     category: project.category,
     features: project.features,
-    journey: project.journey,
     homepage: project.homepage,
     github: project.github,
     schemaType: project.schemaType,
     license: project.license,
     programmingLanguages: project.programmingLanguages,
     dateCreated: project.dateCreated,
-    updatedAt: project.updatedAt,
   }
 }
 
@@ -38,6 +36,9 @@ export function listProjects(locale: Locale, limit: number | null = null, select
       title: project.title,
       description: project.description,
       slug: project.slug,
+      artwork: project.artwork,
       techstack: project.techstack,
+      schemaType: project.schemaType,
+      dateCreated: project.dateCreated,
     }))
 }

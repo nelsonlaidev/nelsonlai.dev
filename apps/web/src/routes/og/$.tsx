@@ -18,7 +18,7 @@ import nacreSvg from '../../../public/brand/seafold-nacre.svg?raw'
 
 const geistFont = Buffer.from(geistUrl.slice(geistUrl.indexOf(',') + 1), 'base64')
 const logo = `data:image/svg+xml;base64,${Buffer.from(nacreSvg).toString('base64')}`
-let mainImage: ReturnType<typeof surfacePoster> | undefined
+const mainImages = new Map<Locale, ReturnType<typeof surfacePoster>>()
 
 const PAGE_GROUPS: Record<
   string,
@@ -70,14 +70,16 @@ export const Route = createFileRoute('/og/$')({
         let index = PAGE_GROUPS[contentPath]?.index ?? 0
 
         if (!contentPath) {
-          // The approved Surface poster is identical in every locale. Only its
-          // immutable bytes are shared; failed renders can retry on the next request.
-          mainImage ??= surfacePoster(geistFont, logo)
+          let image = mainImages.get(locale)
+          if (!image) {
+            image = surfacePoster(geistFont, logo, locale, FONT_FAMILY_BY_LOCALE[locale])
+            mainImages.set(locale, image)
+          }
           let bytes
           try {
-            bytes = await mainImage
+            bytes = await image
           } catch (error) {
-            mainImage = undefined
+            if (mainImages.get(locale) === image) mainImages.delete(locale)
             throw error
           }
           return new Response(new Uint8Array(bytes), {

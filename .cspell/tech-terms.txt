@@ -13,10 +13,13 @@ mdxjs
 menuitemradio
 nosniff
 parsererror
+preinit
+skullet
 substeps
 techstack
 tmpfs
 unstub
+vitesse
 wcag
 webp
 wght

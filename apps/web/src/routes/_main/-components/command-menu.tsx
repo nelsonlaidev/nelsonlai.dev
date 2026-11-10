@@ -14,6 +14,7 @@ import { toast } from '@repo/ui/components/toast'
 import { useNavigate } from '@tanstack/react-router'
 import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon, ShieldIcon, UserCircleIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import { Skeleton } from 'skullet/react'
 
 import { signInDialogHandle } from '@/features/auth/sign-in-dialog'
 import { useSignOut } from '@/features/auth/use-sign-out'
@@ -68,7 +69,7 @@ export function CommandMenu() {
 
   return (
     <CommandDialog
-      className='max-h-[calc(100dvh-32px)] max-w-[min(480px,calc(100vw-32px))] overflow-y-auto border shadow-md ring-0 **:data-[slot=input-group]:min-h-11 sm:max-w-[min(480px,calc(100vw-32px))]'
+      className='max-h-[calc(100dvh-32px)] max-w-[min(480px,calc(100vw-32px))] overflow-y-auto border shadow-md ring-0 sm:max-w-[min(480px,calc(100vw-32px))]'
       open={open}
       onOpenChange={setOpen}
       trigger={
@@ -90,7 +91,6 @@ export function CommandMenu() {
             {session ? (
               <>
                 <CommandItem
-                  className='min-h-11'
                   onSelect={() => {
                     setOpen(false)
                     void navigate({ to: '/account' })
@@ -101,7 +101,6 @@ export function CommandMenu() {
                 </CommandItem>
                 {session.user.role === 'admin' && (
                   <CommandItem
-                    className='min-h-11'
                     onSelect={() => {
                       setOpen(false)
                       void navigate({ to: '/admin' })
@@ -111,33 +110,36 @@ export function CommandMenu() {
                     {m.common_labels_admin()}
                   </CommandItem>
                 )}
-                <CommandItem className='min-h-11' disabled={isSigningOut} onSelect={handleSignOut}>
+                <CommandItem disabled={isSigningOut} onSelect={handleSignOut}>
                   <LogOutIcon aria-hidden='true' />
                   {m.common_sign_out()}
                 </CommandItem>
               </>
             ) : (
               <CommandItem
-                className='min-h-11'
+                value={m.common_sign_in()}
                 disabled={isPending}
                 onSelect={() => {
                   setOpen(false)
                   signInDialogHandle.open(null)
                 }}
               >
-                <LogInIcon aria-hidden='true' />
-                {m.common_sign_in()}
+                <Skeleton loading={isPending} label={m.common_aria_labels_loading()}>
+                  <span className='flex items-center gap-2'>
+                    <LogInIcon aria-hidden='true' />
+                    {m.common_sign_in()}
+                  </span>
+                </Skeleton>
               </CommandItem>
             )}
           </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading={m.common_labels_general()}>
-            <CommandItem className='min-h-11' onSelect={copyCurrentUrl}>
+            <CommandItem onSelect={copyCurrentUrl}>
               <LinkIcon aria-hidden='true' />
               {m.command_menu_actions_copy_link()}
             </CommandItem>
             <CommandItem
-              className='min-h-11'
               onSelect={() => {
                 setOpen(false)
                 window.open(SITE.repository, '_blank', 'noopener,noreferrer')
@@ -151,7 +153,6 @@ export function CommandMenu() {
           <CommandGroup heading={m.command_menu_groups_social()}>
             {SOCIAL_LINKS.map((link) => (
               <CommandItem
-                className='min-h-11'
                 key={link.href}
                 value={link.title}
                 onSelect={() => {

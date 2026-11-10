@@ -4,6 +4,7 @@ import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { Mdx } from '@/components/mdx/mdx'
 import { OceanPage } from '@/components/ocean-page'
+import { PagePending } from '@/components/page-pending'
 import { RouteError } from '@/components/route-error'
 import { getPage } from '@/features/pages/pages.functions'
 import { createJsonLdAboutPage } from '@/lib/json-ld'
@@ -11,7 +12,9 @@ import { createSeoHead } from '@/lib/seo'
 import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
 
-import { AboutHero, AboutSite, AboutStory, AboutToolbox } from './-components/about'
+import { AboutHero } from './-components/about/hero'
+import { AboutStory } from './-components/about/story'
+import { AboutToolbox } from './-components/about/toolbox'
 
 export const Route = createFileRoute('/_main/about')({
   loader: async () => {
@@ -40,7 +43,7 @@ export const Route = createFileRoute('/_main/about')({
       }),
     })
   },
-  pendingComponent: AboutPending,
+  pendingComponent: () => <PagePending title={m.nav_about()} description={m.home_about_intro()} />,
   errorComponent: AboutError,
   component: RouteComponent,
 })
@@ -51,25 +54,14 @@ function RouteComponent() {
   return (
     <OceanPage>
       <Mdx
-        path={page.path}
+        code={page.code}
         unstyled
         components={{
           AboutHero,
           AboutStory,
           AboutToolbox,
-          AboutSite,
         }}
       />
-    </OceanPage>
-  )
-}
-
-function AboutPending() {
-  return (
-    <OceanPage>
-      <output aria-busy='true' className='block text-muted-foreground'>
-        {m.common_loading()}
-      </output>
     </OceanPage>
   )
 }

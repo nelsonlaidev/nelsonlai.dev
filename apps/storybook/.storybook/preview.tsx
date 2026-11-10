@@ -17,7 +17,7 @@ const preview: Preview = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <UIProvider translations={translations} nonce='storybook-preview'>
+      <UIProvider translations={translations}>
         <Story />
       </UIProvider>
     ),

@@ -71,9 +71,13 @@ describe('Dashboard service mapping', () => {
       expect(fixture.queries).toHaveBeenCalledWith({
         source,
         refetchOnWindowFocus: false,
-        meta: { errorHandledLocally: true },
+        meta: { initialErrorHandledByBoundary: true },
       })
-    expect(fixture.queries).toHaveBeenCalledWith({ source: 'posts', meta: { errorHandledLocally: true } })
+    expect(fixture.queries).toHaveBeenCalledWith({
+      source: 'posts',
+      refetchOnWindowFocus: false,
+      meta: { initialErrorHandledByBoundary: true },
+    })
   })
   test('isolates a failed service without hiding the other totals', () => {
     fixture.failed = 'youtube'

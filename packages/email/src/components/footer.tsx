@@ -26,9 +26,7 @@ function Footer(props: FooterProps) {
           </Column>
         </Row>
       </Section>
-      <Text className='mx-0 mt-6 mb-0 p-0 text-xs font-normal text-gray-500'>
-        © {currentYear} Nelson Lai. All rights reserved.
-      </Text>
+      <Text className='mx-0 mt-6 mb-0 p-0 text-xs text-gray-500'>© {currentYear} Nelson Lai. All rights reserved.</Text>
     </>
   )
 }

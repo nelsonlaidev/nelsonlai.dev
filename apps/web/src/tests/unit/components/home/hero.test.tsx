@@ -9,6 +9,6 @@ describe('<Hero />', () => {
     render(<Hero />)
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(m.home_hero_title())
     expect(screen.getByText(m.home_hero_coordinate())).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: m.home_hero_dive() })).toHaveAttribute('href', '#discoveries')
+    expect(screen.getByRole('link', { name: m.home_hero_dive() })).toHaveAttribute('href', '#projects')
   })
 })

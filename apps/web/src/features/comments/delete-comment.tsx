@@ -47,17 +47,15 @@ export function DeleteComment(props: DeleteCommentProps) {
         className='max-h-[calc(100dvh-32px)] overflow-y-auto border shadow-md ring-0 data-[size=default]:max-w-[min(480px,calc(100vw-32px))] data-[size=sm]:max-w-[min(480px,calc(100vw-32px))] sm:data-[size=default]:max-w-[min(480px,calc(100vw-32px))]'
       >
         <AlertDialogHeader>
-          <AlertDialogTitle className='pr-8 leading-tight tracking-[-0.035em]'>
+          <AlertDialogTitle className='pr-8 leading-tight tracking-tight'>
             {m.common_dialogs_delete_comment_title()}
           </AlertDialogTitle>
-          <AlertDialogDescription className='leading-[1.65]'>
+          <AlertDialogDescription className='leading-relaxed'>
             {m.common_dialogs_delete_comment_description()}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={deletion.isPending} className='min-h-11'>
-            {m.common_cancel()}
-          </AlertDialogCancel>
+          <AlertDialogCancel disabled={deletion.isPending}>{m.common_cancel()}</AlertDialogCancel>
           <AlertDialogAction
             variant='destructive'
             disabled={deletion.isPending}

@@ -58,8 +58,8 @@ export function SignInDialog() {
         aria-busy={isPending}
       >
         <DialogHeader>
-          <DialogTitle className='pr-8 text-2xl/tight tracking-[-0.035em]'>{m.common_sign_in()}</DialogTitle>
-          <DialogDescription className='leading-[1.65]'>{m.auth_sign_in_description()}</DialogDescription>
+          <DialogTitle className='pr-8 text-2xl/tight tracking-tight'>{m.common_sign_in()}</DialogTitle>
+          <DialogDescription className='leading-relaxed'>{m.auth_sign_in_description()}</DialogDescription>
         </DialogHeader>
         <div className='my-2 flex flex-col gap-4'>
           {PROVIDERS.map((provider) => {
@@ -72,7 +72,7 @@ export function SignInDialog() {
             return (
               <Button
                 key={provider}
-                className='relative min-h-11 w-full whitespace-normal'
+                className='relative w-full whitespace-normal'
                 size='lg'
                 variant={provider === 'github' ? 'default' : 'outline'}
                 disabled={isPending}

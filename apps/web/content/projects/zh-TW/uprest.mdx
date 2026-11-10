@@ -6,6 +6,7 @@ schemaType: SoftwareSourceCode
 license: https://opensource.org/licenses/MIT
 programmingLanguages:
   - Go
+artwork: pearl
 techstack:
   - Go
   - Redis
@@ -13,7 +14,6 @@ techstack:
 selected: true
 dateCreated: '2026-09-25T00:00:00Z'
 updatedAt: '2026-10-31T00:00:00Z'
-subtitle: '熟悉的 API，在本機流動。'
 category: '開發基礎設施'
 features:
   - title: '保留原有工作流程'
@@ -22,7 +22,6 @@ features:
     text: '支援透過 SSE 的 Pub/Sub、JSON 與 RESP2 回應，以及 token 驗證。'
   - title: '在開發的地方執行'
     text: '多架構 Docker 映像檔，以及 Linux、macOS、Windows 預先編譯的二進位檔，適用於不同開發環境。'
-journey: '開發流程中缺少的一塊，成了一個開源工具。Uprest 探索如何讓基礎設施更平易近人，也更容易在本機執行。'
 ---
 
 Uprest 是一款本機 HTTP-to-Redis 代理，適合使用 [Upstash Redis REST API](https://upstash.com/docs/redis/features/restapi) 的應用程式。它會將請求轉發到真實的 Redis 伺服器，讓應用程式在本機開發與 CI 中不需 Upstash 資料庫也能繼續使用 `@upstash/redis`。

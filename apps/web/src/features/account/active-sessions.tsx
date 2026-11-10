@@ -6,9 +6,12 @@ import { Card, CardContent } from '@repo/ui/components/card'
 import { InfoTip } from '@repo/ui/components/info-tip'
 import { Spinner } from '@repo/ui/components/spinner'
 import { toast } from '@repo/ui/components/toast'
+import { createRange } from '@repo/utils'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import Bowser from 'bowser'
 import { BotIcon, InfoIcon, MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } from 'lucide-react'
+import { Skeleton } from 'skullet/react'
+import { useFormatter } from 'use-intl'
 
 import { useSessionEnded } from '@/features/auth/use-session-ended'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
@@ -16,7 +19,15 @@ import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
 import { accountSessionsQueryOptions } from './account.queries'
-import { ActiveSessionsSkeleton } from './active-sessions-skeleton'
+
+const SAMPLE_SESSIONS: AccountSession[] = createRange(5).map((index) => ({
+  id: `session-skeleton-${index}`,
+  ipAddress: '192.0.2.1',
+  userAgent: null,
+  updatedAt: new Date('2026-10-15T15:30:00Z'),
+  isCurrentSession: index === 0,
+  location: null,
+}))
 
 type ActiveSessionsProps = {
   userId: string
@@ -40,37 +51,39 @@ export function ActiveSessions(props: ActiveSessionsProps) {
     }),
   )
 
-  let content: React.ReactNode = <ActiveSessionsSkeleton />
-
-  if (sessions.data && sessions.data.length > 0) {
-    content = (
-      <div className='space-y-4'>
-        {sessions.data.map((session) => (
-          <SessionCard
-            key={session.id}
-            session={session}
-            isRevoking={revoke.isPending && revoke.variables.id === session.id}
-            disabled={revoke.isPending}
-            onRevoke={() => {
-              if (!revoke.isPending) revoke.mutate({ id: session.id })
-            }}
-          />
-        ))}
-      </div>
-    )
-  } else if (sessions.data) {
-    content = <Card className='border py-12 text-center shadow-none ring-0'>{m.account_no_active_sessions()}</Card>
-  } else if (sessions.isError) {
-    content = null
-  }
-
   return (
     <section className='space-y-6' aria-labelledby='sessions-heading' aria-busy={sessions.isPending}>
-      <h2 id='sessions-heading' className='text-xl/[calc(1.75/1.125)] font-[450] tracking-tight'>
+      <h2 id='sessions-heading' className='text-xl/relaxed font-medium tracking-tight'>
         {m.account_active_sessions()}
       </h2>
       {sessions.isError && <p role='alert'>{m.error_something_went_wrong()}</p>}
-      {content}
+      {(sessions.isPending || sessions.data) && (
+        <Skeleton
+          data={sessions.data}
+          sample={SAMPLE_SESSIONS}
+          label={m.common_aria_labels_loading()}
+          empty={sessions.data?.length === 0}
+          emptyMessage={
+            <Card className='border py-12 text-center shadow-none ring-0'>{m.account_no_active_sessions()}</Card>
+          }
+        >
+          {(items) => (
+            <div className='space-y-4'>
+              {items.map((session) => (
+                <SessionCard
+                  key={session.id}
+                  session={session}
+                  isRevoking={revoke.isPending && revoke.variables.id === session.id}
+                  disabled={sessions.isPending || revoke.isPending}
+                  onRevoke={() => {
+                    if (!sessions.isPending && !revoke.isPending) revoke.mutate({ id: session.id })
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </Skeleton>
+      )}
     </section>
   )
 }
@@ -94,7 +107,10 @@ function SessionCard(props: SessionCardProps) {
   const { session, isRevoking, disabled, onRevoke } = props
   const parsed = session.userAgent ? Bowser.parse(session.userAgent) : undefined
   const PlatformIcon = PLATFORM_ICONS[parsed?.platform.type ?? 'desktop'] ?? MonitorIcon
-  const lastActive = useFormattedDate(session.updatedAt, { formatName: 'long' })
+  const format = useFormatter()
+  const lastActive =
+    useFormattedDate(session.updatedAt, { formatName: 'long' }) ??
+    format.dateTime(session.updatedAt, 'long', { timeZone: 'UTC' })
 
   return (
     <Card className='border shadow-none ring-0'>
@@ -124,7 +140,7 @@ function SessionCard(props: SessionCardProps) {
                   </div>
                 )}
               </div>
-              <p>{lastActive ?? '--'}</p>
+              <p>{lastActive}</p>
             </div>
           </div>
         </div>

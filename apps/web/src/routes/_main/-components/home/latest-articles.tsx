@@ -1,11 +1,15 @@
-import type { PostSummary } from '@/features/posts/types'
+import type { PostStats, PostSummary } from '@/features/posts/types'
 
 import { Link } from '@tanstack/react-router'
-import { ArrowRightIcon } from 'lucide-react'
+import { ArrowRightIcon, EyeIcon, HeartIcon } from 'lucide-react'
+import { useFormatter } from 'use-intl'
 
+import { PendingCount } from '@/components/pending-count'
+import { usePostStats } from '@/features/posts/use-post-stats'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { m } from '@/paraglide/messages'
 
+import { Section } from './section'
 import { SectionHeading } from './section-heading'
 
 type LatestArticlesProps = {
@@ -14,60 +18,72 @@ type LatestArticlesProps = {
 
 export function LatestArticles(props: LatestArticlesProps) {
   const { posts } = props
+  const { data: stats, isPending } = usePostStats(posts.map((post) => post.slug))
 
   return (
-    <section
-      id='notes'
-      aria-labelledby='notes-title'
-      className='mx-auto grid w-full max-w-400 scroll-mt-12.5 gap-10 pt-30 pr-[max(16px,env(safe-area-inset-right))] pb-27.5 pl-[max(16px,env(safe-area-inset-left))] min-[701px]:scroll-mt-17.5 min-[701px]:grid-cols-[1fr_1.05fr] min-[701px]:items-center min-[701px]:gap-17.5 min-[701px]:px-[10%] min-[701px]:py-47.5'
-    >
+    <Section id='blog' className='grid gap-10 pt-32 pb-28 md:grid-cols-[1fr_1.05fr] md:items-center md:gap-16 md:py-48'>
       <SectionHeading
-        id='notes-title'
-        eyebrow={`02 / ${m.nav_blog()}`}
+        id='blog-title'
         title={m.home_notes_title()}
         emphasis={m.home_notes_emphasis()}
         description={m.home_notes_description()}
       />
       <div className='min-w-0'>
-        <div className='border-t'>
-          {posts.map((post, index) => (
-            <ArticleRow key={post.slug} post={post} index={index} />
+        <div className='mb-8 border-t'>
+          {posts.map((post) => (
+            <ArticleRow key={post.slug} post={post} stats={stats} isPending={isPending} />
           ))}
+          {posts.length === 0 && <p className='py-8 text-muted-foreground'>{m.blog_empty()}</p>}
         </div>
-        {posts.length === 0 && <p className='py-8 text-muted-foreground'>{m.blog_empty()}</p>}
-        <Link to='/blog' className='mt-8 inline-flex min-h-11 items-center gap-3 text-sm text-primary'>
+        <Link to='/blog' className='group inline-flex items-center gap-2 text-sm text-primary'>
           {m.blog_all_articles()}
-          <ArrowRightIcon className='size-5' aria-hidden='true' />
+          <ArrowRightIcon
+            className='size-5 motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1'
+            aria-hidden='true'
+          />
         </Link>
       </div>
-    </section>
+    </Section>
   )
 }
 
 type ArticleRowProps = {
   post: PostSummary
-  index: number
+  isPending: boolean
+  stats: Map<string, PostStats> | undefined
 }
 
 function ArticleRow(props: ArticleRowProps) {
-  const { post, index } = props
+  const { post, stats, isPending } = props
+  const counts = stats?.get(post.slug)
+  const fallback = isPending ? <PendingCount /> : '—'
+  const format = useFormatter()
   const date = useFormattedDate(post.publishedAt)
 
   return (
     <article className='border-b'>
-      <Link to='/blog/$slug' params={{ slug: post.slug }} className='group flex items-center gap-4 py-7.5'>
-        <span className='text-sm text-muted-foreground' aria-hidden='true'>
-          {String(index + 1).padStart(2, '0')}
-        </span>
+      <Link to='/blog/$slug' params={{ slug: post.slug }} className='group flex items-center gap-4 py-8'>
         <div className='min-w-0 flex-1'>
-          <time dateTime={post.publishedAt} className='text-sm text-primary'>
-            {m.article_category()} · {date ?? '--'}
-          </time>
-          <h3 className='mt-3 text-lg/normal font-normal tracking-tight min-[701px]:text-xl/normal'>{post.title}</h3>
-          <p className='mt-3 text-base/[1.65] text-muted-foreground'>{post.description}</p>
+          <div className='mb-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground'>
+            <time dateTime={post.publishedAt} className='text-primary'>
+              {date ?? '--'}
+            </time>
+            <span className='inline-flex items-center gap-1'>
+              <EyeIcon className='size-4' aria-hidden='true' />
+              {stats ? format.number(counts?.views ?? 0) : fallback}{' '}
+              <span className='sr-only'>{m.blog_header_views()}</span>
+            </span>
+            <span className='inline-flex items-center gap-1'>
+              <HeartIcon className='size-4' aria-hidden='true' />
+              {stats ? format.number(counts?.likes ?? 0) : fallback}{' '}
+              <span className='sr-only'>{m.admin_dashboard_stats_likes()}</span>
+            </span>
+          </div>
+          <h3 className='mb-3 text-lg tracking-tight md:text-xl'>{post.title}</h3>
+          <p className='text-base/relaxed text-muted-foreground'>{post.description}</p>
         </div>
         <ArrowRightIcon
-          className='size-5 shrink-0 text-primary transition-transform motion-safe:group-hover:translate-x-1 motion-reduce:transition-none'
+          className='size-5 shrink-0 text-primary motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1'
           aria-hidden='true'
         />
       </Link>

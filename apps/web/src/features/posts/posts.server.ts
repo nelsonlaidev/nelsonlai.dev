@@ -9,7 +9,8 @@ export function findPost(slug: string, locale: Locale) {
   if (!post) return null
 
   return {
-    path: post.path,
+    code: post.code,
+    toc: post.toc,
     slug: post.slug,
     locale,
     title: post.title,
@@ -32,5 +33,6 @@ export function listPosts(locale: Locale, limit: number | null = null): PostSumm
       title: post.title,
       description: post.description,
       publishedAt: post.publishedAt,
+      updatedAt: post.updatedAt,
     }))
 }

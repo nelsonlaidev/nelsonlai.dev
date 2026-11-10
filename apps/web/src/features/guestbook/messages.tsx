@@ -1,9 +1,11 @@
 import type { GuestbookMessage } from './types'
 
 import { buttonVariants } from '@repo/ui/components/button'
+import { createRange } from '@repo/utils'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { cn } from 'cn'
 import { useEffect, useRef } from 'react'
+import { Skeleton } from 'skullet/react'
 
 import { UserAvatar } from '@/components/user-avatar'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
@@ -11,7 +13,14 @@ import { m } from '@/paraglide/messages'
 
 import { DeleteButton } from './delete-button'
 import { guestbookMessagesInfiniteOptions } from './guestbook.queries'
-import { MessagesLoader } from './messages-loader'
+
+const SAMPLE_MESSAGES: GuestbookMessage[] = createRange(8).map((number) => ({
+  id: `guestbook-skeleton-${number}`,
+  body: 'A small thought left here, drifting quietly through the ocean.',
+  userId: 'guestbook-skeleton',
+  user: { id: 'guestbook-skeleton', name: 'Ocean visitor', image: null },
+  createdAt: new Date('2026-01-01T00:00:00.000Z'),
+}))
 
 type MessagesProps = {
   userId?: string
@@ -39,19 +48,12 @@ export function Messages(props: MessagesProps) {
   }, [fetchNextPage, hasNextPage, isFetching, isError])
 
   const noMessages = isSuccess && data.pages.every((page) => page.messages.length === 0)
+  const messages = data?.pages.flatMap((page) => page.messages)
 
   return (
-    <div data-testid='guestbook-messages-list' className='mt-6.25 flex flex-col gap-5'>
-      {data?.pages.map((page) =>
-        page.messages.map((message) => (
-          <Message key={message.id} message={message} isAuthor={message.userId === userId} />
-        )),
-      )}
-      {(isPending || isFetchingNextPage) && (
-        <output aria-label={m.common_aria_labels_loading()}>
-          <MessagesLoader />
-        </output>
-      )}
+    <div data-testid='guestbook-messages-list' className='mt-6 flex flex-col gap-5'>
+      {(isPending || (messages && messages.length > 0)) && <MessagesList messages={messages} userId={userId} />}
+      {isFetchingNextPage && <MessagesList />}
       <span ref={sentinelRef} className='invisible' aria-hidden='true' />
       {hasNextPage && !isFetchingNextPage && !isError && (
         <button
@@ -66,7 +68,7 @@ export function Messages(props: MessagesProps) {
         </button>
       )}
       {isError && (
-        <div role='alert' className='border border-[#a3d1b528] px-6 py-10 text-center text-base/[1.65] text-[#adcab0]'>
+        <div role='alert' className='rounded-xl border px-6 py-10 text-center text-base/relaxed text-muted-foreground'>
           <p>{m.error_failed_to_load_messages()}</p>
           <button
             type='button'
@@ -80,11 +82,32 @@ export function Messages(props: MessagesProps) {
         </div>
       )}
       {noMessages && (
-        <div className='border border-[#a3d1b528] px-6 py-10 text-center text-base/[1.65] text-[#adcab0]'>
+        <div className='rounded-xl border px-6 py-10 text-center text-base/relaxed text-muted-foreground'>
           <p className='text-sm text-muted-foreground'>{m.guestbook_no_messages()}</p>
         </div>
       )}
     </div>
+  )
+}
+
+type MessagesListProps = {
+  messages?: GuestbookMessage[]
+  userId?: string
+}
+
+function MessagesList(props: MessagesListProps) {
+  const { messages, userId } = props
+
+  return (
+    <Skeleton data={messages} sample={SAMPLE_MESSAGES} label={m.common_aria_labels_loading()}>
+      {(items) => (
+        <div className='flex flex-col gap-5'>
+          {items.map((message) => (
+            <Message key={message.id} message={message} isAuthor={message.userId === userId} />
+          ))}
+        </div>
+      )}
+    </Skeleton>
   )
 }
 
@@ -100,17 +123,16 @@ function Message(props: MessageProps) {
   return (
     <article
       data-testid={`message-${message.id}`}
-      className='relative border border-[#a3d1b528] p-7.5 [background:radial-gradient(ellipse_at_0_0,#89ccaa10,transparent)] max-[601px]:p-6.25'
+      className='relative rounded-xl border bg-radial-[ellipse_at_0_0] from-primary/5 to-transparent p-6 sm:p-8'
     >
       <span
         aria-hidden='true'
-        className='absolute top-9 right-7.5 size-1.25 rounded-full bg-[#c9e9bb] shadow-[0_0_12px_#a4edb5]'
+        className='absolute top-9 right-8 size-1.25 rounded-full bg-[#c9e9bb] shadow-[0_0_12px_#a4edb5]'
       />
-      <span className='block pr-5 text-xs leading-[normal] tracking-[0.02em] text-[#a8c9b2]'>{m.seabed_light()}</span>
-      <blockquote className='my-6.25 font-serif text-[22px] leading-[1.65] wrap-anywhere whitespace-pre-wrap text-[#d3e3cb] italic max-[601px]:text-[21px]'>
+      <blockquote className='mb-6 pr-5 font-serif text-xl/relaxed wrap-anywhere whitespace-pre-wrap text-primary italic'>
         {message.body}
       </blockquote>
-      <div className='flex flex-wrap items-center justify-between gap-3.75 text-sm/normal text-[#adcab0]'>
+      <div className='flex flex-wrap items-center justify-between gap-4 text-sm/normal text-muted-foreground'>
         <span className='flex min-w-0 items-center gap-3'>
           <UserAvatar id={message.userId} name={message.user.name} image={message.user.image} />
           <span className='min-w-0 wrap-anywhere'>{message.user.name}</span>

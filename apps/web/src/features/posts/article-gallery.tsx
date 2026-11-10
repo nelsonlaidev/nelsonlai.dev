@@ -89,7 +89,7 @@ export function ArticleGallery(props: ArticleGalleryProps) {
       {children}
       {loading && <output className='sr-only'>{m.common_loading()}</output>}
       {failed && (
-        <p role='alert' className='text-base/[1.6] text-foreground [&_a]:underline'>
+        <p role='alert' className='text-base/relaxed text-foreground [&_a]:underline'>
           {m.common_error()}{' '}
           <a href={failed} target='_blank' rel='noopener noreferrer'>
             {m.blog_image_viewer_original()}

@@ -80,7 +80,7 @@ describe('Account and admin presentation with isolated API fixtures', () => {
   test('announces admin loading while no rows are available', () => {
     fixture.users.mockReturnValue(new Promise(() => {}))
     setup(<AdminUsers />)
-    expect(screen.getByRole('status')).toHaveTextContent(m.common_loading())
+    expect(screen.getByRole('status')).toHaveTextContent(m.common_aria_labels_loading())
     expect(screen.queryByRole('table')).not.toBeInTheDocument()
   })
   test('announces an admin request error', async () => {

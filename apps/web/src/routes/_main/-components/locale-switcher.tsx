@@ -8,7 +8,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@repo/ui/components/dropdown-menu'
-import { ChevronDownIcon, LanguagesIcon } from 'lucide-react'
+import { ChevronDownIcon } from 'lucide-react'
 
 import { m } from '@/paraglide/messages'
 import { getLocale, isLocale, locales, setLocale } from '@/paraglide/runtime'
@@ -23,30 +23,18 @@ const LOCALE_LABELS: Record<Locale, string> = {
   'pt-BR': 'Português (Brasil)',
 }
 
-type LocaleSwitcherProps = {
-  compact?: boolean
-  iconOnlyOnMobile?: boolean
-}
-
-export function LocaleSwitcher(props: LocaleSwitcherProps) {
-  const { compact = false, iconOnlyOnMobile = false } = props
+export function LocaleSwitcher() {
   const locale = getLocale()
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={
-          <Button
-            variant={compact ? 'ghost' : 'outline'}
-            aria-label={`${m.nav_change_language()}: ${LOCALE_LABELS[locale]}`}
-          />
-        }
+        render={<Button variant='ghost' aria-label={`${m.nav_change_language()}: ${LOCALE_LABELS[locale]}`} />}
       >
-        {!compact && <LanguagesIcon aria-hidden='true' />}
-        <span className={iconOnlyOnMobile ? 'hidden sm:inline' : undefined}>{LOCALE_LABELS[locale]}</span>
-        <ChevronDownIcon aria-hidden='true' />
+        {LOCALE_LABELS[locale]}
+        <ChevronDownIcon data-icon='inline-end' aria-hidden='true' />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='start' side='top' className='border shadow-md ring-0'>
+      <DropdownMenuContent align='start' side='top' className='min-w-44'>
         <DropdownMenuRadioGroup
           value={locale}
           onValueChange={(value) => {
@@ -54,7 +42,7 @@ export function LocaleSwitcher(props: LocaleSwitcherProps) {
           }}
         >
           {locales.map((value) => (
-            <DropdownMenuRadioItem key={value} value={value} closeOnClick lang={value} className='min-h-11'>
+            <DropdownMenuRadioItem key={value} value={value} closeOnClick lang={value}>
               {LOCALE_LABELS[value]}
             </DropdownMenuRadioItem>
           ))}

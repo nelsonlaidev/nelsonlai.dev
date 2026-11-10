@@ -1,28 +1,22 @@
 type SectionHeadingProps = {
-  compact?: boolean
-  eyebrow: string
   title: string
   emphasis: string
-  description?: string
+  description: string
+  className?: string
   id: string
 }
 
 export function SectionHeading(props: SectionHeadingProps) {
-  const { compact, eyebrow, id, title, emphasis, description } = props
+  const { id, title, emphasis, description, className } = props
 
   return (
-    <div className={compact ? 'mb-8' : 'mb-10 min-[701px]:mb-16'}>
-      <p className='mb-6 text-xs text-primary'>{eyebrow}</p>
-      <h2 id={id} className='text-[39px]/[1.12] font-[410] tracking-tighter min-[701px]:text-[clamp(36px,4.1vw,64px)]'>
+    <div className={className}>
+      <h2 id={id} className='mb-6 text-4xl tracking-tighter lg:text-5xl 2xl:text-6xl'>
         {title}
         <br />
-        <em className='font-serif tracking-[-0.04em] text-primary'>{emphasis}</em>
+        <em className='font-serif tracking-tighter text-primary'>{emphasis}</em>
       </h2>
-      {description && (
-        <p className='mt-6 max-w-lg text-base/[1.65] text-muted-foreground min-[701px]:whitespace-pre-line'>
-          {description}
-        </p>
-      )}
+      <p className='max-w-lg text-base/relaxed text-muted-foreground md:whitespace-pre-line'>{description}</p>
     </div>
   )
 }

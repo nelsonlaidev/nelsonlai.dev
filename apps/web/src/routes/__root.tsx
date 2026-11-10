@@ -15,7 +15,7 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 import { createRootRouteWithContext, HeadContent, Scripts } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import { createIsomorphicFn, getGlobalStartContext } from '@tanstack/react-start'
+import { SkulletProvider } from 'skullet/react'
 import { IntlProvider } from 'use-intl'
 
 import { MainLayout } from '@/components/main-layout'
@@ -43,9 +43,6 @@ const INTL_FORMATS = {
 } satisfies Formats
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-  loader: createIsomorphicFn()
-    .server(() => ({ nonce: getGlobalStartContext()?.nonce }))
-    .client(() => ({ nonce: document.querySelector<HTMLScriptElement>('script[nonce]')?.nonce })),
   head: () => {
     const description = m.metadata_site_description()
     const fallbackImage = getLocalizedUrl('/og/image.webp', getLocale())
@@ -132,7 +129,6 @@ type RootDocumentProps = {
 
 function RootDocument(props: RootDocumentProps) {
   const { children } = props
-  const { nonce } = Route.useLoaderData()
 
   return (
     <html lang={getLocale()} suppressHydrationWarning>
@@ -140,32 +136,33 @@ function RootDocument(props: RootDocumentProps) {
         <HeadContent />
       </head>
       <body>
-        <UIProvider
-          nonce={nonce}
-          translations={{
-            loading: m.common_aria_labels_loading(),
-            close: m.common_labels_close(),
-            commandDialogTitle: m.command_menu_title(),
-            commandDialogDescription: m.command_menu_description(),
-            treeView: m.common_aria_labels_tree_view(),
-            sidebarTitle: m.admin_sidebar_title(),
-            sidebarDescription: m.admin_sidebar_description(),
-            toggleSidebar: m.common_aria_labels_toggle_sidebar(),
-          }}
-        >
-          <IntlProvider locale={getLocale()} formats={INTL_FORMATS}>
-            {children}
-            <Toaster timeout={2500} limit={5} />
-          </IntlProvider>
-        </UIProvider>
-        <TanStackDevtools
-          config={{ position: 'bottom-right' }}
-          plugins={[
-            { name: 'TanStack Router', render: <TanStackRouterDevtoolsPanel /> },
-            { name: 'TanStack Query', render: <ReactQueryDevtoolsPanel /> },
-          ]}
-        />
-        <Scripts />
+        <SkulletProvider mode='dark'>
+          <UIProvider
+            translations={{
+              loading: m.common_aria_labels_loading(),
+              close: m.common_labels_close(),
+              commandDialogTitle: m.command_menu_title(),
+              commandDialogDescription: m.command_menu_description(),
+              treeView: m.common_aria_labels_tree_view(),
+              sidebarTitle: m.admin_sidebar_title(),
+              sidebarDescription: m.admin_sidebar_description(),
+              toggleSidebar: m.common_aria_labels_toggle_sidebar(),
+            }}
+          >
+            <IntlProvider locale={getLocale()} formats={INTL_FORMATS}>
+              {children}
+              <Toaster timeout={2500} limit={5} />
+            </IntlProvider>
+          </UIProvider>
+          <TanStackDevtools
+            config={{ position: 'bottom-right' }}
+            plugins={[
+              { name: 'TanStack Router', render: <TanStackRouterDevtoolsPanel /> },
+              { name: 'TanStack Query', render: <ReactQueryDevtoolsPanel /> },
+            ]}
+          />
+          <Scripts />
+        </SkulletProvider>
       </body>
     </html>
   )
