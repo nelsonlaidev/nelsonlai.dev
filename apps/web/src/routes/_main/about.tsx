@@ -4,12 +4,10 @@ import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { Mdx } from '@/components/mdx/mdx'
 import { OceanPage } from '@/components/ocean-page'
-import { PagePending } from '@/components/page-pending'
 import { RouteError } from '@/components/route-error'
 import { getPage } from '@/features/pages/pages.functions'
 import { createJsonLdAboutPage } from '@/lib/json-ld'
 import { createSeoHead } from '@/lib/seo'
-import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
 
 import { AboutHero } from './-components/about/hero'
@@ -43,7 +41,6 @@ export const Route = createFileRoute('/_main/about')({
       }),
     })
   },
-  pendingComponent: () => <PagePending title={m.nav_about()} description={m.home_about_intro()} />,
   errorComponent: AboutError,
   component: RouteComponent,
 })

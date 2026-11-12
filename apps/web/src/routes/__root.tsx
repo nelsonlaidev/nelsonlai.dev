@@ -13,12 +13,13 @@ import { Toaster } from '@repo/ui/components/toast'
 import { UIProvider } from '@repo/ui/components/ui-provider'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
-import { createRootRouteWithContext, HeadContent, Scripts } from '@tanstack/react-router'
+import { createRootRouteWithContext, HeadContent, Scripts, useRouterState } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { SkulletProvider } from 'skullet/react'
 import { IntlProvider } from 'use-intl'
 
 import { MainLayout } from '@/components/main-layout'
+import { NavigationSpinner } from '@/components/navigation-spinner'
 import { PublicNotFound } from '@/components/not-found'
 import { ENV } from '@/env'
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '@/lib/og'
@@ -129,6 +130,12 @@ type RootDocumentProps = {
 
 function RootDocument(props: RootDocumentProps) {
   const { children } = props
+  const pendingHref = useRouterState({
+    select: (state) =>
+      state.status === 'pending' && state.resolvedLocation && state.location.href !== state.resolvedLocation.href
+        ? state.location.href
+        : undefined,
+  })
 
   return (
     <html lang={getLocale()} suppressHydrationWarning>
@@ -151,6 +158,7 @@ function RootDocument(props: RootDocumentProps) {
           >
             <IntlProvider locale={getLocale()} formats={INTL_FORMATS}>
               {children}
+              {pendingHref && <NavigationSpinner key={pendingHref} />}
               <Toaster timeout={2500} limit={5} />
             </IntlProvider>
           </UIProvider>

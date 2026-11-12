@@ -4,7 +4,6 @@ import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { OceanPage } from '@/components/ocean-page'
 import { PageHeader } from '@/components/page-header'
-import { PagePending } from '@/components/page-pending'
 import { RouteError } from '@/components/route-error'
 import { guestbookMessagesInfiniteOptions } from '@/features/guestbook/guestbook.queries'
 import { MessageBoard } from '@/features/guestbook/message-board'
@@ -43,7 +42,6 @@ export const Route = createFileRoute('/_main/guestbook')({
       }),
     })
   },
-  pendingComponent: () => <PagePending title={m.nav_guestbook()} description={m.seabed_intro()} />,
   errorComponent: GuestbookError,
   component: RouteComponent,
 })

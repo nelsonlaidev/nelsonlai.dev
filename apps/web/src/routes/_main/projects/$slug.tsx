@@ -3,7 +3,6 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 
 import { Mdx } from '@/components/mdx/mdx'
 import { OceanPage } from '@/components/ocean-page'
-import { PagePending } from '@/components/page-pending'
 import { RouteError } from '@/components/route-error'
 import { ProjectArt } from '@/features/projects/project-art'
 import { ProjectHeader } from '@/features/projects/project-header'
@@ -53,7 +52,6 @@ export const Route = createFileRoute('/_main/projects/$slug')({
       }),
     })
   },
-  pendingComponent: () => <PagePending title={m.projects_all()} description={m.projects_intro()} />,
   errorComponent: (props) => (
     <OceanPage>
       <RouteError {...props} />

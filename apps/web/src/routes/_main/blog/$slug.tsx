@@ -6,7 +6,6 @@ import * as z from 'zod'
 
 import { Mdx } from '@/components/mdx/mdx'
 import { OceanPage } from '@/components/ocean-page'
-import { PagePending } from '@/components/page-pending'
 import { RouteError } from '@/components/route-error'
 import { CommentSection } from '@/features/comments/comment-section'
 import { BlogFooter } from '@/features/posts/blog-footer'
@@ -66,7 +65,6 @@ export const Route = createFileRoute('/_main/blog/$slug')({
       }),
     })
   },
-  pendingComponent: () => <PagePending title={m.blog_all_articles()} description={m.blog_intro()} />,
   errorComponent: (props) => (
     <OceanPage>
       <RouteError {...props} />

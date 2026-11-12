@@ -8,12 +8,10 @@ import { ArrowRightIcon } from 'lucide-react'
 import { Mdx } from '@/components/mdx/mdx'
 import { OceanPage } from '@/components/ocean-page'
 import { PageHeader } from '@/components/page-header'
-import { PagePending } from '@/components/page-pending'
 import { RouteError } from '@/components/route-error'
 import { getPage } from '@/features/pages/pages.functions'
 import { createJsonLdWebPage } from '@/lib/json-ld'
 import { createSeoHead } from '@/lib/seo'
-import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
 
 export const Route = createFileRoute('/_main/uses')({
@@ -43,7 +41,6 @@ export const Route = createFileRoute('/_main/uses')({
       }),
     })
   },
-  pendingComponent: () => <PagePending title={m.nav_uses()} />,
   errorComponent: UsesError,
   component: RouteComponent,
 })

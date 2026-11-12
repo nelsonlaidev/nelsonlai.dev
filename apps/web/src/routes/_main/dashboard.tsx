@@ -4,7 +4,6 @@ import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { OceanPage } from '@/components/ocean-page'
 import { PageHeader } from '@/components/page-header'
-import { PagePending } from '@/components/page-pending'
 import { RouteError } from '@/components/route-error'
 import { getPage } from '@/features/pages/pages.functions'
 import { createJsonLdWebPage } from '@/lib/json-ld'
@@ -49,7 +48,6 @@ export const Route = createFileRoute('/_main/dashboard')({
       }),
     })
   },
-  pendingComponent: () => <PagePending title={m.nav_dashboard()} description={m.dashboard_intro()} />,
   errorComponent: DashboardError,
   component: RouteComponent,
 })

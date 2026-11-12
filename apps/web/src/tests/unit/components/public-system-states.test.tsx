@@ -1,12 +1,12 @@
+import { UIProvider } from '@repo/ui/components/ui-provider'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 
+import { NavigationSpinner } from '@/components/navigation-spinner'
 import { RouteError } from '@/components/route-error'
 import { UnsubscribePage } from '@/features/notifications/unsubscribe-page'
 import { m } from '@/paraglide/messages'
-import { Route as PrivacyRoute } from '@/routes/_main/privacy'
-import { Route as TermsRoute } from '@/routes/_main/terms'
 
 type MockLinkProps = {
   children: React.ReactNode
@@ -37,8 +37,6 @@ vi.mock('@tanstack/react-router', async (importOriginal) => ({
 vi.mock('@/components/main-layout', () => ({
   MainLayout: (props: ChildrenProps) => <main>{props.children}</main>,
 }))
-vi.mock('@/features/pages/pages.functions', () => ({ getPage: vi.fn<() => void>() }))
-vi.mock('@/components/mdx/mdx', () => ({ Mdx: () => null }))
 vi.mock('@/lib/orpc-client', async () => {
   const { createTanstackQueryUtils } = await import('@orpc/tanstack-query')
   return {
@@ -127,12 +125,31 @@ describe('Public system states with isolated API fixtures', () => {
       fixture.reset.mock.invocationCallOrder[0] ?? Infinity,
     )
   })
-  test.each([
-    ['privacy', PrivacyRoute.options.pendingComponent],
-    ['terms', TermsRoute.options.pendingComponent],
-  ] as const)('%s pending view announces loading', (_page, Pending) => {
-    if (!Pending) throw new Error('Missing route pending component')
-    render(<Pending />)
-    expect(screen.getByRole('status')).toHaveTextContent(m.common_aria_labels_loading())
+  test('navigation announces loading only after one second', async () => {
+    vi.useFakeTimers()
+    try {
+      render(
+        <UIProvider
+          translations={{
+            loading: m.common_aria_labels_loading(),
+            close: 'Close',
+            commandDialogTitle: 'Commands',
+            commandDialogDescription: 'Find a command',
+            treeView: 'Tree',
+            sidebarTitle: 'Sidebar',
+            sidebarDescription: 'Navigation',
+            toggleSidebar: 'Toggle sidebar',
+          }}
+        >
+          <NavigationSpinner />
+        </UIProvider>,
+      )
+      await act(() => vi.advanceTimersByTime(999))
+      expect(screen.queryByRole('status')).not.toBeInTheDocument()
+      await act(() => vi.advanceTimersByTime(1))
+      expect(screen.getByRole('status', { name: m.common_aria_labels_loading() })).toBeInTheDocument()
+    } finally {
+      vi.useRealTimers()
+    }
   })
 })

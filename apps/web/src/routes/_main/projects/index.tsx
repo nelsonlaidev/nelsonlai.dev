@@ -2,7 +2,6 @@ import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { OceanPage } from '@/components/ocean-page'
 import { PageHeader } from '@/components/page-header'
-import { PagePending } from '@/components/page-pending'
 import { RouteError } from '@/components/route-error'
 import { getPage } from '@/features/pages/pages.functions'
 import { ProjectCard } from '@/features/projects/project-card'
@@ -51,7 +50,6 @@ export const Route = createFileRoute('/_main/projects/')({
       }),
     })
   },
-  pendingComponent: () => <PagePending title={m.nav_projects()} description={m.projects_intro()} />,
   errorComponent: (props) => (
     <OceanPage>
       <RouteError {...props} />
