@@ -86,7 +86,7 @@ export function SectionNavigation() {
             aria-current={active === section.id ? 'location' : undefined}
             className='group flex h-7 items-center justify-end gap-2.5'
           >
-            <span className='sr-only rounded-sm bg-background/90 px-2 py-1 text-xs group-hover:not-sr-only group-focus-visible:not-sr-only'>
+            <span className='sr-only text-xs group-hover:not-sr-only group-focus-visible:not-sr-only'>
               {section.label()}
             </span>
             <span
