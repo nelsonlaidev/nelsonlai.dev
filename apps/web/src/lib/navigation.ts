@@ -8,10 +8,10 @@ export const ACCOUNT_LINKS = linkOptions([
 ])
 
 export const HEADER_LINKS = linkOptions([
-  { to: '/projects', label: m.nav_projects },
   { to: '/blog', label: m.nav_blog },
-  { to: '/about', label: m.nav_about },
   { to: '/guestbook', label: m.nav_guestbook },
-  { to: '/uses', label: m.nav_uses },
   { to: '/dashboard', label: m.nav_dashboard },
+  { to: '/projects', label: m.nav_projects },
+  { to: '/about', label: m.nav_about },
+  { to: '/uses', label: m.nav_uses },
 ])

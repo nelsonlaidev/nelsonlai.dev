@@ -14,10 +14,10 @@ import { surfacePoster } from '@/features/sharing/surface.server'
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '@/lib/og'
 import { getLocale } from '@/paraglide/runtime'
 
-import nacreSvg from '../../../public/brand/seafold-nacre.svg?raw'
+import seafoldSvg from '../../../public/images/seafold.svg?raw'
 
 const geistFont = Buffer.from(geistUrl.slice(geistUrl.indexOf(',') + 1), 'base64')
-const logo = `data:image/svg+xml;base64,${Buffer.from(nacreSvg).toString('base64')}`
+const logo = `data:image/svg+xml;base64,${Buffer.from(seafoldSvg).toString('base64')}`
 const mainImages = new Map<Locale, ReturnType<typeof surfacePoster>>()
 
 const PAGE_GROUPS: Record<

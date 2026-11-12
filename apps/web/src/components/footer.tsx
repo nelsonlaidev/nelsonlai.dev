@@ -1,15 +1,20 @@
 import { ExternalLink } from '@repo/ui/components/external-link'
+import { Separator } from '@repo/ui/components/separator'
 import { Link } from '@tanstack/react-router'
 import { ArrowUpRightIcon } from 'lucide-react'
 import { useState } from 'react'
 
+import { ENV } from '@/env'
 import { SITE } from '@/lib/site'
+import { SOCIAL_LINKS } from '@/lib/social-links'
 import { m } from '@/paraglide/messages'
 import { LocaleSwitcher } from '@/routes/_main/-components/locale-switcher'
 
-import { OceanBrand } from './brand'
+import { SiteLogo } from './site-logo'
 
-export function OceanFooter() {
+const commitSha = ENV.VITE_COMMIT_SHA
+
+export function Footer() {
   const [year] = useState(() => new Date().getUTCFullYear())
   const groups = [
     {
@@ -35,47 +40,51 @@ export function OceanFooter() {
     {
       id: 'elsewhere',
       title: m.nav_footer_elsewhere(),
+      links: SOCIAL_LINKS.filter(({ href }) => href !== SITE.socials.youtube).map(({ href, title }) => ({
+        href,
+        label: title,
+      })),
+    },
+    {
+      id: 'legal',
+      title: m.nav_legal(),
       links: [
-        { href: SITE.socials.github, label: 'GitHub' },
-        { href: SITE.socials.youtube, label: 'YouTube' },
-        { href: SITE.socials.instagram, label: 'Instagram' },
-        { href: SITE.socials.facebook, label: 'Facebook' },
+        { to: '/terms', label: m.common_labels_terms },
+        { to: '/privacy', label: m.common_labels_privacy },
       ],
     },
   ]
 
   return (
     <footer className='mt-14 bg-linear-to-b from-transparent to-backdrop/70 pr-[max(16px,env(safe-area-inset-right))] pb-8 pl-[max(16px,env(safe-area-inset-left))] text-muted-foreground sm:px-[8%] xl:px-[10%]'>
-      <div className='mx-auto max-w-7xl border-t border-primary/30'>
-        <div className='grid gap-8 pt-10 pb-12 lg:grid-cols-[minmax(--spacing(48),.85fr)_minmax(0,2fr)] lg:gap-10 xl:grid-cols-[minmax(--spacing(56),1fr)_minmax(0,2fr)] xl:gap-20 xl:pt-14'>
-          <div>
+      <div className='mx-auto max-w-7xl'>
+        <Separator aria-hidden='true' className='mb-10 xl:mb-14' />
+        <div className='grid gap-8 pb-12 lg:grid-cols-[minmax(--spacing(48),.85fr)_minmax(0,2fr)] lg:gap-10 xl:grid-cols-[minmax(--spacing(56),1fr)_minmax(0,2fr)] xl:gap-20'>
+          <div className='flex flex-col items-start'>
             <Link to='/' aria-label={`Seafold ${m.nav_home()}`} className='inline-flex items-center text-foreground'>
-              <OceanBrand large />
+              <SiteLogo large />
             </Link>
             <p className='mt-6 text-base/relaxed'>Nelson Lai</p>
-            <a href={`mailto:${SITE.email}`} className='inline-flex items-center gap-3 text-base hover:underline'>
+            <a href={`mailto:${SITE.email}`} className='pb-3 text-base hover:text-foreground'>
               {SITE.email}
-              <ArrowUpRightIcon className='size-5' aria-hidden='true' />
             </a>
+            <LocaleSwitcher />
           </div>
-          <nav aria-label={m.nav_footer()} className='grid grid-cols-2 gap-x-5 gap-y-7 sm:grid-cols-3 xl:gap-9'>
+          <nav aria-label={m.nav_footer()} className='grid grid-cols-2 gap-x-5 gap-y-7 sm:grid-cols-4 xl:gap-9'>
             {groups.map((group) => (
-              <div key={group.id} className='min-w-0 last:col-span-full sm:last:col-span-1'>
+              <div key={group.id} className='min-w-0'>
                 <h2 className='mb-4 text-base/normal font-medium text-foreground sm:mt-2'>{group.title}</h2>
-                <ul className={group.id === 'elsewhere' ? 'grid grid-cols-2 sm:grid-cols-1' : undefined}>
+                <ul className='grid gap-y-2'>
                   {group.links.map((link) => (
                     <li key={'to' in link ? link.to : link.href}>
                       {'to' in link ? (
-                        <Link
-                          to={link.to}
-                          className='inline-flex items-center text-base hover:text-foreground hover:underline'
-                        >
+                        <Link to={link.to} className='inline-flex items-center text-base hover:text-foreground'>
                           {typeof link.label === 'string' ? link.label : link.label()}
                         </Link>
                       ) : (
                         <ExternalLink
                           href={link.href}
-                          className='inline-flex items-center gap-2 text-base hover:text-foreground hover:underline'
+                          className='inline-flex items-center gap-2 text-base hover:text-foreground'
                         >
                           {typeof link.label === 'string' ? link.label : link.label()}
                           <ArrowUpRightIcon className='size-3.5 opacity-80' aria-hidden='true' />
@@ -88,20 +97,14 @@ export function OceanFooter() {
             ))}
           </nav>
         </div>
-        <div className='flex flex-wrap items-center gap-x-9 gap-y-2 border-t pt-5 text-sm/relaxed'>
-          <p className='w-full sm:w-auto'>&copy; {year} Nelson Lai</p>
-          <nav aria-label={m.nav_legal()} className='flex flex-wrap gap-x-6 text-base'>
-            <Link to='/terms' className='inline-flex items-center hover:underline'>
-              {m.common_labels_terms()}
-            </Link>
-            <Link to='/privacy' className='inline-flex items-center hover:underline'>
-              {m.common_labels_privacy()}
-            </Link>
-          </nav>
-          <div className='sm:ml-auto'>
-            <LocaleSwitcher />
-          </div>
-          <span className='font-mono text-sm text-muted-foreground'>{m.nav_revision_unavailable()}</span>
+        <Separator aria-hidden='true' className='mb-5' />
+        <div className='flex flex-wrap items-center justify-between gap-2 text-sm/relaxed'>
+          <p>&copy; {year} Nelson Lai</p>
+          {commitSha && (
+            <ExternalLink href={`${SITE.repository}/commit/${commitSha}`} className='font-mono hover:text-foreground'>
+              {commitSha.slice(0, 7)}
+            </ExternalLink>
+          )}
         </div>
       </div>
     </footer>

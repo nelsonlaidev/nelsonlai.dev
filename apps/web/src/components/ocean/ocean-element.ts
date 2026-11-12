@@ -13,7 +13,9 @@ type Fish = {
   avoidance: AvoidanceState
 }
 
-const mix = (a: number, b: number, t: number) => a + (b - a) * t
+function mix(a: number, b: number, t: number) {
+  return a + (b - a) * t
+}
 
 class OceanCanvasElement extends HTMLElement {
   static readonly observedAttributes = ['data-depth']
@@ -32,18 +34,26 @@ class OceanCanvasElement extends HTMLElement {
     const canvas = document.createElement('canvas')
     canvas.style.cssText = 'display: block; width: 100%; height: 100%'
     root.replaceChildren(canvas)
-    const context = canvas.getContext('2d', { alpha: false })
-    if (!context) return
-    const ctx = context
+
+    const ctx = canvas.getContext('2d', { alpha: false })
+    if (ctx) this.startAnimation(ctx)
+  }
+
+  private startAnimation(ctx: CanvasRenderingContext2D) {
+    const canvas = ctx.canvas
+    const drawFrame = draw.bind(this)
     const media = globalThis.matchMedia('(prefers-reduced-motion: reduce)')
-    let width = 0,
-      height = 0,
-      frame = 0,
-      time = 0,
-      previous: number | null = null
+
+    let width = 0
+    let height = 0
+    let frame = 0
+    let time = 0
+    let previous: number | null = null
     let displayedDepth: number | null = null
+
     const hoverMedia = globalThis.matchMedia('(any-hover: hover)')
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0, strength: 0, active: false, initialized: false }
+
     const fish: Fish[] = Array.from({ length: 38 }, (_, i) => ({
       x: Math.random(),
       y: Math.random(),
@@ -54,13 +64,15 @@ class OceanCanvasElement extends HTMLElement {
       sensitivity: 0.9 + Math.random() * 0.2,
       avoidance: createAvoidance(),
     }))
+
     const particles = Array.from({ length: 75 }, () => ({
       x: Math.random(),
       y: Math.random(),
       radius: Math.random() * 1.4 + 0.3,
       phase: Math.random() * 8,
     }))
-    const resize = () => {
+
+    function resize() {
       width = globalThis.innerWidth
       height = globalThis.innerHeight
       const dpr = Math.min(globalThis.devicePixelRatio || 1, 2)
@@ -69,10 +81,12 @@ class OceanCanvasElement extends HTMLElement {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       requestDraw()
     }
-    const clearPointer = () => {
+
+    function clearPointer() {
       pointer.active = false
     }
-    const move = (event: PointerEvent) => {
+
+    function move(event: PointerEvent) {
       if (
         (event.target instanceof Element && event.target.closest('[aria-modal="true"]')) ||
         media.matches ||
@@ -84,26 +98,32 @@ class OceanCanvasElement extends HTMLElement {
         clearPointer()
         return
       }
+
       pointer.targetX = event.clientX
       pointer.targetY = event.clientY
-      // A fresh entry should not sweep an imaginary cursor across the viewport.
+
       if (!pointer.active) {
         pointer.x = pointer.targetX
         pointer.y = pointer.targetY
       }
+
       pointer.initialized = true
       pointer.active = true
     }
-    const leave = (event: PointerEvent) => {
+
+    function leave(event: PointerEvent) {
       if (event.relatedTarget === null) clearPointer()
     }
-    const contact = (event: PointerEvent) => {
+
+    function contact(event: PointerEvent) {
       if (event.pointerType === 'touch') clearPointer()
     }
+
     function requestDraw() {
-      if (!frame && !document.hidden) frame = requestAnimationFrame(draw)
+      if (!frame && !document.hidden) frame = requestAnimationFrame(drawFrame)
     }
-    const resetClock = () => {
+
+    function resetClock() {
       if (frame) cancelAnimationFrame(frame)
       frame = 0
       previous = null
@@ -111,36 +131,43 @@ class OceanCanvasElement extends HTMLElement {
       requestDraw()
     }
 
-    const draw = (stamp: number) => {
+    function draw(this: OceanCanvasElement, stamp: number) {
       frame = 0
+
       if (document.hidden) {
         previous = null
         return
       }
+
       const dt = previous === null ? 0 : Math.min(Math.max((stamp - previous) / 1000, 0), 0.05)
       previous = stamp
+
       const still = media.matches
+
       if (!still) {
         time += dt
         pointer.strength = approach(pointer.strength, pointer.active ? 1 : 0, dt, FISH_MOTION_LIMITS.activationTime)
+
         if (pointer.initialized) {
           pointer.x = approach(pointer.x, pointer.targetX, dt, FISH_MOTION_LIMITS.pointerTime)
           pointer.y = approach(pointer.y, pointer.targetY, dt, FISH_MOTION_LIMITS.pointerTime)
         }
       }
+
       const scrollDepth = Math.min(globalThis.scrollY / Math.max(document.documentElement.scrollHeight - height, 1), 1)
       const targetDepth = this.depthBias + scrollDepth * (1 - this.depthBias)
       displayedDepth = displayedDepth === null || still ? targetDepth : approach(displayedDepth, targetDepth, dt, 0.3)
       const depth = displayedDepth
       const sky = ctx.createLinearGradient(0, 0, width * 0.3, height)
+
       sky.addColorStop(0, `rgb(${mix(25, 3, depth)},${mix(111, 14, depth)},${mix(116, 28, depth)})`)
       sky.addColorStop(0.52, `rgb(${mix(9, 3, depth)},${mix(64, 16, depth)},${mix(78, 31, depth)})`)
       sky.addColorStop(1, `rgb(3,${mix(34, 10, depth)},${mix(49, 24, depth)})`)
       ctx.fillStyle = sky
       ctx.fillRect(0, 0, width, height)
 
-      // Broad refracted light, rather than a flat overlay.
       ctx.globalCompositeOperation = 'screen'
+
       for (let i = 0; i < 9; i++) {
         const origin = width * (0.16 + i * 0.105) + Math.sin(time * 0.15 + i) * 30
         const beam = ctx.createLinearGradient(origin, 0, origin - width * 0.3, height)
@@ -154,15 +181,17 @@ class OceanCanvasElement extends HTMLElement {
         ctx.lineTo(origin - width * 0.45, height)
         ctx.fill()
       }
+
       const glow = ctx.createRadialGradient(width * 0.65, -100, 5, width * 0.65, 0, width * 0.6)
       glow.addColorStop(0, `rgba(197,243,214,${0.24 * (1 - depth)})`)
       glow.addColorStop(1, 'transparent')
       ctx.fillStyle = glow
       ctx.fillRect(0, 0, width, height)
-      // The broken, rippling undersurface remains at the top of the shallows.
+
       if (depth < 0.25) {
         ctx.strokeStyle = `rgba(181,236,207,${0.14 * (1 - depth * 4)})`
         ctx.lineWidth = 1
+
         for (let row = 0; row < 12; row++) {
           ctx.beginPath()
           for (let x = -20; x < width + 20; x += 12) {
@@ -173,12 +202,14 @@ class OceanCanvasElement extends HTMLElement {
           ctx.stroke()
         }
       }
+
       ctx.globalCompositeOperation = 'source-over'
-      // Parallax reef silhouettes create a sense of scale at the edges.
+
       for (let layer = 0; layer < 3; layer++) {
         ctx.fillStyle = `rgba(2,20,32,${0.12 + layer * 0.1})`
         ctx.beginPath()
         ctx.moveTo(0, height)
+
         for (let x = 0; x <= width + 20; x += 20) {
           const edge = Math.pow(Math.abs(x / width - 0.5) * 2, 4)
           const y =
@@ -188,9 +219,11 @@ class OceanCanvasElement extends HTMLElement {
             Math.sin(x * 0.025) * 8
           ctx.lineTo(x, y)
         }
+
         ctx.lineTo(width, height)
         ctx.fill()
       }
+
       for (const p of particles) {
         const x = p.x * width + Math.sin(time * 0.09 + p.phase) * 15
         const y = (((p.y * height - time * (2 + p.radius)) % height) + height) % height
@@ -199,12 +232,15 @@ class OceanCanvasElement extends HTMLElement {
         ctx.arc(x, y, p.radius, 0, Math.PI * 2)
         ctx.fill()
       }
+
       for (const f of fish) {
         const direction = f.school === 1 ? -1 : 1
         if (!still) f.x = (f.x + dt * f.speed * direction + 1) % 1
+
         let x = f.x * (width + 160) - 80
         let y = (0.26 + f.school * 0.22 + (f.y - 0.5) * 0.14) * height + Math.sin(time * 0.5 + f.phase) * 16
-        if (!still)
+
+        if (!still) {
           advanceAvoidance(
             f.avoidance,
             pointer,
@@ -215,8 +251,11 @@ class OceanCanvasElement extends HTMLElement {
             Math.sin(f.phase) < 0 ? -1 : 1,
             dt,
           )
+        }
+
         x += f.avoidance.x
         y += f.avoidance.y
+
         const size = f.size * (width < 600 ? 0.7 : 1)
         ctx.save()
         ctx.translate(x, y)
@@ -228,6 +267,7 @@ class OceanCanvasElement extends HTMLElement {
         ctx.bezierCurveTo(size * 0.35, -size * 0.36, -size * 0.35, -size * 0.3, -size * 0.7, 0)
         ctx.bezierCurveTo(-size * 0.2, size * 0.28, size * 0.4, size * 0.25, size, 0)
         ctx.fill()
+
         const tail = Math.sin(time * 5 + f.phase) * size * 0.1
         ctx.beginPath()
         ctx.moveTo(-size * 0.55, 0)
@@ -242,13 +282,15 @@ class OceanCanvasElement extends HTMLElement {
         ctx.stroke()
         ctx.restore()
       }
-      // A quiet, bioluminescent visitor in the deep chapters.
+
       if (depth > 0.35) {
-        const x = width * 0.82 + Math.sin(time * 0.12) * 28,
-          y = height * 0.35 + Math.sin(time * 0.25) * 18
+        const x = width * 0.82 + Math.sin(time * 0.12) * 28
+        const y = height * 0.35 + Math.sin(time * 0.25) * 18
+
         ctx.save()
         ctx.translate(x, y)
         ctx.globalAlpha = Math.min((depth - 0.35) * 3, 0.65)
+
         const light = ctx.createRadialGradient(0, 0, 1, 0, 0, 85)
         light.addColorStop(0, 'rgba(104,197,207,.1)')
         light.addColorStop(1, 'transparent')
@@ -261,6 +303,7 @@ class OceanCanvasElement extends HTMLElement {
         ctx.bezierCurveTo(10, 5, -12, 5, -27, 0)
         ctx.fill()
         ctx.stroke()
+
         for (let n = 0; n < 7; n++) {
           ctx.beginPath()
           const tx = (n - 3) * 6
@@ -275,12 +318,17 @@ class OceanCanvasElement extends HTMLElement {
           )
           ctx.stroke()
         }
+
         ctx.restore()
       }
+
       if (!still) requestDraw()
     }
+
     this.requestDraw = requestDraw
+
     resize()
+
     media.addEventListener('change', resetClock)
     document.addEventListener('visibilitychange', resetClock)
     globalThis.addEventListener('blur', clearPointer)
@@ -289,6 +337,7 @@ class OceanCanvasElement extends HTMLElement {
     globalThis.addEventListener('resize', resize)
     globalThis.addEventListener('pointermove', move)
     globalThis.addEventListener('pointerout', leave)
+
     this.stop = () => {
       cancelAnimationFrame(frame)
       media.removeEventListener('change', resetClock)

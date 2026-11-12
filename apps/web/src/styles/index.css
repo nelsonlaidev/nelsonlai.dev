@@ -2,6 +2,12 @@
 
 @source '../**/*.{ts,tsx}';
 
+@variant max-lg {
+  html:has(#mobile-navigation:not([inert])) {
+    overflow: hidden;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -30,8 +30,8 @@ export async function surfacePoster(font: Uint8Array, logo: string, locale: Loca
         { width: 1200, height: 630, format: 'png', fonts: [font] },
       ),
     ).toString('base64')}`
-  const upper = await plate('#0a3543'),
-    lower = await plate('#b8d9cd')
+  const upper = await plate('#0a3543')
+  const lower = await plate('#b8d9cd')
   const wave =
     'M-5 344 C70 332 122 354 205 338 S325 350 405 331 S535 342 620 323 S755 335 840 315 S970 324 1050 307 S1150 316 1205 300'
   const ocean = `${wave} L1205 635 L-5 635 Z`

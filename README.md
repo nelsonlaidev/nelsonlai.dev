@@ -26,7 +26,7 @@ The header artwork is preserved from the original project.
   image zoom, and article tables of contents.
 - Paraglide translations for English, Traditional Chinese, Simplified Chinese,
   Japanese, Spanish, and Brazilian Portuguese, with remembered language preferences.
-- A fixed Seafold color palette and a keyboard-driven command menu.
+- A fixed Seafold color palette and an account menu with role-aware navigation.
 - Blog search, likes, view counts, comments, replies, and voting.
 - Guestbook, account settings, active sessions, and an admin dashboard.
 - Localized metadata, JSON-LD, RSS feeds, a sitemap, and dynamic WebP Open Graph

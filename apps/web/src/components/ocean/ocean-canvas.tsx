@@ -10,7 +10,6 @@ type OceanCanvasProps = {
 export function OceanCanvas(props: OceanCanvasProps) {
   const { depthBias = 0 } = props
 
-  // Request the standalone browser bundle as soon as the server renders the ocean.
   preinitModule(oceanModuleUrl, { as: 'script' })
 
   return createElement('ocean-canvas', {
