@@ -8,7 +8,7 @@ import { Section } from './section'
 
 export function AboutMe() {
   return (
-    <Section id='about' className='grid items-center gap-16 py-16 md:grid-cols-2 md:gap-24 md:py-24'>
+    <Section id='about' className='grid items-center gap-16 py-24 md:grid-cols-2 md:gap-24 md:py-36'>
       <div className='md:order-1'>
         <h2 id='about-title' className='mb-4 text-4xl tracking-tighter lg:text-5xl'>
           {m.home_about_title()}

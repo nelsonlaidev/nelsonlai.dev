@@ -56,7 +56,7 @@ export function Footer() {
   ]
 
   return (
-    <footer className='mt-14 bg-linear-to-b from-transparent to-backdrop/70 pr-[max(16px,env(safe-area-inset-right))] pb-8 pl-[max(16px,env(safe-area-inset-left))] text-muted-foreground sm:px-[8%] xl:px-[10%]'>
+    <footer className='bg-linear-to-b from-transparent to-backdrop/70 pr-[max(16px,env(safe-area-inset-right))] pb-8 pl-[max(16px,env(safe-area-inset-left))] text-muted-foreground sm:px-[8%] xl:px-[10%]'>
       <div className='mx-auto max-w-7xl'>
         <Separator aria-hidden='true' className='mb-10 xl:mb-14' />
         <div className='grid gap-8 pb-12 lg:grid-cols-[minmax(--spacing(48),.85fr)_minmax(0,2fr)] lg:gap-10 xl:grid-cols-[minmax(--spacing(56),1fr)_minmax(0,2fr)] xl:gap-20'>
