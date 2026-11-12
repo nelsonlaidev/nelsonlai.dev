@@ -10,7 +10,10 @@ export function RouteError(props: ErrorComponentProps) {
   const router = useRouter()
 
   return (
-    <div role='alert' className='relative space-y-4 px-2 py-8 wrap-anywhere subpixel-antialiased'>
+    <div
+      role='alert'
+      className='relative mx-auto w-full max-w-5xl space-y-4 px-6 pt-36 pb-16 wrap-anywhere subpixel-antialiased sm:px-8 sm:pt-40'
+    >
       <h1 className='text-4xl tracking-tighter text-foreground lg:text-5xl xl:text-6xl'>
         {m.error_something_went_wrong()}
       </h1>

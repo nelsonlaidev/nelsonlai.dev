@@ -3,7 +3,6 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 
 import { Mdx } from '@/components/mdx/mdx'
 import { OceanPage } from '@/components/ocean-page'
-import { RouteError } from '@/components/route-error'
 import { ProjectArt } from '@/features/projects/project-art'
 import { ProjectHeader } from '@/features/projects/project-header'
 import { getProject, getProjects } from '@/features/projects/projects.functions'
@@ -52,11 +51,6 @@ export const Route = createFileRoute('/_main/projects/$slug')({
       }),
     })
   },
-  errorComponent: (props) => (
-    <OceanPage>
-      <RouteError {...props} />
-    </OceanPage>
-  ),
   component: RouteComponent,
 })
 

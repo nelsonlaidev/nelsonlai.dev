@@ -1,10 +1,7 @@
-import type { ErrorComponentProps } from '@tanstack/react-router'
-
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { Mdx } from '@/components/mdx/mdx'
 import { OceanPage } from '@/components/ocean-page'
-import { RouteError } from '@/components/route-error'
 import { getPage } from '@/features/pages/pages.functions'
 import { createJsonLdAboutPage } from '@/lib/json-ld'
 import { createSeoHead } from '@/lib/seo'
@@ -41,7 +38,6 @@ export const Route = createFileRoute('/_main/about')({
       }),
     })
   },
-  errorComponent: AboutError,
   component: RouteComponent,
 })
 
@@ -59,14 +55,6 @@ function RouteComponent() {
           AboutToolbox,
         }}
       />
-    </OceanPage>
-  )
-}
-
-function AboutError(props: ErrorComponentProps) {
-  return (
-    <OceanPage>
-      <RouteError {...props} />
     </OceanPage>
   )
 }

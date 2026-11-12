@@ -6,7 +6,6 @@ import * as z from 'zod'
 
 import { Mdx } from '@/components/mdx/mdx'
 import { OceanPage } from '@/components/ocean-page'
-import { RouteError } from '@/components/route-error'
 import { CommentSection } from '@/features/comments/comment-section'
 import { BlogFooter } from '@/features/posts/blog-footer'
 import { BlogHeader } from '@/features/posts/blog-header'
@@ -65,11 +64,6 @@ export const Route = createFileRoute('/_main/blog/$slug')({
       }),
     })
   },
-  errorComponent: (props) => (
-    <OceanPage>
-      <RouteError {...props} />
-    </OceanPage>
-  ),
   component: RouteComponent,
 })
 

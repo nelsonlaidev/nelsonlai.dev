@@ -1,10 +1,7 @@
-import type { ErrorComponentProps } from '@tanstack/react-router'
-
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { OceanPage } from '@/components/ocean-page'
 import { PageHeader } from '@/components/page-header'
-import { RouteError } from '@/components/route-error'
 import { guestbookMessagesInfiniteOptions } from '@/features/guestbook/guestbook.queries'
 import { MessageBoard } from '@/features/guestbook/message-board'
 import { getPage } from '@/features/pages/pages.functions'
@@ -42,7 +39,6 @@ export const Route = createFileRoute('/_main/guestbook')({
       }),
     })
   },
-  errorComponent: GuestbookError,
   component: RouteComponent,
 })
 
@@ -53,14 +49,6 @@ function RouteComponent() {
     <OceanPage>
       <PageHeader title={page.title} description={m.seabed_intro()} />
       <MessageBoard />
-    </OceanPage>
-  )
-}
-
-function GuestbookError(props: ErrorComponentProps) {
-  return (
-    <OceanPage>
-      <RouteError {...props} />
     </OceanPage>
   )
 }

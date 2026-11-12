@@ -1,5 +1,3 @@
-import type { ErrorComponentProps } from '@tanstack/react-router'
-
 import { BlurImage } from '@repo/ui/components/blur-image'
 import { ExternalLink } from '@repo/ui/components/external-link'
 import { createFileRoute, notFound } from '@tanstack/react-router'
@@ -8,7 +6,6 @@ import { ArrowRightIcon } from 'lucide-react'
 import { Mdx } from '@/components/mdx/mdx'
 import { OceanPage } from '@/components/ocean-page'
 import { PageHeader } from '@/components/page-header'
-import { RouteError } from '@/components/route-error'
 import { getPage } from '@/features/pages/pages.functions'
 import { createJsonLdWebPage } from '@/lib/json-ld'
 import { createSeoHead } from '@/lib/seo'
@@ -41,7 +38,6 @@ export const Route = createFileRoute('/_main/uses')({
       }),
     })
   },
-  errorComponent: UsesError,
   component: RouteComponent,
 })
 
@@ -140,13 +136,5 @@ function UsesLaptop(props: UsesLaptopProps) {
         </div>
       </div>
     </section>
-  )
-}
-
-function UsesError(props: ErrorComponentProps) {
-  return (
-    <OceanPage>
-      <RouteError {...props} />
-    </OceanPage>
   )
 }

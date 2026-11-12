@@ -1,10 +1,7 @@
-import type { ErrorComponentProps } from '@tanstack/react-router'
-
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { OceanPage } from '@/components/ocean-page'
 import { PageHeader } from '@/components/page-header'
-import { RouteError } from '@/components/route-error'
 import { getPage } from '@/features/pages/pages.functions'
 import { createJsonLdWebPage } from '@/lib/json-ld'
 import { orpc } from '@/lib/orpc-client'
@@ -48,7 +45,6 @@ export const Route = createFileRoute('/_main/dashboard')({
       }),
     })
   },
-  errorComponent: DashboardError,
   component: RouteComponent,
 })
 
@@ -59,14 +55,6 @@ function RouteComponent() {
     <OceanPage>
       <PageHeader title={page.title} description={m.dashboard_intro()} />
       <DashboardStats />
-    </OceanPage>
-  )
-}
-
-function DashboardError(props: ErrorComponentProps) {
-  return (
-    <OceanPage>
-      <RouteError {...props} />
     </OceanPage>
   )
 }

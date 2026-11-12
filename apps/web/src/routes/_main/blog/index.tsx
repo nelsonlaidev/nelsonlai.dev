@@ -2,7 +2,6 @@ import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { OceanPage } from '@/components/ocean-page'
 import { PageHeader } from '@/components/page-header'
-import { RouteError } from '@/components/route-error'
 import { getPage } from '@/features/pages/pages.functions'
 import { FilteredPosts } from '@/features/posts/filtered-posts'
 import { getPosts } from '@/features/posts/posts.functions'
@@ -50,11 +49,6 @@ export const Route = createFileRoute('/_main/blog/')({
       }),
     })
   },
-  errorComponent: (props) => (
-    <OceanPage>
-      <RouteError {...props} />
-    </OceanPage>
-  ),
   component: RouteComponent,
 })
 
