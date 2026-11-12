@@ -77,7 +77,7 @@ export function SectionNavigation() {
     <>
       <nav
         aria-label={m.home_chapters_label()}
-        className='fixed top-1/2 right-2.5 z-30 flex -translate-y-1/2 flex-col gap-2 md:right-8 md:gap-2.5'
+        className='fixed top-1/2 right-8 z-30 hidden -translate-y-1/2 flex-col gap-2.5 md:flex'
       >
         {SECTIONS.map((section) => (
           <a
@@ -91,8 +91,8 @@ export function SectionNavigation() {
             </span>
             <span
               className={cn(
-                'h-px w-2 bg-muted-foreground transition-[width] motion-reduce:transition-none md:w-3',
-                active === section.id && 'w-3.5 bg-primary md:w-6',
+                'h-px w-3 bg-muted-foreground transition-[width] motion-reduce:transition-none',
+                active === section.id && 'w-6 bg-primary',
               )}
               aria-hidden='true'
             />
