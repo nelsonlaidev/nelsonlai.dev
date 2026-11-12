@@ -60,14 +60,16 @@ export function Footer() {
       <div className='mx-auto max-w-7xl'>
         <Separator aria-hidden='true' className='mb-10 xl:mb-14' />
         <div className='grid gap-8 pb-12 lg:grid-cols-[minmax(--spacing(48),.85fr)_minmax(0,2fr)] lg:gap-10 xl:grid-cols-[minmax(--spacing(56),1fr)_minmax(0,2fr)] xl:gap-20'>
-          <div className='flex flex-col items-start'>
+          <div className='flex items-center justify-between max-lg:flex-wrap lg:flex-col lg:items-start lg:justify-start'>
             <Link to='/' aria-label={`Seafold ${m.nav_home()}`} className='inline-flex items-center text-foreground'>
               <SiteLogo large />
             </Link>
-            <p className='mt-6 text-base/relaxed'>Nelson Lai</p>
-            <a href={`mailto:${SITE.email}`} className='pb-3 text-base hover:text-foreground'>
-              {SITE.email}
-            </a>
+            <div className='mt-6 w-full max-lg:order-last lg:mb-auto lg:pb-3'>
+              <p className='text-base/relaxed'>Nelson Lai</p>
+              <a href={`mailto:${SITE.email}`} className='text-base hover:text-foreground'>
+                {SITE.email}
+              </a>
+            </div>
             <LocaleSwitcher />
           </div>
           <nav aria-label={m.nav_footer()} className='grid grid-cols-2 gap-x-5 gap-y-7 sm:grid-cols-4 xl:gap-9'>
