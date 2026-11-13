@@ -26,16 +26,17 @@ export const Route = createFileRoute('/_main/blog/')({
     if (!loaderData) return {}
 
     const { page, posts, locale } = loaderData
+    const pathname = '/blog'
 
     return createSeoHead({
       title: page.title,
       description: page.description,
-      pathname: '/blog',
+      pathname,
       locale,
       jsonLd: createJsonLdCollectionPage({
         title: page.title,
         description: page.description,
-        pathname: '/blog',
+        pathname,
         locale,
         items: posts.map((post) => ({
           item: {

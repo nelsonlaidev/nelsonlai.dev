@@ -29,15 +29,16 @@ export const Route = createFileRoute('/_main/')({
 
     const { locale } = loaderData
     const description = m.metadata_site_description({}, { locale })
+    const pathname = '/'
 
     return createSeoHead({
       title: null,
       description,
-      pathname: '/',
+      pathname,
       locale,
       jsonLd: createJsonLdWebSite({
         description,
-        pathname: '/',
+        pathname,
         locale,
       }),
     })

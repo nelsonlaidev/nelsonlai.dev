@@ -21,16 +21,17 @@ export const Route = createFileRoute('/_main/terms')({
     if (!loaderData) return {}
 
     const { page, locale } = loaderData
+    const pathname = '/terms'
 
     return createSeoHead({
       title: page.title,
       description: page.description,
-      pathname: '/terms',
+      pathname,
       locale,
       jsonLd: createJsonLdWebPage({
         title: page.title,
         description: page.description,
-        pathname: '/terms',
+        pathname,
         locale,
       }),
     })

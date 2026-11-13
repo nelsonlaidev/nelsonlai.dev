@@ -21,16 +21,17 @@ export const Route = createFileRoute('/_main/privacy')({
     if (!loaderData) return {}
 
     const { page, locale } = loaderData
+    const pathname = '/privacy'
 
     return createSeoHead({
       title: page.title,
       description: page.description,
-      pathname: '/privacy',
+      pathname,
       locale,
       jsonLd: createJsonLdWebPage({
         title: page.title,
         description: page.description,
-        pathname: '/privacy',
+        pathname,
         locale,
       }),
     })
