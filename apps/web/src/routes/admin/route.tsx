@@ -1,6 +1,5 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
-import { NotFound } from '@/components/not-found'
 import { AdminLayout } from '@/features/admin/admin-layout'
 import { getAccountUser } from '@/features/auth/auth.functions'
 
@@ -18,7 +17,6 @@ export const Route = createFileRoute('/admin')({
       { name: 'googlebot', content: 'noindex, nofollow' },
     ],
   }),
-  notFoundComponent: NotFound,
   component: RouteComponent,
 })
 

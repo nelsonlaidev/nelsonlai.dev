@@ -20,7 +20,7 @@ import { IntlProvider } from 'use-intl'
 
 import { MainLayout } from '@/components/main-layout'
 import { NavigationSpinner } from '@/components/navigation-spinner'
-import { PublicNotFound } from '@/components/not-found'
+import { NotFound } from '@/components/not-found'
 import { ENV } from '@/env'
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '@/lib/og'
 import { getLocalizedUrl, OPEN_GRAPH_LOCALES } from '@/lib/seo'
@@ -179,7 +179,7 @@ function RootDocument(props: RootDocumentProps) {
 function RootNotFound() {
   return (
     <MainLayout>
-      <PublicNotFound />
+      <NotFound />
     </MainLayout>
   )
 }
