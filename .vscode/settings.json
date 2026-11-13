@@ -31,6 +31,5 @@
 
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "js/ts.preferences.preferTypeOnlyAutoImports": true,
-  "js/ts.preferences.includePackageJsonAutoImports": "on",
   "js/ts.tsdk.path": "node_modules/typescript/lib"
 }
