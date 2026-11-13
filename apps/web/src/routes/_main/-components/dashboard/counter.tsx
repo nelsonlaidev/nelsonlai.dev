@@ -21,6 +21,7 @@ export function Counter(props: CounterProps) {
     if (!element) return
 
     const formatter = new Intl.NumberFormat(locale)
+
     if (reducedMotion) {
       element.textContent = formatter.format(value)
       return
