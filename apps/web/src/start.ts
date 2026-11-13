@@ -4,10 +4,7 @@ import { setResponseHeader } from '@tanstack/react-start/server'
 import { ENV } from './env'
 
 function getContentSecurityPolicy() {
-  const scriptSources = ["'self'", ENV.UMAMI_URL && new URL(ENV.UMAMI_URL).origin].filter(Boolean).join(' ')
-  const connectSources = [scriptSources, ENV.CLOUDFLARE_R2_ENDPOINT && new URL(ENV.CLOUDFLARE_R2_ENDPOINT).origin]
-    .filter(Boolean)
-    .join(' ')
+  const appSources = ["'self'", ENV.UMAMI_URL && new URL(ENV.UMAMI_URL).origin].filter(Boolean).join(' ')
   const imageSources = [
     "'self'",
     'https://avatars.githubusercontent.com',
@@ -19,12 +16,12 @@ function getContentSecurityPolicy() {
 
   return [
     "default-src 'none'",
-    `script-src ${scriptSources} 'unsafe-inline' 'unsafe-eval'`,
+    `script-src ${appSources} 'unsafe-inline' 'unsafe-eval'`,
     "script-src-attr 'none'",
     "style-src 'self' 'unsafe-inline'",
     `img-src ${imageSources}`,
     "font-src 'self'",
-    `connect-src ${connectSources}`,
+    `connect-src ${appSources}`,
     "media-src 'self'",
     "worker-src 'none'",
     "frame-src 'none'",

@@ -18,11 +18,8 @@ export const AccountSessionsSchema = z.array(
 
 export const RevokeSessionInputSchema = z.object({ id: z.string().min(1) })
 
-export const AvatarUploadInputSchema = z.object({
-  fileType: z.enum(AVATAR_MIME_TYPES),
-  fileSize: z.number().int().positive().max(AVATAR_MAX_FILE_SIZE),
-})
-
-export const AvatarUploadOutputSchema = z.object({ uploadUrl: z.url(), key: z.string() })
-
-export const UpdateAvatarInputSchema = z.object({ key: z.string().min(1).max(512) })
+export const UpdateAvatarInputSchema = z
+  .file()
+  .min(1)
+  .max(AVATAR_MAX_FILE_SIZE)
+  .mime([...AVATAR_MIME_TYPES])

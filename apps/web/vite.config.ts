@@ -70,7 +70,7 @@ const config = defineConfig({
           },
         },
       },
-      traceDeps: ['takumi-js', '@takumi-rs/core*'],
+      traceDeps: ['@takumi-rs/core*'],
     }),
     tailwindcss(),
     tanstackStart(),

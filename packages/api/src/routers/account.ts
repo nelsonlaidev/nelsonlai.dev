@@ -1,11 +1,11 @@
 import { randomUUID } from 'node:crypto'
 import { isIP } from 'node:net'
 
-import { HeadObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import { PutObjectCommand } from '@aws-sdk/client-s3'
 import { ORPCError } from '@orpc/server'
 import { sessions } from '@repo/db/schema/auth'
 import { and, eq, gt } from 'drizzle-orm'
+import sharp from 'sharp'
 import * as z from 'zod'
 
 import { cache } from '../cache'
@@ -14,10 +14,6 @@ import { getCloudflareR2 } from '../lib/cloudflare-r2'
 import { protectedProcedure } from '../procedures'
 import {
   AccountSessionsSchema,
-  AVATAR_MAX_FILE_SIZE,
-  AVATAR_MIME_TYPES,
-  AvatarUploadInputSchema,
-  AvatarUploadOutputSchema,
   RevokeSessionInputSchema,
   UpdateAvatarInputSchema,
   UpdateNameInputSchema,
@@ -109,43 +105,34 @@ const updateName = protectedProcedure
     await context.auth.api.updateUser({ headers: context.headers, body: input })
   })
 
-const createAvatarUpload = protectedProcedure
-  .input(AvatarUploadInputSchema)
-  .output(AvatarUploadOutputSchema)
-  .handler(async ({ input, context }) => {
-    const { client, bucketName } = getCloudflareR2()
-    const extension = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' }[input.fileType]
-    const key = `avatars/${context.session.user.id}/${randomUUID()}.${extension}`
-    const command = new PutObjectCommand({
-      Bucket: bucketName,
-      Key: key,
-      ContentType: input.fileType,
-      ContentLength: input.fileSize,
-    })
-
-    return { key, uploadUrl: await getSignedUrl(client, command, { expiresIn: 300 }) }
-  })
-
 const updateAvatar = protectedProcedure
   .input(UpdateAvatarInputSchema)
   .output(z.void())
   .handler(async ({ input, context }) => {
-    const prefix = `avatars/${context.session.user.id}/`
-    if (!input.key.startsWith(prefix) || !/^[\da-f-]{36}\.(?:jpg|png|webp)$/.test(input.key.slice(prefix.length))) {
-      throw new ORPCError('BAD_REQUEST')
+    const bytes = Buffer.from(await input.arrayBuffer())
+    const image = sharp(bytes, { animated: true, limitInputPixels: 16_777_216 })
+
+    const { format } = await image.metadata().catch(() => {
+      throw new ORPCError('BAD_REQUEST', { message: 'Invalid avatar image.' })
+    })
+
+    if (`image/${format}` !== input.type) {
+      throw new ORPCError('BAD_REQUEST', { message: 'Avatar content does not match its media type.' })
     }
+
+    // Decode the pixels as well as the header before allowing the original file into storage.
+    await image
+      .raw()
+      .toBuffer()
+      .catch(() => {
+        throw new ORPCError('BAD_REQUEST', { message: 'Invalid avatar image.' })
+      })
 
     const { client, bucketName, publicUrl } = getCloudflareR2()
-    const object = await client.send(new HeadObjectCommand({ Bucket: bucketName, Key: input.key }))
-    if (
-      !object.ContentLength ||
-      object.ContentLength > AVATAR_MAX_FILE_SIZE ||
-      !AVATAR_MIME_TYPES.some((type) => type === object.ContentType)
-    ) {
-      throw new ORPCError('BAD_REQUEST')
-    }
-
-    await context.auth.api.updateUser({ headers: context.headers, body: { image: `${publicUrl}/${input.key}` } })
+    const extension = format === 'jpeg' ? 'jpg' : format
+    const key = `avatars/${context.session.user.id}/${randomUUID()}.${extension}`
+    await client.send(new PutObjectCommand({ Bucket: bucketName, Key: key, Body: bytes, ContentType: input.type }))
+    await context.auth.api.updateUser({ headers: context.headers, body: { image: `${publicUrl}/${key}` } })
   })
 
-export const accountRouter = { listSessions, revokeSession, updateName, createAvatarUpload, updateAvatar }
+export const accountRouter = { listSessions, revokeSession, updateName, updateAvatar }

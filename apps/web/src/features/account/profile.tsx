@@ -1,11 +1,6 @@
 import type { Session } from '@repo/auth'
 
-import {
-  AVATAR_MAX_FILE_SIZE,
-  AVATAR_MIME_TYPES,
-  AvatarUploadInputSchema,
-  UpdateNameInputSchema,
-} from '@repo/api/schema/account'
+import { AVATAR_MAX_FILE_SIZE, AVATAR_MIME_TYPES, UpdateNameInputSchema } from '@repo/api/schema/account'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -29,7 +24,7 @@ import { useId, useRef, useState } from 'react'
 import { UserAvatar } from '@/components/user-avatar'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { authClient } from '@/lib/auth-client'
-import { client, orpc } from '@/lib/orpc-client'
+import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
 type ProfileProps = {
@@ -198,26 +193,17 @@ function UpdateAvatar() {
   const inputRef = useRef<HTMLInputElement>(null)
   const { refetch } = authClient.useSession()
   const queryClient = useQueryClient()
-  const upload = useMutation({
-    mutationFn: async (file: File) => {
-      const { key, uploadUrl } = await client.account.createAvatarUpload(
-        AvatarUploadInputSchema.parse({
-          fileType: file.type,
-          fileSize: file.size,
-        }),
-      )
-      const response = await fetch(uploadUrl, { method: 'PUT', headers: { 'Content-Type': file.type }, body: file })
-      if (!response.ok) throw new Error('Failed to upload avatar')
-      await client.account.updateAvatar({ key })
-    },
-    onSuccess: async () => {
-      await refetch()
-      toast.add({ type: 'success', title: m.success_avatar_updated() })
-      void queryClient.invalidateQueries({ queryKey: orpc.comments.key() })
-      void queryClient.invalidateQueries({ queryKey: orpc.guestbook.key() })
-    },
-    onError: () => toast.add({ type: 'error', title: m.error_update_avatar_failed() }),
-  })
+  const upload = useMutation(
+    orpc.account.updateAvatar.mutationOptions({
+      onSuccess: async () => {
+        await refetch()
+        toast.add({ type: 'success', title: m.success_avatar_updated() })
+        void queryClient.invalidateQueries({ queryKey: orpc.comments.key() })
+        void queryClient.invalidateQueries({ queryKey: orpc.guestbook.key() })
+      },
+      onError: () => toast.add({ type: 'error', title: m.error_update_avatar_failed() }),
+    }),
+  )
 
   return (
     <div>

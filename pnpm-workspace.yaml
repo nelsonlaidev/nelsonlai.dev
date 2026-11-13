@@ -17,6 +17,7 @@ catalog:
   drizzle-orm: 1.0.0-rc.5
   lucide-react: 1.61.0
   react: 19.3.1
+  sharp: 0.35.5
   tailwindcss: 4.3.3
   typescript: 6.0.3
   varlock: 1.24.0
@@ -64,7 +65,6 @@ minimumReleaseAgeExclude:
   - '@aws-sdk/credential-provider-web-identity@3.972.86'
   - '@aws-sdk/middleware-sdk-s3@3.972.85'
   - '@aws-sdk/nested-clients@3.997.54'
-  - '@aws-sdk/s3-request-presigner@3.1161.0'
   - '@aws-sdk/signature-v4-multi-region@3.996.51'
   - '@aws-sdk/token-providers@3.1161.0'
   - yet-another-react-lightbox@3.33.0
