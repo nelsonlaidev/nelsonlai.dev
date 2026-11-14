@@ -13,15 +13,11 @@ export function AccountLayout(props: AccountLayoutProps) {
 
   return (
     <OceanPage>
-      <div className='mb-10 flex items-start justify-between gap-4 border-b pb-8'>
-        <PageHeader
-          title={m.common_labels_account()}
-          description={m.account_description()}
-          className='mb-0 max-w-xl min-w-0 sm:mb-0'
-        />
+      <div className='flex items-start justify-between'>
+        <PageHeader title={m.common_labels_account()} description={m.account_description()} />
         <AccountMobileNav />
       </div>
-      <div className='gap-10 md:flex'>
+      <div className='gap-12 md:flex'>
         <AccountSidebar />
         <div className='min-w-0 flex-1 space-y-12'>{children}</div>
       </div>

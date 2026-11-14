@@ -3,8 +3,6 @@ import { isIP } from 'node:net'
 
 import { PutObjectCommand } from '@aws-sdk/client-s3'
 import { ORPCError } from '@orpc/server'
-import { sessions } from '@repo/db/schema/auth'
-import { and, eq, gt } from 'drizzle-orm'
 import sharp from 'sharp'
 import * as z from 'zod'
 
@@ -44,29 +42,22 @@ async function resolveSessionLocation(ip: string | null) {
 }
 
 const listSessions = protectedProcedure.output(AccountSessionsSchema).handler(async ({ context }) => {
-  const activeSessions = await context.db
-    .select({
-      id: sessions.id,
-      ipAddress: sessions.ipAddress,
-      userAgent: sessions.userAgent,
-      updatedAt: sessions.updatedAt,
-    })
-    .from(sessions)
-    .where(and(eq(sessions.userId, context.session.user.id), gt(sessions.expiresAt, new Date())))
+  const activeSessions = await context.auth.api.listSessions({ headers: context.headers })
 
   const locations = new Map(
     await Promise.all(
       [...new Set(activeSessions.map((session) => session.ipAddress))].map(
-        async (ip) => [ip, await resolveSessionLocation(ip)] as const,
+        async (ip) => [ip, await resolveSessionLocation(ip ?? null)] as const,
       ),
     ),
   )
 
   return activeSessions
     .map((session) => ({
-      ...session,
-      ipAddress: session.ipAddress === '' ? null : session.ipAddress,
-      userAgent: session.userAgent === '' ? null : session.userAgent,
+      id: session.id,
+      updatedAt: session.updatedAt,
+      ipAddress: session.ipAddress === '' ? null : (session.ipAddress ?? null),
+      userAgent: session.userAgent === '' ? null : (session.userAgent ?? null),
       isCurrentSession: session.id === context.session.session.id,
       location: locations.get(session.ipAddress) ?? null,
     }))
@@ -85,10 +76,8 @@ const revokeSession = protectedProcedure
     if (isCurrentSession) {
       await context.auth.api.signOut({ headers: context.headers })
     } else {
-      const [session] = await context.db
-        .select({ token: sessions.token })
-        .from(sessions)
-        .where(and(eq(sessions.id, input.id), eq(sessions.userId, context.session.user.id)))
+      const activeSessions = await context.auth.api.listSessions({ headers: context.headers })
+      const session = activeSessions.find((session) => session.id === input.id)
 
       if (!session) throw new ORPCError('NOT_FOUND')
 

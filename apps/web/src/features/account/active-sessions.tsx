@@ -13,9 +13,9 @@ import { BotIcon, InfoIcon, MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } fr
 import { Skeleton } from 'skullet/react'
 import { useFormatter } from 'use-intl'
 
-import { useSessionEnded } from '@/features/auth/use-session-ended'
+import { useSignOut } from '@/features/auth/use-sign-out'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
-import { orpc } from '@/lib/orpc-client'
+import { client } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
 import { accountSessionsQueryOptions } from './account.queries'
@@ -36,20 +36,17 @@ type ActiveSessionsProps = {
 export function ActiveSessions(props: ActiveSessionsProps) {
   const { userId } = props
   const queryClient = useQueryClient()
-  const reconcileSessionEnded = useSessionEnded()
+  const { isSigningOut, signOut } = useSignOut({ reason: 'session-revoked' })
   const options = accountSessionsQueryOptions(userId)
   const sessions = useQuery(options)
-  const revoke = useMutation(
-    orpc.account.revokeSession.mutationOptions({
-      onSuccess: async ({ isCurrentSession }) => {
-        toast.add({ type: 'success', title: m.success_session_revoked() })
-        await (isCurrentSession
-          ? reconcileSessionEnded()
-          : queryClient.invalidateQueries({ queryKey: options.queryKey }))
-      },
-      onError: () => toast.add({ type: 'error', title: m.error_something_went_wrong() }),
-    }),
-  )
+  const revoke = useMutation({
+    mutationFn: async (session: AccountSession) => client.account.revokeSession({ id: session.id }),
+    onSuccess: async () => {
+      toast.add({ type: 'success', title: m.success_session_revoked() })
+      await queryClient.invalidateQueries({ queryKey: options.queryKey })
+    },
+    onError: () => toast.add({ type: 'error', title: m.error_something_went_wrong() }),
+  })
 
   return (
     <section className='space-y-6' aria-labelledby='sessions-heading' aria-busy={sessions.isPending}>
@@ -73,10 +70,18 @@ export function ActiveSessions(props: ActiveSessionsProps) {
                 <SessionCard
                   key={session.id}
                   session={session}
-                  isRevoking={revoke.isPending && revoke.variables.id === session.id}
-                  disabled={sessions.isPending || revoke.isPending}
+                  isRevoking={
+                    (isSigningOut && session.isCurrentSession) ||
+                    (revoke.isPending && revoke.variables.id === session.id)
+                  }
+                  disabled={sessions.isPending || revoke.isPending || isSigningOut}
                   onRevoke={() => {
-                    if (!sessions.isPending && !revoke.isPending) revoke.mutate({ id: session.id })
+                    if (sessions.isPending || revoke.isPending || isSigningOut) return
+                    if (session.isCurrentSession) {
+                      void signOut()
+                    } else {
+                      revoke.mutate(session)
+                    }
                   }}
                 />
               ))}

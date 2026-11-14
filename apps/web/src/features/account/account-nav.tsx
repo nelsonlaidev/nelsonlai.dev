@@ -21,7 +21,7 @@ export function AccountMobileNav() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger
-        render={<Button variant='outline' size='icon' className='size-11 md:hidden' />}
+        render={<Button variant='outline' size='icon-lg' className='md:hidden' />}
         aria-label={m.account_open_navigation_menu()}
       >
         <MenuIcon aria-hidden='true' />
@@ -31,7 +31,7 @@ export function AccountMobileNav() {
           <DrawerTitle>{m.account_mobile_nav_title()}</DrawerTitle>
           <DrawerDescription>{m.account_mobile_nav_description()}</DrawerDescription>
         </DrawerHeader>
-        <ul className='p-8'>
+        <ul className='p-4'>
           {ACCOUNT_LINKS.map((link) => (
             <li key={link.to}>
               <DrawerClose
@@ -58,7 +58,7 @@ export function AccountSidebar() {
             <Link
               to={link.to}
               activeOptions={{ exact: true }}
-              className='block rounded-md border border-transparent px-3 py-2.5 text-muted-foreground transition-[background-color,border-color,color] hover:bg-accent aria-[current=page]:border-border aria-[current=page]:bg-accent aria-[current=page]:text-foreground'
+              className='block rounded-md px-3 py-2.5 text-muted-foreground transition-[background-color,border-color,color] hover:bg-accent aria-[current=page]:bg-accent aria-[current=page]:text-foreground'
             >
               {link.label()}
             </Link>
