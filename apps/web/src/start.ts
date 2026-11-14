@@ -34,15 +34,11 @@ function getContentSecurityPolicy() {
   ].join('; ')
 }
 
-const securityMiddleware = createMiddleware().server(async ({ next, request }) => {
+const securityMiddleware = createMiddleware().server(async ({ next }) => {
   setResponseHeader('Referrer-Policy', 'no-referrer')
   setResponseHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
   setResponseHeader('X-Content-Type-Options', 'nosniff')
   setResponseHeader('X-Frame-Options', 'DENY')
-
-  if (request.method === 'GET' && request.headers.get('accept')?.includes('text/html')) {
-    setResponseHeader('Cache-Control', 'private, no-store')
-  }
 
   if (import.meta.env.PROD) {
     setResponseHeader('Content-Security-Policy', getContentSecurityPolicy())

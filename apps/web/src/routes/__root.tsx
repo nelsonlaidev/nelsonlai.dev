@@ -44,6 +44,7 @@ const INTL_FORMATS = {
 } satisfies Formats
 
 export const Route = createRootRouteWithContext<RouterContext>()({
+  headers: () => ({ 'Cache-Control': 'private, no-store' }),
   head: () => {
     const description = m.metadata_site_description()
     const fallbackImage = getLocalizedUrl('/og/image.webp', getLocale())
