@@ -3,8 +3,8 @@ import { getRequestHeaders, setResponseHeader } from '@tanstack/react-start/serv
 
 import { auth } from '@/lib/auth'
 
-export const getAccountUser = createServerFn({ method: 'GET' }).handler(async () => {
-  setResponseHeader('Cache-Control', 'private, no-store')
+export const getUser = createServerFn({ method: 'GET' }).handler(async () => {
+  setResponseHeader('Cache-Control', 'no-store')
 
   const headers = getRequestHeaders()
   const session = await auth.api.getSession({ headers })

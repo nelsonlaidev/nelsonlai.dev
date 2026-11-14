@@ -1,11 +1,11 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
 import { AdminLayout } from '@/features/admin/admin-layout'
-import { getAccountUser } from '@/features/auth/auth.functions'
+import { getUser } from '@/features/auth/auth.functions'
 
 export const Route = createFileRoute('/admin')({
   beforeLoad: async () => {
-    const user = await getAccountUser()
+    const user = await getUser()
 
     if (user?.role !== 'admin') throw redirect({ to: '/' })
 

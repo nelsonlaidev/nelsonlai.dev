@@ -1,11 +1,11 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
 import { AccountLayout } from '@/features/account/account-layout'
-import { getAccountUser } from '@/features/auth/auth.functions'
+import { getUser } from '@/features/auth/auth.functions'
 
 export const Route = createFileRoute('/_main/account')({
   beforeLoad: async () => {
-    const user = await getAccountUser()
+    const user = await getUser()
 
     if (!user) throw redirect({ to: '/' })
 
