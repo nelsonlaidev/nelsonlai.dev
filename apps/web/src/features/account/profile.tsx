@@ -21,7 +21,7 @@ import { toast } from '@repo/ui/components/toast'
 import { useForm } from '@tanstack/react-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from '@tanstack/react-router'
-import { useRef, useState } from 'react'
+import { useId, useRef, useState } from 'react'
 
 import { UserAvatar } from '@/components/user-avatar'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
@@ -79,6 +79,8 @@ type EditNameProps = {
 
 function EditName(props: EditNameProps) {
   const { name } = props
+  const inputId = useId()
+  const errorId = `${inputId}-error`
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const { refetch } = authClient.useSession()
@@ -143,9 +145,9 @@ function EditName(props: EditNameProps) {
 
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>{m.account_display_name()}</FieldLabel>
+                    <FieldLabel htmlFor={inputId}>{m.account_display_name()}</FieldLabel>
                     <Input
-                      id={field.name}
+                      id={inputId}
                       name={field.name}
                       autoComplete='name'
                       value={field.state.value}
@@ -154,12 +156,12 @@ function EditName(props: EditNameProps) {
                         field.handleChange(event.target.value)
                       }}
                       aria-invalid={isInvalid}
-                      aria-describedby={isInvalid ? `${field.name}-error` : undefined}
+                      aria-describedby={isInvalid ? errorId : undefined}
                       disabled={update.isPending}
                     />
                     {isInvalid && (
                       <FieldError
-                        id={`${field.name}-error`}
+                        id={errorId}
                         errors={field.state.meta.errors.map((error) => {
                           if (error && 'code' in error) {
                             if (error.code === 'too_small') return { message: m.error_name_cannot_be_empty() }
@@ -175,7 +177,7 @@ function EditName(props: EditNameProps) {
             </form.Field>
           </FieldGroup>
           <AlertDialogFooter>
-            <AlertDialogCancel render={<Button variant='outline' disabled={update.isPending} />}>
+            <AlertDialogCancel render={<Button type='button' variant='outline' disabled={update.isPending} />}>
               {m.common_cancel()}
             </AlertDialogCancel>
             <Button type='submit' disabled={update.isPending}>

@@ -37,6 +37,8 @@ type NotificationSettingsFormProps = NotificationSettingsProps & {
 function NotificationSettingsForm(props: NotificationSettingsFormProps) {
   const { userId, repliesEnabled } = props
   const inputId = useId()
+  const descriptionId = `${inputId}-description`
+  const formId = `${inputId}-form`
   const queryClient = useQueryClient()
   const update = useMutation(
     orpc.notifications.setPreference.mutationOptions({
@@ -51,7 +53,9 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
   const form = useForm({
     defaultValues: { repliesEnabled },
     onSubmit: ({ value }) => {
-      if (!update.isPending) update.mutate(value)
+      if (update.isPending) return
+
+      update.mutate(value)
     },
   })
 
@@ -59,7 +63,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
     <Card>
       <CardContent className='wrap-anywhere'>
         <form
-          id={`${inputId}-form`}
+          id={formId}
           className='space-y-6'
           aria-busy={update.isPending}
           onSubmit={async (event) => {
@@ -73,9 +77,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
               <Field orientation='horizontal'>
                 <FieldContent>
                   <FieldLabel htmlFor={inputId}>{m.settings_reply_notification()}</FieldLabel>
-                  <FieldDescription id={`${inputId}-description`}>
-                    {m.settings_reply_notification_description()}
-                  </FieldDescription>
+                  <FieldDescription id={descriptionId}>{m.settings_reply_notification_description()}</FieldDescription>
                 </FieldContent>
                 <Switch
                   id={inputId}
@@ -83,7 +85,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
                   checked={field.state.value}
                   onBlur={field.handleBlur}
                   onCheckedChange={field.handleChange}
-                  aria-describedby={`${inputId}-description`}
+                  aria-describedby={descriptionId}
                   disabled={update.isPending}
                 />
               </Field>
@@ -106,7 +108,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
                 {m.common_reset()}
               </Button>
             )}
-            <Button type='submit' form={`${inputId}-form`} disabled={!isChanged || update.isPending}>
+            <Button type='submit' form={formId} disabled={!isChanged || update.isPending}>
               {update.isPending && <Spinner />}
               {m.common_save()}
             </Button>

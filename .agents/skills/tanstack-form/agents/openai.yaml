@@ -1,0 +1,3 @@
+interface:
+  display_name: 'TanStack Form'
+  short_description: 'Consistent shadcn forms with accessible field errors'

@@ -22,7 +22,8 @@ type MessageBoxProps = {
 
 export function MessageBox(props: MessageBoxProps) {
   const { user, isSigningOut, onSignOut } = props
-  const errorId = useId()
+  const inputId = useId()
+  const errorId = `${inputId}-error`
   const queryClient = useQueryClient()
 
   const form = useForm({
@@ -30,17 +31,7 @@ export function MessageBox(props: MessageBoxProps) {
       body: '',
     },
     validators: {
-      onSubmit: ({ value }) => {
-        const result = CreateGuestbookMessageInputSchema.safeParse(value, {
-          error: (issue) => {
-            if (issue.code === 'too_small') return m.error_message_cannot_be_empty()
-            if (issue.code === 'too_big') return m.error_message_too_long({ limit: Number(issue.maximum) })
-            return issue.message
-          },
-        })
-
-        return result.success ? undefined : { fields: { body: result.error.issues } }
-      },
+      onSubmit: CreateGuestbookMessageInputSchema,
     },
     onSubmit: ({ value }) => {
       if (isBusy) return
@@ -52,12 +43,7 @@ export function MessageBox(props: MessageBoxProps) {
     orpc.guestbook.create.mutationOptions({
       onSuccess: () => {
         form.reset()
-
-        toast.add({
-          type: 'success',
-          title: m.success_message_created(),
-        })
-
+        toast.add({ type: 'success', title: m.success_message_created() })
         void queryClient.invalidateQueries({ queryKey: orpc.guestbook.list.key() })
       },
     }),
@@ -65,18 +51,20 @@ export function MessageBox(props: MessageBoxProps) {
 
   const isBusy = creation.isPending || isSigningOut
 
-  async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
-    event.preventDefault()
-    await form.handleSubmit()
-  }
-
   return (
     <div className='rounded-xl border bg-card/10 px-5 py-6 sm:p-8'>
       <div className='mb-6 flex items-center gap-3'>
         <UserAvatar id={user.id} name={user.name} image={user.image} size='lg' />
         <span>{user.name}</span>
       </div>
-      <form onSubmit={handleSubmit} className='w-full space-y-4' aria-busy={isBusy}>
+      <form
+        className='w-full space-y-4'
+        aria-busy={isBusy}
+        onSubmit={async (event) => {
+          event.preventDefault()
+          await form.handleSubmit()
+        }}
+      >
         <FieldGroup>
           <form.Field name='body'>
             {(field) => {
@@ -84,11 +72,11 @@ export function MessageBox(props: MessageBoxProps) {
 
               return (
                 <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name} className='sr-only'>
+                  <FieldLabel htmlFor={inputId} className='sr-only'>
                     {m.guestbook_placeholder()}
                   </FieldLabel>
                   <Textarea
-                    id={field.name}
+                    id={inputId}
                     name={field.name}
                     value={field.state.value}
                     onBlur={field.handleBlur}
@@ -102,7 +90,20 @@ export function MessageBox(props: MessageBoxProps) {
                     disabled={isBusy}
                     className='max-h-96 min-h-36'
                   />
-                  {isInvalid && <FieldError id={errorId} errors={field.state.meta.errors} />}
+                  {isInvalid && (
+                    <FieldError
+                      id={errorId}
+                      errors={field.state.meta.errors.map((error) => {
+                        if (error && 'code' in error) {
+                          if (error.code === 'too_small') return { message: m.error_message_cannot_be_empty() }
+                          if (error.code === 'too_big') {
+                            return { message: m.error_message_too_long({ limit: GUESTBOOK_MESSAGE_MAX_LENGTH }) }
+                          }
+                        }
+                        return error
+                      })}
+                    />
+                  )}
                 </Field>
               )
             }}
@@ -123,7 +124,7 @@ export function MessageBox(props: MessageBoxProps) {
           )}
         </form.Subscribe>
         <div className='flex flex-col-reverse items-stretch gap-3'>
-          <Button variant='ghost' onClick={onSignOut} disabled={isBusy} className='text-link'>
+          <Button type='button' variant='ghost' onClick={onSignOut} disabled={isBusy} className='text-link'>
             {m.common_sign_out()}
           </Button>
           <Button variant='outline' size='xl' type='submit' disabled={isBusy}>
