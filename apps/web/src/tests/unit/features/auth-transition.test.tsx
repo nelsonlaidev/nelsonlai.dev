@@ -34,7 +34,7 @@ const fixture = vi.hoisted(() => ({
   >(),
   toast: vi.fn<(message: ToastOptions) => void>(),
 }))
-vi.mock('@/lib/auth-client', () => ({
+vi.mock('@repo/auth/client', () => ({
   authClient: { signOut: fixture.signOut },
 }))
 vi.mock('@/hooks/use-formatted-date', () => ({ useFormattedDate: () => 'Fixture date' }))

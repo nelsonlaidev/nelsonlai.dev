@@ -16,6 +16,7 @@
   "account_open_navigation_menu": "ナビゲーションメニューを開く",
   "account_profile": "プロフィール",
   "account_revoke_session": "取り消す",
+  "account_sessions_sign_in_required": "アカウントの安全を守るため、有効なセッションを確認・管理するには、もう一度サインインしてください。",
   "account_this_device": "このデバイス",
   "account_update_avatar": "アバターを更新",
   "admin_comments_table_comment": "コメント",

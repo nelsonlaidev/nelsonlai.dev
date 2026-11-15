@@ -9,6 +9,8 @@ import { tanstackStartCookies } from 'better-auth/tanstack-start'
 
 import { ENV } from './env'
 
+export { isAPIError } from 'better-auth/api'
+
 function getSocialProviders(): SocialProviders {
   const providers: SocialProviders = {}
 

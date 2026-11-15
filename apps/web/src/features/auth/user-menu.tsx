@@ -1,3 +1,4 @@
+import { authClient } from '@repo/auth/client'
 import { Button } from '@repo/ui/components/button'
 import { DialogTrigger } from '@repo/ui/components/dialog'
 import {
@@ -12,7 +13,6 @@ import { LogOutIcon, ShieldIcon, UserCircleIcon } from 'lucide-react'
 import { Skeleton } from 'skullet/react'
 
 import { UserAvatar } from '@/components/user-avatar'
-import { authClient } from '@/lib/auth-client'
 import { m } from '@/paraglide/messages'
 
 import { signInDialogHandle } from './sign-in-dialog'

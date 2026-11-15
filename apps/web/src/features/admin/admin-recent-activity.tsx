@@ -24,7 +24,7 @@ export function AdminRecentActivity() {
   const { data, isError } = useQuery(orpc.admin.recentActivity.queryOptions())
 
   return (
-    <Card className='border shadow-none ring-0'>
+    <Card>
       <CardHeader>
         <CardTitle>{m.admin_dashboard_recent_activity_title()}</CardTitle>
       </CardHeader>

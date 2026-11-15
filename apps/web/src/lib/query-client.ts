@@ -8,6 +8,7 @@ export function createQueryClient() {
     queryCache: new QueryCache({
       onError: (error, query) => {
         if (import.meta.env.SSR) return
+        if (query.meta?.errorHandledLocally) return
         if (query.state.data === undefined && query.meta?.initialErrorHandledByBoundary) return
 
         toast.add({

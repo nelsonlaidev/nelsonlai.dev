@@ -16,6 +16,7 @@
   "account_open_navigation_menu": "打开导航菜单",
   "account_profile": "个人资料",
   "account_revoke_session": "结束",
+  "account_sessions_sign_in_required": "为了保障您的账户安全，请重新登录以查看和管理活跃会话。",
   "account_this_device": "此设备",
   "account_update_avatar": "更新头像",
   "admin_comments_table_comment": "评论",

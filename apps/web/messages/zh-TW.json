@@ -16,6 +16,7 @@
   "account_open_navigation_menu": "開啟導覽選單",
   "account_profile": "個人資料",
   "account_revoke_session": "終止",
+  "account_sessions_sign_in_required": "為了保障您的帳戶安全，請重新登入以查看及管理使用中的工作階段。",
   "account_this_device": "此裝置",
   "account_update_avatar": "更新頭像",
   "admin_comments_table_comment": "評論",

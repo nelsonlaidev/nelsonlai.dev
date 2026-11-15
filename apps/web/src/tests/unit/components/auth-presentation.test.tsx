@@ -26,7 +26,7 @@ const fixture = vi.hoisted(() => ({
   >(),
   toast: vi.fn<(message: ToastOptions) => void>(),
 }))
-vi.mock('@/lib/auth-client', () => ({
+vi.mock('@repo/auth/client', () => ({
   authClient: { getLastUsedLoginMethod: () => 'github', signIn: { social: fixture.signIn } },
 }))
 vi.mock('@repo/ui/components/toast', () => ({ toast: { add: fixture.toast } }))

@@ -10,7 +10,7 @@ const fixture = vi.hoisted(() => ({
   pending: false,
   create: vi.fn<() => Promise<never>>(),
 }))
-vi.mock('@/lib/auth-client', () => ({
+vi.mock('@repo/auth/client', () => ({
   authClient: {
     useSession: () => ({
       data: fixture.signedIn ? { user: { id: 'local-fixture' } } : null,

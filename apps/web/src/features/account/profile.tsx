@@ -1,6 +1,7 @@
 import type { Session } from '@repo/auth'
 
 import { AVATAR_MAX_FILE_SIZE, AVATAR_MIME_TYPES, UpdateNameInputSchema } from '@repo/api/schema/account'
+import { authClient } from '@repo/auth/client'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -13,17 +14,17 @@ import {
 } from '@repo/ui/components/alert-dialog'
 import { Button } from '@repo/ui/components/button'
 import { Card, CardContent } from '@repo/ui/components/card'
-import { Field, FieldError, FieldLabel } from '@repo/ui/components/field'
+import { Field, FieldError, FieldGroup, FieldLabel } from '@repo/ui/components/field'
 import { Input } from '@repo/ui/components/input'
 import { Spinner } from '@repo/ui/components/spinner'
 import { toast } from '@repo/ui/components/toast'
 import { useForm } from '@tanstack/react-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useId, useRef, useState } from 'react'
+import { useRouter } from '@tanstack/react-router'
+import { useRef, useState } from 'react'
 
 import { UserAvatar } from '@/components/user-avatar'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
-import { authClient } from '@/lib/auth-client'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -40,7 +41,7 @@ export function Profile(props: ProfileProps) {
       <h2 id='profile-heading' className='text-xl/relaxed font-medium tracking-tight'>
         {m.account_profile()}
       </h2>
-      <Card className='border shadow-none ring-0'>
+      <Card>
         <CardContent className='space-y-6 wrap-anywhere'>
           <div className='flex flex-wrap items-center justify-between gap-4'>
             <div className='space-y-2'>
@@ -78,14 +79,15 @@ type EditNameProps = {
 
 function EditName(props: EditNameProps) {
   const { name } = props
+  const router = useRouter()
   const [open, setOpen] = useState(false)
-  const inputId = useId()
   const { refetch } = authClient.useSession()
   const queryClient = useQueryClient()
   const update = useMutation(
     orpc.account.updateName.mutationOptions({
       onSuccess: async () => {
         await refetch()
+        await router.invalidate()
         setOpen(false)
         toast.add({ type: 'success', title: m.success_name_updated() })
         void queryClient.invalidateQueries({ queryKey: orpc.comments.key() })
@@ -100,17 +102,7 @@ function EditName(props: EditNameProps) {
       name,
     },
     validators: {
-      onSubmit: ({ value }) => {
-        const parsed = UpdateNameInputSchema.safeParse(value, {
-          error: (issue) => {
-            if (issue.code === 'too_small') return m.error_name_cannot_be_empty()
-            if (issue.code === 'too_big') return m.error_name_too_long()
-            return issue.message
-          },
-        })
-
-        return parsed.success ? undefined : { fields: { name: parsed.error.issues } }
-      },
+      onSubmit: UpdateNameInputSchema,
     },
     onSubmit: ({ value }) => {
       if (update.isPending) return
@@ -132,15 +124,10 @@ function EditName(props: EditNameProps) {
       }}
     >
       <AlertDialogTrigger render={<Button variant='outline' />}>{m.account_edit_name()}</AlertDialogTrigger>
-      <AlertDialogContent
-        aria-busy={update.isPending}
-        className='max-h-[calc(100dvh-32px)] overflow-y-auto border shadow-md ring-0 data-[size=default]:max-w-[min(480px,calc(100vw-32px))] data-[size=sm]:max-w-[min(480px,calc(100vw-32px))] sm:data-[size=default]:max-w-[min(480px,calc(100vw-32px))]'
-      >
+      <AlertDialogContent aria-busy={update.isPending}>
         <AlertDialogHeader>
-          <AlertDialogTitle className='pr-8 leading-tight tracking-tight'>{m.account_edit_name()}</AlertDialogTitle>
-          <AlertDialogDescription className='leading-relaxed'>
-            {m.account_edit_name_description()}
-          </AlertDialogDescription>
+          <AlertDialogTitle>{m.account_edit_name()}</AlertDialogTitle>
+          <AlertDialogDescription>{m.account_edit_name_description()}</AlertDialogDescription>
         </AlertDialogHeader>
         <form
           className='space-y-6'
@@ -149,37 +136,50 @@ function EditName(props: EditNameProps) {
             await form.handleSubmit()
           }}
         >
-          <form.Field name='name'>
-            {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+          <FieldGroup>
+            <form.Field name='name'>
+              {(field) => {
+                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
 
-              return (
-                <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={inputId}>{m.account_display_name()}</FieldLabel>
-                  <Input
-                    id={inputId}
-                    name={field.name}
-                    autoComplete='name'
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(event) => {
-                      field.handleChange(event.target.value)
-                    }}
-                    aria-invalid={isInvalid}
-                    aria-describedby={isInvalid ? `${inputId}-error` : undefined}
-                    disabled={update.isPending}
-                  />
-                  {isInvalid && <FieldError id={`${inputId}-error`} errors={field.state.meta.errors} />}
-                </Field>
-              )
-            }}
-          </form.Field>
+                return (
+                  <Field data-invalid={isInvalid}>
+                    <FieldLabel htmlFor={field.name}>{m.account_display_name()}</FieldLabel>
+                    <Input
+                      id={field.name}
+                      name={field.name}
+                      autoComplete='name'
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(event) => {
+                        field.handleChange(event.target.value)
+                      }}
+                      aria-invalid={isInvalid}
+                      aria-describedby={isInvalid ? `${field.name}-error` : undefined}
+                      disabled={update.isPending}
+                    />
+                    {isInvalid && (
+                      <FieldError
+                        id={`${field.name}-error`}
+                        errors={field.state.meta.errors.map((error) => {
+                          if (error && 'code' in error) {
+                            if (error.code === 'too_small') return { message: m.error_name_cannot_be_empty() }
+                            if (error.code === 'too_big') return { message: m.error_name_too_long() }
+                          }
+                          return error
+                        })}
+                      />
+                    )}
+                  </Field>
+                )
+              }}
+            </form.Field>
+          </FieldGroup>
           <AlertDialogFooter>
             <AlertDialogCancel render={<Button variant='outline' disabled={update.isPending} />}>
               {m.common_cancel()}
             </AlertDialogCancel>
             <Button type='submit' disabled={update.isPending}>
-              {update.isPending && <Spinner />}
+              {update.isPending && <Spinner data-icon='inline-start' />}
               {m.common_save()}
             </Button>
           </AlertDialogFooter>
@@ -190,6 +190,7 @@ function EditName(props: EditNameProps) {
 }
 
 function UpdateAvatar() {
+  const router = useRouter()
   const inputRef = useRef<HTMLInputElement>(null)
   const { refetch } = authClient.useSession()
   const queryClient = useQueryClient()
@@ -197,6 +198,7 @@ function UpdateAvatar() {
     orpc.account.updateAvatar.mutationOptions({
       onSuccess: async () => {
         await refetch()
+        await router.invalidate()
         toast.add({ type: 'success', title: m.success_avatar_updated() })
         void queryClient.invalidateQueries({ queryKey: orpc.comments.key() })
         void queryClient.invalidateQueries({ queryKey: orpc.guestbook.key() })
@@ -233,7 +235,7 @@ function UpdateAvatar() {
         }}
       />
       <Button variant='outline' disabled={upload.isPending} onClick={() => inputRef.current?.click()}>
-        {upload.isPending && <Spinner />}
+        {upload.isPending && <Spinner data-icon='inline-start' />}
         {m.account_update_avatar()}
       </Button>
     </div>

@@ -30,7 +30,7 @@ export function AdminStatsCards() {
   return (
     <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'>
       {STAT_ITEMS.map((item) => (
-        <Card key={item.field} size='sm' className='border shadow-none ring-0'>
+        <Card key={item.field} size='sm'>
           <CardHeader>
             <CardTitle className='flex items-center justify-between'>
               {item.label()} <item.icon className='size-4 text-muted-foreground' />

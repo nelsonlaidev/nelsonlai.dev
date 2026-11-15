@@ -1,4 +1,5 @@
 import { CreateCommentInputSchema } from '@repo/api/schema/comments'
+import { authClient } from '@repo/auth/client'
 import { Button } from '@repo/ui/components/button'
 import { DialogTrigger } from '@repo/ui/components/dialog'
 import { toast } from '@repo/ui/components/toast'
@@ -8,7 +9,6 @@ import { useState } from 'react'
 import { Skeleton } from 'skullet/react'
 
 import { signInDialogHandle } from '@/features/auth/sign-in-dialog'
-import { authClient } from '@/lib/auth-client'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'

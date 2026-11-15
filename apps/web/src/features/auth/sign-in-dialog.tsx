@@ -1,5 +1,6 @@
 import { SiGithub } from '@icons-pack/react-simple-icons'
 import { ParaglideMessage } from '@inlang/paraglide-js-react'
+import { authClient } from '@repo/auth/client'
 import { Badge } from '@repo/ui/components/badge'
 import { Button } from '@repo/ui/components/button'
 import {
@@ -16,7 +17,6 @@ import { toast } from '@repo/ui/components/toast'
 import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
 
-import { authClient } from '@/lib/auth-client'
 import { m } from '@/paraglide/messages'
 import { getLocale, localizeUrl } from '@/paraglide/runtime'
 

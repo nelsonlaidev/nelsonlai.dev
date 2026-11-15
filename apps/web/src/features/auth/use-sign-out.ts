@@ -1,7 +1,7 @@
+import { authClient } from '@repo/auth/client'
 import { toast } from '@repo/ui/components/toast'
 import { useRef, useState } from 'react'
 
-import { authClient } from '@/lib/auth-client'
 import { m } from '@/paraglide/messages'
 
 export function useSignOut(options: { reason?: 'sign-out' | 'session-revoked' } = {}) {

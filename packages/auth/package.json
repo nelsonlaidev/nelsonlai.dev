@@ -14,11 +14,13 @@
   "dependencies": {
     "@better-auth/drizzle-adapter": "1.7.14",
     "@repo/db": "workspace:*",
-    "better-auth": "1.7.14"
+    "better-auth": "1.7.14",
+    "react": "catalog:"
   },
   "devDependencies": {
     "@nelsonlaidev/typescript-config": "catalog:",
     "@total-typescript/ts-reset": "catalog:",
+    "@types/react": "catalog:",
     "typescript": "catalog:",
     "varlock": "catalog:"
   }

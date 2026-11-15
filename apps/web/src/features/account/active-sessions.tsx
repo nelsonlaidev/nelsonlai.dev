@@ -1,8 +1,10 @@
 import type { AccountSession } from './types'
 
+import { ORPCError } from '@orpc/client'
 import { Badge } from '@repo/ui/components/badge'
 import { Button } from '@repo/ui/components/button'
 import { Card, CardContent } from '@repo/ui/components/card'
+import { DialogTrigger } from '@repo/ui/components/dialog'
 import { InfoTip } from '@repo/ui/components/info-tip'
 import { Spinner } from '@repo/ui/components/spinner'
 import { toast } from '@repo/ui/components/toast'
@@ -13,6 +15,7 @@ import { BotIcon, InfoIcon, MonitorIcon, SmartphoneIcon, TabletIcon, TvIcon } fr
 import { Skeleton } from 'skullet/react'
 import { useFormatter } from 'use-intl'
 
+import { signInDialogHandle } from '@/features/auth/sign-in-dialog'
 import { useSignOut } from '@/features/auth/use-sign-out'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { client } from '@/lib/orpc-client'
@@ -45,24 +48,51 @@ export function ActiveSessions(props: ActiveSessionsProps) {
       toast.add({ type: 'success', title: m.success_session_revoked() })
       await queryClient.invalidateQueries({ queryKey: options.queryKey })
     },
-    onError: () => toast.add({ type: 'error', title: m.error_something_went_wrong() }),
   })
+  const requiresSignIn = [sessions.error, revoke.error].some(
+    (error) => error instanceof ORPCError && error.code === 'SESSION_NOT_FRESH',
+  )
 
   return (
     <section className='space-y-6' aria-labelledby='sessions-heading' aria-busy={sessions.isPending}>
       <h2 id='sessions-heading' className='text-xl/relaxed font-medium tracking-tight'>
         {m.account_active_sessions()}
       </h2>
-      {sessions.isError && <p role='alert'>{m.error_something_went_wrong()}</p>}
-      {(sessions.isPending || sessions.data) && (
+      {requiresSignIn ? (
+        <Card>
+          <CardContent className='space-y-4'>
+            <p>{m.account_sessions_sign_in_required()}</p>
+            <DialogTrigger handle={signInDialogHandle} render={<Button variant='outline' />}>
+              {m.common_sign_in()}
+            </DialogTrigger>
+          </CardContent>
+        </Card>
+      ) : (
+        (sessions.isError || revoke.isError) && (
+          <div role='alert' className='space-y-4'>
+            <p>{m.error_something_went_wrong()}</p>
+            {sessions.isError && (
+              <Button
+                variant='outline'
+                disabled={sessions.isFetching}
+                onClick={() => {
+                  void sessions.refetch()
+                }}
+              >
+                {sessions.isFetching && <Spinner data-icon='inline-start' />}
+                {m.common_retry()}
+              </Button>
+            )}
+          </div>
+        )
+      )}
+      {!requiresSignIn && (sessions.isPending || sessions.data) && (
         <Skeleton
           data={sessions.data}
           sample={SAMPLE_SESSIONS}
           label={m.common_aria_labels_loading()}
           empty={sessions.data?.length === 0}
-          emptyMessage={
-            <Card className='border py-12 text-center shadow-none ring-0'>{m.account_no_active_sessions()}</Card>
-          }
+          emptyMessage={<Card className='py-12 text-center'>{m.account_no_active_sessions()}</Card>}
         >
           {(items) => (
             <div className='space-y-4'>
@@ -118,7 +148,7 @@ function SessionCard(props: SessionCardProps) {
     format.dateTime(session.updatedAt, 'long', { timeZone: 'UTC' })
 
   return (
-    <Card className='border shadow-none ring-0'>
+    <Card>
       <CardContent className='flex flex-col justify-between gap-4 wrap-anywhere sm:flex-row sm:items-start'>
         <div className='flex min-w-0 gap-4'>
           <div className='hidden size-12 shrink-0 items-center justify-center rounded-full bg-secondary md:flex'>

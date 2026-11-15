@@ -1,6 +1,7 @@
 import type { Comment } from './types'
 
 import NumberFlow from '@number-flow/react'
+import { authClient } from '@repo/auth/client'
 import { Badge } from '@repo/ui/components/badge'
 import { Button } from '@repo/ui/components/button'
 import {
@@ -28,7 +29,6 @@ import { Skeleton } from 'skullet/react'
 import { Markdown } from '@/components/mdx/markdown'
 import { UserAvatar } from '@/components/user-avatar'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
-import { authClient } from '@/lib/auth-client'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 

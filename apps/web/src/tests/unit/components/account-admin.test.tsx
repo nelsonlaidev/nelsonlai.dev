@@ -30,7 +30,7 @@ vi.mock('@tanstack/react-router', () => ({
   Link: (props: MockLinkProps) => <a href={props.to}>{props.children}</a>,
   useRouter: () => ({ invalidate: vi.fn<() => Promise<void>>() }),
 }))
-vi.mock('@/lib/auth-client', () => ({ authClient: { useSession: () => ({ refetch: vi.fn<() => Promise<void>>() }) } }))
+vi.mock('@repo/auth/client', () => ({ authClient: { useSession: () => ({ refetch: vi.fn<() => Promise<void>>() }) } }))
 function query(key: string, queryFn: () => Promise<unknown>) {
   return {
     key: () => [key],
@@ -54,7 +54,7 @@ vi.mock('@/lib/orpc-client', () => {
 function setup(children: React.ReactNode) {
   return render(
     <IntlProvider locale='en' formats={{ dateTime: { long: { dateStyle: 'medium', timeStyle: 'short' } } }}>
-      <QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}>
+      <QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false, retryDelay: 0 } } })}>
         {children}
       </QueryClientProvider>
     </IntlProvider>,

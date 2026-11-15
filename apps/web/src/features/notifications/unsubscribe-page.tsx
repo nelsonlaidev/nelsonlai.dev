@@ -78,7 +78,7 @@ export function UnsubscribePage(props: UnsubscribePageProps) {
       <div className='relative mx-4 pt-32 pb-16 wrap-anywhere subpixel-antialiased sm:mx-auto sm:w-[min(84%,640px)] sm:pt-40'>
         <Skeleton loading={Boolean(token) && query.isPending} label={m.common_aria_labels_loading()}>
           <Card
-            className='w-full max-w-none rounded-xl border bg-surface p-6 shadow-none ring-0 md:p-8 lg:p-10 xl:p-12'
+            className='w-full max-w-none rounded-xl bg-surface p-6 md:p-8 lg:p-10 xl:p-12'
             aria-busy={unsubscribe.isPending}
           >
             <CardHeader className='space-y-4 px-0 text-center'>

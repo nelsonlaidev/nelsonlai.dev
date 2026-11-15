@@ -1,7 +1,7 @@
+import { authClient } from '@repo/auth/client'
 import { Skeleton } from 'skullet/react'
 
 import { useSignOut } from '@/features/auth/use-sign-out'
-import { authClient } from '@/lib/auth-client'
 import { m } from '@/paraglide/messages'
 
 import { MessageBox } from './message-box'

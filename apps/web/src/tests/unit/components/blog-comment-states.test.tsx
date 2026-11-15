@@ -14,7 +14,7 @@ type ChildrenProps = {
 }
 
 const fixture = vi.hoisted(() => ({ state: 'loading' as 'loading' | 'empty' | 'error' }))
-vi.mock('@/lib/auth-client', () => ({ authClient: { useSession: () => ({ data: null, isPending: false }) } }))
+vi.mock('@repo/auth/client', () => ({ authClient: { useSession: () => ({ data: null, isPending: false }) } }))
 vi.mock('@/features/comments/comments.queries', () => ({ commentListInfiniteOptions: () => ({}) }))
 vi.mock('@tanstack/react-query', async (importOriginal) => ({
   ...(await importOriginal<typeof ReactQuery>()),

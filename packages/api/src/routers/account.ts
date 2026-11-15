@@ -3,6 +3,7 @@ import { isIP } from 'node:net'
 
 import { PutObjectCommand } from '@aws-sdk/client-s3'
 import { ORPCError } from '@orpc/server'
+import { isAPIError } from '@repo/auth'
 import sharp from 'sharp'
 import * as z from 'zod'
 
@@ -41,7 +42,20 @@ async function resolveSessionLocation(ip: string | null) {
   }
 }
 
-const listSessions = protectedProcedure.output(AccountSessionsSchema).handler(async ({ context }) => {
+const accountSessionsProcedure = protectedProcedure
+  .errors({ SESSION_NOT_FRESH: { message: 'Sign in again to manage your active sessions.' } })
+  .use(async ({ next, errors }) => {
+    try {
+      return await next()
+    } catch (error) {
+      if (isAPIError(error) && error.body?.code === 'SESSION_NOT_FRESH') {
+        throw errors.SESSION_NOT_FRESH({ cause: error })
+      }
+      throw error
+    }
+  })
+
+const listSessions = accountSessionsProcedure.output(AccountSessionsSchema).handler(async ({ context }) => {
   const activeSessions = await context.auth.api.listSessions({ headers: context.headers })
 
   const locations = new Map(
@@ -67,7 +81,7 @@ const listSessions = protectedProcedure.output(AccountSessionsSchema).handler(as
     )
 })
 
-const revokeSession = protectedProcedure
+const revokeSession = accountSessionsProcedure
   .input(RevokeSessionInputSchema)
   .output(z.object({ isCurrentSession: z.boolean() }))
   .handler(async ({ input, context }) => {

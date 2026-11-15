@@ -16,7 +16,7 @@ const fixture = vi.hoisted(() => ({
   create: vi.fn<() => Promise<unknown>>(),
   toast: vi.fn<(options: unknown) => void>(),
 }))
-vi.mock('@/lib/auth-client', () => ({
+vi.mock('@repo/auth/client', () => ({
   authClient: {
     useSession: () => ({
       isPending: fixture.pending,

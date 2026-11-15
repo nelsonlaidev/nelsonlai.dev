@@ -27,6 +27,9 @@ const config = defineConfig({
       cookieName: 'PARAGLIDE_LOCALE',
       strategy: ['cookie', 'preferredLanguage', 'url', 'baseLocale'],
       routeStrategies: [
+        { match: '/api/:path(.*)?', exclude: true },
+        { match: '/robots.txt', exclude: true },
+        { match: '/sitemap.xml', exclude: true },
         {
           match: '/:locale(zh-TW|zh-CN|ja|es|pt-BR){/:path(.*)}?',
           strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale'],
