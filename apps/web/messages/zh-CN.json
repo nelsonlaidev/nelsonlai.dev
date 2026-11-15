@@ -204,6 +204,8 @@
   "error_too_many_requests": "请求过于频繁，请稍候一分钟再试。",
   "error_try_again": "再试一次",
   "error_update_avatar_failed": "更新头像失败，请再试一次。",
+  "error_update_name_failed": "更新显示名称失败，请重试。",
+  "error_update_notification_settings_failed": "保存通知设置失败，请重试。",
   "guestbook_message_placeholder": "这个地方让我想到…",
   "guestbook_message_submit": "留下留言",
   "guestbook_no_messages": "没有留言，快来成为第一位留言者！",

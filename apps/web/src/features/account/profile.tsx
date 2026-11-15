@@ -25,6 +25,7 @@ import { useId, useRef, useState } from 'react'
 
 import { UserAvatar } from '@/components/user-avatar'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
+import { getMutationErrorMessage } from '@/lib/get-mutation-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -95,7 +96,9 @@ function EditName(props: EditNameProps) {
         void queryClient.invalidateQueries({ queryKey: orpc.comments.key() })
         void queryClient.invalidateQueries({ queryKey: orpc.guestbook.key() })
       },
-      onError: () => toast.add({ type: 'error', title: m.error_something_went_wrong() }),
+      onError: (error) => {
+        toast.add({ type: 'error', title: getMutationErrorMessage(error, m.error_update_name_failed()) })
+      },
     }),
   )
 
@@ -205,7 +208,9 @@ function UpdateAvatar() {
         void queryClient.invalidateQueries({ queryKey: orpc.comments.key() })
         void queryClient.invalidateQueries({ queryKey: orpc.guestbook.key() })
       },
-      onError: () => toast.add({ type: 'error', title: m.error_update_avatar_failed() }),
+      onError: (error) => {
+        toast.add({ type: 'error', title: getMutationErrorMessage(error, m.error_update_avatar_failed()) })
+      },
     }),
   )
 

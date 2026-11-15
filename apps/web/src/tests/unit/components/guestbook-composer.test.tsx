@@ -123,7 +123,10 @@ describe('Guestbook session and submission fixtures', () => {
     setup()
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Keep this draft' } })
     fireEvent.click(screen.getByRole('button', { name: m.guestbook_message_submit() }))
-    expect(await screen.findByRole('alert')).toHaveTextContent(m.error_create_message_failed())
+    await waitFor(() => {
+      expect(fixture.toast).toHaveBeenCalledExactlyOnceWith({ type: 'error', title: m.error_create_message_failed() })
+    })
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
     expect(screen.getByRole('textbox')).toHaveValue('Keep this draft')
   })
   test('locks the composer while signing out', () => {

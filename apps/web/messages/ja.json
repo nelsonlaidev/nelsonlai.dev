@@ -204,6 +204,8 @@
   "error_too_many_requests": "リクエストが多すぎます。1分後に再度お試しください。",
   "error_try_again": "もう一度試す",
   "error_update_avatar_failed": "アバターの更新に失敗しました。もう一度お試しください。",
+  "error_update_name_failed": "表示名の更新に失敗しました。もう一度お試しください。",
+  "error_update_notification_settings_failed": "通知設定の保存に失敗しました。もう一度お試しください。",
   "guestbook_message_placeholder": "この場所から思い浮かぶのは…",
   "guestbook_message_submit": "メッセージを残す",
   "guestbook_no_messages": "メッセージがありません。最初のメッセージを残しましょう！",

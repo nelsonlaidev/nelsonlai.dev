@@ -213,6 +213,8 @@
   "error_too_many_requests": "Too many requests. Please try again in a minute.",
   "error_try_again": "Try again",
   "error_update_avatar_failed": "Failed to update avatar. Please try again.",
+  "error_update_name_failed": "Failed to update your display name. Please try again.",
+  "error_update_notification_settings_failed": "Failed to save notification settings. Please try again.",
   "guestbook_message_placeholder": "This place makes me think of…",
   "guestbook_message_submit": "Leave a message",
   "guestbook_no_messages": "No messages. Be the first to leave a message!",

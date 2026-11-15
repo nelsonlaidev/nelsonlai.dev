@@ -79,7 +79,24 @@ Prevent the browser's default submission and call `form.handleSubmit()`. Keep ne
 
 Choose a consistent pending-state owner. When using TanStack Form's `isSubmitting`, return or await the asynchronous operation. When following a React Query `mutate` pattern, use the mutation's `isPending` for loading state and duplicate-submit protection; awaiting `form.handleSubmit()` alone does not wait for that network operation. Handle failures, preserve entered values on failure, and reset or close only when the operation succeeds.
 
-Use `form.reset()` to restore defaults and clear metadata, or `form.reset(savedValues)` when establishing a new saved baseline. Preserve user edits during background data refreshes. Keep server errors visible through the project's existing alert or toast pattern, with field errors next to their controls when available.
+Use `form.reset()` to restore defaults and clear metadata, or `form.reset(savedValues)` when establishing a new saved baseline. Preserve user edits during background data refreshes.
+
+## Error feedback: project convention
+
+Keep field validation errors in `FieldError`, connected with `errorId` as described above. Show API submission failures through `toast.add({ type: 'error', title })` in the mutation's `onError`. Keep entered values available for retry. Use a single toast for each failed submission, without also rendering the same failure as an inline alert. This convention applies to submission failures; loading and query errors retain their appropriate page or section states.
+
+Reuse `getMutationErrorMessage` from `@/lib/get-mutation-error-message` to translate shared API errors such as `TOO_MANY_REQUESTS`. Supply a localized fallback that names the failed operation, such as updating a display name or saving notification settings. Use a generic message only when the operation is genuinely unknown. Reuse an existing operation-specific message where available; otherwise add a message key and translations for every supported locale. Keep shared error-code checks in the helper:
+
+```tsx
+onError: (error) => {
+  toast.add({
+    type: 'error',
+    title: getMutationErrorMessage(error, m.error_create_message_failed()),
+  })
+},
+```
+
+Extend that existing helper when another API error needs the same user-facing message across operations. Keep operation-specific handling local and avoid displaying raw server error messages.
 
 ## Verify
 

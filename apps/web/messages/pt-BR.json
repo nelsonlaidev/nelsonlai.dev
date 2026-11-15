@@ -213,6 +213,8 @@
   "error_too_many_requests": "Muitas solicitações. Tente novamente em um minuto.",
   "error_try_again": "Tentar novamente",
   "error_update_avatar_failed": "Falha ao atualizar o avatar. Por favor, tente novamente.",
+  "error_update_name_failed": "Não foi possível atualizar seu nome de exibição. Por favor, tente novamente.",
+  "error_update_notification_settings_failed": "Não foi possível salvar as configurações de notificações. Por favor, tente novamente.",
   "guestbook_message_placeholder": "Este lugar me faz pensar em…",
   "guestbook_message_submit": "Deixar uma mensagem",
   "guestbook_no_messages": "Sem mensagens. Seja o primeiro a deixar uma mensagem!",

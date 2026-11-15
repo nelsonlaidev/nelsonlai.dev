@@ -204,6 +204,8 @@
   "error_too_many_requests": "請求過於頻繁，請稍候一分鐘再試。",
   "error_try_again": "再試一次",
   "error_update_avatar_failed": "更新頭像失敗，請再試一次。",
+  "error_update_name_failed": "更新顯示名稱失敗，請再試一次。",
+  "error_update_notification_settings_failed": "儲存通知設定失敗，請再試一次。",
   "guestbook_message_placeholder": "這個地方讓我想到…",
   "guestbook_message_submit": "留下留言",
   "guestbook_no_messages": "沒有留言，快來成為第一位留言者！",

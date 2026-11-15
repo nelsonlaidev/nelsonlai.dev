@@ -1,4 +1,3 @@
-import { ORPCError } from '@orpc/client'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,6 +14,7 @@ import { toast } from '@repo/ui/components/toast'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 
+import { getMutationErrorMessage } from '@/lib/get-mutation-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -39,14 +39,9 @@ export function DeleteButton(props: DeleteButtonProps) {
 
         void queryClient.invalidateQueries({ queryKey: orpc.guestbook.list.key() })
       },
-      onError: (error) =>
-        toast.add({
-          type: 'error',
-          title:
-            error instanceof ORPCError && error.code === 'TOO_MANY_REQUESTS'
-              ? m.error_too_many_requests()
-              : m.error_delete_message_failed(),
-        }),
+      onError: (error) => {
+        toast.add({ type: 'error', title: getMutationErrorMessage(error, m.error_delete_message_failed()) })
+      },
     }),
   )
 

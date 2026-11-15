@@ -1,6 +1,5 @@
 import type { Session } from '@repo/auth'
 
-import { ORPCError } from '@orpc/client'
 import { CreateGuestbookMessageInputSchema, GUESTBOOK_MESSAGE_MAX_LENGTH } from '@repo/api/schema/guestbook'
 import { Button } from '@repo/ui/components/button'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@repo/ui/components/field'
@@ -11,6 +10,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useId } from 'react'
 
 import { UserAvatar } from '@/components/user-avatar'
+import { getMutationErrorMessage } from '@/lib/get-mutation-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -45,6 +45,9 @@ export function MessageBox(props: MessageBoxProps) {
         form.reset()
         toast.add({ type: 'success', title: m.success_message_created() })
         void queryClient.invalidateQueries({ queryKey: orpc.guestbook.list.key() })
+      },
+      onError: (error) => {
+        toast.add({ type: 'error', title: getMutationErrorMessage(error, m.error_create_message_failed()) })
       },
     }),
   )
@@ -109,13 +112,6 @@ export function MessageBox(props: MessageBoxProps) {
             }}
           </form.Field>
         </FieldGroup>
-        {creation.isError && (
-          <p role='alert' className='text-sm text-destructive'>
-            {creation.error instanceof ORPCError && creation.error.code === 'TOO_MANY_REQUESTS'
-              ? m.error_too_many_requests()
-              : m.error_create_message_failed()}
-          </p>
-        )}
         <form.Subscribe selector={(state) => state.values.body.length}>
           {(length) => (
             <p className='text-right text-sm text-muted-foreground'>

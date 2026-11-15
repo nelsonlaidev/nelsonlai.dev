@@ -213,6 +213,8 @@
   "error_too_many_requests": "Demasiadas solicitudes. Inténtalo de nuevo en un minuto.",
   "error_try_again": "Intentar de nuevo",
   "error_update_avatar_failed": "Error al actualizar el avatar. Por favor intenta de nuevo.",
+  "error_update_name_failed": "No se pudo actualizar tu nombre visible. Por favor intenta de nuevo.",
+  "error_update_notification_settings_failed": "No se pudo guardar la configuración de notificaciones. Por favor intenta de nuevo.",
   "guestbook_message_placeholder": "Este lugar me hace pensar en…",
   "guestbook_message_submit": "Dejar un mensaje",
   "guestbook_no_messages": "Sin mensajes. ¡Sé el primero en dejar un mensaje!",

@@ -10,6 +10,7 @@ import { useId } from 'react'
 import { Skeleton } from 'skullet/react'
 
 import { replyPreferenceQueryOptions } from '@/features/notifications/notifications.queries'
+import { getMutationErrorMessage } from '@/lib/get-mutation-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -47,7 +48,12 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
         form.reset(data)
         toast.add({ type: 'success', title: m.success_settings_updated() })
       },
-      onError: () => toast.add({ type: 'error', title: m.error_something_went_wrong() }),
+      onError: (error) => {
+        toast.add({
+          type: 'error',
+          title: getMutationErrorMessage(error, m.error_update_notification_settings_failed()),
+        })
+      },
     }),
   )
   const form = useForm({
