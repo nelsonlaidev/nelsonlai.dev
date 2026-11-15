@@ -31,12 +31,7 @@ export function DeleteButton(props: DeleteButtonProps) {
     orpc.guestbook.delete.mutationOptions({
       onSuccess: () => {
         setOpen(false)
-
-        toast.add({
-          type: 'success',
-          title: m.success_message_deleted(),
-        })
-
+        toast.add({ type: 'success', title: m.success_message_deleted() })
         void queryClient.invalidateQueries({ queryKey: orpc.guestbook.list.key() })
       },
       onError: (error) => {
@@ -50,24 +45,21 @@ export function DeleteButton(props: DeleteButtonProps) {
       <AlertDialog
         open={open}
         onOpenChange={(nextOpen, details) => {
-          if (deletion.isPending) details.cancel()
-          else setOpen(nextOpen)
+          if (deletion.isPending) {
+            details.cancel()
+            return
+          }
+
+          setOpen(nextOpen)
         }}
       >
         <AlertDialogTrigger render={<Button variant='destructive' />} disabled={deletion.isPending}>
           {m.common_delete()}
         </AlertDialogTrigger>
-        <AlertDialogContent
-          aria-busy={deletion.isPending}
-          className='max-h-[calc(100dvh-32px)] overflow-y-auto border shadow-md ring-0 data-[size=default]:max-w-[min(480px,calc(100vw-32px))] data-[size=sm]:max-w-[min(480px,calc(100vw-32px))] sm:data-[size=default]:max-w-[min(480px,calc(100vw-32px))]'
-        >
+        <AlertDialogContent aria-busy={deletion.isPending}>
           <AlertDialogHeader>
-            <AlertDialogTitle className='pr-8 leading-tight tracking-tight'>
-              {m.common_dialogs_delete_message_title()}
-            </AlertDialogTitle>
-            <AlertDialogDescription className='leading-relaxed'>
-              {m.common_dialogs_delete_message_description()}
-            </AlertDialogDescription>
+            <AlertDialogTitle>{m.common_dialogs_delete_message_title()}</AlertDialogTitle>
+            <AlertDialogDescription>{m.common_dialogs_delete_message_description()}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={deletion.isPending}>{m.common_cancel()}</AlertDialogCancel>

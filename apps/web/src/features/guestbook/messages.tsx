@@ -52,8 +52,8 @@ export function Messages(props: MessagesProps) {
 
   return (
     <div data-testid='guestbook-messages-list' className='flex flex-col gap-5'>
-      {(isPending || (messages && messages.length > 0)) && <MessagesList messages={messages} userId={userId} />}
-      {isFetchingNextPage && <MessagesList />}
+      {(isPending || (messages && messages.length > 0)) && <MessageList messages={messages} userId={userId} />}
+      {isFetchingNextPage && <MessageList />}
       <span ref={sentinelRef} className='invisible' aria-hidden='true' />
       {hasNextPage && !isFetchingNextPage && !isError && (
         <button
@@ -93,12 +93,12 @@ export function Messages(props: MessagesProps) {
   )
 }
 
-type MessagesListProps = {
+type MessageListProps = {
   messages?: GuestbookMessage[]
   userId?: string
 }
 
-function MessagesList(props: MessagesListProps) {
+function MessageList(props: MessageListProps) {
   const { messages, userId } = props
 
   return (
@@ -130,7 +130,7 @@ function Message(props: MessageProps) {
     >
       <span
         aria-hidden='true'
-        className='absolute top-9 right-8 size-1.25 rounded-full bg-[#c9e9bb] shadow-[0_0_12px_#a4edb5]'
+        className='absolute top-9 right-8 size-1.25 rounded-full bg-primary shadow-[0_0_12px_#a4edb5]'
       />
       <blockquote className='mb-6 pr-5 font-serif text-xl/relaxed wrap-anywhere whitespace-pre-wrap text-primary italic'>
         {message.body}

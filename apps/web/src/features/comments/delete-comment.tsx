@@ -42,17 +42,10 @@ export function DeleteComment(props: DeleteCommentProps) {
         else onOpenChange(value)
       }}
     >
-      <AlertDialogContent
-        aria-busy={deletion.isPending}
-        className='max-h-[calc(100dvh-32px)] overflow-y-auto border shadow-md ring-0 data-[size=default]:max-w-[min(480px,calc(100vw-32px))] data-[size=sm]:max-w-[min(480px,calc(100vw-32px))] sm:data-[size=default]:max-w-[min(480px,calc(100vw-32px))]'
-      >
+      <AlertDialogContent aria-busy={deletion.isPending}>
         <AlertDialogHeader>
-          <AlertDialogTitle className='pr-8 leading-tight tracking-tight'>
-            {m.common_dialogs_delete_comment_title()}
-          </AlertDialogTitle>
-          <AlertDialogDescription className='leading-relaxed'>
-            {m.common_dialogs_delete_comment_description()}
-          </AlertDialogDescription>
+          <AlertDialogTitle>{m.common_dialogs_delete_comment_title()}</AlertDialogTitle>
+          <AlertDialogDescription>{m.common_dialogs_delete_comment_description()}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel disabled={deletion.isPending}>{m.common_cancel()}</AlertDialogCancel>

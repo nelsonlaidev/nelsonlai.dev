@@ -53,13 +53,10 @@ export function SignInDialog() {
 
   return (
     <Dialog handle={signInDialogHandle}>
-      <DialogContent
-        className='max-h-[calc(100dvh-32px)] max-w-[min(480px,calc(100vw-32px))] overflow-y-auto border shadow-md ring-0 sm:max-w-[min(480px,calc(100vw-32px))]'
-        aria-busy={isPending}
-      >
+      <DialogContent aria-busy={isPending}>
         <DialogHeader>
-          <DialogTitle className='pr-8 text-2xl/tight tracking-tight'>{m.common_sign_in()}</DialogTitle>
-          <DialogDescription className='leading-relaxed'>{m.auth_sign_in_description()}</DialogDescription>
+          <DialogTitle>{m.common_sign_in()}</DialogTitle>
+          <DialogDescription>{m.auth_sign_in_description()}</DialogDescription>
         </DialogHeader>
         <div className='my-2 flex flex-col gap-4'>
           {PROVIDERS.map((provider) => {
