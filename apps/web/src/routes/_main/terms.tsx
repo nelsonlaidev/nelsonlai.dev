@@ -46,7 +46,7 @@ function RouteComponent() {
     <OceanPage>
       <div className='mx-auto max-w-prose'>
         <PageHeader title={page.title} description={page.description} />
-        <article aria-label={page.title}>
+        <article>
           <Mdx code={page.code} />
         </article>
       </div>
