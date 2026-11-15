@@ -27,7 +27,7 @@ export function MessageBoard() {
   }
 
   return (
-    <div className='mx-auto w-full max-w-2xl'>
+    <div className='mx-auto w-full max-w-2xl space-y-6'>
       <Skeleton loading={session.isPending} label={m.common_aria_labels_loading()}>
         {composer}
       </Skeleton>

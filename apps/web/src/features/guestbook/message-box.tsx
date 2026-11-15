@@ -119,11 +119,11 @@ export function MessageBox(props: MessageBoxProps) {
             </p>
           )}
         </form.Subscribe>
-        <div className='flex flex-col-reverse items-stretch gap-3'>
+        <div className='flex items-center justify-end gap-3'>
           <Button type='button' variant='ghost' onClick={onSignOut} disabled={isBusy} className='text-link'>
             {m.common_sign_out()}
           </Button>
-          <Button variant='outline' size='xl' type='submit' disabled={isBusy}>
+          <Button type='submit' disabled={isBusy}>
             {creation.isPending ? m.common_loading() : m.guestbook_message_submit()}
           </Button>
         </div>

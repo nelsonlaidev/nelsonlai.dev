@@ -24,7 +24,7 @@ export function ProjectHeader(props: ProjectHeaderProps) {
       {(homepage ?? github) && (
         <div className='flex max-w-full flex-wrap items-center gap-2 pb-2 md:justify-end'>
           {github && (
-            <ExternalLink href={github} className={cn(buttonVariants({ variant: 'outline', size: 'xl' }))}>
+            <ExternalLink href={github} className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}>
               {m.projects_github()}
               <ArrowRightIcon
                 className='size-5 motion-safe:transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1'
@@ -33,7 +33,7 @@ export function ProjectHeader(props: ProjectHeaderProps) {
             </ExternalLink>
           )}
           {homepage && (
-            <ExternalLink href={homepage} className={cn(buttonVariants({ variant: 'ghost', size: 'xl' }))}>
+            <ExternalLink href={homepage} className={cn(buttonVariants({ variant: 'ghost', size: 'lg' }))}>
               {m.projects_visit_website()}
               <ArrowRightIcon
                 className='size-5 motion-safe:transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1'

@@ -1,6 +1,6 @@
 import type { GuestbookMessage } from './types'
 
-import { buttonVariants } from '@repo/ui/components/button'
+import { Button, buttonVariants } from '@repo/ui/components/button'
 import { createRange } from '@repo/utils'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { cn } from 'cn'
@@ -51,7 +51,7 @@ export function Messages(props: MessagesProps) {
   const messages = data?.pages.flatMap((page) => page.messages)
 
   return (
-    <div data-testid='guestbook-messages-list' className='mt-6 flex flex-col gap-5'>
+    <div data-testid='guestbook-messages-list' className='flex flex-col gap-5'>
       {(isPending || (messages && messages.length > 0)) && <MessagesList messages={messages} userId={userId} />}
       {isFetchingNextPage && <MessagesList />}
       <span ref={sentinelRef} className='invisible' aria-hidden='true' />
@@ -68,17 +68,20 @@ export function Messages(props: MessagesProps) {
         </button>
       )}
       {isError && (
-        <div role='alert' className='rounded-xl border px-6 py-10 text-center text-base/relaxed text-muted-foreground'>
+        <div
+          role='alert'
+          className='space-y-4 rounded-xl border px-6 py-10 text-center text-base/relaxed text-muted-foreground'
+        >
           <p>{m.error_failed_to_load_messages()}</p>
-          <button
+          <Button
             type='button'
-            className={cn(buttonVariants({ variant: 'outline', size: 'xl', className: 'mt-4' }))}
+            variant='outline'
             onClick={() => {
               void refetch()
             }}
           >
             {m.common_retry()}
-          </button>
+          </Button>
         </div>
       )}
       {noMessages && (

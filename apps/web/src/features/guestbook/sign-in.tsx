@@ -22,7 +22,7 @@ export function SignIn() {
         maxLength={GUESTBOOK_MESSAGE_MAX_LENGTH}
         className='max-h-96 min-h-36'
       />
-      <DialogTrigger handle={signInDialogHandle} render={<Button variant='outline' size='xl' />}>
+      <DialogTrigger handle={signInDialogHandle} render={<Button variant='outline' size='lg' />}>
         {m.common_sign_in()}
       </DialogTrigger>
       <p>{m.guestbook_signin_description()}</p>
