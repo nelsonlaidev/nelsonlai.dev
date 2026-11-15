@@ -16,6 +16,10 @@ const config = defineConfig({
     },
   },
   resolve: { tsconfigPaths: true },
+  ssr: {
+    // Bundle Bowser before Nitro generates a CommonJS facade with a missing module.exports export.
+    noExternal: ['bowser'],
+  },
   plugins: [
     varlockVitePlugin(),
     contentCollections(),
