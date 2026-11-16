@@ -1,6 +1,7 @@
 appendonly
 argb
 codegen
+cqmin
 dotwebp
 doublestar
 frontmatter
