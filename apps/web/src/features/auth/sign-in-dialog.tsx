@@ -55,7 +55,7 @@ export function SignInDialog() {
     <Dialog handle={signInDialogHandle}>
       <DialogContent aria-busy={isPending}>
         <DialogHeader>
-          <DialogTitle>{m.common_sign_in()}</DialogTitle>
+          <DialogTitle className='text-2xl'>{m.common_sign_in()}</DialogTitle>
           <DialogDescription>{m.auth_sign_in_description()}</DialogDescription>
         </DialogHeader>
         <div className='my-2 flex flex-col gap-4'>
