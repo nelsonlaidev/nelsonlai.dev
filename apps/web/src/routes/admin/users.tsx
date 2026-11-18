@@ -19,9 +19,9 @@ export const Route = createFileRoute('/admin/users')({
 
 function RouteComponent() {
   return (
-    <div className='space-y-6'>
+    <>
       <AdminPageHeader title={m.common_labels_users()} description={m.admin_page_header_users_description()} />
       <AdminUsers />
-    </div>
+    </>
   )
 }
