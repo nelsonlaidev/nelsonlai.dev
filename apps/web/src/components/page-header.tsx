@@ -12,13 +12,13 @@ export function PageHeader(props: PageHeaderProps) {
 
   return (
     <header className={cn('mb-16', className)}>
-      <h1 className='text-5xl tracking-tighter lg:text-6xl xl:text-7xl'>
+      <h1 className='mb-6 text-5xl tracking-tight lg:text-6xl xl:text-7xl'>
         {title}
         <span aria-hidden='true' className='text-primary'>
           .
         </span>
       </h1>
-      <p className='mt-6 text-lg/relaxed whitespace-pre-line text-muted-foreground'>{description}</p>
+      <p className='text-lg/relaxed whitespace-pre-line text-muted-foreground'>{description}</p>
       {children}
     </header>
   )
