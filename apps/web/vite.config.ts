@@ -8,6 +8,8 @@ import viteReact from '@vitejs/plugin-react'
 import { nitro } from 'nitro/vite'
 import { defineConfig } from 'vite'
 
+import { languageIconsPlugin } from './vite-plugins/language-icons.ts'
+
 const config = defineConfig({
   build: {
     // Keep fonts on the same origin rather than data URLs blocked by font-src 'self'.
@@ -21,6 +23,7 @@ const config = defineConfig({
     noExternal: ['bowser'],
   },
   plugins: [
+    languageIconsPlugin(),
     varlockVitePlugin(),
     contentCollections(),
     paraglideVitePlugin({

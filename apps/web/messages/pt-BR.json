@@ -72,11 +72,11 @@
       }
     }
   ],
-  "blog_comments_conversation": "A conversa",
+  "blog_comments_conversation": "Comentários",
   "blog_comments_copy_link": "Copiar link",
   "blog_comments_discussion_intro": "Boas ideias não terminam na última linha. O que você está pensando?",
-  "blog_comments_discussion_kicker": "Um pouco além da ideia",
   "blog_comments_dislike": "Não curtir",
+  "blog_comments_hide_replies": "Ocultar respostas",
   "blog_comments_highlighted_comment": "Comentário destacado",
   "blog_comments_newest": "Mais novos",
   "blog_comments_no_comments": "Nenhum comentário",
@@ -98,6 +98,16 @@
   "blog_comments_reply": "Responder",
   "blog_comments_reply_to_comment": "Responder ao comentário",
   "blog_comments_send_comment": "Enviar comentário",
+  "blog_comments_show_replies": [
+    {
+      "declarations": ["input count"],
+      "selectors": ["count"],
+      "match": {
+        "count=1": "Mostrar {count} resposta",
+        "count=*": "Mostrar {count} respostas"
+      }
+    }
+  ],
   "blog_comments_sort_by": "Ordenar por",
   "blog_comments_this_comment_has_been_deleted": "[Este comentário foi excluído]",
   "blog_comments_toggle_bold": "Alternar negrito",
@@ -128,7 +138,6 @@
   "blog_image_viewer_zoom_in": "Ampliar",
   "blog_image_viewer_zoom_out": "Reduzir",
   "blog_intro": "Aprendizados, detalhes observados e ideias que vale a pena guardar.\nUm pequeno diário de criação para a web.",
-  "blog_join": "Participe da conversa",
   "blog_like_this_post": "Curtir esta postagem",
   "blog_liked": "Curtido",
   "blog_next": "Outra corrente para seguir",
@@ -190,7 +199,9 @@
   "error_avatar_unsupported_file": "Por favor, escolha um tipo de imagem suportado (JPEG, PNG, WebP).",
   "error_comment_cannot_be_empty": "O comentário não pode ficar vazio",
   "error_copy_to_clipboard_error": "Não foi possível copiar para a área de transferência. Por favor, tente novamente.",
+  "error_create_comment_failed": "Não foi possível publicar seu comentário. Tente novamente.",
   "error_create_message_failed": "Não foi possível enviar a mensagem. Tente novamente.",
+  "error_create_reply_failed": "Não foi possível publicar sua resposta. Tente novamente.",
   "error_delete_message_failed": "Não foi possível excluir a mensagem. Tente novamente.",
   "error_failed_to_fetch_comments_data": "Falha ao buscar dados de comentários. Por favor, atualize a página.",
   "error_failed_to_fetch_dashboard_data": "Falha ao buscar dados do painel. Por favor, atualize a página.",

@@ -3,10 +3,11 @@ import { ScrollArea } from '@repo/ui/components/scroll-area'
 import { toast } from '@repo/ui/components/toast'
 import { cn } from 'cn'
 import { CheckIcon, CopyIcon } from 'lucide-react'
+import fileIcon from 'material-icon-theme/icons/file.svg?no-inline'
 import mergeRefs from 'merge-refs'
 import { useEffect, useRef, useState } from 'react'
+import languageIcons from 'virtual:language-icons'
 
-import { getIconByLanguage } from '@/lib/get-icon-by-language'
 import { m } from '@/paraglide/messages'
 
 type CodeBlockProps = React.ComponentProps<'pre'> & {
@@ -19,7 +20,6 @@ export function CodeBlock(props: CodeBlockProps) {
   const { children, title, 'data-lang': lang, figureClassName, scrollAreaClassName, ref, ...rest } = props
   const preRef = useRef<HTMLPreElement>(null)
   const [copied, setCopied] = useState(false)
-  const Icon = getIconByLanguage(lang ?? '')
   const hasCaption = Boolean(title) || Boolean(lang)
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export function CodeBlock(props: CodeBlockProps) {
     >
       {hasCaption ? (
         <div className='flex flex-row items-center gap-3 border-b bg-transparent px-3 py-2 text-sm sm:px-5'>
-          <Icon className='size-3.5 shrink-0 text-muted-foreground' aria-hidden='true' />
+          <img src={languageIcons.get(lang?.toLowerCase() ?? '') ?? fileIcon} alt='' className='size-3.5 shrink-0' />
           <figcaption className='flex-1 truncate wrap-anywhere whitespace-normal text-muted-foreground'>
             {title ?? lang}
           </figcaption>

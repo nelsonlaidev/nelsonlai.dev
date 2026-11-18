@@ -86,7 +86,7 @@ function ActivityItem(props: ActivityProps) {
           )}
         </p>
         <p className='line-clamp-1 text-sm text-muted-foreground'>{activity.body}</p>
-        <p className='text-sm text-muted-foreground'>{timeAgo}</p>
+        <p className='w-fit text-sm text-muted-foreground'>{timeAgo}</p>
       </div>
     </div>
   )

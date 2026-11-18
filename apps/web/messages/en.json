@@ -72,11 +72,11 @@
       }
     }
   ],
-  "blog_comments_conversation": "The conversation",
+  "blog_comments_conversation": "Comments",
   "blog_comments_copy_link": "Copy link",
   "blog_comments_discussion_intro": "Good ideas don’t end at the last line. What’s on your mind?",
-  "blog_comments_discussion_kicker": "A little further into the thought",
   "blog_comments_dislike": "Dislike",
+  "blog_comments_hide_replies": "Hide replies",
   "blog_comments_highlighted_comment": "Highlighted comment",
   "blog_comments_newest": "Newest",
   "blog_comments_no_comments": "No comments",
@@ -98,6 +98,16 @@
   "blog_comments_reply": "Reply",
   "blog_comments_reply_to_comment": "Reply to comment",
   "blog_comments_send_comment": "Send comment",
+  "blog_comments_show_replies": [
+    {
+      "declarations": ["input count"],
+      "selectors": ["count"],
+      "match": {
+        "count=1": "Show {count} reply",
+        "count=*": "Show {count} replies"
+      }
+    }
+  ],
   "blog_comments_sort_by": "Sort by",
   "blog_comments_this_comment_has_been_deleted": "[This comment has been deleted]",
   "blog_comments_toggle_bold": "Toggle bold",
@@ -128,7 +138,6 @@
   "blog_image_viewer_zoom_in": "Zoom in",
   "blog_image_viewer_zoom_out": "Zoom out",
   "blog_intro": "Things learned, details noticed, and ideas worth keeping.\nA small journal of making things for the web.",
-  "blog_join": "Join the conversation",
   "blog_like_this_post": "Like this post",
   "blog_liked": "Liked",
   "blog_next": "Another current to follow",
@@ -190,7 +199,9 @@
   "error_avatar_unsupported_file": "Please choose a supported image type (JPEG, PNG, WebP).",
   "error_comment_cannot_be_empty": "Comment cannot be empty",
   "error_copy_to_clipboard_error": "Unable to copy to clipboard. Please try again.",
+  "error_create_comment_failed": "Failed to post your comment. Please try again.",
   "error_create_message_failed": "Failed to create your message. Please try again.",
+  "error_create_reply_failed": "Failed to post your reply. Please try again.",
   "error_delete_message_failed": "Failed to delete your message. Please try again.",
   "error_failed_to_fetch_comments_data": "Failed to fetch comments data. Please refresh the page.",
   "error_failed_to_fetch_dashboard_data": "Failed to fetch dashboard data. Please refresh the page.",

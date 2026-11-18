@@ -72,11 +72,11 @@
       }
     }
   ],
-  "blog_comments_conversation": "一起聊聊",
+  "blog_comments_conversation": "留言",
   "blog_comments_copy_link": "複製連結",
   "blog_comments_discussion_intro": "好點子不會在最後一行結束。你有什麼想法？",
-  "blog_comments_discussion_kicker": "讓想法再延伸一點",
   "blog_comments_dislike": "倒讚",
+  "blog_comments_hide_replies": "隱藏回覆",
   "blog_comments_highlighted_comment": "已標註評論",
   "blog_comments_newest": "最新",
   "blog_comments_no_comments": "沒有評論",
@@ -98,6 +98,16 @@
   "blog_comments_reply": "回覆",
   "blog_comments_reply_to_comment": "回覆評論",
   "blog_comments_send_comment": "送出評論",
+  "blog_comments_show_replies": [
+    {
+      "declarations": ["input count"],
+      "selectors": ["count"],
+      "match": {
+        "count=1": "顯示 {count} 則回覆",
+        "count=*": "顯示 {count} 則回覆"
+      }
+    }
+  ],
   "blog_comments_sort_by": "排序方式",
   "blog_comments_this_comment_has_been_deleted": "[此評論已被刪除]",
   "blog_comments_toggle_bold": "切換粗體",
@@ -119,7 +129,6 @@
   "blog_image_viewer_zoom_in": "放大",
   "blog_image_viewer_zoom_out": "縮小",
   "blog_intro": "學到的事、留意的細節，以及值得記錄的想法。\n一本關於網頁創作的小誌。",
-  "blog_join": "加入討論",
   "blog_like_this_post": "喜歡這篇文章",
   "blog_liked": "已喜歡",
   "blog_next": "另一道值得追尋的洋流",
@@ -181,7 +190,9 @@
   "error_avatar_unsupported_file": "請選擇支援的圖片格式（JPEG、PNG、WebP）。",
   "error_comment_cannot_be_empty": "評論不能為空",
   "error_copy_to_clipboard_error": "無法複製到剪貼簿，請再試一次。",
+  "error_create_comment_failed": "留言送出失敗，請再試一次。",
   "error_create_message_failed": "留言送出失敗，請再試一次。",
+  "error_create_reply_failed": "回覆送出失敗，請再試一次。",
   "error_delete_message_failed": "刪除留言失敗，請再試一次。",
   "error_failed_to_fetch_comments_data": "無法取得評論資料。請重新整理頁面。",
   "error_failed_to_fetch_dashboard_data": "無法取得儀表板資料。請重新整理頁面。",

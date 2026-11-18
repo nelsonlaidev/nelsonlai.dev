@@ -108,7 +108,13 @@ ${colorConfig.map(([key, itemConfig]) => `  --color-${key}: ${itemConfig.color};
   )
 }
 
-export const ChartTooltip = RechartsPrimitive.Tooltip
+type ChartTooltipProps = RechartsPrimitive.TooltipProps
+
+export function ChartTooltip(props: ChartTooltipProps) {
+  const { isAnimationActive = false, ...rest } = props
+
+  return <RechartsPrimitive.Tooltip isAnimationActive={isAnimationActive} {...rest} />
+}
 
 type ChartTooltipContentProps = {
   className?: string

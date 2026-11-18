@@ -11,7 +11,7 @@ import {
   useSidebar,
 } from '@repo/ui/components/sidebar'
 import { Link, useRouterState } from '@tanstack/react-router'
-import { HomeIcon, LayoutDashboardIcon, MessagesSquareIcon, UsersIcon } from 'lucide-react'
+import { LayoutDashboardIcon, MessagesSquareIcon, UsersIcon } from 'lucide-react'
 
 import { m } from '@/paraglide/messages'
 
@@ -31,7 +31,7 @@ export function AdminSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton render={<Link to='/' />} tooltip={m.nav_home()}>
-              <HomeIcon aria-hidden='true' />
+              <img src='/images/seafold.svg' width={16} height={16} alt='' className='size-4 shrink-0' />
               <span>Seafold</span>
             </SidebarMenuButton>
           </SidebarMenuItem>

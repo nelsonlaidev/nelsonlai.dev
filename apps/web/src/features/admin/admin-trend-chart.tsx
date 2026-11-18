@@ -16,7 +16,10 @@ import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
 
-import { formatTrendDate } from './trend-date'
+function formatTrendDate(day: string, locale: string, options: Intl.DateTimeFormatOptions) {
+  // Format in UTC to preserve the calendar day returned by the API.
+  return new Date(day).toLocaleDateString(locale, { ...options, timeZone: 'UTC' })
+}
 
 export function AdminTrendChart() {
   const { data, isSuccess, isError } = useQuery(

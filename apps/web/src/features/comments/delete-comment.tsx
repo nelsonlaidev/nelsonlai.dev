@@ -30,7 +30,9 @@ export function DeleteComment(props: DeleteCommentProps) {
         void queryClient.invalidateQueries({ queryKey: orpc.comments.key() })
         toast.add({ type: 'success', title: m.success_comment_deleted() })
       },
-      onError: () => toast.add({ type: 'error', title: m.error_something_went_wrong() }),
+      onError: () => {
+        toast.add({ type: 'error', title: m.error_something_went_wrong() })
+      },
     }),
   )
 
@@ -38,8 +40,12 @@ export function DeleteComment(props: DeleteCommentProps) {
     <AlertDialog
       open={open}
       onOpenChange={(value, details) => {
-        if (deletion.isPending) details.cancel()
-        else onOpenChange(value)
+        if (deletion.isPending) {
+          details.cancel()
+          return
+        }
+
+        onOpenChange(value)
       }}
     >
       <AlertDialogContent aria-busy={deletion.isPending}>

@@ -3,11 +3,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/components/ta
 import { BoldIcon, ItalicIcon, StrikethroughIcon } from 'lucide-react'
 import { useId } from 'react'
 
-import { Markdown } from '@/components/mdx/markdown'
 import { useCommentEditor } from '@/hooks/use-comment-editor'
 import { m } from '@/paraglide/messages'
 
-type CommentEditorProps = {
+import { CommentMarkdown } from './comment-markdown'
+
+type CommentEditorProps = Pick<
+  React.ComponentProps<'textarea'>,
+  'id' | 'name' | 'onBlur' | 'aria-invalid' | 'aria-describedby'
+> & {
   value: string
   onChange: (value: string) => void
   onSubmit: () => void
@@ -19,7 +23,21 @@ type CommentEditorProps = {
 }
 
 export function CommentEditor(props: CommentEditorProps) {
-  const { value, onChange, onSubmit, onCancel, disabled, isReply = false, tabsValue, onTabsValueChange } = props
+  const {
+    id: inputId,
+    name,
+    onBlur,
+    'aria-invalid': ariaInvalid,
+    'aria-describedby': ariaDescribedBy,
+    value,
+    onChange,
+    onSubmit,
+    onCancel,
+    disabled,
+    isReply = false,
+    tabsValue,
+    onTabsValueChange,
+  } = props
   const id = useId()
   const editor = useCommentEditor({ onModEnter: onSubmit, onEscape: onCancel })
 
@@ -31,17 +49,18 @@ export function CommentEditor(props: CommentEditorProps) {
         if (typeof next === 'string') onTabsValueChange?.(next)
       }}
     >
-      <TabsList
-        aria-label={isReply ? m.blog_comments_reply_to_comment() : m.blog_comments_placeholder()}
-        className='bg-surface/30'
-      >
+      <TabsList aria-label={isReply ? m.blog_comments_reply_to_comment() : m.blog_comments_placeholder()}>
         <TabsTrigger value='write'>{m.blog_comments_write()}</TabsTrigger>
         <TabsTrigger value='preview'>{m.blog_comments_preview()}</TabsTrigger>
       </TabsList>
       <TabsContent value='write'>
-        <InputGroup className='bg-transparent'>
+        <InputGroup>
           <InputGroupTextarea
-            id={id}
+            id={inputId ?? id}
+            name={name}
+            onBlur={onBlur}
+            aria-invalid={ariaInvalid}
+            aria-describedby={ariaDescribedBy}
             ref={editor.textareaRef}
             rows={1}
             value={value}
@@ -66,11 +85,12 @@ export function CommentEditor(props: CommentEditorProps) {
             onKeyDown={editor.handleKeyDown}
             onCompositionStart={editor.handleCompositionStart}
             onCompositionEnd={editor.handleCompositionEnd}
-            className='min-h-28 resize-none font-sans text-lg/normal text-foreground md:text-lg/snug'
+            className='min-h-28 resize-none font-mono'
           />
           <InputGroupAddon align='block-end'>
             <InputGroupButton
               type='button'
+              size='icon-xs'
               disabled={disabled}
               aria-label={m.blog_comments_toggle_bold()}
               onClick={() => {
@@ -81,6 +101,7 @@ export function CommentEditor(props: CommentEditorProps) {
             </InputGroupButton>
             <InputGroupButton
               type='button'
+              size='icon-xs'
               disabled={disabled}
               aria-label={m.blog_comments_toggle_italic()}
               onClick={() => {
@@ -91,6 +112,7 @@ export function CommentEditor(props: CommentEditorProps) {
             </InputGroupButton>
             <InputGroupButton
               type='button'
+              size='icon-xs'
               disabled={disabled}
               aria-label={m.blog_comments_toggle_strikethrough()}
               onClick={() => {
@@ -103,7 +125,10 @@ export function CommentEditor(props: CommentEditorProps) {
         </InputGroup>
       </TabsContent>
       <TabsContent value='preview' className='rounded-md border border-input bg-input/30 px-2.5'>
-        <Markdown>{value.trim() ? value : m.blog_comments_nothing_to_preview()}</Markdown>
+        <CommentMarkdown className='min-h-28'>
+          {value.trim() ? value : m.blog_comments_nothing_to_preview()}
+        </CommentMarkdown>
+        <div className='h-9.5' />
       </TabsContent>
     </Tabs>
   )

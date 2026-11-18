@@ -56,8 +56,8 @@ export function FilteredPosts(props: FilteredPostsProps) {
               </time>
             </div>
             <div>
-              <h2 className='text-2xl tracking-tighter sm:text-3xl xl:text-4xl'>{post.title}</h2>
-              <p className='mt-4 max-w-2xl text-base/relaxed text-muted-foreground'>{post.description}</p>
+              <h2 className='mb-4 text-2xl tracking-tight sm:text-3xl xl:text-4xl'>{post.title}</h2>
+              <p className='text-muted-foreground'>{post.description}</p>
             </div>
             <ArrowRightIcon
               aria-hidden='true'
@@ -67,10 +67,11 @@ export function FilteredPosts(props: FilteredPostsProps) {
         </article>
       ))}
       {filteredPosts.length === 0 && (
-        <div className='py-10 text-center sm:py-16'>
-          <h2 className='mb-3 text-2xl tracking-tighter sm:text-3xl'>{m.blog_search_no_posts_found()}</h2>
+        <div className='space-y-4 py-10 text-center sm:py-16'>
+          <h2 className='text-2xl tracking-tighter sm:text-3xl'>{m.blog_search_no_posts_found()}</h2>
           <Button
             variant='ghost'
+            size='lg'
             type='button'
             onClick={() => {
               setSearchValue('')

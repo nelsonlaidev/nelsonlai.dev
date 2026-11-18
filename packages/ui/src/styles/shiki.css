@@ -7,6 +7,8 @@
 
 pre.shiki {
   position: relative;
+  width: max-content;
+  min-width: 100%;
   padding: --spacing(4);
   line-height: --spacing(5);
 }

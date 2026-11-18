@@ -43,8 +43,13 @@ export function BlogHeader(props: BlogHeaderProps) {
     }
   }, [increment, post.slug])
 
-  let viewsContent: React.ReactNode = stats.isPending ? <PendingCount /> : '--'
-  let commentsContent: React.ReactNode = <PendingCount />
+  const pendingCount = (
+    <PendingCount>
+      <NumberFlow value={100} />
+    </PendingCount>
+  )
+  let viewsContent: React.ReactNode = stats.isPending ? pendingCount : '--'
+  let commentsContent: React.ReactNode = pendingCount
 
   if (postStats) {
     viewsContent = <NumberFlow data-testid='view-count' value={postStats.views} />
@@ -59,11 +64,9 @@ export function BlogHeader(props: BlogHeaderProps) {
   }
 
   return (
-    <header className='mb-10 max-w-3xl sm:mb-12'>
-      <h1 className='mb-3 text-3xl/tight tracking-tight text-balance sm:text-4xl/tight lg:text-5xl/tight'>
-        {post.title}
-      </h1>
-      <p className='mb-6 max-w-prose text-base/relaxed text-muted-foreground sm:text-lg/relaxed'>{post.description}</p>
+    <header className='mb-10 sm:mb-12'>
+      <h1 className='mb-3 text-3xl tracking-tight text-balance sm:text-4xl/tight lg:text-5xl/tight'>{post.title}</h1>
+      <p className='mb-6 text-muted-foreground sm:text-lg'>{post.description}</p>
       <div className='flex items-center gap-3 text-sm text-muted-foreground'>
         <img src='/images/avatar.png' alt='' width={36} height={36} className='size-9 shrink-0 rounded-full' />
         <div className='grid gap-1'>

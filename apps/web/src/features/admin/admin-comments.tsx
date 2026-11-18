@@ -25,7 +25,7 @@ export function AdminComments() {
     pageIndex: 0,
     pageSize: 10,
   })
-  const { data, isError, isFetching } = useQuery(
+  const { data, isError, isFetching, isPending } = useQuery(
     orpc.admin.comment.list.queryOptions({
       input: {
         page: pagination.pageIndex + 1,
@@ -44,8 +44,9 @@ export function AdminComments() {
   }
 
   return (
-    <div role={data ? undefined : 'status'}>
-      <Skeleton data={data?.comments} sample={SAMPLE_COMMENTS} label={m.common_aria_labels_loading()}>
+    <>
+      {isPending && <output className='sr-only'>{m.common_aria_labels_loading()}</output>}
+      <Skeleton data={data?.comments} sample={SAMPLE_COMMENTS}>
         {(comments) => (
           <CommentsTable
             comments={comments}
@@ -56,6 +57,6 @@ export function AdminComments() {
           />
         )}
       </Skeleton>
-    </div>
+    </>
   )
 }

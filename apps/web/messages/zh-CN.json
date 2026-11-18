@@ -72,11 +72,11 @@
       }
     }
   ],
-  "blog_comments_conversation": "一起聊聊",
+  "blog_comments_conversation": "评论",
   "blog_comments_copy_link": "复制链接",
   "blog_comments_discussion_intro": "好点子不会在最后一行结束。你有什么想法？",
-  "blog_comments_discussion_kicker": "让想法再延伸一点",
   "blog_comments_dislike": "倒赞",
+  "blog_comments_hide_replies": "隐藏回复",
   "blog_comments_highlighted_comment": "已标注评论",
   "blog_comments_newest": "最新",
   "blog_comments_no_comments": "没有评论",
@@ -98,6 +98,16 @@
   "blog_comments_reply": "回复",
   "blog_comments_reply_to_comment": "回复评论",
   "blog_comments_send_comment": "发送评论",
+  "blog_comments_show_replies": [
+    {
+      "declarations": ["input count"],
+      "selectors": ["count"],
+      "match": {
+        "count=1": "显示 {count} 条回复",
+        "count=*": "显示 {count} 条回复"
+      }
+    }
+  ],
   "blog_comments_sort_by": "排序方式",
   "blog_comments_this_comment_has_been_deleted": "[此评论已被删除]",
   "blog_comments_toggle_bold": "切换粗体",
@@ -119,7 +129,6 @@
   "blog_image_viewer_zoom_in": "放大",
   "blog_image_viewer_zoom_out": "缩小",
   "blog_intro": "学到的事、留意的细节，以及值得记录的想法。\n一本关于网页创作的小志。",
-  "blog_join": "加入讨论",
   "blog_like_this_post": "喜欢这篇文章",
   "blog_liked": "已喜欢",
   "blog_next": "另一道值得追寻的洋流",
@@ -181,7 +190,9 @@
   "error_avatar_unsupported_file": "请选择支持的图片格式（JPEG、PNG、WebP）。",
   "error_comment_cannot_be_empty": "评论不能为空",
   "error_copy_to_clipboard_error": "无法复制到剪贴板，请再试一次。",
+  "error_create_comment_failed": "评论发送失败，请重试。",
   "error_create_message_failed": "留言发送失败，请重试。",
+  "error_create_reply_failed": "回复发送失败，请重试。",
   "error_delete_message_failed": "删除留言失败，请重试。",
   "error_failed_to_fetch_comments_data": "无法获取评论数据。请刷新页面。",
   "error_failed_to_fetch_dashboard_data": "无法获取仪表盘数据。请刷新页面。",

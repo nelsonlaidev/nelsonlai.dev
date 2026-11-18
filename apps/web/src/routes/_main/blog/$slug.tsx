@@ -72,7 +72,7 @@ function RouteComponent() {
   const { comment, reply } = Route.useSearch()
 
   return (
-    <OceanPage className={next ? 'pb-0 sm:pb-0' : undefined}>
+    <OceanPage>
       <ArticleDetail key={`${locale}:${post.slug}`} post={post} next={next} comment={comment} reply={reply} />
     </OceanPage>
   )
@@ -91,7 +91,7 @@ function ArticleDetail(props: ArticleDetailProps) {
 
   return (
     <>
-      <Link to='/blog' className='group mb-10 inline-flex items-center gap-3 text-sm/normal text-link sm:mb-14'>
+      <Link to='/blog' className='group mb-10 inline-flex items-center gap-2 text-sm text-link sm:mb-14'>
         <ArrowLeftIcon
           className='size-4 motion-safe:transition-transform motion-safe:group-hover:-translate-x-1 motion-safe:group-focus-visible:-translate-x-1'
           aria-hidden='true'
@@ -116,16 +116,16 @@ function ArticleDetail(props: ArticleDetailProps) {
         <Link
           to='/blog/$slug'
           params={{ slug: next.slug }}
-          className='group mt-16 flex items-center justify-between gap-5 border-t pt-14 sm:mt-28 sm:gap-8'
+          className='group mt-16 flex items-center justify-between gap-5 border-t pt-11 sm:pt-16 md:gap-8'
         >
-          <div>
+          <div className='min-w-0'>
             <span className='mb-6 block text-xs text-section-label'>{m.blog_next()}</span>
-            <h2 className='max-w-2xl text-2xl tracking-tighter sm:text-3xl'>{next.title}</h2>
-            <p className='mt-5 max-w-lg text-base/relaxed text-muted-foreground/80'>{next.description}</p>
+            <h2 className='mb-5 text-4xl tracking-tighter md:text-5xl'>{next.title}</h2>
+            <p className='text-muted-foreground/80'>{next.description}</p>
           </div>
           <ArrowRightIcon
             aria-hidden='true'
-            className='size-7 shrink-0 motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1 sm:size-11'
+            className='size-7 shrink-0 motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1'
           />
         </Link>
       )}

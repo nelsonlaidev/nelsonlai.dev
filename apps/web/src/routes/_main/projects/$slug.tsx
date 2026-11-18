@@ -107,13 +107,13 @@ function RouteComponent() {
           className='group flex items-center justify-between gap-5 border-t pt-11 sm:pt-16 md:gap-8'
         >
           <div className='min-w-0'>
-            <span className='mb-6 block text-xs tracking-wide text-section-label'>{m.projects_next()}</span>
+            <span className='mb-6 block text-xs text-section-label'>{m.projects_next()}</span>
             <h2 className='mb-5 text-4xl tracking-tighter md:text-5xl'>{next.title}</h2>
-            <p className='max-w-lg text-muted-foreground/80'>{next.description}</p>
+            <p className='text-muted-foreground/80'>{next.description}</p>
           </div>
           <ArrowRightIcon
-            className='size-7 shrink-0 motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1'
             aria-hidden='true'
+            className='size-7 shrink-0 motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1'
           />
         </Link>
       )}

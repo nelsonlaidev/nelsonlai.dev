@@ -9,8 +9,8 @@ export function AdminHeader() {
     <header className='flex items-center justify-between gap-3 border-b py-4'>
       <SidebarTrigger variant='outline' aria-label={m.admin_toggle_sidebar()} />
       <div className='flex items-center gap-2'>
-        <UserMenu />
         <LocaleSwitcher />
+        <UserMenu />
       </div>
     </header>
   )

@@ -1,12 +1,14 @@
-import './src/tests/env'
+import './src/tests/env.ts'
 
 import contentCollections from '@content-collections/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 
+import { languageIconsPlugin } from './vite-plugins/language-icons.ts'
+
 export default defineConfig({
   // Dev/build generates the collections; unit tests only need the official import alias.
-  plugins: [contentCollections({ isEnabled: () => false }), react()],
+  plugins: [contentCollections({ isEnabled: () => false }), languageIconsPlugin(), react()],
   resolve: {
     alias: {
       '@': new URL('src', import.meta.url).pathname,

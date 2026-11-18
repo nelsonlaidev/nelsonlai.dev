@@ -72,11 +72,11 @@
       }
     }
   ],
-  "blog_comments_conversation": "La conversación",
+  "blog_comments_conversation": "Comentarios",
   "blog_comments_copy_link": "Copiar enlace",
   "blog_comments_discussion_intro": "Las buenas ideas no terminan en la última línea. ¿Qué piensas?",
-  "blog_comments_discussion_kicker": "Un poco más allá de la idea",
   "blog_comments_dislike": "No me gusta",
+  "blog_comments_hide_replies": "Ocultar respuestas",
   "blog_comments_highlighted_comment": "Comentario destacado",
   "blog_comments_newest": "Más recientes",
   "blog_comments_no_comments": "Sin comentarios",
@@ -98,6 +98,16 @@
   "blog_comments_reply": "Responder",
   "blog_comments_reply_to_comment": "Responder al comentario",
   "blog_comments_send_comment": "Enviar comentario",
+  "blog_comments_show_replies": [
+    {
+      "declarations": ["input count"],
+      "selectors": ["count"],
+      "match": {
+        "count=1": "Mostrar {count} respuesta",
+        "count=*": "Mostrar {count} respuestas"
+      }
+    }
+  ],
   "blog_comments_sort_by": "Ordenar por",
   "blog_comments_this_comment_has_been_deleted": "[Este comentario ha sido eliminado]",
   "blog_comments_toggle_bold": "Alternar negrita",
@@ -128,7 +138,6 @@
   "blog_image_viewer_zoom_in": "Ampliar",
   "blog_image_viewer_zoom_out": "Reducir",
   "blog_intro": "Cosas aprendidas, detalles observados e ideas que merece la pena guardar.\nUn pequeño diario de creación para la web.",
-  "blog_join": "Únete a la conversación",
   "blog_like_this_post": "Me gusta esta entrada",
   "blog_liked": "Me gusta",
   "blog_next": "Otra corriente que seguir",
@@ -190,7 +199,9 @@
   "error_avatar_unsupported_file": "Por favor elige un tipo de imagen compatible (JPEG, PNG, WebP).",
   "error_comment_cannot_be_empty": "El comentario no puede estar vacío",
   "error_copy_to_clipboard_error": "No se pudo copiar al portapapeles. Por favor intenta de nuevo.",
+  "error_create_comment_failed": "No se pudo publicar tu comentario. Inténtalo de nuevo.",
   "error_create_message_failed": "No se pudo enviar el mensaje. Inténtalo de nuevo.",
+  "error_create_reply_failed": "No se pudo publicar tu respuesta. Inténtalo de nuevo.",
   "error_delete_message_failed": "No se pudo eliminar el mensaje. Inténtalo de nuevo.",
   "error_failed_to_fetch_comments_data": "Error al obtener datos de comentarios. Por favor recarga la página.",
   "error_failed_to_fetch_dashboard_data": "Error al obtener datos del panel. Por favor recarga la página.",

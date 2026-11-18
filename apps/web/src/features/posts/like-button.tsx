@@ -102,7 +102,11 @@ export function LikeButton(props: LikeButtonProps) {
   const count = Math.min(3, (query.data?.currentUserLikes ?? 0) + draft)
   const heart = 'M12 21S2 15.2 2 8.5C2 3.5 8 1.5 12 6c4-4.5 10-2.5 10 2.5C22 15.2 12 21 12 21Z'
 
-  let likesContent: React.ReactNode = <PendingCount />
+  let likesContent: React.ReactNode = (
+    <PendingCount>
+      <NumberFlow value={100} />
+    </PendingCount>
+  )
 
   if (query.data) {
     likesContent = <NumberFlow data-testid='like-count' value={query.data.likes + draft} />
@@ -123,7 +127,7 @@ export function LikeButton(props: LikeButtonProps) {
         aria-disabled={count === 3 || undefined}
         aria-label={m.blog_like_this_post()}
         aria-describedby={`${clipId}-status`}
-        className='relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-md border border-input bg-surface px-4 py-2.5 text-base/normal text-foreground/90 transition-[background-color] ease-linear hover:bg-accent focus-visible:-outline-offset-4 aria-disabled:cursor-default motion-safe:not-aria-disabled:active:scale-97 motion-reduce:transition-none'
+        className='relative inline-flex min-h-12 items-center justify-center gap-2.5 rounded-md border border-input bg-surface px-4 py-2.5 text-foreground/90 transition-[background-color] ease-linear hover:bg-accent focus-visible:-outline-offset-4 aria-disabled:cursor-default motion-safe:not-aria-disabled:active:scale-97 motion-reduce:transition-none'
       >
         <span className='relative flex text-primary'>
           <svg width='26' height='26' viewBox='0 0 24 24' aria-hidden='true'>

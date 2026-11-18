@@ -1,21 +1,22 @@
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from '@repo/ui/components/table'
+import { cn } from 'cn'
 import MarkdownToJSX from 'markdown-to-jsx'
 import { Fragment, memo } from 'react'
 
-import { CommentCodeBlock } from '@/features/comments/comment-code-block'
-import { CommentTable } from '@/features/comments/comment-table'
+import { MdxLink } from '@/components/mdx/mdx-link'
 
-import { MdxLink } from './mdx-link'
+import { CommentCodeBlock } from './comment-code-block'
+import { CommentTable } from './comment-table'
 
-type MarkdownProps = {
+type CommentMarkdownProps = React.ComponentProps<'div'> & {
   children: string
 }
 
-export const Markdown = memo((props: MarkdownProps) => {
-  const { children } = props
+export const CommentMarkdown = memo((props: CommentMarkdownProps) => {
+  const { children, className, ...rest } = props
 
   return (
-    <div className='my-3 prose ml-0.5 min-w-0 wrap-break-word'>
+    <div className={cn('prose ml-0.5 min-w-0 py-3 wrap-break-word', className)} {...rest}>
       <MarkdownToJSX
         options={{
           overrides: {
@@ -38,4 +39,4 @@ export const Markdown = memo((props: MarkdownProps) => {
   )
 })
 
-Markdown.displayName = 'Markdown'
+CommentMarkdown.displayName = 'CommentMarkdown'

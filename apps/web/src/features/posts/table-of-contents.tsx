@@ -17,7 +17,9 @@ export function TableOfContents(props: TableOfContentsProps) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) if (entry.isIntersecting) setActiveId(entry.target.id)
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActiveId(entry.target.id)
+        }
       },
       { rootMargin: '-15% 0px -65% 0px' },
     )
@@ -33,12 +35,9 @@ export function TableOfContents(props: TableOfContentsProps) {
   }, [toc])
 
   return (
-    <aside className='mb-11 self-start overflow-y-auto border-b border-b-border pb-7 lg:sticky lg:top-9 lg:mb-0 lg:max-h-[calc(100dvh-(--spacing(9)*2))] lg:border-b-0 lg:pb-0'>
+    <aside className='mb-11 self-start overflow-y-auto border-b pb-7 lg:sticky lg:top-9 lg:mb-0 lg:max-h-[calc(100dvh-(--spacing(9)*2))] lg:border-b-0 lg:pb-0'>
       <span className='mb-3 block text-xs text-section-label'>{m.blog_on_this_page()}</span>
-      <nav
-        aria-label={m.blog_on_this_page()}
-        className='grid grid-cols-1 gap-y-1 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-1'
-      >
+      <nav aria-label={m.blog_on_this_page()} className='grid grid-cols-1 gap-y-1'>
         {toc.map((item) => (
           <a
             key={item.url}

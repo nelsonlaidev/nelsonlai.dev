@@ -1,6 +1,7 @@
 import type { BundledLanguage } from 'shiki'
 
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+import { bundledLanguagesInfo } from 'shiki/langs'
 
 import { CodeBlock } from '@/components/mdx/code-block'
 
@@ -23,10 +24,11 @@ export function CommentCodeBlock(props: CommentCodeBlockProps) {
       ?.split(' ')
       .find((name) => /^(?:lang-|language-)/.test(name))
       ?.replace(/^(?:lang-|language-)/, '') ?? 'plaintext'
+  const languageInfo = bundledLanguagesInfo.find((info) => info.id === lang || info.aliases?.includes(lang))
   const [highlighted, setHighlighted] = useState<{
     code: string
     lang: string
-    html: string
+    lines: React.ReactNode[]
     style: React.CSSProperties
   }>()
 
@@ -35,55 +37,77 @@ export function CommentCodeBlock(props: CommentCodeBlockProps) {
 
     async function highlight() {
       try {
-        const [{ bundledLanguages, getSingletonHighlighter }, { createJavaScriptRegexEngine }] = await Promise.all([
+        const [{ getSingletonHighlighter, getTokenStyleObject }, { createJavaScriptRegexEngine }] = await Promise.all([
           import('shiki'),
           import('shiki/engine/javascript'),
         ])
-        const language = lang in bundledLanguages ? (lang as BundledLanguage) : 'plaintext'
+        const language = languageInfo ? (lang as BundledLanguage) : 'plaintext'
         const highlighter = await getSingletonHighlighter({
           langs: [language],
           themes: ['vitesse-dark'],
           engine: createJavaScriptRegexEngine(),
         })
-        const html = highlighter.codeToHtml(code, {
+        const { tokens, fg } = highlighter.codeToTokens(code, {
           lang: language,
           theme: 'vitesse-dark',
         })
-        const theme = highlighter.getTheme('vitesse-dark')
-        const codeHtml = /<code\b[^>]*>([\s\S]*?)<\/code>/.exec(html)?.[1]
-        if (!cancelled && codeHtml)
-          setHighlighted({
-            code,
-            lang,
-            html: codeHtml,
-            style: { color: theme.fg },
-          })
+        if (cancelled) return
+
+        let lineOffset = 0
+        const lines = tokens.map((line, lineIndex) => {
+          const offset = lineOffset
+          lineOffset += line.reduce((length, token) => length + token.content.length, 0) + 1
+
+          return (
+            <Fragment key={offset}>
+              {lineIndex > 0 ? '\n' : null}
+              <span>
+                {line.map((token) => {
+                  const style = getTokenStyleObject(token)
+
+                  return (
+                    <span
+                      key={token.offset}
+                      style={{
+                        color: style.color,
+                        backgroundColor: style['background-color'],
+                        fontStyle: style['font-style'],
+                        fontWeight: style['font-weight'],
+                        textDecoration: style['text-decoration'],
+                      }}
+                    >
+                      {token.content}
+                    </span>
+                  )
+                })}
+              </span>
+            </Fragment>
+          )
+        })
+
+        setHighlighted({ code, lang, lines, style: { color: fg } })
       } catch (error) {
         console.error('Failed to highlight code:', error)
       }
     }
 
     void highlight()
+
     return () => {
       cancelled = true
     }
-  }, [code, lang])
+  }, [code, lang, languageInfo])
 
   return (
     <CodeBlock
       data-lang={lang}
-      title={title}
-      className='shiki max-h-120'
+      title={title ?? languageInfo?.name}
+      className='shiki'
+      scrollAreaClassName='[&>[data-slot=scroll-area-viewport]]:max-h-120'
       style={highlighted?.style}
-      figureClassName='my-6 mb-9'
+      figureClassName='mt-6 mb-9'
     >
-      {/* Shiki escapes user content before generating highlighted HTML. */}
-      {highlighted?.code === code && highlighted.lang === lang ? (
-        // oxlint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml
-        <code dangerouslySetInnerHTML={{ __html: highlighted.html }} />
-      ) : (
-        <code>{code}</code>
-      )}
+      {highlighted?.code === code && highlighted.lang === lang ? <code>{highlighted.lines}</code> : <code>{code}</code>}
     </CodeBlock>
   )
 }

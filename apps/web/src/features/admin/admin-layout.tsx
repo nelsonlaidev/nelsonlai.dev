@@ -14,7 +14,7 @@ export function AdminLayout(props: AdminLayoutProps) {
   const { children } = props
 
   return (
-    <SidebarProvider className='bg-background text-foreground'>
+    <SidebarProvider>
       <SkipNav />
       <AdminSidebar />
       <div className='flex w-full min-w-0 flex-col overflow-x-hidden px-4 pb-24 sm:px-8 lg:px-10'>

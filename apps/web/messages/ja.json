@@ -72,11 +72,11 @@
       }
     }
   ],
-  "blog_comments_conversation": "会話",
+  "blog_comments_conversation": "コメント",
   "blog_comments_copy_link": "リンクをコピー",
   "blog_comments_discussion_intro": "よいアイデアは最後の一行で終わりません。何を思いましたか？",
-  "blog_comments_discussion_kicker": "考えをもう少し先へ",
   "blog_comments_dislike": "低評価",
+  "blog_comments_hide_replies": "返信を非表示",
   "blog_comments_highlighted_comment": "ハイライトされたコメント",
   "blog_comments_newest": "新しい順",
   "blog_comments_no_comments": "コメントがありません",
@@ -98,6 +98,16 @@
   "blog_comments_reply": "返信",
   "blog_comments_reply_to_comment": "コメントに返信",
   "blog_comments_send_comment": "コメントを送信",
+  "blog_comments_show_replies": [
+    {
+      "declarations": ["input count"],
+      "selectors": ["count"],
+      "match": {
+        "count=1": "{count} 件の返信を表示",
+        "count=*": "{count} 件の返信を表示"
+      }
+    }
+  ],
   "blog_comments_sort_by": "並び替え",
   "blog_comments_this_comment_has_been_deleted": "[このコメントは削除されました]",
   "blog_comments_toggle_bold": "太字を切り替え",
@@ -119,7 +129,6 @@
   "blog_image_viewer_zoom_in": "拡大",
   "blog_image_viewer_zoom_out": "縮小",
   "blog_intro": "学んだこと、気づいた細部、残しておきたいアイデア。\nウェブ制作の小さな日誌。",
-  "blog_join": "会話に参加する",
   "blog_like_this_post": "この投稿にいいね",
   "blog_liked": "いいね済み",
   "blog_next": "次にたどる流れ",
@@ -181,7 +190,9 @@
   "error_avatar_unsupported_file": "サポートされている画像形式（JPEG、PNG、WebP）を選択してください。",
   "error_comment_cannot_be_empty": "コメントを入力してください",
   "error_copy_to_clipboard_error": "クリップボードにコピーできません。もう一度お試しください。",
+  "error_create_comment_failed": "コメントを投稿できませんでした。もう一度お試しください。",
   "error_create_message_failed": "メッセージを送信できませんでした。もう一度お試しください。",
+  "error_create_reply_failed": "返信を投稿できませんでした。もう一度お試しください。",
   "error_delete_message_failed": "メッセージを削除できませんでした。もう一度お試しください。",
   "error_failed_to_fetch_comments_data": "コメントデータの取得に失敗しました。ページを更新してください。",
   "error_failed_to_fetch_dashboard_data": "ダッシュボードデータの取得に失敗しました。ページを更新してください。",

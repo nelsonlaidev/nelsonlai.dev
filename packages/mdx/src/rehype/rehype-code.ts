@@ -14,7 +14,7 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from '@shikijs/transformers'
-import { bundledLanguages, getSingletonHighlighter } from 'shiki'
+import { bundledLanguages, bundledLanguagesInfo, getSingletonHighlighter } from 'shiki'
 import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
 const titleRegex = /title=["']([^"']*)["']/
@@ -30,19 +30,12 @@ export function rehypeCode(): Transformer<Root, Root> {
         // Remove trailing newline
         return code.replace(/\n$/, '')
       },
-      root(hast) {
-        const pre = hast.children[0]
-        if (pre?.type !== 'element') return
-
-        hast.children = [
-          {
-            ...pre,
-            properties: {
-              ...pre.properties,
-              'data-lang': this.options.lang,
-            },
-          },
-        ]
+      pre(node) {
+        const { lang } = this.options
+        node.properties['data-lang'] = lang
+        node.properties.title ??= bundledLanguagesInfo.find(
+          (info) => info.id === lang || info.aliases?.includes(lang),
+        )?.name
       },
     },
     transformerNotationHighlight({

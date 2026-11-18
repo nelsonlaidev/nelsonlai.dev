@@ -8,15 +8,10 @@ import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
 const STAT_ITEMS = [
-  // @i18n-check m.admin_dashboard_stats_users()
   { label: m.admin_dashboard_stats_users, icon: UsersIcon, field: 'totalUsers' },
-  // @i18n-check m.admin_dashboard_stats_comments()
   { label: m.admin_dashboard_stats_comments, icon: MessagesSquareIcon, field: 'totalComments' },
-  // @i18n-check m.admin_dashboard_stats_views()
   { label: m.admin_dashboard_stats_views, icon: EyeIcon, field: 'totalViews' },
-  // @i18n-check m.admin_dashboard_stats_likes()
   { label: m.admin_dashboard_stats_likes, icon: HeartIcon, field: 'totalLikes' },
-  // @i18n-check m.admin_dashboard_stats_messages()
   { label: m.admin_dashboard_stats_messages, icon: MessageSquareIcon, field: 'totalMessages' },
 ] as const
 
@@ -36,14 +31,9 @@ export function AdminStatsCards() {
               {item.label()} <item.icon className='size-4 text-muted-foreground' />
             </CardTitle>
           </CardHeader>
-          <CardContent className='text-2xl/normal font-bold'>
-            <Skeleton
-              className='min-h-lh self-start [--skullet-text-bottom:baseline] [--skullet-text-top:cap-height]'
-              data={data?.[item.field]}
-              sample={123}
-              label={m.common_aria_labels_loading()}
-            >
-              {(value) => (data ? <NumberFlow className='block' value={value} /> : <span>{value}</span>)}
+          <CardContent className='text-2xl font-bold'>
+            <Skeleton data={data?.[item.field]} sample={123} label={m.common_aria_labels_loading()}>
+              {(value) => <NumberFlow className='block w-fit rounded-sm' skullet-block='' value={value} />}
             </Skeleton>
           </CardContent>
         </Card>

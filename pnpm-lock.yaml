@@ -165,8 +165,8 @@ settings:
 catalogs:
   default:
     '@nelsonlaidev/typescript-config':
-      specifier: 2.0.0
-      version: 2.0.0
+      specifier: 3.0.0
+      version: 3.0.0
     '@orpc/server':
       specifier: 2.0.0-beta.45
       version: 2.0.0-beta.45
@@ -225,7 +225,7 @@ importers:
         version: 1.2.4(9d85f05dde14834e1dc397ff7b8035f8)
       '@nelsonlaidev/typescript-config':
         specifier: 'catalog:'
-        version: 2.0.0
+        version: 3.0.0
       cspell:
         specifier: 10.4.0
         version: 10.4.0
@@ -292,7 +292,7 @@ importers:
         version: 5.3.1
       '@nelsonlaidev/typescript-config':
         specifier: 'catalog:'
-        version: 2.0.0
+        version: 3.0.0
       '@storybook/addon-docs':
         specifier: 10.6.5
         version: 10.6.5(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(storybook@10.6.5(@types/react@19.3.0)(prettier@3.9.10)(react@19.3.1))
@@ -494,7 +494,7 @@ importers:
         version: 2.29.3(eslint@10.13.0(jiti@2.7.0)(supports-color@7.2.0))(typescript@6.0.3)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.25.12)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       '@nelsonlaidev/typescript-config':
         specifier: 'catalog:'
-        version: 2.0.0
+        version: 3.0.0
       '@paralleldrive/cuid2':
         specifier: 3.3.0
         version: 3.3.0
@@ -558,6 +558,9 @@ importers:
       jsdom:
         specifier: 30.1.3
         version: 30.1.3(@noble/hashes@2.4.0)
+      material-icon-theme:
+        specifier: 5.40.0
+        version: 5.40.0
       oxc-transform-react:
         specifier: 0.156.0
         version: 0.156.0
@@ -621,7 +624,7 @@ importers:
     devDependencies:
       '@nelsonlaidev/typescript-config':
         specifier: 'catalog:'
-        version: 2.0.0
+        version: 3.0.0
       '@total-typescript/ts-reset':
         specifier: 'catalog:'
         version: 0.6.1
@@ -655,7 +658,7 @@ importers:
     devDependencies:
       '@nelsonlaidev/typescript-config':
         specifier: 'catalog:'
-        version: 2.0.0
+        version: 3.0.0
       '@total-typescript/ts-reset':
         specifier: 'catalog:'
         version: 0.6.1
@@ -683,7 +686,7 @@ importers:
     devDependencies:
       '@nelsonlaidev/typescript-config':
         specifier: 'catalog:'
-        version: 2.0.0
+        version: 3.0.0
       '@total-typescript/ts-reset':
         specifier: 'catalog:'
         version: 0.6.1
@@ -723,7 +726,7 @@ importers:
     devDependencies:
       '@nelsonlaidev/typescript-config':
         specifier: 'catalog:'
-        version: 2.0.0
+        version: 3.0.0
       '@react-email/ui':
         specifier: 6.11.6
         version: 6.11.6(@babel/core@7.29.7(supports-color@7.2.0))(@playwright/test@1.64.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -760,7 +763,7 @@ importers:
     devDependencies:
       '@nelsonlaidev/typescript-config':
         specifier: 'catalog:'
-        version: 2.0.0
+        version: 3.0.0
       '@total-typescript/ts-reset':
         specifier: 'catalog:'
         version: 0.6.1
@@ -809,7 +812,7 @@ importers:
     devDependencies:
       '@nelsonlaidev/typescript-config':
         specifier: 'catalog:'
-        version: 2.0.0
+        version: 3.0.0
       '@total-typescript/ts-reset':
         specifier: 'catalog:'
         version: 0.6.1
@@ -870,7 +873,7 @@ importers:
     devDependencies:
       '@nelsonlaidev/typescript-config':
         specifier: 'catalog:'
-        version: 2.0.0
+        version: 3.0.0
       '@tailwindcss/typography':
         specifier: 0.5.20
         version: 0.5.20(tailwindcss@4.3.3)
@@ -900,7 +903,7 @@ importers:
     devDependencies:
       '@nelsonlaidev/typescript-config':
         specifier: 'catalog:'
-        version: 2.0.0
+        version: 3.0.0
       '@total-typescript/ts-reset':
         specifier: 'catalog:'
         version: 0.6.1
@@ -2529,8 +2532,8 @@ packages:
       oxlint-tsgolint:
         optional: true
 
-  '@nelsonlaidev/typescript-config@2.0.0':
-    resolution: {integrity: sha512-5vZ8BBcl/OH6vlq1G8/mu1oyRfUU8KaClhqPMpUkBecmmqOKuzxlxynxWbdSu+iRMoWeLh0gDDgfcnggZvB5jg==}
+  '@nelsonlaidev/typescript-config@3.0.0':
+    resolution: {integrity: sha512-MjUkTV/VFk7VpTmyKOxSCbco2ZYvtkxcXoTx6aFg/yXSZFw05Ru//v0G6Ojxp+Fu5nX49LZqL2tqI7uSON9LLw==}
 
   '@neodrag/core@3.0.0-next.11':
     resolution: {integrity: sha512-3WQWxyrbxiaK9zS5JU2wJsW2gpoQlZBXVghduBh61JpqaeE0T0cte8R0qYK2RuJo3J2TYQYqxO19CpG/C1i5eg==}
@@ -6134,6 +6137,9 @@ packages:
     resolution: {integrity: sha512-TQMmc3w+5AxjpL8iIiwebF73dRDF4fBIieAqGn9RGCWaEVwQ6Fb2cGe31Yns0RRIzii5goJ1Y7xbMwo1TxMplw==}
     engines: {node: '>= 20.19.0'}
 
+  chroma-js@3.3.0:
+    resolution: {integrity: sha512-afEEP0zHO4dxwrqTllKSFWs83+u+htEsmyvSe8IPjKjrfy3qmNk+vpWAdpbA2fJa14LTgkGyemC74J6v3HSUZA==}
+
   citty@0.2.2:
     resolution: {integrity: sha512-+6vJA3L98yv+IdfKGZHBNiGW5KHn22e/JwID0Strsz8h4S/csAu/OuICwxrg44k5MRiZHWIo8XXuJgQTriRP4w==}
 
@@ -7865,6 +7871,10 @@ packages:
     resolution: {integrity: sha512-8dD6FusOQSrpv9Z1rdNMdlSgQOIP880DHqnohobOmYLElGEqAL/JvxvuxZO16r4HtjTlfPRDC1hbvxC9dPN2nA==}
     engines: {node: '>= 18'}
     hasBin: true
+
+  material-icon-theme@5.40.0:
+    resolution: {integrity: sha512-IrvgusbwtqxhUtVgUy0nToJcfN7CYVRdbBxKMfbo0vab9flVBHA5INZ9UiE5SgRj+PM6opCl5nn5TZdpm2UaxA==}
+    engines: {vscode: ^1.55.0}
 
   mdast-util-find-and-replace@3.0.4:
     resolution: {integrity: sha512-z4B5c6jrnJ1ltOQemhWYPBSAo6y42Z8Gt2yEgfgNTMcLSU59B8bfj8Z8AnAlJrBGLnqkdAUZ7jdDEqQw3KuipQ==}
@@ -11481,7 +11491,7 @@ snapshots:
       eslint-plugin-react-hooks: 7.1.1(eslint@10.13.0(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)
       oxlint-tsgolint: 7.0.2005
 
-  '@nelsonlaidev/typescript-config@2.0.0': {}
+  '@nelsonlaidev/typescript-config@3.0.0': {}
 
   '@neodrag/core@3.0.0-next.11': {}
 
@@ -14922,6 +14932,8 @@ snapshots:
     dependencies:
       readdirp: 5.1.1
 
+  chroma-js@3.3.0: {}
+
   citty@0.2.2: {}
 
   class-variance-authority@0.7.1:
@@ -16534,6 +16546,10 @@ snapshots:
       solid-js: 1.9.17
 
   marked@15.0.12: {}
+
+  material-icon-theme@5.40.0:
+    dependencies:
+      chroma-js: 3.3.0
 
   mdast-util-find-and-replace@3.0.4:
     dependencies:

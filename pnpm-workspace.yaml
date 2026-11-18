@@ -9,7 +9,7 @@ allowBuilds:
   lefthook: true
 
 catalog:
-  '@nelsonlaidev/typescript-config': 2.0.0
+  '@nelsonlaidev/typescript-config': 3.0.0
   '@orpc/server': 2.0.0-beta.45
   '@total-typescript/ts-reset': 0.6.1
   '@types/react': 19.3.0
@@ -37,7 +37,7 @@ minimumReleaseAgeExclude:
   - '@tanstack/start-server-core@1.169.45'
   - '@tanstack/start-storage-context@1.167.41'
   - '@tanstack/router-cli@1.167.46'
-  - '@nelsonlaidev/typescript-config@2.0.0'
+  - '@nelsonlaidev/typescript-config@2.0.0 || 3.0.0'
   - '@nelsonlaidev/oxlint-config@1.2.4'
   - '@takumi-rs/core-darwin-arm64@2.18.1'
   - '@takumi-rs/core-darwin-x64@2.18.1'
