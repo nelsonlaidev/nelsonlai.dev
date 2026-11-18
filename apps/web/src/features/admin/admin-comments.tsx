@@ -21,10 +21,7 @@ const SAMPLE_COMMENTS = createRange(10).map((index) => ({
 }))
 
 export function AdminComments() {
-  const [pagination, setPagination] = useState({
-    pageIndex: 0,
-    pageSize: 10,
-  })
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 })
   const { data, isError, isFetching, isPending } = useQuery(
     orpc.admin.comment.list.queryOptions({
       input: {
