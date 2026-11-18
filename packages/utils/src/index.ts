@@ -1,2 +1,2 @@
 export { createRange } from './create-range'
-export { getInitials } from './get-initials'
+export { getInitials, graphemeSegmenter } from './get-initials'

@@ -3,6 +3,7 @@
 // Source: https://github.com/vercel/avatar/blob/410bc1e438ef26a7456b037bbdd44d5aec49031a/pages/api/avatar/%5Bname%5D.tsx
 //
 // Modified by: Nelson Lai
+import { graphemeSegmenter } from '@repo/utils'
 import { createFileRoute } from '@tanstack/react-router'
 import { googleFonts } from 'takumi-js/helpers'
 import ImageResponse from 'takumi-js/response'
@@ -13,26 +14,25 @@ export const Route = createFileRoute('/api/avatar/{$id}.webp')({
   server: {
     handlers: {
       GET: async ({ params, request }) => {
+        const { searchParams } = new URL(request.url)
         const parsedSize = z.coerce
           .number()
           .int()
           .min(1)
           .max(1024)
-          .safeParse(new URL(request.url).searchParams.get('size') ?? 120)
-        const parsedText = z
-          .string()
-          .max(2)
-          .safeParse(new URL(request.url).searchParams.get('text') ?? '')
+          .safeParse(searchParams.get('size') ?? 120)
 
         if (!parsedSize.success) {
           return new Response('Invalid size', { status: 400 })
         }
 
-        if (!parsedText.success) {
+        const text = searchParams.get('text') ?? ''
+        const textLength = [...graphemeSegmenter.segment(text)].length
+
+        if (textLength > 2) {
           return new Response('Invalid text', { status: 400 })
         }
 
-        const text = parsedText.data
         const size = parsedSize.data
         const gradient = await generateGradient(params.id)
 
@@ -47,12 +47,12 @@ export const Route = createFileRoute('/api/avatar/{$id}.webp')({
               background: `linear-gradient(to bottom right, ${gradient.fromColor}, ${gradient.toColor})`,
             }}
           >
-            {text !== '' && (
+            {textLength > 0 && (
               <span
                 style={{
                   fontFamily: 'Geist, Noto Sans TC, Noto Sans SC, Noto Sans JP',
                   fontWeight: 400,
-                  fontSize: text.length > 0 ? (size * 0.9) / text.length : 0,
+                  fontSize: (size * 0.9) / textLength,
                   color: '#fff',
                   lineHeight: 1,
                   whiteSpace: 'nowrap',
@@ -68,7 +68,8 @@ export const Route = createFileRoute('/api/avatar/{$id}.webp')({
           width: size,
           height: size,
           format: 'webp',
-          fonts: text
+          headers: { 'Cache-Control': 'public, max-age=86400' },
+          fonts: /\P{ASCII}/u.test(text)
             ? googleFonts([
                 { name: 'Noto Sans TC', weight: 400 },
                 { name: 'Noto Sans SC', weight: 400 },
