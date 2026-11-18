@@ -6,7 +6,7 @@ import { useTable } from '@tanstack/react-table'
 import { m } from '@/paraglide/messages'
 
 import { AdminDataTable } from '../admin-data-table'
-import { features } from '../features'
+import { features } from '../table-features'
 import { getColumns } from './columns'
 
 type CommentsTableProps = {

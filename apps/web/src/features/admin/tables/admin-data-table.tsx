@@ -1,5 +1,5 @@
 import type { ReactTable, RowData } from '@tanstack/react-table'
-import type { features } from './features'
+import type { features } from './table-features'
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@repo/ui/components/table'
 import { flexRender } from '@tanstack/react-table'

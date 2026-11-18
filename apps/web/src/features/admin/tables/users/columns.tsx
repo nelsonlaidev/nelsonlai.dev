@@ -1,6 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { AdminUserListOutput } from '../../types'
-import type { features } from '../features'
+import type { features } from '../table-features'
 
 import { UserAvatar } from '@/components/user-avatar'
 import { m } from '@/paraglide/messages'

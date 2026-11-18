@@ -1,5 +1,5 @@
 import type { ReactTable, RowData } from '@tanstack/react-table'
-import type { features } from './features'
+import type { features } from './table-features'
 
 import { Button } from '@repo/ui/components/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/components/select'
@@ -27,18 +27,18 @@ export function TablePagination<TData extends RowData>(props: TablePaginationPro
         <div className='flex items-center gap-2'>
           <p className='text-sm font-medium'>{m.admin_pagination_rows_per_page()}</p>
           <Select
-            value={`${table.state.pagination.pageSize}`}
-            onValueChange={(value) => {
-              table.setPageSize(Number(value))
+            value={table.state.pagination.pageSize}
+            onValueChange={(pageSize) => {
+              if (pageSize !== null) table.setPageSize(pageSize)
             }}
             disabled={disabled}
           >
             <SelectTrigger aria-label={m.admin_pagination_rows_per_page()}>
               <SelectValue placeholder={table.state.pagination.pageSize} />
             </SelectTrigger>
-            <SelectContent side='top' className='border shadow-md ring-0'>
+            <SelectContent>
               {[10, 20, 25, 30, 40, 50].map((pageSize) => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
+                <SelectItem key={pageSize} value={pageSize}>
                   {pageSize}
                 </SelectItem>
               ))}

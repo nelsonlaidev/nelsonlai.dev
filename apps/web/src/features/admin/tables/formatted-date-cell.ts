@@ -6,7 +6,6 @@ type FormattedDateCellProps = {
 
 export function FormattedDateCell(props: FormattedDateCellProps) {
   const { date } = props
-
   const formattedDate = useFormattedDate(date, { formatName: 'long' })
 
   return formattedDate ?? '--'
