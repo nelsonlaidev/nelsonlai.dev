@@ -58,7 +58,7 @@ function RouteComponent() {
 
   return (
     <OceanPage>
-      <PageHeader title={page.title} description={m.blog_intro()} />
+      <PageHeader title={page.title} description={m.blog_intro()} className='mb-10' />
       <FilteredPosts key={locale} posts={posts} />
     </OceanPage>
   )
