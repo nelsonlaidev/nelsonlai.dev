@@ -1,3 +1,5 @@
+import type { InferRouterOutputs } from '@orpc/server'
+
 import { accountRouter } from './account'
 import { adminRouter } from './admin'
 import { commentsRouter } from './comments'
@@ -21,3 +23,5 @@ export const router = {
   wakatime: wakatimeRouter,
   youtube: youtubeRouter,
 }
+
+export type Outputs = InferRouterOutputs<typeof router>
