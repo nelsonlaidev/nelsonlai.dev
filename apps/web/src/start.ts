@@ -35,8 +35,6 @@ function getContentSecurityPolicy() {
 }
 
 const securityMiddleware = createMiddleware().server(async ({ next }) => {
-  setResponseHeader('X-Frame-Options', 'DENY')
-
   if (import.meta.env.PROD) {
     setResponseHeader('Content-Security-Policy', getContentSecurityPolicy())
   }
