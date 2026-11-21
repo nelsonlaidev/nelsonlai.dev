@@ -35,14 +35,10 @@ function getContentSecurityPolicy() {
 }
 
 const securityMiddleware = createMiddleware().server(async ({ next }) => {
-  setResponseHeader('Referrer-Policy', 'no-referrer')
-  setResponseHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
-  setResponseHeader('X-Content-Type-Options', 'nosniff')
   setResponseHeader('X-Frame-Options', 'DENY')
 
   if (import.meta.env.PROD) {
     setResponseHeader('Content-Security-Policy', getContentSecurityPolicy())
-    setResponseHeader('Strict-Transport-Security', 'max-age=31536000')
   }
 
   return next()
