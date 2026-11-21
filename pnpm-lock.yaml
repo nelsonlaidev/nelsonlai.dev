@@ -419,6 +419,9 @@ importers:
       cn:
         specifier: 'catalog:'
         version: 0.5.0
+      dedent:
+        specifier: 1.7.2
+        version: 1.7.2
       lucide-react:
         specifier: 'catalog:'
         version: 1.61.0(@types/react@19.3.0)(react@19.3.1)

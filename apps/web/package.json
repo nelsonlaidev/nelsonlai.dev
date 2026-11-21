@@ -51,6 +51,7 @@
     "@varlock/vite-integration": "1.5.5",
     "bowser": "2.15.0",
     "cn": "catalog:",
+    "dedent": "1.7.2",
     "lucide-react": "catalog:",
     "markdown-to-jsx": "9.10.4",
     "merge-refs": "2.0.0",
