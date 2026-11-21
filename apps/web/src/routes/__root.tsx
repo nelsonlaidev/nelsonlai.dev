@@ -51,11 +51,12 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
     const scripts: AnyRouteMatch['scripts'] = []
 
-    if (ENV.UMAMI_URL && ENV.UMAMI_WEBSITE_ID) {
+    if (import.meta.env.PROD && ENV.UMAMI_URL && ENV.UMAMI_WEBSITE_ID) {
       const umamiScript = {
         src: `${ENV.UMAMI_URL}/script.js`,
         defer: true,
         'data-website-id': ENV.UMAMI_WEBSITE_ID,
+        'data-exclude-search': 'true',
       }
 
       scripts.push(umamiScript)
