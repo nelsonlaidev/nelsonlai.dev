@@ -60,7 +60,6 @@
     "react": "catalog:",
     "react-dom": "19.3.1",
     "recharts": "3.10.1",
-    "rss": "1.2.2",
     "sharp": "catalog:",
     "shiki": "4.5.0",
     "sitemap": "10.0.0",
@@ -69,6 +68,7 @@
     "tinycolor2": "1.6.0",
     "use-debounce": "10.1.1",
     "use-intl": "4.14.9",
+    "xmlbuilder2": "4.0.3",
     "yet-another-react-lightbox": "3.33.0",
     "zod": "catalog:"
   },
@@ -91,7 +91,6 @@
     "@types/node": "26.6.6",
     "@types/react": "catalog:",
     "@types/react-dom": "19.3.0",
-    "@types/rss": "0.0.32",
     "@types/tinycolor2": "1.4.6",
     "@vitejs/plugin-react": "6.1.2",
     "@vitest/coverage-v8": "5.0.5",
