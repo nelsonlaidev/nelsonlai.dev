@@ -40,11 +40,15 @@ describe('sitemap HTTP response', () => {
         [allProjects, '/projects'],
       ] as const) {
         for (const record of records.filter((record) => record.locale === locale)) {
-          const entry = entryFor(`${prefix}/${record.slug}`, locale)
+          const path = `${prefix}/${record.slug}`
+          const entry = entryFor(path, locale)
           expect(entry).toBeDefined()
-          expect(new Date(entry?.querySelector('lastmod')?.textContent ?? '').toISOString()).toBe(
-            new Date(record.updatedAt).toISOString(),
-          )
+          const dates = [Date.parse(record.updatedAt)]
+          if (path === '/blog' || path === '/projects') {
+            const items = path === '/blog' ? allPosts : allProjects
+            dates.push(...items.filter((item) => item.locale === locale).map((item) => Date.parse(item.updatedAt)))
+          }
+          expect(Date.parse(entry?.querySelector('lastmod')?.textContent ?? '')).toBe(Math.max(...dates))
         }
       }
     }
