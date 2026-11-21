@@ -145,7 +145,7 @@ export function LikeButton(props: LikeButtonProps) {
                   key={pulse}
                   d='M-12 0Q-6-2 0 0T12 0T24 0T36 0V30H-12Z'
                   fill='currentColor'
-                  className={cn('motion-reduce:animate-none', pulse > 0 && 'animate-[like-settle_0.6s_ease-out_both]')}
+                  className={cn('motion-reduce:animate-none', pulse > 0 && 'animate-like-settle')}
                 />
               </g>
             </g>
@@ -153,11 +153,11 @@ export function LikeButton(props: LikeButtonProps) {
           </svg>
           {pulse > 0 && (
             <span key={pulse} aria-hidden='true' className='pointer-events-none absolute inset-0 motion-reduce:hidden'>
-              <i className='absolute top-1.75 left-0.75 size-1 animate-[like-bubble_0.65s_ease-out] rounded-full border border-primary opacity-0' />
-              <i className='absolute top-0.75 left-3.25 size-1 animate-[like-bubble_0.65s_ease-out] rounded-full border border-primary opacity-0 [animation-delay:0.05s]' />
-              <i className='absolute top-2.25 left-5.5 size-1 animate-[like-bubble_0.65s_ease-out] rounded-full border border-primary opacity-0 [animation-delay:0.1s]' />
+              <i className='absolute top-1.75 left-0.75 size-1 animate-like-bubble rounded-full border border-primary opacity-0' />
+              <i className='absolute top-0.75 left-3.25 size-1 animate-like-bubble rounded-full border border-primary opacity-0 delay-50' />
+              <i className='absolute top-2.25 left-5.5 size-1 animate-like-bubble rounded-full border border-primary opacity-0 delay-100' />
               {count === 3 && (
-                <b className='absolute -inset-1 animate-[like-ripple_0.65s_ease-out_both] rounded-full border border-primary' />
+                <b className='absolute -inset-1 animate-like-ripple rounded-full border border-primary' />
               )}
             </span>
           )}

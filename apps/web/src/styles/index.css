@@ -17,33 +17,3 @@
     scroll-behavior: auto !important;
   }
 }
-
-@keyframes like-settle {
-  from {
-    transform: translateX(-6px);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes like-bubble {
-  15% {
-    opacity: 0.8;
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-17px);
-  }
-}
-
-@keyframes like-ripple {
-  from {
-    opacity: 0.5;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 0;
-    transform: scale(1.5);
-  }
-}
