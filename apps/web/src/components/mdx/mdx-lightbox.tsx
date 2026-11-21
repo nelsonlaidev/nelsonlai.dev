@@ -1,6 +1,6 @@
 /* oxlint-disable better-tailwindcss/no-unknown-classes -- YARL supplies these library CSS hooks. */
 import 'yet-another-react-lightbox/styles.css'
-import '@/styles/viewer.css'
+import '@/styles/mdx-lightbox.css'
 
 import type { KeyboardEvent } from 'react'
 import type { GalleryImage } from './mdx-gallery'
