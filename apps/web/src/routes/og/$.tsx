@@ -1,130 +1,118 @@
+import type { Page } from 'content-collections'
 import type { Locale } from '@/paraglide/runtime'
 
-import geistUrl from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?inline'
+import { Logo } from '@repo/ui/components/logo'
 import { createFileRoute } from '@tanstack/react-router'
-import { allPosts, allProjects } from 'content-collections'
 import { googleFonts } from 'takumi-js/helpers'
 import { ImageResponse } from 'takumi-js/response'
 
 import { findPage } from '@/features/pages/pages.server'
-import { listPosts } from '@/features/posts/posts.server'
-import { listProjects } from '@/features/projects/projects.server'
-import { ShareCard } from '@/features/sharing/share-card'
-import { surfacePoster } from '@/features/sharing/surface.server'
+import { findPost } from '@/features/posts/posts.server'
+import { findProject } from '@/features/projects/projects.server'
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '@/lib/og'
 import { getLocale } from '@/paraglide/runtime'
 
-import seafoldSvg from '../../../public/images/seafold.svg?raw'
+import oceanSwellUrl from './-assets/ocean-swell.webp?inline'
+import seafoldSurfaceUrl from './-assets/seafold-surface.webp?inline'
 
-const geistFont = Buffer.from(geistUrl.slice(geistUrl.indexOf(',') + 1), 'base64')
-const logo = `data:image/svg+xml;base64,${Buffer.from(seafoldSvg).toString('base64')}`
-const mainImages = new Map<Locale, ReturnType<typeof surfacePoster>>()
+const homeImage = Buffer.from(seafoldSurfaceUrl.slice(seafoldSurfaceUrl.indexOf(',') + 1), 'base64')
 
-const PAGE_GROUPS: Record<
-  string,
-  {
-    group: string
-    index: number
-  }
-> = {
-  blog: { group: 'Writing', index: 1 },
-  projects: { group: 'Selected work', index: 2 },
-  about: { group: 'Nelson Lai', index: 3 },
-  uses: { group: 'Everyday tools', index: 4 },
-  guestbook: { group: 'Say hello', index: 5 },
-  dashboard: { group: 'At a glance', index: 6 },
-  terms: { group: 'Legal', index: 7 },
-  privacy: { group: 'Legal', index: 8 },
-}
-
-const FONT_FAMILY_BY_LOCALE: Record<Locale, string> = {
-  en: 'Geist',
+const FALLBACK_FONT_BY_LOCALE: Record<Locale, string | null> = {
+  en: null,
   'zh-TW': 'Noto Sans TC',
   'zh-CN': 'Noto Sans SC',
   ja: 'Noto Sans JP',
-  'pt-BR': 'Geist',
-  es: 'Geist',
+  'pt-BR': null,
+  es: null,
 }
 
 export const Route = createFileRoute('/og/$')({
   server: {
     handlers: {
-      GET: async ({ params }) => {
+      GET: ({ params }) => {
         const pathSegments = (params._splat ?? '').split('/')
-
         if (pathSegments.pop() !== 'image.webp') {
           return new Response('Image not found', { status: 404 })
         }
 
-        const locale = getLocale()
         const contentPath = pathSegments.join('/')
-
-        let content:
-          | {
-              title: string
-              description: string
-            }
-          | null
-          | undefined
-        let group = PAGE_GROUPS[contentPath]?.group ?? 'Nelson Lai'
-        let index = PAGE_GROUPS[contentPath]?.index ?? 0
-
         if (!contentPath) {
-          let image = mainImages.get(locale)
-          if (!image) {
-            image = surfacePoster(geistFont, logo, locale, FONT_FAMILY_BY_LOCALE[locale])
-            mainImages.set(locale, image)
-          }
-          let bytes
-          try {
-            bytes = await image
-          } catch (error) {
-            if (mainImages.get(locale) === image) mainImages.delete(locale)
-            throw error
-          }
-          return new Response(new Uint8Array(bytes), {
-            headers: { 'Content-Type': 'image/webp' },
-          })
-        } else if (contentPath.startsWith('blog/')) {
-          content = allPosts.find((post) => post.locale === locale && post.slug === contentPath.slice('blog/'.length))
-          group = 'Blog'
-          index = 9 + listPosts(locale).findIndex((post) => post.slug === contentPath.slice('blog/'.length))
-        } else if (contentPath.startsWith('projects/')) {
-          content = allProjects.find(
-            (project) => project.locale === locale && project.slug === contentPath.slice('projects/'.length),
-          )
-          group = 'Projects'
-          index =
-            13 + listProjects(locale).findIndex((project) => project.slug === contentPath.slice('projects/'.length))
-        } else {
-          content = findPage(contentPath, locale)
+          return new Response(homeImage, { headers: { 'Content-Type': 'image/webp' } })
         }
 
+        const locale = getLocale()
+        const content = findShareContent(contentPath, locale)
         if (!content) {
           return new Response('Content not found', { status: 404 })
         }
 
-        const fontFamily = FONT_FAMILY_BY_LOCALE[locale]
-        const fontFamilies = fontFamily === 'Geist' ? ['Geist'] : ['Geist', fontFamily]
+        const { title, description } = content
+        const fallbackFont = FALLBACK_FONT_BY_LOCALE[locale]
+        const fontFamilies = fallbackFont ? ['Geist', fallbackFont] : ['Geist']
 
         return new ImageResponse(
-          <ShareCard
-            title={content.title}
-            description={content.description}
-            group={group}
-            index={index}
-            fontFamily={fontFamilies.join(', ')}
-            logo={logo}
-          />,
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              position: 'relative',
+              overflow: 'hidden',
+              fontFamily: fontFamilies.join(', '),
+              backgroundColor: '#0c1420',
+              backgroundImage: `url(${oceanSwellUrl})`,
+              backgroundSize: 'cover',
+            }}
+          >
+            <Logo width={76} height={76} color='#e7eee5' style={{ position: 'absolute', right: 60, top: 44 }} />
+            <div
+              style={{
+                position: 'absolute',
+                left: 72,
+                right: 72,
+                top: 96,
+                bottom: 96,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: getTitleFontSize(title),
+                  fontWeight: 500,
+                  lineHeight: 1.08,
+                  letterSpacing: '-0.035em',
+                  color: '#f4f6f8',
+                  textWrap: 'balance',
+                  lineClamp: 2,
+                  overflow: 'hidden',
+                  overflowWrap: 'anywhere',
+                }}
+              >
+                {title}
+              </div>
+              <div
+                style={{
+                  marginTop: 24,
+                  maxWidth: 1000,
+                  fontSize: 32,
+                  lineHeight: 1.42,
+                  color: '#b4bfcd',
+                  lineClamp: 4,
+                  overflow: 'hidden',
+                  overflowWrap: 'anywhere',
+                }}
+              >
+                {description}
+              </div>
+            </div>
+          </div>,
           {
             width: OG_IMAGE_WIDTH,
             height: OG_IMAGE_HEIGHT,
             format: 'webp',
             lossless: true,
-            fonts: [
-              geistFont,
-              ...(fontFamily === 'Geist' ? [] : await googleFonts([{ name: fontFamily, weight: '400..500' }])),
-            ],
+            fonts: fallbackFont ? googleFonts([{ name: fallbackFont, weight: '400..500' }]) : undefined,
             fontFamilies,
             lang: locale,
           },
@@ -133,3 +121,16 @@ export const Route = createFileRoute('/og/$')({
     },
   },
 })
+
+function findShareContent(path: string, locale: Locale): Pick<Page, 'title' | 'description'> | null {
+  if (path.startsWith('blog/')) return findPost(path.slice('blog/'.length), locale)
+  if (path.startsWith('projects/')) return findProject(path.slice('projects/'.length), locale)
+  return findPage(path, locale)
+}
+
+function getTitleFontSize(title: string) {
+  if (title.length > 80) return 48
+  if (title.length > 34) return 64
+  if (title.length > 24) return 72
+  return 88
+}
