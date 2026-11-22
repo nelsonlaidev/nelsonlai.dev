@@ -828,9 +828,6 @@ importers:
       '@types/mdast':
         specifier: 4.0.4
         version: 4.0.4
-      '@types/node':
-        specifier: 26.6.6
-        version: 26.6.6
       tsdown:
         specifier: 0.23.4
         version: 0.23.4(oxc-resolver@11.24.2)(tsx@4.23.15)(typescript@6.0.3)
