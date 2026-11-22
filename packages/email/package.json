@@ -15,7 +15,8 @@
   "dependencies": {
     "react": "catalog:",
     "react-dom": "19.3.1",
-    "react-email": "6.11.6"
+    "react-email": "6.11.6",
+    "resend": "6.33.0"
   },
   "devDependencies": {
     "@nelsonlaidev/typescript-config": "catalog:",

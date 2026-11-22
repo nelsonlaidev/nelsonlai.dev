@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react'
 
 import { render, toPlainText } from 'react-email'
+import { Resend } from 'resend'
 
 import { ENV } from './env'
 
@@ -15,12 +16,13 @@ export async function sendEmail(options: SendEmailOptions) {
 
   const { to, subject, react } = options
   const html = await render(react)
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${ENV.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    signal: AbortSignal.timeout(3000),
-    body: JSON.stringify({ from: ENV.RESEND_FROM_EMAIL, to, subject, html, text: toPlainText(html) }),
-  })
+  const resend = new Resend(ENV.RESEND_API_KEY)
+  const { error } = await resend.emails.send(
+    { from: ENV.RESEND_FROM_EMAIL, to, subject, html, text: toPlainText(html) },
+    { signal: AbortSignal.timeout(3000) },
+  )
 
-  if (!response.ok) throw new Error(`Email delivery failed: HTTP ${response.status}`)
+  if (error) {
+    throw new Error(`Email delivery failed: ${error.message}`)
+  }
 }
