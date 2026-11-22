@@ -1,15 +1,9 @@
 import type { Session } from '@repo/auth'
 import type { Database } from '@repo/db'
-import type { comments } from '@repo/db/schema/comments'
-import type { ReactElement } from 'react'
 import type { Context } from '../context'
 
 import { users } from '@repo/db/schema/auth'
-import {
-  commentNotificationPreferences,
-  commentReplyUnsubscribes,
-  comments as commentTable,
-} from '@repo/db/schema/comments'
+import { commentNotificationPreferences, commentReplyUnsubscribes, comments } from '@repo/db/schema/comments'
 import { CommentEmailTemplate, ReplyEmailTemplate, sendEmail } from '@repo/email'
 import { and, eq } from 'drizzle-orm'
 import { jwtVerify, SignJWT } from 'jose'
@@ -18,6 +12,8 @@ import * as z from 'zod'
 
 import settings from '../../../../apps/web/project.inlang/settings.json'
 import { ENV } from '../env'
+
+const REPLY_UNSUBSCRIBE_AUDIENCE = 'comment-reply-unsubscribe'
 
 const ReplyUnsubscribePayloadSchema = z.object({
   type: z.literal('comment_reply'),
@@ -29,7 +25,7 @@ export async function createReplyUnsubscribeToken(userId: string, commentId: str
   return new SignJWT({ type: 'comment_reply', userId, commentId })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuer(ENV.SITE_URL)
-    .setAudience('comment-reply-unsubscribe')
+    .setAudience(REPLY_UNSUBSCRIBE_AUDIENCE)
     .setExpirationTime('30d')
     .sign(new TextEncoder().encode(ENV.JWT_SECRET))
 }
@@ -39,13 +35,38 @@ export async function verifyReplyUnsubscribeToken(token: string) {
     const { payload } = await jwtVerify(token, new TextEncoder().encode(ENV.JWT_SECRET), {
       algorithms: ['HS256'],
     })
-    const legacyToken = payload.iss === undefined && payload.aud === undefined
-    if (!legacyToken && (payload.iss !== ENV.SITE_URL || payload.aud !== 'comment-reply-unsubscribe')) return null
+
+    if (payload.iss !== ENV.SITE_URL || payload.aud !== REPLY_UNSUBSCRIBE_AUDIENCE) return null
+
     const result = ReplyUnsubscribePayloadSchema.safeParse(payload)
     return result.success ? result.data : null
   } catch {
     return null
   }
+}
+
+async function findReplyRecipient(db: Database, parentId: string, replierId: string) {
+  const [recipient] = await db
+    .select({
+      userId: users.id,
+      email: users.email,
+      parentCommentBody: comments.body,
+      commentRepliesEnabled: commentNotificationPreferences.commentRepliesEnabled,
+      unsubscribedCommentId: commentReplyUnsubscribes.commentId,
+    })
+    .from(comments)
+    .innerJoin(users, eq(users.id, comments.userId))
+    .leftJoin(commentNotificationPreferences, eq(commentNotificationPreferences.userId, users.id))
+    .leftJoin(
+      commentReplyUnsubscribes,
+      and(eq(commentReplyUnsubscribes.userId, users.id), eq(commentReplyUnsubscribes.commentId, comments.id)),
+    )
+    .where(eq(comments.id, parentId))
+
+  if (!recipient?.userId || !recipient.email || recipient.userId === replierId) return null
+  if (recipient.commentRepliesEnabled === false || recipient.unsubscribedCommentId) return null
+
+  return recipient
 }
 
 export async function notifyComment(
@@ -58,17 +79,15 @@ export async function notifyComment(
 
   try {
     const { locale, title } = post
-    const prefix = locale === settings.baseLocale ? '' : `/${encodeURIComponent(locale)}`
-    const postUrl = new URL(`${prefix}/blog/${encodeURIComponent(comment.postId)}`, ENV.SITE_URL).href
-    const url = new URL(postUrl)
-    url.searchParams.set('comment', comment.parentId ?? comment.id)
-    if (comment.parentId) url.searchParams.set('reply', comment.id)
+    const localePrefix = locale === settings.baseLocale ? '' : `/${encodeURIComponent(locale)}`
+    const postUrl = new URL(`${localePrefix}/blog/${encodeURIComponent(comment.postId)}`, ENV.SITE_URL)
+    const commentUrl = new URL(postUrl)
+    commentUrl.searchParams.set('comment', comment.parentId ?? comment.id)
 
-    let recipient = ENV.AUTHOR_EMAIL
-    let subject = `New comment on "${title}"`
-    const commonProps = {
+    const userImage = user.image ?? new URL(`/api/avatar/${encodeURIComponent(user.id)}.webp`, ENV.SITE_URL).href
+    const sharedTemplateProps = {
       postTitle: title,
-      postUrl,
+      postUrl: postUrl.href,
       siteUrl: ENV.SITE_URL,
       date: comment.createdAt.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -77,53 +96,46 @@ export async function notifyComment(
         timeZone: 'UTC',
       }),
     }
-    const image = user.image ?? new URL(`/api/avatar/${encodeURIComponent(user.id)}.webp`, ENV.SITE_URL).href
-    let template: ReactElement = createElement(CommentEmailTemplate, {
-      ...commonProps,
-      comment: comment.body,
-      commenterName: user.name,
-      commenterImage: image,
-      commentUrl: url.href,
-    })
 
-    if (comment.parentId) {
-      const [parent] = await db
-        .select({
-          userId: commentTable.userId,
-          email: users.email,
-          body: commentTable.body,
-          commentRepliesEnabled: commentNotificationPreferences.commentRepliesEnabled,
-          unsubscribe: commentReplyUnsubscribes.commentId,
-        })
-        .from(commentTable)
-        .innerJoin(users, eq(users.id, commentTable.userId))
-        .leftJoin(commentNotificationPreferences, eq(commentNotificationPreferences.userId, users.id))
-        .leftJoin(
-          commentReplyUnsubscribes,
-          and(eq(commentReplyUnsubscribes.userId, users.id), eq(commentReplyUnsubscribes.commentId, commentTable.id)),
-        )
-        .where(eq(commentTable.id, comment.parentId))
-      if (!parent?.userId || parent.userId === user.id || parent.commentRepliesEnabled === false || parent.unsubscribe)
-        return
-      recipient = parent.email
-      subject = `New reply to your comment on "${title}"`
-      const unsubscribeUrl = new URL('/unsubscribe', ENV.SITE_URL)
-      unsubscribeUrl.searchParams.set('token', await createReplyUnsubscribeToken(parent.userId, comment.parentId))
-      template = createElement(ReplyEmailTemplate, {
-        ...commonProps,
-        reply: comment.body,
-        replierName: user.name,
-        replierImage: image,
-        comment: parent.body,
-        replyUrl: url.href,
-        unsubscribeUrl: unsubscribeUrl.href,
+    if (!comment.parentId) {
+      const authorEmail = ENV.AUTHOR_EMAIL
+      if (!authorEmail || user.role === 'admin' || user.email === authorEmail) return
+
+      await sendEmail({
+        to: authorEmail,
+        subject: `New comment on "${title}"`,
+        react: createElement(CommentEmailTemplate, {
+          ...sharedTemplateProps,
+          comment: comment.body,
+          commenterName: user.name,
+          commenterImage: userImage,
+          commentUrl: commentUrl.href,
+        }),
       })
-    } else if (user.role === 'admin' || user.email === recipient) {
       return
     }
 
+    const recipient = await findReplyRecipient(db, comment.parentId, user.id)
     if (!recipient) return
-    await sendEmail({ to: recipient, subject, react: template })
+
+    commentUrl.searchParams.set('reply', comment.id)
+    const token = await createReplyUnsubscribeToken(recipient.userId, comment.parentId)
+    const unsubscribeUrl = new URL('/unsubscribe', ENV.SITE_URL)
+    unsubscribeUrl.searchParams.set('token', token)
+
+    await sendEmail({
+      to: recipient.email,
+      subject: `New reply to your comment on "${title}"`,
+      react: createElement(ReplyEmailTemplate, {
+        ...sharedTemplateProps,
+        comment: recipient.parentCommentBody,
+        reply: comment.body,
+        replierName: user.name,
+        replierImage: userImage,
+        replyUrl: commentUrl.href,
+        unsubscribeUrl: unsubscribeUrl.href,
+      }),
+    })
   } catch (error) {
     console.warn('[Comments] Notification could not be delivered', error)
   }

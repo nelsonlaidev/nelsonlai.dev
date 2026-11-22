@@ -33,6 +33,8 @@ test.describe('unsubscribe', () => {
   test('unsubscribes with a valid token and preserves the result after reloading', async ({ page }) => {
     const token = await new SignJWT({ type: 'comment_reply', userId: TEST_UNIQUE_ID, commentId })
       .setProtectedHeader({ alg: 'HS256' })
+      .setIssuer(ENV.SITE_URL)
+      .setAudience('comment-reply-unsubscribe')
       .setExpirationTime('30d')
       .sign(new TextEncoder().encode(ENV.JWT_SECRET))
 
@@ -90,6 +92,8 @@ test.describe('unsubscribe', () => {
     test(`shows an error when the token is ${tokenType} without unsubscribing`, async ({ page }) => {
       const token = await new SignJWT({ type: 'comment_reply', userId: TEST_UNIQUE_ID, commentId })
         .setProtectedHeader({ alg: 'HS256' })
+        .setIssuer(ENV.SITE_URL)
+        .setAudience('comment-reply-unsubscribe')
         .setExpirationTime(expiration)
         .sign(new TextEncoder().encode(secret))
 
