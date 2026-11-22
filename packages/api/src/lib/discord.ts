@@ -22,7 +22,9 @@ export async function sendGuestbookNotification(body: string, name: string, imag
       }),
     })
 
-    if (!response.ok) console.warn('[Guestbook] Notification failed:', response.status)
+    if (!response.ok) {
+      console.warn('[Guestbook] Notification failed:', response.status)
+    }
   } catch {
     console.warn('[Guestbook] Notification could not be delivered')
   }
