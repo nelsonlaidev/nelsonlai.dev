@@ -1,5 +1,6 @@
 import * as z from 'zod'
 
+import settings from '../../../../apps/web/project.inlang/settings.json'
 import { InfiniteQueryCursorSchema, InfiniteQueryInputSchema } from './pagination'
 import { PostSlugInputSchema } from './posts'
 
@@ -38,10 +39,7 @@ export const ListCommentsOutputSchema = z.object({
 export const CreateCommentInputSchema = PostSlugInputSchema.extend({
   body: z.string().trim().min(1).max(10_000),
   parentId: z.string().min(1).max(100).optional(),
-  locale: z
-    .string()
-    .regex(/^[a-z]{2}(?:-[A-Z]{2})?$/)
-    .default('en'),
+  locale: z.enum(settings.locales).default(settings.baseLocale),
 })
 
 export const DeleteCommentInputSchema = z.object({

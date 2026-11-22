@@ -16,6 +16,7 @@ import { jwtVerify, SignJWT } from 'jose'
 import { createElement } from 'react'
 import * as z from 'zod'
 
+import settings from '../../../../apps/web/project.inlang/settings.json'
 import { ENV } from '../env'
 
 const ReplyUnsubscribePayloadSchema = z.object({
@@ -57,7 +58,7 @@ export async function notifyComment(
 
   try {
     const { locale, title } = post
-    const prefix = locale === 'en' ? '' : `/${encodeURIComponent(locale)}`
+    const prefix = locale === settings.baseLocale ? '' : `/${encodeURIComponent(locale)}`
     const postUrl = new URL(`${prefix}/blog/${encodeURIComponent(comment.postId)}`, ENV.SITE_URL).href
     const url = new URL(postUrl)
     url.searchParams.set('comment', comment.parentId ?? comment.id)
