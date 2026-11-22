@@ -10,7 +10,8 @@ import:
   - '@cspell/dict-pt-br/cspell-ext.json'
 
 ignoreRegExpList:
-  - /#[0-9a-fA-F]{3,8}(?![0-9a-fA-F])/g
+  # Match 3, 4, 6, or 8 hex digits after #, including before Tailwind gradient stops like _30%.
+  - /#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})(?:(?![\w\\\u0080-\uFFFF-])|(?=_-?(?:\d*\.)?\d+%))/gi
 
 ignorePaths:
   - pnpm-lock.yaml
