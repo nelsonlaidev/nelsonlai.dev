@@ -54,7 +54,7 @@ test.describe('comment page', () => {
     await db.insert(comments).values({
       id: commentId,
       body: 'Test Comment',
-      postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+      postSlug: COMMENT_DELETE_AND_LIKE_POST_SLUG,
       userId: TEST_UNIQUE_ID,
     })
 
@@ -86,7 +86,7 @@ test.describe('comment page', () => {
     await db.insert(comments).values({
       id: parentId,
       body: 'Parent Comment',
-      postId: COMMENT_REPLY_POST_SLUG,
+      postSlug: COMMENT_REPLY_POST_SLUG,
       userId: TEST_UNIQUE_ID,
     })
 
@@ -119,14 +119,14 @@ test.describe('comment page', () => {
     await db.insert(comments).values({
       id: parentId,
       body: 'Parent Comment',
-      postId: COMMENT_DELETE_REPLY_POST_SLUG,
+      postSlug: COMMENT_DELETE_REPLY_POST_SLUG,
       userId: TEST_UNIQUE_ID,
     })
 
     await db.insert(comments).values({
       id: replyId,
       body: 'Reply comment',
-      postId: COMMENT_DELETE_REPLY_POST_SLUG,
+      postSlug: COMMENT_DELETE_REPLY_POST_SLUG,
       userId: TEST_UNIQUE_ID,
       parentId,
     })
@@ -168,13 +168,13 @@ test.describe('comment page', () => {
       await db.insert(comments).values({
         id: parentId,
         body: `cancel-delete-${parentId}`,
-        postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+        postSlug: COMMENT_DELETE_AND_LIKE_POST_SLUG,
         userId: TEST_UNIQUE_ID,
       })
       await db.insert(comments).values({
         id: commentIds.reply,
         body: `cancel-delete-${commentIds.reply}`,
-        postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+        postSlug: COMMENT_DELETE_AND_LIKE_POST_SLUG,
         userId: TEST_UNIQUE_ID,
         parentId,
       })
@@ -226,7 +226,7 @@ test.describe('comment page', () => {
       await db.insert(comments).values({
         id: commentId,
         body: commentText,
-        postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+        postSlug: COMMENT_DELETE_AND_LIKE_POST_SLUG,
         userId: otherUserId,
       })
 
@@ -272,13 +272,13 @@ test.describe('comment page', () => {
     await db.insert(comments).values({
       id: parentId,
       body: parentText,
-      postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+      postSlug: COMMENT_DELETE_AND_LIKE_POST_SLUG,
       userId: TEST_UNIQUE_ID,
     })
     await db.insert(comments).values({
       id: replyId,
       body: replyText,
-      postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+      postSlug: COMMENT_DELETE_AND_LIKE_POST_SLUG,
       userId: TEST_UNIQUE_ID,
       parentId,
     })
@@ -322,14 +322,14 @@ test.describe('comment page', () => {
     await db.insert(comments).values({
       id: parentId,
       body: 'Deleted Parent Comment',
-      postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+      postSlug: COMMENT_DELETE_AND_LIKE_POST_SLUG,
       userId: TEST_UNIQUE_ID,
       isDeleted: true,
     })
     await db.insert(comments).values({
       id: replyId,
       body: 'Last Reply',
-      postId: COMMENT_DELETE_AND_LIKE_POST_SLUG,
+      postSlug: COMMENT_DELETE_AND_LIKE_POST_SLUG,
       userId: TEST_UNIQUE_ID,
       parentId,
     })
@@ -379,14 +379,14 @@ test.describe('comment page', () => {
       await db.insert(comments).values({
         id: parentId,
         body: 'Vote parent',
-        postId: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+        postSlug: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
         userId: TEST_UNIQUE_ID,
       })
       await db.insert(comments).values({
         id: replyId,
         parentId,
         body: 'Vote reply',
-        postId: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+        postSlug: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
         userId: TEST_UNIQUE_ID,
       })
     })
@@ -502,7 +502,7 @@ test.describe('comment page', () => {
             const ordinary = Array.from({ length: count }, (_, index) => ({
               id: `${slug}-${String(index).padStart(2, '0')}`,
               body: `Pagination comment ${index}`,
-              postId: slug,
+              postSlug: slug,
               userId: TEST_UNIQUE_ID,
               createdAt,
             }))
@@ -510,7 +510,7 @@ test.describe('comment page', () => {
               ? {
                   id: `${slug}-highlighted`,
                   body: 'Highlighted pagination comment',
-                  postId: slug,
+                  postSlug: slug,
                   userId: TEST_UNIQUE_ID,
                   createdAt: new Date('2039-01-01T00:00:00.000Z'),
                 }
@@ -579,7 +579,7 @@ test.describe('comment page', () => {
       await db.insert(comments).values({
         id: parentId,
         body: 'Pagination parent',
-        postId: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+        postSlug: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
         userId: TEST_UNIQUE_ID,
       })
       records = ['comment', 'reply'].flatMap((type) =>
@@ -587,7 +587,7 @@ test.describe('comment page', () => {
           // Reverse timestamp groups relative to IDs so ordering cannot rely on the ID alone.
           id: `${prefix}-${type}-${String((7 - Math.floor(index / 3)) * 3 + (index % 3)).padStart(2, '0')}`,
           body: `${prefix} ${type} ${index}`,
-          postId: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+          postSlug: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
           userId: TEST_UNIQUE_ID,
           parentId: type === 'reply' ? parentId : null,
         })),
@@ -729,14 +729,14 @@ test.describe('comment page', () => {
           await db.insert(comments).values({
             id: parentId,
             body: `Link parent ${parentId}`,
-            postId: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+            postSlug: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
             userId: TEST_UNIQUE_ID,
           })
           await db.insert(comments).values({
             id: replyId,
             parentId,
             body: `Link reply ${replyId}`,
-            postId: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
+            postSlug: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
             userId: TEST_UNIQUE_ID,
           })
 
@@ -762,11 +762,9 @@ test.describe('comment page', () => {
             const target = await fresh.newPage()
             await target.goto(copied)
             await expect(target.locator('html')).toHaveAttribute('lang', locale)
-            await expect(
-              target
-                .getByTestId(`comment-${id}`)
-                .getByText(messages.blog_comments_highlighted_comment, { exact: true }),
-            ).toBeVisible()
+            const highlight = target.getByTestId(`highlighted-comment-${id}`)
+            await expect(highlight).toBeVisible()
+            await expect(highlight).toHaveText(messages.blog_comments_highlighted_comment)
             await expect(target.getByTestId(`comment-${id}`)).toBeInViewport()
             await expect(
               target.getByTestId(`comment-${parentId}`).locator('button[aria-expanded]:not([aria-haspopup])'),

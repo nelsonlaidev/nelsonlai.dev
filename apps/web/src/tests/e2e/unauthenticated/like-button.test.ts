@@ -46,7 +46,7 @@ test.describe('like button', () => {
     await expect
       .poll(async () => {
         const record = await db.query.postLikes.findFirst({
-          where: { postId: COMMENT_DELETE_AND_LIKE_POST_SLUG, anonKey },
+          where: { postSlug: COMMENT_DELETE_AND_LIKE_POST_SLUG, anonKey },
         })
         return record?.likeCount
       })
@@ -79,7 +79,7 @@ test.describe('like button', () => {
     expect(await getNumberFlow(likeCount)).toBe(String(initialCount + 3))
     expect(
       await db.query.postLikes.findFirst({
-        where: { postId: COMMENT_DELETE_AND_LIKE_POST_SLUG, anonKey },
+        where: { postSlug: COMMENT_DELETE_AND_LIKE_POST_SLUG, anonKey },
       }),
     ).toMatchObject({ likeCount: 3 })
   })

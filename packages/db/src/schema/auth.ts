@@ -1,5 +1,4 @@
-import { defineRelationsPart } from 'drizzle-orm'
-import { boolean, index, pgTable, text } from 'drizzle-orm/pg-core'
+import { boolean, index, pgTable, text, unique } from 'drizzle-orm/pg-core'
 
 import { createdAt, timestamptz, updatedAt } from './helpers'
 
@@ -55,7 +54,10 @@ export const accounts = pgTable(
     createdAt: createdAt(),
     updatedAt: updatedAt(),
   },
-  (table) => [index('accounts_user_id_idx').on(table.userId)],
+  (table) => [
+    index('accounts_user_id_idx').on(table.userId),
+    unique('accounts_provider_id_account_id_unique').on(table.providerId, table.accountId),
+  ],
 )
 
 export const verifications = pgTable(
@@ -70,30 +72,3 @@ export const verifications = pgTable(
   },
   (table) => [index('verifications_identifier_idx').on(table.identifier)],
 )
-
-export const authRelations = defineRelationsPart({ users, sessions, accounts, verifications }, (r) => ({
-  users: {
-    sessions: r.many.sessions({
-      from: r.users.id,
-      to: r.sessions.userId,
-    }),
-    accounts: r.many.accounts({
-      from: r.users.id,
-      to: r.accounts.userId,
-    }),
-  },
-  sessions: {
-    user: r.one.users({
-      from: r.sessions.userId,
-      to: r.users.id,
-      optional: false,
-    }),
-  },
-  accounts: {
-    user: r.one.users({
-      from: r.accounts.userId,
-      to: r.users.id,
-      optional: false,
-    }),
-  },
-}))

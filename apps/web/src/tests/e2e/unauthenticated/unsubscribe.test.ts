@@ -20,7 +20,7 @@ test.describe('unsubscribe', () => {
     await db.insert(comments).values({
       id: commentId,
       body: `Comment ${commentId}`,
-      postId: `unsubscribe-${commentId}`,
+      postSlug: `unsubscribe-${commentId}`,
       userId: TEST_UNIQUE_ID,
     })
   })

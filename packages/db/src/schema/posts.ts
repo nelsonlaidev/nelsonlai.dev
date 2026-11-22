@@ -17,7 +17,7 @@ export const posts = pgTable(
 export const postLikes = pgTable(
   'post_likes',
   {
-    postId: text('post_id')
+    postSlug: text('post_slug')
       .notNull()
       .references(() => posts.slug, { onDelete: 'cascade' }),
     anonKey: text('anon_key').notNull(),
@@ -25,7 +25,7 @@ export const postLikes = pgTable(
     createdAt: createdAt(),
   },
   (table) => [
-    primaryKey({ columns: [table.postId, table.anonKey] }),
+    primaryKey({ columns: [table.postSlug, table.anonKey] }),
     check('post_likes_count_check', sql`${table.likeCount} BETWEEN 0 AND 3`),
   ],
 )

@@ -33,19 +33,19 @@ export function getColumns(): Array<ColumnDef<typeof features, Comment>> {
       header: m.admin_comments_table_comment(),
     },
     {
-      accessorKey: 'postId',
+      accessorKey: 'postSlug',
       header: m.admin_comments_table_post(),
       cell: ({ row }) => (
         <Link
           to='/blog/$slug'
-          params={{ slug: row.original.postId }}
+          params={{ slug: row.original.postSlug }}
           search={{
             comment: row.original.parentId ?? row.original.id,
             ...(row.original.parentId && { reply: row.original.id }),
           }}
           className='underline underline-offset-4'
         >
-          {row.original.postId}
+          {row.original.postSlug}
         </Link>
       ),
     },

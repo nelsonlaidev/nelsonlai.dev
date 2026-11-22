@@ -12,7 +12,7 @@ export const comments = pgTable(
       .primaryKey()
       .$defaultFn(() => createId()),
     body: text('body').notNull(),
-    postId: text('post_id')
+    postSlug: text('post_slug')
       .notNull()
       .references(() => posts.slug, { onDelete: 'cascade' }),
     userId: text('user_id').references(() => users.id, { onDelete: 'set null' }),
@@ -23,7 +23,7 @@ export const comments = pgTable(
   },
   (table) => [
     foreignKey({ columns: [table.parentId], foreignColumns: [table.id] }).onDelete('restrict'),
-    index('comments_post_id_created_at_id_idx').on(table.postId, table.createdAt, table.id),
+    index('comments_post_slug_created_at_id_idx').on(table.postSlug, table.createdAt, table.id),
     index('comments_parent_id_created_at_id_idx').on(table.parentId, table.createdAt, table.id),
     index('comments_user_id_idx').on(table.userId),
   ],
@@ -50,7 +50,7 @@ export const commentNotificationPreferences = pgTable('comment_notification_pref
   userId: text('user_id')
     .primaryKey()
     .references(() => users.id, { onDelete: 'cascade' }),
-  commentRepliesEnabled: boolean('replies_enabled').notNull().default(true),
+  commentRepliesEnabled: boolean('comment_replies_enabled').notNull().default(true),
 })
 
 export const commentReplyUnsubscribes = pgTable(

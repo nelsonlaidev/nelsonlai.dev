@@ -42,7 +42,7 @@ const SAMPLE_COMMENTS: Comment[] = createRange(5).map((number) => ({
   id: `comment-skeleton-${number}`,
   userId: 'sample',
   user: { id: 'sample', name: 'Ocean visitor', image: '/images/avatar.png', role: 'user' },
-  postId: 'sample-post',
+  postSlug: 'sample-post',
   parentId: null,
   body: 'Thanks for sharing the details of this project.',
   createdAt: new Date('2026-01-01T12:00:00Z'),
@@ -206,9 +206,13 @@ function CommentItem(props: CommentItemProps) {
   }
 
   return (
-    <div data-testid={`comment-${comment.id}`} ref={elementRef} className='scroll-m-32'>
-      {highlighted && <Badge className='mb-4'>{m.blog_comments_highlighted_comment()}</Badge>}
-      <div className='flex gap-3 sm:gap-4'>
+    <div ref={elementRef} className='scroll-m-32'>
+      {highlighted && (
+        <Badge data-testid={`highlighted-comment-${comment.id}`} className='mb-4'>
+          {m.blog_comments_highlighted_comment()}
+        </Badge>
+      )}
+      <div data-testid={`comment-${comment.id}`} className='flex gap-3 sm:gap-4'>
         <UserAvatar id={comment.user.id} name={comment.user.name} image={comment.user.image} />
         <div className='min-w-0 flex-1'>
           <div className='ml-0.5 flex min-h-8 flex-wrap items-center justify-between gap-2 text-sm'>

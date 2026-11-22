@@ -46,7 +46,7 @@ const getLikes = publicProcedure
       .from(posts)
       .leftJoin(
         postLikes,
-        and(eq(postLikes.postId, posts.slug), eq(postLikes.anonKey, getAnonymousKey(context.headers))),
+        and(eq(postLikes.postSlug, posts.slug), eq(postLikes.anonKey, getAnonymousKey(context.headers))),
       )
       .where(eq(posts.slug, input.slug))
 
@@ -76,9 +76,9 @@ const likePost = publicProcedure
 
       const [record] = await tx
         .insert(postLikes)
-        .values({ postId: input.slug, anonKey, likeCount: input.value })
+        .values({ postSlug: input.slug, anonKey, likeCount: input.value })
         .onConflictDoUpdate({
-          target: [postLikes.postId, postLikes.anonKey],
+          target: [postLikes.postSlug, postLikes.anonKey],
           set: { likeCount: sql`${postLikes.likeCount} + ${input.value}` },
           setWhere: sql`${postLikes.likeCount} + ${input.value} <= 3`,
         })

@@ -11,7 +11,7 @@ import { CommentsTable } from './tables/comments'
 const SAMPLE_COMMENTS = createRange(10).map((index) => ({
   id: String(index),
   body: 'A thought about this article.',
-  postId: 'example-post',
+  postSlug: 'example-post',
   parentId: null,
   userId: 'sample',
   isDeleted: false,

@@ -24,13 +24,13 @@ const list = publicProcedure
   .handler(async ({ input, context }) => {
     const pagination = createTimestampPagination(comments, input)
     const scope = and(
-      eq(comments.postId, input.slug),
+      eq(comments.postSlug, input.slug),
       input.parentId ? eq(comments.parentId, input.parentId) : isNull(comments.parentId),
     )
     const selection = {
       id: comments.id,
       body: comments.body,
-      postId: comments.postId,
+      postSlug: comments.postSlug,
       parentId: comments.parentId,
       userId: comments.userId,
       isDeleted: comments.isDeleted,
@@ -102,7 +102,7 @@ const counts = publicProcedure
         replies: sql<number>`count(*) filter (where ${comments.parentId} is not null)`.mapWith(Number),
       })
       .from(comments)
-      .where(eq(comments.postId, input.slug))
+      .where(eq(comments.postSlug, input.slug))
 
     return result ?? { comments: 0, replies: 0 }
   })
@@ -118,12 +118,12 @@ const create = protectedProcedure
       if (!post) throw new ORPCError('NOT_FOUND')
       if (input.parentId) {
         const [parent] = await tx.select().from(comments).where(eq(comments.id, input.parentId)).for('update')
-        if (!parent || parent.postId !== input.slug || parent.parentId || parent.isDeleted)
+        if (!parent || parent.postSlug !== input.slug || parent.parentId || parent.isDeleted)
           throw new ORPCError('BAD_REQUEST', { message: 'Invalid parent comment' })
       }
       const [created] = await tx
         .insert(comments)
-        .values({ body: input.body, postId: input.slug, userId: context.session.user.id, parentId: input.parentId })
+        .values({ body: input.body, postSlug: input.slug, userId: context.session.user.id, parentId: input.parentId })
         .returning()
       if (!created) throw new ORPCError('INTERNAL_SERVER_ERROR')
       return created

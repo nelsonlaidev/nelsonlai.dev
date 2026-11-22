@@ -1,5 +1,4 @@
 import { createId } from '@paralleldrive/cuid2'
-import { defineRelationsPart } from 'drizzle-orm'
 import { index, pgTable, text } from 'drizzle-orm/pg-core'
 
 import { users } from './auth'
@@ -26,13 +25,3 @@ export const guestbookMessages = pgTable(
     index('guestbook_messages_user_id_idx').on(table.userId),
   ],
 )
-
-export const guestbookRelations = defineRelationsPart({ guestbookMessages, users }, (r) => ({
-  guestbookMessages: {
-    user: r.one.users({
-      from: r.guestbookMessages.userId,
-      to: r.users.id,
-      optional: false,
-    }),
-  },
-}))

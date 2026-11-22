@@ -7,7 +7,7 @@ import { PostSlugInputSchema } from './posts'
 export const CommentSchema = z.object({
   id: z.string(),
   body: z.string(),
-  postId: z.string(),
+  postSlug: z.string(),
   parentId: z.string().nullable(),
   userId: z.string().nullable(),
   isDeleted: z.boolean(),

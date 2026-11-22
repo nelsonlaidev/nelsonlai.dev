@@ -26,7 +26,7 @@ const activityUserColumns = {
 const commentColumns = {
   id: comments.id,
   body: comments.body,
-  postId: comments.postId,
+  postSlug: comments.postSlug,
   parentId: comments.parentId,
   userId: comments.userId,
   isDeleted: comments.isDeleted,
@@ -125,7 +125,7 @@ const getRecentActivity = adminProcedure.output(RecentActivityOutputSchema).hand
       .select({
         id: comments.id,
         body: comments.body,
-        postId: comments.postId,
+        postSlug: comments.postSlug,
         parentId: comments.parentId,
         createdAt: comments.createdAt,
         user: activityUserColumns,
@@ -148,7 +148,7 @@ const getRecentActivity = adminProcedure.output(RecentActivityOutputSchema).hand
       id: comment.id,
       body: comment.body,
       user: comment.user ?? { id: 'deleted', name: 'Deleted user', image: null },
-      postId: comment.postId,
+      postSlug: comment.postSlug,
       createdAt: comment.createdAt,
     })),
     ...recentMessages.map((message) => ({

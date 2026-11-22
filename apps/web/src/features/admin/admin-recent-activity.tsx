@@ -70,10 +70,10 @@ function ActivityItem(props: ActivityProps) {
           {activity.type === 'comment' ? (
             <ParaglideMessage
               message={m.admin_dashboard_recent_activity_commented_on}
-              inputs={{ name: userName, post: activity.postId }}
+              inputs={{ name: userName, post: activity.postSlug }}
               markup={{
                 link: (props) => (
-                  <Link to='/blog/$slug' params={{ slug: activity.postId }} className='underline underline-offset-4'>
+                  <Link to='/blog/$slug' params={{ slug: activity.postSlug }} className='underline underline-offset-4'>
                     {props.children}
                   </Link>
                 ),

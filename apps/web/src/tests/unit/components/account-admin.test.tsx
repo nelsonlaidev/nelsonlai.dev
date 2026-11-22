@@ -96,7 +96,7 @@ describe('Account and admin presentation with isolated API fixtures', () => {
           userId: null,
           parentId: null,
           body: 'Local fixture body',
-          postId: 'example',
+          postSlug: 'example',
           createdAt: new Date('2026-01-01'),
           user: { id: 'deleted', name: 'Fixture reader', image: null },
         },

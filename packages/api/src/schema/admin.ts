@@ -19,7 +19,7 @@ export const ListCommentsOutputSchema = z.object({
     z.object({
       id: z.string(),
       body: z.string(),
-      postId: z.string(),
+      postSlug: z.string(),
       parentId: z.string().nullable(),
       userId: z.string().nullable(),
       isDeleted: z.boolean(),
@@ -60,7 +60,7 @@ export const RecentActivityOutputSchema = z.object({
         id: z.string(),
         body: z.string(),
         user: ActivityUserSchema,
-        postId: z.string(),
+        postSlug: z.string(),
         createdAt: z.date(),
       }),
       z.object({

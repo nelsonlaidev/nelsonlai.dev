@@ -80,7 +80,7 @@ export async function notifyComment(
   try {
     const { locale, title } = post
     const localePrefix = locale === settings.baseLocale ? '' : `/${encodeURIComponent(locale)}`
-    const postUrl = new URL(`${localePrefix}/blog/${encodeURIComponent(comment.postId)}`, ENV.SITE_URL)
+    const postUrl = new URL(`${localePrefix}/blog/${encodeURIComponent(comment.postSlug)}`, ENV.SITE_URL)
     const commentUrl = new URL(postUrl)
     commentUrl.searchParams.set('comment', comment.parentId ?? comment.id)
 
