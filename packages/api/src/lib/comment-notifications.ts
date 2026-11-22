@@ -54,7 +54,7 @@ export async function notifyComment(
   post: Context['posts'][number],
   db: Database,
 ) {
-  if (ENV.NODE_ENV !== 'production') return
+  if (!import.meta.env.PROD) return
 
   try {
     const { locale, title } = post

@@ -1,7 +1,7 @@
 import { ENV } from '../env'
 
 export async function sendGuestbookNotification(body: string, name: string, image: string | null) {
-  if (ENV.NODE_ENV !== 'production' || !ENV.DISCORD_WEBHOOK_URL) return
+  if (!import.meta.env.PROD || !ENV.DISCORD_WEBHOOK_URL) return
 
   try {
     const response = await fetch(ENV.DISCORD_WEBHOOK_URL, {
