@@ -262,6 +262,8 @@
   "nav_footer": "Footer navigation",
   "nav_footer_around": "Around the site",
   "nav_footer_elsewhere": "Elsewhere",
+  "nav_footer_spotify_error": "Failed to fetch Spotify data",
+  "nav_footer_spotify_idle": "Not Listening - Spotify",
   "nav_guestbook": "Guestbook",
   "nav_home": "Home",
   "nav_legal": "Legal",

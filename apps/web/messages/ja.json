@@ -253,6 +253,8 @@
   "nav_footer": "フッターナビゲーション",
   "nav_footer_around": "サイトの各所",
   "nav_footer_elsewhere": "ほかの場所",
+  "nav_footer_spotify_error": "Spotify データの取得に失敗しました",
+  "nav_footer_spotify_idle": "再生停止中 - Spotify",
   "nav_guestbook": "ゲストブック",
   "nav_home": "ホーム",
   "nav_legal": "法的情報",

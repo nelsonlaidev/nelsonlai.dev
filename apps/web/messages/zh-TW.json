@@ -253,6 +253,8 @@
   "nav_footer": "頁尾導覽",
   "nav_footer_around": "網站各處",
   "nav_footer_elsewhere": "其他地方",
+  "nav_footer_spotify_error": "無法獲取 Spotify 資料",
+  "nav_footer_spotify_idle": "未在收聽 - Spotify",
   "nav_guestbook": "留言板",
   "nav_home": "首頁",
   "nav_legal": "法律資訊",

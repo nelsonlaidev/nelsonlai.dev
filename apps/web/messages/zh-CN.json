@@ -253,6 +253,8 @@
   "nav_footer": "页脚导航",
   "nav_footer_around": "网站各处",
   "nav_footer_elsewhere": "其他地方",
+  "nav_footer_spotify_error": "无法获取 Spotify 资料",
+  "nav_footer_spotify_idle": "未在收听 - Spotify",
   "nav_guestbook": "留言板",
   "nav_home": "首页",
   "nav_legal": "法律信息",

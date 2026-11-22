@@ -262,6 +262,8 @@
   "nav_footer": "Navegación del pie de página",
   "nav_footer_around": "Por el sitio",
   "nav_footer_elsewhere": "En otros lugares",
+  "nav_footer_spotify_error": "Error al obtener datos de Spotify",
+  "nav_footer_spotify_idle": "Sin reproducción - Spotify",
   "nav_guestbook": "Libro de visitas",
   "nav_home": "Inicio",
   "nav_legal": "Información legal",

@@ -99,7 +99,7 @@ function ArticleDetail(props: ArticleDetailProps) {
         {m.blog_all_articles()}
       </Link>
       <BlogHeader post={post} />
-      <div className='border-t pt-8 sm:pt-11 lg:grid lg:grid-cols-[minmax(0,65ch)_--spacing(48)] lg:justify-center lg:gap-10 xl:gap-12'>
+      <div className='border-t pt-8 pb-31 sm:pt-11 sm:pb-36 lg:grid lg:grid-cols-[minmax(0,65ch)_--spacing(48)] lg:justify-center lg:gap-10 xl:gap-12'>
         <TableOfContents toc={post.toc}>
           <LikeButton state={likes} placement='desktop' />
         </TableOfContents>
@@ -113,21 +113,23 @@ function ArticleDetail(props: ArticleDetailProps) {
       </div>
       <ProgressBar />
       {next && (
-        <Link
-          to='/blog/$slug'
-          params={{ slug: next.slug }}
-          className='group mt-16 flex items-center justify-between gap-5 border-t pt-11 sm:pt-16 md:gap-8'
-        >
-          <div className='min-w-0'>
-            <span className='mb-6 block text-xs text-section-label'>{m.blog_next()}</span>
-            <h2 className='mb-5 text-4xl tracking-tighter md:text-5xl'>{next.title}</h2>
-            <p className='text-muted-foreground/80'>{next.description}</p>
-          </div>
-          <ArrowRightIcon
-            aria-hidden='true'
-            className='size-7 shrink-0 motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1'
-          />
-        </Link>
+        <div className='border-y py-11 sm:py-20'>
+          <Link
+            to='/blog/$slug'
+            params={{ slug: next.slug }}
+            className='group flex items-center justify-between gap-5 md:gap-8'
+          >
+            <div className='min-w-0'>
+              <span className='mb-6 block text-xs text-section-label'>{m.blog_next()}</span>
+              <h2 className='mb-5 text-4xl tracking-tighter md:text-5xl'>{next.title}</h2>
+              <p className='text-muted-foreground/80'>{next.description}</p>
+            </div>
+            <ArrowRightIcon
+              aria-hidden='true'
+              className='size-7 shrink-0 motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1'
+            />
+          </Link>
+        </div>
       )}
     </>
   )

@@ -1,5 +1,4 @@
 import { ExternalLink } from '@repo/ui/components/external-link'
-import { Separator } from '@repo/ui/components/separator'
 import { Link } from '@tanstack/react-router'
 import { ArrowUpRightIcon } from 'lucide-react'
 import { useState } from 'react'
@@ -10,6 +9,7 @@ import { SOCIAL_LINKS } from '@/lib/social-links'
 import { m } from '@/paraglide/messages'
 import { LocaleSwitcher } from '@/routes/_main/-components/locale-switcher'
 
+import { NowPlaying } from './now-playing'
 import { SiteLogo } from './site-logo'
 
 const commitSha = ENV.VITE_COMMIT_SHA
@@ -56,20 +56,16 @@ export function Footer() {
   ]
 
   return (
-    <footer className='bg-linear-to-b from-transparent to-backdrop/70 pr-[max(16px,env(safe-area-inset-right))] pb-8 pl-[max(16px,env(safe-area-inset-left))] text-muted-foreground sm:px-[8%] xl:px-[10%]'>
-      <div className='mx-auto max-w-7xl'>
-        <Separator aria-hidden='true' className='mb-10 xl:mb-14' />
-        <div className='grid gap-8 pb-12 lg:grid-cols-[minmax(--spacing(48),.85fr)_minmax(0,2fr)] lg:gap-10 xl:grid-cols-[minmax(--spacing(56),1fr)_minmax(0,2fr)] xl:gap-20'>
-          <div className='flex items-center justify-between max-lg:flex-wrap lg:flex-col lg:items-start lg:justify-start'>
+    <footer className='bg-linear-to-b from-transparent to-backdrop/70 pt-20 pr-[max(16px,env(safe-area-inset-right))] pb-8 pl-[max(16px,env(safe-area-inset-left))] text-muted-foreground sm:px-[8%] xl:px-[10%]'>
+      <div className='mx-auto max-w-7xl space-y-16'>
+        <div className='grid gap-8 lg:grid-cols-[minmax(--spacing(48),.85fr)_minmax(0,2fr)] lg:gap-10 xl:grid-cols-[minmax(--spacing(56),1fr)_minmax(0,2fr)] xl:gap-20'>
+          <div className='flex min-w-0 flex-col items-start gap-6'>
             <Link to='/' aria-label={`Seafold ${m.nav_home()}`} className='inline-flex items-center text-foreground'>
               <SiteLogo large />
             </Link>
-            <div className='mt-6 w-full max-lg:order-last lg:mb-auto lg:pb-3'>
-              <p className='text-base/relaxed'>Nelson Lai</p>
-              <a href={`mailto:${SITE.email}`} className='text-base hover:text-foreground'>
-                {SITE.email}
-              </a>
-            </div>
+            <a href={`mailto:${SITE.email}`} className='text-base hover:text-foreground'>
+              {SITE.email}
+            </a>
             <LocaleSwitcher />
           </div>
           <nav aria-label={m.nav_footer()} className='grid grid-cols-2 gap-x-5 gap-y-7 sm:grid-cols-4 xl:gap-9'>
@@ -99,8 +95,8 @@ export function Footer() {
             ))}
           </nav>
         </div>
-        <Separator aria-hidden='true' className='mb-5' />
-        <div className='flex flex-wrap items-center justify-between gap-2 text-sm/relaxed'>
+        <NowPlaying className='min-w-0' />
+        <div className='flex items-center justify-between gap-4 text-sm/relaxed'>
           <p>&copy; {year} Nelson Lai</p>
           {commitSha && (
             <ExternalLink href={`${SITE.repository}/commit/${commitSha}`} className='font-mono hover:text-foreground'>
