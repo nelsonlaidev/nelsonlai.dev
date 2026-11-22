@@ -32,6 +32,6 @@
     "@types/react": "catalog:",
     "typescript": "catalog:",
     "varlock": "catalog:",
-    "vite": "8.3.5"
+    "vite": "catalog:"
   }
 }

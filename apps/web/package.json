@@ -105,7 +105,7 @@
     "tsx": "4.23.15",
     "typescript": "catalog:",
     "varlock": "catalog:",
-    "vite": "8.3.5",
+    "vite": "catalog:",
     "vitest": "5.0.5"
   }
 }
