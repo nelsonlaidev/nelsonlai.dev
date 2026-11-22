@@ -43,7 +43,7 @@ vi.mock('@/lib/orpc-client', async () => {
     orpc: createTanstackQueryUtils({
       notifications: {
         inspectUnsubscribe: fixture.inspect,
-        unsubscribe: fixture.unsubscribe,
+        unsubscribeFromCommentReplies: fixture.unsubscribe,
       },
     }),
   }

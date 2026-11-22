@@ -18,7 +18,7 @@ test.describe('account settings', () => {
   test('loads default settings without allowing unchanged settings to be saved', async ({ page }) => {
     await page.goto('/account/settings')
 
-    await expect(page.getByRole('switch', { name: en.settings_reply_notification })).toBeChecked()
+    await expect(page.getByRole('switch', { name: en.settings_comment_replies })).toBeChecked()
     await expect(page.getByRole('button', { name: en.common_save, exact: true })).toBeDisabled()
     await expect(page.getByRole('button', { name: en.common_reset, exact: true })).toBeHidden()
   })
@@ -26,7 +26,7 @@ test.describe('account settings', () => {
   test('resets unsaved notification changes', async ({ page }) => {
     await page.goto('/account/settings')
 
-    const notificationSwitch = page.getByRole('switch', { name: en.settings_reply_notification })
+    const notificationSwitch = page.getByRole('switch', { name: en.settings_comment_replies })
     const saveButton = page.getByRole('button', { name: en.common_save, exact: true })
     const resetButton = page.getByRole('button', { name: en.common_reset, exact: true })
 
@@ -50,12 +50,12 @@ test.describe('account settings', () => {
     test(`persists ${enabled ? 'enabled' : 'disabled'} reply notifications after reloading`, async ({ page }) => {
       await db.insert(commentNotificationPreferences).values({
         userId: TEST_UNIQUE_ID,
-        repliesEnabled: !enabled,
+        commentRepliesEnabled: !enabled,
       })
 
       await page.goto('/account/settings')
 
-      const notificationSwitch = page.getByRole('switch', { name: en.settings_reply_notification })
+      const notificationSwitch = page.getByRole('switch', { name: en.settings_comment_replies })
       const saveButton = page.getByRole('button', { name: en.common_save, exact: true })
       const resetButton = page.getByRole('button', { name: en.common_reset, exact: true })
 

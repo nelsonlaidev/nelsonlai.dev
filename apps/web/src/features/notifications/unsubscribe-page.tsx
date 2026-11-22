@@ -24,7 +24,7 @@ export function UnsubscribePage(props: UnsubscribePageProps) {
   })
   const query = useQuery(options)
   const unsubscribe = useMutation(
-    orpc.notifications.unsubscribe.mutationOptions({
+    orpc.notifications.unsubscribeFromCommentReplies.mutationOptions({
       onSuccess: (_data, input) => {
         const queryKey = orpc.notifications.inspectUnsubscribe.queryKey({ input })
         queryClient.setQueryData(queryKey, (previous) => (previous ? { ...previous, isUnsubscribed: true } : previous))

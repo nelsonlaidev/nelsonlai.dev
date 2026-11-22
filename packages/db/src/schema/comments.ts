@@ -50,7 +50,7 @@ export const commentNotificationPreferences = pgTable('comment_notification_pref
   userId: text('user_id')
     .primaryKey()
     .references(() => users.id, { onDelete: 'cascade' }),
-  repliesEnabled: boolean('replies_enabled').notNull().default(true),
+  commentRepliesEnabled: boolean('replies_enabled').notNull().default(true),
 })
 
 export const commentReplyUnsubscribes = pgTable(

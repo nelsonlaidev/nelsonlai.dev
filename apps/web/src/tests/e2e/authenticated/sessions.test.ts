@@ -94,7 +94,7 @@ test.describe('session lifecycle', () => {
       await page.goto(`${prefix}/account/settings`)
       await expect(page).toHaveURL(prefix || '/')
 
-      const response = await page.request.post('/api/rpc/notifications/getPreference', { data: { json: {} } })
+      const response = await page.request.post('/api/rpc/notifications/getEmailPreferences', { data: { json: {} } })
       expect(response.status()).toBe(401)
       expect(await response.json()).toMatchObject({ json: { code: 'UNAUTHORIZED' } })
     })

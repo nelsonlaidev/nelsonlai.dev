@@ -46,7 +46,9 @@ test.describe('unsubscribe', () => {
     const successMessage = page.getByText(en.unsubscribe_you_have_been_unsubscribed, { exact: true })
     const successDescription = page.getByText(en.unsubscribe_unsubscribed_description, { exact: true })
 
-    await expect(page.getByText(en.unsubscribe_unsubscribe_from_this_comment, { exact: true })).toBeVisible()
+    await expect(
+      page.getByRole('heading', { name: en.unsubscribe_unsubscribe_from_this_comment, exact: true }),
+    ).toBeVisible()
     await expect(page.getByText(`Comment ${commentId}`, { exact: true })).toBeVisible()
     await expect(unsubscribeButton).toBeEnabled()
     await expect(successMessage).toBeHidden()

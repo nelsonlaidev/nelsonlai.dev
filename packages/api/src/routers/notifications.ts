@@ -7,19 +7,21 @@ import * as z from 'zod'
 import { verifyReplyUnsubscribeToken } from '../lib/comment-notifications'
 import { getMaskedEmail } from '../lib/get-masked-email'
 import { protectedProcedure, publicProcedure } from '../procedures'
-import { ReplyPreferenceSchema, UnsubscribeTokenInputSchema } from '../schema/comments'
+import { EmailNotificationPreferencesSchema, UnsubscribeTokenInputSchema } from '../schema/comments'
 
-const getPreference = protectedProcedure.output(ReplyPreferenceSchema).handler(async ({ context }) => {
-  const [preference] = await context.db
-    .select({ repliesEnabled: commentNotificationPreferences.repliesEnabled })
-    .from(commentNotificationPreferences)
-    .where(eq(commentNotificationPreferences.userId, context.session.user.id))
-  return preference ?? { repliesEnabled: true }
-})
+const getEmailPreferences = protectedProcedure
+  .output(EmailNotificationPreferencesSchema)
+  .handler(async ({ context }) => {
+    const [preference] = await context.db
+      .select({ commentRepliesEnabled: commentNotificationPreferences.commentRepliesEnabled })
+      .from(commentNotificationPreferences)
+      .where(eq(commentNotificationPreferences.userId, context.session.user.id))
+    return preference ?? { commentRepliesEnabled: true }
+  })
 
-const setPreference = protectedProcedure
-  .input(ReplyPreferenceSchema)
-  .output(ReplyPreferenceSchema)
+const setEmailPreferences = protectedProcedure
+  .input(EmailNotificationPreferencesSchema)
+  .output(EmailNotificationPreferencesSchema)
   .handler(async ({ input, context }) => {
     await context.db
       .insert(commentNotificationPreferences)
@@ -55,7 +57,7 @@ const inspectUnsubscribe = publicProcedure
     }
   })
 
-const unsubscribe = publicProcedure
+const unsubscribeFromCommentReplies = publicProcedure
   .input(UnsubscribeTokenInputSchema)
   .output(z.void())
   .handler(async ({ input, context }) => {
@@ -76,8 +78,8 @@ const unsubscribe = publicProcedure
   })
 
 export const notificationsRouter = {
-  getPreference,
-  setPreference,
+  getEmailPreferences,
+  setEmailPreferences,
   inspectUnsubscribe,
-  unsubscribe,
+  unsubscribeFromCommentReplies,
 }

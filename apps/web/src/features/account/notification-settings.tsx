@@ -9,7 +9,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useId } from 'react'
 import { Skeleton } from 'skullet/react'
 
-import { replyPreferenceQueryOptions } from '@/features/notifications/notifications.queries'
+import { emailPreferencesQueryOptions } from '@/features/notifications/notifications.queries'
 import { getMutationErrorMessage } from '@/lib/get-mutation-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
@@ -20,31 +20,33 @@ type NotificationSettingsProps = {
 
 export function NotificationSettings(props: NotificationSettingsProps) {
   const { userId } = props
-  const preference = useQuery(replyPreferenceQueryOptions(userId))
+  const preferences = useQuery(emailPreferencesQueryOptions(userId))
 
-  if (preference.isError) return <p role='alert'>{m.error_failed_to_load_settings()}</p>
+  if (preferences.isError) return <p role='alert'>{m.error_failed_to_load_settings()}</p>
 
   return (
-    <Skeleton data={preference.data?.repliesEnabled} sample={true} label={m.common_aria_labels_loading()}>
-      {(repliesEnabled) => <NotificationSettingsForm userId={userId} repliesEnabled={repliesEnabled} />}
+    <Skeleton data={preferences.data?.commentRepliesEnabled} sample={true} label={m.common_aria_labels_loading()}>
+      {(commentRepliesEnabled) => (
+        <NotificationSettingsForm userId={userId} commentRepliesEnabled={commentRepliesEnabled} />
+      )}
     </Skeleton>
   )
 }
 
 type NotificationSettingsFormProps = NotificationSettingsProps & {
-  repliesEnabled: boolean
+  commentRepliesEnabled: boolean
 }
 
 function NotificationSettingsForm(props: NotificationSettingsFormProps) {
-  const { userId, repliesEnabled } = props
+  const { userId, commentRepliesEnabled } = props
   const inputId = useId()
   const descriptionId = `${inputId}-description`
   const formId = `${inputId}-form`
   const queryClient = useQueryClient()
   const update = useMutation(
-    orpc.notifications.setPreference.mutationOptions({
+    orpc.notifications.setEmailPreferences.mutationOptions({
       onSuccess: (data) => {
-        queryClient.setQueryData(replyPreferenceQueryOptions(userId).queryKey, data)
+        queryClient.setQueryData(emailPreferencesQueryOptions(userId).queryKey, data)
         form.reset(data)
         toast.add({ type: 'success', title: m.success_settings_updated() })
       },
@@ -57,7 +59,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
     }),
   )
   const form = useForm({
-    defaultValues: { repliesEnabled },
+    defaultValues: { commentRepliesEnabled },
     onSubmit: ({ value }) => {
       if (update.isPending) return
 
@@ -77,13 +79,13 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
             await form.handleSubmit()
           }}
         >
-          <h2 className='text-lg font-semibold'>{m.settings_notification_settings()}</h2>
-          <form.Field name='repliesEnabled'>
+          <h2 className='text-lg font-semibold'>{m.settings_email_notifications()}</h2>
+          <form.Field name='commentRepliesEnabled'>
             {(field) => (
               <Field orientation='horizontal'>
                 <FieldContent>
-                  <FieldLabel htmlFor={inputId}>{m.settings_reply_notification()}</FieldLabel>
-                  <FieldDescription id={descriptionId}>{m.settings_reply_notification_description()}</FieldDescription>
+                  <FieldLabel htmlFor={inputId}>{m.settings_comment_replies()}</FieldLabel>
+                  <FieldDescription id={descriptionId}>{m.settings_comment_replies_description()}</FieldDescription>
                 </FieldContent>
                 <Switch
                   id={inputId}
@@ -99,7 +101,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
           </form.Field>
         </form>
       </CardContent>
-      <form.Subscribe selector={(state) => state.values.repliesEnabled !== repliesEnabled}>
+      <form.Subscribe selector={(state) => state.values.commentRepliesEnabled !== commentRepliesEnabled}>
         {(isChanged) => (
           <CardFooter className='justify-end gap-2 border-t'>
             {isChanged && (

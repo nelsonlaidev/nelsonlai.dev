@@ -1,8 +1,8 @@
 import { orpc } from '@/lib/orpc-client'
 
-export function replyPreferenceQueryOptions(userId: string | undefined) {
-  return orpc.notifications.getPreference.queryOptions({
-    queryKey: [...orpc.notifications.getPreference.key(), { userId }],
+export function emailPreferencesQueryOptions(userId: string | undefined) {
+  return orpc.notifications.getEmailPreferences.queryOptions({
+    queryKey: [...orpc.notifications.getEmailPreferences.key(), { userId }],
     enabled: Boolean(userId),
   })
 }

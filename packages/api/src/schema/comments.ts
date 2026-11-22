@@ -45,5 +45,5 @@ export const CommentCountsSchema = z.object({
   comments: z.number().int().nonnegative(),
   replies: z.number().int().nonnegative(),
 })
-export const ReplyPreferenceSchema = z.object({ repliesEnabled: z.boolean() })
+export const EmailNotificationPreferencesSchema = z.object({ commentRepliesEnabled: z.boolean() })
 export const UnsubscribeTokenInputSchema = z.object({ token: z.string().min(1).max(4096) })

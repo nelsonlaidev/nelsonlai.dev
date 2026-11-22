@@ -91,7 +91,7 @@ export async function notifyComment(
           userId: commentTable.userId,
           email: users.email,
           body: commentTable.body,
-          repliesEnabled: commentNotificationPreferences.repliesEnabled,
+          commentRepliesEnabled: commentNotificationPreferences.commentRepliesEnabled,
           unsubscribe: commentReplyUnsubscribes.commentId,
         })
         .from(commentTable)
@@ -102,7 +102,8 @@ export async function notifyComment(
           and(eq(commentReplyUnsubscribes.userId, users.id), eq(commentReplyUnsubscribes.commentId, commentTable.id)),
         )
         .where(eq(commentTable.id, comment.parentId))
-      if (!parent?.userId || parent.userId === user.id || parent.repliesEnabled === false || parent.unsubscribe) return
+      if (!parent?.userId || parent.userId === user.id || parent.commentRepliesEnabled === false || parent.unsubscribe)
+        return
       recipient = parent.email
       subject = `New reply to your comment on "${title}"`
       const unsubscribeUrl = new URL('/unsubscribe', ENV.SITE_URL)

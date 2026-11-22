@@ -21,7 +21,7 @@ const fixture = vi.hoisted(() => ({
   sessions: vi.fn<() => Promise<object[]>>(),
   preference: vi.fn<
     () => Promise<{
-      repliesEnabled: boolean
+      commentRepliesEnabled: boolean
     }>
   >(),
   mutate: vi.fn<() => Promise<never>>(),
@@ -47,7 +47,7 @@ vi.mock('@/lib/orpc-client', () => {
         comment: { list: query('comments', fixture.comments) },
       },
       account: { listSessions: query('sessions', fixture.sessions), revokeSession: mutation },
-      notifications: { getPreference: query('preference', fixture.preference), setPreference: mutation },
+      notifications: { getEmailPreferences: query('preference', fixture.preference), setEmailPreferences: mutation },
     },
   }
 })
@@ -66,7 +66,7 @@ beforeEach(async () => {
   fixture.users.mockResolvedValue({ users: [], pageCount: 0 })
   fixture.comments.mockResolvedValue({ comments: [], pageCount: 0 })
   fixture.sessions.mockResolvedValue([])
-  fixture.preference.mockResolvedValue({ repliesEnabled: true })
+  fixture.preference.mockResolvedValue({ commentRepliesEnabled: true })
 })
 describe('Account and admin presentation with isolated API fixtures', () => {
   test.each(['en', 'zh-TW', 'zh-CN', 'ja', 'es', 'pt-BR'] as const)('localizes empty tables in %s', async (locale) => {
