@@ -1,27 +1,10 @@
-import {
-  Body,
-  Button,
-  Column,
-  Container,
-  Head,
-  Html,
-  Img,
-  Link,
-  Preview,
-  Row,
-  Section,
-  Tailwind,
-  Text,
-} from 'react-email'
+import { Link, Section, Text } from 'react-email'
 
-import Footer from '../components/footer'
-import GeistFont from '../components/geist-font'
-import Logo from '../components/logo'
+import { linkStyle, NotificationEmail } from '../components/notification-email'
 
 type ReplyEmailTemplateProps = {
   reply: string
   replierName: string
-  replierImage: string
   comment: string
   date: string
   replyUrl: string
@@ -32,83 +15,59 @@ type ReplyEmailTemplateProps = {
 }
 
 function ReplyEmailTemplate(props: ReplyEmailTemplateProps) {
-  const { reply, replierName, replierImage, comment, date, replyUrl, postTitle, postUrl, siteUrl, unsubscribeUrl } = {
-    ...ReplyEmailTemplate.PreviewProps,
-    ...props,
-  }
+  const { reply, replierName, comment, date, replyUrl, postTitle, postUrl, siteUrl, unsubscribeUrl } = props
 
   return (
-    <Html>
-      <Head>
-        <GeistFont siteUrl={siteUrl} />
-      </Head>
-      <Preview>New reply on the post "{postTitle}" on nelsonlai.dev</Preview>
-      <Tailwind>
-        <Body className='m-auto bg-white p-1'>
-          <Container className='mx-auto w-full max-w-165 rounded-2xl border border-solid border-neutral-200 bg-white p-8'>
-            <Logo siteUrl={siteUrl} />
-            <Section>
-              <Text className='m-0 p-0 text-xl font-semibold text-gray-900'>Reply to Your Comment</Text>
-              <Text className='mx-0 mt-2 mb-0 p-0 text-base text-gray-500'>
-                {replierName} replied to your comment on{' '}
-                <Link href={postUrl} className='font-medium text-gray-900'>
-                  {postTitle}
-                </Link>
-              </Text>
-            </Section>
-            <Section className='mt-6 rounded-xl border border-solid border-neutral-200 bg-gray-50 p-6'>
-              <Row>
-                <Column className='w-10'>
-                  <Img
-                    src={replierImage}
-                    width={40}
-                    height={40}
-                    className='rounded-full'
-                    alt={`${replierName}'s avatar`}
-                  />
-                </Column>
-                <Column>
-                  <Text className='m-0 py-0 pr-0 pl-3 text-base font-medium text-gray-900'>{replierName}</Text>
-                  <Text className='m-0 py-0 pr-0 pl-3 text-sm text-gray-500'>{date}</Text>
-                </Column>
-              </Row>
-              <Section className='mt-4 rounded-r-lg border-l-4 border-solid border-neutral-200 bg-gray-100 px-3 py-4'>
-                <Text className='m-0 p-0 text-sm text-gray-500'>{comment}</Text>
-              </Section>
-              <Text className='mx-0 mt-4 mb-0 p-0 text-base text-gray-700'>{reply}</Text>
-            </Section>
-            <Button
-              className='mt-6 rounded-4xl bg-gray-900 px-8 py-2.5 align-middle text-sm font-medium text-white'
-              href={replyUrl}
-            >
-              View Reply
-            </Button>
-            <Text className='text-xs text-gray-500'>
-              You received this because you enabled notifications for replies to your comments. If you wish to stop
-              receiving these emails, please update your <Link href={`${postUrl}#comments`}>notification settings</Link>
-              . To stop receiving reply notifications for this specific comment, you can{' '}
-              <Link href={unsubscribeUrl}>unsubscribe</Link>.
-            </Text>
-            <Footer siteUrl={siteUrl} />
-          </Container>
-        </Body>
-      </Tailwind>
-    </Html>
+    <NotificationEmail
+      siteUrl={siteUrl}
+      preview={`New reply on the post "${postTitle}" on nelsonlai.dev`}
+      heading='New reply to your comment'
+      postTitle={postTitle}
+      postUrl={postUrl}
+      actor={replierName}
+      date={date}
+      message={reply}
+      actionLabel='View reply'
+      actionUrl={replyUrl}
+      footer={
+        <Text style={{ color: '#435951', fontSize: 13, lineHeight: '20px', margin: '0 0 12px' }}>
+          You received this email because someone replied to your comment.
+          <br />
+          <Link
+            href={new URL('/account/settings', siteUrl).href}
+            style={{ ...linkStyle, display: 'inline-block', marginRight: 14, lineHeight: '24px' }}
+          >
+            Manage all reply notifications
+          </Link>{' '}
+          <Link href={unsubscribeUrl} style={{ ...linkStyle, display: 'inline-block', lineHeight: '24px' }}>
+            Unsubscribe from this thread
+          </Link>
+        </Text>
+      }
+    >
+      <Section style={{ marginTop: 24, paddingLeft: 14, borderLeft: '2px solid #bccfc5', tableLayout: 'fixed' }}>
+        <Text style={{ color: '#475d55', fontSize: 13, fontWeight: 600, lineHeight: '20px', margin: 0 }}>
+          Your comment
+        </Text>
+        <Text style={{ color: '#475d55', fontSize: 15, lineHeight: '23px', whiteSpace: 'pre-wrap', margin: '4px 0 0' }}>
+          {comment}
+        </Text>
+      </Section>
+    </NotificationEmail>
   )
 }
 
 ReplyEmailTemplate.PreviewProps = {
   reply:
-    "Thank you for your kind words! I'm glad you found the article helpful. Let me know if you have any questions!",
-  replierName: 'John Smith',
-  replierImage: 'https://nelsonlai.dev/api/avatar/john-doe.webp',
-  comment: 'This is exactly what I needed! The explanations are clear and concise. Thanks for sharing! 👏',
-  date: 'January 2, 2025',
-  replyUrl: 'https://nelsonlai.dev/blog/understanding-modern-web-development?comment=1&reply=1',
-  postTitle: 'Understanding Modern Web Development',
-  postUrl: 'https://nelsonlai.dev/blog/understanding-modern-web-development',
-  siteUrl: 'https://nelsonlai.dev',
-  unsubscribeUrl: 'https://nelsonlai.dev/unsubscribe?token=abc123',
+    'I start with what the reader came to do. On a small screen, keeping the next action close to the text makes a real difference.',
+  replierName: 'Alex Rivera',
+  comment: 'How do you choose which details to keep when a layout moves to a smaller screen?',
+  date: 'November 19, 2026',
+  replyUrl: 'https://example.invalid/blog/designing-for-small-screens?comment=preview-comment&reply=preview-reply',
+  postTitle: 'Designing for small screens',
+  postUrl: 'https://example.invalid/blog/designing-for-small-screens',
+  siteUrl: 'http://localhost:3000',
+  unsubscribeUrl: 'https://example.invalid/unsubscribe?token=preview-only',
 } satisfies ReplyEmailTemplateProps
 
 export default ReplyEmailTemplate

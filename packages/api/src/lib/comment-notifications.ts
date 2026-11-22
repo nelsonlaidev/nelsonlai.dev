@@ -84,7 +84,6 @@ export async function notifyComment(
     const commentUrl = new URL(postUrl)
     commentUrl.searchParams.set('comment', comment.parentId ?? comment.id)
 
-    const userImage = user.image ?? new URL(`/api/avatar/${encodeURIComponent(user.id)}.webp`, ENV.SITE_URL).href
     const sharedTemplateProps = {
       postTitle: title,
       postUrl: postUrl.href,
@@ -108,7 +107,6 @@ export async function notifyComment(
           ...sharedTemplateProps,
           comment: comment.body,
           commenterName: user.name,
-          commenterImage: userImage,
           commentUrl: commentUrl.href,
         }),
       })
@@ -131,7 +129,6 @@ export async function notifyComment(
         comment: recipient.parentCommentBody,
         reply: comment.body,
         replierName: user.name,
-        replierImage: userImage,
         replyUrl: commentUrl.href,
         unsubscribeUrl: unsubscribeUrl.href,
       }),
