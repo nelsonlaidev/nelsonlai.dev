@@ -69,14 +69,14 @@ export const TrendsInputSchema = z.object({
   timezone: z
     .string()
     .max(100)
-    .refine((timezone) => {
+    .transform((timezone, ctx) => {
       try {
-        Intl.DateTimeFormat('en-US', { timeZone: timezone }).resolvedOptions()
-        return true
+        return Intl.DateTimeFormat('en-US', { timeZone: timezone }).resolvedOptions().timeZone
       } catch {
-        return false
+        ctx.issues.push({ code: 'custom', input: timezone, message: 'Invalid time zone' })
+        return z.NEVER
       }
-    }, 'Invalid time zone'),
+    }),
 })
 
 export const TrendsOutputSchema = z.array(z.object({ date: z.string(), comments: z.number(), messages: z.number() }))

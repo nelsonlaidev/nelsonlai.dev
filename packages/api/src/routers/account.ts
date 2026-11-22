@@ -134,8 +134,14 @@ const updateAvatar = protectedProcedure
     const { client, bucketName, publicUrl } = getCloudflareR2()
     const extension = format === 'jpeg' ? 'jpg' : format
     const key = `avatars/${context.session.user.id}/${randomUUID()}.${extension}`
+
     await client.send(new PutObjectCommand({ Bucket: bucketName, Key: key, Body: bytes, ContentType: input.type }))
     await context.auth.api.updateUser({ headers: context.headers, body: { image: `${publicUrl}/${key}` } })
   })
 
-export const accountRouter = { listSessions, revokeSession, updateName, updateAvatar }
+export const accountRouter = {
+  listSessions,
+  revokeSession,
+  updateName,
+  updateAvatar,
+}

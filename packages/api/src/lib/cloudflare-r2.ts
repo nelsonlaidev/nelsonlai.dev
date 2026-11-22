@@ -23,5 +23,5 @@ export function getCloudflareR2() {
     credentials: { accessKeyId, secretAccessKey },
   })
 
-  return { client, bucketName, publicUrl: publicUrl.replace(/\/$/, '') }
+  return { client, bucketName, publicUrl }
 }

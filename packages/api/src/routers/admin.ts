@@ -170,50 +170,44 @@ const getTrends = adminProcedure
   .output(TrendsOutputSchema)
   .handler(async ({ input, context }) => {
     const { days, timezone } = input
+    // PostgreSQL interprets signed text zones using POSIX signs. Intervals use ISO signs.
+    const zone = /^[+-]/.test(timezone) ? sql`${timezone}::interval` : sql`${timezone}::text`
 
     const rows = await context.db.execute<{
       date: string
       comments: number
       messages: number
     }>(sql`
-      WITH boundaries AS (
-        SELECT
-          (NOW() AT TIME ZONE ${timezone})::date - (${days} - 1) AS start_day,
-          (NOW() AT TIME ZONE ${timezone})::date                 AS end_day
+      WITH bounds AS (
+        SELECT (NOW() AT TIME ZONE ${zone})::date AS today
       ),
-      date_series AS (
-        SELECT generate_series(
-          (SELECT start_day FROM boundaries),
-          (SELECT end_day   FROM boundaries),
-          INTERVAL '1 day'
-        )::date AS day
+      days AS (
+        SELECT today - n AS day
+        FROM bounds, generate_series(0, ${days} - 1) AS n
       ),
-      comment_counts AS (
-        SELECT
-          (${comments.createdAt} AT TIME ZONE ${timezone})::date AS day,
-          COUNT(*)::int AS count
-        FROM ${comments}
-        WHERE ${comments.createdAt} >= (SELECT start_day FROM boundaries)::timestamp AT TIME ZONE ${timezone}
-          AND ${comments.createdAt} <  (SELECT end_day   FROM boundaries)::timestamp AT TIME ZONE ${timezone} + INTERVAL '1 day'
-        GROUP BY 1
+      activity AS (
+        SELECT ${comments.createdAt} AS created_at, 'comment' AS kind FROM ${comments}
+        UNION ALL
+        SELECT ${messages.createdAt} AS created_at, 'message' AS kind FROM ${messages}
       ),
-      message_counts AS (
+      daily_counts AS (
         SELECT
-          (${messages.createdAt} AT TIME ZONE ${timezone})::date AS day,
-          COUNT(*)::int AS count
-        FROM ${messages}
-        WHERE ${messages.createdAt} >= (SELECT start_day FROM boundaries)::timestamp AT TIME ZONE ${timezone}
-          AND ${messages.createdAt} <  (SELECT end_day   FROM boundaries)::timestamp AT TIME ZONE ${timezone} + INTERVAL '1 day'
+          (created_at AT TIME ZONE ${zone})::date AS day,
+          COUNT(*) FILTER (WHERE kind = 'comment')::int AS comments,
+          COUNT(*) FILTER (WHERE kind = 'message')::int AS messages
+        FROM activity, bounds
+        -- A UTC day on either side covers every offset, including repeated local midnights.
+        WHERE created_at >= (today - ${days}::int)::timestamp AT TIME ZONE 'UTC'
+          AND created_at < (today + 2)::timestamp AT TIME ZONE 'UTC'
         GROUP BY 1
       )
       SELECT
-        ds.day::text          AS date,
-        COALESCE(cc.count, 0) AS comments,
-        COALESCE(mc.count, 0) AS messages
-      FROM date_series ds
-      LEFT JOIN comment_counts cc ON cc.day = ds.day
-      LEFT JOIN message_counts mc ON mc.day = ds.day
-      ORDER BY ds.day ASC
+        days.day::text AS date,
+        COALESCE(daily_counts.comments, 0) AS comments,
+        COALESCE(daily_counts.messages, 0) AS messages
+      FROM days
+      LEFT JOIN daily_counts USING (day)
+      ORDER BY days.day
     `)
 
     return rows.rows
