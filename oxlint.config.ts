@@ -11,12 +11,7 @@ export default defineConfig({
     playwright({
       files: ['apps/web/src/tests/e2e/**/*.test.{ts,tsx}'],
       rules: {
-        'playwright/expect-expect': [
-          'error',
-          {
-            assertFunctionNames: ['a11y'],
-          },
-        ],
+        'playwright/expect-expect': ['error', { assertFunctionNames: ['a11y'] }],
       },
     }),
     vitest({
