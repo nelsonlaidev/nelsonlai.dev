@@ -3,8 +3,6 @@ import { createContext, use } from 'react'
 export type UITranslations = {
   loading: string
   close: string
-  commandDialogTitle: string
-  commandDialogDescription: string
   treeView: string
   sidebarTitle: string
   sidebarDescription: string

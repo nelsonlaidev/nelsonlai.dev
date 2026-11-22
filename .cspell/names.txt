@@ -7,7 +7,6 @@ bentogrids
 bowser
 bradlc
 cleanshot
-cmdk
 cobe
 delba
 dokploy

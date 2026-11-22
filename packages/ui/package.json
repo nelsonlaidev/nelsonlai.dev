@@ -12,9 +12,7 @@
   "dependencies": {
     "@ark-ui/react": "5.40.0",
     "@base-ui/react": "1.9.0",
-    "@repo/utils": "workspace:*",
     "class-variance-authority": "0.7.1",
-    "cmdk": "1.1.1",
     "cn": "catalog:",
     "lucide-react": "catalog:",
     "react": "catalog:",

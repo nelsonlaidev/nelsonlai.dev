@@ -39,8 +39,6 @@ function setup() {
       translations={{
         close: 'Close',
         loading: 'Loading',
-        commandDialogTitle: 'Commands',
-        commandDialogDescription: 'Find a command',
         treeView: 'Tree',
         sidebarTitle: 'Sidebar',
         sidebarDescription: 'Navigation',

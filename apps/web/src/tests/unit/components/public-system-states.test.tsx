@@ -133,8 +133,6 @@ describe('Public system states with isolated API fixtures', () => {
           translations={{
             loading: m.common_aria_labels_loading(),
             close: 'Close',
-            commandDialogTitle: 'Commands',
-            commandDialogDescription: 'Find a command',
             treeView: 'Tree',
             sidebarTitle: 'Sidebar',
             sidebarDescription: 'Navigation',

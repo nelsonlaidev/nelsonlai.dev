@@ -60,8 +60,6 @@ function setup() {
           translations={{
             loading: m.common_aria_labels_loading(),
             close: m.common_labels_close(),
-            commandDialogTitle: m.command_menu_title(),
-            commandDialogDescription: m.command_menu_description(),
             treeView: m.common_aria_labels_tree_view(),
             sidebarTitle: m.admin_sidebar_title(),
             sidebarDescription: m.admin_sidebar_description(),

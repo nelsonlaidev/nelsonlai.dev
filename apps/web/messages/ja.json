@@ -137,8 +137,6 @@
   "blog_search_no_posts_found": "投稿が見つかりませんでした",
   "blog_search_placeholder": "記事を検索",
   "blog_thanks": "お読みいただきありがとうございます。",
-  "command_menu_description": "実行するコマンドを検索...",
-  "command_menu_title": "コマンドパレット",
   "common_aria_labels_copy_code": "コードをクリップボードにコピー",
   "common_aria_labels_loading": "読み込み中",
   "common_aria_labels_toggle_sidebar": "サイドバーを切り替え",
