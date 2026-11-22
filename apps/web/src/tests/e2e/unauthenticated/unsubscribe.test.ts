@@ -16,10 +16,6 @@ test.describe('unsubscribe', () => {
   test.beforeEach(async () => {
     commentId = createId()
 
-    if (!ENV.JWT_SECRET) {
-      throw new Error('JWT_SECRET must be set to run unsubscribe E2E tests')
-    }
-
     await db.insert(posts).values({ slug: `unsubscribe-${commentId}` })
     await db.insert(comments).values({
       id: commentId,

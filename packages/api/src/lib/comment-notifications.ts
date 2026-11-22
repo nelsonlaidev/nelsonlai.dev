@@ -31,12 +31,12 @@ export async function createReplyUnsubscribeToken(userId: string, commentId: str
     .setIssuer(ENV.SITE_URL)
     .setAudience('comment-reply-unsubscribe')
     .setExpirationTime('30d')
-    .sign(new TextEncoder().encode(ENV.JWT_SECRET ?? ENV.BETTER_AUTH_SECRET))
+    .sign(new TextEncoder().encode(ENV.JWT_SECRET))
 }
 
 export async function verifyReplyUnsubscribeToken(token: string) {
   try {
-    const { payload } = await jwtVerify(token, new TextEncoder().encode(ENV.JWT_SECRET ?? ENV.BETTER_AUTH_SECRET), {
+    const { payload } = await jwtVerify(token, new TextEncoder().encode(ENV.JWT_SECRET), {
       algorithms: ['HS256'],
     })
     const legacyToken = payload.iss === undefined && payload.aud === undefined

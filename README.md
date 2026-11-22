@@ -82,6 +82,7 @@ UPSTASH_REDIS_REST_TOKEN=local-uprest-token-7f3c9a2e6b1d4f80
 IP_ADDRESS_SALT=replace-with-your-own-random-secret-at-least-32-characters
 BETTER_AUTH_URL=http://localhost:3000
 BETTER_AUTH_SECRET=replace-with-another-random-secret-at-least-32-characters
+JWT_SECRET=replace-with-a-dedicated-random-secret-at-least-32-characters
 RESEND_FROM_EMAIL="Nelson Lai <noreply@example.invalid>"
 ```
 
@@ -109,7 +110,6 @@ Optional integration variables are documented in the web schema:
 | Google sign-in                           | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`                                                                                                          |
 | GitHub sign-in                           | `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`                                                                                                          |
 | Comment notifications                    | `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `AUTHOR_EMAIL`                                                                                               |
-| Reply unsubscribe tokens                 | `JWT_SECRET` (falls back to `BETTER_AUTH_SECRET`)                                                                                                   |
 | Discord notifications                    | `DISCORD_WEBHOOK_URL`                                                                                                                               |
 | Avatar storage                           | `CLOUDFLARE_R2_ENDPOINT`, `CLOUDFLARE_R2_ACCESS_KEY_ID`, `CLOUDFLARE_R2_SECRET_ACCESS_KEY`, `CLOUDFLARE_R2_BUCKET_NAME`, `CLOUDFLARE_R2_PUBLIC_URL` |
 | GitHub, YouTube, and WakaTime statistics | `GITHUB_TOKEN`, `GOOGLE_API_KEY`, `WAKATIME_API_KEY`                                                                                                |
