@@ -15,7 +15,12 @@ export const CommentSchema = z.object({
   likeCount: z.number().int().nonnegative(),
   dislikeCount: z.number().int().nonnegative(),
   liked: z.boolean().nullable(),
-  user: z.object({ id: z.string(), name: z.string(), image: z.string().nullable(), role: z.string().nullable() }),
+  user: z.object({
+    id: z.string(),
+    name: z.string(),
+    image: z.string().nullable(),
+    role: z.string().nullable(),
+  }),
 })
 
 export const ListCommentsInputSchema = InfiniteQueryInputSchema.extend({
@@ -39,11 +44,23 @@ export const CreateCommentInputSchema = PostSlugInputSchema.extend({
     .default('en'),
 })
 
-export const DeleteCommentInputSchema = z.object({ id: z.string().min(1).max(100) })
-export const VoteCommentInputSchema = DeleteCommentInputSchema.extend({ isLike: z.boolean().nullable() })
+export const DeleteCommentInputSchema = z.object({
+  id: z.string().min(1).max(100),
+})
+
+export const VoteCommentInputSchema = DeleteCommentInputSchema.extend({
+  isLike: z.boolean().nullable(),
+})
+
 export const CommentCountsSchema = z.object({
   comments: z.number().int().nonnegative(),
   replies: z.number().int().nonnegative(),
 })
-export const EmailNotificationPreferencesSchema = z.object({ commentRepliesEnabled: z.boolean() })
-export const UnsubscribeTokenInputSchema = z.object({ token: z.string().min(1).max(4096) })
+
+export const EmailNotificationPreferencesSchema = z.object({
+  commentRepliesEnabled: z.boolean(),
+})
+
+export const UnsubscribeTokenInputSchema = z.object({
+  token: z.string().min(1).max(4096),
+})

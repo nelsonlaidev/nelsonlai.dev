@@ -8,7 +8,11 @@ const PaginationInputSchema = z.object({
 export const ListCommentsInputSchema = PaginationInputSchema
 export const ListUsersInputSchema = PaginationInputSchema
 
-const ActivityUserSchema = z.object({ id: z.string(), name: z.string(), image: z.string().nullable() })
+const ActivityUserSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  image: z.string().nullable(),
+})
 
 export const ListCommentsOutputSchema = z.object({
   comments: z.array(
@@ -29,7 +33,13 @@ export const ListCommentsOutputSchema = z.object({
 })
 
 export const ListUsersOutputSchema = z.object({
-  users: z.array(ActivityUserSchema.extend({ email: z.string(), role: z.string().nullable(), createdAt: z.date() })),
+  users: z.array(
+    ActivityUserSchema.extend({
+      email: z.string(),
+      role: z.string().nullable(),
+      createdAt: z.date(),
+    }),
+  ),
   pageCount: z.number(),
   totalCount: z.number(),
 })
@@ -79,4 +89,10 @@ export const TrendsInputSchema = z.object({
     }),
 })
 
-export const TrendsOutputSchema = z.array(z.object({ date: z.string(), comments: z.number(), messages: z.number() }))
+export const TrendsOutputSchema = z.array(
+  z.object({
+    date: z.string(),
+    comments: z.number(),
+    messages: z.number(),
+  }),
+)

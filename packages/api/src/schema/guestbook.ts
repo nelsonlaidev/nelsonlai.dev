@@ -24,4 +24,6 @@ export const ListGuestbookMessagesOutputSchema = z.object({
   nextCursor: InfiniteQueryCursorSchema.optional(),
 })
 
-export const DeleteGuestbookMessageInputSchema = z.object({ id: z.string().min(1) })
+export const DeleteGuestbookMessageInputSchema = z.object({
+  id: z.string().min(1),
+})
