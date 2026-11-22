@@ -1,6 +1,8 @@
 import * as z from 'zod'
 
-export const PostSlugInputSchema = z.object({ slug: z.string().trim().min(1).max(200) })
+export const PostSlugInputSchema = z.object({
+  slug: z.string().trim().min(1).max(200),
+})
 
 export const PostLikesSchema = z.object({
   likes: z.number().int().nonnegative(),

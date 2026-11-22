@@ -20,7 +20,9 @@ const YoutubeChannelListResponseSchema = z.object({
 })
 
 const getStats = publicProcedure.output(YoutubeStatsSchema).handler(async () => {
-  if (!ENV.GOOGLE_API_KEY) throw new Error('YouTube is not configured')
+  if (!ENV.GOOGLE_API_KEY) {
+    throw new Error('YouTube is not configured')
+  }
 
   const cached = await cache.youtube.stats.get(CHANNEL_ID)
   if (cached !== null) return cached
@@ -39,7 +41,10 @@ const getStats = publicProcedure.output(YoutubeStatsSchema).handler(async () => 
 
   if (!channel) throw new Error('YouTube channel not found')
 
-  const result = { subscribers: channel.statistics.subscriberCount, views: channel.statistics.viewCount }
+  const result = {
+    subscribers: channel.statistics.subscriberCount,
+    views: channel.statistics.viewCount,
+  }
 
   await cache.youtube.stats.set(CHANNEL_ID, result)
 

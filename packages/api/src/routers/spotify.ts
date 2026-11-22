@@ -27,7 +27,9 @@ const SpotifyTrackSchema = z.object({
 const getNowPlaying = publicProcedure.output(SpotifyNowPlayingSchema).handler(async () => {
   const { SPOTIFY_CLIENT_ID: clientId, SPOTIFY_CLIENT_SECRET: clientSecret, SPOTIFY_REFRESH_TOKEN: refreshToken } = ENV
 
-  if (!clientId || !clientSecret || !refreshToken) return { isPlaying: false }
+  if (!clientId || !clientSecret || !refreshToken) {
+    return { isPlaying: false }
+  }
 
   const cacheKey = createHash('sha256').update(`${clientId}:${refreshToken}`).digest('hex')
   let accessToken = await cache.spotify.accessToken.get(cacheKey)
@@ -58,7 +60,9 @@ const getNowPlaying = publicProcedure.output(SpotifyNowPlayingSchema).handler(as
     signal: AbortSignal.timeout(10_000),
   })
 
-  if (response.status === 204) return { isPlaying: false }
+  if (response.status === 204) {
+    return { isPlaying: false }
+  }
 
   if (!response.ok) {
     if (response.status === 401) await cache.spotify.accessToken.del(cacheKey)
@@ -66,7 +70,9 @@ const getNowPlaying = publicProcedure.output(SpotifyNowPlayingSchema).handler(as
   }
 
   const playback = SpotifyPlaybackResponseSchema.parse(await response.json())
-  if (!playback.is_playing || playback.item?.type !== 'track') return { isPlaying: false }
+  if (!playback.is_playing || playback.item?.type !== 'track') {
+    return { isPlaying: false }
+  }
 
   const track = SpotifyTrackSchema.parse(playback.item)
 

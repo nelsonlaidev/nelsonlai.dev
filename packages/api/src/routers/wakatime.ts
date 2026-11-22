@@ -26,8 +26,7 @@ const getStats = publicProcedure.output(WakatimeStatsSchema).handler(async () =>
     throw new Error(`WakaTime API error: ${response.status} ${response.statusText}`)
   }
 
-  const rawData = await response.json()
-  const { data } = WakatimeAllTimeResponseSchema.parse(rawData)
+  const { data } = WakatimeAllTimeResponseSchema.parse(await response.json())
 
   const result = {
     hours: Math.round(data.total_seconds / 60 / 60),
