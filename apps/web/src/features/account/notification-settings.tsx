@@ -45,9 +45,9 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
   const queryClient = useQueryClient()
   const update = useMutation(
     orpc.notifications.setEmailPreferences.mutationOptions({
-      onSuccess: (data) => {
-        queryClient.setQueryData(emailPreferencesQueryOptions(userId).queryKey, data)
-        form.reset(data)
+      onSuccess: (_data, input) => {
+        queryClient.setQueryData(emailPreferencesQueryOptions(userId).queryKey, input)
+        form.reset(input)
         toast.add({ type: 'success', title: m.success_settings_updated() })
       },
       onError: (error) => {

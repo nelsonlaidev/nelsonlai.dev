@@ -35,6 +35,7 @@ const listMessages = publicProcedure
       .limit(pagination.limit)
 
     const { items, nextCursor } = pagination.getPage(rows)
+
     return { messages: items, nextCursor }
   })
 
@@ -48,9 +49,12 @@ const createMessage = protectedProcedure
       .values({ body: input.body, userId: user.id })
       .returning()
 
-    if (!message) throw new ORPCError('INTERNAL_SERVER_ERROR')
+    if (!message) {
+      throw new ORPCError('INTERNAL_SERVER_ERROR')
+    }
 
     await sendGuestbookNotification(message.body, user.name, user.image ?? null)
+
     return message
   })
 
@@ -63,7 +67,9 @@ const deleteMessage = protectedProcedure
       .where(and(eq(guestbookMessages.id, input.id), eq(guestbookMessages.userId, context.session.user.id)))
       .returning({ id: guestbookMessages.id })
 
-    if (deleted.length === 0) throw new ORPCError('NOT_FOUND')
+    if (deleted.length === 0) {
+      throw new ORPCError('NOT_FOUND')
+    }
   })
 
 export const guestbookRouter = {

@@ -16,18 +16,18 @@ const getEmailPreferences = protectedProcedure
       .select({ commentRepliesEnabled: commentNotificationPreferences.commentRepliesEnabled })
       .from(commentNotificationPreferences)
       .where(eq(commentNotificationPreferences.userId, context.session.user.id))
+
     return preference ?? { commentRepliesEnabled: true }
   })
 
 const setEmailPreferences = protectedProcedure
   .input(EmailNotificationPreferencesSchema)
-  .output(EmailNotificationPreferencesSchema)
+  .output(z.void())
   .handler(async ({ input, context }) => {
     await context.db
       .insert(commentNotificationPreferences)
       .values({ userId: context.session.user.id, ...input })
       .onConflictDoUpdate({ target: commentNotificationPreferences.userId, set: input })
-    return input
   })
 
 const inspectUnsubscribe = publicProcedure
@@ -35,7 +35,10 @@ const inspectUnsubscribe = publicProcedure
   .output(z.object({ comment: z.string(), isUnsubscribed: z.boolean(), userEmail: z.string() }))
   .handler(async ({ input, context }) => {
     const payload = await verifyReplyUnsubscribeToken(input.token)
-    if (!payload) throw new ORPCError('BAD_REQUEST')
+    if (!payload) {
+      throw new ORPCError('BAD_REQUEST')
+    }
+
     const [comment] = await context.db
       .select({
         body: comments.body,
@@ -49,7 +52,11 @@ const inspectUnsubscribe = publicProcedure
         and(eq(commentReplyUnsubscribes.commentId, comments.id), eq(commentReplyUnsubscribes.userId, payload.userId)),
       )
       .where(and(eq(comments.id, payload.commentId), eq(comments.userId, payload.userId)))
-    if (!comment) throw new ORPCError('NOT_FOUND')
+
+    if (!comment) {
+      throw new ORPCError('NOT_FOUND')
+    }
+
     return {
       comment: comment.body,
       isUnsubscribed: comment.isUnsubscribed,
@@ -62,14 +69,21 @@ const unsubscribeFromCommentReplies = publicProcedure
   .output(z.void())
   .handler(async ({ input, context }) => {
     const payload = await verifyReplyUnsubscribeToken(input.token)
-    if (!payload) throw new ORPCError('BAD_REQUEST')
+    if (!payload) {
+      throw new ORPCError('BAD_REQUEST')
+    }
+
     await context.db.transaction(async (tx) => {
       const [comment] = await tx
         .select({ id: comments.id })
         .from(comments)
         .where(and(eq(comments.id, payload.commentId), eq(comments.userId, payload.userId)))
         .for('update')
-      if (!comment) throw new ORPCError('NOT_FOUND')
+
+      if (!comment) {
+        throw new ORPCError('NOT_FOUND')
+      }
+
       await tx
         .insert(commentReplyUnsubscribes)
         .values({ userId: payload.userId, commentId: payload.commentId })
