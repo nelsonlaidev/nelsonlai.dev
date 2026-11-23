@@ -4,96 +4,114 @@
   "futureFlags": {
     "watchUsingTaskInputs": true
   },
+  "globalEnv": ["!VITE_COMMIT_SHA"],
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "env": ["VITE_COMMIT_SHA"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".output/**"]
+      "dependsOn": ["^build"]
+    },
+    "@repo/web#build": {
+      "dependsOn": ["^build", "env:generate"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "!project.inlang/.gitignore", "!src/paraglide/**"],
+      "env": [
+        "AUTHOR_EMAIL",
+        "BETTER_AUTH_URL",
+        "CI",
+        "GITHUB_CLIENT_ID",
+        "GOOGLE_CLIENT_ID",
+        "NODE_ENV",
+        "R2_BUCKET",
+        "R2_ENDPOINT",
+        "R2_PUBLIC_URL",
+        "RESEND_FROM_EMAIL",
+        "SITE_URL",
+        "SPOTIFY_CLIENT_ID",
+        "UMAMI_URL",
+        "UMAMI_WEBSITE_ID",
+        "VITE_COMMIT_SHA"
+      ],
+      "passThroughEnv": [
+        "BETTER_AUTH_SECRET",
+        "DATABASE_URL",
+        "DISCORD_WEBHOOK_URL",
+        "GITHUB_CLIENT_SECRET",
+        "GITHUB_TOKEN",
+        "GOOGLE_API_KEY",
+        "GOOGLE_CLIENT_SECRET",
+        "IP_ADDRESS_SALT",
+        "JWT_SECRET",
+        "NELSONLAI_API_KEY",
+        "R2_ACCESS_KEY_ID",
+        "R2_SECRET_ACCESS_KEY",
+        "RESEND_API_KEY",
+        "SPOTIFY_CLIENT_SECRET",
+        "SPOTIFY_REFRESH_TOKEN",
+        "UPSTASH_REDIS_REST_TOKEN",
+        "UPSTASH_REDIS_REST_URL",
+        "WAKATIME_API_KEY"
+      ],
+      "outputs": [".output/**", ".content-collections/generated/**", "src/paraglide/**"]
     },
     "@repo/mdx#build": {
       "outputs": ["dist/**"]
     },
     "storybook:build": {
+      "dependsOn": ["^build"],
       "outputs": ["storybook-static/**"]
     },
     "db:generate": {
       "cache": false,
-      "interactive": true
+      "interactive": true,
+      "passThroughEnv": ["DATABASE_URL", "NODE_ENV"]
     },
     "db:migrate": {
       "cache": false,
-      "interactive": true
+      "interactive": true,
+      "passThroughEnv": ["DATABASE_URL", "NODE_ENV"]
     },
     "db:push": {
       "cache": false,
-      "interactive": true
+      "interactive": true,
+      "passThroughEnv": ["DATABASE_URL", "NODE_ENV"]
     },
     "db:seed": {
-      "cache": false
+      "cache": false,
+      "passThroughEnv": ["DATABASE_URL", "NODE_ENV"]
     },
     "db:reset": {
       "cache": false,
-      "interactive": true
+      "interactive": true,
+      "passThroughEnv": ["DATABASE_URL", "NODE_ENV"]
     },
     "db:studio": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "passThroughEnv": ["DATABASE_URL", "NODE_ENV"]
     },
     "typecheck": {
-      "dependsOn": ["^typecheck"]
+      "dependsOn": ["^typecheck"],
+      "inputs": ["$TURBO_DEFAULT$", "src/env.ts"]
     },
     "//#typecheck:root": {},
     "dev": {
       "cache": false,
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "env:generate"],
       "inputs": ["package.json"],
       "persistent": true,
-      "interruptible": true
+      "interruptible": true,
+      "passThroughEnv": ["*"]
     },
     "env:check": {
-      "cache": false
+      "cache": false,
+      "passThroughEnv": ["*"]
     },
     "env:generate": {
-      "cache": false
+      "dependsOn": ["^env:generate"],
+      "env": ["NODE_ENV"],
+      "inputs": [".env.schema", "$TURBO_ROOT$/apps/web/.env.schema"],
+      "outputs": ["src/env.ts"]
     },
     "i18n:check": {
       "cache": false
     }
-  },
-  "globalEnv": [
-    "AUTHOR_EMAIL",
-    "BETTER_AUTH_SECRET",
-    "BETTER_AUTH_URL",
-    "CI",
-    "CLOUDFLARE_R2_ACCESS_KEY_ID",
-    "CLOUDFLARE_R2_BUCKET_NAME",
-    "CLOUDFLARE_R2_ENDPOINT",
-    "CLOUDFLARE_R2_PUBLIC_URL",
-    "CLOUDFLARE_R2_SECRET_ACCESS_KEY",
-    "DATABASE_URL",
-    "DISCORD_WEBHOOK_URL",
-    "GITHUB_CLIENT_ID",
-    "GITHUB_CLIENT_SECRET",
-    "GITHUB_TOKEN",
-    "GOOGLE_API_KEY",
-    "GOOGLE_CLIENT_ID",
-    "GOOGLE_CLIENT_SECRET",
-    "IP_ADDRESS_SALT",
-    "JWT_SECRET",
-    "NELSONLAI_API_KEY",
-    "NODE_ENV",
-    "RESEND_API_KEY",
-    "RESEND_FROM_EMAIL",
-    "SITE_URL",
-    "SPOTIFY_CLIENT_ID",
-    "SPOTIFY_CLIENT_SECRET",
-    "SPOTIFY_REFRESH_TOKEN",
-    "UMAMI_URL",
-    "UMAMI_WEBSITE_ID",
-    "UPSTASH_REDIS_REST_TOKEN",
-    "UPSTASH_REDIS_REST_URL",
-    "WAKATIME_API_KEY"
-  ],
-  "globalDependencies": [".env*", "apps/*/.env*", "packages/*/.env*"]
+  }
 }
