@@ -5,14 +5,6 @@ import { InfoIcon } from 'lucide-react'
 
 const meta = {
   title: 'Overlays and feedback/Info tip',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { InfoTip } from @repo/ui/components/info-tip. This compact popover supports hover and click/touch. Supply label for the trigger and content for the explanation. Children belong on InfoTip; it creates the trigger itself.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

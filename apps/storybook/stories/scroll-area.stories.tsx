@@ -4,14 +4,6 @@ import { ScrollArea, ScrollBar } from '@repo/ui/components/scroll-area'
 
 const meta = {
   title: 'Structure and navigation/Scroll area',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { ScrollArea, ScrollBar } from @repo/ui/components/scroll-area. ScrollArea includes a vertical scrollbar and corner. Add ScrollBar orientation=horizontal when content also overflows horizontally. Focus the viewport to scroll with the keyboard.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

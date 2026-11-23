@@ -6,14 +6,6 @@ import { useState } from 'react'
 
 const meta = {
   title: 'Structure and navigation/Tree view',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { TreeView, createTreeCollection } and type Node from @repo/ui/components/tree-view. TreeView composes the recursive TreeViewNode export. Nodes use id/name/children. Arrow keys expand/collapse and move focus; selection and expansion can be controlled.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

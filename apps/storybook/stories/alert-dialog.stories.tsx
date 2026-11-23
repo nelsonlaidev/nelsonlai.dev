@@ -18,14 +18,6 @@ import { useState } from 'react'
 
 const meta = {
   title: 'Overlays and feedback/Alert dialog',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the AlertDialog* parts from @repo/ui/components/alert-dialog. The action is a Button, not an implicit close: update controlled open state after the operation succeeds. Cancel closes through the primitive. The examples only update local text.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

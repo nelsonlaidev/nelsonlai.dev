@@ -4,14 +4,6 @@ import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, Table
 
 const meta = {
   title: 'Data and display/Table',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the Table* parts from @repo/ui/components/table. This is a semantic table, not a data-fetching grid. Table supplies a horizontal overflow container. Pass caption to label the table below the scroll container. Mark an empty-state row with data-state="empty".',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

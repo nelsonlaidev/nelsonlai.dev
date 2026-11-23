@@ -13,14 +13,6 @@ import {
 
 const meta = {
   title: 'Structure and navigation/Card',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the Card* parts from @repo/ui/components/card. Supports default and sm spacing. CardAction occupies the header action column; direct first/last images receive edge treatment.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

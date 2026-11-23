@@ -5,14 +5,6 @@ import { Textarea } from '@repo/ui/components/textarea'
 
 const meta = {
   title: 'Actions and forms/Textarea',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { Textarea } from @repo/ui/components/textarea. Native multiline input with resizable content. Associate labels and error descriptions; input here is kept only in this browser example.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

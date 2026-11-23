@@ -12,14 +12,6 @@ import { CheckIcon } from 'lucide-react'
 
 const meta = {
   title: 'Data and display/Avatar',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the Avatar* parts from @repo/ui/components/avatar. Provide meaningful image alt text or initials. A failed image reveals the fallback. Group counts support the surrounding avatar size.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

@@ -17,14 +17,6 @@ import { Switch } from '@repo/ui/components/switch'
 
 const meta = {
   title: 'Actions and forms/Field',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the Field* parts from @repo/ui/components/field. FieldGroup supplies the container for responsive orientation. Associate descriptions/errors explicitly. FieldError accepts text or deduplicated error objects; it renders nothing for an empty list.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

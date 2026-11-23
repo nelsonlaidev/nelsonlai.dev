@@ -21,14 +21,6 @@ import { useState } from 'react'
 
 const meta = {
   title: 'Overlays and feedback/Dropdown menu',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the DropdownMenu* parts from @repo/ui/components/dropdown-menu. Content and submenu content supply portals. The real menu supports keyboard navigation, disabled/destructive items, checkbox/radio state, and submenus. Every action below changes local state only.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

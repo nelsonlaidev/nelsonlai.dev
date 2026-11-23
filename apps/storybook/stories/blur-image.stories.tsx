@@ -6,14 +6,6 @@ import { useState } from 'react'
 
 const meta = {
   title: 'Data and display/Blur image',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { BlurImage } from @repo/ui/components/blur-image. Always supply src and alt. Width/height reserve the aspect ratio; lazy=false loads eagerly. It clears the loading treatment on load or error but does not replace a failed image with a custom placeholder.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

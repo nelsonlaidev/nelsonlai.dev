@@ -5,14 +5,6 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@repo/
 
 const meta = {
   title: 'Overlays and feedback/Tooltip',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import TooltipProvider, Tooltip, TooltipTrigger, and TooltipContent from @repo/ui/components/tooltip. Tooltips supplement an already labelled control. Keep interactive content in a Popover instead. Provider controls hover delay; keyboard focus also reveals the hint.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

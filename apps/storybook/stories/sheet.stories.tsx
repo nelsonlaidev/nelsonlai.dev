@@ -14,14 +14,6 @@ import {
 
 const meta = {
   title: 'Overlays and feedback/Sheet',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the Sheet* parts from @repo/ui/components/sheet. All four sides are supported. SheetContent contains portal/backdrop and can omit its default close icon. Use a title and description and keep an explicit close action available.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

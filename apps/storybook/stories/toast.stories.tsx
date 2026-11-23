@@ -6,14 +6,6 @@ import { useEffect, useState } from 'react'
 
 const meta = {
   title: 'Overlays and feedback/Toast',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { Toaster, toast, createToastManager } from @repo/ui/components/toast. Toaster composes ToastProvider/Portal/Viewport, Toast/Content/Title/Description/Action/Close. Lower-level parts and useToastManager remain available for custom layouts. Mount one Toaster per manager. These examples only add, update, or close browser-local notifications.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

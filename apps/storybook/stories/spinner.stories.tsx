@@ -5,14 +5,6 @@ import { Spinner } from '@repo/ui/components/spinner'
 
 const meta = {
   title: 'Data and display/Spinner',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { Spinner } from @repo/ui/components/spinner. Uses the UIProvider loading translation by default. Override aria-label for a specific operation; use aria-hidden when adjacent text supplies the status.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

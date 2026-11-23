@@ -4,14 +4,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/components/ta
 
 const meta = {
   title: 'Structure and navigation/Tabs',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the Tabs* parts and tabsListVariants from @repo/ui/components/tabs. Lists support default/line appearances; roots support horizontal/vertical orientation. Arrow keys navigate tabs; panels retain their semantic relationships.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

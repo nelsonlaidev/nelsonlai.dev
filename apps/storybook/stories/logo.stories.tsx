@@ -4,14 +4,6 @@ import { Logo } from '@repo/ui/components/logo'
 
 const meta = {
   title: 'Data and display/Logo',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { Logo } from @repo/ui/components/logo. The mark inherits currentColor. Hide a decorative logo from assistive technology; label standalone brand links.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

@@ -4,14 +4,6 @@ import { ExternalLink } from '@repo/ui/components/external-link'
 
 const meta = {
   title: 'Data and display/External link',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { ExternalLink } from @repo/ui/components/external-link. Defaults to a new tab and adds noopener without discarding caller rel values. These examples use a local asset so browsing Storybook never needs an external service.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

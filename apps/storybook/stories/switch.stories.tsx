@@ -6,14 +6,6 @@ import { useState } from 'react'
 
 const meta = {
   title: 'Actions and forms/Switch',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { Switch } from @repo/ui/components/switch. Supports sm/default sizes, controlled or defaultChecked state, disabled, and invalid state. Each switch needs a label; Space toggles it.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

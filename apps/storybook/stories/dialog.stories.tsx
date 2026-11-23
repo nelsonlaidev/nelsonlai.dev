@@ -18,14 +18,6 @@ import { useState } from 'react'
 
 const meta = {
   title: 'Overlays and feedback/Dialog',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the Dialog* parts from @repo/ui/components/dialog. DialogContent supplies portal, backdrop, and optional close icon. DialogFooter can supply a close action. Always include a title and description; test focus trapping and return. DialogPrimitive is the exported root alias for advanced handles.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

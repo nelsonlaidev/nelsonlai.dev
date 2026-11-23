@@ -4,14 +4,6 @@ import { Separator } from '@repo/ui/components/separator'
 
 const meta = {
   title: 'Structure and navigation/Separator',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { Separator } from @repo/ui/components/separator. Supports horizontal and vertical orientation. Use it to separate adjacent content, not to manufacture layout spacing.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

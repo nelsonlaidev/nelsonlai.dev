@@ -7,14 +7,6 @@ import { ArrowRightIcon, PlusIcon } from 'lucide-react'
 const meta = {
   title: 'Actions and forms/Button',
   component: Button,
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import `{ Button, buttonVariants }` from `@repo/ui/components/button`. Combine variants and sizes; use xl for larger actions with more padding. Use native disabled state, label icon-only actions, and keep render elements self-closing. Sizes show the package defaults; the website adds its own 44px minimum control size.',
-      },
-    },
-  },
 } satisfies Meta<typeof Button>
 
 export default meta

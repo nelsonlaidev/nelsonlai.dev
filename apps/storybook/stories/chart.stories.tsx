@@ -12,14 +12,6 @@ import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
 const meta = {
   title: 'Data and display/Chart',
   component: ChartContainer,
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import `ChartContainer`, `ChartTooltip`, `ChartTooltipContent`, `ChartLegend`, and `ChartLegendContent` from `@repo/ui/components/chart`. Use Recharts for the actual chart. The container supplies context, responsive sizing, and series styles through ChartStyle. Give charts a text description as well as color.',
-      },
-    },
-  },
 } satisfies Meta<typeof ChartContainer>
 
 export default meta

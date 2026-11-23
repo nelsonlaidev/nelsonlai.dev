@@ -12,14 +12,6 @@ import { PlusIcon, SearchIcon } from 'lucide-react'
 
 const meta = {
   title: 'Actions and forms/Input group',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the InputGroup* parts from @repo/ui/components/input-group. Addons support inline-start/end and block-start/end. Clicking an addon focuses its input. Supply an accessible name and keep embedded buttons separate from the field label.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

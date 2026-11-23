@@ -36,10 +36,6 @@ const meta = {
     layout: 'fullscreen',
     docs: {
       story: { inline: false, height: '600px' },
-      description: {
-        component:
-          'Import the Sidebar* parts, useSidebar, and sidebarMenuButtonVariants from @repo/ui/components/sidebar. Desktop supports offcanvas/icon/none collapsing and sidebar/floating/inset appearances. Below 768px it becomes a Sheet. Cmd/Ctrl+B toggles it. The original component persists sidebar_state in a local cookie. Use the viewport toolbar or open a story in isolation to exercise mobile behavior.',
-      },
     },
   },
 } satisfies Meta

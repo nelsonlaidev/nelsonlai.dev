@@ -5,14 +5,6 @@ import { Label } from '@repo/ui/components/label'
 
 const meta = {
   title: 'Actions and forms/Input',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { Input } from @repo/ui/components/input. Standard input props pass through. Pair invalid controls with an associated error description, and distinguish readOnly from disabled.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

@@ -8,7 +8,7 @@ import '../stories/preview.css'
 import type { Preview } from '@storybook/react-vite'
 
 import { UIProvider } from '@repo/ui/components/ui-provider'
-import { Description, Stories, Title } from '@storybook/addon-docs/blocks'
+import { Stories, Title } from '@storybook/addon-docs/blocks'
 import { themes } from 'storybook/theming'
 
 import { translations } from '../stories/translations'
@@ -43,7 +43,6 @@ const preview: Preview = {
       page: () => (
         <>
           <Title />
-          <Description />
           <Stories />
         </>
       ),

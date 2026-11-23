@@ -5,14 +5,6 @@ import { CheckIcon } from 'lucide-react'
 
 const meta = {
   title: 'Data and display/Badge',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { Badge, badgeVariants } from @repo/ui/components/badge. Supports render composition for links. A badge is a label, not an interactive control unless composed with one.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

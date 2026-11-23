@@ -14,14 +14,6 @@ import {
 
 const meta = {
   title: 'Overlays and feedback/Popover',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the Popover* parts from @repo/ui/components/popover. Content handles its portal and positioning. Side, alignment, offsets, and collision padding pass through. Use a dialog-like popover for interactive content.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

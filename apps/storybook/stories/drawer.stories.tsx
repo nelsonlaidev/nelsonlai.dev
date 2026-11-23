@@ -15,14 +15,6 @@ import {
 const meta = {
   title: 'Overlays and feedback/Drawer',
   component: Drawer,
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the `Drawer*` parts from `@repo/ui/components/drawer`. DrawerContent includes the portal, modal backdrop, viewport, and optional swipe handle. Try touch dragging, Escape, Tab, and focus return. Snap points are fractions of viewport height.',
-      },
-    },
-  },
 } satisfies Meta<typeof Drawer>
 
 export default meta

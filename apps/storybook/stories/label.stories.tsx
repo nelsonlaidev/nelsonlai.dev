@@ -5,14 +5,6 @@ import { Label } from '@repo/ui/components/label'
 
 const meta = {
   title: 'Actions and forms/Label',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { Label } from @repo/ui/components/label. Connect htmlFor to a unique control id. Keep visible labels even when a control has a placeholder.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

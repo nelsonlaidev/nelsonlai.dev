@@ -14,14 +14,6 @@ import { useState } from 'react'
 
 const meta = {
   title: 'Actions and forms/Select',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import the Select* parts from @repo/ui/components/select. SelectContent includes portal, positioning, and scroll arrows. Use the keyboard to open, type ahead, navigate, and choose. Provide a trigger label and item values.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta

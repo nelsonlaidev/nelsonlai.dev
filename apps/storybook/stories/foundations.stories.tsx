@@ -12,10 +12,6 @@ const meta = {
   parameters: {
     docs: {
       story: { inline: true },
-      description: {
-        component:
-          'This local Storybook covers packages/ui only. All examples import the actual public package exports and the shared stylesheet; there is one supported dark ocean palette. Search by family and open Docs for usage and source examples. The website adds separate styles, including a 44px minimum control size; these previews show the package contract. No application routes, databases, or external services are loaded.',
-      },
     },
   },
 } satisfies Meta

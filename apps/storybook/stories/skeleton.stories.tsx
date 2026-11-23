@@ -4,14 +4,6 @@ import { Skeleton } from '@repo/ui/components/skeleton'
 
 const meta = {
   title: 'Data and display/Skeleton',
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Import { Skeleton } from @repo/ui/components/skeleton. Skeletons are decorative shapes. Announce loading on the containing region, not once per placeholder.',
-      },
-    },
-  },
 } satisfies Meta
 
 export default meta
