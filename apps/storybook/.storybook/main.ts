@@ -12,7 +12,9 @@ export default defineMain({
   stories: ['../stories/**/*.stories.tsx'],
   addons: ['@storybook/addon-docs'],
   staticDirs: ['../stories/public'],
-  typescript: { reactDocgen: false },
+  typescript: {
+    reactDocgen: false,
+  },
   features: {
     controls: false,
     actions: false,
@@ -20,5 +22,7 @@ export default defineMain({
     sidebarOnboardingChecklist: false,
     menuOnboardingChecklist: false,
   },
-  core: { disableTelemetry: true },
+  core: {
+    disableTelemetry: true,
+  },
 })
