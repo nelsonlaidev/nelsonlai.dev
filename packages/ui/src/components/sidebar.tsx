@@ -390,7 +390,7 @@ export function SidebarSeparator(props: SidebarSeparatorProps) {
     <Separator
       data-slot='sidebar-separator'
       data-sidebar='separator'
-      className={cn('mx-2 w-auto bg-sidebar-border', className)}
+      className={cn('mx-2 bg-sidebar-border data-horizontal:w-auto', className)}
       {...rest}
     />
   )
@@ -604,9 +604,9 @@ export function SidebarMenuButton(props: SidebarMenuButtonProps) {
   const tooltipProps = typeof tooltip === 'string' ? { children: tooltip } : tooltip
 
   return (
-    <Tooltip>
+    <Tooltip disabled={tooltipProps.hidden ?? (state !== 'collapsed' || isMobile)}>
       {button}
-      <TooltipContent side='inline-end' align='center' hidden={state !== 'collapsed' || isMobile} {...tooltipProps} />
+      <TooltipContent side='inline-end' align='center' {...tooltipProps} />
     </Tooltip>
   )
 }

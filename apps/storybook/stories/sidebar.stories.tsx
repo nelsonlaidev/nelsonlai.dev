@@ -26,7 +26,7 @@ import {
   useSidebar,
 } from '@repo/ui/components/sidebar'
 import { TooltipProvider } from '@repo/ui/components/tooltip'
-import { HomeIcon, LayersIcon, MoreHorizontalIcon, PlusIcon } from 'lucide-react'
+import { CircleOffIcon, HomeIcon, LayersIcon, LinkIcon, MoreHorizontalIcon, PlusIcon } from 'lucide-react'
 
 import preview from '../.storybook/preview'
 
@@ -73,18 +73,31 @@ function SidebarExample(props: SidebarExampleProps) {
 
   return (
     <TooltipProvider>
-      <SidebarProvider defaultOpen={open}>
-        <Sidebar collapsible={collapsible} variant={variant} side={side}>
+      <SidebarProvider defaultOpen={open} className={side === 'right' ? 'md:flex-row-reverse' : undefined}>
+        <Sidebar
+          collapsible={collapsible}
+          variant={variant}
+          side={side}
+          className={collapsible === 'none' ? 'h-auto' : undefined}
+        >
           <SidebarHeader>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton size='lg' tooltip='Storybook'>
+                <SidebarMenuButton
+                  size='lg'
+                  tooltip='Storybook'
+                  className='group-data-[collapsible=icon]:justify-center'
+                >
                   <LayersIcon aria-hidden='true' />
-                  <span>Storybook</span>
+                  <span className='group-data-[collapsible=icon]:sr-only'>Storybook</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
-            <SidebarInput aria-label='Filter local navigation' placeholder='Filter navigation' />
+            <SidebarInput
+              className='group-data-[collapsible=icon]:hidden'
+              aria-label='Filter local navigation'
+              placeholder='Filter navigation'
+            />
           </SidebarHeader>
           <SidebarSeparator />
           <SidebarContent>
@@ -136,6 +149,7 @@ function SidebarExample(props: SidebarExampleProps) {
                       </SidebarMenuItem>
                       <SidebarMenuItem>
                         <SidebarMenuButton size='sm' disabled>
+                          <CircleOffIcon aria-hidden='true' />
                           <span>Disabled item</span>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
@@ -154,7 +168,8 @@ function SidebarExample(props: SidebarExampleProps) {
           <SidebarFooter>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton render={<a href='#local-footer' />}>
+                <SidebarMenuButton render={<a href='#local-footer' />} tooltip='Local footer link'>
+                  <LinkIcon aria-hidden='true' />
                   <span>Local footer link</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
