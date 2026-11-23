@@ -11,7 +11,6 @@ import preview from '../.storybook/preview'
 
 const meta = preview.meta({
   title: 'Components/Chart',
-  component: ChartContainer,
 })
 
 const config = {

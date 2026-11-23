@@ -6,7 +6,6 @@ import preview from '../.storybook/preview'
 
 const meta = preview.meta({
   title: 'Components/Button',
-  component: Button,
 })
 
 export const Variants = meta.story({
