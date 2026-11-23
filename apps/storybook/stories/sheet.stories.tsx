@@ -14,6 +14,7 @@ import preview from '../.storybook/preview'
 
 const meta = preview.meta({
   title: 'Components/Sheet',
+  component: SheetExample,
 })
 
 type SheetExampleProps = {
@@ -53,6 +54,4 @@ export const Sides = meta.story({
   ),
 })
 
-export const WithoutCloseIcon = meta.story({
-  render: () => <SheetExample closeIcon={false} />,
-})
+export const WithoutCloseIcon = meta.story({ args: { closeIcon: false } })

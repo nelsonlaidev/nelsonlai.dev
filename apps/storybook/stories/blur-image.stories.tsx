@@ -6,6 +6,8 @@ import preview from '../.storybook/preview'
 
 const meta = preview.meta({
   title: 'Components/Blur image',
+  component: BlurImage,
+  args: { width: 640, height: 400, className: 'max-w-sm', imageClassName: 'w-full' },
 })
 
 function ImageExample() {
@@ -38,28 +40,9 @@ export const Loaded = meta.story({
 })
 
 export const Eager = meta.story({
-  render: () => (
-    <BlurImage
-      src='/reef.svg'
-      alt='Eager reef illustration'
-      width={640}
-      height={400}
-      lazy={false}
-      className='max-w-sm'
-      imageClassName='w-full'
-    />
-  ),
+  args: { src: '/reef.svg', alt: 'Eager reef illustration', lazy: false },
 })
 
 export const Failed = meta.story({
-  render: () => (
-    <BlurImage
-      src='/missing-image.png'
-      alt='Unavailable reef illustration'
-      width={640}
-      height={400}
-      className='max-w-sm'
-      imageClassName='w-full'
-    />
-  ),
+  args: { src: '/missing-image.png', alt: 'Unavailable reef illustration' },
 })

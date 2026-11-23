@@ -18,6 +18,7 @@ import preview from '../.storybook/preview'
 
 const meta = preview.meta({
   title: 'Components/Alert dialog',
+  component: AlertExample,
 })
 
 type AlertExampleProps = {
@@ -62,10 +63,6 @@ function AlertExample(props: AlertExampleProps) {
   )
 }
 
-export const Default = meta.story({
-  render: () => <AlertExample />,
-})
+export const Default = meta.story()
 
-export const Small = meta.story({
-  render: () => <AlertExample size='sm' />,
-})
+export const Small = meta.story({ args: { size: 'sm' } })

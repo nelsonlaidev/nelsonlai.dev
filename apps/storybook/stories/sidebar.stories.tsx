@@ -32,6 +32,7 @@ import preview from '../.storybook/preview'
 
 const meta = preview.meta({
   title: 'Components/Sidebar',
+  component: SidebarExample,
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -177,34 +178,18 @@ function SidebarExample(props: SidebarExampleProps) {
   )
 }
 
-export const Expanded = meta.story({
-  render: () => <SidebarExample />,
-})
+export const Expanded = meta.story()
 
-export const CollapsedIcons = meta.story({
-  render: () => <SidebarExample open={false} />,
-})
+export const CollapsedIcons = meta.story({ args: { open: false } })
 
-export const Offcanvas = meta.story({
-  render: () => <SidebarExample collapsible='offcanvas' />,
-})
+export const Offcanvas = meta.story({ args: { collapsible: 'offcanvas' } })
 
-export const Floating = meta.story({
-  render: () => <SidebarExample variant='floating' />,
-})
+export const Floating = meta.story({ args: { variant: 'floating' } })
 
-export const Inset = meta.story({
-  render: () => <SidebarExample variant='inset' />,
-})
+export const Inset = meta.story({ args: { variant: 'inset' } })
 
-export const Right = meta.story({
-  render: () => <SidebarExample side='right' />,
-})
+export const Right = meta.story({ args: { side: 'right' } })
 
-export const Static = meta.story({
-  render: () => <SidebarExample collapsible='none' />,
-})
+export const Static = meta.story({ args: { collapsible: 'none' } })
 
-export const Loading = meta.story({
-  render: () => <SidebarExample loading />,
-})
+export const Loading = meta.story({ args: { loading: true } })

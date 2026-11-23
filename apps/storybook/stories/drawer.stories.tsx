@@ -14,6 +14,7 @@ import preview from '../.storybook/preview'
 
 const meta = preview.meta({
   title: 'Components/Drawer',
+  component: DrawerExample,
 })
 
 type DrawerExampleProps = {
@@ -59,14 +60,8 @@ export const Directions = meta.story({
   ),
 })
 
-export const SnapPoints = meta.story({
-  render: () => <DrawerExample snap />,
-})
+export const SnapPoints = meta.story({ args: { snap: true } })
 
-export const Nested = meta.story({
-  render: () => <DrawerExample nested />,
-})
+export const Nested = meta.story({ args: { nested: true } })
 
-export const NonModal = meta.story({
-  render: () => <DrawerExample modal={false} />,
-})
+export const NonModal = meta.story({ args: { modal: false } })

@@ -14,6 +14,7 @@ import preview from '../.storybook/preview'
 
 const meta = preview.meta({
   title: 'Components/Select',
+  component: SelectExample,
 })
 
 type SelectExampleProps = {
@@ -59,22 +60,12 @@ function SelectExample(props: SelectExampleProps) {
   )
 }
 
-export const Controlled = meta.story({
-  render: () => <SelectExample />,
-})
+export const Controlled = meta.story()
 
-export const Small = meta.story({
-  render: () => <SelectExample size='sm' />,
-})
+export const Small = meta.story({ args: { size: 'sm' } })
 
-export const Disabled = meta.story({
-  render: () => <SelectExample disabled />,
-})
+export const Disabled = meta.story({ args: { disabled: true } })
 
-export const Invalid = meta.story({
-  render: () => <SelectExample invalid />,
-})
+export const Invalid = meta.story({ args: { invalid: true } })
 
-export const Scrollable = meta.story({
-  render: () => <SelectExample long />,
-})
+export const Scrollable = meta.story({ args: { long: true } })

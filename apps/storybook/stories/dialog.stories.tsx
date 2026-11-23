@@ -18,6 +18,7 @@ import preview from '../.storybook/preview'
 
 const meta = preview.meta({
   title: 'Components/Dialog',
+  component: DialogExample,
 })
 
 type DialogExampleProps = {
@@ -58,17 +59,11 @@ function DialogExample(props: DialogExampleProps) {
   )
 }
 
-export const Controlled = meta.story({
-  render: () => <DialogExample />,
-})
+export const Controlled = meta.story()
 
-export const WithoutCloseIcon = meta.story({
-  render: () => <DialogExample closeIcon={false} />,
-})
+export const WithoutCloseIcon = meta.story({ args: { closeIcon: false } })
 
-export const ScrollingContent = meta.story({
-  render: () => <DialogExample long />,
-})
+export const ScrollingContent = meta.story({ args: { long: true } })
 
 const detachedHandle = DialogPrimitive.createHandle<unknown>()
 
