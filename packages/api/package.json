@@ -28,7 +28,7 @@
   "devDependencies": {
     "@nelsonlaidev/typescript-config": "catalog:",
     "@total-typescript/ts-reset": "catalog:",
-    "@types/node": "26.6.6",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "typescript": "catalog:",
     "varlock": "catalog:",

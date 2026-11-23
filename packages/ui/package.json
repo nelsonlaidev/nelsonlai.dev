@@ -25,7 +25,7 @@
     "@nelsonlaidev/typescript-config": "catalog:",
     "@tailwindcss/typography": "0.5.20",
     "@total-typescript/ts-reset": "catalog:",
-    "@types/node": "26.6.6",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "19.3.0",
     "react-dom": "19.3.1",

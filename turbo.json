@@ -58,6 +58,25 @@
       "dependsOn": ["^build"],
       "outputs": ["storybook-static/**"]
     },
+    "@repo/scripts#readme:images": {
+      "dependsOn": ["@repo/web#build"],
+      "cache": false,
+      "passThroughEnv": ["*"]
+    },
+    "test:unit": {},
+    "@repo/web#test:unit": {
+      "dependsOn": ["build"],
+      "env": [
+        "BETTER_AUTH_*",
+        "DATABASE_URL",
+        "IP_ADDRESS_SALT",
+        "JWT_SECRET",
+        "NODE_ENV",
+        "RESEND_FROM_EMAIL",
+        "SITE_URL",
+        "UPSTASH_REDIS_REST_*"
+      ]
+    },
     "db:generate": {
       "cache": false,
       "interactive": true,

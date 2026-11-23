@@ -16,3 +16,6 @@ coverage/
 playwright-report/
 test-results/
 apps/web/src/tests/e2e/.auth/
+
+# Miscellaneous
+.DS_Store

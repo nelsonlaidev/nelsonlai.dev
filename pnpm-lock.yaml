@@ -173,6 +173,9 @@ catalogs:
     '@total-typescript/ts-reset':
       specifier: 0.6.1
       version: 0.6.1
+    '@types/node':
+      specifier: 26.6.6
+      version: 26.6.6
     '@types/react':
       specifier: 19.3.0
       version: 19.3.0
@@ -309,7 +312,7 @@ importers:
         specifier: 'catalog:'
         version: 0.6.1
       '@types/node':
-        specifier: 26.6.6
+        specifier: 'catalog:'
         version: 26.6.6
       '@types/react':
         specifier: 'catalog:'
@@ -526,7 +529,7 @@ importers:
         specifier: 2.0.14
         version: 2.0.14
       '@types/node':
-        specifier: 26.6.6
+        specifier: 'catalog:'
         version: 26.6.6
       '@types/react':
         specifier: 'catalog:'
@@ -626,7 +629,7 @@ importers:
         specifier: 'catalog:'
         version: 0.6.1
       '@types/node':
-        specifier: 26.6.6
+        specifier: 'catalog:'
         version: 26.6.6
       '@types/react':
         specifier: 'catalog:'
@@ -737,7 +740,7 @@ importers:
         specifier: 'catalog:'
         version: 0.6.1
       '@types/node':
-        specifier: 26.6.6
+        specifier: 'catalog:'
         version: 26.6.6
       '@types/react':
         specifier: 'catalog:'
@@ -832,6 +835,45 @@ importers:
         specifier: 'catalog:'
         version: 6.0.3
 
+  packages/scripts:
+    devDependencies:
+      '@nelsonlaidev/typescript-config':
+        specifier: 'catalog:'
+        version: 3.0.0
+      '@repo/email':
+        specifier: workspace:*
+        version: link:../email
+      '@total-typescript/ts-reset':
+        specifier: 'catalog:'
+        version: 0.6.1
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.6
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.3.0
+      playwright:
+        specifier: 1.64.1
+        version: 1.64.1
+      react:
+        specifier: 'catalog:'
+        version: 19.3.1
+      react-email:
+        specifier: 6.11.6
+        version: 6.11.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@7.2.0)
+      sharp:
+        specifier: 'catalog:'
+        version: 0.35.5(@types/node@26.6.6)
+      tsx:
+        specifier: 4.23.15
+        version: 4.23.15
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      vite:
+        specifier: 'catalog:'
+        version: 8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)
+
   packages/ui:
     dependencies:
       '@ark-ui/react':
@@ -875,7 +917,7 @@ importers:
         specifier: 'catalog:'
         version: 0.6.1
       '@types/node':
-        specifier: 26.6.6
+        specifier: 'catalog:'
         version: 26.6.6
       '@types/react':
         specifier: 'catalog:'

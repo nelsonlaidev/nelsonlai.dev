@@ -1,0 +1,23 @@
+{
+  "name": "@repo/scripts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "readme:images": "NODE_ENV=production tsx src/generate-readme-images.tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@nelsonlaidev/typescript-config": "catalog:",
+    "@repo/email": "workspace:*",
+    "@total-typescript/ts-reset": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "playwright": "1.64.1",
+    "react": "catalog:",
+    "react-email": "6.11.6",
+    "sharp": "catalog:",
+    "tsx": "4.23.15",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}

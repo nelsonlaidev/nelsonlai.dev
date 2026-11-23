@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "types": ["@total-typescript/ts-reset", "node"]
+  },
+  "extends": "@nelsonlaidev/typescript-config/react-library.json",
+  "include": ["**/*.ts", "**/*.tsx", "../email/src/**/*.tsx"]
+}

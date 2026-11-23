@@ -22,7 +22,7 @@
     "@nelsonlaidev/typescript-config": "catalog:",
     "@react-email/ui": "6.11.6",
     "@total-typescript/ts-reset": "catalog:",
-    "@types/node": "26.6.6",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "19.3.0",
     "typescript": "catalog:",
