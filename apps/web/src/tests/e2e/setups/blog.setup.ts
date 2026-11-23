@@ -1,5 +1,6 @@
 import { test as setup } from '@playwright/test'
-import { comments, posts } from '@repo/db/schema/index'
+import { comments } from '@repo/db/schema/comments'
+import { posts } from '@repo/db/schema/posts'
 import { and, eq, isNotNull } from 'drizzle-orm'
 
 import { db } from '@/lib/db'

@@ -1,5 +1,7 @@
 import { test as teardown } from '@playwright/test'
-import { comments, guestbookMessages, users } from '@repo/db/schema/index'
+import { users } from '@repo/db/schema/auth'
+import { comments } from '@repo/db/schema/comments'
+import { guestbookMessages } from '@repo/db/schema/guestbook'
 import { and, eq, isNotNull } from 'drizzle-orm'
 
 import { db } from '@/lib/db'

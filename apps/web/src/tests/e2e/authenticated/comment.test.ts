@@ -4,7 +4,9 @@ import type * as z from 'zod'
 import en from '@messages/en.json' with { type: 'json' }
 import zhTW from '@messages/zh-TW.json' with { type: 'json' }
 import { createId } from '@paralleldrive/cuid2'
-import { comments, posts, users } from '@repo/db/schema/index'
+import { users } from '@repo/db/schema/auth'
+import { comments } from '@repo/db/schema/comments'
+import { posts } from '@repo/db/schema/posts'
 import { eq, inArray, sql } from 'drizzle-orm'
 
 import { db } from '@/lib/db'

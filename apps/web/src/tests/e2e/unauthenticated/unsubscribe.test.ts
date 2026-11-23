@@ -1,6 +1,7 @@
 import en from '@messages/en.json' with { type: 'json' }
 import { createId } from '@paralleldrive/cuid2'
-import { comments, posts } from '@repo/db/schema/index'
+import { comments } from '@repo/db/schema/comments'
+import { posts } from '@repo/db/schema/posts'
 import { eq } from 'drizzle-orm'
 import { SignJWT } from 'jose'
 

@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 import { test as setup } from '@playwright/test'
-import { accounts, sessions, users } from '@repo/db/schema/index'
+import { accounts, sessions, users } from '@repo/db/schema/auth'
 
 import { db } from '@/lib/db'
 

@@ -3,7 +3,8 @@ import type * as z from 'zod'
 
 import en from '@messages/en.json' with { type: 'json' }
 import { createId } from '@paralleldrive/cuid2'
-import { guestbookMessages, users } from '@repo/db/schema/index'
+import { users } from '@repo/db/schema/auth'
+import { guestbookMessages } from '@repo/db/schema/guestbook'
 import { eq, inArray, sql } from 'drizzle-orm'
 
 import { db } from '@/lib/db'

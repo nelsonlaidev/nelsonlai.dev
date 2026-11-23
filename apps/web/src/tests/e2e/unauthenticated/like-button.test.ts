@@ -5,7 +5,7 @@ import assert from 'node:assert/strict'
 
 import en from '@messages/en.json' with { type: 'json' }
 import { getAnonymousKey } from '@repo/api/lib/anonymous-key'
-import { postLikes, posts } from '@repo/db/schema/index'
+import { postLikes, posts } from '@repo/db/schema/posts'
 import { and, eq, sql } from 'drizzle-orm'
 
 import { db } from '@/lib/db'

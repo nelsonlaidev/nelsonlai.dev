@@ -1,5 +1,5 @@
 import { createId } from '@paralleldrive/cuid2'
-import { verifications } from '@repo/db/schema/index'
+import { verifications } from '@repo/db/schema/auth'
 import { eq, sql } from 'drizzle-orm'
 
 import { db } from '@/lib/db'

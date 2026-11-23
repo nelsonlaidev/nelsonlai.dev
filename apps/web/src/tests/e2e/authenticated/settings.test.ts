@@ -1,5 +1,5 @@
 import en from '@messages/en.json' with { type: 'json' }
-import { commentNotificationPreferences } from '@repo/db/schema/index'
+import { commentNotificationPreferences } from '@repo/db/schema/comments'
 import { eq } from 'drizzle-orm'
 
 import { db } from '@/lib/db'

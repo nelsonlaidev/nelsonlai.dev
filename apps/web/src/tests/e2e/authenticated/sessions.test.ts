@@ -1,7 +1,7 @@
 import en from '@messages/en.json' with { type: 'json' }
 import zhTW from '@messages/zh-TW.json' with { type: 'json' }
 import { createId } from '@paralleldrive/cuid2'
-import { sessions, users } from '@repo/db/schema/index'
+import { sessions, users } from '@repo/db/schema/auth'
 import { eq } from 'drizzle-orm'
 
 import { db } from '@/lib/db'
