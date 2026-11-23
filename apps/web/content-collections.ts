@@ -15,7 +15,6 @@ async function documentMetadata<
     content: string
   },
 >(document: T, context: CollectionContext, kind: 'blog' | 'projects' | 'pages') {
-  // oxlint-disable-next-line sonarjs/no-unused-vars -- Exclude document bodies from generated metadata.
   const { _meta, content: _content, ...metadata } = document
   const [locale, ...slugParts] = _meta.path.split('/')
   const slug = slugParts.join('/')
