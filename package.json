@@ -126,7 +126,7 @@
     "@tailwindcss/turbopack": "4.3.3",
     "@tailwindcss/typography": "0.5.20",
     "@tanstack/react-query-devtools": "5.104.3",
-    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/jest-dom": "8.0.0",
     "@testing-library/react": "16.3.3",
     "@total-typescript/ts-reset": "0.6.1",
     "@types/canvas-confetti": "1.9.0",
