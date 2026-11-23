@@ -13,14 +13,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
-# Build-time validation uses local, disposable service addresses and test-only values.
-# Test runners apply the dedicated configuration in apps/web/src/tests/env.ts.
 env:
-  SITE_URL: http://localhost:3100
-  BETTER_AUTH_URL: http://localhost:3100
-  DATABASE_URL: postgres://postgres:postgres@localhost:5433/nelsonlaidev_test
-  UPSTASH_REDIS_REST_URL: http://localhost:18079
-  UPSTASH_REDIS_REST_TOKEN: test-only-uprest-token
+  SITE_URL: http://localhost:3000
+  DATABASE_URL: postgres://postgres:postgres@localhost:5432/nelsonlaidev
+  UPSTASH_REDIS_REST_URL: http://localhost:8079
+  UPSTASH_REDIS_REST_TOKEN: local-uprest-token-7f3c9a2e6b1d4f80
   IP_ADDRESS_SALT: test-only-ip-address-salt-at-least-32-characters
   BETTER_AUTH_SECRET: test-only-better-auth-secret-at-least-32-characters
   JWT_SECRET: test-only-jwt-secret-at-least-32-characters
@@ -78,13 +75,21 @@ jobs:
       - name: Set up workspace
         uses: ./.github/actions/setup
 
-      - name: Build MDX compiler
-        run: pnpm --filter @repo/mdx build
+      - name: Build workspace
+        run: pnpm build
 
       - name: Install Chromium and system dependencies
         run: pnpm --filter @repo/web exec playwright install --with-deps chromium
 
-      # This starts isolated services, prepares their schema, and builds the test server.
+      - name: Start services
+        run: docker compose up -d --wait
+
+      - name: Run database migrations
+        run: pnpm --filter @repo/db db:migrate
+
+      - name: Seed database
+        run: pnpm db:seed
+
       - name: Run end-to-end tests
         run: pnpm test:e2e
 
@@ -98,7 +103,3 @@ jobs:
             apps/web/test-results/
           if-no-files-found: ignore
           retention-days: 30
-
-      - name: Stop test services
-        if: always()
-        run: docker compose -f docker-compose.test.yaml -p nelsonlai-tests down

@@ -1,4 +1,4 @@
-import './src/tests/env.ts'
+import 'varlock/auto-load'
 
 import contentCollections from '@content-collections/vite'
 import react from '@vitejs/plugin-react'

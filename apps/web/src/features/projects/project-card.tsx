@@ -17,12 +17,7 @@ export function ProjectCard(props: ProjectCardProps) {
 
   return (
     <article className={cn('min-w-0', className)}>
-      <Link
-        to='/projects/$slug'
-        params={{ slug: project.slug }}
-        aria-label={project.title}
-        className='group/artwork block'
-      >
+      <Link to='/projects/$slug' params={{ slug: project.slug }} className='group/artwork block'>
         <div className='mb-6'>
           <ProjectArt project={project} className='h-71.25 md:h-67.5 lg:h-57.5 xl:h-72.5' />
         </div>

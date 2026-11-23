@@ -53,7 +53,7 @@ test.describe('language switching', () => {
 
       await expect(newPage).toHaveURL(`${targetPrefix}/blog`)
       await expect(newPage.locator('html')).toHaveAttribute('lang', locale)
-      await expect(newPage.getByRole('heading', { level: 1 })).toHaveText(targetMessages.nav_blog)
+      await expect(newPage.getByRole('heading', { level: 1 })).toHaveAccessibleName(targetMessages.nav_blog)
       await expect(newPage.getByRole('button', { name: targetMessages.nav_change_language })).toContainText(label)
     })
   }

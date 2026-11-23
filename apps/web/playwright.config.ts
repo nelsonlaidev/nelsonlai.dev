@@ -1,16 +1,22 @@
-import './src/tests/env'
+import 'varlock/auto-load'
 
 import { defineConfig, devices } from '@playwright/test'
+
+import { ENV } from './src/env'
+
+const port = '3000'
+const baseURL = `http://localhost:${port}`
+const preview = `env -u __VARLOCK_ENV pnpm preview --host localhost --port ${port} --strictPort`
 
 export default defineConfig({
   testDir: './src/tests/e2e',
   fullyParallel: false,
-  forbidOnly: process.env.CI === 'true',
-  retries: process.env.CI === 'true' ? 2 : 0,
+  forbidOnly: ENV.CI,
+  retries: ENV.CI ? 2 : 0,
   workers: 1,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: 'http://localhost:3100',
+    baseURL,
     ...devices['Desktop Chrome'],
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
@@ -29,11 +35,17 @@ export default defineConfig({
     { name: 'teardown', testMatch: '**/*.teardown.ts' },
   ],
   webServer: {
-    command: 'pnpm test:server',
-    url: 'http://localhost:3100',
+    command: ENV.CI ? preview : `env -u __VARLOCK_ENV pnpm build && ${preview}`,
+    url: baseURL,
     timeout: 180_000,
     reuseExistingServer: false,
-    env: { TEST_SERVER: '1' },
+    env: {
+      NODE_ENV: 'production',
+      BETTER_AUTH_URL: baseURL,
+      DISCORD_WEBHOOK_URL: '',
+      AUTHOR_EMAIL: '',
+      RESEND_API_KEY: '',
+    },
     gracefulShutdown: { signal: 'SIGTERM', timeout: 5000 },
   },
 })

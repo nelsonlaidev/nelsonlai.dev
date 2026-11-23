@@ -1,8 +1,5 @@
 import 'varlock/auto-load'
 
-import { existsSync } from 'node:fs'
-import { readdir } from 'node:fs/promises'
-
 import { consola } from 'consola'
 import { sql } from 'drizzle-orm'
 import { execa } from 'execa'
@@ -42,9 +39,6 @@ async function main() {
   }
 
   const directory = new URL('../', import.meta.url)
-  const migrationsDirectory = new URL('migrations/', import.meta.url)
-  const migrations = existsSync(migrationsDirectory) ? await readdir(migrationsDirectory, { recursive: true }) : []
-  const hasMigrations = migrations.some((file) => file.endsWith('.sql'))
   const db = createDatabase()
 
   try {
@@ -59,8 +53,8 @@ async function main() {
       `)
     })
 
-    consola.info(hasMigrations ? 'Migrating database...' : 'No SQL migrations found. Applying the current schema...')
-    await execa('pnpm', [hasMigrations ? 'db:migrate' : 'db:push'], { cwd: directory, stdio: 'inherit' })
+    consola.info('Migrating database...')
+    await execa('pnpm', ['db:migrate'], { cwd: directory, stdio: 'inherit' })
 
     consola.info('Seeding database...')
     await execa('pnpm', ['db:seed'], { cwd: directory, stdio: 'inherit' })
