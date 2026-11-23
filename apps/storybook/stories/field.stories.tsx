@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import {
   Field,
   FieldContent,
@@ -15,15 +13,13 @@ import {
 import { Input } from '@repo/ui/components/input'
 import { Switch } from '@repo/ui/components/switch'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Field',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const FormAnatomy: Story = {
+export const FormAnatomy = meta.story({
   render: () => (
     <FieldSet className='max-w-xl'>
       <FieldLegend>Local preferences</FieldLegend>
@@ -52,9 +48,9 @@ export const FormAnatomy: Story = {
       </FieldGroup>
     </FieldSet>
   ),
-}
+})
 
-export const Validation: Story = {
+export const Validation = meta.story({
   render: () => (
     <FieldGroup className='max-w-md'>
       <Field data-invalid='true'>
@@ -80,4 +76,4 @@ export const Validation: Story = {
       </FieldSet>
     </FieldGroup>
   ),
-}
+})

@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import {
   Avatar,
   AvatarBadge,
@@ -10,15 +8,13 @@ import {
 } from '@repo/ui/components/avatar'
 import { CheckIcon } from 'lucide-react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Avatar',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const SizesAndFallbacks: Story = {
+export const SizesAndFallbacks = meta.story({
   render: () => (
     <div className='flex flex-wrap items-center gap-6'>
       {(['sm', 'default', 'lg'] as const).map((size) => (
@@ -36,9 +32,9 @@ export const SizesAndFallbacks: Story = {
       </Avatar>
     </div>
   ),
-}
+})
 
-export const Group: Story = {
+export const Group = meta.story({
   render: () => (
     <AvatarGroup>
       {['NL', 'SF', 'UI'].map((initials) => (
@@ -49,4 +45,4 @@ export const Group: Story = {
       <AvatarGroupCount>+3</AvatarGroupCount>
     </AvatarGroup>
   ),
-}
+})

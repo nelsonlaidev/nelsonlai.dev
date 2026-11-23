@@ -1,16 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { BlurImage } from '@repo/ui/components/blur-image'
 import { Button } from '@repo/ui/components/button'
 import { useState } from 'react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Blur image',
-} satisfies Meta
-
-export default meta
-
-type Story = StoryObj
+})
 
 function ImageExample() {
   const [revision, setRevision] = useState(0)
@@ -37,11 +33,11 @@ function ImageExample() {
   )
 }
 
-export const Loaded: Story = {
+export const Loaded = meta.story({
   render: () => <ImageExample />,
-}
+})
 
-export const Eager: Story = {
+export const Eager = meta.story({
   render: () => (
     <BlurImage
       src='/reef.svg'
@@ -53,9 +49,9 @@ export const Eager: Story = {
       imageClassName='w-full'
     />
   ),
-}
+})
 
-export const Failed: Story = {
+export const Failed = meta.story({
   render: () => (
     <BlurImage
       src='/missing-image.png'
@@ -66,4 +62,4 @@ export const Failed: Story = {
       imageClassName='w-full'
     />
   ),
-}
+})

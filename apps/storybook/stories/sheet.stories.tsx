@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Button } from '@repo/ui/components/button'
 import {
   Sheet,
@@ -12,13 +10,11 @@ import {
   SheetTrigger,
 } from '@repo/ui/components/sheet'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Sheet',
-} satisfies Meta
-
-export default meta
-
-type Story = StoryObj
+})
 
 type SheetExampleProps = {
   side?: 'top' | 'right' | 'bottom' | 'left'
@@ -47,7 +43,7 @@ function SheetExample(props: SheetExampleProps) {
   )
 }
 
-export const Sides: Story = {
+export const Sides = meta.story({
   render: () => (
     <div className='flex flex-wrap gap-3'>
       {(['top', 'right', 'bottom', 'left'] as const).map((side) => (
@@ -55,8 +51,8 @@ export const Sides: Story = {
       ))}
     </div>
   ),
-}
+})
 
-export const WithoutCloseIcon: Story = {
+export const WithoutCloseIcon = meta.story({
   render: () => <SheetExample closeIcon={false} />,
-}
+})

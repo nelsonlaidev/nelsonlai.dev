@@ -1,24 +1,19 @@
 // cspell:language en-US,es,pt-br
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Button } from '@repo/ui/components/button'
 import { Spinner } from '@repo/ui/components/spinner'
 import { UIProvider, useUITranslation } from '@repo/ui/components/ui-provider'
 
+import preview from '../.storybook/preview'
 import { translations } from './translations'
 
-const meta = {
+const meta = preview.meta({
   title: 'Foundations/Overview',
   parameters: {
     docs: {
       story: { inline: true },
     },
   },
-} satisfies Meta
-
-export default meta
-
-type Story = StoryObj
+})
 
 const colorTokens = [
   'background',
@@ -74,11 +69,11 @@ function Colors() {
   )
 }
 
-export const Palette: Story = {
+export const Palette = meta.story({
   render: () => <Colors />,
-}
+})
 
-export const Typography: Story = {
+export const Typography = meta.story({
   render: () => (
     <div className='max-w-2xl space-y-6'>
       <h1 className='text-4xl font-medium tracking-tight'>Geist · Seafold UI</h1>
@@ -95,9 +90,9 @@ export const Typography: Story = {
       <p lang='es'>Español: instrucciones claras para los componentes.</p>
     </div>
   ),
-}
+})
 
-export const Geometry: Story = {
+export const Geometry = meta.story({
   render: () => (
     <div className='space-y-8'>
       <p className='max-w-xl text-sm text-muted-foreground'>
@@ -121,7 +116,7 @@ export const Geometry: Story = {
       </div>
     </div>
   ),
-}
+})
 
 function ProviderStatus() {
   const label = useUITranslation('loading')
@@ -134,7 +129,7 @@ function ProviderStatus() {
   )
 }
 
-export const ProviderAndLabels: Story = {
+export const ProviderAndLabels = meta.story({
   render: () => (
     <div className='grid max-w-3xl gap-8 sm:grid-cols-2'>
       <div>
@@ -154,9 +149,9 @@ export const ProviderAndLabels: Story = {
       </p>
     </div>
   ),
-}
+})
 
-export const AccessibilityAndMotion: Story = {
+export const AccessibilityAndMotion = meta.story({
   render: () => (
     <div className='max-w-xl space-y-5'>
       <h2 className='text-xl font-medium'>Verify with keyboard and touch</h2>
@@ -180,4 +175,4 @@ export const AccessibilityAndMotion: Story = {
       </p>
     </div>
   ),
-}
+})

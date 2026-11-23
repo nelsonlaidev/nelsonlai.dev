@@ -1,17 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Button } from '@repo/ui/components/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@repo/ui/components/tooltip'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Tooltip',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const Positions: Story = {
+export const Positions = meta.story({
   render: () => (
     <TooltipProvider delay={200}>
       <div className='flex flex-wrap gap-4 py-12'>
@@ -24,9 +20,9 @@ export const Positions: Story = {
       </div>
     </TooltipProvider>
   ),
-}
+})
 
-export const LongText: Story = {
+export const LongText = meta.story({
   render: () => (
     <TooltipProvider>
       <Tooltip>
@@ -38,4 +34,4 @@ export const LongText: Story = {
       </Tooltip>
     </TooltipProvider>
   ),
-}
+})

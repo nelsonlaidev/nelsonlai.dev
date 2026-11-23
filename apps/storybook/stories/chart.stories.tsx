@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import {
   ChartContainer,
   ChartLegend,
@@ -9,14 +7,12 @@ import {
 } from '@repo/ui/components/chart'
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Chart',
   component: ChartContainer,
-} satisfies Meta<typeof ChartContainer>
-
-export default meta
-
-type Story = StoryObj
+})
 
 const config = {
   visits: { label: 'Visits', color: 'var(--chart-1)' },
@@ -29,7 +25,7 @@ const data = [
   { month: 'Mar', visits: 140, messages: 19 },
 ]
 
-export const Responsive: Story = {
+export const Responsive = meta.story({
   render: () => (
     <ChartContainer config={config} className='max-w-2xl' aria-label='Visits and messages from January to March'>
       <BarChart data={data} accessibilityLayer>
@@ -42,9 +38,9 @@ export const Responsive: Story = {
       </BarChart>
     </ChartContainer>
   ),
-}
+})
 
-export const TooltipIndicators: Story = {
+export const TooltipIndicators = meta.story({
   render: () => (
     <div className='grid gap-4 sm:grid-cols-3'>
       {(['dot', 'line', 'dashed'] as const).map((indicator) => (
@@ -58,9 +54,9 @@ export const TooltipIndicators: Story = {
       ))}
     </div>
   ),
-}
+})
 
-export const FormattingAndHiddenLabels: Story = {
+export const FormattingAndHiddenLabels = meta.story({
   render: () => (
     <ChartContainer config={config} className='max-w-xl' aria-label='Visits with a custom tooltip formatter'>
       <BarChart data={data} accessibilityLayer>
@@ -77,9 +73,9 @@ export const FormattingAndHiddenLabels: Story = {
       </BarChart>
     </ChartContainer>
   ),
-}
+})
 
-export const EmptyData: Story = {
+export const EmptyData = meta.story({
   render: () => (
     <div className='max-w-xl space-y-3'>
       <ChartContainer config={config} aria-label='Empty visits chart'>
@@ -93,4 +89,4 @@ export const EmptyData: Story = {
       </p>
     </div>
   ),
-}
+})

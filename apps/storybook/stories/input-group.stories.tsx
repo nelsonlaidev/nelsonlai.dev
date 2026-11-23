@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import {
   InputGroup,
   InputGroupAddon,
@@ -10,15 +8,13 @@ import {
 } from '@repo/ui/components/input-group'
 import { PlusIcon, SearchIcon } from 'lucide-react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Input group',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const InlineAddons: Story = {
+export const InlineAddons = meta.story({
   render: () => (
     <div className='max-w-md space-y-4'>
       <InputGroup>
@@ -50,9 +46,9 @@ export const InlineAddons: Story = {
       </InputGroup>
     </div>
   ),
-}
+})
 
-export const BlockAddons: Story = {
+export const BlockAddons = meta.story({
   render: () => (
     <div className='max-w-md space-y-4'>
       <InputGroup>
@@ -77,4 +73,4 @@ export const BlockAddons: Story = {
       </div>
     </div>
   ),
-}
+})

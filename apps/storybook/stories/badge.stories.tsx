@@ -1,17 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Badge } from '@repo/ui/components/badge'
 import { CheckIcon } from 'lucide-react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Badge',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const Variants: Story = {
+export const Variants = meta.story({
   render: () => (
     <div className='flex flex-wrap gap-3'>
       {(['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] as const).map((variant) => (
@@ -21,9 +17,9 @@ export const Variants: Story = {
       ))}
     </div>
   ),
-}
+})
 
-export const Composition: Story = {
+export const Composition = meta.story({
   render: () => (
     <div className='flex flex-wrap gap-3'>
       <Badge>
@@ -36,4 +32,4 @@ export const Composition: Story = {
       <Badge aria-invalid='true'>Invalid</Badge>
     </div>
   ),
-}
+})

@@ -1,6 +1,8 @@
 {
   "extends": "@nelsonlaidev/typescript-config/react-library.json",
   "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
     "types": ["@total-typescript/ts-reset", "@nelsonlaidev/typescript-config/react", "node", "vite/client"]
   },
   "include": [".storybook/**/*.ts", ".storybook/**/*.tsx", "stories/**/*.ts", "stories/**/*.tsx"]

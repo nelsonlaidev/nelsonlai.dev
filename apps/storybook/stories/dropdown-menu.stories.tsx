@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Button } from '@repo/ui/components/button'
 import {
   DropdownMenu,
@@ -19,13 +17,11 @@ import {
 } from '@repo/ui/components/dropdown-menu'
 import { useState } from 'react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Dropdown menu',
-} satisfies Meta
-
-export default meta
-
-type Story = StoryObj
+})
 
 function MenuExample() {
   const [grid, setGrid] = useState(true)
@@ -79,6 +75,6 @@ function MenuExample() {
   )
 }
 
-export const ItemsAndSubmenu: Story = {
+export const ItemsAndSubmenu = meta.story({
   render: () => <MenuExample />,
-}
+})

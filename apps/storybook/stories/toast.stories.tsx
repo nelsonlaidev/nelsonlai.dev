@@ -1,16 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Button } from '@repo/ui/components/button'
 import { createToastManager, toast, Toaster } from '@repo/ui/components/toast'
 import { useEffect, useState } from 'react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Toast',
-} satisfies Meta
-
-export default meta
-
-type Story = StoryObj
+})
 
 const isolatedManager = createToastManager()
 
@@ -75,9 +71,9 @@ function ToastExample() {
   )
 }
 
-export const IsolatedManager: Story = {
+export const IsolatedManager = meta.story({
   render: () => <ToastExample />,
-}
+})
 
 function DefaultToastExample() {
   useEffect(
@@ -101,9 +97,9 @@ function DefaultToastExample() {
   )
 }
 
-export const DefaultManager: Story = {
+export const DefaultManager = meta.story({
   render: () => <DefaultToastExample />,
-}
+})
 
 function UpdateExample() {
   const manager = updateManager
@@ -137,6 +133,6 @@ function UpdateExample() {
   )
 }
 
-export const UpdateInPlace: Story = {
+export const UpdateInPlace = meta.story({
   render: () => <UpdateExample />,
-}
+})

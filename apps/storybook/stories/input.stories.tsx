@@ -1,17 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Input } from '@repo/ui/components/input'
 import { Label } from '@repo/ui/components/label'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Input',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const States: Story = {
+export const States = meta.story({
   render: () => (
     <div className='grid max-w-xl gap-4 sm:grid-cols-2'>
       <div className='space-y-2'>
@@ -41,9 +37,9 @@ export const States: Story = {
       </div>
     </div>
   ),
-}
+})
 
-export const Types: Story = {
+export const Types = meta.story({
   render: () => (
     <div className='max-w-sm space-y-4'>
       <Input type='search' aria-label='Search locally' placeholder='Search' />
@@ -51,4 +47,4 @@ export const Types: Story = {
       <Input type='file' aria-label='Choose a local file' />
     </div>
   ),
-}
+})

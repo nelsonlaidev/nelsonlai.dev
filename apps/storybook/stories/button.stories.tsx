@@ -1,19 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Button } from '@repo/ui/components/button'
 import { Spinner } from '@repo/ui/components/spinner'
 import { ArrowRightIcon, PlusIcon } from 'lucide-react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Button',
   component: Button,
-} satisfies Meta<typeof Button>
+})
 
-export default meta
-
-type Story = StoryObj<typeof meta>
-
-export const Variants: Story = {
+export const Variants = meta.story({
   render: () => (
     <div className='flex flex-wrap gap-3'>
       {(['default', 'outline', 'secondary', 'ghost', 'destructive', 'link'] as const).map((variant) => (
@@ -23,9 +19,9 @@ export const Variants: Story = {
       ))}
     </div>
   ),
-}
+})
 
-export const Sizes: Story = {
+export const Sizes = meta.story({
   render: () => (
     <div className='flex flex-wrap items-center gap-3'>
       {(['xs', 'sm', 'default', 'lg', 'xl'] as const).map((size) => (
@@ -40,9 +36,9 @@ export const Sizes: Story = {
       ))}
     </div>
   ),
-}
+})
 
-export const StatesAndComposition: Story = {
+export const StatesAndComposition = meta.story({
   render: () => (
     <div className='flex flex-wrap items-center gap-3'>
       <Button disabled>Disabled</Button>
@@ -64,4 +60,4 @@ export const StatesAndComposition: Story = {
       </Button>
     </div>
   ),
-}
+})

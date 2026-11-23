@@ -1,16 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Separator } from '@repo/ui/components/separator'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Separator',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const Orientations: Story = {
+export const Orientations = meta.story({
   render: () => (
     <div className='max-w-md space-y-6'>
       <p>First section</p>
@@ -23,4 +19,4 @@ export const Orientations: Story = {
       </div>
     </div>
   ),
-}
+})

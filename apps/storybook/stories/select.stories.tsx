@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import {
   Select,
   SelectContent,
@@ -12,13 +10,11 @@ import {
 } from '@repo/ui/components/select'
 import { useState } from 'react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Select',
-} satisfies Meta
-
-export default meta
-
-type Story = StoryObj
+})
 
 type SelectExampleProps = {
   size?: 'sm' | 'default'
@@ -63,22 +59,22 @@ function SelectExample(props: SelectExampleProps) {
   )
 }
 
-export const Controlled: Story = {
+export const Controlled = meta.story({
   render: () => <SelectExample />,
-}
+})
 
-export const Small: Story = {
+export const Small = meta.story({
   render: () => <SelectExample size='sm' />,
-}
+})
 
-export const Disabled: Story = {
+export const Disabled = meta.story({
   render: () => <SelectExample disabled />,
-}
+})
 
-export const Invalid: Story = {
+export const Invalid = meta.story({
   render: () => <SelectExample invalid />,
-}
+})
 
-export const Scrollable: Story = {
+export const Scrollable = meta.story({
   render: () => <SelectExample long />,
-}
+})

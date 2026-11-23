@@ -1,17 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Button } from '@repo/ui/components/button'
 import { Spinner } from '@repo/ui/components/spinner'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Spinner',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const LabelsAndSizes: Story = {
+export const LabelsAndSizes = meta.story({
   render: () => (
     <div className='flex items-center gap-6'>
       <Spinner />
@@ -22,4 +18,4 @@ export const LabelsAndSizes: Story = {
       </Button>
     </div>
   ),
-}
+})

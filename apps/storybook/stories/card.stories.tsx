@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Button } from '@repo/ui/components/button'
 import {
   Card,
@@ -11,15 +9,13 @@ import {
   CardTitle,
 } from '@repo/ui/components/card'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Card',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const SizesAndAnatomy: Story = {
+export const SizesAndAnatomy = meta.story({
   render: () => (
     <div className='grid max-w-3xl gap-6 sm:grid-cols-2'>
       {(['default', 'sm'] as const).map((size) => (
@@ -41,9 +37,9 @@ export const SizesAndAnatomy: Story = {
       ))}
     </div>
   ),
-}
+})
 
-export const WithImage: Story = {
+export const WithImage = meta.story({
   render: () => (
     <Card className='max-w-sm'>
       <img src='/reef.svg' alt='Illustrated reef' />
@@ -53,4 +49,4 @@ export const WithImage: Story = {
       </CardHeader>
     </Card>
   ),
-}
+})

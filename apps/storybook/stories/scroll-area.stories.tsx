@@ -1,16 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { ScrollArea, ScrollBar } from '@repo/ui/components/scroll-area'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Scroll area',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const BothAxes: Story = {
+export const BothAxes = meta.story({
   render: () => (
     <ScrollArea className='h-64 w-full max-w-md rounded-lg border'>
       <div className='w-160 space-y-4 p-4'>
@@ -23,4 +19,4 @@ export const BothAxes: Story = {
       <ScrollBar orientation='horizontal' />
     </ScrollArea>
   ),
-}
+})

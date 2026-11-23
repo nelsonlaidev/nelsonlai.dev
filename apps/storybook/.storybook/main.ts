@@ -1,6 +1,6 @@
-import type { StorybookConfig } from '@storybook/react-vite'
+import { defineMain } from '@storybook/react-vite/node'
 
-const config: StorybookConfig = {
+export default defineMain({
   framework: {
     name: '@storybook/react-vite',
     options: { builder: { viteConfigPath: '.storybook/vite.config.ts' } },
@@ -17,6 +17,4 @@ const config: StorybookConfig = {
     menuOnboardingChecklist: false,
   },
   core: { disableTelemetry: true },
-}
-
-export default config
+})

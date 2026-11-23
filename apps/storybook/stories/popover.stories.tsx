@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Button } from '@repo/ui/components/button'
 import { Input } from '@repo/ui/components/input'
 import { Label } from '@repo/ui/components/label'
@@ -12,15 +10,13 @@ import {
   PopoverTrigger,
 } from '@repo/ui/components/popover'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Popover',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const Positioned: Story = {
+export const Positioned = meta.story({
   render: () => (
     <div className='flex flex-wrap gap-4 py-16'>
       {(['top', 'right', 'bottom', 'left'] as const).map((side) => (
@@ -38,4 +34,4 @@ export const Positioned: Story = {
       ))}
     </div>
   ),
-}
+})

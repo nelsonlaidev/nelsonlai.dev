@@ -1,17 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Label } from '@repo/ui/components/label'
 import { Textarea } from '@repo/ui/components/textarea'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Textarea',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const States: Story = {
+export const States = meta.story({
   render: () => (
     <div className='grid max-w-3xl gap-6 sm:grid-cols-2'>
       <div className='space-y-2'>
@@ -39,4 +35,4 @@ export const States: Story = {
       </div>
     </div>
   ),
-}
+})

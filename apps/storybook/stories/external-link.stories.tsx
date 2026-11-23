@@ -1,16 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { ExternalLink } from '@repo/ui/components/external-link'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/External link',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const Targets: Story = {
+export const Targets = meta.story({
   render: () => (
     <div className='flex flex-wrap gap-6'>
       <ExternalLink href='/reef.svg' className='text-link underline'>
@@ -24,4 +20,4 @@ export const Targets: Story = {
       </ExternalLink>
     </div>
   ),
-}
+})

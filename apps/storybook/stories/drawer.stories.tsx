@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Button } from '@repo/ui/components/button'
 import {
   Drawer,
@@ -12,14 +10,12 @@ import {
   DrawerTrigger,
 } from '@repo/ui/components/drawer'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Drawer',
   component: Drawer,
-} satisfies Meta<typeof Drawer>
-
-export default meta
-
-type Story = StoryObj<typeof meta>
+})
 
 type DrawerExampleProps = {
   direction?: 'down' | 'up' | 'left' | 'right'
@@ -54,7 +50,7 @@ function DrawerExample(props: DrawerExampleProps) {
   )
 }
 
-export const Directions: Story = {
+export const Directions = meta.story({
   render: () => (
     <div className='flex flex-wrap gap-3'>
       {(['down', 'up', 'left', 'right'] as const).map((direction) => (
@@ -62,16 +58,16 @@ export const Directions: Story = {
       ))}
     </div>
   ),
-}
+})
 
-export const SnapPoints: Story = {
+export const SnapPoints = meta.story({
   render: () => <DrawerExample snap />,
-}
+})
 
-export const Nested: Story = {
+export const Nested = meta.story({
   render: () => <DrawerExample nested />,
-}
+})
 
-export const NonModal: Story = {
+export const NonModal = meta.story({
   render: () => <DrawerExample modal={false} />,
-}
+})

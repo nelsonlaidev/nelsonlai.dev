@@ -1,16 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Skeleton } from '@repo/ui/components/skeleton'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Skeleton',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const Content: Story = {
+export const Content = meta.story({
   render: () => (
     <div aria-busy='true' className='flex max-w-sm gap-4'>
       <output className='sr-only'>Loading profile</output>
@@ -22,4 +18,4 @@ export const Content: Story = {
       </div>
     </div>
   ),
-}
+})

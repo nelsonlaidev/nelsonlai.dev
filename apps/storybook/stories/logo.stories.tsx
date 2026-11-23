@@ -1,16 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Logo } from '@repo/ui/components/logo'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Logo',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const SizesAndSurfaces: Story = {
+export const SizesAndSurfaces = meta.story({
   render: () => (
     <div className='flex flex-wrap items-center gap-8'>
       <Logo aria-label='Seafold' className='w-8' />
@@ -20,4 +16,4 @@ export const SizesAndSurfaces: Story = {
       </div>
     </div>
   ),
-}
+})

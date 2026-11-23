@@ -5,15 +5,16 @@ import '@fontsource-variable/noto-sans-tc/wght.css'
 import '@fontsource-variable/noto-sans-sc/wght.css'
 import '../stories/preview.css'
 
-import type { Preview } from '@storybook/react-vite'
-
 import { UIProvider } from '@repo/ui/components/ui-provider'
+import addonDocs from '@storybook/addon-docs'
 import { Stories, Title } from '@storybook/addon-docs/blocks'
+import { definePreview } from '@storybook/react-vite'
 import { themes } from 'storybook/theming'
 
 import { translations } from '../stories/translations'
 
-const preview: Preview = {
+export default definePreview({
+  addons: [addonDocs()],
   tags: ['autodocs'],
   decorators: [
     (Story) => (
@@ -44,6 +45,4 @@ const preview: Preview = {
       source: { type: 'code' },
     },
   },
-}
-
-export default preview
+})

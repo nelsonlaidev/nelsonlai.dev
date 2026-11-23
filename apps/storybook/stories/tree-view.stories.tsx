@@ -1,16 +1,13 @@
 import type { Node } from '@repo/ui/components/tree-view'
-import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { createTreeCollection, TreeView } from '@repo/ui/components/tree-view'
 import { useState } from 'react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Tree view',
-} satisfies Meta
-
-export default meta
-
-type Story = StoryObj
+})
 
 const collection = createTreeCollection<Node>({
   nodeToValue: (node) => node.id,
@@ -56,9 +53,9 @@ function TreeExample() {
   )
 }
 
-export const ControlledSelection: Story = {
+export const ControlledSelection = meta.story({
   render: () => <TreeExample />,
-}
+})
 
 const emptyCollection = createTreeCollection<Node>({
   nodeToValue: (node) => node.id,
@@ -66,7 +63,7 @@ const emptyCollection = createTreeCollection<Node>({
   rootNode: { id: 'root', name: 'Empty', children: [] },
 })
 
-export const Empty: Story = {
+export const Empty = meta.story({
   render: () => (
     <div className='max-w-md space-y-3'>
       <TreeView collection={emptyCollection} label='Empty file tree' />
@@ -75,4 +72,4 @@ export const Empty: Story = {
       </p>
     </div>
   ),
-}
+})

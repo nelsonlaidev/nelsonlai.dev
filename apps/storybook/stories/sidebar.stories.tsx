@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Button } from '@repo/ui/components/button'
 import {
   Sidebar,
@@ -30,7 +28,9 @@ import {
 import { TooltipProvider } from '@repo/ui/components/tooltip'
 import { HomeIcon, LayersIcon, MoreHorizontalIcon, PlusIcon } from 'lucide-react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Sidebar',
   parameters: {
     layout: 'fullscreen',
@@ -38,11 +38,7 @@ const meta = {
       story: { inline: false, height: '600px' },
     },
   },
-} satisfies Meta
-
-export default meta
-
-type Story = StoryObj
+})
 
 function SidebarStatus() {
   const { state, isMobile, setOpenMobile } = useSidebar()
@@ -181,34 +177,34 @@ function SidebarExample(props: SidebarExampleProps) {
   )
 }
 
-export const Expanded: Story = {
+export const Expanded = meta.story({
   render: () => <SidebarExample />,
-}
+})
 
-export const CollapsedIcons: Story = {
+export const CollapsedIcons = meta.story({
   render: () => <SidebarExample open={false} />,
-}
+})
 
-export const Offcanvas: Story = {
+export const Offcanvas = meta.story({
   render: () => <SidebarExample collapsible='offcanvas' />,
-}
+})
 
-export const Floating: Story = {
+export const Floating = meta.story({
   render: () => <SidebarExample variant='floating' />,
-}
+})
 
-export const Inset: Story = {
+export const Inset = meta.story({
   render: () => <SidebarExample variant='inset' />,
-}
+})
 
-export const Right: Story = {
+export const Right = meta.story({
   render: () => <SidebarExample side='right' />,
-}
+})
 
-export const Static: Story = {
+export const Static = meta.story({
   render: () => <SidebarExample collapsible='none' />,
-}
+})
 
-export const Loading: Story = {
+export const Loading = meta.story({
   render: () => <SidebarExample loading />,
-}
+})

@@ -1,16 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/components/tabs'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Tabs',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const Variants: Story = {
+export const Variants = meta.story({
   render: () => (
     <div className='max-w-xl space-y-8'>
       {(['default', 'line'] as const).map((variant) => (
@@ -28,9 +24,9 @@ export const Variants: Story = {
       ))}
     </div>
   ),
-}
+})
 
-export const Vertical: Story = {
+export const Vertical = meta.story({
   render: () => (
     <Tabs orientation='vertical' defaultValue='first' className='max-w-lg'>
       <TabsList aria-label='Vertical tabs'>
@@ -41,4 +37,4 @@ export const Vertical: Story = {
       <TabsContent value='second'>Second panel</TabsContent>
     </Tabs>
   ),
-}
+})

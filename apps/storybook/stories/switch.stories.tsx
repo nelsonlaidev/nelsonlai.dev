@@ -1,18 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Label } from '@repo/ui/components/label'
 import { Switch } from '@repo/ui/components/switch'
 import { useState } from 'react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Switch',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const SizesAndStates: Story = {
+export const SizesAndStates = meta.story({
   render: () => (
     <div className='space-y-5'>
       {(['sm', 'default'] as const).map((size) => (
@@ -31,7 +27,7 @@ export const SizesAndStates: Story = {
       </div>
     </div>
   ),
-}
+})
 
 function ControlledSwitch() {
   const [checked, setChecked] = useState(false)
@@ -44,6 +40,6 @@ function ControlledSwitch() {
   )
 }
 
-export const Controlled: Story = {
+export const Controlled = meta.story({
   render: () => <ControlledSwitch />,
-}
+})

@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Button } from '@repo/ui/components/button'
 import {
   Dialog,
@@ -16,13 +14,11 @@ import { Input } from '@repo/ui/components/input'
 import { Label } from '@repo/ui/components/label'
 import { useState } from 'react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Dialog',
-} satisfies Meta
-
-export default meta
-
-type Story = StoryObj
+})
 
 type DialogExampleProps = {
   closeIcon?: boolean
@@ -62,21 +58,21 @@ function DialogExample(props: DialogExampleProps) {
   )
 }
 
-export const Controlled: Story = {
+export const Controlled = meta.story({
   render: () => <DialogExample />,
-}
+})
 
-export const WithoutCloseIcon: Story = {
+export const WithoutCloseIcon = meta.story({
   render: () => <DialogExample closeIcon={false} />,
-}
+})
 
-export const ScrollingContent: Story = {
+export const ScrollingContent = meta.story({
   render: () => <DialogExample long />,
-}
+})
 
 const detachedHandle = DialogPrimitive.createHandle<unknown>()
 
-export const DetachedTrigger: Story = {
+export const DetachedTrigger = meta.story({
   render: () => (
     <>
       <DialogTrigger handle={detachedHandle} render={<Button />}>
@@ -93,4 +89,4 @@ export const DetachedTrigger: Story = {
       </Dialog>
     </>
   ),
-}
+})

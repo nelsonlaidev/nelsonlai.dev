@@ -1,16 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@repo/ui/components/table'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Table',
-} satisfies Meta
+})
 
-export default meta
-
-type Story = StoryObj
-
-export const AnatomyAndOverflow: Story = {
+export const AnatomyAndOverflow = meta.story({
   render: () => (
     <div className='max-w-2xl'>
       <Table caption='Local component inventory'>
@@ -47,9 +43,9 @@ export const AnatomyAndOverflow: Story = {
       </Table>
     </div>
   ),
-}
+})
 
-export const Empty: Story = {
+export const Empty = meta.story({
   render: () => (
     <Table caption='No matching local items'>
       <TableHeader>
@@ -67,4 +63,4 @@ export const Empty: Story = {
       </TableBody>
     </Table>
   ),
-}
+})

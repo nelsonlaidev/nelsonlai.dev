@@ -1,5 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,13 +14,11 @@ import { Button } from '@repo/ui/components/button'
 import { TriangleAlertIcon } from 'lucide-react'
 import { useState } from 'react'
 
-const meta = {
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
   title: 'Components/Alert dialog',
-} satisfies Meta
-
-export default meta
-
-type Story = StoryObj
+})
 
 type AlertExampleProps = {
   size?: 'default' | 'sm'
@@ -66,10 +62,10 @@ function AlertExample(props: AlertExampleProps) {
   )
 }
 
-export const Default: Story = {
+export const Default = meta.story({
   render: () => <AlertExample />,
-}
+})
 
-export const Small: Story = {
+export const Small = meta.story({
   render: () => <AlertExample size='sm' />,
-}
+})
