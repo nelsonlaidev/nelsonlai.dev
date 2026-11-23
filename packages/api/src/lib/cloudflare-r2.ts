@@ -6,11 +6,11 @@ import { ENV } from '../env'
 let client: S3Client | undefined
 
 export function getCloudflareR2() {
-  const endpoint = ENV.CLOUDFLARE_R2_ENDPOINT
-  const accessKeyId = ENV.CLOUDFLARE_R2_ACCESS_KEY_ID
-  const secretAccessKey = ENV.CLOUDFLARE_R2_SECRET_ACCESS_KEY
-  const bucketName = ENV.CLOUDFLARE_R2_BUCKET_NAME
-  const publicUrl = ENV.CLOUDFLARE_R2_PUBLIC_URL
+  const endpoint = ENV.R2_ENDPOINT
+  const accessKeyId = ENV.R2_ACCESS_KEY_ID
+  const secretAccessKey = ENV.R2_SECRET_ACCESS_KEY
+  const bucketName = ENV.R2_BUCKET
+  const publicUrl = ENV.R2_PUBLIC_URL
 
   if (!endpoint || !accessKeyId || !secretAccessKey || !bucketName || !publicUrl) {
     throw new ORPCError('SERVICE_UNAVAILABLE', { message: 'Avatar storage is not configured.' })

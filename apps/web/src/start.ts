@@ -9,7 +9,7 @@ function getContentSecurityPolicy() {
     "'self'",
     'https://avatars.githubusercontent.com',
     'https://*.googleusercontent.com',
-    ENV.CLOUDFLARE_R2_PUBLIC_URL && new URL(ENV.CLOUDFLARE_R2_PUBLIC_URL).origin,
+    ENV.R2_PUBLIC_URL && new URL(ENV.R2_PUBLIC_URL).origin,
   ]
     .filter(Boolean)
     .join(' ')
