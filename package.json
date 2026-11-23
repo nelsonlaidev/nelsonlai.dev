@@ -41,7 +41,7 @@
     "@cspell/dict-pt-br": "2.4.4",
     "@eslint-react/eslint-plugin": "5.28.8",
     "@nelsonlaidev/oxfmt-config": "0.3.1",
-    "@nelsonlaidev/oxlint-config": "1.2.4",
+    "@nelsonlaidev/oxlint-config": "1.2.5",
     "@nelsonlaidev/typescript-config": "catalog:",
     "cspell": "10.4.0",
     "eslint-plugin-better-tailwindcss": "4.10.0",

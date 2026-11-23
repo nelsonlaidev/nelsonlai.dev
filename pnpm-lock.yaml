@@ -227,8 +227,8 @@ importers:
         specifier: 0.3.1
         version: 0.3.1(oxfmt@0.75.0)
       '@nelsonlaidev/oxlint-config':
-        specifier: 1.2.4
-        version: 1.2.4(9d85f05dde14834e1dc397ff7b8035f8)
+        specifier: 1.2.5
+        version: 1.2.5(9d85f05dde14834e1dc397ff7b8035f8)
       '@nelsonlaidev/typescript-config':
         specifier: 'catalog:'
         version: 3.0.0
@@ -2535,8 +2535,8 @@ packages:
     peerDependencies:
       oxfmt: '>=0.47.0'
 
-  '@nelsonlaidev/oxlint-config@1.2.4':
-    resolution: {integrity: sha512-wiW9me4qSt14RZZj/qhkY6g32aKphe4z+kblbBnwBt9AkcB0htLTMCJSRWeAHSh2qM/7AX4cgkJO10y7Shv12w==}
+  '@nelsonlaidev/oxlint-config@1.2.5':
+    resolution: {integrity: sha512-zbpRryUZiRjYEfMxZbCSGQTr2jiQTbaQ4+yNfKGolvqNjcKZTefE6Ts7W3YRtGLBUk4MsA4x0ya3TOOzcUzSWg==}
     engines: {node: '>=22'}
     peerDependencies:
       '@eslint-react/eslint-plugin': ^5.18.10
@@ -11283,7 +11283,7 @@ snapshots:
     dependencies:
       oxfmt: 0.75.0
 
-  '@nelsonlaidev/oxlint-config@1.2.4(9d85f05dde14834e1dc397ff7b8035f8)':
+  '@nelsonlaidev/oxlint-config@1.2.5(9d85f05dde14834e1dc397ff7b8035f8)':
     dependencies:
       '@nelsonlaidev/eslint-plugin': 0.2.6(eslint@10.13.0(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
       '@stylistic/eslint-plugin': 5.10.0(eslint@10.13.0(jiti@2.7.0)(supports-color@7.2.0))
