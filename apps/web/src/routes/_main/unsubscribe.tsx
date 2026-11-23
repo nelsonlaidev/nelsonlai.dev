@@ -1,10 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
 import * as z from 'zod'
 
-import { UnsubscribePage } from '@/features/notifications/unsubscribe-page'
+import { UnsubscribeForm } from '@/features/notifications/unsubscribe-form'
 import { m } from '@/paraglide/messages'
 
-export const Route = createFileRoute('/unsubscribe')({
+export const Route = createFileRoute('/_main/unsubscribe')({
   validateSearch: (search) => {
     const parsed = z.object({ token: z.string().max(4096).optional() }).safeParse(search)
     return parsed.success ? parsed.data : { token: undefined }
@@ -23,5 +23,5 @@ export const Route = createFileRoute('/unsubscribe')({
 function RouteComponent() {
   const { token } = Route.useSearch()
 
-  return <UnsubscribePage token={token} />
+  return <UnsubscribeForm token={token} />
 }

@@ -5,16 +5,12 @@ import { beforeEach, describe, expect, test, vi } from 'vitest'
 
 import { NavigationSpinner } from '@/components/navigation-spinner'
 import { RouteError } from '@/components/route-error'
-import { UnsubscribePage } from '@/features/notifications/unsubscribe-page'
+import { UnsubscribeForm } from '@/features/notifications/unsubscribe-form'
 import { m } from '@/paraglide/messages'
 
 type MockLinkProps = {
   children: React.ReactNode
   to: string
-}
-
-type ChildrenProps = {
-  children: React.ReactNode
 }
 
 const fixture = vi.hoisted(() => ({
@@ -34,9 +30,6 @@ vi.mock('@tanstack/react-router', async (importOriginal) => ({
   Link: (props: MockLinkProps) => <a href={props.to}>{props.children}</a>,
   useRouter: () => ({ invalidate: fixture.invalidate }),
 }))
-vi.mock('@/components/main-layout', () => ({
-  MainLayout: (props: ChildrenProps) => <main>{props.children}</main>,
-}))
 vi.mock('@/lib/orpc-client', async () => {
   const { createTanstackQueryUtils } = await import('@orpc/tanstack-query')
   return {
@@ -52,7 +45,7 @@ vi.mock('@/lib/orpc-client', async () => {
 function setup(token?: string) {
   return render(
     <QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}>
-      <UnsubscribePage token={token} />
+      <UnsubscribeForm token={token} />
     </QueryClientProvider>,
   )
 }
