@@ -23,7 +23,6 @@ pre.shiki > code {
   font-size: inherit;
 }
 
-/* Highlighted, Diff */
 pre.shiki .highlighted,
 pre.shiki .diff {
   margin: 0 calc(--spacing(4) * -1);
@@ -37,7 +36,6 @@ pre.shiki .highlighted {
   background-color: color-mix(in oklab, currentColor 10%, transparent);
 }
 
-/* Diff */
 .shiki code .diff.remove {
   background-color: var(--color-diff-remove);
 }
@@ -61,7 +59,6 @@ pre.shiki .highlighted {
   color: var(--color-diff-add-symbol);
 }
 
-/* Highlighted word */
 .shiki .highlighted-word {
   padding: 1px 2px;
   margin: -1px -3px;
@@ -70,7 +67,6 @@ pre.shiki .highlighted {
   border-radius: var(--radius-xs);
 }
 
-/* Focus */
 .shiki.has-focused .line:not(.focused) {
   opacity: 0.7;
   transition:

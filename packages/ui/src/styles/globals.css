@@ -215,12 +215,3 @@
     cursor: pointer;
   }
 }
-
-/* Base UI scrollbar rules use external CSS under the strict CSP. */
-.base-ui-disable-scrollbar {
-  scrollbar-width: none;
-}
-
-.base-ui-disable-scrollbar::-webkit-scrollbar {
-  display: none;
-}
