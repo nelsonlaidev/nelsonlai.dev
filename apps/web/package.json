@@ -11,7 +11,7 @@
     "i18n:check": "inlang check --project ./project.inlang --source ./src",
     "preview": "vite preview",
     "test:e2e": "playwright test",
-    "test:e2e:inspector": "playwright test --debug",
+    "test:e2e:inspector": "playwright test --debug=inspector",
     "test:e2e:install": "playwright install chromium",
     "test:e2e:ui": "playwright test --ui",
     "test:unit": "vitest run",
