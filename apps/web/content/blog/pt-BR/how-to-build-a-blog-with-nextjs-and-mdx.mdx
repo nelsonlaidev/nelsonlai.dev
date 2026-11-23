@@ -35,7 +35,7 @@ A seguir, crie os seguintes arquivos:
 
 - `components/layout.jsx` - Envolva todos os componentes em um contêiner (opcional, apenas para o estilo)
 - `data/blog/*.mdx` - Artigos do blog
-- `lib/format-date.js` - Formatar a data como `MM DD, YYYY`
+- `lib/format-date.js` - Formata a data por extenso, por exemplo, `21 de agosto de 2022`
 - `pages/blog/[slug].jsx` - página de artigos, usando [rotas dinâmicas](https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes)
 
 <TreeView
@@ -89,7 +89,7 @@ A seguir, crie os seguintes arquivos:
 
 ### Como lidar com arquivos Markdown
 
-Primeiro `const root{:js}` - o diretório raiz e o método `process.cwd(){:js}` retorna o diretório de trabalho atual do processo Node.js.
+Primeiro, defina `root{:js}` como o diretório raiz do projeto. O método `process.cwd(){:js}` retorna o diretório de trabalho atual do processo Node.js.
 
 ```js title='lib/mdx.js'
 const root = process.cwd()
@@ -104,7 +104,7 @@ const POSTS_PATH = path.join(root, 'data', 'blog') // [!code highlight]
 // Saída: A:/nextjs-mdx-blog/data/blog
 ```
 
-Em seguida, use fs para ler o conteúdo daquele diretório, ou seja, todos os nomes de arquivos em `data/blog`.
+Em seguida, use `fs` para ler o conteúdo daquele diretório, ou seja, todos os nomes de arquivos em `data/blog`.
 
 ```js title='lib/mdx.js'
 import fs from 'fs'

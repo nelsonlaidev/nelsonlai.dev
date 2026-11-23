@@ -89,7 +89,7 @@ yarn create next-app nextjs-mdx-blog
 
 ### Markdown ファイルの処理方法
 
-まず `const root{:js}` はルートディレクトリで、`process.cwd(){:js}` メソッドは Node.js プロセスの現在の作業ディレクトリを返します。
+まず、プロジェクトのルートディレクトリを `root{:js}` に代入します。`process.cwd(){:js}` メソッドは Node.js プロセスの現在の作業ディレクトリを返します。
 
 ```js title='lib/mdx.js'
 const root = process.cwd()
@@ -104,7 +104,7 @@ const POSTS_PATH = path.join(root, 'data', 'blog') // [!code highlight]
 // 出力例：A:/nextjs-mdx-blog/data/blog
 ```
 
-次に fs を使ってそのディレクトリの内容、つまり `data/blog` 下のすべてのファイル名を読み込みます。
+次に `fs` を使ってそのディレクトリの内容、つまり `data/blog` 下のすべてのファイル名を読み込みます。
 
 ```js title='lib/mdx.js'
 import fs from 'fs'

@@ -89,7 +89,7 @@ A continuación, crea los siguientes archivos:
 
 ### Cómo manejar archivos Markdown
 
-Primero `const root{:js}` - el directorio raíz, y el método `process.cwd(){:js}` devuelve el directorio de trabajo actual del proceso Node.js.
+Primero, define `root{:js}` como el directorio raíz del proyecto. El método `process.cwd(){:js}` devuelve el directorio de trabajo actual del proceso de Node.js.
 
 ```js title='lib/mdx.js'
 const root = process.cwd()
@@ -104,7 +104,7 @@ const POSTS_PATH = path.join(root, 'data', 'blog') // [!code highlight]
 // Salida: A:/nextjs-mdx-blog/data/blog
 ```
 
-Luego usa fs para leer el contenido de ese directorio, es decir, todos los nombres de archivo bajo `data/blog`.
+Luego usa `fs` para leer el contenido de ese directorio, es decir, todos los nombres de archivo bajo `data/blog`.
 
 ```js title='lib/mdx.js'
 import fs from 'fs'

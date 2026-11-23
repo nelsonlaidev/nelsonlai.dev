@@ -89,13 +89,13 @@ yarn create next-app nextjs-mdx-blog
 
 ### 如何处理 Markdown 文件
 
-首先建立变量 `const root{:js}`，其值为根目录，`process.cwd(){:js}` 方法返回当前 Node.js 进程的工作目录。
+首先，用 `root{:js}` 表示项目根目录。`process.cwd(){:js}` 方法返回 Node.js 进程的当前工作目录。
 
 ```js title='lib/mdx.js'
 const root = process.cwd()
 ```
 
-接着定义变量 `POSTS_PATH`，用于存储文章文件的路径。
+接着定义变量 `POSTS_PATH{:.entity.name.constant}`，用于存储文章文件的路径。
 
 ```js title='lib/mdx.js'
 import path from 'path'
