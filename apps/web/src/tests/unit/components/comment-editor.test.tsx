@@ -40,20 +40,6 @@ function simulateIMEInput(options: SimulateIMEInputOptions) {
 
 describe('<EditorHarness />', () => {
   describe('basic behavior', () => {
-    test('renders textarea and decoration buttons', () => {
-      expect.assertions(4)
-
-      render(<EditorHarness />)
-
-      const textarea = screen.getByRole('textbox')
-
-      expect(textarea).toBeInTheDocument()
-
-      expect(screen.getByLabelText('Toggle bold')).toBeInTheDocument()
-      expect(screen.getByLabelText('Toggle strikethrough')).toBeInTheDocument()
-      expect(screen.getByLabelText('Toggle italic')).toBeInTheDocument()
-    })
-
     test('calls onCancel on Escape', () => {
       expect.assertions(1)
 

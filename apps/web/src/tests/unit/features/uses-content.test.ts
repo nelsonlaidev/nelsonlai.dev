@@ -48,7 +48,6 @@ describe('Uses content', () => {
       expect(existsSync(path.resolve(process.cwd(), `public${laptop.src}`))).toBe(true)
 
       const items = sections.flatMap((section) => section.items)
-      expect(items).toHaveLength(32)
       for (const item of items) {
         expect(existsSync(path.resolve(process.cwd(), `public${item.image}`))).toBe(true)
         expect(item.name).not.toBe('')

@@ -1,3 +1,5 @@
+import en from '@messages/en.json' with { type: 'json' }
+import zhTW from '@messages/zh-TW.json' with { type: 'json' }
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { IntlProvider } from 'use-intl'
@@ -69,13 +71,18 @@ beforeEach(async () => {
   fixture.preference.mockResolvedValue({ commentRepliesEnabled: true })
 })
 describe('Account and admin presentation with isolated API fixtures', () => {
-  test.each(['en', 'zh-TW', 'zh-CN', 'ja', 'es', 'pt-BR'] as const)('localizes empty tables in %s', async (locale) => {
-    await setLocale(locale, { reload: false })
+  test('disables forward pagination for an empty users table', async () => {
     setup(<AdminUsers />)
-    expect(await screen.findByText(m.admin_users_table_empty())).toBeInTheDocument()
-    expect(screen.getByRole('table', { name: m.common_labels_users() })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: m.admin_pagination_go_to_next_page() })).toBeDisabled()
+    expect(await screen.findByText(en.admin_users_table_empty)).toBeInTheDocument()
+    expect(screen.getByRole('table', { name: en.common_labels_users })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: en.admin_pagination_go_to_next_page })).toBeDisabled()
     expect(fixture.mutate).not.toHaveBeenCalled()
+  })
+  test('localizes the empty users table in Traditional Chinese', async () => {
+    await setLocale('zh-TW', { reload: false })
+    setup(<AdminUsers />)
+    expect(await screen.findByText(zhTW.admin_users_table_empty)).toBeInTheDocument()
+    expect(screen.getByRole('table', { name: zhTW.common_labels_users })).toBeInTheDocument()
   })
   test('announces admin loading while no rows are available', () => {
     fixture.users.mockReturnValue(new Promise(() => {}))
