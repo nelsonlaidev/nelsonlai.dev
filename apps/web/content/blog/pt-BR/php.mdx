@@ -9,7 +9,7 @@ updatedAt: '2026-10-31T08:39:58.000Z'
 
 O PHP (nome completo: PHP: _Hypertext Preprocessor_) é uma linguagem de script de computador de uso geral de código aberto, especialmente adequada para o desenvolvimento da web e incorporada em HTML. A sintaxe do PHP baseia-se nas características das linguagens de computador populares, como a linguagem C, Java e Perl, e é fácil de aprender para programadores em geral. O objetivo principal do PHP é permitir que os desenvolvedores web escrevam rapidamente páginas dinâmicas, mas o PHP também é usado em muitas outras áreas.
 
-A extensão de arquivo PHP é `.php`, ex. `index.php`. Como mencionado acima, o `PHP` pode incorporar diretamente o `HTML`.
+Os arquivos PHP usam a extensão `.php`, como em `index.php`. O código PHP pode ser inserido diretamente no HTML.
 
 ## Uso
 
@@ -23,7 +23,7 @@ Em uma aplicação web, o PHP é executado no servidor. O interpretador PHP exec
     </head>
     <body>
         <?php
-            echo "Esta é uma frase."
+            echo "Esta é uma frase.";
         ?>
     </body>
 </html>
@@ -76,7 +76,7 @@ O conteúdo no `echo` também pode usar a sintaxe do `HTML`. Por exemplo, eu use
 
 ## Variável
 
-Podemos atribuir um valor a uma variável para facilitar a escrita de `PHP` para nós, semelhante ao `JavaScript`. Usaremos o cifrão `$`.
+Assim como em JavaScript, em PHP você pode atribuir valores a variáveis. Em PHP, os nomes das variáveis começam com um cifrão (`$`).
 
 ```php
 <?php
@@ -102,7 +102,7 @@ Os nomes de variáveis diferenciam maiúsculas de minúsculas: `$value` e `$Valu
 
 ### Camel case
 
-Quando o nome de uma variável e o nome de uma função estão vinculados por duas ou mais palavras para formar uma palavra de identificação única, o uso de "camel case" para representação pode aumentar a legibilidade de variáveis e funções. Porque não podemos ter `espaços` em variáveis.
+Em camel case, as palavras são escritas sem espaços. A primeira começa com letra minúscula e cada uma das seguintes começa com letra maiúscula. Isso facilita a leitura de nomes de variáveis e funções formados por várias palavras.
 
 ```php
 <?php
@@ -113,7 +113,7 @@ Quando o nome de uma variável e o nome de uma função estão vinculados por du
 
 ### Snake case
 
-O snake case (como snake_case) refere-se a um estilo de escrita no qual cada espaço é substituído por um caractere de sublinhado ( \_ ) e a primeira letra de cada palavra é escrita em minúsculas.
+Em snake case, todas as palavras são escritas em letras minúsculas e separadas por sublinhados, como em `snake_case`.
 
 ```php
 <?php
@@ -124,7 +124,7 @@ O snake case (como snake_case) refere-se a um estilo de escrita no qual cada esp
 
 ## Operador de string
 
-Existem dois operadores de cadeia de caracteres (string). O primeiro é o operador de concatenação ("."), que retorna a string concatenada de seus argumentos esquerdo e direito. O segundo é o operador de atribuição de concatenação (".="), que anexa o argumento à direita ao argumento do lado esquerdo.
+O PHP tem dois operadores de string. O operador de concatenação (`.`) une duas strings. O operador de atribuição por concatenação (`.=`) acrescenta o valor à direita ao final da string armazenada na variável à esquerda.
 
 ```php
 <?php
