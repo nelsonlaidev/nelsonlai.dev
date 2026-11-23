@@ -194,8 +194,8 @@ importers:
         specifier: 2.0.0-beta.44
         version: 2.0.0-beta.44
       '@orpc/server':
-        specifier: 2.0.0-beta.44
-        version: 2.0.0-beta.44
+        specifier: 2.0.0-beta.52
+        version: 2.0.0-beta.52
       '@orpc/tanstack-query':
         specifier: 2.0.0-beta.44
         version: 2.0.0-beta.44(@tanstack/query-core@5.104.3)
@@ -2655,8 +2655,14 @@ packages:
   '@orpc/client@2.0.0-beta.44':
     resolution: {integrity: sha512-x78eWZACv7Xzc6qGyrG6BvbH9/p6zoG+urnmOo8Vr6U63fnk9yLN4AA0B5n3/Ndb2lA6kmW8fNCyYbqj2DzH7A==}
 
+  '@orpc/client@2.0.0-beta.52':
+    resolution: {integrity: sha512-JfKHAlQMccFFRaRDFSJt/PwGL6Y9dbXZJlew6xCS82UkUlOqw2bEyt8y0SfxYKkXnys6txbRsOVkUqkblRncNw==}
+
   '@orpc/contract@2.0.0-beta.44':
     resolution: {integrity: sha512-8yRa8eY7b6ltf9EjswD+h6HlqLhyjzxn4YOmj48u39K2VGjRhFwXw/EpAGJGmochOuQZuWzrj9VcsyVg6uV7kQ==}
+
+  '@orpc/contract@2.0.0-beta.52':
+    resolution: {integrity: sha512-VuPObjRsUAezA06wsKsqlC0UeMfa2TZi3sL0xmHHBCaXhyo47LnzhMwBNKQUj78hnir13vlxREsfAxJVl3M5kA==}
 
   '@orpc/json-schema@2.0.0-beta.44':
     resolution: {integrity: sha512-V8FriE7bd+WEZgjYGuCYg1cAGEaM/+nSDIJLSGyp1Zco2lMaXZ7whwqWyh9KJm36d4VkraIePDA4Tntza9+w7A==}
@@ -2686,8 +2692,22 @@ packages:
       fastify:
         optional: true
 
+  '@orpc/server@2.0.0-beta.52':
+    resolution: {integrity: sha512-ctuMARCazW+dOEglr+o5MUtHIBTBHh0VNDDN+f6lBc5D0HoQD4jBEEYsZBFYlYot8AUriOEDQZgFbQ/WDOsXow==}
+    peerDependencies:
+      crossws: '>=0.3.4'
+      fastify: '>=5.6.1'
+    peerDependenciesMeta:
+      crossws:
+        optional: true
+      fastify:
+        optional: true
+
   '@orpc/shared@2.0.0-beta.44':
     resolution: {integrity: sha512-3R+et5pRqGXJ0GKeU/Xzm+Ia0pgfN7C2Ur01RxvDQmkPnFCfU5XxPWmHq0AmiTbOwt5dV3xpSeP7JTgy8P8A9Q==}
+
+  '@orpc/shared@2.0.0-beta.52':
+    resolution: {integrity: sha512-JVOBT3MbydvRcymjCbbBc/LrfuFX/JZcvWMcnrck9bH8FWBe5gtCvd1whSV13AY4V+BxE9UoGFp801kLhGYTtQ==}
 
   '@orpc/tanstack-query@2.0.0-beta.44':
     resolution: {integrity: sha512-9UEnHifpU2kAo84LNMmCabBb9PRfBkKskN69Tzol85Fu7oqWD9aUCH8PaIdOQQgv5EKUZRJFcU9mbihRX08Yzg==}
@@ -3746,8 +3766,14 @@ packages:
   '@standard-server/aws-lambda@0.10.3':
     resolution: {integrity: sha512-OOoYsr1DVMGPZ0e5xpyyHgjM/7jCRgQJnSvGEYxRt7fIWo9LcKWFqaRmMFDDgjFUQtKhnWwR3Jzw2yWzEhOeaQ==}
 
+  '@standard-server/aws-lambda@0.16.0':
+    resolution: {integrity: sha512-UDrPHorUJbU3HkT35OCRnacJoX0YDtk0DYY6WegmZSZ6RP2X/En2OYymnYpDlVj6GM9jpWzDq+naarnoqj85KQ==}
+
   '@standard-server/core@0.10.3':
     resolution: {integrity: sha512-0ZnZg6F+VxqH6jsicQwKrLCKWOblrlLJPRkga7HRadQd+Dx6nLXd2ujcRIceLvSD2Yc/QzX2VGAT/vyc2CG72A==}
+
+  '@standard-server/core@0.16.0':
+    resolution: {integrity: sha512-5jETsZoqjSuVZh2vV5zfQzcAsl8+6qFZK4tMngk0lm/1u3o2Az36GOjxF24z5grVxrnxSjsLrF+hc9+DwxmwAg==}
 
   '@standard-server/fastify@0.10.3':
     resolution: {integrity: sha512-O293Jlv+bXGDl/KZ7vEOOmesyk2jQNbtbIuJxlEY/VRU4ilV7OHYa3l7U3cpvnAcanAUVCy2wUYBb+OCwmEjcw==}
@@ -3757,17 +3783,37 @@ packages:
       fastify:
         optional: true
 
+  '@standard-server/fastify@0.16.0':
+    resolution: {integrity: sha512-bRzghigLkz8AqcssNHfoW8AYtzoZFiNCZfeD7cLxgclV9obj69NiyutSrekpiyHveLG3Mt+TaJK/h/NQ7PJF7Q==}
+    peerDependencies:
+      fastify: '>=5.6.1'
+    peerDependenciesMeta:
+      fastify:
+        optional: true
+
   '@standard-server/fetch@0.10.3':
     resolution: {integrity: sha512-cdRUrxfYjUv7F3rLeq+1y+d1tBNEI7YgMgyAS715p1mCZAKvueA2dDmM/DPQwM7BsjndfX1teDyc5GKmlj4tyw==}
+
+  '@standard-server/fetch@0.16.0':
+    resolution: {integrity: sha512-oacHxCfyYsc1ooPwvaSRXSivGjm4xVuHXBN03Q1z9uVKuX583FSqmKAaRsh4VjYzIwMep8Ng8mBTZ8xQ7YusQQ==}
 
   '@standard-server/node@0.10.3':
     resolution: {integrity: sha512-5AGTXbTcJ/zbFw3BMhfECASXqLALcehSLPusYgDwzpJRn/9Ow03ndQesO32COONW36DqGp44kL6sy9IPYAQZRg==}
 
+  '@standard-server/node@0.16.0':
+    resolution: {integrity: sha512-ljI9z+3DZSUR3FcJx5w7aEA3rNroDsf8lFCV3MgG5I4Lh+ZfOiHz9/dxeGvxrlH2h+ZXSXv7Co69J5FHNre6SQ==}
+
   '@standard-server/peer@0.10.3':
     resolution: {integrity: sha512-ukNYt8+yQM8YoQ9+gC1DtwrKQWVFnNC1PlWy+7+ph8oCPQJE5hvOfDptfVPv5Ho6nDnyXZdtsGAPQkqJhJLNxw==}
 
+  '@standard-server/peer@0.16.0':
+    resolution: {integrity: sha512-EGUuLbTpa4XvRRqoncpuv09q1t02TMplejN8qGEAVvm+AmdjjAfZz5NqLifKcw+PCwxnoBVb/HOKKDDbOCfN1w==}
+
   '@standard-server/shared@0.10.3':
     resolution: {integrity: sha512-2HRC/4SByyIMttPHo6UQznFlgNkZf7lL+5nawzuyaEIFYh6i+UA6D9pSbIx0S4WqvP7iSI2Ec36q3p7OD5qjWw==}
+
+  '@standard-server/shared@0.16.0':
+    resolution: {integrity: sha512-biBTEcL1dbAOW8ou5DorzWNPmMZyXmu9CpxHd724RbrKvqo91fpzrJrS8QoyGUIr7hbgR8xHqejL6GYM6za6Dw==}
 
   '@stylistic/eslint-plugin@5.10.0':
     resolution: {integrity: sha512-nPK52ZHvot8Ju/0A4ucSX1dcPV2/1clx0kLcH5wDmrE4naKso7TUC/voUyU1O9OTKTrR6MYip6LP0ogEMQ9jPQ==}
@@ -10538,10 +10584,23 @@ snapshots:
       '@standard-server/fetch': 0.10.3
       '@standard-server/peer': 0.10.3
 
+  '@orpc/client@2.0.0-beta.52':
+    dependencies:
+      '@orpc/shared': 2.0.0-beta.52
+      '@standard-server/core': 0.16.0
+      '@standard-server/fetch': 0.16.0
+      '@standard-server/peer': 0.16.0
+
   '@orpc/contract@2.0.0-beta.44':
     dependencies:
       '@orpc/client': 2.0.0-beta.44
       '@orpc/shared': 2.0.0-beta.44
+      '@standard-schema/spec': 1.1.0
+
+  '@orpc/contract@2.0.0-beta.52':
+    dependencies:
+      '@orpc/client': 2.0.0-beta.52
+      '@orpc/shared': 2.0.0-beta.52
       '@standard-schema/spec': 1.1.0
 
   '@orpc/json-schema@2.0.0-beta.44':
@@ -10585,10 +10644,28 @@ snapshots:
       '@standard-server/peer': 0.10.3
       cookie: 2.0.1
 
+  '@orpc/server@2.0.0-beta.52':
+    dependencies:
+      '@orpc/client': 2.0.0-beta.52
+      '@orpc/contract': 2.0.0-beta.52
+      '@orpc/shared': 2.0.0-beta.52
+      '@standard-server/aws-lambda': 0.16.0
+      '@standard-server/core': 0.16.0
+      '@standard-server/fastify': 0.16.0
+      '@standard-server/fetch': 0.16.0
+      '@standard-server/node': 0.16.0
+      '@standard-server/peer': 0.16.0
+      cookie: 2.0.1
+
   '@orpc/shared@2.0.0-beta.44':
     dependencies:
       '@standard-server/shared': 0.10.3
       radash: 12.1.1
+      type-fest: 5.10.0
+
+  '@orpc/shared@2.0.0-beta.52':
+    dependencies:
+      '@standard-server/shared': 0.16.0
       type-fest: 5.10.0
 
   '@orpc/tanstack-query@2.0.0-beta.44(@tanstack/query-core@5.104.3)':
@@ -11367,19 +11444,40 @@ snapshots:
       '@standard-server/node': 0.10.3
       '@standard-server/shared': 0.10.3
 
+  '@standard-server/aws-lambda@0.16.0':
+    dependencies:
+      '@standard-server/core': 0.16.0
+      '@standard-server/fetch': 0.16.0
+      '@standard-server/node': 0.16.0
+      '@standard-server/shared': 0.16.0
+
   '@standard-server/core@0.10.3':
     dependencies:
       '@standard-server/shared': 0.10.3
+
+  '@standard-server/core@0.16.0':
+    dependencies:
+      '@standard-server/shared': 0.16.0
 
   '@standard-server/fastify@0.10.3':
     dependencies:
       '@standard-server/core': 0.10.3
       '@standard-server/node': 0.10.3
 
+  '@standard-server/fastify@0.16.0':
+    dependencies:
+      '@standard-server/core': 0.16.0
+      '@standard-server/node': 0.16.0
+
   '@standard-server/fetch@0.10.3':
     dependencies:
       '@standard-server/core': 0.10.3
       '@standard-server/shared': 0.10.3
+
+  '@standard-server/fetch@0.16.0':
+    dependencies:
+      '@standard-server/core': 0.16.0
+      '@standard-server/shared': 0.16.0
 
   '@standard-server/node@0.10.3':
     dependencies:
@@ -11387,12 +11485,25 @@ snapshots:
       '@standard-server/fetch': 0.10.3
       '@standard-server/shared': 0.10.3
 
+  '@standard-server/node@0.16.0':
+    dependencies:
+      '@standard-server/core': 0.16.0
+      '@standard-server/fetch': 0.16.0
+      '@standard-server/shared': 0.16.0
+
   '@standard-server/peer@0.10.3':
     dependencies:
       '@standard-server/core': 0.10.3
       '@standard-server/shared': 0.10.3
 
+  '@standard-server/peer@0.16.0':
+    dependencies:
+      '@standard-server/core': 0.16.0
+      '@standard-server/shared': 0.16.0
+
   '@standard-server/shared@0.10.3': {}
+
+  '@standard-server/shared@0.16.0': {}
 
   '@stylistic/eslint-plugin@5.10.0(eslint@10.11.0(jiti@2.7.0)(supports-color@7.2.0))':
     dependencies:
