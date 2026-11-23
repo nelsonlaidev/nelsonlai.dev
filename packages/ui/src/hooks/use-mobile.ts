@@ -4,7 +4,9 @@ const MOBILE_QUERY = '(width < 768px)'
 
 function subscribe(onStoreChange: () => void) {
   const mediaQuery = globalThis.matchMedia(MOBILE_QUERY)
+
   mediaQuery.addEventListener('change', onStoreChange)
+
   return () => {
     mediaQuery.removeEventListener('change', onStoreChange)
   }
