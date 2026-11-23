@@ -37,27 +37,27 @@ jobs:
       - name: Set up workspace
         uses: ./.github/actions/setup
 
-      # A fresh checkout needs generated content, messages, and environment types.
       - name: Build workspace
         run: pnpm build
 
-      - name: Check formatting
-        run: pnpm format:check
+      - parallel:
+          - name: Check formatting
+            run: pnpm format:check
+
+          - name: Check spelling
+            run: pnpm spellcheck
+
+          - name: Check translations
+            run: pnpm i18n:check
 
       - name: Lint
         run: pnpm lint
-
-      - name: Check spelling
-        run: pnpm spellcheck
 
       - name: Check types
         run: pnpm typecheck
 
       - name: Check unused code and dependencies
         run: pnpm knip
-
-      - name: Check translations
-        run: pnpm i18n:check
 
       - name: Run unit tests
         run: pnpm test:unit
@@ -78,11 +78,12 @@ jobs:
       - name: Build workspace
         run: pnpm build
 
-      - name: Install Chromium and system dependencies
-        run: pnpm --filter @repo/web exec playwright install --with-deps chromium
+      - parallel:
+          - name: Install Chromium and system dependencies
+            run: pnpm --filter @repo/web exec playwright install --with-deps chromium
 
-      - name: Start services
-        run: docker compose up -d --wait
+          - name: Start services
+            run: docker compose up -d --wait
 
       - name: Run database migrations
         run: pnpm --filter @repo/db db:migrate
