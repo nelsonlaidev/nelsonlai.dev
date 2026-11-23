@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ExternalLink } from '@repo/ui/components/external-link'
 
 const meta = {
-  title: 'Data and display/External link',
+  title: 'Components/External link',
 } satisfies Meta
 
 export default meta

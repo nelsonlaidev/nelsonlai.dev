@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Logo } from '@repo/ui/components/logo'
 
 const meta = {
-  title: 'Data and display/Logo',
+  title: 'Components/Logo',
 } satisfies Meta
 
 export default meta

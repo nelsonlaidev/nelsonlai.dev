@@ -4,7 +4,7 @@ import { InfoTip } from '@repo/ui/components/info-tip'
 import { InfoIcon } from 'lucide-react'
 
 const meta = {
-  title: 'Overlays and feedback/Info tip',
+  title: 'Components/Info tip',
 } satisfies Meta
 
 export default meta

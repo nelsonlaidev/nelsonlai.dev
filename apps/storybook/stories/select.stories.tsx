@@ -13,7 +13,7 @@ import {
 import { useState } from 'react'
 
 const meta = {
-  title: 'Actions and forms/Select',
+  title: 'Components/Select',
 } satisfies Meta
 
 export default meta

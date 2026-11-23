@@ -10,7 +10,7 @@ import {
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
 
 const meta = {
-  title: 'Data and display/Chart',
+  title: 'Components/Chart',
   component: ChartContainer,
 } satisfies Meta<typeof ChartContainer>
 

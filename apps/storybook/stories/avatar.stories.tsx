@@ -11,7 +11,7 @@ import {
 import { CheckIcon } from 'lucide-react'
 
 const meta = {
-  title: 'Data and display/Avatar',
+  title: 'Components/Avatar',
 } satisfies Meta
 
 export default meta

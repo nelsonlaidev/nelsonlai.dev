@@ -13,7 +13,7 @@ import {
 } from '@repo/ui/components/sheet'
 
 const meta = {
-  title: 'Overlays and feedback/Sheet',
+  title: 'Components/Sheet',
 } satisfies Meta
 
 export default meta

@@ -5,7 +5,7 @@ import { createTreeCollection, TreeView } from '@repo/ui/components/tree-view'
 import { useState } from 'react'
 
 const meta = {
-  title: 'Structure and navigation/Tree view',
+  title: 'Components/Tree view',
 } satisfies Meta
 
 export default meta

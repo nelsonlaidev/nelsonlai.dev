@@ -13,7 +13,7 @@ import {
 } from '@repo/ui/components/popover'
 
 const meta = {
-  title: 'Overlays and feedback/Popover',
+  title: 'Components/Popover',
 } satisfies Meta
 
 export default meta

@@ -13,7 +13,7 @@ import {
 } from '@repo/ui/components/drawer'
 
 const meta = {
-  title: 'Overlays and feedback/Drawer',
+  title: 'Components/Drawer',
   component: Drawer,
 } satisfies Meta<typeof Drawer>
 

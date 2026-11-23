@@ -5,7 +5,7 @@ import { Switch } from '@repo/ui/components/switch'
 import { useState } from 'react'
 
 const meta = {
-  title: 'Actions and forms/Switch',
+  title: 'Components/Switch',
 } satisfies Meta
 
 export default meta

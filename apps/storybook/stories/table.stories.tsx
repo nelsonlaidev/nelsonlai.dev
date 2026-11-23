@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@repo/ui/components/table'
 
 const meta = {
-  title: 'Data and display/Table',
+  title: 'Components/Table',
 } satisfies Meta
 
 export default meta

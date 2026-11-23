@@ -5,7 +5,7 @@ import { createToastManager, toast, Toaster } from '@repo/ui/components/toast'
 import { useEffect, useState } from 'react'
 
 const meta = {
-  title: 'Overlays and feedback/Toast',
+  title: 'Components/Toast',
 } satisfies Meta
 
 export default meta

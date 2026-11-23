@@ -12,7 +12,7 @@ import {
 } from '@repo/ui/components/card'
 
 const meta = {
-  title: 'Structure and navigation/Card',
+  title: 'Components/Card',
 } satisfies Meta
 
 export default meta

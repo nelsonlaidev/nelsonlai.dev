@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ScrollArea, ScrollBar } from '@repo/ui/components/scroll-area'
 
 const meta = {
-  title: 'Structure and navigation/Scroll area',
+  title: 'Components/Scroll area',
 } satisfies Meta
 
 export default meta

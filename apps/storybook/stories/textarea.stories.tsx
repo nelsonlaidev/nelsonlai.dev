@@ -4,7 +4,7 @@ import { Label } from '@repo/ui/components/label'
 import { Textarea } from '@repo/ui/components/textarea'
 
 const meta = {
-  title: 'Actions and forms/Textarea',
+  title: 'Components/Textarea',
 } satisfies Meta
 
 export default meta

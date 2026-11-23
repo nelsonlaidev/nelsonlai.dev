@@ -4,7 +4,7 @@ import { Button } from '@repo/ui/components/button'
 import { Spinner } from '@repo/ui/components/spinner'
 
 const meta = {
-  title: 'Data and display/Spinner',
+  title: 'Components/Spinner',
 } satisfies Meta
 
 export default meta

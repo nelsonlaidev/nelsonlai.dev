@@ -16,7 +16,7 @@ import { Input } from '@repo/ui/components/input'
 import { Switch } from '@repo/ui/components/switch'
 
 const meta = {
-  title: 'Actions and forms/Field',
+  title: 'Components/Field',
 } satisfies Meta
 
 export default meta

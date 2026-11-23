@@ -5,7 +5,7 @@ import { Button } from '@repo/ui/components/button'
 import { useState } from 'react'
 
 const meta = {
-  title: 'Data and display/Blur image',
+  title: 'Components/Blur image',
 } satisfies Meta
 
 export default meta

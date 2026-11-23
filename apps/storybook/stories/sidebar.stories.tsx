@@ -31,7 +31,7 @@ import { TooltipProvider } from '@repo/ui/components/tooltip'
 import { HomeIcon, LayersIcon, MoreHorizontalIcon, PlusIcon } from 'lucide-react'
 
 const meta = {
-  title: 'Structure and navigation/Sidebar',
+  title: 'Components/Sidebar',
   parameters: {
     layout: 'fullscreen',
     docs: {

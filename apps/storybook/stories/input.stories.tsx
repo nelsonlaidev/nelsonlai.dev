@@ -4,7 +4,7 @@ import { Input } from '@repo/ui/components/input'
 import { Label } from '@repo/ui/components/label'
 
 const meta = {
-  title: 'Actions and forms/Input',
+  title: 'Components/Input',
 } satisfies Meta
 
 export default meta

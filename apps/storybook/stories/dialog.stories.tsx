@@ -17,7 +17,7 @@ import { Label } from '@repo/ui/components/label'
 import { useState } from 'react'
 
 const meta = {
-  title: 'Overlays and feedback/Dialog',
+  title: 'Components/Dialog',
 } satisfies Meta
 
 export default meta

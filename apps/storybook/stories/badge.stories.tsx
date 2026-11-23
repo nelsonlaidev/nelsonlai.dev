@@ -4,7 +4,7 @@ import { Badge } from '@repo/ui/components/badge'
 import { CheckIcon } from 'lucide-react'
 
 const meta = {
-  title: 'Data and display/Badge',
+  title: 'Components/Badge',
 } satisfies Meta
 
 export default meta

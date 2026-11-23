@@ -20,7 +20,7 @@ import {
 import { useState } from 'react'
 
 const meta = {
-  title: 'Overlays and feedback/Dropdown menu',
+  title: 'Components/Dropdown menu',
 } satisfies Meta
 
 export default meta

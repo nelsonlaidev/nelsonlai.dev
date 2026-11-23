@@ -17,7 +17,7 @@ import { TriangleAlertIcon } from 'lucide-react'
 import { useState } from 'react'
 
 const meta = {
-  title: 'Overlays and feedback/Alert dialog',
+  title: 'Components/Alert dialog',
 } satisfies Meta
 
 export default meta

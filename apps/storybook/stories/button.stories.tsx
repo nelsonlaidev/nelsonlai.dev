@@ -5,7 +5,7 @@ import { Spinner } from '@repo/ui/components/spinner'
 import { ArrowRightIcon, PlusIcon } from 'lucide-react'
 
 const meta = {
-  title: 'Actions and forms/Button',
+  title: 'Components/Button',
   component: Button,
 } satisfies Meta<typeof Button>
 

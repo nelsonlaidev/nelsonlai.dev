@@ -11,7 +11,7 @@ import {
 import { PlusIcon, SearchIcon } from 'lucide-react'
 
 const meta = {
-  title: 'Actions and forms/Input group',
+  title: 'Components/Input group',
 } satisfies Meta
 
 export default meta

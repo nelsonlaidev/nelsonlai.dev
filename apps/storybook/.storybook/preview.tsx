@@ -28,13 +28,8 @@ const preview: Preview = {
     backgrounds: { disable: true },
     options: {
       storySort: {
-        order: [
-          'Foundations',
-          'Actions and forms',
-          'Overlays and feedback',
-          'Structure and navigation',
-          'Data and display',
-        ],
+        order: ['Foundations', 'Components'],
+        method: 'alphabetical',
       },
     },
     docs: {

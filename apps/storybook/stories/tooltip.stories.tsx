@@ -4,7 +4,7 @@ import { Button } from '@repo/ui/components/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@repo/ui/components/tooltip'
 
 const meta = {
-  title: 'Overlays and feedback/Tooltip',
+  title: 'Components/Tooltip',
 } satisfies Meta
 
 export default meta
