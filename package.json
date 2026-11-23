@@ -150,7 +150,7 @@
     "eslint-plugin-react-hooks": "7.1.1",
     "execa": "10.1.1",
     "fast-xml-validator": "1.4.2",
-    "jsdom": "30.1.3",
+    "jsdom": "31.0.1",
     "knip": "6.41.0",
     "lefthook": "2.2.2",
     "oxfmt": "0.73.0",
