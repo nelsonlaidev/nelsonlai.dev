@@ -17,7 +17,7 @@ updatedAt: '2026-10-31T08:39:58.000Z'
 
 為了簡化說明，本範例採用帳號密碼驗證；相同原則也適用於 OAuth 提供者。
 
-此外，我們使用 SQLite 資料庫進行示範。請根據您的設定調整資料庫操作（例如，資料表名稱、欄位型別）。
+此外，我們使用 SQLite 資料庫進行示範。請根據您的設定調整資料庫操作（**例如，資料表名稱、欄位型別**）。
 
 ## 產生工作階段權杖
 
@@ -27,7 +27,7 @@ updatedAt: '2026-10-31T08:39:58.000Z'
 import crypto from 'node:crypto'
 
 export const TEST_USER = {
-  name: '測試使用者',
+  name: 'Test User',
   email: 'test@example.com',
   sessionToken: '00000000000000000000000000000000',
   accountId: '000',
@@ -50,7 +50,7 @@ import { db } from '@/lib/db'
 const TEST_UNIQUE_ID = '0'
 
 const now = new Date().getTime()
-const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).getTime() // 7 天
+const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).getTime() // 7 days
 
 const transaction = db.transaction(() => {
   db.prepare(

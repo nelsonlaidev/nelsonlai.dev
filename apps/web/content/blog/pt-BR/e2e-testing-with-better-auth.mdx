@@ -50,7 +50,7 @@ import { db } from '@/lib/db'
 const TEST_UNIQUE_ID = '0'
 
 const now = new Date().getTime()
-const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).getTime() // 7 dias
+const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).getTime() // 7 days
 
 const transaction = db.transaction(() => {
   db.prepare(

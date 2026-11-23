@@ -17,7 +17,7 @@ updatedAt: '2026-10-31T08:39:58.000Z'
 
 为了简单起见，我们将使用基于凭证的身份验证示例。然而，相同的原则也适用于 OAuth 提供者。
 
-此外，我们使用 SQLite 数据库进行演示。请根据您的设置调整数据库交互（例如，表名、列类型）。
+此外，我们使用 SQLite 数据库进行演示。请根据您的设置调整数据库交互（**例如，表名、列类型**）。
 
 ## 生成会话令牌
 
@@ -27,7 +27,7 @@ updatedAt: '2026-10-31T08:39:58.000Z'
 import crypto from 'node:crypto'
 
 export const TEST_USER = {
-  name: '测试用户',
+  name: 'Test User',
   email: 'test@example.com',
   sessionToken: '00000000000000000000000000000000',
   accountId: '000',
@@ -50,7 +50,7 @@ import { db } from '@/lib/db'
 const TEST_UNIQUE_ID = '0'
 
 const now = new Date().getTime()
-const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).getTime() // 7 天
+const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).getTime() // 7 days
 
 const transaction = db.transaction(() => {
   db.prepare(
@@ -108,7 +108,7 @@ await fs.writeFile('.auth/auth.json', JSON.stringify({ cookies: [cookieObject], 
 
 ## 在测试中使用会话
 
-在您的端到端测试中加载存储的会话，以访问受保护的路由，而无需登录。以下示例使用 Playwright，但这可以适应任何支持 Cookie 注入的测试框架（例如，Cypress）。
+在您的端到端测试中加载存储的会话，以访问受保护的路由，而无需登录。以下示例使用 Playwright，但同样的方法也适用于任何支持 Cookie 注入的测试库（例如 Cypress）。
 
 ```ts title='playwright.config.ts'
 export default defineConfig({
