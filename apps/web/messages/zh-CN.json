@@ -205,7 +205,6 @@
   "error_name_cannot_be_empty": "名称不能为空",
   "error_name_too_long": "名称过长",
   "error_need_logged_in_to_vote": "您必须登录才能对评论投票。",
-  "error_not_found": "找不到页面。",
   "error_reply_cannot_be_empty": "回复不能为空",
   "error_sign_in_error": "登录失败。请再试一次。",
   "error_sign_out_failed": "退出登录失败，请再试一次。",

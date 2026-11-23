@@ -214,7 +214,6 @@
   "error_name_cannot_be_empty": "Name cannot be empty",
   "error_name_too_long": "Name is too long",
   "error_need_logged_in_to_vote": "You need to sign in to vote on comments.",
-  "error_not_found": "Page not found.",
   "error_reply_cannot_be_empty": "Reply cannot be empty",
   "error_sign_in_error": "Failed to sign in. Please try again.",
   "error_sign_out_failed": "Sign out failed. Please try again.",

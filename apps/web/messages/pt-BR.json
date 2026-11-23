@@ -214,7 +214,6 @@
   "error_name_cannot_be_empty": "O nome não pode ficar vazio",
   "error_name_too_long": "O nome é muito longo",
   "error_need_logged_in_to_vote": "Você precisa estar conectado para votar nos comentários",
-  "error_not_found": "Página não encontrada.",
   "error_reply_cannot_be_empty": "A resposta não pode ficar vazia",
   "error_sign_in_error": "Falha ao entrar. Por favor, tente novamente.",
   "error_sign_out_failed": "Falha ao sair. Por favor, tente novamente.",

@@ -214,7 +214,6 @@
   "error_name_cannot_be_empty": "El nombre no puede estar vacío",
   "error_name_too_long": "El nombre es demasiado largo",
   "error_need_logged_in_to_vote": "Debes iniciar sesión para votar comentarios",
-  "error_not_found": "Página no encontrada.",
   "error_reply_cannot_be_empty": "La respuesta no puede estar vacía",
   "error_sign_in_error": "Error al iniciar sesión. Por favor intenta de nuevo.",
   "error_sign_out_failed": "Error al cerrar sesión. Por favor intenta de nuevo.",

@@ -205,7 +205,6 @@
   "error_name_cannot_be_empty": "名稱不能為空",
   "error_name_too_long": "名稱過長",
   "error_need_logged_in_to_vote": "您必須登入才能對評論投票。",
-  "error_not_found": "找不到頁面。",
   "error_reply_cannot_be_empty": "回覆不能為空",
   "error_sign_in_error": "登入失敗。請再試一次。",
   "error_sign_out_failed": "登出失敗，請再試一次。",

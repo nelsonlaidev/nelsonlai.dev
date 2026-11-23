@@ -205,7 +205,6 @@
   "error_name_cannot_be_empty": "名前を入力してください",
   "error_name_too_long": "名前が長すぎます",
   "error_need_logged_in_to_vote": "コメントに投票するにはサインインが必要です。",
-  "error_not_found": "ページが見つかりません。",
   "error_reply_cannot_be_empty": "返信を入力してください",
   "error_sign_in_error": "サインインに失敗しました。もう一度お試しください。",
   "error_sign_out_failed": "サインアウトに失敗しました。もう一度お試しください。",
