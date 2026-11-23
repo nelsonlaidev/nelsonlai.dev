@@ -1,20 +1,13 @@
 import 'varlock/auto-load'
 
-import contentCollections from '@content-collections/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 
 import { languageIconsPlugin } from './vite-plugins/language-icons.ts'
 
 export default defineConfig({
-  // Dev/build generates the collections; unit tests only need the official import alias.
-  plugins: [contentCollections({ isEnabled: () => false }), languageIconsPlugin(), react()],
-  resolve: {
-    alias: {
-      '@': new URL('src', import.meta.url).pathname,
-      '@messages': new URL('messages', import.meta.url).pathname,
-    },
-  },
+  plugins: [languageIconsPlugin(), react()],
+  resolve: { tsconfigPaths: true },
   test: {
     globals: true,
     environment: 'jsdom',
