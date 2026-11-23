@@ -57,7 +57,6 @@ export const Route = createFileRoute('/_main/blog/$slug')({
         headline: post.title,
         description: post.description,
         pathname,
-        image: `/og/blog/${post.slug}/image.webp`,
         datePublished: post.publishedAt,
         dateModified: post.updatedAt,
         locale,

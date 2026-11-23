@@ -23,7 +23,7 @@ import { NavigationSpinner } from '@/components/navigation-spinner'
 import { NotFound } from '@/components/not-found'
 import { ENV } from '@/env'
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '@/lib/og'
-import { getLocalizedUrl, OPEN_GRAPH_LOCALES } from '@/lib/seo'
+import { getLocalizedUrl, getOgImageUrl, OPEN_GRAPH_LOCALES } from '@/lib/seo'
 import { SITE } from '@/lib/site'
 
 import { m } from '../paraglide/messages'
@@ -47,7 +47,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   headers: () => ({ 'Cache-Control': 'private, no-store' }),
   head: () => {
     const description = m.metadata_site_description()
-    const fallbackImage = getLocalizedUrl('/og/image.webp', getLocale())
+    const fallbackImage = getOgImageUrl('/', getLocale())
 
     const scripts: AnyRouteMatch['scripts'] = []
 

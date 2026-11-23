@@ -38,7 +38,6 @@ export const Route = createFileRoute('/_main/')({
       locale,
       jsonLd: createJsonLdWebSite({
         description,
-        pathname,
         locale,
       }),
     })

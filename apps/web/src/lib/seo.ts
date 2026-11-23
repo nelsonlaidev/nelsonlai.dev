@@ -40,6 +40,10 @@ export function getLocalizedUrl(pathname: `/${string}`, locale: Locale) {
   return localizeUrl(new URL(pathname, ENV.SITE_URL), { locale }).href
 }
 
+export function getOgImageUrl(pathname: `/${string}`, locale: Locale) {
+  return getLocalizedUrl(`/og${pathname === '/' ? '' : pathname}/image.webp`, locale)
+}
+
 export function createPrivateSeoHead(options: Pick<SeoHeadOptions, 'title' | 'description' | 'pathname' | 'locale'>) {
   const { title, description, pathname, locale } = options
 
@@ -58,8 +62,7 @@ export function createSeoHead(options: SeoHeadOptions) {
   const { title, description, pathname, locale, jsonLd } = options
   const pageTitle = title === null ? SITE.name : `${title} | ${SITE.name}`
   const canonicalUrl = getLocalizedUrl(pathname, locale)
-  const imagePath = `/og${pathname === '/' ? '' : pathname}/image.webp` as const
-  const imageUrl = getLocalizedUrl(imagePath, locale)
+  const imageUrl = getOgImageUrl(pathname, locale)
 
   const meta: MetaDescriptor[] = [
     { title: pageTitle },

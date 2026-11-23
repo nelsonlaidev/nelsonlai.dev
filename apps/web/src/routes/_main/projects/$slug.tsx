@@ -46,7 +46,6 @@ export const Route = createFileRoute('/_main/projects/$slug')({
         license: project.license,
         programmingLanguages: project.programmingLanguages,
         dateCreated: project.dateCreated,
-        slug: project.slug,
         locale,
       }),
     })

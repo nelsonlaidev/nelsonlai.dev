@@ -15,7 +15,7 @@ import type { Locale } from '@/paraglide/runtime'
 
 import { ENV } from '@/env'
 
-import { getLocalizedUrl } from './seo'
+import { getLocalizedUrl, getOgImageUrl } from './seo'
 import { SITE } from './site'
 
 type JsonLdPersonOptions = {
@@ -33,31 +33,36 @@ function createJsonLdPerson(options?: JsonLdPersonOptions): Person {
   }
 }
 
+const webSiteUrl = new URL('/', ENV.SITE_URL).href
 const webSite = {
   '@type': 'WebSite',
+  '@id': `${webSiteUrl}#website`,
   name: SITE.name,
-  url: ENV.SITE_URL,
+  url: webSiteUrl,
 } satisfies WebSite
 
 type JsonLdWebSiteOptions = {
   description: string
-  pathname: `/${string}`
   locale: Locale
 }
 
-type JsonLdWebPageOptions = JsonLdWebSiteOptions & {
+type JsonLdPageOptions = JsonLdWebSiteOptions & {
+  pathname: `/${string}`
+}
+
+type JsonLdWebPageOptions = JsonLdPageOptions & {
   title: string
 }
 
-type JsonLdBlogPostingOptions = JsonLdWebSiteOptions & {
+type JsonLdBlogPostingOptions = JsonLdPageOptions & {
   headline: string
-  image: `/${string}`
+  image?: `/${string}`
   datePublished: string
   dateModified?: string
 }
 
-type JsonLdProjectOptions = JsonLdWebSiteOptions &
-  Pick<Project, 'schemaType' | 'license' | 'programmingLanguages' | 'dateCreated' | 'slug'> & {
+type JsonLdProjectOptions = JsonLdPageOptions &
+  Pick<Project, 'schemaType' | 'license' | 'programmingLanguages' | 'dateCreated'> & {
     name: string
     codeRepository?: string
   }
@@ -67,15 +72,10 @@ type JsonLdCollectionPageOptions = JsonLdWebPageOptions & {
 }
 
 export function createJsonLdWebSite(options: JsonLdWebSiteOptions): WithContext<WebSite> {
-  const url = getLocalizedUrl(options.pathname, options.locale)
-
   return {
     '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    '@id': url,
-    name: SITE.name,
+    ...webSite,
     description: options.description,
-    url,
     publisher: createJsonLdPerson({ sameAs: Object.values(SITE.socials) }),
     dateCreated: '2022-02-01T00:00:00Z',
     copyrightYear: new Date().getFullYear(),
@@ -122,7 +122,9 @@ export function createJsonLdBlogPosting(options: JsonLdBlogPostingOptions): With
       '@type': 'WebPage',
       '@id': getLocalizedUrl(options.pathname, options.locale),
     },
-    image: getLocalizedUrl(options.image, options.locale),
+    image: options.image
+      ? getLocalizedUrl(options.image, options.locale)
+      : getOgImageUrl(options.pathname, options.locale),
     datePublished: options.datePublished,
     dateModified: options.dateModified,
     author: person,
@@ -147,7 +149,7 @@ export function createJsonLdProject(
     }),
     dateCreated: options.dateCreated,
     author: createJsonLdPerson(),
-    thumbnailUrl: new URL(`/images/projects/${options.slug}/cover.png`, ENV.SITE_URL).href,
+    thumbnailUrl: getOgImageUrl(options.pathname, options.locale),
     inLanguage: options.locale,
   }
 }
