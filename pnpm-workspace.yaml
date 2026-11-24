@@ -18,6 +18,7 @@ catalog:
   drizzle-orm: 1.0.0-rc.5
   lucide-react: 1.61.0
   react: 19.3.1
+  recharts: 3.11.1
   sharp: 0.35.5
   tailwindcss: 4.3.3
   typescript: 6.0.3
@@ -28,3 +29,14 @@ catalog:
 minimumReleaseAgeExclude:
   - '@nelsonlaidev/oxlint-config@1.2.5'
   - recharts@3.11.1
+  - '@aws-sdk/client-s3@3.1176.0'
+  - '@better-auth/core@1.7.28'
+  - '@better-auth/drizzle-adapter@1.7.28'
+  - '@better-auth/kysely-adapter@1.7.28'
+  - '@better-auth/memory-adapter@1.7.28'
+  - '@better-auth/mongo-adapter@1.7.28'
+  - '@better-auth/prisma-adapter@1.7.28'
+  - '@better-auth/telemetry@1.7.28'
+  - '@upstash/ratelimit@2.2.2'
+  - '@upstash/redis@1.41.1'
+  - better-auth@1.7.28

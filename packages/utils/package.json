@@ -13,6 +13,6 @@
     "@nelsonlaidev/typescript-config": "catalog:",
     "@total-typescript/ts-reset": "catalog:",
     "typescript": "catalog:",
-    "vitest": "5.0.5"
+    "vitest": "5.1.1"
   }
 }

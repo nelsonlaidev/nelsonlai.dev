@@ -11,8 +11,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@upstash/ratelimit": "2.2.0",
-    "@upstash/redis": "1.40.0",
+    "@upstash/ratelimit": "2.2.2",
+    "@upstash/redis": "1.41.1",
     "zod": "catalog:"
   },
   "devDependencies": {

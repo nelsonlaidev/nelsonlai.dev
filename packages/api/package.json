@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.1161.0",
+    "@aws-sdk/client-s3": "3.1176.0",
     "@octokit/rest": "22.0.1",
     "@orpc/server": "catalog:",
     "@repo/auth": "workspace:*",
@@ -20,7 +20,7 @@
     "@repo/email": "workspace:*",
     "@repo/kv": "workspace:*",
     "drizzle-orm": "catalog:",
-    "jose": "6.2.14",
+    "jose": "6.2.18",
     "react": "catalog:",
     "sharp": "catalog:",
     "zod": "catalog:"

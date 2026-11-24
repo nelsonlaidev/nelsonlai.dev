@@ -12,7 +12,7 @@
     "lucide-react": "catalog:",
     "react": "catalog:",
     "react-dom": "19.3.1",
-    "recharts": "3.11.1"
+    "recharts": "catalog:"
   },
   "devDependencies": {
     "@fontsource-variable/geist": "5.3.0",
