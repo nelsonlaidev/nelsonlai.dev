@@ -378,6 +378,7 @@ test.describe('comment page', () => {
     test.beforeEach(async () => {
       parentId = createId()
       replyId = createId()
+
       await db.insert(comments).values({
         id: parentId,
         body: 'Vote parent',
@@ -419,6 +420,7 @@ test.describe('comment page', () => {
           )
           await state.action.click()
           await saved
+
           await expect(like).toHaveAttribute('aria-pressed', String(state.liked === true))
           await expect(dislike).toHaveAttribute('aria-pressed', String(state.liked === false))
           expect(await getNumberFlow(like.locator('number-flow-react'))).toBe(state.likes)
@@ -508,6 +510,7 @@ test.describe('comment page', () => {
               userId: TEST_UNIQUE_ID,
               createdAt,
             }))
+
             const highlightedComment = highlighted
               ? {
                   id: `${slug}-highlighted`,
@@ -518,10 +521,12 @@ test.describe('comment page', () => {
                 }
               : undefined
             const records = highlightedComment ? [...ordinary, highlightedComment] : ordinary
+
             const ordered = sort === 'newest' ? ordinary.toReversed() : ordinary
             const visible = ordered.slice(0, limit)
             const lastVisible = visible.at(-1)
             const expected = highlightedComment ? [highlightedComment, ...visible] : visible
+
             input = { slug, sort, limit, highlightedCommentId: highlightedComment?.id }
             expectedPages = [
               {
@@ -554,9 +559,11 @@ test.describe('comment page', () => {
               const body = (await response.json()) as {
                 json: CommentListOutput
               }
+
               expect(body.json.comments).toMatchObject(expected.ids.map((id) => ({ id })))
               expect(body.json.comments).toHaveLength(expected.ids.length)
               expect(body.json.nextCursor).toEqual(expected.nextCursor)
+
               cursor = body.json.nextCursor
             }
             // oxlint-enable no-await-in-loop
@@ -578,12 +585,14 @@ test.describe('comment page', () => {
     test.beforeEach(async () => {
       prefix = `pagination-${createId()}`
       parentId = createId()
+
       await db.insert(comments).values({
         id: parentId,
         body: 'Pagination parent',
         postSlug: COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
         userId: TEST_UNIQUE_ID,
       })
+
       records = ['comment', 'reply'].flatMap((type) =>
         Array.from({ length: 23 }, (_, index) => ({
           // Reverse timestamp groups relative to IDs so ordering cannot rely on the ID alone.
@@ -594,6 +603,7 @@ test.describe('comment page', () => {
           parentId: type === 'reply' ? parentId : null,
         })),
       )
+
       await db.insert(comments).values(
         records.map((record, index) => ({
           ...record,
@@ -630,6 +640,7 @@ test.describe('comment page', () => {
             createdAt: '2040-01-01T00:00:00.127Z',
           },
         }[sort]
+
         const response = await page.request.post('/api/rpc/comments/list', {
           data: {
             json: {
@@ -641,6 +652,7 @@ test.describe('comment page', () => {
             },
           },
         })
+
         await expect(response).toBeOK()
         expect(await response.json()).toMatchObject({
           json: {
@@ -669,6 +681,7 @@ test.describe('comment page', () => {
             .last()
             .scrollIntoViewIfNeeded()
           await page.mouse.wheel(0, 1000)
+
           expect(
             await loaded.evaluateAll((elements) => elements.map((element) => element.getAttribute('data-testid'))),
           ).toEqual(expectedBySort[sort])
@@ -690,6 +703,7 @@ test.describe('comment page', () => {
           },
         },
       })
+
       await expect(response).toBeOK()
       expect(await response.json()).toMatchObject({
         json: {
@@ -706,6 +720,7 @@ test.describe('comment page', () => {
       await expect(async () => {
         await loaded.last().scrollIntoViewIfNeeded()
         await page.mouse.wheel(0, 1000)
+
         expect(
           await loaded.evaluateAll((elements) => elements.map((element) => element.getAttribute('data-testid'))),
         ).toEqual(expected)
@@ -728,6 +743,7 @@ test.describe('comment page', () => {
           const parentId = createId()
           const replyId = createId()
           const id = { comment: parentId, reply: replyId }[type]
+
           await db.insert(comments).values({
             id: parentId,
             body: `Link parent ${parentId}`,
@@ -755,6 +771,7 @@ test.describe('comment page', () => {
               .getByRole('button', { name: messages.blog_comments_open_menu, exact: true })
               .click()
             await page.getByRole('menuitem', { name: messages.blog_comments_copy_link, exact: true }).click()
+
             await expect(page.getByText(messages.success_link_copied, { exact: true })).toBeVisible()
 
             const copied = await page.evaluate(async () => navigator.clipboard.readText())
@@ -763,6 +780,7 @@ test.describe('comment page', () => {
 
             const target = await fresh.newPage()
             await target.goto(copied)
+
             await expect(target.locator('html')).toHaveAttribute('lang', locale)
             const highlight = target.getByTestId(`highlighted-comment-${id}`)
             await expect(highlight).toBeVisible()

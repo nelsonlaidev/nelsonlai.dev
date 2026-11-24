@@ -102,6 +102,7 @@ test.describe('guestbook page', () => {
             columns: { createdAt: true },
             orderBy: { createdAt: 'asc' },
           })
+
           // Keep this cursor range before the public messages used by the other tests.
           const createdAt = new Date((oldest?.createdAt.getTime() ?? Date.now()) - 60_000)
           records = Array.from({ length: count }, (_, index) => ({
@@ -110,10 +111,12 @@ test.describe('guestbook page', () => {
             userId: TEST_UNIQUE_ID,
             createdAt,
           }))
+
           initialCursor = { createdAt: new Date(createdAt.getTime() + 1).toISOString(), id: prefix }
           const ordered = records.toReversed()
           const visible = ordered.slice(0, limit)
           const lastVisible = visible.at(-1)
+
           expectedPages = [
             {
               ids: visible.map(({ id }) => id),
@@ -151,9 +154,11 @@ test.describe('guestbook page', () => {
             const body = (await response.json()) as {
               json: MessageListOutput
             }
+
             expect(body.json.messages).toMatchObject(expected.ids.map((id) => ({ id })))
             expect(body.json.messages).toHaveLength(expected.ids.length)
             expect(body.json.nextCursor).toEqual(expected.nextCursor)
+
             cursor = body.json.nextCursor
           }
           // oxlint-enable no-await-in-loop
@@ -184,6 +189,7 @@ test.describe('guestbook page', () => {
           },
         },
       })
+
       await expect(response).toBeOK()
       expect(await response.json()).toMatchObject({
         json: {
@@ -199,6 +205,7 @@ test.describe('guestbook page', () => {
       await expect(async () => {
         await loaded.last().scrollIntoViewIfNeeded()
         await page.mouse.wheel(0, 1000)
+
         await expect(loaded).toHaveCount(records.length, { timeout: 1000 })
       }).toPass({ timeout: 15_000 })
 

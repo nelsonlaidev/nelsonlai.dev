@@ -8,6 +8,7 @@ const searchMessages = {
   placeholder: en.blog_search_placeholder,
   'no-posts-found': en.blog_search_no_posts_found,
 }
+
 const englishPosts = allPosts.filter((post) => post.locale === 'en')
 
 test.describe('blog search', () => {
@@ -91,6 +92,7 @@ test.describe('blog search', () => {
 
     await page.getByRole('searchbox', { name: searchMessages.placeholder }).fill('Better Auth')
     await expect(resultLinks).toHaveCount(1)
+
     await resultLinks.click()
 
     await expect(page).toHaveURL(`/blog/${COMMENT_SUBMIT_AND_VIEW_POST_SLUG}`)

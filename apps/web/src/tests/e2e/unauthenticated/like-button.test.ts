@@ -47,6 +47,7 @@ test.describe('like button', () => {
     const initialLabel = await getNumberFlow(likeCount)
     const initialCount = Number(initialLabel?.replaceAll(',', ''))
     const finalCount = (initialCount + 3).toLocaleString('en-US')
+
     const saved = page.waitForResponse(async (response) => {
       if (!response.url().includes('/api/rpc/posts/like') || !response.ok()) return false
 
@@ -80,6 +81,7 @@ test.describe('like button', () => {
 
     expect(await getNumberFlow(likeCount)).toBe(finalCount)
     await expect(likeButton).toBeDisabled()
+
     // The aria-disabled control still handles pointer clicks to explain the limit.
     await likeButton.scrollIntoViewIfNeeded()
     const bounds = await likeButton.boundingBox()
@@ -92,6 +94,7 @@ test.describe('like button', () => {
     const response = await page.request.post('/api/rpc/posts/like', {
       data: { json: { slug: COMMENT_DELETE_AND_LIKE_POST_SLUG, value: 1 } },
     })
+
     expect(response.status()).toBe(400)
     expect(await response.json()).toMatchObject({ json: { code: 'BAD_REQUEST' } })
 

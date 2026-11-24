@@ -33,6 +33,7 @@ const test = base.extend<{
         { id: createId(), userId, token, expiresAt, userAgent },
         { id: createId(), userId, token: otherToken, expiresAt, userAgent },
       ])
+
       await context.addCookies([createSessionCookie(token, expiresAt)])
       await provide({ userId, token, otherToken, expiresAt })
     } finally {
@@ -55,6 +56,7 @@ test.describe('session lifecycle', () => {
 
       const revokeButtons = page.getByRole('button', { name: en.account_revoke_session, exact: true })
       await expect(revokeButtons).toHaveCount(2)
+
       const unknownSession = page
         .locator('[data-slot="card"]')
         .filter({ has: page.getByRole('button', { name: en.account_revoke_session, exact: true }) })
@@ -83,6 +85,7 @@ test.describe('session lifecycle', () => {
     }) => {
       await page.goto(`${prefix}/guestbook`)
       await expect(page.getByRole('textbox')).toBeVisible()
+
       await page.getByRole('button', { name: messages.common_sign_out, exact: true }).click()
 
       await expect(page.getByRole('textbox')).toBeDisabled()

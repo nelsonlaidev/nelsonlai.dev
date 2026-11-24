@@ -15,6 +15,7 @@ describe('Uses content', () => {
     (locale) => {
       let laptop: UsesLaptopProps | undefined
       const sections: UsesSectionProps[] = []
+
       const document = allPages.find((page) => page.slug === 'uses' && page.locale === locale)
       expect(document).toBeDefined()
       if (!document) return

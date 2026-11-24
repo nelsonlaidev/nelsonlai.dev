@@ -17,6 +17,7 @@ describe('public content route coverage', () => {
       )
       .map((file) => file.replaceAll(/\/index\.tsx$|\.tsx$/g, ''))
       .filter((file) => file !== 'index')
+
     for (const locale of new Set(allPages.map((page) => page.locale)))
       expect(routes.filter((route) => !allPages.some((page) => page.locale === locale && page.slug === route))).toEqual(
         [],

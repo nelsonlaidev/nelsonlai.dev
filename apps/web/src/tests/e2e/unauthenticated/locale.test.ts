@@ -45,6 +45,7 @@ test.describe('language switching', () => {
       await page.goto(`${sourcePrefix}${articlePath}`)
       await page.getByRole('button', { name: sourceMessages.nav_change_language }).click()
       await page.getByRole('menuitemradio', { name: label, exact: true }).click()
+
       await expect(page).toHaveURL(`${targetPrefix}${articlePath}`)
       await expect(page.getByRole('button', { name: targetMessages.nav_change_language })).toContainText(label)
 
