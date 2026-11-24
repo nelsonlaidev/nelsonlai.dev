@@ -1,4 +1,4 @@
-import { defineConfig, playwright, react, tailwindcss, vitest } from '@nelsonlaidev/oxlint-config'
+import { defineConfig, paraglide, playwright, react, tailwindcss, vitest } from '@nelsonlaidev/oxlint-config'
 
 export default defineConfig({
   overrides: [
@@ -17,6 +17,7 @@ export default defineConfig({
     vitest({
       files: ['apps/web/src/tests/unit/**/*.test.{ts,tsx}'],
     }),
+    paraglide(),
   ],
   settings: {
     'better-tailwindcss': {
