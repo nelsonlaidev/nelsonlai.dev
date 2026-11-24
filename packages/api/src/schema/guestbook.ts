@@ -2,7 +2,7 @@ import * as z from 'zod'
 
 import { InfiniteQueryCursorSchema } from './pagination'
 
-export const GUESTBOOK_MESSAGE_MAX_LENGTH = 2000
+export const GUESTBOOK_MESSAGE_MAX_LENGTH = 500
 
 export const CreateGuestbookMessageInputSchema = z.object({
   body: z.string().trim().min(1).max(GUESTBOOK_MESSAGE_MAX_LENGTH),

@@ -101,13 +101,13 @@ describe('Guestbook session and submission fixtures', () => {
     expect(screen.queryByRole('button', { name: 'Fixture sign in' })).not.toBeInTheDocument()
   })
 
-  test('keeps the full server-supported length instead of the prototype limit', () => {
+  test('shows the character count at the 500-character limit', () => {
     setup()
 
-    expect(screen.getByRole('textbox')).toHaveAttribute('maxlength', '2000')
+    expect(screen.getByRole('textbox')).toHaveAttribute('maxlength', '500')
 
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'x'.repeat(281) } })
-    expect(screen.getByText('281/2000')).toBeInTheDocument()
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'x'.repeat(500) } })
+    expect(screen.getByText('500/500')).toBeInTheDocument()
     expect(fixture.create).not.toHaveBeenCalled()
   })
 
