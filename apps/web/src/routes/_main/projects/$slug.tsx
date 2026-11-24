@@ -76,7 +76,7 @@ function RouteComponent() {
         <h2 className='mb-8 text-4xl tracking-tight lg:text-5xl 2xl:text-6xl'>
           {m.projects_idea_title()}
           <br />
-          <em className='font-serif tracking-tight text-primary italic'>{m.projects_idea_emphasis()}</em>
+          <em className='font-serif text-primary italic'>{m.projects_idea_emphasis()}</em>
         </h2>
         <dl className='mb-6 flex flex-wrap items-baseline gap-x-2 text-sm'>
           <dt>{m.projects_built_with()}</dt>

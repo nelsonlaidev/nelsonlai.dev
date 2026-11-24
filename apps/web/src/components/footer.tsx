@@ -71,7 +71,7 @@ export function Footer() {
           <nav aria-label={m.nav_footer()} className='grid grid-cols-2 gap-x-5 gap-y-7 sm:grid-cols-4 xl:gap-9'>
             {groups.map((group) => (
               <div key={group.id} className='min-w-0'>
-                <h2 className='mb-4 text-base/normal font-medium text-foreground sm:mt-2'>{group.title}</h2>
+                <h2 className='mb-4 text-base font-medium text-foreground sm:mt-2'>{group.title}</h2>
                 <ul className='grid gap-y-2'>
                   {group.links.map((link) => (
                     <li key={'to' in link ? link.to : link.href}>
