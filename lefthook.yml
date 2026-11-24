@@ -19,4 +19,4 @@ pre-commit:
         - '**/*.{json,jsonc,yaml,yml}'
         - '**/*.css'
         - '**/.{gitignore,env.schema}'
-      run: pnpm cspell lint --no-progress --file {staged_files}
+      run: pnpm cspell lint --no-progress --no-must-find-files --file {staged_files}
