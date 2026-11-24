@@ -60,7 +60,7 @@ type UseItem = {
   url: string
 }
 
-export type UsesSectionProps = {
+type UsesSectionProps = {
   id: string
   title: string
   items: UseItem[]
@@ -104,7 +104,7 @@ function UsesSection(props: UsesSectionProps) {
   )
 }
 
-export type UsesLaptopProps = {
+type UsesLaptopProps = {
   title: string
   src: string
   alt: string

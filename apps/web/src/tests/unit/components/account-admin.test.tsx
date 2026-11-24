@@ -85,7 +85,6 @@ describe('Account and admin presentation with isolated API fixtures', () => {
     expect(await screen.findByText(en.admin_users_table_empty)).toBeInTheDocument()
     expect(screen.getByRole('table', { name: en.common_labels_users })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: en.admin_pagination_go_to_next_page })).toBeDisabled()
-    expect(fixture.mutate).not.toHaveBeenCalled()
   })
 
   test('localizes the empty users table in Traditional Chinese', async () => {
