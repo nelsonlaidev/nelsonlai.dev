@@ -19,6 +19,7 @@ const config = defineConfig({
   },
   resolve: { tsconfigPaths: true },
   ssr: {
+    external: ['sharp'],
     // Bundle Bowser before Nitro generates a CommonJS facade with a missing module.exports export.
     noExternal: ['bowser'],
   },
@@ -82,7 +83,7 @@ const config = defineConfig({
           },
         },
       },
-      traceDeps: ['@takumi-rs/core*'],
+      traceDeps: ['@takumi-rs/core*', 'sharp*'],
     }),
     tailwindcss(),
     tanstackStart(),
