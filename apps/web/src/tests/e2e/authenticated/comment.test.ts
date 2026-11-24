@@ -25,7 +25,7 @@ type CommentListInput = z.infer<typeof ListCommentsInputSchema>
 type CommentListOutput = z.infer<typeof ListCommentsOutputSchema>
 
 async function getCount(locator: Parameters<typeof getNumberFlow>[0]) {
-  return Number.parseInt(String(await getNumberFlow(locator)), 10)
+  return Number.parseInt((await getNumberFlow(locator)) ?? '', 10)
 }
 
 test.describe('comment page', () => {

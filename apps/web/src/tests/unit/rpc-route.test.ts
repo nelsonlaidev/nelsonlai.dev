@@ -24,7 +24,7 @@ const handleRequest = handlers.ANY
 
 const handle = async (request: Request) => {
   const response = await handleRequest({ request } as never)
-  if (!(response instanceof Response)) throw new Error('Expected an HTTP response')
+  if (!(response instanceof Response)) throw new TypeError('Expected an HTTP response')
   return response
 }
 
