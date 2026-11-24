@@ -28,11 +28,14 @@ const fixture = vi.hoisted(() => ({
   >(),
   mutate: vi.fn<() => Promise<never>>(),
 }))
+
 vi.mock('@tanstack/react-router', () => ({
   Link: (props: MockLinkProps) => <a href={props.to}>{props.children}</a>,
   useRouter: () => ({ invalidate: vi.fn<() => Promise<void>>() }),
 }))
+
 vi.mock('@repo/auth/client', () => ({ authClient: { useSession: () => ({ refetch: vi.fn<() => Promise<void>>() }) } }))
+
 function query(key: string, queryFn: () => Promise<unknown>) {
   return {
     key: () => [key],
@@ -42,6 +45,7 @@ function query(key: string, queryFn: () => Promise<unknown>) {
 
 vi.mock('@/lib/orpc-client', () => {
   const mutation = { mutationOptions: (options: object) => ({ ...options, mutationFn: fixture.mutate }) }
+
   return {
     orpc: {
       admin: {
@@ -53,6 +57,7 @@ vi.mock('@/lib/orpc-client', () => {
     },
   }
 })
+
 function setup(children: React.ReactNode) {
   return render(
     <IntlProvider locale='en' formats={{ dateTime: { long: { dateStyle: 'medium', timeStyle: 'short' } } }}>
@@ -62,39 +67,50 @@ function setup(children: React.ReactNode) {
     </IntlProvider>,
   )
 }
+
 beforeEach(async () => {
   await setLocale('en', { reload: false })
   vi.resetAllMocks()
+
   fixture.users.mockResolvedValue({ users: [], pageCount: 0 })
   fixture.comments.mockResolvedValue({ comments: [], pageCount: 0 })
   fixture.sessions.mockResolvedValue([])
   fixture.preference.mockResolvedValue({ commentRepliesEnabled: true })
 })
+
 describe('Account and admin presentation with isolated API fixtures', () => {
   test('disables forward pagination for an empty users table', async () => {
     setup(<AdminUsers />)
+
     expect(await screen.findByText(en.admin_users_table_empty)).toBeInTheDocument()
     expect(screen.getByRole('table', { name: en.common_labels_users })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: en.admin_pagination_go_to_next_page })).toBeDisabled()
     expect(fixture.mutate).not.toHaveBeenCalled()
   })
+
   test('localizes the empty users table in Traditional Chinese', async () => {
     await setLocale('zh-TW', { reload: false })
     setup(<AdminUsers />)
     expect(await screen.findByText(zhTW.admin_users_table_empty)).toBeInTheDocument()
+
     expect(screen.getByRole('table', { name: zhTW.common_labels_users })).toBeInTheDocument()
   })
+
   test('announces admin loading while no rows are available', () => {
     fixture.users.mockReturnValue(new Promise(() => {}))
     setup(<AdminUsers />)
+
     expect(screen.getByRole('status')).toHaveTextContent(m.common_aria_labels_loading())
     expect(screen.queryByRole('table')).not.toBeInTheDocument()
   })
+
   test('announces an admin request error', async () => {
     fixture.comments.mockRejectedValue(new Error('Local fixture failure'))
     setup(<AdminComments />)
+
     expect(await screen.findByRole('alert')).toHaveTextContent(m.error_failed_to_fetch_comments_data())
   })
+
   test('retains comment bodies and links in the comments table', async () => {
     fixture.comments.mockResolvedValue({
       comments: [
@@ -110,28 +126,37 @@ describe('Account and admin presentation with isolated API fixtures', () => {
       ],
       pageCount: 1,
     })
+
     setup(<AdminComments />)
+
     expect(await screen.findByText('Local fixture body')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'example' })).toBeInTheDocument()
   })
+
   test('empty sessions never offers a revoke action', async () => {
     setup(<ActiveSessions userId='local-fixture' />)
+
     expect(await screen.findByText(m.account_no_active_sessions())).toBeInTheDocument()
     expect(screen.queryByRole('button')).not.toBeInTheDocument()
     expect(fixture.mutate).not.toHaveBeenCalled()
   })
+
   test('session failures are announced without suggesting there are no sessions', async () => {
     fixture.sessions.mockRejectedValue(new Error('Local fixture failure'))
     setup(<ActiveSessions userId='local-fixture' />)
+
     expect(await screen.findByRole('alert')).toHaveTextContent(m.error_something_went_wrong())
     expect(screen.queryByText(m.account_no_active_sessions())).not.toBeInTheDocument()
   })
+
   test('notification toggling and reset remain local until saved', async () => {
     setup(<NotificationSettings userId='local-fixture' />)
     const toggle = await screen.findByRole('switch')
     expect(screen.getByRole('button', { name: m.common_save() })).toBeDisabled()
+
     fireEvent.click(toggle)
     expect(screen.getByRole('button', { name: m.common_save() })).toBeEnabled()
+
     fireEvent.click(screen.getByRole('button', { name: m.common_reset() }))
     expect(toggle).toBeChecked()
     expect(screen.getByRole('button', { name: m.common_save() })).toBeDisabled()

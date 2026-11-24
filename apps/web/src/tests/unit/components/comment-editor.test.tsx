@@ -7,6 +7,7 @@ import { CommentEditor } from '@/features/comments/comment-editor'
 function EditorHarness(props: Partial<React.ComponentProps<typeof CommentEditor>>) {
   const [value, setValue] = useState(props.value ?? '')
   const [tabsValue, setTabsValue] = useState(props.tabsValue ?? 'write')
+
   return (
     <CommentEditor
       {...props}

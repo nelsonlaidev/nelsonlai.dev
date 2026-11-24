@@ -25,13 +25,16 @@ const fixture = vi.hoisted(() => ({
   >(),
   unsubscribe: vi.fn<() => Promise<void>>(),
 }))
+
 vi.mock('@tanstack/react-router', async (importOriginal) => ({
   ...(await importOriginal()),
   Link: (props: MockLinkProps) => <a href={props.to}>{props.children}</a>,
   useRouter: () => ({ invalidate: fixture.invalidate }),
 }))
+
 vi.mock('@/lib/orpc-client', async () => {
   const { createTanstackQueryUtils } = await import('@orpc/tanstack-query')
+
   return {
     orpc: createTanstackQueryUtils({
       notifications: {
@@ -49,11 +52,13 @@ function setup(token?: string) {
     </QueryClientProvider>,
   )
 }
+
 beforeEach(() => {
   fixture.invalidate.mockReset().mockResolvedValue()
   fixture.reset.mockReset()
   fixture.inspect.mockReset()
   fixture.unsubscribe.mockReset()
+
   fixture.inspect.mockResolvedValue({
     comment: 'Local fixture comment',
     userEmail: 'fixture@example.invalid',
@@ -65,51 +70,66 @@ beforeEach(() => {
 describe('Public system states with isolated API fixtures', () => {
   test('missing token stays invalid and never inspects or writes', () => {
     setup()
+
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(m.unsubscribe_invalid_unsubscribe_link())
     expect(fixture.inspect).not.toHaveBeenCalled()
     expect(fixture.unsubscribe).not.toHaveBeenCalled()
   })
+
   test('inspection error never offers an unsubscribe action', async () => {
     fixture.inspect.mockRejectedValue(new Error('Fixture invalid token'))
     setup('local-fixture')
+
     await screen.findByText(m.unsubscribe_invalid_unsubscribe_link())
     expect(screen.queryByRole('button')).not.toBeInTheDocument()
     expect(fixture.unsubscribe).not.toHaveBeenCalled()
   })
+
   test('loading remains busy without showing a success message', () => {
     fixture.inspect.mockReturnValue(new Promise(() => {}))
     const view = setup('local-fixture')
+
     expect(view.container.querySelector('[aria-busy]')).toHaveAttribute('aria-busy', 'true')
     expect(screen.getByText(m.common_aria_labels_loading())).toHaveAttribute('skullet-status')
     expect(screen.queryByText(m.unsubscribe_you_have_been_unsubscribed())).not.toBeInTheDocument()
   })
+
   test('confirmation requires an explicit click and updates the cached result', async () => {
     setup('local-fixture')
     const button = await screen.findByRole('button', { name: m.common_labels_unsubscribe() })
+
     expect(screen.getByText('Local fixture comment')).toBeInTheDocument()
     expect(fixture.unsubscribe).not.toHaveBeenCalled()
+
     fireEvent.click(button)
     await screen.findByText(m.unsubscribe_you_have_been_unsubscribed())
     expect(fixture.unsubscribe).toHaveBeenCalledOnce()
     expect(screen.queryByRole('button')).not.toBeInTheDocument()
   })
+
   test('existing unsubscribe result needs no mutation', async () => {
     fixture.inspect.mockResolvedValue({ comment: '', userEmail: 'fixture@example.invalid', isUnsubscribed: true })
     setup('local-fixture')
+
     await screen.findByText(m.unsubscribe_you_have_been_unsubscribed())
     expect(fixture.unsubscribe).not.toHaveBeenCalled()
   })
+
   test('failed mutation announces the error and keeps confirmation available', async () => {
     fixture.unsubscribe.mockRejectedValue(new Error('Fixture write failure'))
     setup('local-fixture')
+
     fireEvent.click(await screen.findByRole('button', { name: m.common_labels_unsubscribe() }))
+
     await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(m.error_something_went_wrong()))
     expect(screen.getByRole('button', { name: m.common_labels_unsubscribe() })).toBeEnabled()
     expect(screen.queryByText(m.unsubscribe_you_have_been_unsubscribed())).not.toBeInTheDocument()
   })
+
   test('route error retries the router before resetting its boundary', async () => {
     render(<RouteError error={new Error('Local fixture')} reset={fixture.reset} info={{ componentStack: '' }} />)
     fireEvent.click(screen.getByRole('button', { name: m.error_try_again() }))
+
     await waitFor(() => {
       expect(fixture.reset).toHaveBeenCalledOnce()
     })
@@ -118,6 +138,7 @@ describe('Public system states with isolated API fixtures', () => {
       fixture.reset.mock.invocationCallOrder[0] ?? Infinity,
     )
   })
+
   test('navigation announces loading only after one second', async () => {
     vi.useFakeTimers()
     try {
@@ -135,8 +156,10 @@ describe('Public system states with isolated API fixtures', () => {
           <NavigationSpinner />
         </UIProvider>,
       )
+
       await act(() => vi.advanceTimersByTime(999))
       expect(screen.queryByRole('status')).not.toBeInTheDocument()
+
       await act(() => vi.advanceTimersByTime(1))
       expect(screen.getByRole('status', { name: m.common_aria_labels_loading() })).toBeInTheDocument()
     } finally {

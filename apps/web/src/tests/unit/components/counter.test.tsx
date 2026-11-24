@@ -10,14 +10,17 @@ const fixture = vi.hoisted(() => ({
     }
   >(() => ({ stop: () => {} })),
 }))
+
 vi.mock('motion/react', () => ({ animate: fixture.animate, useReducedMotion: () => true, useInView: () => true }))
 
 describe('Dashboard counter reduced motion', () => {
   test('renders actual localized values immediately without animation', () => {
     const view = render(<Counter value={12_345} />)
+
     expect(view.container.querySelector('[aria-hidden]')).toHaveTextContent('12,345')
     expect(view.container.querySelector('.sr-only')).toHaveTextContent('12,345')
     expect(fixture.animate).not.toHaveBeenCalled()
+
     view.rerender(<Counter value={0} />)
     expect(view.container.querySelector('[aria-hidden]')).toHaveTextContent('0')
     expect(fixture.animate).not.toHaveBeenCalled()

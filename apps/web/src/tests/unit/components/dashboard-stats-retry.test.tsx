@@ -27,7 +27,9 @@ const fixture = vi.hoisted(() => ({
     }) => void
   >(),
 }))
+
 vi.mock('@repo/ui/components/toast', () => ({ toast: { add: fixture.toast } }))
+
 function source(name: string, data: object) {
   return {
     queryOptions: (options: object = {}) => ({
@@ -48,29 +50,35 @@ vi.mock('@/lib/orpc-client', () => {
     },
   }
 })
+
 vi.mock('@tanstack/react-router', async (importOriginal) => ({
   ...(await importOriginal<typeof Router>()),
   Link: (props: MockLinkProps) => <a href={props.to}>{props.children}</a>,
 }))
+
 vi.mock('@/routes/_main/-components/dashboard/counter', () => ({
   Counter: (props: CounterProps) => <>{props.value}</>,
 }))
+
 beforeEach(() => {
   fixture.youtube.mockReset().mockRejectedValue(new Error('Fixture service unavailable'))
   fixture.toast.mockReset()
   vi.spyOn(console, 'error').mockImplementation(() => {})
 })
+
 afterEach(() => vi.restoreAllMocks())
 
 describe('Dashboard suspense recovery with real Query and Router boundaries', () => {
   test('retries an initially failed inactive query and restores only its group', async () => {
     const client = createQueryClient()
     client.setDefaultOptions({ queries: { retry: false } })
+
     const view = render(
       <QueryClientProvider client={client}>
         <DashboardStats />
       </QueryClientProvider>,
     )
+
     const youtube = screen.getByRole('region', { name: 'YouTube' })
     await waitFor(() => {
       expect(within(youtube).getAllByText(m.dashboard_unavailable())).toHaveLength(2)
@@ -84,12 +92,14 @@ describe('Dashboard suspense recovery with real Query and Router boundaries', ()
     ).toBe(false)
     expect(screen.getByText('2345')).toBeInTheDocument()
     expect(screen.getByText('1112')).toBeInTheDocument()
+
     fixture.youtube.mockResolvedValue({ subscribers: 123, views: 4567 })
     fireEvent.click(within(youtube).getByRole('button', { name: m.common_retry() }))
     expect(await screen.findByText('4567')).toBeInTheDocument()
     expect(within(youtube).queryByText(m.dashboard_unavailable())).not.toBeInTheDocument()
     expect(fixture.youtube).toHaveBeenCalledTimes(2)
     expect(fixture.toast).not.toHaveBeenCalled()
+
     view.unmount()
     client.clear()
   })
@@ -97,36 +107,45 @@ describe('Dashboard suspense recovery with real Query and Router boundaries', ()
   test('a failed retry stays recoverable for another attempt', async () => {
     const client = createQueryClient()
     client.setDefaultOptions({ queries: { retry: false } })
+
     const view = render(
       <QueryClientProvider client={client}>
         <DashboardStats />
       </QueryClientProvider>,
     )
+
     const youtube = screen.getByRole('region', { name: 'YouTube' })
     fireEvent.click(await within(youtube).findByRole('button', { name: m.common_retry() }))
     await waitFor(() => {
       expect(fixture.youtube).toHaveBeenCalledTimes(2)
     })
+
     fixture.youtube.mockResolvedValue({ subscribers: 123, views: 4567 })
     fireEvent.click(await within(youtube).findByRole('button', { name: m.common_retry() }))
     expect(await screen.findByText('4567')).toBeInTheDocument()
+
     view.unmount()
     client.clear()
   })
+
   test('preserves the global toast retry for background errors with cached data', async () => {
     const client = createQueryClient()
     client.setDefaultOptions({ queries: { retry: false } })
     client.setQueryData(['youtube'], { subscribers: 123, views: 4567 })
+
     const view = render(
       <QueryClientProvider client={client}>
         <DashboardStats />
       </QueryClientProvider>,
     )
+
     await act(async () => {
       await client.refetchQueries({ queryKey: ['youtube'], exact: true })
     })
+
     expect(fixture.toast).toHaveBeenCalledOnce()
     expect(screen.getAllByText('4567')).toHaveLength(1)
+
     fixture.youtube.mockResolvedValue({ subscribers: 124, views: 4568 })
     const message = fixture.toast.mock.calls[0]?.[0]
     if (!message?.actionProps) throw new Error('Expected retry action')
@@ -134,6 +153,7 @@ describe('Dashboard suspense recovery with real Query and Router boundaries', ()
       message.actionProps?.onClick()
     })
     expect(await screen.findByText('4568')).toBeInTheDocument()
+
     view.unmount()
     client.clear()
   })

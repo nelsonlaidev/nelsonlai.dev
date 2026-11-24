@@ -26,13 +26,17 @@ const fixture = vi.hoisted(() => ({
   >(),
   toast: vi.fn<(message: ToastOptions) => void>(),
 }))
+
 vi.mock('@repo/auth/client', () => ({
   authClient: { getLastUsedLoginMethod: () => 'github', signIn: { social: fixture.signIn } },
 }))
+
 vi.mock('@repo/ui/components/toast', () => ({ toast: { add: fixture.toast } }))
+
 vi.mock('@tanstack/react-router', () => ({
   Link: (props: MockLinkProps) => <a href={props.to}>{props.children}</a>,
 }))
+
 function setup() {
   render(
     <UIProvider
@@ -49,15 +53,19 @@ function setup() {
       <SignInDialog />
     </UIProvider>,
   )
+
   fireEvent.click(screen.getByRole('button', { name: 'Open fixture sign in' }))
 }
+
 beforeEach(() => {
   fixture.signIn.mockReset().mockResolvedValue({ error: null })
   fixture.toast.mockReset()
 })
+
 describe('Sign-in dialog with mocked providers only', () => {
   test('preserves providers, last-used badge and policy links', async () => {
     setup()
+
     expect(await screen.findByRole('dialog')).toHaveAttribute('data-slot', 'dialog-content')
     expect(screen.getByRole('button', { name: /GitHub/ })).toHaveTextContent(m.auth_sign_in_last_used())
     expect(screen.getByRole('button', { name: /Google/ })).toBeEnabled()
@@ -65,31 +73,40 @@ describe('Sign-in dialog with mocked providers only', () => {
     expect(screen.getByRole('link', { name: m.common_labels_privacy() })).toHaveAttribute('href', '/privacy')
     expect(fixture.signIn).not.toHaveBeenCalled()
   })
+
   test('disables both providers during a pending mock sign-in', async () => {
     fixture.signIn.mockReturnValue(new Promise(() => {}))
     setup()
     const github = await screen.findByRole('button', { name: /GitHub/ })
+
     fireEvent.click(github)
     fireEvent.click(github)
+
     expect(github).toBeDisabled()
     expect(screen.getByRole('button', { name: /Google/ })).toBeDisabled()
     expect(screen.getByRole('dialog')).toHaveAttribute('aria-busy', 'true')
     expect(fixture.signIn).toHaveBeenCalledOnce()
   })
+
   test('reports provider failure and allows a retry', async () => {
     fixture.signIn.mockRejectedValue(new Error('Mock provider unavailable'))
     setup()
     const google = await screen.findByRole('button', { name: /Google/ })
+
     fireEvent.click(google)
+
     await waitFor(() => {
       expect(fixture.toast).toHaveBeenCalledWith({ type: 'error', title: m.error_sign_in_error() })
     })
     expect(google).toBeEnabled()
   })
+
   test('can close and reopen without initiating authentication', async () => {
     setup()
+
     fireEvent.click(await screen.findByRole('button', { name: 'Close' }))
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
+
     fireEvent.click(screen.getByRole('button', { name: 'Open fixture sign in' }))
     expect(await screen.findByRole('dialog')).toBeInTheDocument()
     expect(fixture.signIn).not.toHaveBeenCalled()

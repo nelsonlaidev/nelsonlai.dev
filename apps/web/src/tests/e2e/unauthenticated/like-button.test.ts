@@ -23,6 +23,7 @@ test.describe('like button', () => {
 
   test.afterEach(async ({ extraHTTPHeaders }) => {
     const anonKey = getAnonymousKey(new Headers(extraHTTPHeaders))
+
     await db.transaction(async (tx) => {
       const [removed] = await tx
         .delete(postLikes)
