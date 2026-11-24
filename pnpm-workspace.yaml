@@ -10,20 +10,20 @@ allowBuilds:
 
 catalog:
   '@nelsonlaidev/typescript-config': 3.0.0
-  '@orpc/server': 2.0.0-beta.45
+  '@orpc/server': 2.0.0-beta.53
   '@total-typescript/ts-reset': 0.6.1
   '@types/node': 26.6.6
   '@types/react': 19.3.0
-  cn: 0.5.0
-  drizzle-orm: 1.0.0-rc.5
-  lucide-react: 1.61.0
+  cn: 0.5.2
+  drizzle-orm: 1.0.0-rc.6
+  lucide-react: 1.78.0
   react: 19.3.1
   recharts: 3.11.1
   sharp: 0.35.5
-  tailwindcss: 4.3.3
+  tailwindcss: 4.3.5
   typescript: 6.0.3
-  varlock: 1.24.0
-  vite: 8.3.5
+  varlock: 1.25.0
+  vite: 8.3.8
   zod: 4.6.7
 
 minimumReleaseAgeExclude:
