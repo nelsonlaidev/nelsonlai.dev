@@ -12,7 +12,7 @@
     "lucide-react": "catalog:",
     "react": "catalog:",
     "react-dom": "19.3.1",
-    "recharts": "3.10.1"
+    "recharts": "3.11.1"
   },
   "devDependencies": {
     "@fontsource-variable/geist": "5.3.0",
@@ -20,16 +20,16 @@
     "@fontsource-variable/noto-sans-sc": "5.3.1",
     "@fontsource-variable/noto-sans-tc": "5.3.1",
     "@nelsonlaidev/typescript-config": "catalog:",
-    "@storybook/addon-docs": "10.6.5",
-    "@storybook/react-vite": "10.6.5",
-    "@tailwindcss/vite": "4.3.3",
+    "@storybook/addon-docs": "10.6.8",
+    "@storybook/react-vite": "10.6.8",
+    "@tailwindcss/vite": "4.3.5",
     "@total-typescript/ts-reset": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "19.3.0",
-    "@vitejs/plugin-react": "6.1.2",
-    "oxc-transform-react": "0.152.0",
-    "storybook": "10.6.5",
+    "@vitejs/plugin-react": "6.3.0",
+    "oxc-transform-react": "0.158.0",
+    "storybook": "10.6.8",
     "typescript": "catalog:",
     "vite": "catalog:"
   }

@@ -27,3 +27,4 @@ catalog:
 
 minimumReleaseAgeExclude:
   - '@nelsonlaidev/oxlint-config@1.2.5'
+  - recharts@3.11.1
