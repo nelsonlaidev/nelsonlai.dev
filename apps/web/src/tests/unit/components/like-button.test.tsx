@@ -93,7 +93,9 @@ describe('article Like integration with safe query fixtures', () => {
   test('shares drafts across both placements, batches three contributions, and blocks a fourth', async () => {
     setup()
     const buttons = screen.getAllByRole('button', { name: m.blog_like_this_post() })
-    await waitFor(() => expect(buttons[0]).toBeEnabled())
+    await waitFor(() => {
+      expect(buttons[0]).toBeEnabled()
+    })
 
     fireEvent.click(requiredButton(buttons, 0))
     fireEvent.click(requiredButton(buttons, 1))
@@ -111,7 +113,9 @@ describe('article Like integration with safe query fixtures', () => {
       },
       { timeout: 2000 },
     )
-    await waitFor(() => expect(buttons[0]).toHaveAttribute('aria-disabled', 'true'))
+    await waitFor(() => {
+      expect(buttons[0]).toHaveAttribute('aria-disabled', 'true')
+    })
     expect(screen.getAllByText('15')).toHaveLength(2)
   })
 
@@ -119,7 +123,9 @@ describe('article Like integration with safe query fixtures', () => {
     fixture.save.mockRejectedValue(new Error('fixture failure'))
     setup()
     const button = requiredButton(screen.getAllByRole('button', { name: m.blog_like_this_post() }), 0)
-    await waitFor(() => expect(button).toBeEnabled())
+    await waitFor(() => {
+      expect(button).toBeEnabled()
+    })
 
     fireEvent.click(button)
     expect(screen.getAllByText('13')).toHaveLength(2)
@@ -159,7 +165,9 @@ describe('article Like integration with safe query fixtures', () => {
     fixture.save.mockImplementation(async () => new Promise(() => {}))
     setup()
     const buttons = screen.getAllByRole('button', { name: m.blog_like_this_post() })
-    await waitFor(() => expect(buttons[0]).toBeEnabled())
+    await waitFor(() => {
+      expect(buttons[0]).toBeEnabled()
+    })
 
     fireEvent.click(requiredButton(buttons, 0))
     await waitFor(

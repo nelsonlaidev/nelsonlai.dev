@@ -121,7 +121,9 @@ describe('Public system states with isolated API fixtures', () => {
 
     fireEvent.click(await screen.findByRole('button', { name: m.common_labels_unsubscribe() }))
 
-    await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(m.error_something_went_wrong()))
+    await waitFor(() => {
+      expect(screen.getByRole('alert')).toHaveTextContent(m.error_something_went_wrong())
+    })
     expect(screen.getByRole('button', { name: m.common_labels_unsubscribe() })).toBeEnabled()
     expect(screen.queryByText(m.unsubscribe_you_have_been_unsubscribed())).not.toBeInTheDocument()
   })

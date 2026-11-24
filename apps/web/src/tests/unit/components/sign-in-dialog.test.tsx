@@ -105,7 +105,9 @@ describe('Sign-in dialog with mocked providers only', () => {
     setup()
 
     fireEvent.click(await screen.findByRole('button', { name: 'Close' }))
-    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
+    await waitFor(() => {
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    })
 
     fireEvent.click(screen.getByRole('button', { name: 'Open fixture sign in' }))
     expect(await screen.findByRole('dialog')).toBeInTheDocument()
