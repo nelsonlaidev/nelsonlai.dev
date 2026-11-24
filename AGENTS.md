@@ -15,13 +15,6 @@ codebase, which uses TanStack Start.
 - Validate changes with formatting, linting, type checking, and builds. Add
   automated tests only when explicitly requested.
 
-## Repository File Tree
-
-Update `.codex-work/file-tree.md` whenever repository paths are added, removed,
-moved, or renamed. Verify the checklist against tracked files and non-ignored
-untracked files in the working tree and their parent directories. Preserve review
-checkboxes when moving or renaming entries and leave new entries unchecked.
-
 ## Vega Reference
 
 `vega` refers to the local shadcn `base-vega` project at
