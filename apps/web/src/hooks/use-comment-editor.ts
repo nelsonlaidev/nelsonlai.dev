@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react'
 
 type UseCommentEditorOptions = {
-  onModEnter?: () => void
+  onModEnter?: React.KeyboardEventHandler<HTMLTextAreaElement>
   onEscape?: () => void
 }
 
@@ -177,7 +177,6 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
     isApplyingHistoryRef.current = true
     setRangeText(textarea, snapshot.value, { start: 0, end: textarea.value.length })
     textarea.setSelectionRange(snapshot.selectionStart, snapshot.selectionEnd)
-    textarea.dispatchEvent(new InputEvent('input', { bubbles: true }))
     isApplyingHistoryRef.current = false
     textarea.focus()
   }
@@ -431,7 +430,7 @@ export function useCommentEditor(options: UseCommentEditorOptions = {}) {
     (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault()
-        onModEnter?.()
+        onModEnter?.(event)
 
         return true
       }

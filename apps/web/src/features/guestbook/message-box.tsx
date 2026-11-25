@@ -89,6 +89,7 @@ export function MessageBox(props: MessageBoxProps) {
                     aria-invalid={isInvalid}
                     aria-describedby={isInvalid ? errorId : undefined}
                     placeholder={m.guestbook_placeholder()}
+                    required
                     maxLength={GUESTBOOK_MESSAGE_MAX_LENGTH}
                     disabled={isBusy}
                     className='max-h-96 min-h-36'

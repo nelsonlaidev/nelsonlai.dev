@@ -14,7 +14,7 @@ type CommentEditorProps = Pick<
 > & {
   value: string
   onChange: (value: string) => void
-  onSubmit: () => void
+  onSubmit: React.KeyboardEventHandler<HTMLTextAreaElement>
   onCancel?: () => void
   disabled: boolean
   isReply?: boolean
@@ -65,6 +65,7 @@ export function CommentEditor(props: CommentEditorProps) {
             rows={1}
             value={value}
             disabled={disabled}
+            required
             maxLength={10_000}
             aria-label={isReply ? m.blog_comments_reply_to_comment() : m.blog_comments_placeholder()}
             placeholder={isReply ? m.blog_comments_reply_to_comment() : m.blog_comments_placeholder()}
@@ -75,10 +76,7 @@ export function CommentEditor(props: CommentEditorProps) {
             // Reply editors open after an explicit user action.
             // oxlint-disable-next-line jsx-a11y/no-autofocus
             autoFocus={isReply}
-            onInput={(event) => {
-              editor.handleInput(event)
-              onChange(event.currentTarget.value)
-            }}
+            onInput={editor.handleInput}
             onChange={(event) => {
               onChange(event.target.value)
             }}

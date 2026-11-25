@@ -1,6 +1,11 @@
 import type { Session } from '@repo/auth'
 
-import { AVATAR_MAX_FILE_SIZE, AVATAR_MIME_TYPES, UpdateNameInputSchema } from '@repo/api/schema/account'
+import {
+  AVATAR_MAX_FILE_SIZE,
+  AVATAR_MIME_TYPES,
+  DISPLAY_NAME_MAX_LENGTH,
+  UpdateNameInputSchema,
+} from '@repo/api/schema/account'
 import { authClient } from '@repo/auth/client'
 import {
   AlertDialog,
@@ -153,6 +158,8 @@ function EditName(props: EditNameProps) {
                       id={inputId}
                       name={field.name}
                       autoComplete='name'
+                      required
+                      maxLength={DISPLAY_NAME_MAX_LENGTH}
                       value={field.state.value}
                       onBlur={field.handleBlur}
                       onChange={(event) => {

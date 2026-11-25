@@ -94,8 +94,8 @@ export function CommentComposer(props: CommentComposerProps) {
                       aria-invalid={isInvalid}
                       aria-describedby={isInvalid ? errorId : undefined}
                       onChange={field.handleChange}
-                      onSubmit={() => {
-                        void form.handleSubmit()
+                      onSubmit={(event) => {
+                        event.currentTarget.form?.requestSubmit()
                       }}
                       onCancel={onCancel}
                       disabled={!session.data || creation.isPending}
