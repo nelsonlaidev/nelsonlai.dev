@@ -1,11 +1,10 @@
-import type { PostStats, PostSummary } from '@/features/posts/types'
+import type { PostSummary } from '@/features/posts/types'
 
 import { Link } from '@tanstack/react-router'
-import { ArrowRightIcon, EyeIcon, HeartIcon } from 'lucide-react'
-import { useFormatter } from 'use-intl'
+import { ArrowRightIcon } from 'lucide-react'
 
-import { PendingCount } from '@/components/pending-count'
 import { QueryErrorMessage } from '@/components/query-error-message'
+import { PostCounts } from '@/features/posts/post-counts'
 import { usePostStats } from '@/features/posts/use-post-stats'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { m } from '@/paraglide/messages'
@@ -33,7 +32,7 @@ export function LatestArticles(props: LatestArticlesProps) {
         <div className='mb-8 border-t'>
           {query.isLoadingError && <QueryErrorMessage query={query} className='pt-8' />}
           {posts.map((post) => (
-            <ArticleRow key={post.slug} post={post} stats={query.data} isPending={query.isPending} />
+            <ArticleRow key={post.slug} post={post} statsQuery={query} />
           ))}
           {posts.length === 0 && <p className='py-8 text-muted-foreground'>{m.blog_empty()}</p>}
         </div>
@@ -51,15 +50,11 @@ export function LatestArticles(props: LatestArticlesProps) {
 
 type ArticleRowProps = {
   post: PostSummary
-  isPending: boolean
-  stats: Map<string, PostStats> | undefined
+  statsQuery: ReturnType<typeof usePostStats>
 }
 
 function ArticleRow(props: ArticleRowProps) {
-  const { post, stats, isPending } = props
-  const counts = stats?.get(post.slug)
-  const fallback = isPending ? <PendingCount /> : '—'
-  const format = useFormatter()
+  const { post, statsQuery } = props
   const date = useFormattedDate(post.publishedAt)
 
   return (
@@ -70,16 +65,7 @@ function ArticleRow(props: ArticleRowProps) {
             <time dateTime={post.publishedAt} className='text-primary'>
               {date ?? '--'}
             </time>
-            <span className='inline-flex items-center gap-1'>
-              <EyeIcon className='size-4' aria-hidden='true' />
-              {stats ? format.number(counts?.views ?? 0) : fallback}{' '}
-              <span className='sr-only'>{m.blog_header_views()}</span>
-            </span>
-            <span className='inline-flex items-center gap-1'>
-              <HeartIcon className='size-4' aria-hidden='true' />
-              {stats ? format.number(counts?.likes ?? 0) : fallback}{' '}
-              <span className='sr-only'>{m.admin_dashboard_stats_likes()}</span>
-            </span>
+            <PostCounts slug={post.slug} query={statsQuery} />
           </div>
           <h3 className='mb-3 text-lg tracking-tight md:text-xl'>{post.title}</h3>
           <p className='leading-relaxed text-muted-foreground'>{post.description}</p>
