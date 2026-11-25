@@ -50,17 +50,20 @@ describe('Dashboard metric states', () => {
   test('shows unavailable on service error or an absent field', () => {
     const view = render(<StatCards stats={[metrics[0]]} isError />)
 
-    expect(screen.getByRole('status')).toHaveTextContent(m.dashboard_unavailable())
+    expect(screen.getByText(m.dashboard_unavailable())).toBeInTheDocument()
+    expect(screen.queryByRole('status')).not.toBeInTheDocument()
 
     view.rerender(<StatCards stats={[metrics[0]]} values={{ views: 100 }} />)
-    expect(screen.getByRole('status')).toHaveTextContent(m.dashboard_unavailable())
+    expect(screen.getByText(m.dashboard_unavailable())).toBeInTheDocument()
+    expect(screen.queryByRole('status')).not.toBeInTheDocument()
     expect(screen.queryByText('100')).not.toBeInTheDocument()
   })
 
   test('rejects invalid numeric output', () => {
     render(<StatCards stats={[metrics[0]]} values={{ hours: Number.NaN }} />)
 
-    expect(screen.getByRole('status')).toHaveTextContent(m.dashboard_unavailable())
+    expect(screen.getByText(m.dashboard_unavailable())).toBeInTheDocument()
+    expect(screen.queryByRole('status')).not.toBeInTheDocument()
     expect(screen.queryByText('NaN')).not.toBeInTheDocument()
   })
 })

@@ -1,4 +1,3 @@
-/* oxlint-disable better-tailwindcss/no-unknown-classes -- YARL supplies these library CSS hooks. */
 import 'yet-another-react-lightbox/styles.css'
 import '@/styles/mdx-lightbox.css'
 
@@ -126,7 +125,7 @@ export default function MdxLightbox(props: MdxLightboxProps) {
         iconNext: () => <ChevronRightIcon {...iconProps} />,
         iconZoomIn: () => <ZoomInIcon {...iconProps} />,
         iconZoomOut: () => <ZoomOutIcon {...iconProps} />,
-        iconError: () => <output className='leading-normal text-link'>{m.common_error()}</output>,
+        iconError: () => <span className='leading-normal text-link'>{m.common_error()}</span>,
         slideFooter: ({ slide }) => (
           <div className='pointer-events-none absolute inset-x-20 bottom-[max(--spacing(8),env(safe-area-inset-bottom))] mx-auto w-fit bg-backdrop/95 px-2.5 py-1 text-center wrap-anywhere text-link md:bottom-[max(--spacing(5),env(safe-area-inset-bottom))]'>
             {slide.alt}

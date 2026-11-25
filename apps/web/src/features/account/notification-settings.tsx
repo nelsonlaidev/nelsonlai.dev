@@ -24,7 +24,7 @@ export function NotificationSettings(props: NotificationSettingsProps) {
   const query = useQuery(emailPreferencesQueryOptions(userId))
 
   if (query.isLoadingError) {
-    return <QueryErrorMessage query={query} message={m.error_failed_to_load_settings()} />
+    return <QueryErrorMessage role='alert' query={query} message={m.error_failed_to_load_settings()} />
   }
 
   return (

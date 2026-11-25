@@ -63,7 +63,7 @@ export function CommentSection(props: CommentSectionProps) {
       </>
     )
   } else if (query.isLoadingError) {
-    countsContent = <QueryErrorMessage query={query} />
+    countsContent = <QueryErrorMessage inline query={query} />
   }
 
   return (

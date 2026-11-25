@@ -29,11 +29,7 @@ export function NowPlaying(props: NowPlayingProps) {
           ) : (
             m.nav_footer_spotify_idle()
           ))}
-        {query.isError && (
-          <span role='alert' className='block'>
-            {m.nav_footer_spotify_error()}
-          </span>
-        )}
+        {query.isError && <span className='block'>{m.nav_footer_spotify_error()}</span>}
       </p>
     </div>
   )

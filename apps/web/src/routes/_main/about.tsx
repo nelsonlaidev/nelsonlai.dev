@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
 
-import { Mdx } from '@/components/mdx/mdx'
+import { Mdx } from '@/components/mdx'
 import { OceanPage } from '@/components/ocean-page'
 import { getPage } from '@/features/pages/pages.functions'
 import { createJsonLdAboutPage } from '@/lib/json-ld'

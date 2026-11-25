@@ -7,16 +7,20 @@ import { m } from '@/paraglide/messages'
 
 type QueryErrorMessageProps = {
   query: Pick<UseQueryResult, 'refetch' | 'isFetching'>
+  inline?: boolean
+  role?: 'alert'
   message?: string
   className?: string
 }
 
 export function QueryErrorMessage(props: QueryErrorMessageProps) {
-  const { query, message, className } = props
+  const { query, message, className, role, inline = false } = props
+  const Container = inline ? 'span' : 'div'
+  const Message = inline ? 'span' : 'p'
 
   return (
-    <span className={cn('inline-flex flex-wrap items-center gap-2', className)}>
-      <span role='alert'>{message ?? m.common_error()}</span>
+    <Container className={cn('flex-wrap items-center gap-2', inline ? 'inline-flex' : 'flex', className)}>
+      <Message role={role}>{message ?? m.common_error()}</Message>
       <Button
         type='button'
         variant='outline'
@@ -28,6 +32,6 @@ export function QueryErrorMessage(props: QueryErrorMessageProps) {
       >
         {m.common_retry()}
       </Button>
-    </span>
+    </Container>
   )
 }

@@ -45,6 +45,8 @@ that project.
 ## Code Style
 
 - Follow the existing code style and nearby implementation patterns.
+- Explain why a lint rule is disabled in a separate comment immediately above
+  the disable directive. Omit the inline `--` description.
 - Component functions must accept a named `props` parameter rather than
   destructuring props in the function signature. Destructure inside the function
   body when needed, following `apps/web/src/features/admin/admin-page-header.tsx`.

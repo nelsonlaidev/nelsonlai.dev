@@ -55,7 +55,7 @@ export function BlogHeader(props: BlogHeaderProps) {
   if (postStats) {
     viewsContent = <NumberFlow data-testid='view-count' value={postStats.views} />
   } else if (statsQuery.isLoadingError) {
-    viewsContent = <QueryErrorMessage query={statsQuery} />
+    viewsContent = <QueryErrorMessage inline query={statsQuery} />
   }
 
   if (countsQuery.data) {
@@ -63,7 +63,7 @@ export function BlogHeader(props: BlogHeaderProps) {
       <NumberFlow data-testid='comment-count' value={countsQuery.data.comments + countsQuery.data.replies} />
     )
   } else if (countsQuery.isLoadingError) {
-    commentsContent = <QueryErrorMessage query={countsQuery} />
+    commentsContent = <QueryErrorMessage inline query={countsQuery} />
   }
 
   return (

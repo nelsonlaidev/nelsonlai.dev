@@ -131,6 +131,7 @@ describe('Public system states with isolated API fixtures', () => {
 
   test('route error retries the router before resetting its boundary', async () => {
     render(<RouteError error={new Error('Local fixture')} reset={fixture.reset} info={{ componentStack: '' }} />)
+    expect(screen.getByRole('heading', { level: 1 })).toHaveFocus()
     fireEvent.click(screen.getByRole('button', { name: m.error_try_again() }))
 
     await waitFor(() => {

@@ -4,7 +4,7 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import * as z from 'zod'
 
-import { Mdx } from '@/components/mdx/mdx'
+import { Mdx } from '@/components/mdx'
 import { OceanPage } from '@/components/ocean-page'
 import { CommentSection } from '@/features/comments/comment-section'
 import { BlogFooter } from '@/features/posts/blog-footer'

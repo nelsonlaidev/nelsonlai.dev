@@ -3,6 +3,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Skeleton } from 'skullet/react'
 
+import { LoadingStatus } from '@/components/loading-status'
 import { QueryErrorMessage } from '@/components/query-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
@@ -33,6 +34,7 @@ export function AdminUsers() {
   if (query.isLoadingError) {
     return (
       <QueryErrorMessage
+        role='alert'
         query={query}
         message={m.error_failed_to_fetch_users_data()}
         className='text-sm text-destructive'
@@ -42,7 +44,7 @@ export function AdminUsers() {
 
   return (
     <>
-      {query.isPending && <output className='sr-only'>{m.common_aria_labels_loading()}</output>}
+      {query.isPending && <LoadingStatus />}
       <Skeleton data={query.data?.users} sample={SAMPLE_USERS}>
         {(users) => (
           <UsersTable

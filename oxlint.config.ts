@@ -5,7 +5,10 @@ export default defineConfig({
     react(),
     tailwindcss({
       rules: {
-        'better-tailwindcss/no-unknown-classes': ['error', { ignore: ['not-prose', 'shiki'] }],
+        'better-tailwindcss/no-unknown-classes': [
+          'error',
+          { ignore: ['not-prose', 'shiki', 'mdx-lightbox', 'yarl__button'] },
+        ],
       },
     }),
     playwright({

@@ -29,6 +29,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Skeleton } from 'skullet/react'
 
 import { InfiniteQueryPagination } from '@/components/infinite-query-pagination'
+import { LoadingStatus } from '@/components/loading-status'
 import { UserAvatar } from '@/components/user-avatar'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { orpc } from '@/lib/orpc-client'
@@ -93,7 +94,7 @@ export function CommentList(props: CommentListProps) {
         ))}
       {(query.isPending || query.isFetchingNextPage) && (
         <>
-          <output className='sr-only'>{m.common_aria_labels_loading()}</output>
+          <LoadingStatus />
           <Skeleton loading>
             <div className={parentId ? 'space-y-5' : 'space-y-8'}>
               {SAMPLE_COMMENTS.map((comment) => (

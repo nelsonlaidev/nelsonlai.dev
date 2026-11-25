@@ -83,6 +83,9 @@ describe('Dashboard suspense recovery with real Query and Router boundaries', ()
     await waitFor(() => {
       expect(within(youtube).getAllByText(m.dashboard_unavailable())).toHaveLength(2)
     })
+    const announcement = youtube.querySelector('[aria-live="polite"]')
+    expect(announcement).toHaveTextContent(`YouTube — ${m.dashboard_unavailable()}`)
+    expect(announcement).not.toContainElement(within(youtube).getByRole('button', { name: m.common_retry() }))
     expect(fixture.toast).not.toHaveBeenCalled()
     expect(
       client
@@ -97,6 +100,7 @@ describe('Dashboard suspense recovery with real Query and Router boundaries', ()
     fireEvent.click(within(youtube).getByRole('button', { name: m.common_retry() }))
     expect(await screen.findByText('4567')).toBeInTheDocument()
     expect(within(youtube).queryByText(m.dashboard_unavailable())).not.toBeInTheDocument()
+    expect(announcement).toBeEmptyDOMElement()
     expect(fixture.youtube).toHaveBeenCalledTimes(2)
     expect(fixture.toast).not.toHaveBeenCalled()
 

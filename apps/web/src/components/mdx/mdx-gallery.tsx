@@ -2,6 +2,7 @@ import { CatchBoundary } from '@tanstack/react-router'
 import { createContext, lazy, Suspense, use, useCallback, useMemo, useRef, useState, useTransition } from 'react'
 import { createPortal } from 'react-dom'
 
+import { LoadingStatus } from '@/components/loading-status'
 import { m } from '@/paraglide/messages'
 
 const MdxLightbox = lazy(async () => import('./mdx-lightbox'))
@@ -82,15 +83,15 @@ export function MdxGallery(props: MdxGalleryProps) {
   return (
     <GalleryContext value={context}>
       {children}
-      {loading && <output className='sr-only'>{m.common_loading()}</output>}
+      {loading && <LoadingStatus />}
       <Suspense fallback={null}>
         {selection && (
           <CatchBoundary
             getResetKey={() => selection.trigger}
             errorComponent={() =>
               createPortal(
-                <span role='alert' className='mt-2 block text-sm text-foreground'>
-                  {m.blog_image_viewer_error()}{' '}
+                <span className='mt-2 block text-sm text-foreground'>
+                  <span role='alert'>{m.blog_image_viewer_error()}</span>{' '}
                   <a
                     className='text-link underline'
                     href={selection.images[selection.index]?.src}

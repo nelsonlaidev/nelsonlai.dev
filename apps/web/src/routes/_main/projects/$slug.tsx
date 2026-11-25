@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 
-import { Mdx } from '@/components/mdx/mdx'
+import { Mdx } from '@/components/mdx'
 import { OceanPage } from '@/components/ocean-page'
 import { ProjectArt } from '@/features/projects/project-art'
 import { ProjectHeader } from '@/features/projects/project-header'

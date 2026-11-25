@@ -61,7 +61,7 @@ export function ActiveSessions(props: ActiveSessionsProps) {
       {requiresSignIn ? (
         <Card>
           <CardContent className='space-y-4'>
-            <p>{m.account_sessions_sign_in_required()}</p>
+            <p role='alert'>{m.account_sessions_sign_in_required()}</p>
             <DialogTrigger handle={signInDialogHandle} render={<Button variant='outline' />}>
               {m.common_sign_in()}
             </DialogTrigger>
@@ -69,8 +69,8 @@ export function ActiveSessions(props: ActiveSessionsProps) {
         </Card>
       ) : (
         (query.isError || revoke.isError) && (
-          <div role='alert' className='space-y-4'>
-            <p>{m.error_something_went_wrong()}</p>
+          <div className='space-y-4'>
+            <p role='alert'>{m.error_something_went_wrong()}</p>
             {query.isError && (
               <Button
                 variant='outline'

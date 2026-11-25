@@ -3,6 +3,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Skeleton } from 'skullet/react'
 
+import { LoadingStatus } from '@/components/loading-status'
 import { QueryErrorMessage } from '@/components/query-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
@@ -36,6 +37,7 @@ export function AdminComments() {
   if (query.isLoadingError) {
     return (
       <QueryErrorMessage
+        role='alert'
         query={query}
         message={m.error_failed_to_fetch_comments_data()}
         className='rounded-xl border border-destructive/40 bg-card p-6 text-destructive'
@@ -45,7 +47,7 @@ export function AdminComments() {
 
   return (
     <>
-      {query.isPending && <output className='sr-only'>{m.common_aria_labels_loading()}</output>}
+      {query.isPending && <LoadingStatus />}
       <Skeleton data={query.data?.comments} sample={SAMPLE_COMMENTS}>
         {(comments) => (
           <CommentsTable

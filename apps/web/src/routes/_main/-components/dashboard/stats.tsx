@@ -4,7 +4,7 @@ import { QueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query
 import { CatchBoundary, Link } from '@tanstack/react-router'
 import { cn } from 'cn'
 import { ArrowRightIcon } from 'lucide-react'
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 
 import { PendingCount } from '@/components/pending-count'
 import { orpc } from '@/lib/orpc-client'
@@ -110,7 +110,7 @@ export function DashboardStats() {
               </ExternalLink>
             )}
           </div>
-          <StatGroup stats={group.stats}>
+          <StatGroup key={getLocale()} name={group.name} stats={group.stats}>
             <group.source stats={group.stats} />
           </StatGroup>
         </section>
@@ -120,38 +120,49 @@ export function DashboardStats() {
 }
 
 type StatGroupProps = {
+  name: string
   stats: Stat[]
   children: React.ReactNode
 }
 
 function StatGroup(props: StatGroupProps) {
-  const { stats, children } = props
+  const { name, stats, children } = props
+  const [failed, setFailed] = useState(false)
   const locale = getLocale()
 
   return (
-    <QueryErrorResetBoundary>
-      {({ reset }) => (
-        <CatchBoundary
-          getResetKey={() => locale}
-          errorComponent={(errorProps) => (
-            <div className='space-y-4'>
-              <StatCards stats={stats} isError />
-              <Button
-                variant='outline'
-                onClick={() => {
-                  reset()
-                  errorProps.reset()
-                }}
-              >
-                {m.common_retry()}
-              </Button>
-            </div>
-          )}
-        >
-          <Suspense fallback={<StatCards stats={stats} />}>{children}</Suspense>
-        </CatchBoundary>
-      )}
-    </QueryErrorResetBoundary>
+    <>
+      <p aria-live='polite' aria-atomic='true' className='sr-only'>
+        {failed && `${name} — ${m.dashboard_unavailable()}`}
+      </p>
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <CatchBoundary
+            getResetKey={() => locale}
+            onCatch={() => {
+              setFailed(true)
+            }}
+            errorComponent={(errorProps) => (
+              <div className='space-y-4'>
+                <StatCards stats={stats} isError />
+                <Button
+                  variant='outline'
+                  onClick={() => {
+                    setFailed(false)
+                    reset()
+                    errorProps.reset()
+                  }}
+                >
+                  {m.common_retry()}
+                </Button>
+              </div>
+            )}
+          >
+            <Suspense fallback={<StatCards stats={stats} />}>{children}</Suspense>
+          </CatchBoundary>
+        )}
+      </QueryErrorResetBoundary>
+    </>
   )
 }
 
@@ -215,7 +226,7 @@ export function StatCards(props: StatCardsProps) {
     !values && !isError ? (
       <PendingCount />
     ) : (
-      <output className='text-lg tracking-normal text-muted-foreground'>{m.dashboard_unavailable()}</output>
+      <span className='text-lg tracking-normal text-muted-foreground'>{m.dashboard_unavailable()}</span>
     )
   const hasMultipleStats = stats.length > 1
 

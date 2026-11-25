@@ -51,7 +51,12 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
   } else if (query.isLoadingError) {
     content = (
       <CardContent className='px-0'>
-        <QueryErrorMessage query={query} message={m.error_something_went_wrong()} className='justify-center' />
+        <QueryErrorMessage
+          role='alert'
+          query={query}
+          message={m.error_something_went_wrong()}
+          className='justify-center'
+        />
       </CardContent>
     )
   } else if (data?.isUnsubscribed) {
@@ -105,8 +110,8 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
           </CardHeader>
           {content}
           {unsubscribe.isError && (
-            <CardContent role='alert' className='px-0'>
-              {m.error_something_went_wrong()}
+            <CardContent className='px-0'>
+              <p role='alert'>{m.error_something_went_wrong()}</p>
             </CardContent>
           )}
         </Card>

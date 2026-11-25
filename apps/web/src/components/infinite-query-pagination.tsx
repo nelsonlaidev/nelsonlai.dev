@@ -32,8 +32,8 @@ export function InfiniteQueryPagination(props: InfiniteQueryPaginationProps) {
 
   if (query.isLoadingError || query.isFetchNextPageError) {
     return (
-      <div role='alert' className={errorClassName}>
-        <p>{errorMessage}</p>
+      <div className={errorClassName}>
+        <p role='alert'>{errorMessage}</p>
         <Button
           type='button'
           variant='outline'

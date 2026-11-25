@@ -12,6 +12,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
 import { SkeletonBox } from 'skullet/react'
 
+import { LoadingStatus } from '@/components/loading-status'
 import { QueryErrorMessage } from '@/components/query-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
@@ -43,10 +44,10 @@ export function AdminTrendChart() {
   } satisfies ChartConfig
 
   let content: React.ReactNode = (
-    <output className='block h-62.5'>
-      <span className='sr-only'>{m.common_aria_labels_loading()}</span>
+    <div className='h-62.5'>
+      <LoadingStatus />
       <SkeletonBox width='100%' height='100%' />
-    </output>
+    </div>
   )
 
   if (query.data?.length) {

@@ -2,6 +2,7 @@ import type { ErrorComponentProps } from '@tanstack/react-router'
 
 import { Button } from '@repo/ui/components/button'
 import { useRouter } from '@tanstack/react-router'
+import { useEffect, useRef } from 'react'
 
 import { m } from '@/paraglide/messages'
 
@@ -10,10 +11,17 @@ import { CodeBlock } from './mdx/code-block'
 export function RouteError(props: ErrorComponentProps) {
   const { error, reset } = props
   const router = useRouter()
+  const headingRef = useRef<HTMLHeadingElement>(null)
+
+  useEffect(() => {
+    headingRef.current?.focus()
+  }, [])
 
   return (
-    <div role='alert' className='relative mx-auto w-full max-w-5xl space-y-6 px-6 pt-36 pb-16 sm:px-8 sm:pt-40'>
-      <h1 className='text-4xl tracking-tight'>{m.error_something_went_wrong()}</h1>
+    <div className='relative mx-auto w-full max-w-5xl space-y-6 px-6 pt-36 pb-16 sm:px-8 sm:pt-40'>
+      <h1 ref={headingRef} tabIndex={-1} className='text-4xl tracking-tight'>
+        {m.error_something_went_wrong()}
+      </h1>
       <Button
         variant='outline'
         size='lg'
