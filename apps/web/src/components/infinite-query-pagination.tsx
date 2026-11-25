@@ -30,7 +30,7 @@ export function InfiniteQueryPagination(props: InfiniteQueryPaginationProps) {
     }
   }, [hasNextPage, isFetching, isError, fetchNextPage])
 
-  if (isError) {
+  if (query.isLoadingError || query.isFetchNextPageError) {
     return (
       <div role='alert' className={errorClassName}>
         <p>{errorMessage}</p>

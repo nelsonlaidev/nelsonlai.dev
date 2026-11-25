@@ -12,6 +12,7 @@ import { ListFilterIcon } from 'lucide-react'
 import { useState } from 'react'
 
 import { PendingCount } from '@/components/pending-count'
+import { QueryErrorMessage } from '@/components/query-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -62,7 +63,7 @@ export function CommentSection(props: CommentSectionProps) {
       </>
     )
   } else if (query.isLoadingError) {
-    countsContent = m.common_error()
+    countsContent = <QueryErrorMessage query={query} />
   }
 
   return (

@@ -29,6 +29,7 @@ vi.mock('@tanstack/react-query', async (importOriginal) => ({
     isFetchingNextPage: false,
     isPending: fixture.state === 'loading',
     isError: fixture.state === 'error',
+    isLoadingError: fixture.state === 'error',
     isSuccess: ['empty', 'success'].includes(fixture.state),
     fetchNextPage: fixture.next,
     refetch: fixture.retry,

@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { EyeIcon, HeartIcon, MessageSquareIcon, MessagesSquareIcon, UsersIcon } from 'lucide-react'
 import { Skeleton } from 'skullet/react'
 
+import { QueryErrorMessage } from '@/components/query-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -19,7 +20,13 @@ export function AdminStatsCards() {
   const query = useQuery(orpc.admin.stats.queryOptions())
 
   if (query.isLoadingError) {
-    return <p className='text-sm text-destructive'>{m.error_failed_to_fetch_dashboard_data()}</p>
+    return (
+      <QueryErrorMessage
+        query={query}
+        message={m.error_failed_to_fetch_dashboard_data()}
+        className='text-sm text-destructive'
+      />
+    )
   }
 
   return (

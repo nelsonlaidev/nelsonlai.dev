@@ -3,6 +3,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Skeleton } from 'skullet/react'
 
+import { QueryErrorMessage } from '@/components/query-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -34,9 +35,11 @@ export function AdminComments() {
 
   if (query.isLoadingError) {
     return (
-      <div role='alert' className='rounded-xl border border-destructive/40 bg-card p-6 text-destructive'>
-        {m.error_failed_to_fetch_comments_data()}
-      </div>
+      <QueryErrorMessage
+        query={query}
+        message={m.error_failed_to_fetch_comments_data()}
+        className='rounded-xl border border-destructive/40 bg-card p-6 text-destructive'
+      />
     )
   }
 

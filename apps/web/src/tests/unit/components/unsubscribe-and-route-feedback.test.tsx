@@ -1,3 +1,4 @@
+import { ORPCError } from '@orpc/client'
 import { UIProvider } from '@repo/ui/components/ui-provider'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
@@ -77,7 +78,7 @@ describe('Public system states with isolated API fixtures', () => {
   })
 
   test('inspection error never offers an unsubscribe action', async () => {
-    fixture.inspect.mockRejectedValue(new Error('Fixture invalid token'))
+    fixture.inspect.mockRejectedValue(new ORPCError('BAD_REQUEST'))
     setup('local-fixture')
 
     await screen.findByText(m.unsubscribe_invalid_unsubscribe_link())

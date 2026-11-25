@@ -9,6 +9,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useId } from 'react'
 import { Skeleton } from 'skullet/react'
 
+import { QueryErrorMessage } from '@/components/query-error-message'
 import { emailPreferencesQueryOptions } from '@/features/notifications/notifications.queries'
 import { getMutationErrorMessage } from '@/lib/get-mutation-error-message'
 import { orpc } from '@/lib/orpc-client'
@@ -22,7 +23,9 @@ export function NotificationSettings(props: NotificationSettingsProps) {
   const { userId } = props
   const query = useQuery(emailPreferencesQueryOptions(userId))
 
-  if (query.isLoadingError) return <p role='alert'>{m.error_failed_to_load_settings()}</p>
+  if (query.isLoadingError) {
+    return <QueryErrorMessage query={query} message={m.error_failed_to_load_settings()} />
+  }
 
   return (
     <Skeleton data={query.data?.commentRepliesEnabled} sample={true} label={m.common_aria_labels_loading()}>

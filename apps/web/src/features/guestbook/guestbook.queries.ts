@@ -4,7 +4,6 @@ import { orpc } from '@/lib/orpc-client'
 
 export const guestbookMessagesInfiniteOptions = orpc.guestbook.list.infiniteOptions({
   input: (cursor: GuestbookCursor) => ({ cursor }),
-  meta: { nextPageErrorHandledLocally: true },
   initialPageParam: undefined,
   getNextPageParam: (page) => page.nextCursor,
 })

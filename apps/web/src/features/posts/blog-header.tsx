@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef } from 'react'
 
 import { PendingCount } from '@/components/pending-count'
+import { QueryErrorMessage } from '@/components/query-error-message'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { orpc } from '@/lib/orpc-client'
 import { SITE } from '@/lib/site'
@@ -54,7 +55,7 @@ export function BlogHeader(props: BlogHeaderProps) {
   if (postStats) {
     viewsContent = <NumberFlow data-testid='view-count' value={postStats.views} />
   } else if (statsQuery.isLoadingError) {
-    viewsContent = m.common_error()
+    viewsContent = <QueryErrorMessage query={statsQuery} />
   }
 
   if (countsQuery.data) {
@@ -62,7 +63,7 @@ export function BlogHeader(props: BlogHeaderProps) {
       <NumberFlow data-testid='comment-count' value={countsQuery.data.comments + countsQuery.data.replies} />
     )
   } else if (countsQuery.isLoadingError) {
-    commentsContent = m.common_error()
+    commentsContent = <QueryErrorMessage query={countsQuery} />
   }
 
   return (

@@ -26,6 +26,7 @@ vi.mock('@tanstack/react-query', async (importOriginal) => ({
     isFetchingNextPage: false,
     isPending: fixture.state === 'loading',
     isError: fixture.state === 'error',
+    isLoadingError: fixture.state === 'error',
     isSuccess: fixture.state === 'empty',
     data: fixture.state === 'empty' ? { pages: [{ comments: [] }] } : undefined,
   }),

@@ -5,6 +5,7 @@ import { ArrowRightIcon, EyeIcon, HeartIcon } from 'lucide-react'
 import { useFormatter } from 'use-intl'
 
 import { PendingCount } from '@/components/pending-count'
+import { QueryErrorMessage } from '@/components/query-error-message'
 import { usePostStats } from '@/features/posts/use-post-stats'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { m } from '@/paraglide/messages'
@@ -30,6 +31,7 @@ export function LatestArticles(props: LatestArticlesProps) {
       />
       <div className='min-w-0'>
         <div className='mb-8 border-t'>
+          {query.isLoadingError && <QueryErrorMessage query={query} className='pt-8' />}
           {posts.map((post) => (
             <ArticleRow key={post.slug} post={post} stats={query.data} isPending={query.isPending} />
           ))}

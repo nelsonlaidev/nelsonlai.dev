@@ -3,6 +3,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Skeleton } from 'skullet/react'
 
+import { QueryErrorMessage } from '@/components/query-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -31,9 +32,11 @@ export function AdminUsers() {
 
   if (query.isLoadingError) {
     return (
-      <div role='alert' className='text-sm text-destructive'>
-        {m.error_failed_to_fetch_users_data()}
-      </div>
+      <QueryErrorMessage
+        query={query}
+        message={m.error_failed_to_fetch_users_data()}
+        className='text-sm text-destructive'
+      />
     )
   }
 

@@ -7,6 +7,7 @@ import { BellOffIcon } from 'lucide-react'
 import { Skeleton } from 'skullet/react'
 
 import { OceanPage } from '@/components/ocean-page'
+import { QueryErrorMessage } from '@/components/query-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -35,7 +36,6 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
   const { data } = query
   const isInvalid =
     !token ||
-    query.isLoadingError ||
     (query.error instanceof ORPCError && (query.error.code === 'BAD_REQUEST' || query.error.code === 'NOT_FOUND'))
   const isLoading = Boolean(token) && query.isPending
   const isSubmitting = unsubscribe.isPending
@@ -48,6 +48,12 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
     title = m.unsubscribe_invalid_unsubscribe_link()
     description = m.unsubscribe_invalid_link_description()
     content = null
+  } else if (query.isLoadingError) {
+    content = (
+      <CardContent className='px-0'>
+        <QueryErrorMessage query={query} message={m.error_something_went_wrong()} className='justify-center' />
+      </CardContent>
+    )
   } else if (data?.isUnsubscribed) {
     title = m.unsubscribe_you_have_been_unsubscribed()
     description = m.unsubscribe_unsubscribed_description()

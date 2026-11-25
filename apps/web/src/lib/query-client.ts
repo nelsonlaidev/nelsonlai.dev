@@ -9,8 +9,7 @@ export function createQueryClient() {
       onError: (error, query) => {
         if (import.meta.env.SSR) return
         if (query.meta?.errorHandledLocally) return
-        if (query.meta?.nextPageErrorHandledLocally && query.state.fetchMeta?.fetchMore?.direction === 'forward') return
-        if (query.state.data === undefined && query.meta?.initialErrorHandledByBoundary) return
+        if (query.state.data === undefined || query.state.fetchMeta?.fetchMore?.direction === 'forward') return
 
         toast.add({
           type: 'error',

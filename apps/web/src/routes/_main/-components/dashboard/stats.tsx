@@ -164,7 +164,6 @@ function WakatimeStats(props: StatSourceProps) {
   const { data } = useSuspenseQuery(
     orpc.wakatime.stats.queryOptions({
       refetchOnWindowFocus: false,
-      meta: { initialErrorHandledByBoundary: true },
     }),
   )
 
@@ -176,7 +175,6 @@ function YoutubeStats(props: StatSourceProps) {
   const { data } = useSuspenseQuery(
     orpc.youtube.stats.queryOptions({
       refetchOnWindowFocus: false,
-      meta: { initialErrorHandledByBoundary: true },
     }),
   )
 
@@ -188,7 +186,6 @@ function GithubStats(props: StatSourceProps) {
   const { data } = useSuspenseQuery(
     orpc.github.stats.queryOptions({
       refetchOnWindowFocus: false,
-      meta: { initialErrorHandledByBoundary: true },
     }),
   )
 
@@ -200,7 +197,6 @@ function PostStats(props: StatSourceProps) {
   const { data } = useSuspenseQuery(
     orpc.posts.totals.queryOptions({
       refetchOnWindowFocus: false,
-      meta: { initialErrorHandledByBoundary: true },
     }),
   )
 

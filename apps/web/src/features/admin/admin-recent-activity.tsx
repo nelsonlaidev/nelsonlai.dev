@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 import { Skeleton } from 'skullet/react'
 
+import { QueryErrorMessage } from '@/components/query-error-message'
 import { UserAvatar } from '@/components/user-avatar'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { orpc } from '@/lib/orpc-client'
@@ -30,7 +31,11 @@ export function AdminRecentActivity() {
       </CardHeader>
       <CardContent>
         {query.isLoadingError ? (
-          <p className='text-sm text-destructive'>{m.error_failed_to_fetch_dashboard_data()}</p>
+          <QueryErrorMessage
+            query={query}
+            message={m.error_failed_to_fetch_dashboard_data()}
+            className='text-sm text-destructive'
+          />
         ) : (
           <Skeleton
             data={query.data?.activities}

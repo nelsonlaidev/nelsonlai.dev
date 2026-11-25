@@ -12,6 +12,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
 import { SkeletonBox } from 'skullet/react'
 
+import { QueryErrorMessage } from '@/components/query-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
@@ -96,7 +97,13 @@ export function AdminTrendChart() {
   } else if (query.data) {
     content = <p className='text-sm text-muted-foreground'>{m.admin_dashboard_trends_no_data()}</p>
   } else if (query.isLoadingError) {
-    content = <p className='text-sm text-destructive'>{m.error_failed_to_fetch_dashboard_data()}</p>
+    content = (
+      <QueryErrorMessage
+        query={query}
+        message={m.error_failed_to_fetch_dashboard_data()}
+        className='text-sm text-destructive'
+      />
+    )
   }
 
   return (

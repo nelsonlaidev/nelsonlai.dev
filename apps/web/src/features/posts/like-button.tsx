@@ -8,6 +8,7 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { PendingCount } from '@/components/pending-count'
+import { QueryErrorMessage } from '@/components/query-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -102,6 +103,20 @@ export function LikeButton(props: LikeButtonProps) {
   const count = Math.min(3, (query.data?.currentUserLikes ?? 0) + draft)
   const heart = 'M12 21S2 15.2 2 8.5C2 3.5 8 1.5 12 6c4-4.5 10-2.5 10 2.5C22 15.2 12 21 12 21Z'
 
+  const className = cn(
+    'mt-6',
+    placement === 'desktop' && 'hidden p-2.5 lg:block',
+    placement === 'mobile' && 'lg:hidden',
+  )
+
+  if (query.isLoadingError) {
+    return (
+      <div className={className}>
+        <QueryErrorMessage query={query} />
+      </div>
+    )
+  }
+
   let likesContent: React.ReactNode = (
     <PendingCount>
       <NumberFlow value={100} />
@@ -110,14 +125,10 @@ export function LikeButton(props: LikeButtonProps) {
 
   if (query.data) {
     likesContent = <NumberFlow data-testid='like-count' value={query.data.likes + draft} />
-  } else if (query.isLoadingError) {
-    likesContent = m.common_error()
   }
 
   return (
-    <div
-      className={cn('mt-6', placement === 'desktop' && 'hidden p-2.5 lg:block', placement === 'mobile' && 'lg:hidden')}
-    >
+    <div className={className}>
       <button
         type='button'
         onClick={() => {

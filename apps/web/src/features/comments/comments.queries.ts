@@ -10,7 +10,6 @@ export function commentListInfiniteOptions(
 ) {
   return orpc.comments.list.infiniteOptions({
     input: (cursor: z.infer<typeof InfiniteQueryCursorSchema> | undefined) => ({ ...input, cursor }),
-    meta: { nextPageErrorHandledLocally: true },
     initialPageParam: undefined,
     queryKey: [...orpc.comments.list.key(), { input, userId }],
     getNextPageParam: (page) => page.nextCursor,
