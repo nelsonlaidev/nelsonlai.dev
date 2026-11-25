@@ -41,7 +41,7 @@ export function ActiveSessions(props: ActiveSessionsProps) {
   const queryClient = useQueryClient()
   const { isSigningOut, signOut } = useSignOut({ reason: 'session-revoked' })
   const options = accountSessionsQueryOptions(userId)
-  const sessions = useQuery(options)
+  const query = useQuery(options)
   const revoke = useMutation({
     mutationFn: async (session: AccountSession) => client.account.revokeSession({ id: session.id }),
     onSuccess: async () => {
@@ -49,12 +49,12 @@ export function ActiveSessions(props: ActiveSessionsProps) {
       await queryClient.invalidateQueries({ queryKey: options.queryKey })
     },
   })
-  const requiresSignIn = [sessions.error, revoke.error].some(
+  const requiresSignIn = [query.error, revoke.error].some(
     (error) => error instanceof ORPCError && error.code === 'SESSION_NOT_FRESH',
   )
 
   return (
-    <section className='space-y-6' aria-labelledby='sessions-heading' aria-busy={sessions.isPending}>
+    <section className='space-y-6' aria-labelledby='sessions-heading' aria-busy={query.isPending}>
       <h2 id='sessions-heading' className='text-xl font-medium tracking-tight'>
         {m.account_active_sessions()}
       </h2>
@@ -68,30 +68,30 @@ export function ActiveSessions(props: ActiveSessionsProps) {
           </CardContent>
         </Card>
       ) : (
-        (sessions.isError || revoke.isError) && (
+        (query.isError || revoke.isError) && (
           <div role='alert' className='space-y-4'>
             <p>{m.error_something_went_wrong()}</p>
-            {sessions.isError && (
+            {query.isError && (
               <Button
                 variant='outline'
-                disabled={sessions.isFetching}
+                disabled={query.isFetching}
                 onClick={() => {
-                  void sessions.refetch()
+                  void query.refetch()
                 }}
               >
-                {sessions.isFetching && <Spinner data-icon='inline-start' />}
+                {query.isFetching && <Spinner data-icon='inline-start' />}
                 {m.common_retry()}
               </Button>
             )}
           </div>
         )
       )}
-      {!requiresSignIn && (sessions.isPending || sessions.data) && (
+      {!requiresSignIn && (query.isPending || query.data) && (
         <Skeleton
-          data={sessions.data}
+          data={query.data}
           sample={SAMPLE_SESSIONS}
           label={m.common_aria_labels_loading()}
-          empty={sessions.data?.length === 0}
+          empty={query.data?.length === 0}
           emptyMessage={<Card className='py-12 text-center'>{m.account_no_active_sessions()}</Card>}
         >
           {(items) => (
@@ -104,9 +104,9 @@ export function ActiveSessions(props: ActiveSessionsProps) {
                     (isSigningOut && session.isCurrentSession) ||
                     (revoke.isPending && revoke.variables.id === session.id)
                   }
-                  disabled={sessions.isPending || revoke.isPending || isSigningOut}
+                  disabled={query.isPending || revoke.isPending || isSigningOut}
                   onRevoke={() => {
-                    if (sessions.isPending || revoke.isPending || isSigningOut) return
+                    if (query.isPending || revoke.isPending || isSigningOut) return
                     if (session.isCurrentSession) {
                       void signOut()
                     } else {

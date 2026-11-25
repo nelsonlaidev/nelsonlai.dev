@@ -110,7 +110,7 @@ export function LikeButton(props: LikeButtonProps) {
 
   if (query.data) {
     likesContent = <NumberFlow data-testid='like-count' value={query.data.likes + draft} />
-  } else if (query.isError) {
+  } else if (query.isLoadingError) {
     likesContent = m.common_error()
   }
 

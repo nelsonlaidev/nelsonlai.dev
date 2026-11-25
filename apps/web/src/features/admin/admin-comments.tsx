@@ -22,7 +22,7 @@ const SAMPLE_COMMENTS = createRange(10).map((index) => ({
 
 export function AdminComments() {
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 })
-  const { data, isError, isFetching, isPending } = useQuery(
+  const query = useQuery(
     orpc.admin.comment.list.queryOptions({
       input: {
         page: pagination.pageIndex + 1,
@@ -32,7 +32,7 @@ export function AdminComments() {
     }),
   )
 
-  if (isError) {
+  if (query.isLoadingError) {
     return (
       <div role='alert' className='rounded-xl border border-destructive/40 bg-card p-6 text-destructive'>
         {m.error_failed_to_fetch_comments_data()}
@@ -42,15 +42,15 @@ export function AdminComments() {
 
   return (
     <>
-      {isPending && <output className='sr-only'>{m.common_aria_labels_loading()}</output>}
-      <Skeleton data={data?.comments} sample={SAMPLE_COMMENTS}>
+      {query.isPending && <output className='sr-only'>{m.common_aria_labels_loading()}</output>}
+      <Skeleton data={query.data?.comments} sample={SAMPLE_COMMENTS}>
         {(comments) => (
           <CommentsTable
             comments={comments}
-            pageCount={data?.pageCount ?? 1}
+            pageCount={query.data?.pageCount ?? 1}
             pagination={pagination}
             onPaginationChange={setPagination}
-            isFetching={isFetching}
+            isFetching={query.isFetching}
           />
         )}
       </Skeleton>

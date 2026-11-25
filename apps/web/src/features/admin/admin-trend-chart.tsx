@@ -22,7 +22,7 @@ function formatTrendDate(day: string, locale: string, options: Intl.DateTimeForm
 }
 
 export function AdminTrendChart() {
-  const { data, isSuccess, isError } = useQuery(
+  const query = useQuery(
     orpc.admin.trends.queryOptions({
       input: { days: 30, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone },
       placeholderData: keepPreviousData,
@@ -48,10 +48,10 @@ export function AdminTrendChart() {
     </output>
   )
 
-  if (isSuccess && data.length > 0) {
+  if (query.data?.length) {
     content = (
       <ChartContainer config={chartConfig} className='aspect-auto h-62.5 w-full'>
-        <AreaChart accessibilityLayer data={data} margin={{ top: 10, right: 10, bottom: 0, left: 10 }}>
+        <AreaChart accessibilityLayer data={query.data} margin={{ top: 10, right: 10, bottom: 0, left: 10 }}>
           <CartesianGrid vertical={false} />
           <XAxis
             dataKey='date'
@@ -93,9 +93,9 @@ export function AdminTrendChart() {
         </AreaChart>
       </ChartContainer>
     )
-  } else if (isSuccess) {
+  } else if (query.data) {
     content = <p className='text-sm text-muted-foreground'>{m.admin_dashboard_trends_no_data()}</p>
-  } else if (isError) {
+  } else if (query.isLoadingError) {
     content = <p className='text-sm text-destructive'>{m.error_failed_to_fetch_dashboard_data()}</p>
   }
 

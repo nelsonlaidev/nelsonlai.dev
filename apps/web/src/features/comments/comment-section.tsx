@@ -27,7 +27,7 @@ type CommentSectionProps = {
 export function CommentSection(props: CommentSectionProps) {
   const { slug, highlightedCommentId, highlightedReplyId } = props
   const [sort, setSort] = useState<'newest' | 'oldest'>('newest')
-  const counts = useQuery(orpc.comments.counts.queryOptions({ input: { slug } }))
+  const query = useQuery(orpc.comments.counts.queryOptions({ input: { slug } }))
 
   let countsContent: React.ReactNode = (
     <>
@@ -47,21 +47,21 @@ export function CommentSection(props: CommentSectionProps) {
     </>
   )
 
-  if (counts.data) {
+  if (query.data) {
     countsContent = (
       <>
         <span>
-          <NumberFlow data-testid='blog-comment-count' value={counts.data.comments} />{' '}
-          {m.blog_comments_comments({ count: counts.data.comments })}
+          <NumberFlow data-testid='blog-comment-count' value={query.data.comments} />{' '}
+          {m.blog_comments_comments({ count: query.data.comments })}
         </span>
         <i className='px-2.5 text-muted-foreground not-italic'>·</i>
         <span>
-          <NumberFlow data-testid='reply-count' value={counts.data.replies} />{' '}
-          {m.blog_comments_replies({ count: counts.data.replies })}
+          <NumberFlow data-testid='reply-count' value={query.data.replies} />{' '}
+          {m.blog_comments_replies({ count: query.data.replies })}
         </span>
       </>
     )
-  } else if (counts.isError) {
+  } else if (query.isLoadingError) {
     countsContent = m.common_error()
   }
 

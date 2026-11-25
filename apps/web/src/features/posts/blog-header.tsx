@@ -21,9 +21,9 @@ export function BlogHeader(props: BlogHeaderProps) {
   const { post } = props
   const formattedDate = useFormattedDate(post.publishedAt)
   const queryClient = useQueryClient()
-  const stats = usePostStats([post.slug])
-  const postStats = stats.data?.get(post.slug)
-  const counts = useQuery(orpc.comments.counts.queryOptions({ input: { slug: post.slug } }))
+  const statsQuery = usePostStats([post.slug])
+  const postStats = statsQuery.data?.get(post.slug)
+  const countsQuery = useQuery(orpc.comments.counts.queryOptions({ input: { slug: post.slug } }))
   const hasIncrementedRef = useRef(false)
   const increment = useMutation(
     orpc.posts.incrementView.mutationOptions({
@@ -48,18 +48,20 @@ export function BlogHeader(props: BlogHeaderProps) {
       <NumberFlow value={100} />
     </PendingCount>
   )
-  let viewsContent: React.ReactNode = stats.isPending ? pendingCount : '--'
+  let viewsContent: React.ReactNode = statsQuery.isPending ? pendingCount : '--'
   let commentsContent: React.ReactNode = pendingCount
 
   if (postStats) {
     viewsContent = <NumberFlow data-testid='view-count' value={postStats.views} />
-  } else if (stats.isError) {
+  } else if (statsQuery.isLoadingError) {
     viewsContent = m.common_error()
   }
 
-  if (counts.data) {
-    commentsContent = <NumberFlow data-testid='comment-count' value={counts.data.comments + counts.data.replies} />
-  } else if (counts.isError) {
+  if (countsQuery.data) {
+    commentsContent = (
+      <NumberFlow data-testid='comment-count' value={countsQuery.data.comments + countsQuery.data.replies} />
+    )
+  } else if (countsQuery.isLoadingError) {
     commentsContent = m.common_error()
   }
 

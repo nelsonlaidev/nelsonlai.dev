@@ -1,3 +1,4 @@
+import { ORPCError } from '@orpc/client'
 import { Button } from '@repo/ui/components/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/components/card'
 import { Spinner } from '@repo/ui/components/spinner'
@@ -32,7 +33,10 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
   )
 
   const { data } = query
-  const isInvalid = !token || query.isError
+  const isInvalid =
+    !token ||
+    query.isLoadingError ||
+    (query.error instanceof ORPCError && (query.error.code === 'BAD_REQUEST' || query.error.code === 'NOT_FOUND'))
   const isLoading = Boolean(token) && query.isPending
   const isSubmitting = unsubscribe.isPending
 

@@ -28,6 +28,7 @@ import { useReducedMotion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 import { Skeleton } from 'skullet/react'
 
+import { InfiniteQueryPagination } from '@/components/infinite-query-pagination'
 import { UserAvatar } from '@/components/user-avatar'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { orpc } from '@/lib/orpc-client'
@@ -77,21 +78,6 @@ export function CommentList(props: CommentListProps) {
     ...options,
     enabled: !session.isPending,
   })
-  const sentinelRef = useRef<HTMLSpanElement>(null)
-  const { hasNextPage, isFetching, isError, fetchNextPage } = query
-
-  useEffect(() => {
-    const sentinel = sentinelRef.current
-    if (!sentinel || !hasNextPage || isFetching || isError) return
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry?.isIntersecting) void fetchNextPage()
-    })
-    observer.observe(sentinel)
-    return () => {
-      observer.disconnect()
-    }
-  }, [hasNextPage, isFetching, isError, fetchNextPage])
-
   return (
     <div className={parentId ? 'space-y-5 pt-2' : 'space-y-8 py-2'}>
       {query.data?.pages
@@ -117,27 +103,14 @@ export function CommentList(props: CommentListProps) {
           </Skeleton>
         </>
       )}
-      {query.isError && (
-        <p role='alert' className='py-6 text-center text-sm text-muted-foreground'>
-          {parentId ? m.error_failed_to_load_replies() : m.error_failed_to_load_comments()}
-        </p>
-      )}
       {query.isSuccess && query.data.pages.every((page) => page.comments.length === 0) && (
         <p className='py-6 text-center text-sm text-muted-foreground'>{m.blog_comments_no_comments()}</p>
       )}
-      <span ref={sentinelRef} className='invisible' />
-      {query.hasNextPage && (
-        <Button
-          type='button'
-          variant='outline'
-          disabled={query.isFetching}
-          onClick={() => {
-            void query.fetchNextPage()
-          }}
-        >
-          {m.common_load_more()}
-        </Button>
-      )}
+      <InfiniteQueryPagination
+        query={query}
+        errorMessage={parentId ? m.error_failed_to_load_replies() : m.error_failed_to_load_comments()}
+        errorClassName='space-y-4 py-6 text-center text-sm text-muted-foreground'
+      />
     </div>
   )
 }

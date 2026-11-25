@@ -1,12 +1,10 @@
 import type { GuestbookMessage } from './types'
 
-import { Button, buttonVariants } from '@repo/ui/components/button'
 import { createRange } from '@repo/utils'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { cn } from 'cn'
-import { useEffect, useRef } from 'react'
 import { Skeleton } from 'skullet/react'
 
+import { InfiniteQueryPagination } from '@/components/infinite-query-pagination'
 import { UserAvatar } from '@/components/user-avatar'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
 import { m } from '@/paraglide/messages'
@@ -28,60 +26,20 @@ type MessagesProps = {
 
 export function Messages(props: MessagesProps) {
   const { userId } = props
-  const { data, isSuccess, isPending, isError, fetchNextPage, refetch, hasNextPage, isFetching, isFetchingNextPage } =
-    useInfiniteQuery(guestbookMessagesInfiniteOptions)
-  const sentinelRef = useRef<HTMLSpanElement>(null)
-
-  useEffect(() => {
-    const sentinel = sentinelRef.current
-    if (!sentinel || !hasNextPage || isFetching || isError) return
-
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry?.isIntersecting) void fetchNextPage()
-    })
-
-    observer.observe(sentinel)
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [fetchNextPage, hasNextPage, isFetching, isError])
-
-  const noMessages = isSuccess && data.pages.every((page) => page.messages.length === 0)
-  const messages = data?.pages.flatMap((page) => page.messages)
+  const query = useInfiniteQuery(guestbookMessagesInfiniteOptions)
+  const messages = query.data?.pages.flatMap((page) => page.messages)
 
   return (
     <div data-testid='guestbook-messages-list' className='flex flex-col gap-5'>
-      {(isPending || (messages && messages.length > 0)) && <MessageList messages={messages} userId={userId} />}
-      {isFetchingNextPage && <MessageList />}
-      <span ref={sentinelRef} className='invisible' aria-hidden='true' />
-      {hasNextPage && !isFetchingNextPage && !isError && (
-        <button
-          type='button'
-          disabled={isFetching}
-          onClick={() => {
-            void fetchNextPage()
-          }}
-          className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
-        >
-          {m.common_load_more()}
-        </button>
-      )}
-      {isError && (
-        <div role='alert' className='space-y-4 rounded-xl border px-6 py-10 text-center text-muted-foreground'>
-          <p>{m.error_failed_to_load_messages()}</p>
-          <Button
-            type='button'
-            variant='outline'
-            onClick={() => {
-              void refetch()
-            }}
-          >
-            {m.common_retry()}
-          </Button>
-        </div>
-      )}
-      {noMessages && (
+      {(query.isPending || (messages && messages.length > 0)) && <MessageList messages={messages} userId={userId} />}
+      {query.isFetchingNextPage && <MessageList />}
+      <InfiniteQueryPagination
+        query={query}
+        errorMessage={m.error_failed_to_load_messages()}
+        errorClassName='space-y-4 rounded-xl border px-6 py-10 text-center text-muted-foreground'
+        loadMoreSize='lg'
+      />
+      {query.isSuccess && messages?.length === 0 && (
         <div className='rounded-xl border px-6 py-10 text-center text-muted-foreground'>
           <p className='text-sm text-muted-foreground'>{m.guestbook_no_messages()}</p>
         </div>

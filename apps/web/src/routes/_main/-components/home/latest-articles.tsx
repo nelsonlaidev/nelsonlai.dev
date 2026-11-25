@@ -18,7 +18,7 @@ type LatestArticlesProps = {
 
 export function LatestArticles(props: LatestArticlesProps) {
   const { posts } = props
-  const { data: stats, isPending } = usePostStats(posts.map((post) => post.slug))
+  const query = usePostStats(posts.map((post) => post.slug))
 
   return (
     <Section id='blog' className='grid gap-10 pt-32 pb-28 md:grid-cols-[1fr_1.05fr] md:items-center md:gap-16 md:py-48'>
@@ -31,7 +31,7 @@ export function LatestArticles(props: LatestArticlesProps) {
       <div className='min-w-0'>
         <div className='mb-8 border-t'>
           {posts.map((post) => (
-            <ArticleRow key={post.slug} post={post} stats={stats} isPending={isPending} />
+            <ArticleRow key={post.slug} post={post} stats={query.data} isPending={query.isPending} />
           ))}
           {posts.length === 0 && <p className='py-8 text-muted-foreground'>{m.blog_empty()}</p>}
         </div>

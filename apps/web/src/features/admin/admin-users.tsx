@@ -19,7 +19,7 @@ const SAMPLE_USERS = createRange(10).map((index) => ({
 
 export function AdminUsers() {
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 })
-  const { data, isError, isFetching, isPending } = useQuery(
+  const query = useQuery(
     orpc.admin.user.list.queryOptions({
       input: {
         page: pagination.pageIndex + 1,
@@ -29,7 +29,7 @@ export function AdminUsers() {
     }),
   )
 
-  if (isError) {
+  if (query.isLoadingError) {
     return (
       <div role='alert' className='text-sm text-destructive'>
         {m.error_failed_to_fetch_users_data()}
@@ -39,15 +39,15 @@ export function AdminUsers() {
 
   return (
     <>
-      {isPending && <output className='sr-only'>{m.common_aria_labels_loading()}</output>}
-      <Skeleton data={data?.users} sample={SAMPLE_USERS}>
+      {query.isPending && <output className='sr-only'>{m.common_aria_labels_loading()}</output>}
+      <Skeleton data={query.data?.users} sample={SAMPLE_USERS}>
         {(users) => (
           <UsersTable
             users={users}
-            pageCount={data?.pageCount ?? 1}
+            pageCount={query.data?.pageCount ?? 1}
             pagination={pagination}
             onPaginationChange={setPagination}
-            isFetching={isFetching}
+            isFetching={query.isFetching}
           />
         )}
       </Skeleton>

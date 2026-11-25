@@ -20,12 +20,12 @@ type NotificationSettingsProps = {
 
 export function NotificationSettings(props: NotificationSettingsProps) {
   const { userId } = props
-  const preferences = useQuery(emailPreferencesQueryOptions(userId))
+  const query = useQuery(emailPreferencesQueryOptions(userId))
 
-  if (preferences.isError) return <p role='alert'>{m.error_failed_to_load_settings()}</p>
+  if (query.isLoadingError) return <p role='alert'>{m.error_failed_to_load_settings()}</p>
 
   return (
-    <Skeleton data={preferences.data?.commentRepliesEnabled} sample={true} label={m.common_aria_labels_loading()}>
+    <Skeleton data={query.data?.commentRepliesEnabled} sample={true} label={m.common_aria_labels_loading()}>
       {(commentRepliesEnabled) => (
         <NotificationSettingsForm userId={userId} commentRepliesEnabled={commentRepliesEnabled} />
       )}

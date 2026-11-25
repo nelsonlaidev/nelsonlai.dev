@@ -21,8 +21,7 @@ export function NowPlaying(props: NowPlayingProps) {
       <SiSpotify size={20} color='default' className='shrink-0' />
       <p className='min-w-0 wrap-anywhere'>
         {query.isPending && m.common_loading()}
-        {query.isError && m.nav_footer_spotify_error()}
-        {query.isSuccess &&
+        {query.data &&
           (query.data.isPlaying ? (
             <ExternalLink href={query.data.songUrl} rel='noreferrer' className='hover:text-foreground hover:underline'>
               {query.data.title} — {query.data.artist}
@@ -30,6 +29,11 @@ export function NowPlaying(props: NowPlayingProps) {
           ) : (
             m.nav_footer_spotify_idle()
           ))}
+        {query.isError && (
+          <span role='alert' className='block'>
+            {m.nav_footer_spotify_error()}
+          </span>
+        )}
       </p>
     </div>
   )

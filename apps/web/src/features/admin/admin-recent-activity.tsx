@@ -21,7 +21,7 @@ const SAMPLE_ACTIVITIES: AdminRecentActivityOutput['activities'] = createRange(1
 }))
 
 export function AdminRecentActivity() {
-  const { data, isError } = useQuery(orpc.admin.recentActivity.queryOptions())
+  const query = useQuery(orpc.admin.recentActivity.queryOptions())
 
   return (
     <Card>
@@ -29,13 +29,14 @@ export function AdminRecentActivity() {
         <CardTitle>{m.admin_dashboard_recent_activity_title()}</CardTitle>
       </CardHeader>
       <CardContent>
-        {isError && <p className='text-sm text-destructive'>{m.error_failed_to_fetch_dashboard_data()}</p>}
-        {(!isError || data) && (
+        {query.isLoadingError ? (
+          <p className='text-sm text-destructive'>{m.error_failed_to_fetch_dashboard_data()}</p>
+        ) : (
           <Skeleton
-            data={data?.activities}
+            data={query.data?.activities}
             sample={SAMPLE_ACTIVITIES}
             label={m.common_aria_labels_loading()}
-            empty={data?.activities.length === 0}
+            empty={query.data?.activities.length === 0}
             emptyMessage={<p className='text-sm text-muted-foreground'>{m.admin_dashboard_recent_activity_empty()}</p>}
           >
             {(activities) => (

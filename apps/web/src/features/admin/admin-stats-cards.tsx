@@ -16,9 +16,9 @@ const STAT_ITEMS = [
 ] as const
 
 export function AdminStatsCards() {
-  const { data, isError } = useQuery(orpc.admin.stats.queryOptions())
+  const query = useQuery(orpc.admin.stats.queryOptions())
 
-  if (isError) {
+  if (query.isLoadingError) {
     return <p className='text-sm text-destructive'>{m.error_failed_to_fetch_dashboard_data()}</p>
   }
 
@@ -32,7 +32,7 @@ export function AdminStatsCards() {
             </CardTitle>
           </CardHeader>
           <CardContent className='text-2xl font-bold'>
-            <Skeleton data={data?.[item.field]} sample={123} label={m.common_aria_labels_loading()}>
+            <Skeleton data={query.data?.[item.field]} sample={123} label={m.common_aria_labels_loading()}>
               {(value) => <NumberFlow className='block w-fit rounded-sm' skullet-block='' value={value} />}
             </Skeleton>
           </CardContent>
