@@ -12,7 +12,7 @@ type BlogFooterProps = {
 
 export function BlogFooter(props: BlogFooterProps) {
   const { post, children } = props
-  const editUrl = `${SITE.repository}/blob/main/apps/web/content/blog/${post.locale}/${post.slug}.mdx?plain=1`
+  const editUrl = `${SITE.repository}/edit/main/apps/web/content/blog/${post.locale}/${post.slug}.mdx`
 
   return (
     <>
