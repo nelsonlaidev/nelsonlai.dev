@@ -12,6 +12,7 @@ import {
 } from '@repo/ui/components/dialog'
 import { Input } from '@repo/ui/components/input'
 import { Label } from '@repo/ui/components/label'
+import { createRange } from '@repo/utils'
 import { useState } from 'react'
 
 import preview from '../.storybook/preview'
@@ -44,7 +45,7 @@ function DialogExample(props: DialogExampleProps) {
         </div>
         {long && (
           <div className='space-y-4'>
-            {Array.from({ length: 12 }, (_, index) => (
+            {createRange(12).map((index) => (
               <p key={index}>
                 Section {index + 1}: Longer content should scroll inside the dialog while remaining readable on mobile.
               </p>

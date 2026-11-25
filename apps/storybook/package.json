@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
+    "@repo/utils": "workspace:*",
     "lucide-react": "catalog:",
     "react": "catalog:",
     "react-dom": "19.3.1",

@@ -1,5 +1,7 @@
 import type { AvoidanceState } from './fish-motion'
 
+import { createRange } from '@repo/utils'
+
 import { advanceAvoidance, approach, createAvoidance, FISH_MOTION_LIMITS } from './fish-motion'
 
 type Fish = {
@@ -54,7 +56,7 @@ class OceanCanvasElement extends HTMLElement {
     const hoverMedia = globalThis.matchMedia('(any-hover: hover)')
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0, strength: 0, active: false, initialized: false }
 
-    const fish: Fish[] = Array.from({ length: 38 }, (_, i) => ({
+    const fish: Fish[] = createRange(38).map((i) => ({
       x: Math.random(),
       y: Math.random(),
       size: 7 + Math.random() * 21,

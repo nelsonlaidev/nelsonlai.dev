@@ -5,6 +5,7 @@ import en from '@messages/en.json' with { type: 'json' }
 import { createId } from '@paralleldrive/cuid2'
 import { users } from '@repo/db/schema/auth'
 import { guestbookMessages } from '@repo/db/schema/guestbook'
+import { createRange } from '@repo/utils'
 import { eq, inArray, sql } from 'drizzle-orm'
 
 import { db } from '@/lib/db'
@@ -105,7 +106,7 @@ test.describe('guestbook page', () => {
 
           // Keep this cursor range before the public messages used by the other tests.
           const createdAt = new Date((oldest?.createdAt.getTime() ?? Date.now()) - 60_000)
-          records = Array.from({ length: count }, (_, index) => ({
+          records = createRange(count).map((index) => ({
             id: `${prefix}-${String(index).padStart(2, '0')}`,
             body: `Pagination message ${index}`,
             userId: TEST_UNIQUE_ID,
@@ -169,7 +170,7 @@ test.describe('guestbook page', () => {
 
   test('loads every message once after timestamps are rounded to milliseconds', async ({ page }) => {
     const prefix = `pagination-${createId()}`
-    const records = Array.from({ length: 23 }, (_, index) => ({
+    const records = createRange(23).map((index) => ({
       // Reverse timestamp groups relative to IDs so ordering cannot rely on the ID alone.
       id: `${prefix}-${String((7 - Math.floor(index / 3)) * 3 + (index % 3)).padStart(2, '0')}`,
       body: `${prefix} message ${index}`,

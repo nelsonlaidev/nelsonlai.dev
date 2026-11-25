@@ -7,6 +7,7 @@ import { createId } from '@paralleldrive/cuid2'
 import { users } from '@repo/db/schema/auth'
 import { comments } from '@repo/db/schema/comments'
 import { posts } from '@repo/db/schema/posts'
+import { createRange } from '@repo/utils'
 import { eq, inArray, sql } from 'drizzle-orm'
 
 import { db } from '@/lib/db'
@@ -503,7 +504,7 @@ test.describe('comment page', () => {
           test.beforeEach(async () => {
             slug = `pagination-${createId()}`
             const createdAt = new Date('2040-01-01T00:00:00.123Z')
-            const ordinary = Array.from({ length: count }, (_, index) => ({
+            const ordinary = createRange(count).map((index) => ({
               id: `${slug}-${String(index).padStart(2, '0')}`,
               body: `Pagination comment ${index}`,
               postSlug: slug,
@@ -594,7 +595,7 @@ test.describe('comment page', () => {
       })
 
       records = ['comment', 'reply'].flatMap((type) =>
-        Array.from({ length: 23 }, (_, index) => ({
+        createRange(23).map((index) => ({
           // Reverse timestamp groups relative to IDs so ordering cannot rely on the ID alone.
           id: `${prefix}-${type}-${String((7 - Math.floor(index / 3)) * 3 + (index % 3)).padStart(2, '0')}`,
           body: `${prefix} ${type} ${index}`,

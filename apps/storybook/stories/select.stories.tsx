@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@repo/ui/components/select'
+import { createRange } from '@repo/utils'
 import { useState } from 'react'
 
 import preview from '../.storybook/preview'
@@ -37,14 +38,13 @@ function SelectExample(props: SelectExampleProps) {
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Controls</SelectLabel>
-            {(long
-              ? Array.from({ length: 30 }, (_, index) => `Component ${index + 1}`)
-              : ['Button', 'Input', 'Select']
-            ).map((item) => (
-              <SelectItem key={item} value={item}>
-                {item}
-              </SelectItem>
-            ))}
+            {(long ? createRange(30).map((index) => `Component ${index + 1}`) : ['Button', 'Input', 'Select']).map(
+              (item) => (
+                <SelectItem key={item} value={item}>
+                  {item}
+                </SelectItem>
+              ),
+            )}
           </SelectGroup>
           <SelectSeparator />
           <SelectGroup>
