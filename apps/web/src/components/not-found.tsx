@@ -1,7 +1,7 @@
 import { buttonVariants } from '@repo/ui/components/button'
 import { Link } from '@tanstack/react-router'
 import { cn } from 'cn'
-import { ArrowUpRightIcon } from 'lucide-react'
+import { ArrowRightIcon } from 'lucide-react'
 
 import { m } from '@/paraglide/messages'
 
@@ -22,7 +22,10 @@ export function NotFound() {
       <p className='relative mx-auto max-w-md leading-relaxed text-muted-foreground'>{m.not_found_description()}</p>
       <Link to='/' className={cn(buttonVariants({ variant: 'outline', size: 'xl' }))}>
         {m.common_go_to_homepage()}
-        <ArrowUpRightIcon aria-hidden='true' className='size-4' />
+        <ArrowRightIcon
+          aria-hidden='true'
+          className='size-4 motion-safe:transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1'
+        />
       </Link>
     </div>
   )

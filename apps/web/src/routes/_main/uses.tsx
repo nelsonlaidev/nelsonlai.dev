@@ -1,7 +1,6 @@
 import { BlurImage } from '@repo/ui/components/blur-image'
-import { ExternalLink } from '@repo/ui/components/external-link'
+import { ExternalLink, ExternalLinkArrow } from '@repo/ui/components/external-link'
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { ArrowRightIcon } from 'lucide-react'
 
 import { Mdx } from '@/components/mdx/mdx'
 import { OceanPage } from '@/components/ocean-page'
@@ -79,7 +78,7 @@ function UsesSection(props: UsesSectionProps) {
           <ExternalLink
             href={item.url}
             key={item.name}
-            className='group flex min-w-0 items-center gap-3.5 border-b px-4 py-5 transition-[background-color] ease-linear hover:bg-primary/5 motion-reduce:transition-none sm:gap-6 sm:px-5 sm:py-6'
+            className='flex min-w-0 items-center gap-3.5 border-b px-4 py-5 transition-[background-color] ease-linear hover:bg-primary/5 motion-reduce:transition-none sm:gap-6 sm:px-5 sm:py-6'
           >
             <BlurImage
               src={item.image}
@@ -93,10 +92,7 @@ function UsesSection(props: UsesSectionProps) {
               <span className='mb-1.5 block font-medium tracking-tight'>{item.name}</span>
               <span className='block text-sm/relaxed text-muted-foreground'>{item.description}</span>
             </span>
-            <ArrowRightIcon
-              className='size-5 shrink-0 -rotate-45 text-primary transition-[rotate] ease-linear motion-safe:group-hover:rotate-0 motion-safe:group-focus-visible:rotate-0 motion-reduce:transition-none'
-              aria-hidden='true'
-            />
+            <ExternalLinkArrow className='size-5 shrink-0 text-primary' />
           </ExternalLink>
         ))}
       </div>

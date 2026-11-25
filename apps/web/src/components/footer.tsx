@@ -1,6 +1,5 @@
-import { ExternalLink } from '@repo/ui/components/external-link'
+import { ExternalLink, ExternalLinkArrow } from '@repo/ui/components/external-link'
 import { Link } from '@tanstack/react-router'
-import { ArrowUpRightIcon } from 'lucide-react'
 import { useState } from 'react'
 
 import { ENV } from '@/env'
@@ -82,7 +81,7 @@ export function Footer() {
                       ) : (
                         <ExternalLink href={link.href} className='inline-flex items-center gap-2 hover:text-foreground'>
                           {typeof link.label === 'string' ? link.label : link.label()}
-                          <ArrowUpRightIcon className='size-3.5 opacity-80' aria-hidden='true' />
+                          <ExternalLinkArrow className='size-3.5 opacity-80' />
                         </ExternalLink>
                       )}
                     </li>

@@ -1,6 +1,5 @@
 import { BlurImage } from '@repo/ui/components/blur-image'
-import { ExternalLink } from '@repo/ui/components/external-link'
-import { ExternalLinkIcon } from 'lucide-react'
+import { ExternalLink, ExternalLinkArrow } from '@repo/ui/components/external-link'
 
 type LinkCardProps = {
   href: string
@@ -28,7 +27,7 @@ export function LinkCard(props: LinkCardProps) {
           <div className='font-semibold'>{title}</div>
           <div className='text-sm wrap-break-word text-muted-foreground'>{href}</div>
         </div>
-        <ExternalLinkIcon className='size-5 shrink-0' aria-hidden='true' />
+        <ExternalLinkArrow className='size-5 shrink-0 text-primary' />
       </ExternalLink>
     </div>
   )

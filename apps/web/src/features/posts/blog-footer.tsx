@@ -1,7 +1,6 @@
 import type { PostDetail } from './types'
 
-import { ExternalLink } from '@repo/ui/components/external-link'
-import { ArrowUpRightIcon } from 'lucide-react'
+import { ExternalLink, ExternalLinkArrow } from '@repo/ui/components/external-link'
 
 import { SITE } from '@/lib/site'
 import { m } from '@/paraglide/messages'
@@ -19,7 +18,7 @@ export function BlogFooter(props: BlogFooterProps) {
     <>
       <div className='mt-11 mb-7'>
         <ExternalLink href={editUrl} className='inline-flex items-center gap-2 text-sm text-link hover:text-foreground'>
-          {m.blog_footer_edit_on_github()} <ArrowUpRightIcon size={16} aria-hidden='true' />
+          {m.blog_footer_edit_on_github()} <ExternalLinkArrow className='size-4' />
         </ExternalLink>
       </div>
       <div className='border-t py-11 text-center sm:py-16'>
