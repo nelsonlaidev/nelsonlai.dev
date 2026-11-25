@@ -36,10 +36,10 @@ Open [localhost:3000](http://localhost:3000). For other commands, see [`package.
 
 [@nelsonlaidev](https://github.com/nelsonlaidev)
 
-## Donation
+## Sponsorship
 
-If you find this project helpful, consider supporting me by [sponsoring the project](https://github.com/sponsors/nelsonlaidev).
+If you find this project helpful, consider [sponsoring me on GitHub](https://github.com/sponsors/nelsonlaidev).
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
