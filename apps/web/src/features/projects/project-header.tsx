@@ -29,6 +29,7 @@ export function ProjectHeader(props: ProjectHeaderProps) {
               <ArrowRightIcon
                 className='size-5 motion-safe:transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1'
                 aria-hidden='true'
+                data-icon='inline-end'
               />
             </ExternalLink>
           )}
@@ -38,6 +39,7 @@ export function ProjectHeader(props: ProjectHeaderProps) {
               <ArrowRightIcon
                 className='size-5 motion-safe:transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1'
                 aria-hidden='true'
+                data-icon='inline-end'
               />
             </ExternalLink>
           )}

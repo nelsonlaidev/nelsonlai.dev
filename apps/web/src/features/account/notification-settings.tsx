@@ -117,7 +117,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
               </Button>
             )}
             <Button type='submit' form={formId} disabled={!isChanged || update.isPending}>
-              {update.isPending && <Spinner />}
+              {update.isPending && <Spinner data-icon='inline-start' />}
               {m.common_save()}
             </Button>
           </CardFooter>

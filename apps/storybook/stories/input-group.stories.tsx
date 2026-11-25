@@ -66,7 +66,7 @@ export const BlockAddons = meta.story({
       <div className='flex gap-3'>
         {(['xs', 'sm', 'icon-xs', 'icon-sm'] as const).map((size) => (
           <InputGroupButton key={size} size={size} aria-label={`Add item ${size}`}>
-            <PlusIcon aria-hidden='true' />
+            <PlusIcon aria-hidden='true' data-icon={size.startsWith('icon') ? undefined : 'inline-start'} />
             {!size.startsWith('icon') && size}
           </InputGroupButton>
         ))}

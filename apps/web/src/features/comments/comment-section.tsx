@@ -82,7 +82,7 @@ export function CommentSection(props: CommentSectionProps) {
         </NumberFlowGroup>
         <DropdownMenu>
           <DropdownMenuTrigger render={<Button type='button' variant='outline' size='sm' />}>
-            <ListFilterIcon aria-hidden='true' />
+            <ListFilterIcon aria-hidden='true' data-icon='inline-start' />
             {m.blog_comments_sort_by()}
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end' className='border shadow-md ring-0'>

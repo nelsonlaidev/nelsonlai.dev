@@ -20,10 +20,11 @@ export function NotFound() {
         <em className='font-serif text-primary'>{m.not_found_emphasis()}</em>
       </h1>
       <p className='relative mx-auto max-w-md leading-relaxed text-muted-foreground'>{m.not_found_description()}</p>
-      <Link to='/' className={cn(buttonVariants({ variant: 'outline', size: 'xl' }))}>
+      <Link to='/' className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}>
         {m.common_go_to_homepage()}
         <ArrowRightIcon
           aria-hidden='true'
+          data-icon='inline-end'
           className='size-4 motion-safe:transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1'
         />
       </Link>

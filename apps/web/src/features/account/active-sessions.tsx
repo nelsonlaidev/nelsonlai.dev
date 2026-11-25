@@ -180,7 +180,7 @@ function SessionCard(props: SessionCardProps) {
           </div>
         </div>
         <Button variant='destructive' size='sm' onClick={onRevoke} disabled={disabled}>
-          {isRevoking && <Spinner />}
+          {isRevoking && <Spinner data-icon='inline-start' />}
           {m.account_revoke_session()}
         </Button>
       </CardContent>

@@ -62,7 +62,7 @@ export function Messages(props: MessagesProps) {
           onClick={() => {
             void fetchNextPage()
           }}
-          className={cn(buttonVariants({ variant: 'outline', size: 'xl' }))}
+          className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
         >
           {m.common_load_more()}
         </button>

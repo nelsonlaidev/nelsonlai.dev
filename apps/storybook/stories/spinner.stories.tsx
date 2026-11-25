@@ -13,7 +13,7 @@ export const LabelsAndSizes = meta.story({
       <Spinner />
       <Spinner aria-label='Preparing preview' className='size-8' />
       <Button disabled aria-busy='true'>
-        <Spinner aria-hidden='true' />
+        <Spinner aria-hidden='true' data-icon='inline-start' />
         Saving
       </Button>
     </div>

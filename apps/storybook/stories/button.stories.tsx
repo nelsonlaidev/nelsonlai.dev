@@ -23,7 +23,7 @@ export const Variants = meta.story({
 export const Sizes = meta.story({
   render: () => (
     <div className='flex flex-wrap items-center gap-3'>
-      {(['xs', 'sm', 'default', 'lg', 'xl'] as const).map((size) => (
+      {(['xs', 'sm', 'default', 'lg'] as const).map((size) => (
         <Button key={size} size={size}>
           {size}
         </Button>
@@ -42,7 +42,7 @@ export const StatesAndComposition = meta.story({
     <div className='flex flex-wrap items-center gap-3'>
       <Button disabled>Disabled</Button>
       <Button disabled aria-busy='true'>
-        <Spinner />
+        <Spinner data-icon='inline-start' />
         Saving locally
       </Button>
       <Button>
@@ -53,7 +53,7 @@ export const StatesAndComposition = meta.story({
         Local link
         <ArrowRightIcon aria-hidden='true' data-icon='inline-end' />
       </Button>
-      <Button variant='outline' size='xl'>
+      <Button variant='outline' size='lg'>
         Outline action
         <ArrowRightIcon aria-hidden='true' data-icon='inline-end' />
       </Button>

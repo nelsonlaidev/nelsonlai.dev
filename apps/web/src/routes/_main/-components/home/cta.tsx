@@ -18,14 +18,15 @@ export function Cta() {
       </h2>
       <p className='mx-auto max-w-lg px-3 leading-relaxed text-balance text-muted-foreground'>{m.home_site_intro()}</p>
       <div className='flex flex-wrap items-center justify-center gap-2'>
-        <Link to='/guestbook' className={cn(buttonVariants({ size: 'xl' }))}>
+        <Link to='/guestbook' className={cn(buttonVariants({ size: 'lg' }))}>
           {m.home_site_guestbook()}
         </Link>
-        <Link to='/projects' className={cn(buttonVariants({ variant: 'ghost', size: 'xl' }), 'max-sm:px-3')}>
+        <Link to='/projects' className={cn(buttonVariants({ variant: 'ghost', size: 'lg' }))}>
           {m.home_site_projects()}
           <ArrowRightIcon
             className='size-5 motion-safe:transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1'
             aria-hidden='true'
+            data-icon='inline-end'
           />
         </Link>
       </div>

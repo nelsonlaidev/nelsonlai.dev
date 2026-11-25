@@ -65,7 +65,7 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
               if (token && data && !isSubmitting) unsubscribe.mutate({ token })
             }}
           >
-            {isSubmitting && <Spinner />}
+            {isSubmitting && <Spinner data-icon='inline-start' />}
             {m.common_labels_unsubscribe()}
           </Button>
           <p className='text-center text-xs text-balance text-muted-foreground'>

@@ -280,7 +280,7 @@ function CommentItem(props: CommentItemProps) {
                   castVote(true)
                 }}
               >
-                <ThumbsUpIcon aria-hidden='true' />
+                <ThumbsUpIcon aria-hidden='true' data-icon='inline-start' />
                 <NumberFlow value={likeCount} />
               </Button>
               <Button
@@ -296,7 +296,7 @@ function CommentItem(props: CommentItemProps) {
                   castVote(false)
                 }}
               >
-                <ThumbsDownIcon aria-hidden='true' />
+                <ThumbsDownIcon aria-hidden='true' data-icon='inline-start' />
                 <NumberFlow value={dislikeCount} />
               </Button>
               {!comment.parentId && (
@@ -309,7 +309,7 @@ function CommentItem(props: CommentItemProps) {
                     setReplying(true)
                   }}
                 >
-                  <MessageSquareIcon aria-hidden='true' />
+                  <MessageSquareIcon aria-hidden='true' data-icon='inline-start' />
                   {m.blog_comments_reply()}
                 </Button>
               )}
@@ -336,6 +336,7 @@ function CommentItem(props: CommentItemProps) {
               }}
             >
               <ChevronRightIcon
+                data-icon='inline-start'
                 aria-hidden='true'
                 className='size-4 transition-transform duration-200 motion-reduce:transition-none'
               />
