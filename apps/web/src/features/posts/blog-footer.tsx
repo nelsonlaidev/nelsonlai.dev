@@ -14,13 +14,13 @@ type BlogFooterProps = {
 export function BlogFooter(props: BlogFooterProps) {
   const { post, children } = props
   const updatedDate = useFormattedDate(post.updatedAt)
-  const editUrl = `${SITE.repository}/edit/main/apps/web/content/blog/${post.locale}/${post.slug}.mdx`
+  const sourceUrl = `${SITE.repository}/blob/main/apps/web/content/blog/${post.locale}/${post.slug}.mdx`
 
   return (
     <>
       <div className='mt-11 mb-7 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-sm'>
-        <ExternalLink href={editUrl} className='inline-flex items-center gap-2 text-link hover:text-foreground'>
-          {m.blog_footer_edit_on_github()} <ExternalLinkArrow className='size-4' />
+        <ExternalLink href={sourceUrl} className='inline-flex items-center gap-2 text-link hover:text-foreground'>
+          {m.common_view_on_github()} <ExternalLinkArrow className='size-4' />
         </ExternalLink>
         <time dateTime={post.updatedAt} className='text-muted-foreground'>
           {m.blog_footer_last_updated({ date: updatedDate ?? '--' })}
