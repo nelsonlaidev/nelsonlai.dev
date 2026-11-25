@@ -18,8 +18,8 @@ import {
 } from '../schema/admin'
 
 const activityUserColumns = {
-  id: sql<string>`coalesce(${users.id}, 'deleted')`,
-  name: sql<string>`coalesce(${users.name}, 'Deleted user')`,
+  id: users.id,
+  name: users.name,
   image: users.image,
 }
 
@@ -59,10 +59,7 @@ const listComments = adminProcedure
     }
 
     return {
-      comments: result.map((comment) => ({
-        ...comment,
-        user: comment.user ?? { id: 'deleted', name: 'Deleted user', image: null },
-      })),
+      comments: result,
       pageCount: Math.ceil(totalCountResult.count / input.limit),
       totalCount: totalCountResult.count,
     }
@@ -137,7 +134,7 @@ const getRecentActivity = adminProcedure.output(RecentActivityOutputSchema).hand
     context.db
       .select({ id: messages.id, body: messages.body, createdAt: messages.createdAt, user: activityUserColumns })
       .from(messages)
-      .leftJoin(users, eq(messages.userId, users.id))
+      .innerJoin(users, eq(messages.userId, users.id))
       .orderBy(desc(messages.createdAt), desc(messages.id))
       .limit(10),
   ])
@@ -147,7 +144,7 @@ const getRecentActivity = adminProcedure.output(RecentActivityOutputSchema).hand
       type: 'comment' as const,
       id: comment.id,
       body: comment.body,
-      user: comment.user ?? { id: 'deleted', name: 'Deleted user', image: null },
+      user: comment.user,
       postSlug: comment.postSlug,
       createdAt: comment.createdAt,
     })),
@@ -155,7 +152,7 @@ const getRecentActivity = adminProcedure.output(RecentActivityOutputSchema).hand
       type: 'message' as const,
       id: message.id,
       body: message.body,
-      user: message.user ?? { id: 'deleted', name: 'Deleted user', image: null },
+      user: message.user,
       createdAt: message.createdAt,
     })),
   ]

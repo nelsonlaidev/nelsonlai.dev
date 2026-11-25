@@ -255,7 +255,9 @@ test.describe('comment page', () => {
       expect(deleteResponse.status()).toBe(403)
       expect(await deleteResponse.json()).toMatchObject({ json: { code: 'FORBIDDEN' } })
 
+      await db.delete(users).where(eq(users.id, otherUserId))
       await page.reload()
+      await expect(commentBlock.getByText(en.common_labels_deleted_user, { exact: true })).toBeVisible()
 
       await expect(commentBlock.getByText(commentText, { exact: true })).toBeVisible()
       expect(await getCount(page.getByTestId('comment-count'))).toBe(initialCommentCount)

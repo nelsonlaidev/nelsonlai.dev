@@ -148,6 +148,7 @@ type CommentItemProps = Omit<CommentListProps, 'sort' | 'parentId'> & {
 
 function CommentItem(props: CommentItemProps) {
   const { comment, slug, highlightedCommentId, highlightedReplyId } = props
+  const userName = comment.user?.name ?? m.common_labels_deleted_user()
   const [replying, setReplying] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [repliesOpen, setRepliesOpen] = useState(comment.id === highlightedCommentId)
@@ -213,11 +214,11 @@ function CommentItem(props: CommentItemProps) {
         </Badge>
       )}
       <div data-testid={`comment-${comment.id}`} className='flex gap-3 sm:gap-4'>
-        <UserAvatar id={comment.user.id} name={comment.user.name} image={comment.user.image} />
+        <UserAvatar id={comment.user?.id} name={userName} image={comment.user?.image} />
         <div className='min-w-0 flex-1'>
           <div className='ml-0.5 flex min-h-8 flex-wrap items-center justify-between gap-2 text-sm'>
             <div className='flex min-w-0 flex-wrap items-center gap-2'>
-              <span className='max-w-40 truncate font-semibold'>{comment.user.name}</span>
+              <span className='max-w-40 truncate font-semibold'>{userName}</span>
               <Tooltip>
                 <TooltipTrigger
                   render={<time dateTime={comment.createdAt.toISOString()} />}
@@ -227,7 +228,7 @@ function CommentItem(props: CommentItemProps) {
                 </TooltipTrigger>
                 <TooltipContent>{fullDate ?? '--'}</TooltipContent>
               </Tooltip>
-              {comment.user.role === 'admin' && <Badge>{m.blog_comments_author()}</Badge>}
+              {comment.user?.role === 'admin' && <Badge>{m.blog_comments_author()}</Badge>}
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger

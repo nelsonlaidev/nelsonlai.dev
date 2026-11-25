@@ -51,8 +51,8 @@ const list = publicProcedure
         boolean | null
       >`(select ${commentVotes.isLike} from ${commentVotes} where ${commentVotes.commentId} = ${comments.id} and ${commentVotes.userId} = ${context.session?.user.id ?? ''})`,
       user: {
-        id: sql<string>`coalesce(${users.id}, 'deleted')`,
-        name: sql<string>`coalesce(${users.name}, 'Deleted user')`,
+        id: users.id,
+        name: users.name,
         image: users.image,
         role: users.role,
       },
@@ -86,7 +86,6 @@ const list = publicProcedure
       comments: page.items.map((comment) => ({
         ...comment,
         body: comment.isDeleted ? '' : comment.body,
-        user: comment.user ?? { id: 'deleted', name: 'Deleted user', image: null, role: null },
       })),
       nextCursor: page.nextCursor,
     }

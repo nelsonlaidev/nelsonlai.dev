@@ -59,12 +59,12 @@ type ActivityProps = {
 function ActivityItem(props: ActivityProps) {
   const { activity } = props
 
-  const userName = activity.user.name
+  const userName = activity.user?.name ?? m.common_labels_deleted_user()
   const timeAgo = useFormattedDate(activity.createdAt, { relative: true, threshold: 30 })
 
   return (
     <div className='flex items-start gap-3 py-3'>
-      <UserAvatar id={activity.user.id} name={userName} image={activity.user.image} className='size-6' />
+      <UserAvatar id={activity.user?.id} name={userName} image={activity.user?.image} className='size-6' />
       <div className='min-w-0 flex-1 space-y-1 wrap-anywhere'>
         <p className='text-sm'>
           {activity.type === 'comment' ? (

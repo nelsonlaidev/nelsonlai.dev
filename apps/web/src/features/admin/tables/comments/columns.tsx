@@ -16,17 +16,17 @@ export function getColumns(): Array<ColumnDef<typeof features, Comment>> {
     {
       accessorKey: 'userId',
       header: m.admin_comments_table_user(),
-      cell: ({ row }) => (
-        <div className='flex items-center gap-2'>
-          <UserAvatar
-            id={row.original.userId ?? 'deleted'}
-            name={row.original.user.name}
-            image={row.original.user.image}
-            className='size-6'
-          />
-          {row.original.user.name}
-        </div>
-      ),
+      cell: ({ row }) => {
+        const { user } = row.original
+        const userName = user?.name ?? m.common_labels_deleted_user()
+
+        return (
+          <div className='flex items-center gap-2'>
+            <UserAvatar id={user?.id} name={userName} image={user?.image} className='size-6' />
+            {userName}
+          </div>
+        )
+      },
     },
     {
       accessorKey: 'body',

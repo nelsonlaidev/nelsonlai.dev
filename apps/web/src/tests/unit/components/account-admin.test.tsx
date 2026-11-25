@@ -120,7 +120,7 @@ describe('Account and admin presentation with isolated API fixtures', () => {
           body: 'Local fixture body',
           postSlug: 'example',
           createdAt: new Date('2026-01-01'),
-          user: { id: 'deleted', name: 'Fixture reader', image: null },
+          user: null,
         },
       ],
       pageCount: 1,
@@ -129,6 +129,7 @@ describe('Account and admin presentation with isolated API fixtures', () => {
     setup(<AdminComments />)
 
     expect(await screen.findByText('Local fixture body')).toBeInTheDocument()
+    expect(screen.getByText(en.common_labels_deleted_user)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'example' })).toBeInTheDocument()
   })
 

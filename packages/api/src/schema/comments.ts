@@ -16,12 +16,14 @@ export const CommentSchema = z.object({
   likeCount: z.number().int().nonnegative(),
   dislikeCount: z.number().int().nonnegative(),
   liked: z.boolean().nullable(),
-  user: z.object({
-    id: z.string(),
-    name: z.string(),
-    image: z.string().nullable(),
-    role: z.string().nullable(),
-  }),
+  user: z
+    .object({
+      id: z.string(),
+      name: z.string(),
+      image: z.string().nullable(),
+      role: z.string().nullable(),
+    })
+    .nullable(),
 })
 
 export const ListCommentsInputSchema = InfiniteQueryInputSchema.extend({
