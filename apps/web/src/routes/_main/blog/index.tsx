@@ -54,12 +54,12 @@ export const Route = createFileRoute('/_main/blog/')({
 })
 
 function RouteComponent() {
-  const { page, posts, locale } = Route.useLoaderData()
+  const { page, posts } = Route.useLoaderData()
 
   return (
     <OceanPage>
       <PageHeader title={page.title} description={m.blog_intro()} className='mb-10' />
-      <FilteredPosts key={locale} posts={posts} />
+      <FilteredPosts posts={posts} />
     </OceanPage>
   )
 }
