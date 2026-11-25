@@ -119,7 +119,7 @@ function ArticleDetail(props: ArticleDetailProps) {
             className='group flex items-center justify-between gap-5 md:gap-8'
           >
             <div className='min-w-0'>
-              <span className='mb-6 block text-xs text-section-label'>{m.blog_next()}</span>
+              <span className='mb-6 block text-xs text-muted-foreground'>{m.blog_next()}</span>
               <h2 className='mb-5 text-4xl tracking-tight md:text-5xl'>{next.title}</h2>
               <p className='leading-relaxed text-muted-foreground/80'>{next.description}</p>
             </div>

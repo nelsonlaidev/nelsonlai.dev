@@ -28,7 +28,6 @@ const colorTokens = [
   'secondary-foreground',
   'muted',
   'muted-foreground',
-  'section-label',
   'link',
   'skeleton',
   'accent',

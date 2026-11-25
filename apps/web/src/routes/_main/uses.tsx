@@ -127,7 +127,7 @@ function UsesLaptop(props: UsesLaptopProps) {
             <h3 className='mb-2.5 text-xl font-medium tracking-tight sm:text-2xl lg:text-3xl'>{name}</h3>
             <p className='leading-relaxed text-muted-foreground'>{description}</p>
           </div>
-          <span aria-hidden='true' className='hidden text-5xl font-light tracking-tight text-section-label sm:block'>
+          <span aria-hidden='true' className='hidden text-5xl font-light tracking-tight text-muted-foreground sm:block'>
             16<span className='block text-right text-sm tracking-normal'>inch</span>
           </span>
         </div>

@@ -13,7 +13,7 @@ export function AboutToolbox(props: AboutToolboxProps) {
   return (
     <section className='grid grid-cols-1 gap-6 lg:grid-cols-[1fr_2fr] lg:gap-14 xl:gap-24'>
       <div>
-        <span className='mb-6 block text-xs text-section-label'>{label}</span>
+        <span className='mb-6 block text-xs text-muted-foreground'>{label}</span>
         <h2 className='text-4xl tracking-tight lg:text-5xl 2xl:text-6xl [&_em]:font-serif [&_em]:text-primary'>
           {title}
         </h2>
