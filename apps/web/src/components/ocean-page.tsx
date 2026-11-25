@@ -11,7 +11,7 @@ export function OceanPage(props: OceanPageProps) {
   return (
     <div
       className={cn(
-        'mx-auto min-h-[85vh] w-full max-w-400 pt-36 pr-[max(16px,env(safe-area-inset-right))] pb-11 pl-[max(16px,env(safe-area-inset-left))] sm:px-[8%] sm:pt-40 sm:pb-16 lg:pt-48 xl:px-[10%] 2xl:px-40',
+        'mx-auto min-h-[85vh] w-full max-w-400 pt-36 page-gutter pb-11 sm:pt-40 sm:pb-16 sm:[--page-gutter:8%] lg:pt-48 xl:[--page-gutter:10%] 2xl:[--page-gutter:--spacing(40)]',
         className,
       )}
     >

@@ -179,6 +179,12 @@
   --radius: 0.625rem;
 }
 
+@utility page-gutter {
+  --page-gutter: 16px;
+  padding-left: max(var(--page-gutter), env(safe-area-inset-left));
+  padding-right: max(var(--page-gutter), env(safe-area-inset-right));
+}
+
 @utility focus-outline {
   outline: 2px solid var(--ring);
 }

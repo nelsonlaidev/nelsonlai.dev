@@ -55,7 +55,7 @@ export function Footer() {
   ]
 
   return (
-    <footer className='bg-linear-to-b from-transparent to-backdrop/70 pt-20 pr-[max(16px,env(safe-area-inset-right))] pb-8 pl-[max(16px,env(safe-area-inset-left))] text-muted-foreground sm:px-[8%] xl:px-[10%]'>
+    <footer className='bg-linear-to-b from-transparent to-backdrop/70 pt-20 page-gutter pb-8 text-muted-foreground sm:[--page-gutter:8%] xl:[--page-gutter:10%]'>
       <div className='mx-auto max-w-7xl space-y-16'>
         <div className='grid gap-8 lg:grid-cols-[minmax(--spacing(48),.85fr)_minmax(0,2fr)] lg:gap-10 xl:grid-cols-[minmax(--spacing(56),1fr)_minmax(0,2fr)] xl:gap-20'>
           <div className='flex min-w-0 flex-col items-start gap-6'>

@@ -14,7 +14,7 @@ export function Section(props: SectionProps) {
       id={id}
       aria-labelledby={`${id}-title`}
       className={cn(
-        'mx-auto max-w-400 pr-[max(16px,env(safe-area-inset-right))] pl-[max(16px,env(safe-area-inset-left))] md:px-[10%]',
+        'mx-auto max-w-400 page-gutter md:[--page-gutter:10%]',
         id !== 'home' && 'scroll-mt-12 md:scroll-mt-16',
         className,
       )}

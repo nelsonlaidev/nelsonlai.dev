@@ -65,17 +65,17 @@
 }
 
 .mdx-lightbox .yarl__navigation_prev {
-  left: --spacing(4);
+  left: max(--spacing(4), env(safe-area-inset-left));
 
   @variant md {
-    left: --spacing(5);
+    left: max(--spacing(5), env(safe-area-inset-left));
   }
 }
 
 .mdx-lightbox .yarl__navigation_next {
-  right: --spacing(4);
+  right: max(--spacing(4), env(safe-area-inset-right));
 
   @variant md {
-    right: --spacing(5);
+    right: max(--spacing(5), env(safe-area-inset-right));
   }
 }

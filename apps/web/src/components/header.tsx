@@ -56,7 +56,7 @@ export function Header() {
     <>
       <SkipNav />
       <header className='pointer-events-none absolute inset-x-0 top-0 z-40 grid max-h-dvh grid-cols-1 grid-rows-[auto_minmax(0,1fr)]'>
-        <div className='pointer-events-auto relative z-10 col-start-1 row-start-1 py-6 pr-[max(16px,env(safe-area-inset-right))] pl-[max(16px,env(safe-area-inset-left))] sm:px-[8%] md:py-9 xl:px-[10%]'>
+        <div className='pointer-events-auto relative z-10 col-start-1 row-start-1 py-6 page-gutter sm:[--page-gutter:8%] md:py-9 xl:[--page-gutter:10%]'>
           <div className='mx-auto flex max-w-7xl items-center justify-between gap-2.5 md:gap-8'>
             <Link to='/' aria-label={`Seafold, ${m.nav_home()}`}>
               <SiteLogo />
@@ -101,7 +101,7 @@ export function Header() {
           inert={!open}
           className='pointer-events-auto col-start-1 row-span-2 row-start-1 grid grid-rows-subgrid bg-popover transition-[opacity,visibility] duration-260 ease-in-out inert:pointer-events-none inert:invisible inert:opacity-0 motion-reduce:transition-none lg:hidden'
         >
-          <div className='row-start-2 overflow-y-auto overscroll-contain border-b pt-4 pr-[max(16px,env(safe-area-inset-right))] pb-9 pl-[max(16px,env(safe-area-inset-left))] sm:px-[8%]'>
+          <div className='row-start-2 overflow-y-auto overscroll-contain border-b pt-4 page-gutter pb-9 sm:[--page-gutter:8%]'>
             <ul className='transition-transform duration-260 ease-in-out inert:translate-y-1.5 motion-reduce:transition-none'>
               {mobileLinks.map((link) => (
                 <li key={link.to}>
