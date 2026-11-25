@@ -118,6 +118,7 @@
   "blog_discovery": "每一个小发现，都通往下一个。",
   "blog_empty": "新的文章正在路上。",
   "blog_footer_edit_on_github": "在 GitHub 上编辑",
+  "blog_footer_last_updated": "最后更新于 {date}",
   "blog_header_published_on": "发布日期",
   "blog_header_views": "浏览次数",
   "blog_image_viewer_enlarge": "放大图片：{alt}",

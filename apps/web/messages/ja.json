@@ -118,6 +118,7 @@
   "blog_discovery": "小さな発見が、次の発見へとつながります。",
   "blog_empty": "新しい記事を準備中です。",
   "blog_footer_edit_on_github": "GitHub で編集",
+  "blog_footer_last_updated": "最終更新日：{date}",
   "blog_header_published_on": "公開日",
   "blog_header_views": "閲覧数",
   "blog_image_viewer_enlarge": "画像を拡大：{alt}",

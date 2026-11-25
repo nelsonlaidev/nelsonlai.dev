@@ -127,6 +127,7 @@
   "blog_discovery": "Cada pequeño descubrimiento lleva a otro.",
   "blog_empty": "Pronto habrá nuevos artículos.",
   "blog_footer_edit_on_github": "Editar en GitHub",
+  "blog_footer_last_updated": "Última actualización: {date}",
   "blog_header_published_on": "Publicado el",
   "blog_header_views": "Vistas",
   "blog_image_viewer_enlarge": "Ampliar imagen: {alt}",
