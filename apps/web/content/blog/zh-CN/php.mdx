@@ -1,0 +1,154 @@
+---
+title: PHP 学习笔记
+description: 有关 PHP 的基础，如注释、Echo、变量、算术运算符等
+publishedAt: '2025-01-04T09:35:57.000Z'
+updatedAt: '2026-10-31T08:39:58.000Z'
+---
+
+## PHP 简介
+
+PHP（全名：PHP: _Hypertext Preprocessor_）是一种开源的通用计算机脚本语言，特别适合用于网页开发并嵌入到 HTML 中。PHP 的语法借鉴了 C 语言、Java 和 Perl 等流行计算机语言的特点，对于一般程序员来说易于学习。PHP 的主要目标是让网页开发人员快速编写动态页面，但 PHP 也用于许多其他领域。
+
+PHP 文件的后缀名为 `.php`，例如 `index.php`。如上所述，`PHP` 可以直接嵌入到 `HTML` 中。
+
+## 用法
+
+在 Web 应用中，PHP 在服务器端执行。PHP 解释器执行 `<?php` 和 `?>` 之间的代码，再由服务器将输出结果发送给浏览器。例如：
+
+```php
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PHP</title>
+    </head>
+    <body>
+        <?php
+            echo "这是一个句子。";
+        ?>
+    </body>
+</html>
+```
+
+## 注意事项
+
+如果文件仅包含 PHP 代码，或以 PHP 代码结尾，建议省略最后的 `?>`，避免意外输出末尾的空白或换行。将 PHP 嵌入 HTML 时，则可以使用 `?>` 结束 PHP 代码块，继续编写 HTML。
+
+```php
+<?php
+    echo "PHP 结束后没有 HTML";
+```
+
+## PHP 注释
+
+几乎所有的网页程序语言都可以使用注释，`PHP` 的**单行注释**使用 `//`，**多行注释**使用 `/* Some text here */`。
+
+```php
+<?php
+    echo "这是一个单行注释"; // 我是一个单行注释
+    echo "这是一个多行注释";
+    /*
+        我是一个多行注释
+        第二行
+    */
+?>
+```
+
+## Echo
+
+使用 `echo` 可以输出文本或表达式的结果。字符串字面量可以用双引号 `""` 或单引号 `''` 括起来。每条 `echo` 语句都以分号 `;` 结尾。
+
+```php
+<?php
+    echo "这是使用双引号的示例。";
+    echo '这是使用单引号的示例。';
+?>
+```
+
+在 `echo` 的内容中还可以使用 `HTML` 语法。例如，使用 `<br/>` 来换行。
+
+```php
+<?php
+    echo "这是第一句<br/>";
+    echo "这是第二句";
+    echo "<a href=\"https://example.com\">这是一个链接</a>";
+?>
+```
+
+## 变量
+
+和 JavaScript 一样，PHP 也可以给变量赋值。在 PHP 中，变量名以美元符号 `$` 开头。
+
+```php
+<?php
+    $value = "我是变量值";
+?>
+```
+
+命名变量时需要遵循一些规则。
+
+<Table
+  headers={['示例', '描述', '规则']}
+  rows={[
+    ['$value', '小写', '✅'],
+    ['$Value', '大写', '✅'],
+    ['$_value', '底线', '✅'],
+    ['$1value', '以数字开头', '❌'],
+  ]}
+/>
+
+变量名区分大小写：`$value` 和 `$Value` 是不同的变量，即使它们存储相同的值。
+
+## 变量命名技巧
+
+### 驼峰式命名法
+
+驼峰式命名法将多个单词连在一起，不加空格。第一个单词的首字母小写，后续每个单词的首字母大写。这样，由多个单词组成的变量名和函数名就更容易阅读。
+
+```php
+<?php
+    $onePlusOneAnswer = 1 + 1;
+    echo $onePlusOneAnswer;
+?>
+```
+
+### 蛇形命名法
+
+蛇形命名法将每个单词全部写成小写，单词之间用下划线分隔，例如 `snake_case`。
+
+```php
+<?php
+    $one_plus_one_answer = 1 + 1;
+    echo $one_plus_one_answer;
+?>
+```
+
+## 字符串运算符
+
+PHP 有两种字符串运算符。连接运算符（`.`）将两个字符串连在一起。连接赋值运算符（`.=`）将右侧的值追加到左侧变量所存储的字符串末尾。
+
+```php
+<?php
+    echo "这是" . " " . "字符串" . " " . "运算符" . "。";
+?>
+```
+
+## 算术运算符
+
+```php
+<?php
+    $value0 = 1.5; // 浮点数
+    $value1 = 1 + 1; // 加
+    $value2 = 1 - 1; // 减
+    $value3 = 1 * 1; // 乘
+    $value4 = 1 / 1; // 除
+    $value5 = 12 / 5; // 除法：结果为 2.4
+    $value6 = 3 % 5; // 取余数
+?>
+```
+
+## 参考资料
+
+- [PHP - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/PHP)
+- [驼峰式命名法 - 维基百科，自由的百科全书](https://zh.wikipedia.org/zh-cn/%E9%A7%9D%E5%B3%B0%E5%BC%8F%E5%A4%A7%E5%B0%8F%E5%AF%AB)
+- [蛇形命名法 - 维基百科，自由的百科全书](https://zh.wikipedia.org/zh-cn/%E8%9B%87%E5%BD%A2%E5%91%BD%E5%90%8D%E6%B3%95)
+- [字符串运算符](https://www.php.net/manual/en/language.operators.string.php)

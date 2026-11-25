@@ -1,0 +1,36 @@
+{
+  "name": "@repo/mdx",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@shikijs/rehype": "4.6.0",
+    "@shikijs/transformers": "4.6.0",
+    "github-slugger": "2.0.0",
+    "mdast-util-to-hast": "13.2.2",
+    "mdast-util-to-string": "4.0.0",
+    "remark-gfm": "4.0.1",
+    "remark-mdx": "3.1.1",
+    "remark-parse": "11.0.0",
+    "shiki": "4.6.0",
+    "unified": "11.0.5",
+    "unist-util-visit": "5.2.0"
+  },
+  "devDependencies": {
+    "@nelsonlaidev/typescript-config": "catalog:",
+    "@total-typescript/ts-reset": "catalog:",
+    "@types/hast": "3.0.5",
+    "@types/mdast": "4.0.4",
+    "tsdown": "0.23.7",
+    "typescript": "catalog:"
+  }
+}

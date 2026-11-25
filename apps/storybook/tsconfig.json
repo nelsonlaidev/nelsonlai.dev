@@ -1,0 +1,7 @@
+{
+  "extends": "@nelsonlaidev/typescript-config/react-library.json",
+  "compilerOptions": {
+    "types": ["@total-typescript/ts-reset", "@nelsonlaidev/typescript-config/react", "node", "vite/client"]
+  },
+  "include": [".storybook/**/*.ts", ".storybook/**/*.tsx", "stories/**/*.ts", "stories/**/*.tsx"]
+}

@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "types": ["@total-typescript/ts-reset", "vite/client"]
+  },
+  "extends": "@nelsonlaidev/typescript-config/library.json",
+  "include": ["**/*.ts", "**/*.tsx"]
+}

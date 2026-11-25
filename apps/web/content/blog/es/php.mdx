@@ -1,0 +1,154 @@
+---
+title: Notas de estudio de PHP
+description: Conceptos básicos de PHP como comentarios, Echo, variables, operadores aritméticos
+publishedAt: '2026-03-03T08:46:50.000Z'
+updatedAt: '2026-10-31T08:39:58.000Z'
+---
+
+## Introducción a PHP
+
+PHP (nombre completo: PHP: _Hypertext Preprocessor_) es un lenguaje de scripting de computadora de código abierto y de propósito general, especialmente adecuado para el desarrollo web y la incrustación en HTML. La sintaxis de PHP toma características de lenguajes de computadora populares como C, Java y Perl, y es fácil de aprender para programadores en general. El objetivo principal de PHP es permitir a los desarrolladores web escribir rápidamente páginas dinámicas, pero PHP también se usa en muchas otras áreas.
+
+Los archivos PHP usan la extensión `.php`, como en `index.php`. El código PHP se puede insertar directamente en HTML.
+
+## Uso
+
+En una aplicación web, PHP se ejecuta en el servidor. El intérprete de PHP ejecuta el código entre `<?php` y `?>`, y el servidor envía el resultado al navegador. Por ejemplo:
+
+```php
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PHP</title>
+    </head>
+    <body>
+        <?php
+            echo "Esta es una oración.";
+        ?>
+    </body>
+</html>
+```
+
+## Precauciones
+
+Si un archivo contiene únicamente código PHP o termina con código PHP, omite la etiqueta final `?>` para evitar espacios o saltos de línea accidentales en la salida. Al incrustar PHP en HTML, utiliza `?>` para volver al HTML fuera del bloque PHP.
+
+```php
+<?php
+    echo "No hay HTML después de que termina PHP";
+```
+
+## Comentarios en PHP
+
+Casi todos los lenguajes de programación web pueden comentar, y la forma de **una sola línea** en `PHP` es `//` y la forma de **múltiples líneas** es `/* Texto aquí */`.
+
+```php
+<?php
+    echo "Este es un comentario de una línea"; // Soy un comentario de una línea
+    echo "Este es un comentario de múltiples líneas";
+    /*
+        Soy un comentario de múltiples líneas
+        Segunda línea
+    */
+?>
+```
+
+## Echo
+
+Utiliza `echo` para mostrar texto o el resultado de una expresión. Las cadenas de texto pueden encerrarse entre comillas dobles `""` o simples `''`. Termina cada instrucción `echo` con un punto y coma `;`.
+
+```php
+<?php
+    echo "Este es un ejemplo de uso de comillas dobles.";
+    echo 'Este es un ejemplo de uso de comillas simples.';
+?>
+```
+
+El contenido de `echo` también puede usar sintaxis `HTML`. Por ejemplo, usé `<br/>` aquí, para que se pueda hacer un salto de línea.
+
+```php
+<?php
+    echo "Esta es la primera oración<br/>";
+    echo "Esta es la segunda oración";
+    echo "<a href=\"https://example.com\">aquí hay un enlace</a>";
+?>
+```
+
+## Variable
+
+Al igual que en JavaScript, en PHP puedes asignar valores a variables. En PHP, los nombres de las variables comienzan con el signo de dólar (`$`).
+
+```php
+<?php
+    $value = "Soy un valor";
+?>
+```
+
+Hay algunas reglas a seguir al nombrar variables.
+
+<Table
+  headers={['Ejemplo', 'Descripción', 'Reglas']}
+  rows={[
+    ['$value', 'Minúsculas', '✅'],
+    ['$Value', 'Mayúsculas', '✅'],
+    ['$_value', 'Guion bajo', '✅'],
+    ['$1value', 'Empieza con número', '❌'],
+  ]}
+/>
+
+Los nombres de variables distinguen entre mayúsculas y minúsculas: `$value` y `$Value` son variables diferentes, aunque contengan el mismo valor.
+
+## Consejos para nombrar variables
+
+### Camel case
+
+En camel case, las palabras se escriben sin espacios: la primera empieza con minúscula y cada una de las siguientes, con mayúscula. Así es más fácil leer los nombres de variables y funciones formados por varias palabras.
+
+```php
+<?php
+    $onePlusOneAnswer = 1 + 1;
+    echo $onePlusOneAnswer;
+?>
+```
+
+### Snake case
+
+En snake case, todas las palabras se escriben en minúsculas y se separan con guiones bajos, como en `snake_case`.
+
+```php
+<?php
+    $one_plus_one_answer = 1 + 1;
+    echo $one_plus_one_answer;
+?>
+```
+
+## Operador de cadena
+
+PHP tiene dos operadores de cadena. El operador de concatenación (`.`) une dos cadenas. El operador de asignación por concatenación (`.=`) añade el valor de la derecha al final de la cadena almacenada en la variable de la izquierda.
+
+```php
+<?php
+    echo "Estos" . " " . "son" . " " . "operadores" . " " . "de" . " " . "cadena" . ".";
+?>
+```
+
+## Operador aritmético
+
+```php
+<?php
+    $value0 = 1.5; // Número de punto flotante
+    $value1 = 1 + 1; // Suma
+    $value2 = 1 - 1; // Resta
+    $value3 = 1 * 1; // Multiplicación
+    $value4 = 1 / 1; // División
+    $value5 = 12 / 5; // División: el resultado es 2.4
+    $value6 = 3 % 5; // Obtener el resto
+?>
+```
+
+## Referencias
+
+- [PHP - Wikipedia, la enciclopedia libre](https://en.wikipedia.org/wiki/PHP)
+- [Camel case - Wikipedia, la enciclopedia libre](https://en.wikipedia.org/wiki/Camel_case)
+- [Snake case - Wikipedia, la enciclopedia libre](https://en.wikipedia.org/wiki/Snake_case)
+- [Operadores de cadena](https://www.php.net/manual/en/language.operators.string.php)

@@ -1,0 +1,81 @@
+@reference './index.css';
+
+.mdx-lightbox {
+  --yarl__color_button: var(--link);
+  --yarl__color_button_active: var(--foreground);
+  --yarl__color_button_disabled: var(--yarl__color_button);
+}
+
+.mdx-lightbox .yarl__container {
+  background: radial-gradient(ellipse at 50% 0, var(--card), var(--backdrop) 75%);
+}
+
+.mdx-lightbox .yarl__slide {
+  padding: --spacing(20) --spacing(4) --spacing(24);
+
+  @variant md {
+    padding: --spacing(20);
+  }
+}
+
+.mdx-lightbox .yarl__button {
+  @apply transition-[background-color,color] ease-linear motion-reduce:transition-none;
+
+  display: grid;
+  place-items: center;
+  width: --spacing(12);
+  height: --spacing(12);
+  padding: 0;
+  border: 1px solid --alpha(var(--primary) / 30%);
+  border-radius: var(--radius-md);
+  background: var(--background);
+  filter: none;
+}
+
+.mdx-lightbox .yarl__button:hover:not(:disabled) {
+  background: var(--accent);
+}
+
+.mdx-lightbox .yarl__button:focus-visible {
+  @apply focus-outline;
+  outline-offset: 3px;
+}
+
+.mdx-lightbox .yarl__button:disabled {
+  opacity: 0.5;
+}
+
+.mdx-lightbox .yarl__toolbar {
+  gap: --spacing(2.5);
+  padding: max(--spacing(4), env(safe-area-inset-top)) max(--spacing(4), env(safe-area-inset-right)) --spacing(3)
+    max(--spacing(5), env(safe-area-inset-left));
+
+  @variant md {
+    padding-right: max(--spacing(5), env(safe-area-inset-right));
+  }
+}
+
+@variant max-md {
+  .mdx-lightbox .yarl__navigation_prev,
+  .mdx-lightbox .yarl__navigation_next {
+    top: auto;
+    bottom: max(--spacing(4), env(safe-area-inset-bottom));
+    transform: none;
+  }
+}
+
+.mdx-lightbox .yarl__navigation_prev {
+  left: max(--spacing(4), env(safe-area-inset-left));
+
+  @variant md {
+    left: max(--spacing(5), env(safe-area-inset-left));
+  }
+}
+
+.mdx-lightbox .yarl__navigation_next {
+  right: max(--spacing(4), env(safe-area-inset-right));
+
+  @variant md {
+    right: max(--spacing(5), env(safe-area-inset-right));
+  }
+}

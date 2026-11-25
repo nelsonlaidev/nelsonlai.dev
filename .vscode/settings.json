@@ -1,25 +1,35 @@
 {
+  "files.watcherExclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "search.exclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "files.readonlyInclude": {
+    "**/routeTree.gen.ts": true
+  },
+
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "explicit"
   },
 
   "editor.defaultFormatter": "oxc.oxc-vscode",
-  "oxc.fmt.configPath": "oxfmt.config.ts",
 
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
 
   "files.associations": {
-    "*.css": "tailwindcss",
-    ".env*": "properties"
+    "*.css": "tailwindcss"
   },
 
   "tailwindCSS.classFunctions": ["cva", "cn"],
+  "tailwindCSS.experimental.configFile": {
+    "apps/web/src/styles/index.css": "apps/web/src/**",
+    "apps/storybook/stories/preview.css": "apps/storybook/**",
+    "packages/ui/src/styles/globals.css": "packages/ui/src/**"
+  },
 
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
   "js/ts.preferences.preferTypeOnlyAutoImports": true,
-  "js/ts.tsdk.path": "node_modules/typescript/lib",
-
-  "i18n-ally.localesPaths": ["src/i18n/messages"],
-  "i18n-ally.keystyle": "nested"
+  "js/ts.tsdk.path": "node_modules/typescript/lib"
 }

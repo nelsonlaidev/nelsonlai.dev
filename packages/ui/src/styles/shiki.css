@@ -1,0 +1,81 @@
+@theme {
+  --color-diff-remove: rgba(244, 63, 94, 0.16);
+  --color-diff-add: rgba(16, 185, 129, 0.16);
+  --color-diff-remove-symbol: rgb(203, 118, 118);
+  --color-diff-add-symbol: rgb(61, 214, 140);
+}
+
+pre.shiki {
+  position: relative;
+  width: max-content;
+  min-width: 100%;
+  padding: --spacing(4);
+  line-height: --spacing(5);
+}
+
+pre.shiki > code {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: inherit;
+}
+
+pre.shiki .highlighted,
+pre.shiki .diff {
+  margin: 0 calc(--spacing(4) * -1);
+  padding: 0 --spacing(4);
+  display: inline-block;
+  min-width: calc(100% + --spacing(8));
+  line-height: --spacing(5);
+}
+
+pre.shiki .highlighted {
+  background-color: color-mix(in oklab, currentColor 10%, transparent);
+}
+
+.shiki code .diff.remove {
+  background-color: var(--color-diff-remove);
+}
+
+.shiki code .diff::before {
+  position: absolute;
+  left: --spacing(1);
+}
+
+.shiki code .diff.remove::before {
+  content: '-';
+  color: var(--color-diff-remove-symbol);
+}
+
+.shiki code .diff.add {
+  background-color: var(--color-diff-add);
+}
+
+.shiki code .diff.add::before {
+  content: '+';
+  color: var(--color-diff-add-symbol);
+}
+
+.shiki .highlighted-word {
+  padding: 1px 2px;
+  margin: -1px -3px;
+  border: 1px solid color-mix(in oklab, currentColor 50%, transparent);
+  background-color: color-mix(in oklab, currentColor 10%, transparent);
+  border-radius: var(--radius-xs);
+}
+
+.shiki.has-focused .line:not(.focused) {
+  opacity: 0.7;
+  transition:
+    filter 0.35s,
+    opacity 0.35s;
+  filter: blur(0.095rem);
+}
+
+.shiki.has-focused:hover .line:not(.focused) {
+  filter: blur(0);
+  opacity: 1;
+}

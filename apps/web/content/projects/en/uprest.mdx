@@ -1,0 +1,29 @@
+---
+title: Uprest
+description: A local HTTP-to-Redis proxy for the Upstash Redis REST API
+github: https://github.com/nelsonlaidev/uprest
+schemaType: SoftwareSourceCode
+license: https://opensource.org/licenses/MIT
+programmingLanguages:
+  - Go
+artwork: pearl
+techstack:
+  - Go
+  - Redis
+  - Docker
+selected: true
+dateCreated: '2026-09-25T00:00:00Z'
+updatedAt: '2026-11-10T11:14:24.000Z'
+category: 'Developer infrastructure'
+features:
+  - title: 'Keep the Workflow'
+    text: 'Redis commands, pipelines, and transactions are supported through the HTTP interface.'
+  - title: 'Beyond Single Requests'
+    text: 'Pub/Sub over server-sent events, JSON and RESP2 responses, and token authentication cover more demanding local use cases.'
+  - title: 'Run Where You Build'
+    text: 'Multi-architecture Docker images and prebuilt Linux, macOS, and Windows binaries make it available across development setups.'
+---
+
+Uprest is a local HTTP-to-Redis proxy for applications that use the [Upstash Redis REST API](https://upstash.com/docs/redis/features/restapi). It forwards requests to a real Redis server, so applications can keep using `@upstash/redis` during local development and CI without an Upstash database.
+
+I originally used [serverless-redis-http](https://github.com/hiett/serverless-redis-http) (SRH) for this, but it appears to be unmaintained and newer `@upstash/redis` versions break it, so I decided to build a replacement myself. Uprest supports Redis commands, pipelines, transactions, Pub/Sub over SSE, JSON and RESP2 responses, bearer or query-token authentication, and recent `@upstash/ratelimit` versions. It is published as multi-architecture Docker images and prebuilt binaries for Linux, macOS, and Windows.

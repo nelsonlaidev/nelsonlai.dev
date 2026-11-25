@@ -1,0 +1,269 @@
+import type { ListGuestbookMessagesOutputSchema } from '@repo/api/schema/guestbook'
+import type * as z from 'zod'
+
+import en from '@messages/en.json' with { type: 'json' }
+import { createId } from '@paralleldrive/cuid2'
+import { users } from '@repo/db/schema/auth'
+import { guestbookMessages } from '@repo/db/schema/guestbook'
+import { createRange } from '@repo/utils'
+import { eq, inArray, sql } from 'drizzle-orm'
+
+import { db } from '@/lib/db'
+
+import { TEST_UNIQUE_ID } from '../fixtures/auth'
+import { expect, test } from '../fixtures/test'
+import { rejectRpc, toastTitle } from '../utils/toast'
+
+type MessageListOutput = z.infer<typeof ListGuestbookMessagesOutputSchema>
+
+test.describe('guestbook page', () => {
+  // These tests insert and remove messages from the same public list.
+  test.describe.configure({ mode: 'default' })
+
+  for (const [code, createTitle, deleteTitle] of [
+    ['INTERNAL_SERVER_ERROR', en.error_create_message_failed, en.error_delete_message_failed],
+    ['TOO_MANY_REQUESTS', en.error_too_many_requests, en.error_too_many_requests],
+  ] as const) {
+    test(`shows an error toast when posting a guestbook message returns ${code}`, async ({ page }) => {
+      await rejectRpc(page, 'guestbook/create', code)
+      await page.goto('/guestbook')
+      const draft = page.getByRole('textbox')
+      await draft.fill('Keep this draft')
+      await page.getByRole('button', { name: en.guestbook_message_submit }).click()
+      await expect(toastTitle(page, 'error', createTitle)).toBeVisible()
+      await expect(draft).toHaveValue('Keep this draft')
+    })
+
+    test(`shows an error toast when deleting a guestbook message returns ${code}`, async ({ page }) => {
+      const id = createId()
+      await db.insert(guestbookMessages).values({ id, userId: TEST_UNIQUE_ID, body: 'Keep this message' })
+      await rejectRpc(page, 'guestbook/delete', code)
+      await page.goto('/guestbook')
+      const message = page.getByTestId(`message-${id}`)
+      await message.getByRole('button', { name: en.common_delete }).click()
+      await page.getByRole('alertdialog').getByRole('button', { name: en.common_delete }).click()
+      await expect(toastTitle(page, 'error', deleteTitle)).toBeVisible()
+    })
+  }
+
+  test('retries a failed guestbook refresh from the global error toast', async ({ page }) => {
+    await page.goto('/guestbook')
+    const draft = page.getByRole('textbox')
+    const body = createId()
+    await draft.fill(body)
+    await rejectRpc(page, 'guestbook/list', 'INTERNAL_SERVER_ERROR')
+    await page.getByRole('button', { name: en.guestbook_message_submit }).click()
+    const toast = page.locator('[data-slot="toast"][data-type="error"]')
+    await expect(toast.getByText(`${en.common_error}: Internal Server Error`, { exact: true })).toBeVisible({
+      timeout: 15_000,
+    })
+    await page.unroute('**/api/rpc/guestbook/list')
+    await toast.getByRole('button', { name: en.common_retry }).click()
+    await expect(page.getByTestId('guestbook-messages-list').getByText(body, { exact: true })).toBeVisible()
+  })
+
+  test('submits a message', async ({ page }) => {
+    const message = createId()
+
+    await page.goto('/guestbook')
+
+    await page.getByRole('textbox').fill(message)
+
+    await page.getByRole('button', { name: en.guestbook_message_submit, exact: true }).click()
+    await expect(page.getByText(en.success_message_created, { exact: true })).toContainText(en.success_message_created)
+
+    await expect(page.getByTestId('guestbook-messages-list').getByText(message)).toBeVisible()
+  })
+
+  test('deletes a message', async ({ page }) => {
+    const id = createId()
+
+    await db.insert(guestbookMessages).values({
+      id,
+      body: 'Test message',
+      userId: TEST_UNIQUE_ID,
+    })
+
+    await page.goto('/guestbook')
+
+    const messageBlock = page.getByTestId(`message-${id}`)
+    await expect(messageBlock).toBeVisible()
+    await messageBlock.getByRole('button', { name: en.common_delete, exact: true }).click()
+
+    const deleteDialog = page.getByRole('alertdialog')
+    await expect(deleteDialog).toBeVisible()
+    await deleteDialog.getByRole('button', { name: en.common_delete, exact: true }).click()
+
+    await expect(messageBlock).toBeHidden()
+    await expect(page.getByText(en.success_message_deleted, { exact: true })).toContainText(en.success_message_deleted)
+  })
+
+  test("cannot delete another user's message through the UI or API", async ({ page }) => {
+    const userId = createId()
+    const id = createId()
+    await db
+      .insert(users)
+      .values({ id: userId, name: 'Other Guestbook User', email: `${userId}@example.com`, emailVerified: false })
+
+    try {
+      await db.insert(guestbookMessages).values({ id, body: `Other message ${id}`, userId })
+      await page.goto('/guestbook')
+
+      const message = page.getByTestId(`message-${id}`)
+      await expect(message).toBeVisible()
+      await expect(message.getByRole('button', { name: en.common_delete, exact: true })).toBeHidden()
+
+      const response = await page.request.post('/api/rpc/guestbook/delete', { data: { json: { id } } })
+      expect(response.status()).toBe(404)
+      expect(await response.json()).toMatchObject({ json: { code: 'NOT_FOUND' } })
+
+      await page.reload()
+      await expect(message).toBeVisible()
+      expect(await db.query.guestbookMessages.findFirst({ where: { id: id } })).toMatchObject({ userId })
+    } finally {
+      await db.delete(users).where(eq(users.id, userId))
+    }
+  })
+
+  test.describe('pagination boundaries', () => {
+    for (const count of [0, 9, 10, 11]) {
+      test.describe(`${count} messages`, () => {
+        const limit = 10
+        let records: Array<
+          typeof guestbookMessages.$inferInsert & {
+            id: string
+          }
+        >
+        let initialCursor: MessageListOutput['nextCursor']
+        let expectedPages: Array<{
+          ids: string[]
+          nextCursor: MessageListOutput['nextCursor']
+        }>
+
+        test.beforeEach(async () => {
+          const prefix = `pagination-${createId()}`
+          const oldest = await db.query.guestbookMessages.findFirst({
+            columns: { createdAt: true },
+            orderBy: { createdAt: 'asc' },
+          })
+
+          // Keep this cursor range before the public messages used by the other tests.
+          const createdAt = new Date((oldest?.createdAt.getTime() ?? Date.now()) - 60_000)
+          records = createRange(count).map((index) => ({
+            id: `${prefix}-${String(index).padStart(2, '0')}`,
+            body: `Pagination message ${index}`,
+            userId: TEST_UNIQUE_ID,
+            createdAt,
+          }))
+
+          initialCursor = { createdAt: new Date(createdAt.getTime() + 1).toISOString(), id: prefix }
+          const ordered = records.toReversed()
+          const visible = ordered.slice(0, limit)
+          const lastVisible = visible.at(-1)
+
+          expectedPages = [
+            {
+              ids: visible.map(({ id }) => id),
+              nextCursor:
+                count > limit && lastVisible ? { createdAt: createdAt.toISOString(), id: lastVisible.id } : undefined,
+            },
+          ]
+          if (count > limit) {
+            expectedPages.push({ ids: ordered.slice(limit).map(({ id }) => id), nextCursor: undefined })
+          }
+
+          if (records.length > 0) await db.insert(guestbookMessages).values(records)
+        })
+
+        test.afterEach(async () => {
+          if (records.length > 0) {
+            await db.delete(guestbookMessages).where(
+              inArray(
+                guestbookMessages.id,
+                records.map(({ id }) => id),
+              ),
+            )
+          }
+        })
+
+        test('returns each page once and omits the cursor on the final page', async ({ request }) => {
+          let cursor = initialCursor
+
+          // Each request must use the cursor returned by the previous page.
+          // oxlint-disable no-await-in-loop
+          for (const expected of expectedPages) {
+            const response = await request.post('/api/rpc/guestbook/list', { data: { json: { limit, cursor } } })
+            await expect(response).toBeOK()
+
+            const body = (await response.json()) as {
+              json: MessageListOutput
+            }
+
+            expect(body.json.messages).toMatchObject(expected.ids.map((id) => ({ id })))
+            expect(body.json.messages).toHaveLength(expected.ids.length)
+            expect(body.json.nextCursor).toEqual(expected.nextCursor)
+
+            cursor = body.json.nextCursor
+          }
+          // oxlint-enable no-await-in-loop
+        })
+      })
+    }
+  })
+
+  test('loads every message once after timestamps are rounded to milliseconds', async ({ page }) => {
+    const prefix = `pagination-${createId()}`
+    const records = createRange(23).map((index) => ({
+      // Reverse timestamp groups relative to IDs so ordering cannot rely on the ID alone.
+      id: `${prefix}-${String((7 - Math.floor(index / 3)) * 3 + (index % 3)).padStart(2, '0')}`,
+      body: `${prefix} message ${index}`,
+      userId: TEST_UNIQUE_ID,
+      // Let PostgreSQL round SQL inputs so the fixture exercises the stored column precision.
+      createdAt: sql`'2040-01-01T00:00:00.123456Z'::timestamptz + ${Math.floor(index / 3)} * interval '1 millisecond'`,
+    }))
+
+    await db.insert(guestbookMessages).values(records)
+
+    try {
+      const response = await page.request.post('/api/rpc/guestbook/list', {
+        data: {
+          json: {
+            limit: 1,
+            cursor: { createdAt: '2040-01-01T00:00:00.126Z', id: records[9]?.id },
+          },
+        },
+      })
+
+      await expect(response).toBeOK()
+      expect(await response.json()).toMatchObject({
+        json: {
+          messages: [{ id: records[8]?.id }],
+          nextCursor: { createdAt: '2040-01-01T00:00:00.125Z', id: records[8]?.id },
+        },
+      })
+
+      await page.goto('/guestbook')
+      const loaded = page.getByTestId(new RegExp(`^message-${prefix}-`))
+      await expect(loaded).toHaveCount(10)
+
+      await expect(async () => {
+        await loaded.last().scrollIntoViewIfNeeded()
+        await page.mouse.wheel(0, 1000)
+
+        await expect(loaded).toHaveCount(records.length, { timeout: 1000 })
+      }).toPass({ timeout: 15_000 })
+
+      const expectedIds = records.map(({ id }) => `message-${id}`).toReversed()
+      expect(
+        await loaded.evaluateAll((elements) => elements.map((element) => element.getAttribute('data-testid'))),
+      ).toEqual(expectedIds)
+    } finally {
+      await db.delete(guestbookMessages).where(
+        inArray(
+          guestbookMessages.id,
+          records.map(({ id }) => id),
+        ),
+      )
+    }
+  })
+})

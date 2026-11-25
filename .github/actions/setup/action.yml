@@ -1,5 +1,5 @@
 name: Setup
-description: Install Node.js, pnpm and dependencies
+description: Install Node.js, pnpm, and workspace dependencies
 
 runs:
   using: composite
@@ -8,10 +8,11 @@ runs:
       uses: pnpm/action-setup@v6
 
     - name: Install Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v7
       with:
-        node-version-file: 'package.json'
-        cache: 'pnpm'
+        node-version: '24'
+        cache: pnpm
+        cache-dependency-path: pnpm-lock.yaml
 
     - name: Install dependencies
       shell: bash
@@ -19,6 +20,6 @@ runs:
       env:
         PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
 
-    - name: Generate Next.js route types
+    - name: Generate workspace environment modules
       shell: bash
-      run: pnpm typegen
+      run: pnpm env:generate

@@ -1,0 +1,24 @@
+{
+  "name": "@repo/kv",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "env:check": "varlock load",
+    "env:generate": "varlock codegen",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@upstash/ratelimit": "2.2.2",
+    "@upstash/redis": "1.41.1",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@nelsonlaidev/typescript-config": "catalog:",
+    "@total-typescript/ts-reset": "catalog:",
+    "typescript": "catalog:",
+    "varlock": "catalog:"
+  }
+}

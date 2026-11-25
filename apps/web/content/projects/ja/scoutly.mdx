@@ -1,0 +1,29 @@
+---
+title: Scoutly
+description: 高速・軽量な CLI ウェブクローラー兼 SEO アナライザー
+github: https://github.com/nelsonlaidev/scoutly
+schemaType: SoftwareSourceCode
+license: https://opensource.org/licenses/MIT
+programmingLanguages:
+  - Rust
+artwork: cube
+techstack:
+  - Rust
+  - Ratatui
+  - Clap
+selected: true
+dateCreated: '2025-11-04T00:00:00Z'
+updatedAt: '2026-11-10T11:14:24.000Z'
+category: 'コマンドラインツール'
+features:
+  - title: '構造を探る'
+    text: '制限を設定してサイトをクロールし、リンク、画像、ページの構造を調べます。'
+  - title: '見落としを見つける'
+    text: '壊れたリソースや SEO の問題を検出。robots とサイトマップにも対応し、全体像をつかみます。'
+  - title: 'ターミナルで作業'
+    text: 'CLI とターミナル UI で探索し、テキストと JSON レポートを他のワークフローでも活用できます。'
+---
+
+Scoutly は、高速・軽量なウェブクローラー兼 SEO アナライザーです。2025 年 11 月に Rust の練習として開発を始めました。[Scrutiny](https://peacockmedia.software/mac/scrutiny/) にインスパイアされたプロジェクトです。
+
+Scoutly は、深さ・ページ数・並行度・リクエストレートの上限を設定して同一オリジンの HTML ページをクロールし、robots.txt を尊重し、XML サイトマップからページを発見します。見つかったリンクと画像を検査し、ページタイトル、メタディスクリプション、H1 見出し、画像の代替テキストの欠如に関する一般的な SEO 問題を指摘します。結果はキーボード操作の TUI で閲覧できるほか、テキストや JSON レポートとして出力でき、クローラーはインポート可能な Rust ライブラリとしても利用できます。

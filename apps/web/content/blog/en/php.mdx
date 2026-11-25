@@ -1,0 +1,154 @@
+---
+title: PHP Study Notes
+description: Basics about PHP such as comments, Echo, variables, arithmetic operators
+publishedAt: '2022-02-25T10:45:49.000Z'
+updatedAt: '2026-10-31T08:39:58.000Z'
+---
+
+## Introduction to PHP
+
+PHP (full name: PHP: _Hypertext Preprocessor_) is an open source general-purpose computer scripting language, especially suitable for web development and embedded in HTML. The syntax of PHP draws on the characteristics of popular computer languages such as C language, Java and Perl, and is easy for general programmers to learn. The main goal of PHP is to allow web developers to quickly write dynamic pages, but PHP is also used in many other areas.
+
+PHP files use the `.php` extension, as in `index.php`. PHP code can be embedded directly in HTML.
+
+## Usage
+
+In a web application, PHP runs on the server. The PHP interpreter executes the code between `<?php` and `?>`, and the server sends the resulting output to the browser. For example:
+
+```php
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PHP</title>
+    </head>
+    <body>
+        <?php
+            echo "This is a sentence.";
+        ?>
+    </body>
+</html>
+```
+
+## Precautions
+
+If a file contains only PHP code or ends with PHP code, omit the final `?>` tag to avoid accidental trailing whitespace or newlines in the output. When embedding PHP in HTML, use `?>` to return to HTML outside the PHP block.
+
+```php
+<?php
+    echo "No HTML after PHP ends";
+```
+
+## PHP Comments
+
+Like most programming languages, PHP supports comments. Use `//` for **single-line comments** and `/* Some text here */` for **multi-line comments**.
+
+```php
+<?php
+    echo "This is a single line comment"; // I am a single line comment
+    echo "This is a multi-line comment";
+    /*
+        I am a multi-line comment
+        Second line
+    */
+?>
+```
+
+## Echo
+
+Use `echo` to output text or the result of an expression. String literals can be enclosed in double quotes `""` or single quotes `''`. End each `echo` statement with a semicolon `;`.
+
+```php
+<?php
+    echo "This is the example of using double quotes.";
+    echo 'This is the example of using single quotes.';
+?>
+```
+
+Strings output with `echo` can contain HTML. For example, `<br/>` inserts a line break in the rendered page.
+
+```php
+<?php
+    echo "This is the first sentence<br/>";
+    echo "This is the second sentence";
+    echo "<a href=\"https://example.com\">here is a link</a>";
+?>
+```
+
+## Variable
+
+As in JavaScript, you can assign values to variables in PHP. PHP variable names begin with a dollar sign `$`.
+
+```php
+<?php
+    $value = "I am a value";
+?>
+```
+
+Variable names must follow these rules.
+
+<Table
+  headers={['Example', 'Description', 'Rules']}
+  rows={[
+    ['$value', 'Lowercase', '✅'],
+    ['$Value', 'Uppercase', '✅'],
+    ['$_value', 'Underscore', '✅'],
+    ['$1value', 'Starts with a number', '❌'],
+  ]}
+/>
+
+Variable names are case-sensitive: `$value` and `$Value` refer to different variables, even if they contain the same value.
+
+## Variable Naming Tips
+
+### Camel Case
+
+Camel case combines words without spaces. The first word starts with a lowercase letter, and each following word starts with an uppercase letter. This makes variable and function names containing multiple words easier to read.
+
+```php
+<?php
+    $onePlusOneAnswer = 1 + 1;
+    echo $onePlusOneAnswer;
+?>
+```
+
+### Snake Case
+
+Snake case (as in `snake_case`) separates lowercase words with underscores.
+
+```php
+<?php
+    $one_plus_one_answer = 1 + 1;
+    echo $one_plus_one_answer;
+?>
+```
+
+## String Operator
+
+PHP has two string operators. The concatenation operator (`.`) joins two strings. The concatenation assignment operator (`.=`) appends the right-hand value to the variable on the left.
+
+```php
+<?php
+    echo "This" . " " . "is" . " " . "String" . " " . "operators" . ".";
+?>
+```
+
+## Arithmetic Operator
+
+```php
+<?php
+    $value0 = 1.5; // Float
+    $value1 = 1 + 1; // Plus
+    $value2 = 1 - 1; // Minus
+    $value3 = 1 * 1; // Times
+    $value4 = 1 / 1; // Divide
+    $value5 = 12 / 5; // Division: the result is 2.4
+    $value6 = 3 % 5; // Take the remainder
+?>
+```
+
+## References
+
+- [PHP - Wikipedia, the free encyclopedia](https://en.wikipedia.org/wiki/PHP)
+- [Camel case - Wikipedia, the free encyclopedia](https://en.wikipedia.org/wiki/Camel_case)
+- [Snake case - Wikipedia, the free encyclopedia](https://en.wikipedia.org/wiki/Snake_case)
+- [String Operators](https://www.php.net/manual/en/language.operators.string.php)

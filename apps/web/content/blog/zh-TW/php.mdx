@@ -1,0 +1,154 @@
+---
+title: PHP 學習筆記
+description: 有關 PHP 的基礎，如註解、Echo、變數、算術運算子等
+publishedAt: '2025-01-03T07:18:11.000Z'
+updatedAt: '2026-10-31T08:39:58.000Z'
+---
+
+## PHP 簡介
+
+PHP（全名：PHP: _Hypertext Preprocessor_）是一種開源的通用計算機腳本語言，特別適合用於網頁開發並嵌入到 HTML 中。PHP 的語法借鑒了 C 語言、Java 和 Perl 等流行計算機語言的特點，對於一般程式設計師來說易於學習。PHP 的主要目標是讓網頁開發人員快速編寫動態頁面，但 PHP 也用於許多其他領域。
+
+PHP 檔案的副檔名為 `.php`，例如 `index.php`。如上所述，`PHP` 可以直接嵌入到 `HTML` 中。
+
+## 用法
+
+在網頁應用程式中，PHP 會在伺服器端執行。PHP 直譯器會執行 `<?php` 與 `?>` 之間的程式碼，再由伺服器將輸出結果傳送至瀏覽器。例如：
+
+```php
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PHP</title>
+    </head>
+    <body>
+        <?php
+            echo "這是一個句子。";
+        ?>
+    </body>
+</html>
+```
+
+## 注意事項
+
+如果檔案只包含 PHP 程式碼，或以 PHP 程式碼結尾，建議省略最後的 `?>`，避免意外輸出結尾的空白或換行。將 PHP 嵌入 HTML 時，則可使用 `?>` 結束 PHP 區塊，繼續撰寫 HTML。
+
+```php
+<?php
+    echo "PHP 結束後沒有 HTML";
+```
+
+## PHP 註解
+
+幾乎所有的網頁程式語言都可以使用註解，`PHP` 的**單行註解**使用 `//`，**多行註解**使用 `/* Some text here */`。
+
+```php
+<?php
+    echo "這是一個單行註解"; // 我是一個單行註解
+    echo "這是一個多行註解";
+    /*
+        我是一個多行註解
+        第二行
+    */
+?>
+```
+
+## Echo
+
+使用 `echo` 可以輸出文字或運算式的結果。字串常值可以用雙引號 `""` 或單引號 `''` 包起來。每個 `echo` 陳述式都以分號 `;` 結尾。
+
+```php
+<?php
+    echo "這是使用雙引號的範例。";
+    echo '這是使用單引號的範例。';
+?>
+```
+
+在 `echo` 的內容中還可以使用 `HTML` 語法。例如，使用 `<br/>` 來換行。
+
+```php
+<?php
+    echo "這是第一句<br/>";
+    echo "這是第二句";
+    echo "<a href=\"https://example.com\">這是一個連結</a>";
+?>
+```
+
+## 變數
+
+和 JavaScript 一樣，PHP 也可以將值指派給變數。在 PHP 中，變數名稱以錢字號 `$` 開頭。
+
+```php
+<?php
+    $value = "我是變數值";
+?>
+```
+
+命名變數時需要遵循一些規則。
+
+<Table
+  headers={['範例', '描述', '規則']}
+  rows={[
+    ['$value', '小寫', '✅'],
+    ['$Value', '大寫', '✅'],
+    ['$_value', '底線', '✅'],
+    ['$1value', '以數字開頭', '❌'],
+  ]}
+/>
+
+變數名稱區分大小寫：`$value` 和 `$Value` 是不同的變數，即使它們儲存相同的值。
+
+## 變數命名技巧
+
+### 駝峰式命名法
+
+駝峰式命名法將多個單字連在一起，不加空格。第一個單字的首字母小寫，後續每個單字的首字母大寫。這樣一來，由多個單字組成的變數名稱和函式名稱就更容易閱讀。
+
+```php
+<?php
+    $onePlusOneAnswer = 1 + 1;
+    echo $onePlusOneAnswer;
+?>
+```
+
+### 蛇形命名法
+
+蛇形命名法將每個單字全部寫成小寫，單字之間用底線分隔，例如 `snake_case`。
+
+```php
+<?php
+    $one_plus_one_answer = 1 + 1;
+    echo $one_plus_one_answer;
+?>
+```
+
+## 字串運算子
+
+PHP 有兩種字串運算子。串接運算子（`.`）會將兩個字串接在一起。串接指派運算子（`.=`）會將右側的值加到左側變數所儲存的字串末尾。
+
+```php
+<?php
+    echo "這是" . " " . "字串" . " " . "運算子" . "。";
+?>
+```
+
+## 算術運算子
+
+```php
+<?php
+    $value0 = 1.5; // 浮點數
+    $value1 = 1 + 1; // 加
+    $value2 = 1 - 1; // 減
+    $value3 = 1 * 1; // 乘
+    $value4 = 1 / 1; // 除
+    $value5 = 12 / 5; // 除法：結果為 2.4
+    $value6 = 3 % 5; // 取餘數
+?>
+```
+
+## 參考資料
+
+- [PHP - 維基百科，自由的百科全書](https://zh.wikipedia.org/wiki/PHP)
+- [駝峰式命名法 - 維基百科，自由的百科全書](https://zh.wikipedia.org/zh-tw/%E9%A7%9D%E5%B3%B0%E5%BC%8F%E5%A4%A7%E5%B0%8F%E5%AF%AB)
+- [蛇形命名法 - 維基百科，自由的百科全書](https://zh.wikipedia.org/zh-tw/%E8%9B%87%E5%BD%A2%E5%91%BD%E5%90%8D%E6%B3%95)
+- [字串運算子](https://www.php.net/manual/en/language.operators.string.php)

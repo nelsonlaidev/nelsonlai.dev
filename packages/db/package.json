@@ -1,0 +1,36 @@
+{
+  "name": "@repo/db",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:reset": "tsx src/reset.ts",
+    "db:seed": "tsx src/seed.ts",
+    "db:studio": "drizzle-kit studio",
+    "env:check": "varlock load",
+    "env:generate": "varlock codegen",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "3.3.0",
+    "drizzle-orm": "catalog:",
+    "pg": "8.23.1"
+  },
+  "devDependencies": {
+    "@nelsonlaidev/typescript-config": "catalog:",
+    "@total-typescript/ts-reset": "catalog:",
+    "@types/pg": "8.23.1",
+    "consola": "3.4.2",
+    "drizzle-kit": "1.0.0-rc.6",
+    "execa": "10.2.1",
+    "tsx": "4.23.15",
+    "typescript": "catalog:",
+    "varlock": "catalog:"
+  }
+}

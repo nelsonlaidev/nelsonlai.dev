@@ -1,0 +1,15 @@
+type AdminPageHeaderProps = {
+  title: string
+  description: string
+}
+
+export function AdminPageHeader(props: AdminPageHeaderProps) {
+  const { title, description } = props
+
+  return (
+    <div className='mb-6'>
+      <h1 className='mb-3 text-3xl tracking-tight sm:text-4xl'>{title}</h1>
+      <p className='leading-relaxed text-muted-foreground'>{description}</p>
+    </div>
+  )
+}

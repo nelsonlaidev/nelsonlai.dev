@@ -1,33 +1,31 @@
-import { defineConfig, nextjs, playwright, react, tailwindcss, vitest } from '@nelsonlaidev/oxlint-config'
+import { defineConfig, paraglide, playwright, react, tailwindcss, vitest } from '@nelsonlaidev/oxlint-config'
 
 export default defineConfig({
-  ignorePatterns: ['env.d.ts'],
-  settings: {
-    'better-tailwindcss': {
-      entryPoint: 'src/styles/globals.css',
-    },
-  },
   overrides: [
     react(),
-    nextjs(),
     tailwindcss({
       rules: {
-        'better-tailwindcss/no-unknown-classes': ['error', { ignore: ['not-prose', 'shiki'] }],
-      },
-    }),
-    playwright({
-      files: [`src/tests/e2e/**/*.test.{ts,tsx}`],
-      rules: {
-        'playwright/expect-expect': [
+        'better-tailwindcss/no-unknown-classes': [
           'error',
-          {
-            assertFunctionNames: ['a11y', 'checkAppliedTheme', 'checkStoredTheme'],
-          },
+          { ignore: ['not-prose', 'shiki', 'mdx-lightbox', 'yarl__button'] },
         ],
       },
     }),
-    vitest({
-      files: [`src/tests/unit/**/*.test.{ts,tsx}`],
+    playwright({
+      files: ['apps/web/src/tests/e2e/**/*.test.{ts,tsx}'],
+      rules: {
+        'playwright/expect-expect': ['error', { assertFunctionNames: ['a11y'] }],
+      },
     }),
+    vitest({
+      files: ['apps/web/src/tests/unit/**/*.test.{ts,tsx}'],
+    }),
+    paraglide(),
   ],
+  settings: {
+    'better-tailwindcss': {
+      cwd: './packages/ui',
+      entryPoint: './src/styles/globals.css',
+    },
+  },
 })

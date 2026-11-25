@@ -1,3 +1,0 @@
-ALTER TABLE "unsubscribes" DROP CONSTRAINT "unsubscribes_comment_reply_check";--> statement-breakpoint
-DROP INDEX "comments_parent_id_idx";--> statement-breakpoint
-ALTER TABLE "unsubscribes" ADD CONSTRAINT "unsubscribes_comment_reply_check" CHECK (("unsubscribes"."type" = 'comment_reply' AND "unsubscribes"."comment_id" IS NOT NULL) OR ("unsubscribes"."type" != 'comment_reply' AND "unsubscribes"."comment_id" IS NULL));

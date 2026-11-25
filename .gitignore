@@ -1,30 +1,21 @@
 # Dependencies
 node_modules/
 
-# Env files
-.env*.local
-.env
-
-/src/env.ts
-
-# Vercel
-.vercel/
-
-# Misc
-.DS_Store
-
-# Outputs
-.next/
-
-# Content Collections
-.content-collections
-
-# Testing
-playwright-report/
-test-results/
-coverage/
-src/tests/e2e/.auth/
+# Turborepo
+.turbo/
 
 # TypeScript
-*.tsbuildinfo
-next-env.d.ts
+tsconfig.tsbuildinfo
+
+# Environment Variables
+.env*
+!.env.schema
+
+# Test Artifacts
+coverage/
+playwright-report/
+test-results/
+apps/web/src/tests/e2e/.auth/
+
+# Miscellaneous
+.DS_Store

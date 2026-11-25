@@ -1,0 +1,11 @@
+# TanStack
+.tanstack/
+
+# Nitro
+.output/
+
+# Varlock
+src/env.ts
+
+# Content Collections
+.content-collections/

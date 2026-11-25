@@ -1,0 +1,40 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/components/tabs'
+
+import preview from '../.storybook/preview'
+
+const meta = preview.meta({
+  title: 'Components/Tabs',
+})
+
+export const Variants = meta.story({
+  render: () => (
+    <div className='max-w-xl space-y-8'>
+      {(['default', 'line'] as const).map((variant) => (
+        <Tabs key={variant} defaultValue='overview'>
+          <TabsList variant={variant} aria-label={`${variant} tabs`}>
+            <TabsTrigger value='overview'>Overview</TabsTrigger>
+            <TabsTrigger value='details'>Details</TabsTrigger>
+            <TabsTrigger value='disabled' disabled>
+              Disabled
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value='overview'>Overview content for the {variant} list.</TabsContent>
+          <TabsContent value='details'>Details selected using the actual tabs primitive.</TabsContent>
+        </Tabs>
+      ))}
+    </div>
+  ),
+})
+
+export const Vertical = meta.story({
+  render: () => (
+    <Tabs orientation='vertical' defaultValue='first' className='max-w-lg'>
+      <TabsList aria-label='Vertical tabs'>
+        <TabsTrigger value='first'>First section</TabsTrigger>
+        <TabsTrigger value='second'>A longer second section</TabsTrigger>
+      </TabsList>
+      <TabsContent value='first'>First panel</TabsContent>
+      <TabsContent value='second'>Second panel</TabsContent>
+    </Tabs>
+  ),
+})

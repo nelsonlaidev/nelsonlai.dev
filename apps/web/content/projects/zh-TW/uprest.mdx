@@ -1,0 +1,29 @@
+---
+title: Uprest
+description: 一款用於 Upstash Redis REST API 的本機 HTTP-to-Redis 代理
+github: https://github.com/nelsonlaidev/uprest
+schemaType: SoftwareSourceCode
+license: https://opensource.org/licenses/MIT
+programmingLanguages:
+  - Go
+artwork: pearl
+techstack:
+  - Go
+  - Redis
+  - Docker
+selected: true
+dateCreated: '2026-09-25T00:00:00Z'
+updatedAt: '2026-11-10T11:14:24.000Z'
+category: '開發基礎設施'
+features:
+  - title: '保留原有工作流程'
+    text: '透過 HTTP 介面支援 Redis 指令、pipeline 和交易。'
+  - title: '不只單次請求'
+    text: '透過伺服器傳送事件（SSE）支援 Pub/Sub，並提供 JSON 與 RESP2 回應及權杖驗證，以滿足較複雜的本機開發需求。'
+  - title: '在開發的地方執行'
+    text: '多架構 Docker 映像檔，以及 Linux、macOS、Windows 預先編譯的二進位檔，適用於不同開發環境。'
+---
+
+Uprest 是一款本機 HTTP-to-Redis 代理，適合使用 [Upstash Redis REST API](https://upstash.com/docs/redis/features/restapi) 的應用程式。它會將請求轉發到真實的 Redis 伺服器，讓應用程式在本機開發與 CI 中不需 Upstash 資料庫也能繼續使用 `@upstash/redis`。
+
+我原本使用 [serverless-redis-http](https://github.com/hiett/serverless-redis-http)（SRH），但它似乎已無人維護，較新的 `@upstash/redis` 會讓它無法運作，因此我決定自行打造替代方案。Uprest 支援 Redis 指令、pipeline、交易、透過 SSE 的 Pub/Sub、JSON 與 RESP2 回應、bearer 或 query token 驗證，以及較新的 `@upstash/ratelimit` 版本。它以多架構 Docker 映像檔，以及適用於 Linux、macOS、Windows 的預先編譯二進位檔發佈。

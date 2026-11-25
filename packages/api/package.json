@@ -1,0 +1,37 @@
+{
+  "name": "@repo/api",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": "./src/*.ts",
+    "./routers": "./src/routers/index.ts"
+  },
+  "scripts": {
+    "env:check": "varlock load",
+    "env:generate": "varlock codegen",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.1176.0",
+    "@octokit/rest": "22.0.1",
+    "@orpc/server": "catalog:",
+    "@repo/auth": "workspace:*",
+    "@repo/db": "workspace:*",
+    "@repo/email": "workspace:*",
+    "@repo/kv": "workspace:*",
+    "drizzle-orm": "catalog:",
+    "jose": "6.2.18",
+    "react": "catalog:",
+    "sharp": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@nelsonlaidev/typescript-config": "catalog:",
+    "@total-typescript/ts-reset": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "typescript": "catalog:",
+    "varlock": "catalog:",
+    "vite": "catalog:"
+  }
+}

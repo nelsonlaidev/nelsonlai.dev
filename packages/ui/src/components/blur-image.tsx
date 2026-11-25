@@ -1,0 +1,54 @@
+import { cn } from 'cn'
+import { useEffect, useRef, useState } from 'react'
+
+import { Skeleton } from './skeleton'
+
+type BlurImageProps = React.ComponentProps<'img'> & {
+  src: string
+  alt: string
+  imageClassName?: string
+  lazy?: boolean
+}
+
+export function BlurImage(props: BlurImageProps) {
+  const { src, alt, width, height, imageClassName, lazy = true, className, style, onLoad, onError, ...rest } = props
+
+  const [isLoading, setIsLoading] = useState(true)
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    setIsLoading(!imgRef.current?.complete)
+  }, [src])
+
+  return (
+    <div data-loading={isLoading} className={cn('group relative overflow-hidden', className)}>
+      <img
+        ref={imgRef}
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        loading={lazy ? 'lazy' : 'eager'}
+        fetchPriority={lazy ? 'auto' : 'high'}
+        decoding='async'
+        className={cn(
+          'transition-[filter,scale] duration-[700ms,150ms] ease-[ease] group-data-[loading=true]:blur-xl group-data-[loading=true]:grayscale motion-safe:group-data-[loading=true]:scale-102 motion-reduce:transition-none',
+          imageClassName,
+        )}
+        style={{ aspectRatio: width && height ? `${width} / ${height}` : undefined, ...style }}
+        onLoad={(event) => {
+          setIsLoading(false)
+          onLoad?.(event)
+        }}
+        onError={(event) => {
+          setIsLoading(false)
+          onError?.(event)
+        }}
+        {...rest}
+      />
+      {isLoading && (
+        <Skeleton aria-hidden='true' className='pointer-events-none absolute inset-0 rounded-none bg-transparent' />
+      )}
+    </div>
+  )
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@repo/ui",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./globals.css": "./src/styles/globals.css",
+    "./components/*": "./src/components/*.tsx"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ark-ui/react": "5.40.1",
+    "@base-ui/react": "1.9.0",
+    "class-variance-authority": "0.7.1",
+    "cn": "catalog:",
+    "lucide-react": "catalog:",
+    "react": "catalog:",
+    "recharts": "catalog:",
+    "shadcn": "4.23.0",
+    "skullet": "0.0.3",
+    "tw-animate-css": "1.4.0"
+  },
+  "devDependencies": {
+    "@nelsonlaidev/typescript-config": "catalog:",
+    "@tailwindcss/typography": "0.5.20",
+    "@total-typescript/ts-reset": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "19.3.0",
+    "react-dom": "19.3.1",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:"
+  }
+}

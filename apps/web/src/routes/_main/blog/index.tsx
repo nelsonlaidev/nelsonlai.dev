@@ -1,0 +1,65 @@
+import { createFileRoute, notFound } from '@tanstack/react-router'
+
+import { OceanPage } from '@/components/ocean-page'
+import { PageHeader } from '@/components/page-header'
+import { getPage } from '@/features/pages/pages.functions'
+import { FilteredPosts } from '@/features/posts/filtered-posts'
+import { getPosts } from '@/features/posts/posts.functions'
+import { createJsonLdCollectionPage } from '@/lib/json-ld'
+import { createSeoHead, getLocalizedUrl } from '@/lib/seo'
+import { m } from '@/paraglide/messages'
+import { getLocale } from '@/paraglide/runtime'
+
+export const Route = createFileRoute('/_main/blog/')({
+  loader: async () => {
+    const locale = getLocale()
+    const [page, posts] = await Promise.all([
+      getPage({ data: { slug: 'blog', locale } }),
+      getPosts({ data: { locale } }),
+    ])
+
+    if (!page) throw notFound()
+
+    return { page, posts, locale }
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) return {}
+
+    const { page, posts, locale } = loaderData
+    const pathname = '/blog'
+
+    return createSeoHead({
+      title: page.title,
+      description: page.description,
+      pathname,
+      locale,
+      jsonLd: createJsonLdCollectionPage({
+        title: page.title,
+        description: page.description,
+        pathname,
+        locale,
+        items: posts.map((post) => ({
+          item: {
+            '@type': 'BlogPosting',
+            headline: post.title,
+            url: getLocalizedUrl(`/blog/${post.slug}`, locale),
+            datePublished: post.publishedAt,
+            dateModified: post.updatedAt,
+          },
+        })),
+      }),
+    })
+  },
+  component: RouteComponent,
+})
+
+function RouteComponent() {
+  const { page, posts } = Route.useLoaderData()
+
+  return (
+    <OceanPage>
+      <PageHeader title={page.title} description={m.blog_intro()} className='mb-10' />
+      <FilteredPosts posts={posts} />
+    </OceanPage>
+  )
+}

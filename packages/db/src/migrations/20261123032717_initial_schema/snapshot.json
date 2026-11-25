@@ -1,0 +1,1987 @@
+{
+  "type": "base",
+  "version": "10",
+  "dialect": "postgres",
+  "id": "a0cf6864-7e70-41d4-a585-3f68c638918d",
+  "prevIds": ["00000000-0000-0000-0000-000000000000"],
+  "footprints": [
+    {
+      "statementType": "create_table",
+      "statementTarget": ["table", "public", "accounts"],
+      "writes": [
+        "s|tbl|public.accounts",
+        "n|tbl|public.accounts",
+        "e|tbl|public.accounts",
+        "n|rel|public.accounts",
+        "n|type|public.accounts",
+        "n|rel|public.accounts_pkey",
+        "n|rel|public.accounts_provider_id_account_id_unique"
+      ],
+      "reads": ["n|sch|public"]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": ["table", "public", "sessions"],
+      "writes": [
+        "s|tbl|public.sessions",
+        "n|tbl|public.sessions",
+        "e|tbl|public.sessions",
+        "n|rel|public.sessions",
+        "n|type|public.sessions",
+        "n|rel|public.sessions_pkey",
+        "n|rel|public.sessions_token_key"
+      ],
+      "reads": ["n|sch|public"]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": ["table", "public", "users"],
+      "writes": [
+        "s|tbl|public.users",
+        "n|tbl|public.users",
+        "e|tbl|public.users",
+        "n|rel|public.users",
+        "n|type|public.users",
+        "n|rel|public.users_pkey",
+        "n|rel|public.users_email_key"
+      ],
+      "reads": ["n|sch|public"]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": ["table", "public", "verifications"],
+      "writes": [
+        "s|tbl|public.verifications",
+        "n|tbl|public.verifications",
+        "e|tbl|public.verifications",
+        "n|rel|public.verifications",
+        "n|type|public.verifications",
+        "n|rel|public.verifications_pkey"
+      ],
+      "reads": ["n|sch|public"]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": ["table", "public", "comment_notification_preferences"],
+      "writes": [
+        "s|tbl|public.comment_notification_preferences",
+        "n|tbl|public.comment_notification_preferences",
+        "e|tbl|public.comment_notification_preferences",
+        "n|rel|public.comment_notification_preferences",
+        "n|type|public.comment_notification_preferences",
+        "n|rel|public.comment_notification_preferences_pkey"
+      ],
+      "reads": ["n|sch|public"]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": ["table", "public", "comment_reply_unsubscribes"],
+      "writes": [
+        "s|tbl|public.comment_reply_unsubscribes",
+        "n|tbl|public.comment_reply_unsubscribes",
+        "e|tbl|public.comment_reply_unsubscribes",
+        "n|rel|public.comment_reply_unsubscribes",
+        "n|type|public.comment_reply_unsubscribes",
+        "n|rel|public.comment_reply_unsubscribes_pkey"
+      ],
+      "reads": ["n|sch|public"]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": ["table", "public", "comment_votes"],
+      "writes": [
+        "s|tbl|public.comment_votes",
+        "n|tbl|public.comment_votes",
+        "e|tbl|public.comment_votes",
+        "n|rel|public.comment_votes",
+        "n|type|public.comment_votes",
+        "n|rel|public.comment_votes_pkey"
+      ],
+      "reads": ["n|sch|public"]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": ["table", "public", "comments"],
+      "writes": [
+        "s|tbl|public.comments",
+        "n|tbl|public.comments",
+        "e|tbl|public.comments",
+        "n|rel|public.comments",
+        "n|type|public.comments",
+        "n|rel|public.comments_pkey"
+      ],
+      "reads": ["n|sch|public"]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": ["table", "public", "guestbook_messages"],
+      "writes": [
+        "s|tbl|public.guestbook_messages",
+        "n|tbl|public.guestbook_messages",
+        "e|tbl|public.guestbook_messages",
+        "n|rel|public.guestbook_messages",
+        "n|type|public.guestbook_messages",
+        "n|rel|public.guestbook_messages_pkey"
+      ],
+      "reads": ["n|sch|public"]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": ["table", "public", "post_likes"],
+      "writes": [
+        "s|tbl|public.post_likes",
+        "n|tbl|public.post_likes",
+        "e|tbl|public.post_likes",
+        "n|rel|public.post_likes",
+        "n|type|public.post_likes",
+        "n|rel|public.post_likes_pkey"
+      ],
+      "reads": ["n|sch|public"]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": ["table", "public", "posts"],
+      "writes": [
+        "s|tbl|public.posts",
+        "n|tbl|public.posts",
+        "e|tbl|public.posts",
+        "n|rel|public.posts",
+        "n|type|public.posts",
+        "n|rel|public.posts_pkey"
+      ],
+      "reads": ["n|sch|public"]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": ["index", "public", "accounts", "accounts_user_id_idx"],
+      "writes": [
+        "s|idx|public.accounts_user_id_idx",
+        "n|idx|public.accounts_user_id_idx",
+        "e|idx|public.accounts_user_id_idx",
+        "n|rel|public.accounts_user_id_idx"
+      ],
+      "reads": ["n|tbl|public.accounts", "n|sch|public", "n|col|public.accounts.user_id"]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": ["index", "public", "sessions", "sessions_user_id_idx"],
+      "writes": [
+        "s|idx|public.sessions_user_id_idx",
+        "n|idx|public.sessions_user_id_idx",
+        "e|idx|public.sessions_user_id_idx",
+        "n|rel|public.sessions_user_id_idx"
+      ],
+      "reads": ["n|tbl|public.sessions", "n|sch|public", "n|col|public.sessions.user_id"]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": ["index", "public", "verifications", "verifications_identifier_idx"],
+      "writes": [
+        "s|idx|public.verifications_identifier_idx",
+        "n|idx|public.verifications_identifier_idx",
+        "e|idx|public.verifications_identifier_idx",
+        "n|rel|public.verifications_identifier_idx"
+      ],
+      "reads": ["n|tbl|public.verifications", "n|sch|public", "n|col|public.verifications.identifier"]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": ["index", "public", "comment_votes", "comment_votes_comment_id_is_like_idx"],
+      "writes": [
+        "s|idx|public.comment_votes_comment_id_is_like_idx",
+        "n|idx|public.comment_votes_comment_id_is_like_idx",
+        "e|idx|public.comment_votes_comment_id_is_like_idx",
+        "n|rel|public.comment_votes_comment_id_is_like_idx"
+      ],
+      "reads": [
+        "n|tbl|public.comment_votes",
+        "n|sch|public",
+        "n|col|public.comment_votes.comment_id",
+        "n|col|public.comment_votes.is_like"
+      ]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": ["index", "public", "comments", "comments_post_slug_created_at_id_idx"],
+      "writes": [
+        "s|idx|public.comments_post_slug_created_at_id_idx",
+        "n|idx|public.comments_post_slug_created_at_id_idx",
+        "e|idx|public.comments_post_slug_created_at_id_idx",
+        "n|rel|public.comments_post_slug_created_at_id_idx"
+      ],
+      "reads": [
+        "n|tbl|public.comments",
+        "n|sch|public",
+        "n|col|public.comments.post_slug",
+        "n|col|public.comments.created_at",
+        "n|col|public.comments.id"
+      ]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": ["index", "public", "comments", "comments_parent_id_created_at_id_idx"],
+      "writes": [
+        "s|idx|public.comments_parent_id_created_at_id_idx",
+        "n|idx|public.comments_parent_id_created_at_id_idx",
+        "e|idx|public.comments_parent_id_created_at_id_idx",
+        "n|rel|public.comments_parent_id_created_at_id_idx"
+      ],
+      "reads": [
+        "n|tbl|public.comments",
+        "n|sch|public",
+        "n|col|public.comments.parent_id",
+        "n|col|public.comments.created_at",
+        "n|col|public.comments.id"
+      ]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": ["index", "public", "comments", "comments_user_id_idx"],
+      "writes": [
+        "s|idx|public.comments_user_id_idx",
+        "n|idx|public.comments_user_id_idx",
+        "e|idx|public.comments_user_id_idx",
+        "n|rel|public.comments_user_id_idx"
+      ],
+      "reads": ["n|tbl|public.comments", "n|sch|public", "n|col|public.comments.user_id"]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": ["index", "public", "guestbook_messages", "guestbook_messages_created_at_id_desc_idx"],
+      "writes": [
+        "s|idx|public.guestbook_messages_created_at_id_desc_idx",
+        "n|idx|public.guestbook_messages_created_at_id_desc_idx",
+        "e|idx|public.guestbook_messages_created_at_id_desc_idx",
+        "n|rel|public.guestbook_messages_created_at_id_desc_idx"
+      ],
+      "reads": [
+        "n|tbl|public.guestbook_messages",
+        "n|sch|public",
+        "n|col|public.guestbook_messages.created_at",
+        "n|col|public.guestbook_messages.id"
+      ]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": ["index", "public", "guestbook_messages", "guestbook_messages_user_id_idx"],
+      "writes": [
+        "s|idx|public.guestbook_messages_user_id_idx",
+        "n|idx|public.guestbook_messages_user_id_idx",
+        "e|idx|public.guestbook_messages_user_id_idx",
+        "n|rel|public.guestbook_messages_user_id_idx"
+      ],
+      "reads": ["n|tbl|public.guestbook_messages", "n|sch|public", "n|col|public.guestbook_messages.user_id"]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": ["index", "public", "posts", "posts_created_at_desc_idx"],
+      "writes": [
+        "s|idx|public.posts_created_at_desc_idx",
+        "n|idx|public.posts_created_at_desc_idx",
+        "e|idx|public.posts_created_at_desc_idx",
+        "n|rel|public.posts_created_at_desc_idx"
+      ],
+      "reads": ["n|tbl|public.posts", "n|sch|public", "n|col|public.posts.created_at"]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": ["table", "public", "accounts"],
+      "writes": [
+        "s|fk|public.accounts.accounts_user_id_users_id_fkey",
+        "n|fk|public.accounts.accounts_user_id_users_id_fkey",
+        "e|fk|public.accounts.accounts_user_id_users_id_fkey",
+        "n|con|public.accounts.accounts_user_id_users_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.accounts",
+        "n|sch|public",
+        "n|tbl|public.users",
+        "n|sch|public",
+        "n|col|public.accounts.user_id",
+        "n|col|public.users.id",
+        "e|uniqueness|public.users.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": ["table", "public", "sessions"],
+      "writes": [
+        "s|fk|public.sessions.sessions_user_id_users_id_fkey",
+        "n|fk|public.sessions.sessions_user_id_users_id_fkey",
+        "e|fk|public.sessions.sessions_user_id_users_id_fkey",
+        "n|con|public.sessions.sessions_user_id_users_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.sessions",
+        "n|sch|public",
+        "n|tbl|public.users",
+        "n|sch|public",
+        "n|col|public.sessions.user_id",
+        "n|col|public.users.id",
+        "e|uniqueness|public.users.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": ["table", "public", "comment_notification_preferences"],
+      "writes": [
+        "s|fk|public.comment_notification_preferences.comment_notification_preferences_user_id_users_id_fkey",
+        "n|fk|public.comment_notification_preferences.comment_notification_preferences_user_id_users_id_fkey",
+        "e|fk|public.comment_notification_preferences.comment_notification_preferences_user_id_users_id_fkey",
+        "n|con|public.comment_notification_preferences.comment_notification_preferences_user_id_users_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.comment_notification_preferences",
+        "n|sch|public",
+        "n|tbl|public.users",
+        "n|sch|public",
+        "n|col|public.comment_notification_preferences.user_id",
+        "n|col|public.users.id",
+        "e|uniqueness|public.users.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": ["table", "public", "comment_reply_unsubscribes"],
+      "writes": [
+        "s|fk|public.comment_reply_unsubscribes.comment_reply_unsubscribes_user_id_users_id_fkey",
+        "n|fk|public.comment_reply_unsubscribes.comment_reply_unsubscribes_user_id_users_id_fkey",
+        "e|fk|public.comment_reply_unsubscribes.comment_reply_unsubscribes_user_id_users_id_fkey",
+        "n|con|public.comment_reply_unsubscribes.comment_reply_unsubscribes_user_id_users_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.comment_reply_unsubscribes",
+        "n|sch|public",
+        "n|tbl|public.users",
+        "n|sch|public",
+        "n|col|public.comment_reply_unsubscribes.user_id",
+        "n|col|public.users.id",
+        "e|uniqueness|public.users.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": ["table", "public", "comment_reply_unsubscribes"],
+      "writes": [
+        "s|fk|public.comment_reply_unsubscribes.comment_reply_unsubscribes_comment_id_comments_id_fkey",
+        "n|fk|public.comment_reply_unsubscribes.comment_reply_unsubscribes_comment_id_comments_id_fkey",
+        "e|fk|public.comment_reply_unsubscribes.comment_reply_unsubscribes_comment_id_comments_id_fkey",
+        "n|con|public.comment_reply_unsubscribes.comment_reply_unsubscribes_comment_id_comments_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.comment_reply_unsubscribes",
+        "n|sch|public",
+        "n|tbl|public.comments",
+        "n|sch|public",
+        "n|col|public.comment_reply_unsubscribes.comment_id",
+        "n|col|public.comments.id",
+        "e|uniqueness|public.comments.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": ["table", "public", "comment_votes"],
+      "writes": [
+        "s|fk|public.comment_votes.comment_votes_user_id_users_id_fkey",
+        "n|fk|public.comment_votes.comment_votes_user_id_users_id_fkey",
+        "e|fk|public.comment_votes.comment_votes_user_id_users_id_fkey",
+        "n|con|public.comment_votes.comment_votes_user_id_users_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.comment_votes",
+        "n|sch|public",
+        "n|tbl|public.users",
+        "n|sch|public",
+        "n|col|public.comment_votes.user_id",
+        "n|col|public.users.id",
+        "e|uniqueness|public.users.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": ["table", "public", "comment_votes"],
+      "writes": [
+        "s|fk|public.comment_votes.comment_votes_comment_id_comments_id_fkey",
+        "n|fk|public.comment_votes.comment_votes_comment_id_comments_id_fkey",
+        "e|fk|public.comment_votes.comment_votes_comment_id_comments_id_fkey",
+        "n|con|public.comment_votes.comment_votes_comment_id_comments_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.comment_votes",
+        "n|sch|public",
+        "n|tbl|public.comments",
+        "n|sch|public",
+        "n|col|public.comment_votes.comment_id",
+        "n|col|public.comments.id",
+        "e|uniqueness|public.comments.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": ["table", "public", "comments"],
+      "writes": [
+        "s|fk|public.comments.comments_post_slug_posts_slug_fkey",
+        "n|fk|public.comments.comments_post_slug_posts_slug_fkey",
+        "e|fk|public.comments.comments_post_slug_posts_slug_fkey",
+        "n|con|public.comments.comments_post_slug_posts_slug_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.comments",
+        "n|sch|public",
+        "n|tbl|public.posts",
+        "n|sch|public",
+        "n|col|public.comments.post_slug",
+        "n|col|public.posts.slug",
+        "e|uniqueness|public.posts.slug"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": ["table", "public", "comments"],
+      "writes": [
+        "s|fk|public.comments.comments_user_id_users_id_fkey",
+        "n|fk|public.comments.comments_user_id_users_id_fkey",
+        "e|fk|public.comments.comments_user_id_users_id_fkey",
+        "n|con|public.comments.comments_user_id_users_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.comments",
+        "n|sch|public",
+        "n|tbl|public.users",
+        "n|sch|public",
+        "n|col|public.comments.user_id",
+        "n|col|public.users.id",
+        "e|uniqueness|public.users.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": ["table", "public", "comments"],
+      "writes": [
+        "s|fk|public.comments.comments_parent_id_comments_id_fkey",
+        "n|fk|public.comments.comments_parent_id_comments_id_fkey",
+        "e|fk|public.comments.comments_parent_id_comments_id_fkey",
+        "n|con|public.comments.comments_parent_id_comments_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.comments",
+        "n|sch|public",
+        "n|tbl|public.comments",
+        "n|sch|public",
+        "n|col|public.comments.parent_id",
+        "n|col|public.comments.id",
+        "e|uniqueness|public.comments.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": ["table", "public", "guestbook_messages"],
+      "writes": [
+        "s|fk|public.guestbook_messages.guestbook_messages_user_id_users_id_fkey",
+        "n|fk|public.guestbook_messages.guestbook_messages_user_id_users_id_fkey",
+        "e|fk|public.guestbook_messages.guestbook_messages_user_id_users_id_fkey",
+        "n|con|public.guestbook_messages.guestbook_messages_user_id_users_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.guestbook_messages",
+        "n|sch|public",
+        "n|tbl|public.users",
+        "n|sch|public",
+        "n|col|public.guestbook_messages.user_id",
+        "n|col|public.users.id",
+        "e|uniqueness|public.users.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": ["table", "public", "post_likes"],
+      "writes": [
+        "s|fk|public.post_likes.post_likes_post_slug_posts_slug_fkey",
+        "n|fk|public.post_likes.post_likes_post_slug_posts_slug_fkey",
+        "e|fk|public.post_likes.post_likes_post_slug_posts_slug_fkey",
+        "n|con|public.post_likes.post_likes_post_slug_posts_slug_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.post_likes",
+        "n|sch|public",
+        "n|tbl|public.posts",
+        "n|sch|public",
+        "n|col|public.post_likes.post_slug",
+        "n|col|public.posts.slug",
+        "e|uniqueness|public.posts.slug"
+      ]
+    }
+  ],
+  "ddl": [
+    {
+      "schema": "public",
+      "name": "accounts",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "sessions",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "users",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "verifications",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "comment_notification_preferences",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "comment_reply_unsubscribes",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "comment_votes",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "comments",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "guestbook_messages",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "post_likes",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "posts",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "account_id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "provider_id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "user_id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "access_token",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "refresh_token",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "id_token",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "access_token_expires_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "refresh_token_expires_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "scope",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "password",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "created_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "updated_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "expires_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "token",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "ip_address",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "user_agent",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "user_id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "impersonated_by",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "created_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "updated_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "name",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "email",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "email_verified",
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "image",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "role",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "banned",
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "ban_reason",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "ban_expires",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "last_login_method",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "created_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "updated_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "verifications",
+      "name": "id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "verifications",
+      "name": "identifier",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "verifications",
+      "name": "value",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "verifications",
+      "name": "expires_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "verifications",
+      "name": "created_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "verifications",
+      "name": "updated_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comment_notification_preferences",
+      "name": "user_id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comment_notification_preferences",
+      "name": "comment_replies_enabled",
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "true",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comment_reply_unsubscribes",
+      "name": "user_id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comment_reply_unsubscribes",
+      "name": "comment_id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comment_votes",
+      "name": "user_id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comment_votes",
+      "name": "comment_id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comment_votes",
+      "name": "is_like",
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "body",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "post_slug",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "user_id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "parent_id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "is_deleted",
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "created_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "updated_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "guestbook_messages",
+      "name": "id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "guestbook_messages",
+      "name": "body",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "guestbook_messages",
+      "name": "user_id",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "guestbook_messages",
+      "name": "created_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "guestbook_messages",
+      "name": "updated_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "post_likes",
+      "name": "post_slug",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "post_likes",
+      "name": "anon_key",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "post_likes",
+      "name": "like_count",
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "0",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "post_likes",
+      "name": "created_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "posts",
+      "name": "slug",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "posts",
+      "name": "likes",
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "0",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "posts",
+      "name": "views",
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "0",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "posts",
+      "name": "created_at",
+      "type": "timestamp(3) with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "accounts_user_id_idx",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "user_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "sessions_user_id_idx",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "user_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "verifications",
+      "name": "verifications_identifier_idx",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "identifier",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "comment_votes",
+      "name": "comment_votes_comment_id_is_like_idx",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "comment_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "is_like",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "comments_post_slug_created_at_id_idx",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "post_slug",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "created_at",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "comments_parent_id_created_at_id_idx",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "parent_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "created_at",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "comments_user_id_idx",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "user_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "guestbook_messages",
+      "name": "guestbook_messages_created_at_id_desc_idx",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "created_at",
+          "isExpression": false,
+          "asc": false,
+          "nullsFirst": true,
+          "opclass": null
+        },
+        {
+          "value": "id",
+          "isExpression": false,
+          "asc": false,
+          "nullsFirst": true,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "guestbook_messages",
+      "name": "guestbook_messages_user_id_idx",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "user_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "posts",
+      "name": "posts_created_at_desc_idx",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "created_at",
+          "isExpression": false,
+          "asc": false,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "accounts_user_id_users_id_fkey",
+      "nameExplicit": false,
+      "columns": ["user_id"],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": ["id"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "sessions_user_id_users_id_fkey",
+      "nameExplicit": false,
+      "columns": ["user_id"],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": ["id"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "comment_notification_preferences",
+      "name": "comment_notification_preferences_user_id_users_id_fkey",
+      "nameExplicit": false,
+      "columns": ["user_id"],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": ["id"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "comment_reply_unsubscribes",
+      "name": "comment_reply_unsubscribes_user_id_users_id_fkey",
+      "nameExplicit": false,
+      "columns": ["user_id"],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": ["id"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "comment_reply_unsubscribes",
+      "name": "comment_reply_unsubscribes_comment_id_comments_id_fkey",
+      "nameExplicit": false,
+      "columns": ["comment_id"],
+      "schemaTo": "public",
+      "tableTo": "comments",
+      "columnsTo": ["id"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "comment_votes",
+      "name": "comment_votes_user_id_users_id_fkey",
+      "nameExplicit": false,
+      "columns": ["user_id"],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": ["id"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "comment_votes",
+      "name": "comment_votes_comment_id_comments_id_fkey",
+      "nameExplicit": false,
+      "columns": ["comment_id"],
+      "schemaTo": "public",
+      "tableTo": "comments",
+      "columnsTo": ["id"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "comments_post_slug_posts_slug_fkey",
+      "nameExplicit": false,
+      "columns": ["post_slug"],
+      "schemaTo": "public",
+      "tableTo": "posts",
+      "columnsTo": ["slug"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "comments_user_id_users_id_fkey",
+      "nameExplicit": false,
+      "columns": ["user_id"],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": ["id"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "SET NULL",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "comments_parent_id_comments_id_fkey",
+      "nameExplicit": false,
+      "columns": ["parent_id"],
+      "schemaTo": "public",
+      "tableTo": "comments",
+      "columnsTo": ["id"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "RESTRICT",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "guestbook_messages",
+      "name": "guestbook_messages_user_id_users_id_fkey",
+      "nameExplicit": false,
+      "columns": ["user_id"],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": ["id"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "post_likes",
+      "name": "post_likes_post_slug_posts_slug_fkey",
+      "nameExplicit": false,
+      "columns": ["post_slug"],
+      "schemaTo": "public",
+      "tableTo": "posts",
+      "columnsTo": ["slug"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "comment_reply_unsubscribes",
+      "name": "comment_reply_unsubscribes_pkey",
+      "columns": ["user_id", "comment_id"],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "comment_votes",
+      "name": "comment_votes_pkey",
+      "columns": ["user_id", "comment_id"],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "post_likes",
+      "name": "post_likes_pkey",
+      "columns": ["post_slug", "anon_key"],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "accounts_pkey",
+      "columns": ["id"],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "sessions_pkey",
+      "columns": ["id"],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "users_pkey",
+      "columns": ["id"],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "verifications",
+      "name": "verifications_pkey",
+      "columns": ["id"],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "comment_notification_preferences",
+      "name": "comment_notification_preferences_pkey",
+      "columns": ["user_id"],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "comments",
+      "name": "comments_pkey",
+      "columns": ["id"],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "guestbook_messages",
+      "name": "guestbook_messages_pkey",
+      "columns": ["id"],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "posts",
+      "name": "posts_pkey",
+      "columns": ["slug"],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "accounts",
+      "name": "accounts_provider_id_account_id_unique",
+      "nameExplicit": true,
+      "columns": ["provider_id", "account_id"],
+      "nullsNotDistinct": false,
+      "entityType": "uniques"
+    },
+    {
+      "schema": "public",
+      "table": "sessions",
+      "name": "sessions_token_key",
+      "nameExplicit": false,
+      "columns": ["token"],
+      "nullsNotDistinct": false,
+      "entityType": "uniques"
+    },
+    {
+      "schema": "public",
+      "table": "users",
+      "name": "users_email_key",
+      "nameExplicit": false,
+      "columns": ["email"],
+      "nullsNotDistinct": false,
+      "entityType": "uniques"
+    },
+    {
+      "schema": "public",
+      "table": "post_likes",
+      "name": "post_likes_count_check",
+      "value": "\"like_count\" BETWEEN 0 AND 3",
+      "entityType": "checks"
+    }
+  ]
+}

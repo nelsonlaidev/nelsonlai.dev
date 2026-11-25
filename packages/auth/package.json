@@ -1,0 +1,28 @@
+{
+  "name": "@repo/auth",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "env:check": "varlock load",
+    "env:generate": "varlock codegen",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@better-auth/drizzle-adapter": "1.7.28",
+    "@repo/db": "workspace:*",
+    "better-auth": "1.7.28",
+    "react": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@nelsonlaidev/typescript-config": "catalog:",
+    "@total-typescript/ts-reset": "catalog:",
+    "@types/react": "catalog:",
+    "typescript": "catalog:",
+    "varlock": "catalog:"
+  }
+}

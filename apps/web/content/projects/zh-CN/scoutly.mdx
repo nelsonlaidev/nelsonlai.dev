@@ -1,0 +1,29 @@
+---
+title: Scoutly
+description: 一款快速、轻量级的命令行网站爬虫和 SEO 分析工具
+github: https://github.com/nelsonlaidev/scoutly
+schemaType: SoftwareSourceCode
+license: https://opensource.org/licenses/MIT
+programmingLanguages:
+  - Rust
+artwork: cube
+techstack:
+  - Rust
+  - Ratatui
+  - Clap
+selected: true
+dateCreated: '2025-11-04T00:00:00Z'
+updatedAt: '2026-11-10T11:14:24.000Z'
+category: '命令行工具'
+features:
+  - title: '探索网站结构'
+    text: '按照可配置的限制爬取网站，检查链接、图片与页面结构。'
+  - title: '找出遗漏之处'
+    text: '找出失效资源与 SEO 问题，并支持 robots 和 sitemap，呈现更完整的网站面貌。'
+  - title: '在终端工作'
+    text: 'CLI 与终端界面方便探索，文本与 JSON 报告让结果也能用于其他工作流程。'
+---
+
+Scoutly 是一款快速、轻量级的网站爬虫与 SEO 分析工具。我在 2025 年 11 月为了练习 Rust 而启动这个项目。此项目灵感源自 [Scrutiny](https://peacockmedia.software/mac/scrutiny/)。
+
+Scoutly 以可配置的深度、页数、并发度与请求速率限制爬取同源 HTML 页面，遵守 robots.txt，并从 XML sitemap 发掘页面。它会检查发现的链接与图片，并找出与页面标题、元描述、H1 标题及缺少图片替代文本相关的常见 SEO 问题。结果可在通过键盘操作的终端界面（TUI）中浏览，或以纯文本与 JSON 报告输出；爬虫核心也同时以 Rust 库的形式提供。

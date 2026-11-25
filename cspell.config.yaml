@@ -1,0 +1,61 @@
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+
+version: '0.2'
+language: en-US
+useGitignore: true
+enableGlobDot: true
+
+import:
+  - '@cspell/dict-es-es/cspell-ext.json'
+  - '@cspell/dict-pt-br/cspell-ext.json'
+
+ignoreRegExpList:
+  # Match 3, 4, 6, or 8 hex digits after #, including before Tailwind gradient stops like _30%.
+  - /#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})(?:(?![\w\\\u0080-\uFFFF-])|(?=_-?(?:\d*\.)?\d+%))/gi
+
+ignorePaths:
+  - pnpm-lock.yaml
+  - '**/snapshot.json'
+  - '**/routeTree.gen.ts'
+
+files:
+  - '**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}'
+  - '**/*.{md,mdx}'
+  - '**/*.{json,jsonc,yaml,yml}'
+  - '**/*.css'
+  - '**/.{gitignore,env.schema}'
+
+overrides:
+  - filename:
+      - 'apps/web/messages/es.json'
+      - 'apps/web/content/**/es/*.mdx'
+    language: en-US,es
+    dictionaries:
+      - es-custom
+  - filename:
+      - 'apps/web/messages/pt-BR.json'
+      - 'apps/web/content/**/pt-BR/*.mdx'
+    language: en-US,pt-br
+    dictionaries:
+      - pt-br-custom
+
+dictionaryDefinitions:
+  - name: en-custom
+    path: ./.cspell/en-custom.txt
+  - name: es-custom
+    path: ./.cspell/es-custom.txt
+  - name: pt-br-custom
+    path: ./.cspell/pt-br-custom.txt
+  - name: names
+    path: ./.cspell/names.txt
+  - name: tech-terms
+    path: ./.cspell/tech-terms.txt
+
+dictionaries:
+  - en-custom
+  - names
+  - tech-terms
+  - npm
+  - sql
+  - python
+  - rust-crates

@@ -1,11 +1,22 @@
+glob_matcher: doublestar
+
 pre-commit:
   parallel: true
   jobs:
-    - name: format
-      run: pnpm oxfmt --no-error-on-unmatched-pattern {staged_files}
+    - name: oxfmt
+      run: pnpm oxfmt --write --no-error-on-unmatched-pattern {staged_files}
       stage_fixed: true
 
-    - name: lint
-      glob: '*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts,d.cjs,d.mts}'
+    - name: oxlint
+      glob: '**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}'
       run: pnpm oxlint --fix {staged_files}
       stage_fixed: true
+
+    - name: cspell
+      glob:
+        - '**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}'
+        - '**/*.{md,mdx}'
+        - '**/*.{json,jsonc,yaml,yml}'
+        - '**/*.css'
+        - '**/.{gitignore,env.schema}'
+      run: pnpm cspell lint --no-progress --no-must-find-files --file {staged_files}

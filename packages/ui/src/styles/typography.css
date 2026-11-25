@@ -1,0 +1,74 @@
+@plugin '@tailwindcss/typography';
+
+.prose {
+  --tw-prose-body: color-mix(in oklab, var(--color-foreground) 90%, transparent);
+  --tw-prose-headings: var(--color-foreground);
+  --tw-prose-lead: var(--color-foreground);
+  --tw-prose-links: var(--color-link);
+  --tw-prose-bold: var(--color-foreground);
+  --tw-prose-counters: var(--color-muted-foreground);
+  --tw-prose-bullets: var(--color-muted-foreground);
+  --tw-prose-hr: var(--color-border);
+  --tw-prose-quotes: var(--color-foreground);
+  --tw-prose-quote-borders: var(--color-border);
+  --tw-prose-captions: var(--color-foreground);
+  --tw-prose-code: var(--color-foreground);
+  --tw-prose-pre-code: var(--color-foreground);
+  --tw-prose-pre-bg: var(--color-muted);
+  --tw-prose-th-borders: var(--color-border);
+  --tw-prose-td-borders: var(--color-border);
+
+  max-width: none;
+
+  :where(figure):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+    margin: 0;
+  }
+
+  :where(img):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+    margin: 0 auto;
+  }
+
+  :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+    @apply px-1 py-0.5 text-sm;
+    border-radius: var(--radius-sm);
+    background: color-mix(in oklab, var(--color-secondary) 50%, transparent);
+    border: 1px solid var(--color-border);
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  :where(blockquote):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+    font-style: normal;
+
+    p {
+      &:first-of-type::before,
+      &:last-of-type::after {
+        content: none;
+      }
+    }
+  }
+
+  :where(video):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+    margin-block: --spacing(4);
+  }
+
+  :where(a):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+    overflow-wrap: anywhere;
+    text-underline-offset: --spacing(1);
+  }
+
+  :is(:where(h1, h2, h3, h4, h5, h6, th):not(:where([class~='not-prose'], [class~='not-prose'] *))) {
+    & a {
+      text-decoration: none;
+      font-weight: inherit;
+      color: inherit;
+    }
+
+    & code {
+      font-size: inherit;
+    }
+  }
+}

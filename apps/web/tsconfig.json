@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "content-collections": ["./.content-collections/generated"],
+      "@messages/*": ["./messages/*"]
+    },
+    "types": ["@total-typescript/ts-reset", "@nelsonlaidev/typescript-config/react"]
+  },
+  "extends": "@nelsonlaidev/typescript-config/tanstack-start.json",
+  "include": ["**/*.ts", "**/*.tsx"]
+}

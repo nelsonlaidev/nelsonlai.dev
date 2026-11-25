@@ -1,9 +1,10 @@
 {
   "recommendations": [
-    "oxc.oxc-vscode",
     "bradlc.vscode-tailwindcss",
-    "unifiedjs.vscode-mdx",
+    "inlang.vs-code-extension",
+    "oxc.oxc-vscode",
     "streetsidesoftware.code-spell-checker",
-    "lokalise.i18n-ally"
+    "unifiedjs.vscode-mdx",
+    "varlock.env-spec-language"
   ]
 }

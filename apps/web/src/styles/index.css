@@ -1,0 +1,19 @@
+@import '@repo/ui/globals.css';
+
+@source '../**/*.{ts,tsx}';
+
+@variant max-lg {
+  html:has(#mobile-navigation:not([inert])) {
+    overflow: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}
