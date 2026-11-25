@@ -35,6 +35,8 @@ export const Route = createFileRoute('/api/avatar/{$id}.webp')({
 
         const size = parsedSize.data
         const gradient = await generateGradient(params.id)
+        const fallbackFonts = /\P{ASCII}/u.test(text) ? ['Noto Sans TC', 'Noto Sans SC', 'Noto Sans JP'] : []
+        const fontFamilies = ['Geist', ...fallbackFonts]
 
         const avatar = (
           <div
@@ -50,7 +52,7 @@ export const Route = createFileRoute('/api/avatar/{$id}.webp')({
             {textLength > 0 && (
               <span
                 style={{
-                  fontFamily: 'Geist, Noto Sans TC, Noto Sans SC, Noto Sans JP',
+                  fontFamily: fontFamilies.join(', '),
                   fontWeight: 400,
                   fontSize: (size * 0.9) / textLength,
                   color: '#fff',
@@ -69,14 +71,8 @@ export const Route = createFileRoute('/api/avatar/{$id}.webp')({
           height: size,
           format: 'webp',
           headers: { 'Cache-Control': 'public, max-age=86400' },
-          fonts: /\P{ASCII}/u.test(text)
-            ? googleFonts([
-                { name: 'Noto Sans TC', weight: 400 },
-                { name: 'Noto Sans SC', weight: 400 },
-                { name: 'Noto Sans JP', weight: 400 },
-              ])
-            : undefined,
-          fontFamilies: ['Geist', 'Noto Sans TC', 'Noto Sans SC', 'Noto Sans JP'],
+          fonts: fallbackFonts.length > 0 ? googleFonts(fallbackFonts) : undefined,
+          fontFamilies,
         })
       },
     },
