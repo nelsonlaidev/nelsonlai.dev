@@ -94,7 +94,7 @@ function UsesSection(props: UsesSectionProps) {
               <span className='block text-sm/relaxed text-muted-foreground'>{item.description}</span>
             </span>
             <ArrowRightIcon
-              className='size-5 shrink-0 -rotate-45 text-primary transition-[rotate] duration-200 ease-linear group-hover:rotate-0 motion-reduce:transition-none'
+              className='size-5 shrink-0 -rotate-45 text-primary transition-[rotate] duration-200 ease-linear motion-safe:group-hover:rotate-0 motion-safe:group-focus-visible:rotate-0 motion-reduce:transition-none'
               aria-hidden='true'
             />
           </ExternalLink>

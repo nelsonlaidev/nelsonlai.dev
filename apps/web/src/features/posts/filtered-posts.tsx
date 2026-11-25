@@ -61,7 +61,7 @@ export function FilteredPosts(props: FilteredPostsProps) {
             </div>
             <ArrowRightIcon
               aria-hidden='true'
-              className='transition-transform duration-300 ease-linear motion-safe:group-hover/row:translate-x-2 motion-safe:group-focus-visible/row:translate-x-2 motion-reduce:transition-none'
+              className='motion-safe:transition-transform motion-safe:group-hover/row:translate-x-1 motion-safe:group-focus-visible/row:translate-x-1'
             />
           </Link>
         </article>

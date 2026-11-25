@@ -3,7 +3,7 @@ import { cn } from 'cn'
 const innerOutline = 'absolute top-1/2 left-1/2 border border-[#bcd4bd55]'
 const outerOutline = 'absolute top-1/2 left-1/2 border border-[#bcd4bd28]'
 const shape =
-  'absolute top-1/2 left-1/2 transition-transform duration-800 ease-linear group-hover/artwork:transform-[translate(-50%,-55%)_rotate(8deg)] group-focus-visible/artwork:transform-[translate(-50%,-55%)_rotate(8deg)] motion-reduce:transition-none'
+  'absolute top-1/2 left-1/2 transition-transform duration-800 ease-linear motion-safe:group-hover/artwork:transform-[translate(-50%,-55%)_rotate(8deg)] motion-safe:group-focus-visible/artwork:transform-[translate(-50%,-55%)_rotate(8deg)] motion-reduce:transition-none'
 
 export function PearlArtwork() {
   return (
