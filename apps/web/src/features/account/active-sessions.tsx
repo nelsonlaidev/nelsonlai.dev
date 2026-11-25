@@ -55,7 +55,7 @@ export function ActiveSessions(props: ActiveSessionsProps) {
 
   return (
     <section className='space-y-6' aria-labelledby='sessions-heading' aria-busy={sessions.isPending}>
-      <h2 id='sessions-heading' className='text-xl/relaxed font-medium tracking-tight'>
+      <h2 id='sessions-heading' className='text-xl font-medium tracking-tight'>
         {m.account_active_sessions()}
       </h2>
       {requiresSignIn ? (

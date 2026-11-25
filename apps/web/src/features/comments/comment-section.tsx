@@ -73,7 +73,7 @@ export function CommentSection(props: CommentSectionProps) {
     >
       <header className='mb-6'>
         <h2 className='mb-4 text-3xl font-medium tracking-tight'>{m.blog_comments_conversation()}</h2>
-        <p className='mb-6 text-muted-foreground'>{m.blog_comments_discussion_intro()}</p>
+        <p className='mb-6 leading-relaxed text-muted-foreground'>{m.blog_comments_discussion_intro()}</p>
       </header>
       <CommentComposer slug={slug} />
       <div className='flex flex-wrap items-center justify-between gap-3'>

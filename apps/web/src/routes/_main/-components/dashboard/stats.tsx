@@ -89,7 +89,7 @@ export function DashboardStats() {
             {group.id === 'blog' ? (
               <Link
                 to='/blog'
-                className='group inline-flex items-center justify-end gap-2 text-sm/normal text-link hover:text-foreground'
+                className='group inline-flex items-center justify-end gap-2 text-sm text-link hover:text-foreground'
               >
                 {group.linkText}
                 <ArrowRightIcon
@@ -100,7 +100,7 @@ export function DashboardStats() {
             ) : (
               <ExternalLink
                 href={group.link}
-                className='group inline-flex items-center justify-end gap-2 text-sm/normal text-link hover:text-foreground'
+                className='group inline-flex items-center justify-end gap-2 text-sm text-link hover:text-foreground'
               >
                 {group.linkText}
                 <ArrowRightIcon
@@ -219,7 +219,7 @@ export function StatCards(props: StatCardsProps) {
     !values && !isError ? (
       <PendingCount />
     ) : (
-      <output className='text-lg/relaxed tracking-normal text-muted-foreground'>{m.dashboard_unavailable()}</output>
+      <output className='text-lg tracking-normal text-muted-foreground'>{m.dashboard_unavailable()}</output>
     )
   const hasMultipleStats = stats.length > 1
 
@@ -236,10 +236,10 @@ export function StatCards(props: StatCardsProps) {
             key={field}
             className='min-w-0 border-border/70 not-first:border-t not-first:pt-6 sm:not-first:border-t-0 sm:not-first:pt-0'
           >
-            <dt className='mb-2 text-base/snug font-medium text-foreground sm:mb-3'>{title}</dt>
+            <dt className='mb-2 font-medium text-foreground sm:mb-3'>{title}</dt>
             <dd
               className={cn(
-                'flex min-h-[1.1em] flex-wrap items-baseline gap-2.5 text-5xl tracking-tighter text-foreground tabular-nums sm:text-6xl',
+                'flex min-h-[1.1em] flex-wrap items-baseline gap-2.5 text-5xl tracking-tight text-foreground tabular-nums sm:text-6xl',
                 hasMultipleStats && 'lg:text-5xl xl:text-6xl',
               )}
             >

@@ -39,7 +39,7 @@ export function Profile(props: ProfileProps) {
 
   return (
     <section className='space-y-6' aria-labelledby='profile-heading'>
-      <h2 id='profile-heading' className='text-xl/relaxed font-medium tracking-tight'>
+      <h2 id='profile-heading' className='text-xl font-medium tracking-tight'>
         {m.account_profile()}
       </h2>
       <Card>

@@ -12,13 +12,11 @@ export function Cta() {
     <Section id='site' className='space-y-8 py-24 text-center md:py-36'>
       <h2
         id='site-title'
-        className='font-serif text-4xl tracking-tighter text-balance text-primary italic lg:text-5xl 2xl:text-6xl'
+        className='font-serif text-4xl tracking-tight text-balance text-primary italic lg:text-5xl 2xl:text-6xl'
       >
         {m.home_site_title()}
       </h2>
-      <p className='mx-auto max-w-lg px-3 text-base/relaxed text-balance text-muted-foreground'>
-        {m.home_site_intro()}
-      </p>
+      <p className='mx-auto max-w-lg px-3 leading-relaxed text-balance text-muted-foreground'>{m.home_site_intro()}</p>
       <div className='flex flex-wrap items-center justify-center gap-2'>
         <Link to='/guestbook' className={cn(buttonVariants({ size: 'xl' }))}>
           {m.home_site_guestbook()}

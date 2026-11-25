@@ -80,7 +80,7 @@ function ArticleRow(props: ArticleRowProps) {
             </span>
           </div>
           <h3 className='mb-3 text-lg tracking-tight md:text-xl'>{post.title}</h3>
-          <p className='text-base/relaxed text-muted-foreground'>{post.description}</p>
+          <p className='leading-relaxed text-muted-foreground'>{post.description}</p>
         </div>
         <ArrowRightIcon
           className='size-5 shrink-0 text-primary motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1'

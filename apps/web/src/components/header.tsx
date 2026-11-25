@@ -105,7 +105,7 @@ export function Header() {
             <ul className='transition-transform duration-260 ease-in-out inert:translate-y-1.5 motion-reduce:transition-none'>
               {mobileLinks.map((link) => (
                 <li key={link.to}>
-                  <Link to={link.to} className='flex min-h-16 items-center border-b py-4 text-xl tracking-tight'>
+                  <Link to={link.to} className='flex min-h-16 items-center border-b py-4 text-xl'>
                     {link.label()}
                   </Link>
                 </li>

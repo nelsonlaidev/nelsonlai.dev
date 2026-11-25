@@ -126,9 +126,9 @@ export default function MdxLightbox(props: MdxLightboxProps) {
         iconNext: () => <ChevronRightIcon {...iconProps} />,
         iconZoomIn: () => <ZoomInIcon {...iconProps} />,
         iconZoomOut: () => <ZoomOutIcon {...iconProps} />,
-        iconError: () => <output className='text-base text-link'>{m.common_error()}</output>,
+        iconError: () => <output className='leading-normal text-link'>{m.common_error()}</output>,
         slideFooter: ({ slide }) => (
-          <div className='pointer-events-none absolute inset-x-20 bottom-[max(--spacing(8),env(safe-area-inset-bottom))] mx-auto w-fit bg-backdrop/95 px-2.5 py-1 text-center text-base wrap-anywhere text-link md:bottom-[max(--spacing(5),env(safe-area-inset-bottom))]'>
+          <div className='pointer-events-none absolute inset-x-20 bottom-[max(--spacing(8),env(safe-area-inset-bottom))] mx-auto w-fit bg-backdrop/95 px-2.5 py-1 text-center wrap-anywhere text-link md:bottom-[max(--spacing(5),env(safe-area-inset-bottom))]'>
             {slide.alt}
           </div>
         ),

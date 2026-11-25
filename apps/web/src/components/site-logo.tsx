@@ -11,7 +11,7 @@ export function SiteLogo(props: SiteLogoProps) {
     <span
       className={cn(
         'inline-flex items-center tracking-tight',
-        large ? 'gap-3 text-2xl' : 'gap-2 text-base md:gap-3.5 md:text-lg',
+        large ? 'gap-3 text-2xl' : 'gap-2 md:gap-3.5 md:text-lg',
       )}
     >
       <img

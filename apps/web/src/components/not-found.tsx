@@ -10,16 +10,16 @@ export function NotFound() {
     <div className='relative mx-auto flex min-h-[85vh] w-full flex-col items-center justify-center gap-8 overflow-hidden px-4 pt-48 pb-20 text-center sm:px-[max(16px,10%)] sm:pt-56 sm:pb-24'>
       <span
         aria-hidden='true'
-        className='pointer-events-none absolute top-1/2 left-1/2 block -translate-1/2 text-[clamp(230px,40vw,480px)] tracking-tighter text-[#9ac6b40f]'
+        className='pointer-events-none absolute top-1/2 left-1/2 block -translate-1/2 text-[clamp(230px,40vw,480px)] tracking-tight text-[#9ac6b40f]'
       >
         404
       </span>
-      <h1 className='relative text-5xl tracking-tighter text-foreground lg:text-6xl xl:text-7xl'>
+      <h1 className='relative text-5xl tracking-tight text-foreground lg:text-6xl xl:text-7xl'>
         {m.not_found_title()}
         <br />
         <em className='font-serif text-primary'>{m.not_found_emphasis()}</em>
       </h1>
-      <p className='relative mx-auto max-w-md text-base/relaxed text-muted-foreground'>{m.not_found_description()}</p>
+      <p className='relative mx-auto max-w-md leading-relaxed text-muted-foreground'>{m.not_found_description()}</p>
       <Link to='/' className={cn(buttonVariants({ variant: 'outline', size: 'xl' }))}>
         {m.common_go_to_homepage()}
         <ArrowUpRightIcon aria-hidden='true' className='size-4' />

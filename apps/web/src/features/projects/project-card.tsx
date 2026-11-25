@@ -23,7 +23,7 @@ export function ProjectCard(props: ProjectCardProps) {
         </div>
         <p className='mb-3.5 text-sm text-muted-foreground/80'>{project.techstack.join(' · ')}</p>
         <Heading className='mb-4 text-3xl tracking-tight'>{project.title}</Heading>
-        <p className='text-muted-foreground'>{project.description}</p>
+        <p className='leading-relaxed text-muted-foreground'>{project.description}</p>
       </Link>
     </article>
   )

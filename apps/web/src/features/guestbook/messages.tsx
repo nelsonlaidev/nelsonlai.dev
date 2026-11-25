@@ -68,10 +68,7 @@ export function Messages(props: MessagesProps) {
         </button>
       )}
       {isError && (
-        <div
-          role='alert'
-          className='space-y-4 rounded-xl border px-6 py-10 text-center text-base/relaxed text-muted-foreground'
-        >
+        <div role='alert' className='space-y-4 rounded-xl border px-6 py-10 text-center text-muted-foreground'>
           <p>{m.error_failed_to_load_messages()}</p>
           <Button
             type='button'
@@ -85,7 +82,7 @@ export function Messages(props: MessagesProps) {
         </div>
       )}
       {noMessages && (
-        <div className='rounded-xl border px-6 py-10 text-center text-base/relaxed text-muted-foreground'>
+        <div className='rounded-xl border px-6 py-10 text-center text-muted-foreground'>
           <p className='text-sm text-muted-foreground'>{m.guestbook_no_messages()}</p>
         </div>
       )}
@@ -135,7 +132,7 @@ function Message(props: MessageProps) {
       <blockquote className='mb-6 pr-5 font-serif text-xl/relaxed wrap-anywhere whitespace-pre-wrap text-primary italic'>
         {message.body}
       </blockquote>
-      <div className='flex flex-wrap items-center justify-between gap-4 text-sm/normal text-muted-foreground'>
+      <div className='flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground'>
         <span className='flex min-w-0 items-center gap-3'>
           <UserAvatar id={message.userId} name={message.user.name} image={message.user.image} />
           <span className='min-w-0 wrap-anywhere'>{message.user.name}</span>

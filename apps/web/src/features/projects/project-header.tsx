@@ -19,7 +19,7 @@ export function ProjectHeader(props: ProjectHeaderProps) {
     <div className='mb-9 flex flex-col items-start justify-between gap-7 md:mb-12 md:flex-row md:items-end md:gap-8'>
       <div className='min-w-0'>
         <h1 className='mb-4 text-7xl tracking-tight md:mb-5 lg:text-8xl'>{title}</h1>
-        <p className='text-base/relaxed text-muted-foreground md:text-xl'>{description}</p>
+        <p className='leading-relaxed text-muted-foreground md:text-xl'>{description}</p>
       </div>
       {(homepage ?? github) && (
         <div className='flex max-w-full flex-wrap items-center gap-2 pb-2 md:justify-end'>

@@ -90,7 +90,7 @@ function UsesSection(props: UsesSectionProps) {
               imageClassName='size-full object-contain'
             />
             <span className='min-w-0 flex-1'>
-              <span className='mb-1.5 block text-base/relaxed font-medium tracking-tight'>{item.name}</span>
+              <span className='mb-1.5 block font-medium tracking-tight'>{item.name}</span>
               <span className='block text-sm/relaxed text-muted-foreground'>{item.description}</span>
             </span>
             <ArrowRightIcon
@@ -129,9 +129,9 @@ function UsesLaptop(props: UsesLaptopProps) {
         <div className='flex items-center justify-between gap-5 border-t p-5 sm:px-8 sm:py-7'>
           <div>
             <h3 className='mb-2.5 text-xl font-medium tracking-tight sm:text-2xl lg:text-3xl'>{name}</h3>
-            <p className='text-base/relaxed text-muted-foreground'>{description}</p>
+            <p className='leading-relaxed text-muted-foreground'>{description}</p>
           </div>
-          <span aria-hidden='true' className='hidden text-5xl font-light tracking-tighter text-section-label sm:block'>
+          <span aria-hidden='true' className='hidden text-5xl font-light tracking-tight text-section-label sm:block'>
             16<span className='block text-right text-sm tracking-normal'>inch</span>
           </span>
         </div>

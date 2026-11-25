@@ -120,8 +120,8 @@ function ArticleDetail(props: ArticleDetailProps) {
           >
             <div className='min-w-0'>
               <span className='mb-6 block text-xs text-section-label'>{m.blog_next()}</span>
-              <h2 className='mb-5 text-4xl tracking-tighter md:text-5xl'>{next.title}</h2>
-              <p className='text-muted-foreground/80'>{next.description}</p>
+              <h2 className='mb-5 text-4xl tracking-tight md:text-5xl'>{next.title}</h2>
+              <p className='leading-relaxed text-muted-foreground/80'>{next.description}</p>
             </div>
             <ArrowRightIcon
               aria-hidden='true'

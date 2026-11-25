@@ -88,7 +88,7 @@ export function SignInDialog() {
             )
           })}
         </div>
-        <div className='text-center text-sm/relaxed text-muted-foreground'>
+        <div className='text-center text-sm text-muted-foreground'>
           <ParaglideMessage
             message={m.auth_sign_in_notice}
             markup={{

@@ -66,7 +66,7 @@ export function BlogHeader(props: BlogHeaderProps) {
   return (
     <header className='mb-10 sm:mb-12'>
       <h1 className='mb-3 text-3xl tracking-tight text-balance sm:text-4xl/tight lg:text-5xl/tight'>{post.title}</h1>
-      <p className='mb-6 text-muted-foreground sm:text-lg'>{post.description}</p>
+      <p className='mb-6 leading-relaxed text-muted-foreground sm:text-lg'>{post.description}</p>
       <div className='flex items-center gap-3 text-sm text-muted-foreground'>
         <img src='/images/avatar.png' alt='' width={36} height={36} className='size-9 shrink-0 rounded-full' />
         <div className='grid gap-1'>

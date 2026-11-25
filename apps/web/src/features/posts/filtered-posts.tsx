@@ -50,14 +50,14 @@ export function FilteredPosts(props: FilteredPostsProps) {
             className='group/row grid grid-cols-[1fr_--spacing(5)] items-center gap-3.5 py-7 sm:grid-cols-[--spacing(24)_1fr_--spacing(9)] sm:gap-9 sm:py-11'
           >
             <div className='col-span-full flex items-center gap-2.5 self-start text-muted-foreground sm:col-span-1 sm:flex-col sm:items-start sm:pt-1'>
-              <span className='text-sm font-light tracking-tighter sm:text-3xl'>{post.publishedAt.slice(0, 4)}</span>
-              <time dateTime={post.publishedAt} className='text-sm/normal text-muted-foreground/80'>
+              <span className='text-sm font-light tracking-tight sm:text-3xl'>{post.publishedAt.slice(0, 4)}</span>
+              <time dateTime={post.publishedAt} className='text-sm text-muted-foreground/80'>
                 {date.format(new Date(post.publishedAt))}
               </time>
             </div>
             <div>
               <h2 className='mb-4 text-2xl tracking-tight sm:text-3xl xl:text-4xl'>{post.title}</h2>
-              <p className='text-muted-foreground'>{post.description}</p>
+              <p className='leading-relaxed text-muted-foreground'>{post.description}</p>
             </div>
             <ArrowRightIcon
               aria-hidden='true'
@@ -68,7 +68,7 @@ export function FilteredPosts(props: FilteredPostsProps) {
       ))}
       {filteredPosts.length === 0 && (
         <div className='space-y-4 py-10 text-center sm:py-16'>
-          <h2 className='text-2xl tracking-tighter sm:text-3xl'>{m.blog_search_no_posts_found()}</h2>
+          <h2 className='text-2xl tracking-tight sm:text-3xl'>{m.blog_search_no_posts_found()}</h2>
           <Button
             variant='ghost'
             size='lg'

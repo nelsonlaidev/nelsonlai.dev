@@ -63,7 +63,7 @@ export function Footer() {
             <Link to='/' aria-label={`Seafold ${m.nav_home()}`} className='inline-flex items-center text-foreground'>
               <SiteLogo large />
             </Link>
-            <a href={`mailto:${SITE.email}`} className='text-base hover:text-foreground'>
+            <a href={`mailto:${SITE.email}`} className='hover:text-foreground'>
               {SITE.email}
             </a>
             <LocaleSwitcher />
@@ -71,19 +71,16 @@ export function Footer() {
           <nav aria-label={m.nav_footer()} className='grid grid-cols-2 gap-x-5 gap-y-7 sm:grid-cols-4 xl:gap-9'>
             {groups.map((group) => (
               <div key={group.id} className='min-w-0'>
-                <h2 className='mb-4 text-base font-medium text-foreground sm:mt-2'>{group.title}</h2>
+                <h2 className='mb-4 font-medium text-foreground sm:mt-2'>{group.title}</h2>
                 <ul className='grid gap-y-2'>
                   {group.links.map((link) => (
                     <li key={'to' in link ? link.to : link.href}>
                       {'to' in link ? (
-                        <Link to={link.to} className='inline-flex items-center text-base hover:text-foreground'>
+                        <Link to={link.to} className='inline-flex items-center hover:text-foreground'>
                           {typeof link.label === 'string' ? link.label : link.label()}
                         </Link>
                       ) : (
-                        <ExternalLink
-                          href={link.href}
-                          className='inline-flex items-center gap-2 text-base hover:text-foreground'
-                        >
+                        <ExternalLink href={link.href} className='inline-flex items-center gap-2 hover:text-foreground'>
                           {typeof link.label === 'string' ? link.label : link.label()}
                           <ArrowUpRightIcon className='size-3.5 opacity-80' aria-hidden='true' />
                         </ExternalLink>
@@ -96,7 +93,7 @@ export function Footer() {
           </nav>
         </div>
         <NowPlaying className='min-w-0' />
-        <div className='flex items-center justify-between gap-4 text-sm/relaxed'>
+        <div className='flex items-center justify-between gap-4 text-sm'>
           <p>&copy; {year} Nelson Lai</p>
           {commitSha && (
             <ExternalLink href={`${SITE.repository}/commit/${commitSha}`} className='font-mono hover:text-foreground'>

@@ -92,7 +92,7 @@ function RouteComponent() {
                 </span>
                 <div className='min-w-0 space-y-3'>
                   <h3 className='text-lg font-medium tracking-tight'>{feature.title}</h3>
-                  <p className='text-base/relaxed text-muted-foreground'>{feature.text}</p>
+                  <p className='leading-relaxed text-muted-foreground'>{feature.text}</p>
                 </div>
               </section>
             ))}
@@ -108,8 +108,8 @@ function RouteComponent() {
           >
             <div className='min-w-0'>
               <span className='mb-6 block text-xs text-section-label'>{m.projects_next()}</span>
-              <h2 className='mb-5 text-4xl tracking-tighter md:text-5xl'>{next.title}</h2>
-              <p className='text-muted-foreground/80'>{next.description}</p>
+              <h2 className='mb-5 text-4xl tracking-tight md:text-5xl'>{next.title}</h2>
+              <p className='leading-relaxed text-muted-foreground/80'>{next.description}</p>
             </div>
             <ArrowRightIcon
               aria-hidden='true'

@@ -11,7 +11,7 @@ export function SignIn() {
   const fieldId = useId()
 
   return (
-    <div className='flex flex-col items-stretch gap-6 rounded-xl border bg-card/10 px-5 py-6 text-base text-muted-foreground sm:p-8'>
+    <div className='flex flex-col items-stretch gap-6 rounded-xl border bg-card/10 px-5 py-6 text-muted-foreground sm:p-8'>
       <label htmlFor={fieldId} className='sr-only'>
         {m.guestbook_placeholder()}
       </label>

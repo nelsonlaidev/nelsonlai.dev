@@ -86,12 +86,10 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
             </div>
             <div className='space-y-2' aria-live='polite'>
               <CardTitle className='text-2xl text-balance'>
-                <h1 className='text-3xl font-normal tracking-tighter text-foreground sm:text-4xl'>{title}</h1>
+                <h1 className='text-3xl font-normal tracking-tight text-foreground sm:text-4xl'>{title}</h1>
               </CardTitle>
               {description && (
-                <CardDescription className='text-base/relaxed text-pretty text-muted-foreground'>
-                  {description}
-                </CardDescription>
+                <CardDescription className='text-base text-pretty text-muted-foreground'>{description}</CardDescription>
               )}
             </div>
           </CardHeader>

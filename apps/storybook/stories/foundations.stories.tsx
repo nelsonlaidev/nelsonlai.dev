@@ -78,9 +78,7 @@ export const Typography = meta.story({
     <div className='max-w-2xl space-y-6'>
       <h1 className='text-4xl font-medium tracking-tight'>Geist · Seafold UI</h1>
       <h2 className='text-2xl font-medium'>A clear hierarchy for shared components</h2>
-      <p className='text-base/relaxed'>
-        Body text uses the actual font-sans token. Muted text remains legible against the dark ocean background.
-      </p>
+      <p>Body text uses the actual font-sans token. Muted text remains legible against the dark ocean background.</p>
       <p className='text-sm text-muted-foreground'>Small labels and supporting descriptions.</p>
       <p className='font-mono'>Geist Mono: const count = 123_456</p>
       <p lang='zh-TW'>繁體中文：清楚呈現元件、狀態與互動。</p>

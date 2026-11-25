@@ -11,12 +11,12 @@ export function SectionHeading(props: SectionHeadingProps) {
 
   return (
     <div className={className}>
-      <h2 id={id} className='mb-6 text-4xl tracking-tighter lg:text-5xl 2xl:text-6xl'>
+      <h2 id={id} className='mb-6 text-4xl tracking-tight lg:text-5xl 2xl:text-6xl'>
         {title}
         <br />
         <em className='font-serif text-primary'>{emphasis}</em>
       </h2>
-      <p className='max-w-lg text-base/relaxed text-muted-foreground md:whitespace-pre-line'>{description}</p>
+      <p className='max-w-lg leading-relaxed text-muted-foreground md:whitespace-pre-line'>{description}</p>
     </div>
   )
 }
