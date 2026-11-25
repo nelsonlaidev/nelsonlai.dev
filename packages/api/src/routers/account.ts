@@ -4,6 +4,7 @@ import { isIP } from 'node:net'
 import { PutObjectCommand } from '@aws-sdk/client-s3'
 import { ORPCError } from '@orpc/server'
 import { isAPIError } from '@repo/auth'
+import { UpdateNameInputSchema } from '@repo/auth/schema'
 import sharp from 'sharp'
 import * as z from 'zod'
 
@@ -11,12 +12,7 @@ import { cache } from '../cache'
 import { ENV } from '../env'
 import { getCloudflareR2 } from '../lib/cloudflare-r2'
 import { protectedProcedure } from '../procedures'
-import {
-  AccountSessionsSchema,
-  RevokeSessionInputSchema,
-  UpdateAvatarInputSchema,
-  UpdateNameInputSchema,
-} from '../schema/account'
+import { AccountSessionsSchema, RevokeSessionInputSchema, UpdateAvatarInputSchema } from '../schema/account'
 
 async function resolveSessionLocation(ip: string | null) {
   if (!ip || !isIP(ip)) return null

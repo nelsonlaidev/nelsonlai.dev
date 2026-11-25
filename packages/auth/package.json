@@ -15,7 +15,8 @@
     "@better-auth/drizzle-adapter": "1.7.28",
     "@repo/db": "workspace:*",
     "better-auth": "1.7.28",
-    "react": "catalog:"
+    "react": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@nelsonlaidev/typescript-config": "catalog:",

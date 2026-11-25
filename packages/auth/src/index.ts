@@ -4,10 +4,12 @@ import type { SocialProviders } from 'better-auth'
 import { drizzleAdapter } from '@better-auth/drizzle-adapter/relations-v2'
 import * as schema from '@repo/db/schema/auth'
 import { betterAuth } from 'better-auth'
+import { APIError } from 'better-auth/api'
 import { admin, lastLoginMethod } from 'better-auth/plugins'
 import { tanstackStartCookies } from 'better-auth/tanstack-start'
 
 import { ENV } from './env'
+import { UpdateNameInputSchema } from './schema'
 
 export { isAPIError } from 'better-auth/api'
 
@@ -40,6 +42,24 @@ export function createAuth(database: Database) {
       schema,
       usePlural: true,
     }),
+    databaseHooks: {
+      user: {
+        update: {
+          before: async (user) => {
+            if (user.name === undefined) return
+
+            const result = await UpdateNameInputSchema.safeParseAsync(user)
+            if (!result.success) {
+              throw new APIError('BAD_REQUEST', { code: 'INVALID_DISPLAY_NAME', message: 'Invalid display name.' })
+            }
+
+            return {
+              data: { ...user, ...result.data },
+            }
+          },
+        },
+      },
+    },
     trustedOrigins: [ENV.BETTER_AUTH_URL],
     socialProviders: getSocialProviders(),
     plugins: [admin(), lastLoginMethod({ storeInDatabase: true }), tanstackStartCookies()],

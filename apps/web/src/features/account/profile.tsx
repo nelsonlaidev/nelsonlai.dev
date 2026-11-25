@@ -1,12 +1,8 @@
 import type { Session } from '@repo/auth'
 
-import {
-  AVATAR_MAX_FILE_SIZE,
-  AVATAR_MIME_TYPES,
-  DISPLAY_NAME_MAX_LENGTH,
-  UpdateNameInputSchema,
-} from '@repo/api/schema/account'
+import { AVATAR_MAX_FILE_SIZE, AVATAR_MIME_TYPES } from '@repo/api/schema/account'
 import { authClient } from '@repo/auth/client'
+import { DISPLAY_NAME_MAX_LENGTH, UpdateNameInputSchema } from '@repo/auth/schema'
 import {
   AlertDialog,
   AlertDialogCancel,

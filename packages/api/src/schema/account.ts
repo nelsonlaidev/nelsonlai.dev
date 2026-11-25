@@ -3,12 +3,6 @@ import * as z from 'zod'
 export const AVATAR_MAX_FILE_SIZE = 2 * 1024 * 1024
 export const AVATAR_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const
 
-export const DISPLAY_NAME_MAX_LENGTH = 50
-
-export const UpdateNameInputSchema = z.object({
-  name: z.string().trim().min(1).max(DISPLAY_NAME_MAX_LENGTH),
-})
-
 export const AccountSessionsSchema = z.array(
   z.object({
     id: z.string(),
