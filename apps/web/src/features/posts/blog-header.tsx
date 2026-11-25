@@ -26,7 +26,7 @@ export function BlogHeader(props: BlogHeaderProps) {
   const postStats = statsQuery.data?.get(post.slug)
   const countsQuery = useQuery(orpc.comments.counts.queryOptions({ input: { slug: post.slug } }))
   const hasIncrementedRef = useRef(false)
-  const increment = useMutation(
+  const mutation = useMutation(
     orpc.posts.incrementView.mutationOptions({
       onSuccess: async (data) => {
         const queryKey = orpc.posts.stats.queryKey({ input: { slugs: [post.slug] } })
@@ -37,12 +37,13 @@ export function BlogHeader(props: BlogHeaderProps) {
     }),
   )
 
+  const { mutate } = mutation
   useEffect(() => {
     if (!hasIncrementedRef.current) {
       hasIncrementedRef.current = true
-      increment.mutate({ slug: post.slug })
+      mutate({ slug: post.slug })
     }
-  }, [increment, post.slug])
+  }, [mutate, post.slug])
 
   const pendingCount = (
     <PendingCount>

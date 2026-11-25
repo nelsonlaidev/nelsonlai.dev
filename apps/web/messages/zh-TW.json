@@ -192,6 +192,7 @@
   "error_create_comment_failed": "留言送出失敗，請再試一次。",
   "error_create_message_failed": "留言送出失敗，請再試一次。",
   "error_create_reply_failed": "回覆送出失敗，請再試一次。",
+  "error_delete_comment_failed": "刪除評論失敗，請再試一次。",
   "error_delete_message_failed": "刪除留言失敗，請再試一次。",
   "error_failed_to_fetch_comments_data": "無法取得評論資料。",
   "error_failed_to_fetch_dashboard_data": "無法取得儀表板資料。",

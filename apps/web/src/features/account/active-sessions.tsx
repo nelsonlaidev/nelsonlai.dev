@@ -18,6 +18,7 @@ import { useFormatter } from 'use-intl'
 import { signInDialogHandle } from '@/features/auth/sign-in-dialog'
 import { useSignOut } from '@/features/auth/use-sign-out'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
+import { getMutationErrorMessage } from '@/lib/get-mutation-error-message'
 import { client } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -42,19 +43,20 @@ export function ActiveSessions(props: ActiveSessionsProps) {
   const { isSigningOut, signOut } = useSignOut({ reason: 'session-revoked' })
   const options = accountSessionsQueryOptions(userId)
   const query = useQuery(options)
-  const revoke = useMutation({
+  const mutation = useMutation({
     mutationFn: async (session: AccountSession) => client.account.revokeSession({ id: session.id }),
     onSuccess: async () => {
       toast.add({ type: 'success', title: m.success_session_revoked() })
       await queryClient.invalidateQueries({ queryKey: options.queryKey })
     },
   })
-  const requiresSignIn = [query.error, revoke.error].some(
+  const isBusy = query.isPending || mutation.isPending || isSigningOut
+  const requiresSignIn = [query.error, mutation.error].some(
     (error) => error instanceof ORPCError && error.code === 'SESSION_NOT_FRESH',
   )
 
   return (
-    <section className='space-y-6' aria-labelledby='sessions-heading' aria-busy={query.isPending}>
+    <section className='space-y-6' aria-labelledby='sessions-heading' aria-busy={isBusy}>
       <h2 id='sessions-heading' className='text-xl font-medium tracking-tight'>
         {m.account_active_sessions()}
       </h2>
@@ -68,9 +70,9 @@ export function ActiveSessions(props: ActiveSessionsProps) {
           </CardContent>
         </Card>
       ) : (
-        (query.isError || revoke.isError) && (
+        (query.isError || mutation.isError) && (
           <div className='space-y-4'>
-            <p role='alert'>{m.error_something_went_wrong()}</p>
+            <p role='alert'>{getMutationErrorMessage(mutation.error, m.error_something_went_wrong())}</p>
             {query.isError && (
               <Button
                 variant='outline'
@@ -102,15 +104,15 @@ export function ActiveSessions(props: ActiveSessionsProps) {
                   session={session}
                   isRevoking={
                     (isSigningOut && session.isCurrentSession) ||
-                    (revoke.isPending && revoke.variables.id === session.id)
+                    (mutation.isPending && mutation.variables.id === session.id)
                   }
-                  disabled={query.isPending || revoke.isPending || isSigningOut}
+                  disabled={isBusy}
                   onRevoke={() => {
-                    if (query.isPending || revoke.isPending || isSigningOut) return
+                    if (isBusy) return
                     if (session.isCurrentSession) {
                       void signOut()
                     } else {
-                      revoke.mutate(session)
+                      mutation.mutate(session)
                     }
                   }}
                 />

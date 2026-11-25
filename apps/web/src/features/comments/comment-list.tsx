@@ -32,6 +32,7 @@ import { InfiniteQueryPagination } from '@/components/infinite-query-pagination'
 import { LoadingStatus } from '@/components/loading-status'
 import { UserAvatar } from '@/components/user-avatar'
 import { useFormattedDate } from '@/hooks/use-formatted-date'
+import { getMutationErrorMessage } from '@/lib/get-mutation-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -137,14 +138,14 @@ function CommentItem(props: CommentItemProps) {
   const liked = optimisticVote === undefined ? comment.liked : optimisticVote
   const likeCount = comment.likeCount + Number(liked === true) - Number(comment.liked === true)
   const dislikeCount = comment.dislikeCount + Number(liked === false) - Number(comment.liked === false)
-  const vote = useMutation(
+  const mutation = useMutation(
     orpc.comments.vote.mutationOptions({
       onMutate: (input) => {
         setOptimisticVote(input.isLike)
       },
-      onError: () => {
+      onError: (error) => {
         setOptimisticVote(undefined)
-        toast.add({ type: 'error', title: m.error_something_went_wrong() })
+        toast.add({ type: 'error', title: getMutationErrorMessage(error, m.error_something_went_wrong()) })
       },
       onSettled: async () => {
         await queryClient.invalidateQueries({ queryKey: orpc.comments.list.key() })
@@ -163,7 +164,9 @@ function CommentItem(props: CommentItemProps) {
       toast.add({ type: 'error', title: m.error_need_logged_in_to_vote() })
       return
     }
-    if (!vote.isPending) vote.mutate({ id: comment.id, isLike: comment.liked === isLike ? null : isLike })
+    if (!mutation.isPending) {
+      mutation.mutate({ id: comment.id, isLike: comment.liked === isLike ? null : isLike })
+    }
   }
 
   async function copyLink() {
@@ -250,7 +253,8 @@ function CommentItem(props: CommentItemProps) {
                 aria-label={m.common_like()}
                 aria-pressed={liked === true}
                 skullet-block=''
-                disabled={vote.isPending}
+                aria-busy={mutation.isPending}
+                disabled={mutation.isPending}
                 onClick={() => {
                   castVote(true)
                 }}
@@ -266,7 +270,8 @@ function CommentItem(props: CommentItemProps) {
                 aria-label={m.blog_comments_dislike()}
                 aria-pressed={liked === false}
                 skullet-block=''
-                disabled={vote.isPending}
+                aria-busy={mutation.isPending}
+                disabled={mutation.isPending}
                 onClick={() => {
                   castVote(false)
                 }}

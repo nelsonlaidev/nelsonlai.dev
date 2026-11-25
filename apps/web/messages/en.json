@@ -201,6 +201,7 @@
   "error_create_comment_failed": "Failed to post your comment. Please try again.",
   "error_create_message_failed": "Failed to create your message. Please try again.",
   "error_create_reply_failed": "Failed to post your reply. Please try again.",
+  "error_delete_comment_failed": "Failed to delete the comment. Please try again.",
   "error_delete_message_failed": "Failed to delete your message. Please try again.",
   "error_failed_to_fetch_comments_data": "Failed to fetch comments data.",
   "error_failed_to_fetch_dashboard_data": "Failed to fetch dashboard data.",

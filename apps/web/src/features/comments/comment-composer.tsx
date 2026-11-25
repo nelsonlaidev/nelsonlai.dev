@@ -37,12 +37,12 @@ export function CommentComposer(props: CommentComposerProps) {
       onSubmit: CreateCommentInputSchema.pick({ body: true }),
     },
     onSubmit: ({ value }) => {
-      if (!session.data || creation.isPending) return
-      creation.mutate({ slug, parentId, body: value.body.trim(), locale: getLocale() })
+      if (!session.data || mutation.isPending) return
+      mutation.mutate({ slug, parentId, body: value.body.trim(), locale: getLocale() })
     },
   })
 
-  const creation = useMutation(
+  const mutation = useMutation(
     orpc.comments.create.mutationOptions({
       onSuccess: () => {
         form.reset()
@@ -74,7 +74,7 @@ export function CommentComposer(props: CommentComposerProps) {
           await form.handleSubmit()
         }}
         className='space-y-3'
-        aria-busy={creation.isPending}
+        aria-busy={mutation.isPending}
       >
         <FieldGroup>
           <form.Field name='body'>
@@ -98,7 +98,7 @@ export function CommentComposer(props: CommentComposerProps) {
                         event.currentTarget.form?.requestSubmit()
                       }}
                       onCancel={onCancel}
-                      disabled={!session.data || creation.isPending}
+                      disabled={!session.data || mutation.isPending}
                       isReply={Boolean(parentId)}
                       tabsValue={tabsValue}
                       onTabsValueChange={setTabsValue}
@@ -109,7 +109,7 @@ export function CommentComposer(props: CommentComposerProps) {
                         variant='ghost'
                         size='icon-xs'
                         className='absolute right-2.5 bottom-2'
-                        disabled={!session.data || creation.isPending || !field.state.value.trim()}
+                        disabled={!session.data || mutation.isPending || !field.state.value.trim()}
                         aria-label={m.blog_comments_send_comment()}
                         skullet-ignore=''
                       >
@@ -151,7 +151,7 @@ export function CommentComposer(props: CommentComposerProps) {
                         type='submit'
                         variant='secondary'
                         size='sm'
-                        disabled={!session.data || creation.isPending || !field.state.value.trim()}
+                        disabled={!session.data || mutation.isPending || !field.state.value.trim()}
                       >
                         {m.blog_comments_reply()}
                       </Button>
@@ -161,7 +161,7 @@ export function CommentComposer(props: CommentComposerProps) {
                           variant='secondary'
                           size='sm'
                           onClick={onCancel}
-                          disabled={creation.isPending}
+                          disabled={mutation.isPending}
                         >
                           {m.common_cancel()}
                         </Button>

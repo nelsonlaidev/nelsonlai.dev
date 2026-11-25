@@ -201,6 +201,7 @@
   "error_create_comment_failed": "No se pudo publicar tu comentario. Inténtalo de nuevo.",
   "error_create_message_failed": "No se pudo enviar el mensaje. Inténtalo de nuevo.",
   "error_create_reply_failed": "No se pudo publicar tu respuesta. Inténtalo de nuevo.",
+  "error_delete_comment_failed": "No se pudo eliminar el comentario. Inténtalo de nuevo.",
   "error_delete_message_failed": "No se pudo eliminar el mensaje. Inténtalo de nuevo.",
   "error_failed_to_fetch_comments_data": "Error al obtener datos de comentarios.",
   "error_failed_to_fetch_dashboard_data": "Error al obtener datos del panel.",

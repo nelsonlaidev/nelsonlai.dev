@@ -9,6 +9,7 @@ import { useDebouncedCallback } from 'use-debounce'
 
 import { PendingCount } from '@/components/pending-count'
 import { QueryErrorMessage } from '@/components/query-error-message'
+import { getMutationErrorMessage } from '@/lib/get-mutation-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -24,7 +25,7 @@ export function usePostLike(slug: string) {
 
   const reducedMotion = useReducedMotion()
 
-  const save = useMutation(
+  const mutation = useMutation(
     orpc.posts.like.mutationOptions({
       onMutate: async ({ value }) => {
         await queryClient.cancelQueries({ queryKey: likesOptions.queryKey })
@@ -51,7 +52,7 @@ export function usePostLike(slug: string) {
           title:
             error instanceof ORPCError && error.code === 'BAD_REQUEST'
               ? m.error_like_limit_reached()
-              : m.error_something_went_wrong(),
+              : getMutationErrorMessage(error, m.error_something_went_wrong()),
         })
       },
       onSettled: () => {
@@ -61,7 +62,7 @@ export function usePostLike(slug: string) {
   )
 
   const scheduleSave = useDebouncedCallback((value: number) => {
-    save.mutate({ slug, value })
+    mutation.mutate({ slug, value })
     draftRef.current = 0
     setDraft(0)
   }, 1000)
@@ -74,7 +75,7 @@ export function usePostLike(slug: string) {
   )
 
   function like() {
-    if (!query.data || save.isPending) return
+    if (!query.data || mutation.isPending) return
 
     if (query.data.currentUserLikes + draftRef.current >= 3) {
       toast.add({ type: 'error', title: m.error_like_limit_reached() })
@@ -88,7 +89,7 @@ export function usePostLike(slug: string) {
     if (!reducedMotion) setPulse((value) => value + 1)
   }
 
-  return { query, save, draft, pulse, like }
+  return { query, mutation, draft, pulse, like }
 }
 
 type LikeButtonProps = {
@@ -98,7 +99,7 @@ type LikeButtonProps = {
 
 export function LikeButton(props: LikeButtonProps) {
   const { state, placement } = props
-  const { query, save, draft, pulse, like } = state
+  const { query, mutation, draft, pulse, like } = state
   const clipId = useId()
   const count = Math.min(3, (query.data?.currentUserLikes ?? 0) + draft)
   const heart = 'M12 21S2 15.2 2 8.5C2 3.5 8 1.5 12 6c4-4.5 10-2.5 10 2.5C22 15.2 12 21 12 21Z'
@@ -134,7 +135,8 @@ export function LikeButton(props: LikeButtonProps) {
         onClick={() => {
           like()
         }}
-        disabled={!query.data || save.isPending}
+        disabled={!query.data || mutation.isPending}
+        aria-busy={mutation.isPending}
         aria-disabled={count === 3 || undefined}
         aria-label={m.blog_like_this_post()}
         aria-describedby={`${clipId}-status`}

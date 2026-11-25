@@ -70,7 +70,7 @@ test.describe('comment page', () => {
       .click()
     await page.getByRole('menuitem', { name: en.common_delete }).click()
     await page.getByRole('alertdialog').getByRole('button', { name: en.common_delete }).click()
-    await expect(toastTitle(page, 'error', en.error_something_went_wrong)).toBeVisible()
+    await expect(toastTitle(page, 'error', en.error_delete_comment_failed)).toBeVisible()
   })
 
   test('submits a comment', async ({ page }) => {

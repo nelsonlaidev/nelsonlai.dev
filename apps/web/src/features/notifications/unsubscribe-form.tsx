@@ -8,6 +8,7 @@ import { Skeleton } from 'skullet/react'
 
 import { OceanPage } from '@/components/ocean-page'
 import { QueryErrorMessage } from '@/components/query-error-message'
+import { getMutationErrorMessage } from '@/lib/get-mutation-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -24,7 +25,7 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
     retry: false,
   })
   const query = useQuery(options)
-  const unsubscribe = useMutation(
+  const mutation = useMutation(
     orpc.notifications.unsubscribeFromCommentReplies.mutationOptions({
       onSuccess: (_data, input) => {
         const queryKey = orpc.notifications.inspectUnsubscribe.queryKey({ input })
@@ -38,7 +39,6 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
     !token ||
     (query.error instanceof ORPCError && (query.error.code === 'BAD_REQUEST' || query.error.code === 'NOT_FOUND'))
   const isLoading = Boolean(token) && query.isPending
-  const isSubmitting = unsubscribe.isPending
 
   let title = m.unsubscribe_unsubscribe_from_this_comment()
   let description = m.unsubscribe_stop_receiving_email_notifications()
@@ -74,13 +74,13 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
         </div>
         <div className='space-y-3'>
           <Button
-            disabled={!data || isSubmitting}
+            disabled={!data || mutation.isPending}
             className='w-full'
             onClick={() => {
-              if (token && data && !isSubmitting) unsubscribe.mutate({ token })
+              if (token && data && !mutation.isPending) mutation.mutate({ token })
             }}
           >
-            {isSubmitting && <Spinner data-icon='inline-start' />}
+            {mutation.isPending && <Spinner data-icon='inline-start' />}
             {m.common_labels_unsubscribe()}
           </Button>
           <p className='text-center text-xs text-balance text-muted-foreground'>
@@ -94,7 +94,7 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
   return (
     <OceanPage className='grid content-center pt-28 wrap-anywhere sm:pt-32 lg:pt-36'>
       <Skeleton loading={isLoading} label={m.common_aria_labels_loading()}>
-        <Card className='mx-auto w-full max-w-160 rounded-xl bg-surface p-6 sm:p-8' aria-busy={isSubmitting}>
+        <Card className='mx-auto w-full max-w-160 rounded-xl bg-surface p-6 sm:p-8' aria-busy={mutation.isPending}>
           <CardHeader className='gap-4 px-0 text-center'>
             <div className='mx-auto flex size-16 items-center justify-center rounded-full bg-accent'>
               <BellOffIcon className='size-8' aria-hidden='true' />
@@ -109,9 +109,9 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
             </div>
           </CardHeader>
           {content}
-          {unsubscribe.isError && (
+          {mutation.isError && (
             <CardContent className='px-0'>
-              <p role='alert'>{m.error_something_went_wrong()}</p>
+              <p role='alert'>{getMutationErrorMessage(mutation.error, m.error_something_went_wrong())}</p>
             </CardContent>
           )}
         </Card>

@@ -27,7 +27,7 @@ export function DeleteButton(props: DeleteButtonProps) {
   const [open, setOpen] = useState(false)
   const queryClient = useQueryClient()
 
-  const deletion = useMutation(
+  const mutation = useMutation(
     orpc.guestbook.delete.mutationOptions({
       onSuccess: () => {
         setOpen(false)
@@ -45,30 +45,29 @@ export function DeleteButton(props: DeleteButtonProps) {
       <AlertDialog
         open={open}
         onOpenChange={(nextOpen, details) => {
-          if (deletion.isPending) {
+          if (mutation.isPending) {
             details.cancel()
             return
           }
-
           setOpen(nextOpen)
         }}
       >
-        <AlertDialogTrigger render={<Button variant='destructive' />} disabled={deletion.isPending}>
+        <AlertDialogTrigger render={<Button variant='destructive' />} disabled={mutation.isPending}>
           {m.common_delete()}
         </AlertDialogTrigger>
-        <AlertDialogContent aria-busy={deletion.isPending}>
+        <AlertDialogContent aria-busy={mutation.isPending}>
           <AlertDialogHeader>
             <AlertDialogTitle>{m.common_dialogs_delete_message_title()}</AlertDialogTitle>
             <AlertDialogDescription>{m.common_dialogs_delete_message_description()}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={deletion.isPending}>{m.common_cancel()}</AlertDialogCancel>
+            <AlertDialogCancel disabled={mutation.isPending}>{m.common_cancel()}</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => {
-                if (!deletion.isPending) deletion.mutate({ id })
+                if (!mutation.isPending) mutation.mutate({ id })
               }}
               variant='destructive'
-              disabled={deletion.isPending}
+              disabled={mutation.isPending}
             >
               {m.common_delete()}
             </AlertDialogAction>

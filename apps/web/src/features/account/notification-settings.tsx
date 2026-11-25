@@ -46,7 +46,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
   const descriptionId = `${inputId}-description`
   const formId = `${inputId}-form`
   const queryClient = useQueryClient()
-  const update = useMutation(
+  const mutation = useMutation(
     orpc.notifications.setEmailPreferences.mutationOptions({
       onSuccess: (_data, input) => {
         queryClient.setQueryData(emailPreferencesQueryOptions(userId).queryKey, input)
@@ -64,9 +64,8 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
   const form = useForm({
     defaultValues: { commentRepliesEnabled },
     onSubmit: ({ value }) => {
-      if (update.isPending) return
-
-      update.mutate(value)
+      if (mutation.isPending) return
+      mutation.mutate(value)
     },
   })
 
@@ -76,7 +75,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
         <form
           id={formId}
           className='space-y-6'
-          aria-busy={update.isPending}
+          aria-busy={mutation.isPending}
           onSubmit={async (event) => {
             event.preventDefault()
             await form.handleSubmit()
@@ -97,7 +96,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
                   onBlur={field.handleBlur}
                   onCheckedChange={field.handleChange}
                   aria-describedby={descriptionId}
-                  disabled={update.isPending}
+                  disabled={mutation.isPending}
                 />
               </Field>
             )}
@@ -111,7 +110,7 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
               <Button
                 type='button'
                 variant='outline'
-                disabled={update.isPending}
+                disabled={mutation.isPending}
                 onClick={() => {
                   form.reset()
                 }}
@@ -119,8 +118,8 @@ function NotificationSettingsForm(props: NotificationSettingsFormProps) {
                 {m.common_reset()}
               </Button>
             )}
-            <Button type='submit' form={formId} disabled={!isChanged || update.isPending}>
-              {update.isPending && <Spinner data-icon='inline-start' />}
+            <Button type='submit' form={formId} disabled={!isChanged || mutation.isPending}>
+              {mutation.isPending && <Spinner data-icon='inline-start' />}
               {m.common_save()}
             </Button>
           </CardFooter>

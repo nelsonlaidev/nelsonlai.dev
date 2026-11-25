@@ -11,6 +11,7 @@ import {
 import { toast } from '@repo/ui/components/toast'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { getMutationErrorMessage } from '@/lib/get-mutation-error-message'
 import { orpc } from '@/lib/orpc-client'
 import { m } from '@/paraglide/messages'
 
@@ -23,15 +24,15 @@ type DeleteCommentProps = {
 export function DeleteComment(props: DeleteCommentProps) {
   const { id, open, onOpenChange } = props
   const queryClient = useQueryClient()
-  const deletion = useMutation(
+  const mutation = useMutation(
     orpc.comments.delete.mutationOptions({
       onSuccess: () => {
         onOpenChange(false)
         void queryClient.invalidateQueries({ queryKey: orpc.comments.key() })
         toast.add({ type: 'success', title: m.success_comment_deleted() })
       },
-      onError: () => {
-        toast.add({ type: 'error', title: m.error_something_went_wrong() })
+      onError: (error) => {
+        toast.add({ type: 'error', title: getMutationErrorMessage(error, m.error_delete_comment_failed()) })
       },
     }),
   )
@@ -40,26 +41,25 @@ export function DeleteComment(props: DeleteCommentProps) {
     <AlertDialog
       open={open}
       onOpenChange={(value, details) => {
-        if (deletion.isPending) {
+        if (mutation.isPending) {
           details.cancel()
           return
         }
-
         onOpenChange(value)
       }}
     >
-      <AlertDialogContent aria-busy={deletion.isPending}>
+      <AlertDialogContent aria-busy={mutation.isPending}>
         <AlertDialogHeader>
           <AlertDialogTitle>{m.common_dialogs_delete_comment_title()}</AlertDialogTitle>
           <AlertDialogDescription>{m.common_dialogs_delete_comment_description()}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={deletion.isPending}>{m.common_cancel()}</AlertDialogCancel>
+          <AlertDialogCancel disabled={mutation.isPending}>{m.common_cancel()}</AlertDialogCancel>
           <AlertDialogAction
             variant='destructive'
-            disabled={deletion.isPending}
+            disabled={mutation.isPending}
             onClick={() => {
-              if (!deletion.isPending) deletion.mutate({ id })
+              if (!mutation.isPending) mutation.mutate({ id })
             }}
           >
             {m.common_delete()}

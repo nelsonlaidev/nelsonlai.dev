@@ -201,6 +201,7 @@
   "error_create_comment_failed": "Não foi possível publicar seu comentário. Tente novamente.",
   "error_create_message_failed": "Não foi possível enviar a mensagem. Tente novamente.",
   "error_create_reply_failed": "Não foi possível publicar sua resposta. Tente novamente.",
+  "error_delete_comment_failed": "Não foi possível excluir o comentário. Tente novamente.",
   "error_delete_message_failed": "Não foi possível excluir a mensagem. Tente novamente.",
   "error_failed_to_fetch_comments_data": "Falha ao buscar dados de comentários.",
   "error_failed_to_fetch_dashboard_data": "Falha ao buscar dados do painel.",

@@ -35,11 +35,11 @@ export function MessageBox(props: MessageBoxProps) {
     },
     onSubmit: ({ value }) => {
       if (isBusy) return
-      creation.mutate(value)
+      mutation.mutate(value)
     },
   })
 
-  const creation = useMutation(
+  const mutation = useMutation(
     orpc.guestbook.create.mutationOptions({
       onSuccess: () => {
         form.reset()
@@ -52,7 +52,7 @@ export function MessageBox(props: MessageBoxProps) {
     }),
   )
 
-  const isBusy = creation.isPending || isSigningOut
+  const isBusy = mutation.isPending || isSigningOut
 
   return (
     <div className='rounded-xl border bg-card/10 px-5 py-6 sm:p-8'>
@@ -125,7 +125,7 @@ export function MessageBox(props: MessageBoxProps) {
             {m.common_sign_out()}
           </Button>
           <Button type='submit' disabled={isBusy}>
-            {creation.isPending ? m.common_loading() : m.guestbook_message_submit()}
+            {mutation.isPending ? m.common_loading() : m.guestbook_message_submit()}
           </Button>
         </div>
       </form>

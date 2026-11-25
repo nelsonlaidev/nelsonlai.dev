@@ -87,7 +87,7 @@ function EditName(props: EditNameProps) {
   const [open, setOpen] = useState(false)
   const { refetch } = authClient.useSession()
   const queryClient = useQueryClient()
-  const update = useMutation(
+  const mutation = useMutation(
     orpc.account.updateName.mutationOptions({
       onSuccess: async () => {
         await refetch()
@@ -111,9 +111,8 @@ function EditName(props: EditNameProps) {
       onSubmit: UpdateNameInputSchema,
     },
     onSubmit: ({ value }) => {
-      if (update.isPending) return
-
-      update.mutate(value)
+      if (mutation.isPending) return
+      mutation.mutate(value)
     },
   })
 
@@ -121,7 +120,7 @@ function EditName(props: EditNameProps) {
     <AlertDialog
       open={open}
       onOpenChange={(value, details) => {
-        if (update.isPending) {
+        if (mutation.isPending) {
           details.cancel()
           return
         }
@@ -130,7 +129,7 @@ function EditName(props: EditNameProps) {
       }}
     >
       <AlertDialogTrigger render={<Button variant='outline' />}>{m.account_edit_name()}</AlertDialogTrigger>
-      <AlertDialogContent aria-busy={update.isPending}>
+      <AlertDialogContent aria-busy={mutation.isPending}>
         <AlertDialogHeader>
           <AlertDialogTitle>{m.account_edit_name()}</AlertDialogTitle>
           <AlertDialogDescription>{m.account_edit_name_description()}</AlertDialogDescription>
@@ -163,7 +162,7 @@ function EditName(props: EditNameProps) {
                       }}
                       aria-invalid={isInvalid}
                       aria-describedby={isInvalid ? errorId : undefined}
-                      disabled={update.isPending}
+                      disabled={mutation.isPending}
                     />
                     {isInvalid && (
                       <FieldError
@@ -183,11 +182,11 @@ function EditName(props: EditNameProps) {
             </form.Field>
           </FieldGroup>
           <AlertDialogFooter>
-            <AlertDialogCancel render={<Button type='button' variant='outline' disabled={update.isPending} />}>
+            <AlertDialogCancel render={<Button type='button' variant='outline' disabled={mutation.isPending} />}>
               {m.common_cancel()}
             </AlertDialogCancel>
-            <Button type='submit' disabled={update.isPending}>
-              {update.isPending && <Spinner data-icon='inline-start' />}
+            <Button type='submit' disabled={mutation.isPending}>
+              {mutation.isPending && <Spinner data-icon='inline-start' />}
               {m.common_save()}
             </Button>
           </AlertDialogFooter>
@@ -202,7 +201,7 @@ function UpdateAvatar() {
   const inputRef = useRef<HTMLInputElement>(null)
   const { refetch } = authClient.useSession()
   const queryClient = useQueryClient()
-  const upload = useMutation(
+  const mutation = useMutation(
     orpc.account.updateAvatar.mutationOptions({
       onSuccess: async () => {
         await refetch()
@@ -225,11 +224,11 @@ function UpdateAvatar() {
         accept={AVATAR_MIME_TYPES.join(',')}
         aria-label={m.account_update_avatar()}
         className='hidden'
-        disabled={upload.isPending}
+        disabled={mutation.isPending}
         onChange={(event) => {
           const file = event.target.files?.[0]
           event.target.value = ''
-          if (!file || upload.isPending) return
+          if (!file || mutation.isPending) return
           if (!AVATAR_MIME_TYPES.some((type) => type === file.type)) {
             toast.add({ type: 'error', title: m.error_avatar_unsupported_file() })
             return
@@ -241,11 +240,11 @@ function UpdateAvatar() {
             })
             return
           }
-          upload.mutate(file)
+          mutation.mutate(file)
         }}
       />
-      <Button variant='outline' disabled={upload.isPending} onClick={() => inputRef.current?.click()}>
-        {upload.isPending && <Spinner data-icon='inline-start' />}
+      <Button variant='outline' disabled={mutation.isPending} onClick={() => inputRef.current?.click()}>
+        {mutation.isPending && <Spinner data-icon='inline-start' />}
         {m.account_update_avatar()}
       </Button>
     </div>

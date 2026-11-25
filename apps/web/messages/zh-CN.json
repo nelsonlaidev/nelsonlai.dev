@@ -192,6 +192,7 @@
   "error_create_comment_failed": "评论发送失败，请重试。",
   "error_create_message_failed": "留言发送失败，请重试。",
   "error_create_reply_failed": "回复发送失败，请重试。",
+  "error_delete_comment_failed": "删除评论失败，请重试。",
   "error_delete_message_failed": "删除留言失败，请重试。",
   "error_failed_to_fetch_comments_data": "无法获取评论数据。",
   "error_failed_to_fetch_dashboard_data": "无法获取仪表盘数据。",
