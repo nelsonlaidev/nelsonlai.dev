@@ -18,7 +18,7 @@ export function AboutHero(props: AboutHeroProps) {
 
   return (
     <div className='mb-20 grid grid-cols-1 items-center gap-8 lg:mb-32 lg:grid-cols-[1.5fr_1fr] xl:gap-16'>
-      <PageHeader title={title} description={intro} className='mb-0 sm:mb-0'>
+      <PageHeader title={title} description={intro} className='mb-0'>
         <ExternalLink
           href={SITE.socials.github}
           className='group mt-7 inline-flex items-center gap-2 text-sm text-link'

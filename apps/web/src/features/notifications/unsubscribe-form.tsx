@@ -94,18 +94,16 @@ export function UnsubscribeForm(props: UnsubscribeFormProps) {
   return (
     <OceanPage className='grid content-center pt-28 wrap-anywhere sm:pt-32 lg:pt-36'>
       <Skeleton loading={isLoading} label={m.common_aria_labels_loading()}>
-        <Card className='mx-auto w-full max-w-160 rounded-xl bg-surface p-6 sm:p-8' aria-busy={mutation.isPending}>
+        <Card className='mx-auto w-full max-w-160 bg-surface p-6 sm:p-8' aria-busy={mutation.isPending}>
           <CardHeader className='gap-4 px-0 text-center'>
             <div className='mx-auto flex size-16 items-center justify-center rounded-full bg-accent'>
               <BellOffIcon className='size-8' aria-hidden='true' />
             </div>
             <div className='space-y-2' aria-live='polite'>
-              <CardTitle className='text-2xl text-balance'>
+              <CardTitle className='text-balance'>
                 <h1 className='text-3xl font-normal tracking-tight text-foreground sm:text-4xl'>{title}</h1>
               </CardTitle>
-              {description && (
-                <CardDescription className='text-base text-pretty text-muted-foreground'>{description}</CardDescription>
-              )}
+              {description && <CardDescription className='text-base text-pretty'>{description}</CardDescription>}
             </div>
           </CardHeader>
           {content}

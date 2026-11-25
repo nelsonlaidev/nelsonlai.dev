@@ -85,7 +85,7 @@ export function TerminalArtwork() {
       <span
         className={cn(
           shape,
-          'transform-[translate(-50%,-50%)_rotate(-8deg)] rounded-[9px] border border-[#8cae9f75] shadow-[12px_20px_30px_#00182770,inset_0_0_15px_#83b7a110] [background:linear-gradient(145deg,#274e53,#092a36)] before:absolute before:size-3 before:transform-[rotate(45deg)] before:border-t-2 before:border-r-2 before:border-t-[#b1d7b4] before:border-r-[#b1d7b4] before:content-[""] after:absolute after:h-0.5 after:bg-[#79a69a] after:shadow-[0_10px_0_#79a69a25] after:content-[""]',
+          'transform-[translate(-50%,-50%)_rotate(-8deg)] rounded-[9px] border border-[#8cae9f75] shadow-[12px_20px_30px_#00182770,inset_0_0_15px_#83b7a110] [background:linear-gradient(145deg,#274e53,#092a36)] before:absolute before:size-3 before:transform-[rotate(45deg)] before:border-t-2 before:border-r-2 before:border-t-[#b1d7b4] before:border-r-[#b1d7b4] after:absolute after:h-0.5 after:bg-[#79a69a] after:shadow-[0_10px_0_#79a69a25]',
           'h-25 w-33.75 before:top-8.5 before:left-7 after:top-13.25 after:left-13.75 after:w-5.75',
         )}
       />
@@ -98,7 +98,7 @@ export function PagesArtwork() {
     <span
       className={cn(
         shape,
-        'transform-[translate(-50%,-50%)_rotate(12deg)] rounded-[3px] shadow-[-12px_8px_0_#426e70,-22px_16px_0_#214c5b,5px_25px_35px_#00192d70] [background:linear-gradient(135deg,#bed0b6,#668f87)] after:absolute after:h-px after:bg-[#2f606070] after:shadow-[0_12px_0_#2f606070,0_24px_0_#2f606070,0_36px_0_#2f606070,0_48px_0_#2f606035] after:content-[""]',
+        'transform-[translate(-50%,-50%)_rotate(12deg)] rounded-[3px] shadow-[-12px_8px_0_#426e70,-22px_16px_0_#214c5b,5px_25px_35px_#00192d70] [background:linear-gradient(135deg,#bed0b6,#668f87)] after:absolute after:h-px after:bg-[#2f606070] after:shadow-[0_12px_0_#2f606070,0_24px_0_#2f606070,0_36px_0_#2f606070,0_48px_0_#2f606035]',
         'h-32 w-25 after:top-9 after:left-5.75 after:w-12.5',
       )}
     />
@@ -119,7 +119,7 @@ export function ToolsArtwork() {
       <span
         className={cn(
           shape,
-          'transform-[translate(-50%,-50%)_rotate(45deg)] rounded-[22px] shadow-[10px_10px_30px_#001b3260] [background:linear-gradient(150deg,#b3c6ab,#5b9690_40%,#1f4b5d)] after:absolute after:rounded-full after:border after:border-[#c3ddbf90] after:shadow-[inset_4px_4px_12px_#123b4a80] after:content-[""]',
+          'transform-[translate(-50%,-50%)_rotate(45deg)] rounded-[22px] shadow-[10px_10px_30px_#001b3260] [background:linear-gradient(150deg,#b3c6ab,#5b9690_40%,#1f4b5d)] after:absolute after:rounded-full after:border after:border-[#c3ddbf90] after:shadow-[inset_4px_4px_12px_#123b4a80]',
           'size-27.5 after:inset-7',
         )}
       />
@@ -147,7 +147,7 @@ export function JournalArtwork() {
       <span
         className={cn(
           shape,
-          'transform-[translate(-50%,-50%)_rotate(-12deg)] rounded-[50%_50%_8%_8%/8%_8%_12%_12%] shadow-[5px_20px_30px_#001b3260] [background:linear-gradient(90deg,#728e82,#b6c4a5_45%,#547b76_50%,#c0cbae_55%,#829d8a)] after:absolute after:h-px after:bg-[#365d5550] after:content-[""]',
+          'transform-[translate(-50%,-50%)_rotate(-12deg)] rounded-[50%_50%_8%_8%/8%_8%_12%_12%] shadow-[5px_20px_30px_#001b3260] [background:linear-gradient(90deg,#728e82,#b6c4a5_45%,#547b76_50%,#c0cbae_55%,#829d8a)] after:absolute after:h-px after:bg-[#365d5550]',
           'h-25 w-31.25 after:top-7 after:left-3 after:w-9.5 after:shadow-[0_10px_0_#365d5550,0_20px_0_#365d5550,64px_0_0_#365d5550,64px_10px_0_#365d5550,64px_20px_0_#365d5550]',
         )}
       />

@@ -41,7 +41,7 @@ export function Messages(props: MessagesProps) {
       />
       {query.isSuccess && messages?.length === 0 && (
         <div className='rounded-xl border px-6 py-10 text-center text-muted-foreground'>
-          <p className='text-sm text-muted-foreground'>{m.guestbook_no_messages()}</p>
+          <p className='text-sm'>{m.guestbook_no_messages()}</p>
         </div>
       )}
     </div>

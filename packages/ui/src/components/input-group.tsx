@@ -94,7 +94,7 @@ export function InputGroupAddon(props: InputGroupAddonProps) {
   )
 }
 
-const inputGroupButtonVariants = cva('flex items-center gap-2 text-sm shadow-none', {
+const inputGroupButtonVariants = cva('flex gap-2 shadow-none', {
   variants: {
     size: {
       xs: "h-6 gap-1 rounded-[calc(var(--radius)-5px)] px-1.5 [&>svg:not([class*='size-'])]:size-3.5",
@@ -171,7 +171,7 @@ export function InputGroupTextarea(props: InputGroupTextareaProps) {
     <Textarea
       data-slot='input-group-control'
       className={cn(
-        'flex-1 resize-none rounded-none border-0 bg-transparent py-2 shadow-none ring-0 outline-none',
+        'flex-1 resize-none rounded-none border-0 bg-transparent shadow-none ring-0 outline-none',
         'aria-invalid:ring-0',
         'disabled:bg-transparent',
         className,

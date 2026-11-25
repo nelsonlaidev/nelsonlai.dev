@@ -206,7 +206,7 @@ export function ChartTooltipContent(props: ChartTooltipContentProps) {
                 // eslint-disable-next-line @eslint-react/no-array-index-key
                 key={index}
                 className={cn(
-                  'flex w-full flex-wrap items-stretch gap-2 [&>svg]:size-2.5 [&>svg]:text-muted-foreground',
+                  'flex w-full flex-wrap gap-2 [&>svg]:size-2.5 [&>svg]:text-muted-foreground',
                   indicator === 'dot' && 'items-center',
                 )}
               >
@@ -292,7 +292,7 @@ export function ChartLegendContent(props: ChartLegendContentProps) {
               // Recharts payload order provides stable legend positions.
               // eslint-disable-next-line @eslint-react/no-array-index-key
               key={index}
-              className={cn('flex items-center gap-1.5 [&>svg]:size-3 [&>svg]:text-muted-foreground')}
+              className='flex items-center gap-1.5 [&>svg]:size-3 [&>svg]:text-muted-foreground'
             >
               {itemConfig?.icon && !hideIcon ? (
                 <itemConfig.icon />

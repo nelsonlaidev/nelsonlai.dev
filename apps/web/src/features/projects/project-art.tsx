@@ -35,7 +35,7 @@ export function ProjectArt(props: ProjectArtProps) {
     <div
       aria-hidden='true'
       className={cn(
-        '@container-size relative overflow-hidden border border-border/60 [background:radial-gradient(ellipse_at_50%_100%,#408c8e35,transparent_70%),#c0e0d505] after:pointer-events-none after:absolute after:inset-0 after:content-[""] after:[background:linear-gradient(125deg,#d3edce10,transparent_60%)]',
+        '@container-size relative overflow-hidden border border-border/60 [background:radial-gradient(ellipse_at_50%_100%,#408c8e35,transparent_70%),#c0e0d505] after:pointer-events-none after:absolute after:inset-0 after:[background:linear-gradient(125deg,#d3edce10,transparent_60%)]',
         className,
       )}
     >

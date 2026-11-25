@@ -128,7 +128,7 @@ export function FieldLabel(props: FieldLabelProps) {
     <Label
       data-slot='field-label'
       className={cn(
-        'group/field-label peer/field-label flex w-fit gap-2 leading-snug',
+        'group/field-label peer/field-label w-fit leading-snug',
         'group-data-[disabled=true]/field:opacity-50',
         'has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border',
         'has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-muted/50',

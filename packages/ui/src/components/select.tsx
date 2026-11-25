@@ -145,7 +145,7 @@ export function SelectItem(props: SelectItemProps) {
       <SelectPrimitive.ItemIndicator
         render={<span className='pointer-events-none absolute right-2 flex size-4 items-center justify-center' />}
       >
-        <CheckIcon className='pointer-events-none' />
+        <CheckIcon />
       </SelectPrimitive.ItemIndicator>
     </SelectPrimitive.Item>
   )

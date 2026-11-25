@@ -69,7 +69,7 @@ export function CodeBlock(props: CodeBlockProps) {
       )}
     >
       {hasCaption ? (
-        <div className='flex flex-row items-center gap-3 border-b bg-transparent px-3 py-2 text-sm sm:px-5'>
+        <div className='flex items-center gap-3 border-b px-3 py-2 text-sm sm:px-5'>
           <img src={languageIcons.get(lang?.toLowerCase() ?? '') ?? fileIcon} alt='' className='size-3.5 shrink-0' />
           <figcaption className='flex-1 truncate wrap-anywhere whitespace-normal text-muted-foreground'>
             {title ?? lang}

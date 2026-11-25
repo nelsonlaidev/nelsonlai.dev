@@ -10,7 +10,7 @@ export function NotFound() {
     <div className='relative mx-auto flex min-h-[85vh] w-full flex-col items-center justify-center gap-8 overflow-hidden px-4 pt-48 pb-20 text-center sm:px-[max(16px,10%)] sm:pt-56 sm:pb-24'>
       <span
         aria-hidden='true'
-        className='pointer-events-none absolute top-1/2 left-1/2 block -translate-1/2 text-[clamp(230px,40vw,480px)] tracking-tight text-[#9ac6b40f]'
+        className='pointer-events-none absolute top-1/2 left-1/2 -translate-1/2 text-[clamp(230px,40vw,480px)] tracking-tight text-[#9ac6b40f]'
       >
         404
       </span>
@@ -25,7 +25,7 @@ export function NotFound() {
         <ArrowRightIcon
           aria-hidden='true'
           data-icon='inline-end'
-          className='size-4 motion-safe:transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1'
+          className='motion-safe:transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1'
         />
       </Link>
     </div>

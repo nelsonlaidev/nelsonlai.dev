@@ -83,7 +83,7 @@ export function CommentEditor(props: CommentEditorProps) {
             onKeyDown={editor.handleKeyDown}
             onCompositionStart={editor.handleCompositionStart}
             onCompositionEnd={editor.handleCompositionEnd}
-            className='min-h-28 resize-none font-mono'
+            className='min-h-28 font-mono'
           />
           <InputGroupAddon align='block-end'>
             <InputGroupButton
@@ -122,7 +122,7 @@ export function CommentEditor(props: CommentEditorProps) {
           </InputGroupAddon>
         </InputGroup>
       </TabsContent>
-      <TabsContent value='preview' className='rounded-md border border-input bg-input/30 px-2.5'>
+      <TabsContent value='preview' className='border border-input bg-input/30 px-2.5'>
         <CommentMarkdown className='min-h-28'>
           {value.trim() ? value : m.blog_comments_nothing_to_preview()}
         </CommentMarkdown>

@@ -10,7 +10,7 @@ export function PendingCount(props: PendingCountProps) {
   const { children = '000' } = props
 
   return (
-    <span className='relative inline-block align-baseline'>
+    <span className='relative inline-block'>
       <LoadingStatus />
       <span aria-hidden='true' className='invisible'>
         {children}

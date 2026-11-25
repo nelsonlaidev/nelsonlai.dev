@@ -318,7 +318,7 @@ function CommentItem(props: CommentItemProps) {
               <ChevronRightIcon
                 data-icon='inline-start'
                 aria-hidden='true'
-                className='size-4 transition-transform duration-200 motion-reduce:transition-none'
+                className='transition-transform duration-200 motion-reduce:transition-none'
               />
               <span data-testid='comment-reply-count'>
                 {repliesOpen

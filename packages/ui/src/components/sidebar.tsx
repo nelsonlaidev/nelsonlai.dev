@@ -345,7 +345,7 @@ export function SidebarInput(props: SidebarInputProps) {
     <Input
       data-slot='sidebar-input'
       data-sidebar='input'
-      className={cn('h-8 w-full bg-background shadow-none', className)}
+      className={cn('h-8 bg-background shadow-none', className)}
       {...rest}
     />
   )
@@ -696,7 +696,7 @@ export function SidebarMenuSkeleton(props: SidebarMenuSkeletonProps) {
       className={cn('flex h-8 items-center gap-2 rounded-md px-2', className)}
       {...rest}
     >
-      {showIcon && <Skeleton className='size-4 rounded-md bg-sidebar-skeleton' data-sidebar='menu-skeleton-icon' />}
+      {showIcon && <Skeleton className='size-4 bg-sidebar-skeleton' data-sidebar='menu-skeleton-icon' />}
       <Skeleton
         className='h-4 max-w-(--skeleton-width) flex-1 bg-sidebar-skeleton'
         data-sidebar='menu-skeleton-text'

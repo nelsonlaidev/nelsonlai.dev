@@ -14,7 +14,7 @@ export function InfoTip(props: InfoTipProps) {
 
   return (
     <Popover>
-      <PopoverTrigger openOnHover aria-label={label} className='cursor-pointer'>
+      <PopoverTrigger openOnHover aria-label={label}>
         {children}
       </PopoverTrigger>
       <PopoverPrimitive.Portal>

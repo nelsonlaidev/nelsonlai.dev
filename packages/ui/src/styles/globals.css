@@ -205,7 +205,7 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased relative min-h-svh flex flex-col;
+    @apply bg-background text-foreground relative min-h-svh flex flex-col;
   }
 
   button:not(:disabled),

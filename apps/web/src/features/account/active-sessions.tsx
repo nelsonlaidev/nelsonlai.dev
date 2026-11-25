@@ -151,7 +151,7 @@ function SessionCard(props: SessionCardProps) {
 
   return (
     <Card>
-      <CardContent className='flex flex-col justify-between gap-4 wrap-anywhere sm:flex-row sm:items-start'>
+      <CardContent className='justify-between gap-4 wrap-anywhere sm:flex-row sm:items-start'>
         <div className='flex min-w-0 gap-4'>
           <div className='hidden size-12 shrink-0 items-center justify-center rounded-full bg-secondary md:flex'>
             <PlatformIcon aria-hidden='true' className='size-6' />

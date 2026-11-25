@@ -85,7 +85,7 @@ function UsesSection(props: UsesSectionProps) {
               alt=''
               width={64}
               height={64}
-              className='size-16 shrink-0 basis-16'
+              className='size-16 shrink-0'
               imageClassName='size-full object-contain'
             />
             <span className='min-w-0 flex-1'>
@@ -120,7 +120,7 @@ function UsesLaptop(props: UsesLaptopProps) {
       </h2>
       <div className='border bg-card/65 bg-radial-[ellipse_at_50%_12%] from-primary/10 to-transparent to-70%'>
         <div className='p-5 sm:px-8 sm:py-6'>
-          <BlurImage {...imageProps} lazy={false} className='block w-full' imageClassName='block h-auto w-full' />
+          <BlurImage {...imageProps} lazy={false} imageClassName='w-full' />
         </div>
         <div className='flex items-center justify-between gap-5 border-t p-5 sm:px-8 sm:py-7'>
           <div>

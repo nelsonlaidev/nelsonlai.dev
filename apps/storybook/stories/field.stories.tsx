@@ -43,7 +43,7 @@ export const FormAnatomy = meta.story({
             <FieldLabel htmlFor='field-responsive'>Responsive label</FieldLabel>
             <FieldDescription>Resize the preview to change the arrangement.</FieldDescription>
           </FieldContent>
-          <Input id='field-responsive' className='min-w-0' />
+          <Input id='field-responsive' />
         </Field>
       </FieldGroup>
     </FieldSet>
