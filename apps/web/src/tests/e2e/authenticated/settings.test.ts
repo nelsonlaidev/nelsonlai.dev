@@ -6,6 +6,7 @@ import { db } from '@/lib/db'
 
 import { TEST_UNIQUE_ID } from '../fixtures/auth'
 import { expect, test } from '../fixtures/test'
+import { rejectRpc, toastTitle } from '../utils/toast'
 
 test.describe('account settings', () => {
   // These tests update the same user's commentNotificationPreferences.
@@ -14,6 +15,19 @@ test.describe('account settings', () => {
   test.beforeEach(async () => {
     await db.delete(commentNotificationPreferences).where(eq(commentNotificationPreferences.userId, TEST_UNIQUE_ID))
   })
+
+  for (const [code, title] of [
+    ['INTERNAL_SERVER_ERROR', en.error_update_notification_settings_failed],
+    ['TOO_MANY_REQUESTS', en.error_too_many_requests],
+  ] as const) {
+    test(`shows an error toast when saving preferences returns ${code}`, async ({ page }) => {
+      await rejectRpc(page, 'notifications/setEmailPreferences', code)
+      await page.goto('/account/settings')
+      await page.getByRole('switch', { name: en.settings_comment_replies }).click()
+      await page.getByRole('button', { name: en.common_save }).click()
+      await expect(toastTitle(page, 'error', title)).toBeVisible()
+    })
+  }
 
   test('loads default settings without allowing unchanged settings to be saved', async ({ page }) => {
     await page.goto('/account/settings')

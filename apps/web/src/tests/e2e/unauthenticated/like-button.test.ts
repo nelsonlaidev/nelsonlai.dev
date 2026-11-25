@@ -13,6 +13,7 @@ import { db } from '@/lib/db'
 import { COMMENT_DELETE_AND_LIKE_POST_SLUG } from '../fixtures/posts'
 import { expect, test } from '../fixtures/test'
 import { getNumberFlow } from '../utils/number-flow'
+import { rejectRpc, toastTitle } from '../utils/toast'
 
 type LikeCountOutput = z.infer<typeof PostLikesSchema>
 
@@ -38,6 +39,17 @@ test.describe('like button', () => {
       }
     })
   })
+
+  for (const [code, title] of [
+    ['BAD_REQUEST', en.error_like_limit_reached],
+    ['INTERNAL_SERVER_ERROR', en.error_something_went_wrong],
+  ] as const) {
+    test(`shows an error toast when saving a like returns ${code}`, async ({ page }) => {
+      await rejectRpc(page, 'posts/like', code)
+      await page.getByRole('button', { name: en.blog_like_this_post, exact: true }).click()
+      await expect(toastTitle(page, 'error', title)).toBeVisible()
+    })
+  }
 
   test('persists three likes and rejects a fourth after reloading', async ({ page, extraHTTPHeaders }) => {
     const likeCount = page.getByTestId('like-count').filter({ visible: true })

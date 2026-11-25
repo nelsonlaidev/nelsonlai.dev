@@ -2,8 +2,10 @@ appendonly
 argb
 codegen
 cqmin
+domcontentloaded
 dotwebp
 doublestar
+framenavigated
 frontmatter
 haspopup
 healthcheck

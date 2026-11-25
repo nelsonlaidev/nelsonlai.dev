@@ -13,14 +13,15 @@ import { eq, inArray, sql } from 'drizzle-orm'
 import { db } from '@/lib/db'
 
 import { TEST_UNIQUE_ID } from '../fixtures/auth'
+import { expect, test } from '../fixtures/comment'
 import {
   COMMENT_DELETE_AND_LIKE_POST_SLUG,
   COMMENT_DELETE_REPLY_POST_SLUG,
   COMMENT_REPLY_POST_SLUG,
   COMMENT_SUBMIT_AND_VIEW_POST_SLUG,
 } from '../fixtures/posts'
-import { expect, test } from '../fixtures/test'
 import { getNumberFlow } from '../utils/number-flow'
+import { rejectRpc, toastTitle } from '../utils/toast'
 
 type CommentListInput = z.infer<typeof ListCommentsInputSchema>
 type CommentListOutput = z.infer<typeof ListCommentsOutputSchema>
@@ -32,6 +33,45 @@ async function getCount(locator: Parameters<typeof getNumberFlow>[0]) {
 test.describe('comment page', () => {
   // Comment mutations share article counts across these tests.
   test.describe.configure({ mode: 'default' })
+
+  for (const [code, commentTitle, replyTitle] of [
+    ['INTERNAL_SERVER_ERROR', en.error_create_comment_failed, en.error_create_reply_failed],
+    ['TOO_MANY_REQUESTS', en.error_too_many_requests, en.error_too_many_requests],
+  ] as const) {
+    test(`shows an error toast when posting a comment returns ${code}`, async ({ page }) => {
+      await rejectRpc(page, 'comments/create', code)
+      await page.goto(`/blog/${COMMENT_REPLY_POST_SLUG}`)
+      const draft = page.getByRole('textbox', { name: en.blog_comments_placeholder })
+      await draft.fill('Keep this draft')
+      await page.getByRole('button', { name: en.blog_comments_send_comment, exact: true }).click()
+      await expect(toastTitle(page, 'error', commentTitle)).toBeVisible()
+      await expect(draft).toHaveValue('Keep this draft')
+    })
+
+    test(`shows an error toast when posting a reply returns ${code}`, async ({ page, savedComment }) => {
+      await rejectRpc(page, 'comments/create', code)
+      await page.goto(`/blog/${savedComment.postSlug}?comment=${savedComment.id}`)
+      const comment = page.getByTestId(`comment-${savedComment.id}`)
+      await comment.getByRole('button', { name: en.blog_comments_reply, exact: true }).click()
+      const draft = comment.getByRole('textbox', { name: en.blog_comments_reply_to_comment })
+      await draft.fill('Keep this reply')
+      await comment.getByRole('button', { name: en.blog_comments_reply, exact: true }).click()
+      await expect(toastTitle(page, 'error', replyTitle)).toBeVisible()
+      await expect(draft).toHaveValue('Keep this reply')
+    })
+  }
+
+  test('shows an error toast when deleting a comment fails', async ({ page, savedComment }) => {
+    await rejectRpc(page, 'comments/delete', 'INTERNAL_SERVER_ERROR')
+    await page.goto(`/blog/${savedComment.postSlug}?comment=${savedComment.id}`)
+    await page
+      .getByTestId(`comment-${savedComment.id}`)
+      .getByRole('button', { name: en.blog_comments_open_menu })
+      .click()
+    await page.getByRole('menuitem', { name: en.common_delete }).click()
+    await page.getByRole('alertdialog').getByRole('button', { name: en.common_delete }).click()
+    await expect(toastTitle(page, 'error', en.error_something_went_wrong)).toBeVisible()
+  })
 
   test('submits a comment', async ({ page }) => {
     const commentText = `comment-${createId()}`
@@ -470,6 +510,7 @@ test.describe('comment page', () => {
         }
 
         await failed
+        await expect(toastTitle(page, 'error', en.error_something_went_wrong)).toBeVisible()
         await expect(like).toHaveAttribute('aria-pressed', 'false')
         expect(await getNumberFlow(like.locator('number-flow-react'))).toBe('0')
         expect(

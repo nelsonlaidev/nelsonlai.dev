@@ -1,3 +1,5 @@
+import type { Locator, Page } from '@playwright/test'
+
 import en from '@messages/en.json' with { type: 'json' }
 import zhTW from '@messages/zh-TW.json' with { type: 'json' }
 import { createId } from '@paralleldrive/cuid2'
@@ -8,6 +10,7 @@ import { db } from '@/lib/db'
 
 import { expect, test as base } from '../fixtures/test'
 import { createSessionCookie } from '../utils/auth'
+import { toastTitle } from '../utils/toast'
 
 const test = base.extend<{
   isolatedSession: {
@@ -42,6 +45,26 @@ const test = base.extend<{
   },
 })
 
+async function expectSuccessToastBeforeReload(page: Page, button: Locator, title: string) {
+  // The reload discards the toast DOM. Read it from the outgoing document before it is replaced.
+  const key = 'e2e:success-toast-before-reload'
+  await page.evaluate((storageKey) => {
+    window.addEventListener(
+      'pagehide',
+      () => {
+        const toast = document.querySelector<HTMLElement>(
+          '[data-slot="toast"][data-type="success"] [data-slot="toast-title"]',
+        )
+        if (toast?.checkVisibility()) sessionStorage.setItem(storageKey, toast.textContent)
+      },
+      { once: true },
+    )
+  }, key)
+  await Promise.all([page.waitForEvent('framenavigated', (frame) => frame === page.mainFrame()), button.click()])
+  await page.waitForLoadState('domcontentloaded')
+  expect(await page.evaluate((storageKey) => sessionStorage.getItem(storageKey), key)).toBe(title)
+}
+
 test.use({ storageState: { cookies: [], origins: [] } })
 
 test.describe('session lifecycle', () => {
@@ -75,6 +98,37 @@ test.describe('session lifecycle', () => {
     })
   }
 
+  for (const failure of ['returned', 'network']) {
+    test.describe(`sign-out with a ${failure} failure`, () => {
+      const denied = 'Session update denied'
+
+      test.beforeEach(async ({ page }) => {
+        await page.route('**/api/auth/sign-out', async (route) =>
+          failure === 'network'
+            ? route.abort('failed')
+            : route.fulfill({ status: 403, json: { code: 'FORBIDDEN', message: denied } }),
+        )
+      })
+
+      test('shows the sign-out error toast', async ({ page, isolatedSession }) => {
+        await page.goto('/guestbook')
+        await page.getByRole('button', { name: en.common_sign_out, exact: true }).click()
+        await expect(toastTitle(page, 'error', failure === 'network' ? en.error_sign_out_failed : denied)).toBeVisible()
+        expect(await db.query.sessions.findFirst({ where: { token: isolatedSession.token } })).toBeDefined()
+      })
+
+      test('shows the current-session revocation error toast', async ({ page, isolatedSession }) => {
+        await page.goto('/account')
+        const current = page
+          .locator('[data-slot="card"]')
+          .filter({ has: page.getByText(en.account_this_device, { exact: true }) })
+        await current.getByRole('button', { name: en.account_revoke_session }).click()
+        await expect(toastTitle(page, 'error', en.error_something_went_wrong)).toBeVisible()
+        expect(await db.query.sessions.findFirst({ where: { token: isolatedSession.token } })).toBeDefined()
+      })
+    })
+  }
+
   for (const { prefix, messages } of [
     { prefix: '', messages: en },
     { prefix: '/zh-TW', messages: zhTW },
@@ -86,7 +140,11 @@ test.describe('session lifecycle', () => {
       await page.goto(`${prefix}/guestbook`)
       await expect(page.getByRole('textbox')).toBeVisible()
 
-      await page.getByRole('button', { name: messages.common_sign_out, exact: true }).click()
+      await expectSuccessToastBeforeReload(
+        page,
+        page.getByRole('button', { name: messages.common_sign_out, exact: true }),
+        messages.success_signed_out,
+      )
 
       await expect(page.getByRole('textbox')).toBeDisabled()
       await expect(
@@ -109,7 +167,11 @@ test.describe('session lifecycle', () => {
     const currentSession = page
       .locator('[data-slot="card"]')
       .filter({ has: page.getByText(en.account_this_device, { exact: true }) })
-    await currentSession.getByRole('button', { name: en.account_revoke_session, exact: true }).click()
+    await expectSuccessToastBeforeReload(
+      page,
+      currentSession.getByRole('button', { name: en.account_revoke_session, exact: true }),
+      en.success_session_revoked,
+    )
 
     await expect(page).toHaveURL('/')
     expect(await db.query.sessions.findFirst({ where: { token: isolatedSession.token } })).toBeUndefined()
@@ -146,6 +208,7 @@ test.describe('session lifecycle', () => {
       const revokeButtons = page.getByRole('button', { name: en.account_revoke_session, exact: true })
       await expect(revokeButtons).toHaveCount(2)
       await revokeButtons.nth(1).click()
+      await expect(toastTitle(page, 'success', en.success_session_revoked)).toBeVisible()
 
       await expect(revokeButtons).toHaveCount(1)
       await expect(page.getByText(en.account_this_device, { exact: true })).toBeVisible()

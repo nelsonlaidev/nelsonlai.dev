@@ -12,12 +12,55 @@ import { db } from '@/lib/db'
 
 import { TEST_UNIQUE_ID } from '../fixtures/auth'
 import { expect, test } from '../fixtures/test'
+import { rejectRpc, toastTitle } from '../utils/toast'
 
 type MessageListOutput = z.infer<typeof ListGuestbookMessagesOutputSchema>
 
 test.describe('guestbook page', () => {
   // These tests insert and remove messages from the same public list.
   test.describe.configure({ mode: 'default' })
+
+  for (const [code, createTitle, deleteTitle] of [
+    ['INTERNAL_SERVER_ERROR', en.error_create_message_failed, en.error_delete_message_failed],
+    ['TOO_MANY_REQUESTS', en.error_too_many_requests, en.error_too_many_requests],
+  ] as const) {
+    test(`shows an error toast when posting a guestbook message returns ${code}`, async ({ page }) => {
+      await rejectRpc(page, 'guestbook/create', code)
+      await page.goto('/guestbook')
+      const draft = page.getByRole('textbox')
+      await draft.fill('Keep this draft')
+      await page.getByRole('button', { name: en.guestbook_message_submit }).click()
+      await expect(toastTitle(page, 'error', createTitle)).toBeVisible()
+      await expect(draft).toHaveValue('Keep this draft')
+    })
+
+    test(`shows an error toast when deleting a guestbook message returns ${code}`, async ({ page }) => {
+      const id = createId()
+      await db.insert(guestbookMessages).values({ id, userId: TEST_UNIQUE_ID, body: 'Keep this message' })
+      await rejectRpc(page, 'guestbook/delete', code)
+      await page.goto('/guestbook')
+      const message = page.getByTestId(`message-${id}`)
+      await message.getByRole('button', { name: en.common_delete }).click()
+      await page.getByRole('alertdialog').getByRole('button', { name: en.common_delete }).click()
+      await expect(toastTitle(page, 'error', deleteTitle)).toBeVisible()
+    })
+  }
+
+  test('retries a failed guestbook refresh from the global error toast', async ({ page }) => {
+    await page.goto('/guestbook')
+    const draft = page.getByRole('textbox')
+    const body = createId()
+    await draft.fill(body)
+    await rejectRpc(page, 'guestbook/list', 'INTERNAL_SERVER_ERROR')
+    await page.getByRole('button', { name: en.guestbook_message_submit }).click()
+    const toast = page.locator('[data-slot="toast"][data-type="error"]')
+    await expect(toast.getByText(`${en.common_error}: Internal Server Error`, { exact: true })).toBeVisible({
+      timeout: 15_000,
+    })
+    await page.unroute('**/api/rpc/guestbook/list')
+    await toast.getByRole('button', { name: en.common_retry }).click()
+    await expect(page.getByTestId('guestbook-messages-list').getByText(body, { exact: true })).toBeVisible()
+  })
 
   test('submits a message', async ({ page }) => {
     const message = createId()
