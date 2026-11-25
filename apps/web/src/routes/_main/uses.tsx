@@ -79,7 +79,7 @@ function UsesSection(props: UsesSectionProps) {
           <ExternalLink
             href={item.url}
             key={item.name}
-            className='group flex min-w-0 items-center gap-3.5 border-b px-4 py-5 transition-[background-color] duration-200 ease-linear hover:bg-primary/5 motion-reduce:transition-none sm:gap-6 sm:px-5 sm:py-6'
+            className='group flex min-w-0 items-center gap-3.5 border-b px-4 py-5 transition-[background-color] ease-linear hover:bg-primary/5 motion-reduce:transition-none sm:gap-6 sm:px-5 sm:py-6'
           >
             <BlurImage
               src={item.image}
@@ -94,7 +94,7 @@ function UsesSection(props: UsesSectionProps) {
               <span className='block text-sm/relaxed text-muted-foreground'>{item.description}</span>
             </span>
             <ArrowRightIcon
-              className='size-5 shrink-0 -rotate-45 text-primary transition-[rotate] duration-200 ease-linear motion-safe:group-hover:rotate-0 motion-safe:group-focus-visible:rotate-0 motion-reduce:transition-none'
+              className='size-5 shrink-0 -rotate-45 text-primary transition-[rotate] ease-linear motion-safe:group-hover:rotate-0 motion-safe:group-focus-visible:rotate-0 motion-reduce:transition-none'
               aria-hidden='true'
             />
           </ExternalLink>
