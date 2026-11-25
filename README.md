@@ -106,35 +106,23 @@ This is my personal blog and portfolio, built with TanStack Start. I publish art
 
 ## Project Structure
 
-```text
-.
-├── .github/                # CI workflows, shared actions, and README images
-├── .vscode/                # Editor settings and recommended extensions
-├── apps/
-│   ├── storybook/          # Component stories and Storybook configuration
-│   └── web/                # TanStack Start application
-│       ├── content/        # MDX content
-│       ├── messages/       # Translations by locale
-│       ├── public/         # Static assets served by the app
-│       └── src/
-│           ├── features/   # Blog, guestbook, account, and admin features
-│           ├── routes/     # Pages, API endpoints, and feeds
-│           └── tests/      # Web unit and end-to-end tests
-├── packages/
-│   ├── api/                # oRPC procedures
-│   ├── auth/               # Better Auth configuration
-│   ├── db/                 # Drizzle schema, migrations, and seed data
-│   ├── email/              # React Email templates and delivery
-│   ├── kv/                 # Redis caching and rate limiting
-│   ├── mdx/                # Shared MDX plugins
-│   ├── scripts/            # Repository scripts, including README image generation
-│   ├── ui/                 # Shared UI components
-│   └── utils/              # Shared utilities
-├── docker-compose.yaml     # Local PostgreSQL, Redis, and Redis REST API
-├── package.json            # Workspace scripts
-├── pnpm-workspace.yaml     # Workspace packages and dependency versions
-└── turbo.json              # Task dependencies and caching
-```
+| Workspace                                      | Contents                                                                        |
+| ---------------------------------------------- | ------------------------------------------------------------------------------- |
+| [apps/web](apps/web/README.md)                 | TanStack Start application, MDX content, translations, static assets, and tests |
+| [apps/storybook](apps/storybook/README.md)     | Component stories and Storybook configuration                                   |
+| [packages/api](packages/api/README.md)         | oRPC procedures and request context                                             |
+| [packages/auth](packages/auth/README.md)       | Better Auth server configuration and browser client                             |
+| [packages/db](packages/db/README.md)           | Drizzle schema, relations, migrations, and seed data                            |
+| [packages/email](packages/email/README.md)     | React Email templates and delivery                                              |
+| [packages/kv](packages/kv/README.md)           | Redis caching and rate limiting                                                 |
+| [packages/mdx](packages/mdx/README.md)         | Heading and code highlighting plugins for MDX                                   |
+| [packages/scripts](packages/scripts/README.md) | README image generation                                                         |
+| [packages/ui](packages/ui/README.md)           | Shared React components, theme, and typography                                  |
+| [packages/utils](packages/utils/README.md)     | Index range and Unicode name helpers                                            |
+
+The [workspace manifest](pnpm-workspace.yaml) lists workspace members and shared dependency versions. The [root scripts](package.json) and [Turborepo configuration](turbo.json) define commands, task dependencies, and caching. Local services are defined in [Docker Compose](docker-compose.yaml).
+
+CI workflows, shared actions, and README images live under [.github](.github). Editor settings and extension recommendations live under [.vscode](.vscode).
 
 ## Development
 
