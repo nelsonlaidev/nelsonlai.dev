@@ -23,7 +23,8 @@ files:
   - '**/*.{md,mdx}'
   - '**/*.{json,jsonc,yaml,yml}'
   - '**/*.css'
-  - '**/.{gitignore,env.schema}'
+  - '**/.{dockerignore,gitignore,env.schema}'
+  - '**/Dockerfile'
 
 overrides:
   - filename:

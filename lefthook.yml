@@ -18,5 +18,6 @@ pre-commit:
         - '**/*.{md,mdx}'
         - '**/*.{json,jsonc,yaml,yml}'
         - '**/*.css'
-        - '**/.{gitignore,env.schema}'
+        - '**/.{dockerignore,gitignore,env.schema}'
+        - '**/Dockerfile'
       run: pnpm cspell lint --no-progress --no-must-find-files --file {staged_files}

@@ -1,8 +1,5 @@
-bioluminescent
 customizer
 frontmost
-gifs
 interruptible
 noninteractive
-organise
 timebombs
