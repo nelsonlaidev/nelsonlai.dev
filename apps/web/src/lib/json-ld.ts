@@ -26,7 +26,7 @@ type JsonLdPersonOptions = {
 function createJsonLdPerson(options?: JsonLdPersonOptions): Person {
   return {
     '@type': 'Person',
-    name: SITE.name,
+    name: SITE.author,
     url: ENV.SITE_URL,
     ...(options?.description && { description: options.description }),
     ...(options?.sameAs && { sameAs: options.sameAs }),

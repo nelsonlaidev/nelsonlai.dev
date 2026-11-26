@@ -93,7 +93,9 @@ export function Footer() {
         </div>
         <NowPlaying className='min-w-0' />
         <div className='flex items-center justify-between gap-4 text-sm'>
-          <p>&copy; {year} Nelson Lai</p>
+          <p>
+            &copy; {year} {SITE.author}
+          </p>
           {commitSha && (
             <ExternalLink href={`${SITE.repository}/commit/${commitSha}`} className='font-mono hover:text-foreground'>
               {commitSha.slice(0, 7)}

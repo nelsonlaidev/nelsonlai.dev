@@ -76,7 +76,7 @@ export function BlogHeader(props: BlogHeaderProps) {
         <div className='grid gap-1'>
           <div className='flex flex-wrap items-baseline gap-x-2'>
             <ExternalLink href={SITE.socials.github} className='font-medium text-foreground'>
-              {SITE.name}
+              {SITE.author}
             </ExternalLink>
             <span aria-hidden='true'>·</span>
             <time dateTime={post.publishedAt}>

@@ -20,7 +20,7 @@ function ReplyEmailTemplate(props: ReplyEmailTemplateProps) {
   return (
     <NotificationEmail
       siteUrl={siteUrl}
-      preview={`New reply on the post "${postTitle}" on nelsonlai.dev`}
+      preview={`New reply on the post "${postTitle}" on Seafold`}
       heading='New reply to your comment'
       postTitle={postTitle}
       postUrl={postUrl}

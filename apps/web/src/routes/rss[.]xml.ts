@@ -30,7 +30,7 @@ export const Route = createFileRoute('/rss.xml')({
           language: locale,
           'atom:link': { '@href': getLocalizedUrl('/rss.xml', locale), '@rel': 'self', '@type': 'application/rss+xml' },
           image: { url: new URL('/favicon-96x96.png', ENV.SITE_URL).href, title: SITE.name, link: siteUrl },
-          copyright: `© ${new Date().getFullYear()} ${SITE.name}. All rights reserved.`,
+          copyright: `© ${new Date().getFullYear()} ${SITE.author}. All rights reserved.`,
           webMaster: SITE.email,
         })
 
@@ -47,7 +47,7 @@ export const Route = createFileRoute('/rss.xml')({
             description: post.description,
             link,
             guid: { '@isPermaLink': 'true', '#': link },
-            'dc:creator': SITE.name,
+            'dc:creator': SITE.author,
             pubDate: new Date(post.publishedAt).toUTCString(),
           })
         }

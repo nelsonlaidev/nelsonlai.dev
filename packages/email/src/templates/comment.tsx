@@ -16,7 +16,7 @@ function CommentEmailTemplate(props: CommentEmailTemplateProps) {
   return (
     <NotificationEmail
       siteUrl={siteUrl}
-      preview={`New comment on the post "${postTitle}" on nelsonlai.dev`}
+      preview={`New comment on the post "${postTitle}" on Seafold`}
       heading='New comment on your post'
       postTitle={postTitle}
       postUrl={postUrl}

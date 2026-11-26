@@ -1,8 +1,8 @@
-# [nelsonlai.dev](https://nelsonlai.dev)
+# [Seafold](https://nelsonlai.dev)
 
 My personal blog and portfolio, built with TanStack Start and TypeScript.
 
-[![Homepage of nelsonlai.dev](.github/images/header.png)](https://nelsonlai.dev)
+[![Seafold homepage](.github/images/header.png)](https://nelsonlai.dev)
 
 ## Local development
 
