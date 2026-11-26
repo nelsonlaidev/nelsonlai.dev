@@ -37,6 +37,11 @@ export function createAuth(database: Database) {
   return betterAuth({
     baseURL: ENV.BETTER_AUTH_URL,
     secret: ENV.BETTER_AUTH_SECRET,
+    advanced: {
+      ipAddress: {
+        ipAddressHeaders: ['cf-connecting-ip'],
+      },
+    },
     database: drizzleAdapter(database, {
       provider: 'pg',
       schema,
