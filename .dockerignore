@@ -4,6 +4,16 @@
 !pnpm-workspace.yaml
 !turbo.json
 !.gitignore
+!.git/
+.git/**
+!.git/HEAD
+!.git/objects/
+.git/objects/**
+!.git/packed-refs
+!.git/refs/
+.git/refs/**
+!.git/refs/heads/
+!.git/refs/heads/**
 !apps/
 apps/*
 !apps/web/

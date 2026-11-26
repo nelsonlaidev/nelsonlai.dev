@@ -1,6 +1,13 @@
 FROM node:24-bookworm-slim AS base
 WORKDIR /app
 
+FROM base AS revision
+RUN apt-get update && apt-get install -y --no-install-recommends git
+RUN --mount=type=bind,target=/checkout \
+    if [ -f /checkout/.git/HEAD ]; then \
+        git --git-dir=/checkout/.git rev-parse --verify HEAD; \
+    fi > /revision
+
 FROM base AS tools
 COPY package.json ./
 RUN npm install --global "$(node -p 'require("./package.json").packageManager')" \
@@ -20,7 +27,9 @@ COPY --from=prune /app/out/full/ ./
 
 ARG TARGETARCH
 RUN --mount=type=bind,source=.env,target=/app/apps/web/.env \
+    --mount=type=bind,from=revision,source=/revision,target=/revision \
     --mount=type=cache,id=nelsonlaidev-turbo-${TARGETARCH},target=/app/.turbo/cache \
+    if [ -s /revision ]; then export VITE_COMMIT_SHA="$(cat /revision)"; fi && \
     NODE_ENV=production pnpm exec turbo run build --filter=@repo/web
 
 FROM base AS runtime
