@@ -9,3 +9,6 @@ src/env.ts
 
 # Content Collections
 .content-collections/
+
+# Paraglide
+project.inlang/cache
