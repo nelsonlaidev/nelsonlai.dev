@@ -5,7 +5,7 @@ import { NotFound } from '@/components/not-found'
 import { RouteError } from '@/components/route-error'
 
 import { createQueryClient } from './lib/query-client'
-import { deLocalizeUrl, localizeUrl } from './paraglide/runtime'
+import { deLocalizeUrl, isExcludedByRouteStrategy, localizeUrl } from './paraglide/runtime'
 import { routeTree } from './routeTree.gen'
 
 export function getRouter() {
@@ -20,8 +20,12 @@ export function getRouter() {
     defaultPreloadStaleTime: 0,
     context: { queryClient },
     rewrite: {
-      input: ({ url }) => deLocalizeUrl(url),
-      output: ({ url }) => localizeUrl(url),
+      input: ({ url }) => {
+        const canonical = deLocalizeUrl(url)
+
+        return isExcludedByRouteStrategy(canonical.href) ? url : canonical
+      },
+      output: ({ url }) => (isExcludedByRouteStrategy(url.href) ? url : localizeUrl(url)),
     },
   })
 
