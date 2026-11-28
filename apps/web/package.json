@@ -50,7 +50,6 @@
     "@varlock/vite-integration": "1.5.6",
     "bowser": "2.15.1",
     "cn": "catalog:",
-    "dedent": "1.7.2",
     "lucide-react": "catalog:",
     "markdown-to-jsx": "9.11.0",
     "merge-refs": "2.0.1",
